@@ -49,7 +49,7 @@ def main() -> None:
         "overlay_workspace_reused": reused, "overlay_files_sha256": sources,
         "maintained_and_generated_sources_match": unchanged, "module_files_unchanged": unchanged,
         "module_downloads_enabled": False, "frontend_embedded": False, "upstream_server_started": False,
-        "provider_implemented": False, "runtime_integration_verified": False, "virtualization_used": False,
+        "provider_implemented": True, "runtime_integration_verified": False, "virtualization_used": False,
     }
     if passed:
         report.update({"binary_sha256": sha256(binary), "binary_bytes": binary.stat().st_size})

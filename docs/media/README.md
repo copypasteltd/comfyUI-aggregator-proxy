@@ -14,6 +14,8 @@ All captures use the actual Admin and Control API with disposable native Postgre
 | [巡览 MP4 / Tour MP4](admin-tour.mp4) | 同一实际页面巡览，H.264 / The same actual UI tour in H.264 |
 | [Workflow GIF](workflow-lifecycle.gif) | 音频 Workflow 的二次确认、归档、解除归档和发布历史 / Confirmation, archive, unarchive and release history for an audio Workflow |
 | [Workflow MP4](workflow-lifecycle.mp4) | 同一连续操作录屏 / The same continuous operation recording |
+| [网关目录 GIF / Gateway catalog GIF](gateway-catalog/gateway-catalog.gif) | 六类映射、价格、原请求核对、拒绝、回滚和下架 / Six capability mappings, prices, original-request recovery, rejection, rollback and withdrawal |
+| [网关目录 MP4 / Gateway catalog MP4](gateway-catalog/gateway-catalog.mp4) | 同一实际页面连续操作 / The same continuous actual-UI recording |
 
 ![Workflow lifecycle demonstration](workflow-lifecycle.gif)
 
@@ -53,3 +55,18 @@ Run from `app/` in the prepared native environment. The recorder requires `playw
 原始 WebM 与日志位于 `app/.local/readme-media/`，不提交。公开 MP4 为无声 H.264、yuv420p、faststart；GIF 使用调色板压缩并循环播放。浏览器三个 context 在 finally 中关闭，不操作用户已有标签页。转换使用锁定的原生 FFmpeg/ffprobe，验证工具摘要并检查输出。
 
 Raw WebM/logs remain in ignored `app/.local/readme-media/`. Public MP4 is silent H.264/yuv420p with faststart; GIF uses a palette and loops. Three owned contexts are closed in `finally`; existing user tabs are untouched. Encoding uses hash-verified native FFmpeg/ffprobe.
+
+## 网关目录增量 / Gateway catalog capture
+
+另增四张截图：[映射编辑](gateway-catalog/catalog-editor.png)、[期望/确认](gateway-catalog/catalog-confirmed.png)、[历史](gateway-catalog/catalog-history.png) 和 [375px 移动端](gateway-catalog/catalog-mobile.png)。[响应](gateway-catalog/api-responses.json) 包含实际 Admin 发布及明确标记的模拟 Provider 回执，不包含身份秘密；[浏览器记录](gateway-catalog/capture.json)、[媒体摘要](gateway-catalog/manifest.json) 和 [临时资源清理](../evidence/2026-10-25/gateway-catalog-browser.json) 分别留证。当前图库共 15 张图片、3 个 MP4 和 3 个 GIF。
+
+Four additional screenshots show the editor, desired/confirmed versions, history and the 375px layout. Responses contain an actual Admin publication and explicitly simulated Provider receipts, with authentication secrets omitted. The capture, media manifest and isolated-resource cleanup are separate records. The gallery now contains 15 images, three MP4s and three GIFs. Actual Provider automatic application is validated separately in topic 80; these recordings do not establish GPU or production acceptance.
+
+```powershell
+./.venv/Scripts/python.exe scripts/test-gateway-catalog-browser.py --browser-python C:/path/to/media-python/python.exe
+./.venv/Scripts/python.exe scripts/render-readme-media.py --catalog --run <private_run>
+```
+
+目录录制关闭四个自有 context 及浏览器，原始文件留在忽略的 app/.local/gateway-catalog-browser；登录通过录制前的独立请求完成。回执夹具不连接实际 Provider；[原生跨进程报告](../evidence/2026-10-25/provider-catalog-native-protocol.json) 才记录实际消费者。新增媒体同样核对锁定工具摘要、产物摘要与完整解码。
+
+The catalog recorder closes four owned contexts and its browser. Raw files stay in the ignored app/.local/gateway-catalog-browser directory, and login happens before recording. Receipt fixtures do not invoke the Provider; its separate native cross-process report records actual consumption. New media follows the same pinned-tool, artifact-hash and full-decode checks.

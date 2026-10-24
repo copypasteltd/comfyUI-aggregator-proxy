@@ -2111,6 +2111,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/admin/api/v1/gateway-catalog-options": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Catalog Options */
+        get: operations["catalog_options_admin_api_v1_gateway_catalog_options_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/admin/api/v1/gateways/{identifier}/catalog": {
         parameters: {
             query?: never;
@@ -3233,6 +3250,15 @@ export interface components {
             error_code?: ("not_found" | "database_busy" | "cancellation_rejected") | null;
             /** Current Status */
             current_status: string | null;
+        };
+        /** CatalogGatewayOption */
+        CatalogGatewayOption: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Enabled */
+            enabled: boolean;
         };
         /** CatalogModelBinding */
         CatalogModelBinding: {
@@ -5237,6 +5263,15 @@ export interface components {
         Page_BindingView_: {
             /** Data */
             data: components["schemas"]["generation_contracts__gateway__BindingView"][];
+            /** Page */
+            page: number;
+            /** Has More */
+            has_more: boolean;
+        };
+        /** Page[CatalogGatewayOption] */
+        Page_CatalogGatewayOption_: {
+            /** Data */
+            data: components["schemas"]["CatalogGatewayOption"][];
             /** Page */
             page: number;
             /** Has More */
@@ -12115,6 +12150,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_options_admin_api_v1_gateway_catalog_options_get: {
+        parameters: {
+            query?: {
+                page?: number;
+                q?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_CatalogGatewayOption_"];
                 };
             };
             /** @description Validation Error */

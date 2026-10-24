@@ -223,11 +223,12 @@ type JobRequest struct {
 }
 
 type AdmissionRequest struct {
-	ProviderRequestID string     `json:"provider_request_id"`
-	ExternalTaskRef   string     `json:"external_task_ref"`
-	PriceVersion      string     `json:"price_version"`
-	AuthorizationRef  string     `json:"authorization_ref"`
-	Request           JobRequest `json:"request"`
+	ProviderRequestID string        `json:"provider_request_id"`
+	ExternalTaskRef   string        `json:"external_task_ref"`
+	PriceVersion      string        `json:"price_version"`
+	AuthorizationRef  string        `json:"authorization_ref"`
+	Request           JobRequest    `json:"request"`
+	Catalog           *CatalogStamp `json:"catalog,omitempty"`
 }
 
 type Admission struct {
@@ -269,7 +270,7 @@ func validAdmission(value Admission) bool {
 }
 
 func (c *Client) Admit(ctx context.Context, subject Subject, data AdmissionRequest) (Admission, error) {
-	if !ascii(data.ProviderRequestID, 16, 128) || !ascii(data.ExternalTaskRef, 1, 128) || !ascii(data.PriceVersion, 1, 64) || !ascii(data.AuthorizationRef, 1, 128) {
+	if !ascii(data.ProviderRequestID, 16, 128) || !ascii(data.ExternalTaskRef, 1, 128) || !ascii(data.PriceVersion, 1, 64) || !ascii(data.AuthorizationRef, 1, 128) || data.Catalog != nil && !data.Catalog.Valid() {
 		return Admission{}, &CallError{Code: "invalid_request"}
 	}
 	var result Admission

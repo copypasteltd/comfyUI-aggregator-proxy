@@ -13,17 +13,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (h *PublicHandler) assetRule(key *service.APIKey, model string) (publicRule, error) {
+func (h *PublicHandler) assetRule(ctx context.Context, key *service.APIKey, model string) (publicRule, error) {
 	if model != "" {
-		rule, ok := h.models[model]
+		rule, ok := h.modelSnapshot(ctx).models[model]
 		if !ok {
 			return publicRule{}, ErrNotFound
 		}
-		return h.rule(key, model, rule.model.TaskType)
+		return h.ruleAt(ctx, key, model, rule.model.TaskType)
 	}
 	var chosen publicRule
-	for model, rule := range h.models {
-		if _, err := h.rule(key, model, rule.model.TaskType); err != nil {
+	for model, rule := range h.modelSnapshot(ctx).models {
+		if _, err := h.ruleAt(ctx, key, model, rule.model.TaskType); err != nil {
 			continue
 		}
 		if chosen.model.Model != "" && chosen.model.Target.gatewayID != rule.model.Target.gatewayID {
@@ -55,7 +55,7 @@ func (h *PublicHandler) uploadAsset(c *gin.Context) {
 		publicError(c, ErrInvalid)
 		return
 	}
-	rule, err := h.assetRule(key, query.Get("model"))
+	rule, err := h.assetRule(c.Request.Context(), key, query.Get("model"))
 	if err != nil {
 		publicError(c, err)
 		return
@@ -118,7 +118,7 @@ func (h *PublicHandler) assetOwner(c *gin.Context) (Subject, assetUpload, error)
 	if err != nil {
 		return Subject{}, assetUpload{}, err
 	}
-	if _, err = h.assetRule(key, upload.Model); err != nil {
+	if _, err = h.assetRule(c.Request.Context(), key, upload.Model); err != nil {
 		return Subject{}, assetUpload{}, err
 	}
 	if h.clients[upload.GatewayID] == nil {

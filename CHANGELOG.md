@@ -1,5 +1,16 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 — Provider 目录消费与图形映射 / Provider catalogs and visual mapping
+
+- Provider 自动校验/持久化/确认目录，使用不可变请求快照，支持拒绝保留、丢回执和重启恢复、空目录下架及永久别名归属；Sub2API 新增向前迁移 257，旧迁移与唯一客户货币账本保留。
+- Admin 增加网关/模型页目录入口，支持六类映射、价格、期望/确认、差异、历史、原请求核对及受控重试/回滚；models:read/publish 与网关凭证管理权限分开。64 位 ID 与八位价格使用精确字符串。
+- Add durable Provider catalog consumption, activation/rejection, lost-receipt/restart recovery, empty withdrawal, immutable request stamps and permanent alias ownership. Add forward migration 257 while preserving prior migrations and the single customer ledger.
+- Add visual gateway/model-page catalog management with six task types, prices, desired/confirmed versions, differences, history, original-request reconciliation and controlled retry/rollback. Separate read/publish permissions from credential management and preserve decimal precision.
+- 新增文档 80/81、四张截图、一段 MP4/一张 GIF、脱敏响应及失败记录；更新双语 README、导航和稳定待办编号。Add topics 80/81, four screenshots, MP4/GIF, sanitized responses and retained failure evidence; synchronize bilingual documentation and stable checklist IDs.
+- 验证/Validation：3148 Python、19 目录后端、40 前端单元、16 浏览器场景；Go 客户端 48 顶层/222 子测试、Provider 172 顶层/325 子测试、实际服务编译、20 组 legacy/25 组 managed 原生跨进程通过。目录媒体的 4 PNG/MP4/GIF 摘要及完整解码通过。All listed checks passed; physical GPU, production dependencies and fleet acceptance remain separate.
+- 候选/Candidate：rc-20261025.81.1，456 源输入、154 载荷、57 wheels；24 项隔离离线安装及安装后 8 组浏览器通过，所属临时资源清理。456 source inputs, 154 payload files and 57 wheels; 24 isolated offline-install checks and eight installed-browser scenarios passed with owned-resource cleanup. This is not production acceptance.
+- 待办/Pending：01～04 实现出口补齐，72 个跟踪项仍待收口，其中两项为可选增强。真实 Windows/Workflow、GPU 质量、S3/Redis、生产服务/恢复与 10～20 台容量未提升为通过。Implementation items 01–04 are complete; 72 tracked items remain open, including two optional improvements. Actual-resource/production acceptance remains open.
+
 本文件记录面向使用者的变化、验证范围和迁移事项。日期使用 Asia/Taipei；源码推送不等于发布生产版本。
 
 This file records user-facing changes, validation scope and migration notes. Dates use Asia/Taipei. Pushing source is not a production release.

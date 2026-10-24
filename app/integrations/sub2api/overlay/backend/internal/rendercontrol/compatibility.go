@@ -247,7 +247,7 @@ func (h *PublicHandler) waitImage(c *gin.Context, request controlclient.JobReque
 		publicError(c, err)
 		return
 	}
-	rule, err := h.rule(key, request.Model, request.TaskType)
+	rule, err := h.requestRule(c, key, request.Model, request.TaskType)
 	if err != nil {
 		publicError(c, err)
 		return

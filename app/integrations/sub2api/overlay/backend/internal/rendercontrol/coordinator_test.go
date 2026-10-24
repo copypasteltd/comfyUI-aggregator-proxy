@@ -142,6 +142,13 @@ func (g *recoveryGateway) serve(w http.ResponseWriter, r *http.Request) {
 	if r.Header.Get("Authorization") != "Bearer "+g.i.TargetGatewayID+"."+strings.Repeat("s", 43) {
 		g.t.Error("coordinator changed its authenticated service")
 	}
+	if path == "/gateway/v1/catalog" && r.Method == http.MethodGet {
+		if r.Header.Get("X-External-Tenant-Ref") != "" || r.Header.Get("X-External-Key-Ref") != "" || r.Header.Get("X-Client-IP") != "" || r.URL.Query().Get("instance_id") != g.i.Instance {
+			g.t.Error("catalog did not use isolated service identity")
+		}
+		_ = json.NewEncoder(w).Encode(controlclient.GatewayCatalogState{GatewayID: g.i.TargetGatewayID, Status: "legacy"})
+		return
+	}
 	serviceOnly := strings.HasPrefix(path, "/gateway/v1/admission-requests/") || strings.HasPrefix(path, settlementPath)
 	identity, _ := g.i.RequestIdentity()
 	if serviceOnly {
@@ -236,6 +243,9 @@ func (g *recoveryGateway) serve(w http.ResponseWriter, r *http.Request) {
 		canonical, err := NewRequest(g.i.Operation, body.Request)
 		if err != nil || canonical.hash != g.i.RequestHash || body.ProviderRequestID != g.i.ProviderRequestID || body.ExternalTaskRef != g.i.ID || body.AuthorizationRef != g.i.AuthorizationRef || body.PriceVersion != g.i.PriceVersion {
 			g.t.Error("recovery admission changed frozen identity or request")
+		}
+		if (body.Catalog == nil) != (g.i.Catalog == nil) || body.Catalog != nil && *body.Catalog != *g.i.Catalog {
+			g.t.Error("admission changed the original catalog stamp")
 		}
 		g.requests = append(g.requests, canonical.hash)
 		if g.dropBeforeAdmission {

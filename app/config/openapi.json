@@ -9360,6 +9360,59 @@
         }
       }
     },
+    "/admin/api/v1/gateway-catalog-options": {
+      "get": {
+        "summary": "Catalog Options",
+        "operationId": "catalog_options_admin_api_v1_gateway_catalog_options_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 128,
+              "default": "",
+              "title": "Q"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_CatalogGatewayOption_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/api/v1/gateways/{identifier}/catalog": {
       "get": {
         "summary": "Catalog State",
@@ -12823,6 +12876,30 @@
           "current_status"
         ],
         "title": "CancellationTargetView"
+      },
+      "CatalogGatewayOption": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "enabled"
+        ],
+        "title": "CatalogGatewayOption"
       },
       "CatalogModelBinding": {
         "properties": {
@@ -18868,6 +18945,32 @@
           "has_more"
         ],
         "title": "Page[BindingView]"
+      },
+      "Page_CatalogGatewayOption_": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogGatewayOption"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "page",
+          "has_more"
+        ],
+        "title": "Page[CatalogGatewayOption]"
       },
       "Page_CatalogReleaseSummary_": {
         "properties": {

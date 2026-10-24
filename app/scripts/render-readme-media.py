@@ -22,10 +22,14 @@ def digest(path: Path) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", required=True, help="12-character owned capture run ID")
+    parser.add_argument("--catalog", action="store_true", help="Encode the separate gateway catalog capture")
     args = parser.parse_args()
     if not re.fullmatch(r"[0-9a-f]{12}", args.run):
         raise SystemExit("Invalid capture run ID")
-    private = ROOT / ".local/readme-media" / args.run
+    private = ROOT / (".local/gateway-catalog-browser" if args.catalog else ".local/readme-media") / args.run
+    media = MEDIA / "gateway-catalog" if args.catalog else MEDIA
+    capture = json.loads((media / "capture.json").read_text(encoding="utf-8"))
+    assert capture["passed"] and capture["closed_contexts"] == (4 if args.catalog else 3) and capture["browser_closed"]
     lock = json.loads((ROOT / "config/media-tools.lock.json").read_text(encoding="utf-8"))
     tools = ROOT / ".local/toolchains/ffmpeg-8.1"
     for name in ("bin/ffmpeg.exe", "bin/ffprobe.exe"):
@@ -35,10 +39,10 @@ def main() -> None:
     log = private / "encoding.log"
     records: list[dict[str, Any]] = []
     with log.open("wb") as output:
-        for name in ("admin-tour", "workflow-lifecycle"):
+        for name in (("gateway-catalog",) if args.catalog else ("admin-tour", "workflow-lifecycle")):
             source = private / (name + ".webm")
             for extension in ("mp4", "gif"):
-                target = MEDIA / (name + "." + extension)
+                target = media / (name + "." + extension)
                 command = [str(tools / "bin/ffmpeg.exe"), "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-i", str(source), "-an"]
                 if extension == "mp4":
                     command.extend(["-vf", "fps=24,scale=1280:-2:flags=lanczos", "-c:v", "libx264", "-threads", "2", "-preset", "medium", "-crf", "24", "-pix_fmt", "yuv420p", "-movflags", "+faststart"])
@@ -52,13 +56,12 @@ def main() -> None:
                 if float(metadata["format"]["duration"]) < 3:
                     raise SystemExit("Recording unexpectedly short")
                 records.append({"path": target.name, "bytes": target.stat().st_size, "sha256": digest(target), "probe": metadata})
-    for path in sorted(MEDIA.glob("*.png")):
+    for path in sorted(media.glob("*.png")):
         records.append({"path": path.name, "bytes": path.stat().st_size, "sha256": digest(path)})
-    capture = json.loads((MEDIA / "capture.json").read_text(encoding="utf-8"))
-    assert capture["passed"] and capture["closed_contexts"] == 3 and capture["browser_closed"]
-    manifest = {"at": datetime.now(UTC).isoformat(), "passed": True, "synthetic_data": True, "real_gpu_generation": False, "playwright": "1.58.0", "browser_version": capture["browser_version"], "native_media_tools": lock["version"], "no_authentication_recording": True, "screenshots": 11, "mp4": 2, "gif": 2, "files": records}
-    (MEDIA / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"passed": True, "screenshots": 11, "mp4": 2, "gif": 2, "total_MiB": round(sum(item["bytes"] for item in records) / 1024**2, 2)}))
+    counts = {name: sum(Path(item["path"]).suffix == "." + extension for item in records) for name, extension in (("screenshots", "png"), ("mp4", "mp4"), ("gif", "gif"))}
+    manifest = {"at": datetime.now(UTC).isoformat(), "passed": True, "synthetic_data": True, "real_gpu_generation": False, "playwright": "1.58.0", "browser_version": capture["browser_version"], "native_media_tools": lock["version"], "no_authentication_recording": True, **counts, "files": records}
+    (media / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"passed": True, **counts, "total_MiB": round(sum(item["bytes"] for item in records) / 1024**2, 2)}))
 
 
 if __name__ == "__main__":

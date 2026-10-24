@@ -117,6 +117,14 @@ def check_admission_model(session: Session, configuration: dict[str, Any], model
 
 
 class GatewayCatalogAdministration(AdminBase):
+    def options(self, page: int, q: str) -> dict[str, Any]:
+        with self.sessions() as session:
+            query = select(GatewayService).order_by(GatewayService.name, GatewayService.id)
+            if q:
+                query = query.where(GatewayService.name.icontains(q, autoescape=True))
+            rows = list(session.scalars(query.offset((page - 1) * 50).limit(51)))
+            return {"data": [{"id": public_id("gateway", row.id), "name": row.name, "enabled": row.enabled} for row in rows[:50]], "page": page, "has_more": len(rows) > 50}
+
     def _service(self, session: Session, gateway_id: UUID, *, write: bool = False) -> GatewayService:
         query = select(GatewayService).where(GatewayService.id == gateway_id)
         row = session.scalar(query.with_for_update(key_share=True) if write else query)

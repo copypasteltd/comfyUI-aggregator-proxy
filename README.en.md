@@ -10,9 +10,9 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 **Status: in development.** Native Windows implementation, protocol tests and isolated candidate installation have recorded verification. Actual Workflows, model quality, real S3/Redis, production system services and capacity on 10–20 physical machines still require acceptance. Screenshots and recordings show the real UI and API backed by isolated PostgreSQL and explicitly synthetic fixtures. They demonstrate neither real GPU generation nor production throughput.
 
-The [remaining-work checklist](docs/78-完整待办与首版收口清单.md), written in Chinese, identifies 76 known items. The [gateway catalog protocol](docs/79-网关模型目录持久发布协议.md) now implements control-plane persistence, application receipts, retry/rollback and admission revision checks. Provider polling/application and the Admin mapping UI still need integration. The current Provider continues to use startup model/pricing configuration; the complete publication lifecycle remains unfinished.
+The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: implementation items 01–04 are complete, with 72 still open (70 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md) and [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md) now connect the durable protocol, covering confirmation/rejection, recovery, frozen prices and existing tasks, original-request checks and history rollback. Actual model/gateway acceptance remains separate.
 
-The latest [verification record](docs/evidence/2026-10-25/gateway-catalog-verification.json) reports 3146 passing Python checks, 20 native Provider legacy protocol scenarios and a consistent 45-table development-database restore. Actual ComfyUI, production storage and physical-machine capacity still require acceptance.
+The latest [verification record](docs/evidence/2026-10-25/provider-catalog-verification.json) reports 3148 passing Python checks, 172 top-level/325 Provider ledger subtests, 40 frontend unit checks and 16 catalog browser scenarios. Actual Provider legacy/managed cross-process evidence is recorded separately. Actual ComfyUI, production storage and physical-machine capacity still require acceptance.
 
 ## Contents
 
@@ -73,7 +73,13 @@ PostgreSQL is authoritative for jobs and resources. SQLite is only a single Work
 
 ## Admin and demonstrations
 
-Catalog synchronization currently provides control-plane APIs. Administrators publish a full catalog using `expected_revision`, `If-Match` and `Idempotency-Key`; Providers pull and acknowledge it through their separate gateway identity. Immutable snapshots bind models, Workflow releases, channels and price versions. Legacy admission continues until the first confirmation; managed admission then requires a matching `catalog` stamp. Existing tasks and request recovery retain their original frozen records. Retry and rollback create new revisions. **The current Provider does not consume this protocol yet; do not manually acknowledge managed activation.** See the [protocol, budgets and migration notes](docs/79-网关模型目录持久发布协议.md).
+Open **网关接入 → 模型目录** (gateway catalog) or **模型与路由 → 网关模型目录** (model-page catalog entry). `models:read` permits state, mapping differences, failure receipts and paginated history; `models:publish` permits editing, publication, retry and rollback. The model-page read entry does not require gateway credential-management permission.
+
+For the first publication, enter the same logical instance as the Provider startup file, select published models, and enter existing Sub2API usage-account/group IDs, price versions and unit prices. IDs remain decimal strings to preserve 64-bit precision. Publish the complete desired catalog after confirmation. The Provider polls, validates and persists candidates, then activates new-request rules only after a valid applied receipt. Desired and confirmed versions remain separate. After first activation, startup rules are no longer an automatic fallback; an empty catalog withdraws new tasks. Existing tasks and idempotent recovery retain their original model, Workflow, target and price. Rejection preserves the previous catalog; retry/rollback creates a new revision. Back up, drain and independently migrate Sub2API through migration 257 before deployment; startup only probes the schema. See the [publication protocol](docs/79-网关模型目录持久发布协议.md), [Provider recovery](docs/80-Provider目录消费与版本快照.md) and [Admin behavior](docs/81-Admin网关目录映射与发布核对.md).
+
+![Gateway catalog publication, request recovery and rollback: synthetic data](docs/media/gateway-catalog/gateway-catalog.gif)
+
+[Catalog MP4](docs/media/gateway-catalog/gateway-catalog.mp4) · [Editor](docs/media/gateway-catalog/catalog-editor.png) · [Desired/confirmed versions](docs/media/gateway-catalog/catalog-confirmed.png) · [History](docs/media/gateway-catalog/catalog-history.png) · [Mobile](docs/media/gateway-catalog/catalog-mobile.png) · [Sanitized requests/responses](docs/media/gateway-catalog/api-responses.json). Provider receipts in this UI recording are explicitly labeled protocol fixtures. Actual Provider consumption has separate cross-process evidence; neither establishes physical GPU acceptance.
 
 ![Admin feature tour with synthetic data](docs/media/admin-tour.gif)
 
@@ -270,16 +276,17 @@ Run from `app/`:
 
 Python integration tests require the project's native PostgreSQL and separate `render_control_test` database. In-memory/SQLite substitutes do not satisfy that gate. Go and full Sub2API checks require the pinned native Go toolchain and corresponding upstream cache. Browser tests/recordings must close their own page/context/browser in `finally`.
 
-| Most recent recorded verification: increment 76 | Result and scope |
+| Recent verification: increments 80–81 | Result and scope |
 | --- | --- |
-| Python | 3087 checks; additional 1498 focused/contract checks |
-| Frontend | 33 unit checks, generated API types, type checking and production build |
-| Admin browser | 91 desktop/390px groups; 8 additional installed-candidate groups |
-| Native integration | 20 groups, 11 synthetic jobs; not actual GPU generation |
-| Candidate installation | 24 isolated offline installation checks, `rc-20261025.76.3` |
-| Database/contracts | 42 business tables, 53 runtime contracts, 51 schemas / 833 fixtures |
+| Python | Full 3148 checks, 1498 contract checks and 19 focused catalog backend checks |
+| Frontend | 40 unit checks, generated API types, type checking and production build |
+| Admin browser | 16 catalog scenarios at desktop/375px/landscape; eight additional installed-candidate scenarios |
+| Provider components | Go client: 48 top-level/222 subtests; Provider: 172 top-level/325 subtests |
+| Native integration | Legacy: 20 scenarios/11 synthetic jobs; managed: 25 scenarios/13 synthetic jobs, with actual processes and protocol fixtures distinguished |
+| Candidate installation | 24 isolated offline installation checks, `rc-20261025.81.1` |
+| Database/contracts | 45 control-plane tables; 58 runtime contracts, 56 schemas/855 fixtures, 188 design endpoints, 154 OpenAPI paths/195 methods |
 
-These are historical results for their recorded revisions. Subsequent documentation/tooling changes do not mean the full suite was rerun. [Verification records](docs/76-Workflow归档与恢复管理.md) distinguish fresh runs, hash-based reuse and unverified conditions.
+These checks were run for this increment; historical checks for other pages are not presented as fresh runs. The [summary](docs/evidence/2026-10-25/provider-catalog-verification.json), [Provider topic](docs/80-Provider目录消费与版本快照.md) and [UI/candidate topic](docs/81-Admin网关目录映射与发布核对.md) record source hashes, failures, cleanup and scope. Actual GPUs, dependencies, a fresh host, production and complete capacity acceptance remain open.
 
 ## Documentation and future updates
 

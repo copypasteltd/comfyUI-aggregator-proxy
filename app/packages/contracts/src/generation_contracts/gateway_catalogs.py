@@ -12,6 +12,12 @@ class CatalogModelBinding(StrictDTO):
     expected_revision: int = Field(ge=1, le=2147483647)
 
 
+class CatalogGatewayOption(StrictDTO):
+    id: str
+    name: str
+    enabled: bool
+
+
 class CatalogRule(StrictDTO):
     usage_account_id: str
     group_ids: list[str] = Field(min_length=1, max_length=1024)

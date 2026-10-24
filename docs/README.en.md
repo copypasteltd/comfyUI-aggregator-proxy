@@ -6,7 +6,7 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
-The [76-item remaining-work checklist](78-完整待办与首版收口清单.md) distinguishes implementation gaps from missing actual-environment acceptance. [Topic 79](79-网关模型目录持久发布协议.md) adds durable control-plane catalog publication and confirmation; Provider consumption and the Admin mapping UI remain unfinished. Existing protocol/browser evidence does not establish complete release acceptance.
+The [checklist](78-完整待办与首版收口清单.md) preserves 76 stable tracking IDs and separates implementation from actual-environment acceptance. [Topic 79](79-网关模型目录持久发布协议.md) is now connected to [Provider consumption and frozen request versions](80-Provider目录消费与版本快照.md) and [Admin mapping management](81-Admin网关目录映射与发布核对.md). Desired/confirmed state, prices, retry/rollback and existing requests have separate evidence. Physical-resource and complete release acceptance remain open.
 
 ## Requirements and engineering baseline
 
@@ -111,12 +111,14 @@ The [76-item remaining-work checklist](78-完整待办与首版收口清单.md) 
 | 77 | [Repository preparation and bilingual documentation delivery](77-仓库整理与双语文档交付.md) |
 | 78 | [Complete remaining-work and first-release checklist](78-完整待办与首版收口清单.md) |
 | 79 | [Durable gateway catalog publication protocol](79-网关模型目录持久发布协议.md) |
+| 80 | [Provider catalog consumption and frozen request versions](80-Provider目录消费与版本快照.md) |
+| 81 | [Admin gateway mappings and publication reconciliation](81-Admin网关目录映射与发布核对.md) |
 
 ## Contracts, examples and media
 
 - [Machine contracts](contracts/README.md): frozen JSON Schemas, fixtures, state machine, endpoint inventory and development traceability.
 - Complete native requests: [image](examples/create-image.json), [video](examples/create-video.json), [audio](examples/create-audio.json).
-- [Demonstration gallery](media/README.md): 11 screenshots, two recordings in MP4/GIF, selected real API responses, hashes and reproduction steps.
+- [Demonstration gallery](media/README.md): 15 screenshots, three recordings in MP4/GIF, selected actual API responses, explicitly labeled receipt fixtures, hashes and reproduction steps.
 - [Contribution/synchronization rules](../CONTRIBUTING.md): update both READMEs, change notes and applicable media, run checks, commit and push.
 
 Production acceptance remains open for actual devices and Workflows, model quality, real storage/gateway dependencies, system services, joint recovery and physical-fleet capacity. The delivery checklist is authoritative for completion status.

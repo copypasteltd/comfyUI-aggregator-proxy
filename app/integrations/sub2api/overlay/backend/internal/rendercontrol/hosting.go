@@ -99,14 +99,18 @@ type hostedHandler struct {
 	stock           http.Handler
 	stopping        atomic.Bool
 	models          map[string]bool
+	public          *PublicHandler
 	uploadDirectory string
 	uploadSlots     chan struct{}
 }
 
 func (h *hostedHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if h.public != nil {
+		r = r.WithContext(context.WithValue(r.Context(), catalogContextKey{}, h.public.modelSnapshot(r.Context())))
+	}
 	requestStarted := time.Now()
 	owned := r.URL.Path == "/v1/jobs" || strings.HasPrefix(r.URL.Path, "/v1/jobs/") || r.URL.Path == "/v1/assets" || strings.HasPrefix(r.URL.Path, "/v1/assets/") || r.URL.Path == "/v1/content" || strings.HasPrefix(r.URL.Path, "/v1/content/") || strings.HasPrefix(r.URL.Path, "/v1/images/tasks/rc_") || strings.HasPrefix(r.URL.Path, "/v1/videos/rc_")
-	if r.Method == http.MethodGet && (r.URL.Path == "/v1/capabilities" || r.URL.Path == "/v1/models" && r.URL.Query().Get("client_version") == "" || strings.HasPrefix(r.URL.Path, "/v1/models/") && h.models[strings.TrimPrefix(r.URL.Path, "/v1/models/")]) {
+	if r.Method == http.MethodGet && (r.URL.Path == "/v1/capabilities" || r.URL.Path == "/v1/models" && r.URL.Query().Get("client_version") == "" || strings.HasPrefix(r.URL.Path, "/v1/models/") && h.ownsModel(r.Context(), strings.TrimPrefix(r.URL.Path, "/v1/models/"))) {
 		owned = true
 		if r.URL.Path == "/v1/models" {
 			r = r.WithContext(context.WithValue(r.Context(), stockModelHandler{}, h.stock))
@@ -147,7 +151,7 @@ func (h *hostedHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			hostRoutingError(w, 400, "invalid_request")
 			return
 		}
-		owned = h.models[model]
+		owned = h.ownsModel(r.Context(), model)
 		if _, err = file.file.Seek(0, 0); err != nil {
 			hostRoutingError(w, 503, "upload_unavailable")
 			return
@@ -173,7 +177,7 @@ func (h *hostedHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				hostRoutingError(w, http.StatusBadRequest, "invalid_request")
 				return
 			}
-			owned = h.models[object["model"].(string)]
+			owned = h.ownsModel(r.Context(), object["model"].(string))
 			r.Body = io.NopCloser(bytes.NewReader(raw))
 			r.ContentLength = int64(len(raw))
 		}
@@ -219,6 +223,14 @@ func hostRoutingError(w http.ResponseWriter, status int, code string) {
 	}
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(map[string]any{"error": map[string]string{"type": "invalid_request_error", "code": code, "message": "Generation request could not be parsed"}})
+}
+
+func (h *hostedHandler) ownsModel(ctx context.Context, model string) bool {
+	if h.public == nil {
+		return h.models[model]
+	}
+	_, owned := h.public.modelSnapshot(ctx).owned[model]
+	return owned
 }
 
 // InstallFromEnvironment is called by the reviewed stock composition patch.
@@ -308,7 +320,7 @@ func InstallFromEnvironment(db *sql.DB, auth middleware.APIKeyAuthMiddleware, se
 				return nil, ErrInvalid
 			}
 		}
-		client, err := controlclient.New(controlclient.Config{GatewayID: gateway.ID, Origin: gateway.Origin, Credential: credential, RootCAs: roots})
+		client, err := controlclient.New(controlclient.Config{GatewayID: gateway.ID, Origin: gateway.Origin, Credential: credential, RootCAs: roots, MaxResponseBytes: 4 << 20})
 		if err != nil {
 			return nil, ErrInvalid
 		}
@@ -328,7 +340,15 @@ func InstallFromEnvironment(db *sql.DB, auth middleware.APIKeyAuthMiddleware, se
 			return nil, ErrInvalid
 		}
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-		err := checkUsageAccount(ctx, db, model.UsageAccountID)
+		var managed bool
+		err := db.QueryRowContext(ctx, `SELECT EXISTS(SELECT 1 FROM render_control_catalogs WHERE instance=$1 AND target_gateway_id=$2 AND confirmed_revision IS NOT NULL)`, file.Instance, model.GatewayID).Scan(&managed)
+		if err != nil {
+			cancel()
+			return nil, ErrStorage
+		}
+		if err == nil && !managed {
+			err = checkUsageAccount(ctx, db, model.UsageAccountID)
+		}
 		cancel()
 		if err != nil {
 			return nil, err
@@ -378,14 +398,27 @@ func InstallFromEnvironment(db *sql.DB, auth middleware.APIKeyAuthMiddleware, se
 	if err != nil {
 		return nil, ErrStorage
 	}
+	ctx, cancel = context.WithTimeout(context.Background(), 20*time.Second)
+	err = handler.initializeCatalogs(ctx)
+	cancel()
+	if err != nil {
+		return nil, err
+	}
 	if err = runtime.Start(context.Background()); err != nil {
+		return nil, err
+	}
+	catalogs, err := startCatalogConsumer(handler, 5*time.Second)
+	if err != nil {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		_ = runtime.Stop(ctx)
 		return nil, err
 	}
 	ownedModels := map[string]bool{}
 	for _, model := range file.Models {
 		ownedModels[model.Model] = true
 	}
-	mux := &hostedHandler{provider: router, stock: server.Handler, models: ownedModels, uploadDirectory: handler.uploadDirectory, uploadSlots: handler.uploadSlots}
+	mux := &hostedHandler{provider: router, stock: server.Handler, models: ownedModels, public: handler, uploadDirectory: handler.uploadDirectory, uploadSlots: handler.uploadSlots}
 	server.Handler = mux
 	var once sync.Once
 	cleanup := func() {
@@ -393,6 +426,9 @@ func InstallFromEnvironment(db *sql.DB, auth middleware.APIKeyAuthMiddleware, se
 			mux.stopping.Store(true)
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
+			if catalogs.Stop(ctx) != nil {
+				log.Print("RenderControl catalog shutdown did not finish within its limit")
+			}
 			if runtime.Stop(ctx) != nil {
 				log.Print("RenderControl shutdown did not finish within its limit")
 			}

@@ -41,11 +41,11 @@ func (h *PublicHandler) acquireCatalog(c *gin.Context) bool {
 func (h *PublicHandler) discover(ctx context.Context, subject Subject, key *service.APIKey, capabilities bool, model string) discoveredCatalog {
 	allowed := map[string]publicRule{}
 	targetSet := map[string]bool{}
-	for id, candidate := range h.models {
+	for id, candidate := range h.modelSnapshot(ctx).models {
 		if model != "" && model != id {
 			continue
 		}
-		if rule, err := h.rule(key, id, candidate.model.TaskType); err == nil {
+		if rule, err := authorizePublicRule(key, id, candidate.model.TaskType, candidate, true); err == nil {
 			allowed[id] = rule
 			targetSet[rule.model.Target.gatewayID] = true
 		}
@@ -215,7 +215,7 @@ func (h *PublicHandler) modelsList(c *gin.Context) {
 			ID string `json:"id"`
 		}
 		_ = json.Unmarshal(item, &model) // checked by decodeStockCatalog
-		if _, owned := h.models[model.ID]; owned || seen[model.ID] {
+		if _, owned := h.modelSnapshot(c.Request.Context()).owned[model.ID]; owned || seen[model.ID] {
 			continue
 		}
 		seen[model.ID] = true

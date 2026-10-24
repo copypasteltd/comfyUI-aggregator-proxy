@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import GatewayCatalogLauncher from '../components/GatewayCatalogLauncher.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus, Refresh } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
@@ -155,7 +156,7 @@ onUnmounted(() => { disposed = true; stopAll(); pending.value = null; sample.val
 </script>
 
 <template>
-  <div class="page-heading"><div><p class="eyebrow">CAPABILITIES / MODELS</p><h1>模型与路由</h1><p class="muted">将公开模型别名映射到冻结 Workflow、规格与渠道。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button><el-button v-if="session.allows('models:write')" type="primary" :icon="Plus" :disabled="blocked || !visible" @click="open()">添加模型</el-button></div></div>
+  <div class="page-heading"><div><p class="eyebrow">CAPABILITIES / MODELS</p><h1>模型与路由</h1><p class="muted">将公开模型别名映射到冻结 Workflow、规格与渠道。</p></div><div class="toolbar"><GatewayCatalogLauncher/><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button><el-button v-if="session.allows('models:write')" type="primary" :icon="Plus" :disabled="blocked || !visible" @click="open()">添加模型</el-button></div></div>
   <el-alert v-if="error" :title="error + (snapshot ? ' · 当前展示最后一次成功快照' : '')" type="error" :closable="false"/>
   <ModelRequestStatus v-if="!drawer && !validationDialog" :description="pending?.description ?? null" :uncertain="uncertain" :busy="writing" :active="visible" :error="writeError" @retry="pending && execute(pending)" @clear="clearPending"/>
   <section class="panel model-filters" aria-label="模型目录筛选"><el-form label-position="top" @submit.prevent="applyFilters"><div class="model-filter-grid"><el-form-item label="模型别名搜索"><el-input v-model="draft.q" aria-label="模型别名搜索" maxlength="128" placeholder="按别名字面搜索" clearable/></el-form-item><el-form-item label="筛选项目"><ScopeSelect v-model="draft.project_id" label="筛选项目" :active="visible" clearable allow-inactive/></el-form-item><el-form-item label="能力类型"><el-select v-model="draft.task_type" aria-label="能力类型" clearable placeholder="全部能力"><el-option v-for="(name, id) in taskNames" :key="id" :label="name" :value="id"/></el-select></el-form-item><el-form-item label="发布状态"><el-select v-model="draft.status" aria-label="发布状态" clearable placeholder="全部状态"><el-option label="已发布" value="published"/><el-option label="未发布" value="unpublished"/></el-select></el-form-item></div><div class="toolbar model-filter-actions"><el-button @click="resetFilters">重置筛选</el-button><el-button type="primary" native-type="submit">应用筛选</el-button></div></el-form></section>

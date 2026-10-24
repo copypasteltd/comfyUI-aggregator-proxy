@@ -45,23 +45,30 @@ def main() -> None:
     for name in ("create-image.json", "create-video.json", "create-audio.json"):
         request = json.loads((ROOT / "docs/examples" / name).read_text(encoding="utf-8"))
         Draft202012Validator(schema).validate(request)
-    manifest = json.loads((MEDIA / "manifest.json").read_text(encoding="utf-8"))
-    assert manifest["passed"] and manifest["synthetic_data"] and not manifest["real_gpu_generation"]
     decoded = []
+    screenshots = 0
     ffmpeg = ROOT / "app/.local/toolchains/ffmpeg-8.1/bin/ffmpeg.exe"
-    for item in manifest["files"]:
-        path = MEDIA / item["path"]
-        if path.stat().st_size != item["bytes"] or sha(path) != item["sha256"]:
-            errors.append("media_hash:" + path.name)
-        if path.suffix == ".png":
-            with Image.open(path) as image:
-                image.verify()
-        else:
-            result = subprocess.run([str(ffmpeg), "-hide_banner", "-loglevel", "error", "-nostdin", "-protocol_whitelist", "file", "-i", str(path), "-map", "0:v:0", "-threads", "1", "-f", "null", "-"], capture_output=True, timeout=120, creationflags=subprocess.CREATE_NO_WINDOW)  # noqa: S603 -- fixed native executable and manifest-owned file
-            if result.returncode:
-                errors.append("media_decode:" + path.name)
+    lock = json.loads((ROOT / "app/config/media-tools.lock.json").read_text(encoding="utf-8"))
+    assert sha(ffmpeg) == lock["files"]["bin/ffmpeg.exe"]["sha256"]
+    for directory in (MEDIA, MEDIA / "gateway-catalog"):
+        manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
+        assert manifest["passed"] and manifest["synthetic_data"] and not manifest["real_gpu_generation"]
+        for item in manifest["files"]:
+            path = (directory / item["path"]).resolve()
+            if not path.is_relative_to(directory.resolve()):
+                raise ValueError("media_manifest_path_escape")
+            if path.stat().st_size != item["bytes"] or sha(path) != item["sha256"]:
+                errors.append("media_hash:" + path.name)
+            if path.suffix == ".png":
+                screenshots += 1
+                with Image.open(path) as image:
+                    image.verify()
             else:
-                decoded.append(path.name)
+                result = subprocess.run([str(ffmpeg), "-hide_banner", "-loglevel", "error", "-nostdin", "-protocol_whitelist", "file", "-i", str(path), "-map", "0:v:0", "-threads", "1", "-f", "null", "-"], capture_output=True, timeout=120, creationflags=subprocess.CREATE_NO_WINDOW)  # noqa: S603 -- fixed native executable and manifest-owned file
+                if result.returncode:
+                    errors.append("media_decode:" + path.name)
+                else:
+                    decoded.append(path.relative_to(MEDIA).as_posix())
     capture = json.loads((MEDIA / "capture.json").read_text(encoding="utf-8"))
     cleanup = json.loads((ROOT / "docs/evidence/2026-10-25/readme-media-capture.json").read_text(encoding="utf-8"))
     assert capture["passed"] and not capture["errors"] and capture["closed_contexts"] == 3 and capture["browser_closed"]
@@ -72,7 +79,15 @@ def main() -> None:
         request, response = record["request"], record["response"]
         assert record["http_status"] == 200 and request["archived"] == response["archived"]
         assert request["expected_revision"] == response["previous_revision"] == response["revision"] - 1
-    report = {"at": datetime.now(UTC).isoformat(), "passed": not errors, "entry_documents": len(documents), "local_links_checked": links, "request_examples_validated": 3, "screenshots_verified": 11, "video_and_gif_fully_decoded": decoded, "bilingual_capability_topics_present": True, "actual_lifecycle_responses_verified": 2, "synthetic_capture_and_cleanup_passed": True, "errors": errors, "full_python_suite_rerun": False, "runtime_protocol_changed": False}
+    catalog_capture = json.loads((MEDIA / "gateway-catalog/capture.json").read_text(encoding="utf-8"))
+    catalog_cleanup = json.loads((ROOT / "docs/evidence/2026-10-25/gateway-catalog-browser.json").read_text(encoding="utf-8"))
+    assert catalog_capture["passed"] and not catalog_capture["errors"] and catalog_capture["closed_contexts"] == 4 and catalog_capture["browser_closed"]
+    assert catalog_cleanup["passed"] and all(catalog_cleanup["cleanup"].values())
+    catalog_responses = json.loads((MEDIA / "gateway-catalog/api-responses.json").read_text(encoding="utf-8"))
+    assert catalog_responses["authentication_headers_and_cookies_omitted"] and catalog_responses["provider_receipts_are_protocol_fixtures"]
+    assert sum(item["operation"] == "publish_six_types" and item["http_status"] == 201 for item in catalog_responses["responses"]) == 1
+    assert sum(item["operation"] == "simulated_provider_receipt" and item["http_status"] == 200 for item in catalog_responses["responses"]) == 4
+    report = {"at": datetime.now(UTC).isoformat(), "passed": not errors, "entry_documents": len(documents), "local_links_checked": links, "request_examples_validated": 3, "screenshots_verified": screenshots, "media_manifests_verified": 2, "video_and_gif_fully_decoded": decoded, "bilingual_capability_topics_present": True, "actual_lifecycle_responses_verified": 2, "catalog_responses_verified": len(catalog_responses["responses"]), "catalog_provider_receipts_are_protocol_fixtures": True, "synthetic_capture_and_cleanup_passed": True, "errors": errors, "full_python_suite_rerun": False, "runtime_protocol_changed": False}
     (ROOT / "docs/evidence/2026-10-25/repository-readme-verification.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False))
     raise SystemExit(0 if report["passed"] else 1)

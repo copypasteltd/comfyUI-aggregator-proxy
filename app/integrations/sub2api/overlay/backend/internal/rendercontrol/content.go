@@ -135,7 +135,7 @@ func (h *PublicHandler) contentOwner(c *gin.Context, ownerOnly bool) (Subject, I
 	if err != nil {
 		return Subject{}, Intent{}, err
 	}
-	if _, err = h.rule(key, i.Model, i.TaskType); err != nil {
+	if err = h.authorizeIntent(c.Request.Context(), key, i); err != nil {
 		return Subject{}, Intent{}, err
 	}
 	return subject, i, nil

@@ -10,9 +10,9 @@
 
 **当前状态：开发中。** 原生 Windows 本地实现、协议测试和隔离候选安装已有验证记录；真实 Workflow、模型质量、真实 S3/Redis、生产系统服务与 10～20 台实机容量尚未完成验收。文中的截图和录屏使用真实页面与 API、独立 PostgreSQL 和明确标记的合成数据，不代表真实 GPU 生成或生产压测结果。
 
-[完整待办与首版收口清单](docs/78-完整待办与首版收口清单.md) 列出 76 项已知剩余工作。[网关目录协议](docs/79-网关模型目录持久发布协议.md) 已补齐控制面持久发布、应用回执、重试/回滚及准入版本校验；Provider 自动拉取/应用和 Admin 映射界面仍待接线。当前 Provider 继续使用启动文件中的模型/价格配置，完整发布闭环尚未完成。
+[完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～04 的发布实现已补齐，72 项仍待收口（70 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md) 与 [Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md) 已连接持久发布协议，支持确认/拒绝、恢复、价格与旧任务版本、原请求核对和历史回滚。真实模型/网关联合验收继续独立。
 
-本轮 [验证记录](docs/evidence/2026-10-25/gateway-catalog-verification.json)：完整 Python 回归 3146 项、原生 Provider legacy 协议场景 20 组和开发库 45 表恢复演练通过；这些不替代真实 ComfyUI、生产存储或实机容量验收。
+本轮 [验证记录](docs/evidence/2026-10-25/provider-catalog-verification.json)：完整 Python 回归 3148 项、Provider/账本 172 项顶层与 325 子测试、前端 40 项单元及目录界面 16 组浏览器场景通过；实际 Provider 的 legacy/managed 跨进程验证分开记录。这些不替代真实 ComfyUI、生产存储或实机容量验收。
 
 ## 目录
 
@@ -73,7 +73,13 @@ PostgreSQL 是任务和资源权威源；SQLite 仅是单机 Worker journal。Su
 
 ## Admin 操作与演示
 
-模型目录同步目前交付控制面 API：管理员按 `expected_revision`、`If-Match` 和 `Idempotency-Key` 发布完整目录，Provider 用独立网关身份拉取及确认。目录保存不可变配置、摘要、模型/Workflow/渠道绑定和价格版本。首次确认前保持 legacy；确认后新网关准入必须携带匹配的 `catalog` 版本，已接收任务和原请求恢复继续使用冻结记录。重试和回滚均创建新版本。**当前 Provider 尚未接入此消费者，暂不要手工确认启用 managed。** 详见 [协议、预算与迁移说明](docs/79-网关模型目录持久发布协议.md)。
+模型目录可从“网关接入 → 模型目录”或“模型与路由 → 网关模型目录”管理。`models:read` 可以核对期望/确认版本、映射差异、失败回执和分页历史；`models:publish` 才能编辑、发布、重试或回滚。模型页的只读入口不要求网关凭证管理权限。
+
+首次填写与 Provider 启动文件相同的逻辑 instance，选择已发布模型并填写既有 Sub2API 用量账户、分组、价格版本及单位价格；账户/分组 ID 使用十进制字符串，避免 64 位精度丢失。确认后发布完整期望目录。Provider 自动拉取、校验并持久保存候选，取得有效 applied 回执后切换新请求；后台分别展示期望和已确认版本。首次确认后不自动回退启动规则；空目录表示下架该网关的新任务，旧在途任务和幂等重放保留原模型、Workflow、目标与价格。失败保留上一有效目录，历史重试/回滚创建新版本。部署前须备份、排空并独立迁移 Sub2API 至 257；启动只读探测结构。详见 [持久发布协议](docs/79-网关模型目录持久发布协议.md)、[Provider 应用与恢复](docs/80-Provider目录消费与版本快照.md) 和 [Admin 操作约束](docs/81-Admin网关目录映射与发布核对.md)。
+
+![网关目录发布、原请求核对及回滚：合成数据](docs/media/gateway-catalog/gateway-catalog.gif)
+
+[目录演示 MP4](docs/media/gateway-catalog/gateway-catalog.mp4) · [映射编辑](docs/media/gateway-catalog/catalog-editor.png) · [期望/确认版本](docs/media/gateway-catalog/catalog-confirmed.png) · [版本历史](docs/media/gateway-catalog/catalog-history.png) · [移动端](docs/media/gateway-catalog/catalog-mobile.png) · [脱敏请求与响应](docs/media/gateway-catalog/api-responses.json)。界面演示中的 Provider 回执是明确标记的协议夹具；实际 Provider 自动消费另有跨进程验证，均不代表真实 GPU 验收。
 
 ![Admin 功能巡览 GIF：合成数据](docs/media/admin-tour.gif)
 
@@ -270,16 +276,17 @@ comfyUI-aggregator-proxy/
 
 Python 集成测试要求本项目的原生 PostgreSQL 与独立 `render_control_test` 库，不以进程内或 SQLite 替代。Go 和完整 Sub2API 检查要求锁定的原生 Go 工具链与对应上游缓存。浏览器检查和录屏必须在 `finally` 中关闭自己创建的 page/context/browser。
 
-| 最近已记录验证：第 76 增量 | 结果及范围 |
+| 最近验证：第 80～81 增量 | 结果及范围 |
 | --- | --- |
-| Python | 3087 项；另有 1498 项定向与契约检查 |
-| 前端 | 33 项单元检查、类型生成/检查和生产构建 |
-| Admin 图形检查 | 91 组桌面/390px 检查；安装后另有 8 组 |
-| 原生集成 | 20 组、11 个合成任务；不是实际 GPU 生成 |
-| 候选安装 | 24 项隔离离线安装检查，候选 `rc-20261025.76.3` |
-| 数据库与契约 | 42 张业务表，53 个运行契约，51 schema / 833 fixture |
+| Python | 完整 3148 项；契约复核 1498 项；目录后端定向 19 项 |
+| 前端 | 40 项单元、类型生成/检查和生产构建 |
+| Admin 图形检查 | 本轮目录 16 组桌面/375px/横屏；候选安装后另有 8 组 |
+| Provider 组件 | Go 客户端 48 顶层/222 子测试；Provider 172 顶层/325 子测试 |
+| 原生集成 | legacy 20 组/11 合成任务，managed 25 组/13 合成任务；实际服务进程与协议夹具边界分开 |
+| 候选安装 | 24 项隔离离线安装检查，候选 `rc-20261025.81.1` |
+| 数据库与契约 | 控制面 45 表；58 运行契约，56 schema/855 fixture，188 设计端点，154 OpenAPI 路径/195 方法 |
 
-这些是对应版本的历史证据，后续文档或工具整理不表示重跑全部测试。[验证记录](docs/76-Workflow归档与恢复管理.md) 中区分本轮执行、摘要匹配复用和未实测事项。
+这些是本轮实际执行的分层结果；其他页面历史记录不冒充本轮重测。[汇总](docs/evidence/2026-10-25/provider-catalog-verification.json)、[Provider](docs/80-Provider目录消费与版本快照.md) 和 [UI/候选](docs/81-Admin网关目录映射与发布核对.md) 分别记录源码摘要、失败、清理和范围。真实 GPU、真实依赖、全新宿主、生产与完整容量仍待验收。
 
 ## 文档与后续更新
 

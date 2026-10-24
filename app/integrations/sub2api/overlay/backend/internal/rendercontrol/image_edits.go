@@ -413,7 +413,7 @@ func (h *PublicHandler) imageEdit(c *gin.Context, asynchronous bool) {
 		publicError(c, ErrInvalid)
 		return
 	}
-	rule, err := h.rule(key, plan.request.Model, plan.request.TaskType)
+	rule, err := h.requestRule(c, key, plan.request.Model, plan.request.TaskType)
 	if err != nil {
 		publicError(c, err)
 		return

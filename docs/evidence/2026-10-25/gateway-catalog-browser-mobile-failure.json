@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-24T23:11:31.186562+00:00",
+  "passed": false,
+  "synthetic_data": true,
+  "actual_admin_api": true,
+  "provider_receipts_are_protocol_fixtures": true,
+  "real_comfyui": false,
+  "physical_fleet_validated": false,
+  "virtualization_used": false,
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "credentials": true
+  },
+  "empty_database_backup_verified": true,
+  "browser": {
+    "passed": false,
+    "synthetic_data": true,
+    "actual_admin_api": true,
+    "provider_receipts_are_protocol_fixtures": true,
+    "real_gpu_generation": false,
+    "checks": [
+      "six_capabilities_visual_mapping",
+      "int64_and_fixed_decimal_wire_precision",
+      "desired_is_separate_from_confirmed",
+      "frozen_json_and_confirmed_digest",
+      "committed_response_loss_preserves_original_request",
+      "uncertain_close_blocked",
+      "hidden_write_wait_cleanup_and_session_recheck",
+      "rejection_keeps_previous_confirmed",
+      "history_rollback_creates_new_revision",
+      "concurrent_revision_does_not_rebase_draft",
+      "explicit_empty_catalog_withdrawal"
+    ],
+    "screenshots": [
+      "catalog-editor.png",
+      "catalog-confirmed.png",
+      "catalog-history.png"
+    ],
+    "recordings": [
+      "gateway-catalog.webm"
+    ],
+    "errors": [],
+    "closed_contexts": 2,
+    "browser_closed": true,
+    "browser_version": "156.0.4314.42"
+  },
+  "failure": {
+    "phase": "browser",
+    "type": "RuntimeError"
+  }
+}

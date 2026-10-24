@@ -81,13 +81,13 @@ type contentStream struct {
 	Task   string `json:"task"`
 }
 
-func (h *PublicHandler) collectionStreams(key *service.APIKey, model string) []contentStream {
+func (h *PublicHandler) collectionStreams(ctx context.Context, key *service.APIKey, model string) []contentStream {
 	streams := []contentStream{}
-	for _, rule := range h.models {
+	for _, rule := range h.modelSnapshot(ctx).readable {
 		if model != "" && model != rule.model.Model {
 			continue
 		}
-		if _, err := h.rule(key, rule.model.Model, rule.model.TaskType); err == nil {
+		if _, err := authorizePublicRule(key, rule.model.Model, rule.model.TaskType, rule, true); err == nil {
 			streams = append(streams, contentStream{rule.model.Target.gatewayID, rule.model.Model, rule.model.TaskType})
 		}
 	}
@@ -148,7 +148,7 @@ func (h *PublicHandler) listContent(c *gin.Context) {
 		return
 	}
 	defer release()
-	streams := h.collectionStreams(key, query.Model)
+	streams := h.collectionStreams(c.Request.Context(), key, query.Model)
 	scope := listingScope(query, streams, nil)
 	position, err := h.store.readListingCursor(subject, "content", scope, query.Cursor, time.Now())
 	if err != nil || position.Stream > len(streams) {
@@ -283,7 +283,7 @@ func (h *PublicHandler) listJobs(c *gin.Context) {
 		return
 	}
 	defer release()
-	streams := h.collectionStreams(key, query.Model)
+	streams := h.collectionStreams(c.Request.Context(), key, query.Model)
 	targets, err := h.store.listingTargets(ctx, subject, streams)
 	if err != nil {
 		publicError(c, err)

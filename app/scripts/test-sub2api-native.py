@@ -5,6 +5,7 @@ script cannot target an existing database, remote machine or customer catalog.
 """
 from __future__ import annotations
 
+import argparse
 import base64
 import hashlib
 import importlib.util
@@ -40,6 +41,7 @@ from generation_infrastructure.models import (
     WorkflowBinding,
     WorkflowRelease,
 )
+from generation_infrastructure.security import password_hash
 from generation_infrastructure.settings import Settings
 from psycopg import sql
 from sqlalchemy import create_engine, select
@@ -253,7 +255,87 @@ def seed_upstream(conn: psycopg.Connection[Any]) -> dict[str, Any]:
     return {"user": user, "group": group, "keys": keys, "credentials": credentials, "account": account}
 
 
-def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connection[Any], control: psycopg.Connection[Any], fixtures: Any, processes: Processes, provider: subprocess.Popen[bytes], restart: Any, root: Path, outcomes: list[dict[str, Any]], pepper: str, comfy: Any) -> None:
+class NativeCatalog:
+    """Admin HTTP publication and automatic Provider receipts; never fake applied."""
+
+    def __init__(self, api: httpx.Client, gateway: str, upstream: dict[str, Any], outcomes: list[dict[str, Any]]) -> None:
+        self.api, self.path, self.upstream, self.outcomes = api, "/admin/api/v1/gateways/" + gateway + "/catalog", upstream, outcomes
+        response = api.get("/admin/api/v1/public-models", params={"status": "published", "page": 1})
+        check(response.status_code == 200 and len(response.json()["data"]) == 6, "catalog_native_models_missing")
+        self.models = response.json()["data"]
+        self.first: dict[str, Any] = {}
+
+    def publish(self, expected: int, price: str = "1.00000000", *, empty: bool = False, unavailable: bool = False) -> dict[str, Any]:
+        body = {"instance_id": "native-protocol", "expected_revision": expected, "models": [] if empty else [{"usage_account_id": "9223372036854775807" if unavailable else str(self.upstream["account"]), "group_ids": [str(self.upstream["group"])], "price_version": f"catalog-v{expected + 1}", "unit_price": price if model["task_type"] == "text_to_image" else "1.00000000", "model_bindings": [{"model_id": model["id"], "expected_revision": model["revision"]}]} for model in self.models]}
+        token = str(uuid4())
+        response = self.api.post(self.path + "/releases", json=body, headers={"If-Match": f'"{expected}"', "Idempotency-Key": token})
+        check(response.status_code == 201, "catalog_native_publication_failed_" + str(response.status_code))
+        release = response.json()
+        check(release["revision"] == expected + 1 and sha_bytes(release["configuration_json"].encode()) == release["digest"], "catalog_native_frozen_bytes_changed")
+        replay = self.api.post(self.path + "/releases", json=body, headers={"If-Match": f'"{expected}"', "Idempotency-Key": token})
+        check(replay.status_code == 201 and replay.json() == release, "catalog_native_admin_replay_changed")
+        return release
+
+    def wait(self, pg: psycopg.Connection[Any], revision: int, *, rejected: bool = False) -> dict[str, Any]:
+        deadline = time.monotonic() + 60
+        while time.monotonic() < deadline:
+            response = self.api.get(self.path)
+            check(response.status_code == 200, "catalog_native_state_failed")
+            value = response.json()
+            row = pg.execute("SELECT confirmed_revision FROM render_control_catalogs WHERE instance='native-protocol'").fetchone()
+            pg.commit()
+            if rejected and value["status"] == "rejected" and value["last_receipt"]["revision"] == revision:
+                check(value["last_receipt"]["error_code"] == "account_unavailable", "catalog_native_rejection_not_fixed")
+                return value
+            if not rejected and value["confirmed"] and value["confirmed"]["revision"] == revision and row == (revision,):
+                return value
+            time.sleep(0.25)
+        raise RuntimeError("catalog_native_confirmation_timeout")
+
+    def exercise(self, pg: psycopg.Connection[Any], call: Any, poll: Any, jobs: list[str], fixtures: Any, image_body: dict[str, Any]) -> None:
+        previous = pg.execute("SELECT count(*),count(*) FILTER(WHERE catalog_revision=1 AND catalog_digest=%s) FROM render_control_intents", (self.first["digest"],)).fetchone()
+        pg.commit()
+        check(previous == (len(jobs), len(jobs)), "catalog_native_six_types_not_stamped")
+        self.outcomes.append({"case": "managed_six_types_and_compatibility_stamp", "passed": True, "intent_count": len(jobs), "revision": 1})
+        self.publish(1, "2.00000000")
+        self.wait(pg, 2)
+        body = {"model": "protocol-text-to-image", "task_type": "text_to_image", "input": {"prompt": "Synthetic managed catalog pricing"}, "parameters": fixtures.defaults("text_to_image")}
+        identifier = call("POST", "/v1/jobs", 202, json=body, headers={"Idempotency-Key": "catalog-managed-price"}).json()["id"]
+        poll(identifier)
+        jobs.append(identifier)
+        self.publish(2, "3.00000000", unavailable=True)
+        rejected = self.wait(pg, 3, rejected=True)
+        check(rejected["confirmed"]["revision"] == 2, "catalog_native_rejection_removed_previous")
+        replay = call("POST", "/v1/jobs", 202, json=body, headers={"Idempotency-Key": "catalog-managed-price"}).json()
+        check(replay["id"] == identifier, "catalog_native_rejection_lost_original")
+        self.outcomes.append({"case": "managed_price_and_dependency_rejection", "passed": True, "confirmed_kept": 2, "rejected": 3})
+        self.publish(3, empty=True)
+        self.wait(pg, 4)
+        call("POST", "/v1/jobs", 404, json=body, headers={"Idempotency-Key": "catalog-withdrawn-new"})
+        check(call("POST", "/v1/jobs", 202, json=body, headers={"Idempotency-Key": "catalog-managed-price"}).json()["id"] == identifier, "catalog_native_withdrawal_lost_replay")
+        # A completed synchronous request must remain retrievable after the rule
+        # is withdrawn, including its protected inline media response.
+        check(call("POST", "/v1/images/generations", json=image_body, headers={"Idempotency-Key": "compatible-sync-image"}).json()["data"][0]["b64_json"], "catalog_native_withdrawal_lost_compatible_result")
+        check(not any(item["id"].startswith("protocol-") for item in call("GET", "/v1/models").json()["data"]), "catalog_native_withdrawal_discovery_stale")
+        check(call("GET", "/v1/jobs/" + jobs[0]).json()["id"] == jobs[0], "catalog_native_withdrawal_orphaned_task")
+        self.outcomes.append({"case": "managed_empty_catalog_and_original_content", "passed": True, "revision": 4, "stock_fallback_blocked": True})
+        response = self.api.post(self.path + "/replay", json={"action": "rollback", "expected_revision": 4, "source_revision": 1}, headers={"If-Match": '"4"', "Idempotency-Key": str(uuid4())})
+        check(response.status_code == 201 and response.json()["revision"] == 5, "catalog_native_rollback_not_new_version")
+        self.wait(pg, 5)
+        identifier = call("POST", "/v1/jobs", 202, json=body, headers={"Idempotency-Key": "catalog-after-rollback"}).json()["id"]
+        poll(identifier)
+        jobs.append(identifier)
+        facts = pg.execute("SELECT catalog_revision,price_version,unit_price::text FROM render_control_intents ORDER BY created_at,id").fetchall()
+        pg.commit()
+        check(sum(row == (1, "catalog-v1", "1.00000000") for row in facts) == len(jobs) - 2 and (2, "catalog-v2", "2.00000000") in facts and (5, "catalog-v1", "1.00000000") in facts, "catalog_native_frozen_price_versions_changed")
+        self.outcomes.append({"case": "managed_rollback_preserves_original_prices", "passed": True, "new_revision": 5, "source_revision": 1})
+
+
+def sha_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
+
+
+def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connection[Any], control: psycopg.Connection[Any], fixtures: Any, processes: Processes, provider: subprocess.Popen[bytes], restart: Any, root: Path, outcomes: list[dict[str, Any]], pepper: str, comfy: Any, managed: NativeCatalog | None = None) -> None:
     tokens = upstream["credentials"]
     client.headers["Authorization"] = "Bearer " + tokens[0]
 
@@ -388,6 +470,8 @@ def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connect
     jobs.append(identifier)
     outcomes.append({"case": "compatible_video_and_range_delivery", "passed": True})
 
+    if managed:
+        managed.exercise(pg, call, poll, jobs, fixtures, image_body)
     # Reuse original frozen quote and real stock auth/cache after process restart.
     processes.stop(provider)
     credential_id, rotated = fixtures.issue_secret("gateway")
@@ -421,7 +505,8 @@ def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connect
     quota = pg.execute("SELECT quota_used::text FROM api_keys WHERE id=%s", (upstream["keys"][0],)).fetchone()[0]
     usage = pg.execute("SELECT count(*) FROM usage_logs WHERE user_id=%s", (upstream["user"],)).fetchone()[0]
     pg.commit()
-    check(balance == ("77.00000000", "0.00000000") and quota == "23.00000000" and usage == len(jobs), "native_usage_or_money_mismatch")
+    expected_balance, expected_quota = ("74.00000000", "26.00000000") if managed else ("77.00000000", "23.00000000")
+    check(balance == (expected_balance, "0.00000000") and quota == expected_quota and usage == len(jobs), "native_usage_or_money_mismatch")
     audio_usage = pg.execute("SELECT audio_count,audio_duration_milliseconds,image_count,video_count,actual_cost=1,billing_mode FROM usage_logs WHERE user_id=%s AND model='protocol-text-to-audio'", (upstream["user"],)).fetchall()
     check(audio_usage == [(1, 500, 0, 0, True, "audio")], "audio_native_metering_not_independent")
     control_audio = control.execute("SELECT u.audio_milliseconds,u.image_count,u.video_milliseconds FROM usage_ledger u JOIN jobs j ON j.id=u.job_id WHERE j.model_alias='protocol-text-to-audio'").fetchall()
@@ -433,6 +518,9 @@ def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connect
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--managed-catalog", action="store_true", help="Exercise Admin publication and automatic Provider catalog confirmation")
+    args = parser.parse_args()
     check(os.name == "nt", "native_windows_required")
     started = time.monotonic()
     run_id = uuid4().hex[:12]
@@ -451,6 +539,7 @@ def main() -> None:
     created: list[str] = []
     comfy, engine, api_client, provider_client = None, None, None, None
     admin = None
+    managed: NativeCatalog | None = None
     phase = "verify_sources"
     failure: BaseException | None = None
     try:
@@ -536,11 +625,22 @@ def main() -> None:
                         release = session.get(WorkflowRelease, binding.release_id)
                         check(release is not None and release.validation.get("test_only") is True and binding.desired_digest == binding.applied_digest, "synthetic_boot_approval_invalid")
                         binding.verified_digest = binding.desired_digest
+                        if args.managed_catalog:
+                            binding.runtime_approval = {"profile_id": "synthetic-protocol-fixture", "physical_runtime_approval": False}
                     report["synthetic_boot_fixture"] = {"approved_after_registration": True, "workflow_bindings": len(bindings), "physical_runtime_approval": False}
                     break
             time.sleep(0.2)
         else:
             raise RuntimeError("worker_registration_timeout")
+        if args.managed_catalog:
+            password = secrets.token_urlsafe(32)
+            with factory.begin() as session:
+                session.add(AdminUser(username="native-catalog-admin", password_hash=password_hash(password), role="administrator"))
+            response = api_client.post("/admin/api/v1/session", json={"username": "native-catalog-admin", "password": password}, headers={"Origin": api_origin})
+            check(response.status_code == 200, "catalog_native_admin_login_failed")
+            api_client.headers.update({"Origin": api_origin, "X-CSRF-Token": response.json()["csrf_token"]})
+            managed = NativeCatalog(api_client, catalog["gateway_id"], upstream, report["cases"])
+            managed.first = managed.publish(0)
         processes.start("control-runner", [sys.executable, "-m", "control_runner.main"], env)
         redis_password = secrets.token_urlsafe(40)
         write(root / "redis.json", {"protocol_test": True, "address": f"127.0.0.1:{redis_port}", "password": redis_password})
@@ -550,6 +650,9 @@ def main() -> None:
         (root / "provider.key").write_text(base64.b64encode(secrets.token_bytes(32)).decode(), encoding="ascii")
         provider_config = {"version": 1, "instance": "native-protocol", "public_origin": f"https://127.0.0.1:{provider_port}", "sync_wait_milliseconds": 60000, "upload_directory": str(root / "provider-uploads"), "active_key": "protocol-v1", "encryption_key_files": {"protocol-v1": str(root / "provider.key")}, "gateways": [{"id": catalog["gateway_id"], "origin": api_origin, "credential_file": str(root / "gateway.key"), "ca_file": str(cert)}], "models": [{"usage_account_id": upstream["account"], "model": "protocol-" + task.replace("_", "-"), "task_type": task, "gateway_id": catalog["gateway_id"], "price_version": "protocol-v1", "unit_price": "1.00000000", "group_ids": [upstream["group"]], "defaults": fixtures.defaults(task)} for task in fixtures.TASKS], "runtime": {"workers": 1, "poll_milliseconds": 500, "settlement_milliseconds": 1000, "call_milliseconds": 5000, "lease_milliseconds": 60000}}
         write(root / "provider.json", provider_config)
+        if managed:
+            provider_config["models"] = []
+            write(root / "provider.json", provider_config)
         stock_config = {"run_mode": "standard", "server": {"host": "127.0.0.1", "port": provider_port, "mode": "release"}, "database": {"host": url.host, "port": url.port, "user": url.username, "password": url.password, "dbname": upstream_database, "sslmode": "disable"}, "redis": {"host": "127.0.0.1", "port": redis_port, "password": redis_password, "db": 0}, "jwt": {"secret": secrets.token_urlsafe(48)}, "log": {"level": "info", "format": "json"}}
         write(root / "config.yaml", stock_config)
         provider_env = {**env, "SKIP_SETUP": "true", "AUTO_SETUP": "false", "DATA_DIR": str(root), "CONFIG_FILE": str(root / "config.yaml"), "SUB2API_RENDER_CONTROL_CONFIG": str(root / "provider.json")}
@@ -566,10 +669,14 @@ def main() -> None:
         phase = "public_generation_and_delivery"
         print(json.dumps({"phase": phase, "native_servers_started": True, "redis_is_protocol_fixture": True, "comfy_is_protocol_fixture": True}), flush=True)
         with psycopg.connect(**{**options, "dbname": upstream_database}) as pg, psycopg.connect(**{**options, "dbname": control_database}) as control:
-            scenario(provider_client, upstream, pg, control, fixtures, processes, provider, restart, root, report["cases"], pepper, comfy)
+            if managed:
+                managed.wait(pg, 1)
+                report["managed_catalog"] = {"initial_revision": 1, "empty_bootstrap_models": True, "receipts_generated_by_actual_provider": True, "physical_runtime_approval": False}
+                report["cases"].append({"case": "managed_catalog_empty_bootstrap_onboarding", "passed": True})
+            scenario(provider_client, upstream, pg, control, fixtures, processes, provider, restart, root, report["cases"], pepper, comfy, managed)
         phase = "worker_retention_after_cloud_ack"
         state = root / "worker-state"
-        expected_outputs = len(fixtures.TASKS) + 5  # Unified tasks plus the five compatibility submissions.
+        expected_outputs = len(fixtures.TASKS) + 5 + (2 if managed else 0)
         deadline = time.monotonic() + 30
         while True:
             with closing(sqlite3.connect(state / "journal.sqlite3")) as journal:
@@ -651,7 +758,7 @@ def main() -> None:
         report["duration_seconds"] = round(time.monotonic() - started, 2)
         report["passed"] = report["passed"] and all(report["cleanup"].values())
         write(root / "report.json", report)
-        write(EVIDENCE / "sub2api-native-protocol.json", report)
+        write(EVIDENCE / ("provider-catalog-native-protocol.json" if args.managed_catalog else "sub2api-native-protocol.json"), report)
         print(json.dumps({"passed": report["passed"], "phase": phase, "cases": len(report["cases"]), "cleanup": report["cleanup"], "failure": report.get("failure")}, ensure_ascii=False), flush=True)
     if failure:
         raise SystemExit(1)

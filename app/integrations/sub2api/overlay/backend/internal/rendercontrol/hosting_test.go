@@ -154,7 +154,6 @@ func TestHostingRejectsInvalidConfigurationWithoutChangingServer(t *testing.T) {
 		"missing_usage_account": func(c *hostingFile) { c.Models[0].UsageAccountID = 0 },
 		"long_usage_model":      func(c *hostingFile) { c.Models[0].Model = strings.Repeat("m", 101) },
 		"untrusted_default":     func(c *hostingFile) { c.Models[0].Defaults = map[string]any{"workflow_json": "untrusted"} },
-		"missing_models":        func(c *hostingFile) { c.Models = nil },
 		"proxy":                 func(c *hostingFile) { c.TrustedProxies = []string{"not-a-proxy"} },
 		"unbounded_poll":        func(c *hostingFile) { c.Runtime.PollMilliseconds = -1 },
 		"overflow_duration":     func(c *hostingFile) { c.Runtime.LeaseMilliseconds = int(^uint(0) >> 1) },

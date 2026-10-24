@@ -27,9 +27,11 @@ from generation_infrastructure.models import (
     GatewayCatalog,
     GatewayCatalogReceipt,
     GatewayCatalogRelease,
+    GatewayService,
     PublicModel,
     WorkflowBinding,
 )
+from generation_infrastructure.security import password_hash
 from generation_infrastructure.settings import Settings
 from sqlalchemy import func, select, text
 from sqlalchemy.exc import DBAPIError
@@ -39,6 +41,43 @@ from tests.integration.test_gateway import admission_body
 from tests.integration.test_gateway import gateway_client as gateway_client
 
 pytestmark = pytest.mark.integration
+
+
+def test_catalog_gateway_options_are_bounded_literal_and_omit_identity_configuration(gateway_client: Any, pg: sessionmaker[Session]) -> None:
+    client, _, _ = gateway_client
+    with pg.begin() as session:
+        for index in range(52):
+            session.add(GatewayService(name=f"Catalog % literal {index:02}", issuer="synthetic-catalog", allowed_cidrs=["192.0.2.1/32"], credential_identifier=uuid4().hex, credential_verifier="0" * 64))
+        session.add(GatewayService(name="Catalog ordinary", issuer="synthetic-catalog", allowed_cidrs=["192.0.2.1/32"], credential_identifier=uuid4().hex, credential_verifier="0" * 64, enabled=False))
+    first = client.get("/admin/api/v1/gateway-catalog-options", params={"q": "%", "page": 1})
+    assert first.status_code == 200
+    value = first.json()
+    assert len(value["data"]) == 50 and value["has_more"]
+    assert all(set(row) == {"id", "name", "enabled"} and "%" in row["name"] for row in value["data"])
+    second = client.get("/admin/api/v1/gateway-catalog-options", params={"q": "%", "page": 2}).json()
+    assert len(second["data"]) == 2 and not second["has_more"]
+    assert not {row["id"] for row in value["data"]} & {row["id"] for row in second["data"]}
+    disabled = client.get("/admin/api/v1/gateway-catalog-options", params={"q": "ordinary"}).json()
+    assert len(disabled["data"]) == 1 and not disabled["data"][0]["enabled"]
+    for query in ({"page": 0}, {"page": 1001}, {"q": "x" * 129}):
+        assert client.get("/admin/api/v1/gateway-catalog-options", params=query).status_code == 422
+
+
+def test_catalog_gateway_selection_does_not_grant_gateway_credential_management(gateway_client: Any, pg: sessionmaker[Session]) -> None:
+    client, _, info = gateway_client
+    password = "Synthetic-observer-catalog-password"
+    with pg.begin() as session:
+        session.add(AdminUser(username="catalog-observer", password_hash=password_hash(password), role="observer"))
+    login = client.post("/admin/api/v1/session", json={"username": "catalog-observer", "password": password})
+    assert login.status_code == 200
+    client.headers["X-CSRF-Token"] = login.json()["csrf_token"]
+    result = client.get("/admin/api/v1/gateway-catalog-options")
+    assert result.status_code == 200 and info["service"]["gateway"]["id"] in {row["id"] for row in result.json()["data"]}
+    assert client.get("/admin/api/v1/gateways").status_code == 403
+    assert client.get(base_path(info)).status_code == 200
+    assert client.post(base_path(info) + "/replay", json={"action": "rollback", "expected_revision": 1, "source_revision": 1}, headers={"If-Match": '"1"', "Idempotency-Key": str(uuid4())}).status_code == 403
+    assert client.delete("/admin/api/v1/session").status_code == 204
+    assert client.get("/admin/api/v1/gateway-catalog-options").status_code == 401
 
 
 @pytest.fixture

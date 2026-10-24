@@ -4,6 +4,7 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends, Path, Query, Request
 from generation_application.ports import AdminIdentity, GatewayIdentity
 from generation_contracts.gateway_catalogs import (
+    CatalogGatewayOption,
     CatalogPublication,
     CatalogReceipt,
     CatalogReceiptResult,
@@ -19,6 +20,10 @@ from generation_infrastructure.gateway_catalogs import GatewayCatalogAdministrat
 
 def catalog_routes(administration: GatewayCatalogAdministration, gateway: Callable[..., GatewayIdentity], permission: Callable[..., Any], token: Callable[[Request], str], revision: Callable[[Request, int], None]) -> APIRouter:
     router = APIRouter()
+
+    @router.get("/admin/api/v1/gateway-catalog-options", response_model=Page[CatalogGatewayOption])
+    def catalog_options(actor: Annotated[AdminIdentity, Depends(permission("models:read"))], page: int = Query(1, ge=1, le=1000), q: str = Query("", max_length=128)) -> dict[str, Any]:
+        return administration.options(page, q)
 
     @router.get("/admin/api/v1/gateways/{identifier}/catalog", response_model=CatalogState)
     def catalog_state(identifier: str, actor: Annotated[AdminIdentity, Depends(permission("models:read"))]) -> dict[str, Any]:

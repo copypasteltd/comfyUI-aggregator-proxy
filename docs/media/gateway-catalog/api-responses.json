@@ -1,0 +1,353 @@
+{
+  "synthetic_data": true,
+  "provider_receipts_are_protocol_fixtures": true,
+  "authentication_headers_and_cookies_omitted": true,
+  "responses": [
+    {
+      "operation": "publish_six_types",
+      "http_status": 201,
+      "request": {
+        "expected_revision": 0,
+        "instance_id": "demo-studio",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1",
+              "9223372036854775806"
+            ],
+            "price_version": "demo-prices-v1",
+            "unit_price": "0.12500000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_07a0abdf07324ff99ca6c63c00ed8075",
+                "expected_revision": 1
+              }
+            ]
+          },
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1",
+              "9223372036854775806"
+            ],
+            "price_version": "demo-prices-v1",
+            "unit_price": "0.12500000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_19bccec1ebe4476eb20ccdf8ea464ed2",
+                "expected_revision": 1
+              }
+            ]
+          },
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1",
+              "9223372036854775806"
+            ],
+            "price_version": "demo-prices-v1",
+            "unit_price": "0.12500000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_1ee07752c97345069c86730a82f0d3ec",
+                "expected_revision": 1
+              }
+            ]
+          },
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1",
+              "9223372036854775806"
+            ],
+            "price_version": "demo-prices-v1",
+            "unit_price": "0.12500000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_32665cc94a0743a1a9c2f3d6cfdc0615",
+                "expected_revision": 1
+              }
+            ]
+          },
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1",
+              "9223372036854775806"
+            ],
+            "price_version": "demo-prices-v1",
+            "unit_price": "0.12500000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_6d1ccc2e05934a3c933d261cf3efcd0b",
+                "expected_revision": 1
+              }
+            ]
+          },
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1",
+              "9223372036854775806"
+            ],
+            "price_version": "demo-prices-v1",
+            "unit_price": "0.12500000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_e7b453d3a5874d37929d752ed9c85800",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      },
+      "response": {
+        "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+        "revision": 1,
+        "instance_id": "demo-studio",
+        "digest": "70a6b9e179d9107386b9096386182cbcf2ff36b0848f2d990365257a2a7e88b9",
+        "action": "publish",
+        "source_revision": null,
+        "created_at": 1792883863,
+        "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-image-to-image\",\"model_bindings\":[{\"alias\":\"demo-image-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_1ee07752c97345069c86730a82f0d3ec\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"352204774dfa70bad5569bb1d5a5d30673a06cf08e7300d445955bd40d6c3f41\",\"release_id\":\"wfr_74906668f1ca468d9848b215d7f8d07c\",\"revision\":1,\"task_type\":\"image_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"image_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-image\",\"model_bindings\":[{\"alias\":\"demo-references-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_32665cc94a0743a1a9c2f3d6cfdc0615\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"c9263c14fd0ce77ed9238987ea125a74ef846c171bb6109088a262275efd93bd\",\"release_id\":\"wfr_2a06c8ddc9e443079dd49d7986ceb7c6\",\"revision\":1,\"task_type\":\"references_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-video\",\"model_bindings\":[{\"alias\":\"demo-references-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_e7b453d3a5874d37929d752ed9c85800\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"cf54ec7e842d9881dffcc17674c57d622e7945deb8fff493d2bc125e010c6565\",\"release_id\":\"wfr_766af341e7b04c7e8704e9bdfc20fb8b\",\"revision\":1,\"task_type\":\"references_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-audio\",\"model_bindings\":[{\"alias\":\"demo-text-to-audio\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"model_id\":\"mdl_07a0abdf07324ff99ca6c63c00ed8075\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9e3ce0865e0026aea5ce9c2269d82a99cca83ea8426addffe35b5b7b81d922d4\",\"release_id\":\"wfr_25406bef0a734ffeab874046953ba5d6\",\"revision\":1,\"task_type\":\"text_to_audio\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_audio\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-image\",\"model_bindings\":[{\"alias\":\"demo-text-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_6d1ccc2e05934a3c933d261cf3efcd0b\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9b65caf5104aa4c5316e5946a94b672e37d8c65c4c1718684688fa47743e5454\",\"release_id\":\"wfr_630bbe6c072f4e2eb7d8f53aa691cfde\",\"revision\":1,\"task_type\":\"text_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-video\",\"model_bindings\":[{\"alias\":\"demo-text-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_19bccec1ebe4476eb20ccdf8ea464ed2\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"2b2133e6d6fe9670c975dc80bf1d36821408298c448fbceb44dcdacf6ff71714\",\"release_id\":\"wfr_f286017effcc428586c0304fddadd4e5\",\"revision\":1,\"task_type\":\"text_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"}],\"revision\":1}"
+      }
+    },
+    {
+      "operation": "simulated_provider_receipt",
+      "http_status": 200,
+      "request": {
+        "instance_id": "demo-studio",
+        "revision": 1,
+        "digest": "70a6b9e179d9107386b9096386182cbcf2ff36b0848f2d990365257a2a7e88b9",
+        "status": "applied",
+        "error_code": null
+      },
+      "response": {
+        "receipt": {
+          "instance_id": "demo-studio",
+          "revision": 1,
+          "digest": "70a6b9e179d9107386b9096386182cbcf2ff36b0848f2d990365257a2a7e88b9",
+          "status": "applied",
+          "error_code": null,
+          "observed_at": 1792883864
+        },
+        "activated": true,
+        "state": {
+          "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+          "revision": 1,
+          "instance_id": "demo-studio",
+          "managed": true,
+          "status": "confirmed",
+          "desired_stale": false,
+          "confirmed_stale": false,
+          "desired": {
+            "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+            "revision": 1,
+            "instance_id": "demo-studio",
+            "digest": "70a6b9e179d9107386b9096386182cbcf2ff36b0848f2d990365257a2a7e88b9",
+            "action": "publish",
+            "source_revision": null,
+            "created_at": 1792883863,
+            "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-image-to-image\",\"model_bindings\":[{\"alias\":\"demo-image-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_1ee07752c97345069c86730a82f0d3ec\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"352204774dfa70bad5569bb1d5a5d30673a06cf08e7300d445955bd40d6c3f41\",\"release_id\":\"wfr_74906668f1ca468d9848b215d7f8d07c\",\"revision\":1,\"task_type\":\"image_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"image_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-image\",\"model_bindings\":[{\"alias\":\"demo-references-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_32665cc94a0743a1a9c2f3d6cfdc0615\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"c9263c14fd0ce77ed9238987ea125a74ef846c171bb6109088a262275efd93bd\",\"release_id\":\"wfr_2a06c8ddc9e443079dd49d7986ceb7c6\",\"revision\":1,\"task_type\":\"references_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-video\",\"model_bindings\":[{\"alias\":\"demo-references-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_e7b453d3a5874d37929d752ed9c85800\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"cf54ec7e842d9881dffcc17674c57d622e7945deb8fff493d2bc125e010c6565\",\"release_id\":\"wfr_766af341e7b04c7e8704e9bdfc20fb8b\",\"revision\":1,\"task_type\":\"references_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-audio\",\"model_bindings\":[{\"alias\":\"demo-text-to-audio\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"model_id\":\"mdl_07a0abdf07324ff99ca6c63c00ed8075\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9e3ce0865e0026aea5ce9c2269d82a99cca83ea8426addffe35b5b7b81d922d4\",\"release_id\":\"wfr_25406bef0a734ffeab874046953ba5d6\",\"revision\":1,\"task_type\":\"text_to_audio\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_audio\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-image\",\"model_bindings\":[{\"alias\":\"demo-text-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_6d1ccc2e05934a3c933d261cf3efcd0b\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9b65caf5104aa4c5316e5946a94b672e37d8c65c4c1718684688fa47743e5454\",\"release_id\":\"wfr_630bbe6c072f4e2eb7d8f53aa691cfde\",\"revision\":1,\"task_type\":\"text_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-video\",\"model_bindings\":[{\"alias\":\"demo-text-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_19bccec1ebe4476eb20ccdf8ea464ed2\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"2b2133e6d6fe9670c975dc80bf1d36821408298c448fbceb44dcdacf6ff71714\",\"release_id\":\"wfr_f286017effcc428586c0304fddadd4e5\",\"revision\":1,\"task_type\":\"text_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"}],\"revision\":1}"
+          },
+          "confirmed": {
+            "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+            "revision": 1,
+            "instance_id": "demo-studio",
+            "digest": "70a6b9e179d9107386b9096386182cbcf2ff36b0848f2d990365257a2a7e88b9",
+            "action": "publish",
+            "source_revision": null,
+            "created_at": 1792883863,
+            "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-image-to-image\",\"model_bindings\":[{\"alias\":\"demo-image-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_1ee07752c97345069c86730a82f0d3ec\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"352204774dfa70bad5569bb1d5a5d30673a06cf08e7300d445955bd40d6c3f41\",\"release_id\":\"wfr_74906668f1ca468d9848b215d7f8d07c\",\"revision\":1,\"task_type\":\"image_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"image_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-image\",\"model_bindings\":[{\"alias\":\"demo-references-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_32665cc94a0743a1a9c2f3d6cfdc0615\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"c9263c14fd0ce77ed9238987ea125a74ef846c171bb6109088a262275efd93bd\",\"release_id\":\"wfr_2a06c8ddc9e443079dd49d7986ceb7c6\",\"revision\":1,\"task_type\":\"references_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-video\",\"model_bindings\":[{\"alias\":\"demo-references-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_e7b453d3a5874d37929d752ed9c85800\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"cf54ec7e842d9881dffcc17674c57d622e7945deb8fff493d2bc125e010c6565\",\"release_id\":\"wfr_766af341e7b04c7e8704e9bdfc20fb8b\",\"revision\":1,\"task_type\":\"references_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-audio\",\"model_bindings\":[{\"alias\":\"demo-text-to-audio\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"model_id\":\"mdl_07a0abdf07324ff99ca6c63c00ed8075\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9e3ce0865e0026aea5ce9c2269d82a99cca83ea8426addffe35b5b7b81d922d4\",\"release_id\":\"wfr_25406bef0a734ffeab874046953ba5d6\",\"revision\":1,\"task_type\":\"text_to_audio\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_audio\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-image\",\"model_bindings\":[{\"alias\":\"demo-text-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_6d1ccc2e05934a3c933d261cf3efcd0b\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9b65caf5104aa4c5316e5946a94b672e37d8c65c4c1718684688fa47743e5454\",\"release_id\":\"wfr_630bbe6c072f4e2eb7d8f53aa691cfde\",\"revision\":1,\"task_type\":\"text_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-video\",\"model_bindings\":[{\"alias\":\"demo-text-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_19bccec1ebe4476eb20ccdf8ea464ed2\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"2b2133e6d6fe9670c975dc80bf1d36821408298c448fbceb44dcdacf6ff71714\",\"release_id\":\"wfr_f286017effcc428586c0304fddadd4e5\",\"revision\":1,\"task_type\":\"text_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"}],\"revision\":1}"
+          },
+          "last_receipt": {
+            "instance_id": "demo-studio",
+            "revision": 1,
+            "digest": "70a6b9e179d9107386b9096386182cbcf2ff36b0848f2d990365257a2a7e88b9",
+            "status": "applied",
+            "error_code": null,
+            "observed_at": 1792883864
+          }
+        }
+      }
+    },
+    {
+      "operation": "simulated_provider_receipt",
+      "http_status": 200,
+      "request": {
+        "instance_id": "demo-studio",
+        "revision": 2,
+        "digest": "466fcc5ba5b0fc2f725f0a6fd725d768271e45c42e6a99f816fc092af07a2b2b",
+        "status": "rejected",
+        "error_code": "account_unavailable"
+      },
+      "response": {
+        "receipt": {
+          "instance_id": "demo-studio",
+          "revision": 2,
+          "digest": "466fcc5ba5b0fc2f725f0a6fd725d768271e45c42e6a99f816fc092af07a2b2b",
+          "status": "rejected",
+          "error_code": "account_unavailable",
+          "observed_at": 1792883865
+        },
+        "activated": false,
+        "state": {
+          "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+          "revision": 2,
+          "instance_id": "demo-studio",
+          "managed": true,
+          "status": "rejected",
+          "desired_stale": false,
+          "confirmed_stale": false,
+          "desired": {
+            "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+            "revision": 2,
+            "instance_id": "demo-studio",
+            "digest": "466fcc5ba5b0fc2f725f0a6fd725d768271e45c42e6a99f816fc092af07a2b2b",
+            "action": "publish",
+            "source_revision": null,
+            "created_at": 1792883864,
+            "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-image-to-image\",\"model_bindings\":[{\"alias\":\"demo-image-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_1ee07752c97345069c86730a82f0d3ec\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"352204774dfa70bad5569bb1d5a5d30673a06cf08e7300d445955bd40d6c3f41\",\"release_id\":\"wfr_74906668f1ca468d9848b215d7f8d07c\",\"revision\":1,\"task_type\":\"image_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"image_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-image\",\"model_bindings\":[{\"alias\":\"demo-references-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_32665cc94a0743a1a9c2f3d6cfdc0615\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"c9263c14fd0ce77ed9238987ea125a74ef846c171bb6109088a262275efd93bd\",\"release_id\":\"wfr_2a06c8ddc9e443079dd49d7986ceb7c6\",\"revision\":1,\"task_type\":\"references_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-video\",\"model_bindings\":[{\"alias\":\"demo-references-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_e7b453d3a5874d37929d752ed9c85800\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"cf54ec7e842d9881dffcc17674c57d622e7945deb8fff493d2bc125e010c6565\",\"release_id\":\"wfr_766af341e7b04c7e8704e9bdfc20fb8b\",\"revision\":1,\"task_type\":\"references_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-audio\",\"model_bindings\":[{\"alias\":\"demo-text-to-audio\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"model_id\":\"mdl_07a0abdf07324ff99ca6c63c00ed8075\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9e3ce0865e0026aea5ce9c2269d82a99cca83ea8426addffe35b5b7b81d922d4\",\"release_id\":\"wfr_25406bef0a734ffeab874046953ba5d6\",\"revision\":1,\"task_type\":\"text_to_audio\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_audio\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-image\",\"model_bindings\":[{\"alias\":\"demo-text-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_6d1ccc2e05934a3c933d261cf3efcd0b\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9b65caf5104aa4c5316e5946a94b672e37d8c65c4c1718684688fa47743e5454\",\"release_id\":\"wfr_630bbe6c072f4e2eb7d8f53aa691cfde\",\"revision\":1,\"task_type\":\"text_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_image\",\"unit_price\":\"0.25000000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-video\",\"model_bindings\":[{\"alias\":\"demo-text-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_19bccec1ebe4476eb20ccdf8ea464ed2\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"2b2133e6d6fe9670c975dc80bf1d36821408298c448fbceb44dcdacf6ff71714\",\"release_id\":\"wfr_f286017effcc428586c0304fddadd4e5\",\"revision\":1,\"task_type\":\"text_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"}],\"revision\":2}"
+          },
+          "confirmed": {
+            "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+            "revision": 1,
+            "instance_id": "demo-studio",
+            "digest": "70a6b9e179d9107386b9096386182cbcf2ff36b0848f2d990365257a2a7e88b9",
+            "action": "publish",
+            "source_revision": null,
+            "created_at": 1792883863,
+            "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-image-to-image\",\"model_bindings\":[{\"alias\":\"demo-image-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_1ee07752c97345069c86730a82f0d3ec\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"352204774dfa70bad5569bb1d5a5d30673a06cf08e7300d445955bd40d6c3f41\",\"release_id\":\"wfr_74906668f1ca468d9848b215d7f8d07c\",\"revision\":1,\"task_type\":\"image_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"image_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-image\",\"model_bindings\":[{\"alias\":\"demo-references-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_32665cc94a0743a1a9c2f3d6cfdc0615\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"c9263c14fd0ce77ed9238987ea125a74ef846c171bb6109088a262275efd93bd\",\"release_id\":\"wfr_2a06c8ddc9e443079dd49d7986ceb7c6\",\"revision\":1,\"task_type\":\"references_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-video\",\"model_bindings\":[{\"alias\":\"demo-references-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_e7b453d3a5874d37929d752ed9c85800\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"cf54ec7e842d9881dffcc17674c57d622e7945deb8fff493d2bc125e010c6565\",\"release_id\":\"wfr_766af341e7b04c7e8704e9bdfc20fb8b\",\"revision\":1,\"task_type\":\"references_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-audio\",\"model_bindings\":[{\"alias\":\"demo-text-to-audio\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"model_id\":\"mdl_07a0abdf07324ff99ca6c63c00ed8075\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9e3ce0865e0026aea5ce9c2269d82a99cca83ea8426addffe35b5b7b81d922d4\",\"release_id\":\"wfr_25406bef0a734ffeab874046953ba5d6\",\"revision\":1,\"task_type\":\"text_to_audio\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_audio\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-image\",\"model_bindings\":[{\"alias\":\"demo-text-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_6d1ccc2e05934a3c933d261cf3efcd0b\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9b65caf5104aa4c5316e5946a94b672e37d8c65c4c1718684688fa47743e5454\",\"release_id\":\"wfr_630bbe6c072f4e2eb7d8f53aa691cfde\",\"revision\":1,\"task_type\":\"text_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-video\",\"model_bindings\":[{\"alias\":\"demo-text-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_19bccec1ebe4476eb20ccdf8ea464ed2\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"2b2133e6d6fe9670c975dc80bf1d36821408298c448fbceb44dcdacf6ff71714\",\"release_id\":\"wfr_f286017effcc428586c0304fddadd4e5\",\"revision\":1,\"task_type\":\"text_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"}],\"revision\":1}"
+          },
+          "last_receipt": {
+            "instance_id": "demo-studio",
+            "revision": 2,
+            "digest": "466fcc5ba5b0fc2f725f0a6fd725d768271e45c42e6a99f816fc092af07a2b2b",
+            "status": "rejected",
+            "error_code": "account_unavailable",
+            "observed_at": 1792883865
+          }
+        }
+      }
+    },
+    {
+      "operation": "simulated_provider_receipt",
+      "http_status": 200,
+      "request": {
+        "instance_id": "demo-studio",
+        "revision": 3,
+        "digest": "76890a64d36d0057159bd65aa0c69cab99d86b9052b93e0a2c596371305af4fb",
+        "status": "applied",
+        "error_code": null
+      },
+      "response": {
+        "receipt": {
+          "instance_id": "demo-studio",
+          "revision": 3,
+          "digest": "76890a64d36d0057159bd65aa0c69cab99d86b9052b93e0a2c596371305af4fb",
+          "status": "applied",
+          "error_code": null,
+          "observed_at": 1792883866
+        },
+        "activated": true,
+        "state": {
+          "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+          "revision": 3,
+          "instance_id": "demo-studio",
+          "managed": true,
+          "status": "confirmed",
+          "desired_stale": false,
+          "confirmed_stale": false,
+          "desired": {
+            "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+            "revision": 3,
+            "instance_id": "demo-studio",
+            "digest": "76890a64d36d0057159bd65aa0c69cab99d86b9052b93e0a2c596371305af4fb",
+            "action": "rollback",
+            "source_revision": 1,
+            "created_at": 1792883866,
+            "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-image-to-image\",\"model_bindings\":[{\"alias\":\"demo-image-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_1ee07752c97345069c86730a82f0d3ec\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"352204774dfa70bad5569bb1d5a5d30673a06cf08e7300d445955bd40d6c3f41\",\"release_id\":\"wfr_74906668f1ca468d9848b215d7f8d07c\",\"revision\":1,\"task_type\":\"image_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"image_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-image\",\"model_bindings\":[{\"alias\":\"demo-references-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_32665cc94a0743a1a9c2f3d6cfdc0615\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"c9263c14fd0ce77ed9238987ea125a74ef846c171bb6109088a262275efd93bd\",\"release_id\":\"wfr_2a06c8ddc9e443079dd49d7986ceb7c6\",\"revision\":1,\"task_type\":\"references_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-video\",\"model_bindings\":[{\"alias\":\"demo-references-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_e7b453d3a5874d37929d752ed9c85800\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"cf54ec7e842d9881dffcc17674c57d622e7945deb8fff493d2bc125e010c6565\",\"release_id\":\"wfr_766af341e7b04c7e8704e9bdfc20fb8b\",\"revision\":1,\"task_type\":\"references_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-audio\",\"model_bindings\":[{\"alias\":\"demo-text-to-audio\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"model_id\":\"mdl_07a0abdf07324ff99ca6c63c00ed8075\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9e3ce0865e0026aea5ce9c2269d82a99cca83ea8426addffe35b5b7b81d922d4\",\"release_id\":\"wfr_25406bef0a734ffeab874046953ba5d6\",\"revision\":1,\"task_type\":\"text_to_audio\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_audio\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-image\",\"model_bindings\":[{\"alias\":\"demo-text-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_6d1ccc2e05934a3c933d261cf3efcd0b\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9b65caf5104aa4c5316e5946a94b672e37d8c65c4c1718684688fa47743e5454\",\"release_id\":\"wfr_630bbe6c072f4e2eb7d8f53aa691cfde\",\"revision\":1,\"task_type\":\"text_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-video\",\"model_bindings\":[{\"alias\":\"demo-text-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_19bccec1ebe4476eb20ccdf8ea464ed2\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"2b2133e6d6fe9670c975dc80bf1d36821408298c448fbceb44dcdacf6ff71714\",\"release_id\":\"wfr_f286017effcc428586c0304fddadd4e5\",\"revision\":1,\"task_type\":\"text_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"}],\"revision\":3}"
+          },
+          "confirmed": {
+            "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+            "revision": 3,
+            "instance_id": "demo-studio",
+            "digest": "76890a64d36d0057159bd65aa0c69cab99d86b9052b93e0a2c596371305af4fb",
+            "action": "rollback",
+            "source_revision": 1,
+            "created_at": 1792883866,
+            "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-image-to-image\",\"model_bindings\":[{\"alias\":\"demo-image-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_1ee07752c97345069c86730a82f0d3ec\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"352204774dfa70bad5569bb1d5a5d30673a06cf08e7300d445955bd40d6c3f41\",\"release_id\":\"wfr_74906668f1ca468d9848b215d7f8d07c\",\"revision\":1,\"task_type\":\"image_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"image_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-image\",\"model_bindings\":[{\"alias\":\"demo-references-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_32665cc94a0743a1a9c2f3d6cfdc0615\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"c9263c14fd0ce77ed9238987ea125a74ef846c171bb6109088a262275efd93bd\",\"release_id\":\"wfr_2a06c8ddc9e443079dd49d7986ceb7c6\",\"revision\":1,\"task_type\":\"references_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-references-to-video\",\"model_bindings\":[{\"alias\":\"demo-references-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_e7b453d3a5874d37929d752ed9c85800\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"cf54ec7e842d9881dffcc17674c57d622e7945deb8fff493d2bc125e010c6565\",\"release_id\":\"wfr_766af341e7b04c7e8704e9bdfc20fb8b\",\"revision\":1,\"task_type\":\"references_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"references_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-audio\",\"model_bindings\":[{\"alias\":\"demo-text-to-audio\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":2},\"model_id\":\"mdl_07a0abdf07324ff99ca6c63c00ed8075\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9e3ce0865e0026aea5ce9c2269d82a99cca83ea8426addffe35b5b7b81d922d4\",\"release_id\":\"wfr_25406bef0a734ffeab874046953ba5d6\",\"revision\":1,\"task_type\":\"text_to_audio\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_audio\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-image\",\"model_bindings\":[{\"alias\":\"demo-text-to-image\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"size\":\"1024x1024\"},\"model_id\":\"mdl_6d1ccc2e05934a3c933d261cf3efcd0b\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"9b65caf5104aa4c5316e5946a94b672e37d8c65c4c1718684688fa47743e5454\",\"release_id\":\"wfr_630bbe6c072f4e2eb7d8f53aa691cfde\",\"revision\":1,\"task_type\":\"text_to_image\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_image\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"},{\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"group_ids\":[\"1\",\"9223372036854775806\"],\"model\":\"demo-text-to-video\",\"model_bindings\":[{\"alias\":\"demo-text-to-video\",\"channel_ids\":[\"ch_b907f8f2bcb84d0794fd3da269e7f6c1\"],\"defaults\":{\"quality\":\"standard\",\"seconds\":5,\"size\":\"1024x1024\"},\"model_id\":\"mdl_19bccec1ebe4476eb20ccdf8ea464ed2\",\"project_id\":\"prj_f679a69aa3304d429e87c9cf521185c7\",\"release_digest\":\"2b2133e6d6fe9670c975dc80bf1d36821408298c448fbceb44dcdacf6ff71714\",\"release_id\":\"wfr_f286017effcc428586c0304fddadd4e5\",\"revision\":1,\"task_type\":\"text_to_video\",\"tenant_id\":\"ten_1c0225f8adc345a5b095eaf415d4f1eb\"}],\"price_version\":\"demo-prices-v1\",\"task_type\":\"text_to_video\",\"unit_price\":\"0.12500000\",\"usage_account_id\":\"9223372036854775807\"}],\"revision\":3}"
+          },
+          "last_receipt": {
+            "instance_id": "demo-studio",
+            "revision": 3,
+            "digest": "76890a64d36d0057159bd65aa0c69cab99d86b9052b93e0a2c596371305af4fb",
+            "status": "applied",
+            "error_code": null,
+            "observed_at": 1792883866
+          }
+        }
+      }
+    },
+    {
+      "operation": "simulated_provider_receipt",
+      "http_status": 200,
+      "request": {
+        "instance_id": "demo-studio",
+        "revision": 5,
+        "digest": "0457041a1779e2a3194477107231ccf04c61dd2a26d83d5dd72f6dc400af7e9c",
+        "status": "applied",
+        "error_code": null
+      },
+      "response": {
+        "receipt": {
+          "instance_id": "demo-studio",
+          "revision": 5,
+          "digest": "0457041a1779e2a3194477107231ccf04c61dd2a26d83d5dd72f6dc400af7e9c",
+          "status": "applied",
+          "error_code": null,
+          "observed_at": 1792883867
+        },
+        "activated": true,
+        "state": {
+          "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+          "revision": 5,
+          "instance_id": "demo-studio",
+          "managed": true,
+          "status": "confirmed",
+          "desired_stale": false,
+          "confirmed_stale": false,
+          "desired": {
+            "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+            "revision": 5,
+            "instance_id": "demo-studio",
+            "digest": "0457041a1779e2a3194477107231ccf04c61dd2a26d83d5dd72f6dc400af7e9c",
+            "action": "publish",
+            "source_revision": null,
+            "created_at": 1792883867,
+            "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[],\"revision\":5}"
+          },
+          "confirmed": {
+            "gateway_id": "gateway_52ac74c9641b4fe697cb95b9ebf65da0",
+            "revision": 5,
+            "instance_id": "demo-studio",
+            "digest": "0457041a1779e2a3194477107231ccf04c61dd2a26d83d5dd72f6dc400af7e9c",
+            "action": "publish",
+            "source_revision": null,
+            "created_at": 1792883867,
+            "configuration_json": "{\"format_version\":\"gateway-catalog-v1\",\"gateway_id\":\"gateway_52ac74c9641b4fe697cb95b9ebf65da0\",\"instance_id\":\"demo-studio\",\"models\":[],\"revision\":5}"
+          },
+          "last_receipt": {
+            "instance_id": "demo-studio",
+            "revision": 5,
+            "digest": "0457041a1779e2a3194477107231ccf04c61dd2a26d83d5dd72f6dc400af7e9c",
+            "status": "applied",
+            "error_code": null,
+            "observed_at": 1792883867
+          }
+        }
+      }
+    }
+  ]
+}

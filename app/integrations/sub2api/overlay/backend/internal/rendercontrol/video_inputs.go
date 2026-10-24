@@ -139,7 +139,7 @@ func (h *PublicHandler) videoGeneration(c *gin.Context) {
 		return
 	}
 	defer plan.close()
-	rule, err := h.rule(key, plan.request.Model, plan.request.TaskType)
+	rule, err := h.requestRule(c, key, plan.request.Model, plan.request.TaskType)
 	if err != nil {
 		publicError(c, err)
 		return

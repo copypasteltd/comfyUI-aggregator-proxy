@@ -103,6 +103,7 @@ func (s Subject) GatewaySubject() (controlclient.Subject, error) {
 }
 
 type Request struct {
+	catalog        *controlclient.CatalogStamp
 	usageAccountID int64
 	operation      string
 	taskType       string
@@ -233,6 +234,7 @@ func NewTarget(gatewayID string) (Target, error) {
 
 // Intent is a metadata-only projection; ciphertext and plaintext stay private.
 type Intent struct {
+	Catalog           *controlclient.CatalogStamp
 	ID                string
 	UsageAccountID    int64
 	BillingGroupID    int64

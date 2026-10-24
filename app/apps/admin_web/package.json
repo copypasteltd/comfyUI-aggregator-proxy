@@ -12,7 +12,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "generate:api": "openapi-typescript ../../config/openapi.json -o src/generated/api.d.ts",
     "test": "vitest run",
-    "test:workflow-json": "node --test tests/workflowJson.test.ts"
+    "test:workflow-json": "node --test tests/workflowJson.test.ts",
+    "test:gateway-catalog": "node --test tests/gatewayCatalog.test.ts"
   },
   "dependencies": {
     "openapi-fetch": "^0.14.0",

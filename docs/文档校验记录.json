@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-25T05:56:15+08:00",
+  "checked_at": "2026-10-25T07:37:41+08:00",
   "baseline": "v0.4",
   "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
   "project": "E:\\dev\\sandbox\\生图生视API封装",
@@ -10,12 +10,12 @@
   },
   "checks": {
     "markdown": {
-      "documents": 83,
+      "documents": 85,
       "instruction_files": 1,
-      "fenced_blocks": 36,
+      "fenced_blocks": 37,
       "json_examples": 15,
       "yaml_examples": 1,
-      "local_links_checked": 1429
+      "local_links_checked": 1500
     },
     "contracts": {
       "json_files": 60,
@@ -39,11 +39,11 @@
       "guards": 21
     },
     "endpoints": {
-      "total": 187,
+      "total": 188,
       "by_identity": {
         "service": 27,
         "admin_login": 1,
-        "admin": 119,
+        "admin": 120,
         "worker": 12,
         "gateway": 28
       },
@@ -111,9 +111,9 @@
     },
     {
       "file": "docs/07-Admin可视化管理后台.md",
-      "bytes": 33702,
-      "lines": 312,
-      "sha256": "9960aa27a10fe6f07697710a1efe861e57e5684ee227f6bf0f2a3251836c55f5"
+      "bytes": 34054,
+      "lines": 314,
+      "sha256": "4ce3a25aff5d41b2318520203991b155c079deef005c4efac74c447718d65b77"
     },
     {
       "file": "docs/08-APIKey鉴权与访问控制.md",
@@ -147,33 +147,33 @@
     },
     {
       "file": "docs/13-Admin前端开发规范.md",
-      "bytes": 16589,
-      "lines": 139,
-      "sha256": "29ebca478c43711f965ad01ad5fa40c7b8a4b7b2c81abcb496cfaf41cf349736"
+      "bytes": 16904,
+      "lines": 141,
+      "sha256": "47464be107dd8c2ced7c8c9ca903f134e08025aa7966ec9c06e77957505ac31d"
     },
     {
       "file": "docs/14-测试策略与质量门禁.md",
-      "bytes": 18358,
-      "lines": 144,
-      "sha256": "f4612fe13a59f28016b58bf3ff83e06aa0fa113c1c622b4a1a82473c6ac16055"
+      "bytes": 19028,
+      "lines": 149,
+      "sha256": "12075762c6cc0f5a5523ec4f3a2cf8e18111458bc3ab61fecd78b4513eeac4ef"
     },
     {
       "file": "docs/15-原生部署配置与运维.md",
-      "bytes": 27007,
-      "lines": 177,
-      "sha256": "f919427fcf408fc1419dd38c980064a6f4f2357685eca5c443d8b08f5ebe9ead"
+      "bytes": 27385,
+      "lines": 179,
+      "sha256": "53dd80dfdc5152385892b602fb8d61b3abd7041859b0075714ac562ccb821166"
     },
     {
       "file": "docs/16-开发任务分解与交付清单.md",
-      "bytes": 67403,
+      "bytes": 67436,
       "lines": 323,
-      "sha256": "b6e32e3ce05baa3132c981c7ebf48a323bcc50a905508a8a040d9b3fc10c0ef2"
+      "sha256": "b17184e72831d3eeaeaf236a1929c804c6116c3a9ad97248e356492c7213440a"
     },
     {
       "file": "docs/17-开发记录与运行说明.md",
-      "bytes": 131220,
-      "lines": 576,
-      "sha256": "3c4bf0d2c76f96a26a657fb414075747c5e95ea6649bdcc8d204684276d9a00a"
+      "bytes": 133569,
+      "lines": 587,
+      "sha256": "105fc017c3319afc62554b28832f511732b41f46b57493643be51dad9609ca6d"
     },
     {
       "file": "docs/18-Admin界面实现约定.md",
@@ -267,9 +267,9 @@
     },
     {
       "file": "docs/33-Sub2API服务托管与生命周期.md",
-      "bytes": 9555,
-      "lines": 78,
-      "sha256": "420ac9aafbc232b1d6d65608463aaa19faa4ab658927061b07b86ff0b2bc45c9"
+      "bytes": 10029,
+      "lines": 80,
+      "sha256": "d547d5e2faa1d9b33269c2adbf704c2bace29d49e6dec40344e49be8784a41ab"
     },
     {
       "file": "docs/34-Sub2API生成兼容与产物访问.md",
@@ -537,15 +537,27 @@
     },
     {
       "file": "docs/78-完整待办与首版收口清单.md",
-      "bytes": 21827,
-      "lines": 148,
-      "sha256": "2c14b0908551cc8cd10144d29a803a20dbda23bd771d25d09719d4d24cdcf633"
+      "bytes": 22232,
+      "lines": 150,
+      "sha256": "2a93378d17fe8434f33333041119c84e6ad939b769e3619005356024df4c507b"
     },
     {
       "file": "docs/79-网关模型目录持久发布协议.md",
-      "bytes": 12103,
-      "lines": 81,
-      "sha256": "64aa9dc66cfcf4247cca9044547f30115867d178ce9acf112c57f83ace582f8f"
+      "bytes": 12472,
+      "lines": 83,
+      "sha256": "214b4253d7114927a1cfeeaa1cb11024623d9ad9e20149fd9756f48c5b1c17cc"
+    },
+    {
+      "file": "docs/80-Provider目录消费与版本快照.md",
+      "bytes": 7185,
+      "lines": 35,
+      "sha256": "f4560786b60704c3e0430d13bbefca23ba049274ed425c8ca3eb58e50489f860"
+    },
+    {
+      "file": "docs/81-Admin网关目录映射与发布核对.md",
+      "bytes": 6898,
+      "lines": 35,
+      "sha256": "aa25af63cfa8059eee1b6c4bd1e9d038188a076ebc7dc1de88d9f2e4b223d1ab"
     },
     {
       "file": "docs/contracts/admin-alert-failure.schema.json",
@@ -741,9 +753,9 @@
     },
     {
       "file": "docs/contracts/endpoint-catalog.json",
-      "bytes": 108759,
-      "lines": 3536,
-      "sha256": "1bf64abdd4842e17b123e3642fe3356ac74b39e013f53ebe3d00e38c06b4aba6"
+      "bytes": 109392,
+      "lines": 3554,
+      "sha256": "01f1f9672d0d0e089a9de2d3b4d69fbcf30b63162cbb3c178d182f3ff84bc8cc"
     },
     {
       "file": "docs/contracts/fixtures.json",
@@ -915,21 +927,21 @@
     },
     {
       "file": "docs/media/README.md",
-      "bytes": 5070,
-      "lines": 55,
-      "sha256": "9c29fe6ec60bb5fc47f063681e1ebb1195298a494c27a58afc6dc6fc91f6f3d0"
+      "bytes": 7648,
+      "lines": 72,
+      "sha256": "f2367a254f25ac2ac3c611de6a9734b94d67ffe546f03c230e82822ca2268573"
     },
     {
       "file": "docs/README.en.md",
-      "bytes": 9803,
-      "lines": 122,
-      "sha256": "0c2160172864cc2bd0631fe13a7cc00412f95ebf52e028390cba9db8073f326e"
+      "bytes": 10199,
+      "lines": 124,
+      "sha256": "e0a5a4673efbf984fe2cf7a1a933b8c5b1d8dc0be47a633667dde34b8a2d3956"
     },
     {
       "file": "docs/README.md",
-      "bytes": 22420,
-      "lines": 157,
-      "sha256": "af0adc0680c0551bb2cc7ac63cf5e5fbbeee7435d380415413a4805ab137ef79"
+      "bytes": 22897,
+      "lines": 159,
+      "sha256": "79bb3275c012ca9ba7de0c771c20f79d626aa6bbbf45417fe81d3391cf762e3d"
     },
     {
       "file": "docs/tools/verify_docs.py",

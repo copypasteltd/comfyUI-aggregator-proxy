@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/netip"
 	"net/url"
+	"sync/atomic"
 	"time"
 
 	pkgip "github.com/Wei-Shaw/sub2api/internal/pkg/ip"
@@ -19,6 +20,7 @@ import (
 )
 
 type PublicModelRule struct {
+	Catalog        *controlclient.CatalogStamp
 	UsageAccountID int64
 	Model          string
 	TaskType       string
@@ -50,6 +52,7 @@ type PublicHandler struct {
 	store           *Store
 	instance        string
 	models          map[string]publicRule
+	catalog         atomic.Pointer[catalogSnapshot]
 	clients         map[string]*controlclient.Client
 	publicOrigin    string
 	syncWait        time.Duration
@@ -76,7 +79,7 @@ func configurationInput(task string) map[string]any {
 }
 
 func NewPublicHandler(store *Store, config PublicConfig) (*PublicHandler, error) {
-	if store == nil || !instancePattern.MatchString(config.Instance) || len(config.Models) < 1 || len(config.Models) > 256 || len(config.Clients) < 1 || len(config.Clients) > 64 {
+	if store == nil || !instancePattern.MatchString(config.Instance) || len(config.Models) > 256 || len(config.Clients) < 1 || len(config.Clients) > 64 {
 		return nil, ErrInvalid
 	}
 	if config.SyncWait == 0 {
@@ -177,6 +180,7 @@ func (h *PublicHandler) NewNativeRouter(auth middleware.APIKeyAuthMiddleware, tr
 		c.Header("X-Content-Type-Options", "nosniff")
 		ctx, cancel := context.WithTimeout(c.Request.Context(), providerBudget(c.Request))
 		defer cancel()
+		ctx = context.WithValue(ctx, catalogContextKey{}, h.modelSnapshot(ctx))
 		c.Request = c.Request.WithContext(ctx)
 		limit := int64(2 << 20)
 		if uploadRequest(c.Request) {
@@ -231,7 +235,15 @@ func (h *PublicHandler) identity(c *gin.Context) (Subject, *service.APIKey, erro
 }
 
 func (h *PublicHandler) rule(key *service.APIKey, model, task string) (publicRule, error) {
-	rule, exists := h.models[model]
+	return h.ruleAt(context.Background(), key, model, task)
+}
+
+func (h *PublicHandler) ruleAt(ctx context.Context, key *service.APIKey, model, task string) (publicRule, error) {
+	rule, exists := h.modelSnapshot(ctx).models[model]
+	return authorizePublicRule(key, model, task, rule, exists)
+}
+
+func authorizePublicRule(key *service.APIKey, model, task string, rule publicRule, exists bool) (publicRule, error) {
 	if !exists || rule.model.TaskType != task || key.GroupID == nil || !rule.groups[*key.GroupID] || key.Group == nil || !key.Group.IsActive() || !key.Group.ModelAllowlist.Allows(model) {
 		return publicRule{}, ErrNotFound
 	}
@@ -308,11 +320,25 @@ func (h *PublicHandler) reserveRequest(c *gin.Context, native controlclient.JobR
 	if err != nil {
 		return Intent{}, err
 	}
-	rule, err := h.rule(key, native.Model, native.TaskType)
+	requested, marshalErr := json.Marshal(native)
+	if marshalErr != nil {
+		return Intent{}, ErrInvalid
+	}
+	token, err := publicIdempotency(c)
 	if err != nil {
 		return Intent{}, err
 	}
-	requested, _ := json.Marshal(native)
+	existing, replayErr := h.store.replayCatalogRequest(c.Request.Context(), subject, publicOperation(native.TaskType), token, digest(requested))
+	if replayErr == nil {
+		return existing, h.authorizeIntent(c.Request.Context(), key, existing)
+	}
+	if !errors.Is(replayErr, ErrNotFound) {
+		return Intent{}, replayErr
+	}
+	rule, err := h.ruleAt(c.Request.Context(), key, native.Model, native.TaskType)
+	if err != nil {
+		return Intent{}, err
+	}
 	parameters := map[string]any{}
 	for name, value := range rule.model.Defaults {
 		parameters[name] = value
@@ -327,11 +353,8 @@ func (h *PublicHandler) reserveRequest(c *gin.Context, native controlclient.JobR
 	}
 	request.inputHash = digest(requested)
 	request.requireAssets = c.GetBool("render_control_asset_inputs")
-	token, err := publicIdempotency(c)
-	if err != nil {
-		return Intent{}, err
-	}
 	request.usageAccountID = rule.model.UsageAccountID
+	request.catalog = rule.model.Catalog
 	return h.store.Reserve(c.Request.Context(), subject, rule.model.Target, token, request, Quote{Version: rule.model.PriceVersion, UnitPrice: rule.model.UnitPrice, MaxUnits: request.units})
 }
 
@@ -373,7 +396,7 @@ func (h *PublicHandler) load(c *gin.Context) (Subject, Intent, error) {
 	if i.Model == "" {
 		return Subject{}, Intent{}, ErrNotFound
 	}
-	if _, err = h.rule(key, i.Model, i.TaskType); err != nil {
+	if err = h.authorizeIntent(c.Request.Context(), key, i); err != nil {
 		return Subject{}, Intent{}, err
 	}
 	return subject, i, nil

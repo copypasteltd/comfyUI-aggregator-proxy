@@ -210,7 +210,7 @@ func (c *Coordinator) dispatch(ctx context.Context, lease RecoveryLease, closing
 		return 0, ErrInvalid
 	}
 	callCtx, cancel := context.WithTimeout(ctx, c.config.CallTimeout)
-	admission, err := c.client.Admit(callCtx, subject, controlclient.AdmissionRequest{ProviderRequestID: i.ProviderRequestID, ExternalTaskRef: i.ID, PriceVersion: i.PriceVersion, AuthorizationRef: i.AuthorizationRef, Request: request})
+	admission, err := c.client.Admit(callCtx, subject, controlclient.AdmissionRequest{ProviderRequestID: i.ProviderRequestID, ExternalTaskRef: i.ID, PriceVersion: i.PriceVersion, AuthorizationRef: i.AuthorizationRef, Request: request, Catalog: i.Catalog})
 	cancel()
 	if err != nil {
 		*closing = *closing || closeAfterAdmissionError(err)
