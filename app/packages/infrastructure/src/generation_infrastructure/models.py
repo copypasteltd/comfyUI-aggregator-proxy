@@ -586,6 +586,55 @@ class GatewayService(Entity, Base):
     pepper_version: Mapped[int] = mapped_column(default=1)
 
 
+class GatewayCatalogRelease(Entity, Base):
+    __tablename__ = "gateway_catalog_releases"
+    gateway_id: Mapped[UUID] = mapped_column(ForeignKey("gateway_services.id"))
+    revision: Mapped[int] = mapped_column()
+    instance_id: Mapped[str] = mapped_column(String(64))
+    digest: Mapped[str] = mapped_column(String(64))
+    configuration_json: Mapped[str] = mapped_column(Text)
+    action: Mapped[str] = mapped_column(String(16))
+    source_revision: Mapped[int | None] = mapped_column()
+    actor_id: Mapped[UUID] = mapped_column(ForeignKey("admin_users.id"))
+    __table_args__ = (
+        UniqueConstraint("gateway_id", "revision"),
+        UniqueConstraint("gateway_id", "revision", "digest", "instance_id", name="uq_gateway_catalog_release_digest"),
+        ForeignKeyConstraint(["gateway_id", "source_revision"], ["gateway_catalog_releases.gateway_id", "gateway_catalog_releases.revision"], name="fk_gateway_catalog_source", deferrable=True, initially="DEFERRED"),
+        CheckConstraint("revision BETWEEN 1 AND 2147483647", name="revision"),
+        CheckConstraint("action IN ('publish','retry','rollback') AND ((action = 'publish' AND source_revision IS NULL) OR (action <> 'publish' AND source_revision IS NOT NULL AND source_revision BETWEEN 1 AND revision - 1))", name="action_source"),
+        CheckConstraint("octet_length(configuration_json) BETWEEN 2 AND 524288 AND digest = encode(sha256(convert_to(configuration_json, 'UTF8')), 'hex')", name="payload"),
+    )
+
+
+class GatewayCatalog(Base):
+    __tablename__ = "gateway_catalogs"
+    gateway_id: Mapped[UUID] = mapped_column(ForeignKey("gateway_services.id"), primary_key=True)
+    instance_id: Mapped[str] = mapped_column(String(64))
+    revision: Mapped[int] = mapped_column()
+    confirmed_revision: Mapped[int | None] = mapped_column()
+    __table_args__ = (
+        ForeignKeyConstraint(["gateway_id", "revision"], ["gateway_catalog_releases.gateway_id", "gateway_catalog_releases.revision"], name="fk_gateway_catalog_desired", deferrable=True, initially="DEFERRED"),
+        ForeignKeyConstraint(["gateway_id", "confirmed_revision"], ["gateway_catalog_releases.gateway_id", "gateway_catalog_releases.revision"], name="fk_gateway_catalog_confirmed", deferrable=True, initially="DEFERRED"),
+        CheckConstraint("revision BETWEEN 1 AND 2147483647 AND (confirmed_revision IS NULL OR confirmed_revision BETWEEN 1 AND revision)", name="revision"),
+    )
+
+
+class GatewayCatalogReceipt(Entity, Base):
+    __tablename__ = "gateway_catalog_receipts"
+    gateway_id: Mapped[UUID] = mapped_column()
+    revision: Mapped[int] = mapped_column()
+    instance_id: Mapped[str] = mapped_column(String(64))
+    digest: Mapped[str] = mapped_column(String(64))
+    status: Mapped[str] = mapped_column(String(16))
+    error_code: Mapped[str | None] = mapped_column(String(32))
+    observed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (
+        UniqueConstraint("gateway_id", "revision"),
+        ForeignKeyConstraint(["gateway_id", "revision", "digest", "instance_id"], ["gateway_catalog_releases.gateway_id", "gateway_catalog_releases.revision", "gateway_catalog_releases.digest", "gateway_catalog_releases.instance_id"], name="fk_gateway_catalog_receipt_release"),
+        CheckConstraint("(status = 'applied' AND error_code IS NULL) OR (status = 'rejected' AND error_code IS NOT NULL AND error_code IN ('unsupported_configuration','account_unavailable','group_unavailable','storage_unavailable','apply_failed'))", name="status"),
+    )
+
+
 class ExternalIdentityBinding(Entity, Scoped, Base):
     __tablename__ = "external_identity_bindings"
     gateway_id: Mapped[UUID] = mapped_column(ForeignKey("gateway_services.id"))
@@ -620,13 +669,16 @@ class GatewayAdmission(Entity, Scoped, Base):
     external_task_ref: Mapped[str] = mapped_column(String(128))
     intent_digest: Mapped[str] = mapped_column(String(64))
     price_version: Mapped[str] = mapped_column(String(64))
+    catalog_revision: Mapped[int | None] = mapped_column()
+    catalog_digest: Mapped[str | None] = mapped_column(String(64))
+    catalog_instance_id: Mapped[str | None] = mapped_column(String(64))
     authorization_ref: Mapped[str] = mapped_column(String(128))
     key_revision: Mapped[int] = mapped_column()
     binding_revision: Mapped[int] = mapped_column()
     state: Mapped[str] = mapped_column(String(16), default="pending")
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     error_code: Mapped[str | None] = mapped_column(String(64))
-    __table_args__ = scope_constraints(UniqueConstraint("gateway_id", "provider_request_id"), UniqueConstraint("gateway_id", "external_task_ref"), ForeignKeyConstraint(["gateway_id", "tenant_id", "project_id", "key_id", "binding_id"], ["external_identity_bindings.gateway_id", "external_identity_bindings.tenant_id", "external_identity_bindings.project_id", "external_identity_bindings.key_id", "external_identity_bindings.id"]), ForeignKeyConstraint(["tenant_id", "project_id", "key_id", "job_id"], ["jobs.tenant_id", "jobs.project_id", "jobs.key_id", "jobs.id"]), CheckConstraint("state IN ('pending','confirmed','aborted','expired','rejected')", name="state"))
+    __table_args__ = scope_constraints(UniqueConstraint("gateway_id", "provider_request_id"), UniqueConstraint("gateway_id", "external_task_ref"), ForeignKeyConstraint(["gateway_id", "tenant_id", "project_id", "key_id", "binding_id"], ["external_identity_bindings.gateway_id", "external_identity_bindings.tenant_id", "external_identity_bindings.project_id", "external_identity_bindings.key_id", "external_identity_bindings.id"]), ForeignKeyConstraint(["tenant_id", "project_id", "key_id", "job_id"], ["jobs.tenant_id", "jobs.project_id", "jobs.key_id", "jobs.id"]), CheckConstraint("state IN ('pending','confirmed','aborted','expired','rejected')", name="state"), ForeignKeyConstraint(["gateway_id", "catalog_revision", "catalog_digest", "catalog_instance_id"], ["gateway_catalog_releases.gateway_id", "gateway_catalog_releases.revision", "gateway_catalog_releases.digest", "gateway_catalog_releases.instance_id"], name="fk_gateway_admission_catalog"), CheckConstraint("(catalog_revision IS NULL AND catalog_digest IS NULL AND catalog_instance_id IS NULL) OR (catalog_revision IS NOT NULL AND catalog_digest IS NOT NULL AND catalog_instance_id IS NOT NULL)", name="catalog_stamp"))
 
 
 class ClaimRequest(Entity, Base):

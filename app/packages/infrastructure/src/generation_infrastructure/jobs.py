@@ -27,6 +27,10 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, defer, sessionmaker
 
 from generation_infrastructure.cursors import CursorCodec
+from generation_infrastructure.gateway_catalogs import (
+    check_admission_model,
+    lock_catalog_for_admission,
+)
 from generation_infrastructure.gateway_intent import PendingGateway, lock_request_fence
 from generation_infrastructure.models import (
     ApiKey,
@@ -175,10 +179,11 @@ class JobRepository:
             self._asset_hashes(session, identity, request, require_ready=True)
             if not selected(policy["models"], request["model"]):
                 raise DomainError("model_denied", "模型未授权", 403)
+            gateway_configuration = lock_catalog_for_admission(session, pending_gateway.gateway_id, pending_gateway.catalog_stamp) if pending_gateway else None
             model_query = select(PublicModel).where(PublicModel.tenant_id == identity.tenant_id, PublicModel.project_id == identity.project_id, PublicModel.alias == request["model"])
             if validation_channel is None:
                 model_query = model_query.where(PublicModel.published.is_(True))
-            else:
+            if validation_channel is not None or pending_gateway is not None:
                 model_query = model_query.with_for_update(read=True)
             model = session.execute(model_query).scalar_one_or_none()
             if model is None or model.task_type != request["task_type"]:
@@ -188,6 +193,8 @@ class JobRepository:
             release = session.get(WorkflowRelease, model.release_id)
             if not release or not release.validated or not selected(policy["workflow_releases"], public_id("wfr", release.id)):
                 raise DomainError("workflow_denied", "工作流不可用或未授权", 403)
+            if gateway_configuration is not None and pending_gateway is not None:
+                check_admission_model(session, gateway_configuration, model, release, pending_gateway.price_version)
             require_active_workflow(session, release.workflow_id)
             check_input_contract(release.manifest, request)
             routes = list(session.scalars(select(Channel).where(Channel.tenant_id == identity.tenant_id, Channel.project_id == identity.project_id, Channel.deleted_at.is_(None), Channel.enabled.is_(True), Channel.draining.is_(False)).order_by(Channel.id).with_for_update(read=True)))
@@ -235,7 +242,8 @@ class JobRepository:
                 session.add(JobAssetReference(tenant_id=job.tenant_id, project_id=job.project_id, key_id=job.key_id, job_id=job.id, asset_id=parse_id("asset", identifier)))
             if pending_gateway:
                 assert binding
-                session.add(GatewayAdmission(tenant_id=job.tenant_id, project_id=job.project_id, key_id=job.key_id, gateway_id=pending_gateway.gateway_id, binding_id=pending_gateway.binding_id, binding_revision=binding.revision, job_id=job.id, provider_request_id=pending_gateway.provider_request_id, external_task_ref=pending_gateway.external_task_ref, intent_digest=pending_gateway.digest, price_version=pending_gateway.price_version, authorization_ref=pending_gateway.authorization_ref, key_revision=key.revision, expires_at=now + timedelta(seconds=120)))
+                stamp = pending_gateway.catalog_stamp or {}
+                session.add(GatewayAdmission(tenant_id=job.tenant_id, project_id=job.project_id, key_id=job.key_id, gateway_id=pending_gateway.gateway_id, binding_id=pending_gateway.binding_id, binding_revision=binding.revision, job_id=job.id, provider_request_id=pending_gateway.provider_request_id, external_task_ref=pending_gateway.external_task_ref, intent_digest=pending_gateway.digest, price_version=pending_gateway.price_version, authorization_ref=pending_gateway.authorization_ref, key_revision=key.revision, expires_at=now + timedelta(seconds=120), catalog_revision=stamp.get("revision"), catalog_digest=stamp.get("digest"), catalog_instance_id=stamp.get("instance_id")))
             for (_kind, day), bucket in buckets.items():
                 if day == "active":
                     bucket.unfinished_jobs += 1

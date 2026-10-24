@@ -273,7 +273,11 @@ def run() -> int:
         if identity == "admin_login":
             require(item["path"] == "/admin/api/v1/session" and item["method"] == "POST", "Anonymous realm allowed beyond login")
         if identity == "gateway":
-            if item.get("reconciliation_service_only"):
+            if item.get("configuration_service_only"):
+                configuration_endpoints = {("GET", "/gateway/v1/catalog"), ("POST", "/gateway/v1/catalog/receipts")}
+                require((item["method"], item["path"]) in configuration_endpoints, f"Configuration exception beyond fixed catalog endpoints: {label}")
+                require(item.get("resource_guard") == "gateway_catalog_binding" and item.get("policy_evaluation") == "service_configuration" and not item.get("delegated_business_policy_required") and not item.get("delegated_scopes_all") and not item.get("reconciliation_service_only"), f"Unbounded configuration exception: {label}")
+            elif item.get("reconciliation_service_only"):
                 reconciliation_guards = {("GET", "/gateway/v1/settlements"): "gateway_settlement_binding", ("POST", "/gateway/v1/settlements/{id}/ack"): "gateway_settlement_binding", ("POST", "/gateway/v1/admission-requests/lookup"): "gateway_request_binding", ("POST", "/gateway/v1/admission-requests/close"): "gateway_request_binding"}
                 expected_guard = reconciliation_guards.get((item["method"], item["path"]))
                 require(expected_guard is not None, f"Reconciliation exception beyond fixed recovery endpoints: {label}")

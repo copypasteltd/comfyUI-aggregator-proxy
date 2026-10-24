@@ -3394,7 +3394,143 @@
         "admin-workflow-lifecycle-result.schema.json"
       ],
       "description": "归档或解除归档 Workflow，保留冻结历史及已接收任务"
+    },
+    {
+      "operation_id": "admin_gateway_catalog",
+      "method": "GET",
+      "path": "/admin/api/v1/gateways/{identifier}/catalog",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "request_schemas": [],
+      "response_schemas": [],
+      "description": "受控网关目录发布、历史与服务应用确认"
+    },
+    {
+      "operation_id": "admin_gateway_catalog_history",
+      "method": "GET",
+      "path": "/admin/api/v1/gateways/{identifier}/catalog/releases",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "request_schemas": [],
+      "response_schemas": [],
+      "description": "受控网关目录发布、历史与服务应用确认"
+    },
+    {
+      "operation_id": "admin_gateway_catalog_release",
+      "method": "GET",
+      "path": "/admin/api/v1/gateways/{identifier}/catalog/releases/{number}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "request_schemas": [],
+      "response_schemas": [],
+      "description": "受控网关目录发布、历史与服务应用确认"
+    },
+    {
+      "operation_id": "admin_gateway_catalog_publish",
+      "method": "POST",
+      "path": "/admin/api/v1/gateways/{identifier}/catalog/releases",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-11",
+      "request_schemas": [
+        "gateway-catalog-publication.schema.json"
+      ],
+      "response_schemas": [],
+      "description": "受控网关目录发布、历史与服务应用确认"
+    },
+    {
+      "operation_id": "admin_gateway_catalog_replay",
+      "method": "POST",
+      "path": "/admin/api/v1/gateways/{identifier}/catalog/replay",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-11",
+      "request_schemas": [
+        "gateway-catalog-replay.schema.json"
+      ],
+      "response_schemas": [],
+      "description": "受控网关目录发布、历史与服务应用确认"
+    },
+    {
+      "operation_id": "gateway_catalog_pull",
+      "method": "GET",
+      "path": "/gateway/v1/catalog",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "gateway_catalog_binding",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "request_schemas": [],
+      "response_schemas": [],
+      "description": "受控网关目录发布、历史与服务应用确认",
+      "configuration_service_only": true,
+      "delegated_business_policy_required": false,
+      "delegated_scopes_all": [],
+      "policy_evaluation": "service_configuration"
+    },
+    {
+      "operation_id": "gateway_catalog_receipt",
+      "method": "POST",
+      "path": "/gateway/v1/catalog/receipts",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "gateway_catalog_binding",
+      "csrf_required": false,
+      "idempotency": "resource_identity",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "request_schemas": [
+        "gateway-catalog-receipt.schema.json"
+      ],
+      "response_schemas": [],
+      "description": "受控网关目录发布、历史与服务应用确认",
+      "configuration_service_only": true,
+      "delegated_business_policy_required": false,
+      "delegated_scopes_all": [],
+      "policy_evaluation": "service_configuration"
     }
   ],
-  "inventory_revision": "2026-10-25-increment-76"
+  "inventory_revision": "2026-10-25-increment-79"
 }

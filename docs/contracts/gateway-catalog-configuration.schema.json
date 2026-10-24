@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Immutable gateway catalog configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "gateway_id",
+    "instance_id",
+    "revision",
+    "models"
+  ],
+  "properties": {
+    "format_version": {
+      "const": "gateway-catalog-v1"
+    },
+    "gateway_id": {
+      "type": "string",
+      "pattern": "^gateway_[a-f0-9]{32}$"
+    },
+    "instance_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2147483647
+    },
+    "models": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "model",
+          "task_type",
+          "usage_account_id",
+          "group_ids",
+          "price_version",
+          "unit_price",
+          "defaults",
+          "model_bindings"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,99}$"
+          },
+          "task_type": {
+            "enum": [
+              "text_to_image",
+              "image_to_image",
+              "references_to_image",
+              "text_to_video",
+              "references_to_video",
+              "text_to_audio"
+            ]
+          },
+          "usage_account_id": {
+            "type": "string",
+            "pattern": "^(?:[1-9][0-9]{0,17}|[1-8][0-9]{18}|9[0-1][0-9]{17}|92[0-1][0-9]{16}|922[0-2][0-9]{15}|9223[0-2][0-9]{14}|92233[0-6][0-9]{13}|922337[0-1][0-9]{12}|92233720[0-2][0-9]{10}|922337203[0-5][0-9]{9}|9223372036[0-7][0-9]{8}|92233720368[0-4][0-9]{7}|922337203685[0-3][0-9]{6}|9223372036854[0-6][0-9]{5}|92233720368547[0-6][0-9]{4}|922337203685477[0-4][0-9]{3}|9223372036854775[0-7][0-9]{2}|922337203685477580[0-6]|9223372036854775807)$"
+          },
+          "group_ids": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1024,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^(?:[1-9][0-9]{0,17}|[1-8][0-9]{18}|9[0-1][0-9]{17}|92[0-1][0-9]{16}|922[0-2][0-9]{15}|9223[0-2][0-9]{14}|92233[0-6][0-9]{13}|922337[0-1][0-9]{12}|92233720[0-2][0-9]{10}|922337203[0-5][0-9]{9}|9223372036[0-7][0-9]{8}|92233720368[0-4][0-9]{7}|922337203685[0-3][0-9]{6}|9223372036854[0-6][0-9]{5}|92233720368547[0-6][0-9]{4}|922337203685477[0-4][0-9]{3}|9223372036854775[0-7][0-9]{2}|922337203685477580[0-6]|9223372036854775807)$"
+            }
+          },
+          "price_version": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,63}$"
+          },
+          "unit_price": {
+            "type": "string",
+            "pattern": "^(?:0\\.[0-9]{1,8}|[1-9][0-9]{0,5}(?:\\.[0-9]{1,8})?|1000000(?:\\.0{1,8})?)$",
+            "not": {
+              "pattern": "^0(?:\\.0+)?$"
+            }
+          },
+          "defaults": {
+            "type": "object",
+            "maxProperties": 32
+          },
+          "model_bindings": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 64,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "model_id",
+                "revision",
+                "tenant_id",
+                "project_id",
+                "alias",
+                "task_type",
+                "release_id",
+                "release_digest",
+                "channel_ids",
+                "defaults"
+              ],
+              "properties": {
+                "model_id": {
+                  "type": "string",
+                  "pattern": "^mdl_[a-f0-9]{32}$"
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647
+                },
+                "tenant_id": {
+                  "type": "string",
+                  "pattern": "^ten_[a-f0-9]{32}$"
+                },
+                "project_id": {
+                  "type": "string",
+                  "pattern": "^prj_[a-f0-9]{32}$"
+                },
+                "alias": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,99}$"
+                },
+                "task_type": {
+                  "enum": [
+                    "text_to_image",
+                    "image_to_image",
+                    "references_to_image",
+                    "text_to_video",
+                    "references_to_video",
+                    "text_to_audio"
+                  ]
+                },
+                "release_id": {
+                  "type": "string",
+                  "pattern": "^wfr_[a-f0-9]{32}$"
+                },
+                "release_digest": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "channel_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1024,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ch_[a-f0-9]{32}$"
+                  }
+                },
+                "defaults": {
+                  "type": "object",
+                  "maxProperties": 32
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

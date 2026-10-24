@@ -4,6 +4,17 @@
 
 This file records user-facing changes, validation scope and migration notes. Dates use Asia/Taipei. Pushing source is not a production release.
 
+## 2026-10-25 — 网关目录控制面 / Gateway catalog control plane
+
+- 新增 [持久发布协议](docs/79-网关模型目录持久发布协议.md)：不可变模型/规格/价格目录、期望与确认分离、严格服务回执、历史、管理 CAS/幂等、重试与回滚；迟到确认不覆盖新版。
+- 网关准入增加可选 `catalog`，首次确认后校验确认版本、主体范围、模型、Workflow、渠道与价格；原请求幂等和账本恢复沿用冻结身份，原生业务 Key 接口行为不变。
+- 迁移 `1b8e0c5f3247` 新增三表、准入复合外键和数据库保护；原生备份后升级开发库，45 表一致快照恢复通过。修复原生 pytest 入口的共享测试模块路径配置。
+- Add immutable catalog publication, desired/confirmed revisions, strict service receipts, history, CAS/idempotency, retry and rollback. Late receipts cannot overwrite a newer confirmation.
+- Add an optional admission `catalog` stamp. Managed admission checks the confirmed revision, customer scope, model, Workflow, channel and price binding; existing intents and ledger recovery keep their frozen identities.
+- Add migration `1b8e0c5f3247` with three tables, admission foreign keys and database guards. Back up and upgrade the development database; rehearse a consistent 45-table restore. Fix shared-test imports through the native pytest entry point.
+- 验证/Validation：[完整记录](docs/evidence/2026-10-25/gateway-catalog-verification.json)：3146 项 Python、20 组原生 legacy 协议、45 表恢复、静态/类型/锁文件和前端构建通过；保留初始迁移和收集失败，最终回归通过。3146 Python checks, 20 native legacy protocol scenarios, a 45-table restore, static/type/lock checks and the frontend build pass. Initial migration/collection failures are retained with their fixes; actual-resource and production gates remain open.
+- 待办/Pending：Provider 自动消费和 Admin 映射 UI 尚未接线，当前 Provider 保持启动配置和 legacy 模式；完整首版、真实资源与生产验收仍未完成。Provider consumption and Admin mapping UI remain open. No new offline candidate or production acceptance is published in this increment.
+
 ## 2026-10-25 — 完整待办评估 / Remaining-work assessment
 
 - 新增 [76 项编号待办](docs/78-完整待办与首版收口清单.md)：5 项开发、6 项完善、7 项真实 Workflow 产品化、46 项实测、7 项配置、3 项交付与 2 项非首版阻断增强；同步中英入口和开发记录。

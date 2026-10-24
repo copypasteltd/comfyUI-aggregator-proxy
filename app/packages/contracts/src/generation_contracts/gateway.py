@@ -4,6 +4,7 @@ from typing import Literal
 
 from pydantic import Field
 
+from generation_contracts.gateway_catalogs import CatalogStamp
 from generation_contracts.validation import JobCreate, KeyPolicy, StrictDTO
 
 
@@ -42,6 +43,7 @@ class AdmissionCreate(StrictDTO):
     price_version: str = Field(min_length=1, max_length=64, pattern=r"^[\x21-\x7e]+$")
     authorization_ref: str = Field(min_length=1, max_length=128, pattern=r"^[\x21-\x7e]+$")
     request: JobCreate
+    catalog: CatalogStamp | None = None
 
 
 class SettlementAck(StrictDTO):

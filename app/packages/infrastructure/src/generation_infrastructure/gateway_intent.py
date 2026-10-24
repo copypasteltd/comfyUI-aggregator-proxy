@@ -38,6 +38,7 @@ class PendingGateway:
     authorization_ref: str
     external_tenant_ref: str
     external_key_ref: str
+    catalog_stamp: dict[str, object] | None = None
 
     @property
     def identity(self) -> GatewayRequestIdentity:
@@ -45,4 +46,7 @@ class PendingGateway:
 
     @property
     def digest(self) -> str:
-        return fingerprint({"gateway_id": str(self.gateway_id), "binding_id": str(self.binding_id), "provider_request_id": self.provider_request_id, "external_task_ref": self.external_task_ref, "price_version": self.price_version, "authorization_ref": self.authorization_ref})
+        intent: dict[str, object] = {"gateway_id": str(self.gateway_id), "binding_id": str(self.binding_id), "provider_request_id": self.provider_request_id, "external_task_ref": self.external_task_ref, "price_version": self.price_version, "authorization_ref": self.authorization_ref}
+        if self.catalog_stamp is not None:
+            intent["catalog"] = self.catalog_stamp
+        return fingerprint(intent)

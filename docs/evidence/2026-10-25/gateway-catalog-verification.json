@@ -1,0 +1,119 @@
+{
+  "at": "2026-10-24T21:54:52.587699+00:00",
+  "scope": "Gateway catalog control plane; Provider consumer and Admin mapping UI remain unimplemented",
+  "passed": true,
+  "sources_sha256": {
+    "app/apps/control_api/src/control_api/gateway_catalogs.py": "14cf3307a3665bc304c0007b0e36fd0e928db01fa08406760c8a7fad0e394e42",
+    "app/packages/contracts/src/generation_contracts/gateway_catalogs.py": "c6ec43168a2efcabf52b410854ac225bcd552bf0c718b29961a0cdca2d002d9e",
+    "app/packages/infrastructure/src/generation_infrastructure/gateway_catalogs.py": "bc15a2da368acf6cddbcb56355564429a9ac73f02cb29852e5859753ab734c65",
+    "app/packages/infrastructure/src/generation_infrastructure/jobs.py": "055a93d54615a61bb0e2d2489ecdcf4d06a519370f02243c90e87f0d19bf7bc3",
+    "app/packages/infrastructure/src/generation_infrastructure/gateway_intent.py": "30ef58040ef4f761c38b265c4002158c67203d1d4aa96695f041d54c7d392415",
+    "app/migrations/versions/1b8e0c5f3247_gateway_catalog_publication.py": "f99a9dd009243ef838f17a89637edc2b33aad40403ca86ce34c5e2d1b103f935",
+    "app/tests/integration/test_gateway_catalogs.py": "6d34c2e764998a9cf5b79136f34a5c0f8b8a72cacfc4786dbcea7fe7a5ac5576"
+  },
+  "python_full_suite": {
+    "report": "gateway-catalog-full-python.xml",
+    "tests": 3146,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_seconds": 528.59,
+    "existing_dependency_warnings": 1
+  },
+  "catalog_integration_cases": 17,
+  "earlier_targeted_suite": {
+    "report": "gateway-catalog-targeted.xml",
+    "tests": 1549,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "before_final_two_edge_cases": true
+  },
+  "static_checks": {
+    "ruff_passed": true,
+    "mypy_source_files_passed": 156,
+    "uv_lock_valid_packages": 75
+  },
+  "frontend": {
+    "typecheck_and_build_passed": true,
+    "generated_api_updated": true,
+    "ui_changed": false,
+    "screenshots_rerecorded": false,
+    "existing_large_chunk_warning": true
+  },
+  "contracts": {
+    "schemas": 56,
+    "fixtures": 855,
+    "positive": 205,
+    "negative": 650,
+    "packaged_runtime_contracts": 58
+  },
+  "openapi": {
+    "paths": 153,
+    "methods": 194,
+    "design_endpoints": 187,
+    "existing_paths_changed": [],
+    "existing_schemas_changed": [
+      "AdmissionCreate"
+    ],
+    "admission_catalog_optional": true
+  },
+  "native_postgresql": {
+    "development": {
+      "revision": "1b8e0c5f3247",
+      "business_tables": 45,
+      "enabled_catalog_guards": 4,
+      "admission_catalog_fk_columns": 4,
+      "revision_overflow_guard_present": true,
+      "orm_migration_differences": 0
+    },
+    "isolated_test": {
+      "revision": "1b8e0c5f3247",
+      "business_tables": 45,
+      "enabled_catalog_guards": 4,
+      "admission_catalog_fk_columns": 4,
+      "revision_overflow_guard_present": true,
+      "orm_migration_differences": 0
+    }
+  },
+  "legacy_provider_regression": {
+    "report": "gateway-catalog-legacy-native.json",
+    "cases_passed": 20,
+    "real_native_processes": true,
+    "comfyui_redis_storage_are_protocol_fixtures": true,
+    "new_provider_catalog_consumption_tested": false
+  },
+  "backup_restore": {
+    "report": "gateway-catalog-restore.json",
+    "consistent_snapshot": true,
+    "business_tables": 45,
+    "row_counts_match": true,
+    "temporary_database_removed": true,
+    "object_bytes_and_master_keys_restored": false
+  },
+  "development_preview": {
+    "report": "gateway-catalog-development-readiness.json",
+    "services_restarted": true,
+    "retained": "project-owned API/Runner/object-GC and PostgreSQL for development preview",
+    "browser_used": false
+  },
+  "earlier_failures_preserved": [
+    {
+      "report": "gateway-catalog-initial-failure.xml",
+      "reason": "Earlier unpublished migration draft remained installed; corrected by verified explicit empty-test-schema downgrade and fresh upgrade"
+    },
+    {
+      "report": "gateway-catalog-collection-failure.xml",
+      "reason": "Native pytest entry point lacked project root; fixed pythonpath for existing shared test imports"
+    }
+  ],
+  "pending": [
+    "Provider durable catalog polling, validation, atomic application, receipts and request stamps",
+    "Admin model/specification/price mapping UI, differences, retries and rollback",
+    "All actual-resource and production acceptance gates listed in checklist 78"
+  ],
+  "full_goal_complete": false,
+  "production_accepted": false,
+  "new_offline_release_candidate_built": false,
+  "goal_status_changed": false
+}

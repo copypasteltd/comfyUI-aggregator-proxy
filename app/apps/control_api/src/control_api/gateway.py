@@ -39,15 +39,18 @@ from generation_infrastructure.admin_gateways import GatewayAdministration
 from generation_infrastructure.content import ContentRepository
 from generation_infrastructure.cursors import CursorCodec
 from generation_infrastructure.gateway import GatewayRepository
+from generation_infrastructure.gateway_catalogs import GatewayCatalogAdministration
 from generation_infrastructure.jobs import JobRepository
 
 from control_api.access import normalized_ip
 from control_api.collections import content_query, job_query
+from control_api.gateway_catalogs import catalog_routes
 from control_api.uploads import upload_token
 
 
 def gateway_routes(repository: GatewayRepository, administration: GatewayAdministration, catalog: CatalogAdministration, content: ContentRepository, jobs: GenerationService, gateway: Callable[..., GatewayIdentity], permission: Callable[..., Any], token: Callable[[Request], str], revision: Callable[[Request, int], None], cursors: CursorCodec) -> APIRouter:
     router = APIRouter()
+    router.include_router(catalog_routes(GatewayCatalogAdministration(repository.sessions, administration.settings), gateway, permission, token, revision))
 
     def delegated(request: Request, service: Annotated[GatewayIdentity, Depends(gateway)]) -> BusinessIdentity:
         def remember(identity: BusinessIdentity, peer: str) -> None:

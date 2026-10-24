@@ -15,6 +15,22 @@ ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = json.loads((ROOT / "docs/contracts/fixtures.json").read_text(encoding="utf-8"))["cases"]
 
 
+@pytest.mark.parametrize("case", [c for c in FIXTURES if c["schema"] in {"gateway-catalog-publication.schema.json", "gateway-catalog-replay.schema.json", "gateway-catalog-stamp.schema.json", "gateway-catalog-receipt.schema.json"}], ids=lambda c: c["id"])
+def test_gateway_catalog_dto_matches_frozen_fixture(case: dict[str, Any]) -> None:
+    from generation_contracts.gateway_catalogs import (
+        CatalogPublication,
+        CatalogReceipt,
+        CatalogReplay,
+        CatalogStamp,
+    )
+    model = {"gateway-catalog-publication.schema.json": CatalogPublication, "gateway-catalog-replay.schema.json": CatalogReplay, "gateway-catalog-stamp.schema.json": CatalogStamp, "gateway-catalog-receipt.schema.json": CatalogReceipt}[case["schema"]]
+    if case["valid"]:
+        assert model.model_validate(case["data"]).model_dump(exclude_unset=True) == case["data"]
+    else:
+        with pytest.raises(ValueError):
+            model.model_validate(case["data"])
+
+
 @pytest.mark.parametrize("case", [c for c in FIXTURES if c["schema"] == "admin-job-cancellations.schema.json"], ids=lambda c: c["id"])
 def test_cancellation_batch_dto_matches_frozen_fixture(case: dict[str, Any]) -> None:
     from generation_contracts.job_cancellations import JobCancellationBatch

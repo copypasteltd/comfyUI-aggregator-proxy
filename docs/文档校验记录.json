@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-25T04:36:57+08:00",
+  "checked_at": "2026-10-25T05:56:15+08:00",
   "baseline": "v0.4",
   "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
   "project": "E:\\dev\\sandbox\\生图生视API封装",
@@ -10,19 +10,19 @@
   },
   "checks": {
     "markdown": {
-      "documents": 82,
+      "documents": 83,
       "instruction_files": 1,
       "fenced_blocks": 36,
       "json_examples": 15,
       "yaml_examples": 1,
-      "local_links_checked": 1410
+      "local_links_checked": 1429
     },
     "contracts": {
-      "json_files": 55,
-      "schemas": 51,
-      "fixtures": 833,
-      "positive_fixtures": 197,
-      "negative_fixtures": 636,
+      "json_files": 60,
+      "schemas": 56,
+      "fixtures": 855,
+      "positive_fixtures": 205,
+      "negative_fixtures": 650,
       "capabilities_covered": [
         "image_to_image",
         "references_to_image",
@@ -39,13 +39,13 @@
       "guards": 21
     },
     "endpoints": {
-      "total": 180,
+      "total": 187,
       "by_identity": {
         "service": 27,
         "admin_login": 1,
-        "admin": 114,
+        "admin": 119,
         "worker": 12,
-        "gateway": 26
+        "gateway": 28
       },
       "admin_permissions": 25
     },
@@ -135,15 +135,15 @@
     },
     {
       "file": "docs/11-数据字典与数据库事务.md",
-      "bytes": 27207,
-      "lines": 178,
-      "sha256": "04adbd7f62be5f70965dfd9e9b092eed6f32b10d1b11be195250503264512fe7"
+      "bytes": 27719,
+      "lines": 180,
+      "sha256": "c75120eccedcaeed478749dfee57569018b34ab8fbc45d1cb8979197d9377ba4"
     },
     {
       "file": "docs/12-接口契约与Worker协议.md",
-      "bytes": 26511,
-      "lines": 175,
-      "sha256": "81bf9e8fa2a81e2d3d7c9272a2a53900075f4a0bd841c8f41f9347f285acd41f"
+      "bytes": 27016,
+      "lines": 177,
+      "sha256": "ba3e2184ca4793abccc288c9ea79c0d97e00218c8d4fdd776701d7996e7cc2f8"
     },
     {
       "file": "docs/13-Admin前端开发规范.md",
@@ -165,15 +165,15 @@
     },
     {
       "file": "docs/16-开发任务分解与交付清单.md",
-      "bytes": 67334,
+      "bytes": 67403,
       "lines": 323,
-      "sha256": "4104ff27a2b6308b6f26722de0227fdbeb184dd5ef6a9a46a6bd267d3711a25f"
+      "sha256": "b6e32e3ce05baa3132c981c7ebf48a323bcc50a905508a8a040d9b3fc10c0ef2"
     },
     {
       "file": "docs/17-开发记录与运行说明.md",
-      "bytes": 129922,
-      "lines": 572,
-      "sha256": "ce9eae62230d4deb16f78931af53cd478a8c53a88ed738ce5e1bf293cc9c44b3"
+      "bytes": 131220,
+      "lines": 576,
+      "sha256": "3c4bf0d2c76f96a26a657fb414075747c5e95ea6649bdcc8d204684276d9a00a"
     },
     {
       "file": "docs/18-Admin界面实现约定.md",
@@ -537,9 +537,15 @@
     },
     {
       "file": "docs/78-完整待办与首版收口清单.md",
-      "bytes": 21430,
-      "lines": 146,
-      "sha256": "c4ded0d23fde4dbf3a9c5b18c4393fb6d4794268a75d026d1129c2646b05cf6c"
+      "bytes": 21827,
+      "lines": 148,
+      "sha256": "2c14b0908551cc8cd10144d29a803a20dbda23bd771d25d09719d4d24cdcf633"
+    },
+    {
+      "file": "docs/79-网关模型目录持久发布协议.md",
+      "bytes": 12103,
+      "lines": 81,
+      "sha256": "64aa9dc66cfcf4247cca9044547f30115867d178ce9acf112c57f83ace582f8f"
     },
     {
       "file": "docs/contracts/admin-alert-failure.schema.json",
@@ -723,9 +729,9 @@
     },
     {
       "file": "docs/contracts/development-traceability.json",
-      "bytes": 37492,
+      "bytes": 38019,
       "lines": 1705,
-      "sha256": "3165827607c9a44362aa3223181c0b3e72e220961992ceaef1ca80aeaad31b6d"
+      "sha256": "d4923fcc59ef0973eacf5a41ce577b331b2892414b7778b1d9fa521cf9b7629d"
     },
     {
       "file": "docs/contracts/dispatch-policy.schema.json",
@@ -735,15 +741,45 @@
     },
     {
       "file": "docs/contracts/endpoint-catalog.json",
-      "bytes": 104175,
-      "lines": 3400,
-      "sha256": "5812a1586a336080c89ba71570434371118336552d1403f75170038e18f4834f"
+      "bytes": 108759,
+      "lines": 3536,
+      "sha256": "1bf64abdd4842e17b123e3642fe3356ac74b39e013f53ebe3d00e38c06b4aba6"
     },
     {
       "file": "docs/contracts/fixtures.json",
-      "bytes": 1369173,
-      "lines": 41618,
-      "sha256": "28e949e34777ca5310894c915e0cdc2d60a12265242d949edfedd83d68216e2d"
+      "bytes": 1380006,
+      "lines": 41989,
+      "sha256": "681f2f769258c5bf5457c496f3225ad45d38b8e4fa8f6025ab3925b9a95bcbd6"
+    },
+    {
+      "file": "docs/contracts/gateway-catalog-configuration.schema.json",
+      "bytes": 5730,
+      "lines": 170,
+      "sha256": "4491340dbd408f9bb023c55fab62d2e9e08b5125fa90bd0fbfb438ae2e6acf07"
+    },
+    {
+      "file": "docs/contracts/gateway-catalog-publication.schema.json",
+      "bytes": 3106,
+      "lines": 88,
+      "sha256": "2eb0df2c07c86e2a0683713168cd175a2f7f4719d8eae51e01b61daef00318c7"
+    },
+    {
+      "file": "docs/contracts/gateway-catalog-receipt.schema.json",
+      "bytes": 1353,
+      "lines": 75,
+      "sha256": "2d138995bbeda7396880bd8a20334efaf19a3ceba0852e6d1fa0c0e0bb1c9a30"
+    },
+    {
+      "file": "docs/contracts/gateway-catalog-replay.schema.json",
+      "bytes": 553,
+      "lines": 29,
+      "sha256": "9b060fb46f8b7f6d8b06b06357f3b73ea8cbf8e1c6f5c5a6eafdac35b41cb631"
+    },
+    {
+      "file": "docs/contracts/gateway-catalog-stamp.schema.json",
+      "bytes": 521,
+      "lines": 26,
+      "sha256": "01834d0eefea341b42e8962ba72b1b96f30d89aa16f5d1c4361f420ff4b758fd"
     },
     {
       "file": "docs/contracts/gateway-request-identity.schema.json",
@@ -807,9 +843,9 @@
     },
     {
       "file": "docs/contracts/README.md",
-      "bytes": 16585,
-      "lines": 127,
-      "sha256": "614ea77d35d620aa10194375458105c726c60577f41368619adf87f317d174b6"
+      "bytes": 17121,
+      "lines": 129,
+      "sha256": "f964560d7084211be41477fe4714d0436bd2728ef748d3220f9feb62ef354f2f"
     },
     {
       "file": "docs/contracts/recovery-checkpoint.schema.json",
@@ -885,21 +921,21 @@
     },
     {
       "file": "docs/README.en.md",
-      "bytes": 9609,
-      "lines": 121,
-      "sha256": "a4acac0f5d1556c4fd1b49ceb7a22e1681cdec4146b6d667f13633b828906328"
+      "bytes": 9803,
+      "lines": 122,
+      "sha256": "0c2160172864cc2bd0631fe13a7cc00412f95ebf52e028390cba9db8073f326e"
     },
     {
       "file": "docs/README.md",
-      "bytes": 22183,
-      "lines": 156,
-      "sha256": "9b3d515323c5475457fd3d8222f2daf7360f683b1787de6efc143d3e5fffa538"
+      "bytes": 22420,
+      "lines": 157,
+      "sha256": "af0adc0680c0551bb2cc7ac63cf5e5fbbeee7435d380415413a4805ab137ef79"
     },
     {
       "file": "docs/tools/verify_docs.py",
-      "bytes": 24947,
-      "lines": 393,
-      "sha256": "2a12a969736695a6dd74cedb3ce61402a14c3f63dc97d2bc658371efe4fa2404"
+      "bytes": 25605,
+      "lines": 397,
+      "sha256": "e452b1c7376bd8f1369a0d8bf8f5a054920ac322a3a770ae2cc2a6466e1649df"
     }
   ],
   "errors": [],

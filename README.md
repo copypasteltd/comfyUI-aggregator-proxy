@@ -10,7 +10,9 @@
 
 **当前状态：开发中。** 原生 Windows 本地实现、协议测试和隔离候选安装已有验证记录；真实 Workflow、模型质量、真实 S3/Redis、生产系统服务与 10～20 台实机容量尚未完成验收。文中的截图和录屏使用真实页面与 API、独立 PostgreSQL 和明确标记的合成数据，不代表真实 GPU 生成或生产压测结果。
 
-[完整待办与首版收口清单](docs/78-完整待办与首版收口清单.md) 列出 76 项已知剩余工作，区分开发、完善、产品化、实测、配置、交付与增强。其中，Admin 模型发布到 Sub2API 的持久同步、网关确认及失败恢复仍待开发；当前控制面发布和 Provider 启动时的模型/价格配置是独立步骤。
+[完整待办与首版收口清单](docs/78-完整待办与首版收口清单.md) 列出 76 项已知剩余工作。[网关目录协议](docs/79-网关模型目录持久发布协议.md) 已补齐控制面持久发布、应用回执、重试/回滚及准入版本校验；Provider 自动拉取/应用和 Admin 映射界面仍待接线。当前 Provider 继续使用启动文件中的模型/价格配置，完整发布闭环尚未完成。
+
+本轮 [验证记录](docs/evidence/2026-10-25/gateway-catalog-verification.json)：完整 Python 回归 3146 项、原生 Provider legacy 协议场景 20 组和开发库 45 表恢复演练通过；这些不替代真实 ComfyUI、生产存储或实机容量验收。
 
 ## 目录
 
@@ -70,6 +72,8 @@ flowchart LR
 PostgreSQL 是任务和资源权威源；SQLite 仅是单机 Worker journal。Sub2API 自己的账本通过固定集成协同，本项目不复制一套独立收费账本。
 
 ## Admin 操作与演示
+
+模型目录同步目前交付控制面 API：管理员按 `expected_revision`、`If-Match` 和 `Idempotency-Key` 发布完整目录，Provider 用独立网关身份拉取及确认。目录保存不可变配置、摘要、模型/Workflow/渠道绑定和价格版本。首次确认前保持 legacy；确认后新网关准入必须携带匹配的 `catalog` 版本，已接收任务和原请求恢复继续使用冻结记录。重试和回滚均创建新版本。**当前 Provider 尚未接入此消费者，暂不要手工确认启用 managed。** 详见 [协议、预算与迁移说明](docs/79-网关模型目录持久发布协议.md)。
 
 ![Admin 功能巡览 GIF：合成数据](docs/media/admin-tour.gif)
 

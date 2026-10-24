@@ -41,6 +41,7 @@ ignore = ["E501", "S101", "B008"]
 
 [tool.pytest.ini_options]
 addopts = "--basetemp=.local/pytest"
+pythonpath = ["."]
 testpaths = ["tests"]
 asyncio_mode = "auto"
 markers = ["integration: requires the isolated native PostgreSQL instance", "protocol: worker protocol and durable journal", "fault: injected crash, duplicate, or connectivity failure"]

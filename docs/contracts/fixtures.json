@@ -41613,6 +41613,377 @@
         "archived": false
       },
       "id": "admin-workflow-lifecycle-result-bad-id-832"
+    },
+    {
+      "id": "gateway_catalog_publication_valid",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": true,
+      "data": {
+        "expected_revision": 0,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "0.05000000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_publication_empty",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": true,
+      "data": {
+        "expected_revision": 0,
+        "instance_id": "synthetic-provider",
+        "models": []
+      }
+    },
+    {
+      "id": "gateway_catalog_price_zero",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": false,
+      "data": {
+        "expected_revision": 0,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "0.00000000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_price_too_large",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": false,
+      "data": {
+        "expected_revision": 0,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "1000000.01",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_price_exponent",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": false,
+      "data": {
+        "expected_revision": 0,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "1e-2",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_int64_overflow",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": false,
+      "data": {
+        "expected_revision": 0,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775808",
+            "group_ids": [
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "0.05000000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_id_number",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": false,
+      "data": {
+        "expected_revision": 0,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": 1,
+            "group_ids": [
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "0.05000000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_duplicate_groups",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": false,
+      "data": {
+        "expected_revision": 0,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1",
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "0.05000000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_revision_bool",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": false,
+      "data": {
+        "expected_revision": true,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "0.05000000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_revision_negative",
+      "schema": "gateway-catalog-publication.schema.json",
+      "valid": false,
+      "data": {
+        "expected_revision": -1,
+        "instance_id": "synthetic-provider",
+        "models": [
+          {
+            "usage_account_id": "9223372036854775807",
+            "group_ids": [
+              "1"
+            ],
+            "price_version": "synthetic-price-v1",
+            "unit_price": "0.05000000",
+            "model_bindings": [
+              {
+                "model_id": "mdl_11111111111111111111111111111111",
+                "expected_revision": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gateway_catalog_stamp_valid",
+      "schema": "gateway-catalog-stamp.schema.json",
+      "valid": true,
+      "data": {
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "gateway_catalog_stamp_extra",
+      "schema": "gateway-catalog-stamp.schema.json",
+      "valid": false,
+      "data": {
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "gateway_id": "customer-supplied"
+      }
+    },
+    {
+      "id": "gateway_catalog_applied",
+      "schema": "gateway-catalog-receipt.schema.json",
+      "valid": true,
+      "data": {
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": "applied",
+        "error_code": null
+      }
+    },
+    {
+      "id": "gateway_catalog_rejected",
+      "schema": "gateway-catalog-receipt.schema.json",
+      "valid": true,
+      "data": {
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": "rejected",
+        "error_code": "apply_failed"
+      }
+    },
+    {
+      "id": "gateway_catalog_applied_error",
+      "schema": "gateway-catalog-receipt.schema.json",
+      "valid": false,
+      "data": {
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": "applied",
+        "error_code": "apply_failed"
+      }
+    },
+    {
+      "id": "gateway_catalog_rejected_no_error",
+      "schema": "gateway-catalog-receipt.schema.json",
+      "valid": false,
+      "data": {
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": "rejected",
+        "error_code": null
+      }
+    },
+    {
+      "id": "gateway_catalog_raw_error",
+      "schema": "gateway-catalog-receipt.schema.json",
+      "valid": false,
+      "data": {
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": "rejected",
+        "error_code": "secret or URL in error"
+      }
+    },
+    {
+      "id": "gateway_catalog_retry",
+      "schema": "gateway-catalog-replay.schema.json",
+      "valid": true,
+      "data": {
+        "action": "retry",
+        "expected_revision": 2,
+        "source_revision": 1
+      }
+    },
+    {
+      "id": "gateway_catalog_rollback",
+      "schema": "gateway-catalog-replay.schema.json",
+      "valid": true,
+      "data": {
+        "action": "rollback",
+        "expected_revision": 2,
+        "source_revision": 1
+      }
+    },
+    {
+      "id": "gateway_catalog_replay_unknown_action",
+      "schema": "gateway-catalog-replay.schema.json",
+      "valid": false,
+      "data": {
+        "action": "disable-verification",
+        "expected_revision": 2,
+        "source_revision": 1
+      }
+    },
+    {
+      "id": "gateway_catalog_configuration_empty",
+      "schema": "gateway-catalog-configuration.schema.json",
+      "valid": true,
+      "data": {
+        "format_version": "gateway-catalog-v1",
+        "gateway_id": "gateway_22222222222222222222222222222222",
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "models": []
+      }
+    },
+    {
+      "id": "gateway_catalog_configuration_version",
+      "schema": "gateway-catalog-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "format_version": "customer-defined",
+        "gateway_id": "gateway_22222222222222222222222222222222",
+        "instance_id": "synthetic-provider",
+        "revision": 1,
+        "models": []
+      }
     }
   ]
 }

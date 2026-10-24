@@ -125,3 +125,5 @@ JSON Schema 使用 draft 2020-12，引用限定本文件 `#/$defs`，禁止在�
 
 
 第 76 增量新增 admin-workflow-lifecycle.schema.json / admin-workflow-lifecycle-result.schema.json，供归档/解除归档的严格布尔、CAS 与原事务结果使用；结果 revision 恰好增加一次。51 schema、833 fixture（197 正/636 反），53 运行契约、180 设计端点，无 DDL，见 [76](../76-Workflow归档与恢复管理.md)。
+
+第 79 增量新增网关目录发布、重放、准入 stamp、服务回执及完整配置五份 schema，增加 22 个 fixture（8 正/14 反）；累计 56 schema、855 fixture（205 正/650 反），58 运行契约、187 设计端点。期望与确认版本独立，首次确认前兼容 legacy；服务配置端点不接收客户委托身份。控制面持久化与版本校验已有实际 PostgreSQL 证据，Provider 自动消费者和 Admin 映射 UI 仍待实现，见 [79](../79-网关模型目录持久发布协议.md)。

@@ -10,7 +10,9 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 **Status: in development.** Native Windows implementation, protocol tests and isolated candidate installation have recorded verification. Actual Workflows, model quality, real S3/Redis, production system services and capacity on 10–20 physical machines still require acceptance. Screenshots and recordings show the real UI and API backed by isolated PostgreSQL and explicitly synthetic fixtures. They demonstrate neither real GPU generation nor production throughput.
 
-The [remaining-work checklist](docs/78-完整待办与首版收口清单.md), written in Chinese, identifies 76 known items across implementation, refinement, Workflow productization, actual-environment validation, configuration, delivery and optional improvements. Durable synchronization from Admin model publication to Sub2API, gateway confirmation and failure recovery still need implementation. Control-plane publication and the Provider's startup model/pricing configuration are currently separate steps.
+The [remaining-work checklist](docs/78-完整待办与首版收口清单.md), written in Chinese, identifies 76 known items. The [gateway catalog protocol](docs/79-网关模型目录持久发布协议.md) now implements control-plane persistence, application receipts, retry/rollback and admission revision checks. Provider polling/application and the Admin mapping UI still need integration. The current Provider continues to use startup model/pricing configuration; the complete publication lifecycle remains unfinished.
+
+The latest [verification record](docs/evidence/2026-10-25/gateway-catalog-verification.json) reports 3146 passing Python checks, 20 native Provider legacy protocol scenarios and a consistent 45-table development-database restore. Actual ComfyUI, production storage and physical-machine capacity still require acceptance.
 
 ## Contents
 
@@ -70,6 +72,8 @@ flowchart LR
 PostgreSQL is authoritative for jobs and resources. SQLite is only a single Worker's journal. The pinned integration coordinates with Sub2API's existing ledger instead of introducing another independent billing ledger.
 
 ## Admin and demonstrations
+
+Catalog synchronization currently provides control-plane APIs. Administrators publish a full catalog using `expected_revision`, `If-Match` and `Idempotency-Key`; Providers pull and acknowledge it through their separate gateway identity. Immutable snapshots bind models, Workflow releases, channels and price versions. Legacy admission continues until the first confirmation; managed admission then requires a matching `catalog` stamp. Existing tasks and request recovery retain their original frozen records. Retry and rollback create new revisions. **The current Provider does not consume this protocol yet; do not manually acknowledge managed activation.** See the [protocol, budgets and migration notes](docs/79-网关模型目录持久发布协议.md).
 
 ![Admin feature tour with synthetic data](docs/media/admin-tour.gif)
 

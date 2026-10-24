@@ -9360,6 +9360,322 @@
         }
       }
     },
+    "/admin/api/v1/gateways/{identifier}/catalog": {
+      "get": {
+        "summary": "Catalog State",
+        "operationId": "catalog_state_admin_api_v1_gateways__identifier__catalog_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogState"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/api/v1/gateways/{identifier}/catalog/releases": {
+      "get": {
+        "summary": "Catalog History",
+        "operationId": "catalog_history_admin_api_v1_gateways__identifier__catalog_releases_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000000,
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_CatalogReleaseSummary_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Catalog Publish",
+        "operationId": "catalog_publish_admin_api_v1_gateways__identifier__catalog_releases_post",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatalogPublication"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogReleaseView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/api/v1/gateways/{identifier}/catalog/releases/{number}": {
+      "get": {
+        "summary": "Catalog Release",
+        "operationId": "catalog_release_admin_api_v1_gateways__identifier__catalog_releases__number__get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "number",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "maximum": 2147483647,
+              "minimum": 1,
+              "title": "Number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogReleaseView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/api/v1/gateways/{identifier}/catalog/replay": {
+      "post": {
+        "summary": "Catalog Replay",
+        "operationId": "catalog_replay_admin_api_v1_gateways__identifier__catalog_replay_post",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatalogReplay"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogReleaseView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gateway/v1/catalog": {
+      "get": {
+        "summary": "Catalog Pull",
+        "operationId": "catalog_pull_gateway_v1_catalog_get",
+        "parameters": [
+          {
+            "name": "instance_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$",
+              "title": "Instance Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogState"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gateway/v1/catalog/receipts": {
+      "post": {
+        "summary": "Catalog Receipt",
+        "operationId": "catalog_receipt_gateway_v1_catalog_receipts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatalogReceipt"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogReceiptResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/api/v1/gateways": {
       "get": {
         "summary": "Gateway List",
@@ -11467,6 +11783,16 @@
           },
           "request": {
             "$ref": "#/components/schemas/JobCreate"
+          },
+          "catalog": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CatalogStamp"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -12497,6 +12823,499 @@
           "current_status"
         ],
         "title": "CancellationTargetView"
+      },
+      "CatalogModelBinding": {
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "model_id",
+          "expected_revision"
+        ],
+        "title": "CatalogModelBinding"
+      },
+      "CatalogPublication": {
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "maximum": 2147483646.0,
+            "minimum": 0.0,
+            "title": "Expected Revision"
+          },
+          "instance_id": {
+            "type": "string",
+            "title": "Instance Id"
+          },
+          "models": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogRule"
+            },
+            "type": "array",
+            "maxItems": 256,
+            "title": "Models"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_revision",
+          "instance_id",
+          "models"
+        ],
+        "title": "CatalogPublication"
+      },
+      "CatalogReceipt": {
+        "properties": {
+          "instance_id": {
+            "type": "string",
+            "title": "Instance Id"
+          },
+          "revision": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Revision"
+          },
+          "digest": {
+            "type": "string",
+            "title": "Digest"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "applied",
+              "rejected"
+            ],
+            "title": "Status"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "unsupported_configuration",
+                  "account_unavailable",
+                  "group_unavailable",
+                  "storage_unavailable",
+                  "apply_failed"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "instance_id",
+          "revision",
+          "digest",
+          "status"
+        ],
+        "title": "CatalogReceipt"
+      },
+      "CatalogReceiptResult": {
+        "properties": {
+          "receipt": {
+            "$ref": "#/components/schemas/CatalogReceiptView"
+          },
+          "activated": {
+            "type": "boolean",
+            "title": "Activated"
+          },
+          "state": {
+            "$ref": "#/components/schemas/CatalogState"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "receipt",
+          "activated",
+          "state"
+        ],
+        "title": "CatalogReceiptResult"
+      },
+      "CatalogReceiptView": {
+        "properties": {
+          "instance_id": {
+            "type": "string",
+            "title": "Instance Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "digest": {
+            "type": "string",
+            "title": "Digest"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "applied",
+              "rejected"
+            ],
+            "title": "Status"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "unsupported_configuration",
+                  "account_unavailable",
+                  "group_unavailable",
+                  "storage_unavailable",
+                  "apply_failed"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          },
+          "observed_at": {
+            "type": "integer",
+            "title": "Observed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "instance_id",
+          "revision",
+          "digest",
+          "status",
+          "error_code",
+          "observed_at"
+        ],
+        "title": "CatalogReceiptView"
+      },
+      "CatalogReleaseSummary": {
+        "properties": {
+          "gateway_id": {
+            "type": "string",
+            "title": "Gateway Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "instance_id": {
+            "type": "string",
+            "title": "Instance Id"
+          },
+          "digest": {
+            "type": "string",
+            "title": "Digest"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "publish",
+              "retry",
+              "rollback"
+            ],
+            "title": "Action"
+          },
+          "source_revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Revision"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "gateway_id",
+          "revision",
+          "instance_id",
+          "digest",
+          "action",
+          "source_revision",
+          "created_at"
+        ],
+        "title": "CatalogReleaseSummary"
+      },
+      "CatalogReleaseView": {
+        "properties": {
+          "gateway_id": {
+            "type": "string",
+            "title": "Gateway Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "instance_id": {
+            "type": "string",
+            "title": "Instance Id"
+          },
+          "digest": {
+            "type": "string",
+            "title": "Digest"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "publish",
+              "retry",
+              "rollback"
+            ],
+            "title": "Action"
+          },
+          "source_revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Revision"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "configuration_json": {
+            "type": "string",
+            "title": "Configuration Json"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "gateway_id",
+          "revision",
+          "instance_id",
+          "digest",
+          "action",
+          "source_revision",
+          "created_at",
+          "configuration_json"
+        ],
+        "title": "CatalogReleaseView"
+      },
+      "CatalogReplay": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "retry",
+              "rollback"
+            ],
+            "title": "Action"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "source_revision": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Source Revision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action",
+          "expected_revision",
+          "source_revision"
+        ],
+        "title": "CatalogReplay"
+      },
+      "CatalogRule": {
+        "properties": {
+          "usage_account_id": {
+            "type": "string",
+            "title": "Usage Account Id"
+          },
+          "group_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 1024,
+            "minItems": 1,
+            "title": "Group Ids"
+          },
+          "price_version": {
+            "type": "string",
+            "title": "Price Version"
+          },
+          "unit_price": {
+            "type": "string",
+            "title": "Unit Price"
+          },
+          "model_bindings": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogModelBinding"
+            },
+            "type": "array",
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Model Bindings"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "usage_account_id",
+          "group_ids",
+          "price_version",
+          "unit_price",
+          "model_bindings"
+        ],
+        "title": "CatalogRule"
+      },
+      "CatalogStamp": {
+        "properties": {
+          "instance_id": {
+            "type": "string",
+            "title": "Instance Id"
+          },
+          "revision": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Revision"
+          },
+          "digest": {
+            "type": "string",
+            "title": "Digest"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "instance_id",
+          "revision",
+          "digest"
+        ],
+        "title": "CatalogStamp"
+      },
+      "CatalogState": {
+        "properties": {
+          "gateway_id": {
+            "type": "string",
+            "title": "Gateway Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "instance_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instance Id"
+          },
+          "managed": {
+            "type": "boolean",
+            "title": "Managed"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "legacy",
+              "pending",
+              "confirmed",
+              "rejected",
+              "stale"
+            ],
+            "title": "Status"
+          },
+          "desired_stale": {
+            "type": "boolean",
+            "title": "Desired Stale"
+          },
+          "confirmed_stale": {
+            "type": "boolean",
+            "title": "Confirmed Stale"
+          },
+          "desired": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CatalogReleaseView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "confirmed": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CatalogReleaseView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "last_receipt": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CatalogReceiptView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "gateway_id",
+          "revision",
+          "instance_id",
+          "managed",
+          "status",
+          "desired_stale",
+          "confirmed_stale",
+          "desired",
+          "confirmed",
+          "last_receipt"
+        ],
+        "title": "CatalogState"
       },
       "ChannelAction": {
         "properties": {
@@ -18049,6 +18868,32 @@
           "has_more"
         ],
         "title": "Page[BindingView]"
+      },
+      "Page_CatalogReleaseSummary_": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogReleaseSummary"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "page",
+          "has_more"
+        ],
+        "title": "Page[CatalogReleaseSummary]"
       },
       "Page_ChannelView_": {
         "properties": {

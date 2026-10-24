@@ -2111,6 +2111,109 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/admin/api/v1/gateways/{identifier}/catalog": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Catalog State */
+        get: operations["catalog_state_admin_api_v1_gateways__identifier__catalog_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/api/v1/gateways/{identifier}/catalog/releases": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Catalog History */
+        get: operations["catalog_history_admin_api_v1_gateways__identifier__catalog_releases_get"];
+        put?: never;
+        /** Catalog Publish */
+        post: operations["catalog_publish_admin_api_v1_gateways__identifier__catalog_releases_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/api/v1/gateways/{identifier}/catalog/releases/{number}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Catalog Release */
+        get: operations["catalog_release_admin_api_v1_gateways__identifier__catalog_releases__number__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/api/v1/gateways/{identifier}/catalog/replay": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Catalog Replay */
+        post: operations["catalog_replay_admin_api_v1_gateways__identifier__catalog_replay_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/gateway/v1/catalog": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Catalog Pull */
+        get: operations["catalog_pull_gateway_v1_catalog_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/gateway/v1/catalog/receipts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Catalog Receipt */
+        post: operations["catalog_receipt_gateway_v1_catalog_receipts_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/admin/api/v1/gateways": {
         parameters: {
             query?: never;
@@ -2794,6 +2897,7 @@ export interface components {
             /** Authorization Ref */
             authorization_ref: string;
             request: components["schemas"]["JobCreate"];
+            catalog?: components["schemas"]["CatalogStamp"] | null;
         };
         /** AdmissionView */
         AdmissionView: {
@@ -3129,6 +3233,162 @@ export interface components {
             error_code?: ("not_found" | "database_busy" | "cancellation_rejected") | null;
             /** Current Status */
             current_status: string | null;
+        };
+        /** CatalogModelBinding */
+        CatalogModelBinding: {
+            /** Model Id */
+            model_id: string;
+            /** Expected Revision */
+            expected_revision: number;
+        };
+        /** CatalogPublication */
+        CatalogPublication: {
+            /** Expected Revision */
+            expected_revision: number;
+            /** Instance Id */
+            instance_id: string;
+            /** Models */
+            models: components["schemas"]["CatalogRule"][];
+        };
+        /** CatalogReceipt */
+        CatalogReceipt: {
+            /** Instance Id */
+            instance_id: string;
+            /** Revision */
+            revision: number;
+            /** Digest */
+            digest: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "applied" | "rejected";
+            /** Error Code */
+            error_code?: ("unsupported_configuration" | "account_unavailable" | "group_unavailable" | "storage_unavailable" | "apply_failed") | null;
+        };
+        /** CatalogReceiptResult */
+        CatalogReceiptResult: {
+            receipt: components["schemas"]["CatalogReceiptView"];
+            /** Activated */
+            activated: boolean;
+            state: components["schemas"]["CatalogState"];
+        };
+        /** CatalogReceiptView */
+        CatalogReceiptView: {
+            /** Instance Id */
+            instance_id: string;
+            /** Revision */
+            revision: number;
+            /** Digest */
+            digest: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "applied" | "rejected";
+            /** Error Code */
+            error_code: ("unsupported_configuration" | "account_unavailable" | "group_unavailable" | "storage_unavailable" | "apply_failed") | null;
+            /** Observed At */
+            observed_at: number;
+        };
+        /** CatalogReleaseSummary */
+        CatalogReleaseSummary: {
+            /** Gateway Id */
+            gateway_id: string;
+            /** Revision */
+            revision: number;
+            /** Instance Id */
+            instance_id: string;
+            /** Digest */
+            digest: string;
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "publish" | "retry" | "rollback";
+            /** Source Revision */
+            source_revision: number | null;
+            /** Created At */
+            created_at: number;
+        };
+        /** CatalogReleaseView */
+        CatalogReleaseView: {
+            /** Gateway Id */
+            gateway_id: string;
+            /** Revision */
+            revision: number;
+            /** Instance Id */
+            instance_id: string;
+            /** Digest */
+            digest: string;
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "publish" | "retry" | "rollback";
+            /** Source Revision */
+            source_revision: number | null;
+            /** Created At */
+            created_at: number;
+            /** Configuration Json */
+            configuration_json: string;
+        };
+        /** CatalogReplay */
+        CatalogReplay: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "retry" | "rollback";
+            /** Expected Revision */
+            expected_revision: number;
+            /** Source Revision */
+            source_revision: number;
+        };
+        /** CatalogRule */
+        CatalogRule: {
+            /** Usage Account Id */
+            usage_account_id: string;
+            /** Group Ids */
+            group_ids: string[];
+            /** Price Version */
+            price_version: string;
+            /** Unit Price */
+            unit_price: string;
+            /** Model Bindings */
+            model_bindings: components["schemas"]["CatalogModelBinding"][];
+        };
+        /** CatalogStamp */
+        CatalogStamp: {
+            /** Instance Id */
+            instance_id: string;
+            /** Revision */
+            revision: number;
+            /** Digest */
+            digest: string;
+        };
+        /** CatalogState */
+        CatalogState: {
+            /** Gateway Id */
+            gateway_id: string;
+            /** Revision */
+            revision: number;
+            /** Instance Id */
+            instance_id: string | null;
+            /** Managed */
+            managed: boolean;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "legacy" | "pending" | "confirmed" | "rejected" | "stale";
+            /** Desired Stale */
+            desired_stale: boolean;
+            /** Confirmed Stale */
+            confirmed_stale: boolean;
+            desired: components["schemas"]["CatalogReleaseView"] | null;
+            confirmed: components["schemas"]["CatalogReleaseView"] | null;
+            last_receipt: components["schemas"]["CatalogReceiptView"] | null;
         };
         /** ChannelAction */
         ChannelAction: {
@@ -4977,6 +5237,15 @@ export interface components {
         Page_BindingView_: {
             /** Data */
             data: components["schemas"]["generation_contracts__gateway__BindingView"][];
+            /** Page */
+            page: number;
+            /** Has More */
+            has_more: boolean;
+        };
+        /** Page[CatalogReleaseSummary] */
+        Page_CatalogReleaseSummary_: {
+            /** Data */
+            data: components["schemas"]["CatalogReleaseSummary"][];
             /** Page */
             page: number;
             /** Has More */
@@ -11846,6 +12115,236 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_state_admin_api_v1_gateways__identifier__catalog_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_history_admin_api_v1_gateways__identifier__catalog_releases_get: {
+        parameters: {
+            query?: {
+                page?: number;
+            };
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_CatalogReleaseSummary_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_publish_admin_api_v1_gateways__identifier__catalog_releases_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogPublication"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogReleaseView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_release_admin_api_v1_gateways__identifier__catalog_releases__number__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+                number: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogReleaseView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_replay_admin_api_v1_gateways__identifier__catalog_replay_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogReplay"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogReleaseView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_pull_gateway_v1_catalog_get: {
+        parameters: {
+            query: {
+                instance_id: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_receipt_gateway_v1_catalog_receipts_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogReceipt"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogReceiptResult"];
                 };
             };
             /** @description Validation Error */

@@ -83,7 +83,7 @@ class GatewayRepository:
             binding = session.scalar(select(ExternalIdentityBinding).where(ExternalIdentityBinding.gateway_id == gateway.gateway_id, ExternalIdentityBinding.key_id == identity.key_id, ExternalIdentityBinding.enabled.is_(True)))
             if not binding:
                 raise DomainError("gateway_identity_unmapped", "外部主体没有显式绑定", 403)
-            pending = PendingGateway(gateway.gateway_id, binding.id, binding.revision, data.provider_request_id, data.external_task_ref, data.price_version, data.authorization_ref, binding.external_tenant_ref, binding.external_key_ref)
+            pending = PendingGateway(gateway.gateway_id, binding.id, binding.revision, data.provider_request_id, data.external_task_ref, data.price_version, data.authorization_ref, binding.external_tenant_ref, binding.external_key_ref, data.catalog.model_dump() if data.catalog is not None else None)
         self.jobs.create(identity, data.request.model_dump(exclude_unset=True), hashlib.sha256(data.provider_request_id.encode()).hexdigest(), request_id, pending_gateway=pending)
         with self.sessions() as session:
             row, job = session.execute(select(GatewayAdmission, Job).join(Job, GatewayAdmission.job_id == Job.id).where(GatewayAdmission.gateway_id == gateway.gateway_id, GatewayAdmission.provider_request_id == data.provider_request_id, Job.key_id == identity.key_id)).one()
