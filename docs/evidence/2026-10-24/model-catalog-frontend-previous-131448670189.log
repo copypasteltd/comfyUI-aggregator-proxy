@@ -1,0 +1,22 @@
+
+> render-control-admin@0.1.0 build
+> vue-tsc --noEmit && vite build
+
+src/pages/Models.vue(110,74): error TS2322: Type '{ expected_revision: number; release_id: string; channel_ids: string[]; defaults: { n: number; quality: "draft" | "standard" | "high"; size?: string | null | undefined; seconds?: (number) | null | undefined; }; }' is not assignable to type '{ tenant_id: string; project_id: string; alias: string; release_id: string; channel_ids: string[]; defaults?: { [key: string]: string | number | boolean; } | undefined; } | { expected_revision: number; release_id: string; channel_ids: string[]; defaults: { ...; }; } | { ...; } | { ...; }'.
+  Type '{ expected_revision: number; release_id: string; channel_ids: string[]; defaults: { n: number; quality: "draft" | "standard" | "high"; size?: string | null | undefined; seconds?: (number) | null | undefined; }; }' is not assignable to type '{ expected_revision: number; release_id: string; channel_ids: string[]; defaults: { [key: string]: string | number | boolean; }; }'.
+    Types of property 'defaults' are incompatible.
+      Type '{ n: number; quality: "draft" | "standard" | "high"; size?: string | null | undefined; seconds?: (number) | null | undefined; }' is not assignable to type '{ [key: string]: string | number | boolean; }'.
+        Property 'size' is incompatible with index signature.
+          Type 'string | null' is not assignable to type 'string | number | boolean'.
+            Type 'null' is not assignable to type 'string | number | boolean'.
+src/pages/Models.vue(111,39): error TS2322: Type '{ alias: string; tenant_id: string; project_id: string; release_id: string; channel_ids: string[]; defaults: { n: number; quality: "draft" | "standard" | "high"; size?: string | null | undefined; seconds?: (number) | null | undefined; }; }' is not assignable to type '{ tenant_id: string; project_id: string; alias: string; release_id: string; channel_ids: string[]; defaults?: { [key: string]: string | number | boolean; } | undefined; } | { expected_revision: number; release_id: string; channel_ids: string[]; defaults: { ...; }; } | { ...; } | { ...; }'.
+  Type '{ alias: string; tenant_id: string; project_id: string; release_id: string; channel_ids: string[]; defaults: { n: number; quality: "draft" | "standard" | "high"; size?: string | null | undefined; seconds?: (number) | null | undefined; }; }' is not assignable to type '{ tenant_id: string; project_id: string; alias: string; release_id: string; channel_ids: string[]; defaults?: { [key: string]: string | number | boolean; } | undefined; }'.
+    Types of property 'defaults' are incompatible.
+      Type '{ n: number; quality: "draft" | "standard" | "high"; size?: string | null | undefined; seconds?: (number) | null | undefined; }' is not assignable to type '{ [key: string]: string | number | boolean; }'.
+        Property 'size' is incompatible with index signature.
+          Type 'string | null' is not assignable to type 'string | number | boolean'.
+            Type 'null' is not assignable to type 'string | number | boolean'.
+src/pages/Models.vue(136,67): error TS2322: Type '{ model_id: string; expected_model_revision: number; channel_id: string; expected_channel_revision: number; sample_budget: number; request: { model: string; task_type: string; input: { [key: string]: unknown; }; parameters?: { [key: string]: unknown; }; client_request_id?: string | null; }; }' is not assignable to type '{ tenant_id: string; project_id: string; alias: string; release_id: string; channel_ids: string[]; defaults?: { [key: string]: string | number | boolean; } | undefined; } | { expected_revision: number; release_id: string; channel_ids: string[]; defaults: { ...; }; } | { ...; } | { ...; }'.
+  Type '{ model_id: string; expected_model_revision: number; channel_id: string; expected_channel_revision: number; sample_budget: number; request: { model: string; task_type: string; input: { [key: string]: unknown; }; parameters?: { [key: string]: unknown; }; client_request_id?: string | null; }; }' is not assignable to type '{ channel_id: string; request: { model: string; task_type: string; input: { [key: string]: unknown; }; parameters?: { [key: string]: unknown; } | undefined; client_request_id?: string | null | undefined; }; model_id: string; expected_model_revision: number; expected_channel_revision: number; sample_budget: 1; }'.
+    Types of property 'sample_budget' are incompatible.
+      Type 'number' is not assignable to type '1'.

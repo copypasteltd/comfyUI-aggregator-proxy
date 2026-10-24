@@ -1,0 +1,65 @@
+{
+  "baseline": "v0.4",
+  "passed": false,
+  "checks": {
+    "markdown": {
+      "documents": 55,
+      "instruction_files": 1,
+      "fenced_blocks": 32,
+      "json_examples": 15,
+      "yaml_examples": 1,
+      "local_links_checked": 679
+    },
+    "contracts": {
+      "json_files": 23,
+      "schemas": 19,
+      "fixtures": 194,
+      "positive_fixtures": 57,
+      "negative_fixtures": 137,
+      "capabilities_covered": [
+        "image_to_image",
+        "references_to_image",
+        "references_to_video",
+        "text_to_image",
+        "text_to_video"
+      ]
+    },
+    "state_machine": {
+      "states": 16,
+      "terminal_states": 4,
+      "transitions": 61,
+      "guards": 21
+    },
+    "endpoints": {
+      "total": 158,
+      "by_identity": {
+        "service": 27,
+        "admin_login": 1,
+        "admin": 93,
+        "worker": 11,
+        "gateway": 26
+      },
+      "admin_permissions": 24
+    },
+    "traceability": {
+      "rules": 32,
+      "quality_scenarios": 18,
+      "work_packages": 15,
+      "requirements": 72,
+      "work_package_statuses": {
+        "in_progress": 14,
+        "not_started": 1
+      },
+      "admin_acceptance_mapped": 16,
+      "key_acceptance_mapped": 12
+    },
+    "topic_presence": {
+      "checks": 14,
+      "scope": "Text presence only, not proof of correctness"
+    }
+  },
+  "errors": [
+    "Admin write lacks idempotency: POST /admin/api/v1/key-policy/options/query"
+  ],
+  "report_written": false
+}

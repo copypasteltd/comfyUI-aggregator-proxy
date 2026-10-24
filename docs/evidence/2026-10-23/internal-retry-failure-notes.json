@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-23T16:47:39.779743+00:00",
+  "all_resolved": true,
+  "unresolved_failures": [],
+  "resolved": [
+    {
+      "case": "two_overlay_verification_timeouts",
+      "observed": "Two native source-verification attempts exceeded the original 180-second archive-inspection budget before any test database or runtime service was created.",
+      "resolution": "Kept every pinned archive, path, inventory and digest check; increased the bounded native test-helper inspection budget to 600 seconds. The final full inspection and native protocol run passed."
+    },
+    {
+      "case": "required_retry_nulls_filtered_in_admin_detail",
+      "observed": "The real mobile cancel response omitted required nullable retry.next_at under response_model_exclude_none.",
+      "resolution": "Preserved required nullable values with a wrapping Pydantic serializer, verified the unchanged declared OpenAPI schema and retained hidden input behavior. Unit, HTTP, real browser and full-suite regressions passed."
+    },
+    {
+      "case": "browser_fixture_cleanup_namespace",
+      "observed": "The reused native fixture cleanup correctly refused a different owned test root.",
+      "resolution": "Used exact parent checks and nonrecursive removal of the empty browser fixture directories; verified that its database, API process and private fixture were removed."
+    },
+    {
+      "case": "concurrent_database_checkpoints_and_setup_timeouts",
+      "observed": "A checkpoint synced 18,839 files in 1328.917 seconds. Concurrent full tests showed three setup errors, and upstream fixture migrations reached their existing 120-second context deadline. Those partial runs were stopped or retained as failed.",
+      "resolution": "Changed only the guarded test-database reset: delete in FK order without replacing relation files; keep every CHECK/FK and durability setting. Verified unchanged relation filenodes, empty tables and server-side read-only protection for wrong-target tests. Repeated the complete suite and database-heavy checks serially."
+    },
+    {
+      "case": "test_cleanup_hit_immutable_gateway_fence",
+      "observed": "The first serial full suite stopped after 253 passed cases because fixture DELETE correctly hit the immutable gateway fence trigger.",
+      "resolution": "After verifying the exact owned test database and enabled guard, pause only that named immutable-row trigger within the locked reset transaction and restore it before commit. Never disable FK/CHECK or ALL/USER triggers. Regression checks seed a real fence, prove ordinary fence deletion and FK violation remain rejected, then verify identical trigger states and relation filenodes after reset. The final complete suite passed."
+    },
+    {
+      "case": "relocated_install_helper_import",
+      "observed": "The copied local installation helper lacked the maintained scripts import path and exited before creating any installation or database.",
+      "resolution": "Added the explicit project scripts path to the local helper. The candidate payload and production sources were unchanged; the fresh installation validation then passed."
+    },
+    {
+      "case": "test_helper_reference_and_origin_assertions",
+      "observed": "Early targeted checks referenced the wrong outbox class/field and expected a validation usage row to be absent; a new HTTP login test omitted its required Origin.",
+      "resolution": "Corrected the helpers to the real model and existing accounting/authentication contracts. The final 81 targeted tests and full suite passed."
+    }
+  ]
+}

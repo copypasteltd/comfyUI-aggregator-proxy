@@ -1,0 +1,82 @@
+{
+  "at": "2026-10-24T00:17:25.979365+00:00",
+  "passed": true,
+  "non_worker_openapi_unchanged": true,
+  "components_unchanged": true,
+  "changed_paths": [
+    "/internal/v1/attempts/{identifier}",
+    "/internal/v1/attempts/{identifier}/complete",
+    "/internal/v1/attempts/{identifier}/events",
+    "/internal/v1/attempts/{identifier}/inputs/{asset_id}",
+    "/internal/v1/attempts/{identifier}/reconciliation-context",
+    "/internal/v1/attempts/{identifier}/renew",
+    "/internal/v1/attempts/{identifier}/upload-authorizations",
+    "/internal/v1/claims",
+    "/internal/v1/commands/claims",
+    "/internal/v1/commands/{identifier}/receipts",
+    "/internal/v1/heartbeat",
+    "/internal/v1/reconciliations",
+    "/internal/v1/register",
+    "/internal/v1/uploads/{identifier}/content"
+  ],
+  "header_optional": true,
+  "operations": [
+    {
+      "path": "/internal/v1/register",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/heartbeat",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/claims",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/attempts/{identifier}",
+      "method": "get"
+    },
+    {
+      "path": "/internal/v1/attempts/{identifier}/renew",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/attempts/{identifier}/events",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/commands/claims",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/reconciliations",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/attempts/{identifier}/reconciliation-context",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/attempts/{identifier}/upload-authorizations",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/uploads/{identifier}/content",
+      "method": "put"
+    },
+    {
+      "path": "/internal/v1/attempts/{identifier}/complete",
+      "method": "post"
+    },
+    {
+      "path": "/internal/v1/attempts/{identifier}/inputs/{asset_id}",
+      "method": "get"
+    },
+    {
+      "path": "/internal/v1/commands/{identifier}/receipts",
+      "method": "post"
+    }
+  ],
+  "only_contract_delta": "Optional expected Worker identity header on 14 internal operations"
+}

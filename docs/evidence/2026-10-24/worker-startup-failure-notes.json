@@ -1,0 +1,60 @@
+{
+  "scope": "Increment 57 local verification; original unsuccessful reports are preserved separately.",
+  "entries": [
+    {
+      "kind": "test_parameter_id",
+      "result": "149 passed, setup and teardown errors for one oversized-configuration parameter",
+      "record": "worker-startup-targeted-before-parameter-ids.xml",
+      "reason": "The one-MiB parameter became the pytest test ID and exceeded Windows' 32767-character environment-variable limit before the application test ran.",
+      "resolution": "Use short explicit parameter IDs; the oversized input and application rejection assertion remain unchanged. The immediate corrected run passed 152 cases; final targeted regression after identity-header/receipt cases passed 193.",
+      "application_constraint_weakened": false
+    },
+    {
+      "kind": "rate_test_clock",
+      "result": "1212 passed, 1 failed",
+      "record": "worker-startup-before-rate-clock-fixture-full-python-tests.xml",
+      "reason": "An existing gateway-recovery test seeded an empty token bucket and assumed the following HTTP call would occur before its 500-ms refill boundary. The request arrived after the bucket could refill and correctly returned 200.",
+      "resolution": "Freeze only the test's SQL clock while preserving real PostgreSQL rows and transactions. Assert denial at 0 and 499 ms, acceptance at 500 ms, and zero customer generation-quota buckets throughout. The focused boundary test passed; the complete rerun is recorded separately.",
+      "production_rate_logic_changed": false,
+      "original_failure_preserved": true
+    },
+    {
+      "kind": "storage_lock_probe_coordination",
+      "result": "1220 passed, 1 failed",
+      "record": "worker-startup-before-storage-probe-gate-full-python-tests.xml",
+      "reason": "The existing eight-way upload test probed an exclusive Key-row lock before every request finished its legitimate preparation transaction. The probe timed out after 500 ms while contending with another preparation/probe, before reaching its storage barrier.",
+      "resolution": "Gate all eight requests inside storage before one exclusive-lock probe, then gate publication until that probe completes. Keep eight-way concurrency, the 500-ms lock timeout and all durable idempotency/object-count/cleanup/restart assertions. The complete five-test asset-idempotency suite passed; the full rerun is recorded separately.",
+      "production_storage_or_lock_logic_changed": false,
+      "original_failure_preserved": true
+    },
+    {
+      "kind": "scope_snapshot_clock",
+      "result": "1220 passed, 1 failed",
+      "record": "worker-startup-before-scope-snapshot-clock-full-python-tests.xml",
+      "reason": "The HTTP scope test equated a newly read snapshot with the create response, including observed_at. The two successful responses crossed a wall-clock second; their other 11 fields matched.",
+      "resolution": "Control only the scope-projection test clock and explicitly advance it between mutation replay, project creation, detail and list reads. Assert replay preserves the original timestamp, while each fresh read has the new timestamp and identical business fields. The focused snapshot test passed; the final full rerun is recorded separately.",
+      "production_snapshot_or_clock_logic_changed": false,
+      "original_failure_preserved": true
+    },
+    {
+      "kind": "superseded_candidate",
+      "release_id": "rc-20261024.57.1",
+      "result": "Built and passed its 1213-case full regression and 15-check isolated installation before the final identity-header refinement.",
+      "reason": "Review found that a credential JSON with a mismatched node ID and valid token could reach registration for the token's actual node. The final candidate adds pre-transaction authenticated identity comparison plus client registration receipt verification.",
+      "replacement": "rc-20261024.57.2",
+      "reports_prefix": "worker-startup-before-identity-header-",
+      "original_reports_preserved": true
+    }
+  ],
+  "production_accepted": false,
+  "final_test_results": {
+    "full_python_passed": 1221,
+    "targeted_passed": 193,
+    "asset_suite_passed": 5,
+    "scope_snapshot_boundary_passed": 1,
+    "candidate": "rc-20261024.57.2",
+    "isolated_installation_checks_passed": 15,
+    "original_unsuccessful_reports_preserved": true,
+    "fixture_fixes_change_production_behavior": false
+  }
+}

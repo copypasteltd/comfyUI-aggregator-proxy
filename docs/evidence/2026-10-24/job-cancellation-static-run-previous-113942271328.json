@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-24T11:11:50.745357+00:00",
+  "passed": true,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.07,
+      "log": "job-cancellation-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "seconds": 1.08,
+      "log": "job-cancellation-mypy.log"
+    },
+    {
+      "name": "lock",
+      "exit_code": 0,
+      "seconds": 2.69,
+      "log": "job-cancellation-lock.log"
+    },
+    {
+      "name": "docs",
+      "exit_code": 0,
+      "seconds": 3.01,
+      "log": "job-cancellation-docs.log"
+    }
+  ]
+}

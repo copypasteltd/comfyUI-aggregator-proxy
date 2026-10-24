@@ -1,0 +1,11 @@
+{
+  "failures_preserved": true,
+  "static": "The first mypy run found int versus Literal[500]. Marked the fixed batch constant Final; the final static phase passed 133 source files. The failed run/log remain archived.",
+  "targeted": "The first targeted run passed 442 and failed 2 cases. The held-row test selected and locked all rows because scalar() did not imply LIMIT 1; corrected the test to lock one row. The role test incorrectly assumed operator audit:read; corrected it to the existing frozen administrator-only permission. No production deletion or permission was relaxed. Final targeted 445 and full Python 1656 passed; earlier run/log are preserved and final JUnit contains passing results.",
+  "frontend_review": "Review caught the initial wait-for-both read pattern, which delayed records while policy stalled. Before final Python/browser/native/build checks, made the reads render independently and added a shared 10-second request budget. Actual browser delay, failure independence, hiding, logout and stale-response checks passed.",
+  "browser_expected_cancellation": "Intentional request cancellation can log Playwright route cancellation. Both contexts and browser closed, page errors were empty, owned API/databases/private fixture/archive were removed.",
+  "requirements_weakened": false,
+  "no_new_ddl": true,
+  "real_resources_accepted": false,
+  "database_and_secrets_in_docs": false
+}

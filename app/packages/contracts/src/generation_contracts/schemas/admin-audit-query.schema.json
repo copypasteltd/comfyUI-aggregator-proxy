@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-audit-query:0.5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "actor": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9_.:-]{0,127}$",
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "action": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9_.]{0,127}$",
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 49,
+          "pattern": "^(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[a-z][a-z0-9]{0,15}_[0-9a-f]{32})$",
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "request_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "created_from": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4102444800
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "created_before": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4102444800
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "$defs": {
+    "ModelFileCatalog": {
+      "additionalProperties": false,
+      "properties": {
+        "protocol": {
+          "const": "models-directory-v1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ready",
+            "partial",
+            "unavailable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "entries": {
+          "items": {
+            "$ref": "#/$defs/ModelFileEntry"
+          },
+          "maxItems": 1000,
+          "title": "Entries",
+          "type": "array"
+        },
+        "scanned_entries": {
+          "maximum": 5000,
+          "minimum": 0,
+          "title": "Scanned Entries",
+          "type": "integer"
+        },
+        "skipped_entries": {
+          "maximum": 5000,
+          "minimum": 0,
+          "title": "Skipped Entries",
+          "type": "integer"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "enum": [
+                "not_found",
+                "path_not_allowed",
+                "read_failed",
+                "entry_limit",
+                "time_budget",
+                "depth_limit",
+                "file_limit"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reason"
+        },
+        "catalog_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Catalog Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocol",
+        "status",
+        "entries",
+        "scanned_entries",
+        "skipped_entries",
+        "reason",
+        "catalog_digest"
+      ],
+      "title": "ModelFileCatalog",
+      "type": "object"
+    },
+    "ModelFileEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "relative_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "bytes": {
+          "exclusiveMinimum": 0,
+          "maximum": 1099511627776,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "modified_at_ns": {
+          "maximum": 9223372036854775807,
+          "minimum": 0,
+          "title": "Modified At Ns",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "checkpoint",
+            "diffusion_model",
+            "unet",
+            "vae",
+            "lora",
+            "text_encoder",
+            "clip",
+            "embedding",
+            "upscaler",
+            "controlnet",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "relative_path",
+        "bytes",
+        "modified_at_ns",
+        "kind"
+      ],
+      "title": "ModelFileEntry",
+      "type": "object"
+    },
+    "ModelFileInspection": {
+      "additionalProperties": false,
+      "properties": {
+        "relative_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "bytes": {
+          "exclusiveMinimum": 0,
+          "maximum": 1099511627776,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "modified_at_ns": {
+          "maximum": 9223372036854775807,
+          "minimum": 0,
+          "title": "Modified At Ns",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "checkpoint",
+            "diffusion_model",
+            "unet",
+            "vae",
+            "lora",
+            "text_encoder",
+            "clip",
+            "embedding",
+            "upscaler",
+            "controlnet",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "protocol": {
+          "const": "model-inspection-v1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "catalog_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Catalog Digest",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "relative_path",
+        "bytes",
+        "modified_at_ns",
+        "kind",
+        "protocol",
+        "catalog_digest",
+        "sha256"
+      ],
+      "title": "ModelFileInspection",
+      "type": "object"
+    },
+    "ModelInspectionReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "success": {
+          "const": true,
+          "title": "Success",
+          "type": "boolean"
+        },
+        "applied_revision": {
+          "minimum": 1,
+          "title": "Applied Revision",
+          "type": "integer"
+        },
+        "inspection": {
+          "$ref": "#/$defs/ModelFileInspection"
+        }
+      },
+      "required": [
+        "success",
+        "applied_revision",
+        "inspection"
+      ],
+      "title": "ModelInspectionReceipt",
+      "type": "object"
+    },
+    "ModelInventoryReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "success": {
+          "const": true,
+          "title": "Success",
+          "type": "boolean"
+        },
+        "applied_revision": {
+          "minimum": 1,
+          "title": "Applied Revision",
+          "type": "integer"
+        },
+        "inventory": {
+          "$ref": "#/$defs/NodeClasses"
+        },
+        "model_catalog": {
+          "$ref": "#/$defs/ModelFileCatalog"
+        }
+      },
+      "required": [
+        "success",
+        "applied_revision",
+        "inventory",
+        "model_catalog"
+      ],
+      "title": "ModelInventoryReceipt",
+      "type": "object"
+    },
+    "NodeClasses": {
+      "additionalProperties": false,
+      "properties": {
+        "node_classes": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10000,
+          "title": "Node Classes",
+          "type": "array"
+        },
+        "node_schema_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Node Schema Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "node_classes",
+        "node_schema_digest"
+      ],
+      "title": "NodeClasses",
+      "type": "object"
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "#/$defs/ModelInventoryReceipt"
+    },
+    {
+      "$ref": "#/$defs/ModelInspectionReceipt"
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:model-file-receipt:1",
+  "description": "Closed wire shape; DTO, command context, catalog digest, boot/revision/freshness and registration transaction additionally checked."
+}

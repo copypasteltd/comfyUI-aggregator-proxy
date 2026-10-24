@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-24T14:26:35.923497+00:00",
+  "passed": false,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.87,
+      "log": "key-generation-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "seconds": 9.01,
+      "log": "key-generation-mypy.log"
+    },
+    {
+      "name": "lock",
+      "exit_code": 0,
+      "seconds": 0.53,
+      "log": "key-generation-lock.log"
+    },
+    {
+      "name": "docs",
+      "exit_code": 1,
+      "seconds": 4.22,
+      "log": "key-generation-docs.log"
+    }
+  ]
+}

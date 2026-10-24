@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-content-query:0.4.0",
+  "title": "Admin content query",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "enum": [
+        "input",
+        "output"
+      ]
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^\\S(?:.*\\S)?$"
+    },
+    "tag": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f-\\u009f]"
+      },
+      "$comment": "Additionally NFC and no leading/trailing whitespace; enforced by DTO."
+    },
+    "media_kind": {
+      "enum": [
+        "image",
+        "video",
+        "audio"
+      ]
+    },
+    "state": {
+      "enum": [
+        "available",
+        "unverified",
+        "expired",
+        "pending_reclaim",
+        "reclaimed"
+      ]
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^ten_[a-f0-9]{32}$"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^prj_[a-f0-9]{32}$"
+    },
+    "key_id": {
+      "type": "string",
+      "pattern": "^key_[a-f0-9]{32}$"
+    },
+    "job_id": {
+      "type": "string",
+      "pattern": "^job_[a-f0-9]{32}$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf_[a-f0-9]{32}$"
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^wfr_[a-f0-9]{32}$"
+    },
+    "created_from": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4102444800
+    },
+    "created_before": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4102444800
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "created_from < created_before and NFC tag semantics are additionally checked by DTO.",
+  "contract_version": "0.5.0"
+}

@@ -1,0 +1,677 @@
+..............FFFFFFFF.................................................. [  5%]
+........................................................................ [ 10%]
+........................................................................ [ 15%]
+........................................................................ [ 20%]
+........................................................................ [ 25%]
+........................................................................ [ 30%]
+........................................................................ [ 35%]
+........................................................................ [ 41%]
+........................................................................ [ 46%]
+........................................................................ [ 51%]
+........................................................................ [ 56%]
+........................................................................ [ 61%]
+........................................................................ [ 66%]
+........................................................................ [ 71%]
+........................................................................ [ 76%]
+........................................................................ [ 82%]
+........................................................................ [ 87%]
+........................................................................ [ 92%]
+........................................................................ [ 97%]
+....................................                                     [100%]
+================================== FAILURES ===================================
+_ test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[corrupt_digest-422] _
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_restoration.py:95: in test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft
+    with pg.begin() as session:
+         ^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'format_version': '1.1', 'task_typ ... (996 chars)), 'workflow_releases_id': UUID('19246df0-9f19-41cf-b1e0-ec6f552b80b9')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)
+_ test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[wrong_type-422] _
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_restoration.py:95: in test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft
+    with pg.begin() as session:
+         ^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'format_version': '1.1', 'task_typ ... (1029 chars)), 'workflow_releases_id': UUID('36d69279-7feb-4887-8560-397903b79eb5')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)
+_ test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[invalid_manifest-422] _
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_restoration.py:95: in test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft
+    with pg.begin() as session:
+         ^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'private': 'PRIVATE-RESTORATION'}), 'workflow_releases_id': UUID('74508bd5-688e-4be7-b369-0e20b48e21cc')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)
+_ test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[depth-413] _
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_restoration.py:95: in test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft
+    with pg.begin() as session:
+         ^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'deep': {'nested': {'nested': {'ne ... (804 chars)), 'workflow_releases_id': UUID('ec5e6c98-5f56-4fa7-9d09-0df439f6e6df')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)
+_ test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[nodes-413] _
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_restoration.py:95: in test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft
+    with pg.begin() as session:
+         ^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'nodes': [None, None, None, None,  ... (600017 chars)), 'workflow_releases_id': UUID('bd8c2d0c-ae2d-412e-ab82-89225e77c8e2')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)
+_ test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[size-413] _
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_restoration.py:95: in test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft
+    with pg.begin() as session:
+         ^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'private': 'PRIVATE-RESTORATIONPRI ... (11400015 chars)), 'workflow_releases_id': UUID('0c2c9743-5795-43b8-8460-41c23893cc1b')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)
+_ test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[scalar-422] _
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_restoration.py:95: in test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft
+    with pg.begin() as session:
+         ^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb(None), 'workflow_releases_id': UUID('4005e34a-78ed-4c6e-b30f-2db8281089fd')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)
+_ test_restore_leaves_existing_frozen_job_models_bindings_and_gpu_identity_untouched _
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_restoration.py:156: in test_restore_leaves_existing_frozen_job_models_bindings_and_gpu_identity_untouched
+    with pg.begin() as session:
+         ^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET workflow_id=%(workflow_id)s::UUID, version=%(version)s::INTEGER WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'workflow_id': UUID('4e653d77-e191-431a-b0a6-d4834e48e3fb'), 'version': 2, 'workflow_releases_id': UUID('1f5f184f-25dd-4e43-908c-4178ae55e573')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_workflow_restoration.py::test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[corrupt_digest-422]
+FAILED tests/integration/test_workflow_restoration.py::test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[wrong_type-422]
+FAILED tests/integration/test_workflow_restoration.py::test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[invalid_manifest-422]
+FAILED tests/integration/test_workflow_restoration.py::test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[depth-413]
+FAILED tests/integration/test_workflow_restoration.py::test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[nodes-413]
+FAILED tests/integration/test_workflow_restoration.py::test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[size-413]
+FAILED tests/integration/test_workflow_restoration.py::test_failed_restore_rolls_back_all_writes_and_never_loads_old_draft[scalar-422]
+FAILED tests/integration/test_workflow_restoration.py::test_restore_leaves_existing_frozen_job_models_bindings_and_gpu_identity_untouched
+8 failed, 1396 passed, 1 warning in 63.78s (0:01:03)

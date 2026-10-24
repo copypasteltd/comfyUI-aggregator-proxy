@@ -1,0 +1,1705 @@
+{
+  "contract_version": "0.4.0",
+  "status_scope": "第 76 增量完成 Workflow 归档/解除归档图形管理，覆盖原五类及 ComfyUI 音频。二次确认、revision CAS、原请求幂等、元数据行锁、公开模型/待完成同步阻塞及安全审计已实现；新模型发布、同步/绑定/重试、批准、验证与任务准入持有 Workflow 共享锁并检查未归档。归档对象仍可查看草稿/历史/导出，已接收任务保留原版本并可继续领取，不新增任务或同步指令。未知响应重放首次事务结果，后来反向变更不会被重复覆盖；观察者只读，关闭/隐藏/离页/注销清理确认选择，恢复可见先核对会话。新执行 Python 3087 项、定向 1498 项、前端 33 项、mypy 153 文件；26 组归档图形检查、30 组表单/13 组历史/22 组恢复回归、20 组原生协议/11 合成任务、隔离安装 24 项及安装后浏览器 8 组通过。未改 Go 代码及二进制按摘要复用 45 顶层/192 子测试与 491 项账本证明，非本轮重跑。候选 rc-20261025.76.3，431 源输入、149 载荷、57 wheels、53 运行契约；51 schema/833 fixture（197 正/636 反），187 API 方法/147 路径、180 设计端点。无 DDL，两库 head 0a7d9b4e2136、42 业务表。真实 Windows/六类 Workflow/模型质量、S3/Redis、生产部署/系统服务与联合恢复、10/20 台实机容量仍独立验收，完整目标进行中。 Synthetic checks do not promote complete work packages.",
+  "rules": [
+    {
+      "id": "DEV-01",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "WP-00"
+      ]
+    },
+    {
+      "id": "DEV-02",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "WP-00"
+      ]
+    },
+    {
+      "id": "DEV-03",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-15"
+      ]
+    },
+    {
+      "id": "DEV-04",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-17",
+        "WP-13"
+      ]
+    },
+    {
+      "id": "DEV-05",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "WP-00"
+      ]
+    },
+    {
+      "id": "DEV-06",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "WP-01"
+      ]
+    },
+    {
+      "id": "DEV-07",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-01"
+      ]
+    },
+    {
+      "id": "DEV-08",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-01",
+        "QC-02"
+      ]
+    },
+    {
+      "id": "DEV-09",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-03",
+        "QC-04"
+      ]
+    },
+    {
+      "id": "DEV-10",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-02",
+        "QC-04"
+      ]
+    },
+    {
+      "id": "DEV-11",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-02",
+        "QC-05"
+      ]
+    },
+    {
+      "id": "DEV-12",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-06"
+      ]
+    },
+    {
+      "id": "DEV-13",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-01",
+        "QC-07"
+      ]
+    },
+    {
+      "id": "DEV-14",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-08",
+        "QC-18"
+      ]
+    },
+    {
+      "id": "DEV-15",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-09"
+      ]
+    },
+    {
+      "id": "DEV-16",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-06",
+        "QC-10"
+      ]
+    },
+    {
+      "id": "DEV-17",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-11"
+      ]
+    },
+    {
+      "id": "DEV-18",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-09",
+        "QC-18"
+      ]
+    },
+    {
+      "id": "DEV-19",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-12"
+      ]
+    },
+    {
+      "id": "DEV-20",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-12",
+        "QC-13",
+        "QC-17"
+      ]
+    },
+    {
+      "id": "DEV-21",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-11",
+        "QC-13"
+      ]
+    },
+    {
+      "id": "DEV-22",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-14"
+      ]
+    },
+    {
+      "id": "DEV-23",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-05"
+      ]
+    },
+    {
+      "id": "DEV-24",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-05",
+        "QC-08",
+        "QC-18"
+      ]
+    },
+    {
+      "id": "DEV-25",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-10"
+      ]
+    },
+    {
+      "id": "DEV-26",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-15"
+      ]
+    },
+    {
+      "id": "DEV-27",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-16"
+      ]
+    },
+    {
+      "id": "DEV-28",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-15"
+      ]
+    },
+    {
+      "id": "DEV-29",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-17",
+        "WP-13"
+      ]
+    },
+    {
+      "id": "DEV-30",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-16"
+      ]
+    },
+    {
+      "id": "DEV-31",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "WP-14"
+      ]
+    },
+    {
+      "id": "DEV-32",
+      "document": "09-开发总纲与强制约束.md",
+      "evidence_refs": [
+        "QC-16"
+      ]
+    }
+  ],
+  "quality_scenarios": [
+    {
+      "id": "QC-01",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-07",
+        "DEV-08",
+        "DEV-13"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-02",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-08",
+        "DEV-10",
+        "DEV-11"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-03",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-09",
+        "DEV-10"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-04",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-09",
+        "DEV-10"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-05",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-11",
+        "DEV-23",
+        "DEV-24"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-06",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-12",
+        "DEV-16"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-07",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-13"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-08",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-14",
+        "DEV-24"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-09",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-15",
+        "DEV-18"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-10",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-16",
+        "DEV-25"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-11",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-17",
+        "DEV-21"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-12",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-19",
+        "DEV-20"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-13",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-20",
+        "DEV-21"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-14",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-22"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-15",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-03",
+        "DEV-26",
+        "DEV-28"
+      ],
+      "status": "passed",
+      "evidence": "evidence/2026-10-24/operational-queue-load.json",
+      "scope": "Current increment 58: 20 authenticated HTTP protocol Workers, 500 unfinished jobs, 3 real browser Admin sessions, 30 rendered update samples and bounded read-only statistics; hidden/logout cleanup. Not physical-fleet acceptance."
+    },
+    {
+      "id": "QC-16",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-27",
+        "DEV-30",
+        "DEV-32"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-17",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-04",
+        "DEV-20",
+        "DEV-29"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "QC-18",
+      "document": "14-测试策略与质量门禁.md",
+      "rules": [
+        "DEV-14",
+        "DEV-18",
+        "DEV-24"
+      ],
+      "status": "not_run"
+    }
+  ],
+  "work_packages": [
+    {
+      "id": "WP-00",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [],
+      "status": "in_progress",
+      "progress_ref": "49-原生发布包与离线安装验证.md"
+    },
+    {
+      "id": "WP-01",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-00"
+      ],
+      "status": "in_progress",
+      "progress_ref": "51-租户公平调度与等待老化.md"
+    },
+    {
+      "id": "WP-02",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-01"
+      ],
+      "status": "in_progress",
+      "progress_ref": "63-管理审计保留与有界清理.md"
+    },
+    {
+      "id": "WP-03",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-02"
+      ],
+      "status": "in_progress",
+      "progress_ref": "60-数据库对象与密钥联合恢复校验.md"
+    },
+    {
+      "id": "WP-04",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-01",
+        "WP-02",
+        "WP-03"
+      ],
+      "status": "in_progress",
+      "progress_ref": "17-开发记录与运行说明.md"
+    },
+    {
+      "id": "WP-05",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-01",
+        "WP-02",
+        "WP-03"
+      ],
+      "status": "in_progress",
+      "progress_ref": "60-数据库对象与密钥联合恢复校验.md"
+    },
+    {
+      "id": "WP-06",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-04",
+        "WP-05"
+      ],
+      "status": "in_progress",
+      "progress_ref": "68-任务批量取消与持久逐项结果.md"
+    },
+    {
+      "id": "WP-07",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-02",
+        "WP-05",
+        "WP-06"
+      ],
+      "status": "in_progress",
+      "progress_ref": "76-Workflow归档与恢复管理.md"
+    },
+    {
+      "id": "WP-08",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-02",
+        "WP-07"
+      ],
+      "status": "in_progress",
+      "progress_ref": "76-Workflow归档与恢复管理.md"
+    },
+    {
+      "id": "WP-09",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-06",
+        "WP-08"
+      ],
+      "status": "in_progress",
+      "progress_ref": "70-模型目录分页与冻结规格选择.md"
+    },
+    {
+      "id": "WP-10",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-03",
+        "WP-04",
+        "WP-08"
+      ],
+      "status": "in_progress",
+      "progress_ref": "76-Workflow归档与恢复管理.md"
+    },
+    {
+      "id": "WP-11",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-04",
+        "WP-06",
+        "WP-10"
+      ],
+      "status": "in_progress",
+      "progress_ref": "43-Sub2API原生跨进程联调.md"
+    },
+    {
+      "id": "WP-12",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-05",
+        "WP-06",
+        "WP-07"
+      ],
+      "status": "not_started",
+      "progress_ref": "17-开发记录与运行说明.md"
+    },
+    {
+      "id": "WP-13",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-09",
+        "WP-10",
+        "WP-11",
+        "WP-12"
+      ],
+      "status": "in_progress",
+      "progress_ref": "76-Workflow归档与恢复管理.md"
+    },
+    {
+      "id": "WP-14",
+      "document": "16-开发任务分解与交付清单.md",
+      "depends_on": [
+        "WP-00",
+        "WP-01",
+        "WP-02",
+        "WP-03",
+        "WP-04",
+        "WP-05",
+        "WP-06",
+        "WP-07",
+        "WP-08",
+        "WP-09",
+        "WP-10",
+        "WP-11",
+        "WP-12",
+        "WP-13"
+      ],
+      "status": "in_progress",
+      "progress_ref": "76-Workflow归档与恢复管理.md"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "CAP-01",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "04-工作流产品化规范.md"
+      ],
+      "work_packages": [
+        "WP-12",
+        "WP-13"
+      ],
+      "acceptance": [
+        "QC-17"
+      ]
+    },
+    {
+      "id": "CAP-02",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "04-工作流产品化规范.md"
+      ],
+      "work_packages": [
+        "WP-12",
+        "WP-13"
+      ],
+      "acceptance": [
+        "QC-17"
+      ]
+    },
+    {
+      "id": "CAP-03",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "04-工作流产品化规范.md"
+      ],
+      "work_packages": [
+        "WP-12",
+        "WP-13"
+      ],
+      "acceptance": [
+        "QC-17"
+      ]
+    },
+    {
+      "id": "CAP-04",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "04-工作流产品化规范.md"
+      ],
+      "work_packages": [
+        "WP-12",
+        "WP-13"
+      ],
+      "acceptance": [
+        "QC-17"
+      ]
+    },
+    {
+      "id": "CAP-05",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "04-工作流产品化规范.md"
+      ],
+      "work_packages": [
+        "WP-12",
+        "WP-13"
+      ],
+      "acceptance": [
+        "QC-17"
+      ]
+    },
+    {
+      "id": "API-01",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-02",
+        "WP-04",
+        "WP-10",
+        "WP-11"
+      ],
+      "acceptance": [
+        "KEY-TEST-02",
+        "QC-08"
+      ]
+    },
+    {
+      "id": "API-02",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-07",
+        "WP-08"
+      ],
+      "acceptance": [
+        "COMPAT-01"
+      ]
+    },
+    {
+      "id": "API-03",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-02",
+        "COMPAT-03",
+        "COMPAT-04"
+      ]
+    },
+    {
+      "id": "API-04",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-06",
+        "WP-09"
+      ],
+      "acceptance": [
+        "COMPAT-04",
+        "COMPAT-05",
+        "FUNC-04",
+        "FAIL-01"
+      ]
+    },
+    {
+      "id": "API-05",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-01",
+        "COMPAT-10",
+        "QC-18"
+      ]
+    },
+    {
+      "id": "API-06",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04"
+      ],
+      "acceptance": [
+        "FUNC-03",
+        "QC-12"
+      ]
+    },
+    {
+      "id": "API-07",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-07",
+        "QC-06"
+      ]
+    },
+    {
+      "id": "JOB-01",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-06"
+      ],
+      "acceptance": [
+        "FAIL-01",
+        "FAIL-10"
+      ]
+    },
+    {
+      "id": "JOB-02",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-05",
+        "WP-06"
+      ],
+      "acceptance": [
+        "SCALE-01",
+        "SCALE-03"
+      ]
+    },
+    {
+      "id": "JOB-03",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-06",
+        "WP-09"
+      ],
+      "acceptance": [
+        "SCALE-04",
+        "SCALE-05"
+      ]
+    },
+    {
+      "id": "JOB-04",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-05",
+        "WP-06"
+      ],
+      "acceptance": [
+        "FUNC-01",
+        "FAIL-13"
+      ]
+    },
+    {
+      "id": "JOB-05",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-05",
+        "WP-06"
+      ],
+      "acceptance": [
+        "FAIL-03",
+        "FAIL-04"
+      ]
+    },
+    {
+      "id": "JOB-06",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-06"
+      ],
+      "acceptance": [
+        "FAIL-02",
+        "FAIL-06",
+        "FAIL-13"
+      ]
+    },
+    {
+      "id": "JOB-07",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-06",
+        "WP-09"
+      ],
+      "acceptance": [
+        "FUNC-04",
+        "FAIL-11"
+      ]
+    },
+    {
+      "id": "JOB-08",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-06"
+      ],
+      "acceptance": [
+        "FAIL-01",
+        "FAIL-06"
+      ]
+    },
+    {
+      "id": "JOB-09",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-06"
+      ],
+      "acceptance": [
+        "QC-05",
+        "FAIL-07",
+        "FAIL-09"
+      ]
+    },
+    {
+      "id": "JOB-10",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-06",
+        "WP-13"
+      ],
+      "acceptance": [
+        "FAIL-08",
+        "FAIL-10",
+        "QC-16"
+      ]
+    },
+    {
+      "id": "NODE-01",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-05",
+        "WP-07",
+        "WP-08"
+      ],
+      "acceptance": [
+        "SCALE-01",
+        "SCALE-03"
+      ]
+    },
+    {
+      "id": "NODE-02",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-05",
+        "WP-07"
+      ],
+      "acceptance": [
+        "QC-13",
+        "ADMIN-TEST-03"
+      ]
+    },
+    {
+      "id": "NODE-03",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-05",
+        "WP-09"
+      ],
+      "acceptance": [
+        "SCALE-01",
+        "ADMIN-TEST-11"
+      ]
+    },
+    {
+      "id": "NODE-04",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-06"
+      ],
+      "acceptance": [
+        "SCALE-02",
+        "QC-01"
+      ]
+    },
+    {
+      "id": "NODE-05",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-05",
+        "WP-06",
+        "WP-08"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-03",
+        "ADMIN-TEST-04",
+        "ADMIN-TEST-11"
+      ]
+    },
+    {
+      "id": "NODE-06",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md",
+        "46-生成失败归因与规格隔离.md"
+      ],
+      "work_packages": [
+        "WP-06",
+        "WP-07",
+        "WP-08"
+      ],
+      "acceptance": [
+        "FAIL-13",
+        "ADMIN-TEST-04"
+      ]
+    },
+    {
+      "id": "NODE-07",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-00",
+        "WP-05"
+      ],
+      "acceptance": [
+        "FAIL-04",
+        "QC-03"
+      ]
+    },
+    {
+      "id": "NODE-08",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-05",
+        "WP-07"
+      ],
+      "acceptance": [
+        "SCALE-02"
+      ]
+    },
+    {
+      "id": "NODE-09",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-07",
+        "WP-08"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-02",
+        "ADMIN-TEST-03",
+        "QC-01"
+      ]
+    },
+    {
+      "id": "DATA-01",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03"
+      ],
+      "acceptance": [
+        "DATA-TEST-03",
+        "FUNC-04"
+      ]
+    },
+    {
+      "id": "DATA-02",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-05"
+      ],
+      "acceptance": [
+        "DATA-TEST-02",
+        "QC-09"
+      ]
+    },
+    {
+      "id": "DATA-03",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-05"
+      ],
+      "acceptance": [
+        "FUNC-01",
+        "FUNC-06"
+      ]
+    },
+    {
+      "id": "DATA-04",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-06"
+      ],
+      "acceptance": [
+        "FAIL-09",
+        "QC-05"
+      ]
+    },
+    {
+      "id": "DATA-05",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-10"
+      ],
+      "acceptance": [
+        "KEY-TEST-09",
+        "DATA-TEST-04"
+      ]
+    },
+    {
+      "id": "DATA-06",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-05",
+        "DATA-TEST-04"
+      ]
+    },
+    {
+      "id": "DATA-07",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-05"
+      ],
+      "acceptance": [
+        "FAIL-08",
+        "FAIL-09"
+      ]
+    },
+    {
+      "id": "DATA-08",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-14"
+      ],
+      "acceptance": [
+        "DATA-TEST-04",
+        "DATA-TEST-05"
+      ]
+    },
+    {
+      "id": "DATA-09",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-06"
+      ],
+      "acceptance": [
+        "DATA-TEST-04"
+      ]
+    },
+    {
+      "id": "DATA-10",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md"
+      ],
+      "work_packages": [
+        "WP-03",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-05",
+        "QC-09"
+      ]
+    },
+    {
+      "id": "BILL-01",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-11"
+      ],
+      "acceptance": [
+        "FUNC-05",
+        "COMPAT-08"
+      ]
+    },
+    {
+      "id": "BILL-02",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-06",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-08",
+        "FAIL-12"
+      ]
+    },
+    {
+      "id": "BILL-03",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-06",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-08",
+        "QC-05"
+      ]
+    },
+    {
+      "id": "BILL-04",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-06",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-08",
+        "QC-18"
+      ]
+    },
+    {
+      "id": "BILL-05",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-04",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-08"
+      ]
+    },
+    {
+      "id": "BILL-06",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-08",
+        "QC-18"
+      ]
+    },
+    {
+      "id": "BILL-07",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "03-接口与Sub2API接入规范.md"
+      ],
+      "work_packages": [
+        "WP-06",
+        "WP-11"
+      ],
+      "acceptance": [
+        "COMPAT-09",
+        "FAIL-12"
+      ]
+    },
+    {
+      "id": "ADMIN-01",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md",
+        "58-运行趋势与任务阶段耗时.md"
+      ],
+      "work_packages": [
+        "WP-08",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-01"
+      ]
+    },
+    {
+      "id": "ADMIN-02",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md"
+      ],
+      "work_packages": [
+        "WP-08",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-02",
+        "ADMIN-TEST-04"
+      ]
+    },
+    {
+      "id": "ADMIN-03",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md"
+      ],
+      "work_packages": [
+        "WP-08",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-03",
+        "ADMIN-TEST-04"
+      ]
+    },
+    {
+      "id": "ADMIN-04",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md"
+      ],
+      "work_packages": [
+        "WP-08",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-05",
+        "ADMIN-TEST-08"
+      ]
+    },
+    {
+      "id": "ADMIN-05",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md"
+      ],
+      "work_packages": [
+        "WP-08",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-06",
+        "ADMIN-TEST-07"
+      ]
+    },
+    {
+      "id": "ADMIN-06",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md"
+      ],
+      "work_packages": [
+        "WP-08",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-07",
+        "ADMIN-TEST-08"
+      ]
+    },
+    {
+      "id": "ADMIN-07",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md",
+        "58-运行趋势与任务阶段耗时.md"
+      ],
+      "work_packages": [
+        "WP-09",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-09",
+        "ADMIN-TEST-12"
+      ]
+    },
+    {
+      "id": "ADMIN-08",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md"
+      ],
+      "work_packages": [
+        "WP-09",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-10",
+        "ADMIN-TEST-11"
+      ]
+    },
+    {
+      "id": "ADMIN-09",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md",
+        "46-生成失败归因与规格隔离.md"
+      ],
+      "work_packages": [
+        "WP-09",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-13"
+      ]
+    },
+    {
+      "id": "ADMIN-10",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md",
+        "58-运行趋势与任务阶段耗时.md"
+      ],
+      "work_packages": [
+        "WP-09",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-11",
+        "ADMIN-TEST-12"
+      ]
+    },
+    {
+      "id": "ADMIN-11",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md",
+        "46-生成失败归因与规格隔离.md",
+        "58-运行趋势与任务阶段耗时.md"
+      ],
+      "work_packages": [
+        "WP-09",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-01",
+        "ADMIN-TEST-14"
+      ]
+    },
+    {
+      "id": "ADMIN-12",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "07-Admin可视化管理后台.md"
+      ],
+      "work_packages": [
+        "WP-09",
+        "WP-13"
+      ],
+      "acceptance": [
+        "ADMIN-TEST-15",
+        "ADMIN-TEST-16"
+      ]
+    },
+    {
+      "id": "KEY-01",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-01"
+      ]
+    },
+    {
+      "id": "KEY-02",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-02"
+      ]
+    },
+    {
+      "id": "KEY-03",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-03"
+      ]
+    },
+    {
+      "id": "KEY-04",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-04"
+      ]
+    },
+    {
+      "id": "KEY-05",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-05"
+      ]
+    },
+    {
+      "id": "KEY-06",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-06"
+      ]
+    },
+    {
+      "id": "KEY-07",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-07"
+      ]
+    },
+    {
+      "id": "KEY-08",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-08"
+      ]
+    },
+    {
+      "id": "KEY-09",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md",
+        "48-内容检索标签与受控预览.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-09"
+      ]
+    },
+    {
+      "id": "KEY-10",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md",
+        "48-内容检索标签与受控预览.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-10"
+      ]
+    },
+    {
+      "id": "KEY-11",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-11"
+      ]
+    },
+    {
+      "id": "KEY-12",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "08-APIKey鉴权与访问控制.md"
+      ],
+      "work_packages": [
+        "WP-10",
+        "WP-11",
+        "WP-13"
+      ],
+      "acceptance": [
+        "KEY-TEST-12"
+      ]
+    },
+    {
+      "id": "CAP-06",
+      "design_docs": [
+        "01-需求规格与约束.md",
+        "02-系统架构与任务机制.md",
+        "04-工作流产品化规范.md",
+        "54-ComfyUI音频产物范围与开发约束.md"
+      ],
+      "acceptance": [
+        "AUDIO-01",
+        "AUDIO-02",
+        "AUDIO-03",
+        "AUDIO-04",
+        "AUDIO-05",
+        "AUDIO-06",
+        "AUDIO-07",
+        "AUDIO-08"
+      ],
+      "work_packages": [
+        "WP-01",
+        "WP-03",
+        "WP-04",
+        "WP-05",
+        "WP-06",
+        "WP-07",
+        "WP-08",
+        "WP-09",
+        "WP-10",
+        "WP-12",
+        "WP-13"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[project]
+name = "generation-infrastructure"
+version = "0.1.0"
+requires-python = ">=3.13,<3.14"
+dependencies = ["generation-domain", "generation-application", "generation-contracts", "sqlalchemy>=2.0.36,<2.1", "psycopg[binary]>=3.2,<4", "alembic>=1.14,<2", "pydantic-settings>=2.7,<3", "argon2-cffi>=23.1,<26", "cryptography>=44,<48", "boto3>=1.36,<2", "httpx>=0.28,<1", "pillow>=11,<13"]
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/generation_infrastructure"]

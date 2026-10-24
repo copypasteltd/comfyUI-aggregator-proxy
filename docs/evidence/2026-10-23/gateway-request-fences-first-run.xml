@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="20" time="64.514" timestamp="2026-10-23T04:50:22.501677+08:00" hostname="wikigspc"><testcase classname="tests.integration.test_gateway" name="test_gateway_realms_and_explicit_customer_mapping" time="3.683" /><testcase classname="tests.integration.test_gateway" name="test_pending_cannot_dispatch_and_concurrent_confirmation_accounts_once" time="3.184" /><testcase classname="tests.integration.test_gateway" name="test_expired_confirm_cannot_resurrect_and_settlement_survives_disabled_customer" time="3.689" /><testcase classname="tests.integration.test_gateway" name="test_cancel_pending_keeps_admission_and_job_consistent" time="2.409" /><testcase classname="tests.integration.test_gateway" name="test_confirmation_moves_resource_reservation_to_confirmation_day" time="2.499" /><testcase classname="tests.integration.test_gateway" name="test_request_unknown_is_read_only_and_closed_request_blocks_late_create" time="3.120"><failure message="assert (403 == 200)&#10; +  where 403 = &lt;Response [403 Forbidden]&gt;.status_code">tests\integration\test_gateway.py:193: in test_request_unknown_is_read_only_and_closed_request_blocks_late_create
+    assert replay.status_code == 200 and replay.json() == closed.json()
+E   assert (403 == 200)
+E    +  where 403 = &lt;Response [403 Forbidden]&gt;.status_code</failure></testcase><testcase classname="tests.integration.test_gateway" name="test_create_and_close_race_has_one_durable_decision" time="5.334" /><testcase classname="tests.integration.test_gateway" name="test_pending_request_cleanup_survives_customer_and_binding_revocation" time="3.347" /><testcase classname="tests.integration.test_gateway" name="test_confirmed_request_close_does_not_cancel_or_release" time="2.176" /><testcase classname="tests.integration.test_gateway" name="test_confirm_and_service_close_serialize_without_resurrection" time="5.824" /><testcase classname="tests.integration.test_gateway" name="test_recovery_identity_mismatch_cannot_close_existing_admission[provider_request_id]" time="2.706" /><testcase classname="tests.integration.test_gateway" name="test_recovery_identity_mismatch_cannot_close_existing_admission[external_task_ref]" time="2.081" /><testcase classname="tests.integration.test_gateway" name="test_recovery_identity_mismatch_cannot_close_existing_admission[authorization_ref]" time="2.472" /><testcase classname="tests.integration.test_gateway" name="test_recovery_identity_mismatch_cannot_close_existing_admission[price_version]" time="1.814" /><testcase classname="tests.integration.test_gateway" name="test_recovery_identity_mismatch_cannot_close_existing_admission[external_tenant_ref]" time="2.869" /><testcase classname="tests.integration.test_gateway" name="test_recovery_identity_mismatch_cannot_close_existing_admission[external_key_ref]" time="2.281" /><testcase classname="tests.integration.test_gateway" name="test_request_fences_are_isolated_between_gateway_services" time="3.218" /><testcase classname="tests.integration.test_gateway" name="test_request_recovery_requires_active_service_realm_and_strict_body" time="2.520" /><testcase classname="tests.integration.test_gateway" name="test_service_recovery_limit_does_not_spend_customer_quota" time="1.698" /><testcase classname="tests.integration.test_gateway" name="test_closure_and_audit_failure_roll_back_together" time="2.000"><failure message="sqlalchemy.exc.ProgrammingError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)&#10;(psycopg.errors.RaiseException) synthetic closure audit failure&#10;CONTEXT:  PL/pgSQL function synthetic_reject_closure() line 1 at RAISE&#10;[SQL: INSERT INTO audit_events (actor, action, resource, request_id, detail, id) VALUES (%(actor)s::VARCHAR, %(action)s::VARCHAR, %(resource)s::VARCHAR, %(request_id)s::VARCHAR, %(detail)s::JSONB, %(id)s::UUID) RETURNING audit_events.created_at]&#10;[SQL parameters hidden due to hide_parameters=True]&#10;(Background on this error at: https://sqlalche.me/e/20/f405)">.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.RaiseException: synthetic closure audit failure
+E   CONTEXT:  PL/pgSQL function synthetic_reject_closure() line 1 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_gateway.py:377: in test_closure_and_audit_failure_roll_back_together
+    client.post("/gateway/v1/admission-requests/close", json=recovery_body(body, headers), headers=service_headers(headers))
+.venv\Lib\site-packages\httpx\_client.py:1144: in post
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:518: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+.venv\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+.venv\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:384: in iter_body
+    exit_stack.close()
+C:\Python313\Lib\contextlib.py:627: in close
+    self.__exit__(None, None, None)
+C:\Python313\Lib\contextlib.py:619: in __exit__
+    raise exc
+C:\Python313\Lib\contextlib.py:604: in __exit__
+    if cb(*exc_details):
+       ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:399: in close_app
+    raise exception
+.venv\Lib\site-packages\anyio\from_thread.py:265: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:366: in run_app
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\applications.py:1194: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:96: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\fastapi\telemetry\_asgi.py:151: in __call__
+    await self.app(scope, receive, send)
+apps\control_api\src\control_api\access.py:71: in __call__
+    await self.app(scope, counted_receive, counted_send)
+.venv\Lib\site-packages\starlette\middleware\base.py:203: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+apps\control_api\src\control_api\main.py:209: in request_context
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\middleware\base.py:179: in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+.venv\Lib\site-packages\starlette\middleware\base.py:149: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+.venv\Lib\site-packages\starlette\middleware\trustedhost.py:57: in __call__
+    await self.app(scope, receive, send)
+apps\control_api\src\control_api\limits.py:35: in __call__
+    await self.app(scope, limited_receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:678: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:2813: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:1841: in handle
+    await self.original_router.handle(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:2896: in handle
+    await included_router._handle_selected(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:1867: in _handle_selected
+    await original_route.handle(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:1330: in handle
+    await effective_context.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:167: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:153: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:746: in app
+    raw_response = await run_endpoint_function(
+.venv\Lib\site-packages\fastapi\routing.py:375: in run_endpoint_function
+    return await run_in_threadpool(
+.venv\Lib\site-packages\starlette\concurrency.py:34: in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\anyio\to_thread.py:65: in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+.venv\Lib\site-packages\anyio\_backends\_asyncio.py:2706: in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+.venv\Lib\site-packages\anyio\_backends\_asyncio.py:1100: in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\telemetry\_api.py:244: in _run_sync_endpoint
+    return function(**arguments)
+           ^^^^^^^^^^^^^^^^^^^^^
+apps\control_api\src\control_api\gateway.py:99: in request_close
+    return repository.close_request(service, data, request.state.request_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+packages\infrastructure\src\generation_infrastructure\gateway.py:131: in close_request
+    return self._resolution(session, gateway.gateway_id, data, fence)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+packages\infrastructure\src\generation_infrastructure\gateway.py:95: in _resolution
+    row = session.scalar(select(GatewayAdmission).where(GatewayAdmission.gateway_id == gateway_id, GatewayAdmission.provider_request_id == identity.provider_request_id))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2421: in scalar
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2250: in _execute_internal
+    ) = compile_state_cls.orm_pre_session_exec(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:577: in orm_pre_session_exec
+    session._autoflush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3073: in _autoflush
+    raise e.with_traceback(sys.exc_info()[2])
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3062: in _autoflush
+    self.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:94: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1234: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.ProgrammingError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+E   (psycopg.errors.RaiseException) synthetic closure audit failure
+E   CONTEXT:  PL/pgSQL function synthetic_reject_closure() line 1 at RAISE
+E   [SQL: INSERT INTO audit_events (actor, action, resource, request_id, detail, id) VALUES (%(actor)s::VARCHAR, %(action)s::VARCHAR, %(resource)s::VARCHAR, %(request_id)s::VARCHAR, %(detail)s::JSONB, %(id)s::UUID) RETURNING audit_events.created_at]
+E   [SQL parameters hidden due to hide_parameters=True]
+E   (Background on this error at: https://sqlalche.me/e/20/f405)</failure></testcase></testsuite></testsuites>

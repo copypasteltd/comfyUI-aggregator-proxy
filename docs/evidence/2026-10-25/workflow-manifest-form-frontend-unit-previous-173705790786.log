@@ -1,0 +1,45 @@
+
+> render-control-admin@0.1.0 test:workflow-json
+> node --test tests/workflowJson.test.ts
+
+✔ 64-bit seeds, long decimals and exponents stay numeric and exact in edited HTTP bodies (13.5942ms)
+✔ prototype-like keys remain ordinary data, including a literal toJSON key (0.3573ms)
+✔ rejects invalid or ambiguous JSON: "" (11.5779ms)
+✔ rejects invalid or ambiguous JSON: "{" (0.1519ms)
+✔ rejects invalid or ambiguous JSON: "[1,]" (0.2566ms)
+✔ rejects invalid or ambiguous JSON: "{\"a\":1,}" (0.2336ms)
+✔ rejects invalid or ambiguous JSON: "{\"a\":1 \"b\":2}" (0.1589ms)
+✔ rejects invalid or ambiguous JSON: "{\"a\":1,\"a\":2}" (0.1074ms)
+✔ rejects invalid or ambiguous JSON: "{\"a\":1,\"\\u0061\":2}" (0.1335ms)
+✔ rejects invalid or ambiguous JSON: "01" (0.2556ms)
+✔ rejects invalid or ambiguous JSON: "+1" (0.1441ms)
+✔ rejects invalid or ambiguous JSON: "1." (0.1229ms)
+✔ rejects invalid or ambiguous JSON: "1e" (0.1266ms)
+✔ rejects invalid or ambiguous JSON: ".5" (0.0797ms)
+✔ rejects invalid or ambiguous JSON: "0x10" (0.1292ms)
+✔ rejects invalid or ambiguous JSON: "NaN" (0.1138ms)
+✔ rejects invalid or ambiguous JSON: "Infinity" (0.0815ms)
+✔ rejects invalid or ambiguous JSON: "undefined" (0.0367ms)
+✔ rejects invalid or ambiguous JSON: "true false" (0.0363ms)
+✔ rejects invalid or ambiguous JSON: "\"\\x20\"" (0.0562ms)
+✔ rejects invalid or ambiguous JSON: "\"\\u0xx0\"" (0.0308ms)
+✔ rejects invalid or ambiguous JSON: "\"unfinished" (0.0292ms)
+✔ rejects invalid or ambiguous JSON: "\"line\nfeed\"" (0.0302ms)
+✔ rejects invalid or ambiguous JSON: "[,,]" (0.0305ms)
+✔ rejects invalid or ambiguous JSON: "{a:1}" (0.0291ms)
+✔ rejects invalid or ambiguous JSON: "null trailing" (0.0281ms)
+✔ JSON whitespace, escapes, arrays and null use JSON semantics (0.3198ms)
+✔ size limits count UTF-8 bytes and reject oversized input before decoding (0.5918ms)
+✔ 64-level and 100000-value budgets fail explicitly without a partial object (187.2874ms)
+✔ unsafe native numbers, non-JSON objects, sparse arrays and cycles never silently change values (0.5267ms)
+✔ unfinished numeric fields survive local state while blocking every serialization path (0.3568ms)
+✔ protocol integers must be safe while arbitrary graph integers keep their token (10.2925ms)
+✔ pretty printing falls back to compact JSON rather than dropping a near-limit field (122.0412ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 888.3813

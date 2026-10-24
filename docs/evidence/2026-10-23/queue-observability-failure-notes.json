@@ -1,0 +1,56 @@
+{
+  "all_resolved": true,
+  "unresolved_failures": [],
+  "cases": [
+    {
+      "phase": "targeted_database_test",
+      "cause": "Synthetic management_hold was a dict; the actual column is UUID.",
+      "resolution": "Use a UUID fixture; the 1-versus-50 channel query count and resource facts pass."
+    },
+    {
+      "phase": "full_python_regression",
+      "cause": "One older internal test called JobAdministration.list(state=...) after the unified QueueQuery signature was introduced. Initial full run: 632 passed, 1 failed.",
+      "resolution": "Update the internal caller to QueueQuery(state=queued); final full run passes 634 tests. One intermediate run was interrupted before acceptance because an atomic patch had not applied."
+    },
+    {
+      "phase": "load_browser_cleanup",
+      "cause": "Playwright wait_for_function(string) evaluated under the existing strict CSP.",
+      "resolution": "Poll direct CDP evaluation without changing application CSP; final hidden/visible/logout checks pass."
+    },
+    {
+      "phase": "load_fixture_cleanup",
+      "cause": "The reused native-provider cleanup helper deliberately rejected a queue-load directory outside its own allowed root.",
+      "resolution": "Use an explicitly checked queue-load run root and direct child targets. Manually verified and cleaned the first failed run; subsequent failed/successful runs report full cleanup."
+    },
+    {
+      "phase": "load_measurement_callback",
+      "cause": "Nested synchronous response.json() callbacks could overwrite a newer test observation with an older response.",
+      "resolution": "Retain monotonic preparing counts in the measurement observer; rendered DOM and fresh snapshot checks pass for all 30 samples. Product refresh uses cancellation and current request identity."
+    },
+    {
+      "phase": "synthetic_browser_failure_case",
+      "cause": "A one-shot mock error was immediately followed by an SSE-triggered successful refresh, hiding the error before the assertion.",
+      "resolution": "Keep the synthetic failure active until the scenario ends; same-filter data preservation and error display pass."
+    },
+    {
+      "phase": "powershell_test_wrappers",
+      "cause": "PathInfo.Parent was null in the archive wrapper; a separate foreach redirection was parsed as a command after all four browser scripts had passed.",
+      "resolution": "Resolve the archive path explicitly and run native regression successfully. All four browser evidence reports were checked directly: 10+11+6+5 groups, no runtime errors, contexts closed."
+    }
+  ],
+  "final_checks": {
+    "python_tests": 634,
+    "new_tests_and_contract_cases": 43,
+    "browser_groups": 42,
+    "qc15_update_samples": 30,
+    "qc15_update_p95_seconds": 4.0521,
+    "native_protocol_groups": 15,
+    "physical_fleet_validated": false
+  },
+  "constraints": {
+    "virtualization_used": false,
+    "subagents_used": false,
+    "temporary_resources_cleaned": true,
+    "only_registered_development_services_retained": true
+  }
+}

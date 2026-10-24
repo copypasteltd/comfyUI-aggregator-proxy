@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:workflow-sync-retry:0.5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "release_id",
+    "release_digest",
+    "targets"
+  ],
+  "properties": {
+    "release_id": {
+      "type": "string",
+      "pattern": "^wfr_[0-9a-f]{32}$"
+    },
+    "release_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "command_id",
+          "channel_id",
+          "expected_revision"
+        ],
+        "properties": {
+          "command_id": {
+            "type": "string",
+            "pattern": "^cmd_[0-9a-f]{32}$"
+          },
+          "channel_id": {
+            "type": "string",
+            "pattern": "^ch_[0-9a-f]{32}$"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 100,
+      "uniqueItems": true
+    }
+  }
+}

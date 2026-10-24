@@ -1,0 +1,12 @@
+Exported 128 implemented OpenAPI paths
+
+> render-control-admin@0.1.0 generate:api
+> openapi-typescript ../../config/openapi.json -o src/generated/api.d.ts
+
+✨ openapi-typescript 7.13.0
+🚀 ../../config/openapi.json → src/generated/api.d.ts [337.3ms]
+
+> render-control-admin@0.1.0 build
+> vue-tsc --noEmit && vite build
+
+src/components/PolicyDirectorySelect.vue(51,86): error TS2739: Type '{ mode: "resolve"; ids: string[]; kind: "project" | "creator_key"; tenant_id: string; project_ids: string[]; }' is missing the following properties from type '{ mode: "browse" | "resolve"; kind: "project" | "creator_key"; tenant_id: string; project_ids?: string[] | undefined; ids?: string[] | undefined; page: number; q: string; }': page, q

@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "failed_tests": 1,
+  "passed_tests": 16,
+  "duration_seconds": 16.5,
+  "command": "pytest -q tests/integration/test_compatibility_inputs.py tests/unit/test_workflows.py --tb=short",
+  "failure": "Video seconds string normalized into Decimal, incompatible with float multipleOf in the frozen JSON Schema. Valid input returned invalid_parameters.",
+  "correction": "Validate decimal duration and normalize to a JSON-compatible int/float before JobCreate validation; cross-entry JSON/multipart/native regression covers this path."
+}

@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-statistics:0.5.0",
+  "type": "object",
+  "properties": {
+    "snapshot_at": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "window": {
+      "enum": [
+        "1h",
+        "24h",
+        "7d"
+      ]
+    },
+    "window_start": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "window_end": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "bucket_seconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "include_validation": {
+      "type": "boolean"
+    },
+    "task_type": {
+      "anyOf": [
+        {
+          "enum": [
+            "text_to_image",
+            "image_to_image",
+            "references_to_image",
+            "text_to_video",
+            "references_to_video",
+            "text_to_audio"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "filters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "integer"
+        ]
+      }
+    },
+    "totals": {
+      "type": "object",
+      "properties": {
+        "accepted": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "succeeded": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cancelled": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expired": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "accepted",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "expired",
+        "completed"
+      ],
+      "additionalProperties": false
+    },
+    "success_rate_bps": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "successful_duration": {
+      "type": "object",
+      "properties": {
+        "samples": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missing_samples": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "p50_ms": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "p95_ms": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "samples",
+        "missing_samples",
+        "p50_ms",
+        "p95_ms"
+      ],
+      "additionalProperties": false
+    },
+    "buckets": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 28,
+      "items": {
+        "type": "object",
+        "properties": {
+          "started_at": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "ended_at": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "succeeded": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "failed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "cancelled": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "expired": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "started_at",
+          "ended_at",
+          "succeeded",
+          "failed",
+          "cancelled",
+          "expired"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "task_types": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "properties": {
+          "task_type": {
+            "enum": [
+              "text_to_image",
+              "image_to_image",
+              "references_to_image",
+              "text_to_video",
+              "references_to_video",
+              "text_to_audio",
+              "other"
+            ]
+          },
+          "accepted": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "succeeded": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "failed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "cancelled": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "expired": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "completed": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "task_type",
+          "accepted",
+          "succeeded",
+          "failed",
+          "cancelled",
+          "expired",
+          "completed"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "failure_classes": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "enum": [
+              "out_of_memory",
+              "invalid_output",
+              "preparation",
+              "execution",
+              "other",
+              "unclassified"
+            ]
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "category",
+          "count"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "snapshot_at",
+    "window",
+    "window_start",
+    "window_end",
+    "bucket_seconds",
+    "include_validation",
+    "task_type",
+    "filters",
+    "totals",
+    "success_rate_bps",
+    "successful_duration",
+    "buckets",
+    "task_types",
+    "failure_classes"
+  ],
+  "additionalProperties": false,
+  "$comment": "Half-open server-time windows; fixed bucket count/width, sums, categories, quantile ordering and success-rate arithmetic additionally enforced by the response DTO."
+}

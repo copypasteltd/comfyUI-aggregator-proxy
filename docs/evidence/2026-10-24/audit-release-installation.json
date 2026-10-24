@@ -1,0 +1,122 @@
+{
+  "at": "2026-10-24T03:45:15.668250+00:00",
+  "passed": true,
+  "run_id": "d3549d72f496",
+  "checks": [
+    "fresh_offline_wheels_seven_modules_frozen_contracts_no_editable_dependencies",
+    "installed_s3_exact_version_guard_and_bounded_read_close_without_source_checkout",
+    "installed_four_audio_formats_decode_without_global_ffmpeg",
+    "existing_installation_refused_without_modification",
+    "startup_on_empty_database_refuses_without_implicit_ddl",
+    "installed_migration_takes_native_pg18_backup_and_verifies_archive_before_ddl",
+    "installed_recovery_keygen_is_independent_private_and_never_overwrites",
+    "installed_readonly_recovery_snapshot_and_verify_use_exact_candidate_modules",
+    "installed_recovery_rejects_tampering_before_any_config_database_or_storage_access",
+    "invalid_configuration_and_missing_tls_fail_without_secret_output",
+    "installed_https_health_and_bundled_admin_assets",
+    "unauthenticated_and_business_bearer_cannot_enter_admin",
+    "installed_runner_and_independent_gc_execute_once",
+    "worker_explicit_config_preserves_unresolved_durable_journal_without_comfy_call",
+    "installed_worker_refuses_unbound_legacy_journal_without_changing_execution_facts",
+    "installed_worker_explicit_adoption_verifies_backup_and_retains_unknown_submit",
+    "incompatible_database_revision_blocks_startup_without_migration",
+    "fresh_installed_real_browser_desktop_mobile_admin_and_content",
+    "runtime_tampered_payload_is_rejected_and_manifest_stays_immutable"
+  ],
+  "virtualization_used": false,
+  "production_accepted": false,
+  "archive_sha256": "0c519342d546a6f13dd3c72bd530194cabfec2ddd219b0ea68d4c70f20ef4882",
+  "release_id": "rc-20261024.61.1",
+  "source_tree_sha256": "ec39882b056cfcf6d15ac83ab3207e51c25c1ecd146968b601d8c430ef0c80ba",
+  "payload_files": 145,
+  "database_head": "f96c8a3d1025",
+  "installation": {
+    "application_modules": [
+      "generation_domain",
+      "generation_application",
+      "generation_contracts",
+      "generation_infrastructure",
+      "control_api",
+      "control_runner",
+      "windows_worker"
+    ],
+    "archive_sha256": "0c519342d546a6f13dd3c72bd530194cabfec2ddd219b0ea68d4c70f20ef4882",
+    "contracts_verified": 27,
+    "editable": false,
+    "format_version": 1,
+    "manifest_sha256": "7cb746ab0a8f17bdd819256170dd7ec170ee03a8f177b52226d8553e82e8aaaf",
+    "offline": true,
+    "python_version": "3.13.1",
+    "release_id": "rc-20261024.61.1",
+    "requirements": 57
+  },
+  "s3_boundary": {
+    "passed": true,
+    "isolated_installed_module": true,
+    "valid_stream_and_wrong_version_guard": true,
+    "response_bodies_closed": true,
+    "real_s3": false
+  },
+  "audio_media": {
+    "passed": true,
+    "formats": [
+      "wav",
+      "flac",
+      "mp3",
+      "opus"
+    ],
+    "global_media_tools_unavailable": true,
+    "bundled_tools_used": true
+  },
+  "pre_migration_backup": {
+    "archive_list_verified": true,
+    "sha256": "7f2fb36581c4d52bf7d3737bf3d0855d681acece9b152a3d99d65a2a2acf2971",
+    "created_before_ddl": true
+  },
+  "recovery_verification": {
+    "passed": true,
+    "tables": 42,
+    "rows": 1,
+    "objects": 0,
+    "object_bytes": 0,
+    "media": {
+      "images": 0,
+      "videos": 0,
+      "audio": 0,
+      "other": 0
+    },
+    "encrypted_values": 0,
+    "master_key_verified": true,
+    "pepper_verified": true,
+    "database_read_only": true,
+    "reconciliation_required_before_dispatch": true,
+    "production_recovery_accepted": false
+  },
+  "browser": {
+    "passed": true,
+    "checks": [
+      "desktop_installed_admin_login_and_live_queue",
+      "desktop_installed_statistics_audio_empty_unknown_and_responsive",
+      "desktop_installed_content_route_and_authorization",
+      "desktop_installed_audit_query_and_responsive_filters",
+      "mobile_installed_admin_login_and_live_queue",
+      "mobile_installed_statistics_audio_empty_unknown_and_responsive",
+      "mobile_installed_content_route_and_authorization",
+      "mobile_installed_audit_query_and_responsive_filters"
+    ],
+    "errors": [],
+    "closed_contexts": 2,
+    "browser_closed": true
+  },
+  "processes": [
+    {
+      "name": "installed-api",
+      "pid": 15308,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "temporary_database_removed": true,
+  "temporary_root_removed": true,
+  "duration_seconds": 174.98
+}

@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-job-timing:0.5.0",
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [
+        "complete",
+        "open",
+        "unknown"
+      ]
+    },
+    "milliseconds": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "started_at_ms": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ended_at_ms": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "enum": [
+            "missing_record",
+            "clock_order",
+            "unmeasured"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "complete"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "milliseconds",
+          "started_at_ms",
+          "ended_at_ms"
+        ],
+        "properties": {
+          "milliseconds": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "started_at_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "ended_at_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "reason": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "open"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "milliseconds",
+          "started_at_ms"
+        ],
+        "properties": {
+          "milliseconds": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "started_at_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "ended_at_ms": {
+            "type": "null"
+          },
+          "reason": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "unknown"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "reason"
+        ],
+        "properties": {
+          "reason": {
+            "enum": [
+              "missing_record",
+              "clock_order",
+              "unmeasured"
+            ]
+          },
+          "milliseconds": {
+            "type": "null"
+          },
+          "started_at_ms": {
+            "type": "null"
+          },
+          "ended_at_ms": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$comment": "A single persisted observation span. Complete milliseconds equals ended_at_ms-started_at_ms; open ends at the separate response snapshot. Cross-field arithmetic is additionally enforced by the DTO. Missing null fields may be omitted by legacy detail serialization."
+}

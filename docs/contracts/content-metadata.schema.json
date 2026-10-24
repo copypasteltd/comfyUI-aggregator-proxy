@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:content-metadata:0.4.0",
+  "title": "Admin content tag replacement",
+  "type": "object",
+  "properties": {
+    "expected_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "tags": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 64,
+        "not": {
+          "pattern": "[\\u0000-\\u001f\\u007f-\\u009f]"
+        },
+        "$comment": "Additionally NFC and no leading/trailing whitespace; enforced by DTO."
+      }
+    }
+  },
+  "required": [
+    "expected_revision",
+    "tags"
+  ],
+  "additionalProperties": false
+}

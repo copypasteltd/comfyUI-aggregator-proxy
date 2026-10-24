@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-channel-query:0.5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "q": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f-\\x9f](?:[^\\x00-\\x1f\\x7f-\\x9f]*[^\\s\\x00-\\x1f\\x7f-\\x9f])?$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "channel_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^ch_[a-f0-9]{32}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tenant_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^ten_[a-f0-9]{32}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^prj_[a-f0-9]{32}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "node_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^node_[a-f0-9]{32}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled",
+            "draining",
+            "deleted"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

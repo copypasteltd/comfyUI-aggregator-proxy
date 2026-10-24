@@ -1,0 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:generation:admin-workflow-diff",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\r\n]"
+      }
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^prj_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\r\n]"
+      }
+    },
+    "workflow_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "has_more": {
+      "type": "boolean"
+    },
+    "total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "snapshot_at": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "base": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "release"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^wfr_[a-f0-9]{32}$",
+          "not": {
+            "pattern": "[\r\n]"
+          }
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "not": {
+            "pattern": "[\r\n]"
+          }
+        },
+        "validated": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "version",
+        "digest",
+        "validated",
+        "created_at"
+      ]
+    },
+    "target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "release"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^wfr_[a-f0-9]{32}$",
+              "not": {
+                "pattern": "[\r\n]"
+              }
+            },
+            "version": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$",
+              "not": {
+                "pattern": "[\r\n]"
+              }
+            },
+            "validated": {
+              "type": "boolean"
+            },
+            "created_at": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "kind",
+            "id",
+            "version",
+            "digest",
+            "validated",
+            "created_at"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "draft"
+            },
+            "revision": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "kind",
+            "revision"
+          ]
+        }
+      ]
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "added": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "removed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "changed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "added",
+        "removed",
+        "changed"
+      ]
+    },
+    "data": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "maxLength": 512,
+            "not": {
+              "pattern": "[\u0000-\u001f-]"
+            },
+            "minLength": 1
+          },
+          "path_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "not": {
+              "pattern": "[\r\n]"
+            }
+          },
+          "path_truncated": {
+            "type": "boolean"
+          },
+          "change": {
+            "enum": [
+              "added",
+              "removed",
+              "changed"
+            ]
+          },
+          "before_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "object",
+                  "array",
+                  "string",
+                  "number",
+                  "boolean",
+                  "null"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "after_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "object",
+                  "array",
+                  "string",
+                  "number",
+                  "boolean",
+                  "null"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "before_preview": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2048,
+                "not": {
+                  "pattern": "[\u0000-\u001f-]"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "after_preview": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2048,
+                "not": {
+                  "pattern": "[\u0000-\u001f-]"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "before_truncated": {
+            "type": "boolean"
+          },
+          "after_truncated": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "path",
+          "path_digest",
+          "path_truncated",
+          "change",
+          "before_type",
+          "after_type",
+          "before_preview",
+          "after_preview",
+          "before_truncated",
+          "after_truncated"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "change": {
+                  "const": "added"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "before_type": {
+                  "type": "null"
+                },
+                "before_preview": {
+                  "type": "null"
+                },
+                "before_truncated": {
+                  "const": false
+                },
+                "after_type": {
+                  "enum": [
+                    "object",
+                    "array",
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "after_preview": {
+                  "type": "string",
+                  "maxLength": 2048,
+                  "not": {
+                    "pattern": "[\u0000-\u001f-]"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "change": {
+                  "const": "removed"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "after_type": {
+                  "type": "null"
+                },
+                "after_preview": {
+                  "type": "null"
+                },
+                "after_truncated": {
+                  "const": false
+                },
+                "before_type": {
+                  "enum": [
+                    "object",
+                    "array",
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "before_preview": {
+                  "type": "string",
+                  "maxLength": 2048,
+                  "not": {
+                    "pattern": "[\u0000-\u001f-]"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "change": {
+                  "const": "changed"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "before_type": {
+                  "enum": [
+                    "object",
+                    "array",
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "after_type": {
+                  "enum": [
+                    "object",
+                    "array",
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "before_preview": {
+                  "type": "string",
+                  "maxLength": 2048,
+                  "not": {
+                    "pattern": "[\u0000-\u001f-]"
+                  }
+                },
+                "after_preview": {
+                  "type": "string",
+                  "maxLength": 2048,
+                  "not": {
+                    "pattern": "[\u0000-\u001f-]"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "workflow_id",
+    "project_id",
+    "workflow_revision",
+    "page",
+    "has_more",
+    "total",
+    "snapshot_at",
+    "base",
+    "target",
+    "counts",
+    "data"
+  ]
+}

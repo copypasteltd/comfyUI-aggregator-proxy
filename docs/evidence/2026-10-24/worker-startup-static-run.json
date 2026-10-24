@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-24T00:32:41.286751+00:00",
+  "passed": true,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.21,
+      "log": "worker-startup-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "seconds": 1.26,
+      "log": "worker-startup-mypy.log"
+    },
+    {
+      "name": "lock",
+      "exit_code": 0,
+      "seconds": 0.2,
+      "log": "worker-startup-lock.log"
+    }
+  ]
+}

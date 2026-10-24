@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-24T19:05:09.036416+00:00",
+  "passed": true,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.11,
+      "log": "workflow-lifecycle-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "seconds": 19.54,
+      "log": "workflow-lifecycle-mypy.log"
+    },
+    {
+      "name": "lock",
+      "exit_code": 0,
+      "seconds": 0.1,
+      "log": "workflow-lifecycle-lock.log"
+    },
+    {
+      "name": "docs",
+      "exit_code": 0,
+      "seconds": 2.54,
+      "log": "workflow-lifecycle-docs.log"
+    }
+  ]
+}

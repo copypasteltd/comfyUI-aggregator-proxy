@@ -1,0 +1,248 @@
+{
+  "passed": true,
+  "run_id": "2f85faad07cc",
+  "started_at": "2026-10-23T07:35:31.186510+00:00",
+  "sources_sha256": {
+    "scripts\\test-sub2api-native.py": "8e612d9438e802d156bc84aa1070a5beb5c38b42c1dac30573fc6ac1baff7c4c",
+    "scripts\\native-provider-fixtures.py": "3cfdb5c68a0055b1d37443241be134b525ade3e4498a2b976abdef977b906d29",
+    "integrations\\sub2api\\protocol-fixture\\main.go": "72f244b35afc4a63399967632454232ba89db654fa916dcda63b5ee5d50d7b33"
+  },
+  "native_windows": true,
+  "virtualization_used": false,
+  "real_redis": false,
+  "real_comfyui": false,
+  "real_s3": false,
+  "physical_fleet_validated": false,
+  "production_runtime_validated": false,
+  "browser_used": false,
+  "cases": [
+    {
+      "case": "actual_stock_and_provider_model_discovery",
+      "passed": true,
+      "protocol_models": 5
+    },
+    {
+      "case": "public_asset_upload",
+      "passed": true,
+      "count": 2
+    },
+    {
+      "case": "text_to_image",
+      "passed": true,
+      "idempotent_replay": true,
+      "job_id": "rc_11e02e77942c5513a143f391fc6439dd",
+      "media_bytes_verified": true,
+      "cross_key_isolation": true
+    },
+    {
+      "case": "image_to_image",
+      "passed": true,
+      "idempotent_replay": true,
+      "job_id": "rc_e603ba1daeb4d90b44f3a5bd3b5288e6",
+      "media_bytes_verified": true,
+      "cross_key_isolation": true
+    },
+    {
+      "case": "references_to_image",
+      "passed": true,
+      "idempotent_replay": true,
+      "job_id": "rc_94ef0ba151a9ff56ba1f53c1c75201ab",
+      "media_bytes_verified": true,
+      "cross_key_isolation": true
+    },
+    {
+      "case": "text_to_video",
+      "passed": true,
+      "idempotent_replay": true,
+      "job_id": "rc_7094f1e1239d3a08b9cc8eeec7f76c4d",
+      "media_bytes_verified": true,
+      "cross_key_isolation": true
+    },
+    {
+      "case": "references_to_video",
+      "passed": true,
+      "idempotent_replay": true,
+      "job_id": "rc_d65b1d7edd35f81db12b0bb8ee9d5605",
+      "media_bytes_verified": true,
+      "cross_key_isolation": true
+    },
+    {
+      "case": "compatible_image_sync_bytes",
+      "passed": true
+    },
+    {
+      "case": "compatible_image_async_and_task",
+      "passed": true
+    },
+    {
+      "case": "compatible_edit_multipart_sync",
+      "passed": true
+    },
+    {
+      "case": "compatible_edit_references_json_async",
+      "passed": true
+    },
+    {
+      "case": "compatible_video_and_range_delivery",
+      "passed": true
+    },
+    {
+      "case": "provider_crash_restart_and_gateway_credential_rotation",
+      "passed": true,
+      "stable_gateway_id": "gateway_7740aedf341f4b7fb69b452bfd5d26ce"
+    },
+    {
+      "case": "current_control_key_revocation",
+      "passed": true
+    },
+    {
+      "case": "unique_hold_settlement_usage_and_cache_effects",
+      "passed": true,
+      "intents": 10,
+      "settled": 10,
+      "effects": 20,
+      "effects_consumed": 20,
+      "usage_logs": 10,
+      "balance": "78.00000000",
+      "frozen_balance": "0.00000000",
+      "quota_used": "22.00000000"
+    }
+  ],
+  "backups": [
+    {
+      "database_namespace": "render_control_native_2f85faad07cc",
+      "sha256": "50b86d880cb74833ab44491d5117ac7400dc29e24565b9f0613fe29d201f2c1b",
+      "archive_verified_before_ddl": true,
+      "bytes": 934
+    },
+    {
+      "database_namespace": "render_sub2api_test_2f85faad07cc",
+      "sha256": "6ce89c70772f1b74aa2111bdac3f530bd3e0c15f20613905fe5d8ad4a30bdad3",
+      "archive_verified_before_ddl": true,
+      "bytes": 926
+    }
+  ],
+  "cleanup": {
+    "processes": true,
+    "databases": true,
+    "media_and_credentials": true
+  },
+  "overlay_sha256": {
+    "cmd/server/wire_gen.go": "d6e49bc947a7dafa3efcb438e7e472e67af2c4ca9357e4345d73c6fdd21de126",
+    "internal/server/middleware/api_key_auth.go": "6c7f9f41c79740ed7098680e3532949f4fe977c871e5725b22abe366bb883868",
+    "internal/rendercontrol/assets_http.go": "26f6b9e920952a581e1ad84da80beab932aa5954a70044507ab59ff5fa8b7e4b",
+    "internal/rendercontrol/assets_store.go": "ea2e40a23c57bc0964d7fbbe3c1a8108a5237cf39bf02a76ef940863cb29e103",
+    "internal/rendercontrol/assets_test.go": "aeaedc4d88c3d2dddeeb3b7c8624615c30542ef7252e9d8cee8ca0a389b7928f",
+    "internal/rendercontrol/billing_test.go": "5da6f6d764ee14e6d0be221c0be0eba4c36f5ddcc50cd583e15ad9105e50c3ed",
+    "internal/rendercontrol/cancellation.go": "ed346942e117ac3ac594c76377abf352ebe170c37103e33153100d6679221f3f",
+    "internal/rendercontrol/closures.go": "b2be3c5692595fbb671dac266b57818f3ebc740734614662ca7e97fa4a72f9de",
+    "internal/rendercontrol/closures_test.go": "a8f6d93fb20e9c25eee94311dff753373f20537b58723562b7f479e0f23a81f9",
+    "internal/rendercontrol/compatibility.go": "49fee07d9a03f2e46d40430de5ff5275b3c06154fbcbb30da7ccedd39f3beb6e",
+    "internal/rendercontrol/compatibility_test.go": "b29c73987b5bb27e9e2965bf2f520222b9dcab82abffc2674249c18e5e2f0888",
+    "internal/rendercontrol/content.go": "c56ecf71ef8a4eb05927b57347c1df7a224b398dd280597d6f78dd4a06c7c224",
+    "internal/rendercontrol/content_routes.go": "d20cb4e22033ce7202d841f967f5c7acc97ac43eb4d4fc8ca89e0754236929c0",
+    "internal/rendercontrol/coordinator.go": "79375ce57aa866641255e21950db84bd9d4ff9d0ea2e592a533c2461a31f8b86",
+    "internal/rendercontrol/coordinator_test.go": "e6d20953d0299c63e9cde0064ba85f3ebbad64d97cc10848a15756f9bfea27a9",
+    "internal/rendercontrol/discovery.go": "b9b6f04be4e8b12dd13d5680651b2f6dbfe391c2a1c7184bfb9e770c8fbdab5f",
+    "internal/rendercontrol/discovery_test.go": "148e6d97bb0e5e5b1622353d6db3fb4b46572f84d9bd2793343d83feb90497cc",
+    "internal/rendercontrol/edges_test.go": "d11c2dbd588931835b42d4c918b5950fcf5bcd037c9491378a844d69d1f24b3f",
+    "internal/rendercontrol/effect_consumer.go": "1eb215408a67a88f0070a4c6eb61957a49314f91c8769b029c3c22cb2992a005",
+    "internal/rendercontrol/effect_consumer_test.go": "90717c07d50601fcf177f70f753b60f7138069da453599d201794c05a32d3a02",
+    "internal/rendercontrol/effects.go": "6f6e6502996aaf59353266ac97c961acb7d3886d4619bf89f61b4181283593e4",
+    "internal/rendercontrol/hosting.go": "d89ddae5b5d31c2698a13c232dbccd377f07b0cbe32eb2eab0102b7fa0cd1136",
+    "internal/rendercontrol/hosting_test.go": "6472f9bd8f82008f5fe4219a9a599920c8a835f92fb71235033c9286f8f2553c",
+    "internal/rendercontrol/image_edits.go": "be3afa6003e4a96f7168d1d19eeaf90343fa45d4a2ce0b9c8ee3ea9bb9600153",
+    "internal/rendercontrol/ledger_test.go": "d5b2651e26527cea46633dc425235062da33595f609cea575211066ca8120e8a",
+    "internal/rendercontrol/listing_cursor.go": "e7e1657dc3210fc0c731191b0bdb8a0a85ecc11b49e0078da808ae3f685acb19",
+    "internal/rendercontrol/listings.go": "e3e6ce7676c017806843289e02a5ef592a18b6f9fb470ab4c437332b65671d18",
+    "internal/rendercontrol/listings_test.go": "2b39821498f4858db25f377b6702ae3c3477cea3199150d7cc6e6647da084239",
+    "internal/rendercontrol/native_cache.go": "bb92ce4098e3c74f58827acf036e7cdc3953f9d1929ee5b927e5c63ec7ce7e26",
+    "internal/rendercontrol/pricing.go": "3b038eb4d2bd80bc28258e984b596bf6f800c928a879d40d6ac9413da1904633",
+    "internal/rendercontrol/public_auth.go": "8f83926833be251e71071877479f7cc6b70465ec2843ed8e233b9b15506df6cd",
+    "internal/rendercontrol/public_http.go": "e42ac46058cba904f0d8f56dbafbeaebc2cd13d64aeaf895dab080b6bbe2dbdc",
+    "internal/rendercontrol/public_http_test.go": "896a870550a03d4c105f956f498e4d756ebd198ef8830fa101d094056851af2e",
+    "internal/rendercontrol/public_request.go": "76f145a9b8382ed4b352211dac74c38284915abe65653ee4962bc37f88d88b65",
+    "internal/rendercontrol/public_request_test.go": "7edc86e3f0dfdd5ed85df983def1660ab5da0753b3ecf13b47dafc1e41231f99",
+    "internal/rendercontrol/recovery.go": "5b02e61f0bad3316000bb943c251f096288a9a8f6d90962118a9b9f105d4872a",
+    "internal/rendercontrol/recovery_test.go": "77e11a41b967fc78e5f80ac3153267c60257087591d6dc6728cf7218cf1ce61f",
+    "internal/rendercontrol/runtime.go": "3fad4a4fdadd932d8992670a9b990875df9c83fca412ae3fab4a8297e4b806c7",
+    "internal/rendercontrol/runtime_test.go": "7fa7dabccbe69a6899d48854424b66da31df9a477cb09c08394d153f877b0b90",
+    "internal/rendercontrol/store.go": "fe5afb60cd47e7a2256cde7edda870233b29aa31781a47990ec83a5c8aac9fbd",
+    "internal/rendercontrol/subscriptions.go": "5aab5e2e9e10c9b3dc2a38d6a5272bcd23c72ae4d411ded00c6d923c894f9d9c",
+    "internal/rendercontrol/testdata/job-create-fixtures.json": "4aab2f0c1fdd981d2fdae0d40dd0cc34355d444eefa4cb9a0f7b318bef95bc53",
+    "internal/rendercontrol/testdata/job-create-schema.sha256": "acca71a93c1bc658ab63a3eb4f571a60c5d34b4c60b68d8fa8717b6a7487f2c2",
+    "internal/rendercontrol/transitions.go": "c7c599861aa29691378e0e1dd8ca919bcfc303dfd93d8974522ba1e0e55be3ab",
+    "internal/rendercontrol/types.go": "a3fde2237472e23f4e1a68427ebd91f164ffe584fe7b39df0e23fa30059efab6",
+    "internal/rendercontrol/uploads.go": "9e840f6a5d04f062ace90f035964fd10b9c4a302a8500c141114c2b867e583d0",
+    "internal/rendercontrol/video_inputs.go": "6c7bb02ec5b086dfd6d238763d349679e7f4ef0dab8be6f4c8e3e1b0dc9923e9",
+    "internal/rendercontrol/video_inputs_test.go": "896b5833a54dd7fcdcfeb8f607a7bf991c6d1213c66f652db12beb35a9976abc",
+    "internal/repository/render_control_billing.go": "d5349c25deb80bc20746d77f49bae480d58e235286c168540c52d35903578da3",
+    "internal/server/middleware/render_control_auth.go": "01725e2e123d361ef2db4698d49249d987425a6b76019fe1dfc066780e4a9108",
+    "internal/service/render_control_subscription.go": "205251f2d27be1734429906754fb467099fde86f717d4ba647ea9442dce19fa0",
+    "migrations/247_render_control_provider.sql": "805ed5ed11f63eb2c69023e97f1f0909a662ba9afe8e4f19db4289a03ec0293c",
+    "migrations/248_render_control_closures.sql": "a17d28e63f3add9c6bb7232baf8da13838ffc064f16ad092fc54e0db7cbea2f0",
+    "migrations/249_render_control_recovery.sql": "0ec30f38944eb51628bb3f4c5a55b5a11ce95edfeb29677a21d2da93c55f8f68",
+    "migrations/250_render_control_ingress.sql": "f5e96751080a93fdc8d4968eb88750e0c304b3d42e1a0c005c6262479b3b2805",
+    "migrations/251_render_control_content.sql": "c5bda9f2faf2bbb61ce35e6d53a8ddb5a3a2a051cbde3e005b64b6040399bba5",
+    "migrations/252_render_control_assets.sql": "1ef7569136905e70213f60000cfb9bf4ef46330a6eba5948bf75baca11192294",
+    "migrations/253_render_control_content_routes.sql": "1308d7a5943a11d34e43eb42cea487051372065f241492ff1543b32f2fbbc140",
+    "migrations/254_render_control_effect_consumption.sql": "3e4616d7ccbab597a25616c54729530c9b8e4c1a0ee191e6532e646876d4bc3d",
+    "migrations/255_render_control_billing.sql": "5bae717d5765dd5768b63612fe6c0ad0d02281e9fa59bd5387ea17623d34611c",
+    "render_control_patches.json": "52a79bd61eed6bf9ee79e6acca85c5c9c4ca5ae773c723d7e6c2dd8bcd887658",
+    "internal/rendercontrol/controlclient/assets.go": "bd98b016c314e0b9dcab2d77ee4cadd9149919d8f950920276c11c73616354cb",
+    "internal/rendercontrol/controlclient/catalog.go": "fafd7c9ba489693b9ec29da1acad4c685bb686ea707e51d637d03b32a8e3d5f1",
+    "internal/rendercontrol/controlclient/client.go": "c581fe3957f33ca9a7688b7402494ecd82bab8ef3b043158425afd06de9c95e3",
+    "internal/rendercontrol/controlclient/collections.go": "91823fcfedaf1c60cea0704bf2e0419146ea62743f33114d82a4cc5c68c1c9ea",
+    "internal/rendercontrol/controlclient/media.go": "87b85a7682defc7d296cf6c43a09e781bb86245b147c3f1037ac1ac679927c58"
+  },
+  "upstream_commit": "7da09cab4e875463baa79fc150adde700c5438df",
+  "binaries_sha256": {
+    "stock_provider": "fc5b5669325e3444de0cafa60e10beb0df707161064fa9a4f728799f7d7db2e0",
+    "migration_test": "78f7e781d2929734242d04d6fb5835be466dffc9006c5ea78d656402f2c20848",
+    "redis_protocol": "8e85746e8d67e78882887064c1ea35bf44b270d35eecc088ad6ecd7522b6d483"
+  },
+  "comfy_protocol": {
+    "submissions": 10,
+    "input_uploads": 10
+  },
+  "source_unchanged": true,
+  "owned_processes": [
+    {
+      "name": "sub2api-1",
+      "pid": 38344,
+      "stopped": true,
+      "exit_code": 1
+    },
+    {
+      "name": "sub2api-2",
+      "pid": 35204,
+      "stopped": true,
+      "exit_code": 1
+    },
+    {
+      "name": "redis-protocol",
+      "pid": 34692,
+      "stopped": true,
+      "exit_code": 1
+    },
+    {
+      "name": "control-runner",
+      "pid": 17908,
+      "stopped": true,
+      "exit_code": 1
+    },
+    {
+      "name": "windows-worker",
+      "pid": 36400,
+      "stopped": true,
+      "exit_code": 1
+    },
+    {
+      "name": "control-api",
+      "pid": 14516,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "duration_seconds": 104.31
+}

@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-24T02:53:06.308703+00:00",
+  "passed": true,
+  "changed_candidate_sources": [
+    "config/contract-hashes.json",
+    "packages/contracts/src/generation_contracts/recovery_checkpoint.py",
+    "packages/contracts/src/generation_contracts/schemas/recovery-checkpoint.schema.json",
+    "packages/infrastructure/src/generation_infrastructure/restore_verification.py",
+    "packages/infrastructure/src/generation_infrastructure/storage.py",
+    "scripts/build-release.py",
+    "scripts/joint-restore-rehearsal.py",
+    "scripts/sync-contracts.py",
+    "scripts/test-release-install.py",
+    "scripts/verify-recovery.py"
+  ],
+  "unchanged_previous_candidate_sources": 351,
+  "frontend_api_openapi_models_migrations_worker_unchanged": true,
+  "existing_runtime_contracts_unchanged": 25,
+  "new_runtime_contract": "recovery-checkpoint.schema.json",
+  "historical_admin_browser_groups": 16,
+  "historical_queue_load": {
+    "workers": 20,
+    "unfinished_jobs": 500,
+    "sessions": 3,
+    "source": "operational-queue-load.json"
+  },
+  "historical_migration_archives": 2,
+  "historical_migration_source": "operational-migration-restore.json",
+  "go_components_rerun": false,
+  "go_client_top_level": 45,
+  "go_client_subtests": 192,
+  "go_ledger_passed": 491,
+  "go_helper_skips": 1,
+  "go_overlay_sources_checked": 68,
+  "exact_provider_binary_matches": true,
+  "native_protocol_rerun": true,
+  "installed_browser_rerun": true,
+  "physical_or_production_acceptance": false
+}

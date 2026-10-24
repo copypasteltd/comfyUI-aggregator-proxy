@@ -1,0 +1,55 @@
+Exported 132 implemented OpenAPI paths
+
+> render-control-admin@0.1.0 generate:api
+> openapi-typescript ../../config/openapi.json -o src/generated/api.d.ts
+
+✨ openapi-typescript 7.13.0
+🚀 ../../config/openapi.json → src/generated/api.d.ts [414.9ms]
+
+> render-control-admin@0.1.0 build
+> vue-tsc --noEmit && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 1758 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                        0.44 kB │ gzip:   0.33 kB
+dist/assets/ScopeSelect-z--WBBcv.css                   0.11 kB │ gzip:   0.12 kB
+dist/assets/Channels-C0Zcvre7.css                      0.39 kB │ gzip:   0.22 kB
+dist/assets/KeyAccess-DaDYgnlc.css                     0.48 kB │ gzip:   0.23 kB
+dist/assets/timing-CJQcCY3X.css                        0.81 kB │ gzip:   0.33 kB
+dist/assets/Keys-C0NeBbIv.css                          0.88 kB │ gzip:   0.35 kB
+dist/assets/Workflows-Dh2ONn1B.css                     1.08 kB │ gzip:   0.42 kB
+dist/assets/Jobs-BQItAJWm.css                          1.35 kB │ gzip:   0.54 kB
+dist/assets/WorkerNodes-BBFk-h7X.css                   1.48 kB │ gzip:   0.53 kB
+dist/assets/Content-DSPDgL0k.css                       1.94 kB │ gzip:   0.62 kB
+dist/assets/Scopes-BY6P3f1y.css                        2.05 kB │ gzip:   0.70 kB
+dist/assets/Overview-Dl4gK1w1.css                      4.64 kB │ gzip:   1.38 kB
+dist/assets/index-GLRZaBAL.css                       369.02 kB │ gzip:  50.44 kB
+dist/assets/_plugin-vue_export-helper-DlAUqK2U.js      0.09 kB │ gzip:   0.10 kB
+dist/assets/ScopeSelect-DVpooJ__.js                    3.27 kB │ gzip:   1.62 kB
+dist/assets/Alerts-Bpfd04LS.js                         5.98 kB │ gzip:   2.92 kB
+dist/assets/Records-DRBKZaTf.js                        6.12 kB │ gzip:   2.56 kB
+dist/assets/KeyAccess-Dk85AcV9.js                      6.62 kB │ gzip:   3.18 kB
+dist/assets/Users-DLMoykgR.js                          7.02 kB │ gzip:   3.06 kB
+dist/assets/timing-B7EU3S9X.js                         7.50 kB │ gzip:   3.45 kB
+dist/assets/SpecIsolations-Bar1oWy0.js                 8.57 kB │ gzip:   3.78 kB
+dist/assets/ModelArtifacts-BjGhClr6.js                 9.19 kB │ gzip:   3.70 kB
+dist/assets/Gateways-BVHg9PrU.js                      11.04 kB │ gzip:   3.95 kB
+dist/assets/Models--u82QRWt.js                        12.70 kB │ gzip:   4.73 kB
+dist/assets/Scopes-BTk1EFsd.js                        13.50 kB │ gzip:   5.19 kB
+dist/assets/Overview-QsiHXnrJ.js                      13.55 kB │ gzip:   5.67 kB
+dist/assets/Jobs-Crq-HHDg.js                          15.76 kB │ gzip:   6.20 kB
+dist/assets/WorkerNodes-DM43MxVo.js                   15.99 kB │ gzip:   5.92 kB
+dist/assets/Content-Ddg-zk8G.js                       17.71 kB │ gzip:   6.73 kB
+dist/assets/Keys-D3kk7Xiw.js                          24.36 kB │ gzip:   8.57 kB
+dist/assets/Channels-BQhPVYWo.js                      25.32 kB │ gzip:   8.50 kB
+dist/assets/Workflows--7BaXmkL.js                     31.76 kB │ gzip:  10.66 kB
+dist/assets/index-CDbVnDRN.js                      1,059.06 kB │ gzip: 349.75 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 46.86s

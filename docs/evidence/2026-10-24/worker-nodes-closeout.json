@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-23T23:27:17.120307+00:00",
+  "passed": true,
+  "scope": "Local Windows Worker graphical enrollment, credentials and lifecycle; independent regression evidence only.",
+  "release_id": "rc-20261024.56.3",
+  "archive_sha256": "f1f2b0d1e8b69087f74ad3a85209a66492eaea812d66b22c999400ab5013367c",
+  "source_inputs_match": 345,
+  "runtime_contracts": 22,
+  "payload_files": 139,
+  "python_passed": 1177,
+  "typechecked_files": 123,
+  "admin_browser_groups": 21,
+  "installed_browser_groups": 10,
+  "current_browser_contexts_closed": 7,
+  "installation_checks": 14,
+  "native_protocol_groups": 18,
+  "native_delivered_jobs": 11,
+  "restore_tables": 42,
+  "restore_rows": 753,
+  "databases": [
+    {
+      "database": "render_control",
+      "head": "d62f7b08a9e1",
+      "durability_enabled": true,
+      "lifecycle_metadata_valid": true
+    },
+    {
+      "database": "render_control_test",
+      "head": "d62f7b08a9e1",
+      "durability_enabled": true,
+      "lifecycle_metadata_valid": true
+    }
+  ],
+  "retained_registered_processes": 9,
+  "temporary_resources_cleaned": true,
+  "virtualization_used": false,
+  "subagents_used": false,
+  "full_goal_complete": false,
+  "production_accepted": false,
+  "pending": [
+    "Physical Windows and ComfyUI resources",
+    "Actual six Workflow exports, models and quality/throughput acceptance",
+    "Private S3 and real Redis",
+    "Public proxy and Linux/system-service deployment",
+    "Production upgrade/rollback and joint object/master-key recovery",
+    "10/20 physical devices capacity acceptance"
+  ]
+}

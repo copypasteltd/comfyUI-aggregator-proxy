@@ -1,0 +1,86 @@
+{
+  "at": "2026-10-23T21:53:47.988843+00:00",
+  "passed": true,
+  "run_id": "6380a3f64acf",
+  "checks": [
+    "fresh_offline_wheels_seven_modules_frozen_contracts_no_editable_dependencies",
+    "installed_four_audio_formats_decode_without_global_ffmpeg",
+    "existing_installation_refused_without_modification",
+    "startup_on_empty_database_refuses_without_implicit_ddl",
+    "installed_migration_takes_native_pg18_backup_and_verifies_archive_before_ddl",
+    "invalid_configuration_and_missing_tls_fail_without_secret_output",
+    "installed_https_health_and_bundled_admin_assets",
+    "unauthenticated_and_business_bearer_cannot_enter_admin",
+    "installed_runner_and_independent_gc_execute_once",
+    "worker_explicit_config_preserves_unresolved_durable_journal_without_comfy_call",
+    "incompatible_database_revision_blocks_startup_without_migration",
+    "fresh_installed_real_browser_desktop_mobile_admin_and_content",
+    "runtime_tampered_payload_is_rejected_and_manifest_stays_immutable"
+  ],
+  "virtualization_used": false,
+  "production_accepted": false,
+  "archive_sha256": "53ac8669bbe8043d2a8606df4016621362552eb192a80cfff828a9319631a1c1",
+  "release_id": "rc-20261024.55.1",
+  "source_tree_sha256": "796688b272b67396e6a4f16638083c353cf6ef025d1b2f13c273077afa3a806c",
+  "payload_files": 136,
+  "database_head": "c57a2d9f4106",
+  "installation": {
+    "application_modules": [
+      "generation_domain",
+      "generation_application",
+      "generation_contracts",
+      "generation_infrastructure",
+      "control_api",
+      "control_runner",
+      "windows_worker"
+    ],
+    "archive_sha256": "53ac8669bbe8043d2a8606df4016621362552eb192a80cfff828a9319631a1c1",
+    "contracts_verified": 21,
+    "editable": false,
+    "format_version": 1,
+    "manifest_sha256": "0d314d7ffeab820dbe269ce442b2760376d42b048547760acac9c9d034a4ab80",
+    "offline": true,
+    "python_version": "3.13.1",
+    "release_id": "rc-20261024.55.1",
+    "requirements": 57
+  },
+  "audio_media": {
+    "passed": true,
+    "formats": [
+      "wav",
+      "flac",
+      "mp3",
+      "opus"
+    ],
+    "global_media_tools_unavailable": true,
+    "bundled_tools_used": true
+  },
+  "pre_migration_backup": {
+    "archive_list_verified": true,
+    "sha256": "aa5e0e0742463b568ee14cdb903aaa384624d810714067ce96c8d59bdc48dc2e",
+    "created_before_ddl": true
+  },
+  "browser": {
+    "passed": true,
+    "checks": [
+      "desktop_installed_admin_login_and_live_queue",
+      "desktop_installed_content_route_and_authorization",
+      "mobile_installed_admin_login_and_live_queue",
+      "mobile_installed_content_route_and_authorization"
+    ],
+    "errors": [],
+    "closed_contexts": 2,
+    "browser_closed": true
+  },
+  "processes": [
+    {
+      "name": "installed-api",
+      "pid": 16884,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "temporary_database_removed": true,
+  "temporary_root_removed": true,
+  "duration_seconds": 176.75
+}

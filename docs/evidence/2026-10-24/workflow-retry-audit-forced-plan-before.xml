@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="2.443" timestamp="2026-10-24T17:54:55.011013+08:00" hostname="wikigspc"><testcase classname="tests.integration.test_audit_retention" name="test_each_batch_is_bounded_and_restart_only_deletes_remaining_rows[default]" time="0.668" /><testcase classname="tests.integration.test_audit_retention" name="test_each_batch_is_bounded_and_restart_only_deletes_remaining_rows[nested_loop]" time="0.387"><failure message="assert [797, 206, 0, 0] == [500, 500, 3, 0]&#10;  &#10;  At index 0 diff: 797 != 500&#10;  Use -v to get more diff">tests\integration\test_audit_retention.py:127: in test_each_batch_is_bounded_and_restart_only_deletes_remaining_rows
+    assert [prune_audit_events(pg, 180) for _ in range(4)] == [500, 500, 3, 0]
+E   assert [797, 206, 0, 0] == [500, 500, 3, 0]
+E     
+E     At index 0 diff: 797 != 500
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "run_id": "8638df935495",
+  "synthetic_catalog": true,
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "real_comfyui": false,
+  "authentication_audit": {
+    "admin.login": 1
+  },
+  "database_assertions": {
+    "business_snapshot_unchanged": true
+  },
+  "checks": [
+    "multi_channel_push_uses_one_versioned_request",
+    "partial_failure_target_receipts_are_visible",
+    "explicit_release_validation_and_job_detail_navigation",
+    "gpu_runtime_approval_includes_current_revision_and_evidence"
+  ]
+}

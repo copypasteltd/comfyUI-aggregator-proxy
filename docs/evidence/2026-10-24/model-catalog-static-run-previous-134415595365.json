@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-24T13:26:24.366035+00:00",
+  "passed": true,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.07,
+      "log": "model-catalog-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "seconds": 3.87,
+      "log": "model-catalog-mypy.log"
+    },
+    {
+      "name": "lock",
+      "exit_code": 0,
+      "seconds": 0.15,
+      "log": "model-catalog-lock.log"
+    },
+    {
+      "name": "docs",
+      "exit_code": 0,
+      "seconds": 1.26,
+      "log": "model-catalog-docs.log"
+    }
+  ]
+}

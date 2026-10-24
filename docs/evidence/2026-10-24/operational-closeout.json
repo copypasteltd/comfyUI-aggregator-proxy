@@ -1,0 +1,69 @@
+{
+  "at": "2026-10-24T01:40:21.833266+00:00",
+  "passed": true,
+  "scope": "Image/video/audio Workflow operational statistics, real committed phase observations, bounded read-only aggregates, accessible Admin UI, local protocol and candidate-install verification.",
+  "release_id": "rc-20261024.58.1",
+  "archive_sha256": "747bd793b21333065023a4c17a380bbc48fe908f6ce3c09d9ae872bc5691328c",
+  "source_tree_sha256": "cecf28cb50f93e60bc681ae050087f1ca43b0b78741443402420b041d98faf56",
+  "source_inputs_match": 356,
+  "payload_files": 141,
+  "runtime_contracts": 25,
+  "wheels": 57,
+  "python_passed": 1295,
+  "targeted_passed": 348,
+  "typechecked_files": 126,
+  "admin_browser_groups": 16,
+  "admin_browser_contexts_closed": 2,
+  "installation_checks": 15,
+  "installed_browser_groups": 6,
+  "installed_browser_contexts_closed": 2,
+  "native_protocol_groups": 18,
+  "native_delivered_jobs": 11,
+  "load": {
+    "synthetic_http_workers": 20,
+    "unfinished_jobs": 500,
+    "admin_browser_sessions": 3,
+    "update_samples": 30,
+    "update_p95_seconds": 3.9301,
+    "statistics_http_requests": 21,
+    "statistics_http_p95_seconds": 0.2119,
+    "all_statistics_responses_successful": true
+  },
+  "restored_archives": 2,
+  "recorded_phase_history_downgrade_guard_verified": true,
+  "databases": [
+    {
+      "database": "render_control",
+      "head": "e85b6c2d9014",
+      "tables": 42,
+      "nullable_phase_columns": 4,
+      "window_indexes": 2,
+      "durability_enabled": true,
+      "inspection_read_only": true
+    },
+    {
+      "database": "render_control_test",
+      "head": "e85b6c2d9014",
+      "tables": 42,
+      "nullable_phase_columns": 4,
+      "window_indexes": 2,
+      "durability_enabled": true,
+      "inspection_read_only": true
+    }
+  ],
+  "markdown_documents": 60,
+  "schema_fixtures": 240,
+  "remaining_test_processes": 0,
+  "retained_registered_processes": 9,
+  "virtualization_used": false,
+  "subagents_used": false,
+  "full_goal_complete": false,
+  "production_accepted": false,
+  "pending": [
+    "Physical Windows/ComfyUI and six actual Workflow exports/models/quality/throughput",
+    "Private S3 and real Redis",
+    "Public proxy, Linux and system-service/ACL validation",
+    "Production upgrade/rollback and object/master-key joint recovery",
+    "10/20 physical devices capacity acceptance"
+  ]
+}

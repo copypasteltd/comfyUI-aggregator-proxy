@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "release_id": "rc-20261024.55.3",
+  "archive_bytes": 280644924,
+  "archive_sha256": "4f53969a5d16cbf89b61382a0ef443741690bf52ff8dcdbd0e6daa9e669c3179",
+  "manifest_sha256": "aff34999683b3b8c5ac4bfb58aae3c4ab649f1881fcfc02cdb978e5dd1d02d0e",
+  "source_tree_sha256": "5eef193a92f26a113f5a3cc7f3f7043547c7b513e52d837c695f8cc8f66d998a",
+  "source_inputs": 340,
+  "payload_files": 136,
+  "contracts": {
+    "version": "0.5.0",
+    "sha256": "0d6159110fe717e66273ffe1fdf78a210c7b79af4eebc7fb22f6f45bd9d02ba6"
+  },
+  "database": {
+    "head": "c57a2d9f4106",
+    "migrations_sha256": "35ab146609d00dac61d7bd8e71709f5a4344e5b5141a23568f3e0769935f5b0d",
+    "auto_migrate": false
+  },
+  "worker": {
+    "protocols": [
+      "0.4.0"
+    ],
+    "journal_source_sha256": "659e3ac21ea6bde103a8803668a12f33b0c27d5dd97dac26d7bacd3847283a15"
+  },
+  "gateway": {
+    "upstream_repository": "https://github.com/Wei-Shaw/sub2api",
+    "upstream_commit": "7da09cab4e875463baa79fc150adde700c5438df",
+    "provider_binary_sha256": "df6ac8d2f0ad64e288f5fce3d8a34850a2427d492f35bc10908b6f30cec350ec",
+    "frontend_embedded": false
+  },
+  "required_tasks": [
+    "text_to_image",
+    "text_to_video",
+    "image_to_image",
+    "references_to_image",
+    "references_to_video",
+    "text_to_audio"
+  ],
+  "production_accepted": false
+}

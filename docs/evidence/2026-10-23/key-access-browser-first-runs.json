@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-23",
+  "scope": "Sanitized notes for failed initial access-history browser checks; final passing reports are separate",
+  "attempts": [
+    {
+      "mode": "real HTTPS and database",
+      "outcome": "failed",
+      "reason": "Element Plus placeholder intercepted a pointer click aimed at its internal combobox input",
+      "resolution": "Use the accessible focus and ArrowDown interaction, then choose the option",
+      "browser_context_closed": true,
+      "owned_disabled_test_key_cleaned_through_management_api": true
+    },
+    {
+      "mode": "real HTTPS login and static build, synthetic bounded access-history responses",
+      "outcome": "failed",
+      "reason": "Sign-in unconditionally redirected an access-history deep link to the overview",
+      "resolution": "Preserve the resolved internal path after sign-in and discard query and fragment",
+      "browser_context_closed": true,
+      "business_data_mutated": false
+    }
+  ],
+  "final_real_http_report": "admin-browser-smoke.json",
+  "final_synthetic_ui_report": "admin-key-access-ui.json"
+}

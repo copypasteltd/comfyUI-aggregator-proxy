@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-23T22:15:15.926214+00:00",
+  "scope": "Audio increment failures, corrections and validation boundaries",
+  "implementation_fixes": [
+    {
+      "issue": "Audio was missing from the fair dispatch task set",
+      "fix": "Added the explicit audio task and independent baseline; targeted dispatch regression passed"
+    },
+    {
+      "issue": "Minimal legacy Worker fixtures omitted manifest task_type",
+      "fix": "Graph compilation retains the old image behavior when the optional fixture field is absent; full 1129-test regression passed"
+    },
+    {
+      "issue": "Audio duration input used a whole-second native HTML step with a 0.001-second minimum",
+      "fix": "Set step=0.001; actual desktop/mobile native form submission and saved model defaults passed"
+    }
+  ],
+  "verification_fixes": [
+    {
+      "issue": "Unit and integration test modules shared the same test_audio.py basename",
+      "fix": "Renamed unit module to test_audio_media.py"
+    },
+    {
+      "issue": "Legacy scope response snapshot omitted the new explicit zero audio quota",
+      "fix": "Updated the backward-default expectation and reran the complete regression"
+    },
+    {
+      "issue": "Go public parser test still asserted exactly 14 frozen request fixtures",
+      "fix": "Reviewed and synced the 23 request cases plus schema digest; complete Go ledger suite passed",
+      "retained": "audio-sub2api-ledger-before-fixture-count-fix.json"
+    },
+    {
+      "issue": "Native cross-process assertion compared an eight-place monetary string with the upstream NUMERIC(20,10) text",
+      "fix": "Compare actual_cost=1 in PostgreSQL; audio meter and media family checks remain exact",
+      "retained": "audio-native-protocol-before-money-format-fix.json"
+    },
+    {
+      "issue": "The final output-retention assertion still expected the original ten customer tasks",
+      "fix": "Derive the count from six unified tasks plus five compatibility submissions and bound the wait for durable cloud acknowledgement; no execution or transport timeouts changed",
+      "retained": "audio-native-protocol-before-retention-count-fix.json"
+    }
+  ],
+  "private_browser_harness_fixes": [
+    "Provided the required public_origin for isolated settings",
+    "Read Admin key identifiers from the key envelope",
+    "Used the actual workflow freeze confirmation label",
+    "Used CSP-compatible function predicates without unsafe-eval",
+    "Used independent published model fixtures for desktop and mobile because editing correctly unpublishes a model"
+  ],
+  "browser_cleanup": {
+    "specific_audio_run": "audio-browser-fixture.json",
+    "all_test_contexts_closed": true,
+    "user_tabs_untouched": true
+  },
+  "release_sequence": {
+    "rc-20261024.55.1": "Passed 13 isolated installation checks; replaced to include the corrected monetary assertion in source provenance",
+    "rc-20261024.55.2": "Passed 13 isolated installation checks; replaced to include the corrected output-retention verification in source provenance",
+    "rc-20261024.55.3": "Final candidate; exact-candidate installation and native protocol results are recorded separately"
+  },
+  "concurrent_protocol_failure": {
+    "retained": "audio-native-protocol-concurrent-io-timeout.json",
+    "failure": "Synchronous image compatibility call returned 504; Worker reported transport_or_runtime_failure and the safe database snapshot retained one submitting task",
+    "root_cause_confirmed": false,
+    "recovery_validation": "Repeat unchanged native sources and unchanged transport deadlines after the isolated candidate installation finishes; final result in audio-native-protocol.json",
+    "serial_rerun_passed": true,
+    "original_failed_result_preserved": true
+  },
+  "real_comfyui_validated": false,
+  "real_fleet_validated": false,
+  "production_accepted": false,
+  "virtualization_used": false,
+  "subagents_used": false
+}

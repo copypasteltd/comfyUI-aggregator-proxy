@@ -1,0 +1,47 @@
+{
+  "increment": 48,
+  "status": "resolved_and_rechecked",
+  "failures_and_corrections": [
+    {
+      "phase": "targeted_http_test",
+      "observed": "184 passed and one failed: common response middleware replaced private,no-store and the preview-specific CSP.",
+      "correction": "Preserve response headers explicitly supplied by trusted routes; keep the default no-store and application CSP for other responses.",
+      "recheck": "185 targeted/contract cases passed; the 13-case PostgreSQL/HTTP feature suite then passed after adding further concurrency and identity checks."
+    },
+    {
+      "phase": "browser_date_input",
+      "observed": "The date picker rendered a range input and a popup input with the same placeholder, causing a strict locator failure.",
+      "correction": "Target the visible filter's range inputs by their component class.",
+      "recheck": "Name, time, model, workflow, key and tag intersection and explicit real image preview passed on the next run."
+    },
+    {
+      "phase": "browser_created_tag_selection",
+      "observed": "The automated Enter/Escape sequence did not select the newly created tag, leaving Save disabled.",
+      "correction": "Wait for the created option and explicitly select it through the graphical control before asserting the selected tag.",
+      "recheck": "All 12 browser groups passed with real HTTPS/PostgreSQL and synthetic generated media; every owned context and the exact synthetic tenant/media were cleaned."
+    },
+    {
+      "phase": "synthetic_catalog_setup",
+      "observed": "A setup subprocess exceeded 60 seconds during concurrent full regression; its manifest retained 57 exact owned object entries.",
+      "correction": "Cleaned the unique synthetic tenant and files, increased the bounded helper timeout to 180 seconds, and added setup-failure cleanup before any browser is launched.",
+      "recheck": "All 12 browser groups passed with real HTTPS/PostgreSQL and synthetic generated media; every owned context and the exact synthetic tenant/media were cleaned."
+    },
+    {
+      "phase": "browser_history_navigation",
+      "observed": "The harness assumed hash routing; the application uses createWebHistory.",
+      "correction": "Use real browser Back while the video drawer is open.",
+      "recheck": "Route unmount paused the detached video and removed its src."
+    },
+    {
+      "phase": "reduced_permission_ui_teardown",
+      "observed": "The test interceptor attempted JSON decoding on the successful 204 logout response.",
+      "correction": "Only decode/rewrite successful 200 session payloads; forward empty responses unchanged.",
+      "recheck": "All 12 groups, real session revocation, restricted UI logout and cleanup passed."
+    }
+  ],
+  "real_customer_data_used": false,
+  "virtualization_used": false,
+  "full_first_release_complete": false,
+  "all_resolved": true,
+  "unresolved_failures": []
+}

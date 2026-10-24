@@ -1,0 +1,104 @@
+{
+  "at": "2026-10-22T16:36:42.256058+00:00",
+  "compiler": "go version go1.27.3 windows/amd64",
+  "command": "go test -json -mod=readonly -count=1 -p=2 -timeout=90s ./...",
+  "module": "render-control/sub2api-controlclient",
+  "source_sha256": {
+    "client.go": "97ef26626f2f460f45290acb4729afbd49faa98ea990ff675b4fc00bdb341401",
+    "client_test.go": "c129d452b0f3e3a24ee60361f61008a5423680208563a6018cca3156df05f1ff",
+    "go.mod": "bd5fb70c1d0baf9fe7d507d24566b4b6e53f7a777f51f80d2871ae9ad9c133c6"
+  },
+  "sources_unchanged": true,
+  "offline_module_downloads_disabled": true,
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "top_level_tests": 9,
+  "subtests": 7,
+  "tests": [
+    {
+      "name": "TestMetadataLifecycleAndIndependentServiceReconciliation",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestRedirectNeverForwardsCredential",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies/false",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies/true",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestErrorsAndFormattingDoNotContainCredentialsOrResponseBodies",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCancellationDoesNotRetryAdmission",
+      "status": "pass",
+      "seconds": 1.01
+    },
+    {
+      "name": "TestUnsafeOriginsSubjectsAndIdentifiersAreRejectedBeforeHTTP",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMalformedSuccessfulAdmissionRemainsUncertain",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/unknown_status",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/pending_already_queued",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/expired_not_terminal",
+      "status": "pass",
+      "seconds": 0.09
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/missing_expiry",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/wrong_request",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState",
+      "status": "pass",
+      "seconds": 0.15
+    },
+    {
+      "name": "TestUntrustedJobArtifactsAndDuplicateSettlementAreRejected",
+      "status": "pass",
+      "seconds": 0.02
+    }
+  ],
+  "duration_seconds": 55.61,
+  "provider_implemented": false,
+  "upstream_runtime_verified": false,
+  "virtualization_used": false
+}

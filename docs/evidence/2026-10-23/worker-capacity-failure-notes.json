@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-10-23T08:35:18.831161+00:00",
+  "recovered_run_id": "abba69e1174e",
+  "native_groups_passed_before_cleanup_failure": 15,
+  "confirmed_packages_and_files": 10,
+  "original_report_passed": false,
+  "reason": "SQLite connection context committed but did not close the connection; Windows sharing violation during test resource deletion.",
+  "fix": "contextlib.closing explicitly closes the read-only inspection connection before process/media cleanup.",
+  "owned_media_and_credentials_recovered": true,
+  "browser_first_attempt": "Exact text assertion missed the label because its cell also contains the kind span; test locator uses substring matching within the table.",
+  "browser_finally_closed_on_failed_attempt": true,
+  "browser_second_attempt": "Element Plus input is covered by the select placeholder; click the actual select wrapper as a user does, without force.",
+  "browser_final_run_groups_passed": 5,
+  "final_native_run_id": "cd1f8fcc2a10",
+  "final_native_run_passed_and_cleaned": true
+}

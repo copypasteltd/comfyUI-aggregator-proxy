@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-23T03:18:25.100709+00:00",
+  "command": "pytest -q tests/integration/test_compatibility_inputs.py tests/unit/test_workflows.py --tb=short",
+  "passed": false,
+  "failed_tests": 5,
+  "passed_tests": 12,
+  "duration_seconds": 26.81,
+  "failure": "Shared synthetic PNG fixture had an invalid IDAT CRC. PIL.verify raised SyntaxError instead of a controlled domain error.",
+  "correction": "Generate the synthetic fixture with Pillow; handle malformed image SyntaxError as invalid_image. Retain a dedicated corrupt-checksum HTTP regression.",
+  "real_gpu_tested": false,
+  "virtualization_used": false
+}

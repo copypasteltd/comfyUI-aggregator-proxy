@@ -1,0 +1,241 @@
+{
+  "$defs": {
+    "WorkflowCatalogEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "relative_path": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "directory",
+            "file"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bytes"
+        },
+        "modified_at": {
+          "minimum": 0,
+          "title": "Modified At",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "directory",
+            "ready",
+            "invalid"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "source_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Digest"
+        },
+        "export_format": {
+          "anyOf": [
+            {
+              "enum": [
+                "comfy-api",
+                "manifest-v1"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Export Format"
+        },
+        "node_count": {
+          "anyOf": [
+            {
+              "maximum": 2000,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Node Count"
+        },
+        "task_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "text_to_image",
+                "image_to_image",
+                "references_to_image",
+                "text_to_video",
+                "references_to_video",
+                "text_to_audio"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Type"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "enum": [
+                "invalid_workflow_source",
+                "ui_workflow_not_supported",
+                "workflow_source_too_large",
+                "workflow_export_not_allowed",
+                "workflow_export_changed"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Code"
+        }
+      },
+      "required": [
+        "name",
+        "relative_path",
+        "kind",
+        "modified_at",
+        "status"
+      ],
+      "title": "WorkflowCatalogEntry",
+      "type": "object"
+    },
+    "WorkflowCatalogPage": {
+      "additionalProperties": false,
+      "properties": {
+        "protocol": {
+          "const": "local-directory-v1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "relative_directory": {
+          "maxLength": 512,
+          "title": "Relative Directory",
+          "type": "string"
+        },
+        "directory_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Directory Digest",
+          "type": "string"
+        },
+        "entries": {
+          "items": {
+            "$ref": "#/$defs/WorkflowCatalogEntry"
+          },
+          "maxItems": 20,
+          "title": "Entries",
+          "type": "array"
+        },
+        "skipped_count": {
+          "maximum": 2000,
+          "minimum": 0,
+          "title": "Skipped Count",
+          "type": "integer"
+        },
+        "has_more": {
+          "title": "Has More",
+          "type": "boolean"
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "maxLength": 4096,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next Cursor"
+        }
+      },
+      "required": [
+        "protocol",
+        "relative_directory",
+        "directory_digest",
+        "entries",
+        "skipped_count",
+        "has_more"
+      ],
+      "title": "WorkflowCatalogPage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "success": {
+      "const": true,
+      "title": "Success",
+      "type": "boolean"
+    },
+    "applied_revision": {
+      "minimum": 1,
+      "title": "Applied Revision",
+      "type": "integer"
+    },
+    "catalog": {
+      "$ref": "#/$defs/WorkflowCatalogPage"
+    },
+    "catalog_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Catalog Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "success",
+    "applied_revision",
+    "catalog",
+    "catalog_digest"
+  ],
+  "title": "WorkflowCatalogReceipt",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.invalid/contracts/workflow-catalog-receipt.schema.json",
+  "contract_version": "0.4.0",
+  "description": "Structural contract. Runtime also checks canonical digest, source-bound directory and continuation, direct-child paths, sorted uniqueness, metadata completeness and 64 KiB receipt limit."
+}

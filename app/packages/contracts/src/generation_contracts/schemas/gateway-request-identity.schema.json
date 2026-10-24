@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gateway request lookup/close identity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["provider_request_id", "external_task_ref", "price_version", "authorization_ref", "external_tenant_ref", "external_key_ref"],
+  "properties": {
+    "provider_request_id": {"type": "string", "minLength": 16, "maxLength": 128, "pattern": "^[!-~]+$"},
+    "external_task_ref": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[!-~]+$"},
+    "price_version": {"type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[!-~]+$"},
+    "authorization_ref": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[!-~]+$"},
+    "external_tenant_ref": {"type": "string", "minLength": 1, "maxLength": 128},
+    "external_key_ref": {"type": "string", "minLength": 1, "maxLength": 128}
+  }
+}

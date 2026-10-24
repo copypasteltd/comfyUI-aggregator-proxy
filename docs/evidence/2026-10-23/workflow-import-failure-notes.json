@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-23T05:46:37.939754+00:00",
+  "artifacts_sha256": {
+    "workflow-import-http-fixture-first.xml": "86ef6df8d113a9143b182ba6fe0ef313ec1388e432f1ae4049c9225134204d5b",
+    "workflow-import-collection-first.log": "a033e391c775abad9e49d728959f2bf48fdb53189f25d9b32d8a0347d50ce93e",
+    "workflow-import-deadlock-first.log": "8df156e18c704248ddb17ee7deba810f08f4eb3acf88366b530ed5998eef5c08",
+    "workflow-import-python-tests.xml": "1da9f1a359b184e43f2221e6d09d3fd936f109afea598376dc4c02698037a624",
+    "workflow-import-python-console.log": "7c90c30c053bb336059d9af2f41263ba67fa7206338a82ce85a449e853f0582e",
+    "workflow-import-frontend-console.log": "6bac91982bb6d17f9b542be17a2be35eecbcf210cf9d476d9b6a5b1cd863fdf6"
+  },
+  "failures": [
+    {
+      "stage": "HTTP fixture",
+      "result": "7 passed, 1 failed",
+      "reason": "New TestClient fixture omitted the required Idempotency-Key; endpoint correctly returned 400.",
+      "resolution": "Added explicit management idempotency header and positive HTTP preview/detail/commit coverage."
+    },
+    {
+      "stage": "Full pytest collection",
+      "reason": "New unit and integration modules shared the same basename under the existing pytest import mode.",
+      "resolution": "Renamed the unit module test_workflow_sources.py; no cache deletion or global pytest mode change."
+    },
+    {
+      "stage": "Full PostgreSQL regression",
+      "result": "339 passed, 1 failed",
+      "postgres_error": "40P01",
+      "reason": "Different idempotency INSERTs each acquired actor FK KEY SHARE and then attempted actor FOR UPDATE; both lock upgrades conflicted.",
+      "resolution": "Use actor FOR NO KEY UPDATE for serialized preview limit; current real PG concurrency test passes."
+    },
+    {
+      "stage": "Browser runtime discovery",
+      "reason": "The project venv and bundled document Python did not provide Python Playwright.",
+      "resolution": "Located existing C:/Python313 Python Playwright; used installed native Edge, installed no packages and created no virtualization."
+    }
+  ],
+  "final_python_passed": 341,
+  "final_browser_checks_passed": 5,
+  "full_goal_complete": false
+}

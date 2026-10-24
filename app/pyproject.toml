@@ -1,0 +1,54 @@
+[project]
+name = "render-control-workspace"
+version = "0.1.0"
+description = "Native ComfyUI image and video control plane"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "render-control-api", "render-control-runner", "render-windows-worker",
+]
+
+[dependency-groups]
+release-build = ["hatchling==1.27.0"]
+dev = [
+  "pytest>=8.3,<10", "pytest-asyncio>=0.25,<2", "ruff>=0.11,<1",
+  "mypy>=1.15,<2", "jsonschema>=4.23,<5", "pyyaml>=6.0,<7",
+  "types-PyYAML>=6.0", "types-jsonschema>=4.23", "httpx>=0.28,<1",
+]
+
+[tool.uv.workspace]
+members = ["packages/*", "apps/control_api", "apps/control_runner", "apps/windows_worker"]
+
+[tool.uv.sources]
+render-control-api = { workspace = true }
+render-control-runner = { workspace = true }
+render-windows-worker = { workspace = true }
+generation-domain = { workspace = true }
+generation-application = { workspace = true }
+generation-contracts = { workspace = true }
+generation-infrastructure = { workspace = true }
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+extend-exclude = [".local", ".venv", "node_modules", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "S"]
+ignore = ["E501", "S101", "B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S105", "S106", "S311", "S608"]
+
+[tool.pytest.ini_options]
+addopts = "--basetemp=.local/pytest"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = ["integration: requires the isolated native PostgreSQL instance", "protocol: worker protocol and durable journal", "fault: injected crash, duplicate, or connectivity failure"]
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
+python_version = "3.13"
+check_untyped_defs = true
+disallow_untyped_defs = true
+warn_unused_ignores = true
+ignore_missing_imports = true

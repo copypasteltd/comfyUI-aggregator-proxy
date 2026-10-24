@@ -1,0 +1,395 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Service key policy 0.5.0 (legacy missing audio limits deny audio)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scopes",
+    "models",
+    "workflow_releases",
+    "channels",
+    "spec_limits",
+    "content",
+    "limits",
+    "allowed_cidrs",
+    "download",
+    "period_timezone"
+  ],
+  "properties": {
+    "scopes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "jobs:read",
+          "jobs:cancel",
+          "images:create",
+          "videos:create",
+          "assets:upload",
+          "assets:read",
+          "artifacts:read",
+          "content:read",
+          "content:download",
+          "content:delete",
+          "content:sensitive",
+          "audio:create"
+        ]
+      }
+    },
+    "models": {
+      "$ref": "#/$defs/selection"
+    },
+    "workflow_releases": {
+      "$ref": "#/$defs/selection"
+    },
+    "channels": {
+      "$ref": "#/$defs/selection"
+    },
+    "spec_limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "image_max_pixels",
+        "video_max_pixels",
+        "video_max_milliseconds",
+        "max_references",
+        "allowed_qualities"
+      ],
+      "properties": {
+        "image_max_pixels": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "video_max_pixels": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "video_max_milliseconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_references": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "allowed_qualities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "draft",
+              "standard",
+              "high"
+            ]
+          }
+        },
+        "audio_max_milliseconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 600000,
+          "default": 0
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "project_ids",
+        "creator_key_ids"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "owner_only",
+            "project_shared",
+            "shared_creator_keys"
+          ]
+        },
+        "project_ids": {
+          "$ref": "#/$defs/idList"
+        },
+        "creator_key_ids": {
+          "$ref": "#/$defs/idList"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "owner_only"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "project_ids": {
+                "maxItems": 0
+              },
+              "creator_key_ids": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "project_shared"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "project_ids": {
+                "minItems": 1
+              },
+              "creator_key_ids": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "shared_creator_keys"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "project_ids": {
+                "minItems": 1
+              },
+              "creator_key_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rpm",
+        "burst",
+        "daily_jobs",
+        "unfinished_jobs",
+        "generating_jobs",
+        "daily_image_count",
+        "daily_video_milliseconds"
+      ],
+      "properties": {
+        "rpm": {
+          "$ref": "#/$defs/limit"
+        },
+        "burst": {
+          "$ref": "#/$defs/limit"
+        },
+        "daily_jobs": {
+          "$ref": "#/$defs/limit"
+        },
+        "unfinished_jobs": {
+          "$ref": "#/$defs/limit"
+        },
+        "generating_jobs": {
+          "$ref": "#/$defs/limit"
+        },
+        "daily_image_count": {
+          "$ref": "#/$defs/limit"
+        },
+        "daily_video_milliseconds": {
+          "$ref": "#/$defs/limit"
+        },
+        "daily_audio_milliseconds": {
+          "$ref": "#/$defs/limit"
+        }
+      }
+    },
+    "allowed_cidrs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "values"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "any",
+            "allowlist"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "maxItems": 100,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "any"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "allowlist"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "values": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "download": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "signed_url_max_seconds"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "authenticated_proxy",
+            "signed_url"
+          ]
+        },
+        "signed_url_max_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 900
+        }
+      }
+    },
+    "period_timezone": {
+      "const": "Asia/Taipei"
+    }
+  },
+  "$defs": {
+    "idList": {
+      "type": "array",
+      "maxItems": 1000,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "selected_ids"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "selected",
+            "all_authorized"
+          ]
+        },
+        "selected_ids": {
+          "$ref": "#/$defs/idList"
+        }
+      },
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "all_authorized"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "selected_ids": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    "limit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "value"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "bounded",
+            "unlimited"
+          ]
+        },
+        "value": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "bounded"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "value": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  },
+  "contract_version": "0.5.0"
+}

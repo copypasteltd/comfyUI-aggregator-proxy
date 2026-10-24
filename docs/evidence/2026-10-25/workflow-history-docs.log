@@ -1,0 +1,64 @@
+{
+  "baseline": "v0.4",
+  "passed": true,
+  "checks": {
+    "markdown": {
+      "documents": 75,
+      "instruction_files": 1,
+      "fenced_blocks": 35,
+      "json_examples": 15,
+      "yaml_examples": 1,
+      "local_links_checked": 1172
+    },
+    "contracts": {
+      "json_files": 51,
+      "schemas": 47,
+      "fixtures": 747,
+      "positive_fixtures": 189,
+      "negative_fixtures": 558,
+      "capabilities_covered": [
+        "image_to_image",
+        "references_to_image",
+        "references_to_video",
+        "text_to_audio",
+        "text_to_image",
+        "text_to_video"
+      ]
+    },
+    "state_machine": {
+      "states": 16,
+      "terminal_states": 4,
+      "transitions": 62,
+      "guards": 21
+    },
+    "endpoints": {
+      "total": 178,
+      "by_identity": {
+        "service": 27,
+        "admin_login": 1,
+        "admin": 112,
+        "worker": 12,
+        "gateway": 26
+      },
+      "admin_permissions": 25
+    },
+    "traceability": {
+      "rules": 32,
+      "quality_scenarios": 18,
+      "work_packages": 15,
+      "requirements": 73,
+      "work_package_statuses": {
+        "in_progress": 14,
+        "not_started": 1
+      },
+      "admin_acceptance_mapped": 16,
+      "key_acceptance_mapped": 12
+    },
+    "topic_presence": {
+      "checks": 14,
+      "scope": "Text presence only, not proof of correctness"
+    }
+  },
+  "errors": [],
+  "report_written": true
+}

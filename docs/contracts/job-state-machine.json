@@ -1,0 +1,662 @@
+{
+  "contract_version": "0.4.0",
+  "initial_states": [
+    "admission_pending",
+    "queued"
+  ],
+  "states": [
+    "admission_pending",
+    "queued",
+    "leased",
+    "preparing",
+    "submitting",
+    "running",
+    "collecting",
+    "uploading",
+    "verifying",
+    "reconciling",
+    "retry_wait",
+    "cancel_requested",
+    "succeeded",
+    "failed",
+    "cancelled",
+    "expired"
+  ],
+  "terminal_states": [
+    "succeeded",
+    "failed",
+    "cancelled",
+    "expired"
+  ],
+  "non_state_events": [
+    "progress",
+    "upload_progress",
+    "heartbeat"
+  ],
+  "guards": {
+    "admission_confirmed": "身份/版本/输入/额度及网关确认均已持久化。",
+    "current_lease": "node/boot/attempt/fence/current_attempt/服务器租约均有效；管理动作另按角色授权。",
+    "generation_slot_held": "同一物理 GPU 的 occupancy 由当前 attempt 持有，所有并发上限已检查。",
+    "inputs_verified": "输入授权、ready、hash 和冻结执行环境一致。",
+    "journal_intent_durable": "Worker 已持久化提交意图与可核对关联标识。",
+    "comfy_acceptance_observed": "已观察原 prompt 被 ComfyUI 接收或运行，不能仅凭HTTP已发送。",
+    "execution_stopped": "已确认 GPU 推理/编码停止；若从未提交则有可核对未提交证据。",
+    "outputs_stable": "输出文件完整稳定、清单与媒体规格可校验。",
+    "gpu_release_recorded": "GPU释放证据、occupancy删除与生成计数减少原子完成；结果租约仍保留。",
+    "cloud_manifest_verified": "私有云端对象不可变版本/bytes/hash/媒体校验通过。",
+    "terminal_commit_once": "终态CAS、唯一manifest、资源结算与outbox在同一事务；迟到事件不可覆盖。",
+    "ownership_uncertain": "提交、租约、执行或结果归属存在不确定性；未知GPU占用继续保留。",
+    "old_attempt_closed": "旧执行已结束、结果处置明确、旧结果权已失效，才能创建下一attempt。",
+    "retry_budget_available": "错误分类允许重试、deadline/次数/规格预算均允许，不重新扣accepted计数。",
+    "not_running_proven": "没有活动GPU计算/提交未知，不能以超时或空history作为唯一证据。",
+    "deadline_reached": "服务器确认冻结总预算或排队截止已到。",
+    "cancel_authorized": "操作主体有权取消，取消意图已持久化。",
+    "no_result_publish": "撤销后不发布客户结果，按规则释放预留并保留历史。",
+    "resume_authorized": "恢复证据已审查、resume_state匹配、新boot/fence结果权已正式授予；不是旧租约复活。",
+    "safe_failure": "错误不可恢复且已证明无继续执行/未知占用；资源与产物处置明确。",
+    "resources_accounted": "当前事务按已确认资源事实结算/释放占用与计数、处置结果权和预留；不得仅改状态遗留槽位或负数计数。未知执行不能通过此guard。"
+  },
+  "transitions": [
+    {
+      "from": "admission_pending",
+      "to": "queued",
+      "trigger": "confirm_admission",
+      "guards": [
+        "admission_confirmed"
+      ]
+    },
+    {
+      "from": "admission_pending",
+      "to": "failed",
+      "trigger": "reject_admission",
+      "guards": [
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "admission_pending",
+      "to": "cancelled",
+      "trigger": "abort_admission",
+      "guards": [
+        "cancel_authorized",
+        "no_result_publish",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "admission_pending",
+      "to": "expired",
+      "trigger": "admission_timeout",
+      "guards": [
+        "deadline_reached",
+        "not_running_proven",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "queued",
+      "to": "leased",
+      "trigger": "claim",
+      "guards": [
+        "admission_confirmed",
+        "generation_slot_held",
+        "retry_budget_available"
+      ]
+    },
+    {
+      "from": "queued",
+      "to": "cancelled",
+      "trigger": "cancel_before_claim",
+      "guards": [
+        "cancel_authorized",
+        "not_running_proven",
+        "no_result_publish",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "queued",
+      "to": "expired",
+      "trigger": "queue_timeout",
+      "guards": [
+        "deadline_reached",
+        "not_running_proven",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "queued",
+      "to": "failed",
+      "trigger": "permanent_pre_execution_failure",
+      "guards": [
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "retry_wait",
+      "to": "leased",
+      "trigger": "claim",
+      "guards": [
+        "admission_confirmed",
+        "generation_slot_held",
+        "retry_budget_available"
+      ]
+    },
+    {
+      "from": "retry_wait",
+      "to": "cancelled",
+      "trigger": "cancel_before_claim",
+      "guards": [
+        "cancel_authorized",
+        "not_running_proven",
+        "no_result_publish",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "retry_wait",
+      "to": "expired",
+      "trigger": "queue_timeout",
+      "guards": [
+        "deadline_reached",
+        "not_running_proven",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "retry_wait",
+      "to": "failed",
+      "trigger": "permanent_pre_execution_failure",
+      "guards": [
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "retry_wait",
+      "to": "queued",
+      "trigger": "retry_due",
+      "guards": [
+        "old_attempt_closed",
+        "retry_budget_available"
+      ]
+    },
+    {
+      "from": "leased",
+      "to": "preparing",
+      "trigger": "worker_preparing",
+      "guards": [
+        "current_lease",
+        "generation_slot_held"
+      ]
+    },
+    {
+      "from": "preparing",
+      "to": "submitting",
+      "trigger": "submit_intent",
+      "guards": [
+        "current_lease",
+        "inputs_verified",
+        "journal_intent_durable",
+        "generation_slot_held"
+      ]
+    },
+    {
+      "from": "submitting",
+      "to": "running",
+      "trigger": "submitted",
+      "guards": [
+        "current_lease",
+        "comfy_acceptance_observed"
+      ]
+    },
+    {
+      "from": "running",
+      "to": "collecting",
+      "trigger": "generation_observed_complete",
+      "guards": [
+        "current_lease",
+        "execution_stopped"
+      ]
+    },
+    {
+      "from": "collecting",
+      "to": "uploading",
+      "trigger": "gpu_released",
+      "guards": [
+        "current_lease",
+        "outputs_stable",
+        "execution_stopped",
+        "gpu_release_recorded"
+      ]
+    },
+    {
+      "from": "uploading",
+      "to": "verifying",
+      "trigger": "complete_manifest",
+      "guards": [
+        "current_lease",
+        "outputs_stable"
+      ]
+    },
+    {
+      "from": "verifying",
+      "to": "uploading",
+      "trigger": "resume_existing_upload",
+      "guards": [
+        "current_lease",
+        "outputs_stable"
+      ]
+    },
+    {
+      "from": "verifying",
+      "to": "succeeded",
+      "trigger": "finalize_verified_manifest",
+      "guards": [
+        "current_lease",
+        "cloud_manifest_verified",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "leased",
+      "to": "reconciling",
+      "trigger": "ownership_or_execution_unknown",
+      "guards": [
+        "ownership_uncertain"
+      ]
+    },
+    {
+      "from": "leased",
+      "to": "cancel_requested",
+      "trigger": "request_cancel",
+      "guards": [
+        "cancel_authorized"
+      ]
+    },
+    {
+      "from": "leased",
+      "to": "failed",
+      "trigger": "permanent_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "preparing",
+      "to": "reconciling",
+      "trigger": "ownership_or_execution_unknown",
+      "guards": [
+        "ownership_uncertain"
+      ]
+    },
+    {
+      "from": "preparing",
+      "to": "cancel_requested",
+      "trigger": "request_cancel",
+      "guards": [
+        "cancel_authorized"
+      ]
+    },
+    {
+      "from": "preparing",
+      "to": "failed",
+      "trigger": "permanent_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "submitting",
+      "to": "reconciling",
+      "trigger": "ownership_or_execution_unknown",
+      "guards": [
+        "ownership_uncertain"
+      ]
+    },
+    {
+      "from": "submitting",
+      "to": "cancel_requested",
+      "trigger": "request_cancel",
+      "guards": [
+        "cancel_authorized"
+      ]
+    },
+    {
+      "from": "submitting",
+      "to": "failed",
+      "trigger": "permanent_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "running",
+      "to": "reconciling",
+      "trigger": "ownership_or_execution_unknown",
+      "guards": [
+        "ownership_uncertain"
+      ]
+    },
+    {
+      "from": "running",
+      "to": "cancel_requested",
+      "trigger": "request_cancel",
+      "guards": [
+        "cancel_authorized"
+      ]
+    },
+    {
+      "from": "running",
+      "to": "failed",
+      "trigger": "permanent_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "collecting",
+      "to": "reconciling",
+      "trigger": "ownership_or_execution_unknown",
+      "guards": [
+        "ownership_uncertain"
+      ]
+    },
+    {
+      "from": "collecting",
+      "to": "cancel_requested",
+      "trigger": "request_cancel",
+      "guards": [
+        "cancel_authorized"
+      ]
+    },
+    {
+      "from": "collecting",
+      "to": "failed",
+      "trigger": "permanent_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "uploading",
+      "to": "reconciling",
+      "trigger": "ownership_or_execution_unknown",
+      "guards": [
+        "ownership_uncertain"
+      ]
+    },
+    {
+      "from": "uploading",
+      "to": "cancel_requested",
+      "trigger": "request_cancel",
+      "guards": [
+        "cancel_authorized"
+      ]
+    },
+    {
+      "from": "uploading",
+      "to": "failed",
+      "trigger": "permanent_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "verifying",
+      "to": "reconciling",
+      "trigger": "ownership_or_execution_unknown",
+      "guards": [
+        "ownership_uncertain"
+      ]
+    },
+    {
+      "from": "verifying",
+      "to": "cancel_requested",
+      "trigger": "request_cancel",
+      "guards": [
+        "cancel_authorized"
+      ]
+    },
+    {
+      "from": "verifying",
+      "to": "failed",
+      "trigger": "permanent_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "leased",
+      "to": "retry_wait",
+      "trigger": "retry_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "old_attempt_closed",
+        "retry_budget_available",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "preparing",
+      "to": "retry_wait",
+      "trigger": "retry_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "old_attempt_closed",
+        "retry_budget_available",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "submitting",
+      "to": "retry_wait",
+      "trigger": "retry_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "old_attempt_closed",
+        "retry_budget_available",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "running",
+      "to": "retry_wait",
+      "trigger": "retry_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "old_attempt_closed",
+        "retry_budget_available",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "collecting",
+      "to": "retry_wait",
+      "trigger": "retry_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "old_attempt_closed",
+        "retry_budget_available",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "cancel_requested",
+      "to": "cancelled",
+      "trigger": "cancel_confirmed",
+      "guards": [
+        "execution_stopped",
+        "no_result_publish",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "cancel_requested",
+      "to": "reconciling",
+      "trigger": "cancel_result_unknown",
+      "guards": [
+        "ownership_uncertain"
+      ]
+    },
+    {
+      "from": "cancel_requested",
+      "to": "failed",
+      "trigger": "permanent_confirmed_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "cancel_requested",
+      "trigger": "request_cancel",
+      "guards": [
+        "cancel_authorized"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "leased",
+      "trigger": "resume_confirmed_attempt",
+      "guards": [
+        "resume_authorized"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "preparing",
+      "trigger": "resume_confirmed_attempt",
+      "guards": [
+        "resume_authorized"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "running",
+      "trigger": "resume_confirmed_attempt",
+      "guards": [
+        "resume_authorized"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "collecting",
+      "trigger": "resume_confirmed_attempt",
+      "guards": [
+        "resume_authorized"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "uploading",
+      "trigger": "resume_confirmed_attempt",
+      "guards": [
+        "resume_authorized"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "verifying",
+      "trigger": "resume_confirmed_attempt",
+      "guards": [
+        "resume_authorized"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "cancel_requested",
+      "trigger": "resume_confirmed_attempt",
+      "guards": [
+        "resume_authorized"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "retry_wait",
+      "trigger": "reconciled_no_deliverable_result",
+      "guards": [
+        "execution_stopped",
+        "old_attempt_closed",
+        "retry_budget_available",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "failed",
+      "trigger": "reconciled_permanent_failure",
+      "guards": [
+        "execution_stopped",
+        "safe_failure",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "cancelled",
+      "trigger": "reconciled_cancellation",
+      "guards": [
+        "execution_stopped",
+        "no_result_publish",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "expired",
+      "trigger": "reconciled_never_started_expiry",
+      "guards": [
+        "not_running_proven",
+        "deadline_reached",
+        "terminal_commit_once",
+        "resources_accounted"
+      ]
+    }
+  ],
+  "notes": [
+    "事件不是状态写入指令；应用检查guard后CAS。",
+    "gpu资源事实与state分离；reconciling/cancel_requested保留resume_state。",
+    "上传失败首先续传，未丢失本地产物时不能直接重算。",
+    "核对中允许经授权记录取消意图进入 cancel_requested；这不证明执行停止，不释放 GPU、不提升 fence、不复活过期租约，Worker 仍按原 attempt 核对停止证据。"
+  ]
+}

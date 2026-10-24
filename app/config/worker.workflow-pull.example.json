@@ -1,0 +1,18 @@
+{
+  "control_origin": "https://control.example.invalid",
+  "credential_file": "C:/render-worker/private/node.secret",
+  "state_root": "C:/render-worker/state",
+  "gpus": [{"hardware_id": "REPLACE_WITH_REGISTERED_GPU_ID", "name": "Windows GPU"}],
+  "channels": [{
+    "base_url": "http://127.0.0.1:8188",
+    "hardware_id": "REPLACE_WITH_REGISTERED_GPU_ID",
+    "comfy_root": "C:/ComfyUI",
+    "workflow_export_root": "C:/render-worker/workflow-exports"
+  }],
+  "maximum_uploads": 2,
+  "minimum_free_disk_bytes": 5368709120,
+  "minimum_available_memory_bytes": 1073741824,
+  "maximum_spool_bytes": 21474836480,
+  "generation_reserve_bytes": 2147483648,
+  "output_retention_seconds": 3600
+}

@@ -1,0 +1,31 @@
+{
+  "source_commit": "7da09cab4e875463baa79fc150adde700c5438df",
+  "patches": [
+    {
+      "path": "internal/server/middleware/api_key_auth.go",
+      "stock_sha256": "71e180a0703d5e2caf6fe6832a3717affbd9866e2ad65278fde718277a822616",
+      "patched_sha256": "6c7f9f41c79740ed7098680e3532949f4fe977c871e5725b22abe366bb883868",
+      "old": "skipBilling := c.Request.URL.Path == \"/v1/usage\" || billingInfoRequest || isAsyncImageTaskRead(c.Request.Method, c.Request.URL.Path)",
+      "new": "skipBilling := c.Request.URL.Path == \"/v1/usage\" || billingInfoRequest || isAsyncImageTaskRead(c.Request.Method, c.Request.URL.Path) || isRenderControlTaskRead(c.Request.Method, c.Request.URL.Path) || isRenderControlOwnedBilling(c)"
+    },
+    {
+      "path": "cmd/server/wire_gen.go",
+      "stock_sha256": "c73fa54fabbc758d31b4cf8b66e1e7d6a54ef71df6e9beeb773f9260cf23ed17",
+      "patched_sha256": "d6e49bc947a7dafa3efcb438e7e472e67af2c4ca9357e4345d73c6fdd21de126",
+      "replacements": [
+        {
+          "old": "\t\"github.com/Wei-Shaw/sub2api/internal/repository\"\n",
+          "new": "\t\"github.com/Wei-Shaw/sub2api/internal/rendercontrol\"\n\t\"github.com/Wei-Shaw/sub2api/internal/repository\"\n"
+        },
+        {
+          "old": "\tapplication := &Application{\n",
+          "new": "\trenderControlCleanup, err := rendercontrol.InstallFromEnvironment(db, apiKeyAuthMiddleware, httpServer, configConfig.RunMode, rendercontrol.NewNativeBillingInvalidator(billingCache, subscriptionService))\n\tif err != nil {\n\t\tv()\n\t\treturn nil, err\n\t}\n\tcleanup := func() {\n\t\trenderControlCleanup()\n\t\tv()\n\t}\n\tapplication := &Application{\n"
+        },
+        {
+          "old": "\t\tCleanup:       v,\n",
+          "new": "\t\tCleanup:       cleanup,\n"
+        }
+      ]
+    }
+  ]
+}

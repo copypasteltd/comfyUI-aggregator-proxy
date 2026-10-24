@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-session:0.5.0",
+  "title": "Admin interaction and lifetime",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/activity"
+    },
+    {
+      "$ref": "#/$defs/lifetime"
+    }
+  ],
+  "$defs": {
+    "activity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activity"
+      ],
+      "properties": {
+        "activity": {
+          "const": "interactive"
+        }
+      }
+    },
+    "lifetime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "absolute_expires_at",
+        "idle_expires_at",
+        "server_time",
+        "idle_timeout_seconds"
+      ],
+      "properties": {
+        "absolute_expires_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4102444800
+        },
+        "idle_expires_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4102444800
+        },
+        "server_time": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4102444800
+        },
+        "idle_timeout_seconds": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 86400
+        }
+      }
+    }
+  }
+}

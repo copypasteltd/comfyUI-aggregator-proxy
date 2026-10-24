@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:worker-command-reconciliation:0.5.0",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/request"
+    },
+    {
+      "$ref": "#/$defs/response"
+    }
+  ],
+  "$defs": {
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "boot_id",
+        "command_digest",
+        "observation",
+        "result"
+      ],
+      "properties": {
+        "protocol": {
+          "const": "command-reconciliation-v1"
+        },
+        "boot_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "command_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "observation": {
+          "enum": [
+            "completed",
+            "unknown"
+          ]
+        },
+        "result": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "observation": {
+                "const": "unknown"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "observation": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result": {
+                "type": "object",
+                "required": [
+                  "success"
+                ],
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  }
+                },
+                "not": {
+                  "required": [
+                    "_control_recovery"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "command_id",
+        "acknowledged",
+        "resolution",
+        "command_status",
+        "server_time"
+      ],
+      "properties": {
+        "protocol": {
+          "const": "command-reconciliation-v1"
+        },
+        "command_id": {
+          "type": "string",
+          "pattern": "^cmd_[0-9a-f]{32}$"
+        },
+        "acknowledged": {
+          "type": "boolean"
+        },
+        "resolution": {
+          "enum": [
+            "already_completed",
+            "result_requires_revalidation",
+            "evidence_required"
+          ]
+        },
+        "command_status": {
+          "enum": [
+            "running",
+            "succeeded",
+            "failed"
+          ]
+        },
+        "server_time": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "evidence_required"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "acknowledged": {
+                "const": false
+              },
+              "command_status": {
+                "const": "running"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "acknowledged": {
+                "const": true
+              },
+              "command_status": {
+                "enum": [
+                  "succeeded",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "result_requires_revalidation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "command_status": {
+                "const": "failed"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

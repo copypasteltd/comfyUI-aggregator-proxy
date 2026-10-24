@@ -1,0 +1,1220 @@
+{
+  "at": "2026-10-23T21:36:52.326573+00:00",
+  "compiler": "go version go1.27.3 windows/amd64",
+  "command": "go test -json -mod=readonly -count=1 -p=2 -timeout=90s ./...",
+  "module": "render-control/sub2api-controlclient",
+  "source_sha256": {
+    "assets.go": "bd98b016c314e0b9dcab2d77ee4cadd9149919d8f950920276c11c73616354cb",
+    "assets_test.go": "3f8e248fd3d392809c0c95eca548d3f87ae11f2887e544d90e5f28c0974f8fd7",
+    "audio_test.go": "2c75abc63331c00818efcb04c3f6219db3d4c2b0163121ac666261d14c7a708a",
+    "catalog.go": "a85d12ed21efdaaa8b3cd6762764f8e0d06b8bd3afd919fda5adbb094ffc099d",
+    "catalog_test.go": "76b06b913804296f6b20c9bea81f9d9a661f56bd286131aee77dfc3dcde74ff7",
+    "client.go": "f05652279358beca2ec06b9e1f7e135233532475044817eb9edf036a1608a532",
+    "client_test.go": "87d93c6bba011ba0bf5b35029a046a1af5fc78555924ed7bf715d3355b44f07d",
+    "collections.go": "825da75ada8f8a10c535543e4b98c9bbc3ded8b7dd0296ff7965e5967efed16a",
+    "collections_test.go": "2f84bb0e62d8f9b1908b91d3a1dd82b1c0e50f612c3bd91cf9a4e7b8f04b99cd",
+    "go.mod": "bd5fb70c1d0baf9fe7d507d24566b4b6e53f7a777f51f80d2871ae9ad9c133c6",
+    "media.go": "7b1e2ade90c01550cfc6002b87f4c1eb5fde06a66b76c71fc434ad7db1dc9f45",
+    "media_test.go": "2e67cb266f67fd6033005f7ecb3bd3cd0dac918348d213351ea52041400314b6",
+    "proof_test.go": "3a15e3541d84c2cfb62d0f11e3a1e06cd2bbc0ea58c65bc3d2a630d1bd0a9df0",
+    "recovery_test.go": "4e90f2f61ac4a132bd3e9a2dadb9474358e4962490b7b6d72fc7330f13ecdfe2"
+  },
+  "sources_unchanged": true,
+  "offline_module_downloads_disabled": true,
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "top_level_tests": 45,
+  "subtests": 192,
+  "tests": [
+    {
+      "name": "TestAssetUploadUsesOneBoundedMultipartAndCurrentSubject",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry/wrong_size",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry/wrong_type",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry/wrong_state",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry/zero_width",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry/pixel_budget",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry/missing_expiry",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry/foreign_id",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry/wrong_hash",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadRejectsUntrustedResponsesAndDoesNotRetry",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestAssetUploadRejectsInputsBeforeHTTP",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadResponseLossAndRedirectStayUncertain/0",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadResponseLossAndRedirectStayUncertain/302",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadResponseLossAndRedirectStayUncertain/503",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadResponseLossAndRedirectStayUncertain/403",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetUploadResponseLossAndRedirectStayUncertain",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestAssetMetadataDeleteAndMediaUseFixedOriginalPaths/full",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetMetadataDeleteAndMediaUseFixedOriginalPaths/head",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetMetadataDeleteAndMediaUseFixedOriginalPaths/range",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetMetadataDeleteAndMediaUseFixedOriginalPaths/head_range",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetMetadataDeleteAndMediaUseFixedOriginalPaths",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetRangeCannotHideOversizedOrNonImageObject/oversized_range",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetRangeCannotHideOversizedOrNonImageObject/not_image",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAssetRangeCannotHideOversizedOrNonImageObject",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/rate",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/channels",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/opus_rate",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/codec",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/format_mime",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/image_parameter",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/fps_parameter",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/too_long",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/fractional_millisecond",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/mime",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/bytes",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/size",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize/duration_missing",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioCatalogPreservesActualFormatWithoutImageSize",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestAudioDoesNotChangeLegacySettlementEncodingOrMediaFamily",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogUsesFixedAuthenticatedPathsAndSafeProjection",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/object",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/version",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/digest",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/output_count",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/alias",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/presets_duplicate",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/seconds",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/output_mismatch",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/output_bytes",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/async",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/task",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/parameters_missing",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/parameters_unknown",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/output_duplicate",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/owner",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/created",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/parameters_duplicate",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/presets_missing",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/quality",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities/size",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsMalformedIdentityAndCapabilities",
+      "status": "pass",
+      "seconds": 0.06
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/null",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/duplicate_keys",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/trailing",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/large",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/wrong_object",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/duplicate_ids",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/duplicate_item_key",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/deep",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists/invalid_utf8",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCatalogRejectsAmbiguousAndOversizedLists",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestCatalogCancellationAndRemoteDenialStayBounded",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestStableGatewayIdentitySurvivesCredentialRotation",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestClientRequiresExplicitStableGatewayIdentity",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMetadataLifecycleAndIndependentServiceReconciliation",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRedirectNeverForwardsCredential",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies/false",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies/true",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestErrorsAndFormattingDoNotContainCredentialsOrResponseBodies",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCancellationDoesNotRetryAdmission",
+      "status": "pass",
+      "seconds": 1
+    },
+    {
+      "name": "TestUnsafeOriginsSubjectsAndIdentifiersAreRejectedBeforeHTTP",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMalformedSuccessfulAdmissionRemainsUncertain",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/unknown_status",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/pending_already_queued",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/expired_not_terminal",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/missing_expiry",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/wrong_request",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestUntrustedJobArtifactsAndDuplicateSettlementAreRejected",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionsUseFixedRoutesCurrentIdentityAndSafeProjection",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidQueryBeforeNetwork/cursor_large",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidQueryBeforeNetwork/zero",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidQueryBeforeNetwork/negative",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidQueryBeforeNetwork/large",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidQueryBeforeNetwork/cursor_control",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidQueryBeforeNetwork/model",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidQueryBeforeNetwork/status",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidQueryBeforeNetwork",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/empty_cursor",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/wrong_number",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/null",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/null_data",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/missing_cursor",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/more_without_cursor",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/duplicate_nested",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/utf8",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/wrong_object",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/bool_null",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/loop_cursor",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/duplicate_keys",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/depth",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/oversize",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/missing_bool",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/cursor_without_more",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/duplicate_ids",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/trailing",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope/empty_more",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsAmbiguousContinuationAndEnvelope",
+      "status": "pass",
+      "seconds": 0.08
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/id",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/media_task",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/media",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/max_length",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/expiry",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/date_limit",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/job",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/reference",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/empty_reference",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/model",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/task",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/length",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/sha",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent/created",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedContent",
+      "status": "pass",
+      "seconds": 0.07
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs/object",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs/created",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs/revision",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs/status",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs/model",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs/task",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs/premature_artifacts",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs/id",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestCollectionRejectsInvalidAuthorizedJobs",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestCollectionCancellationDenialAndEmptyTerminalPage",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestMediaUsesCurrentSubjectAndBoundedHeadRanges/full",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaUsesCurrentSubjectAndBoundedHeadRanges/head",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaUsesCurrentSubjectAndBoundedHeadRanges/range",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaUsesCurrentSubjectAndBoundedHeadRanges/head_range",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaUsesCurrentSubjectAndBoundedHeadRanges",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/too_large",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/unsafe_type",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/type_parameters",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/compressed",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/weak_etag",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/missing_etag",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/redirect",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/unbounded_length",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects/unrequested_range",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsUnsafeResponsesAndRedirects",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/none",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/multi",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/wrong_unit",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/zero_suffix",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/backwards",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/overflow",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/space",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/closed",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/open",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/suffix",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/empty",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/negative",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/closed#01",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/open#01",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/suffix#01",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/oversuffix",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/mismatch",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/length",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/clamp",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/total",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/unknown",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding/overflow#01",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRangeValidationAndResponseBinding",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsRangeDowngradeAndImageCorruption/downgrade",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsRangeDowngradeAndImageCorruption/range_mismatch",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsRangeDowngradeAndImageCorruption/hash",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsRangeDowngradeAndImageCorruption/truncated",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsRangeDowngradeAndImageCorruption/video_inline",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsRangeDowngradeAndImageCorruption/inline_size",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaRejectsRangeDowngradeAndImageCorruption",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestMediaBodyCloseCancelsInflightAndInvalidInputsDoNotCall",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestDeliveryMetadataPolicyAndIdempotentDeletion",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved/302",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved/401",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved/403",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved/404",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved/409",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved/416",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved/429",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved/503",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMediaErrorsAreSafeAndMutatingUncertaintyIsPreserved",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestJobArtifactsRequireSuccessfulUniquePublication/succeeded",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestJobArtifactsRequireSuccessfulUniquePublication/unpublished",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestJobArtifactsRequireSuccessfulUniquePublication/duplicate",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestJobArtifactsRequireSuccessfulUniquePublication",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryUsesOnlyServiceAuthority",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/unknown_lookup",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/unknown_close",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/closed_lookup",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/closed_missing_receipt",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/unknown_with_receipt",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/closed_with_admission",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/pending_lookup",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/pending_after_close",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/aborted_after_close",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/confirmed_after_close",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/admitted_with_receipt",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/admitted_without_record",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/unknown_state",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_request",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_task",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_price",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_authorization",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_tenant",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_key",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses",
+      "status": "pass",
+      "seconds": 0.06
+    },
+    {
+      "name": "TestRequestRecoveryLossRetainsWriteUncertaintyWithoutRetry/lookup",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryLossRetainsWriteUncertaintyWithoutRetry/close",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryLossRetainsWriteUncertaintyWithoutRetry",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsUnconstructedIdentityBeforeHTTP",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestRequestRecoveryRejectsDifferentGatewayUnderValidHTTPS",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestClosureProofCannotBeConstructedFromPublicJSON/lookup",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestClosureProofCannotBeConstructedFromPublicJSON/close",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestClosureProofCannotBeConstructedFromPublicJSON",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestUnknownAndAdmittedResponsesDoNotIssueClosureProof/unknown",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestUnknownAndAdmittedResponsesDoNotIssueClosureProof/admitted",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestUnknownAndAdmittedResponsesDoNotIssueClosureProof",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestExplicitLoopbackHTTPDoesNotIssueFinancialClosureProof",
+      "status": "pass",
+      "seconds": 0
+    }
+  ],
+  "duration_seconds": 58.58,
+  "provider_implemented": false,
+  "upstream_runtime_verified": false,
+  "virtualization_used": false
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:generation:admin-workflow-draft-restore",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "expected_revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740990
+    },
+    "source_release_id": {
+      "type": "string",
+      "pattern": "^wfr_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "source_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    }
+  },
+  "required": [
+    "expected_revision",
+    "source_release_id",
+    "source_digest"
+  ]
+}

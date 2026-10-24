@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Confirmed generation failure context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "code",
+    "task_type",
+    "model",
+    "release_id",
+    "attempt_id",
+    "channel_id"
+  ],
+  "properties": {
+    "code": {
+      "enum": [
+        "comfy_oom",
+        "comfy_output_invalid"
+      ]
+    },
+    "task_type": {
+      "enum": [
+        "text_to_image",
+        "image_to_image",
+        "references_to_image",
+        "text_to_video",
+        "references_to_video",
+        "text_to_audio"
+      ]
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^wfr_[a-f0-9]{32}$"
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^att_[a-f0-9]{32}$"
+    },
+    "channel_id": {
+      "type": "string",
+      "pattern": "^ch_[a-f0-9]{32}$"
+    }
+  }
+}

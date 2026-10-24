@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-23T19:45:43.369052+00:00",
+  "all_resolved": true,
+  "unresolved_failures": [],
+  "original_failed_runs_remain_failed": true,
+  "runs": [
+    {
+      "run": "targeted-connect",
+      "tests": 38,
+      "failures": 0,
+      "errors": 12,
+      "skipped": 0,
+      "seconds": 138.689,
+      "junit_sha256": "b99a681e416b626add021c294101e7fcfda8f59b3e5c50584caea95cf9572e64",
+      "reason_and_resolution": "Project PostgreSQL was not listening; restored only the owned native instance, retained durability settings and schema."
+    },
+    {
+      "run": "targeted-assertions",
+      "tests": 41,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 16.682,
+      "junit_sha256": "0238c349dae11c1199d5dcf85b1f883b00f3848574459cf9d4c87f60bd569afe",
+      "reason_and_resolution": "Corrected test-only Idempotency-Key lengths and recovery outer/admission status assertions."
+    },
+    {
+      "run": "full-first",
+      "tests": 1017,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 356.25,
+      "junit_sha256": "d2d528c65552ed2b437c600d659469f0d22f127fb3f111a955fbae116c9cc058",
+      "reason_and_resolution": "Two confirmation concurrency tests hit parent default rate budgets; synthetic catalog now declares high protocol request budgets, dedicated low-budget hierarchy tests retain rejection checks."
+    },
+    {
+      "run": "browser-first",
+      "passed": false,
+      "report_sha256": "0f07883b029ec71832d5d4ec79398e3ef762adf4f5955471f6cd8e9dcd3b0a5b",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Click visible Element Plus switch wrapper, not its hidden input."
+    },
+    {
+      "run": "browser-second",
+      "passed": false,
+      "report_sha256": "88bc7c1e91214a2ad025bbf81ea5eaf046f50143747f97ec3a6e9c001e451cfa",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Select label assertion now targets the visible selected item."
+    },
+    {
+      "run": "browser-third",
+      "passed": false,
+      "report_sha256": "18abc2c76180eb1a6672cbf80fd0ee5f4900c522a2bdd35cea373dfc990dc1f8",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Create the required synthetic gateway before testing its binding picker."
+    },
+    {
+      "run": "native-pre-review",
+      "passed": true,
+      "current_validation_claim": false,
+      "report_sha256": "b898596196616d9d615d37a52c15a6eef8668159f3f424c9a4a3c1a25ffee22c",
+      "reason_and_resolution": "The successful protocol path did not use a diagnostic SQL column accidentally renamed by the local copier. Restored dispatch_count, verified the maintained script differs only in output/date/provider-build references, and reran all native cases."
+    }
+  ],
+  "final_python": {
+    "tests": 1017,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 196.875
+  },
+  "production_limits_relaxed": false
+}

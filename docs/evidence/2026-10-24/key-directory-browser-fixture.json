@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "run_id": "dba8e83fdfda",
+  "checks": [
+    "desktop_create_shared_key_with_project_page3_creator_page3_and_archived_source",
+    "desktop_edit_restores_labels_beyond_current_key_page",
+    "desktop_failed_resolution_preserves_grants_blocks_save_and_retries",
+    "desktop_project_removal_retains_invalid_creators_until_explicit_repair",
+    "desktop_tenant_change_clears_grants_with_persistent_notice",
+    "desktop_closed_popup_and_drawer_cancel_pending_search",
+    "desktop_1000_project_and_creator_labels_resolve_in_bounded_post_batches_and_save",
+    "mobile_create_shared_key_with_project_page3_creator_page3_and_archived_source",
+    "mobile_edit_restores_labels_beyond_current_key_page",
+    "mobile_failed_resolution_preserves_grants_blocks_save_and_retries",
+    "mobile_project_removal_retains_invalid_creators_until_explicit_repair",
+    "mobile_tenant_change_clears_grants_with_persistent_notice",
+    "mobile_closed_popup_and_drawer_cancel_pending_search",
+    "observer_cannot_open_key_write_form_or_query_directory"
+  ],
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "sources_sha256": {
+    ".local\\test-key-directory-browser.py": "4cc33cf83013cb8be4909fcb5158bb82e8c3567b64bea2b1f416a661e501c0b5",
+    ".local\\browser-key-directory-smoke.py": "6973dab24bc8f16233c54d11cce626f6c468b233b32c30e0973d98398692bd00"
+  },
+  "backup_before_ddl": {
+    "sha256": "08c59ba4a31a8439acdf7f7f521fbb856d16723da42c817ba9afa612cfd59745",
+    "archive_list_verified": true
+  },
+  "database_mutations_verified": true,
+  "runner_intentionally_not_started": true,
+  "duration_seconds": 46.56,
+  "owned_processes": [
+    {
+      "name": "retry-api",
+      "pid": 1324,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "source_unchanged": true
+}

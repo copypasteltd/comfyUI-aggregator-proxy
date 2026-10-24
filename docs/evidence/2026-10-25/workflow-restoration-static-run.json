@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-24T18:50:03.527094+00:00",
+  "passed": true,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.11,
+      "log": "workflow-restoration-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "seconds": 1.26,
+      "log": "workflow-restoration-mypy.log"
+    },
+    {
+      "name": "lock",
+      "exit_code": 0,
+      "seconds": 0.09,
+      "log": "workflow-restoration-lock.log"
+    },
+    {
+      "name": "docs",
+      "exit_code": 0,
+      "seconds": 2.15,
+      "log": "workflow-restoration-docs.log"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+
+> render-control-admin@0.1.0 build
+> vue-tsc --noEmit && vite build
+
+src/pages/Alerts.vue(9,42): error TS2339: Property 'AlertQuery' does not exist on type '{ AccessCaptureHealth: { started_at: number; written: number; failed: number; overloaded: number; anonymous_skipped: number; }; AccessEventView: { id: string; request_id: string; started_at: number; ... 13 more ...; response_bytes: number; }; ... 215 more ...; generation_contracts__gateway__BindingView: { ...; }; }'.
+src/pages/Alerts.vue(11,98): error TS2345: Argument of type '{ page: number; }' is not assignable to parameter of type 'Filter'.
+  Type '{ page: number; }' is missing the following properties from type 'Filter': kind, severity, resource_id
+src/pages/Alerts.vue(16,59): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type 'Record<"gpu_occupancy_uncertain" | "job_reconciling" | "node_heartbeat_stale" | "channel_observation_stale" | "channel_config_unverified" | "job_waiting_over_5m" | "operation_failed" | ... 7 more ... | "job_output_invalid_recent", string>'.
+src/pages/Alerts.vue(54,210): error TS2322: Type '{ page: number; }' is not assignable to type 'Filter | { kind: any; page: any; severity: any; resource_id: any; }'.
+  Type '{ page: number; }' is missing the following properties from type '{ kind: any; page: any; severity: any; resource_id: any; }': kind, severity, resource_id

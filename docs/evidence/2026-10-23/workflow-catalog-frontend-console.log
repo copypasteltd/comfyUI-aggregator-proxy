@@ -1,0 +1,41 @@
+Exported 114 implemented OpenAPI paths
+
+> render-control-admin@0.1.0 generate:api
+> openapi-typescript ../../config/openapi.json -o src/generated/api.d.ts
+
+✨ openapi-typescript 7.13.0
+🚀 ../../config/openapi.json → src/generated/api.d.ts [301ms]
+
+> render-control-admin@0.1.0 build
+> vue-tsc --noEmit && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 1716 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                        0.44 kB │ gzip:   0.32 kB
+dist/assets/KeyAccess-DaDYgnlc.css                     0.48 kB │ gzip:   0.23 kB
+dist/assets/Workflows-CsD7kii1.css                     1.08 kB │ gzip:   0.42 kB
+dist/assets/index-GLRZaBAL.css                       369.02 kB │ gzip:  50.44 kB
+dist/assets/_plugin-vue_export-helper-DlAUqK2U.js      0.09 kB │ gzip:   0.10 kB
+dist/assets/Alerts-1TAR8dov.js                         4.25 kB │ gzip:   2.27 kB
+dist/assets/Overview-CRFKf3QQ.js                       5.08 kB │ gzip:   2.49 kB
+dist/assets/Content-DhuqzcFp.js                        5.99 kB │ gzip:   2.55 kB
+dist/assets/Records-CucgYB8O.js                        6.12 kB │ gzip:   2.56 kB
+dist/assets/KeyAccess-mr6GXvrN.js                      6.62 kB │ gzip:   3.18 kB
+dist/assets/Users-DDh7ObW0.js                          7.02 kB │ gzip:   3.06 kB
+dist/assets/ModelArtifacts-ZDmOQSND.js                 9.01 kB │ gzip:   3.56 kB
+dist/assets/Jobs-D-Ccm_wU.js                          10.36 kB │ gzip:   4.17 kB
+dist/assets/Gateways-DNyCjM8i.js                      11.10 kB │ gzip:   3.91 kB
+dist/assets/Models-CRMJR1Af.js                        12.55 kB │ gzip:   4.59 kB
+dist/assets/Channels-DCC-78Fe.js                      16.56 kB │ gzip:   5.65 kB
+dist/assets/Keys-DtEFOQU-.js                          17.02 kB │ gzip:   6.01 kB
+dist/assets/Workflows-B9_w9Weg.js                     31.83 kB │ gzip:  10.64 kB
+dist/assets/index-fQnG0aoQ.js                      1,057.23 kB │ gzip: 349.07 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 11.02s

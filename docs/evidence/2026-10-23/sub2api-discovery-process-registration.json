@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-23T01:30:06.0566720+00:00",
+  "observed_process_check": {
+    "at": "2026-10-23T09:28:33.0234523+08:00",
+    "registered": 10,
+    "all_identities_match": true,
+    "identities": [
+      {
+        "pid": 15496,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 15852,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 33592,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 27548,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 36948,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 9120,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 25204,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 26088,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 24548,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 27444,
+        "running": true,
+        "identity_matches": true
+      }
+    ],
+    "remaining_project_test_processes": 0
+  },
+  "reason": "Recursive registration followed conhost into an HP desktop extension; this executable is outside application ownership. All ten observed identities matched; only the registration is removed.",
+  "excluded_entry": {
+    "Name": "api-child-child",
+    "Pid": 27444,
+    "StartTime": "2026-10-21T16:06:48.5077393Z",
+    "Executable": "C:\\Program Files\\WindowsApps\\AD2F1837.myHP_61.52637.14262.0_x64__v10z8vjag6ke6\\win32\\DesktopExtension.exe",
+    "Depth": 2
+  },
+  "excluded_parent_pid": 26088,
+  "retained_registered_processes": 9,
+  "retained_runner_gc_processes": 6,
+  "process_terminated": false,
+  "restart_helper_limited_to_direct_verified_python_and_conhost_children": true
+}

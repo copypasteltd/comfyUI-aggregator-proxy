@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "run_id": "9412978022e4",
+  "synthetic_catalog": true,
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "real_comfyui": false,
+  "database_assertions": {
+    "one_create_after_lost_response": true,
+    "one_cas_edit_after_lost_response_and_conflict": true,
+    "one_rotation_after_replay": true,
+    "original_selected_values_preserved": true,
+    "one_delete_after_lost_response": true,
+    "one_active_credential": true,
+    "no_jobs_attempts_or_occupancy": true,
+    "gpu_fences_unchanged": true,
+    "audit_counts": {
+      "key.enable": 1,
+      "key.rotate": 2,
+      "key.disable": 1,
+      "key.created": 2,
+      "key.deleted": 1,
+      "key.updated": 1
+    }
+  },
+  "authentication_audit": {
+    "admin.login": 3,
+    "admin.logout": 1
+  },
+  "checks": [
+    "desktop_three_directories_page2_selection_alias_values_and_selected_label_retention",
+    "desktop_project_change_clears_selected_values_without_expanding_authorization",
+    "desktop_actual_committed_create_replays_original_request_without_redisplaying_secret",
+    "desktop_actual_committed_patch_original_revision_conflict_preserves_record_and_reads_current_policy",
+    "desktop_actual_rotation_replay_keeps_single_new_credential_and_does_not_return_secret",
+    "desktop_unresolved_selection_blocks_save_and_explicit_removal_preserves_empty_deny",
+    "desktop_literal_search_and_selector_ten_second_budget_without_automatic_retry",
+    "desktop_first_create_and_rotation_secrets_display_once_clear_on_hidden_and_close_without_browser_storage",
+    "desktop_committed_write_timeout_ignores_late_reply_and_replays_same_disable_request",
+    "desktop_actual_soft_delete_lost_response_replays_original_revision_without_duplicate_audit",
+    "desktop_content_directory_remains_independent_and_cross_tenant_change_resets_sharing",
+    "desktop_first_read_failure_is_not_presented_as_an_empty_key_directory",
+    "desktop_list_failure_marks_last_snapshot_and_ten_second_budget_requires_explicit_retry",
+    "desktop_closed_form_aborts_selector_and_late_reply_cannot_reopen_it",
+    "desktop_hidden_selector_aborts_and_visible_session_recheck_precedes_resume",
+    "desktop_unmount_and_logout_abort_reads_late_replies_cannot_restore_private_key_state",
+    "mobile_exact_selected_audio_resources_and_390px_layout_without_mutation"
+  ]
+}

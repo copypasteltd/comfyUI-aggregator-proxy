@@ -1,0 +1,127 @@
+{
+  "at": "2026-10-24T17:42:12.777494+00:00",
+  "passed": true,
+  "run_id": "47dbd5b94258",
+  "checks": [
+    "fresh_offline_wheels_seven_modules_frozen_contracts_no_editable_dependencies",
+    "installed_s3_exact_version_guard_and_bounded_read_close_without_source_checkout",
+    "installed_four_audio_formats_decode_without_global_ffmpeg",
+    "existing_installation_refused_without_modification",
+    "startup_on_empty_database_refuses_without_implicit_ddl",
+    "installed_migration_takes_native_pg18_backup_and_verifies_archive_before_ddl",
+    "installed_recovery_keygen_is_independent_private_and_never_overwrites",
+    "installed_readonly_recovery_snapshot_and_verify_use_exact_candidate_modules",
+    "installed_recovery_rejects_tampering_before_any_config_database_or_storage_access",
+    "invalid_configuration_and_missing_tls_fail_without_secret_output",
+    "installed_https_health_and_bundled_admin_assets",
+    "unauthenticated_and_business_bearer_cannot_enter_admin",
+    "installed_audit_retention_defaults_disabled_and_status_is_read_only",
+    "installed_channel_query_literal_filters_bounds_and_unknown_fields",
+    "installed_channel_deletion_endpoint_requires_identity_and_validates_identifiers",
+    "installed_reapply_revision_and_worker_reconciliation_identity_boundaries",
+    "installed_session_lifetime_csrf_explicit_activity_and_logout_without_source_checkout",
+    "installed_runner_and_independent_gc_execute_once",
+    "worker_explicit_config_preserves_unresolved_durable_journal_without_comfy_call",
+    "installed_worker_refuses_unbound_legacy_journal_without_changing_execution_facts",
+    "installed_worker_explicit_adoption_verifies_backup_and_retains_unknown_submit",
+    "incompatible_database_revision_blocks_startup_without_migration",
+    "fresh_installed_real_browser_desktop_mobile_admin_and_content",
+    "runtime_tampered_payload_is_rejected_and_manifest_stays_immutable"
+  ],
+  "virtualization_used": false,
+  "production_accepted": false,
+  "archive_sha256": "97123457627254df84d9406f58f663f16dbd590f795d3e1c21e7c41fe4dc032b",
+  "release_id": "rc-20261025.74.1",
+  "source_tree_sha256": "62389ecc0b4eabd7dedcc991023a942b658003cd3df52adecd441cd0dca2acb6",
+  "payload_files": 149,
+  "database_head": "0a7d9b4e2136",
+  "installation": {
+    "application_modules": [
+      "generation_domain",
+      "generation_application",
+      "generation_contracts",
+      "generation_infrastructure",
+      "control_api",
+      "control_runner",
+      "windows_worker"
+    ],
+    "archive_sha256": "97123457627254df84d9406f58f663f16dbd590f795d3e1c21e7c41fe4dc032b",
+    "contracts_verified": 49,
+    "editable": false,
+    "format_version": 1,
+    "manifest_sha256": "8ad1dfe7aaa71fd403a8211ce94f5b017c963dc4ddd47c89f2860bd8f55eb0f8",
+    "offline": true,
+    "python_version": "3.13.1",
+    "release_id": "rc-20261025.74.1",
+    "requirements": 57
+  },
+  "s3_boundary": {
+    "passed": true,
+    "isolated_installed_module": true,
+    "valid_stream_and_wrong_version_guard": true,
+    "response_bodies_closed": true,
+    "real_s3": false
+  },
+  "audio_media": {
+    "passed": true,
+    "formats": [
+      "wav",
+      "flac",
+      "mp3",
+      "opus"
+    ],
+    "global_media_tools_unavailable": true,
+    "bundled_tools_used": true
+  },
+  "pre_migration_backup": {
+    "archive_list_verified": true,
+    "sha256": "9dbe9af692c6f00736762efe072243c894281593ba5c4bd2ebc84eb4513da7da",
+    "created_before_ddl": true
+  },
+  "recovery_verification": {
+    "passed": true,
+    "tables": 42,
+    "rows": 1,
+    "objects": 0,
+    "object_bytes": 0,
+    "media": {
+      "images": 0,
+      "videos": 0,
+      "audio": 0,
+      "other": 0
+    },
+    "encrypted_values": 0,
+    "master_key_verified": true,
+    "pepper_verified": true,
+    "database_read_only": true,
+    "reconciliation_required_before_dispatch": true,
+    "production_recovery_accepted": false
+  },
+  "browser": {
+    "passed": true,
+    "checks": [
+      "desktop_installed_admin_login_and_live_queue",
+      "desktop_installed_statistics_audio_empty_unknown_and_responsive",
+      "desktop_installed_content_route_and_authorization",
+      "desktop_installed_audit_query_and_responsive_filters",
+      "mobile_installed_admin_login_and_live_queue",
+      "mobile_installed_statistics_audio_empty_unknown_and_responsive",
+      "mobile_installed_content_route_and_authorization",
+      "mobile_installed_audit_query_and_responsive_filters"
+    ],
+    "errors": [],
+    "closed_contexts": 2,
+    "browser_closed": true
+  },
+  "processes": [
+    {
+      "name": "installed-api",
+      "pid": 2156,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "temporary_database_removed": true,
+  "temporary_root_removed": true,
+  "duration_seconds": 254.63
+}

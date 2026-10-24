@@ -1,0 +1,470 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://generation.local/contracts/admin-model-mapping-options.schema.json",
+  "title": "admin-model-mapping-options",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "enum": [
+        "workflow",
+        "release",
+        "channel",
+        "preset"
+      ]
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^prj_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "snapshot_at": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "has_more": {
+      "type": "boolean"
+    },
+    "total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "data": {
+      "type": "array",
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "kind",
+    "project_id",
+    "snapshot_at",
+    "page",
+    "has_more",
+    "total",
+    "data"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "workflow"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "workflow"
+                },
+                "id": {
+                  "type": "string",
+                  "pattern": "^wf_[a-f0-9]{32}$",
+                  "not": {
+                    "pattern": "[\\r\\n]"
+                  }
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "task_type": {
+                  "enum": [
+                    "text_to_image",
+                    "image_to_image",
+                    "references_to_image",
+                    "text_to_video",
+                    "references_to_video",
+                    "text_to_audio"
+                  ]
+                },
+                "archived": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "kind",
+                "id",
+                "name",
+                "task_type",
+                "archived"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "channel"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "channel"
+                },
+                "id": {
+                  "type": "string",
+                  "pattern": "^ch_[a-f0-9]{32}$",
+                  "not": {
+                    "pattern": "[\\r\\n]"
+                  }
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "draining": {
+                  "type": "boolean"
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "kind",
+                "id",
+                "name",
+                "enabled",
+                "draining",
+                "revision"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "release"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "release"
+                },
+                "id": {
+                  "type": "string",
+                  "pattern": "^wfr_[a-f0-9]{32}$",
+                  "not": {
+                    "pattern": "[\\r\\n]"
+                  }
+                },
+                "workflow_id": {
+                  "type": "string",
+                  "pattern": "^wf_[a-f0-9]{32}$",
+                  "not": {
+                    "pattern": "[\\r\\n]"
+                  }
+                },
+                "task_type": {
+                  "enum": [
+                    "text_to_image",
+                    "image_to_image",
+                    "references_to_image",
+                    "text_to_video",
+                    "references_to_video",
+                    "text_to_audio"
+                  ]
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "validated": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "kind",
+                "id",
+                "workflow_id",
+                "task_type",
+                "version",
+                "validated"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "preset"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "preset"
+                },
+                "id": {
+                  "type": "string",
+                  "pattern": "^preset_[0-9]{1,5}$",
+                  "not": {
+                    "pattern": "[\\r\\n]"
+                  }
+                },
+                "release_id": {
+                  "type": "string",
+                  "pattern": "^wfr_[a-f0-9]{32}$",
+                  "not": {
+                    "pattern": "[\\r\\n]"
+                  }
+                },
+                "task_type": {
+                  "enum": [
+                    "text_to_image",
+                    "image_to_image",
+                    "references_to_image",
+                    "text_to_video",
+                    "references_to_video",
+                    "text_to_audio"
+                  ]
+                },
+                "defaults": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "n": {
+                      "type": "integer",
+                      "const": 1
+                    },
+                    "quality": {
+                      "enum": [
+                        "draft",
+                        "standard",
+                        "high"
+                      ]
+                    },
+                    "size": {
+                      "type": "string",
+                      "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                      "not": {
+                        "pattern": "[\\r\\n]"
+                      }
+                    },
+                    "seconds": {
+                      "type": "number",
+                      "minimum": 0.001,
+                      "maximum": 600
+                    }
+                  },
+                  "required": [
+                    "n",
+                    "quality"
+                  ]
+                },
+                "usable": {
+                  "type": "boolean"
+                },
+                "audio": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "format": {
+                          "enum": [
+                            "wav",
+                            "flac",
+                            "mp3",
+                            "opus"
+                          ]
+                        },
+                        "sample_rate": {
+                          "type": "integer",
+                          "minimum": 8000,
+                          "maximum": 96000
+                        },
+                        "channels": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2
+                        }
+                      },
+                      "required": [
+                        "format",
+                        "sample_rate",
+                        "channels"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "kind",
+                "id",
+                "release_id",
+                "task_type",
+                "defaults",
+                "usable"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "task_type": {
+                        "const": "text_to_audio"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "audio"
+                    ],
+                    "properties": {
+                      "audio": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "format": {
+                            "enum": [
+                              "wav",
+                              "flac",
+                              "mp3",
+                              "opus"
+                            ]
+                          },
+                          "sample_rate": {
+                            "type": "integer",
+                            "minimum": 8000,
+                            "maximum": 96000
+                          },
+                          "channels": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2
+                          }
+                        },
+                        "required": [
+                          "format",
+                          "sample_rate",
+                          "channels"
+                        ]
+                      },
+                      "defaults": {
+                        "required": [
+                          "seconds"
+                        ],
+                        "not": {
+                          "required": [
+                            "size"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "audio": {
+                        "type": "null"
+                      },
+                      "defaults": {
+                        "required": [
+                          "size"
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "task_type": {
+                        "enum": [
+                          "text_to_video",
+                          "references_to_video"
+                        ]
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "defaults": {
+                        "required": [
+                          "seconds"
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "task_type": {
+                        "enum": [
+                          "text_to_image",
+                          "image_to_image",
+                          "references_to_image"
+                        ]
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "defaults": {
+                        "not": {
+                          "required": [
+                            "seconds"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

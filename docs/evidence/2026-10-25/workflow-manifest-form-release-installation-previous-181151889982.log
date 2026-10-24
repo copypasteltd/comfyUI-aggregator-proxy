@@ -1,0 +1,10 @@
+{"passed": false, "run_id": "8fc3f6d0a514", "checks": 4, "cleaned": true}
+Traceback (most recent call last):
+  File "E:\dev\sandbox\生图生视API封装\app\scripts\test-release-install.py", line 343, in <module>
+    main()
+    ~~~~^^
+  File "E:\dev\sandbox\生图生视API封装\app\scripts\test-release-install.py", line 136, in main
+    admin = psycopg.connect(**{**options, "dbname": "postgres"}, autocommit=True)
+  File "E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired

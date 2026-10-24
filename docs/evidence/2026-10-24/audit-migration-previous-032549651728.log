@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "E:\dev\sandbox\生图生视API封装\app\.local\migrate-audit.py", line 111, in <module>
+    main()
+    ~~~~^^
+  File "E:\dev\sandbox\生图生视API封装\app\.local\migrate-audit.py", line 57, in main
+    before = snapshot(connection, key)
+  File "E:\dev\sandbox\生图生视API封装\app\.local\migrate-audit.py", line 34, in snapshot
+    rows = connection.execute(sql.SQL('SELECT row_to_json(t)::text FROM {} t ORDER BY id').format(sql.Identifier(name))).fetchall()
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\psycopg\connection.py", line 304, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "id" does not exist
+LINE 1: ...CT row_to_json(t)::text FROM "gpu_occupancies" t ORDER BY id
+                                                                     ^

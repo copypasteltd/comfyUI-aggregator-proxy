@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-23T23:15:25.897559+00:00",
+  "entries": [
+    {
+      "kind": "browser_assertion",
+      "record": "worker-nodes-browser-before-close-assertion.json",
+      "result": "failed",
+      "reason": "The initial assertion required the closed dialog input element to be removed. The original dialog retained an empty hidden input.",
+      "resolution": "Final UI destroys the one-time dialog on close, resets the password mask on reopen, and verifies hidden-page credential removal and a full refresh-interval pause.",
+      "original_failure_preserved": true
+    },
+    {
+      "kind": "superseded_candidate",
+      "release_id": "rc-20261024.56.1",
+      "archive_sha256": "bfe1544d2033b93718e3716b01baf56faf4e3b6abeadf46f196bc96ec16bfb26",
+      "result": "build_passed_not_installed",
+      "reason": "Final onboarding review added direct copying of the existing Worker credential-file JSON shape; only WorkerNodes.vue changed.",
+      "replacement": "rc-20261024.56.3"
+    },
+    {
+      "kind": "superseded_candidate",
+      "release_id": "rc-20261024.56.2",
+      "archive_sha256": "d314a612afac3c0d8038de284769cea6927a21c4e744bcaf9265d6182c7f7e58",
+      "result": "build_passed_not_installed",
+      "reason": "The maintained native test harness now restores all six explicit test-only Workflow confirmations after first registration, matching the new boot guard.",
+      "replacement": "rc-20261024.56.3"
+    },
+    {
+      "kind": "native_fixture",
+      "record": "worker-nodes-native-before-binding-fixture.json",
+      "result": "failed",
+      "reason": "The initial native fixture restored channel confirmation after Worker registration but left all six Workflow bindings invalidated. One admitted job stayed queued until the test timeout.",
+      "safe_failure_state": "queued job; no generation was submitted; all owned processes, databases, media and credentials cleaned",
+      "resolution": "The test-only harness verifies the six synthetic releases and their applied digests, then confirms their bindings after registration. Production registration behavior is unchanged.",
+      "original_failure_preserved": true
+    },
+    {
+      "kind": "validation_scope",
+      "result": "application_backend_unchanged",
+      "reason": "Full Python 1177 checks ran after the final registration/lifecycle guards. Only credential JSON copy text/behavior and the native test harness changed afterward; matching frontend, browser, native and final candidate checks cover those changes."
+    },
+    {
+      "kind": "existing_nonblocking_tool_warnings",
+      "items": [
+        "Upstream Starlette TestClient deprecation warning",
+        "Existing shared Element Plus frontend chunk exceeds Vite size advisory"
+      ]
+    }
+  ]
+}

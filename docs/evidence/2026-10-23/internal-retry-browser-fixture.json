@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "run_id": "3f4cd92fade8",
+  "checks": [
+    "desktop_live_overview_retry_is_unfinished_without_ready_or_gpu_count",
+    "desktop_live_detail_retry_count_reason_server_time_and_closed_attempt",
+    "desktop_retry_wait_priority_keeps_job_backoff_and_identity",
+    "desktop_priority_csrf_and_stale_revision_are_enforced",
+    "mobile_live_overview_retry_is_unfinished_without_ready_or_gpu_count",
+    "mobile_live_detail_retry_count_reason_server_time_and_closed_attempt",
+    "mobile_retry_wait_cancel_is_terminal_and_clears_schedule",
+    "mobile_retry_detail_has_no_document_overflow"
+  ],
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "backup_before_ddl": {
+    "sha256": "3f3c89659ec3df2c740b755dc26990fe37908a7808c5f1a0ab33d58c6186d254",
+    "archive_list_verified": true
+  },
+  "database_mutations_verified": true,
+  "runner_intentionally_not_started": true,
+  "duration_seconds": 211.23,
+  "owned_processes": [
+    {
+      "name": "retry-api",
+      "pid": 11824,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ]
+}

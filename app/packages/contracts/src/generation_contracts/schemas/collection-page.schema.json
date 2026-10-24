@@ -1,0 +1,495 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.invalid/contracts/collection-page.schema.json",
+  "contract_version": "0.5.0",
+  "title": "Authorized cursor collection",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/job_page"
+    },
+    {
+      "$ref": "#/$defs/content_page"
+    },
+    {
+      "$ref": "#/$defs/gateway_content_page"
+    }
+  ],
+  "$defs": {
+    "job": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "object",
+        "model",
+        "task_type",
+        "status",
+        "created_at"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(job|rc)_[a-f0-9]{32}$"
+        },
+        "object": {
+          "enum": [
+            "generation.job",
+            "job"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "task_type": {
+          "enum": [
+            "text_to_image",
+            "image_to_image",
+            "references_to_image",
+            "text_to_video",
+            "references_to_video",
+            "text_to_audio"
+          ]
+        },
+        "status": {
+          "enum": [
+            "admission_pending",
+            "queued",
+            "leased",
+            "preparing",
+            "submitting",
+            "running",
+            "collecting",
+            "uploading",
+            "verifying",
+            "reconciling",
+            "retry_wait",
+            "cancel_requested",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "expired"
+          ]
+        },
+        "created_at": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 253402300799
+        },
+        "updated_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "completed_at": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 253402300799
+        },
+        "error": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "poll_url": {
+          "type": "string",
+          "pattern": "^/v1/jobs/rc_[a-f0-9]{32}$"
+        },
+        "artifacts": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^content_[a-f0-9]{32}$"
+              }
+            }
+          }
+        },
+        "retry": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/job_retry"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "job_id",
+        "bytes",
+        "media_type",
+        "sha256",
+        "created_at",
+        "expires_at"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^content_[a-f0-9]{32}$"
+        },
+        "job_id": {
+          "type": "string",
+          "pattern": "^(job|rc)_[a-f0-9]{32}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483648
+        },
+        "media_type": {
+          "enum": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "video/mp4",
+            "video/webm",
+            "audio/wav",
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg"
+          ]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "created_at": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 253402300799
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 253402300799
+        }
+      }
+    },
+    "gateway_content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "job_id",
+        "bytes",
+        "media_type",
+        "sha256",
+        "created_at",
+        "expires_at",
+        "external_task_ref",
+        "model",
+        "task_type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^content_[a-f0-9]{32}$"
+        },
+        "job_id": {
+          "type": "string",
+          "pattern": "^(job|rc)_[a-f0-9]{32}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483648
+        },
+        "media_type": {
+          "enum": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "video/mp4",
+            "video/webm",
+            "audio/wav",
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg"
+          ]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "created_at": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 253402300799
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 253402300799
+        },
+        "external_task_ref": {
+          "type": "string",
+          "pattern": "^[!-~]{1,128}$"
+        },
+        "model": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "task_type": {
+          "enum": [
+            "text_to_image",
+            "image_to_image",
+            "references_to_image",
+            "text_to_video",
+            "references_to_video",
+            "text_to_audio"
+          ]
+        }
+      }
+    },
+    "job_page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "object",
+        "data",
+        "has_more",
+        "next_cursor"
+      ],
+      "properties": {
+        "object": {
+          "const": "list"
+        },
+        "data": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/job"
+          }
+        },
+        "has_more": {
+          "type": "boolean"
+        },
+        "next_cursor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 8192
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "has_more": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "next_cursor": {
+                "type": "string"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "next_cursor": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "content_page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "object",
+        "data",
+        "has_more",
+        "next_cursor"
+      ],
+      "properties": {
+        "object": {
+          "const": "list"
+        },
+        "data": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/content"
+          }
+        },
+        "has_more": {
+          "type": "boolean"
+        },
+        "next_cursor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 8192
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "has_more": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "next_cursor": {
+                "type": "string"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "next_cursor": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "gateway_content_page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "object",
+        "data",
+        "has_more",
+        "next_cursor"
+      ],
+      "properties": {
+        "object": {
+          "const": "list"
+        },
+        "data": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/gateway_content"
+          }
+        },
+        "has_more": {
+          "type": "boolean"
+        },
+        "next_cursor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "has_more": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "next_cursor": {
+                "type": "string"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "next_cursor": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "job_retry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "limit",
+        "next_at",
+        "last_error"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "limit": {
+          "const": 2
+        },
+        "next_at": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "last_error": {
+          "enum": [
+            null,
+            "preparation_transport_failure"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "count": {
+                "const": 0
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "next_at": {
+                "type": "null"
+              },
+              "last_error": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "last_error": {
+                "const": "preparation_transport_failure"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

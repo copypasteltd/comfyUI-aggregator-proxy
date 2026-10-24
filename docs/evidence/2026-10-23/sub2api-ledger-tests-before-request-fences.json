@@ -1,0 +1,324 @@
+{
+  "at": "2026-10-22T20:22:17.515834+00:00",
+  "source_commit": "7da09cab4e875463baa79fc150adde700c5438df",
+  "source_archive_sha256": "03504108ee0e4d2ef79c5874563153c3d205588ae5354dbefe01e7e1c40af152",
+  "harness_sha256": "22dcefc42d739f88f1066fd4177906458515f928687cb8490d10e6d83707321c",
+  "compiler": "go version go1.27.3 windows/amd64",
+  "command": "verified native ledger binary via test2json -test.count=1 -test.timeout=240s",
+  "duration_seconds": 140.23,
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "production_repository_compiled": true,
+  "upstream_tests_run": false,
+  "vet_enabled": false,
+  "gofmt_verified": true,
+  "schema": "native upstream schema: migrations=298 tables=103 replay_verified=true",
+  "migrations_replayed": true,
+  "backup_sha256": "4010cbf39ffc0a1b85170bb8803732148ee896a49ce6e6c8e80c96bbf52dd5d4",
+  "backup_list_verified": true,
+  "temporary_database_dropped": true,
+  "module_files_unchanged": true,
+  "overlay_snapshot_unchanged": true,
+  "maintained_sources_match": true,
+  "module_downloads_enabled": false,
+  "virtualization_used": false,
+  "overlay_files_sha256": {
+    "internal/rendercontrol/edges_test.go": "490faef18b7a3ac41cd0258a980ef90ee0ce9c62cfda54342bd7b1c89ef3e1fc",
+    "internal/rendercontrol/effects.go": "60b23482fcdf8985ad590d71b251e702404e64de7c18401e51743ead603dae43",
+    "internal/rendercontrol/ledger_test.go": "17143c38168633b71454ed4b648a3a3abbe954caca1616fd3a17d8c4799241a1",
+    "internal/rendercontrol/store.go": "476d52e55c9bfe441a44844df0ca39a6129c3d3c9e71bc908ec77773f2b03bab",
+    "internal/rendercontrol/transitions.go": "1075ca528e2d193d4dd77e2cc1ae1f3b35737363583e7d7b8bf50df42a73414b",
+    "internal/rendercontrol/types.go": "7497c6f16c8b5c8bf1c761b0cf0680aeb899f00166f0b7f361badc2d5cc696cf",
+    "internal/repository/render_control_billing.go": "2be44c35cb1ab67a4a4fb8af72bd348b796bf9f156c3c222f431e58829d2724a",
+    "migrations/247_render_control_provider.sql": "805ed5ed11f63eb2c69023e97f1f0909a662ba9afe8e4f19db4289a03ec0293c",
+    "internal/rendercontrol/controlclient/client.go": "97ef26626f2f460f45290acb4729afbd49faa98ea990ff675b4fc00bdb341401"
+  },
+  "top_level_tests_passed": 27,
+  "subtests_passed": 39,
+  "tests": {
+    "TestNativeTestGuardRejectsOtherDatabase": {
+      "result": "pass",
+      "seconds": 1.11
+    },
+    "TestVideoDurationAllocationBounds/1e999999999": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/1e-999999999": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/0.0001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/86400.001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/0": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/-1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/1e2": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestExpiredAndDisabledAdmission/key_expired": {
+      "result": "pass",
+      "seconds": 0.35
+    },
+    "TestExpiredAndDisabledAdmission/key_disabled": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestExpiredAndDisabledAdmission/user_disabled": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestExpiredAndDisabledAdmission/group_disabled": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestExpiredAndDisabledAdmission/missing_group": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestExpiredAndDisabledAdmission": {
+      "result": "pass",
+      "seconds": 0.54
+    },
+    "TestDifferentKeysShareOneUserBalanceLock": {
+      "result": "pass",
+      "seconds": 0.43
+    },
+    "TestDistinctIntentsCannotReuseTerminalEvent": {
+      "result": "pass",
+      "seconds": 0.24
+    },
+    "TestFrozenBalanceConflictPreservesIntent": {
+      "result": "pass",
+      "seconds": 0.11
+    },
+    "TestLedgerForeignKeysPreventHardDeletion": {
+      "result": "pass",
+      "seconds": 0.97
+    },
+    "TestPendingRecoveryIsBounded": {
+      "result": "pass",
+      "seconds": 0.1
+    },
+    "TestConcurrentEffectConsumersDoNotShareLeases": {
+      "result": "pass",
+      "seconds": 0.34
+    },
+    "TestMoneyBoundaries/accept_0": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/accept_0.00000001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/accept_1.23456789": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/accept_1000000.00000000": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_-1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_+1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_01": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_1e-8": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_NaN": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_.1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_1.": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_1.000000001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_1000000.00000001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_9999999999999999999": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject__1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/text_to_image": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/image_to_image": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/references_to_image": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/text_to_video": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/references_to_video": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestConcurrentIdempotencyAndFrozenQuote": {
+      "result": "pass",
+      "seconds": 1.78
+    },
+    "TestOwnershipAndBillingMode": {
+      "result": "pass",
+      "seconds": 0.18
+    },
+    "TestConcurrentBalanceAndKeyLimits/balance": {
+      "result": "pass",
+      "seconds": 0.93
+    },
+    "TestConcurrentBalanceAndKeyLimits/quota": {
+      "result": "pass",
+      "seconds": 0.97
+    },
+    "TestConcurrentBalanceAndKeyLimits/5h": {
+      "result": "pass",
+      "seconds": 0.94
+    },
+    "TestConcurrentBalanceAndKeyLimits/1d": {
+      "result": "pass",
+      "seconds": 0.96
+    },
+    "TestConcurrentBalanceAndKeyLimits/7d": {
+      "result": "pass",
+      "seconds": 0.97
+    },
+    "TestConcurrentBalanceAndKeyLimits": {
+      "result": "pass",
+      "seconds": 4.79
+    },
+    "TestReserveTransactionRollsBackOnOutboxFailure": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestDispatchVersusUnsentRelease": {
+      "result": "pass",
+      "seconds": 1.23
+    },
+    "TestTerminalCorrelationAndFrozenBounds": {
+      "result": "pass",
+      "seconds": 0.39
+    },
+    "TestConcurrentTerminalsChooseOne": {
+      "result": "pass",
+      "seconds": 0.56
+    },
+    "TestSettlementRollsBackAllEffects": {
+      "result": "pass",
+      "seconds": 0.14
+    },
+    "TestRevokedKeysStillSettle/disabled": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestRevokedKeysStillSettle/soft_deleted": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestRevokedKeysStillSettle": {
+      "result": "pass",
+      "seconds": 0.14
+    },
+    "TestCipherAuthenticationAndRotation": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestVideoRoundingAndMinimumMoney": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestKeyWindowsAndPendingHoldsAcrossReset": {
+      "result": "pass",
+      "seconds": 0.14
+    },
+    "TestLateBindingCannotChangeTerminal": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestArchivedDedupCannotBecomeSecondCharge": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestEffectLeaseFenceAndNoRebilling": {
+      "result": "pass",
+      "seconds": 0.18
+    },
+    "TestActualProcessRestartBoundaries": {
+      "result": "pass",
+      "seconds": 2.27
+    },
+    "TestProcessBoundaryHelper": {
+      "result": "skip",
+      "seconds": 0
+    }
+  },
+  "provider_implemented": false,
+  "runtime_integration_verified": false,
+  "coverage_boundary": "Additive ledger core against actual upstream schema, native subprocess crash boundaries; no public routes, remote admission/confirm recovery, usage/cache consumer, subscription or media delivery integration",
+  "overlay_workspace_reused": true,
+  "native_loopback_pg_tls": false,
+  "build_command": "go test -c -trimpath -vet=off -mod=readonly -p=2 -o <app-local binary> ./internal/rendercontrol",
+  "binary_build": {
+    "compiled": true,
+    "binary_reused": true,
+    "build_seconds": 0.0,
+    "binary_sha256": "514f01002e483f6ca7e182bb437b13136946f171bee6ddf2fedcee74095c6db0",
+    "input_sha256": "eedaac9278398e3fb03ac7b210fe892b8e9695714bd2f49d93000eaebbf374f7",
+    "converter_binary_sha256": "53b398c0f5c529145965194c502809c92c18ebe3ed0e6358065908b57d74dd97",
+    "converter_reused": true
+  }
+}

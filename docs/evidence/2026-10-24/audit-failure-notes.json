@@ -1,0 +1,15 @@
+{
+  "failures_preserved": true,
+  "pre_ddl_helper": "Initial helper assumed every table uses id; corrected to actual metadata primary keys before any migration. The repeated backup/restore then passed.",
+  "python": "Legacy content-tag assertion omitted the newly required before/after revision fields; failure retained in audit-full-python-first-failure.xml. Updated exact expected fields and repeated the full suite.",
+  "browser": [
+    "First run expected logout 200; frozen API returns 204.",
+    "Second run attempted audit with observer; frozen permissions correctly refused. Use administrator at both sizes and explicitly test observer denial. Both failed runs closed all created contexts and removed owned processes/databases/private fixtures."
+  ],
+  "requirements_weakened": false,
+  "browser_attempts": [
+    "audit-browser-first-failure.json",
+    "audit-browser-second-failure.json"
+  ],
+  "database_and_secrets_in_docs": false
+}

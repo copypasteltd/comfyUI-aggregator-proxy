@@ -1,0 +1,11 @@
+{
+  "failures_preserved": true,
+  "pre_ddl_backup_directory": "The helper reused the previous audit backup directory, so its single-receipt assertion failed after the development DDL had safely committed. Preserved the original pre-DDL archive and failed report/log; moved only the new owned backup to session-/development, resumed from the actual head and restored both original archives with full preexisting-row HMAC equality. No database was rolled back or histories rewritten.",
+  "python": "First collection referenced Outbox instead of the existing OutboxEvent model. Fixed only the import/query; final targeted 425 and full 1595 passed. Initial failed run/log retained by phase runner; the final JUnit is the passing version.",
+  "documentation": "The existing validator required a global permission and idempotency for the new own-session endpoint. Added an exact method/path exception that still requires current_session_only, CSRF and no arbitrary resource controls. Final documentation verification rerun.",
+  "post_suite_refinement": "After full Python passed, added an exclusive downgrade table lock and an installed-candidate session check. Native PG observed the blocked lock and preserved the concurrent activity; exact candidate installation validates the final sources.",
+  "browser_expected_cancellation": "The delayed passive GET is intentionally aborted at logout; Playwright may log a cancelled route handler. Both contexts and browser closed, page errors were empty, owned API/database/private fixture were removed.",
+  "requirements_weakened": false,
+  "database_and_secrets_in_docs": false,
+  "native_first_attempt": "First native run overlapped the candidate build and failed a task GET with 502 gateway_unavailable. API logged access_event_overloaded; both persisted control-plane jobs had succeeded. Retained session-native-first-failure.json and the original phase log; all owned resources were cleaned. Running the unchanged final sources alone passed 18 groups/11 synthetic jobs. Load contention is plausible but not proven."
+}

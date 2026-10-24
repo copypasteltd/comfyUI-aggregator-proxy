@@ -1,0 +1,24 @@
+{
+  "failures": [
+    {
+      "report": "sub2api-billing-existing-regression-first-run.json",
+      "sha256": "19df9a769e8f689a2c97436e0f04954da849c5eefd6b291e7840c6ae95bc69ff",
+      "reason_and_fix": "The new immutable-accounting trigger rejected an old forbidden price update with PostgreSQL P0001 rather than the established 23514. Migration 255 now preserves 23514; the original regression assertion was retained."
+    },
+    {
+      "report": "sub2api-billing-test-fixture-compile-first-run.json",
+      "sha256": "c0206081b4126aea38d1d7be4a5e0d6cec8d09c16c67f7686df0446b9fd60e0e",
+      "reason_and_fix": "The new stock-route fixture passed the named APIKeyAuthMiddleware type to gin.Use without an explicit gin.HandlerFunc conversion. Only the fixture conversion changed."
+    },
+    {
+      "report": "sub2api-billing-new-cases-first-run.json",
+      "sha256": "ac190256ffe5ad9b02565f4520e13a9a66863a3cb56d36c67bbaa87bca3aff62",
+      "reason_and_fix": "A new original-subscription test exposed the prior documented behavior that soft-deleted Keys skipped terminal counters. Document 40 explicitly changed the Provider terminal rule before the repository helper was updated; old regression names were retained with the new documented expectation."
+    },
+    {
+      "report": "sub2api-billing-revocation-regression-first-run.json",
+      "sha256": "d45ba2d21b8f31fae39149ea6a22855495ee0fd38ab93bcda247d221304612f4",
+      "reason_and_fix": "The coordinator confirm-won regression also expected zero counters after soft deletion. Its assertion now checks the documented original-Key terminal counter; coordinator production behavior was unchanged."
+    }
+  ]
+}

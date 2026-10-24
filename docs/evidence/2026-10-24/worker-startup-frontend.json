@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-24T00:17:25.979927+00:00",
+  "passed": true,
+  "command": "./scripts/check.ps1 -Suite Frontend",
+  "observed_session": 77179,
+  "exit_code": 0,
+  "openapi_paths": 131,
+  "steps": [
+    "export-openapi",
+    "openapi-typescript 7.13.0",
+    "vue-tsc --noEmit",
+    "vite build"
+  ],
+  "vite": {
+    "version": "7.3.7",
+    "modules_transformed": 1748,
+    "build_seconds": 25.44
+  },
+  "warning": "Existing main chunk exceeds 500 kB after minification",
+  "scope": "Recorded from completed tool session; this record does not claim to be its full console transcript."
+}

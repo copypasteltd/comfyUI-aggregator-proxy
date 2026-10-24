@@ -1,0 +1,334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.invalid/contracts/model-discovery.schema.json",
+  "title": "Safe published model capabilities",
+  "type": "object",
+  "properties": {
+    "object": {
+      "const": "list"
+    },
+    "data": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "object": {
+            "const": "model"
+          },
+          "created": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 253402300799
+          },
+          "owned_by": {
+            "const": "render-control"
+          },
+          "task_type": {
+            "enum": [
+              "text_to_image",
+              "image_to_image",
+              "references_to_image",
+              "text_to_video",
+              "references_to_video",
+              "text_to_audio"
+            ]
+          },
+          "asynchronous": {
+            "const": true
+          },
+          "release": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "digest": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "version",
+              "digest"
+            ],
+            "additionalProperties": false
+          },
+          "supported_parameters": {
+            "type": "array",
+            "maxItems": 8,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "size",
+                "quality",
+                "seed",
+                "n",
+                "seconds",
+                "fps",
+                "strength",
+                "negative_prompt"
+              ]
+            }
+          },
+          "presets": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 128,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "properties": {
+                "quality": {
+                  "enum": [
+                    "draft",
+                    "standard",
+                    "high"
+                  ]
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$"
+                },
+                "seconds": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "maximum": 3600
+                },
+                "audio_format": {
+                  "enum": [
+                    "wav",
+                    "flac",
+                    "mp3",
+                    "opus"
+                  ]
+                },
+                "sample_rate": {
+                  "type": "integer",
+                  "minimum": 8000,
+                  "maximum": 96000
+                },
+                "channels": {
+                  "enum": [
+                    1,
+                    2
+                  ]
+                }
+              },
+              "required": [
+                "quality"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "output": {
+            "type": "object",
+            "properties": {
+              "media_types": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 9,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "image/png",
+                    "image/jpeg",
+                    "image/webp",
+                    "video/mp4",
+                    "video/webm",
+                    "audio/wav",
+                    "audio/flac",
+                    "audio/mpeg",
+                    "audio/ogg"
+                  ]
+                }
+              },
+              "expected_count": {
+                "const": 1
+              },
+              "max_bytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483648
+              }
+            },
+            "required": [
+              "media_types",
+              "expected_count",
+              "max_bytes"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "created",
+          "owned_by",
+          "task_type",
+          "asynchronous",
+          "release",
+          "supported_parameters",
+          "presets",
+          "output"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "task_type": {
+                  "enum": [
+                    "text_to_video",
+                    "references_to_video"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "output": {
+                  "properties": {
+                    "media_types": {
+                      "items": {
+                        "enum": [
+                          "video/mp4",
+                          "video/webm"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "else": {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "output": {
+                    "properties": {
+                      "media_types": {
+                        "items": {
+                          "enum": [
+                            "audio/wav",
+                            "audio/flac",
+                            "audio/mpeg",
+                            "audio/ogg"
+                          ]
+                        }
+                      },
+                      "max_bytes": {
+                        "maximum": 268435456
+                      }
+                    }
+                  },
+                  "presets": {
+                    "items": {
+                      "required": [
+                        "quality",
+                        "seconds",
+                        "audio_format",
+                        "sample_rate",
+                        "channels"
+                      ],
+                      "not": {
+                        "required": [
+                          "size"
+                        ]
+                      },
+                      "properties": {
+                        "seconds": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 600
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "output": {
+                    "properties": {
+                      "media_types": {
+                        "items": {
+                          "enum": [
+                            "image/png",
+                            "image/jpeg",
+                            "image/webp"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "task_type": {
+                  "not": {
+                    "const": "text_to_audio"
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "presets": {
+                  "items": {
+                    "required": [
+                      "size"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "audio_format"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "sample_rate"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "channels"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "object",
+    "data"
+  ],
+  "additionalProperties": false,
+  "contract_version": "0.5.0"
+}

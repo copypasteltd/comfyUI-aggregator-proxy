@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-23T18:39:06.721947+00:00",
+  "passed": true,
+  "run_id": "d5524e2313dc",
+  "checks": [
+    "fresh_offline_wheels_seven_modules_frozen_contracts_no_editable_dependencies",
+    "existing_installation_refused_without_modification",
+    "startup_on_empty_database_refuses_without_implicit_ddl",
+    "installed_migration_takes_native_pg18_backup_and_verifies_archive_before_ddl",
+    "invalid_configuration_and_missing_tls_fail_without_secret_output",
+    "installed_https_health_and_bundled_admin_assets",
+    "unauthenticated_and_business_bearer_cannot_enter_admin",
+    "installed_runner_and_independent_gc_execute_once",
+    "worker_explicit_config_preserves_unresolved_durable_journal_without_comfy_call",
+    "incompatible_database_revision_blocks_startup_without_migration",
+    "fresh_installed_real_browser_desktop_mobile_admin_and_content",
+    "runtime_tampered_payload_is_rejected_and_manifest_stays_immutable"
+  ],
+  "virtualization_used": false,
+  "production_accepted": false,
+  "archive_sha256": "18002952a5e054580a699bb3340955792103b2a1c5691a9007f8635b67119411",
+  "release_id": "rc-20261024.51.1",
+  "source_tree_sha256": "191dee35db54448ff30916d754be0f42ca446733ac3612d03d716b8890fd8acf",
+  "payload_files": 124,
+  "database_head": "d682a0b14139",
+  "installation": {
+    "application_modules": [
+      "generation_domain",
+      "generation_application",
+      "generation_contracts",
+      "generation_infrastructure",
+      "control_api",
+      "control_runner",
+      "windows_worker"
+    ],
+    "archive_sha256": "18002952a5e054580a699bb3340955792103b2a1c5691a9007f8635b67119411",
+    "contracts_verified": 19,
+    "editable": false,
+    "format_version": 1,
+    "manifest_sha256": "24f7b761da043fe3c23e918d7607610b891bf1c32f496063e16b68cf5e6452fe",
+    "offline": true,
+    "python_version": "3.13.1",
+    "release_id": "rc-20261024.51.1",
+    "requirements": 57
+  },
+  "pre_migration_backup": {
+    "archive_list_verified": true,
+    "sha256": "50a1add260aaf94fbb8ea2a706bb0a872ef42fb07d32b6e3dea96792343e0b2a",
+    "created_before_ddl": true
+  },
+  "browser": {
+    "passed": true,
+    "checks": [
+      "desktop_installed_admin_login_and_live_queue",
+      "desktop_installed_content_route_and_authorization",
+      "mobile_installed_admin_login_and_live_queue",
+      "mobile_installed_content_route_and_authorization"
+    ],
+    "errors": [],
+    "closed_contexts": 2,
+    "browser_closed": true
+  },
+  "processes": [
+    {
+      "name": "installed-api",
+      "pid": 40320,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "temporary_database_removed": true,
+  "temporary_root_removed": true,
+  "duration_seconds": 171.33
+}

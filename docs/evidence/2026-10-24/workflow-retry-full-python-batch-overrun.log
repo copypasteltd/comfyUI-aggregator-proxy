@@ -1,0 +1,59 @@
+........................................................................ [  3%]
+........................................................................ [  7%]
+........................................................................ [ 10%]
+........................................................................ [ 14%]
+........................................................................ [ 18%]
+........................................................................ [ 21%]
+........................................................................ [ 25%]
+........................................................................ [ 28%]
+........................................................................ [ 32%]
+.......................F................................................ [ 36%]
+........................................................................ [ 39%]
+........................................................................ [ 43%]
+........................................................................ [ 47%]
+........................................................................ [ 50%]
+........................................................................ [ 54%]
+........................................................................ [ 57%]
+........................................................................ [ 61%]
+........................................................................ [ 65%]
+..........................................................F............. [ 68%]
+........................................................................ [ 72%]
+........................................................................ [ 76%]
+........................................................................ [ 79%]
+........................................................................ [ 83%]
+........................................................................ [ 86%]
+........................................................................ [ 90%]
+........................................................................ [ 94%]
+........................................................................ [ 97%]
+............................................                             [100%]
+================================== FAILURES ===================================
+_____ test_each_batch_is_bounded_and_restart_only_deletes_remaining_rows ______
+tests\integration\test_audit_retention.py:113: in test_each_batch_is_bounded_and_restart_only_deletes_remaining_rows
+    assert [prune_audit_events(pg, 180) for _ in range(4)] == [500, 500, 3, 0]
+E   assert [1003, 0, 0, 0] == [500, 500, 3, 0]
+E     
+E     At index 0 diff: 1003 != 500
+E     Use -v to get more diff
+___________ test_preflight_does_not_create_state_or_contact_control ___________
+tests\protocol\test_worker_startup.py:114: in test_preflight_does_not_create_state_or_contact_control
+    result = subprocess.run([sys.executable, "-I", "-m", "windows_worker.main", "--config", str(config), "--validate-config"], capture_output=True, timeout=15)  # noqa: S603 -- fixed interpreter/module and owned config, no shell
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\subprocess.py:556: in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\subprocess.py:1219: in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\subprocess.py:1640: in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+E   subprocess.TimeoutExpired: Command '['E:\\dev\\sandbox\\生图生视API封装\\app\\.venv\\Scripts\\python.exe', '-I', '-m', 'windows_worker.main', '--config', 'E:\\dev\\sandbox\\生图生视API封装\\app\\.local\\pytest\\test_preflight_does_not_create0\\worker.json', '--validate-config']' timed out after 15 seconds
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_audit_retention.py::test_each_batch_is_bounded_and_restart_only_deletes_remaining_rows
+FAILED tests/protocol/test_worker_startup.py::test_preflight_does_not_create_state_or_contact_control
+2 failed, 1986 passed, 1 warning in 868.86s (0:14:28)

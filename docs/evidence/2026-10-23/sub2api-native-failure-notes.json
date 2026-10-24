@@ -1,0 +1,73 @@
+{
+  "passed": false,
+  "historical_attempts": [
+    {
+      "run_id": "c4cb0034674b",
+      "phase": "stock_server_startup",
+      "code": "missing_native_iana_timezone_data",
+      "processes_and_databases_cleaned": true
+    },
+    {
+      "run_id": "46b6b164da8c",
+      "phase": "database_identity_guard",
+      "code": "inet_text_includes_prefix_use_host",
+      "no_ddl_executed": true
+    },
+    {
+      "run_id": "a85dd04591ee",
+      "phase": "stock_server_startup_and_cleanup",
+      "code": "missing_native_iana_timezone_data_and_readonly_git_cleanup",
+      "cleanup_recovered": true
+    },
+    {
+      "run_id": "68f07c4ee5aa",
+      "failure": {
+        "phase": "start_native_services",
+        "type": "RuntimeError",
+        "code": "native_server_startup_failed"
+      },
+      "cases_passed_before_failure": 0,
+      "cleanup": {
+        "processes": true,
+        "databases": true,
+        "media_and_credentials": true
+      },
+      "interpretation": "Protocol fixture recovery lease was shorter than coordinator lower bound; fixed to 60 seconds after native IANA packaging repair."
+    },
+    {
+      "run_id": "bdd93d2a6abe",
+      "failure": {
+        "phase": "public_generation_and_delivery",
+        "type": "RuntimeError",
+        "code": "native_job_timeout"
+      },
+      "cases_passed_before_failure": 2,
+      "cleanup": {
+        "processes": true,
+        "databases": true,
+        "media_and_credentials": true
+      },
+      "interpretation": "Actual stable service UUID differed from credential identifier; fixed explicit service identity in Go client and hosting."
+    },
+    {
+      "run_id": "f52c65e8daee",
+      "failure": {
+        "phase": "public_generation_and_delivery",
+        "type": "RuntimeError",
+        "code": "http_POST_/v1/assets_403_permission_denied"
+      },
+      "cases_passed_before_failure": 0,
+      "cleanup": {
+        "processes": true,
+        "databases": true,
+        "media_and_credentials": true
+      },
+      "interpretation": "Synthetic key issuer did not match the existing gateway service issuer contract; fixture corrected."
+    }
+  ],
+  "recovery": {
+    "owned_databases_absent": true,
+    "media_and_credentials_removed": true
+  },
+  "scope": "Historical failed rehearsal attempts and cleanup recovery; not a current pass report."
+}

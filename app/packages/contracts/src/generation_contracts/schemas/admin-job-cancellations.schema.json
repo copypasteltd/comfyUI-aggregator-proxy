@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "admin-job-cancellations.schema.json",
+  "title": "Explicit bounded administrative job cancellation batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "job_ids",
+    "reason"
+  ],
+  "properties": {
+    "job_ids": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^job_[0-9a-f]{32}$"
+      }
+    },
+    "reason": {
+      "enum": [
+        "operator_request",
+        "key_access_changed",
+        "maintenance"
+      ]
+    }
+  }
+}

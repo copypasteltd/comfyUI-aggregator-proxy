@@ -1,0 +1,615 @@
+{
+  "checked_at": "2026-10-24T10:09:23+08:00",
+  "baseline": "v0.4",
+  "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
+  "project": "E:\\dev\\sandbox\\生图生视API封装",
+  "tool": {
+    "python": "3.13.1",
+    "jsonschema": "4.26.0",
+    "PyYAML": "6.0.3"
+  },
+  "checks": {
+    "markdown": {
+      "documents": 61,
+      "instruction_files": 1,
+      "fenced_blocks": 34,
+      "json_examples": 15,
+      "yaml_examples": 1,
+      "local_links_checked": 880
+    },
+    "contracts": {
+      "json_files": 27,
+      "schemas": 23,
+      "fixtures": 240,
+      "positive_fixtures": 71,
+      "negative_fixtures": 169,
+      "capabilities_covered": [
+        "image_to_image",
+        "references_to_image",
+        "references_to_video",
+        "text_to_audio",
+        "text_to_image",
+        "text_to_video"
+      ]
+    },
+    "state_machine": {
+      "states": 16,
+      "terminal_states": 4,
+      "transitions": 61,
+      "guards": 21
+    },
+    "endpoints": {
+      "total": 164,
+      "by_identity": {
+        "service": 27,
+        "admin_login": 1,
+        "admin": 99,
+        "worker": 11,
+        "gateway": 26
+      },
+      "admin_permissions": 25
+    },
+    "traceability": {
+      "rules": 32,
+      "quality_scenarios": 18,
+      "work_packages": 15,
+      "requirements": 73,
+      "work_package_statuses": {
+        "in_progress": 14,
+        "not_started": 1
+      },
+      "admin_acceptance_mapped": 16,
+      "key_acceptance_mapped": 12
+    },
+    "topic_presence": {
+      "checks": 14,
+      "scope": "Text presence only, not proof of correctness"
+    }
+  },
+  "files": [
+    {
+      "file": "AGENTS.md",
+      "bytes": 3474,
+      "lines": 18,
+      "sha256": "d9fcaaec1a3be1258748df6d56c5f8377f3bdd67c372c326463bf57758f00eb1"
+    },
+    {
+      "file": "docs/01-需求规格与约束.md",
+      "bytes": 24035,
+      "lines": 242,
+      "sha256": "2ce2055321641857c3a6db24470a90d826dda47f673d397b07d283f9e459a772"
+    },
+    {
+      "file": "docs/02-系统架构与任务机制.md",
+      "bytes": 27604,
+      "lines": 274,
+      "sha256": "3d58bd381bab4e25851191f85acc074d28356b8b4a8faf0b39cc37ef1a720331"
+    },
+    {
+      "file": "docs/03-接口与Sub2API接入规范.md",
+      "bytes": 32939,
+      "lines": 462,
+      "sha256": "9c5db7bb7b985f7402196bf851383c2b460ee139d82671c6dd07bfb440e63b9b"
+    },
+    {
+      "file": "docs/04-工作流产品化规范.md",
+      "bytes": 16775,
+      "lines": 217,
+      "sha256": "ae7ee71ab1366528007332455f7ef770f9a5443ea0bb1b48336a61f707135e10"
+    },
+    {
+      "file": "docs/05-实施路线与验收.md",
+      "bytes": 27690,
+      "lines": 264,
+      "sha256": "1c275031c6a0dd33efb0517e96e725b8fab8986afe996fbaad3a446ca02fb37f"
+    },
+    {
+      "file": "docs/06-调研依据与兼容性核对.md",
+      "bytes": 12132,
+      "lines": 142,
+      "sha256": "810ea2b03b22f7f6d9503808320b59e72bfeec13c4dddb52e8c58838498ab838"
+    },
+    {
+      "file": "docs/07-Admin可视化管理后台.md",
+      "bytes": 28385,
+      "lines": 244,
+      "sha256": "affbdc51eacb557e32a91c92275467f2fc317c695d271a47e84dc31c7e2e85bc"
+    },
+    {
+      "file": "docs/08-APIKey鉴权与访问控制.md",
+      "bytes": 22932,
+      "lines": 176,
+      "sha256": "5a3469da4c970a32bf8b7770a98d4c037b51acba7ebe8f873c3ba8563e1c4da5"
+    },
+    {
+      "file": "docs/09-开发总纲与强制约束.md",
+      "bytes": 9885,
+      "lines": 72,
+      "sha256": "2f9cc65dab49a0855919b9c31e1b96b96b54c868231c42821deb6cd3dc88f3f4"
+    },
+    {
+      "file": "docs/10-技术栈与工程结构.md",
+      "bytes": 9876,
+      "lines": 101,
+      "sha256": "76b555074f49b128601d99cf3cffdb868052849ee7e83c15ef79afcb85419a72"
+    },
+    {
+      "file": "docs/11-数据字典与数据库事务.md",
+      "bytes": 24939,
+      "lines": 155,
+      "sha256": "e29b24729c65c8aa4cb6d169977a90b191e4e845385c40e02edc61ffb226981b"
+    },
+    {
+      "file": "docs/12-接口契约与Worker协议.md",
+      "bytes": 22928,
+      "lines": 137,
+      "sha256": "dc6456ed69290095b86ad9142bc65ad04079fa8f104af3e693d39f619ee51971"
+    },
+    {
+      "file": "docs/13-Admin前端开发规范.md",
+      "bytes": 11441,
+      "lines": 81,
+      "sha256": "94eb603a0fe91a11fc6c21b98d177ab57991e32a702244e8196569f76bc78d15"
+    },
+    {
+      "file": "docs/14-测试策略与质量门禁.md",
+      "bytes": 14846,
+      "lines": 106,
+      "sha256": "0f7dc4776ff084302ecaa1c5a29eab6f142b99c07172e744d03df18e1e079b90"
+    },
+    {
+      "file": "docs/15-原生部署配置与运维.md",
+      "bytes": 22966,
+      "lines": 147,
+      "sha256": "cdb7cad78a97271b6f38bf0870278160b0d0ccff189c802a06475fc7427a10a6"
+    },
+    {
+      "file": "docs/16-开发任务分解与交付清单.md",
+      "bytes": 43252,
+      "lines": 225,
+      "sha256": "28d9720637460f8cf7e7f6770d3743861c9eb600ead24801025b65caecc26ba6"
+    },
+    {
+      "file": "docs/17-开发记录与运行说明.md",
+      "bytes": 105234,
+      "lines": 474,
+      "sha256": "c60cea89a6ff2aab6af92ee8a36978a0ead905f442f85fce7287477ebbc19246"
+    },
+    {
+      "file": "docs/18-Admin界面实现约定.md",
+      "bytes": 4664,
+      "lines": 34,
+      "sha256": "6d64ce7971792ecb1e0f3cc4e04ed6ba8d1bef4bb90b5b6115a4cd9e7c16f966"
+    },
+    {
+      "file": "docs/19-执行链路增量实现约定.md",
+      "bytes": 3358,
+      "lines": 15,
+      "sha256": "84d31f7381e46e395af2a2ac457dd16ecf8266d15ea2fdf12da983b3f69aabc5"
+    },
+    {
+      "file": "docs/20-网关准入与对账实现约定.md",
+      "bytes": 5271,
+      "lines": 25,
+      "sha256": "ee64dbe467b42037a847ac9f780deed063c592d19ccd8977a235eda00adb19b2"
+    },
+    {
+      "file": "docs/21-内容保留与回收实现约定.md",
+      "bytes": 2233,
+      "lines": 11,
+      "sha256": "a5eb0fb3928e5409e5a58fb9034fa22bee8633ae6a40eb6baa8ab00e36c01979"
+    },
+    {
+      "file": "docs/22-任务处置与管理账号实现约定.md",
+      "bytes": 3528,
+      "lines": 27,
+      "sha256": "e3f4bc3d39fd715f4eee15657dfa7bdc3e3d3c1ec714fa3da0f816fe0b67ca5f"
+    },
+    {
+      "file": "docs/23-模型文件目录实现约定.md",
+      "bytes": 2591,
+      "lines": 15,
+      "sha256": "4e1403acd172605411b71dab73c8ac00a39de5c21c61258cfce53caa5625b41f"
+    },
+    {
+      "file": "docs/24-Workflow批量推送与验证实现约定.md",
+      "bytes": 3868,
+      "lines": 27,
+      "sha256": "5dca67f67e495d2b26992fb6caadcce09a83ea702dd2d6cda4bf5d996d21af23"
+    },
+    {
+      "file": "docs/25-Sub2API原生适配实施约定.md",
+      "bytes": 15461,
+      "lines": 75,
+      "sha256": "757ebaab45c9908c1389a506198dae83de9225d1cb512a002ce60600a6a7339d"
+    },
+    {
+      "file": "docs/26-告警与节点尝试只读查询约定.md",
+      "bytes": 4682,
+      "lines": 38,
+      "sha256": "808f4bdbc1819d6d8419eb67d8ee564334629b2e1fd472846189a19ec6f74568"
+    },
+    {
+      "file": "docs/27-Worker元数据响应边界约定.md",
+      "bytes": 3874,
+      "lines": 33,
+      "sha256": "cf2639ef73efee4dc1ef6e7f5def0f0ea68f21a9e3c54e417c27c2982693c090"
+    },
+    {
+      "file": "docs/28-APIKey访问记录实现约定.md",
+      "bytes": 6481,
+      "lines": 41,
+      "sha256": "795e1d4dad49e2d385152fb7cfe383081f5bd85741856b309c48b4f58cc7599b"
+    },
+    {
+      "file": "docs/29-Sub2API持久意图与账本事务约定.md",
+      "bytes": 16115,
+      "lines": 70,
+      "sha256": "e82cb02f2ff273e3937a4761ef30a4241f8bca5e61f8e00d2f0da5620ccce603"
+    },
+    {
+      "file": "docs/30-网关请求关闭与恢复协议.md",
+      "bytes": 8566,
+      "lines": 52,
+      "sha256": "3cbd9fa79b0b6a3442234da35e87f0622aca7988b6c6d0ecbdca76824535bda8"
+    },
+    {
+      "file": "docs/31-Sub2API恢复租约与协调器.md",
+      "bytes": 9132,
+      "lines": 55,
+      "sha256": "ab570427b5a4d1337d201f8b02517998d92e3a7ed26ccc14a3c175c6752acfb5"
+    },
+    {
+      "file": "docs/32-Sub2API公开任务接入.md",
+      "bytes": 8070,
+      "lines": 39,
+      "sha256": "bc77535c1ff1f14c248e352248b5184517014d0c82100d9a88a66ac499d137b6"
+    },
+    {
+      "file": "docs/33-Sub2API服务托管与生命周期.md",
+      "bytes": 9555,
+      "lines": 78,
+      "sha256": "420ac9aafbc232b1d6d65608463aaa19faa4ab658927061b07b86ff0b2bc45c9"
+    },
+    {
+      "file": "docs/34-Sub2API生成兼容与产物访问.md",
+      "bytes": 8632,
+      "lines": 49,
+      "sha256": "1171ed9e73ef7b38b585048a72b351b4bc44479a902b9209c71fc01b503f4353"
+    },
+    {
+      "file": "docs/35-Sub2API素材与图片编辑接入.md",
+      "bytes": 8479,
+      "lines": 47,
+      "sha256": "c2a78c99149a01fc63fdf32ce487ad89d8b303984cd400cca1e91de85876522e"
+    },
+    {
+      "file": "docs/36-Sub2API模型发现与能力投影.md",
+      "bytes": 9576,
+      "lines": 45,
+      "sha256": "df52fa32f35ece8148c897bcd437f0b1a2480c13d8a2c0ba5ea7c580de51fb4f"
+    },
+    {
+      "file": "docs/37-任务与内容游标及共享访问.md",
+      "bytes": 11095,
+      "lines": 49,
+      "sha256": "619b6dfc29dd6917240444712cc27a6f0c95f9e60bc017ef5d8b92487451c051"
+    },
+    {
+      "file": "docs/38-标准化参考输入与Workflow选项.md",
+      "bytes": 8539,
+      "lines": 72,
+      "sha256": "af897b3a2af4d271c413bbcfa6ade3752f34446532ea05f17f36d114a1247036"
+    },
+    {
+      "file": "docs/39-Sub2API用量与缓存持久消费.md",
+      "bytes": 8025,
+      "lines": 39,
+      "sha256": "fe8197c5c38d9c260456da0aa0b9fbb9e0e6baf59f5f730ba9a9ee8099ed4e67"
+    },
+    {
+      "file": "docs/40-Sub2API倍率与套餐计费.md",
+      "bytes": 9647,
+      "lines": 49,
+      "sha256": "cffadc76a4141bdad1aca51c51a9248307587a09f486d5c37a040598d905db9a"
+    },
+    {
+      "file": "docs/41-Workflow渠道拉取与草稿导入.md",
+      "bytes": 10157,
+      "lines": 63,
+      "sha256": "2680251c9a957057b680f2b76928f66cf5488a440b29b20fb2497046befdaae1"
+    },
+    {
+      "file": "docs/42-Workflow目录浏览与来源状态.md",
+      "bytes": 9960,
+      "lines": 55,
+      "sha256": "08db1c204e7a5e68e6c6e603f0c09b31c5ae91299d8a76f9ddc866ff0306fb23"
+    },
+    {
+      "file": "docs/43-Sub2API原生跨进程联调.md",
+      "bytes": 9626,
+      "lines": 67,
+      "sha256": "fff3af22cc1160ebf08cd3bef004a1413e6f9f682210c3f63b8470348ccb45af"
+    },
+    {
+      "file": "docs/44-Worker容量保护与本地产物保留.md",
+      "bytes": 10473,
+      "lines": 57,
+      "sha256": "f85e5663aeabe06df50bd7c22318100f6c0eb33ad27ea5f146238b59ea926f96"
+    },
+    {
+      "file": "docs/45-渠道模型清单与受控登记.md",
+      "bytes": 11201,
+      "lines": 63,
+      "sha256": "f442f82bdecaf3a68873b538efe9e0429463b6a63bd009e632e9dfc4b96c903e"
+    },
+    {
+      "file": "docs/46-生成失败归因与规格隔离.md",
+      "bytes": 9247,
+      "lines": 60,
+      "sha256": "e989fa9abd49ba3e8a886676f8819ca80d8125ff3cbe9ec9f6d3b27560583a7a"
+    },
+    {
+      "file": "docs/47-队列筛选与实时负载验收.md",
+      "bytes": 6581,
+      "lines": 41,
+      "sha256": "0a64a3435755ad63fb89e68b3f0bc182820b8a766f1d62d576309fc7ad75952d"
+    },
+    {
+      "file": "docs/48-内容检索标签与受控预览.md",
+      "bytes": 9025,
+      "lines": 49,
+      "sha256": "ec9c951522386274f3dcd4fc4b9d60a266d08baaa50333620ea72af21464664e"
+    },
+    {
+      "file": "docs/49-原生发布包与离线安装验证.md",
+      "bytes": 13391,
+      "lines": 83,
+      "sha256": "f7968c78668bea637ad5c90e26f3160dcdda659fbf2d0905569c8a33e1636c0c"
+    },
+    {
+      "file": "docs/50-有证据内部重试与计量保全.md",
+      "bytes": 8423,
+      "lines": 47,
+      "sha256": "040efa1f18905cd8b8c00bc35445aadf77078967390a963e94a4fac0efda9bc3"
+    },
+    {
+      "file": "docs/51-租户公平调度与等待老化.md",
+      "bytes": 9915,
+      "lines": 61,
+      "sha256": "034424c6fbb767c92564840f7ea6a7bc5079edbfe6c7b41ca762b9fb2d753160"
+    },
+    {
+      "file": "docs/52-租户项目与分层配额管理.md",
+      "bytes": 9379,
+      "lines": 55,
+      "sha256": "75dd92100dec735f48a2e7aff46052b7cf3f2b3976e885623dc9e4f4befd5b68"
+    },
+    {
+      "file": "docs/53-Key内容授权目录与分页选择.md",
+      "bytes": 9655,
+      "lines": 62,
+      "sha256": "f525189280a55f880b831d1fa5305db66414889b6b0c5dc95080ff2c5c2b22fe"
+    },
+    {
+      "file": "docs/54-ComfyUI音频产物范围与开发约束.md",
+      "bytes": 7748,
+      "lines": 62,
+      "sha256": "615d6e766625127f04f7b1eded3c2d2e0157e25e6e452d04152440ddcbe072ea"
+    },
+    {
+      "file": "docs/55-音频契约与兼容迁移.md",
+      "bytes": 13232,
+      "lines": 86,
+      "sha256": "86e56eca1b7ac663a294c952eb54375bd3578a3268e9332ed55a8a5701a3b326"
+    },
+    {
+      "file": "docs/56-Windows节点登记与凭证管理.md",
+      "bytes": 12065,
+      "lines": 65,
+      "sha256": "eb60085c650f284317d72aa007e200a47c6eb64abbf9186ae35ca9f322d56388"
+    },
+    {
+      "file": "docs/57-Worker启动身份与原生进程保护.md",
+      "bytes": 11867,
+      "lines": 65,
+      "sha256": "933ca248284e825d0d562c10594dac89c7e4feaabf6bf8da35afd9609b988c2e"
+    },
+    {
+      "file": "docs/58-运行趋势与任务阶段耗时.md",
+      "bytes": 11798,
+      "lines": 65,
+      "sha256": "5c6c31ec99209791ddb99ea947e18d1ab4bfe09d9d3e2687771185aaa949a605"
+    },
+    {
+      "file": "docs/59-S3版本与范围交付校验.md",
+      "bytes": 7842,
+      "lines": 53,
+      "sha256": "bba4579c3b2888a6113217e537ffa241d335714393a0554a58709841b7e3fb9c"
+    },
+    {
+      "file": "docs/contracts/admin-content-query.schema.json",
+      "bytes": 1989,
+      "lines": 87,
+      "sha256": "e61353e9e29e252f375bcc06f6dd007ca7d27e562635412292046acfd58b3cb0"
+    },
+    {
+      "file": "docs/contracts/admin-job-timing.schema.json",
+      "bytes": 3396,
+      "lines": 164,
+      "sha256": "8715a01b3ebe29673588a59de88a96092b3b0c3e9faeee5f197a0dd233a1d394"
+    },
+    {
+      "file": "docs/contracts/admin-queue-query.schema.json",
+      "bytes": 1819,
+      "lines": 75,
+      "sha256": "a8393313999d2c66138d707ec97411c4aaec3c014c71ffeb9d56692556136b7b"
+    },
+    {
+      "file": "docs/contracts/admin-statistics-query.schema.json",
+      "bytes": 2235,
+      "lines": 95,
+      "sha256": "d1110163d1ca38272200601b54929c0668a834fe25e170d8635d8eb4741c6d14"
+    },
+    {
+      "file": "docs/contracts/admin-statistics.schema.json",
+      "bytes": 6519,
+      "lines": 296,
+      "sha256": "bafe2159422f62a7f6051d2f7fcc7af4502fb45285b31d47a6847edb9f3e4c08"
+    },
+    {
+      "file": "docs/contracts/collection-page.schema.json",
+      "bytes": 11136,
+      "lines": 495,
+      "sha256": "47f30268955524a1100c4a830f74fa7766442678e5b59e832e903ca8a2c98458"
+    },
+    {
+      "file": "docs/contracts/content-metadata.schema.json",
+      "bytes": 772,
+      "lines": 31,
+      "sha256": "cb729127f753464f8275f5d9989b9132a38ea1e85b4784df0bb716f7bb110663"
+    },
+    {
+      "file": "docs/contracts/development-traceability.json",
+      "bytes": 36793,
+      "lines": 1705,
+      "sha256": "0bd5f035bb4ba252c4eda19980efcfd9f89e00c767bcba27710d423be433eedf"
+    },
+    {
+      "file": "docs/contracts/dispatch-policy.schema.json",
+      "bytes": 1474,
+      "lines": 59,
+      "sha256": "1674d91653d519bea2af8f3420d915de42804c5ebffcada05983db1d58e166b3"
+    },
+    {
+      "file": "docs/contracts/endpoint-catalog.json",
+      "bytes": 93760,
+      "lines": 3089,
+      "sha256": "caeef0632bbbb7dbe60dbe165f9d22acfb83b2d33e31519c3f5ea17ace47a8a4"
+    },
+    {
+      "file": "docs/contracts/fixtures.json",
+      "bytes": 390039,
+      "lines": 10562,
+      "sha256": "7353ba086e897a368416d6ee0eab71846385d116bf40aeaae484963c08a66bad"
+    },
+    {
+      "file": "docs/contracts/gateway-request-identity.schema.json",
+      "bytes": 897,
+      "lines": 15,
+      "sha256": "fd9ff1e38e7ee0b3fff99409578017fc5254d21f4ead6b2c06a5f94ce033d9e5"
+    },
+    {
+      "file": "docs/contracts/job-create.schema.json",
+      "bytes": 8873,
+      "lines": 423,
+      "sha256": "6d048c17bdff215c5cc3fade8ab3529e2b728d19fb768e8dc893081fb0b6679c"
+    },
+    {
+      "file": "docs/contracts/job-retry.schema.json",
+      "bytes": 1293,
+      "lines": 66,
+      "sha256": "2f9a1cc77e2518ccde167cb396c2f4091af50f04dcf69dfda964db1e282534b4"
+    },
+    {
+      "file": "docs/contracts/job-state-machine.json",
+      "bytes": 16837,
+      "lines": 653,
+      "sha256": "ef73d479da75513b65eb0bbd84495f6c69a2003c133b5017ddca2d857734450d"
+    },
+    {
+      "file": "docs/contracts/key-policy-options-query.schema.json",
+      "bytes": 2387,
+      "lines": 123,
+      "sha256": "aacf9e095c011b953889e3610876658ab008dec80bbe0d6a28c2cce25ed62674"
+    },
+    {
+      "file": "docs/contracts/key-policy.schema.json",
+      "bytes": 8574,
+      "lines": 395,
+      "sha256": "781c2f5050384e443066b2d7b4ced2d04577219a727e9acd056263cf7186cb97"
+    },
+    {
+      "file": "docs/contracts/model-discovery.schema.json",
+      "bytes": 9329,
+      "lines": 334,
+      "sha256": "f7ec00051d19000f1698617156faa6083075675c27992ce452e632dceb8a1e9d"
+    },
+    {
+      "file": "docs/contracts/model-file-receipt.schema.json",
+      "bytes": 7066,
+      "lines": 282,
+      "sha256": "1a10929d0ae752a04049e9081c2858eeb16b057319a30cb88078a035ac297ed9"
+    },
+    {
+      "file": "docs/contracts/README.md",
+      "bytes": 9446,
+      "lines": 68,
+      "sha256": "6a0dd5c3922553573c1ac0d1fc63c351853a408b708fd624509cc239d4f37965"
+    },
+    {
+      "file": "docs/contracts/release-manifest.schema.json",
+      "bytes": 7021,
+      "lines": 312,
+      "sha256": "0f479fd1413db293a9a48501615f8dbd19faa95b1fbfc1caa550c81b09f7fad7"
+    },
+    {
+      "file": "docs/contracts/resource-limits.schema.json",
+      "bytes": 2242,
+      "lines": 112,
+      "sha256": "079ef8cbdfa4637265116e816d5af089a4df7a83669f53bf125fbe01686c30ae"
+    },
+    {
+      "file": "docs/contracts/spec-isolation.schema.json",
+      "bytes": 1714,
+      "lines": 74,
+      "sha256": "8a28b6719c79a069b44f2003b9bd04d1577f2f2e36d3d2eaf1b5ff2e87f51586"
+    },
+    {
+      "file": "docs/contracts/worker-capacity.schema.json",
+      "bytes": 5629,
+      "lines": 251,
+      "sha256": "01190f15a3d7e292c1470788937119036f75e8db98d1314b08c58be88b6e3a90"
+    },
+    {
+      "file": "docs/contracts/worker-event.schema.json",
+      "bytes": 5231,
+      "lines": 45,
+      "sha256": "5c83273005e369b5d10911c8ea6abac106b50af801d25821670700d404011e89"
+    },
+    {
+      "file": "docs/contracts/worker-node-command.schema.json",
+      "bytes": 1585,
+      "lines": 70,
+      "sha256": "9bc6b47946bce0d38674587ce0726992a1a0604bfbd8a87e59d8b630fdd18172"
+    },
+    {
+      "file": "docs/contracts/workflow-catalog-receipt.schema.json",
+      "bytes": 6000,
+      "lines": 241,
+      "sha256": "804480f0a6420766adabd25e62ef82c07b5a913e879dfbaf9e6198ab3edc8c52"
+    },
+    {
+      "file": "docs/contracts/workflow-source-receipt.schema.json",
+      "bytes": 977,
+      "lines": 18,
+      "sha256": "2dd76b59e203dbc27ff7d508c272f569e81803bcc1d46ea998176a195d130de7"
+    },
+    {
+      "file": "docs/README.md",
+      "bytes": 18483,
+      "lines": 133,
+      "sha256": "2bb2aa7a8a3930f9c54f964ff68912c9b6164e7294b95b0173cf5a01b3995de2"
+    },
+    {
+      "file": "docs/tools/verify_docs.py",
+      "bytes": 24305,
+      "lines": 386,
+      "sha256": "bcf3aae86805165b7b87cae30188ce253bcf135764e876de7b37403e5762a188"
+    }
+  ],
+  "errors": [
+    "59-S3版本与范围交付校验.md: broken local link: ./evidence/2026-10-24/s3-boundary-process-check.json"
+  ],
+  "passed": false
+}

@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-22T18:39:36.516862+00:00",
+  "browser": "installed Microsoft Edge, headless",
+  "origin": "https://127.0.0.1:8443",
+  "backend_mode": "real local HTTPS login/build; bounded synthetic access-history route fixtures",
+  "visibility_mode": "document.hidden and visibilitychange simulated in isolated page",
+  "business_data_mutated": false,
+  "real_comfy_or_s3_tested": false,
+  "duration_seconds": 5.95,
+  "checks": [
+    "login_keeps_resolved_history_path_without_query_or_hash",
+    "page_failure_keeps_current_rows_retry_and_previous_reuses_upper_bound",
+    "late_cancelled_filter_response_cannot_replace_current_filter",
+    "simulated_visibility_cancels_then_resumes_one_read_without_idle_polling",
+    "leaving_history_cancels_pending_read_and_drops_late_response"
+  ],
+  "runtime_errors": [],
+  "browser_context_closed": true
+}

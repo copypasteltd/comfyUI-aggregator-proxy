@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "run_id": "77f0df645f24",
+  "synthetic_catalog": true,
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "real_comfyui": false,
+  "authentication_audit": {
+    "admin.login": 3,
+    "admin.logout": 1
+  },
+  "database_assertions": {
+    "business_snapshot_unchanged": true,
+    "final_jobs": 4,
+    "attempts": 4,
+    "terminal_accounting": 3,
+    "unknown_occupancy_preserved": true
+  },
+  "checks": [
+    "desktop_confirmed_image_audio_failure_context_and_responsive_read_only_list",
+    "desktop_draft_does_not_change_applied_refresh_and_explicit_filters_intersect",
+    "desktop_invalid_resource_stays_local_and_preserves_applied_snapshot",
+    "desktop_exact_audio_and_video_filters_preserve_media_types",
+    "desktop_failure_resource_opens_authorized_real_job_detail",
+    "desktop_failure_context_opens_authorized_real_channel_detail",
+    "desktop_stable_50_row_pagination_and_filter_reset_to_first_page",
+    "desktop_safe_503_preserves_marked_last_snapshot_then_recovers",
+    "desktop_ten_second_read_budget_without_overlapping_poll_keeps_last_snapshot",
+    "desktop_filter_switch_aborts_and_ignores_late_old_snapshot",
+    "desktop_hidden_aborts_and_pauses_poll_visible_rechecks_session_and_reads",
+    "desktop_unmount_aborts_pending_read_and_stops_poll",
+    "desktop_logout_clears_filter_snapshot_and_pending_request",
+    "desktop_observer_reads_both_media_failures_without_business_mutations",
+    "mobile_confirmed_image_audio_failure_context_and_responsive_read_only_list",
+    "mobile_exact_video_resource_intersection_and_safe_context",
+    "mobile_critical_unknown_gpu_remains_separate_from_confirmed_failures"
+  ]
+}

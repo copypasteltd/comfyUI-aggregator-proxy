@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-24T01:53:31.688217+00:00",
+  "passed": true,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.77,
+      "log": "s3-boundary-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "seconds": 12.1,
+      "log": "s3-boundary-mypy.log"
+    },
+    {
+      "name": "lock",
+      "exit_code": 0,
+      "seconds": 1.26,
+      "log": "s3-boundary-lock.log"
+    }
+  ]
+}

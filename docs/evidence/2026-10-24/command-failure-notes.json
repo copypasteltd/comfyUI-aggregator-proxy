@@ -1,0 +1,9 @@
+{
+  "initial_collection": "Two new test files originally shared a pytest basename. Renamed the protocol test; production behavior was unchanged.",
+  "initial_targeted": "725 passed, four new HTTP tests used the default testserver host and wrong cookie. Corrected to the configured HTTPS origin and gen_admin cookie. A focused rerun then found two new tests used too short an idempotency token; corrected the test token to the existing 16-128 ASCII contract.",
+  "static": "Initial mypy found a reused proof local name colliding with an existing ModelFileInspection variable. Renamed the saved proof local; subsequent 137 source checks passed.",
+  "browser": "Initial browser preparation navigated after a fixed delay while login was still pending and seeded a credential with the wrong fixture pepper. Corrected fixture pepper and explicit login-complete wait. Preserved failed cleanup/results. Thirteen browser groups passed before adding stale-target and logout checks; final 15 groups include those checks. No source assertion or security gate was weakened.",
+  "requirements_weakened": false,
+  "no_new_ddl": true,
+  "physical_acceptance": false
+}

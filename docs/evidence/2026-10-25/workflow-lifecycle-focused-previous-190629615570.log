@@ -1,0 +1,82 @@
+.......................F.....FF.F..FFFF................................. [  4%]
+........................................................................ [  9%]
+........................................................................ [ 14%]
+........................................................................ [ 19%]
+........................................................................ [ 24%]
+........................................................................ [ 28%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+........................................................................ [ 43%]
+........................................................................ [ 48%]
+........................................................................ [ 52%]
+........................................................................ [ 57%]
+........................................................................ [ 62%]
+........................................................................ [ 67%]
+........................................................................ [ 72%]
+........................................................................ [ 77%]
+........................................................................ [ 81%]
+........................................................................ [ 86%]
+........................................................................ [ 91%]
+........................................................................ [ 96%]
+.......................................................                  [100%]
+================================== FAILURES ===================================
+_ test_archived_workflow_blocks_all_new_mutations_without_partial_effects[admission] _
+tests\integration\test_workflow_lifecycle.py:280: in test_archived_workflow_blocks_all_new_mutations_without_partial_effects
+    assert caught.value.status == 409 and caught.value.code == "workflow_archived"
+E   AssertionError: assert (403 == 409)
+E    +  where 403 = DomainError('验证任务必须由控制面内部主体创建').status
+E    +    where DomainError('验证任务必须由控制面内部主体创建') = <ExceptionInfo DomainError('验证任务必须由控制面内部主体创建') tblen=2>.value
+_ test_shared_gates_serialize_actual_publishing_sync_and_admission[True-admission] _
+tests\integration\test_workflow_lifecycle.py:435: in test_shared_gates_serialize_actual_publishing_sync_and_admission
+    assert second_result == "workflow_archived"
+E   AssertionError: assert 'validation_identity_required' == 'workflow_archived'
+E     
+E     - workflow_archived
+E     + validation_identity_required
+_ test_shared_gates_serialize_actual_publishing_sync_and_admission[False-publish] _
+tests\integration\test_workflow_lifecycle.py:433: in test_shared_gates_serialize_actual_publishing_sync_and_admission
+    assert isinstance(first_result, dict)
+E   AssertionError: assert False
+E    +  where False = isinstance('runtime_evidence_required', dict)
+_ test_shared_gates_serialize_actual_publishing_sync_and_admission[False-admission] _
+tests\integration\test_workflow_lifecycle.py:428: in test_shared_gates_serialize_actual_publishing_sync_and_admission
+    assert ready.wait(4)
+E   assert False
+E    +  where False = wait(4)
+E    +    where wait = <threading.Event at 0x29bde68b4d0: unset>.wait
+_ test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation[administrator-True] _
+tests\integration\test_workflow_lifecycle.py:505: in test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation
+    "X-CSRF-Token": login["csrf_token"],
+                    ^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'csrf_token'
+_ test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation[workflow_maintainer-True] _
+tests\integration\test_workflow_lifecycle.py:505: in test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation
+    "X-CSRF-Token": login["csrf_token"],
+                    ^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'csrf_token'
+_ test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation[operator-False] _
+tests\integration\test_workflow_lifecycle.py:505: in test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation
+    "X-CSRF-Token": login["csrf_token"],
+                    ^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'csrf_token'
+_ test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation[observer-False] _
+tests\integration\test_workflow_lifecycle.py:505: in test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation
+    "X-CSRF-Token": login["csrf_token"],
+                    ^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'csrf_token'
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_workflow_lifecycle.py::test_archived_workflow_blocks_all_new_mutations_without_partial_effects[admission]
+FAILED tests/integration/test_workflow_lifecycle.py::test_shared_gates_serialize_actual_publishing_sync_and_admission[True-admission]
+FAILED tests/integration/test_workflow_lifecycle.py::test_shared_gates_serialize_actual_publishing_sync_and_admission[False-publish]
+FAILED tests/integration/test_workflow_lifecycle.py::test_shared_gates_serialize_actual_publishing_sync_and_admission[False-admission]
+FAILED tests/integration/test_workflow_lifecycle.py::test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation[administrator-True]
+FAILED tests/integration/test_workflow_lifecycle.py::test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation[workflow_maintainer-True]
+FAILED tests/integration/test_workflow_lifecycle.py::test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation[operator-False]
+FAILED tests/integration/test_workflow_lifecycle.py::test_http_roles_csrf_revision_original_replay_and_valid_business_key_isolation[observer-False]
+8 failed, 1487 passed, 1 warning in 40.81s

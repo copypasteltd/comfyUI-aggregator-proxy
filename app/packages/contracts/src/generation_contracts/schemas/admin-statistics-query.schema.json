@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-statistics-query:0.5.0",
+  "title": "Admin operational statistics query",
+  "type": "object",
+  "properties": {
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^ten_[a-f0-9]{32}$"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^prj_[a-f0-9]{32}$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf_[a-f0-9]{32}$"
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^wfr_[a-f0-9]{32}$"
+    },
+    "channel_id": {
+      "type": "string",
+      "pattern": "^ch_[a-f0-9]{32}$"
+    },
+    "key_id": {
+      "type": "string",
+      "pattern": "^key_[a-f0-9]{32}$"
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^\\S(?:.*\\S)?$"
+    },
+    "state": {
+      "enum": [
+        "admission_pending",
+        "queued",
+        "leased",
+        "preparing",
+        "submitting",
+        "running",
+        "collecting",
+        "uploading",
+        "verifying",
+        "reconciling",
+        "retry_wait",
+        "cancel_requested",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "expired"
+      ]
+    },
+    "created_from": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4102444800
+    },
+    "created_before": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4102444800
+    },
+    "window": {
+      "enum": [
+        "1h",
+        "24h",
+        "7d"
+      ]
+    },
+    "task_type": {
+      "enum": [
+        "text_to_image",
+        "image_to_image",
+        "references_to_image",
+        "text_to_video",
+        "references_to_video",
+        "text_to_audio"
+      ]
+    },
+    "include_validation": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Queue filter intersection. page does not change aggregates. window defaults to 24h; include_validation defaults to false. Time-order validation additionally follows QueueQuery."
+}

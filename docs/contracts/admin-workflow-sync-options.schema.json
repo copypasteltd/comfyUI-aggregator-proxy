@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://generation.local/contracts/admin-workflow-sync-options.schema.json",
+  "title": "admin-workflow-sync-options",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "enum": [
+        "release",
+        "channel"
+      ]
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^prj_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\r\n]"
+      }
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\r\n]"
+      }
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "snapshot_at": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "has_more": {
+      "type": "boolean"
+    },
+    "data": {
+      "type": "array",
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "kind",
+    "project_id",
+    "workflow_id",
+    "page",
+    "snapshot_at",
+    "total",
+    "has_more",
+    "data"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "release"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "release"
+                },
+                "id": {
+                  "type": "string",
+                  "pattern": "^wfr_[a-f0-9]{32}$",
+                  "not": {
+                    "pattern": "[\r\n]"
+                  }
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "digest": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$",
+                  "not": {
+                    "pattern": "[\r\n]"
+                  }
+                },
+                "validated": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "kind",
+                "id",
+                "version",
+                "digest",
+                "validated"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "channel"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "channel"
+                },
+                "id": {
+                  "type": "string",
+                  "pattern": "^ch_[a-f0-9]{32}$",
+                  "not": {
+                    "pattern": "[\r\n]"
+                  }
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "draining": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "kind",
+                "id",
+                "name",
+                "revision",
+                "enabled",
+                "draining"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

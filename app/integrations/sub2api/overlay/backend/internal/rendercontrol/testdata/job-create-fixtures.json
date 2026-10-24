@@ -1,0 +1,430 @@
+{
+  "contract_version": "0.5.0",
+  "source": "docs/contracts/fixtures.json",
+  "cases": [
+    {
+      "id": "job_text_image",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-image-v1",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "合成测试：雨后的街道"
+        },
+        "parameters": {
+          "size": "1024x1024",
+          "quality": "standard"
+        }
+      }
+    },
+    {
+      "id": "job_image_image",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-image-v1",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "合成测试：雨后的街道",
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "size": "1024x1024",
+          "quality": "standard",
+          "strength": 0.5
+        }
+      }
+    },
+    {
+      "id": "job_references_image",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-image-v1",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "合成测试：雨后的街道",
+          "references": [
+            {
+              "asset_id": "asset_character01",
+              "role": "character"
+            },
+            {
+              "asset_id": "asset_scene00001",
+              "role": "scene"
+            }
+          ]
+        },
+        "parameters": {
+          "size": "1024x1024",
+          "quality": "standard"
+        }
+      }
+    },
+    {
+      "id": "job_text_video",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-video-v1",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "合成测试：雨后的街道"
+        },
+        "parameters": {
+          "size": "720x1280",
+          "quality": "standard",
+          "seconds": 5.125,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "job_references_video",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-video-v1",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "合成测试：雨后的街道",
+          "references": [
+            {
+              "asset_id": "asset_character01",
+              "role": "character"
+            },
+            {
+              "asset_id": "asset_scene00001",
+              "role": "scene"
+            }
+          ]
+        },
+        "parameters": {
+          "size": "720x1280",
+          "quality": "standard",
+          "seconds": 5.125,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "reject_one_reference_video",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-video-v1",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "合成测试：雨后的街道",
+          "references": [
+            {
+              "asset_id": "asset_character01",
+              "role": "character"
+            }
+          ]
+        },
+        "parameters": {
+          "size": "720x1280",
+          "quality": "standard",
+          "seconds": 5.125,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "reject_arbitrary_workflow",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-image-v1",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "合成测试：雨后的街道"
+        },
+        "parameters": {
+          "size": "1024x1024",
+          "quality": "standard"
+        },
+        "workflow_json": {}
+      }
+    },
+    {
+      "id": "reject_image_duration",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-image-v1",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "合成测试：雨后的街道"
+        },
+        "parameters": {
+          "size": "1024x1024",
+          "quality": "standard",
+          "seconds": 5
+        }
+      }
+    },
+    {
+      "id": "reject_missing_source",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-image-v1",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "合成测试：雨后的街道"
+        },
+        "parameters": {
+          "size": "1024x1024",
+          "quality": "standard",
+          "strength": 0.5
+        }
+      }
+    },
+    {
+      "id": "reject_customer_owner",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-image-v1",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "合成测试：雨后的街道"
+        },
+        "parameters": {
+          "size": "1024x1024",
+          "quality": "standard"
+        },
+        "tenant_id": "tenant_other"
+      }
+    },
+    {
+      "id": "reject_unpublished_batch",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-image-v1",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "合成测试：雨后的街道"
+        },
+        "parameters": {
+          "size": "1024x1024",
+          "quality": "standard",
+          "n": 2
+        }
+      }
+    },
+    {
+      "id": "video_single_first_frame",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-reference-v1",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic input",
+          "references": [
+            {
+              "asset_id": "asset_reference1",
+              "role": "first_frame"
+            }
+          ]
+        },
+        "parameters": {
+          "seconds": 6
+        }
+      }
+    },
+    {
+      "id": "image_single_first_frame_rejected",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-reference-v1",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "Synthetic input",
+          "references": [
+            {
+              "asset_id": "asset_reference1",
+              "role": "first_frame"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "video_single_character_rejected",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-reference-v1",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic input",
+          "references": [
+            {
+              "asset_id": "asset_reference1",
+              "role": "character"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "audio_job",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30
+        }
+      }
+    },
+    {
+      "id": "audio_reject_size",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "size": "512x512"
+        }
+      }
+    },
+    {
+      "id": "audio_reject_fps",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "fps": 24
+        }
+      }
+    },
+    {
+      "id": "audio_reject_strength",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "strength": 0.5
+        }
+      }
+    },
+    {
+      "id": "audio_600_seconds",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 600
+        }
+      }
+    },
+    {
+      "id": "audio_too_long",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 600.001
+        }
+      }
+    },
+    {
+      "id": "audio_zero",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 0
+        }
+      }
+    },
+    {
+      "id": "audio_sub_millisecond",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 0.0001
+        }
+      }
+    },
+    {
+      "id": "audio_reject_image_input",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-audio-v1",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "合成协议样例：风声",
+          "source_image": {
+            "asset_id": "asset_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30
+        }
+      }
+    }
+  ]
+}

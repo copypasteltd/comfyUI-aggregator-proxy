@@ -1,0 +1,98 @@
+{
+  "at": "2026-10-24T02:05:45.954058+00:00",
+  "passed": true,
+  "run_id": "077424a207b1",
+  "checks": [
+    "fresh_offline_wheels_seven_modules_frozen_contracts_no_editable_dependencies",
+    "installed_s3_exact_version_guard_and_bounded_read_close_without_source_checkout",
+    "installed_four_audio_formats_decode_without_global_ffmpeg",
+    "existing_installation_refused_without_modification",
+    "startup_on_empty_database_refuses_without_implicit_ddl",
+    "installed_migration_takes_native_pg18_backup_and_verifies_archive_before_ddl",
+    "invalid_configuration_and_missing_tls_fail_without_secret_output",
+    "installed_https_health_and_bundled_admin_assets",
+    "unauthenticated_and_business_bearer_cannot_enter_admin",
+    "installed_runner_and_independent_gc_execute_once",
+    "worker_explicit_config_preserves_unresolved_durable_journal_without_comfy_call",
+    "installed_worker_refuses_unbound_legacy_journal_without_changing_execution_facts",
+    "installed_worker_explicit_adoption_verifies_backup_and_retains_unknown_submit",
+    "incompatible_database_revision_blocks_startup_without_migration",
+    "fresh_installed_real_browser_desktop_mobile_admin_and_content",
+    "runtime_tampered_payload_is_rejected_and_manifest_stays_immutable"
+  ],
+  "virtualization_used": false,
+  "production_accepted": false,
+  "archive_sha256": "b36a888b9b0fd001038245132e628ac0254fcc19a24048bbde5967c0413c87a8",
+  "release_id": "rc-20261024.59.1",
+  "source_tree_sha256": "c1da8e2dfec2ce9475f2707466ba3bbc2542dffd812324c18636a45fa7968d64",
+  "payload_files": 141,
+  "database_head": "e85b6c2d9014",
+  "installation": {
+    "application_modules": [
+      "generation_domain",
+      "generation_application",
+      "generation_contracts",
+      "generation_infrastructure",
+      "control_api",
+      "control_runner",
+      "windows_worker"
+    ],
+    "archive_sha256": "b36a888b9b0fd001038245132e628ac0254fcc19a24048bbde5967c0413c87a8",
+    "contracts_verified": 25,
+    "editable": false,
+    "format_version": 1,
+    "manifest_sha256": "10e4dc125012bbb9f536725d2621583603d21b7836204aac2166ed0b6d791d6f",
+    "offline": true,
+    "python_version": "3.13.1",
+    "release_id": "rc-20261024.59.1",
+    "requirements": 57
+  },
+  "s3_boundary": {
+    "passed": true,
+    "isolated_installed_module": true,
+    "valid_stream_and_wrong_version_guard": true,
+    "response_bodies_closed": true,
+    "real_s3": false
+  },
+  "audio_media": {
+    "passed": true,
+    "formats": [
+      "wav",
+      "flac",
+      "mp3",
+      "opus"
+    ],
+    "global_media_tools_unavailable": true,
+    "bundled_tools_used": true
+  },
+  "pre_migration_backup": {
+    "archive_list_verified": true,
+    "sha256": "529000608977270736fd6afaf058f5f64fe7171560227e4f792ec0500ecd04db",
+    "created_before_ddl": true
+  },
+  "browser": {
+    "passed": true,
+    "checks": [
+      "desktop_installed_admin_login_and_live_queue",
+      "desktop_installed_statistics_audio_empty_unknown_and_responsive",
+      "desktop_installed_content_route_and_authorization",
+      "mobile_installed_admin_login_and_live_queue",
+      "mobile_installed_statistics_audio_empty_unknown_and_responsive",
+      "mobile_installed_content_route_and_authorization"
+    ],
+    "errors": [],
+    "closed_contexts": 2,
+    "browser_closed": true
+  },
+  "processes": [
+    {
+      "name": "installed-api",
+      "pid": 2072,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "temporary_database_removed": true,
+  "temporary_root_removed": true,
+  "duration_seconds": 181.46
+}

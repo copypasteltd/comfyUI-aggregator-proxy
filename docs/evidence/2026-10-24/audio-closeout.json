@@ -1,0 +1,289 @@
+{
+  "at": "2026-10-23T22:16:10.506369+00:00",
+  "passed": true,
+  "scope": "Local audio implementation, protocol, isolated Windows candidate and document cross-check; real resources unaccepted",
+  "release_id": "rc-20261024.55.3",
+  "archive_sha256": "4f53969a5d16cbf89b61382a0ef443741690bf52ff8dcdbd0e6daa9e669c3179",
+  "archive_bytes": 280644924,
+  "source_tree_sha256": "5eef193a92f26a113f5a3cc7f3f7043547c7b513e52d837c695f8cc8f66d998a",
+  "source_inputs_verified": 340,
+  "payload_files": 136,
+  "wheels": 57,
+  "packaged_contracts": 21,
+  "python_tests": 1129,
+  "python_seconds": 353.812,
+  "mypy_source_files": 121,
+  "release_security_tests": 71,
+  "ruff_lock_frontend_passed": true,
+  "engineering_log_sha256": {
+    "audio-full-python.log": "a685d6452e98fa98fb264fadcd708941add8ae9dc0c8ca7a2099517f61392a0c",
+    "audio-mypy.log": "7a657fb734f82b9f4569eccbf4a96baf5946830493bf79a3ea42219cd083a5df",
+    "audio-final-ruff.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "audio-final-lock.log": "2fdd62fba322bb9d6604a26bafdd186cbb581a76edf4035c924f1a1f69bffcb3",
+    "audio-frontend.log": "4ed0b3e69242672f190ebe5a6efea55639522090686c684448c9a0c9a42f4012"
+  },
+  "go_client_top_level": 45,
+  "go_client_subtests": 192,
+  "go_ledger_passed": 491,
+  "go_parent_helper_skipped": 1,
+  "go_source_files_verified": 68,
+  "audio_browser_groups": 12,
+  "installed_browser_groups": 4,
+  "all_test_browsers_closed": true,
+  "new_installation_checks": 13,
+  "installation_run_id": "0a36d4af5389",
+  "media_runtime_lock": {
+    "format_version": 1,
+    "version": "8.1-full_build-www.gyan.dev",
+    "platform": "windows-amd64",
+    "source": "https://www.gyan.dev/ffmpeg/builds/",
+    "origin": "Pre-existing Gyan.FFmpeg native WinGet installation; package archive was not downloaded by this project",
+    "license": "GPL-3.0-or-later",
+    "files": {
+      "bin/ffmpeg.exe": {
+        "bytes": 223360000,
+        "sha256": "d1e2a156261ecc675081943197a85f08f2868784a0af499171ede89353edad31"
+      },
+      "bin/ffprobe.exe": {
+        "bytes": 223153664,
+        "sha256": "70872c3ffbc43d0b2c570f9837f54d6e9a832f4ca25463e9735b6a3ec0621478"
+      },
+      "LICENSE": {
+        "bytes": 35147,
+        "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+      },
+      "README.txt": {
+        "bytes": 45232,
+        "sha256": "557205ec68086511f87c0c2ca7ba077d4c687f71e55f3165aed425ebe704b5d8"
+      }
+    }
+  },
+  "four_formats_without_global_ffmpeg": true,
+  "native_protocol_groups": 18,
+  "native_generation_jobs": 11,
+  "native_run_id": "a5c328a1f997",
+  "native_seconds": 114.45,
+  "worker_retention": {
+    "confirmed_packages": 11,
+    "retained_files_verified": 11,
+    "minimum_retention_seconds": 3600,
+    "journal_and_files_removed_only_by_test_resource_cleanup": true
+  },
+  "restore_rehearsal": {
+    "at": "2026-10-23T21:45:35.546672+00:00",
+    "duration_seconds": 4.2,
+    "source": "project-native PostgreSQL development database",
+    "consistent_exported_snapshot": true,
+    "schema_revision": "c57a2d9f4106",
+    "table_count": 42,
+    "total_rows": 753,
+    "row_counts_match": true,
+    "audio_meter_sums_match": true,
+    "audio_columns_not_null": 2,
+    "backup_sha256": "370eb2dbf74e3bb5b6a836c4521a60f4fc6c358ce2f048eb3e0f257887f15ae2",
+    "temporary_database_dropped": true,
+    "object_bytes_and_master_keys_restored": false,
+    "production_recovery_accepted": false
+  },
+  "databases": [
+    {
+      "database": "render_control",
+      "head": "c57a2d9f4106",
+      "business_tables": 42,
+      "durability_preserved": true,
+      "constraints_validated": true,
+      "audio_columns_not_null": 2
+    },
+    {
+      "database": "render_control_test",
+      "head": "c57a2d9f4106",
+      "business_tables": 42,
+      "durability_preserved": true,
+      "constraints_validated": true,
+      "audio_columns_not_null": 2
+    }
+  ],
+  "https_statuses": {
+    "/health/live": 200,
+    "/health/ready": 200,
+    "/admin/": 200,
+    "/admin/api/v1/content": 401
+  },
+  "processes": {
+    "at": "2026-10-23T22:15:54.1663838+00:00",
+    "registered": 9,
+    "all_identities_match": true,
+    "identities": [
+      {
+        "pid": 29268,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 7648,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 1716,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 10836,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 39552,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 30772,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 22616,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 40080,
+        "running": true,
+        "identity_matches": true
+      },
+      {
+        "pid": 28108,
+        "running": true,
+        "identity_matches": true
+      }
+    ],
+    "remaining_test_processes": 0,
+    "retained_purpose": "Local HTTPS Admin/API, persistent Runner and independent object GC; native development PostgreSQL retained separately"
+  },
+  "temporary_resources_cleaned": true,
+  "document_checks": {
+    "markdown": {
+      "documents": 57,
+      "instruction_files": 1,
+      "fenced_blocks": 34,
+      "json_examples": 15,
+      "yaml_examples": 1,
+      "local_links_checked": 785
+    },
+    "contracts": {
+      "json_files": 23,
+      "schemas": 19,
+      "fixtures": 203,
+      "positive_fixtures": 59,
+      "negative_fixtures": 144,
+      "capabilities_covered": [
+        "image_to_image",
+        "references_to_image",
+        "references_to_video",
+        "text_to_audio",
+        "text_to_image",
+        "text_to_video"
+      ]
+    },
+    "state_machine": {
+      "states": 16,
+      "terminal_states": 4,
+      "transitions": 61,
+      "guards": 21
+    },
+    "endpoints": {
+      "total": 158,
+      "by_identity": {
+        "service": 27,
+        "admin_login": 1,
+        "admin": 93,
+        "worker": 11,
+        "gateway": 26
+      },
+      "admin_permissions": 24
+    },
+    "traceability": {
+      "rules": 32,
+      "quality_scenarios": 18,
+      "work_packages": 15,
+      "requirements": 73,
+      "work_package_statuses": {
+        "in_progress": 14,
+        "not_started": 1
+      },
+      "admin_acceptance_mapped": 16,
+      "key_acceptance_mapped": 12
+    },
+    "topic_presence": {
+      "checks": 14,
+      "scope": "Text presence only, not proof of correctness"
+    }
+  },
+  "document_report_sha256": "4d1d7a60d04cf703de34fe83a9dd0f13a1d1484a80dcd3c257fcc9171c1c0517",
+  "evidence_sha256": {
+    "audio-accounting-targeted.xml": "f91b16f2fad201f0a333764ca562da4d66bb8a2a0a1e035d10741790d9c484b8",
+    "audio-browser-before-csp-helper-fix.json": "e061f11a684ced784607bca0eb0bcb9a36539f1a53ac488ee500bfd57c979e7f",
+    "audio-browser-before-duration-step-fix.json": "691db3dc31c3f6e8efc087722c61c7845bb03c6c6de25625866b5f4ad3cd4dea",
+    "audio-browser-before-freeze-locator-fix.json": "afd5cdf9d3a60a826e1411843c7d2698e8756a75d613f6feaeac36c9c18d45ff",
+    "audio-browser-before-key-envelope-fix.json": "33ed5b18f355322e043ba985dde85207ceb505f01eed586e799a4a6b3e7f01c8",
+    "audio-browser-before-model-isolation-fix.json": "b6cb252df0d160c7f9b425bc89e7107068f69ceb70ad4c673da9858af49e43c7",
+    "audio-browser-fixture-before-duration-step-fix.json": "1640de26734e5db317da0f0a143ba24e7bbfa313ab118dfbf6b0a1c3fff1291c",
+    "audio-browser-fixture-before-key-envelope-fix.json": "df810a242f2ce7f528d79fc9cf34f5a553a5123e08fa2e740868e0a6907b8ea2",
+    "audio-browser-fixture-before-origin-fix.json": "b5b3d2de0530883a7494eaf351a0c74b0b2097b4c40f522967db0f459b8d4af1",
+    "audio-browser-fixture.json": "7b04cf24716a339fb8554ae113f268e233adeb673b60ae1468b99636470bd07b",
+    "audio-browser.json": "ad7654c513debac3469a3bbc1cc097894d119b1c3d9615677f71824bb0cff281",
+    "audio-desktop.png": "7c9d8c8de2e0ba53961537cc7497b51fae6f5d136dda0940223ed65477808b82",
+    "audio-document-check.json": "4d1d7a60d04cf703de34fe83a9dd0f13a1d1484a80dcd3c257fcc9171c1c0517",
+    "audio-domain-media-tests.xml": "c70c7b8a84f28f997b0cd2e0d2785bfb5230b49b01ba734e3c53afb742627d35",
+    "audio-failure-notes.json": "45a32d1451e61a8ae837c5772e15e2f48df6138d0e57b3a65df643b00551e8fc",
+    "audio-full-python-before-fixes.xml": "eebb06e539ce80a362cd90a395f99bdb15da5b2731fa088ba3e62a784340d4a1",
+    "audio-full-python-tests.xml": "d972149c20a689a8bcd881bf5bf49d2d4e5bda2562eb245c5e9faadc78e309a7",
+    "audio-migrations.json": "f7e472c8222efce95dd805dbfe8abf072c84edfb96fd2010066ec0368911ef0e",
+    "audio-mobile.png": "11afa9c067f6f5222641cd177910fda0fba1031d4b025e50ea91829c8d3f4d98",
+    "audio-native-protocol-before-money-format-fix.json": "3cdc77243a8a3fc2e5ea6ffa3fc2088812ac3e7a5a9634c1cc11fb2edfa17dce",
+    "audio-native-protocol-before-retention-count-fix.json": "05ddcd76842d0e6eb0609e05496c1f168e955005c8bf154e7a1c3a5bc043ae19",
+    "audio-native-protocol-concurrent-io-timeout.json": "c11f3b9b9fb338c198d74a0267325af19ff4c0849c256f533b9fac339d7e0c33",
+    "audio-native-protocol.json": "8f65efc5b315cbc42098177276703ead0ae5a208f05c6b1ef43b9e8714691922",
+    "audio-process-check.json": "42a98b202a49910c81226a86625164434fa51f3b1f79ec10208fe205bdd448f8",
+    "audio-regression-targeted.xml": "1d69cdf7200e418ed5f32d3b5c7d2e50ebbd48ed49759adfb80823558aeffb41",
+    "audio-release-build-55.1.json": "11cc9a192bc8e5dc4043fee4940fe751e422022cc318502fed62358a69674670",
+    "audio-release-build.json": "c8b1a882b11d4036fd4b359621fca804e512d520f291373c9bfb87cc0f3d4c11",
+    "audio-release-installation-55.1.json": "13e92f53f62c11103c3a8160a9ba846bde4be6211768f420d623b05e40863d30",
+    "audio-release-installation-55.2.json": "0d4a449f5ceac07d02e21e278cc71983835de192f1d831cbc6faf25d234428e7",
+    "audio-release-installation.json": "3085cdcc94efe102668a8edce6715b94148f2dc9a3da9f1e0e0209adf137c1b5",
+    "audio-release-installed-browser-55.2.json": "bf446e351e2bebb57dca20449227f7d643640e6c053988e67101412196abd2f6",
+    "audio-release-installed-browser.json": "bf446e351e2bebb57dca20449227f7d643640e6c053988e67101412196abd2f6",
+    "audio-release-installed-desktop.png": "20ccc52362bcb96c804be41ecad2dd5df8758c3e0f9d02d6057e3480e3ae05c5",
+    "audio-release-installed-mobile.png": "a769dd3c5d16f029b592c743da35c799e061f89f9bb0414cadfe270eb154d863",
+    "audio-release-manifest.json": "aff34999683b3b8c5ac4bfb58aae3c4ab649f1881fcfc02cdb978e5dd1d02d0e",
+    "audio-release-security-tests.xml": "62d4e733b3962a5a717f5a8fec06ba9d8e42d52f1855423c2ccca2a3feeea480",
+    "audio-restore-rehearsal.json": "15db050644cd81443bbcc6a2a2be0ae5a4d336defa3d3113d95a8c27631e84a3",
+    "audio-scope-registry-initial-failure.json": "6b3784200611fe3f2fa3a872ad70852ece207e6db4c0385baffa6e24a682d09d",
+    "audio-sub2api-build.json": "81513a5000db03d9030ef147322dd63919e1bf2ce9c2f66e1d0ee04fd1f24067",
+    "audio-sub2api-client.json": "fb0959bb22f70ef5d7e24b3c6917e60fd8ba9ef2ce4f3c09521e5b24225de5a5",
+    "audio-sub2api-ledger-before-fixture-count-fix.json": "5ba67535af7d3a976870f09acd9c3b77b5608edecfb0364b9ed410b23cd98fb3",
+    "audio-sub2api-ledger.json": "0ca6f04155540c7f51d05b9bac075d33b0b0fa283cd5352cda4119c4017297b2",
+    "audio-worker-meter-tests.xml": "b329556e6601a3d9817ab5ac72df937bc9797ac54f98e6cdd72f7a097cd0888b"
+  },
+  "audit_script_sha256": "735a2c14c766d640c4524a7d6d6ad02f54897a4af5a71fe1bfda2ad0ea58e3e4",
+  "historical_qc15": {
+    "increment": 51,
+    "rerun_this_increment": false
+  },
+  "source_revision": null,
+  "acceptance": {
+    "production": false,
+    "linux_runtime": false,
+    "real_fleet": false,
+    "real_workflows": false,
+    "private_s3": false
+  },
+  "real_redis_validated": false,
+  "object_bytes_and_master_keys_restored": false,
+  "full_goal_complete": false,
+  "virtualization_used": false,
+  "subagents_used": false
+}

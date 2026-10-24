@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "run_id": "02eb46551c55",
+  "checks": [
+    "desktop_live_overview_retry_is_unfinished_without_ready_or_gpu_count",
+    "desktop_server_dispatch_policy_and_visible_rules",
+    "desktop_live_detail_retry_count_reason_server_time_and_closed_attempt",
+    "desktop_priority_form_explains_fairness_and_frozen_authorization",
+    "desktop_retry_wait_priority_keeps_job_backoff_and_identity",
+    "desktop_priority_csrf_and_stale_revision_are_enforced",
+    "mobile_live_overview_retry_is_unfinished_without_ready_or_gpu_count",
+    "mobile_server_dispatch_policy_and_visible_rules",
+    "mobile_live_detail_retry_count_reason_server_time_and_closed_attempt",
+    "mobile_priority_form_explains_fairness_and_frozen_authorization",
+    "mobile_retry_wait_cancel_is_terminal_and_clears_schedule",
+    "mobile_retry_detail_has_no_document_overflow"
+  ],
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "sources_sha256": {
+    ".local\\test-dispatch-browser.py": "3c4ed8193b99b0470adac2e30941d4aeac796598d82172f5d424a22d7adcff32",
+    ".local\\browser-dispatch-smoke.py": "9cbce9a7dc32ce63a31812b50b1c5f467313fae1ebca8d191371b4cbea56dd56"
+  },
+  "backup_before_ddl": {
+    "sha256": "ab4493d23a2340986dbb84e789d452e465da2a6fc48d56c44460f3ab241c4d35",
+    "archive_list_verified": true
+  },
+  "database_mutations_verified": true,
+  "runner_intentionally_not_started": true,
+  "duration_seconds": 39.93,
+  "owned_processes": [
+    {
+      "name": "retry-api",
+      "pid": 43648,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "source_unchanged": true
+}

@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-23T14:16:08.196814+00:00",
+  "all_resolved": true,
+  "unresolved_failures": [],
+  "resolved": [
+    {
+      "case": "frontend_native_node_exit_assertion",
+      "cause": "Vite generated assets but native Node hit a Windows libuv closing-handle assertion on exit.",
+      "resolution": "Repeated type generation and production build completed with exit 0; that successful build is packaged."
+    },
+    {
+      "case": "isolated_test_working_directory_relative_archive",
+      "cause": "The test helper passed a relative installer/archive path after changing the working directory.",
+      "resolution": "The helper resolves the archive and installer paths before invoking the isolated process."
+    },
+    {
+      "case": "journal_test_missing_accepted_claim",
+      "cause": "The synthetic journal test attempted intent without persisting an accepted claim; the existing resubmit_forbidden guard correctly rejected it.",
+      "resolution": "The test now persists accepted, then submit_intent and posting with the returned association, before verifying unchanged journal bytes."
+    },
+    {
+      "case": "external_browser_driver_user_site",
+      "cause": "The test reused the application isolation environment for the external browser driver, while the existing Playwright dependency is installed in the host user site.",
+      "resolution": "Only the browser test host uses its existing user-site dependency. Installed application commands still use -I and PYTHONNOUSERSITE=1."
+    }
+  ],
+  "failed_run_resources_cleaned": true,
+  "non_failing_test_warning": "One pinned Starlette TestClient/httpx deprecation warning; 776 tests passed. No dependency auto-upgrade was performed."
+}

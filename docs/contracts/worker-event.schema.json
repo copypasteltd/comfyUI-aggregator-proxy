@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Worker event envelope 0.4.0",
+  "type": "object", "additionalProperties": false,
+  "required": ["protocol_version", "event_id", "node_id", "boot_id", "job_id", "attempt_id", "fencing_token", "journal_seq", "observed_at", "type", "payload"],
+  "properties": {
+    "protocol_version": {"const": "0.4.0"},
+    "event_id": {"type": "string", "format": "uuid"},
+    "node_id": {"$ref": "#/$defs/id"},
+    "boot_id": {"type": "string", "format": "uuid"},
+    "job_id": {"$ref": "#/$defs/id"},
+    "attempt_id": {"$ref": "#/$defs/id"},
+    "fencing_token": {"type": "integer", "minimum": 1},
+    "journal_seq": {"type": "integer", "minimum": 1},
+    "observed_at": {"type": "integer", "minimum": 0},
+    "type": {"enum": ["preparing", "submit_intent", "submitted", "progress", "outputs_collected", "gpu_released", "upload_progress", "execution_failed", "cancel_confirmed", "reconcile_observation"]},
+    "payload": {"type": "object"}
+  },
+  "allOf": [
+    {"if": {"properties": {"type": {"const": "preparing"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/preparing"}}}},
+    {"if": {"properties": {"type": {"const": "submit_intent"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/submitIntent"}}}},
+    {"if": {"properties": {"type": {"const": "submitted"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/submitted"}}}},
+    {"if": {"properties": {"type": {"const": "progress"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/progress"}}}},
+    {"if": {"properties": {"type": {"const": "outputs_collected"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/collected"}}}},
+    {"if": {"properties": {"type": {"const": "gpu_released"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/released"}}}},
+    {"if": {"properties": {"type": {"const": "upload_progress"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/uploadProgress"}}}},
+    {"if": {"properties": {"type": {"const": "execution_failed"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/failure"}}}},
+    {"if": {"properties": {"type": {"const": "cancel_confirmed"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/cancelled"}}}},
+    {"if": {"properties": {"type": {"const": "reconcile_observation"}}}, "then": {"properties": {"payload": {"$ref": "#/$defs/reconcile"}}}}
+  ],
+  "$defs": {
+    "id": {"type": "string", "minLength": 8, "maxLength": 128},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "preparing": {"type": "object", "additionalProperties": false, "required": ["execution_digest"], "properties": {"execution_digest": {"$ref": "#/$defs/sha256"}}},
+    "submitIntent": {"type": "object", "additionalProperties": false, "required": ["association_id", "workflow_digest", "journal_committed"], "properties": {"association_id": {"type": "string", "format": "uuid"}, "workflow_digest": {"$ref": "#/$defs/sha256"}, "journal_committed": {"const": true}}},
+    "submitted": {"type": "object", "additionalProperties": false, "required": ["prompt_id"], "properties": {"prompt_id": {"type": "string", "minLength": 1, "maxLength": 128}}},
+    "progress": {"type": "object", "additionalProperties": false, "required": ["stage", "current_step", "total_steps"], "properties": {"stage": {"enum": ["loading", "sampling", "encoding", "collecting"]}, "current_step": {"type": ["integer", "null"], "minimum": 0}, "total_steps": {"type": ["integer", "null"], "minimum": 1}}},
+    "collected": {"type": "object", "additionalProperties": false, "required": ["manifest_digest", "output_count", "files_stable"], "properties": {"manifest_digest": {"$ref": "#/$defs/sha256"}, "output_count": {"type": "integer", "minimum": 1, "maximum": 100}, "files_stable": {"const": true}}},
+    "released": {"type": "object", "additionalProperties": false, "required": ["gpu_id", "compute_stopped", "gpu_encoding_stopped", "evidence_digest"], "properties": {"gpu_id": {"$ref": "#/$defs/id"}, "compute_stopped": {"const": true}, "gpu_encoding_stopped": {"const": true}, "evidence_digest": {"$ref": "#/$defs/sha256"}}},
+    "uploadProgress": {"type": "object", "additionalProperties": false, "required": ["uploaded_bytes", "total_bytes"], "properties": {"uploaded_bytes": {"type": "integer", "minimum": 0}, "total_bytes": {"type": "integer", "minimum": 1}}},
+    "failure": {"type": "object", "additionalProperties": false, "required": ["error_code", "execution_stop_confirmed", "evidence_digest"], "properties": {"error_code": {"type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$"}, "execution_stop_confirmed": {"type": "boolean"}, "evidence_digest": {"$ref": "#/$defs/sha256"}}},
+    "cancelled": {"type": "object", "additionalProperties": false, "required": ["execution_stop_confirmed", "evidence_digest"], "properties": {"execution_stop_confirmed": {"const": true}, "evidence_digest": {"$ref": "#/$defs/sha256"}}},
+    "reconcile": {"type": "object", "additionalProperties": false, "required": ["evidence_digest", "queue_observation", "process_boot_changed"], "properties": {"evidence_digest": {"$ref": "#/$defs/sha256"}, "queue_observation": {"enum": ["found", "absent", "unknown"]}, "process_boot_changed": {"type": "boolean"}}}
+  }
+}

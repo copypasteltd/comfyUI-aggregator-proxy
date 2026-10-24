@@ -1,0 +1,35 @@
+....................FF.................................................. [ 10%]
+........................................................................ [ 20%]
+........................................................................ [ 30%]
+........................................................................ [ 40%]
+........................................................................ [ 51%]
+........................................................................ [ 61%]
+........................................................................ [ 71%]
+........................................................................ [ 81%]
+........................................................................ [ 92%]
+.......................................................                  [100%]
+================================== FAILURES ===================================
+_ test_http_retry_permissions_csrf_and_real_operation_projection[administrator-True] _
+tests\integration\test_workflow_retries.py:526: in test_http_retry_permissions_csrf_and_real_operation_projection
+    assert accepted.status_code == (202 if allowed else 403)
+E   assert 400 == 202
+E    +  where 400 = <Response [400 Bad Request]>.status_code
+_ test_http_retry_permissions_csrf_and_real_operation_projection[workflow_maintainer-True] _
+tests\integration\test_workflow_retries.py:526: in test_http_retry_permissions_csrf_and_real_operation_projection
+    assert accepted.status_code == (202 if allowed else 403)
+E   assert 400 == 202
+E    +  where 400 = <Response [400 Bad Request]>.status_code
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/integration/test_workflow_retries.py::test_partial_failure_retries_only_failed_preserves_original_and_survives_service_restart
+  E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\_pytest\raises.py:613: PytestWarning: matching against an empty string will *always* pass. If you want to check for an empty message you need to pass '^$'. If you don't want to match you should pass `None` or leave out the parameter.
+    super().__init__(match=match, check=check)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_workflow_retries.py::test_http_retry_permissions_csrf_and_real_operation_projection[administrator-True]
+FAILED tests/integration/test_workflow_retries.py::test_http_retry_permissions_csrf_and_real_operation_projection[workflow_maintainer-True]
+2 failed, 701 passed, 2 warnings in 89.36s (0:01:29)

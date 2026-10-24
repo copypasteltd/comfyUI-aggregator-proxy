@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "run_id": "0479928dc858",
+  "checks": [
+    "desktop_create_tenant_then_project_with_parent_limits",
+    "desktop_edit_limits_disable_preserve_and_responsive_drawer",
+    "desktop_csrf_stale_revision_preserved_input_and_reload",
+    "desktop_paged_project_beyond_session_100_in_keys",
+    "desktop_paged_project_beyond_session_100_in_channels",
+    "desktop_paged_project_beyond_session_100_in_workflows",
+    "desktop_paged_project_beyond_session_100_in_model-artifacts",
+    "desktop_paged_project_beyond_session_100_in_models",
+    "desktop_paged_project_beyond_session_100_in_gateways",
+    "desktop_created_key_uses_selected_trusted_project",
+    "mobile_create_tenant_then_project_with_parent_limits",
+    "mobile_edit_limits_disable_preserve_and_responsive_drawer",
+    "mobile_csrf_stale_revision_preserved_input_and_reload",
+    "mobile_paged_project_beyond_session_100_in_keys",
+    "mobile_created_key_uses_selected_trusted_project",
+    "observer_scope_directory_and_readonly_usage_drawer"
+  ],
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "sources_sha256": {
+    ".local\\test-scopes-browser.py": "049a84d9ea04bfd602042bb943740a2184070fc53010523a04e247e38645c8d1",
+    ".local\\browser-scopes-smoke.py": "02d1374db8c79afc4d5cad7d39cd24cd7d6e9aac405e4f136d9771f3a7e8d26c"
+  },
+  "backup_before_ddl": {
+    "sha256": "cb9d4401f5c96f74b2b45cff5f082affdba5ace213f3bbbcbe7b0d7ca435f8f7",
+    "archive_list_verified": true
+  },
+  "database_mutations_verified": true,
+  "runner_intentionally_not_started": true,
+  "duration_seconds": 42.18,
+  "owned_processes": [
+    {
+      "name": "retry-api",
+      "pid": 42908,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "source_unchanged": true
+}

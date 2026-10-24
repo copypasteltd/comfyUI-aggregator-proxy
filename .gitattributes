@@ -1,0 +1,10 @@
+# Preserve exact bytes: frozen contracts, upstream patches and evidence use SHA-256.
+* -text whitespace=cr-at-eol
+# Captured logs and test reports retain the original diagnostic whitespace.
+docs/evidence/**/*.log -whitespace
+docs/evidence/**/*.xml -whitespace
+*.png binary
+*.gif binary
+*.mp4 binary
+*.webm binary
+*.woff2 binary

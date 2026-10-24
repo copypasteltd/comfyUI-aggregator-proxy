@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-24T08:35:37.368194+00:00",
+  "passed": false,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.1,
+      "log": "workflow-retry-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 1,
+      "seconds": 17.63,
+      "log": "workflow-retry-mypy.log"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "at": "2026-10-24T02:43:15.182280+00:00",
+  "passed": false,
+  "run_id": "e09e9a91a979",
+  "checks": [
+    "fresh_offline_wheels_seven_modules_frozen_contracts_no_editable_dependencies",
+    "installed_s3_exact_version_guard_and_bounded_read_close_without_source_checkout",
+    "installed_four_audio_formats_decode_without_global_ffmpeg",
+    "existing_installation_refused_without_modification",
+    "startup_on_empty_database_refuses_without_implicit_ddl",
+    "installed_migration_takes_native_pg18_backup_and_verifies_archive_before_ddl"
+  ],
+  "virtualization_used": false,
+  "production_accepted": false,
+  "archive_sha256": "d0b06edb5b28d50cd503af8814c14e1a8ccebdbc3168d0ba25f3199035164c2c",
+  "release_id": "rc-20261024.60.1",
+  "source_tree_sha256": "05400968e769160c8222e0754fc954eb60b8619fe792c26e5b0021b3c45add5a",
+  "payload_files": 142,
+  "database_head": "e85b6c2d9014",
+  "installation": {
+    "application_modules": [
+      "generation_domain",
+      "generation_application",
+      "generation_contracts",
+      "generation_infrastructure",
+      "control_api",
+      "control_runner",
+      "windows_worker"
+    ],
+    "archive_sha256": "d0b06edb5b28d50cd503af8814c14e1a8ccebdbc3168d0ba25f3199035164c2c",
+    "contracts_verified": 26,
+    "editable": false,
+    "format_version": 1,
+    "manifest_sha256": "34d42283fb47bc0d0a4e5f08f2eaba2a3e5de6e437578ade86d19243473b462e",
+    "offline": true,
+    "python_version": "3.13.1",
+    "release_id": "rc-20261024.60.1",
+    "requirements": 57
+  },
+  "s3_boundary": {
+    "passed": true,
+    "isolated_installed_module": true,
+    "valid_stream_and_wrong_version_guard": true,
+    "response_bodies_closed": true,
+    "real_s3": false
+  },
+  "audio_media": {
+    "passed": true,
+    "formats": [
+      "wav",
+      "flac",
+      "mp3",
+      "opus"
+    ],
+    "global_media_tools_unavailable": true,
+    "bundled_tools_used": true
+  },
+  "pre_migration_backup": {
+    "archive_list_verified": true,
+    "sha256": "1f48f44db26a8ed8bb7fe6dd3fa1e9e42e8f513d44493e102fe638cc311ae17c",
+    "created_before_ddl": true
+  },
+  "failure": {
+    "type": "AssertionError",
+    "code": "recovery-keygen_exit_code"
+  },
+  "processes": [],
+  "temporary_database_removed": true,
+  "private_resources_cleaned": true,
+  "duration_seconds": 111.96
+}

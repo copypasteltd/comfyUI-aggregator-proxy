@@ -1,0 +1,28 @@
+{
+  "passed": false,
+  "run_id": "eb28b66372c7",
+  "checks": [],
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "sources_sha256": {
+    ".local\\test-scopes-browser.py": "049a84d9ea04bfd602042bb943740a2184070fc53010523a04e247e38645c8d1",
+    ".local\\browser-scopes-smoke.py": "505ced236066f5a9f88795275f95f6b7b92851e5e124f7fdc94f72db7208c64e"
+  },
+  "backup_before_ddl": {
+    "sha256": "9b40875325b6a952b4cfecb9653070969e9dc16abec65eb5ab3c8d313504d521",
+    "archive_list_verified": true
+  },
+  "duration_seconds": 23.91,
+  "owned_processes": [
+    {
+      "name": "retry-api",
+      "pid": 38796,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ],
+  "source_unchanged": true
+}

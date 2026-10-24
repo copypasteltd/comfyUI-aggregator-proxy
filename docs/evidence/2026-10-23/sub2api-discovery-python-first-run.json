@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-23T00:57:23.041427+00:00",
+  "passed": false,
+  "scope": "Initial targeted Python discovery/http/gateway tests; outcome record from native session 97282, not a terminal transcript.",
+  "command": "pytest -q tests/integration/test_discovery.py tests/integration/test_http_auth.py tests/integration/test_gateway.py --tb=short",
+  "exit_code": 1,
+  "failed": 12,
+  "passed_tests": 46,
+  "warnings": 1,
+  "duration_seconds": 153.43,
+  "failure_groups": {
+    "synthetic_fixture_attempted_to_update_immutable_release": 7,
+    "test_asserted_wrong_domain_error_attribute": 4,
+    "test_used_wrong_binding_id_prefix": 1
+  },
+  "correction": "Create new immutable version 2 fixtures; assert DomainError.status; parse bind IDs. No database guard was removed or weakened.",
+  "virtualization_used": false
+}

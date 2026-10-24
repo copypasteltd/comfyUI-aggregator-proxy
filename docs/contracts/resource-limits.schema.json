@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.local/contracts/resource-limits.schema.json",
+  "title": "Tenant and project resource limits",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "rpm",
+    "burst",
+    "daily_jobs",
+    "unfinished_jobs",
+    "generating_jobs",
+    "daily_image_count",
+    "daily_video_milliseconds"
+  ],
+  "properties": {
+    "rpm": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/limit"
+        },
+        {
+          "properties": {
+            "value": {
+              "maximum": 60000
+            }
+          }
+        }
+      ]
+    },
+    "burst": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/limit"
+        },
+        {
+          "properties": {
+            "value": {
+              "maximum": 10000
+            }
+          }
+        }
+      ]
+    },
+    "daily_jobs": {
+      "$ref": "#/$defs/limit"
+    },
+    "unfinished_jobs": {
+      "$ref": "#/$defs/limit"
+    },
+    "generating_jobs": {
+      "$ref": "#/$defs/limit"
+    },
+    "daily_image_count": {
+      "$ref": "#/$defs/limit"
+    },
+    "daily_video_milliseconds": {
+      "$ref": "#/$defs/limit"
+    },
+    "daily_audio_milliseconds": {
+      "$ref": "#/$defs/limit"
+    }
+  },
+  "$defs": {
+    "limit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "value"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "bounded",
+            "unlimited"
+          ]
+        },
+        "value": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "bounded"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "value": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  },
+  "contract_version": "0.5.0"
+}

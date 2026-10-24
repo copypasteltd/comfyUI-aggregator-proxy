@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:release-manifest:1",
+  "title": "Native candidate release manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": 1
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]{0,63}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "platform": {
+      "const": "windows-amd64-cp313"
+    },
+    "application_version": {
+      "const": "0.1.0"
+    },
+    "source_revision": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "source_tree_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "python": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "implementation": {
+          "const": "CPython"
+        },
+        "major": {
+          "const": 3
+        },
+        "minor": {
+          "const": 13
+        },
+        "build_version": {
+          "type": "string",
+          "pattern": "^3\\.13\\.[0-9]+$"
+        }
+      },
+      "required": [
+        "implementation",
+        "major",
+        "minor",
+        "build_version"
+      ]
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "enum": [
+            "0.4.0",
+            "0.5.0"
+          ]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "sha256"
+      ]
+    },
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "head": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{12}$"
+        },
+        "migrations_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "auto_migrate": {
+          "const": false
+        }
+      },
+      "required": [
+        "head",
+        "migrations_sha256",
+        "auto_migrate"
+      ]
+    },
+    "worker": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocols": {
+          "const": [
+            "0.4.0"
+          ]
+        },
+        "journal_source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "protocols",
+        "journal_source_sha256"
+      ]
+    },
+    "workflows": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required_task_types": {
+          "type": "array"
+        },
+        "validated_releases": {
+          "const": []
+        }
+      },
+      "required": [
+        "required_task_types",
+        "validated_releases"
+      ]
+    },
+    "gateway": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "upstream_repository": {
+          "const": "https://github.com/Wei-Shaw/sub2api"
+        },
+        "upstream_commit": {
+          "const": "7da09cab4e875463baa79fc150adde700c5438df"
+        },
+        "provider_binary_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "frontend_embedded": {
+          "const": false
+        }
+      },
+      "required": [
+        "upstream_repository",
+        "upstream_commit",
+        "provider_binary_sha256",
+        "frontend_embedded"
+      ]
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requires_python": {
+          "const": ">=3.13,<3.14"
+        },
+        "lock_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "requirements_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "requires_python",
+        "lock_sha256",
+        "requirements_sha256"
+      ]
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "bytes",
+          "sha256"
+        ]
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "production": {
+          "const": false
+        },
+        "linux_runtime": {
+          "const": false
+        },
+        "real_fleet": {
+          "const": false
+        },
+        "real_workflows": {
+          "const": false
+        },
+        "private_s3": {
+          "const": false
+        }
+      },
+      "required": [
+        "production",
+        "linux_runtime",
+        "real_fleet",
+        "real_workflows",
+        "private_s3"
+      ]
+    }
+  },
+  "required": [
+    "format_version",
+    "release_id",
+    "created_at",
+    "platform",
+    "application_version",
+    "source_revision",
+    "source_tree_sha256",
+    "python",
+    "contracts",
+    "database",
+    "worker",
+    "workflows",
+    "gateway",
+    "runtime",
+    "files",
+    "acceptance"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "contracts": {
+            "properties": {
+              "version": {
+                "const": "0.5.0"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "workflows": {
+            "properties": {
+              "required_task_types": {
+                "const": [
+                  "text_to_image",
+                  "text_to_video",
+                  "image_to_image",
+                  "references_to_image",
+                  "references_to_video",
+                  "text_to_audio"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "workflows": {
+            "properties": {
+              "required_task_types": {
+                "const": [
+                  "text_to_image",
+                  "text_to_video",
+                  "image_to_image",
+                  "references_to_image",
+                  "references_to_video"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "local_preparation": "The contract/doc helper first used an absent document 13 filename after preparing earlier files. Corrected the filename and appended only remaining sections, without rerunning or overwriting prior artifacts.",
+  "initial_targeted_failure": "First targeted run: 629 passed, two new HTTP tests wrongly expected invalid resource IDs to return 422. Existing parse_id uses not_found/404; corrected the new tests and installation probe to preserve that contract.",
+  "second_targeted_failure": "Second targeted run: 630 passed, one frozen-hash test failed because the endpoint catalog revision was updated without synchronizing the runtime copy. Ran the existing sync-contracts command; no test expectation was weakened.",
+  "browser_failures": "The initial 18 browser groups passed. Screenshots then showed a very long blocking dialog, with actions far below a narrow viewport. Preserved deletion-browser-before-visual-refinement.json, cleanup and screenshots. After native protocol completed, only the Vue dialog layout was refined with a bounded scrolling body and visible actions; final frontend/browser were rerun and require action buttons in the viewport. Backend/native source hashes were unchanged.",
+  "requirements_weakened": false,
+  "no_new_ddl": true,
+  "physical_acceptance": false
+}

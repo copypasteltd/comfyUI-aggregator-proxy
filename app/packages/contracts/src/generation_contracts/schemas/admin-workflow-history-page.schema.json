@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:generation:admin-workflow-history-page",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\r\n]"
+      }
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^prj_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\r\n]"
+      }
+    },
+    "workflow_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "has_more": {
+      "type": "boolean"
+    },
+    "total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "snapshot_at": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "data": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "release"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^wfr_[a-f0-9]{32}$",
+            "not": {
+              "pattern": "[\r\n]"
+            }
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "not": {
+              "pattern": "[\r\n]"
+            }
+          },
+          "validated": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "kind",
+          "id",
+          "version",
+          "digest",
+          "validated",
+          "created_at"
+        ]
+      }
+    }
+  },
+  "required": [
+    "workflow_id",
+    "project_id",
+    "workflow_revision",
+    "page",
+    "has_more",
+    "total",
+    "snapshot_at",
+    "data"
+  ]
+}

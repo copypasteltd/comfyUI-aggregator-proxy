@@ -1,0 +1,11 @@
+{"passed": false, "run_id": "e09e9a91a979", "checks": 6, "cleaned": true}
+Traceback (most recent call last):
+  File "E:\dev\sandbox\生图生视API封装\app\scripts\test-release-install.py", line 309, in <module>
+    main()
+    ~~~~^^
+  File "E:\dev\sandbox\生图生视API封装\app\scripts\test-release-install.py", line 171, in main
+    generated = execute("recovery-keygen", [python, "-I", recovery_entry, "keygen", "--recovery-key-file", str(recovery_key)], env=environment)
+  File "E:\dev\sandbox\生图生视API封装\app\scripts\test-release-install.py", line 76, in execute
+    assert (completed.returncode == 0) == (expected == 0), name + "_exit_code"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: recovery-keygen_exit_code

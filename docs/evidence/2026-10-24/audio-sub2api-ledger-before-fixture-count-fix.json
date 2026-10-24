@@ -1,0 +1,2005 @@
+{
+  "at": "2026-10-23T21:40:03.357802+00:00",
+  "source_commit": "7da09cab4e875463baa79fc150adde700c5438df",
+  "source_archive_sha256": "03504108ee0e4d2ef79c5874563153c3d205588ae5354dbefe01e7e1c40af152",
+  "harness_sha256": "8f136c0111f2cec206d0e41dbfe51701b714a4f9bf8f362069ab8148fc0f4b6b",
+  "compiler": "go version go1.27.3 windows/amd64",
+  "command": "verified native ledger binary via test2json -test.count=1 -test.timeout=240s",
+  "duration_seconds": 253.42,
+  "passed": false,
+  "exit_code": 1,
+  "timed_out": false,
+  "production_repository_compiled": true,
+  "upstream_tests_run": false,
+  "vet_enabled": false,
+  "gofmt_verified": true,
+  "schema": "native upstream schema: migrations=307 tables=109 replay_verified=true",
+  "migrations_replayed": true,
+  "backup_sha256": "3e6a675d5e107f59b5d73db573ce68cf9f1fc5bbbbb1702af8dbcf686f77c6a3",
+  "backup_list_verified": true,
+  "temporary_database_dropped": true,
+  "module_files_unchanged": true,
+  "overlay_snapshot_unchanged": true,
+  "maintained_sources_match": true,
+  "module_downloads_enabled": false,
+  "virtualization_used": false,
+  "overlay_files_sha256": {
+    "cmd/server/wire_gen.go": "d6e49bc947a7dafa3efcb438e7e472e67af2c4ca9357e4345d73c6fdd21de126",
+    "internal/server/middleware/api_key_auth.go": "6c7f9f41c79740ed7098680e3532949f4fe977c871e5725b22abe366bb883868",
+    "internal/rendercontrol/assets_http.go": "26f6b9e920952a581e1ad84da80beab932aa5954a70044507ab59ff5fa8b7e4b",
+    "internal/rendercontrol/assets_store.go": "ea2e40a23c57bc0964d7fbbe3c1a8108a5237cf39bf02a76ef940863cb29e103",
+    "internal/rendercontrol/assets_test.go": "aeaedc4d88c3d2dddeeb3b7c8624615c30542ef7252e9d8cee8ca0a389b7928f",
+    "internal/rendercontrol/audio_test.go": "7500ca08ccaa2683fe6992780d6848686974f5043fa93b681659f634428bfe07",
+    "internal/rendercontrol/billing_test.go": "5da6f6d764ee14e6d0be221c0be0eba4c36f5ddcc50cd583e15ad9105e50c3ed",
+    "internal/rendercontrol/cancellation.go": "ed346942e117ac3ac594c76377abf352ebe170c37103e33153100d6679221f3f",
+    "internal/rendercontrol/closures.go": "b2be3c5692595fbb671dac266b57818f3ebc740734614662ca7e97fa4a72f9de",
+    "internal/rendercontrol/closures_test.go": "a8f6d93fb20e9c25eee94311dff753373f20537b58723562b7f479e0f23a81f9",
+    "internal/rendercontrol/compatibility.go": "49fee07d9a03f2e46d40430de5ff5275b3c06154fbcbb30da7ccedd39f3beb6e",
+    "internal/rendercontrol/compatibility_test.go": "b29c73987b5bb27e9e2965bf2f520222b9dcab82abffc2674249c18e5e2f0888",
+    "internal/rendercontrol/content.go": "c56ecf71ef8a4eb05927b57347c1df7a224b398dd280597d6f78dd4a06c7c224",
+    "internal/rendercontrol/content_routes.go": "d20cb4e22033ce7202d841f967f5c7acc97ac43eb4d4fc8ca89e0754236929c0",
+    "internal/rendercontrol/coordinator.go": "79375ce57aa866641255e21950db84bd9d4ff9d0ea2e592a533c2461a31f8b86",
+    "internal/rendercontrol/coordinator_test.go": "e6d20953d0299c63e9cde0064ba85f3ebbad64d97cc10848a15756f9bfea27a9",
+    "internal/rendercontrol/discovery.go": "b9b6f04be4e8b12dd13d5680651b2f6dbfe391c2a1c7184bfb9e770c8fbdab5f",
+    "internal/rendercontrol/discovery_test.go": "148e6d97bb0e5e5b1622353d6db3fb4b46572f84d9bd2793343d83feb90497cc",
+    "internal/rendercontrol/edges_test.go": "d11c2dbd588931835b42d4c918b5950fcf5bcd037c9491378a844d69d1f24b3f",
+    "internal/rendercontrol/effect_consumer.go": "fcf716443994b90c9231a399ca7db80c90e8dd9a3212448695ff59e0e8858faa",
+    "internal/rendercontrol/effect_consumer_test.go": "90717c07d50601fcf177f70f753b60f7138069da453599d201794c05a32d3a02",
+    "internal/rendercontrol/effects.go": "6f6e6502996aaf59353266ac97c961acb7d3886d4619bf89f61b4181283593e4",
+    "internal/rendercontrol/hosting.go": "d89ddae5b5d31c2698a13c232dbccd377f07b0cbe32eb2eab0102b7fa0cd1136",
+    "internal/rendercontrol/hosting_test.go": "6472f9bd8f82008f5fe4219a9a599920c8a835f92fb71235033c9286f8f2553c",
+    "internal/rendercontrol/image_edits.go": "be3afa6003e4a96f7168d1d19eeaf90343fa45d4a2ce0b9c8ee3ea9bb9600153",
+    "internal/rendercontrol/ledger_test.go": "d5b2651e26527cea46633dc425235062da33595f609cea575211066ca8120e8a",
+    "internal/rendercontrol/listing_cursor.go": "e7e1657dc3210fc0c731191b0bdb8a0a85ecc11b49e0078da808ae3f685acb19",
+    "internal/rendercontrol/listings.go": "e3e6ce7676c017806843289e02a5ef592a18b6f9fb470ab4c437332b65671d18",
+    "internal/rendercontrol/listings_test.go": "2b39821498f4858db25f377b6702ae3c3477cea3199150d7cc6e6647da084239",
+    "internal/rendercontrol/native_cache.go": "bb92ce4098e3c74f58827acf036e7cdc3953f9d1929ee5b927e5c63ec7ce7e26",
+    "internal/rendercontrol/pricing.go": "3b038eb4d2bd80bc28258e984b596bf6f800c928a879d40d6ac9413da1904633",
+    "internal/rendercontrol/public_auth.go": "8f83926833be251e71071877479f7cc6b70465ec2843ed8e233b9b15506df6cd",
+    "internal/rendercontrol/public_http.go": "cde3fa9b841a037696a1b351ae8ef6351643e50679c86efeb834657f5736e0cd",
+    "internal/rendercontrol/public_http_test.go": "896a870550a03d4c105f956f498e4d756ebd198ef8830fa101d094056851af2e",
+    "internal/rendercontrol/public_request.go": "59e98a16571d58efb34d6f52ab3b1f2ab87d717bace8ff4fbfdd0add07b2d20d",
+    "internal/rendercontrol/public_request_test.go": "7edc86e3f0dfdd5ed85df983def1660ab5da0753b3ecf13b47dafc1e41231f99",
+    "internal/rendercontrol/recovery.go": "5b02e61f0bad3316000bb943c251f096288a9a8f6d90962118a9b9f105d4872a",
+    "internal/rendercontrol/recovery_test.go": "77e11a41b967fc78e5f80ac3153267c60257087591d6dc6728cf7218cf1ce61f",
+    "internal/rendercontrol/runtime.go": "3fad4a4fdadd932d8992670a9b990875df9c83fca412ae3fab4a8297e4b806c7",
+    "internal/rendercontrol/runtime_test.go": "7fa7dabccbe69a6899d48854424b66da31df9a477cb09c08394d153f877b0b90",
+    "internal/rendercontrol/store.go": "24c02e794a05565fdd8b1f0cc0fa775bec7d0173312ea804b61dcf2826a8cb79",
+    "internal/rendercontrol/subscriptions.go": "5aab5e2e9e10c9b3dc2a38d6a5272bcd23c72ae4d411ded00c6d923c894f9d9c",
+    "internal/rendercontrol/testdata/job-create-fixtures.json": "861d4b6d451d1f09d5a6cf36dfa9f36cea1142786a2d4e4b19688e0b9cd4c0b9",
+    "internal/rendercontrol/testdata/job-create-schema.sha256": "b00346164518da6105fa35695e5e2a7f2b5f362d802db13a0c66f55097ee4a3d",
+    "internal/rendercontrol/transitions.go": "39e6217db7ca2c65856fa80162774b1be9ab33bcc6a5247deed3d0c77b347c86",
+    "internal/rendercontrol/types.go": "06f4d2de80f4cf269ed6aaebe9cdb78eb465ffe902d2eb2ce61c745365a8fd75",
+    "internal/rendercontrol/uploads.go": "9e840f6a5d04f062ace90f035964fd10b9c4a302a8500c141114c2b867e583d0",
+    "internal/rendercontrol/video_inputs.go": "6c7bb02ec5b086dfd6d238763d349679e7f4ef0dab8be6f4c8e3e1b0dc9923e9",
+    "internal/rendercontrol/video_inputs_test.go": "896b5833a54dd7fcdcfeb8f607a7bf991c6d1213c66f652db12beb35a9976abc",
+    "internal/repository/render_control_billing.go": "d5349c25deb80bc20746d77f49bae480d58e235286c168540c52d35903578da3",
+    "internal/server/middleware/render_control_auth.go": "01725e2e123d361ef2db4698d49249d987425a6b76019fe1dfc066780e4a9108",
+    "internal/service/render_control_subscription.go": "205251f2d27be1734429906754fb467099fde86f717d4ba647ea9442dce19fa0",
+    "migrations/247_render_control_provider.sql": "805ed5ed11f63eb2c69023e97f1f0909a662ba9afe8e4f19db4289a03ec0293c",
+    "migrations/248_render_control_closures.sql": "a17d28e63f3add9c6bb7232baf8da13838ffc064f16ad092fc54e0db7cbea2f0",
+    "migrations/249_render_control_recovery.sql": "0ec30f38944eb51628bb3f4c5a55b5a11ce95edfeb29677a21d2da93c55f8f68",
+    "migrations/250_render_control_ingress.sql": "f5e96751080a93fdc8d4968eb88750e0c304b3d42e1a0c005c6262479b3b2805",
+    "migrations/251_render_control_content.sql": "c5bda9f2faf2bbb61ce35e6d53a8ddb5a3a2a051cbde3e005b64b6040399bba5",
+    "migrations/252_render_control_assets.sql": "1ef7569136905e70213f60000cfb9bf4ef46330a6eba5948bf75baca11192294",
+    "migrations/253_render_control_content_routes.sql": "1308d7a5943a11d34e43eb42cea487051372065f241492ff1543b32f2fbbc140",
+    "migrations/254_render_control_effect_consumption.sql": "3e4616d7ccbab597a25616c54729530c9b8e4c1a0ee191e6532e646876d4bc3d",
+    "migrations/255_render_control_billing.sql": "5bae717d5765dd5768b63612fe6c0ad0d02281e9fa59bd5387ea17623d34611c",
+    "migrations/256_render_control_audio.sql": "73b224abc0afbc2be91b0fe16d1751c6b801586ab30b4192388bb96fc7c0bb34",
+    "render_control_patches.json": "52a79bd61eed6bf9ee79e6acca85c5c9c4ca5ae773c723d7e6c2dd8bcd887658",
+    "internal/rendercontrol/controlclient/assets.go": "bd98b016c314e0b9dcab2d77ee4cadd9149919d8f950920276c11c73616354cb",
+    "internal/rendercontrol/controlclient/catalog.go": "a85d12ed21efdaaa8b3cd6762764f8e0d06b8bd3afd919fda5adbb094ffc099d",
+    "internal/rendercontrol/controlclient/client.go": "f05652279358beca2ec06b9e1f7e135233532475044817eb9edf036a1608a532",
+    "internal/rendercontrol/controlclient/collections.go": "825da75ada8f8a10c535543e4b98c9bbc3ded8b7dd0296ff7965e5967efed16a",
+    "internal/rendercontrol/controlclient/media.go": "7b1e2ade90c01550cfc6002b87f4c1eb5fde06a66b76c71fc434ad7db1dc9f45"
+  },
+  "top_level_tests_passed": 164,
+  "subtests_passed": 303,
+  "tests": {
+    "TestAssetUploadPersistsOriginalTargetAndRecoversLostReply": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestAssetUploadConcurrentReplayAndDifferentBytesConflict": {
+      "result": "pass",
+      "seconds": 0.25
+    },
+    "TestAssetOwnershipCurrentPolicyAndStreamingHeaders/metadata": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetOwnershipCurrentPolicyAndStreamingHeaders/full": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetOwnershipCurrentPolicyAndStreamingHeaders/head": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetOwnershipCurrentPolicyAndStreamingHeaders/range": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetOwnershipCurrentPolicyAndStreamingHeaders/head_range": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetOwnershipCurrentPolicyAndStreamingHeaders": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestImageEditInlineAndNativeShareDurableIdempotency": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestImageEditReferencesPreserveOrderRolesAndRejectChangedRequest": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestImageEditSyncTimeoutAndReplayUseOriginalUploadedAsset": {
+      "result": "pass",
+      "seconds": 0.15
+    },
+    "TestImageEditMultipartMaskAndPublicURLNormalizeToSameRequest": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/invalid_role": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/single_model_mismatch": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/mixed_input": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/duplicate_model": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/unknown_field": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/external_url": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/bad_base64": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/repeated_role_index": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/strength_range": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/wrong_magic": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/missing_roles": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/duplicate_prompt": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/invalid_second_file": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation/mixed_images": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditRejectsInvalidInputsBeforeUploadOrReservation": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestImageEditPreflightPermissionTokenAndCapacityHaveNoUploadSideEffects/assets:upload": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestImageEditPreflightPermissionTokenAndCapacityHaveNoUploadSideEffects/images:create": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditPreflightPermissionTokenAndCapacityHaveNoUploadSideEffects/content:download": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestImageEditPreflightPermissionTokenAndCapacityHaveNoUploadSideEffects": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestAssetPublicationFailureRollsBackAndDatabaseGuardsRetainOriginalOwner/upload_target": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetPublicationFailureRollsBackAndDatabaseGuardsRetainOriginalOwner/upload_hash": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetPublicationFailureRollsBackAndDatabaseGuardsRetainOriginalOwner/binding_expiry": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetPublicationFailureRollsBackAndDatabaseGuardsRetainOriginalOwner": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestAssetCorruptReplyDoesNotInventBindingAndReplayRecovers": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestHostedEditFallbackReplaysOriginalBodyAndCleansSpool": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestAssetReadRejectsMetadataThatContradictsPersistedUpload": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestUploadSizeTruncationAndEncodingRejectionsCleanOwnedFiles/size": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestUploadSizeTruncationAndEncodingRejectionsCleanOwnedFiles/truncated": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestUploadSizeTruncationAndEncodingRejectionsCleanOwnedFiles": {
+      "result": "pass",
+      "seconds": 0.12
+    },
+    "TestImageEditExistingAssetTargetCheckedBeforeInlineMaskUpload": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestImageEditRejectsInvalidUTF8AndAcceptsSplitUnicodeInSpool": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestAudioPublicRequestNeedsNoImageSizeOrImageGroupPermission": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestAudioSettlementUsesIndependentActualMeterAndExactlyOneNativeUsage": {
+      "result": "pass",
+      "seconds": 0.39
+    },
+    "TestAudioSettlementRejectsWrongMetersAndRefundsTerminalFailures/succeeded": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestAudioSettlementRejectsWrongMetersAndRefundsTerminalFailures/failed": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestAudioSettlementRejectsWrongMetersAndRefundsTerminalFailures/cancelled": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestAudioSettlementRejectsWrongMetersAndRefundsTerminalFailures/expired": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestAudioSettlementRejectsWrongMetersAndRefundsTerminalFailures": {
+      "result": "pass",
+      "seconds": 0.16
+    },
+    "TestAudioRequestOperationAndDurationBounds": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/0.00000001_0.5_2": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/0.00000001_0.5_1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/0.00000001_0.4999_1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/0.00000001_0_100": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/0.00000001_999999.9999_100": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/1000000_0.0001_1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/1.23456789_1.25_3": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/invalid_-1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/invalid_NaN": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/invalid_Infinity": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/invalid_1e-4": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/invalid_01": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/invalid_1000000": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce/invalid_0.00001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingRoundsCompleteAmountOnce": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPricingUsesNativeMediaAndUserPriority/group": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestPricingUsesNativeMediaAndUserPriority/user": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestPricingUsesNativeMediaAndUserPriority/null_user": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestPricingUsesNativeMediaAndUserPriority/independent_image": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestPricingUsesNativeMediaAndUserPriority/independent_video": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestPricingUsesNativeMediaAndUserPriority/image_not_video": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestPricingUsesNativeMediaAndUserPriority/video_not_image": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestPricingUsesNativeMediaAndUserPriority": {
+      "result": "pass",
+      "seconds": 0.1
+    },
+    "TestPricingRemainsFrozenAcrossRegroupAndReplay": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPricingFreePublicTasksRetainMeteringAndAuthentication": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestSubscriptionRejectsInvalidEntitlementsWithoutBalanceFallback/missing": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestSubscriptionRejectsInvalidEntitlementsWithoutBalanceFallback/future": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionRejectsInvalidEntitlementsWithoutBalanceFallback/expired": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestSubscriptionRejectsInvalidEntitlementsWithoutBalanceFallback/suspended": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionRejectsInvalidEntitlementsWithoutBalanceFallback/deleted": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionRejectsInvalidEntitlementsWithoutBalanceFallback": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestSubscriptionCrossKeyAndInstanceReservationsAreAtomic/daily": {
+      "result": "pass",
+      "seconds": 0.52
+    },
+    "TestSubscriptionCrossKeyAndInstanceReservationsAreAtomic/weekly": {
+      "result": "pass",
+      "seconds": 0.6
+    },
+    "TestSubscriptionCrossKeyAndInstanceReservationsAreAtomic/monthly": {
+      "result": "pass",
+      "seconds": 0.44
+    },
+    "TestSubscriptionCrossKeyAndInstanceReservationsAreAtomic": {
+      "result": "pass",
+      "seconds": 1.56
+    },
+    "TestSubscriptionKeyLimitsIncludeRatedPendingAmounts/quota": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionKeyLimitsIncludeRatedPendingAmounts/rate_limit_5h": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionKeyLimitsIncludeRatedPendingAmounts/rate_limit_1d": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionKeyLimitsIncludeRatedPendingAmounts/rate_limit_7d": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionKeyLimitsIncludeRatedPendingAmounts": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestSubscriptionSettlesOnceAgainstOriginalEntitlement/active": {
+      "result": "pass",
+      "seconds": 0.18
+    },
+    "TestSubscriptionSettlesOnceAgainstOriginalEntitlement/expired": {
+      "result": "pass",
+      "seconds": 0.21
+    },
+    "TestSubscriptionSettlesOnceAgainstOriginalEntitlement/suspended": {
+      "result": "pass",
+      "seconds": 0.28
+    },
+    "TestSubscriptionSettlesOnceAgainstOriginalEntitlement/deleted": {
+      "result": "pass",
+      "seconds": 0.22
+    },
+    "TestSubscriptionSettlesOnceAgainstOriginalEntitlement/regrouped": {
+      "result": "pass",
+      "seconds": 0.16
+    },
+    "TestSubscriptionSettlesOnceAgainstOriginalEntitlement": {
+      "result": "pass",
+      "seconds": 1.06
+    },
+    "TestSubscriptionTerminalRollbackAndZeroCostOutcomes/failed": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestSubscriptionTerminalRollbackAndZeroCostOutcomes/cancelled": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestSubscriptionTerminalRollbackAndZeroCostOutcomes/expired": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionTerminalRollbackAndZeroCostOutcomes/not_dispatched": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestSubscriptionTerminalRollbackAndZeroCostOutcomes": {
+      "result": "pass",
+      "seconds": 0.15
+    },
+    "TestSubscriptionWindowPlanPreservesPinnedSemantics/activation": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestSubscriptionWindowPlanPreservesPinnedSemantics/daily": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestSubscriptionWindowPlanPreservesPinnedSemantics/one_time": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestSubscriptionWindowPlanPreservesPinnedSemantics/weekly": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestSubscriptionWindowPlanPreservesPinnedSemantics/monthly_30_days": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestSubscriptionWindowPlanPreservesPinnedSemantics/final_partial": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestSubscriptionWindowPlanPreservesPinnedSemantics/legacy_midnight": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestSubscriptionWindowPlanPreservesPinnedSemantics": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestSubscriptionPostgresWindowsKeepOutstandingReservations/daily": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestSubscriptionPostgresWindowsKeepOutstandingReservations/weekly": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestSubscriptionPostgresWindowsKeepOutstandingReservations/monthly": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestSubscriptionPostgresWindowsKeepOutstandingReservations": {
+      "result": "pass",
+      "seconds": 0.1
+    },
+    "TestSubscriptionNativeUsageCacheAndPubsub": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestSubscriptionNativeProcessCrashAfterSettlement": {
+      "result": "pass",
+      "seconds": 0.29
+    },
+    "TestSubscriptionPublicQuotaErrorContract": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestSubscriptionPublicNativeAuthAndExpiredReplay": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestSubscriptionSettlementUsesCurrentWindowAndOneTimeQuota/settlement_after_midnight": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestSubscriptionSettlementUsesCurrentWindowAndOneTimeQuota/one_time_daily_is_not_refilled": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestSubscriptionSettlementUsesCurrentWindowAndOneTimeQuota": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestSubscriptionVideoPriceUsesCeilingThenFrozenMultiplier": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestSubscriptionCacheFailureRetainsLocalCommit": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestTargetIsRequiredPersistedAndFrozenOnReplay": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestClosureProofReleasesOnceAfterRevocation": {
+      "result": "pass",
+      "seconds": 0.28
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity/gateway": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity/instance": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity/user": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity/key": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity/request": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity/task": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity/price": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity/authorization": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestClosureProofCannotCrossIntentOrIdentity": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestBoundAdmissionCannotConsumeClosureProof": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestClosureRollsBackProofFundsAndDedupOnEffectFailure": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestClosureRacesWithLocalTransitions/dispatch": {
+      "result": "pass",
+      "seconds": 0.15
+    },
+    "TestClosureRacesWithLocalTransitions/bind": {
+      "result": "pass",
+      "seconds": 0.16
+    },
+    "TestClosureRacesWithLocalTransitions/finalize": {
+      "result": "pass",
+      "seconds": 0.17
+    },
+    "TestClosureRacesWithLocalTransitions": {
+      "result": "pass",
+      "seconds": 0.47
+    },
+    "TestDatabaseRequiresMatchingProofAndTerminalInOneTransaction/proof_only": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestDatabaseRequiresMatchingProofAndTerminalInOneTransaction/terminal_only": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestDatabaseRequiresMatchingProofAndTerminalInOneTransaction/wrong_owner": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestDatabaseRequiresMatchingProofAndTerminalInOneTransaction": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestDatabasePreservesClosureAndIntentIdentity": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestLegacyUnknownTargetCannotBeGuessedOrDispatched/false": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestLegacyUnknownTargetCannotBeGuessedOrDispatched/true": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestLegacyUnknownTargetCannotBeGuessedOrDispatched": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestClosureSurvivesActualProcessExit": {
+      "result": "pass",
+      "seconds": 0.57
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/video_field": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/multiple": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/invalid_format": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/empty_prompt": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/trailing": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/oversize": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/duplicate": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/case": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/stream": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/private_identity": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/float_rounding": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/null_format": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/parameters": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/null": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/negative": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/over": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/float_precision": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation/exponent": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityStrictNormalizationBeforeReservation": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilityAsyncSharesNativeDurableIdempotency": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestCompatibilitySyncTimeoutKeepsIntentAndReplayDeliversVerifiedImage": {
+      "result": "pass",
+      "seconds": 0.14
+    },
+    "TestCompatibilitySyncChecksDeliveryPolicyAndCapacityBeforeReserve/images:create": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestCompatibilitySyncChecksDeliveryPolicyAndCapacityBeforeReserve/jobs:create": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilitySyncChecksDeliveryPolicyAndCapacityBeforeReserve/jobs:read": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilitySyncChecksDeliveryPolicyAndCapacityBeforeReserve/artifacts:read": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilitySyncChecksDeliveryPolicyAndCapacityBeforeReserve/content:read": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilitySyncChecksDeliveryPolicyAndCapacityBeforeReserve/content:download": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestCompatibilitySyncChecksDeliveryPolicyAndCapacityBeforeReserve": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestCompatibilityAsyncRechecksDownloadAuthorization": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestCompatibilityVideoJSONAndOriginalTaskContent": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestContentBindingIsScopedImmutableAndAtomic": {
+      "result": "pass",
+      "seconds": 0.15
+    },
+    "TestContentProxyValidatesRangesAndDropsPrivateResponseHeaders": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestContentReadsRetainAuthenticationWithExhaustedAndExpiredKeys": {
+      "result": "pass",
+      "seconds": 0.1
+    },
+    "TestHostedCompatibilitySelectsConfiguredModelsAndPreservesStockBody": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestCompatibilityReferenceVideoPreservesOrderedAssetsAcrossEntrypoints": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestContentUsesPersistedGatewayAndCurrentDeleteAuthority": {
+      "result": "pass",
+      "seconds": 0.11
+    },
+    "TestContentTruncationAbortsStreamAndReleasesCapacity": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestCoordinatorRecoversAcceptedAdmissionWithoutReceipt": {
+      "result": "pass",
+      "seconds": 0.12
+    },
+    "TestCoordinatorRetriesUnknownUsingOriginalFrozenRequest": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestCoordinatorRecoversConfirmedAdmissionWithoutReceipt": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestCoordinatorClosesAfterPolicyDenialAndKeyRevocation/admit": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestCoordinatorClosesAfterPolicyDenialAndKeyRevocation/confirm": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestCoordinatorClosesAfterPolicyDenialAndKeyRevocation/confirm_won": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestCoordinatorClosesAfterPolicyDenialAndKeyRevocation": {
+      "result": "pass",
+      "seconds": 0.2
+    },
+    "TestCoordinatorRejectsExpiredLeaseResponse": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestCoordinatorKeepsBoundUnknownAndCorruptRequestFrozen/bound_unknown": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestCoordinatorKeepsBoundUnknownAndCorruptRequestFrozen/cipher": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestCoordinatorKeepsBoundUnknownAndCorruptRequestFrozen": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestCoordinatorSettlementAckReplayDoesNotRebill/not_received": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestCoordinatorSettlementAckReplayDoesNotRebill/receipt_lost": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestCoordinatorSettlementAckReplayDoesNotRebill": {
+      "result": "pass",
+      "seconds": 0.18
+    },
+    "TestCoordinatorDoesNotAcknowledgeUnknownSettlement": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestCoordinatorRejectsWrongServiceAndPlaintext": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestCoordinatorRecoverySurvivesActualProcessExit": {
+      "result": "pass",
+      "seconds": 0.33
+    },
+    "TestDiscoveryIntersectsConfiguredModelsWithoutFinancialEffects": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestDiscoveryRechecksCurrentGroupAndRemoteScopes": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestDiscoveryProjectsAllFiveCapabilitiesAndRejectsTaskMismatch/text_to_image": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestDiscoveryProjectsAllFiveCapabilitiesAndRejectsTaskMismatch/image_to_image": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestDiscoveryProjectsAllFiveCapabilitiesAndRejectsTaskMismatch/references_to_image": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestDiscoveryProjectsAllFiveCapabilitiesAndRejectsTaskMismatch/text_to_video": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestDiscoveryProjectsAllFiveCapabilitiesAndRejectsTaskMismatch/references_to_video": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestDiscoveryProjectsAllFiveCapabilitiesAndRejectsTaskMismatch": {
+      "result": "pass",
+      "seconds": 0.16
+    },
+    "TestDiscoveryUsesOnlyConfiguredOriginalTargetAndReportsPartialFailure": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestHostedDiscoveryMergesStockFieldsAndPreservesCodexAndUnownedModels": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections/duplicate_keys": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections/null_data": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections/bad_item": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections/unexpected_304": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections/denied": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections/unavailable": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections/over_limit": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections/not_list": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections": {
+      "result": "pass",
+      "seconds": 0.3
+    },
+    "TestDiscoveryCapacityHasNoRemoteOrFinancialSideEffects": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestDiscoveryParallelTargetsAndCancellationReleaseAllWorkers/bounded_success": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestDiscoveryParallelTargetsAndCancellationReleaseAllWorkers/cancelled": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestDiscoveryParallelTargetsAndCancellationReleaseAllWorkers": {
+      "result": "pass",
+      "seconds": 0.18
+    },
+    "TestNativeTestGuardRejectsOtherDatabase": {
+      "result": "pass",
+      "seconds": 0.2
+    },
+    "TestVideoDurationAllocationBounds/1e999999999": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/1e-999999999": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/0.0001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/86400.001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/0": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/-1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds/1e2": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoDurationAllocationBounds": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestExpiredAndDisabledAdmission/key_expired": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestExpiredAndDisabledAdmission/key_disabled": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestExpiredAndDisabledAdmission/user_disabled": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestExpiredAndDisabledAdmission/group_disabled": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestExpiredAndDisabledAdmission/missing_group": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestExpiredAndDisabledAdmission": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestDifferentKeysShareOneUserBalanceLock": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestDistinctIntentsCannotReuseTerminalEvent": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestFrozenBalanceConflictPreservesIntent": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestLedgerForeignKeysPreventHardDeletion": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestPendingRecoveryIsBounded": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestConcurrentEffectConsumersDoNotShareLeases": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestEffectsWriteNativeUsageAndBothCachePasses": {
+      "result": "pass",
+      "seconds": 0.1
+    },
+    "TestEffectsFreezeImageDefaultForOmittedModelSize": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestEffectsCacheFailureRetriesWithoutRebillingOrDuplicateUsage": {
+      "result": "pass",
+      "seconds": 0.11
+    },
+    "TestEffectsConcurrentConsumersAndScopeIsolation": {
+      "result": "pass",
+      "seconds": 0.3
+    },
+    "TestEffectsNativeUsageOutcomesAndVideoMetering/failed": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestEffectsNativeUsageOutcomesAndVideoMetering/cancelled": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestEffectsNativeUsageOutcomesAndVideoMetering/expired": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestEffectsNativeUsageOutcomesAndVideoMetering/succeeded": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestEffectsNativeUsageOutcomesAndVideoMetering/video": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestEffectsNativeUsageOutcomesAndVideoMetering": {
+      "result": "pass",
+      "seconds": 0.21
+    },
+    "TestEffectsMappingIsFrozenAndMissingHistoricalMappingRetained": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestEffectsUsageConflictAndLocalFailureRollback/conflict": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestEffectsUsageConflictAndLocalFailureRollback/transaction_failure": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestEffectsUsageConflictAndLocalFailureRollback": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestEffectsStaleFenceCannotPrepareRetryOrFinish": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestEffectsNativeProcessCrashAfterLocalCommit": {
+      "result": "pass",
+      "seconds": 0.3
+    },
+    "TestEffectsReleasedReservationOnlyInvalidates": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestEffectsRuntimeCancellationPreservesCurrentWork": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestEffectsAccountValidationAndConfiguration/schedulable": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestEffectsAccountValidationAndConfiguration/wrong_platform": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestEffectsAccountValidationAndConfiguration/deleted": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestEffectsAccountValidationAndConfiguration/missing": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestEffectsAccountValidationAndConfiguration": {
+      "result": "pass",
+      "seconds": 0.14
+    },
+    "TestHostingDisabledPreservesUpstreamWithoutDependencies": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestHostingInstallsRealAuthAndRuntimeOnExistingServer": {
+      "result": "pass",
+      "seconds": 1.16
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/version": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/duplicate_gateway": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/proxy": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/overflow_duration": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/instance": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/missing_key": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/wrong_gateway": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/negative_price": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/long_usage_model": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/missing_models": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/public_path": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/missing_secret": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/missing_usage_account": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/public_plaintext": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/public_credentials": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/public_query": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/negative_sync_wait": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/plaintext": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/untrusted_default": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/unbounded_poll": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer/unbounded_sync_wait": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsInvalidConfigurationWithoutChangingServer": {
+      "result": "pass",
+      "seconds": 0.31
+    },
+    "TestHostingRejectsMalformedFilesAndUnsupportedMode/unknown": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsMalformedFilesAndUnsupportedMode/duplicate": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsMalformedFilesAndUnsupportedMode/oversize": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestHostingRejectsMalformedFilesAndUnsupportedMode/trailing": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestHostingRejectsMalformedFilesAndUnsupportedMode/simple": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestHostingRejectsMalformedFilesAndUnsupportedMode/unknown#01": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestHostingRejectsMalformedFilesAndUnsupportedMode": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestHostingMissingSchemaFailsWithoutCreatingTables": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestMoneyBoundaries/accept_0": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/accept_0.00000001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/accept_1.23456789": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/accept_1000000.00000000": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_-1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_+1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_01": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_1e-8": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_NaN": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_.1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_1.": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_1.000000001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_1000000.00000001": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject_9999999999999999999": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries/reject__1": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestMoneyBoundaries": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/text_to_image": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/image_to_image": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/references_to_image": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/text_to_video": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds/references_to_video": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRequestCanonicalizationAndBounds": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestConcurrentIdempotencyAndFrozenQuote": {
+      "result": "pass",
+      "seconds": 0.34
+    },
+    "TestOwnershipAndBillingMode": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestConcurrentBalanceAndKeyLimits/balance": {
+      "result": "pass",
+      "seconds": 0.22
+    },
+    "TestConcurrentBalanceAndKeyLimits/quota": {
+      "result": "pass",
+      "seconds": 0.25
+    },
+    "TestConcurrentBalanceAndKeyLimits/5h": {
+      "result": "pass",
+      "seconds": 0.26
+    },
+    "TestConcurrentBalanceAndKeyLimits/1d": {
+      "result": "pass",
+      "seconds": 0.24
+    },
+    "TestConcurrentBalanceAndKeyLimits/7d": {
+      "result": "pass",
+      "seconds": 0.27
+    },
+    "TestConcurrentBalanceAndKeyLimits": {
+      "result": "pass",
+      "seconds": 1.25
+    },
+    "TestReserveTransactionRollsBackOnOutboxFailure": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestDispatchVersusUnsentRelease": {
+      "result": "pass",
+      "seconds": 0.22
+    },
+    "TestTerminalCorrelationAndFrozenBounds": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestConcurrentTerminalsChooseOne": {
+      "result": "pass",
+      "seconds": 0.26
+    },
+    "TestSettlementRollsBackAllEffects": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestRevokedKeysStillSettle/disabled": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestRevokedKeysStillSettle/soft_deleted": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestRevokedKeysStillSettle": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestCipherAuthenticationAndRotation": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoRoundingAndMinimumMoney": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestKeyWindowsAndPendingHoldsAcrossReset": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestLateBindingCannotChangeTerminal": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestArchivedDedupCannotBecomeSecondCharge": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestEffectLeaseFenceAndNoRebilling": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestActualProcessRestartBoundaries": {
+      "result": "pass",
+      "seconds": 0.81
+    },
+    "TestProcessBoundaryHelper": {
+      "result": "skip",
+      "seconds": 0
+    },
+    "TestCollectionJobsCursorIsStableBoundedAndOwned": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestCollectionJobsStatusScanBudgetReturnsContinuation": {
+      "result": "pass",
+      "seconds": 0.77
+    },
+    "TestCollectionJobsUseCurrentRemotePhaseAndOriginalTarget": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestCollectionCursorsBindSubjectScopeAndFixedExpiry": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestContentCollectionRequiresFreshExplicitSharingForEveryRead": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestContentCollectionStreamsContinueAndBindConfiguration": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestContentCollectionFailureCapacityAndCancellationRelease": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestCollectionReadsRetainExactBillingAndAuthenticationBoundary/balance_zero": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestCollectionReadsRetainExactBillingAndAuthenticationBoundary/key_expired": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestCollectionReadsRetainExactBillingAndAuthenticationBoundary/quota_exhausted": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestCollectionReadsRetainExactBillingAndAuthenticationBoundary/key_disabled": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestCollectionReadsRetainExactBillingAndAuthenticationBoundary/user_disabled": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestCollectionReadsRetainExactBillingAndAuthenticationBoundary/ip_denied": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestCollectionReadsRetainExactBillingAndAuthenticationBoundary": {
+      "result": "pass",
+      "seconds": 0.24
+    },
+    "TestCollectionQueryAndHostedRouteAreStrict": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestContentRouteBindingsAreImmutableAtomicAndDoNotGrantOwnership": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestContentRouteConcurrentDiscoveryAndOriginalBindingCannotDisagree": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestPublicIngressAuthenticatesAndIgnoresForgedIdentity/anonymous": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressAuthenticatesAndIgnoresForgedIdentity/arbitrary": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressAuthenticatesAndIgnoresForgedIdentity/service_realm": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressAuthenticatesAndIgnoresForgedIdentity": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestPublicIngressConcurrentIdempotencyAndFrozenDefaults": {
+      "result": "pass",
+      "seconds": 0.25
+    },
+    "TestPublicIngressOmittedIdempotencyCreatesDistinctTasks": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicIngressAcceptsFiveCapabilitiesAndConfiguredVideoDefaults/text_to_image": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestPublicIngressAcceptsFiveCapabilitiesAndConfiguredVideoDefaults/image_to_image": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestPublicIngressAcceptsFiveCapabilitiesAndConfiguredVideoDefaults/references_to_image": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestPublicIngressAcceptsFiveCapabilitiesAndConfiguredVideoDefaults/text_to_video": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestPublicIngressAcceptsFiveCapabilitiesAndConfiguredVideoDefaults/references_to_video": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicIngressAcceptsFiveCapabilitiesAndConfiguredVideoDefaults": {
+      "result": "pass",
+      "seconds": 0.21
+    },
+    "TestPublicIngressScopesAndCurrentPolicy": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestPublicIngressExistingTaskBillingExceptionKeepsAuthentication/balance_zero": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestPublicIngressExistingTaskBillingExceptionKeepsAuthentication/key_expired": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestPublicIngressExistingTaskBillingExceptionKeepsAuthentication/quota_exhausted": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestPublicIngressExistingTaskBillingExceptionKeepsAuthentication/key_disabled": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestPublicIngressExistingTaskBillingExceptionKeepsAuthentication/user_disabled": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicIngressExistingTaskBillingExceptionKeepsAuthentication/ip_denied": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicIngressExistingTaskBillingExceptionKeepsAuthentication": {
+      "result": "pass",
+      "seconds": 0.29
+    },
+    "TestPublicIngressRejectsCurrentQuotaBalanceAndUnsupportedBilling/quota": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicIngressRejectsCurrentQuotaBalanceAndUnsupportedBilling/balance": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicIngressRejectsCurrentQuotaBalanceAndUnsupportedBilling/subscription": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestPublicIngressRejectsCurrentQuotaBalanceAndUnsupportedBilling/image_permission": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicIngressRejectsCurrentQuotaBalanceAndUnsupportedBilling/group_route": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestPublicIngressRejectsCurrentQuotaBalanceAndUnsupportedBilling": {
+      "result": "pass",
+      "seconds": 0.15
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve/media": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve/compression": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve/empty_idempotency": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve/invalid_idempotency": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve/unknown_model": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve/wrong_capability": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve/unknown_field": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve/too_large": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestPublicIngressRejectsInvalidMediaAndLimitsBeforeReserve": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestPublicIngressBoundQueryChecksRemoteAndKeepsPublicID": {
+      "result": "pass",
+      "seconds": 0.08
+    },
+    "TestPublicIngressCancellationFencesAndRecovers/reserved": {
+      "result": "pass",
+      "seconds": 0.06
+    },
+    "TestPublicIngressCancellationFencesAndRecovers/pending": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestPublicIngressCancellationFencesAndRecovers/confirmed_receipt_lost": {
+      "result": "pass",
+      "seconds": 0.09
+    },
+    "TestPublicIngressCancellationFencesAndRecovers": {
+      "result": "pass",
+      "seconds": 0.22
+    },
+    "TestCancellationPersistsTrustedRequestIPAndRollsBackOnFailure": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicModelAndClientFingerprintCannotBeRebound": {
+      "result": "pass",
+      "seconds": 0.03
+    },
+    "TestPublicRequestMatchesFrozenFixtures": {
+      "result": "fail",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/fractional_seed_rounded_by_float": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/image_fps": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/root_null": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/null_parameters": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/fractional_n_rounded_by_float": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/depth_limit": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/legacy_duration": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/duration_exponent": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/trailing_json": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/invalid_utf8": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/allocation_exponent": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/foreign_strength": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/root_array": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/duplicate_root": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/duplicate_nested": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/null_input": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/duration_over_limit": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/empty_prompt": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/byte_limit": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/source_url": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/reference_weight_precision": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/case_alias": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/unknown_field": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON/long_prompt": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestRejectsUnsafeOrAmbiguousJSON": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestPublicRequestPreservesExactSupportedNumbersAndUnicode": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRecoveryLeaseClaimsAreConcurrentAndScoped": {
+      "result": "pass",
+      "seconds": 0.12
+    },
+    "TestRecoveryStaleFenceCannotMutateOrComplete": {
+      "result": "pass",
+      "seconds": 0.05
+    },
+    "TestRecoveryLeaseUsesActualDatabaseClock": {
+      "result": "pass",
+      "seconds": 0.28
+    },
+    "TestRecoveryBackoffAndClosePlanSurviveReclaim": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestRecoveryWorkAndReservationCommitTogether": {
+      "result": "pass",
+      "seconds": 0.04
+    },
+    "TestRuntimeAutomaticallyRecoversAndSettlesWithAckReplay": {
+      "result": "pass",
+      "seconds": 1.2
+    },
+    "TestRuntimeConcurrentStartAndParentCancellation": {
+      "result": "pass",
+      "seconds": 0.02
+    },
+    "TestRuntimeStopCancelsInflightAndKeepsUnknownFundsFrozen": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestRuntimeGatewaysProgressIndependentlyUnderFailure": {
+      "result": "pass",
+      "seconds": 1.08
+    },
+    "TestRuntimeRejectsUnsafeBudgetsAndClients/negative_workers": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRuntimeRejectsUnsafeBudgetsAndClients/poll": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRuntimeRejectsUnsafeBudgetsAndClients/settlement": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRuntimeRejectsUnsafeBudgetsAndClients/lease": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRuntimeRejectsUnsafeBudgetsAndClients/owner": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRuntimeRejectsUnsafeBudgetsAndClients/workers": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestRuntimeRejectsUnsafeBudgetsAndClients": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoInputReferenceJSONMultipartAndNativeReplay": {
+      "result": "pass",
+      "seconds": 0.07
+    },
+    "TestVideoWorkflowReferencesPreserveWeightsAndCurrentOwnership": {
+      "result": "pass",
+      "seconds": 0.24
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/duplicate_option": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/unknown_option": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/null_option": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/bad_seed": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/bad_fps": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/bad_strength": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/mixed_references": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/file_id": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/external_url": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/string_reference": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/duplicate_file": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/wrong_file": {
+      "result": "pass",
+      "seconds": 0
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve/duplicate_prompt": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestVideoReferenceInvalidInputsNeverUploadOrReserve": {
+      "result": "pass",
+      "seconds": 0.12
+    },
+    "TestVideoReferenceChecksPermissionTargetAndCapacityBeforeUpload": {
+      "result": "pass",
+      "seconds": 0.1
+    },
+    "TestHostedVideoMultipartFallbackAndConfiguredRoutingCleanSpool": {
+      "result": "pass",
+      "seconds": 0.01
+    },
+    "TestWorkflowScalarOptionsNormalizeAcrossImageSurfaces": {
+      "result": "pass",
+      "seconds": 0.08
+    }
+  },
+  "provider_implemented": false,
+  "runtime_integration_verified": false,
+  "coverage_boundary": "Ledger, recovery, hosted lifecycle, image/video/reference inputs, asset/content access, discovery/collections, durable native usage/cache effects, exact media/group/user multipliers and native subscription reservations/settlement against pinned upstream authentication/schema/repositories, native PostgreSQL, HTTPS protocol fixtures and an in-process Redis protocol service; native crash/restart tests retained. Stock cmd/server compiled separately. Full cross-service runtime, mixed stock-provider inflight guarantees, real Redis, real media/storage/hardware remain unverified",
+  "overlay_workspace_reused": true,
+  "native_loopback_pg_tls": false,
+  "public_request_contract_schema_sha256": "6d048c17bdff215c5cc3fade8ab3529e2b728d19fb768e8dc893081fb0b6679c",
+  "public_request_fixtures_match_frozen_contract": true,
+  "reviewed_stock_patches": [
+    {
+      "path": "internal/server/middleware/api_key_auth.go",
+      "stock_sha256": "71e180a0703d5e2caf6fe6832a3717affbd9866e2ad65278fde718277a822616",
+      "patched_sha256": "6c7f9f41c79740ed7098680e3532949f4fe977c871e5725b22abe366bb883868"
+    },
+    {
+      "path": "cmd/server/wire_gen.go",
+      "stock_sha256": "c73fa54fabbc758d31b4cf8b66e1e7d6a54ef71df6e9beeb773f9260cf23ed17",
+      "patched_sha256": "d6e49bc947a7dafa3efcb438e7e472e67af2c4ca9357e4345d73c6fdd21de126"
+    }
+  ],
+  "build_command": "go test -c -trimpath -vet=off -mod=readonly -p=2 -o <app-local binary> ./internal/rendercontrol",
+  "binary_build": {
+    "compiled": true,
+    "binary_reused": false,
+    "build_seconds": 142.25,
+    "binary_sha256": "7c092fbc94b0d4ccd55038a650af53f067ba674ce05f8e73d277465d5a4ae651",
+    "input_sha256": "e98b1033815c16194d088654a6f89f85fa7cf057e6614191e5cd7a0a10546661",
+    "converter_binary_sha256": "53b398c0f5c529145965194c502809c92c18ebe3ed0e6358065908b57d74dd97",
+    "converter_reused": true
+  }
+}

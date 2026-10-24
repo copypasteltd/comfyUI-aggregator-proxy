@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "real_https_admin_session": true,
+  "real_postgresql_content_and_preview": true,
+  "synthetic_owned_media": true,
+  "lost_patch_ack_is_injected": true,
+  "checks": [
+    "real_https_catalog_is_bounded_and_never_autoloads_media",
+    "name_options_page_search_and_explicit_apply_preserve_catalog_pagination",
+    "frozen_model_workflow_key_tag_media_state_and_local_time_intersection",
+    "explicit_same_origin_image_preview_reads_verified_bytes_and_releases_on_close",
+    "tag_edit_sends_csrf_ifmatch_and_reuses_idempotency_after_committed_lost_ack",
+    "real_concurrent_revision_conflict_preserves_draft_until_explicit_reload_and_save",
+    "real_generated_video_plays_without_autoplay_or_blob_and_drawer_close_clears_src",
+    "hidden_page_releases_video_and_visibility_reauthenticates_without_media_reload",
+    "route_unmount_pauses_detached_video_and_removes_its_source",
+    "sensitive_input_catalog_and_390px_filter_layout_remain_usable",
+    "session_expiry_unmounts_catalog_and_frees_active_media",
+    "reduced_permission_ui_hides_tag_mutation_and_sensitive_input_preview_download"
+  ],
+  "runtime_errors": [],
+  "permission_reduction_only_in_ui_fixture": true,
+  "tag_metadata_revision": 5,
+  "observed_patch_requests": 5,
+  "all_contexts_closed": true,
+  "fixture_cleanup": {
+    "cleaned": true,
+    "synthetic_tenant_removed": true,
+    "private_media_removed": true
+  }
+}

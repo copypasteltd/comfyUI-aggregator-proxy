@@ -1,0 +1,101 @@
+{
+  "at": "2026-10-23T02:49:01.530601+00:00",
+  "passed": true,
+  "audit_script_sha256": "ee10160f759a795c20fb5dd27f22e3e629ec877d568bef33fd60e2e5a317022a",
+  "scope": "Authorized keyset collections and explicitly shared original-target content routing. Real upstream authentication/repositories, native PostgreSQL, HTTPS protocol peers, migration replay and actual cmd/server compilation; full cross-service runtime and real media/hardware remain unverified.",
+  "source_commit": "7da09cab4e875463baa79fc150adde700c5438df",
+  "source_archive_sha256": "03504108ee0e4d2ef79c5874563153c3d205588ae5354dbefe01e7e1c40af152",
+  "client_top_level_tests": 41,
+  "client_subtests": 179,
+  "client_duration_seconds": 31.12,
+  "ledger_top_level_tests": 125,
+  "ledger_subtests": 230,
+  "ledger_duration_seconds": 177.29,
+  "ledger_build_seconds": 114.42,
+  "current_client_ledger_harness_sources_match": true,
+  "verified_manifest_files_including_shared_client_and_stock_patch": 55,
+  "previous_247_to_252_migrations_unchanged": true,
+  "reviewed_stock_patches": [
+    {
+      "path": "internal/server/middleware/api_key_auth.go",
+      "stock_sha256": "71e180a0703d5e2caf6fe6832a3717affbd9866e2ad65278fde718277a822616",
+      "patched_sha256": "42f48765edb5a528618bf30826a1a6033543a1632d99c562b2b8fc0379706a0d"
+    },
+    {
+      "path": "cmd/server/wire_gen.go",
+      "stock_sha256": "c73fa54fabbc758d31b4cf8b66e1e7d6a54ef71df6e9beeb773f9260cf23ed17",
+      "patched_sha256": "6e09e31377fccfeee4283ae53dd0f6d7fc0a648851f2995c00b942cb39958519"
+    }
+  ],
+  "migrations_replayed": 304,
+  "upstream_test_tables": 109,
+  "stock_server_composition_compiled": true,
+  "stock_server_build_duration_seconds": 14.67,
+  "report_sha256": {
+    "sub2api-controlclient-tests.json": "80f6e88ac2d67cd321807e1edf6f9af1ef5154266071cd104d026512822898e9",
+    "sub2api-ledger-tests.json": "7ca0fde6f9934883b89ea7248af08b3c2417393afe7d5df18dc87ced130d69c7",
+    "sub2api-provider-native-build.json": "a550919a57c0c55c484413696652c18f0268abfd34dab1ad4ba54d3815488cbe",
+    "sub2api-listings-application-checks.json": "8a57b7d48ee958a4bba9b8833a6fdab49fd0b696cb18cf3fa2b70e6c25d19b7c"
+  },
+  "application_source_and_output_files": 196,
+  "python_regression_passed": 277,
+  "authorization_precedes_pagination_verified": true,
+  "encrypted_subject_query_bound_fixed_lifetime_cursor_verified": true,
+  "current_explicit_sharing_required_for_metadata_range_head_verified": true,
+  "shared_reads_do_not_grant_task_asset_or_delete_authority": true,
+  "immutable_original_destination_and_concurrent_route_guards_verified": true,
+  "bounded_stream_and_status_scan_continuation_verified": true,
+  "capacity_cancellation_and_exact_billing_auth_boundary_verified": true,
+  "collection_has_no_reservation_or_money_effects_verified": true,
+  "collection_contract_sha256": "1ad0295497ca17e6acfd8961c7ab9e31003ac6c072924d73640b678fd1c04394",
+  "failure_reports_preserved": [
+    "docs/evidence/2026-10-23/sub2api-listings-go-first-run.json",
+    "docs/evidence/2026-10-23/sub2api-listings-python-first-run.json"
+  ],
+  "migration_and_restore_report_sha256": {
+    "listings-test-migration.json": "0688d12f9a0a6bfe30dbf555ee4f6fa0b69a4b18e8e3bf798fa06d98509f21ed",
+    "listings-development-migration.json": "5b9671f5fb5cfa1627e4038f906772f5bcc72e21f8cb55a7aa5407fe6c61f2d7",
+    "native-restore-rehearsal.json": "9000b1da66e2bda4bef0bddea88010f1fe95de7b3f36732026359417ac121d69"
+  },
+  "application_revision": "bc284d51e790",
+  "application_business_tables": 40,
+  "remaining_disposable_test_and_restore_databases": 0,
+  "remaining_host_test_directories": 0,
+  "remaining_upload_spool_files": 0,
+  "https_statuses": {
+    "/health/live": 200,
+    "/health/ready": 200,
+    "/admin/": 200,
+    "/v1/jobs": 401,
+    "/v1/content": 401,
+    "/gateway/v1/jobs": 401,
+    "/gateway/v1/content": 401,
+    "/v1/models": 401,
+    "/v1/capabilities": 401
+  },
+  "tls_verified_with_project_certificate": true,
+  "live_schema_matches_export": true,
+  "registered_development_processes": 9,
+  "all_registered_process_identities_match": true,
+  "remaining_project_test_processes": 0,
+  "process_check_sha256": "1350feb11088b71b30e9cfaebaf738ee1dbb63fef11f1a706d26fb1c962bd978",
+  "browser_opened": false,
+  "virtualization_used": false,
+  "retained_services": [
+    "native PostgreSQL",
+    "HTTPS API",
+    "lease Runner",
+    "object GC"
+  ],
+  "full_upstream_server_started": false,
+  "provider_implemented": false,
+  "runtime_integration_verified": false,
+  "real_comfyui_or_s3_verified": false,
+  "pending": [
+    "complete standardized input_reference/workflow_options",
+    "actual usage/cache/notification consumers and subscription/group pricing",
+    "full upstream/control-plane cross-process runtime",
+    "input/output aggregation, tags and remaining content management",
+    "real ComfyUI/five workflows/S3 and 10/20 devices"
+  ]
+}

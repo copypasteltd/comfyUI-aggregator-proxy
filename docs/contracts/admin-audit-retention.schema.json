@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-audit-retention:0.5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "enabled",
+    "retention_days",
+    "batch_limit",
+    "snapshot_at",
+    "last_batch"
+  ],
+  "properties": {
+    "enabled": {
+      "type": "boolean"
+    },
+    "retention_days": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3650
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "batch_limit": {
+      "type": "integer",
+      "const": 500
+    },
+    "snapshot_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4102444800
+    },
+    "last_batch": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "completed_at",
+            "cutoff",
+            "deleted",
+            "retention_days"
+          ],
+          "properties": {
+            "completed_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4102444800
+            },
+            "cutoff": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4102444800
+            },
+            "deleted": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500
+            },
+            "retention_days": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3650
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "enabled": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "retention_days": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3650
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "retention_days": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

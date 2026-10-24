@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-22T22:10:26.460814+00:00",
+  "scope": "Pinned Sub2API durable recovery leases and admission/confirm/close coordinator; real upstream schema and native PG, concrete HTTPS client with synthetic protocol server, actual native child process exit; no hosted Provider or full cross-service runtime",
+  "passed": true,
+  "client_top_level_tests": 17,
+  "client_subtests": 32,
+  "client_duration_seconds": 7.97,
+  "client_report_sha256": "dc3f44037f3e8e8c97835b5f0abaa31338f22c4e577f44cfb03a831157b7bd73",
+  "ledger_top_level_tests": 52,
+  "ledger_subtests": 62,
+  "ledger_duration_seconds": 17.05,
+  "ledger_report_sha256": "40c0e5f72cb509aba519bcababcc92a300d3de87e69e5659877a6acb670f025d",
+  "current_client_ledger_harness_sources_match": true,
+  "overlay_files_including_shared_client": 17,
+  "ledger_binary_matches": true,
+  "previous_247_and_248_migrations_unchanged": true,
+  "migrations_replayed": 300,
+  "upstream_test_tables": 105,
+  "backup_verified_before_test_migrations": true,
+  "durable_recovery_leases_verified": true,
+  "coordinator_core_verified": true,
+  "coordinator_process_exit_recovery_verified": true,
+  "application_database_queries_read_only": true,
+  "application_revision": "3e15b92f08dc",
+  "application_business_tables": 40,
+  "remaining_disposable_test_and_restore_databases": 0,
+  "https_statuses": {
+    "/health/live": 200,
+    "/health/ready": 200,
+    "/admin/": 200
+  },
+  "tls_verified_with_project_certificate": true,
+  "registered_development_processes": 9,
+  "all_registered_process_identities_match": true,
+  "remaining_project_test_processes": 0,
+  "browser_opened": false,
+  "virtualization_used": false,
+  "retained_services": [
+    "native PostgreSQL",
+    "HTTPS API",
+    "lease Runner",
+    "object GC"
+  ],
+  "provider_implemented": false,
+  "runtime_integration_verified": false,
+  "pending": [
+    "hosted scheduling and public Provider authentication/routes",
+    "media and content delivery authorization",
+    "usage/cache/notification consumers and subscription integration",
+    "full control-plane/Sub2API runtime validation",
+    "real ComfyUI/workflows/S3 and 10/20 device verification"
+  ]
+}

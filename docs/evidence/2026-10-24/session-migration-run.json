@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-24T04:26:25.223431+00:00",
+  "passed": true,
+  "commands": [
+    ".local/migrate-session.py",
+    ".local/test-session-migration-race.py"
+  ],
+  "backup_restore_report": "session-migration-restore.json",
+  "concurrent_downgrade_report": "session-migration-race.json",
+  "final_migration_sha256": "05cb25e5115253766753d61330ff56d4c7498a1b34fdf18f4c2866b090d28c02",
+  "full_python_before_table_lock_refinement": true,
+  "only_post_suite_source_changes": [
+    "migrations/versions/0a7d9b4e2136_admin_session_activity.py",
+    "scripts/test-release-install.py"
+  ],
+  "post_suite_changes_validated_by_native_race_and_exact_candidate_installation": true
+}

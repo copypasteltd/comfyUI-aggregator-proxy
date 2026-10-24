@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-23T18:43:26.966119+00:00",
+  "all_resolved": true,
+  "unresolved_failures": [],
+  "resolved": [
+    {
+      "case": "initial_target_helper_references",
+      "observed": "The first new unit/integration helper used the wrong contracts root and an obsolete Maintenance.sweep name.",
+      "resolution": "Corrected the helper paths and called the existing tick interface; the final 81 targeted checks and full suite pass."
+    },
+    {
+      "case": "first_concurrent_arbitration_lock_timeout",
+      "observed": "The first 20-way claim run failed while each request performed expensive 500-job eligibility scans under the global arbitration lock.",
+      "evidence": "dispatch-queue-load-first-failure.json",
+      "resolution": "Moved bounded eligibility snapshots outside the mutex; re-read current job state, priority, deadline, quotas and fair history inside it, then repeat every claim hard gate."
+    },
+    {
+      "case": "second_arbitration_lock_timeout",
+      "observed": "A second run still hit the unchanged 5-second advisory-lock wait limit on one request.",
+      "evidence": "dispatch-queue-load-second-failure.json",
+      "resolution": "Timing diagnostics located remaining transaction cost. Batched bucket initialization and ordered row locking into two statements; retained fixed lock order, complete bucket checks and all durability settings. The final 20-way run passes without extending timeouts."
+    },
+    {
+      "case": "stale_cached_quota_after_release",
+      "observed": "Inspection found that locking an already cached quota entity could retain a count read before another transaction released a generation slot.",
+      "resolution": "FOR UPDATE explicitly refreshes cached entities. A deterministic two-GPU concurrent-release regression retains the stale entity and verifies exactly one occupied GPU and generating_jobs=1 across global, tenant, project and key scopes."
+    },
+    {
+      "case": "outdated_load_browser_metric_position",
+      "observed": "The diagnostic run completed 20 unique claims, then failed because the older load browser read the retry-wait card by its former numeric position.",
+      "evidence": "dispatch-queue-load-profile.json",
+      "resolution": "The maintained browser check now selects unfinished-task and occupied-GPU metrics by their visible names; all 3 real sessions and 30 updates pass in the final run."
+    },
+    {
+      "case": "dated_native_build_evidence_reference",
+      "observed": "The local native runner moved its output evidence date to October 24 and also looked there for the unchanged provider build evidence, which remains dated October 23. It exited with zero cases, zero backups and no started processes or created databases.",
+      "evidence": "dispatch-native-source-reference-failure.json",
+      "resolution": "The local runner now explicitly reads the original dated provider build evidence and still verifies every source and binary digest; new execution evidence remains dated October 24. The final native protocol run passes."
+    }
+  ],
+  "original_failed_runs_remain_failed": true,
+  "original_timeouts_and_durability_preserved": true
+}

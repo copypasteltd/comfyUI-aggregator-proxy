@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.local/contracts/worker-node-command.schema.json",
+  "title": "Worker node creation, metadata patch or lifecycle action",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "\\S",
+          "not": {
+            "pattern": "[\\x00-\\x1f\\x7f]"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "name",
+        "expected_revision"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "\\S",
+          "not": {
+            "pattern": "[\\x00-\\x1f\\x7f]"
+          }
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "action",
+        "expected_revision"
+      ],
+      "properties": {
+        "action": {
+          "enum": [
+            "enable",
+            "disable",
+            "rotate_credential",
+            "archive"
+          ]
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

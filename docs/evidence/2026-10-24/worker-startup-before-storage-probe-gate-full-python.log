@@ -1,0 +1,92 @@
+........................................................................ [  5%]
+........................................................................ [ 11%]
+........................................................................ [ 17%]
+......................................................F................. [ 23%]
+........................................................................ [ 29%]
+........................................................................ [ 35%]
+........................................................................ [ 41%]
+........................................................................ [ 47%]
+........................................................................ [ 53%]
+........................................................................ [ 58%]
+........................................................................ [ 64%]
+........................................................................ [ 70%]
+........................................................................ [ 76%]
+........................................................................ [ 82%]
+........................................................................ [ 88%]
+........................................................................ [ 94%]
+.....................................................................    [100%]
+================================== FAILURES ===================================
+_______ test_asset_upload_concurrency_is_durable_without_storage_locks ________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.LockNotAvailable: canceling statement due to lock timeout
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_asset_idempotency.py:45: in test_asset_upload_concurrency_is_durable_without_storage_locks
+    results = list(pool.map(lambda _: repository.upload_asset(identity, picture(), "synthetic-upload", "durable-same-upload"), range(8)))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:619: in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:317: in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Python313\Lib\concurrent\futures\thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_asset_idempotency.py:45: in <lambda>
+    results = list(pool.map(lambda _: repository.upload_asset(identity, picture(), "synthetic-upload", "durable-same-upload"), range(8)))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+packages\infrastructure\src\generation_infrastructure\content.py:170: in upload_asset
+    stored = self.store.put(key, source, metadata["media_type"], 20 * 1024 * 1024)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_asset_idempotency.py:38: in put
+    session.execute(select(ApiKey.id).where(ApiKey.id == identity.key_id).with_for_update())
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2373: in execute
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2271: in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:306: in orm_execute_statement
+    result = conn.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.OperationalError: (psycopg.errors.LockNotAvailable) canceling statement due to lock timeout
+E   [SQL: SELECT api_keys.id 
+E   FROM api_keys 
+E   WHERE api_keys.id = %(id_1)s::UUID FOR UPDATE]
+E   [parameters: {'id_1': UUID('dfe6afc2-aaef-4048-9452-f15bfd3790f3')}]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_asset_idempotency.py::test_asset_upload_concurrency_is_durable_without_storage_locks
+1 failed, 1220 passed, 1 warning in 312.59s (0:05:12)

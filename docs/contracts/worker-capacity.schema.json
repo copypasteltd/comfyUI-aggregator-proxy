@@ -1,0 +1,251 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "protocol": {
+      "const": "native-capacity-v1",
+      "title": "Protocol",
+      "type": "string"
+    },
+    "sequence": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "observed_ago_ms": {
+      "maximum": 60000,
+      "minimum": 0,
+      "title": "Observed Ago Ms",
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "blocked",
+        "unavailable"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "enum": [
+          "disk_space",
+          "memory",
+          "spool_limit",
+          "upload_backlog",
+          "observation_unavailable"
+        ],
+        "type": "string"
+      },
+      "maxItems": 5,
+      "title": "Reasons",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "free_disk_bytes": {
+      "anyOf": [
+        {
+          "maximum": 1152921504606846976,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Free Disk Bytes"
+    },
+    "available_memory_bytes": {
+      "anyOf": [
+        {
+          "maximum": 1152921504606846976,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Available Memory Bytes"
+    },
+    "spool_bytes": {
+      "anyOf": [
+        {
+          "maximum": 1152921504606846976,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Spool Bytes"
+    },
+    "reserved_bytes": {
+      "maximum": 1152921504606846976,
+      "minimum": 0,
+      "title": "Reserved Bytes",
+      "type": "integer"
+    },
+    "pending_uploads": {
+      "maximum": 10000,
+      "minimum": 0,
+      "title": "Pending Uploads",
+      "type": "integer"
+    },
+    "minimum_free_disk_bytes": {
+      "maximum": 1152921504606846976,
+      "minimum": 1,
+      "title": "Minimum Free Disk Bytes",
+      "type": "integer"
+    },
+    "minimum_available_memory_bytes": {
+      "maximum": 1152921504606846976,
+      "minimum": 1,
+      "title": "Minimum Available Memory Bytes",
+      "type": "integer"
+    },
+    "maximum_spool_bytes": {
+      "maximum": 1152921504606846976,
+      "minimum": 1,
+      "title": "Maximum Spool Bytes",
+      "type": "integer"
+    },
+    "generation_reserve_bytes": {
+      "maximum": 1152921504606846976,
+      "minimum": 1,
+      "title": "Generation Reserve Bytes",
+      "type": "integer"
+    },
+    "maximum_uploads": {
+      "maximum": 8,
+      "minimum": 1,
+      "title": "Maximum Uploads",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "protocol",
+    "sequence",
+    "observed_ago_ms",
+    "status",
+    "reasons",
+    "free_disk_bytes",
+    "available_memory_bytes",
+    "spool_bytes",
+    "reserved_bytes",
+    "pending_uploads",
+    "minimum_free_disk_bytes",
+    "minimum_available_memory_bytes",
+    "maximum_spool_bytes",
+    "generation_reserve_bytes",
+    "maximum_uploads"
+  ],
+  "title": "WorkerCapacity",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:worker-capacity:1",
+  "description": "Wire shape only. DTO and scheduler additionally derive and verify budget/status/reasons; no paths or raw errors.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ready"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reasons": {
+            "maxItems": 0
+          },
+          "free_disk_bytes": {
+            "type": "integer"
+          },
+          "available_memory_bytes": {
+            "type": "integer"
+          },
+          "spool_bytes": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "blocked"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reasons": {
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "disk_space",
+                "memory",
+                "spool_limit",
+                "upload_backlog"
+              ]
+            }
+          },
+          "free_disk_bytes": {
+            "type": "integer"
+          },
+          "available_memory_bytes": {
+            "type": "integer"
+          },
+          "spool_bytes": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "unavailable"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reasons": {
+            "const": [
+              "observation_unavailable"
+            ]
+          }
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "free_disk_bytes": {
+                "type": "null"
+              }
+            }
+          },
+          {
+            "properties": {
+              "available_memory_bytes": {
+                "type": "null"
+              }
+            }
+          },
+          {
+            "properties": {
+              "spool_bytes": {
+                "type": "null"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

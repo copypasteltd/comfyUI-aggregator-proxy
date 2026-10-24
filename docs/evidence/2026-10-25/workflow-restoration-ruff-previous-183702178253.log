@@ -1,0 +1,23 @@
+I001 [*] Import block is un-sorted or un-formatted
+   --> tests\contract\test_frozen_contracts.py:238:5
+    |
+236 | @pytest.mark.parametrize("case", [c for c in FIXTURES if c["schema"] in ["admin-workflow-draft-restore.schema.json", "admin-workflow-…
+237 | def test_workflow_restoration_dto_matches_frozen_fixture(case: dict[str, Any]) -> None:
+238 |     from generation_contracts.workflow_restoration import WorkflowDraftRestore, WorkflowDraftRestored
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+239 |     model = WorkflowDraftRestore if case["schema"] == "admin-workflow-draft-restore.schema.json" else WorkflowDraftRestored
+240 |     if case["valid"]:
+    |
+help: Organize imports
+    |
+237 | def test_workflow_restoration_dto_matches_frozen_fixture(case: dict[str, Any]) -> None:
+    -     from generation_contracts.workflow_restoration import WorkflowDraftRestore, WorkflowDraftRestored
+238 +     from generation_contracts.workflow_restoration import (
+239 +         WorkflowDraftRestore,
+240 +         WorkflowDraftRestored,
+241 +     )
+242 |     model = WorkflowDraftRestore if case["schema"] == "admin-workflow-draft-restore.schema.json" else WorkflowDraftRestored
+    |
+
+Found 1 error.
+[*] 1 fixable with `--fix`.

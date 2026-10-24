@@ -1,0 +1,92 @@
+Resolved 73 packages in 4ms
+All checks passed!
+Success: no issues found in 88 source files
+........................................................................ [ 21%]
+........................................................................ [ 42%]
+........................................................F............... [ 63%]
+........................................................................ [ 84%]
+....................................................                     [100%]
+================================== FAILURES ===================================
+______________ test_preview_limit_and_replay_status_are_bounded _______________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.DeadlockDetected: deadlock detected
+E   DETAIL:  Process 29512 waits for ShareLock on transaction 128887; blocked by process 2140.
+E   Process 2140 waits for ShareLock on transaction 128888; blocked by process 29512.
+E   HINT:  See server log for query details.
+E   CONTEXT:  while locking tuple (0,1) in relation "admin_users"
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_imports.py:214: in test_preview_limit_and_replay_status_are_bounded
+    assert sorted(executor.map(racing_preview, range(2))) == ["pending", "workflow_preview_limit"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:619: in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:317: in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:449: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Python313\Lib\concurrent\futures\thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_workflow_imports.py:210: in racing_preview
+    return preview(service, import_actor, data)["status"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_workflow_imports.py:70: in preview
+    return service.preview(actor, WorkflowImportPreview.model_validate({**source_data, "target": target or {"mode": "create", "name": "Imported synthetic", "task_type": "text_to_image"}}), token or uuid4().hex, "test-preview")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+packages\infrastructure\src\generation_infrastructure\admin_workflow_imports.py:82: in preview
+    session.execute(select(AdminUser.id).where(AdminUser.id == actor.user_id).with_for_update()).scalar_one()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2373: in execute
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2271: in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:306: in orm_execute_statement
+    result = conn.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.OperationalError: (psycopg.errors.DeadlockDetected) deadlock detected
+E   DETAIL:  Process 29512 waits for ShareLock on transaction 128887; blocked by process 2140.
+E   Process 2140 waits for ShareLock on transaction 128888; blocked by process 29512.
+E   HINT:  See server log for query details.
+E   CONTEXT:  while locking tuple (0,1) in relation "admin_users"
+E   [SQL: SELECT admin_users.id 
+E   FROM admin_users 
+E   WHERE admin_users.id = %(id_1)s::UUID FOR UPDATE]
+E   [parameters: {'id_1': UUID('94cd734b-7fe1-4706-9b1b-403cf6663143')}]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\dev\sandbox\��ͼ����API��װ\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_workflow_imports.py::test_preview_limit_and_replay_status_are_bounded
+1 failed, 339 passed, 1 warning in 246.82s (0:04:06)

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "E:\dev\sandbox\生图生视API封装\app\.local\test-job-cancellation-browser.py", line 131, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "E:\dev\sandbox\生图生视API封装\app\.local\test-job-cancellation-browser.py", line 87, in main
+    password = secrets.token_urlsafe(32); data = seed(sessions, password, encryption, environment['GEN_CREDENTIAL_PEPPER'])
+                                                 ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\dev\sandbox\生图生视API封装\app\.local\test-job-cancellation-browser.py", line 36, in seed
+    from tests.integration.test_audio import audio_catalog
+ModuleNotFoundError: No module named 'tests'

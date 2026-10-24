@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.invalid/contracts/workflow-source-receipt.schema.json",
+  "contract_version": "0.4.0",
+  "title": "Successful local Workflow pull receipt",
+  "description": "Additional semantic validation checks canonical SHA-256, graph format, JSON complexity and document byte bounds in both Worker and control plane.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["success", "applied_revision", "source_document", "source_digest", "export_format", "source_bytes"],
+  "properties": {
+    "success": {"const": true},
+    "applied_revision": {"type": "integer", "minimum": 1},
+    "source_document": {"type": "object", "minProperties": 1, "maxProperties": 2000},
+    "source_digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "export_format": {"enum": ["comfy-api", "manifest-v1"]},
+    "source_bytes": {"type": "integer", "minimum": 1, "maximum": 1048576}
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "at": "2026-10-22T21:44:00.646219+00:00",
+  "compiler": "go version go1.27.3 windows/amd64",
+  "command": "go test -json -mod=readonly -count=1 -p=2 -timeout=90s ./...",
+  "module": "render-control/sub2api-controlclient",
+  "source_sha256": {
+    "client.go": "33833b12d0f4f54b3653b19169143c0116109c4b27404a1b23325f12b50270da",
+    "client_test.go": "c129d452b0f3e3a24ee60361f61008a5423680208563a6018cca3156df05f1ff",
+    "go.mod": "bd5fb70c1d0baf9fe7d507d24566b4b6e53f7a777f51f80d2871ae9ad9c133c6",
+    "proof_test.go": "d99f67942958d544b35924d18e4f823972e1c7cb52494b912138aa37a5705c98",
+    "recovery_test.go": "4e90f2f61ac4a132bd3e9a2dadb9474358e4962490b7b6d72fc7330f13ecdfe2"
+  },
+  "sources_unchanged": true,
+  "offline_module_downloads_disabled": true,
+  "passed": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "top_level_tests": 17,
+  "subtests": 32,
+  "tests": [
+    {
+      "name": "TestMetadataLifecycleAndIndependentServiceReconciliation",
+      "status": "pass",
+      "seconds": 0.04
+    },
+    {
+      "name": "TestRedirectNeverForwardsCredential",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies/false",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies/true",
+      "status": "pass",
+      "seconds": 0.04
+    },
+    {
+      "name": "TestResponseLimitsIncludeDecodedGzipAndCloseBodies",
+      "status": "pass",
+      "seconds": 0.05
+    },
+    {
+      "name": "TestErrorsAndFormattingDoNotContainCredentialsOrResponseBodies",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestCancellationDoesNotRetryAdmission",
+      "status": "pass",
+      "seconds": 1.01
+    },
+    {
+      "name": "TestUnsafeOriginsSubjectsAndIdentifiersAreRejectedBeforeHTTP",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestMalformedSuccessfulAdmissionRemainsUncertain",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/unknown_status",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/pending_already_queued",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/expired_not_terminal",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/missing_expiry",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState/wrong_request",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestSuccessfulAdmissionCannotContradictPersistedState",
+      "status": "pass",
+      "seconds": 0.06
+    },
+    {
+      "name": "TestUntrustedJobArtifactsAndDuplicateSettlementAreRejected",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestRequestRecoveryUsesOnlyServiceAuthority",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/unknown_lookup",
+      "status": "pass",
+      "seconds": 0.04
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/unknown_close",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/closed_lookup",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/closed_missing_receipt",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/unknown_with_receipt",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/closed_with_admission",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/pending_lookup",
+      "status": "pass",
+      "seconds": 0.67
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/pending_after_close",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/aborted_after_close",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/confirmed_after_close",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/admitted_with_receipt",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/admitted_without_record",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/unknown_state",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_request",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_task",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_price",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_authorization",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_tenant",
+      "status": "pass",
+      "seconds": 0.05
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses/mismatched_key",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryRejectsContradictoryOrUnboundResponses",
+      "status": "pass",
+      "seconds": 1.02
+    },
+    {
+      "name": "TestRequestRecoveryLossRetainsWriteUncertaintyWithoutRetry/lookup",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryLossRetainsWriteUncertaintyWithoutRetry/close",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestRequestRecoveryLossRetainsWriteUncertaintyWithoutRetry",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestRequestRecoveryRejectsUnconstructedIdentityBeforeHTTP",
+      "status": "pass",
+      "seconds": 0.03
+    },
+    {
+      "name": "TestRequestRecoveryRejectsDifferentGatewayUnderValidHTTPS",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestClosureProofCannotBeConstructedFromPublicJSON/lookup",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestClosureProofCannotBeConstructedFromPublicJSON/close",
+      "status": "pass",
+      "seconds": 0
+    },
+    {
+      "name": "TestClosureProofCannotBeConstructedFromPublicJSON",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestUnknownAndAdmittedResponsesDoNotIssueClosureProof/unknown",
+      "status": "pass",
+      "seconds": 0.01
+    },
+    {
+      "name": "TestUnknownAndAdmittedResponsesDoNotIssueClosureProof/admitted",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestUnknownAndAdmittedResponsesDoNotIssueClosureProof",
+      "status": "pass",
+      "seconds": 0.02
+    },
+    {
+      "name": "TestExplicitLoopbackHTTPDoesNotIssueFinancialClosureProof",
+      "status": "pass",
+      "seconds": 0
+    }
+  ],
+  "duration_seconds": 13.46,
+  "provider_implemented": false,
+  "upstream_runtime_verified": false,
+  "virtualization_used": false
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:spec-isolation:0.4.0",
+  "title": "Spec isolation mutation",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "pattern": "^job_[a-f0-9]{32}$"
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,127}$"
+        }
+      },
+      "required": [
+        "job_id",
+        "expected_revision",
+        "evidence_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "const": "isolate"
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,127}$"
+        }
+      },
+      "required": [
+        "action",
+        "expected_revision",
+        "evidence_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "const": "resume"
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "validation_job_id": {
+          "type": "string",
+          "pattern": "^job_[a-f0-9]{32}$"
+        }
+      },
+      "required": [
+        "action",
+        "expected_revision",
+        "validation_job_id"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

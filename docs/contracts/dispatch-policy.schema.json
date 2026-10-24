@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.invalid/contracts/dispatch-policy.schema.json",
+  "contract_version": "0.4.0",
+  "title": "Tenant service and aging dispatch policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "policy_id",
+    "tenant_shares",
+    "service_unit",
+    "aging_step_seconds",
+    "overdue_tenant_seconds",
+    "minimum_service_milliseconds",
+    "maximum_service_milliseconds",
+    "image_baseline_milliseconds",
+    "video_baseline_milliseconds"
+  ],
+  "properties": {
+    "policy_id": {
+      "const": "tenant-service-aging-v1"
+    },
+    "tenant_shares": {
+      "const": "equal"
+    },
+    "service_unit": {
+      "const": "estimated_gpu_milliseconds"
+    },
+    "aging_step_seconds": {
+      "type": "integer",
+      "const": 5
+    },
+    "overdue_tenant_seconds": {
+      "type": "integer",
+      "const": 300
+    },
+    "minimum_service_milliseconds": {
+      "type": "integer",
+      "const": 1000
+    },
+    "maximum_service_milliseconds": {
+      "type": "integer",
+      "const": 7200000
+    },
+    "image_baseline_milliseconds": {
+      "type": "integer",
+      "const": 60000
+    },
+    "video_baseline_milliseconds": {
+      "type": "integer",
+      "const": 300000
+    },
+    "audio_baseline_milliseconds": {
+      "type": "integer",
+      "const": 300000,
+      "default": 300000
+    }
+  }
+}

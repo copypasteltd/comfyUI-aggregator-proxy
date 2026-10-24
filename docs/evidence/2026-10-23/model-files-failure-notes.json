@@ -1,0 +1,55 @@
+{
+  "recorded_at": "2026-10-23T09:52:52.828775+00:00",
+  "scope": "Development failures corrected before final acceptance; no production GPU/weights involved",
+  "items": [
+    {
+      "stage": "first native migration attempt",
+      "error": "Alembic naming convention prefixed an already-prefixed check constraint name",
+      "transaction_rolled_back": true,
+      "fix": "Use op.f for the existing constraint; rerun with a fresh verified backup",
+      "development_and_test_migration_then_passed": true
+    },
+    {
+      "stage": "first focused file tests",
+      "error": "Windows DirEntry.stat reports st_nlink=0, ordinary files were rejected",
+      "fix": "Use lstat for actual file link count; keep pointer and hardlink rejection",
+      "model_specific_tests_after_fix": 56
+    },
+    {
+      "stage": "HTTP test setup",
+      "error": "Synthetic idempotency token was shorter than the existing 16-character minimum",
+      "fix": "Use a valid test token; retain API validation"
+    },
+    {
+      "stage": "first browser close action",
+      "error": "Dialog close accessible name did not match the drawer close button",
+      "fix": "Target the drawer close button; rerun all ten groups",
+      "browser_groups_after_fix": 10,
+      "owned_context_closed_in_finally": true
+    },
+    {
+      "stage": "closeout review of source changes during a slow read",
+      "error": "Valid issued-snapshot reads could be rejected after catalog expiry, revision change or catalog removal, leaving the management queue running",
+      "regression_before_fix": {
+        "failed": 3,
+        "seconds": 3.46
+      },
+      "fix": "Accept validated same-boot, in-lease observations of the issued snapshot; keep creator/registration current-source and age gates; allow the next command",
+      "regression_after_fix": {
+        "passed": 3,
+        "seconds": 2.81
+      },
+      "full_regressions_repeated": true
+    },
+    {
+      "stage": "UI explicit repeat inspection",
+      "error": "A completed same-file check reused its old idempotency key and could replay expired evidence",
+      "regression_before_fix_failed": true,
+      "fix": "Clear the create intent only after receiving an operation id; preserve unknown-result retries; new explicit reads obtain a fresh key",
+      "model_browser_groups_after_fix": 11,
+      "owned_context_closed_in_finally": true
+    }
+  ],
+  "final_python_tests_passed": 500,
+  "final_browser_groups_passed": 22
+}

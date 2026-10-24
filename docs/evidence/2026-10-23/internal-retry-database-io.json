@@ -1,0 +1,45 @@
+{
+  "checkpoint_complete_at": "2026-10-23 23:45:51.820 +08:00",
+  "checkpoint_seconds": 1328.917,
+  "checkpoint_sync_seconds": 1179.385,
+  "sync_files": 18839,
+  "fsync_disabled": false,
+  "synchronous_commit_disabled": false,
+  "full_suite_setup_errors_before_stop": 3,
+  "suite_stopped_for_serial_revalidation": true,
+  "test_cleanup_change": "Guard exact server database identity; break nullable test Job-to-Attempt cycles and DELETE in FK order without replacing relation files.",
+  "verification_status": "passed",
+  "readonly_wrong_database_guard_passed": true,
+  "test_filenode_preservation_status": "passed",
+  "at": "2026-10-23T16:19:04.289733+00:00",
+  "all_public_constraints_validated": true,
+  "durability_settings": {
+    "fsync": "on",
+    "full_page_writes": "on",
+    "synchronous_commit": "on"
+  },
+  "targeted_tests": 81,
+  "long_checkpoints": [
+    {
+      "completed_local": "2026-10-23 23:45:51.820 CST",
+      "sync_seconds": 1179.385,
+      "total_seconds": 1328.917,
+      "sync_files": 18839
+    },
+    {
+      "completed_local": "2026-10-24 00:08:56.681 CST",
+      "sync_seconds": 1307.852,
+      "total_seconds": 1384.825,
+      "sync_files": 31598
+    }
+  ],
+  "gateway_immutable_guard_enabled": true,
+  "test_reset_trigger_states_unchanged": true,
+  "ordinary_fence_delete_and_fk_violation_rejected": true,
+  "resolved_serial_reset_failure": {
+    "passed_before_setup_error": 253,
+    "code": "gateway_request_fence_immutable",
+    "trigger": "preserve_gateway_request_fence",
+    "scope": "one named immutable-row trigger, paused and restored in the same locked, identity-checked test transaction; all FK/CHECK stay enabled"
+  }
+}

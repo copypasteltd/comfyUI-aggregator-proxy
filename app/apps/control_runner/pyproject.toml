@@ -1,0 +1,15 @@
+[project]
+name = "render-control-runner"
+version = "0.1.0"
+requires-python = ">=3.13,<3.14"
+dependencies = ["generation-application", "generation-infrastructure"]
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/control_runner"]
+
+[project.scripts]
+genrunner = "control_runner.main:main"

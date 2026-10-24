@@ -1,0 +1,423 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Native generation create request 0.5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "model",
+    "task_type",
+    "input"
+  ],
+  "properties": {
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "task_type": {
+      "enum": [
+        "text_to_image",
+        "image_to_image",
+        "references_to_image",
+        "text_to_video",
+        "references_to_video",
+        "text_to_audio"
+      ]
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prompt"
+      ],
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8000
+        },
+        "negative_prompt": {
+          "type": "string",
+          "maxLength": 8000
+        },
+        "source_image": {
+          "$ref": "#/$defs/asset"
+        },
+        "mask": {
+          "$ref": "#/$defs/asset"
+        },
+        "references": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "asset_id",
+              "role"
+            ],
+            "properties": {
+              "asset_id": {
+                "$ref": "#/$defs/assetId"
+              },
+              "role": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,31}$"
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 2
+              }
+            }
+          }
+        }
+      },
+      "dependentRequired": {
+        "mask": [
+          "source_image"
+        ]
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "size": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$"
+        },
+        "quality": {
+          "enum": [
+            "draft",
+            "standard",
+            "high"
+          ]
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1
+        },
+        "seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 600,
+          "multipleOf": 0.001
+        },
+        "fps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        },
+        "strength": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "client_request_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "enum": [
+              "text_to_image",
+              "text_to_video",
+              "text_to_audio"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "source_image"
+                  ]
+                },
+                {
+                  "required": [
+                    "mask"
+                  ]
+                },
+                {
+                  "required": [
+                    "references"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "const": "image_to_image"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "required": [
+              "source_image"
+            ],
+            "not": {
+              "required": [
+                "references"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "enum": [
+              "references_to_image",
+              "references_to_video"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "required": [
+              "references"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "source_image"
+                  ]
+                },
+                {
+                  "required": [
+                    "mask"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "enum": [
+              "text_to_image",
+              "image_to_image",
+              "references_to_image"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "parameters": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "seconds"
+                  ]
+                },
+                {
+                  "required": [
+                    "fps"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "enum": [
+              "text_to_video",
+              "references_to_video"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "parameters": {
+            "properties": {
+              "n": {
+                "const": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "not": {
+              "const": "image_to_image"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "parameters": {
+            "not": {
+              "required": [
+                "strength"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "const": "references_to_image"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "properties": {
+              "references": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "const": "references_to_video"
+          },
+          "input": {
+            "properties": {
+              "references": {
+                "maxItems": 1
+              }
+            },
+            "required": [
+              "references"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "properties": {
+              "references": {
+                "items": {
+                  "properties": {
+                    "role": {
+                      "const": "first_frame"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "const": "text_to_audio"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "parameters": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "size"
+                  ]
+                },
+                {
+                  "required": [
+                    "fps"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "parameters": {
+            "properties": {
+              "seconds": {
+                "maximum": 120
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "assetId": {
+      "type": "string",
+      "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_id"
+      ],
+      "properties": {
+        "asset_id": {
+          "$ref": "#/$defs/assetId"
+        }
+      }
+    }
+  },
+  "contract_version": "0.5.0"
+}

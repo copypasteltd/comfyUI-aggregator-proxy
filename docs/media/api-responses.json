@@ -1,0 +1,34 @@
+{
+  "synthetic_data": true,
+  "authentication_headers_and_cookies_omitted": true,
+  "responses": [
+    {
+      "operation": "archive",
+      "http_status": 200,
+      "request": {
+        "expected_revision": 1,
+        "archived": true
+      },
+      "response": {
+        "workflow_id": "wf_42fb4d4a58fc46a6a37e3c2fd24523ed",
+        "archived": true,
+        "previous_revision": 1,
+        "revision": 2
+      }
+    },
+    {
+      "operation": "unarchive",
+      "http_status": 200,
+      "request": {
+        "expected_revision": 2,
+        "archived": false
+      },
+      "response": {
+        "workflow_id": "wf_42fb4d4a58fc46a6a37e3c2fd24523ed",
+        "archived": false,
+        "previous_revision": 2,
+        "revision": 3
+      }
+    }
+  ]
+}

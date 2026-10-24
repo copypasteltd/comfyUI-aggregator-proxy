@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-24T04:37:50.361093+00:00",
+  "passed": true,
+  "phase": "static",
+  "commands": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "seconds": 0.06,
+      "log": "retention-ruff.log"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "seconds": 1.28,
+      "log": "retention-mypy.log"
+    },
+    {
+      "name": "lock",
+      "exit_code": 0,
+      "seconds": 2.37,
+      "log": "retention-lock.log"
+    }
+  ]
+}

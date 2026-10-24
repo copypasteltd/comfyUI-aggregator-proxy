@@ -1,0 +1,48 @@
+............................FFFF........................................ [  9%]
+........................................................................ [ 19%]
+........................................................................ [ 29%]
+........................................................................ [ 39%]
+........................................................................ [ 49%]
+........................................................................ [ 59%]
+........................................................................ [ 69%]
+........................................................................ [ 79%]
+........................................................................ [ 88%]
+........................................................................ [ 98%]
+.........                                                                [100%]
+================================== FAILURES ===================================
+_______ test_reapply_http_identity_revision_and_csrf[administrator-202] _______
+tests\integration\test_command_recovery.py:394: in test_reapply_http_identity_revision_and_csrf
+    assert response.status_code == status, response.text
+E   AssertionError: Invalid host header
+E   assert 400 == 202
+E    +  where 400 = <Response [400 Bad Request]>.status_code
+_________ test_reapply_http_identity_revision_and_csrf[operator-202] __________
+tests\integration\test_command_recovery.py:394: in test_reapply_http_identity_revision_and_csrf
+    assert response.status_code == status, response.text
+E   AssertionError: Invalid host header
+E   assert 400 == 202
+E    +  where 400 = <Response [400 Bad Request]>.status_code
+_________ test_reapply_http_identity_revision_and_csrf[observer-403] __________
+tests\integration\test_command_recovery.py:394: in test_reapply_http_identity_revision_and_csrf
+    assert response.status_code == status, response.text
+E   AssertionError: Invalid host header
+E   assert 400 == 403
+E    +  where 400 = <Response [400 Bad Request]>.status_code
+____ test_reapply_http_identity_revision_and_csrf[workflow_maintainer-403] ____
+tests\integration\test_command_recovery.py:394: in test_reapply_http_identity_revision_and_csrf
+    assert response.status_code == status, response.text
+E   AssertionError: Invalid host header
+E   assert 400 == 403
+E    +  where 400 = <Response [400 Bad Request]>.status_code
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_command_recovery.py::test_reapply_http_identity_revision_and_csrf[administrator-202]
+FAILED tests/integration/test_command_recovery.py::test_reapply_http_identity_revision_and_csrf[operator-202]
+FAILED tests/integration/test_command_recovery.py::test_reapply_http_identity_revision_and_csrf[observer-403]
+FAILED tests/integration/test_command_recovery.py::test_reapply_http_identity_revision_and_csrf[workflow_maintainer-403]
+4 failed, 725 passed, 1 warning in 175.68s (0:02:55)

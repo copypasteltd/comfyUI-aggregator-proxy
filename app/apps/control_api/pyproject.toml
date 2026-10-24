@@ -1,0 +1,15 @@
+[project]
+name = "render-control-api"
+version = "0.1.0"
+requires-python = ">=3.13,<3.14"
+dependencies = ["generation-domain", "generation-application", "generation-contracts", "generation-infrastructure", "fastapi>=0.115,<1", "uvicorn[standard]>=0.34,<1", "python-multipart>=0.0.20,<1"]
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/control_api"]
+
+[project.scripts]
+genctl = "control_api.cli:main"

@@ -1,0 +1,288 @@
+# ComfyUI Aggregator Proxy
+
+**把多台 Windows 上的 ComfyUI，统一封装为可管理、可排队、可追踪的图片、视频与音频 API。**
+
+中文 · [English](README.en.md) · [开发文档](docs/README.md) · [更新日志](CHANGELOG.md) · [贡献与同步约定](CONTRIBUTING.md)
+
+![Admin 运行总览：合成演示数据](docs/media/overview.png)
+
+本项目内部服务名为 **Render Control**。它由可视化 Admin、持久化任务控制面、Windows Worker 和 Sub2API 集成组成。图像、视频、音频均来自 ComfyUI Workflow；音频不另接一套外部生成服务。
+
+**当前状态：开发中。** 原生 Windows 本地实现、协议测试和隔离候选安装已有验证记录；真实 Workflow、模型质量、真实 S3/Redis、生产系统服务与 10～20 台实机容量尚未完成验收。文中的截图和录屏使用真实页面与 API、独立 PostgreSQL 和明确标记的合成数据，不代表真实 GPU 生成或生产压测结果。
+
+## 目录
+
+- [功能与边界](#功能与边界)
+- [架构与请求流转](#架构与请求流转)
+- [Admin 操作与演示](#admin-操作与演示)
+- [原生 Windows 快速开始](#原生-windows-快速开始)
+- [从零接入设备与 Workflow](#从零接入设备与-workflow)
+- [API 使用](#api-使用)
+- [API Key、内容与额度](#api-key内容与额度)
+- [调度、幂等与故障恢复](#调度幂等与故障恢复)
+- [配置、部署与运维](#配置部署与运维)
+- [工程结构与验证](#工程结构与验证)
+- [文档与后续更新](#文档与后续更新)
+
+## 功能与边界
+
+| 能力 | 接入方式与行为 |
+| --- | --- |
+| 文生图 | `text_to_image`，冻结 Workflow、公开模型别名与受控预设 |
+| 图生图 | `image_to_image`，先上传素材，再引用 `asset_id`；可声明蒙版 |
+| 多参考图生图 | `references_to_image`，有序参考素材及受控角色/权重 |
+| 文生视频 | `text_to_video`，异步任务、受控尺寸/时长与结果下载 |
+| 参考图生视频 | `references_to_video`，文本与已上传参考素材 |
+| 音频生成 | `text_to_audio`，同一 ComfyUI Workflow 体系，可承载语音、音乐或其他声音 |
+| Windows 接入 | 节点、物理 GPU、ComfyUI 渠道分别管理；面向 10～20 台设备设计 |
+| 图形 Admin | 渠道、节点、Workflow、模型路由、全局/渠道队列、任务、内容、Key、审计与告警 |
+| 多业务 Key | 独立权限、模型/版本/渠道范围、内容范围、速率、并发与日额度 |
+| Sub2API 优先 | 固定上游版本与 Provider overlay，提供 OpenAI 风格兼容入口及原生异步入口 |
+
+当前生成约束包含单任务单最终产物、声明式参数绑定和明确输出节点。客户不能上传任意执行图、指定任意节点参数、访问服务器路径或令服务随意下载 URL。音频首批输入是文本；具体声音能力取决于接入并验收的 Workflow。音频输出覆盖受控 WAV、FLAC、MP3、Ogg Opus 预设，服务验证实际格式、采样率、声道和解码时长。详见 [音频契约](docs/55-音频契约与兼容迁移.md)。
+
+## 架构与请求流转
+
+```mermaid
+flowchart LR
+    C[客户端] -->|Sub2API Key / 兼容 API| S[Sub2API + ComfyUI Provider]
+    C -->|业务 Key / 原生异步 API| A[Control API]
+    S -->|独立服务身份 + 可信范围| A
+    U[管理员] -->|账号会话 + CSRF| UI[Web Admin]
+    UI --> A
+    A <--> PG[(PostgreSQL：任务 / 配额 / GPU 占用 / 审计)]
+    R[Runner / 独立文件 GC] <--> PG
+    W[Windows Worker + SQLite journal] -->|领取 / 心跳 / 核对 / 回传| A
+    W --> F[本机 ComfyUI + 固定 Workflow]
+    W -->|受控上传| O[(私有对象存储)]
+    A -->|校验 + 鉴权交付| O
+```
+
+1. 客户提交模型别名、标准输入、参数和稳定的 `Idempotency-Key`。Sub2API 路径先验证其客户身份，再由受信服务身份转发；原生路径直接验证本系统业务 Key。
+2. 控制面检查租户/项目/Key 权限、模型发布状态、Workflow、渠道和规格，事务性预留额度并持久化任务。
+3. Runner 与 Worker 围绕数据库中的状态、租约和物理 GPU 栅栏协调。多个 ComfyUI 渠道共享同一 GPU 时，生成占用仍按物理 GPU 计算。
+4. Worker 在提交 ComfyUI **之前**持久化本机 journal，然后执行固定版本的 Workflow；不接受任意远程 shell。
+5. 结果进入私有存储后，服务检查内容、大小、摘要、不可变对象版本及媒体实际属性，再将任务置为成功并结算。
+6. 客户查询任务与产物，通过鉴权接口预览或下载。生成槽位、结果提交权、配额和文件清理分别管理。
+
+PostgreSQL 是任务和资源权威源；SQLite 仅是单机 Worker journal。Sub2API 自己的账本通过固定集成协同，本项目不复制一套独立收费账本。
+
+## Admin 操作与演示
+
+![Admin 功能巡览 GIF：合成数据](docs/media/admin-tour.gif)
+
+[完整巡览 MP4](docs/media/admin-tour.mp4) · [Workflow 操作 MP4](docs/media/workflow-lifecycle.mp4) · [演示素材、拍摄方法与响应记录](docs/media/README.md)
+
+| 页面 | 使用逻辑 |
+| --- | --- |
+| 运行总览、任务管理 | 查看排队、运行、异常与完成情况，按范围和状态筛选；查看任务阶段、取消与受控重试 |
+| Windows 渠道、节点 | 管理 ComfyUI 地址和配置、节点凭证与物理 GPU 关联，核对期望/应用/验证状态及各渠道队列 |
+| Workflow 管理 | 导入 API-format Workflow、编辑参数表单、冻结版本、同步渠道、检查发布历史及恢复历史为新草稿 |
+| 模型与路由 | 将已冻结、已同步并具有运行证据的版本绑定到公开别名和可用渠道，设置默认值后发布 |
+| API 密钥、租户与项目 | 创建多个业务 Key，分配操作和资源范围，配置上层与 Key 额度并查看访问记录 |
+| 内容管理 | 按所有者、任务、类型与标签查找素材/产物，鉴权预览、下载、标签维护与受控删除 |
+| 操作中心、告警、审计 | 跟踪同步等持久管理指令、核对失败与重试，查看管理员动作和运行异常 |
+
+![Workflow 归档和解除归档：真实 API，合成数据](docs/media/workflow-lifecycle.gif)
+
+Workflow 归档使用二次确认、revision CAS 和幂等请求。仍有已发布模型引用或未完成同步指令时会拒绝归档。归档后停止新增编辑、冻结、同步、批准和任务准入，保留历史、导出及已接收任务。解除归档恢复维护能力；发布、同步和运行批准仍须显式执行。历史恢复会生成新的草稿 revision，保留原冻结版本。
+
+界面发生响应丢失时提供“使用原请求核对”，继续使用原正文、幂等键和 revision；不会自动换键覆盖其他管理员的修改。操作行为见 [Workflow 生命周期](docs/76-Workflow归档与恢复管理.md)。
+
+更多截图：[渠道](docs/media/channels.png)、[任务队列](docs/media/queue.png)、[模型路由](docs/media/models.png)、[API Key](docs/media/api-keys.png)、[内容](docs/media/content.png)、[版本历史](docs/media/workflow-history.png)、[移动端](docs/media/mobile-overview.png)。当前 Admin 界面语言为中文。
+
+## 原生 Windows 快速开始
+
+### 依赖
+
+- 原生 Windows、Git、PATH 中的 Python **3.13**。
+- `app/config/native-toolchains.lock.json` 固定的 Node.js **24.22.1**、PostgreSQL **18.6**；bootstrap 可下载并验证这两项。
+- FFmpeg/ffprobe 原生媒体工具：按 `app/config/media-tools.lock.json` 准备 `app/.local/toolchains/ffmpeg-8.1/`，其中包含 `bin/ffmpeg.exe`、`bin/ffprobe.exe`、`LICENSE` 和 `README.txt`。bootstrap 不安装这部分；发布构建会检查锁定的字节数与摘要。
+- 使用真实渠道时，Windows 上已安装并可独立工作的 ComfyUI、模型、自定义节点与 Workflow。Worker 使用独立 Python 环境，不复用 ComfyUI 的 torch 环境。
+
+本项目开发与验证禁止 Docker、WSL、虚拟机。下面的命令在 PowerShell 中运行。安装脚本只安装工程依赖；不安装模型、不开放防火墙、不自动注册系统服务。
+
+```powershell
+git clone git@github.com:copypasteltd/comfyUI-aggregator-proxy.git
+Set-Location comfyUI-aggregator-proxy/app
+
+./scripts/bootstrap.ps1 -WithPostgresToolchain
+
+# 只对全新目录执行 init：生成私有 .env，创建原生开发/测试库并启动 PostgreSQL。
+./.venv/Scripts/python.exe scripts/dev-db.py init
+
+# 迁移前自动备份并校验归档；真实恢复演练另行执行。
+./scripts/db-migrate.ps1
+./.venv/Scripts/python.exe -m control_api.cli bootstrap-project
+./.venv/Scripts/python.exe -m control_api.cli bootstrap-admin --username admin
+
+$taskNode = '.local/toolchains/node-24.22.1/node-v24.22.1-win-x64'
+./.venv/Scripts/python.exe scripts/export-openapi.py
+& "$taskNode/npm.cmd" --prefix apps/admin_web run generate:api
+& "$taskNode/npm.cmd" --prefix apps/admin_web run build
+
+# 先按上方说明准备锁定的媒体工具。
+./scripts/dev-start.ps1
+```
+
+打开 **https://127.0.0.1:8443/admin/**，使用刚创建的账号登录。本地证书位于忽略目录 `.local/tls/`，用于回环开发；生产部署使用自己的 HTTPS 证书。首次系统没有已验收的真实模型或渠道，需要完成下一节接入步骤才能生成。
+
+已有环境不要重新初始化数据库。恢复开发时执行 `python scripts/dev-db.py start`，再执行 `scripts/dev-start.ps1`；若已在运行则先核对状态。停止本项目注册的 API/Runner/GC 使用 `scripts/dev-stop.ps1`；停止所属 PostgreSQL 使用 `python scripts/dev-db.py stop`。脚本核对 PID、可执行文件和创建时间，排除 PID 复用造成的旧进程误认。
+
+### 开发配置与生产配置
+
+`dev-db.py init` 生成的 `.env` 使用 `development` 与本地存储，仅供开发。生产配置示例为 [environment.example](app/config/environment.example)：数据库、pepper、Fernet 密钥、可信 HTTPS origin、S3 私有桶与访问凭证均须显式设置。**不能直接把开发 `.env` 复制到生产。** 生产迁移、恢复和服务托管见 [原生部署与运维](docs/15-原生部署配置与运维.md)。
+
+## 从零接入设备与 Workflow
+
+1. **建立范围。** 在 Admin 创建或选择租户和项目，配置额度。它们与业务 Key 的限制共同生效；默认音频日额度可能为零，启用音频时需要明确配置各层额度。
+2. **登记 Windows 节点。** 在节点页面登记、发放一次性 Worker 凭证并保存到设备私有文件，核对物理 GPU 身份。配置参考 [worker.example.json](app/config/worker.example.json)。
+3. **登记渠道。** 设置该节点上的 ComfyUI 地址、GPU 关联与允许访问范围。渠道凭证加密保存；浏览器不直接连接 ComfyUI。地址可维护，变更必须等待 Worker 应用并验证。
+4. **准备 Workflow。** 在 ComfyUI 导出 API 格式图，声明参数到节点输入的绑定、允许预设、依赖锁、输出适配器与最终节点。UI 格式工作流不能直接当成 API 执行图。导入候选须检查后提交。
+5. **冻结、同步、验证。** 冻结不可变版本，同步到指定渠道，核对 desired/applied/verified digest；使用实际模型与样例取得相应规格的运行证据并批准。仅导入成功不能证明可运行。
+6. **发布模型别名。** 配置别名、任务类型、冻结版本、渠道与默认规格，满足门禁后发布。客户通过别名调用，不直接选择任意 Workflow 图。
+7. **创建业务 Key。** 配置生成和内容 scopes、资源选择范围、规格限制及额度；只在创建时显示明文，妥善保存。
+8. **配置网关并联调。** 按 [Sub2API 接入](docs/32-Sub2API公开任务接入.md) 配置固定 Provider、服务凭证和外部身份映射，验证生成、查询、下载、取消、额度与账本恢复。
+
+Worker 的入口为 `python -m windows_worker.main --config C:/render-worker/config.json`；可先加 `--validate-config` 校验本地配置。凭证与 journal 必须位于受限、持久目录，配置必须包含当前启动协议要求的节点/GPU/渠道信息。详见 [节点登记](docs/56-Windows节点登记与凭证管理.md) 和 [Worker 启动保护](docs/57-Worker启动身份与原生进程保护.md)。
+
+## API 使用
+
+### 原生异步入口
+
+适用于全部六类任务。下面在 `app/` 目录执行，先将 Admin 创建的业务 Key 保存到进程环境变量 `COMFY_API_KEY`。示例中的 `demo-*` 是演示别名，使用时换成自己已发布的模型。
+
+```powershell
+curl.exe --cacert .local/tls/localhost.crt `
+  -H "Authorization: Bearer $env:COMFY_API_KEY" `
+  -H "Content-Type: application/json" `
+  -H "Idempotency-Key: example-image-0001" `
+  --data-binary '@../docs/examples/create-image.json' `
+  https://127.0.0.1:8443/v1/jobs
+```
+
+[图片请求](docs/examples/create-image.json)、[视频请求](docs/examples/create-video.json)、[音频请求](docs/examples/create-audio.json) 均为完整 JSON。音频请求示例：
+
+```json
+{
+  "model": "demo-text-to-audio",
+  "task_type": "text_to_audio",
+  "input": {"prompt": "A short, calm instrumental cue"},
+  "parameters": {"quality": "standard", "seconds": 2}
+}
+```
+
+| 操作 | Control API 路径 | 行为 |
+| --- | --- | --- |
+| 发现模型 | `GET /v1/models` | 只返回当前身份有权使用的已发布模型 |
+| 上传输入 | `POST /v1/assets` | 受限上传，返回素材 ID；生成时引用它 |
+| 提交任务 | `POST /v1/jobs` | `202`、稳定任务 ID、Location 和重查提示 |
+| 查询与列表 | `GET /v1/jobs/{id}`、`GET /v1/jobs` | 按 Key/范围鉴权，使用游标分页 |
+| 取消 | `POST /v1/jobs/{id}/cancel` | 请求取消；运行中的任务须等安全停止/核对 |
+| 产物 | `GET /v1/content`、`GET /v1/content/{id}/download` | 范围过滤与鉴权下载；不公开桶 |
+
+收到 `202` 后保存任务 ID，用同一业务身份查询直到 `succeeded`、`failed`、`cancelled` 或 `expired`。只在成功后按任务/内容响应取得产物；HTTP 成功接收不等于生成完成。网络超时重试提交时保留原幂等键和正文；不要生成新键创建重复任务。
+
+### Sub2API / OpenAI 风格入口
+
+下列路径位于配置了本项目 Provider 的 **Sub2API origin**，使用 Sub2API 客户 Key；不能把它当成直接 Control API 地址。
+
+| 路径 | 兼容行为 |
+| --- | --- |
+| `POST /v1/images/generations` | 受限同步图片入口，完成后返回 OpenAI 风格 `created/data` |
+| `POST /v1/images/generations/async` | 返回图片任务及查询地址，适合长任务 |
+| `GET /v1/images/tasks/{id}` | 图片任务查询 |
+| `POST /v1/images/edits` 及 `/async` | 受限图片编辑、上传素材与标准输入归一化 |
+| `POST /v1/videos`、`GET /v1/videos/{id}` | 异步视频创建及查询 |
+| `GET /v1/models` | 经过身份和发布范围过滤的模型发现 |
+
+本项目追求 OpenAI 格式兼容的明确子集，支持的字段、文件输入、URL/二进制交付及错误行为由冻结契约定义。`n=1`；不支持任意 SDK 功能或任意 OpenAI 参数。**音频当前走原生 `/v1/jobs`，并未实现 `/v1/audio/speech` 的同步二进制协议。** 详见 [兼容与交付](docs/34-Sub2API生成兼容与产物访问.md)、[素材与图片编辑](docs/35-Sub2API素材与图片编辑接入.md)、[音频迁移](docs/55-音频契约与兼容迁移.md)。
+
+## API Key、内容与额度
+
+- **业务 Key** 保护对外生成及内容 API；管理账号/会话、Worker 凭证、网关服务身份分别独立。业务 Key 不能登录 Admin 或调用管理 API。
+- Key 绑定可信租户和项目；可限制 scopes、公开模型、Workflow 版本、渠道、规格、内容所有权/显式共享范围、到期和启停状态。服务不信任客户自报租户头。
+- 速率、未完成任务数、实际生成并发与每日图片/视频/音频额度按各层策略约束；`bounded: 0` 表示禁止，不等于无限。不限额必须显式声明。
+- 任务准入预留额度；终态按规则结算/返还。音频按实际验证解码时长结算，视频遵守冻结的时长语义；数字计量不使用浮点数累加费用。
+- 素材与产物使用不透明 ID。每次查询、聚合、预览和下载都核对范围。内容删除是受控、可审计的逻辑删除与异步物理回收，不能直接改表或删桶文件。
+
+详情：[Key 访问控制](docs/08-APIKey鉴权与访问控制.md)、[内容管理](docs/48-内容检索标签与受控预览.md)、[数据库事务](docs/11-数据字典与数据库事务.md)。
+
+## 调度、幂等与故障恢复
+
+Worker 离线、租约到期或 HTTP 超时都不证明 GPU 已空闲。提交结果未知时先以 journal 和 ComfyUI 状态核对；不盲目再次提交、不自动换机器重跑、不无证据释放物理槽位。迟到的回执需要有效 attempt/fencing 身份，不能覆盖新执行权。
+
+取消、排空、规格隔离、管理同步和重试都有独立状态与审计。运行态文件回传和媒体校验可以继续处理，生成槽位释放与上传槽位不是同一件事。所有持久管理动作只有固定的允许操作，不远程执行任意命令、不自动安装自定义节点或下载权重。
+
+关键说明：[任务机制](docs/02-系统架构与任务机制.md)、[Worker 协议](docs/12-接口契约与Worker协议.md)、[恢复演练](docs/60-数据库对象与密钥联合恢复校验.md)。
+
+## 配置、部署与运维
+
+| 配置 | 用途 |
+| --- | --- |
+| `GEN_DATABASE_URL` | PostgreSQL 连接，生产与开发库分离 |
+| `GEN_CREDENTIAL_PEPPER`、`GEN_ENCRYPTION_KEY` | Key/凭证校验及可恢复渠道秘密的加密；不能互相替代 |
+| `GEN_PUBLIC_ORIGIN` | 可信外部 HTTPS origin，用于交付链接与请求来源检查 |
+| `GEN_STORAGE_BACKEND`、`GEN_S3_*` | 开发本地存储或生产私有 S3；真实 S3 需独立验收 |
+| `GEN_SESSION_SECONDS`、`GEN_SESSION_IDLE_SECONDS` | 管理会话绝对寿命和空闲时间 |
+| `GEN_AUDIT_RETENTION_DAYS` | 显式批准后启用审计保留期；缺省不自动删除管理审计 |
+
+生产迁移前先停止/排空对应服务、备份并验证归档，再单独执行迁移。数据库备份不等于联合恢复：对象版本、Worker journal、Sub2API 账本/幂等事实及凭证也必须一致恢复和核对。Windows 服务 ACL、Linux/systemd、生产反向代理、真实 Redis/S3 和联合恢复仍是独立验收项。不要把开发启动脚本注册成已经验收的生产服务。
+
+候选构建和离线安装工具位于 `app/scripts/build-release.py`、`test-release-install.py`、`release-entrypoint.py`。构建产物、原生运行时和 wheels 位于忽略目录 `.local/`，不提交到源码仓库；具体命令与门禁见 [部署文档](docs/15-原生部署配置与运维.md)。
+
+## 工程结构与验证
+
+```text
+comfyUI-aggregator-proxy/
+├─ README.md / README.en.md       中英文使用与方案入口
+├─ CHANGELOG.md / CONTRIBUTING.md 更新说明与协作规则
+├─ AGENTS.md                     环境、开发与同步约束
+├─ app/
+│  ├─ apps/                      Control API / Runner / Windows Worker / Vue Admin
+│  ├─ packages/                  domain / application / contracts / infrastructure
+│  ├─ integrations/sub2api/      固定上游、Go 客户端与窄范围 overlay
+│  ├─ migrations/                Alembic 迁移
+│  ├─ scripts/                   原生开发、验证、构建、录屏与发布审查
+│  ├─ config/                    配置示例、工具链与契约摘要
+│  ├─ tests/                     契约、数据库、协议、故障与单元测试
+│  └─ pyproject.toml / uv.lock    Python workspace 与精确依赖锁
+└─ docs/                         设计、协议、机器契约、运行记录与演示素材
+```
+
+在 `app/` 执行：
+
+```powershell
+./scripts/check.ps1 -Suite Docs
+./scripts/check.ps1 -Suite Python
+./scripts/check.ps1 -Suite Frontend
+./scripts/check.ps1 -Suite Sub2API
+./scripts/check.ps1 -Suite Sub2APILedger
+./scripts/check.ps1 -Suite Sub2APINative
+./.venv/Scripts/python.exe scripts/audit-repository.py
+```
+
+Python 集成测试要求本项目的原生 PostgreSQL 与独立 `render_control_test` 库，不以进程内或 SQLite 替代。Go 和完整 Sub2API 检查要求锁定的原生 Go 工具链与对应上游缓存。浏览器检查和录屏必须在 `finally` 中关闭自己创建的 page/context/browser。
+
+| 最近已记录验证：第 76 增量 | 结果及范围 |
+| --- | --- |
+| Python | 3087 项；另有 1498 项定向与契约检查 |
+| 前端 | 33 项单元检查、类型生成/检查和生产构建 |
+| Admin 图形检查 | 91 组桌面/390px 检查；安装后另有 8 组 |
+| 原生集成 | 20 组、11 个合成任务；不是实际 GPU 生成 |
+| 候选安装 | 24 项隔离离线安装检查，候选 `rc-20261025.76.3` |
+| 数据库与契约 | 42 张业务表，53 个运行契约，51 schema / 833 fixture |
+
+这些是对应版本的历史证据，后续文档或工具整理不表示重跑全部测试。[验证记录](docs/76-Workflow归档与恢复管理.md) 中区分本轮执行、摘要匹配复用和未实测事项。
+
+## 文档与后续更新
+
+- [中文文档索引](docs/README.md) / [English documentation index](docs/README.en.md)：从需求、架构到协议与专题实现。
+- [开发总纲](docs/09-开发总纲与强制约束.md)、[工程结构](docs/10-技术栈与工程结构.md)、[开发任务](docs/16-开发任务分解与交付清单.md)：开发约束和未完成门禁。
+- [机器契约](docs/contracts/README.md)：JSON Schema、状态机、端点清单与追踪关系。
+- [演示素材](docs/media/README.md)：截图、MP4、GIF、实际响应及复现方式。
+- [仓库整理与交付](docs/77-仓库整理与双语文档交付.md)：本次发布范围和检查记录。
+
+后续每次完成修改，都要更新对应中英文说明及 `CHANGELOG.md`，界面变化同步截图/演示，运行适用检查后提交并推送同一远端。默认只普通推送，不强推或改写共享历史。步骤见 [CONTRIBUTING](CONTRIBUTING.md)。
+
+本仓库尚未指定项目整体的开源许可证。固定上游 [Sub2API](https://github.com/Wei-Shaw/sub2api) 及其依赖、媒体工具保留各自许可；仓库不包含 ComfyUI 模型权重、第三方完整上游副本或原生二进制。依赖固定信息见 [upstream-lock.json](app/integrations/sub2api/upstream-lock.json) 和工具链锁。

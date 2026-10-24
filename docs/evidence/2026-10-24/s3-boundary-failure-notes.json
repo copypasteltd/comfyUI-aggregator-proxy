@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-24T01:57:55.281215+00:00",
+  "first_targeted": {
+    "passed": false,
+    "tests_passed": 79,
+    "failures": 2,
+    "report": "s3-boundary-targeted-attempt-1.xml",
+    "cause": "Synthetic HTTP fixture method request collided with BaseHTTPRequestHandler.request socket attribute. Renamed to record_request; all 116 targeted cases then passed. All owned endpoints and client pools closed by finally."
+  },
+  "first_static": {
+    "passed": false,
+    "rule": "S110",
+    "cause": "Cleanup failure was silently suppressed. Added fixed redacted s3_body_close_failed event without SDK exception text; full static checks then passed."
+  },
+  "integrity_rules_relaxed": false,
+  "real_s3": false,
+  "first_documentation_check": {
+    "passed": false,
+    "report": "s3-boundary-docs-attempt-1.json",
+    "cause": "The new local process-check evidence link was checked before restarting the dev services and writing that report. Restart and perform the actual process check before the final documentation check; do not substitute a passing placeholder."
+  }
+}

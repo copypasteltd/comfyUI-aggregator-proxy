@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-channel-deletion:0.5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "channel_id",
+    "node_id",
+    "gpu_id",
+    "revision",
+    "snapshot_at",
+    "deleted",
+    "can_delete",
+    "blockers"
+  ],
+  "properties": {
+    "channel_id": {
+      "type": "string",
+      "pattern": "^ch_[a-f0-9]{32}$"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^node_[a-f0-9]{32}$"
+    },
+    "gpu_id": {
+      "type": "string",
+      "pattern": "^gpu_[a-f0-9]{32}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "snapshot_at": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "deleted": {
+      "type": "boolean"
+    },
+    "can_delete": {
+      "type": "boolean"
+    },
+    "blockers": {
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "$ref": "#/$defs/blocker"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "properties": {
+              "kind": {
+                "const": "active_jobs"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "kind": {
+                "const": "open_attempts"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "kind": {
+                "const": "pending_commands"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "kind": {
+                "const": "published_models"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "kind": {
+                "const": "gpu_occupancy"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "kind": {
+                "const": "gpu_management_hold"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "minContains": 0,
+          "maxContains": 1
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "resource_ids",
+        "has_more"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "active_jobs",
+            "open_attempts",
+            "pending_commands",
+            "published_models",
+            "gpu_occupancy",
+            "gpu_management_hold"
+          ]
+        },
+        "resource_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "has_more": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "active_jobs"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resource_ids": {
+                "items": {
+                  "pattern": "^job_[a-f0-9]{32}$"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "open_attempts"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resource_ids": {
+                "items": {
+                  "pattern": "^job_[a-f0-9]{32}$"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "pending_commands"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resource_ids": {
+                "items": {
+                  "pattern": "^op_[a-f0-9]{32}$"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "published_models"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resource_ids": {
+                "items": {
+                  "pattern": "^mdl_[a-f0-9]{32}$"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "gpu_occupancy"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resource_ids": {
+                "items": {
+                  "pattern": "^job_[a-f0-9]{32}$"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "gpu_management_hold"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resource_ids": {
+                "items": {
+                  "pattern": "^gpu_[a-f0-9]{32}$"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "deleted": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "can_delete": {
+            "const": false
+          },
+          "blockers": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "can_delete": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "deleted": {
+            "const": false
+          },
+          "blockers": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "deleted": {
+            "const": false
+          },
+          "blockers": {
+            "maxItems": 0
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "can_delete": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "blockers": {
+            "minItems": 1
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "can_delete": {
+            "const": false
+          }
+        }
+      }
+    }
+  ]
+}

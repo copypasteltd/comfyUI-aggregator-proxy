@@ -1,0 +1,26 @@
+........................................................................ [ 11%]
+........................................................................ [ 22%]
+........................................................................ [ 34%]
+........................................................................ [ 45%]
+........................................................................ [ 57%]
+........................................................................ [ 68%]
+.........................................................F.............. [ 79%]
+........................................................................ [ 91%]
+.......................................................                  [100%]
+================================== FAILURES ===================================
+_________________ test_packaged_contracts_match_frozen_source _________________
+tests\contract\test_frozen_contracts.py:32: in test_packaged_contracts_match_frozen_source
+    assert hashlib.sha256(source).hexdigest() == expected
+E   AssertionError: assert 'cf60fa2dc298...0261e90ce75e3' == 'e5012f694415...1f6d6b31ea291'
+E     
+E     - e5012f694415fecee3d44286890bcccd912efdcf0e8f429acba1f6d6b31ea291
+E     + cf60fa2dc298e24755a533730ababadd2dfef760325a933cdbc0261e90ce75e3
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\dev\sandbox\生图生视API封装\app\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_frozen_contracts.py::test_packaged_contracts_match_frozen_source
+1 failed, 630 passed, 1 warning in 60.36s (0:01:00)

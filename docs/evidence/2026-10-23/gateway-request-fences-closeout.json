@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-22T21:22:15.384820+00:00",
+  "scope": "Request closure protocol and native component/source/runtime verification; not full Sub2API Provider integration",
+  "passed": true,
+  "python_tests": 220,
+  "python_report_sha256": "741dc567af41a3fea05db831961276f2c231c04d376887e6427db0b5029b660b",
+  "client_top_level_tests": 14,
+  "client_subtests": 28,
+  "client_report_sha256": "b0cb8e6466e099b2b86b6698ccd22cb167f766cf3dac8c790686c314a9c20cb9",
+  "ledger_top_level_tests": 27,
+  "ledger_subtests": 39,
+  "ledger_report_sha256": "e3a6061ae2c79b6930ecaf6461f7f686673ab4adb0b0597f9d419db8f9eb845b",
+  "current_client_ledger_harness_sources_match": true,
+  "ledger_binary_matches": true,
+  "database_queries_read_only": true,
+  "application_revision": "3e15b92f08dc",
+  "application_business_tables": 40,
+  "fence_guard_triggers": [
+    "enforce_gateway_admission_fence",
+    "preserve_gateway_request_fence"
+  ],
+  "remaining_disposable_test_and_restore_databases": 0,
+  "https_statuses": {
+    "/health/live": 200,
+    "/health/ready": 200,
+    "/admin/": 200
+  },
+  "tls_verified_with_project_certificate": true,
+  "live_openapi_paths": 103,
+  "closure_routes_and_gateway_identity_present": true,
+  "registered_development_processes": 9,
+  "all_registered_process_identities_match": true,
+  "remaining_project_test_processes": 0,
+  "browser_opened": false,
+  "virtualization_used": false,
+  "retained_services": [
+    "native PostgreSQL",
+    "HTTPS API",
+    "lease Runner",
+    "object GC"
+  ],
+  "provider_runtime_verified": false,
+  "pending": [
+    "persist target gateway and consume closure proof in Sub2API ledger",
+    "remote admission/confirm recovery",
+    "public Provider routing and media delivery",
+    "usage/cache consumers and subscription integration",
+    "real ComfyUI/workflows/S3 and 10/20 device verification"
+  ]
+}

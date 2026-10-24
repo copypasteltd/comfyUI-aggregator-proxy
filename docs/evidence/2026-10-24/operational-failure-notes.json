@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-24T01:30:11.127311+00:00",
+  "passed": true,
+  "original_failures_retained": true,
+  "items": [
+    {
+      "scope": "Owned browser test driver",
+      "failure": "Playwright check targeted Element Plus hidden native checkbox input and timed out; application had no runtime error.",
+      "correction": "Click visible checkbox label and assert checked state; same application rebuilt only for independent task timing edge and overview ordering.",
+      "evidence": "operational-browser-attempt-1.log",
+      "cleanup_verified": true,
+      "permission_or_timeout_weakened": false
+    },
+    {
+      "scope": "Owned migration restore guard fixture",
+      "failure": "Shared synthetic history helper used fixed credential identifier already present in the restored archive; PostgreSQL unique constraint rejected fixture.",
+      "correction": "Use a fresh synthetic credential identifier only in the owned temporary restore database; rerun both archives and verify history-bearing downgrade refusal.",
+      "evidence": "operational-migration-restore-attempt-2.json",
+      "cleanup_verified": true,
+      "production_constraint_removed": false
+    },
+    {
+      "scope": "Additional timing boundary review",
+      "failure": "Initial passing implementation did not reject a first assignment timestamp later than a terminal timestamp; admission_pending could present an accepted clock if inconsistent stored input existed.",
+      "correction": "Report unknown and add three focused cases; rerun complete Python (1295 passed), frontend, current native/load and candidate checks.",
+      "evidence": "operational-full-python-tests-before-timing-bounds.xml",
+      "permission_or_timeout_weakened": false
+    }
+  ],
+  "test_warning": "Existing upstream Starlette TestClient/httpx deprecation retained.",
+  "build_warning": "Existing Vite chunk size advisory retained.",
+  "production_accepted": false
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "Route registration only; not permission, behavior, hardware or gateway acceptance",
+  "design_endpoint_count": 180,
+  "implemented_method_path_count": 187,
+  "matched_design_count": 180,
+  "missing_design": [],
+  "additional_implemented": [
+    "GET /health/live",
+    "GET /health/ready",
+    "GET /internal/v1/attempts/{id}/inputs/{id}",
+    "POST /admin/api/v1/channels/{id}/workflow-bindings/approvals",
+    "POST /admin/api/v1/public-models/{id}/validation-jobs",
+    "POST /internal/v1/attempts/{id}/reconciliation-context",
+    "PUT /internal/v1/uploads/{id}/content"
+  ]
+}

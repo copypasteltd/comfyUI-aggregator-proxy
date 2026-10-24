@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "run_id": "5dd33fe1c56c",
+  "synthetic_catalog": true,
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "real_comfyui": false,
+  "database_assertions": {
+    "generation_snapshot_unchanged": true,
+    "expected_18_archive_18_unarchive_2_patch_audits": true,
+    "all_six_exact_sources_and_revisions": true,
+    "no_new_operations_or_commands": true,
+    "no_jobs_attempts_or_occupancy": true,
+    "gpu_fences_unchanged": true
+  },
+  "authentication_audit": {
+    "admin.login": 4,
+    "admin.logout": 4
+  },
+  "checks": [
+    "desktop:archive_unarchive_text_to_image_preserves_graph_history_and_disables_new_mutations",
+    "desktop:archive_unarchive_image_to_image_preserves_graph_history_and_disables_new_mutations",
+    "desktop:archive_unarchive_references_to_image_preserves_graph_history_and_disables_new_mutations",
+    "desktop:archive_unarchive_text_to_video_preserves_graph_history_and_disables_new_mutations",
+    "desktop:archive_unarchive_references_to_video_preserves_graph_history_and_disables_new_mutations",
+    "desktop:archive_unarchive_text_to_audio_preserves_graph_history_and_disables_new_mutations",
+    "desktop:lost_committed_response_replays_original_after_reverse_without_archiving_again",
+    "desktop:concurrent_patch_conflict_clears_stale_success_and_requires_fresh_confirmation",
+    "desktop:lost_uncommitted_request_retries_original_body_key_and_revision_once",
+    "desktop:blocked_published_is_rejected_with_actionable_error",
+    "desktop:blocked_sync_is_rejected_with_actionable_error",
+    "desktop:cancel_hidden_session_first_resume_and_navigation_clear_unconfirmed_choice",
+    "desktop:logout_clears_confirmation_observer_has_only_read_access",
+    "mobile:archive_unarchive_text_to_image_preserves_graph_history_and_disables_new_mutations",
+    "mobile:archive_unarchive_image_to_image_preserves_graph_history_and_disables_new_mutations",
+    "mobile:archive_unarchive_references_to_image_preserves_graph_history_and_disables_new_mutations",
+    "mobile:archive_unarchive_text_to_video_preserves_graph_history_and_disables_new_mutations",
+    "mobile:archive_unarchive_references_to_video_preserves_graph_history_and_disables_new_mutations",
+    "mobile:archive_unarchive_text_to_audio_preserves_graph_history_and_disables_new_mutations",
+    "mobile:lost_committed_response_replays_original_after_reverse_without_archiving_again",
+    "mobile:concurrent_patch_conflict_clears_stale_success_and_requires_fresh_confirmation",
+    "mobile:lost_uncommitted_request_retries_original_body_key_and_revision_once",
+    "mobile:blocked_published_is_rejected_with_actionable_error",
+    "mobile:blocked_sync_is_rejected_with_actionable_error",
+    "mobile:cancel_hidden_session_first_resume_and_navigation_clear_unconfirmed_choice",
+    "mobile:logout_clears_confirmation_observer_has_only_read_access"
+  ]
+}

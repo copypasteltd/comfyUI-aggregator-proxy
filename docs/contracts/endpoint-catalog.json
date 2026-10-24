@@ -1,0 +1,3400 @@
+{
+  "contract_version": "0.4.0",
+  "scope": "Design route and authorization inventory, not complete OpenAPI and not implemented endpoints.",
+  "permissions": [
+    "nodes:read",
+    "nodes:manage",
+    "channels:read",
+    "channels:write",
+    "workflows:read",
+    "workflows:write",
+    "workflows:publish",
+    "models:read",
+    "models:write",
+    "models:publish",
+    "queues:read",
+    "jobs:read",
+    "jobs:control",
+    "operations:read",
+    "audit:read",
+    "users:manage",
+    "keys:manage",
+    "keys:usage",
+    "content:read",
+    "content:download",
+    "content:delete",
+    "content:sensitive",
+    "content:manage",
+    "scopes:read",
+    "scopes:manage"
+  ],
+  "role_presets": {
+    "administrator": [
+      "nodes:read",
+      "nodes:manage",
+      "channels:read",
+      "channels:write",
+      "workflows:read",
+      "workflows:write",
+      "workflows:publish",
+      "models:read",
+      "models:write",
+      "models:publish",
+      "queues:read",
+      "jobs:read",
+      "jobs:control",
+      "operations:read",
+      "audit:read",
+      "users:manage",
+      "keys:manage",
+      "keys:usage",
+      "content:read",
+      "content:download",
+      "content:delete",
+      "content:sensitive",
+      "content:manage",
+      "scopes:read",
+      "scopes:manage"
+    ],
+    "operator": [
+      "nodes:read",
+      "channels:read",
+      "channels:write",
+      "workflows:read",
+      "models:read",
+      "queues:read",
+      "jobs:read",
+      "jobs:control",
+      "operations:read",
+      "scopes:read"
+    ],
+    "workflow_maintainer": [
+      "nodes:read",
+      "channels:read",
+      "workflows:read",
+      "workflows:write",
+      "workflows:publish",
+      "models:read",
+      "models:write",
+      "models:publish",
+      "operations:read",
+      "queues:read",
+      "scopes:read"
+    ],
+    "observer": [
+      "nodes:read",
+      "channels:read",
+      "workflows:read",
+      "models:read",
+      "queues:read",
+      "jobs:read",
+      "operations:read",
+      "scopes:read"
+    ]
+  },
+  "sensitive_content_requires_additional_permission": true,
+  "endpoints": [
+    {
+      "operation_id": "get_v1_models",
+      "method": "GET",
+      "path": "/v1/models",
+      "identity": "service",
+      "scopes_all": [
+        "models:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_models_model",
+      "method": "GET",
+      "path": "/v1/models/{model}",
+      "identity": "service",
+      "scopes_all": [
+        "models:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_capabilities",
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "identity": "service",
+      "scopes_all": [
+        "capabilities:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_access_policy",
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "identity": "service",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "current_principal_only",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_v1_assets",
+      "method": "POST",
+      "path": "/v1/assets",
+      "identity": "service",
+      "scopes_all": [
+        "assets:upload"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-03"
+    },
+    {
+      "operation_id": "get_v1_assets_id",
+      "method": "GET",
+      "path": "/v1/assets/{id}",
+      "identity": "service",
+      "scopes_all": [
+        "assets:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-03",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_assets_id_content",
+      "method": "GET",
+      "path": "/v1/assets/{id}/content",
+      "identity": "service",
+      "scopes_all": [
+        "assets:read",
+        "content:download"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-03",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "head_v1_assets_id_content",
+      "method": "HEAD",
+      "path": "/v1/assets/{id}/content",
+      "identity": "service",
+      "scopes_all": [
+        "assets:read",
+        "content:download"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-03",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "delete_v1_assets_id",
+      "method": "DELETE",
+      "path": "/v1/assets/{id}",
+      "identity": "service",
+      "scopes_all": [
+        "content:delete"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-03"
+    },
+    {
+      "operation_id": "get_v1_content",
+      "method": "GET",
+      "path": "/v1/content",
+      "identity": "service",
+      "scopes_all": [
+        "content:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_content_id",
+      "method": "GET",
+      "path": "/v1/content/{id}",
+      "identity": "service",
+      "scopes_all": [
+        "content:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_content_id_download",
+      "method": "GET",
+      "path": "/v1/content/{id}/download",
+      "identity": "service",
+      "scopes_all": [
+        "content:read",
+        "content:download"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "head_v1_content_id_download",
+      "method": "HEAD",
+      "path": "/v1/content/{id}/download",
+      "identity": "service",
+      "scopes_all": [
+        "content:read",
+        "content:download"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "delete_v1_content_id",
+      "method": "DELETE",
+      "path": "/v1/content/{id}",
+      "identity": "service",
+      "scopes_all": [
+        "content:delete"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-10"
+    },
+    {
+      "operation_id": "post_v1_jobs",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:create"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "request_schemas": [
+        "job-create.schema.json"
+      ],
+      "capability_scopes": {
+        "image": [
+          "images:create"
+        ],
+        "video": [
+          "videos:create"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_jobs",
+      "method": "GET",
+      "path": "/v1/jobs",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_jobs_id",
+      "method": "GET",
+      "path": "/v1/jobs/{id}",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ],
+        "artifact_metadata": [
+          "artifacts:read"
+        ],
+        "signed_url_or_inline_result": [
+          "content:download"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_v1_jobs_id_cancel",
+      "method": "POST",
+      "path": "/v1/jobs/{id}/cancel",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:cancel"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-06"
+    },
+    {
+      "operation_id": "post_v1_images_generations",
+      "method": "POST",
+      "path": "/v1/images/generations",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:create",
+        "images:create",
+        "content:download"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-04"
+    },
+    {
+      "operation_id": "post_v1_images_generations_async",
+      "method": "POST",
+      "path": "/v1/images/generations/async",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:create",
+        "images:create"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-04"
+    },
+    {
+      "operation_id": "post_v1_images_edits",
+      "method": "POST",
+      "path": "/v1/images/edits",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:create",
+        "images:create",
+        "content:download"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-04"
+    },
+    {
+      "operation_id": "post_v1_images_edits_async",
+      "method": "POST",
+      "path": "/v1/images/edits/async",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:create",
+        "images:create"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-04"
+    },
+    {
+      "operation_id": "get_v1_images_tasks_id",
+      "method": "GET",
+      "path": "/v1/images/tasks/{id}",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "note": "结果/链接另检查artifacts:read和content:download；无权只返回安全状态。",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ],
+        "artifact_metadata": [
+          "artifacts:read"
+        ],
+        "signed_url_or_inline_result": [
+          "content:download"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_v1_videos",
+      "method": "POST",
+      "path": "/v1/videos",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:create",
+        "videos:create"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "optional",
+      "if_match_required": false,
+      "work_package": "WP-04"
+    },
+    {
+      "operation_id": "get_v1_videos_id",
+      "method": "GET",
+      "path": "/v1/videos/{id}",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ],
+        "artifact_metadata": [
+          "artifacts:read"
+        ],
+        "signed_url_or_inline_result": [
+          "content:download"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_v1_videos_id_content",
+      "method": "GET",
+      "path": "/v1/videos/{id}/content",
+      "identity": "service",
+      "scopes_all": [
+        "artifacts:read",
+        "content:download"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-03",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "head_v1_videos_id_content",
+      "method": "HEAD",
+      "path": "/v1/videos/{id}/content",
+      "identity": "service",
+      "scopes_all": [
+        "artifacts:read",
+        "content:download"
+      ],
+      "permissions_all": [],
+      "resource_guard": "business_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-03",
+      "conditional_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_session",
+      "method": "POST",
+      "path": "/admin/api/v1/session",
+      "identity": "admin_login",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "origin_and_login_rate_limit",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_session",
+      "method": "GET",
+      "path": "/admin/api/v1/session",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "current_session_only",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "delete_admin_api_v1_session",
+      "method": "DELETE",
+      "path": "/admin/api/v1/session",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "current_session_only",
+      "csrf_required": true,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_nodes",
+      "method": "GET",
+      "path": "/admin/api/v1/nodes",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "nodes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_nodes_id",
+      "method": "GET",
+      "path": "/admin/api/v1/nodes/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "nodes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_channels",
+      "method": "GET",
+      "path": "/admin/api/v1/channels",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_channels_id",
+      "method": "GET",
+      "path": "/admin/api/v1/channels/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_channels",
+      "method": "POST",
+      "path": "/admin/api/v1/channels",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_channels_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/channels/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "delete_admin_api_v1_channels_id",
+      "method": "DELETE",
+      "path": "/admin/api/v1/channels/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "post_admin_api_v1_channels_id_probe",
+      "method": "POST",
+      "path": "/admin/api/v1/channels/{id}/probe",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "post_admin_api_v1_channels_id_actions",
+      "method": "POST",
+      "path": "/admin/api/v1/channels/{id}/actions",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "post_admin_api_v1_channels_id_inventory_scans",
+      "method": "POST",
+      "path": "/admin/api/v1/channels/{id}/inventory-scans",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "get_admin_api_v1_channels_id_inventory",
+      "method": "GET",
+      "path": "/admin/api/v1/channels/{id}/inventory",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_channels_id_workflow_bindings",
+      "method": "GET",
+      "path": "/admin/api/v1/channels/{id}/workflow-bindings",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "put_admin_api_v1_channels_id_workflow_bindings",
+      "method": "PUT",
+      "path": "/admin/api/v1/channels/{id}/workflow-bindings",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "get_admin_api_v1_workflows",
+      "method": "GET",
+      "path": "/admin/api/v1/workflows",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "request_schemas": [
+        "admin-workflow-catalog-query.schema.json"
+      ],
+      "response_schemas": [
+        "admin-workflow-catalog-page.schema.json"
+      ]
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflows",
+      "method": "POST",
+      "path": "/admin/api/v1/workflows",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "get_admin_api_v1_workflows_id",
+      "method": "GET",
+      "path": "/admin/api/v1/workflows/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "patch_admin_api_v1_workflows_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/workflows/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflows_id_releases",
+      "method": "POST",
+      "path": "/admin/api/v1/workflows/{id}/releases",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "get_admin_api_v1_workflow_releases_id",
+      "method": "GET",
+      "path": "/admin/api/v1/workflow-releases/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflow_releases_id_validate",
+      "method": "POST",
+      "path": "/admin/api/v1/workflow-releases/{id}/validate",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "仅不可变release；目标channel revision与样本预算在body中校验。"
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflow_syncs",
+      "method": "POST",
+      "path": "/admin/api/v1/workflow-syncs",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "目标revision与包摘要逐项检查。"
+    },
+    {
+      "operation_id": "get_admin_api_v1_model_artifacts",
+      "method": "GET",
+      "path": "/admin/api/v1/model-artifacts",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_model_artifacts",
+      "method": "POST",
+      "path": "/admin/api/v1/model-artifacts",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_model_artifacts_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/model-artifacts/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "delete_admin_api_v1_model_artifacts_id",
+      "method": "DELETE",
+      "path": "/admin/api/v1/model-artifacts/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "get_admin_api_v1_public_models",
+      "method": "GET",
+      "path": "/admin/api/v1/public-models",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "request_schemas": [
+        "admin-model-catalog-query.schema.json"
+      ]
+    },
+    {
+      "operation_id": "post_admin_api_v1_public_models",
+      "method": "POST",
+      "path": "/admin/api/v1/public-models",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_public_models_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/public-models/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "post_admin_api_v1_public_models_id_actions",
+      "method": "POST",
+      "path": "/admin/api/v1/public-models/{id}/actions",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "get_admin_api_v1_queues_snapshot",
+      "method": "GET",
+      "path": "/admin/api/v1/queues/snapshot",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "queues:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "query_schema": "admin-queue-query.schema.json",
+      "queue_count_semantics": "filtered task counts; actual unfiltered physical GPU and ComfyUI observations; shared candidate counts overlap"
+    },
+    {
+      "operation_id": "get_admin_api_v1_queues_jobs",
+      "method": "GET",
+      "path": "/admin/api/v1/queues/jobs",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "jobs:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "query_schema": "admin-queue-query.schema.json",
+      "queue_count_semantics": "filtered task counts; actual unfiltered physical GPU and ComfyUI observations; shared candidate counts overlap"
+    },
+    {
+      "operation_id": "get_admin_api_v1_channels_id_queue",
+      "method": "GET",
+      "path": "/admin/api/v1/channels/{id}/queue",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "queues:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_jobs_id",
+      "method": "GET",
+      "path": "/admin/api/v1/jobs/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "jobs:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_jobs_id_cancel",
+      "method": "POST",
+      "path": "/admin/api/v1/jobs/{id}/cancel",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "jobs:control"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-09"
+    },
+    {
+      "operation_id": "post_admin_api_v1_jobs_id_retry",
+      "method": "POST",
+      "path": "/admin/api/v1/jobs/{id}/retry",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "jobs:control"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-09"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_jobs_id_priority",
+      "method": "PATCH",
+      "path": "/admin/api/v1/jobs/{id}/priority",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "jobs:control"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-09"
+    },
+    {
+      "operation_id": "get_admin_api_v1_operations",
+      "method": "GET",
+      "path": "/admin/api/v1/operations",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "operations:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_operations_id",
+      "method": "GET",
+      "path": "/admin/api/v1/operations/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "operations:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_alerts",
+      "method": "GET",
+      "path": "/admin/api/v1/alerts",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "operations:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "request_schemas": [
+        "admin-alert-query.schema.json"
+      ]
+    },
+    {
+      "operation_id": "get_admin_api_v1_events",
+      "method": "GET",
+      "path": "/admin/api/v1/events",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "note": "服务端依事件主题再查queues/operations等权限并过滤；无可订阅主题时403。",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_admin_users",
+      "method": "GET",
+      "path": "/admin/api/v1/admin-users",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "users:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_admin_users",
+      "method": "POST",
+      "path": "/admin/api/v1/admin-users",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "users:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_admin_users_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/admin-users/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "users:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_audit_events",
+      "method": "GET",
+      "path": "/admin/api/v1/audit-events",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "audit:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_api_keys",
+      "method": "GET",
+      "path": "/admin/api/v1/api-keys",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_api_keys",
+      "method": "POST",
+      "path": "/admin/api/v1/api-keys",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-10"
+    },
+    {
+      "operation_id": "get_admin_api_v1_api_keys_id",
+      "method": "GET",
+      "path": "/admin/api/v1/api-keys/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "patch_admin_api_v1_api_keys_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/api-keys/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-10"
+    },
+    {
+      "operation_id": "delete_admin_api_v1_api_keys_id",
+      "method": "DELETE",
+      "path": "/admin/api/v1/api-keys/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-10"
+    },
+    {
+      "operation_id": "post_admin_api_v1_api_keys_id_actions",
+      "method": "POST",
+      "path": "/admin/api/v1/api-keys/{id}/actions",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-10"
+    },
+    {
+      "operation_id": "get_admin_api_v1_api_keys_id_usage",
+      "method": "GET",
+      "path": "/admin/api/v1/api-keys/{id}/usage",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:usage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_api_keys_id_access_events",
+      "method": "GET",
+      "path": "/admin/api/v1/api-keys/{id}/access-events",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:usage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "optional_query": [
+        "result",
+        "before"
+      ],
+      "pagination": {
+        "kind": "snapshot_keyset",
+        "maximum_items": 50,
+        "maximum_cursor_length": 128
+      },
+      "result_filter": [
+        "all",
+        "success",
+        "denied",
+        "error"
+      ],
+      "sensitive_payload_available": false
+    },
+    {
+      "operation_id": "get_admin_api_v1_content",
+      "method": "GET",
+      "path": "/admin/api/v1/content",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "query_schema": "admin-content-query.schema.json",
+      "note": "50 metadata rows per page; content creation owner and time, immutable job associations, exact tags and snapshot lifecycle. No public authorization expansion."
+    },
+    {
+      "operation_id": "get_admin_api_v1_content_id",
+      "method": "GET",
+      "path": "/admin/api/v1/content/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_content_id_download",
+      "method": "GET",
+      "path": "/admin/api/v1/content/{id}/download",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:download"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "head_admin_api_v1_content_id_download",
+      "method": "HEAD",
+      "path": "/admin/api/v1/content/{id}/download",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:download"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "delete_admin_api_v1_content_id",
+      "method": "DELETE",
+      "path": "/admin/api/v1/content/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:delete"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-10"
+    },
+    {
+      "operation_id": "post_internal_v1_register",
+      "method": "POST",
+      "path": "/internal/v1/register",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-05"
+    },
+    {
+      "operation_id": "post_internal_v1_heartbeat",
+      "method": "POST",
+      "path": "/internal/v1/heartbeat",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-05"
+    },
+    {
+      "operation_id": "post_internal_v1_claims",
+      "method": "POST",
+      "path": "/internal/v1/claims",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-06"
+    },
+    {
+      "operation_id": "post_internal_v1_attempts_id_renew",
+      "method": "POST",
+      "path": "/internal/v1/attempts/{id}/renew",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-06"
+    },
+    {
+      "operation_id": "post_internal_v1_attempts_id_events",
+      "method": "POST",
+      "path": "/internal/v1/attempts/{id}/events",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-06",
+      "request_schemas": [
+        "worker-event.schema.json"
+      ]
+    },
+    {
+      "operation_id": "post_internal_v1_attempts_id_upload_authorizations",
+      "method": "POST",
+      "path": "/internal/v1/attempts/{id}/upload-authorizations",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-06"
+    },
+    {
+      "operation_id": "post_internal_v1_attempts_id_complete",
+      "method": "POST",
+      "path": "/internal/v1/attempts/{id}/complete",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-06"
+    },
+    {
+      "operation_id": "post_internal_v1_reconciliations",
+      "method": "POST",
+      "path": "/internal/v1/reconciliations",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-06"
+    },
+    {
+      "operation_id": "post_internal_v1_commands_claims",
+      "method": "POST",
+      "path": "/internal/v1/commands/claims",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-05"
+    },
+    {
+      "operation_id": "post_internal_v1_commands_id_receipts",
+      "method": "POST",
+      "path": "/internal/v1/commands/{id}/receipts",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-05"
+    },
+    {
+      "operation_id": "get_internal_v1_attempts_id",
+      "method": "GET",
+      "path": "/internal/v1/attempts/{id}",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-06",
+      "required_query": [
+        "boot_id",
+        "fencing_token"
+      ]
+    },
+    {
+      "operation_id": "post_gateway_v1_admissions",
+      "method": "POST",
+      "path": "/gateway/v1/admissions",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": [
+        "jobs:create"
+      ],
+      "capability_scopes": {
+        "image": [
+          "images:create"
+        ],
+        "video": [
+          "videos:create"
+        ]
+      },
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_gateway_v1_admissions_id_confirm",
+      "method": "POST",
+      "path": "/gateway/v1/admissions/{id}/confirm",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "admission_snapshot",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "note": "已绑定准入收尾按快照与意图状态处理；不因客户停止轮询或Key后续禁用而漏释放/对账。"
+    },
+    {
+      "operation_id": "post_gateway_v1_admissions_id_abort",
+      "method": "POST",
+      "path": "/gateway/v1/admissions/{id}/abort",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "admission_snapshot",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "note": "已绑定准入收尾按快照与意图状态处理；不因客户停止轮询或Key后续禁用而漏释放/对账。"
+    },
+    {
+      "operation_id": "post_gateway_v1_jobs_id_cancel",
+      "method": "POST",
+      "path": "/gateway/v1/jobs/{id}/cancel",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": [
+        "jobs:cancel"
+      ],
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_jobs_id",
+      "method": "GET",
+      "path": "/gateway/v1/jobs/{id}",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": [
+        "jobs:read"
+      ],
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_models",
+      "method": "GET",
+      "path": "/gateway/v1/models",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": [
+        "models:read"
+      ],
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_models_model",
+      "method": "GET",
+      "path": "/gateway/v1/models/{model}",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": [
+        "models:read"
+      ],
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_content_id",
+      "method": "GET",
+      "path": "/gateway/v1/content/{id}",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": [
+        "content:read"
+      ],
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_content_id_download",
+      "method": "GET",
+      "path": "/gateway/v1/content/{id}/download",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "note": "可信外部主体仍校验对应业务scopes/共享/下载策略；服务身份不能越过客户范围。",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": [
+        "content:read",
+        "content:download"
+      ],
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "head_gateway_v1_content_id_download",
+      "method": "HEAD",
+      "path": "/gateway/v1/content/{id}/download",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "note": "可信外部主体仍校验对应业务scopes/共享/下载策略；服务身份不能越过客户范围。",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": [
+        "content:read",
+        "content:download"
+      ],
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_gateway_v1_assets",
+      "method": "POST",
+      "path": "/gateway/v1/assets",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "assets:upload"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_assets_id",
+      "method": "GET",
+      "path": "/gateway/v1/assets/{id}",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "assets:read"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_assets_id_content",
+      "method": "GET",
+      "path": "/gateway/v1/assets/{id}/content",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "assets:read",
+        "content:download"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "head_gateway_v1_assets_id_content",
+      "method": "HEAD",
+      "path": "/gateway/v1/assets/{id}/content",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "assets:read",
+        "content:download"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "delete_gateway_v1_assets_id",
+      "method": "DELETE",
+      "path": "/gateway/v1/assets/{id}",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "content:delete"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_capabilities",
+      "method": "GET",
+      "path": "/gateway/v1/capabilities",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "capabilities:read"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_jobs",
+      "method": "GET",
+      "path": "/gateway/v1/jobs",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "jobs:read"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "delete_gateway_v1_content_id",
+      "method": "DELETE",
+      "path": "/gateway/v1/content/{id}",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "content:delete"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_gateway_v1_videos_id_content",
+      "method": "GET",
+      "path": "/gateway/v1/videos/{id}/content",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "artifacts:read",
+        "content:download"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "head_gateway_v1_videos_id_content",
+      "method": "HEAD",
+      "path": "/gateway/v1/videos/{id}/content",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "artifacts:read",
+        "content:download"
+      ],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_gateways",
+      "method": "GET",
+      "path": "/admin/api/v1/gateways",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11"
+    },
+    {
+      "operation_id": "post_admin_api_v1_gateways",
+      "method": "POST",
+      "path": "/admin/api/v1/gateways",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_gateways_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/gateways/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-11"
+    },
+    {
+      "operation_id": "get_admin_api_v1_gateway_bindings",
+      "method": "GET",
+      "path": "/admin/api/v1/gateway-bindings",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11"
+    },
+    {
+      "operation_id": "post_admin_api_v1_gateway_bindings",
+      "method": "POST",
+      "path": "/admin/api/v1/gateway-bindings",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_gateway_bindings_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/gateway-bindings/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-11"
+    },
+    {
+      "operation_id": "get_gateway_v1_settlements",
+      "method": "GET",
+      "path": "/gateway/v1/settlements",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "gateway_settlement_binding",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": false,
+      "reconciliation_service_only": true,
+      "policy_evaluation": "service_reconciliation",
+      "delegated_scopes_all": []
+    },
+    {
+      "operation_id": "post_gateway_v1_settlements_id_ack",
+      "method": "POST",
+      "path": "/gateway/v1/settlements/{id}/ack",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "gateway_settlement_binding",
+      "csrf_required": false,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": false,
+      "reconciliation_service_only": true,
+      "policy_evaluation": "service_reconciliation",
+      "delegated_scopes_all": []
+    },
+    {
+      "operation_id": "post_gateway_v1_admission_requests_lookup",
+      "method": "POST",
+      "path": "/gateway/v1/admission-requests/lookup",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "gateway_request_binding",
+      "csrf_required": false,
+      "idempotency": "intrinsic",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": false,
+      "reconciliation_service_only": true,
+      "policy_evaluation": "service_reconciliation",
+      "delegated_scopes_all": [],
+      "request_schemas": [
+        "gateway-request-identity.schema.json"
+      ]
+    },
+    {
+      "operation_id": "post_gateway_v1_admission_requests_close",
+      "method": "POST",
+      "path": "/gateway/v1/admission-requests/close",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "gateway_request_binding",
+      "csrf_required": false,
+      "idempotency": "intrinsic",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": false,
+      "reconciliation_service_only": true,
+      "policy_evaluation": "service_reconciliation",
+      "delegated_scopes_all": [],
+      "request_schemas": [
+        "gateway-request-identity.schema.json"
+      ]
+    },
+    {
+      "operation_id": "get_gateway_v1_access_policy",
+      "method": "GET",
+      "path": "/gateway/v1/access-policy",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "trusted_gateway_mapping",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "delegated_scopes_all": []
+    },
+    {
+      "operation_id": "get_gateway_v1_content",
+      "method": "GET",
+      "path": "/gateway/v1/content",
+      "identity": "gateway",
+      "scopes_all": [],
+      "permissions_all": [],
+      "delegated_scopes_all": [
+        "content:read"
+      ],
+      "resource_guard": "trusted_gateway_mapping_and_current_content_scope",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-11",
+      "delegated_business_policy_required": true,
+      "policy_evaluation": "current_business_policy",
+      "conditional_delegated_scopes": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflow_pulls",
+      "method": "POST",
+      "path": "/admin/api/v1/workflow-pulls",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Actor-bound durable source/preview, same-project target and revision/digest checks; draft import only."
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflow_import_previews",
+      "method": "POST",
+      "path": "/admin/api/v1/workflow-import-previews",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Actor-bound durable source/preview, same-project target and revision/digest checks; draft import only."
+    },
+    {
+      "operation_id": "get_admin_api_v1_workflow_import_previews_preview_id",
+      "method": "GET",
+      "path": "/admin/api/v1/workflow-import-previews/{preview_id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Actor-bound durable source/preview, same-project target and revision/digest checks; draft import only."
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflow_import_previews_preview_id_commit",
+      "method": "POST",
+      "path": "/admin/api/v1/workflow-import-previews/{preview_id}/commit",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Actor-bound durable source/preview, same-project target and revision/digest checks; draft import only."
+    },
+    {
+      "operation_id": "get_admin_api_v1_channels_channel_id_workflow_exports",
+      "method": "GET",
+      "path": "/admin/api/v1/channels/{channel_id}/workflow-exports",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Fresh current-boot source observation; actor-bound single-directory bounded catalog; no graph, absolute root or runtime writes."
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflow_catalogs",
+      "method": "POST",
+      "path": "/admin/api/v1/workflow-catalogs",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Fresh current-boot source observation; actor-bound single-directory bounded catalog; no graph, absolute root or runtime writes."
+    },
+    {
+      "operation_id": "get_admin_api_v1_workflow_catalogs_operation_id",
+      "method": "GET",
+      "path": "/admin/api/v1/workflow-catalogs/{operation_id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Fresh current-boot source observation; actor-bound single-directory bounded catalog; no graph, absolute root or runtime writes."
+    },
+    {
+      "operation_id": "post_admin_api_v1_model_file_reads",
+      "method": "POST",
+      "path": "/admin/api/v1/model-file-reads",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Actor/admin-bound selected local model file inspection and evidence-backed registration; current boot/revision/catalog, no model content or arbitrary path."
+    },
+    {
+      "operation_id": "get_admin_api_v1_model_file_reads_identifier",
+      "method": "GET",
+      "path": "/admin/api/v1/model-file-reads/{identifier}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Actor/admin-bound selected local model file inspection and evidence-backed registration; current boot/revision/catalog, no model content or arbitrary path."
+    },
+    {
+      "operation_id": "post_admin_api_v1_model_file_reads_identifier_registrations",
+      "method": "POST",
+      "path": "/admin/api/v1/model-file-reads/{identifier}/registrations",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Actor/admin-bound selected local model file inspection and evidence-backed registration; current boot/revision/catalog, no model content or arbitrary path."
+    },
+    {
+      "operation_id": "get_admin_api_v1_spec_isolations",
+      "method": "GET",
+      "path": "/admin/api/v1/spec-isolations",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Persistent physical-GPU/release/spec isolation; server-derived scope; explicit fresh successful validation proof required to resume."
+    },
+    {
+      "operation_id": "post_admin_api_v1_spec_isolations",
+      "method": "POST",
+      "path": "/admin/api/v1/spec-isolations",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08",
+      "note": "Persistent physical-GPU/release/spec isolation; server-derived scope; explicit fresh successful validation proof required to resume.",
+      "request_schemas": [
+        "spec-isolation.schema.json"
+      ]
+    },
+    {
+      "operation_id": "post_admin_api_v1_spec_isolations_identifier_actions",
+      "method": "POST",
+      "path": "/admin/api/v1/spec-isolations/{identifier}/actions",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08",
+      "note": "Persistent physical-GPU/release/spec isolation; server-derived scope; explicit fresh successful validation proof required to resume.",
+      "request_schemas": [
+        "spec-isolation.schema.json"
+      ]
+    },
+    {
+      "operation_id": "get_admin_api_v1_queues_filter_options",
+      "method": "GET",
+      "path": "/admin/api/v1/queues/filter-options",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "queues:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "notes": "50 safe value/label metadata options per page, max page 10000; no workflow graphs, addresses or credentials. kind tenant/project/model/workflow/release/channel; q max 128; optional parent tenant/project/workflow."
+    },
+    {
+      "operation_id": "get_admin_api_v1_content_filter_options",
+      "method": "GET",
+      "path": "/admin/api/v1/content/filter-options",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:read"
+      ],
+      "resource_guard": "admin_visibility_and_content_lifecycle",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "note": "kind tenant/project/key/model/workflow/release; bounded parent scope/q/page; only safe value/label, never credentials."
+    },
+    {
+      "operation_id": "patch_admin_api_v1_content_by_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/content/{identifier}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:manage"
+      ],
+      "resource_guard": "admin_visibility_and_content_lifecycle",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-10",
+      "request_schema": "content-metadata.schema.json"
+    },
+    {
+      "operation_id": "get_admin_api_v1_content_by_id_preview",
+      "method": "GET",
+      "path": "/admin/api/v1/content/{identifier}/preview",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:download"
+      ],
+      "resource_guard": "admin_visibility_and_content_lifecycle",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "input_assets": [
+          "content:sensitive"
+        ]
+      },
+      "note": "Explicit same-origin streaming preview; fixed image/video MIME whitelist, authenticated Range/HEAD and lifecycle checks; no signed storage URL."
+    },
+    {
+      "operation_id": "head_admin_api_v1_content_by_id_preview",
+      "method": "HEAD",
+      "path": "/admin/api/v1/content/{identifier}/preview",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "content:download"
+      ],
+      "resource_guard": "admin_visibility_and_content_lifecycle",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "conditional_permissions": {
+        "input_assets": [
+          "content:sensitive"
+        ]
+      },
+      "note": "Explicit same-origin streaming preview; fixed image/video MIME whitelist, authenticated Range/HEAD and lifecycle checks; no signed storage URL."
+    },
+    {
+      "operation_id": "get_admin_api_v1_tenants",
+      "method": "GET",
+      "path": "/admin/api/v1/tenants",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "post_admin_api_v1_tenants",
+      "method": "POST",
+      "path": "/admin/api/v1/tenants",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_tenants_id",
+      "method": "GET",
+      "path": "/admin/api/v1/tenants/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_tenants_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/tenants/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_projects",
+      "method": "GET",
+      "path": "/admin/api/v1/projects",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "post_admin_api_v1_projects",
+      "method": "POST",
+      "path": "/admin/api/v1/projects",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_projects_id",
+      "method": "GET",
+      "path": "/admin/api/v1/projects/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_projects_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/projects/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_scopes_options",
+      "method": "GET",
+      "path": "/admin/api/v1/scopes/options",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "scopes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "post_admin_api_v1_key_policy_options_query",
+      "method": "POST",
+      "path": "/admin/api/v1/key-policy/options/query",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "get_admin_api_v1_worker_nodes",
+      "method": "GET",
+      "path": "/admin/api/v1/worker-nodes",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "nodes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_worker_nodes",
+      "method": "POST",
+      "path": "/admin/api/v1/worker-nodes",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "nodes:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_worker_nodes_id",
+      "method": "GET",
+      "path": "/admin/api/v1/worker-nodes/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "nodes:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "patch_admin_api_v1_worker_nodes_id",
+      "method": "PATCH",
+      "path": "/admin/api/v1/worker-nodes/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "nodes:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "post_admin_api_v1_worker_nodes_id_actions",
+      "method": "POST",
+      "path": "/admin/api/v1/worker-nodes/{id}/actions",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "nodes:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      }
+    },
+    {
+      "operation_id": "get_admin_api_v1_queues_statistics",
+      "method": "GET",
+      "path": "/admin/api/v1/queues/statistics",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "queues:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "query_schema": "admin-statistics-query.schema.json",
+      "response_schema": "admin-statistics.schema.json",
+      "notes": "Bounded read-only server-time trend/quantile aggregates; excludes validation by default; never returns request/exception bodies or changes task/resource facts."
+    },
+    {
+      "operation_id": "post_admin_api_v1_session_activity",
+      "method": "POST",
+      "path": "/admin/api/v1/session/activity",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "current_session_only",
+      "csrf_required": true,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_audit_retention",
+      "method": "GET",
+      "path": "/admin/api/v1/audit-retention",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "audit:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-02"
+    },
+    {
+      "operation_id": "get_admin_api_v1_channels_id_deletion_check",
+      "method": "GET",
+      "path": "/admin/api/v1/channels/{id}/deletion-check",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Bounded read-only deletion blockers; an observation does not authorize deletion. DELETE checks again under Node/GPU/Channel locks."
+    },
+    {
+      "operation_id": "post_internal_v1_commands_id_reconciliations",
+      "method": "POST",
+      "path": "/internal/v1/commands/{id}/reconciliations",
+      "identity": "worker",
+      "scopes_all": [],
+      "permissions_all": [],
+      "resource_guard": "own_node_boot_attempt",
+      "csrf_required": false,
+      "idempotency": "protocol_field",
+      "if_match_required": false,
+      "work_package": "WP-05",
+      "note": "Durable completed-result reconciliation; unknown execution never releases a resource."
+    },
+    {
+      "operation_id": "post_admin_api_v1_channels_id_reapply",
+      "method": "POST",
+      "path": "/admin/api/v1/channels/{id}/reapply",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08",
+      "note": "Explicit idempotent reapplication of the current desired configuration; refuses an unresolved command on this channel."
+    },
+    {
+      "operation_id": "get_admin_api_v1_workflow_syncs_id_retry_options",
+      "method": "GET",
+      "path": "/admin/api/v1/workflow-syncs/{id}/retry-options",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "conditional_permissions": {
+        "sensitive_fields_or_input_original": [
+          "content:sensitive"
+        ]
+      },
+      "note": "Original immutable release and confirmed failed targets only; terminal source, current channel revisions, server-owned one-successor lineage and idempotency are checked transactionally."
+    },
+    {
+      "operation_id": "post_admin_api_v1_workflow_syncs_id_retries",
+      "method": "POST",
+      "path": "/admin/api/v1/workflow-syncs/{id}/retries",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "note": "Original immutable release and confirmed failed targets only; terminal source, current channel revisions, server-owned one-successor lineage and idempotency are checked transactionally.",
+      "request_schemas": [
+        "workflow-sync-retry.schema.json"
+      ]
+    },
+    {
+      "operation_id": "post_admin_api_v1_job_cancellations",
+      "method": "POST",
+      "path": "/admin/api/v1/job-cancellations",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "jobs:control"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "note": "Persistent explicit job cancellation targets; no filter expansion or GPU release.",
+      "request_schemas": [
+        "admin-job-cancellations.schema.json"
+      ]
+    },
+    {
+      "operation_id": "get_admin_api_v1_job_cancellations_id",
+      "method": "GET",
+      "path": "/admin/api/v1/job-cancellations/{id}",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "jobs:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "note": "Persistent explicit job cancellation targets; no filter expansion or GPU release."
+    },
+    {
+      "operation_id": "get_admin_api_v1_model_mapping_options",
+      "method": "GET",
+      "path": "/admin/api/v1/model-mapping-options",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "request_schemas": [
+        "admin-model-mapping-query.schema.json"
+      ],
+      "response_schemas": [
+        "admin-model-mapping-options.schema.json"
+      ]
+    },
+    {
+      "operation_id": "admin_key_generation_options_query",
+      "method": "POST",
+      "path": "/admin/api/v1/key-generation-options/query",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-10",
+      "request_schemas": [
+        "key-generation-options-query.schema.json"
+      ],
+      "response_schemas": [
+        "key-generation-options.schema.json"
+      ],
+      "description": "按项目搜索/分页/精确解析 Key 的模型别名、Workflow 发布版本与渠道授权；不加载私密执行配置"
+    },
+    {
+      "operation_id": "admin_workflow_sync_options",
+      "method": "GET",
+      "path": "/admin/api/v1/workflow-sync-options",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:publish"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "request_schemas": [
+        "admin-workflow-sync-options-query.schema.json"
+      ],
+      "response_schemas": [
+        "admin-workflow-sync-options.schema.json"
+      ]
+    },
+    {
+      "operation_id": "admin_workflow_release_history",
+      "method": "GET",
+      "path": "/admin/api/v1/workflows/{identifier}/releases",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "request_schemas": [
+        "admin-workflow-history-query.schema.json"
+      ],
+      "response_schemas": [
+        "admin-workflow-history-page.schema.json"
+      ]
+    },
+    {
+      "operation_id": "admin_workflow_release_diff",
+      "method": "GET",
+      "path": "/admin/api/v1/workflows/{identifier}/release-diff",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "request_schemas": [
+        "admin-workflow-diff-query.schema.json"
+      ],
+      "response_schemas": [
+        "admin-workflow-diff.schema.json"
+      ]
+    },
+    {
+      "operation_id": "admin_workflow_draft_restore",
+      "method": "POST",
+      "path": "/admin/api/v1/workflows/{identifier}/draft-restorations",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08",
+      "request_schemas": [
+        "admin-workflow-draft-restore.schema.json"
+      ],
+      "response_schemas": [
+        "admin-workflow-draft-restored.schema.json"
+      ],
+      "description": "按原 revision 与来源摘要幂等恢复冻结版本为草稿；不改动发布能力或旧任务"
+    },
+    {
+      "operation_id": "admin_workflow_lifecycle",
+      "method": "POST",
+      "path": "/admin/api/v1/workflows/{identifier}/lifecycle",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "workflows:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08",
+      "request_schemas": [
+        "admin-workflow-lifecycle.schema.json"
+      ],
+      "response_schemas": [
+        "admin-workflow-lifecycle-result.schema.json"
+      ],
+      "description": "归档或解除归档 Workflow，保留冻结历史及已接收任务"
+    }
+  ],
+  "inventory_revision": "2026-10-25-increment-76"
+}

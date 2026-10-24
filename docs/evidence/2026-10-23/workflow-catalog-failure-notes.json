@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-23T06:42:34.757871+00:00",
+  "artifacts_sha256": {
+    "workflow-catalog-python-tests.xml": "a5b34986eac9acb0e5175aefdd567ccbb4ac3e6c2e5d8e1a07c1149e2d4e8874",
+    "workflow-catalog-python-console.log": "3f23c789639c00eef62ed69d52c27e2caf88d6a0800709845f69ba6fea26e223",
+    "workflow-catalog-frontend-console.log": "327677020ae91b92d7b3f799fc28dcf58a8266316afdb8143060cd2c219fcab0",
+    "workflow-catalog-first-focus.log": "a839fc6d07dc6044d468372b1ee96d1cdeae2b521f15059993b6887bb9d61f3d",
+    "workflow-catalog-first-focus.xml": "3234b6f474f24a0a9aede33c301fa3dc27acc71882d68af940e349a24e91b40d",
+    "workflow-catalog-lock-first.log": "7f3917fb612d21844c7b251397b9d931bf98051181ef2ddf20dc61b586867fe3",
+    "workflow-catalog-lock-first.xml": "477a4e8287bc9626ed335bbd1b41a4c031356f9112a299ba815a2ad4812bafee"
+  },
+  "failures": [
+    {
+      "stage": "First focused native tests",
+      "result": "22 passed, 2 failed",
+      "reason": "FILE_READ_ATTRIBUTES alone did not enforce sharing restrictions; a protected directory was still renameable. HTTP fixture also used a key shorter than the existing 16-character management requirement.",
+      "resolution": "Add FILE_LIST_DIRECTORY and allow read sharing only; native test proves ancestor/current rename and directory write handle blocked until context exit. Fix fixture key without relaxing API validation."
+    },
+    {
+      "stage": "Forced heartbeat/read interleaving",
+      "result": "2 failed",
+      "postgres_error": "40P01",
+      "reason": "Heartbeat held Node FOR UPDATE then updated Channel; reads held Channel FOR UPDATE then inserted a command whose node FK took KEY SHARE. Both catalog and file paths deadlocked.",
+      "resolution": "Acquire Node FOR SHARE before Channel FOR UPDATE and recheck the channel node before enqueue; both forced concurrency cases and full regression pass."
+    }
+  ],
+  "final_python_tests_passed": 374,
+  "final_browser_groups_passed": 11,
+  "full_goal_complete": false
+}

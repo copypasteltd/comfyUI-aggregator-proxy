@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-23T11:14:26.794694+00:00",
+  "resolved": true,
+  "items": [
+    {
+      "stage": "migration",
+      "finding": "Initial new-table GPU foreign key used the logical class name instead of the existing gpu_resources table.",
+      "resolution": "Transaction rolled back; corrected the ORM and migration target, then repeated backup/archive verification and both upgrades. Alembic check reports no model drift.",
+      "private_log": "app/.local/spec-isolation-migration-before-fk-fix.log"
+    },
+    {
+      "stage": "test_collection",
+      "finding": "Unit and integration test modules shared a basename under pytest prepend imports.",
+      "resolution": "Renamed the integration module before rerunning. No production behavior changed."
+    },
+    {
+      "stage": "targeted_tests",
+      "finding": "Eight failures in the first 171-case run: two fixtures requested an unauthorized quality, two expected 412 instead of the established 409 conflict, four compared SQLite integer acknowledgement flags by boolean identity.",
+      "resolution": "Used an authorized distinct size, matched the frozen conflict behavior, normalized acknowledgement assertions. Added further independent-GPU/release and failure/resume concurrency coverage; final targeted run 185 passed.",
+      "private_log": "app/.local/spec-isolation-targeted-before-fixture-fix.log"
+    },
+    {
+      "stage": "native_process_restart",
+      "finding": "A checked launcher could exit with its child between process lookup and Stop-Process.",
+      "resolution": "The stop script only tolerates the race when that PID no longer exists; identity and still-running errors remain visible. Registered API/Runner/GC were restarted and reverified."
+    },
+    {
+      "stage": "browser",
+      "finding": "The default Playwright browser executable was unavailable; Element Plus label/combobox/hidden-option selection and an open drawer required more precise interactions.",
+      "resolution": "Used the existing native Edge channel, keyboard interaction for the select, explicit drawer close, and table-scoped alert assertion. Screenshot confirmed the alert had rendered correctly. Final 10 new and 22 regression groups passed; every created context/browser closed in finally."
+    }
+  ],
+  "virtualization_used": false,
+  "subagents_used": false,
+  "remaining_failed_checks": []
+}

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="5.730" timestamp="2026-10-23T14:36:11.158805+08:00" hostname="wikigspc"><testcase classname="tests.integration.test_workflow_catalog_operations" name="test_workflow_reads_and_heartbeat_follow_node_then_channel_lock_order[catalog]" time="2.124"><failure message="sqlalchemy.exc.OperationalError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)&#10;(psycopg.errors.DeadlockDetected) deadlock detected&#10;DETAIL:  Process 2840 waits for ShareLock on transaction 136713; blocked by process 33872.&#10;Process 33872 waits for ShareLock on transaction 136712; blocked by process 2840.&#10;HINT:  See server log for query details.&#10;CONTEXT:  while updating tuple (0,3) in relation &quot;channels&quot;&#10;[SQL: UPDATE channels SET observed_at=%(observed_at)s::TIMESTAMP WITH TIME ZONE, observation=%(observation)s::JSONB WHERE channels.id = %(channels_id)s::UUID]&#10;[parameters: {'observed_at': datetime.datetime(2026, 10, 23, 6, 36, 13, 136803, tzinfo=datetime.timezone.utc), 'observation': Jsonb({'queue': {'reachable': False, 'err ... (343 chars)), 'channels_id': UUID('f86b70b2-22d0-4f65-9078-c3d020838090')}]&#10;(Background on this error at: https://sqlalche.me/e/20/e3q8)">.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.DeadlockDetected: deadlock detected
+E   DETAIL:  Process 2840 waits for ShareLock on transaction 136713; blocked by process 33872.
+E   Process 33872 waits for ShareLock on transaction 136712; blocked by process 2840.
+E   HINT:  See server log for query details.
+E   CONTEXT:  while updating tuple (0,3) in relation "channels"
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_catalog_operations.py:222: in test_workflow_reads_and_heartbeat_follow_node_then_channel_lock_order
+    heartbeat_result.result(timeout=12)
+C:\Python313\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Python313\Lib\concurrent\futures\thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_workflow_catalog_operations.py:208: in heartbeat
+    observe(pg, catalog, test_settings)
+tests\integration\test_workflow_catalog_operations.py:50: in observe
+    LeaseRepository(pg, SecretVault(settings.encryption_key.get_secret_value())).heartbeat(catalog["node_id"], catalog["boot_id"], [observation(catalog, status, age)])
+packages\infrastructure\src\generation_infrastructure\leases.py:111: in heartbeat
+    configs = [{"id": public_id("ch", c.id), "revision": c.applied_revision, "base_url": c.base_url, "authorization": self.vault.decrypt(c.encrypted_auth) if c.encrypted_auth else None} for c in session.scalars(select(Channel).where(Channel.node_id == node_id, Channel.deleted_at.is_(None), Channel.applied_revision == Channel.desired_revision).order_by(Channel.id).limit(100))]
+                                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2481: in scalars
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2250: in _execute_internal
+    ) = compile_state_cls.orm_pre_session_exec(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:577: in orm_pre_session_exec
+    session._autoflush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3073: in _autoflush
+    raise e.with_traceback(sys.exc_info()[2])
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3062: in _autoflush
+    self.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.OperationalError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+E   (psycopg.errors.DeadlockDetected) deadlock detected
+E   DETAIL:  Process 2840 waits for ShareLock on transaction 136713; blocked by process 33872.
+E   Process 33872 waits for ShareLock on transaction 136712; blocked by process 2840.
+E   HINT:  See server log for query details.
+E   CONTEXT:  while updating tuple (0,3) in relation "channels"
+E   [SQL: UPDATE channels SET observed_at=%(observed_at)s::TIMESTAMP WITH TIME ZONE, observation=%(observation)s::JSONB WHERE channels.id = %(channels_id)s::UUID]
+E   [parameters: {'observed_at': datetime.datetime(2026, 10, 23, 6, 36, 13, 136803, tzinfo=datetime.timezone.utc), 'observation': Jsonb({'queue': {'reachable': False, 'err ... (343 chars)), 'channels_id': UUID('f86b70b2-22d0-4f65-9078-c3d020838090')}]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)</failure></testcase><testcase classname="tests.integration.test_workflow_catalog_operations" name="test_workflow_reads_and_heartbeat_follow_node_then_channel_lock_order[file]" time="1.486"><failure message="sqlalchemy.exc.OperationalError: (psycopg.errors.DeadlockDetected) deadlock detected&#10;DETAIL:  Process 33872 waits for ShareLock on transaction 136718; blocked by process 2840.&#10;Process 2840 waits for ShareLock on transaction 136719; blocked by process 33872.&#10;HINT:  See server log for query details.&#10;CONTEXT:  while locking tuple (0,2) in relation &quot;nodes&quot;&#10;SQL statement &quot;SELECT 1 FROM ONLY &quot;public&quot;.&quot;nodes&quot; x WHERE &quot;id&quot; OPERATOR(pg_catalog.=) $1 FOR KEY SHARE OF x&quot;&#10;[SQL: INSERT INTO worker_commands (operation_id, node_id, channel_id, command, payload, boot_id, state, lease_expires_at, authorization_snapshot, id) VALUES (%(operation_id)s::UUID, %(node_id)s::UUID, %(channel_id)s::UUID, %(command)s::VARCHAR, %(payload)s::JSONB, %(boot_id)s::UUID, %(state)s::VARCHAR, %(lease_expires_at)s::TIMESTAMP WITH TIME ZONE, %(authorization_snapshot)s::VARCHAR, %(id)s::UUID) RETURNING worker_commands.created_at]&#10;[parameters: {'operation_id': UUID('753e92ee-345c-4ccd-9e46-31e23b8f5beb'), 'node_id': UUID('1e3e6fb8-aa96-42e5-8e8f-d78a7913fb4a'), 'channel_id': UUID('8ca0a261-5a8c-4f2e-bd9c-55e19456d84a'), 'command': 'pull_workflow', 'payload': Jsonb({'revision': 1, 'relative_path': 's ... (47 chars)), 'boot_id': None, 'state': 'pending', 'lease_expires_at': None, 'authorization_snapshot': None, 'id': UUID('46064b69-48d4-49bc-910d-cec627df234b')}]&#10;(Background on this error at: https://sqlalche.me/e/20/e3q8)">.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.DeadlockDetected: deadlock detected
+E   DETAIL:  Process 33872 waits for ShareLock on transaction 136718; blocked by process 2840.
+E   Process 2840 waits for ShareLock on transaction 136719; blocked by process 33872.
+E   HINT:  See server log for query details.
+E   CONTEXT:  while locking tuple (0,2) in relation "nodes"
+E   SQL statement "SELECT 1 FROM ONLY "public"."nodes" x WHERE "id" OPERATOR(pg_catalog.=) $1 FOR KEY SHARE OF x"
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_workflow_catalog_operations.py:223: in test_workflow_reads_and_heartbeat_follow_node_then_channel_lock_order
+    assert read_result.result(timeout=12)["status"] == "pending"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:449: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Python313\Lib\concurrent\futures\thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_workflow_catalog_operations.py:215: in read
+    return WorkflowImportAdministration(pg, test_settings).pull(catalog_actor, WorkflowPull(channel_id=request(catalog).channel_id, expected_revision=1, relative_path="sample.json"), "concurrent-file-heartbeat", "test")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+packages\infrastructure\src\generation_infrastructure\admin_workflow_imports.py:62: in pull
+    with self.sessions.begin() as session:
+         ^^^^^^^^^^^^^^^^^^^^^
+C:\Python313\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1819: in _maker_context_manager
+    with self.begin():
+         ^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:147: in __exit__
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\engine\util.py:145: in __exit__
+    self.commit()
+&lt;string&gt;:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+&lt;string&gt;:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:94: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1234: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.OperationalError: (psycopg.errors.DeadlockDetected) deadlock detected
+E   DETAIL:  Process 33872 waits for ShareLock on transaction 136718; blocked by process 2840.
+E   Process 2840 waits for ShareLock on transaction 136719; blocked by process 33872.
+E   HINT:  See server log for query details.
+E   CONTEXT:  while locking tuple (0,2) in relation "nodes"
+E   SQL statement "SELECT 1 FROM ONLY "public"."nodes" x WHERE "id" OPERATOR(pg_catalog.=) $1 FOR KEY SHARE OF x"
+E   [SQL: INSERT INTO worker_commands (operation_id, node_id, channel_id, command, payload, boot_id, state, lease_expires_at, authorization_snapshot, id) VALUES (%(operation_id)s::UUID, %(node_id)s::UUID, %(channel_id)s::UUID, %(command)s::VARCHAR, %(payload)s::JSONB, %(boot_id)s::UUID, %(state)s::VARCHAR, %(lease_expires_at)s::TIMESTAMP WITH TIME ZONE, %(authorization_snapshot)s::VARCHAR, %(id)s::UUID) RETURNING worker_commands.created_at]
+E   [parameters: {'operation_id': UUID('753e92ee-345c-4ccd-9e46-31e23b8f5beb'), 'node_id': UUID('1e3e6fb8-aa96-42e5-8e8f-d78a7913fb4a'), 'channel_id': UUID('8ca0a261-5a8c-4f2e-bd9c-55e19456d84a'), 'command': 'pull_workflow', 'payload': Jsonb({'revision': 1, 'relative_path': 's ... (47 chars)), 'boot_id': None, 'state': 'pending', 'lease_expires_at': None, 'authorization_snapshot': None, 'id': UUID('46064b69-48d4-49bc-910d-cec627df234b')}]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://generation.local/contracts/admin-workflow-sync-options-query.schema.json",
+  "title": "admin-workflow-sync-options-query",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "enum": [
+        "release",
+        "channel"
+      ]
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^prj_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\r\n]"
+      }
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf_[a-f0-9]{32}$",
+      "not": {
+        "pattern": "[\r\n]"
+      }
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "q": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f-\\x9f](?:[^\\x00-\\x1f\\x7f-\\x9f]*[^\\s\\x00-\\x1f\\x7f-\\x9f])?$",
+          "not": {
+            "pattern": "[\u0000-\u001f-]"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ids": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "project_id",
+    "workflow_id"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "release"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ids": {
+            "items": {
+              "type": "string",
+              "pattern": "^wfr_[a-f0-9]{32}$",
+              "not": {
+                "pattern": "[\r\n]"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "channel"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ids": {
+            "items": {
+              "type": "string",
+              "pattern": "^ch_[a-f0-9]{32}$",
+              "not": {
+                "pattern": "[\r\n]"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "ids"
+        ],
+        "properties": {
+          "ids": {
+            "minItems": 1
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "page": {
+            "const": 1
+          },
+          "q": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

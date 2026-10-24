@@ -1,0 +1,107 @@
+{
+  "at": "2026-10-23T20:38:55.587302+00:00",
+  "all_resolved": true,
+  "unresolved_failures": [],
+  "original_failed_runs_remain_failed": true,
+  "failed_runs": [
+    {
+      "run": "initial-selector",
+      "passed": false,
+      "report": "key-directory-browser-initial-selector-failure.json",
+      "sha256": "b1e2e2e67ac7362220baa3353a997fa78e76fe2ee586f17f6cdade7917a09b96",
+      "cleanup_report": "key-directory-browser-fixture-initial-selector-failure.json",
+      "cleanup_sha256": "bc694cef00f095fffe073b81524ec907df88775e1e7112426223032c0f1c1c4b",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Click the visible Element Plus wrapper rather than the overlaid input."
+    },
+    {
+      "run": "second-selector",
+      "passed": false,
+      "report": "key-directory-browser-second-selector-failure.json",
+      "sha256": "b1e2e2e67ac7362220baa3353a997fa78e76fe2ee586f17f6cdade7917a09b96",
+      "cleanup_report": "key-directory-browser-fixture-second-selector-failure.json",
+      "cleanup_sha256": "83dd7ec3cd2a16fdd8008d3d39a3d5706ed6a7b13d793a4a5b290ea9710bb9be",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Use the input ancestor wrapper instead of a wrongly scoped nested locator."
+    },
+    {
+      "run": "third-selector",
+      "passed": false,
+      "report": "key-directory-browser-third-selector-failure.json",
+      "sha256": "b1e2e2e67ac7362220baa3353a997fa78e76fe2ee586f17f6cdade7917a09b96",
+      "cleanup_report": "key-directory-browser-fixture-third-selector-failure.json",
+      "cleanup_sha256": "8906434a484ffc104d584b144a7764b1d53749befad4af6cfbbfdc6b6dd69cf3",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Apply the wrapper locator consistently to remote multi-select inputs."
+    },
+    {
+      "run": "fixture-order",
+      "passed": false,
+      "report": "key-directory-browser-fixture-order-failure.json",
+      "sha256": "b1e2e2e67ac7362220baa3353a997fa78e76fe2ee586f17f6cdade7917a09b96",
+      "cleanup_report": "key-directory-browser-fixture-order-failure-cleanup.json",
+      "cleanup_sha256": "9191d5a0e5dfc2b7f2a8a41158f583003334fa7738c2ad065a5a69c22df182a7",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Give synthetic history deterministic created_at ordering; transaction-default timestamps had ties."
+    },
+    {
+      "run": "edit-selector",
+      "passed": false,
+      "report": "key-directory-browser-edit-selector-failure.json",
+      "sha256": "4f4f370e5e800614a2c83825e8875562ddbbaf41d37c406c10cc14cefd6b22e1",
+      "cleanup_report": "key-directory-browser-edit-selector-failure-cleanup.json",
+      "cleanup_sha256": "cb88317c639ddda5cb8580d5201f9d7a49952e72f679b835bb7580bb4bb15724",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Use the existing table action label 策略."
+    },
+    {
+      "run": "retry-visibility",
+      "passed": false,
+      "report": "key-directory-browser-retry-visibility-failure.json",
+      "sha256": "08206d7b6182ed4b4318f67ecef2f0e0c738dc0c015e14e7171edbbdbdb29d32",
+      "cleanup_report": "key-directory-browser-retry-visibility-failure-cleanup.json",
+      "cleanup_sha256": "2faf2c66e7aed8a860f8463e0c3d3e0064689ddc9b4eb091bbb527833b2985f7",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Initial symptom of the real reopened-form validity bug: Save could complete and hide the retry action."
+    },
+    {
+      "run": "reopen-validity",
+      "passed": false,
+      "report": "key-directory-browser-reopen-validity-failure.json",
+      "sha256": "08206d7b6182ed4b4318f67ecef2f0e0c738dc0c015e14e7171edbbdbdb29d32",
+      "cleanup_report": "key-directory-browser-reopen-validity-failure-cleanup.json",
+      "cleanup_sha256": "455b376fb0c96830af773b4687fe8e75c1720607d6fdfa2d8443bebfe6586a09",
+      "cleanup_verified": true,
+      "reason_and_resolution": "Real UI defect fixed: initialize nonempty selections as unverified and emit validity on active transitions, including unchanged false."
+    },
+    {
+      "run": "frontend-initial-type-failure",
+      "passed": false,
+      "report": "key-directory-frontend-initial-type-failure.log",
+      "sha256": "ea670d869285718e332c15a7bf43996387534ef61db8f530fb71351141d2fd02",
+      "reason_and_resolution": "Resolve request now explicitly supplies page=1 and q=\"\" to satisfy generated OpenAPI types."
+    },
+    {
+      "run": "docs-initial-readonly-query-failure",
+      "passed": false,
+      "report": "key-directory-docs-initial-readonly-query-failure.log",
+      "sha256": "0619c47535e6a6cc2d262fe464f3671c06638d13bc56db0fb49a351ff5111304",
+      "reason_and_resolution": "Document checker now recognizes only the exact frozen POST directory query as read-only; CSRF and keys:manage remain mandatory, every other Admin mutation retains its controls."
+    },
+    {
+      "run": "audio-requirement-registry",
+      "passed": false,
+      "report": "audio-scope-registry-initial-failure.json",
+      "sha256": "6b3784200611fe3f2fa3a872ad70852ece207e6db4c0385baffa6e24a682d09d",
+      "reason_and_resolution": "New CAP-06 required an explicit trace mapping. Registered CAP-06 and AUDIO-01–08 in the acceptance table and traceability registry; final 56-document verification passed."
+    }
+  ],
+  "superseded_candidate": {
+    "release_id": "rc-20261024.53.1",
+    "archive_sha256": "2132057c0c6cfd6669a2135cea86cc149a040cd659721d480c10fd717f1e14a3",
+    "reason": "Reopened-form failure recovery exposed a real stale-validity UI defect. Archive integrity passed, behavioral acceptance did not; superseded by rc-20261024.53.2."
+  },
+  "final_candidate": "rc-20261024.53.2",
+  "final_browser_groups": 14,
+  "visual_review": "Recaptured screenshots only after popup transitions ended; reviewed desktop/mobile captures. Earlier successful capture retained as a separate run."
+}
