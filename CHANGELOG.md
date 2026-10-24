@@ -4,6 +4,17 @@
 
 This file records user-facing changes, validation scope and migration notes. Dates use Asia/Taipei. Pushing source is not a production release.
 
+## 2026-10-25 — 完整待办评估 / Remaining-work assessment
+
+- 新增 [76 项编号待办](docs/78-完整待办与首版收口清单.md)：5 项开发、6 项完善、7 项真实 Workflow 产品化、46 项实测、7 项配置、3 项交付与 2 项非首版阻断增强；同步中英入口和开发记录。
+- 对照代码明确 Admin 模型发布与 Sub2API 启动模型/价格配置尚未形成持久同步、确认及失败恢复闭环；180 项端点已注册不能替代行为验收。
+- 依据第 58 增量负载记录注明领取 P95 2.837 秒和页面更新 P95 3.9301 秒的历史/协议边界，不将更早的 7.682 秒视为当前测量。
+- Add a numbered checklist of 76 known remaining items: 5 implementation, 6 refinement, 7 actual Workflow productization, 46 actual-environment checks, 7 configuration, 3 delivery and 2 optional improvements. Synchronize Chinese/English entry points and development records.
+- Clarify the missing durable synchronization/confirmation/recovery between Admin publication and Sub2API startup model/pricing configuration. Route registration does not establish behavioral acceptance.
+- Label increment 58 latency figures as historical protocol evidence rather than fresh measurements; the earlier 7.682-second figure does not describe later results.
+- 验证/Validation：执行编号/分类核对、文档/契约与入口链接/示例检查、发布审查；无运行代码、UI、依赖、契约或数据库迁移变化，不重跑完整 Python 或重新录制未变化的媒体。Documentation/checklist-only change; no runtime/UI/dependency/contract/database changes or new hardware acceptance.
+- 待办/Pending：完整首版与真实资源/生产门禁保持未验收；原有工作包状态不提升。Full release and actual-resource/production acceptance remain open; work-package status is not promoted.
+
 ## 2026-10-25 — 仓库首发 / Initial repository publication
 
 ### 新增 / Added

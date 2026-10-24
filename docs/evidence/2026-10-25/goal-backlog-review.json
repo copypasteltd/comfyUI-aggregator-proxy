@@ -1,0 +1,43 @@
+{
+  "assessment_date": "2026-10-25",
+  "timezone": "Asia/Taipei",
+  "implementation_baseline": "2e5418a0db4f59b45eb28b3173ebbe0b427087e2",
+  "scope": "Known remaining-work inventory and documentation review only; no runtime or actual-resource acceptance",
+  "checklist_document": "78-完整待办与首版收口清单.md",
+  "items": 76,
+  "contiguous_unique_ids_verified": true,
+  "classification_counts_verified": {
+    "implementation": 5,
+    "refinement": 6,
+    "workflow_productization": 7,
+    "actual_environment_validation": 46,
+    "configuration": 7,
+    "delivery": 3,
+    "optional_improvements": 2
+  },
+  "optional_ids": ["07", "08"],
+  "implementation_gap_confirmed_by_source_review": "Control-plane model publication and Provider startup model/pricing configuration do not implement the specified durable gateway mapping synchronization, confirmation and failure-recovery lifecycle",
+  "reviewed_source_files": [
+    "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
+    "app/integrations/sub2api/overlay/backend/internal/rendercontrol/hosting.go",
+    "app/integrations/sub2api/overlay/backend/internal/rendercontrol/discovery.go"
+  ],
+  "historical_operational_load_reused_for_assessment": {
+    "report": "evidence/2026-10-24/operational-queue-load.json",
+    "concurrent_claim_p95_seconds": 2.837,
+    "admin_update_p95_seconds": 3.9301,
+    "fresh_measurement": false,
+    "physical_fleet_validated": false
+  },
+  "work_packages": {"in_progress": 14, "not_started": 1},
+  "docs_and_readme_checks_passed": true,
+  "runtime_code_changed": false,
+  "runtime_protocol_changed": false,
+  "database_schema_changed": false,
+  "ui_changed": false,
+  "full_python_suite_rerun": false,
+  "new_browser_or_service_started": false,
+  "full_goal_complete": false,
+  "production_accepted": false,
+  "goal_status_changed": false
+}

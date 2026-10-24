@@ -6,6 +6,8 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
+The [76-item remaining-work checklist](78-完整待办与首版收口清单.md) distinguishes implementation gaps from missing actual-environment acceptance. Durable Admin-to-Sub2API model synchronization/confirmation remains an implementation gap; existing protocol/browser evidence does not establish complete release acceptance.
+
 ## Requirements and engineering baseline
 
 | Topic | Document |
@@ -107,6 +109,7 @@ Start with requirements, development rules, engineering structure and the delive
 | 75 | [Restore a release into a new draft](75-Workflow历史版本恢复草稿.md) |
 | 76 | [Workflow archive and unarchive](76-Workflow归档与恢复管理.md) |
 | 77 | [Repository preparation and bilingual documentation delivery](77-仓库整理与双语文档交付.md) |
+| 78 | [Complete remaining-work and first-release checklist](78-完整待办与首版收口清单.md) |
 
 ## Contracts, examples and media
 

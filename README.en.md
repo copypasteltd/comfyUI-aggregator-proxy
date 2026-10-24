@@ -10,6 +10,8 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 **Status: in development.** Native Windows implementation, protocol tests and isolated candidate installation have recorded verification. Actual Workflows, model quality, real S3/Redis, production system services and capacity on 10–20 physical machines still require acceptance. Screenshots and recordings show the real UI and API backed by isolated PostgreSQL and explicitly synthetic fixtures. They demonstrate neither real GPU generation nor production throughput.
 
+The [remaining-work checklist](docs/78-完整待办与首版收口清单.md), written in Chinese, identifies 76 known items across implementation, refinement, Workflow productization, actual-environment validation, configuration, delivery and optional improvements. Durable synchronization from Admin model publication to Sub2API, gateway confirmation and failure recovery still need implementation. Control-plane publication and the Provider's startup model/pricing configuration are currently separate steps.
+
 ## Contents
 
 - [Capabilities and boundaries](#capabilities-and-boundaries)
