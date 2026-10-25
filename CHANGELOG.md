@@ -1,5 +1,20 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 — 原生固定角色系统服务工具 / Native fixed-role service tooling
+
+- 新增 Windows 离线服务部署契约、固定角色 CLI、WinSW 2.12.0 pin 与 MIT 许可。默认手动启动；独立虚拟账户、外部秘密/状态、确定性 XML 重建和实际 SCM 身份核对，拒绝覆盖同名服务或接管其他进程。
+- Add an offline Windows deployment contract, fixed-role CLI and pinned WinSW 2.12.0 asset with its MIT license. Use manual startup by default, per-service virtual accounts, external secrets/state, deterministic XML reconstruction and SCM identity checks; refuse existing registrations and foreign ownership.
+- 同部署 API 先于 Worker 启动并晚于 Worker 停止，保留回报窗口。支持显式 render/validate/status/install/start/stop/uninstall、全局互斥、有界停止、部分安装失败的归属回滚与停止后卸载；不弹 UAC、不自动修改 ACL、不删除 journal/对象/配置，不管理 ComfyUI 进程。
+- Start the API before Workers and stop it after them to preserve the shutdown reporting window. Provide explicit rendering, validation, status and lifecycle commands, a global operation mutex, bounded stops and ownership-checked installation rollback. Require an existing elevated token for mutations; keep ACL changes explicit and preserve journals, objects and configuration.
+- 安装器从宿主 CPython 复制带摘要的专用服务解释器，验证真实 venv 及相同离线依赖；服务入口使用独立隐藏控制台。Provider 监督器只运行包内固定程序、清理继承配置覆盖并转发有界停止信号。
+- Prepare a hashed dedicated service interpreter from the host CPython installation and verify the real venv and offline distributions. Use a private hidden console; the Provider supervisor runs only the bundled executable with explicit configuration and bounded signal forwarding.
+- 验证驱动逐项清理自有资源并持久记录失败；保留首轮路由错误、第二轮总报告缺失及非提升 wrapper 未就绪的限制，不将控制台或单元结果冒充 SCM/生产验收。
+- Preserve failed attempts and cleanup evidence. Unit and direct application-entry checks do not establish WinSW/SCM, service-account ACL, boot recovery or production acceptance; backlog item 66 and the 70 remaining items stay open. Details and final validation facts are recorded in [85](docs/85-原生系统服务封装与受控生命周期.md).
+
+- 验证/Validation：161 项专项、完整 16 门禁/3524 Python（零失败/错误/跳过）、40 前端单元、162 文件 mypy、76 包锁、七个应用 wheel、28 项精确候选安装、8 项浏览器全部通过；581 项 CI 输入一致，四个应用角色退出码为 0、清理前无子进程，journal 与资源清理已核对。
+- 最终候选/Final candidate：rc-20261025.85.3，281259923 字节、484 源输入、166 载荷、58 wheels、61 运行契约；SHA-256 20c5a79d1d439fcccaa76f424bd1fc982a70b17a7ab7abbb3b8c352736a2979d。58 schema/937 fixture 同步，45 业务表/head 3da02e7b5941，无新迁移。70 项仍开放（首版 68、可选 2）；复用既有明确范围的 Go/协议证据，未重跑或提升真实/生产标志。
+- All listed local checks and cleanup passed. Keep the first audit-query 503, interrupted CI, failed installer attempts and unready wrapper probe visible. Actual WinSW/SCM, gateway supervision, boot recovery, production resources and the prior concurrent authentication 502 remain unresolved; see the [verification](docs/evidence/2026-10-25/native-services-verification.json).
+
 ## 2026-10-25 — 监控指标与请求关联 / Monitoring and request correlation
 
 - 新增两个默认关闭的只读监控入口，使用独立 Bearer 摘要及实际连接 CIDR，支持双凭证轮换；业务、管理、Worker 和网关身份不可代用。安全配置响应不公开凭证、网段、DSN 或客户/设备标识。

@@ -19,6 +19,7 @@
 | [endpoint-catalog.json](./endpoint-catalog.json) | 公共/管理/Worker/网关端点、身份、权限、幂等和 revision 条件清单；不代替完整请求/响应 OpenAPI |
 | [worker-node-command.schema.json](./worker-node-command.schema.json) | Windows 节点创建、改名与固定生命周期动作；名称拒绝空白/控制字符，停用/轮换/归档的空闲及引用条件仍由数据库事务核验，见 [56](../56-Windows节点登记与凭证管理.md) |
 | [admin-queue-query.schema.json](./admin-queue-query.schema.json) | Admin 多维队列查询；ID/状态/长度/分页/时间数值边界，时间先后关系由 DTO 语义校验 |
+| [service-deployment.schema.json](./service-deployment.schema.json) | 固定 Windows 服务角色、外部路径、手动/延迟启动与显式 API TLS；路径别名/重解析点、身份及文件由工具继续核验，真实 SCM 见 [85](../85-原生系统服务封装与受控生命周期.md) |
 | [release-manifest.schema.json](./release-manifest.schema.json) | Windows CPython 3.13 候选清单、完整文件摘要、DB/Worker/网关版本和未签收边界；独立安装器另查 Windows 安全路径与字段对应的实际产物，见 [49](../49-原生发布包与离线安装验证.md) |
 | [recovery-checkpoint.schema.json](./recovery-checkpoint.schema.json) | 独立恢复文档形状、行/对象计数与密钥 canary；签名、表名排序/唯一和计数交集由 DTO/恢复器核验，真实恢复另行验收，见 [60](../60-数据库对象与密钥联合恢复校验.md) |
 | [admin-audit-query.schema.json](./admin-audit-query.schema.json) | Admin 审计封闭分页、精确交集和半开时间查询；时间先后关系由 DTO 校验，安全投影与权限另实测，见 [61](../61-管理审计检索与详情.md) |

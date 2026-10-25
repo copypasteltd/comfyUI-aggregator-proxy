@@ -12,7 +12,13 @@
 
 [完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05、10 共 6 项本地实现已收口，70 项仍开放（68 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md)、[确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 及 [监控接线](docs/84-监控指标与脱敏请求关联.md) 已有实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
 
-最新增量 [84 · 监控与请求关联](docs/84-监控指标与脱敏请求关联.md) 增加独立只读身份、固定标签指标、只读 PG 快照、流式脱敏日志和十条告警规则。[本轮验证](docs/evidence/2026-10-25/monitoring-verification.json) 通过完整 16 门禁/3399 项 Python、87 项监控专项、27 组原生协议、50 个 PromQL 断言、26 项候选安装及安装后 8 项浏览器检查。候选 rc-20261025.84.1 的 476 项源输入已核对，包含 159 个载荷文件、58 个 wheel；生产采集和通知仍按第 68 项验收。
+此前增量 [84 · 监控与请求关联](docs/84-监控指标与脱敏请求关联.md) 增加独立只读身份、固定标签指标、只读 PG 快照、流式脱敏日志和十条告警规则。[84 验证](docs/evidence/2026-10-25/monitoring-verification.json) 通过完整 16 门禁/3399 项 Python、87 项监控专项、27 组原生协议、50 个 PromQL 断言、26 项候选安装及安装后 8 项浏览器检查。候选 rc-20261025.84.1 的 476 项源输入已核对，包含 159 个载荷文件、58 个 wheel；生产采集和通知仍按第 68 项验收。
+
+第 85 增量提供 [Windows 原生服务部署工具](docs/85-原生系统服务封装与受控生命周期.md)：固定 API/Runner/GC/Worker/Sub2API 角色、可核对的服务计划、独立虚拟账户、显式安装/启停/卸载和有界恢复。非管理员拒绝变更且不弹 UAC；默认手动启动，不修改防火墙或 ComfyUI。部署工具及应用入口验证与真实 WinSW/SCM 生命周期分别记录，第 66 项继续开放。
+
+[85 验证汇总](docs/evidence/2026-10-25/native-services-verification.json)：完整 16 门禁、3524 项 Python（零失败/错误/跳过）、161 项服务/发行专项、40 项前端单元、28 项精确候选安装及 8 项安装后浏览器检查通过。最终候选 `rc-20261025.85.3` 的 484 源输入与代码一致，包含 166 载荷、58 wheels 和 61 运行契约；581 项 CI 输入一致。四个应用角色正常退出、journal 保留与私有资源清理已核对；WinSW/SCM 和新网关监督器的真实生命周期继续待验收。
+
+同一部署按 API → Worker → GC → Runner → Gateway 启动，反向停止，使 Worker 停止时 API 仍可接收回报。先 `install` 登记未启动的服务，再按生成的 `acl-plan.json` 落实各角色读取/修改权限，最后 `start` 并分别核对 SCM、HTTPS readiness 和 Worker 登记；服务状态不能代替业务健康。升级前先排空并核对未知任务，卸载保留状态和配置。
 
 仓库 [原生 CI](docs/83-原生CI门禁与失败证据.md) 固定 16 项串行门禁、独立测试目录、测试库备份后迁移，仅公开脱敏摘要，原始日志/JUnit 留在私有目录。专用物理 Runner、仓库变量启用及实际 GitHub 成功/失败 artifact 仍待验收，第 11 项继续开放。
 
@@ -266,6 +272,23 @@ Worker 离线、租约到期或 HTTP 超时都不证明 GPU 已空闲。提交�
 令牌只写入指定的新文件，控制台只显示摘要；已有文件拒绝覆盖。隔离安装或外部状态目录使用 `configuration --env-file <private-env-file>` 和 `rules --env-file <private-env-file> --output <new-file>`；这些命令不连接数据库。采集端配置参考 [原生 Prometheus 示例](app/deploy/observability/prometheus.example.yml)，使用凭证文件和可信 CA。规则涵盖十类异常，宿主仍需自行部署采集和通知。API 多实例须逐进程抓取，全局数据库指标使用 `max` 去重，HTTP counter 按实例采集后聚合。
 
 指标包括任务积压、有效耗时样本、物理 GPU 占用、节点容量覆盖、结算积压和待删对象。数据库使用独立只读连接池及五秒缓存；观测失败时输出 `snapshot_success=0` 并省略数据库指标。上传、下载与 SSE 持续流式传递，脱敏请求 JSON 日志通过服务端请求 ID 关联；不记录提示词、凭证、查询串或路径参数。外部监控阈值与 Admin 现有派生告警分别管理。
+
+Windows 系统服务工具见 [85](docs/85-原生系统服务封装与受控生命周期.md)。构建前在 `app/` 显式准备固定 wrapper：
+
+```powershell
+.\.venv\Scripts\python.exe scripts/prepare-service-tools.py --download
+# 离线准备可改用 --source <含固定 WinSW.NET461.exe 与 LICENSE.txt 的本地目录>。
+```
+
+新候选的安装器会准备专用 `venv/Scripts/python-service.exe` 并校验前缀、依赖和文件摘要；服务使用该解释器以避免 venv 启动器额外进程。参考 [封闭配置示例](app/deploy/native-windows/services.example.json) 填写安装目录、外部秘密/状态路径、角色和 API TLS，然后使用安装环境生成新计划：
+
+```powershell
+& 'C:/render/install/venv/Scripts/python.exe' -I 'C:/render/install/payload/scripts/service-deploy.py' render --spec 'C:/render/private/services.json' --output 'C:/render/services/edge-a'
+& 'C:/render/install/venv/Scripts/python.exe' -I 'C:/render/install/payload/scripts/service-deploy.py' validate --deployment 'C:/render/services/edge-a'
+& 'C:/render/install/venv/Scripts/python.exe' -I 'C:/render/install/payload/scripts/service-deploy.py' status --deployment 'C:/render/services/edge-a'
+```
+
+计划内含各角色 XML、wrapper 摘要和未执行的 ACL 需求；它不验证生产权限或应用 ready。明确部署时用 `install` 注册 STOPPED 服务、`start` 启动、排空后 `stop`、STOPPED 后 `uninstall`，参数均为 `--deployment`，可用 `--service` 精确选定本计划中的一项。四种变更要求已提升的管理员会话，不自动提权；卸载保留配置、journal、数据库及文件。真实 SCM、服务账户权限、开机恢复和网关监督仍须按 66/67/73 验收。
 
 生产迁移前先停止/排空对应服务、备份并验证归档，再单独执行迁移。数据库备份不等于联合恢复：对象版本、Worker journal、Sub2API 账本/幂等事实及凭证也必须一致恢复和核对。Windows 服务 ACL、Linux/systemd、生产反向代理、真实 Redis/S3 和联合恢复仍是独立验收项。不要把开发启动脚本注册成已经验收的生产服务。
 

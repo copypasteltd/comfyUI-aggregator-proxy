@@ -11,6 +11,7 @@ import ssl
 import subprocess
 import sys
 import time
+from contextlib import closing
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -20,6 +21,7 @@ import httpx
 import psycopg
 from cryptography.fernet import Fernet
 from generation_infrastructure.settings import Settings
+from native_service_smoke import ServiceEntryProbe
 from prometheus_client.parser import text_string_to_metric_families
 from psycopg import sql
 from release_bundle import (
@@ -73,6 +75,8 @@ def main() -> None:
     native = importlib.util.module_from_spec(native_spec)
     native_spec.loader.exec_module(native)
     processes = native.Processes(root)
+    service_probes: list[ServiceEntryProbe] = []
+    service_runtime: dict[str, Any] = {}
     admin = None
     created = False
     client = None
@@ -226,7 +230,17 @@ print(json.dumps({'passed':True,'isolated_installed_module':True,'valid_stream_a
         assert pepper.encode() not in bad.stderr and password.encode() not in bad.stderr
         checks.append("invalid_configuration_and_missing_tls_fail_without_secret_output")
         cert, key = ROOT / ".local/tls/localhost.crt", ROOT / ".local/tls/localhost.key"
-        api = processes.start("installed-api", [*common, "api", *cloud, "--port", str(port), "--tls-cert", str(cert), "--tls-key", str(key)], environment)
+        service_python = destination / "venv/Scripts/python-service.exe"
+        service_entry = payload / "scripts/service-process.py"
+        runtime_root = state / "native-service-probe"
+        runtime_root.mkdir()
+        role_states = {}
+        for role in ("api", "runner", "gc", "worker"):
+            role_states[role] = runtime_root / "state" / role
+            role_states[role].mkdir(parents=True)
+        api = processes.start("installed-api", [str(service_python), "-I", str(service_entry), "api", "--config", str(config), "--state-dir", str(role_states["api"]), "--port", str(port), "--tls-cert", str(cert), "--tls-key", str(key)], environment)
+        api_service_probe = ServiceEntryProbe(api, service_python)
+        service_probes.append(api_service_probe)
         client = httpx.Client(base_url=origin, verify=ssl.create_default_context(cafile=str(cert)), trust_env=False, timeout=10)
         native.wait_http(client, "/health/ready", api)
         assert client.get("/health/live").status_code == 200
@@ -250,6 +264,59 @@ print(json.dumps({'passed':True,'isolated_installed_module':True,'valid_stream_a
         lifetime = login.json()["lifetime"]
         assert lifetime["idle_timeout_seconds"] == 1800 and lifetime["idle_expires_at"] <= lifetime["absolute_expires_at"]
         headers = {"Origin": origin, "X-CSRF-Token": login.json()["csrf_token"]}
+        native_node = client.post("/admin/api/v1/worker-nodes", headers={**headers, "Idempotency-Key": "release-service-node-" + run_id}, json={"name": "Synthetic installed service entry"})
+        assert native_node.status_code == 201, "installed_service_worker_node_create_http_" + str(native_node.status_code)
+        assert native_node.json()["secret_available"], "installed_service_worker_secret_not_available"
+        native_node = native_node.json()
+        runtime_private = runtime_root / "private"
+        runtime_private.mkdir()
+        native_credential = runtime_private / "worker-credential.json"
+        native_credential.write_text(json.dumps({"node_id": native_node["node"]["id"], "token": native_node["secret"]}), encoding="utf-8")
+        native_worker_config = runtime_private / "worker.json"
+        native_worker_config.write_text(json.dumps({"control_origin": origin, "credential_file": str(native_credential), "state_root": str(role_states["worker"]), "ca_file": str(cert), "gpus": [], "channels": []}), encoding="utf-8")
+        for role in ("runner", "gc", "worker"):
+            role_config = native_worker_config if role == "worker" else config
+            process = processes.start("service-entry-" + role, [str(service_python), "-I", str(service_entry), role, "--config", str(role_config), "--state-dir", str(role_states[role])], environment)
+            probe = ServiceEntryProbe(process, service_python)
+            service_probes.append(probe)
+            service_runtime[role] = probe
+        deadline = time.monotonic() + 30
+        while True:
+            assert service_runtime["worker"].process.poll() is None
+            with psycopg.connect(**{**options, "dbname": database}) as connection:
+                registered = connection.execute("SELECT current_boot_id IS NOT NULL FROM nodes WHERE id=%s", (native_node["node"]["id"].removeprefix("node_"),)).fetchone()
+            if registered == (True,):
+                break
+            assert time.monotonic() < deadline, "installed_service_worker_did_not_register"
+            time.sleep(.2)
+        service_cli = [python, "-I", str(payload / "scripts/service-deploy.py")]
+        service_spec = {"protocol": "native-services-v1", "deployment_id": "release-" + run_id, "installation": str(destination), "services": []}
+        for role in ("api", "runner", "gc", "worker"):
+            item = {"role": role, "instance": "main", "config": str(native_worker_config if role == "worker" else config), "state_dir": str(role_states[role]), "startup": "manual"}
+            if role == "api":
+                item["listen"] = {"host": "127.0.0.1", "port": port, "tls_cert": str(cert), "tls_key": str(key), "allow_network_bind": False}
+            service_spec["services"].append(item)
+        service_spec_path = runtime_private / "services.json"
+        service_spec_path.write_text(json.dumps(service_spec), encoding="utf-8")
+        service_output = runtime_root / "deployment"
+        rendered = execute("service-render", [*service_cli, "render", "--spec", str(service_spec_path), "--output", str(service_output)], env=environment)
+        assert json.loads(rendered.stdout)["services"] == 4
+        validated = execute("service-validate", [*service_cli, "validate", "--deployment", str(service_output)], env=environment)
+        assert json.loads(validated.stdout)["valid"] and not json.loads(validated.stdout)["permissions_applied"]
+        queried = execute("service-status", [*service_cli, "status", "--deployment", str(service_output)], env=environment)
+        assert all(item["state"] is None for item in json.loads(queried.stdout)["services"])
+        from native_services import administrator
+        assert not administrator(), "SCM mutation probe must run without an elevated token"
+        for action in ("install", "start", "stop", "uninstall"):
+            denied_service = execute("service-nonadmin-" + action, [*service_cli, action, "--deployment", str(service_output)], env=environment, expected=1)
+            assert json.loads(denied_service.stderr)["error"] == "service_administrator_required_no_elevation"
+        changed_xml = next(service_output.glob("*.xml"))
+        intact_xml = changed_xml.read_bytes()
+        changed_xml.write_bytes(intact_xml + b"<!--tamper-->")
+        denied_service = execute("service-tampered-xml", [*service_cli, "validate", "--deployment", str(service_output)], env=environment, expected=1)
+        assert json.loads(denied_service.stderr)["error"] == "service_plan_tampered"
+        changed_xml.write_bytes(intact_xml)
+        checks.append("installed_service_plan_render_validate_readonly_scm_nonadmin_no_uac_and_tamper_rejection")
         retention = client.get("/admin/api/v1/audit-retention")
         assert retention.status_code == 200
         assert retention.json()["enabled"] is False and retention.json()["retention_days"] is None and retention.json()["batch_limit"] == 500
@@ -339,36 +406,72 @@ print(json.dumps({'passed':True,'isolated_installed_module':True,'valid_stream_a
             index.write_bytes(original)
         verify_payload(payload)
         checks.append("runtime_tampered_payload_is_rejected_and_manifest_stays_immutable")
+        lifecycle = {}
+        report["native_service_entry_lifecycle"] = {"roles": lifecycle, "worker_identity_journal_reopened": False, "real_gpu": False, "gateway_supervision_verified": False, "wrapper_and_scm_verified": False}
+        for role in ("worker", "runner", "gc"):
+            lifecycle[role] = service_runtime[role].stop()
+        import sqlite3
+        with closing(sqlite3.connect(role_states["worker"] / "journal.sqlite3")) as journal_connection:
+            assert journal_connection.execute("SELECT COUNT(*) FROM worker_identity").fetchone() == (1,)
+        lifecycle["api"] = api_service_probe.stop()
+        report["native_service_entry_lifecycle"]["worker_identity_journal_reopened"] = True
+        checks.append("installed_native_service_entries_https_worker_registration_runner_gc_sigint_clean_exit_no_descendants_and_journal_retained")
         report["passed"] = True
     except BaseException as exc:
         report["failure"] = {"type": type(exc).__name__, "code": str(exc) if isinstance(exc, AssertionError) else "native_release_smoke_failed"}
         raise
     finally:
+        cleanup_errors = []
+
+        def cleanup_step(code, action):
+            try:
+                action()
+            except BaseException:
+                cleanup_errors.append(code)
+                report["passed"] = False
+
+        def remove_owned(target, parent):
+            for attempt in range(3):
+                try:
+                    remove_created(target, parent)
+                    return
+                except OSError as exc:
+                    if attempt == 2 or getattr(exc, "winerror", None) not in (5, 32, 145):
+                        raise
+                    time.sleep(.5)
+
         if client:
-            client.close()
-        processes.close()
+            cleanup_step("http_client_close", client.close)
+        for index, probe in enumerate(reversed(service_probes)):
+            cleanup_step("service_probe_close_" + str(index), probe.close)
+        cleanup_step("owned_processes_close", processes.close)
         report["processes"] = processes.stops
         if admin:
             if created:
-                admin.execute(sql.SQL("DROP DATABASE {} WITH (FORCE)").format(sql.Identifier(database)))
-                report["temporary_database_removed"] = admin.execute("SELECT count(*) FROM pg_database WHERE datname=%s", (database,)).fetchone()[0] == 0
-            admin.close()
-        # Preserve non-sensitive logs for a failed run; private configuration,
-        # credentials, venv and owned databases are always cleaned.
+                def drop_owned_database():
+                    admin.execute(sql.SQL("DROP DATABASE {} WITH (FORCE)").format(sql.Identifier(database)))
+                    report["temporary_database_removed"] = admin.execute("SELECT count(*) FROM pg_database WHERE datname=%s", (database,)).fetchone()[0] == 0
+                cleanup_step("temporary_database_remove", drop_owned_database)
+            cleanup_step("database_connection_close", admin.close)
+        # Each cleanup runs independently. Only owned, newly created directories
+        # receive bounded retries; a cleanup error fails the run and is reported.
         if report["passed"]:
-            remove_created(root, ROOT / ".local")
+            cleanup_step("temporary_root_remove", lambda: remove_owned(root, ROOT / ".local"))
             report["temporary_root_removed"] = not root.exists()
-        else:
+        if not report["passed"]:
             for name in ("installation", "state", "worker-state", "outside-project"):
                 target = root / name
                 if target.is_dir():
-                    remove_created(target, root)
-            for path in (root / "browser-private.json", root / "worker-credential.json", root / "worker.json"):
-                path.unlink(missing_ok=True)
-            report["private_resources_cleaned"] = True
+                    cleanup_step("private_directory_remove_" + name, lambda target=target: remove_owned(target, root))
+            for name in ("browser-private.json", "worker-credential.json", "worker.json"):
+                cleanup_step("private_file_remove_" + name, lambda name=name: (root / name).unlink(missing_ok=True))
+            report["private_resources_cleaned"] = not cleanup_errors
+        report["cleanup_errors"] = cleanup_errors
         report["duration_seconds"] = round(time.monotonic() - started, 2)
         (evidence / "native-release-installation.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"passed": report["passed"], "run_id": run_id, "checks": len(checks), "cleaned": report.get("temporary_root_removed", report.get("private_resources_cleaned", False))}))
+        if cleanup_errors:
+            raise SystemExit("native_release_cleanup_failed")
 
 
 if __name__ == "__main__":

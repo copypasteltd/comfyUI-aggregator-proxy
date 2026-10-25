@@ -27,6 +27,7 @@ from release_bundle import (
     verify_archive,
     verify_candidate,
     verify_media_runtime,
+    verify_service_runtime,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -120,7 +121,7 @@ def main() -> None:
         for path in (ROOT / "migrations").rglob("*"):
             if path.is_file() and path.suffix in (".py", ".mako"):
                 copy(path, stage / path.relative_to(ROOT))
-        for name in ("alembic.ini", "scripts/release_bundle.py", "scripts/release-entrypoint.py", "scripts/migrate.py", "scripts/verify-recovery.py", "config/environment.example", "config/worker.example.json", "config/worker.workflow-pull.example.json", "config/contract-hashes.json", "integrations/sub2api/upstream-lock.json"):
+        for name in ("alembic.ini", "scripts/release_bundle.py", "scripts/release-entrypoint.py", "scripts/native_services.py", "scripts/service-deploy.py", "scripts/service-process.py", "scripts/migrate.py", "scripts/verify-recovery.py", "config/environment.example", "config/worker.example.json", "config/worker.workflow-pull.example.json", "config/contract-hashes.json", "integrations/sub2api/upstream-lock.json"):
             copy(ROOT / name, stage / name)
         copy(ROOT / "packages/contracts/src/generation_contracts/schemas/release-manifest.schema.json", stage / "config/release-manifest.schema.json")
         for name in ("prometheus.example.yml", "monitoring.env.example"):
@@ -130,6 +131,12 @@ def main() -> None:
         for name in media_lock["files"]:
             copy(ROOT / ".local/toolchains/ffmpeg-8.1" / name, stage / "media" / name)
         verify_media_runtime(stage)
+        copy(ROOT / "config/service-tools.lock.json", stage / "config/service-tools.lock.json")
+        copy(ROOT / "deploy/native-windows/services.example.json", stage / "deploy/native-windows/services.example.json")
+        service_lock = json.loads((ROOT / "config/service-tools.lock.json").read_text(encoding="utf-8"))
+        for name in service_lock["files"]:
+            copy(ROOT / ".local/toolchains/winsw-2.12.0" / name, stage / "service-tools" / name)
+        verify_service_runtime(stage)
         copy(ROOT / "uv.lock", stage / "provenance/uv.lock")
         (stage / "provenance/source-files.json").write_text(json.dumps(sources, sort_keys=True, indent=2) + "\n", encoding="utf-8")
         backend = ROOT / ".local/bin/sub2api-provider.exe"

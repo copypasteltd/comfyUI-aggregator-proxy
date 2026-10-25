@@ -1,0 +1,12 @@
+{
+  "protocol": "native-services-v1",
+  "deployment_id": "edge-a",
+  "installation": "C:/render/install",
+  "services": [
+    {"role": "api", "instance": "main", "config": "C:/render/private/cloud.env", "state_dir": "C:/render/state/api", "startup": "manual", "listen": {"host": "127.0.0.1", "port": 8443, "tls_cert": "C:/render/private/server.crt", "tls_key": "C:/render/private/server.key", "allow_network_bind": false}},
+    {"role": "runner", "instance": "main", "config": "C:/render/private/cloud.env", "state_dir": "C:/render/state/runner", "startup": "manual"},
+    {"role": "gc", "instance": "main", "config": "C:/render/private/cloud.env", "state_dir": "C:/render/state/gc", "startup": "manual"},
+    {"role": "gateway", "instance": "main", "config": "C:/render/private/provider.json", "native_config": "C:/render/private/config.yaml", "state_dir": "C:/render/state/gateway", "startup": "manual"},
+    {"role": "worker", "instance": "gpu-a", "config": "C:/render/private/worker.json", "state_dir": "C:/render/state/worker", "startup": "manual"}
+  ]
+}

@@ -12,7 +12,13 @@ from pathlib import Path
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from release_bundle import ReleaseError, strict_json, verify_candidate, verify_payload  # noqa: E402 -- before importing the immutable local verifier
+from release_bundle import (  # noqa: E402 -- before importing the immutable local verifier
+    ReleaseError,
+    strict_json,
+    verify_candidate,
+    verify_payload,
+    verify_service_python,
+)
 
 
 def outside(path: Path, installation: Path) -> Path:
@@ -53,7 +59,7 @@ def database_compatible(settings, manifest: dict) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("role", choices=("api", "runner", "gc", "worker"))
+    parser.add_argument("role", choices=("api", "runner", "gc", "worker", "gateway"))
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--state-dir", type=Path, required=True)
     parser.add_argument("--once", action="store_true")
@@ -64,6 +70,7 @@ def main() -> None:
     parser.add_argument("--port", type=int, default=8443)
     parser.add_argument("--tls-cert", type=Path)
     parser.add_argument("--tls-key", type=Path)
+    parser.add_argument("--native-config", type=Path)
     args = parser.parse_args()
     try:
         payload = Path(__file__).resolve().parents[1]
@@ -73,6 +80,9 @@ def main() -> None:
             raise ReleaseError("invalid_install_record")
         manifest = verify_payload(payload, record["manifest_sha256"])
         verify_candidate(payload, manifest)
+        if Path(sys.executable).name.casefold() == "python-service.exe":
+            if Path(sys.executable).resolve() != verify_service_python(installation, record.get("service_python")):
+                raise ReleaseError("service_python_interpreter_mismatch")
         if manifest["contracts"]["version"] == "0.5.0":
             os.environ["PATH"] = str(payload / "media/bin") + os.pathsep + os.environ.get("PATH", "")
         if args.once and args.role not in ("runner", "gc"):
@@ -86,6 +96,19 @@ def main() -> None:
         if not state.is_dir():
             raise ReleaseError("state_directory_required")
         os.chdir(state)
+        if args.role == "gateway":
+            if args.native_config is None:
+                raise ReleaseError("gateway_native_configuration_required")
+            native_config = outside(args.native_config, installation).resolve(strict=True)
+            from native_services import run_gateway
+
+            if args.validate_config:
+                print(json.dumps({"role": "gateway", "configuration_paths_valid": True, "configuration_contents_verified": False, "processes_started": False}))
+                return
+            run_gateway(payload, config, state, native_config)
+            return
+        if args.native_config is not None:
+            raise ReleaseError("native_configuration_only_supported_for_gateway")
         if args.role == "worker":
             from windows_worker.configuration import load_settings, validate_startup
             from windows_worker.runtime import Worker
@@ -115,7 +138,7 @@ def main() -> None:
                 raise ReleaseError("explicit_tls_required")
             cert = outside(args.tls_cert, installation).resolve(strict=True)
             key = outside(args.tls_key, installation).resolve(strict=True)
-            uvicorn.run(create_app(settings), host=args.host, port=args.port, ssl_certfile=str(cert), ssl_keyfile=str(key), access_log=False, proxy_headers=False, log_level="warning")
+            uvicorn.run(create_app(settings), host=args.host, port=args.port, ssl_certfile=str(cert), ssl_keyfile=str(key), access_log=False, proxy_headers=False, log_level="warning", timeout_graceful_shutdown=90)
         else:
             if args.role == "runner":
                 from control_runner.main import main as run

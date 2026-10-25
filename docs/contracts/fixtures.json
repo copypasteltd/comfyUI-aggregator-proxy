@@ -43200,6 +43200,891 @@
           "alert_for_seconds": "0"
         }
       }
+    },
+    {
+      "id": "native_services_runner",
+      "schema": "service-deployment.schema.json",
+      "valid": true,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_api",
+      "schema": "service-deployment.schema.json",
+      "valid": true,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "api",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "listen": {
+              "host": "127.0.0.1",
+              "port": 8443,
+              "tls_cert": "C:/render/private/server.crt",
+              "tls_key": "C:/render/private/server.key",
+              "allow_network_bind": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_gateway",
+      "schema": "service-deployment.schema.json",
+      "valid": true,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "gateway",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "automatic-delayed",
+            "native_config": "C:/render/private/config.yaml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_worker",
+      "schema": "service-deployment.schema.json",
+      "valid": true,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "worker",
+            "instance": "main",
+            "config": "D:/render/private/worker.json",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_protocol_4",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "v2",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_protocol_5",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": true,
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_deployment_id_6",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "../other",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_deployment_id_7",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_deployment_id_8",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "a-",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_installation_9",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "//server/share",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_installation_10",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/%PATH%",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_installation_11",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/file:ads",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_installation_12",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "relative",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_services_13",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": []
+      }
+    },
+    {
+      "id": "native_services_invalid_root_services_14",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          },
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_root_extra_15",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ],
+        "extra": "shell"
+      }
+    },
+    {
+      "id": "native_services_invalid_service_role",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "shell",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_service_instance",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "-bad",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_service_config_control",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/secret\n.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_service_config_quote",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/secret\".env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_service_state_dir",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/*",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_service_startup",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "automatic"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_service_listen",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "listen": {
+              "host": "127.0.0.1",
+              "port": 8443,
+              "tls_cert": "C:/render/private/server.crt",
+              "tls_key": "C:/render/private/server.key",
+              "allow_network_bind": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_service_native_config",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "native_config": "C:/private/x.yaml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_service_arguments",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "arguments": [
+              "--shell"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_missing_listen",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "api",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_missing_native_config",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "gateway",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "automatic-delayed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_listen_port_27",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "api",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "listen": {
+              "host": "127.0.0.1",
+              "port": true,
+              "tls_cert": "C:/render/private/server.crt",
+              "tls_key": "C:/render/private/server.key",
+              "allow_network_bind": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_listen_port_28",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "api",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "listen": {
+              "host": "127.0.0.1",
+              "port": 65536,
+              "tls_cert": "C:/render/private/server.crt",
+              "tls_key": "C:/render/private/server.key",
+              "allow_network_bind": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_listen_port_29",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "api",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "listen": {
+              "host": "127.0.0.1",
+              "port": "443",
+              "tls_cert": "C:/render/private/server.crt",
+              "tls_key": "C:/render/private/server.key",
+              "allow_network_bind": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_listen_allow_network_bind_30",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "api",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "listen": {
+              "host": "127.0.0.1",
+              "port": 8443,
+              "tls_cert": "C:/render/private/server.crt",
+              "tls_key": "C:/render/private/server.key",
+              "allow_network_bind": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_listen_tls_key_31",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "api",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "listen": {
+              "host": "127.0.0.1",
+              "port": 8443,
+              "tls_cert": "C:/render/private/server.crt",
+              "tls_key": "C:/private/%KEY%",
+              "allow_network_bind": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_invalid_listen_host_32",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "api",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual",
+            "listen": {
+              "host": "",
+              "port": 8443,
+              "tls_cert": "C:/render/private/server.crt",
+              "tls_key": "C:/render/private/server.key",
+              "allow_network_bind": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_missing_required_33",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "native-services-v1",
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "native_services_missing_required_34",
+      "schema": "service-deployment.schema.json",
+      "valid": false,
+      "data": {
+        "deployment_id": "edge-a",
+        "installation": "C:/render/install",
+        "services": [
+          {
+            "role": "runner",
+            "instance": "main",
+            "config": "C:/render/private/cloud.env",
+            "state_dir": "C:/render/state/runner",
+            "startup": "manual"
+          }
+        ]
+      }
     }
   ]
 }

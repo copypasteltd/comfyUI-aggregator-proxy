@@ -261,6 +261,70 @@ def verify_candidate(payload: Path, manifest: dict) -> None:
             raise ReleaseError("candidate_required_artifact")
     if manifest["contracts"]["version"] == "0.5.0":
         verify_media_runtime(payload)
+    if any((payload / name).exists() for name in ("config/service-tools.lock.json", "scripts/native_services.py", "scripts/service-deploy.py", "scripts/service-process.py", "service-tools")):
+        verify_service_runtime(payload)
+
+
+
+SERVICE_TOOL_FILES = {
+    "WinSW.NET461.exe": {"bytes": 655872, "sha256": "b5066b7bbdfba1293e5d15cda3caaea88fbeab35bd5b38c41c913d492aadfc4f"},
+    "LICENSE.txt": {"bytes": 1158, "sha256": "1cdf703c10a70e5973bf3acf2a5eeabe7746237155b92db2034aeae26fdf7802"},
+}
+
+SERVICE_PYTHON_FILES = {"python-service.exe": "python.exe", "python313.dll": "python313.dll", "python3.dll": "python3.dll", "vcruntime140.dll": "vcruntime140.dll", "vcruntime140_1.dll": "vcruntime140_1.dll"}
+
+
+def prepare_service_python(installation: Path) -> dict:
+    """Copy the real host interpreter, avoiding the venv redirector process."""
+    record = {"protocol": "host-cpython-service-v1", "python_version": sys.version.split()[0], "files": {}}
+    for target_name, source_name in SERVICE_PYTHON_FILES.items():
+        source = Path(sys.base_prefix) / source_name
+        target = installation / "venv/Scripts" / target_name
+        if source.is_symlink() or not source.is_file() or target.exists():
+            raise ReleaseError("service_python_runtime_source_or_target")
+        shutil.copyfile(source, target)
+        record["files"][target_name] = {"bytes": target.stat().st_size, "sha256": digest_file(target)}
+    return record
+
+
+def verify_service_python(installation: Path, record: object) -> Path:
+    value = _keys(record, "protocol python_version files")
+    if value["protocol"] != "host-cpython-service-v1" or not isinstance(value["python_version"], str) or not re.fullmatch(r"3\.13\.\d+", value["python_version"]) or type(value["files"]) is not dict or set(value["files"]) != set(SERVICE_PYTHON_FILES):
+        raise ReleaseError("service_python_receipt_invalid")
+    for name, item in value["files"].items():
+        item = _keys(item, "bytes sha256")
+        _hash(item["sha256"])
+        target = installation / "venv/Scripts" / name
+        if any(path.exists() and path.lstat().st_file_attributes & stat.FILE_ATTRIBUTE_REPARSE_POINT for path in (installation, installation / "venv", target.parent, target)):
+            raise ReleaseError("service_python_runtime_reparse_point")
+        if type(item["bytes"]) is not int or not 1 <= item["bytes"] <= 64 * 1024**2 or target.is_symlink() or not target.is_file() or target.stat().st_nlink != 1 or target.stat().st_size != item["bytes"] or digest_file(target) != item["sha256"]:
+            raise ReleaseError("service_python_runtime_mismatch")
+    return installation / "venv/Scripts/python-service.exe"
+
+
+def verify_service_runtime(payload: Path) -> Path:
+    """Authenticate the optional v85 fixed native service wrapper and its license."""
+    lock = _keys(strict_json((payload / "config/service-tools.lock.json").read_bytes()), "protocol version platform source asset license digest_origin files")
+    expected = {
+        "protocol": "winsw-pin-v1", "version": "2.12.0", "platform": "windows-net461",
+        "source": "https://github.com/winsw/winsw/releases/tag/v2.12.0",
+        "asset": "https://github.com/winsw/winsw/releases/download/v2.12.0/WinSW.NET461.exe",
+        "license": "MIT", "digest_origin": "project-first-download-from-official-https-api-no-upstream-digest",
+        "files": SERVICE_TOOL_FILES,
+    }
+    if lock != expected:
+        raise ReleaseError("candidate_service_tool_pin")
+    tools = payload / "service-tools"
+    if tools.is_symlink() or not tools.is_dir() or {path.name for path in tools.iterdir()} != set(SERVICE_TOOL_FILES):
+        raise ReleaseError("candidate_service_tool_inventory")
+    for name, item in SERVICE_TOOL_FILES.items():
+        target = tools / name
+        if target.is_symlink() or not target.is_file() or target.stat().st_size != item["bytes"] or digest_file(target) != item["sha256"]:
+            raise ReleaseError("candidate_service_tool_digest")
+    for name in ("scripts/native_services.py", "scripts/service-deploy.py", "scripts/service-process.py", "deploy/native-windows/services.example.json"):
+        if not (payload / name).is_file():
+            raise ReleaseError("candidate_service_tool_entrypoint")
+    return tools / "WinSW.NET461.exe"
 
 
 def verify_media_runtime(payload: Path) -> Path:
@@ -333,6 +397,7 @@ def install_archive(archive: Path, expected_sha256: str, destination: Path) -> d
         verify_candidate(payload, manifest)
         venv.EnvBuilder(with_pip=True, symlinks=False).create(destination / "venv")
         python = destination / "venv/Scripts/python.exe"
+        service_python = prepare_service_python(destination) if (payload / "config/service-tools.lock.json").is_file() else None
         subprocess.run([str(python), "-I", "-m", "pip", "--isolated", "install", "--no-index", "--find-links", str(payload / "wheels"), "--only-binary=:all:", "--no-deps", "--require-hashes", "-r", str(payload / "runtime-requirements.txt")], env=clean_environment(), cwd=destination, check=True, timeout=300, capture_output=True)  # noqa: S603 -- fixed offline installer, authenticated inventory and locked hashes
         probe = """import hashlib,importlib.metadata as m,importlib.util as u,json,sys
 from importlib.resources import files
@@ -349,10 +414,18 @@ assert not any(json.loads(d.read_text('direct_url.json') or '{}').get('dir_info'
 print(json.dumps({'prefix':sys.prefix,'modules':list(modules),'contracts_verified':len(hashes),'distributions':{d.metadata['Name'].lower().replace('_','-'):d.version for d in m.distributions()}}))"""
         completed = subprocess.run([str(python), "-I", "-c", probe, str(payload)], env=clean_environment(), cwd=destination, check=True, timeout=30, capture_output=True, text=True)  # noqa: S603 -- fixed local installed-distribution and packaged-contract probe
         installed = json.loads(completed.stdout)
+        if service_python is not None:
+            service_executable = verify_service_python(destination, service_python)
+            service_probe = subprocess.run([str(service_executable), "-I", "-c", probe, str(payload)], env=clean_environment(), cwd=destination, check=True, timeout=30, capture_output=True, text=True)  # noqa: S603 -- freshly copied real CPython host runtime, same isolated installed-package probe
+            service_installed = json.loads(service_probe.stdout)
+            if service_installed != installed:
+                raise ReleaseError("service_python_installed_probe_mismatch")
         if Path(installed["prefix"]).resolve() != (destination / "venv").resolve() or any(installed["distributions"].get(name) != version for name, version in requirements):
             raise ReleaseError("installed_distribution_mismatch")
         subprocess.run([str(python), "-I", "-m", "pip", "--isolated", "check"], env=clean_environment(), cwd=destination, check=True, timeout=30, capture_output=True)  # noqa: S603 -- fixed offline dependency compatibility check
         result = {"format_version": 1, "release_id": manifest["release_id"], "archive_sha256": expected_sha256, "manifest_sha256": digest_file(payload / MANIFEST), "python_version": sys.version.split()[0], "requirements": len(requirements), "application_modules": installed["modules"], "contracts_verified": installed["contracts_verified"], "offline": True, "editable": False}
+        if service_python is not None:
+            result["service_python"] = service_python
         (destination / "install.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
         verify_payload(payload, result["manifest_sha256"])
         return result
