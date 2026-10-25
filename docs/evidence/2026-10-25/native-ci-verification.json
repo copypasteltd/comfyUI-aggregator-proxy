@@ -1,0 +1,127 @@
+{
+  "at": "2026-10-25T02:21:49.553272+00:00",
+  "passed": true,
+  "baseline_commit": "b3daeaa1ce1c7a329bfb73e6962059fe03a2e2a8",
+  "local_working_tree_verification": true,
+  "successful_ci_run": "ci83-20261025-lock-fixed",
+  "bootstrap_run": "ci83-20261025-bootstrap",
+  "bootstrap_reused_after_lock_fix": true,
+  "source_inputs_verified": 558,
+  "sources_unchanged": true,
+  "required_gates_passed": 16,
+  "python": {
+    "tests": 3275,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "focused_ci_tests": 43,
+  "frontend_units": 40,
+  "mypy_source_files": 157,
+  "uv_lock_packages": 75,
+  "application_wheels": 7,
+  "database": {
+    "render_control": {
+      "head": "2c9f1d6a4830",
+      "business_tables": 45,
+      "server_version": 180006
+    },
+    "render_control_test": {
+      "head": "2c9f1d6a4830",
+      "business_tables": 45,
+      "server_version": 180006
+    }
+  },
+  "test_database_backup": {
+    "at": "2026-10-25T02:07:28.167885+00:00",
+    "database": "render_control_test",
+    "server_version": 180006,
+    "backup_sha256": "1ee1ab279e98222eb7405cb58e88fb315d5d9ac80d36c2dcd4d089f3a2890d4f",
+    "archive_list_verified": true,
+    "restore_rehearsed": false
+  },
+  "safe_public_ci_reports_verified": 5,
+  "raw_logs_uploaded": false,
+  "first_failed_run_retained": true,
+  "ci_lock_collision_fixed": true,
+  "ci_does_not_hold_dispatch_or_migration_lock": true,
+  "local_github_mode_dirty_source_refused": true,
+  "actual_github_runner_accepted": false,
+  "runtime_inputs_reverified_for_historical_evidence": 251,
+  "gateway_related_inputs_reverified": 84,
+  "go_or_native_protocol_rerun": false,
+  "historical_candidate_rebuilt": false,
+  "new_browser_tabs": 0,
+  "resource_cleanup": {
+    "at": "2026-10-25T02:20:46.9950770Z",
+    "passed": true,
+    "observed_ci_processes": 4,
+    "observed_ci_processes_still_running": 0,
+    "retained_development_processes": 9,
+    "retained_purpose": "Existing API/Runner/GC development preview",
+    "browser_tabs_created": 0,
+    "virtualization_used": false,
+    "original_user_processes_stopped": false,
+    "ci_raw_logs_retained_privately": true
+  },
+  "remaining_items": 71,
+  "first_release_remaining": 69,
+  "optional_remaining": 2,
+  "real_workflows_accepted": false,
+  "real_s3_accepted": false,
+  "real_redis_accepted": false,
+  "physical_fleet_accepted": false,
+  "production_accepted": false,
+  "known_gateway_concurrent_auth_row_lock_timeout_resolved": false,
+  "goal_complete": false,
+  "ci_reports": [
+    {
+      "path": "docs/evidence/native-ci/ci83-20261025-bootstrap/bootstrap.json",
+      "sha256": "c0e4abd093e3058fdb8be6a78d29c3f2eafd06f4e7e717aaddeb309059ff58ef",
+      "passed": true,
+      "state": "bootstrap"
+    },
+    {
+      "path": "docs/evidence/native-ci/ci83-20261025-bootstrap/summary.json",
+      "sha256": "ae2939ace978aad952f3217f01e42db03d751402cc97f3160d4cc4704590b1bf",
+      "passed": false,
+      "state": "failed"
+    },
+    {
+      "path": "docs/evidence/native-ci/ci83-20261025-lock-fixed/summary.json",
+      "sha256": "9b1beb2997b84605657b280625a380a2f7961749f748a32ee8dc6f1f291331bc",
+      "passed": true,
+      "state": "passed"
+    },
+    {
+      "path": "docs/evidence/native-ci/ci83-concurrent-refused/summary.json",
+      "sha256": "ff2f0df7e0ba8fa09046dd5ed0cbbeafa9851afd18f1c201a199012f9d6be9fb",
+      "passed": false,
+      "state": "failed"
+    },
+    {
+      "path": "docs/evidence/native-ci/ci83-github-dirty-refused/summary.json",
+      "sha256": "4281807998e2d51ccfaf15acca44bc8ffe59072904986fc33fa96ee592d200d2",
+      "passed": false,
+      "state": "failed"
+    }
+  ],
+  "final_documentation": {
+    "passed": true,
+    "markdown_documents": 87,
+    "local_links_checked": 1582,
+    "readme_entry_documents": 7,
+    "readme_links_checked": 312,
+    "request_examples": 3,
+    "screenshots_verified": 18,
+    "video_and_gif_fully_decoded": 8,
+    "schema": 56,
+    "fixtures": 865,
+    "positive_fixtures": 207,
+    "negative_fixtures": 658,
+    "design_endpoints": 188,
+    "openapi_paths": 154,
+    "openapi_methods": 195
+  },
+  "final_documentation_checked_at": "2026-10-25T02:25:19.880154+00:00"
+}

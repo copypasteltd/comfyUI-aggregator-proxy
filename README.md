@@ -12,7 +12,9 @@
 
 [完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05 的发布与重试实现已补齐，71 项仍待收口（69 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md) 与 [确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 已有本地实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
 
-本轮 [验证记录](docs/evidence/2026-10-25/confirmed-retry-verification.json)：完整 Python 回归 3232 项、契约/单元 2156 项、前端 40 项单元、重试界面 8 项、候选安装 24 项及安装后浏览器 8 项通过；实际服务跨进程 26 个场景覆盖六类任务、OOM 换卡和唯一结算。ComfyUI/Redis/存储仍为协议夹具；并行运行中出现的鉴权行锁超时/502 保留待定位，不以隔离通过替代并发容量验收。
+新增 [原生 CI](docs/83-原生CI门禁与失败证据.md)：固定 16 项串行门禁、独立测试目录、测试库备份后迁移、只公开脱敏摘要，原始日志/JUnit 留在私有目录。[本地完整验证](docs/evidence/2026-10-25/native-ci-verification.json) 16 项门禁和 3275 项 Python 回归通过，包含 [43 项 CI 专项](docs/evidence/2026-10-25/native-ci-unit-summary.json)；专用物理 Runner、仓库变量启用及实际 GitHub 成功/失败 artifact 仍待验收，待办 11 继续开放。
+
+第 82 增量 [验证记录](docs/evidence/2026-10-25/confirmed-retry-verification.json)：完整 Python 回归 3232 项、契约/单元 2156 项、前端 40 项单元、重试界面 8 项、候选安装 24 项及安装后浏览器 8 项通过；实际服务跨进程 26 个场景覆盖六类任务、OOM 换卡和唯一结算。ComfyUI/Redis/存储仍为协议夹具；并行运行中出现的鉴权行锁超时/502 保留待定位，不以隔离通过替代并发容量验收。该候选与运行证据描述当时版本；本次工具链变更不冒称已经重建候选。
 
 ## 目录
 
@@ -274,6 +276,7 @@ comfyUI-aggregator-proxy/
 ./scripts/check.ps1 -Suite Docs
 ./scripts/check.ps1 -Suite Python
 ./scripts/check.ps1 -Suite Frontend
+./scripts/check.ps1 -Suite CI
 ./scripts/check.ps1 -Suite Sub2API
 ./scripts/check.ps1 -Suite Sub2APILedger
 ./scripts/check.ps1 -Suite Sub2APINative
@@ -282,7 +285,16 @@ comfyUI-aggregator-proxy/
 
 Python 集成测试要求本项目的原生 PostgreSQL 与独立 `render_control_test` 库，不以进程内或 SQLite 替代。Go 和完整 Sub2API 检查要求锁定的原生 Go 工具链与对应上游缓存。浏览器检查和录屏必须在 `finally` 中关闭自己创建的 page/context/browser。
 
-| 最近验证：第 82 增量 | 结果及范围 |
+原生 CI 的统一入口为 `./scripts/ci.ps1 -Action Verify`。它串行核对文档、依赖锁、静态、只读生成物、前端单元/构建、测试库备份/迁移、完整 Python、七个 wheel、README/媒体及发布审查；日志有字节/时间上限，原始日志和 JUnit 留在 `.local/`，公开 JSON 仅含状态、计数、摘要及清理事实。专用 Windows 自托管 Runner 使用固定标签，并由 `NATIVE_CI_ENABLED=true` 启用；只运行受信主分支 push/手动触发，Action 固定提交。锁定依赖准备可执行 `./scripts/ci.ps1 -Action Bootstrap`，数据库和私有配置由管理员事先准备。详细命令、媒体来源与远端验收边界见 [原生 CI](docs/83-原生CI门禁与失败证据.md)。
+
+| 第 83 增量：本地原生 CI | 结果及范围 |
+| --- | --- |
+| 完整门禁 | 16 项串行通过，558 项 app/平台入口源摘要一致 |
+| Python/前端 | Python 3275 项（含 CI 专项 43），零失败/错误/跳过；前端 40 单元、类型比对/检查和生产构建 |
+| 工程/数据库 | Ruff、157 文件 mypy、75 包锁、七个 wheel；测试库先备份验证再迁移，两库保持 45 业务表/head 2c9f1d6a4830 |
+| 失败与边界 | 保留首轮 CI 锁冲突及修复证据；五份公开 JSON 白名单通过，原始日志/JUnit 私有；实际 GitHub Runner 仍待验收 |
+
+| 历史运行/安装验证：第 82 增量 | 结果及范围 |
 | --- | --- |
 | Python | 完整 3232 项；契约/单元 2156 项；完整回归含确认失败与目录后端 58 项 |
 | 前端 | 40 项单元、类型生成/检查和生产构建 |

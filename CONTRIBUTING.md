@@ -4,6 +4,8 @@
 
 ## 中文
 
+原生 CI 使用 `app/scripts/ci.ps1 -Action Verify`（在 app 执行）。GitHub 必需的根 `.github/workflows` 仅保存平台入口；业务脚本仍在 app。主分支受信代码在专用原生 Windows Runner 执行，启用与准备步骤见 [83](docs/83-原生CI门禁与失败证据.md)。CI 报告不可自动包含原始日志、JUnit、凭证或数据库备份；生成文件漂移应修复后新开一轮。
+
 1. 从 `AGENTS.md`、`docs/09-开发总纲与强制约束.md` 和对应专题开始。应用代码、配置、脚本与构建位于 `app/`；设计、机器契约、演示素材和证据位于 `docs/`。根目录保留仓库入口文件。
 2. 使用原生进程，禁止 Docker/WSL/VM。浏览器自动化须在 `finally` 关闭自己创建的 page/context/browser，不关闭用户已有标签页。
 3. 冻结契约变化先修改文档/机器契约，再同步实现、OpenAPI/前端类型、迁移及相应验证。维护 PostgreSQL 权威、物理 GPU 栅栏、提交前 journal、租户/Key 隔离和幂等不变量。
@@ -31,6 +33,8 @@ git push
 新分支首次使用 `git push -u origin <branch>`。`main` 的上游为 `origin/main`。新增安装包通过单独的发布流程处理；源码推送不隐式安装、部署或发布 GitHub Release。现有 `.gitattributes` 保留文件精确字节，并识别 Windows 换行，避免冻结契约、上游补丁与证据摘要因跨平台换行被静默改变；归档日志/XML 报告保留诊断输出的原始空白，新增文本按 `.editorconfig` 使用 UTF-8/LF。
 
 ## English
+
+Run native CI with `app/scripts/ci.ps1 -Action Verify` from `app`. The root `.github/workflows` exception contains only the required platform entry; implementation stays in `app`. A dedicated native Windows Runner executes trusted main-branch code; provisioning and activation are documented in [topic 83](docs/83-原生CI门禁与失败证据.md). Public artifacts must exclude raw logs, JUnit, credentials and database backups. Fix generated-file drift before starting a new run.
 
 1. Read `AGENTS.md`, the development rules and the relevant topic before editing. Keep code/configuration/scripts/builds under `app/` and design/contracts/media/evidence under `docs/`. Repository entry points belong at the root.
 2. Use native processes; Docker, WSL and VMs are prohibited. Browser automation must close only its own page/context/browser in `finally`.

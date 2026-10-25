@@ -1,0 +1,32 @@
+{
+  "format_version": 1,
+  "repository": "copypasteltd/comfyUI-aggregator-proxy",
+  "branch": "main",
+  "enable_variable": "NATIVE_CI_ENABLED",
+  "runner_labels": ["self-hosted", "Windows", "X64", "render-control-native"],
+  "actions": {
+    "checkout": "d23441a48e516b6c34aea4fa41551a30e30af803",
+    "upload_artifact": "b7c566a772e6b6bfb58ed0dc250532a479d7789f"
+  },
+  "artifact_retention_days": 14,
+  "log_limit_bytes": 67108864,
+  "job_timeout_minutes": 45,
+  "timeouts_seconds": {
+    "docs": 90,
+    "lock": 60,
+    "ruff": 120,
+    "mypy": 240,
+    "contracts": 60,
+    "openapi": 60,
+    "types_generate": 90,
+    "types_compare": 30,
+    "frontend_units": 90,
+    "frontend_build": 240,
+    "database_migrate": 180,
+    "python": 1200,
+    "wheels_build": 300,
+    "wheels_verify": 60,
+    "readme": 120,
+    "publication": 120
+  }
+}

@@ -1,5 +1,20 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 — 原生 CI 与完整待办追踪 / Native CI and complete backlog tracking
+
+- 新增专用原生 Windows x64 自托管 CI；仅受信主分支且显式启用时执行。固定 Action 提交、只读仓库权限、串行门禁、OS/数据库锁和独立目录；不调用 Docker/WSL/VM，不自动注册开发主机。
+- Add opt-in CI for a dedicated native Windows x64 Runner, trusted main only, pinned Action commits, read-only repository access, serial gates, OS/database locks and isolated directories. No Docker/WSL/VM or automatic registration of the development host.
+- 契约/OpenAPI 新增只读漂移检查；前端类型在私有目录生成比对；测试库备份并验证归档后迁移，完整回归、前端单元/构建及七个 wheel 构建纳入驱动。
+- Add read-only contract/OpenAPI drift checks, private frontend type comparison, test-only migration after verified backup, full regression, frontend tests/build and seven-wheel construction.
+- 原始日志/JUnit 私有保留，公开 JSON 仅含固定状态/计数/摘要。固定超时及 64 MiB 日志上限，使用所属 Windows Job Object 清理子进程；本地并发拒绝与失败 not_run 记录已核对。
+- Retain raw logs/JUnit privately and expose only fixed status/count/hash facts in JSON. Enforce timeouts and a 64 MiB log limit, close owned Windows process trees, and verify concurrent refusal plus durable not_run results.
+- 43 项专项检查通过。完整待办保留 76 编号，01～05 实现关闭，71 项仍待收口（首版 69、可选 2）；11 仍缺实际 Runner 启用和 GitHub 成功/失败 artifact。真实资源与生产验收状态不提升。
+- All 43 focused checks passed. Preserve 76 backlog IDs, five completed implementations and 71 open items (69 first-release, two optional). Item 11 still requires actual Runner enablement and GitHub success/failure artifacts. Real-resource and production acceptance remain open.
+- 保留首轮完整 CI 的锁冲突失败；修正 CI 专用 advisory key，新增与派单/清理/迁移锁编号不冲突的回归，并在真实本地 PostgreSQL 核对持 CI 锁时派单/迁移仍可领取。不改业务锁或等待预算。
+- Preserve the first full CI failure, assign a distinct CI advisory key, and add a cross-module regression. Verify dispatch and migration locks remain available while CI holds its own lock, without changing business locks or wait budgets.
+- 最终本地 16 门禁、3275 Python（零失败/错误/跳过）、40 前端单元、157 文件 mypy、Ruff/75 包锁、七个 wheel 全部通过；558 源输入一致、五份公开 JSON 白名单通过，原始日志/JUnit 私有。两库保持 45 业务表/head 2c9f1d6a4830，测试库归档先验证后迁移；本轮没有新迁移或实机验收。
+- Final local validation passed 16 gates, 3275 Python checks with zero failures/errors/skips, 40 frontend units, mypy on 157 files, Ruff, the 75-package lock and seven wheels. Verify 558 source inputs and whitelist five public JSON reports. Both databases retain 45 business tables/head 2c9f1d6a4830; verify the test backup before migration. No new migration or physical-resource acceptance.
+
 ## 2026-10-25 — 确认失败重试与跨 GPU 约束 / Confirmed failure retries across GPUs
 
 - 完善安全失败分类：明确未提交的准备传输错误与有当前 prompt 停止证明的白名单 OOM 共享两次重试、5/15 秒退避；每任务最多一次 OOM，必须换到原冻结渠道内另一已批准物理 GPU，原 job/seed/Workflow/规格/输入/deadline/价格不变。

@@ -1,4 +1,4 @@
-param([ValidateSet('All','Python','Frontend','Docs','Sub2API','Sub2APILedger','Sub2APIProvider','Sub2APINative','Sub2APINativeCatalog','Sub2APINativeRetry')][string]$Suite='All')
+param([ValidateSet('All','Python','Frontend','Docs','CI','Sub2API','Sub2APILedger','Sub2APIProvider','Sub2APINative','Sub2APINativeCatalog','Sub2APINativeRetry')][string]$Suite='All')
 $ErrorActionPreference = 'Stop'
 $taskRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 Set-Location -LiteralPath $taskRoot
@@ -12,7 +12,8 @@ if ($Suite -in @('All','Python')) {
     Invoke-Checked (Join-Path $taskRoot '.venv\Scripts\uv.exe') @('lock','--check')
     Invoke-Checked (Join-Path $taskRoot '.venv\Scripts\ruff.exe') @('check','packages','apps','scripts','tests','migrations')
     Invoke-Checked (Join-Path $taskRoot '.venv\Scripts\mypy.exe') @('packages','apps')
-    Invoke-Checked (Join-Path $taskRoot '.venv\Scripts\pytest.exe') @('-q','tests','--tb=short')
+    $taskTestRoot=Join-Path $taskRoot ('.local/check-pytest-'+[guid]::NewGuid().ToString('N'))
+    Invoke-Checked (Join-Path $taskRoot '.venv\Scripts\pytest.exe') @('-q','tests','--tb=short',('--basetemp='+$taskTestRoot))
 }
 if ($Suite -in @('All','Frontend')) {
     $taskNodeDirectory = Join-Path $taskRoot '.local\toolchains\node-24.22.1\node-v24.22.1-win-x64'
@@ -21,8 +22,12 @@ if ($Suite -in @('All','Frontend')) {
     Push-Location -LiteralPath 'apps\admin_web'
     try {
         Invoke-Checked (Join-Path $taskNodeDirectory 'npm.cmd') @('run','generate:api')
+        Invoke-Checked (Join-Path $taskNodeDirectory 'node.exe') @('--test','tests/workflowJson.test.ts','tests/gatewayCatalog.test.ts')
         Invoke-Checked (Join-Path $taskNodeDirectory 'npm.cmd') @('run','build')
     } finally { Pop-Location }
+}
+if ($Suite -eq 'CI') {
+    Invoke-Checked $taskPython @('-X','utf8','scripts/native_ci.py')
 }
 if ($Suite -in @('All','Docs')) {
     Push-Location -LiteralPath (Split-Path $taskRoot -Parent)

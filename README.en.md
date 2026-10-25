@@ -12,7 +12,9 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: implementation items 01–05 are complete, with 71 still open (69 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md), [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md) and [confirmed failure retries](docs/82-确认失败重试分类与跨GPU约束.md) have local implementations and separate verification evidence. Actual Workflows, joint gateway behavior, failures and production still require acceptance.
 
-The latest [verification record](docs/evidence/2026-10-25/confirmed-retry-verification.json) reports 3232 full Python checks, 2156 contract/unit checks, 40 frontend unit checks, eight retry browser checks, 24 candidate installation checks and eight installed browser checks. Actual service processes passed 26 scenarios covering six task types, OOM rerouting and single settlement. ComfyUI/Redis/storage remain protocol fixtures. A gateway authentication row-lock timeout/502 observed during concurrent checks remains unresolved; an isolated pass does not establish concurrent capacity.
+The new [native CI](docs/83-原生CI门禁与失败证据.md) provides 16 serial gates, isolated test directories, backup before test-database migration and sanitized public summaries. Raw logs/JUnit remain private. [Complete local verification](docs/evidence/2026-10-25/native-ci-verification.json) passed all 16 gates and 3275 Python checks, including [43 focused CI checks](docs/evidence/2026-10-25/native-ci-unit-summary.json). A dedicated physical Runner, repository enablement and actual GitHub success/failure artifacts still require acceptance; item 11 remains open.
+
+The increment 82 [verification record](docs/evidence/2026-10-25/confirmed-retry-verification.json) reports 3232 full Python checks, 2156 contract/unit checks, 40 frontend unit checks, eight retry browser checks, 24 candidate installation checks and eight installed browser checks. Actual service processes passed 26 scenarios covering six task types, OOM rerouting and single settlement. ComfyUI/Redis/storage remain protocol fixtures. A gateway authentication row-lock timeout/502 observed during concurrent checks remains unresolved; an isolated pass does not establish concurrent capacity. That candidate and runtime evidence describe their recorded revision; this tooling change does not claim a rebuilt candidate.
 
 ## Contents
 
@@ -274,6 +276,7 @@ Run from `app/`:
 ./scripts/check.ps1 -Suite Docs
 ./scripts/check.ps1 -Suite Python
 ./scripts/check.ps1 -Suite Frontend
+./scripts/check.ps1 -Suite CI
 ./scripts/check.ps1 -Suite Sub2API
 ./scripts/check.ps1 -Suite Sub2APILedger
 ./scripts/check.ps1 -Suite Sub2APINative
@@ -282,7 +285,16 @@ Run from `app/`:
 
 Python integration tests require the project's native PostgreSQL and separate `render_control_test` database. In-memory/SQLite substitutes do not satisfy that gate. Go and full Sub2API checks require the pinned native Go toolchain and corresponding upstream cache. Browser tests/recordings must close their own page/context/browser in `finally`.
 
-| Recent verification: increment 82 | Result and scope |
+Run the native CI driver with `./scripts/ci.ps1 -Action Verify`. It serially checks documentation, locks/static analysis, generated files without overwriting them, frontend units/build, test-database backup/migration, full Python tests, seven wheels, README/media and publication candidates. Private logs/JUnit stay in `.local/`; public JSON contains only status, counts, hashes and cleanup facts. A dedicated native Windows self-hosted Runner uses fixed labels and `NATIVE_CI_ENABLED=true`; only trusted main-branch pushes/manual runs execute, with Actions pinned to complete commits. `./scripts/ci.ps1 -Action Bootstrap` prepares locked dependencies; an administrator prepares the database/private configuration separately. See [native CI](docs/83-原生CI门禁与失败证据.md) for commands, media provisioning and the separate remote-activation gate.
+
+| Increment 83: local native CI | Result and scope |
+| --- | --- |
+| Complete gates | 16 serial gates passed; 558 app/platform source hashes match |
+| Python/frontend | 3275 Python checks including 43 CI checks, zero failures/errors/skips; 40 frontend units, generated-type comparison/checking and production build |
+| Engineering/database | Ruff, mypy on 157 files, 75-package lock, seven wheels; backup verified before test migration, both databases retain 45 business tables/head 2c9f1d6a4830 |
+| Failures and boundaries | Preserve the initial CI lock collision and its fix; whitelist all five public JSON reports, retain raw logs/JUnit privately; actual GitHub Runner acceptance remains pending |
+
+| Historical runtime/installation verification: increment 82 | Result and scope |
 | --- | --- |
 | Python | Full 3232 checks; 2156 contract/unit checks; full regression includes 58 confirmed-failure and catalog backend checks |
 | Frontend | 40 unit checks, generated API types, type checking and production build |

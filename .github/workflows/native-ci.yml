@@ -1,0 +1,46 @@
+name: Native Windows CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: render-control-native-ci
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.repository == 'copypasteltd/comfyUI-aggregator-proxy' && github.ref == 'refs/heads/main' && vars.NATIVE_CI_ENABLED == 'true'
+    runs-on: [self-hosted, Windows, X64, render-control-native]
+    timeout-minutes: 45
+    env:
+      CI_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
+      CI_MEDIA_SOURCE: ${{ vars.NATIVE_CI_MEDIA_SOURCE }}
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: app
+    steps:
+      - name: Checkout trusted main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          clean: false
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Prepare locked native dependencies
+        run: ./scripts/ci.ps1 -Action Bootstrap -RunId $env:CI_RUN_ID -MediaSource $env:CI_MEDIA_SOURCE
+      - name: Run serial native gates
+        run: ./scripts/ci.ps1 -Action Verify -RunId $env:CI_RUN_ID
+      - name: Retain safe success or failure evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: native-ci-${{ github.run_id }}-${{ github.run_attempt }}
+          path: docs/evidence/native-ci/${{ env.CI_RUN_ID }}/*.json
+          if-no-files-found: error
+          retention-days: 14
+          include-hidden-files: false

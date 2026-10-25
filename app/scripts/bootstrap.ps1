@@ -1,4 +1,4 @@
-param([switch]$WithPostgresToolchain)
+param([switch]$WithPostgresToolchain, [switch]$WithBuildTools)
 $ErrorActionPreference = 'Stop'
 $taskRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 Set-Location -LiteralPath $taskRoot
@@ -27,7 +27,11 @@ if (-not (Test-Path -LiteralPath $taskPython)) {
 }
 if (-not (Test-Path -LiteralPath '.venv/Scripts/uv.exe')) { Invoke-Checked $taskPython @('-m','pip','install','uv==0.13.5') }
 Invoke-Checked (Join-Path $taskRoot '.venv/Scripts/uv.exe') @('lock','--check')
-Invoke-Checked (Join-Path $taskRoot '.venv/Scripts/uv.exe') @('sync','--frozen')
+if ($WithBuildTools) {
+    Invoke-Checked (Join-Path $taskRoot '.venv/Scripts/uv.exe') @('sync','--frozen','--group','release-build')
+} else {
+    Invoke-Checked (Join-Path $taskRoot '.venv/Scripts/uv.exe') @('sync','--frozen')
+}
 New-Item -ItemType Directory -Path '.local/toolchains' -Force | Out-Null
 Install-PinnedArchive $taskLock.node.source $taskLock.node.sha256 '.local/toolchains/node-24.22.1.zip' '.local/toolchains/node-24.22.1'
 $taskNode = Join-Path $taskRoot '.local/toolchains/node-24.22.1/node-v24.22.1-win-x64'
