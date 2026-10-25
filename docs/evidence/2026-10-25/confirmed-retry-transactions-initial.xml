@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="39" time="12.802" timestamp="2026-10-25T08:22:20.553529+08:00" hostname="wikigspc"><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_oom_crosses_physical_gpu_preserves_job_and_records_failure[True]" time="1.089" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_oom_crosses_physical_gpu_preserves_job_and_records_failure[False]" time="0.517" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_mixed_oom_and_preparation_share_budget_and_never_return_to_oom_gpu" time="0.552" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_second_oom_is_terminal_even_when_a_third_gpu_exists" time="0.393" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[absent]" time="0.331" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[same_gpu_only]" time="0.184" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[disabled_gpu]" time="0.202" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[disabled_node]" time="0.170" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[disabled_channel]" time="0.177" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[draining]" time="0.179" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[unverified]" time="0.170" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[unapproved]" time="0.175" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[stale_node]" time="0.201" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[outside_frozen_routes]" time="0.164" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_unqualified_alternative_does_not_authorize_oom_retry[no_capacity]" time="0.143" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_mismatched_proof_keeps_original_occupancy[prompt_id]" time="0.160" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_mismatched_proof_keeps_original_occupancy[association_id]" time="0.148" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_mismatched_proof_keeps_original_occupancy[evidence_digest]" time="0.143" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_oom_guards_keep_existing_safe_semantics[legacy]" time="0.148" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_oom_guards_keep_existing_safe_semantics[unknown_stop]" time="0.141" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_oom_guards_keep_existing_safe_semantics[cancel]" time="0.206" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_oom_guards_keep_existing_safe_semantics[validation]" time="0.160" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_oom_guards_keep_existing_safe_semantics[deadline]" time="0.164" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_old_writer_cannot_insert_another_attempt_on_failed_physical_gpu" time="0.171" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_concurrent_duplicate_oom_and_cancel_due_race_commit_once" time="0.236" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_approval_revoked_while_waiting_cannot_claim_and_deadline_settles_once" time="0.317" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_downgrade_refuses_oom_retry_facts_even_after_later_preparation_failure[False]" time="0.236" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_downgrade_refuses_oom_retry_facts_even_after_later_preparation_failure[True]" time="0.288" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_reconciled_confirmed_failure_uses_its_evidence_and_correct_terminal_transition[alternative]" time="0.183" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_reconciled_confirmed_failure_uses_its_evidence_and_correct_terminal_transition[no_alternative]" time="0.170" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_reconciled_confirmed_failure_uses_its_evidence_and_correct_terminal_transition[deadline]" time="0.173" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_reconciled_confirmed_failure_uses_its_evidence_and_correct_terminal_transition[cancel]" time="0.166" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_reconciled_confirmed_failure_uses_its_evidence_and_correct_terminal_transition[legacy]" time="0.197" /><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_retry_requires_current_matching_runtime_approval_at_claim[none]" time="0.134"><failure message="sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)&#10;(psycopg.errors.CheckViolation) workflow release is immutable&#10;CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE&#10;[SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]&#10;[parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('5fd067cb-fe40-4987-b176-4664f47d0c55')}]&#10;(Background on this error at: https://sqlalche.me/e/20/gkpj)">.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_confirmed_failure_retries.py:558: in test_retry_requires_current_matching_runtime_approval_at_claim
+    binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == target["channel_id"]))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2421: in scalar
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2250: in _execute_internal
+    ) = compile_state_cls.orm_pre_session_exec(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:577: in orm_pre_session_exec
+    session._autoflush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3073: in _autoflush
+    raise e.with_traceback(sys.exc_info()[2])
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3062: in _autoflush
+    self.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+E   (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('5fd067cb-fe40-4987-b176-4664f47d0c55')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)</failure></testcase><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_retry_requires_current_matching_runtime_approval_at_claim[profile]" time="0.096"><failure message="sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)&#10;(psycopg.errors.CheckViolation) workflow release is immutable&#10;CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE&#10;[SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]&#10;[parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('95221e4d-b779-4308-86e2-8bd2684cf2b9')}]&#10;(Background on this error at: https://sqlalche.me/e/20/gkpj)">.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_confirmed_failure_retries.py:558: in test_retry_requires_current_matching_runtime_approval_at_claim
+    binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == target["channel_id"]))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2421: in scalar
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2250: in _execute_internal
+    ) = compile_state_cls.orm_pre_session_exec(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:577: in orm_pre_session_exec
+    session._autoflush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3073: in _autoflush
+    raise e.with_traceback(sys.exc_info()[2])
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3062: in _autoflush
+    self.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+E   (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('95221e4d-b779-4308-86e2-8bd2684cf2b9')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)</failure></testcase><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_retry_requires_current_matching_runtime_approval_at_claim[approval]" time="0.096"><failure message="sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)&#10;(psycopg.errors.CheckViolation) workflow release is immutable&#10;CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE&#10;[SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]&#10;[parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('a1c747b8-b1d6-4998-9cc0-ec83f4cdfb9b')}]&#10;(Background on this error at: https://sqlalche.me/e/20/gkpj)">.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_confirmed_failure_retries.py:558: in test_retry_requires_current_matching_runtime_approval_at_claim
+    binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == target["channel_id"]))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2421: in scalar
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2250: in _execute_internal
+    ) = compile_state_cls.orm_pre_session_exec(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:577: in orm_pre_session_exec
+    session._autoflush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3073: in _autoflush
+    raise e.with_traceback(sys.exc_info()[2])
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3062: in _autoflush
+    self.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+E   (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('a1c747b8-b1d6-4998-9cc0-ec83f4cdfb9b')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)</failure></testcase><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_retry_requires_current_matching_runtime_approval_at_claim[hold]" time="0.098"><failure message="sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)&#10;(psycopg.errors.CheckViolation) workflow release is immutable&#10;CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE&#10;[SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]&#10;[parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('b6f25287-7439-453e-9c29-f0a0da31baa6')}]&#10;(Background on this error at: https://sqlalche.me/e/20/gkpj)">.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_confirmed_failure_retries.py:558: in test_retry_requires_current_matching_runtime_approval_at_claim
+    binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == target["channel_id"]))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2421: in scalar
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2250: in _execute_internal
+    ) = compile_state_cls.orm_pre_session_exec(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:577: in orm_pre_session_exec
+    session._autoflush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3073: in _autoflush
+    raise e.with_traceback(sys.exc_info()[2])
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3062: in _autoflush
+    self.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+E   (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('b6f25287-7439-453e-9c29-f0a0da31baa6')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)</failure></testcase><testcase classname="tests.integration.test_confirmed_failure_retries" name="test_retry_requires_current_matching_runtime_approval_at_claim[isolation]" time="0.107"><failure message="sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)&#10;(psycopg.errors.CheckViolation) workflow release is immutable&#10;CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE&#10;[SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]&#10;[parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('bb6700c5-a3f9-49b2-834d-1859175fb672')}]&#10;(Background on this error at: https://sqlalche.me/e/20/gkpj)">.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   psycopg.errors.CheckViolation: workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_confirmed_failure_retries.py:558: in test_retry_requires_current_matching_runtime_approval_at_claim
+    binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == target["channel_id"]))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2421: in scalar
+    return self._execute_internal(
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2250: in _execute_internal
+    ) = compile_state_cls.orm_pre_session_exec(
+.venv\Lib\site-packages\sqlalchemy\orm\context.py:577: in orm_pre_session_exec
+    session._autoflush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3073: in _autoflush
+    raise e.with_traceback(sys.exc_info()[2])
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:3062: in _autoflush
+    self.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:86: in save_obj
+    _emit_update_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:913: in _emit_update_statements
+    c = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1428: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1650: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1855: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1995: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2372: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1976: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:964: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\psycopg\cursor.py:117: in execute
+    raise ex.with_traceback(None)
+E   sqlalchemy.exc.IntegrityError: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+E   (psycopg.errors.CheckViolation) workflow release is immutable
+E   CONTEXT:  PL/pgSQL function protect_workflow_release() line 6 at RAISE
+E   [SQL: UPDATE workflow_releases SET manifest=%(manifest)s::JSONB, validation=%(validation)s::JSONB WHERE workflow_releases.id = %(workflow_releases_id)s::UUID]
+E   [parameters: {'manifest': Jsonb({'task_type': 'text_to_image', 'wor ... (261 chars)), 'validation': Jsonb({'test_only': False}), 'workflow_releases_id': UUID('bb6700c5-a3f9-49b2-834d-1859175fb672')}]
+E   (Background on this error at: https://sqlalche.me/e/20/gkpj)</failure></testcase><testcase classname="tests.integration.test_gateway_catalogs" name="test_catalog_migration_refuses_fact_loss_and_admission_stamp_is_immutable" time="1.074" /></testsuite></testsuites>

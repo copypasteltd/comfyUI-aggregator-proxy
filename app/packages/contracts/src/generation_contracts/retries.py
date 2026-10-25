@@ -11,7 +11,7 @@ class RetryInfo(StrictDTO):
     count: int = Field(ge=0, le=2)
     limit: Literal[2]
     next_at: int | None = Field(ge=1, le=9007199254740991)
-    last_error: Literal["preparation_transport_failure"] | None
+    last_error: Literal["preparation_transport_failure", "comfy_oom"] | None
 
     @model_validator(mode="after")
     def coherent(self) -> RetryInfo:

@@ -22,14 +22,16 @@ def digest(path: Path) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", required=True, help="12-character owned capture run ID")
-    parser.add_argument("--catalog", action="store_true", help="Encode the separate gateway catalog capture")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--catalog", action="store_true", help="Encode the separate gateway catalog capture")
+    modes.add_argument("--confirmed-retry", action="store_true", help="Encode the confirmed OOM retry capture")
     args = parser.parse_args()
     if not re.fullmatch(r"[0-9a-f]{12}", args.run):
         raise SystemExit("Invalid capture run ID")
-    private = ROOT / (".local/gateway-catalog-browser" if args.catalog else ".local/readme-media") / args.run
-    media = MEDIA / "gateway-catalog" if args.catalog else MEDIA
+    private = ROOT / (".local/confirmed-retry-browser" if args.confirmed_retry else ".local/gateway-catalog-browser" if args.catalog else ".local/readme-media") / args.run
+    media = MEDIA / "confirmed-retry" if args.confirmed_retry else MEDIA / "gateway-catalog" if args.catalog else MEDIA
     capture = json.loads((media / "capture.json").read_text(encoding="utf-8"))
-    assert capture["passed"] and capture["closed_contexts"] == (4 if args.catalog else 3) and capture["browser_closed"]
+    assert capture["passed"] and capture["closed_contexts"] == (2 if args.confirmed_retry else 4 if args.catalog else 3) and capture["browser_closed"]
     lock = json.loads((ROOT / "config/media-tools.lock.json").read_text(encoding="utf-8"))
     tools = ROOT / ".local/toolchains/ffmpeg-8.1"
     for name in ("bin/ffmpeg.exe", "bin/ffprobe.exe"):
@@ -39,8 +41,10 @@ def main() -> None:
     log = private / "encoding.log"
     records: list[dict[str, Any]] = []
     with log.open("wb") as output:
-        for name in (("gateway-catalog",) if args.catalog else ("admin-tour", "workflow-lifecycle")):
-            source = private / (name + ".webm")
+        for name in (("confirmed-retry",) if args.confirmed_retry else ("gateway-catalog",) if args.catalog else ("admin-tour", "workflow-lifecycle")):
+            source = Path(capture["recordings"][0]["path"]) if args.confirmed_retry else private / (name + ".webm")
+            if args.confirmed_retry and (source.resolve().parent != (private / "recordings").resolve() or source.suffix != ".webm"):
+                raise SystemExit("Recording does not belong to this capture run")
             for extension in ("mp4", "gif"):
                 target = media / (name + "." + extension)
                 command = [str(tools / "bin/ffmpeg.exe"), "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-i", str(source), "-an"]
@@ -55,6 +59,7 @@ def main() -> None:
                 metadata = json.loads(probe.stdout)
                 if float(metadata["format"]["duration"]) < 3:
                     raise SystemExit("Recording unexpectedly short")
+                subprocess.run([str(tools / "bin/ffmpeg.exe"), "-hide_banner", "-loglevel", "error", "-nostdin", "-protocol_whitelist", "file", "-i", str(target), "-map", "0:v:0", "-threads", "1", "-f", "null", "-"], stdout=output, stderr=subprocess.STDOUT, check=True, timeout=120, creationflags=subprocess.CREATE_NO_WINDOW)  # noqa: S603 -- fixed tool and generated local media
                 records.append({"path": target.name, "bytes": target.stat().st_size, "sha256": digest(target), "probe": metadata})
     for path in sorted(media.glob("*.png")):
         records.append({"path": path.name, "bytes": path.stat().st_size, "sha256": digest(path)})

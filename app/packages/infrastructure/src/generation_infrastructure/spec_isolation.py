@@ -37,8 +37,9 @@ def blocks_claim(session: Session, job: Job, gpu: Gpu) -> bool:
     return bool(row is not None and row.is_active and not job.is_validation)
 
 
-def confirmed_failure(session: Session, job: Job, attempt: Attempt, request_id: str) -> None:
-    if job.state != "failed" or job.error_code not in ISOLATING_FAILURES or attempt.generation_released_at is None:
+def confirmed_failure(session: Session, job: Job, attempt: Attempt, request_id: str, *, error_code: str | None = None) -> None:
+    error_code = error_code or job.error_code
+    if job.state not in ("failed", "retry_wait") or error_code not in ISOLATING_FAILURES or attempt.generation_released_at is None:
         return
     gpu = session.get(Gpu, attempt.gpu_id)
     assert gpu is not None
@@ -54,12 +55,12 @@ def confirmed_failure(session: Session, job: Job, attempt: Attempt, request_id: 
     else:
         row.failure_count = min(1000000, row.failure_count + 1)
     if row.last_failure_at is None or at >= row.last_failure_at:
-        row.last_failure_at, row.last_failure_job_id, row.last_error_code = at, job.id, job.error_code
+        row.last_failure_at, row.last_failure_job_id, row.last_error_code = at, job.id, error_code
     if row.failure_count >= FAILURE_THRESHOLD and not row.is_active:
         row.is_active, row.isolated_at, row.reason = True, utcnow(), "repeated_failure"
         row.cleared_validation_job_id = None
     row.updated_at, row.revision = utcnow(), row.revision + 1
-    record_change(session, "system", "spec.failure_observed", row.id, request_id, {"job_id": public_id("job", job.id), "error_code": job.error_code, "is_active": row.is_active, "revision": row.revision})
+    record_change(session, "system", "spec.failure_observed", row.id, request_id, {"job_id": public_id("job", job.id), "error_code": error_code, "is_active": row.is_active, "revision": row.revision})
 
 
 def verified_success(session: Session, job: Job, attempt: Attempt, request_id: str) -> None:

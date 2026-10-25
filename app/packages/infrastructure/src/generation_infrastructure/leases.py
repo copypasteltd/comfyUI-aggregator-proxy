@@ -8,7 +8,7 @@ from generation_contracts.capacity import WorkerCapacity, output_reservation
 from generation_contracts.validation import WorkerEvent
 from generation_domain.errors import DomainError
 from generation_domain.policies import enforce_limit
-from generation_domain.retries import retry_after
+from generation_domain.retries import OOM_CODE, RETRY_POLICY, confirmed_oom_evidence, retry_after
 from generation_domain.state import TERMINAL, transition, uncertain
 from generation_domain.values import fingerprint, parse_id, public_id, utcnow
 from sqlalchemy import select, text
@@ -37,6 +37,12 @@ from generation_infrastructure.models import (
     WorkerInbox,
     WorkflowBinding,
     WorkflowRelease,
+)
+from generation_infrastructure.retry_routes import (
+    failed_oom_gpus,
+    has_oom_alternative,
+    oom_attempts,
+    retry_route_approved,
 )
 from generation_infrastructure.security import SecretVault
 from generation_infrastructure.spec_isolation import blocks_claim, confirmed_failure
@@ -224,8 +230,9 @@ class LeaseRepository:
             except DomainError:
                 return None
         channels = list(session.scalars(select(Channel).where(Channel.node_id == node_id, Channel.tenant_id == job.tenant_id, Channel.project_id == job.project_id, Channel.enabled.is_(True), Channel.draining.is_(False), Channel.deleted_at.is_(None), Channel.desired_revision == Channel.applied_revision, Channel.desired_revision == Channel.verified_revision).order_by(Channel.gpu_id, Channel.id).execution_options(populate_existing=True)))
+        excluded_gpus = failed_oom_gpus(session, [job.id]).get(job.id, set())
         for channel in channels:
-            if public_id("ch", channel.id) not in job.eligible_channels:
+            if public_id("ch", channel.id) not in job.eligible_channels or channel.gpu_id in excluded_gpus:
                 continue
             binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == channel.id, WorkflowBinding.release_id == job.release_id, WorkflowBinding.desired_digest == WorkflowBinding.verified_digest, WorkflowBinding.applied_digest == WorkflowBinding.verified_digest).execution_options(populate_existing=True))
             if not binding:
@@ -237,6 +244,8 @@ class LeaseRepository:
                 continue
             gpu = session.execute(select(Gpu).where(Gpu.id == channel.gpu_id).with_for_update().execution_options(populate_existing=True)).scalar_one()
             if not gpu.enabled or gpu.management_hold is not None or session.get(GpuOccupancy, gpu.id) is not None or blocks_claim(session, job, gpu):
+                continue
+            if excluded_gpus and not retry_route_approved(binding, release, gpu, allow_synthetic_catalog=self.allow_synthetic_catalog):
                 continue
             node = session.execute(select(Node).where(Node.id == node_id).with_for_update(read=True).execution_options(populate_existing=True)).scalar_one()
             if not node.enabled or node.current_boot_id != boot_id:
@@ -267,7 +276,7 @@ class LeaseRepository:
         snapshot = attempt.channel_snapshot
         if snapshot.get("legacy_requires_reconciliation"):
             return {"reconciliation_required": True, "attempt_id": public_id("att", attempt.id), "status": job.state}
-        return {"protocol_version": "0.4.0", "server_time": int(utcnow().timestamp()), "job_id": public_id("job", job.id), "attempt_id": public_id("att", attempt.id), "node_id": public_id("node", attempt.node_id), "boot_id": str(attempt.boot_id), "fencing_token": attempt.fence, "lease_expires_at": int(attempt.lease_expires_at.timestamp()), "generation_released": attempt.generation_released_at is not None, "execution": job.execution, "execution_digest": job.execution_fingerprint, "workflow": release.manifest, "workflow_digest": release.digest, "channel": {"id": snapshot["id"], "gpu_id": public_id("gpu", attempt.gpu_id), "revision": snapshot["revision"], "base_url": snapshot["base_url"], "authorization": self.vault.decrypt(snapshot["encrypted_auth"]) if snapshot["encrypted_auth"] else None}}
+        return {"protocol_version": "0.4.0", "retry_policy": RETRY_POLICY, "server_time": int(utcnow().timestamp()), "job_id": public_id("job", job.id), "attempt_id": public_id("att", attempt.id), "node_id": public_id("node", attempt.node_id), "boot_id": str(attempt.boot_id), "fencing_token": attempt.fence, "lease_expires_at": int(attempt.lease_expires_at.timestamp()), "generation_released": attempt.generation_released_at is not None, "execution": job.execution, "execution_digest": job.execution_fingerprint, "workflow": release.manifest, "workflow_digest": release.digest, "channel": {"id": snapshot["id"], "gpu_id": public_id("gpu", attempt.gpu_id), "revision": snapshot["revision"], "base_url": snapshot["base_url"], "authorization": self.vault.decrypt(snapshot["encrypted_auth"]) if snapshot["encrypted_auth"] else None}}
 
     def _lock_attempt(self, session: Session, node_id: UUID, boot_id: UUID, attempt_id: UUID, fence: int) -> tuple[Job, Attempt, dict[Any, Any]]:
         node_guard = session.execute(select(Node).where(Node.id == node_id).with_for_update(read=True)).scalar_one()
@@ -359,12 +368,19 @@ class LeaseRepository:
                 job.state = transition(job.state, "uploading", "gpu_released", facts | {"outputs_stable", "execution_stopped", "gpu_release_recorded"})
             elif event.type in ("execution_failed", "cancel_confirmed"):
                 if payload.get("execution_stop_confirmed"):
+                    oom_proof = confirmed_oom_evidence(payload, prompt_id=attempt.prompt_id, association_id=str(attempt.association_id) if attempt.association_id else None)
+                    if "retry_evidence" in payload and not oom_proof:
+                        raise DomainError("failure_evidence_mismatch", "失败证明与当前执行尝试不一致", 409)
+                    oom_proof = oom_proof and attempt.outputs_collected_at is None and attempt.generation_released_at is None and job.result_manifest is None
+                    prior_ooms = len(session.execute(oom_attempts([job.id]).where(Attempt.id != attempt.id).limit(1)).all()) if oom_proof else 0
                     self._release_generation(session, attempt, buckets, payload)
                     now = utcnow()
-                    eligible = retry_after(state=job.state, count=job.retry_count, error_code=payload.get("error_code"), execution_stopped=payload.get("execution_stop_confirmed") is True, evidence_digest=payload.get("evidence_digest"), has_submission=attempt.association_id is not None or attempt.prompt_id is not None, cancelled=job.cancellation_requested or event.type != "execution_failed", validation=job.is_validation, now=now, deadline=job.deadline)
                     attempt.closed_at = now
+                    alternative = has_oom_alternative(session, job, attempt.gpu_id, allow_synthetic_catalog=self.allow_synthetic_catalog) if oom_proof and not prior_ooms and job.retry_count < 2 and not job.cancellation_requested and not job.is_validation else False
+                    eligible = retry_after(state=job.state, count=job.retry_count, error_code=payload.get("error_code"), execution_stopped=payload.get("execution_stop_confirmed") is True, evidence_digest=payload.get("evidence_digest"), has_submission=attempt.association_id is not None or attempt.prompt_id is not None, cancelled=job.cancellation_requested or event.type != "execution_failed", validation=job.is_validation, now=now, deadline=job.deadline, oom_failures=prior_ooms, oom_evidence=oom_proof, alternative_gpu=alternative)
                     if eligible is not None:
-                        job.state = transition(job.state, "retry_wait", "retry_confirmed_failure", {"execution_stopped", "old_attempt_closed", "retry_budget_available", "resources_accounted"})
+                        trigger = "retry_confirmed_oom" if payload.get("error_code") == OOM_CODE else "retry_confirmed_failure"
+                        job.state = transition(job.state, "retry_wait", trigger, {"execution_stopped", "old_attempt_closed", "retry_budget_available", "resources_accounted", "current_prompt_evidence", "alternative_physical_gpu", "unchanged_generation_spec"})
                         job.retry_count += 1
                         job.retry_after = eligible
                         job.retry_error_code = payload["error_code"]
@@ -373,12 +389,16 @@ class LeaseRepository:
                         job.error_code = None
                         record_change(session, "scheduler", "job.retry_scheduled", job.id, event.event_id, {"count": job.retry_count, "next_at": int(eligible.timestamp()), "error_code": job.retry_error_code})
                     else:
-                        target = "cancelled" if job.state == "cancel_requested" else "failed"
-                        trigger = "cancel_confirmed" if target == "cancelled" else "permanent_confirmed_failure"
+                        target = "cancelled" if job.cancellation_requested or job.state == "cancel_requested" else "failed"
+                        if job.state == "reconciling":
+                            trigger = "reconciled_cancellation" if target == "cancelled" else "reconciled_permanent_failure"
+                        else:
+                            trigger = "cancel_confirmed" if target == "cancelled" else "permanent_confirmed_failure"
                         transition(job.state, target, trigger, {"execution_stopped", "safe_failure", "terminal_commit_once", "resources_accounted", "no_result_publish"})
                         terminal_accounting(session, job, buckets, target)
                         job.error_code = payload.get("error_code")
-                        confirmed_failure(session, job, attempt, event.event_id)
+                    if job.state in ("failed", "retry_wait"):
+                        confirmed_failure(session, job, attempt, event.event_id, error_code=payload.get("error_code"))
                 else:
                     job.state = uncertain(job.state)
                     occupancy = session.get(GpuOccupancy, attempt.gpu_id)

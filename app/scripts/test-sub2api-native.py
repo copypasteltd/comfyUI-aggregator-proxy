@@ -335,7 +335,7 @@ def sha_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
-def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connection[Any], control: psycopg.Connection[Any], fixtures: Any, processes: Processes, provider: subprocess.Popen[bytes], restart: Any, root: Path, outcomes: list[dict[str, Any]], pepper: str, comfy: Any, managed: NativeCatalog | None = None) -> None:
+def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connection[Any], control: psycopg.Connection[Any], fixtures: Any, processes: Processes, provider: subprocess.Popen[bytes], restart: Any, root: Path, outcomes: list[dict[str, Any]], pepper: str, comfy: Any, managed: NativeCatalog | None = None, confirmed_retry: bool = False) -> None:
     tokens = upstream["credentials"]
     client.headers["Authorization"] = "Bearer " + tokens[0]
 
@@ -380,6 +380,9 @@ def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connect
         if task.endswith("video"):
             body["parameters"]["seconds"] = 5
         submissions_before = comfy.submissions
+        if confirmed_retry:
+            with comfy.lock:
+                comfy.fail_next_generations = 1
         if task == "image_to_image":
             with comfy.lock:
                 comfy.fail_next_uploads = 1
@@ -407,16 +410,48 @@ def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connect
                 time.sleep(0.2)
             else:
                 raise RuntimeError("native_retry_wait_not_observed")
+        oom_job = None
+        if confirmed_retry:
+            deadline = time.monotonic() + 45
+            while time.monotonic() < deadline:
+                row = pg.execute("SELECT remote_job_id,state FROM render_control_intents WHERE id=%s", (identifier,)).fetchone()
+                pg.commit()
+                if row and row[0]:
+                    saved = control.execute("SELECT state,retry_count,retry_error_code FROM jobs WHERE id=%s", (row[0].removeprefix("job_"),)).fetchone()
+                    control.commit()
+                    if saved and saved[0] == "retry_wait" and saved[2] == "comfy_oom":
+                        oom_job = row[0]
+                        check(saved[1] == (2 if retry_job else 1) and row[1] != "settled", "native_oom_retry_budget_or_money_changed")
+                        attempts = control.execute("SELECT association_id,prompt_id,generation_released_at,closed_at,generation_evidence FROM attempts WHERE job_id=%s ORDER BY created_at,id", (oom_job.removeprefix("job_"),)).fetchall()
+                        check(len(attempts) == (2 if retry_job else 1), "native_oom_early_duplicate_attempt")
+                        source = attempts[-1]
+                        from generation_domain.retries import confirmed_oom_evidence
+                        check(source[2] is not None and source[3] is not None and confirmed_oom_evidence(source[4]["release"], prompt_id=source[1], association_id=str(source[0])), "native_oom_stop_evidence_missing")
+                        check(control.execute("SELECT count(*) FROM usage_ledger WHERE job_id=%s", (oom_job.removeprefix("job_"),)).fetchone()[0] == 0, "native_oom_settled_early")
+                        control.commit()
+                        break
+                time.sleep(0.15)
+            else:
+                raise RuntimeError("native_oom_retry_wait_not_observed")
         result = poll(identifier)
+        if oom_job:
+            facts = control.execute("SELECT retry_count,(SELECT count(*) FROM attempts WHERE job_id=jobs.id),(SELECT count(DISTINCT gpu_id) FROM attempts WHERE job_id=jobs.id),(SELECT count(*) FROM usage_ledger WHERE job_id=jobs.id) FROM jobs WHERE id=%s", (oom_job.removeprefix("job_"),)).fetchone()
+            control.commit()
+            check(facts == ((2, 3, 2, 1) if retry_job else (1, 2, 2, 1)), "native_oom_physical_route_or_unique_usage_failed")
+            with closing(sqlite3.connect(root / "worker-state/journal.sqlite3")) as journal:
+                snapshots = journal.execute("SELECT claim FROM attempts WHERE json_extract(claim,'$.job_id')=?", (oom_job,)).fetchall()
+            executions = [json.loads(record[0])["execution_digest"] for record in snapshots]
+            check(len(executions) == facts[1] and len(set(executions)) == 1, "native_oom_changed_frozen_execution")
+            outcomes.append({"case": task + "_confirmed_oom_cross_gpu", "passed": True, "attempts": facts[1], "scheduled_retries": facts[0], "physical_gpus": facts[2], "usage_rows": facts[3], "same_execution_digest": True, "real_oom": False})
         if retry_job:
             with closing(sqlite3.connect(root / "worker-state/journal.sqlite3")) as journal:
                 records = journal.execute("SELECT association_id,prompt_id,stage FROM attempts WHERE json_extract(claim,'$.job_id')=? ORDER BY rowid", (retry_job,)).fetchall()
-            check(len(records) == 2 and records[0][:2] == (None, None) and records[1][0] and records[1][1], "native_retry_journal_submission_evidence_invalid")
+            check(len(records) == (3 if confirmed_retry else 2) and records[0][:2] == (None, None) and records[1][0] and records[1][1], "native_retry_journal_submission_evidence_invalid")
             check(comfy.submissions == submissions_before + 1 and comfy.preparation_failures == 1, "native_retry_prompt_not_exactly_once")
             settled_job = control.execute("SELECT retry_count,(SELECT count(*) FROM usage_ledger WHERE job_id=jobs.id),(SELECT count(*) FROM attempts WHERE job_id=jobs.id) FROM jobs WHERE id=%s", (retry_job.removeprefix("job_"),)).fetchone()
             control.commit()
-            check(settled_job == (1, 1, 2), "native_retry_not_single_job_usage")
-            outcomes.append({"case": "preparation_503_retry_same_job_one_prompt_one_usage", "passed": True, "attempts": 2, "scheduled_retries": 1, "real_backoff_seconds": 5, "pre_intent_journal_verified": True})
+            check(settled_job == ((2, 1, 3) if confirmed_retry else (1, 1, 2)), "native_retry_not_single_job_usage")
+            outcomes.append({"case": "preparation_503_and_oom_share_job_and_budget" if confirmed_retry else "preparation_503_retry_same_job_one_prompt_one_usage", "passed": True, "attempts": settled_job[2], "scheduled_retries": settled_job[0], "real_backoff_seconds": [5, 15] if confirmed_retry else [5], "pre_intent_journal_verified": True})
         jobs.append(identifier)
         artifacts = result.get("artifacts", [])
         check(len(artifacts) == 1, "native_artifact_count")
@@ -519,7 +554,9 @@ def scenario(client: httpx.Client, upstream: dict[str, Any], pg: psycopg.Connect
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--managed-catalog", action="store_true", help="Exercise Admin publication and automatic Provider catalog confirmation")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--managed-catalog", action="store_true", help="Exercise Admin publication and automatic Provider catalog confirmation")
+    modes.add_argument("--confirmed-oom", action="store_true", help="Inject confirmed OOM across all six task types using two protocol GPUs")
     args = parser.parse_args()
     check(os.name == "nt", "native_windows_required")
     started = time.monotonic()
@@ -537,7 +574,7 @@ def main() -> None:
     report: dict[str, Any] = {"passed": False, "run_id": run_id, "started_at": datetime.now(UTC).isoformat(), "sources_sha256": source_hashes, "native_windows": True, "virtualization_used": False, "real_redis": False, "real_comfyui": False, "real_s3": False, "physical_fleet_validated": False, "production_runtime_validated": False, "browser_used": False, "cases": [], "backups": [], "cleanup": {"processes": False, "databases": False}}
     processes = Processes(root)
     created: list[str] = []
-    comfy, engine, api_client, provider_client = None, None, None, None
+    comfy, alternative_comfy, engine, api_client, provider_client = None, None, None, None, None
     admin = None
     managed: NativeCatalog | None = None
     phase = "verify_sources"
@@ -597,12 +634,19 @@ def main() -> None:
             upstream = seed_upstream(pg)
         engine = create_engine(control_url, pool_pre_ping=True)
         factory = sessionmaker(engine, expire_on_commit=False)
-        catalog = fixtures.seed_control(factory, pepper, f"http://127.0.0.1:{comfy_port}", commit, upstream)
+        if args.confirmed_oom:
+            alternative_port = port()
+            alternative_comfy = fixtures.ComfyProtocol(root / "comfy", alternative_port)
+        catalog = fixtures.seed_control(factory, pepper, f"http://127.0.0.1:{comfy_port}", commit, upstream, alternative_origin=f"http://127.0.0.1:{alternative_port}" if args.confirmed_oom else None)
         write(root / "worker-credential.json", catalog["worker_credential"])
         tls = ROOT / ".local/tls"
         cert, key = tls / "localhost.crt", tls / "localhost.key"
         worker_config = {"control_origin": api_origin, "credential_file": str(root / "worker-credential.json"), "state_root": str(root / "worker-state"), "ca_file": str(cert), "gpus": [{"hardware_id": fixtures.HARDWARE, "name": "Synthetic protocol GPU"}], "channels": [{"base_url": f"http://127.0.0.1:{comfy_port}", "hardware_id": fixtures.HARDWARE, "comfy_root": str(root / "comfy")}]}
         write(root / "worker.json", worker_config)
+        if alternative_comfy:
+            worker_config["gpus"].append({"hardware_id": fixtures.HARDWARE + "-ALT", "name": "Synthetic alternative GPU"})
+            worker_config["channels"].append({"base_url": f"http://127.0.0.1:{alternative_port}", "hardware_id": fixtures.HARDWARE + "-ALT", "comfy_root": str(root / "comfy")})
+            write(root / "worker.json", worker_config)
         phase = "start_native_services"
         api = processes.start("control-api", [sys.executable, "-m", "uvicorn", "control_api.main:create_app", "--factory", "--host", "127.0.0.1", "--port", str(api_port), "--ssl-certfile", str(cert), "--ssl-keyfile", str(key), "--no-proxy-headers", "--no-access-log"], env)
         api_client = httpx.Client(base_url=api_origin, verify=ssl.create_default_context(cafile=str(cert)), timeout=5, trust_env=False, follow_redirects=False)
@@ -619,8 +663,14 @@ def main() -> None:
                     channel = session.get(Channel, catalog["channel_uuid"])
                     assert channel
                     channel.applied_revision = channel.verified_revision = 1
-                    bindings = list(session.scalars(select(WorkflowBinding).where(WorkflowBinding.channel_id == channel.id)))
-                    check(len(bindings) == len(fixtures.TASKS), "synthetic_boot_bindings_missing")
+                    channel_ids = [channel.id]
+                    if args.confirmed_oom:
+                        other = session.get(Channel, catalog["alternative_channel_uuid"])
+                        assert other
+                        other.applied_revision = other.verified_revision = 1
+                        channel_ids.append(other.id)
+                    bindings = list(session.scalars(select(WorkflowBinding).where(WorkflowBinding.channel_id.in_(channel_ids))))
+                    check(len(bindings) == len(fixtures.TASKS) * len(channel_ids), "synthetic_boot_bindings_missing")
                     for binding in bindings:
                         release = session.get(WorkflowRelease, binding.release_id)
                         check(release is not None and release.validation.get("test_only") is True and binding.desired_digest == binding.applied_digest, "synthetic_boot_approval_invalid")
@@ -673,7 +723,7 @@ def main() -> None:
                 managed.wait(pg, 1)
                 report["managed_catalog"] = {"initial_revision": 1, "empty_bootstrap_models": True, "receipts_generated_by_actual_provider": True, "physical_runtime_approval": False}
                 report["cases"].append({"case": "managed_catalog_empty_bootstrap_onboarding", "passed": True})
-            scenario(provider_client, upstream, pg, control, fixtures, processes, provider, restart, root, report["cases"], pepper, comfy, managed)
+            scenario(provider_client, upstream, pg, control, fixtures, processes, provider, restart, root, report["cases"], pepper, comfy, managed, args.confirmed_oom)
         phase = "worker_retention_after_cloud_ack"
         state = root / "worker-state"
         expected_outputs = len(fixtures.TASKS) + 5 + (2 if managed else 0)
@@ -699,6 +749,8 @@ def main() -> None:
                 kept += 1
         report["worker_retention"] = {"confirmed_packages": len(rows), "retained_files_verified": kept, "minimum_retention_seconds": 3600, "journal_and_files_removed_only_by_test_resource_cleanup": True}
         report["comfy_protocol"] = {"submissions": comfy.submissions, "input_uploads": comfy.uploads, "injected_preparation_failures": comfy.preparation_failures}
+        if alternative_comfy:
+            report["comfy_protocol"].update(confirmed_oom_failures=comfy.oom_failures, alternative_gpu_submissions=alternative_comfy.submissions, distinct_physical_gpu_fixtures=2)
         phase = "management_command_durable_recovery"
         management_recovery_case(factory, catalog, root, processes, worker, env, report["cases"])
         report["source_unchanged"] = all(sha(ROOT / name) == digest for name, digest in source_hashes.items()) and all(sha(backend / name) == digest for name, digest in sources.items())
@@ -730,6 +782,8 @@ def main() -> None:
         report["owned_processes"] = processes.stops
         if comfy:
             comfy.close()
+        if alternative_comfy:
+            alternative_comfy.close()
         if engine:
             engine.dispose()
         if report["cleanup"]["processes"]:
@@ -758,7 +812,7 @@ def main() -> None:
         report["duration_seconds"] = round(time.monotonic() - started, 2)
         report["passed"] = report["passed"] and all(report["cleanup"].values())
         write(root / "report.json", report)
-        write(EVIDENCE / ("provider-catalog-native-protocol.json" if args.managed_catalog else "sub2api-native-protocol.json"), report)
+        write(EVIDENCE / ("confirmed-retry-native-protocol.json" if args.confirmed_oom else "provider-catalog-native-protocol.json" if args.managed_catalog else "sub2api-native-protocol.json"), report)
         print(json.dumps({"passed": report["passed"], "phase": phase, "cases": len(report["cases"]), "cleanup": report["cleanup"], "failure": report.get("failure")}, ensure_ascii=False), flush=True)
     if failure:
         raise SystemExit(1)

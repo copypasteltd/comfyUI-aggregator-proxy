@@ -9,7 +9,7 @@ import wave
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from generation_contracts.defaults import default_key_policy, default_limits
 from generation_domain.values import fingerprint, public_id, utcnow
@@ -71,7 +71,7 @@ def defaults(task: str) -> dict[str, Any]:
     return {"size": "1024x1024", "quality": "standard", **({"seconds": 5} if task.endswith("video") else {})}
 
 
-def manifest(task: str, commit: str) -> dict[str, Any]:
+def manifest(task: str, commit: str, *, alternative_gpu: bool = False) -> dict[str, Any]:
     sources = ["prompt", "seed"]
     if task == "image_to_image":
         sources.append("source_image")
@@ -91,6 +91,8 @@ def manifest(task: str, commit: str) -> dict[str, Any]:
         "runtime_profiles": [{"id": "protocol-only", "gpu_hardware_id": HARDWARE, "approved": False, "evidence_id": None, "execution_timeout_seconds": 30}],
         "supported_parameters": [],
     }
+    if alternative_gpu:
+        result["runtime_profiles"].append({**result["runtime_profiles"][0], "id": "protocol-alternative", "gpu_hardware_id": HARDWARE + "-ALT"})
     from generation_contracts.workflows import WorkflowManifest
     from generation_domain.workflows import validate_manifest
     WorkflowManifest.model_validate(result)
@@ -106,6 +108,8 @@ class ComfyProtocol:
         self.submissions = 0
         self.fail_next_uploads = 0
         self.preparation_failures = 0
+        self.fail_next_generations = 0
+        self.oom_failures = 0
         self.lock = threading.Lock()
         fixture = self
 
@@ -162,6 +166,11 @@ class ComfyProtocol:
                         video = graph["2"]["class_type"] == "SyntheticProtocolVideo"
                         audio = graph["2"]["class_type"] == "SyntheticProtocolAudio"
                         fixture.receipts[identifier] = {"prompt": [0, identifier, graph, value.get("extra_data", {}), ["2"]], "outputs": {"2": {"audio" if audio else "videos" if video else "images": [{"filename": "result.wav" if audio else "result.mp4" if video else "result.png", "subfolder": "", "type": "output"}]}}, "status": {"completed": True, "status_str": "success", "messages": []}}
+                        if fixture.fail_next_generations:
+                            fixture.fail_next_generations -= 1
+                            fixture.oom_failures += 1
+                            fixture.receipts[identifier]["outputs"] = {}
+                            fixture.receipts[identifier]["status"] = {"completed": False, "status_str": "error", "messages": [["execution_error", {"prompt_id": identifier, "exception_type": "torch.cuda.OutOfMemoryError", "exception_message": "Synthetic OOM; no physical GPU execution"}]]}
                         fixture.submissions += 1
                         self.reply({"prompt_id": identifier, "number": fixture.submissions, "node_errors": {}})
                     else:
@@ -178,7 +187,7 @@ class ComfyProtocol:
         self.thread.join(timeout=5)
 
 
-def seed_control(factory: sessionmaker[Session], pepper: str, comfy_origin: str, commit: str, upstream: dict[str, Any]) -> dict[str, Any]:
+def seed_control(factory: sessionmaker[Session], pepper: str, comfy_origin: str, commit: str, upstream: dict[str, Any], *, alternative_origin: str | None = None) -> dict[str, Any]:
     worker_id, worker_token = issue_secret("worker")
     gateway_id, gateway_token = issue_secret("gateway")
     with factory.begin() as session:
@@ -206,14 +215,25 @@ def seed_control(factory: sessionmaker[Session], pepper: str, comfy_origin: str,
         channel = Channel(tenant_id=tenant.id, project_id=project.id, node_id=node.id, gpu_id=gpu.id, name="Synthetic protocol channel", base_url=comfy_origin, enabled=True, desired_revision=1)
         session.add(channel)
         session.flush()
+        channels = [channel]
+        if alternative_origin:
+            other_gpu = Gpu(id=UUID("ffffffff-ffff-4fff-bfff-ffffffffffff"), node_id=node.id, hardware_id=HARDWARE + "-ALT", name="Synthetic alternative GPU")
+            session.add(other_gpu)
+            session.flush()
+            other_channel = Channel(tenant_id=tenant.id, project_id=project.id, node_id=node.id, gpu_id=other_gpu.id,
+                                    name="Synthetic alternative channel", base_url=alternative_origin, enabled=True, desired_revision=1)
+            session.add(other_channel)
+            session.flush()
+            channels.append(other_channel)
         for task in TASKS:
             workflow = Workflow(tenant_id=tenant.id, project_id=project.id, name=f"Protocol {task}", task_type=task, draft={})
             session.add(workflow)
             session.flush()
-            value = manifest(task, commit)
+            value = manifest(task, commit, alternative_gpu=alternative_origin is not None)
             release = WorkflowRelease(tenant_id=tenant.id, project_id=project.id, workflow_id=workflow.id, version=1, digest=fingerprint(value), manifest=value, validated=True, validation={"test_only": True})
             session.add(release)
             session.flush()
-            session.add(WorkflowBinding(tenant_id=tenant.id, project_id=project.id, channel_id=channel.id, release_id=release.id, desired_digest=release.digest, applied_digest=release.digest, verified_digest=release.digest, observed_at=utcnow()))
-            session.add(PublicModel(tenant_id=tenant.id, project_id=project.id, alias="protocol-" + task.replace("_", "-"), task_type=task, release_id=release.id, channel_ids=[public_id("ch", channel.id)], defaults=defaults(task), published=True))
-        return {"node_uuid": node.id, "channel_uuid": channel.id, "key_uuids": [key.id for key in keys], "worker_credential": {"node_id": public_id("node", node.id), "token": worker_token}, "gateway_id": public_id("gateway", gateway.id), "gateway_token": gateway_token}
+            for target in channels:
+                session.add(WorkflowBinding(tenant_id=tenant.id, project_id=project.id, channel_id=target.id, release_id=release.id, desired_digest=release.digest, applied_digest=release.digest, verified_digest=release.digest, observed_at=utcnow()))
+            session.add(PublicModel(tenant_id=tenant.id, project_id=project.id, alias="protocol-" + task.replace("_", "-"), task_type=task, release_id=release.id, channel_ids=[public_id("ch", target.id) for target in channels], defaults=defaults(task), published=True))
+        return {"node_uuid": node.id, "channel_uuid": channel.id, "alternative_channel_uuid": channels[-1].id if alternative_origin else None, "key_uuids": [key.id for key in keys], "worker_credential": {"node_id": public_id("node", node.id), "token": worker_token}, "gateway_id": public_id("gateway", gateway.id), "gateway_token": gateway_token}

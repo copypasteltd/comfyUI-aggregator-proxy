@@ -5,10 +5,11 @@ from typing import Any
 
 import httpx
 from generation_domain.errors import DomainError
+from generation_domain.retries import OOM_TYPES
+from generation_domain.values import fingerprint
 
 from windows_worker.comfy_json import prompt_identifier
 
-OOM_TYPES = frozenset({"torch.OutOfMemoryError", "torch.cuda.OutOfMemoryError"})
 COLLECTION_REJECTIONS = frozenset({"output_count_mismatch", "invalid_output_path", "unsafe_path", "output_too_large", "output_media_mismatch"})
 MEDIA_REJECTIONS = frozenset({"invalid_image", "unsupported_image", "invalid_video", "invalid_audio", "media_type_mismatch", "output_spec_mismatch"})
 
@@ -32,6 +33,20 @@ def execution_failure_code(history: dict[str, Any], prompt_id: str) -> str:
                     and isinstance(message[1].get("exception_type"), str) and message[1]["exception_type"] in OOM_TYPES):
                 return "comfy_oom"
     return "comfy_execution_failed"
+
+
+def oom_retry_evidence(history: dict[str, Any], queue: dict[str, Any], prompt_id: str, association_id: str) -> dict[str, Any] | None:
+    """Project only fixed facts; never persist private history, inputs or traceback."""
+    if history.get("status", {}).get("status_str") != "error" or execution_failure_code(history, prompt_id) != "comfy_oom":
+        return None
+    require_prompt_absent(queue, prompt_id)
+    messages = history["status"]["messages"]
+    exception = next(item[1]["exception_type"] for item in messages
+                     if isinstance(item, (list, tuple)) and len(item) == 2 and item[0] == "execution_error"
+                     and isinstance(item[1], dict) and item[1].get("prompt_id") == prompt_id
+                     and isinstance(item[1].get("exception_type"), str) and item[1]["exception_type"] in OOM_TYPES)
+    return {"kind": "comfy-oom-v1", "prompt_id": prompt_id, "association_id": association_id,
+            "exception_type": exception, "history_digest": fingerprint(history), "queue_digest": fingerprint(queue), "queue_absent": True}
 
 
 def require_prompt_absent(queue: dict[str, Any], prompt_id: str) -> None:

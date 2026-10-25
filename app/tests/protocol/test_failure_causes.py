@@ -14,6 +14,7 @@ import pytest
 from conftest import capacity_sample
 from generation_contracts.capacity import WorkerCapacity
 from generation_domain.errors import DomainError
+from generation_domain.retries import RETRY_POLICY, confirmed_oom_evidence
 from generation_domain.values import fingerprint
 from windows_worker import runtime
 from windows_worker.configuration import WorkerSettings
@@ -25,6 +26,7 @@ from windows_worker.runtime import Execution, Worker
     "mode,code",
     [
         ("oom", "comfy_oom"),
+        ("oom_evidenced", "comfy_oom"),
         ("text_only", "comfy_execution_failed"),
         ("queue_running", None),
         ("queue_malformed", None),
@@ -60,7 +62,7 @@ async def test_actual_execution_failure_paths_keep_journal_and_never_guess_gpu_s
                     }
                 )
             else:
-                error = mode in {"oom", "text_only", "queue_running", "queue_malformed"}
+                error = mode in {"oom", "oom_evidenced", "text_only", "queue_running", "queue_malformed"}
                 status = {
                     "status_str": "error" if error else "success",
                     "completed": True,
@@ -171,6 +173,8 @@ async def test_actual_execution_failure_paths_keep_journal_and_never_guess_gpu_s
             "lease_expires_at": 2000,
             "server_time": 1000,
         }
+        if mode == "oom_evidenced":
+            claim["retry_policy"] = RETRY_POLICY
         run = Execution(worker, claim)
 
         async def collect(*args: Any) -> tuple[list[Path], list[dict[str, Any]]]:
@@ -197,6 +201,10 @@ async def test_actual_execution_failure_paths_keep_journal_and_never_guess_gpu_s
         assert bool(row["stage"] == "closed" and row["cloud_ack"]) is (code is not None)
         assert [e["payload"]["error_code"] for e in failures] == ([code] if code else [])
         assert "synthetic-private-prompt" not in json.dumps(events)
+        if mode == "oom_evidenced":
+            assert confirmed_oom_evidence(failures[0]["payload"], prompt_id=prompt, association_id=row["association_id"])
+        elif failures:
+            assert "retry_evidence" not in failures[0]["payload"]
         if mode.startswith("media_"):
             assert any(e["type"] == "gpu_released" for e in events)
             assert run.released

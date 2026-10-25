@@ -3522,7 +3522,7 @@
         "count": 1,
         "limit": 2,
         "next_at": null,
-        "last_error": "comfy_oom"
+        "last_error": "unknown_execution_failure"
       }
     },
     {
@@ -41983,6 +41983,296 @@
         "instance_id": "synthetic-provider",
         "revision": 1,
         "models": []
+      }
+    },
+    {
+      "id": "job_retry_confirmed_oom",
+      "schema": "job-retry.schema.json",
+      "valid": true,
+      "data": {
+        "count": 1,
+        "limit": 2,
+        "next_at": 1792887000,
+        "last_error": "comfy_oom"
+      }
+    },
+    {
+      "id": "worker_oom_retry_evidence",
+      "schema": "worker-event.schema.json",
+      "valid": true,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "comfy_oom",
+          "execution_stop_confirmed": true,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "00000000-0000-4000-8000-000000000000",
+            "exception_type": "torch.OutOfMemoryError",
+            "history_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "queue_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "queue_absent": true
+          }
+        }
+      }
+    },
+    {
+      "id": "worker_oom_wrong_exception",
+      "schema": "worker-event.schema.json",
+      "valid": false,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "comfy_oom",
+          "execution_stop_confirmed": true,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "00000000-0000-4000-8000-000000000000",
+            "exception_type": "RuntimeError",
+            "history_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "queue_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "queue_absent": true
+          }
+        }
+      }
+    },
+    {
+      "id": "worker_oom_queue_not_absent",
+      "schema": "worker-event.schema.json",
+      "valid": false,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "comfy_oom",
+          "execution_stop_confirmed": true,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "00000000-0000-4000-8000-000000000000",
+            "exception_type": "torch.OutOfMemoryError",
+            "history_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "queue_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "queue_absent": false
+          }
+        }
+      }
+    },
+    {
+      "id": "worker_oom_bad_hash",
+      "schema": "worker-event.schema.json",
+      "valid": false,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "comfy_oom",
+          "execution_stop_confirmed": true,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "00000000-0000-4000-8000-000000000000",
+            "exception_type": "torch.OutOfMemoryError",
+            "history_digest": "bad",
+            "queue_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "queue_absent": true
+          }
+        }
+      }
+    },
+    {
+      "id": "worker_oom_extra_private",
+      "schema": "worker-event.schema.json",
+      "valid": false,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "comfy_oom",
+          "execution_stop_confirmed": true,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "00000000-0000-4000-8000-000000000000",
+            "exception_type": "torch.OutOfMemoryError",
+            "history_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "queue_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "queue_absent": true,
+            "traceback": "synthetic-private"
+          }
+        }
+      }
+    },
+    {
+      "id": "worker_oom_bad_association",
+      "schema": "worker-event.schema.json",
+      "valid": false,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "comfy_oom",
+          "execution_stop_confirmed": true,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "bad",
+            "exception_type": "torch.OutOfMemoryError",
+            "history_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "queue_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "queue_absent": true
+          }
+        }
+      }
+    },
+    {
+      "id": "worker_oom_unconfirmed",
+      "schema": "worker-event.schema.json",
+      "valid": false,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "comfy_oom",
+          "execution_stop_confirmed": false,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "00000000-0000-4000-8000-000000000000",
+            "exception_type": "torch.OutOfMemoryError",
+            "history_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "queue_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "queue_absent": true
+          }
+        }
+      }
+    },
+    {
+      "id": "worker_oom_wrong_reason",
+      "schema": "worker-event.schema.json",
+      "valid": false,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "preparation_transport_failure",
+          "execution_stop_confirmed": true,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "00000000-0000-4000-8000-000000000000",
+            "exception_type": "torch.OutOfMemoryError",
+            "history_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "queue_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "queue_absent": true
+          }
+        }
+      }
+    },
+    {
+      "id": "worker_oom_missing_queue_hash",
+      "schema": "worker-event.schema.json",
+      "valid": false,
+      "data": {
+        "protocol_version": "0.4.0",
+        "event_id": "00000000-0000-4000-8000-000000000008",
+        "node_id": "node_example01",
+        "boot_id": "00000000-0000-4000-8000-000000000002",
+        "job_id": "job_example01",
+        "attempt_id": "attempt_example01",
+        "fencing_token": 3,
+        "journal_seq": 8,
+        "observed_at": 1792622400,
+        "type": "execution_failed",
+        "payload": {
+          "error_code": "comfy_oom",
+          "execution_stop_confirmed": true,
+          "evidence_digest": "8ca952caca69429f6de1a40be8f09004e21dcc6def7ea0eecc05935f8e7af06e",
+          "retry_evidence": {
+            "kind": "comfy-oom-v1",
+            "prompt_id": "synthetic-oom-proof",
+            "association_id": "00000000-0000-4000-8000-000000000000",
+            "exception_type": "torch.OutOfMemoryError",
+            "history_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "queue_absent": true
+          }
+        }
       }
     }
   ]

@@ -303,7 +303,7 @@ class Job(Entity, Scoped, Base):
     __table_args__ += (
         ForeignKeyConstraint(["id", "retry_source_attempt_id"], ["attempts.job_id", "attempts.id"], use_alter=True, name="fk_jobs_retry_source_owner"),
         CheckConstraint("retry_count BETWEEN 0 AND 2", name="retry_count"),
-        CheckConstraint("(retry_count = 0 AND retry_error_code IS NULL AND retry_source_attempt_id IS NULL) OR (retry_count > 0 AND retry_error_code IS NOT NULL AND retry_error_code = 'preparation_transport_failure' AND retry_source_attempt_id IS NOT NULL)", name="retry_metadata"),
+        CheckConstraint("(retry_count = 0 AND retry_error_code IS NULL AND retry_source_attempt_id IS NULL) OR (retry_count > 0 AND retry_error_code IS NOT NULL AND retry_error_code IN ('preparation_transport_failure','comfy_oom') AND retry_source_attempt_id IS NOT NULL)", name="retry_metadata"),
         CheckConstraint("(state = 'retry_wait' AND retry_count > 0 AND retry_after IS NOT NULL AND current_attempt_id IS NULL) OR (state <> 'retry_wait' AND retry_after IS NULL)", name="retry_schedule"),
         Index("ix_jobs_retry_due", "state", "retry_after", "id", postgresql_where=text("state = 'retry_wait'")),
     )

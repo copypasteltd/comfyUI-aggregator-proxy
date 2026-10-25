@@ -1,0 +1,48 @@
+{
+  "synthetic_data": true,
+  "authentication_headers_and_cookies_omitted": true,
+  "responses": [
+    {
+      "operation": "desktop_get_retry",
+      "http_status": 200,
+      "response": {
+        "id": "job_7975e15ffaf249a4b023dbf7d9ae4027",
+        "status": "retry_wait",
+        "retry": {
+          "count": 1,
+          "limit": 2,
+          "next_at": 1792887472,
+          "last_error": "comfy_oom"
+        }
+      }
+    },
+    {
+      "operation": "mobile_get_retry",
+      "http_status": 200,
+      "response": {
+        "id": "job_c739403b919044098b43e4cc5d276fa5",
+        "status": "retry_wait",
+        "retry": {
+          "count": 1,
+          "limit": 2,
+          "next_at": 1792887472,
+          "last_error": "comfy_oom"
+        }
+      }
+    },
+    {
+      "operation": "mobile_cancel_result",
+      "http_status": 200,
+      "response": {
+        "id": "job_c739403b919044098b43e4cc5d276fa5",
+        "status": "cancelled",
+        "retry": {
+          "count": 1,
+          "limit": 2,
+          "last_error": "comfy_oom",
+          "next_at": null
+        }
+      }
+    }
+  ]
+}

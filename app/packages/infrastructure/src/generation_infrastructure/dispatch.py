@@ -36,6 +36,7 @@ from generation_infrastructure.models import (
     WorkflowBinding,
     WorkflowRelease,
 )
+from generation_infrastructure.retry_routes import failed_oom_gpus
 from generation_infrastructure.transactions import GLOBAL_ID
 from generation_infrastructure.worker_capacity import capacity_ready
 
@@ -104,12 +105,14 @@ def eligible_candidates(session: Session, node: Node, now: datetime, *, allow_sy
     if len(isolated) > MAX_ROUTE_MATCHES:
         raise DomainError("dispatch_catalog_capacity", "调度规格目录超过单轮上限", 503)
     candidates = []
+    excluded_gpus = failed_oom_gpus(session, [job.id for job in jobs])
     for job in jobs:
         output, test_only = releases[job.release_id]
         if not node.current_boot_id or not capacity_ready(node.inventory, node.current_boot_id, now, next_reserve=output_reservation({"output": output}, 2 * 1024**3)):
             continue
         digest = spec_digest(job.task_type, job.execution)
         if not any(channel_id in job.eligible_channels and (tenant_id, project_id) == (job.tenant_id, job.project_id)
+                   and gpu_id not in excluded_gpus.get(job.id, set())
                    and (job.is_validation or runtime_approved or (allow_synthetic_catalog and test_only))
                    and (job.is_validation or (gpu_id, job.release_id, digest) not in isolated)
                    for channel_id, gpu_id, tenant_id, project_id, runtime_approved in routes[job.release_id]):

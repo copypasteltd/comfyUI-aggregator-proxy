@@ -1,4 +1,4 @@
-param([ValidateSet('All','Python','Frontend','Docs','Sub2API','Sub2APILedger','Sub2APIProvider','Sub2APINative','Sub2APINativeCatalog')][string]$Suite='All')
+param([ValidateSet('All','Python','Frontend','Docs','Sub2API','Sub2APILedger','Sub2APIProvider','Sub2APINative','Sub2APINativeCatalog','Sub2APINativeRetry')][string]$Suite='All')
 $ErrorActionPreference = 'Stop'
 $taskRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 Set-Location -LiteralPath $taskRoot
@@ -42,4 +42,8 @@ if ($Suite -in @('All','Sub2APINative')) {
 }
 if ($Suite -in @('All','Sub2APINativeCatalog')) {
     Invoke-Checked $taskPython @('scripts/test-sub2api-native.py','--managed-catalog')
+}
+
+if ($Suite -in @('All','Sub2APINativeRetry')) {
+    Invoke-Checked $taskPython @('scripts/test-sub2api-native.py','--confirmed-oom')
 }

@@ -50,7 +50,7 @@ def main() -> None:
     ffmpeg = ROOT / "app/.local/toolchains/ffmpeg-8.1/bin/ffmpeg.exe"
     lock = json.loads((ROOT / "app/config/media-tools.lock.json").read_text(encoding="utf-8"))
     assert sha(ffmpeg) == lock["files"]["bin/ffmpeg.exe"]["sha256"]
-    for directory in (MEDIA, MEDIA / "gateway-catalog"):
+    for directory in (MEDIA, MEDIA / "gateway-catalog", MEDIA / "confirmed-retry"):
         manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
         assert manifest["passed"] and manifest["synthetic_data"] and not manifest["real_gpu_generation"]
         for item in manifest["files"]:
@@ -87,7 +87,19 @@ def main() -> None:
     assert catalog_responses["authentication_headers_and_cookies_omitted"] and catalog_responses["provider_receipts_are_protocol_fixtures"]
     assert sum(item["operation"] == "publish_six_types" and item["http_status"] == 201 for item in catalog_responses["responses"]) == 1
     assert sum(item["operation"] == "simulated_provider_receipt" and item["http_status"] == 200 for item in catalog_responses["responses"]) == 4
-    report = {"at": datetime.now(UTC).isoformat(), "passed": not errors, "entry_documents": len(documents), "local_links_checked": links, "request_examples_validated": 3, "screenshots_verified": screenshots, "media_manifests_verified": 2, "video_and_gif_fully_decoded": decoded, "bilingual_capability_topics_present": True, "actual_lifecycle_responses_verified": 2, "catalog_responses_verified": len(catalog_responses["responses"]), "catalog_provider_receipts_are_protocol_fixtures": True, "synthetic_capture_and_cleanup_passed": True, "errors": errors, "full_python_suite_rerun": False, "runtime_protocol_changed": False}
+    retry_capture = json.loads((MEDIA / "confirmed-retry/capture.json").read_text(encoding="utf-8"))
+    retry_cleanup = json.loads((ROOT / "docs/evidence/2026-10-25/confirmed-retry-browser-fixture.json").read_text(encoding="utf-8"))
+    assert retry_capture["passed"] and not retry_capture["errors"] and retry_capture["closed_contexts"] == 2 and retry_capture["browser_closed"]
+    assert retry_cleanup["passed"] and all(retry_cleanup["cleanup"].values())
+    retry_responses = json.loads((MEDIA / "confirmed-retry/api-responses.json").read_text(encoding="utf-8"))
+    assert retry_responses["synthetic_data"] and retry_responses["authentication_headers_and_cookies_omitted"]
+    assert len(retry_responses["responses"]) == 3 and all(item["http_status"] == 200 for item in retry_responses["responses"])
+    for item in retry_responses["responses"]:
+        response = item["response"]
+        assert response["retry"]["last_error"] == "comfy_oom" and response["retry"]["count"] == 1 and response["retry"]["limit"] == 2
+        assert response["status"] == ("cancelled" if item["operation"] == "mobile_cancel_result" else "retry_wait")
+        assert (response["retry"]["next_at"] is None) == (response["status"] == "cancelled")
+    report = {"at": datetime.now(UTC).isoformat(), "passed": not errors, "entry_documents": len(documents), "local_links_checked": links, "request_examples_validated": 3, "screenshots_verified": screenshots, "media_manifests_verified": 3, "video_and_gif_fully_decoded": decoded, "bilingual_capability_topics_present": True, "actual_lifecycle_responses_verified": 2, "catalog_responses_verified": len(catalog_responses["responses"]), "catalog_provider_receipts_are_protocol_fixtures": True, "confirmed_retry_responses_verified": len(retry_responses["responses"]), "synthetic_capture_and_cleanup_passed": True, "errors": errors, "full_python_suite_rerun": False, "runtime_protocol_changed": False}
     (ROOT / "docs/evidence/2026-10-25/repository-readme-verification.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False))
     raise SystemExit(0 if report["passed"] else 1)

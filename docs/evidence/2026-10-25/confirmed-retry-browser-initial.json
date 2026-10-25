@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "synthetic_data": true,
+  "real_gpu_generation": false,
+  "mocked_api_responses": false,
+  "checks": [
+    "desktop_retry_has_unfinished_quota_without_ready_candidate_or_gpu_slot",
+    "desktop_oom_reason_budget_and_closed_source_are_visible",
+    "desktop_priority_change_preserves_oom_backoff_and_identity",
+    "mobile_retry_has_unfinished_quota_without_ready_candidate_or_gpu_slot",
+    "mobile_oom_reason_budget_and_closed_source_are_visible",
+    "mobile_cancel_settles_without_another_gpu_execution",
+    "mobile_375px_no_document_overflow"
+  ],
+  "errors": [],
+  "screenshots": [
+    "retry-desktop.png",
+    "retry-mobile.png",
+    "retry-mobile-cancelled.png"
+  ],
+  "recordings": [
+    {
+      "name": "desktop",
+      "path": "E:\\dev\\sandbox\\生图生视API封装\\app\\.local\\confirmed-retry-browser\\7367738e48ef\\recordings\\ebf512d57555b6b7cf3358a12cee3880.webm"
+    }
+  ],
+  "closed_contexts": 2,
+  "browser_closed": true,
+  "authentication_recorded": false,
+  "browser_version": "156.0.4314.42"
+}

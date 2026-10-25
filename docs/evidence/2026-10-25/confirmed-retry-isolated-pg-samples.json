@@ -1,0 +1,227 @@
+{
+  "scope": "Read-only sampled PostgreSQL metadata during isolated native verification; no SQL bodies, parameters or credentials collected",
+  "sample_count": 15,
+  "absence_of_unsampled_lock_waits_proven": false,
+  "production_capacity_proven": false,
+  "samples": [
+    {
+      "at": "2026-10-25T01:04:48.530388+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:04:51.533639+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:04:54.537915+00:00",
+      "rows": [
+        {
+          "state": "active",
+          "wait_event_type": "IO",
+          "wait_event": "WalWrite",
+          "connections": 1,
+          "oldest_transaction_seconds": "0.010",
+          "blockers": 0
+        },
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 5,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:04:57.539921+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:00.544313+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:03.546845+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:06.550396+00:00",
+      "rows": [
+        {
+          "state": "active",
+          "wait_event_type": "IO",
+          "wait_event": "WalWrite",
+          "connections": 1,
+          "oldest_transaction_seconds": "0.009",
+          "blockers": 0
+        },
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 5,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:09.554557+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:12.558894+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:15.561034+00:00",
+      "rows": [
+        {
+          "state": "active",
+          "wait_event_type": null,
+          "wait_event": null,
+          "connections": 1,
+          "oldest_transaction_seconds": "0.023",
+          "blockers": 0
+        },
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 5,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:18.564061+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:21.566370+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:24.568569+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:27.570837+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    },
+    {
+      "at": "2026-10-25T01:05:30.573771+00:00",
+      "rows": [
+        {
+          "state": "idle",
+          "wait_event_type": "Client",
+          "wait_event": "ClientRead",
+          "connections": 6,
+          "oldest_transaction_seconds": null,
+          "blockers": 0
+        }
+      ]
+    }
+  ]
+}

@@ -54,7 +54,10 @@
     "no_result_publish": "撤销后不发布客户结果，按规则释放预留并保留历史。",
     "resume_authorized": "恢复证据已审查、resume_state匹配、新boot/fence结果权已正式授予；不是旧租约复活。",
     "safe_failure": "错误不可恢复且已证明无继续执行/未知占用；资源与产物处置明确。",
-    "resources_accounted": "当前事务按已确认资源事实结算/释放占用与计数、处置结果权和预留；不得仅改状态遗留槽位或负数计数。未知执行不能通过此guard。"
+    "resources_accounted": "当前事务按已确认资源事实结算/释放占用与计数、处置结果权和预留；不得仅改状态遗留槽位或负数计数。未知执行不能通过此guard。",
+    "current_prompt_evidence": "白名单 OOM 属于当前 attempt 的 prompt/association；history 终结且 queue 无该 prompt，固定证明与外层规范摘要一致，尚无稳定产物。",
+    "alternative_physical_gpu": "原冻结 eligible_channels 内存在另一当前已批准且健康的物理 GPU；排除本任务所有历史确认 OOM GPU，领取时重新核验。",
+    "unchanged_generation_spec": "保留同一 job、实际 seed、Workflow、输入、规格、deadline、准入归属及价格；OOM 最多一次并占原共享两次重试预算。"
   },
   "transitions": [
     {
@@ -650,6 +653,34 @@
         "deadline_reached",
         "terminal_commit_once",
         "resources_accounted"
+      ]
+    },
+    {
+      "from": "running",
+      "to": "retry_wait",
+      "trigger": "retry_confirmed_oom",
+      "guards": [
+        "execution_stopped",
+        "old_attempt_closed",
+        "retry_budget_available",
+        "resources_accounted",
+        "current_prompt_evidence",
+        "alternative_physical_gpu",
+        "unchanged_generation_spec"
+      ]
+    },
+    {
+      "from": "reconciling",
+      "to": "retry_wait",
+      "trigger": "retry_confirmed_oom",
+      "guards": [
+        "execution_stopped",
+        "old_attempt_closed",
+        "retry_budget_available",
+        "resources_accounted",
+        "current_prompt_evidence",
+        "alternative_physical_gpu",
+        "unchanged_generation_spec"
       ]
     }
   ],

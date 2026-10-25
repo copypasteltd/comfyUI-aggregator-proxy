@@ -1,0 +1,75 @@
+{
+  "at": "2026-10-25T00:51:14.984656+00:00",
+  "scope": "Implementation and verification failures retained without changing production acceptance",
+  "failures": [
+    {
+      "case": "initial_full_regression_schema_head_assertion",
+      "evidence": "confirmed-retry-python-initial.xml",
+      "cause": "Existing historical downgrade test compared its unchanged schema against the previous hard-coded head.",
+      "correction": "Capture schema before the rejected downgrade and verify it remains unchanged."
+    },
+    {
+      "case": "runtime_profile_fixture_attempted_immutable_release_edit",
+      "evidence": "confirmed-retry-transactions-initial.xml",
+      "cause": "New test fixture attempted to change an immutable published manifest; PostgreSQL correctly rejected it.",
+      "correction": "Create a new release and matching bindings before admitting the synthetic job."
+    },
+    {
+      "case": "profile_drift_fixture_selected_historical_binding",
+      "evidence": "confirmed-retry-profile-fixture-initial.xml",
+      "cause": "The fixture changed the first channel binding rather than the current release binding.",
+      "correction": "Select by channel and the accepted release; retain the profile drift rejection assertion."
+    },
+    {
+      "case": "mobile_long_identifiers_clipped",
+      "evidence": "confirmed-retry-mobile-initial.png",
+      "cause": "Descriptions table cells clipped long identifiers at 375px.",
+      "correction": "Apply mobile table widths and wrap complete identifiers; assert the table itself does not overflow."
+    },
+    {
+      "case": "state_graph_guard_definitions_missing",
+      "evidence": "confirmed-retry-docs-initial.json",
+      "cause": "Three new transition guards lacked dictionary definitions.",
+      "correction": "Register definitions and sync frozen runtime metadata; state edges and requirements remain identical."
+    },
+    {
+      "case": "parallel_pytest_shared_basetemp_collision",
+      "evidence": "confirmed-retry-temp-fixture-initial.xml",
+      "cause": "An additional suite reused the configured basetemp and interfered with the running full suite.",
+      "correction": "Retain the error, stop only the two identity-verified owned contaminated test processes, and rerun using separate explicit basetemp directories.",
+      "partial_full_run_not_counted_as_pass": true
+    },
+    {
+      "case": "wrong_test_selector_and_readiness_probe_path",
+      "cause": "A guessed test selector did not exist, and a guessed collection URL returned the Admin SPA.",
+      "correction": "Use the discovered test module and frozen endpoint /admin/api/v1/queues/jobs; verify 401 there.",
+      "product_authentication_bypass_observed": false
+    },
+    {
+      "case": "native_gateway_authentication_rate_state_lock_timeout",
+      "evidence": "confirmed-retry-native-concurrent-lock-failure.json",
+      "observed": "Control API gateway authentication SELECT FOR UPDATE on rate_states exceeded the existing PostgreSQL lock timeout; the Provider job GET returned 502 gateway_unavailable.",
+      "environment": "Concurrent full regression and isolated release installation on the same native PostgreSQL host.",
+      "root_cause_beyond_observed_lock_timeout_proven": false,
+      "response": "Retain the failure and cleanup evidence; perform a separate isolated native run after other heavy checks finish. Do not raise lock/request timeouts or retry budgets.",
+      "production_and_concurrent_capacity_acceptance_remain_open": true
+    }
+  ],
+  "additional_review_fix": "Recheck all three binding digests against the frozen release at alternative-GPU claim and add a rejection test.",
+  "superseded_candidates": [
+    "rc-20261025.82.1",
+    "rc-20261025.82.2"
+  ],
+  "current_candidate": "rc-20261025.82.3",
+  "old_evidence_not_rewritten_to_pass": true,
+  "test_limits_or_budgets_relaxed": false,
+  "real_resource_acceptance_promoted": false,
+  "isolated_followup": {
+    "report": "confirmed-retry-native-protocol.json",
+    "run_id": "641b90dcbca5",
+    "passed": true,
+    "scenarios": 26,
+    "gateway_row_lock_root_cause_resolved": false,
+    "concurrent_capacity_proven": false
+  }
+}

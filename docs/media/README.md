@@ -58,7 +58,7 @@ Raw WebM/logs remain in ignored `app/.local/readme-media/`. Public MP4 is silent
 
 ## 网关目录增量 / Gateway catalog capture
 
-另增四张截图：[映射编辑](gateway-catalog/catalog-editor.png)、[期望/确认](gateway-catalog/catalog-confirmed.png)、[历史](gateway-catalog/catalog-history.png) 和 [375px 移动端](gateway-catalog/catalog-mobile.png)。[响应](gateway-catalog/api-responses.json) 包含实际 Admin 发布及明确标记的模拟 Provider 回执，不包含身份秘密；[浏览器记录](gateway-catalog/capture.json)、[媒体摘要](gateway-catalog/manifest.json) 和 [临时资源清理](../evidence/2026-10-25/gateway-catalog-browser.json) 分别留证。当前图库共 15 张图片、3 个 MP4 和 3 个 GIF。
+另增四张截图：[映射编辑](gateway-catalog/catalog-editor.png)、[期望/确认](gateway-catalog/catalog-confirmed.png)、[历史](gateway-catalog/catalog-history.png) 和 [375px 移动端](gateway-catalog/catalog-mobile.png)。[响应](gateway-catalog/api-responses.json) 包含实际 Admin 发布及明确标记的模拟 Provider 回执，不包含身份秘密；[浏览器记录](gateway-catalog/capture.json)、[媒体摘要](gateway-catalog/manifest.json) 和 [临时资源清理](../evidence/2026-10-25/gateway-catalog-browser.json) 分别留证。该增量完成时图库为 15 张图片、3 个 MP4 和 3 个 GIF。
 
 Four additional screenshots show the editor, desired/confirmed versions, history and the 375px layout. Responses contain an actual Admin publication and explicitly simulated Provider receipts, with authentication secrets omitted. The capture, media manifest and isolated-resource cleanup are separate records. The gallery now contains 15 images, three MP4s and three GIFs. Actual Provider automatic application is validated separately in topic 80; these recordings do not establish GPU or production acceptance.
 
@@ -70,3 +70,22 @@ Four additional screenshots show the editor, desired/confirmed versions, history
 目录录制关闭四个自有 context 及浏览器，原始文件留在忽略的 app/.local/gateway-catalog-browser；登录通过录制前的独立请求完成。回执夹具不连接实际 Provider；[原生跨进程报告](../evidence/2026-10-25/provider-catalog-native-protocol.json) 才记录实际消费者。新增媒体同样核对锁定工具摘要、产物摘要与完整解码。
 
 The catalog recorder closes four owned contexts and its browser. Raw files stay in the ignored app/.local/gateway-catalog-browser directory, and login happens before recording. Receipt fixtures do not invoke the Provider; its separate native cross-process report records actual consumption. New media follows the same pinned-tool, artifact-hash and full-decode checks.
+
+## 确认失败重试增量 / Confirmed failure retry capture
+
+新增 [桌面详情](confirmed-retry/retry-desktop.png)、[375px 手机详情](confirmed-retry/retry-mobile.png)、[取消结果](confirmed-retry/retry-mobile-cancelled.png)、[GIF](confirmed-retry/confirmed-retry.gif) 和 [MP4](confirmed-retry/confirmed-retry.mp4)。页面显示 OOM 原因、1/2 共享预算、最早可分配时间与关闭的来源尝试；验证优先级变更、配额/候选/GPU 口径和取消不触发新生成。长 ID 在手机详情内换行。故障由实际领域/事务生成，数据与 OOM 观察为合成，没有真实 GPU 推理。
+
+Three screenshots and a continuous recording show the OOM cause, shared budget, earliest dispatch time, closed source attempt, priority change and cancellation. Mobile identifiers wrap inside the table. The actual domain/database create the retry state using explicit synthetic data and OOM observations; no physical GPU generation is recorded.
+
+[实际脱敏响应](confirmed-retry/api-responses.json)、[浏览器清理](confirmed-retry/capture.json)、[媒体摘要](confirmed-retry/manifest.json) 和 [隔离资源报告](../evidence/2026-10-25/confirmed-retry-browser-fixture.json) 分别记录；不公开认证头、Cookie、CSRF 或登录过程。两个自有 context/browser、临时 API、数据库和私密配置均已清理。图库现共 18 张图片、4 个 MP4、4 个 GIF。
+
+Sanitized responses, capture cleanup, media hashes and isolated-resource cleanup are recorded separately. Authentication material and login are excluded. Both owned contexts, the browser, temporary API/database and private configuration are removed. The gallery now contains 18 screenshots, four MP4 files and four GIF files.
+
+```powershell
+./.venv/Scripts/python.exe scripts/test-confirmed-retry-browser.py --browser-python C:/path/to/media-python/python.exe
+./.venv/Scripts/python.exe scripts/render-readme-media.py --confirmed-retry --run <run_id>
+```
+
+原始录屏在忽略的 app/.local/confirmed-retry-browser/<run_id>/recordings；转换只接受对应运行目录，核对锁定工具摘要，并完整解码公开 MP4/GIF。Raw recordings remain under the ignored owned capture run; conversion validates ownership and pinned tools, then fully decodes both outputs.
+
+run_id 从 docs/evidence/<日期>/confirmed-retry-browser-fixture.json 读取。Read run_id from the dated browser-fixture evidence file.

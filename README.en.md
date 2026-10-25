@@ -10,9 +10,9 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 **Status: in development.** Native Windows implementation, protocol tests and isolated candidate installation have recorded verification. Actual Workflows, model quality, real S3/Redis, production system services and capacity on 10–20 physical machines still require acceptance. Screenshots and recordings show the real UI and API backed by isolated PostgreSQL and explicitly synthetic fixtures. They demonstrate neither real GPU generation nor production throughput.
 
-The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: implementation items 01–04 are complete, with 72 still open (70 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md) and [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md) now connect the durable protocol, covering confirmation/rejection, recovery, frozen prices and existing tasks, original-request checks and history rollback. Actual model/gateway acceptance remains separate.
+The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: implementation items 01–05 are complete, with 71 still open (69 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md), [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md) and [confirmed failure retries](docs/82-确认失败重试分类与跨GPU约束.md) have local implementations and separate verification evidence. Actual Workflows, joint gateway behavior, failures and production still require acceptance.
 
-The latest [verification record](docs/evidence/2026-10-25/provider-catalog-verification.json) reports 3148 passing Python checks, 172 top-level/325 Provider ledger subtests, 40 frontend unit checks and 16 catalog browser scenarios. Actual Provider legacy/managed cross-process evidence is recorded separately. Actual ComfyUI, production storage and physical-machine capacity still require acceptance.
+The latest [verification record](docs/evidence/2026-10-25/confirmed-retry-verification.json) reports 3232 full Python checks, 2156 contract/unit checks, 40 frontend unit checks, eight retry browser checks, 24 candidate installation checks and eight installed browser checks. Actual service processes passed 26 scenarios covering six task types, OOM rerouting and single settlement. ComfyUI/Redis/storage remain protocol fixtures. A gateway authentication row-lock timeout/502 observed during concurrent checks remains unresolved; an isolated pass does not establish concurrent capacity.
 
 ## Contents
 
@@ -226,6 +226,12 @@ A disconnected Worker, expired lease or HTTP timeout does not prove a GPU is fre
 
 Cancellation, draining, specification isolation, management synchronization and retries have separate state and audit. Upload and media verification may continue independently of generation occupancy. Durable management commands use fixed allowed actions; they cannot run arbitrary commands, install custom nodes or download model weights automatically.
 
+Internal retries share a maximum of two retries with 5/15-second backoffs. A preparation transport failure must be proven never submitted. A whitelisted OOM additionally requires current-prompt stop evidence and another approved physical GPU within the original frozen routes; each job may retry OOM once. The job, seed, Workflow, specification, inputs, deadline and price remain frozen, and later attempts continue excluding its failed OOM GPU. Unknown submissions reconcile the original execution; upload failures recover the existing file. Final metering and settlement occur once. An older Worker without OOM evidence retains the prior confirmed-failure behavior. See [confirmed failure retry rules](docs/82-确认失败重试分类与跨GPU约束.md).
+
+![Retry management using the actual UI and synthetic failure data](docs/media/confirmed-retry/confirmed-retry.gif)
+
+[Retry MP4](docs/media/confirmed-retry/confirmed-retry.mp4) · [Desktop details](docs/media/confirmed-retry/retry-desktop.png) · [375px mobile](docs/media/confirmed-retry/retry-mobile.png) · [Cancellation result](docs/media/confirmed-retry/retry-mobile-cancelled.png) · [Sanitized responses](docs/media/confirmed-retry/api-responses.json). Admin shows the cause, budget and earliest dispatch time. Backoff retains unfinished quota and allows priority changes or cancellation. This recording uses the actual API/database with synthetic faults; physical GPU OOM acceptance remains separate.
+
 See [task mechanisms](docs/02-系统架构与任务机制.md), [Worker protocol](docs/12-接口契约与Worker协议.md), and [joint recovery](docs/60-数据库对象与密钥联合恢复校验.md).
 
 ## Configuration, deployment and operations
@@ -276,17 +282,17 @@ Run from `app/`:
 
 Python integration tests require the project's native PostgreSQL and separate `render_control_test` database. In-memory/SQLite substitutes do not satisfy that gate. Go and full Sub2API checks require the pinned native Go toolchain and corresponding upstream cache. Browser tests/recordings must close their own page/context/browser in `finally`.
 
-| Recent verification: increments 80–81 | Result and scope |
+| Recent verification: increment 82 | Result and scope |
 | --- | --- |
-| Python | Full 3148 checks, 1498 contract checks and 19 focused catalog backend checks |
+| Python | Full 3232 checks; 2156 contract/unit checks; full regression includes 58 confirmed-failure and catalog backend checks |
 | Frontend | 40 unit checks, generated API types, type checking and production build |
-| Admin browser | 16 catalog scenarios at desktop/375px/landscape; eight additional installed-candidate scenarios |
-| Provider components | Go client: 48 top-level/222 subtests; Provider: 172 top-level/325 subtests |
-| Native integration | Legacy: 20 scenarios/11 synthetic jobs; managed: 25 scenarios/13 synthetic jobs, with actual processes and protocol fixtures distinguished |
-| Candidate installation | 24 isolated offline installation checks, `rc-20261025.81.1` |
-| Database/contracts | 45 control-plane tables; 58 runtime contracts, 56 schemas/855 fixtures, 188 design endpoints, 154 OpenAPI paths/195 methods |
+| Admin browser | Eight retry checks at desktop/375px and eight installed-candidate checks; 18 screenshots/four MP4/four GIF verified |
+| Provider components | Unchanged Go source/binary hashes verified; reuse historical client 48 top-level/222 subtests and Provider 172 top-level/325 subtests |
+| Native integration | 26 scenarios/11 synthetic jobs, one OOM for each task type, shared preparation-failure budget, frozen inputs and single settlement |
+| Candidate installation | 24 isolated offline installation checks, `rc-20261025.82.3`, 460 source inputs/155 payload files/57 wheels |
+| Database/contracts | Consistent snapshot restore of 45 tables/758 rows; head 2c9f1d6a4830; 58 runtime contracts, 56 schemas/865 fixtures, 188 design endpoints, 154 OpenAPI paths/195 methods |
 
-These checks were run for this increment; historical checks for other pages are not presented as fresh runs. The [summary](docs/evidence/2026-10-25/provider-catalog-verification.json), [Provider topic](docs/80-Provider目录消费与版本快照.md) and [UI/candidate topic](docs/81-Admin网关目录映射与发布核对.md) record source hashes, failures, cleanup and scope. Actual GPUs, dependencies, a fresh host, production and complete capacity acceptance remain open.
+Fresh execution and historical evidence reused after hash verification are identified separately. The [summary](docs/evidence/2026-10-25/confirmed-retry-verification.json) and [retry/candidate topic](docs/82-确认失败重试分类与跨GPU约束.md) record source hashes, failures, cleanup and scope. Actual GPUs, dependencies, a fresh host, production and complete capacity acceptance remain open.
 
 ## Documentation and future updates
 

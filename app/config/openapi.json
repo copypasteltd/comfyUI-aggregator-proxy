@@ -20173,7 +20173,10 @@
             "anyOf": [
               {
                 "type": "string",
-                "const": "preparation_transport_failure"
+                "enum": [
+                  "preparation_transport_failure",
+                  "comfy_oom"
+                ]
               },
               {
                 "type": "null"

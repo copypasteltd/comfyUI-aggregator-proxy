@@ -6,7 +6,7 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
-The [checklist](78-完整待办与首版收口清单.md) preserves 76 stable tracking IDs and separates implementation from actual-environment acceptance. [Topic 79](79-网关模型目录持久发布协议.md) is now connected to [Provider consumption and frozen request versions](80-Provider目录消费与版本快照.md) and [Admin mapping management](81-Admin网关目录映射与发布核对.md). Desired/confirmed state, prices, retry/rollback and existing requests have separate evidence. Physical-resource and complete release acceptance remain open.
+The [checklist](78-完整待办与首版收口清单.md) preserves 76 stable IDs. Implementations 01–05 are complete, leaving 71 items (69 first-release, two optional). [Topic 79](79-网关模型目录持久发布协议.md) connects to [Provider consumption](80-Provider目录消费与版本快照.md) and [Admin mapping management](81-Admin网关目录映射与发布核对.md). Latest [topic 82](82-确认失败重试分类与跨GPU约束.md) defines confirmed-failure classification, shared retry limits, cross-GPU restrictions and stop evidence. The 3232 Python checks, 26 native protocol scenarios, browser and exact-candidate installation have separate evidence. Physical-resource and complete release acceptance remain open.
 
 ## Requirements and engineering baseline
 
@@ -113,12 +113,13 @@ The [checklist](78-完整待办与首版收口清单.md) preserves 76 stable tra
 | 79 | [Durable gateway catalog publication protocol](79-网关模型目录持久发布协议.md) |
 | 80 | [Provider catalog consumption and frozen request versions](80-Provider目录消费与版本快照.md) |
 | 81 | [Admin gateway mappings and publication reconciliation](81-Admin网关目录映射与发布核对.md) |
+| 82 | [Confirmed failure classification, retry budget and physical GPU constraints](82-确认失败重试分类与跨GPU约束.md) |
 
 ## Contracts, examples and media
 
 - [Machine contracts](contracts/README.md): frozen JSON Schemas, fixtures, state machine, endpoint inventory and development traceability.
 - Complete native requests: [image](examples/create-image.json), [video](examples/create-video.json), [audio](examples/create-audio.json).
-- [Demonstration gallery](media/README.md): 15 screenshots, three recordings in MP4/GIF, selected actual API responses, explicitly labeled receipt fixtures, hashes and reproduction steps.
+- [Demonstration gallery](media/README.md): 18 screenshots, four recordings in MP4/GIF, selected actual API responses, explicitly labeled receipt/failure fixtures, hashes and reproduction steps.
 - [Contribution/synchronization rules](../CONTRIBUTING.md): update both READMEs, change notes and applicable media, run checks, commit and push.
 
 Production acceptance remains open for actual devices and Workflows, model quality, real storage/gateway dependencies, system services, joint recovery and physical-fleet capacity. The delivery checklist is authoritative for completion status.

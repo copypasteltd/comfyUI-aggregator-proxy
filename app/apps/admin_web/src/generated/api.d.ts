@@ -5675,7 +5675,7 @@ export interface components {
             /** Next At */
             next_at: number | null;
             /** Last Error */
-            last_error: "preparation_transport_failure" | null;
+            last_error: ("preparation_transport_failure" | "comfy_oom") | null;
         };
         /** RuntimeApprovalView */
         RuntimeApprovalView: {

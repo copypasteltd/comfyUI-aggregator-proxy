@@ -1,5 +1,18 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 — 确认失败重试与跨 GPU 约束 / Confirmed failure retries across GPUs
+
+- 完善安全失败分类：明确未提交的准备传输错误与有当前 prompt 停止证明的白名单 OOM 共享两次重试、5/15 秒退避；每任务最多一次 OOM，必须换到原冻结渠道内另一已批准物理 GPU，原 job/seed/Workflow/规格/输入/deadline/价格不变。
+- Add strict failure classification, two shared retries with 5/15-second backoffs, and one evidenced OOM retry per job on another currently approved physical GPU within the original routes. Preserve job, seed, Workflow, specification, inputs, deadline and price.
+- 新增向前迁移 2c9f1d6a4830、旧写入物理 GPU 保护和批准/绑定摘要领取复核；OOM 来源失败继续计入规格隔离，最后一次计量及 Sub2API 唯一结算保持不变。已有新事实时拒绝破坏性降级。
+- Add forward migration 2c9f1d6a4830, database protection against reusing an OOM GPU, and claim-time approval/binding checks. Preserve source failure accounting and single final metering/settlement; reject destructive downgrade of persisted facts.
+- Worker 0.4.0 使用显式 failure-retry-v1 声明和可选、脱敏的固定证明；旧 API/Worker 按原确认失败兼容。Admin 显示 OOM 原因、共享预算和下次时间，375px 长 ID 换行；补充双语操作文档、三张截图、MP4/GIF 和真实脱敏响应。
+- Keep Worker 0.4.0 compatible through explicit capability advertisement and an optional fixed evidence projection. Show OOM cause, shared budget and dispatch time in Admin, wrap long mobile IDs, and update bilingual documentation with three screenshots, MP4/GIF and sanitized actual responses.
+- 验证/Validation：3232 项完整 Python、2156 项契约/单元、157 文件 mypy、Ruff/75 包锁、40 前端单元、类型/构建、8 项重试浏览器、24 项最终候选安装和 8 项安装后浏览器通过；45 表/758 行一致快照恢复通过。上述范围均为本地或协议验证；完整原生链路结果及历史失败单独留证。
+- 候选/Candidate：rc-20261025.82.3，460 源输入、155 载荷、57 wheels；SHA-256 b93929c6a201aa6cc842c9d4283f8f4036682c437bad9c35131401acba8ae8a6。真实设备、GPU OOM/质量、六类 Workflow、S3/Redis、生产和实机规模验收保持开放。
+- 最终隔离原生链路 26 场景/11 合成任务通过，六类各一次 OOM、图片编辑混合准备失败共享预算、11 次唯一计量/结算及 22 次持久副作用消费核对通过；251 项运行源和候选 460 项源输入与当前一致。保留并行检查出现的鉴权行锁超时/502，未提升并发容量验收。待办 05 实现关闭，余 71 项（首版 69、可选 2）。
+- Final isolated native verification passed 26 scenarios/11 synthetic jobs, including six OOM cases, a shared preparation-failure budget, 11 unique metering/settlement records and 22 durable effects. All 251 runtime and 460 candidate inputs match current sources. Retain the concurrent authentication lock timeout/502; capacity acceptance stays open. Implementation item 05 closes, leaving 71 items (69 first-release, two optional).
+
 ## 2026-10-25 — Provider 目录消费与图形映射 / Provider catalogs and visual mapping
 
 - Provider 自动校验/持久化/确认目录，使用不可变请求快照，支持拒绝保留、丢回执和重启恢复、空目录下架及永久别名归属；Sub2API 新增向前迁移 257，旧迁移与唯一客户货币账本保留。

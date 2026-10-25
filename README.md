@@ -10,9 +10,9 @@
 
 **当前状态：开发中。** 原生 Windows 本地实现、协议测试和隔离候选安装已有验证记录；真实 Workflow、模型质量、真实 S3/Redis、生产系统服务与 10～20 台实机容量尚未完成验收。文中的截图和录屏使用真实页面与 API、独立 PostgreSQL 和明确标记的合成数据，不代表真实 GPU 生成或生产压测结果。
 
-[完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～04 的发布实现已补齐，72 项仍待收口（70 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md) 与 [Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md) 已连接持久发布协议，支持确认/拒绝、恢复、价格与旧任务版本、原请求核对和历史回滚。真实模型/网关联合验收继续独立。
+[完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05 的发布与重试实现已补齐，71 项仍待收口（69 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md) 与 [确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 已有本地实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
 
-本轮 [验证记录](docs/evidence/2026-10-25/provider-catalog-verification.json)：完整 Python 回归 3148 项、Provider/账本 172 项顶层与 325 子测试、前端 40 项单元及目录界面 16 组浏览器场景通过；实际 Provider 的 legacy/managed 跨进程验证分开记录。这些不替代真实 ComfyUI、生产存储或实机容量验收。
+本轮 [验证记录](docs/evidence/2026-10-25/confirmed-retry-verification.json)：完整 Python 回归 3232 项、契约/单元 2156 项、前端 40 项单元、重试界面 8 项、候选安装 24 项及安装后浏览器 8 项通过；实际服务跨进程 26 个场景覆盖六类任务、OOM 换卡和唯一结算。ComfyUI/Redis/存储仍为协议夹具；并行运行中出现的鉴权行锁超时/502 保留待定位，不以隔离通过替代并发容量验收。
 
 ## 目录
 
@@ -226,6 +226,12 @@ Worker 离线、租约到期或 HTTP 超时都不证明 GPU 已空闲。提交�
 
 取消、排空、规格隔离、管理同步和重试都有独立状态与审计。运行态文件回传和媒体校验可以继续处理，生成槽位释放与上传槽位不是同一件事。所有持久管理动作只有固定的允许操作，不远程执行任意命令、不自动安装自定义节点或下载权重。
 
+内部重试最多安排 2 次，依次退避 5/15 秒。明确未提交的准备传输失败可重试；当前 prompt 的白名单 OOM 还须有停止证明、原冻结渠道内另一已批准物理 GPU，且每任务最多重试一次 OOM。所有重试保持原 job、seed、Workflow、规格、输入、deadline 与价格，原 OOM GPU 在后续尝试中继续排除。未知提交继续核对；上传失败恢复原文件；最终只计量和结算一次。旧 Worker 缺少 OOM 证明时沿用原确认失败行为。详见 [安全重试分类](docs/82-确认失败重试分类与跨GPU约束.md)。
+
+![安全重试管理：实际界面、合成故障数据](docs/media/confirmed-retry/confirmed-retry.gif)
+
+[重试演示 MP4](docs/media/confirmed-retry/confirmed-retry.mp4) · [桌面详情](docs/media/confirmed-retry/retry-desktop.png) · [375px 手机](docs/media/confirmed-retry/retry-mobile.png) · [取消结果](docs/media/confirmed-retry/retry-mobile-cancelled.png) · [脱敏响应](docs/media/confirmed-retry/api-responses.json)。后台显示原因、预算与最早可分配时间；退避中仍占未完成配额，可调序或取消。演示使用实际 API/数据库，不代表真实 GPU OOM 验收。
+
 关键说明：[任务机制](docs/02-系统架构与任务机制.md)、[Worker 协议](docs/12-接口契约与Worker协议.md)、[恢复演练](docs/60-数据库对象与密钥联合恢复校验.md)。
 
 ## 配置、部署与运维
@@ -276,17 +282,17 @@ comfyUI-aggregator-proxy/
 
 Python 集成测试要求本项目的原生 PostgreSQL 与独立 `render_control_test` 库，不以进程内或 SQLite 替代。Go 和完整 Sub2API 检查要求锁定的原生 Go 工具链与对应上游缓存。浏览器检查和录屏必须在 `finally` 中关闭自己创建的 page/context/browser。
 
-| 最近验证：第 80～81 增量 | 结果及范围 |
+| 最近验证：第 82 增量 | 结果及范围 |
 | --- | --- |
-| Python | 完整 3148 项；契约复核 1498 项；目录后端定向 19 项 |
+| Python | 完整 3232 项；契约/单元 2156 项；完整回归含确认失败与目录后端 58 项 |
 | 前端 | 40 项单元、类型生成/检查和生产构建 |
-| Admin 图形检查 | 本轮目录 16 组桌面/375px/横屏；候选安装后另有 8 组 |
-| Provider 组件 | Go 客户端 48 顶层/222 子测试；Provider 172 顶层/325 子测试 |
-| 原生集成 | legacy 20 组/11 合成任务，managed 25 组/13 合成任务；实际服务进程与协议夹具边界分开 |
-| 候选安装 | 24 项隔离离线安装检查，候选 `rc-20261025.81.1` |
-| 数据库与契约 | 控制面 45 表；58 运行契约，56 schema/855 fixture，188 设计端点，154 OpenAPI 路径/195 方法 |
+| Admin 图形检查 | 重试 8 项桌面/375px；候选安装后另有 8 项；18 张截图/4 MP4/4 GIF 已核验 |
+| Provider 组件 | 未变 Go 源码/二进制摘要复核，复用客户端 48 顶层/222 子测试及 Provider 172 顶层/325 子测试历史证据 |
+| 原生集成 | 26 场景/11 合成任务，六类各一次 OOM；准备失败共享预算、冻结参数与唯一结算 |
+| 候选安装 | 24 项隔离离线安装检查，候选 `rc-20261025.82.3`，460 源输入/155 载荷/57 wheels |
+| 数据库与契约 | 45 表/758 行一致快照恢复；head 2c9f1d6a4830；58 运行契约，56 schema/865 fixture，188 设计端点，154 OpenAPI 路径/195 方法 |
 
-这些是本轮实际执行的分层结果；其他页面历史记录不冒充本轮重测。[汇总](docs/evidence/2026-10-25/provider-catalog-verification.json)、[Provider](docs/80-Provider目录消费与版本快照.md) 和 [UI/候选](docs/81-Admin网关目录映射与发布核对.md) 分别记录源码摘要、失败、清理和范围。真实 GPU、真实依赖、全新宿主、生产与完整容量仍待验收。
+本轮执行与按摘要复用的历史证据分别标明；其他页面不冒充本轮重测。[汇总](docs/evidence/2026-10-25/confirmed-retry-verification.json) 和 [重试/候选](docs/82-确认失败重试分类与跨GPU约束.md) 记录源码摘要、失败、清理和范围。真实 GPU、真实依赖、全新宿主、生产与完整容量仍待验收。
 
 ## 文档与后续更新
 

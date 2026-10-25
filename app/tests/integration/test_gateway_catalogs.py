@@ -344,6 +344,8 @@ def test_activation_races_legacy_admission_without_lost_fences(gateway_client: A
 
 
 def test_catalog_migration_refuses_fact_loss_and_admission_stamp_is_immutable(gateway_client: Any, published_model: dict[str, Any], pg: sessionmaker[Session]) -> None:
+    with pg() as session:
+        schema_before = session.scalar(text("SELECT version_num FROM alembic_version"))
     client, headers, info = gateway_client
     first = publish(client, info, published_model).json()
     assert acknowledge(client, headers, first).json()["activated"]
@@ -361,7 +363,7 @@ def test_catalog_migration_refuses_fact_loss_and_admission_stamp_is_immutable(ga
             module.downgrade()
     with pg() as session:
         assert session.scalar(select(func.count()).select_from(GatewayCatalogRelease)) == 1
-        assert session.scalar(text("SELECT version_num FROM alembic_version")) == "1b8e0c5f3247"
+        assert session.scalar(text("SELECT version_num FROM alembic_version")) == schema_before
 
 
 def test_publication_needs_an_enabled_channel_and_confirmation_rechecks_it(gateway_client: Any, published_model: dict[str, Any], pg: sessionmaker[Session]) -> None:

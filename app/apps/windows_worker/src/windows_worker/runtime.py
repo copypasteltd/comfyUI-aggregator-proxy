@@ -18,6 +18,7 @@ from generation_contracts.command_recovery import (
 )
 from generation_domain.errors import DomainError
 from generation_domain.media_types import output_mime
+from generation_domain.retries import RETRY_POLICY
 from generation_domain.values import fingerprint
 from generation_domain.workflows import compile_graph
 
@@ -38,6 +39,7 @@ from windows_worker.environment import file_digest, safe_path, verify_environmen
 from windows_worker.failure_causes import (
     COLLECTION_REJECTIONS,
     execution_failure_code,
+    oom_retry_evidence,
     preparation_failure_code,
     rejected_media,
     require_prompt_absent,
@@ -158,12 +160,16 @@ class Execution:
             specs.append({"position": i, "bytes": size, "sha256": digest, "media_type": media})
         return outputs, specs
 
-    async def require_stopped(self, comfy: httpx.AsyncClient, prompt: str) -> None:
+    async def require_stopped(self, comfy: httpx.AsyncClient, prompt: str) -> dict[str, Any]:
         queue = checked_queue(await async_request_json(comfy, "GET", "/queue", maximum=MAX_QUEUE_BYTES))
         require_prompt_absent(queue, prompt)
+        return queue
 
-    async def fail(self, code: str) -> None:
-        await self.emit("execution_failed", {"error_code": code, "execution_stop_confirmed": True, "evidence_digest": fingerprint({"attempt_id": self.aid, "error_code": code, "stopped": True})})
+    async def fail(self, code: str, proof: dict[str, Any] | None = None) -> None:
+        payload = {"error_code": code, "execution_stop_confirmed": True, "evidence_digest": fingerprint(proof if proof is not None else {"attempt_id": self.aid, "error_code": code, "stopped": True})}
+        if proof is not None:
+            payload["retry_evidence"] = proof
+        await self.emit("execution_failed", payload)
         self.worker.journal.finish(self.aid, retention_seconds=self.worker.settings.output_retention_seconds)
 
     async def run(self) -> None:
@@ -228,8 +234,10 @@ class Execution:
                     if history:
                         status = history.get("status", {})
                         if status.get("status_str") == "error":
-                            await self.require_stopped(comfy, prompt)
-                            await self.fail(execution_failure_code(history, prompt))
+                            queue = await self.require_stopped(comfy, prompt)
+                            row = self.worker.journal.get(self.aid)
+                            proof = oom_retry_evidence(history, queue, prompt, row["association_id"]) if self.claim.get("retry_policy") == RETRY_POLICY and row and row.get("association_id") else None
+                            await self.fail(execution_failure_code(history, prompt), proof)
                             return
                         if status.get("completed") is True and status.get("status_str") == "success":
                             await self.require_stopped(comfy, prompt)

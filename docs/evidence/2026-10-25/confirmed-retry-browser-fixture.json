@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "synthetic_data": true,
+  "real_comfyui": false,
+  "real_gpu_generation": false,
+  "run_id": "c93a3035b678",
+  "checks": [
+    "desktop_retry_has_unfinished_quota_without_ready_candidate_or_gpu_slot",
+    "desktop_oom_reason_budget_and_closed_source_are_visible",
+    "desktop_priority_change_preserves_oom_backoff_and_identity",
+    "mobile_retry_has_unfinished_quota_without_ready_candidate_or_gpu_slot",
+    "mobile_oom_reason_budget_and_closed_source_are_visible",
+    "mobile_long_identifiers_wrap_inside_description_table",
+    "mobile_cancel_settles_without_another_gpu_execution",
+    "mobile_375px_no_document_overflow"
+  ],
+  "cleanup": {
+    "processes": true,
+    "database": true,
+    "private_fixture": true
+  },
+  "backup_before_ddl": {
+    "sha256": "0a26b2327a82d725d2b61194085d9ffd29bb9aab6891ae5aace8b09545b38c4f",
+    "archive_list_verified": true
+  },
+  "database_mutations_verified": true,
+  "runner_intentionally_not_started": true,
+  "duration_seconds": 21.53,
+  "owned_processes": [
+    {
+      "name": "confirmed-retry-browser",
+      "pid": 12592,
+      "stopped": true,
+      "exit_code": 0
+    },
+    {
+      "name": "retry-api",
+      "pid": 8992,
+      "stopped": true,
+      "exit_code": 1
+    }
+  ]
+}

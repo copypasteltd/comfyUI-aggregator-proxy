@@ -120,6 +120,8 @@ Admin 内容目录接受 kind=input/output、page 与可选 key_id，返回规�
 
 原生 job/授权集合/Admin 的可选 retry 扩展按 [job-retry.schema.json](./contracts/job-retry.schema.json) 返回 count、limit、next_at、last_error；旧持久响应允许缺少扩展。内部重试保留 job/seed/Workflow/准入归属，和 Admin 对终态创建关联新任务的人工重试分开。等待内部重试的任务可按现有权限、CSRF、revision 和幂等规则取消或调序；不增加业务 Key 的管理权限。
 
+第 82 增量继续使用 Worker 0.4.0：领取响应可声明 `retry_policy=failure-retry-v1`；新 Worker 仅在收到声明后为当前 prompt 的已停止白名单 OOM 附带可选 `retry_evidence`。固定字段为 kind、prompt_id、association_id、exception_type、history_digest、queue_digest、queue_absent；摘要仅证明受控观察，不上传原始 history、输入或异常堆栈。外层 evidence_digest 必须匹配此对象的规范摘要。旧 API 无声明时 Worker 发旧格式，旧 Worker 无证明时新 API 不自动重跑。原 job retry 的 last_error 增加 comfy_oom，四个字段与 2 次共享预算不变；跨物理 GPU 及未知执行边界见 [82](./82-确认失败重试分类与跨GPU约束.md)。
+
 
 队列快照的可选 dispatch_policy 扩展见 [51](./51-租户公平调度与等待老化.md) 和 [schema](./contracts/dispatch-policy.schema.json)。Admin 只读显示固定份额、成本与老化规则，不泄露其他租户历史，也不承诺精确全局位置。客户/Worker 不能设置调度成本、权重或优先级；现有 Worker 0.4.0、业务和网关任务字段不增加必需项。
 
