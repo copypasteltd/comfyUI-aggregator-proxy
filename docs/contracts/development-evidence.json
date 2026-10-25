@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 92,
+  "increment": 93,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-92.json",
-    "sha256": "8604a0efd691d21528895e561f20ef9cc32eb0dae3c09cba87414471fc857e8d"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-93.json",
+    "sha256": "33a2a8dc8677a5d33ebfa8953fc986aa893c4b370b8fe7c5b08a0f4640de741f"
   },
   "requirements": [
     {
@@ -24,6 +24,10 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/scripts/workflow_package.py",
+          "baseline": "package93"
         }
       ],
       "tests": [
@@ -31,12 +35,19 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
           "language": "python"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_package.py",
+          "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
+          "language": "python",
+          "baseline": "package93"
         }
       ],
       "evidence": [
         "ci86",
         "native86",
-        "video92"
+        "video92",
+        "package93"
       ],
       "remaining_backlog": [
         "18",
@@ -58,6 +69,10 @@
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/scripts/workflow_package.py",
+          "baseline": "package93"
         }
       ],
       "tests": [
@@ -65,10 +80,17 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_image_standard_sources_roles_and_options_reach_native_job",
           "language": "python"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_package.py",
+          "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
+          "language": "python",
+          "baseline": "package93"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "package93"
       ],
       "remaining_backlog": [
         "19",
@@ -90,6 +112,10 @@
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/scripts/workflow_package.py",
+          "baseline": "package93"
         }
       ],
       "tests": [
@@ -102,10 +128,17 @@
           "path": "app/tests/unit/test_workflows.py",
           "symbol": "test_reference_compilation_preserves_order_and_never_modifies_release",
           "language": "python"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_package.py",
+          "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
+          "language": "python",
+          "baseline": "package93"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "package93"
       ],
       "remaining_backlog": [
         "20",
@@ -131,6 +164,10 @@
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
           "baseline": "video92"
+        },
+        {
+          "path": "app/scripts/workflow_package.py",
+          "baseline": "package93"
         }
       ],
       "tests": [
@@ -138,12 +175,19 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_video_json_multipart_and_native_share_ready_asset_and_job",
           "language": "python"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_package.py",
+          "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
+          "language": "python",
+          "baseline": "package93"
         }
       ],
       "evidence": [
         "ci86",
         "native86",
-        "video92"
+        "video92",
+        "package93"
       ],
       "remaining_backlog": [
         "21",
@@ -165,6 +209,10 @@
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/scripts/workflow_package.py",
+          "baseline": "package93"
         }
       ],
       "tests": [
@@ -177,10 +225,17 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_single_video_cannot_enter_a_multiple_reference_workflow_or_consume_quota",
           "language": "python"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_package.py",
+          "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
+          "language": "python",
+          "baseline": "package93"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "package93"
       ],
       "remaining_backlog": [
         "22",
@@ -206,6 +261,10 @@
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
           "baseline": "admin87"
+        },
+        {
+          "path": "app/scripts/workflow_package.py",
+          "baseline": "package93"
         }
       ],
       "tests": [
@@ -218,6 +277,12 @@
           "path": "app/tests/integration/test_audio.py",
           "symbol": "test_verified_audio_refunds_reservation_difference_and_replay_is_once",
           "language": "python"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_package.py",
+          "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
+          "language": "python",
+          "baseline": "package93"
         }
       ],
       "evidence": [
@@ -226,7 +291,8 @@
         "native86",
         "visual87",
         "sdk91",
-        "sdk92"
+        "sdk92",
+        "package93"
       ],
       "remaining_backlog": [
         "23",

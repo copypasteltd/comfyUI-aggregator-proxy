@@ -12,7 +12,9 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: local implementation/traceability items 01–05, 10 and 12 are complete, leaving 69 open items (67 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md), [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md), [confirmed failure retries](docs/82-确认失败重试分类与跨GPU约束.md) and [monitoring](docs/84-监控指标与脱敏请求关联.md) have implementations and separate verification evidence. Actual Workflows, joint gateway behavior, failures and production still require acceptance.
 
-Current [increment 92](docs/92-直接视频接口冻结投影与权限边界.md) aligns direct job_ video creation, original-key replay and detail reads with frozen specifications, exact millisecond durations and safe terminal errors. It preserves current scopes, revocation, sensitive-input controls, cross-key/tenant isolation and bounded list queries. Verification passes 28 source-bound video cases, 74 release-security cases, all 16 gates/3790 Python tests, 39 actual SDK checks within 24 native scenarios, 29 exact-candidate installation checks and ten browser checks. See [verification 92](docs/evidence/2026-10-26/direct-video-verification-92.json). Preserve both CI timeouts, the bounded statistics experiment and other failures; the original 1200-second budget stays fixed. Original Lime sources and all 69 remaining full-acceptance items are preserved.
+Current [increment 93](docs/93-真实Workflow离线发布包构建.md) prepares importable packages for all six capabilities from existing local ComfyUI dependencies, including model hashes, Git revisions and drift verification. [Focused evidence](docs/evidence/2026-10-26/workflow-package-python-93.json) is separate from historical full CI. Actual generation, quality and production approval remain pending.
+
+Previous [increment 92](docs/92-直接视频接口冻结投影与权限边界.md) aligns direct job_ video creation, original-key replay and detail reads with frozen specifications, exact millisecond durations and safe terminal errors. It preserves current scopes, revocation, sensitive-input controls, cross-key/tenant isolation and bounded list queries. Verification passes 28 source-bound video cases, 74 release-security cases, all 16 gates/3790 Python tests, 39 actual SDK checks within 24 native scenarios, 29 exact-candidate installation checks and ten browser checks. See [verification 92](docs/evidence/2026-10-26/direct-video-verification-92.json). Preserve both CI timeouts, the bounded statistics experiment and other failures; the original 1200-second budget stays fixed. Original Lime sources and all 69 remaining full-acceptance items are preserved.
 
 The Admin directly reuses the downloaded [original 04 Lime CSS](app/apps/admin_web/src/theme/reference/lime.css) and local original fonts. Future screens use the same shared theme and component adapter. See [source provenance and reuse rules](docs/87-青柠视觉系统与组件复用.md) and [this direct retrieval check](docs/evidence/2026-10-26/lime-direct-source-retrieval-92.json).
 
@@ -185,6 +187,14 @@ Do not initialize an existing database again. To resume development, run `python
 The `.env` created by `dev-db.py init` uses `development` and local storage. It is for development only. The production template is [environment.example](app/config/environment.example). Explicitly configure the database, pepper, Fernet key, trusted HTTPS origin, private S3 bucket and credentials. **Do not copy the development `.env` into production.** Production migrations, recovery and service hosting are covered by [native deployment and operations](docs/15-原生部署配置与运维.md).
 
 ## Onboarding devices and Workflows
+
+Prepare an existing local Workflow draft with the [offline package tool](docs/93-真实Workflow离线发布包构建.md). It hashes declared model files, locks local ComfyUI/custom-node revisions and produces an importable `manifest.json` for all six capabilities. Previous runtime approvals are cleared; actual generation and channel approval follow the steps below.
+
+```powershell
+# Run from app/. The parent must exist; the output package directory must be new.
+./.venv/Scripts/python.exe -X utf8 scripts/workflow-package.py build --manifest .local/my-workflow-draft.json --comfy-root C:/ComfyUI --output .local/workflow-packages/my-workflow-v1
+./.venv/Scripts/python.exe -X utf8 scripts/workflow-package.py verify --package .local/workflow-packages/my-workflow-v1 --comfy-root C:/ComfyUI
+```
 
 1. **Establish scope.** Create/select a tenant and project in Admin and set limits. Their limits and the business Key's limits all apply. Default daily audio quota can be zero; explicitly configure every applicable layer before enabling audio.
 2. **Register Windows nodes.** Issue a one-time Worker credential, save it to a private device file and verify the physical GPU identity. Start from [worker.example.json](app/config/worker.example.json).

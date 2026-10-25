@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 93 / 六类 Workflow 离线发布准备
+
+- 新增原生 `workflow-package.py build/verify`：基于明确指定的现有 ComfyUI 和六类发布草稿，流式计算模型 SHA-256、固定本地 Git 版本，输出可直接导入现有 Admin 的 manifest、来源及校验和。
+- Prepare all six Workflow capabilities from existing local dependencies. Preserve the frozen Admin import format, clear old runtime approvals, verify package integrity and optionally detect actual dependency drift. No model downloads, node installation, generation or database changes.
+- 拒绝覆盖、依赖越界/junction、脏仓库、依赖重复、模型读取变化、篡改和伪造离线批准。修正首轮原生 Windows ctime 接口差异与 Git 系统换行策略造成的误判，保留失败记录。
+- 70 focused checks pass, covering six-capability import/compilation and actual native CLI/Git execution. Keep this scope separate from previous full CI and physical-resource acceptance. Update bilingual usage and productization guidance; UI/media stay at their recorded revision. All 69 full-acceptance exits remain open.
+
 ## 2026-10-26 · Increment 92 / 直接视频接口冻结投影
 
 - 直接视频创建、重放和详情使用冻结 seconds/size；毫秒精度、旧字段省略、畸形元数据固定 503、16 种状态和安全终态错误均有回归。Location 与 poll_url 对齐，当前权限和跨主体隔离继续生效，列表保持轻量。

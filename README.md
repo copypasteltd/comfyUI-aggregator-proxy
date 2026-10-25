@@ -12,7 +12,9 @@
 
 [完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05、10、12 共 7 项本地实现/追踪出口已收口，69 项仍开放（67 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md)、[确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 及 [监控接线](docs/84-监控指标与脱敏请求关联.md) 已有实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
 
-本轮 [92 · 直接视频接口](docs/92-直接视频接口冻结投影与权限边界.md) 将 job_ 视频的创建、原键恢复和详情对齐到原冻结规格，返回精确毫秒时长、尺寸和固定安全终态错误。跨 Key/租户、敏感输入、当前 scope 与撤销继续校验；分页列表保持一次有界查询。28 项源码绑定视频回归、74 项发行安全回归、完整 16 门禁/3790 Python、39 项实际 SDK 检查/24 原生场景、29 项精确候选安装及 10 浏览器检查通过。见 [92 验证](docs/evidence/2026-10-26/direct-video-verification-92.json)。两轮 CI 超时、统计实验与其他失败独立保留，复验未提高 1200 秒预算。原始青柠源码继续直接引用，69 项完整待办保持开放。
+本轮 [93 · Workflow 离线发布包](docs/93-真实Workflow离线发布包构建.md) 提供六类能力的本机依赖锁定、模型哈希、可导入 manifest 与漂移复验，接续现有 Admin 发布链路。[专项验证](docs/evidence/2026-10-26/workflow-package-python-93.json) 与历史全量 CI 分开记录；真实生成、质量和生产批准仍待实机完成。
+
+此前 [92 · 直接视频接口](docs/92-直接视频接口冻结投影与权限边界.md) 将 job_ 视频的创建、原键恢复和详情对齐到原冻结规格，返回精确毫秒时长、尺寸和固定安全终态错误。跨 Key/租户、敏感输入、当前 scope 与撤销继续校验；分页列表保持一次有界查询。28 项源码绑定视频回归、74 项发行安全回归、完整 16 门禁/3790 Python、39 项实际 SDK 检查/24 原生场景、29 项精确候选安装及 10 浏览器检查通过。见 [92 验证](docs/evidence/2026-10-26/direct-video-verification-92.json)。两轮 CI 超时、统计实验与其他失败独立保留，复验未提高 1200 秒预算。原始青柠源码继续直接引用，69 项完整待办保持开放。
 
 Admin 全面复用直接拉取的 [04 · 青柠原始 CSS](app/apps/admin_web/src/theme/reference/lime.css) 与本地原字体；后续界面继续使用同一共享主题与组件适配。[来源、源码和复用规则](docs/87-青柠视觉系统与组件复用.md) · [本次直接拉取核对](docs/evidence/2026-10-26/lime-direct-source-retrieval-92.json)。
 
@@ -185,6 +187,14 @@ $taskNode = '.local/toolchains/node-24.22.1/node-v24.22.1-win-x64'
 `dev-db.py init` 生成的 `.env` 使用 `development` 与本地存储，仅供开发。生产配置示例为 [environment.example](app/config/environment.example)：数据库、pepper、Fernet 密钥、可信 HTTPS origin、S3 私有桶与访问凭证均须显式设置。**不能直接把开发 `.env` 复制到生产。** 生产迁移、恢复和服务托管见 [原生部署与运维](docs/15-原生部署配置与运维.md)。
 
 ## 从零接入设备与 Workflow
+
+已有本机 Workflow 草稿时，可先用[离线发布包工具](docs/93-真实Workflow离线发布包构建.md)计算模型哈希、锁定 ComfyUI/节点版本，生成可导入的 `manifest.json`。支持全部六类能力；工具清除旧运行批准，实机生成与渠道批准仍按以下流程完成。
+
+```powershell
+# 在 app/ 下执行；输出父目录须已存在，输出包目录必须全新。
+./.venv/Scripts/python.exe -X utf8 scripts/workflow-package.py build --manifest .local/my-workflow-draft.json --comfy-root C:/ComfyUI --output .local/workflow-packages/my-workflow-v1
+./.venv/Scripts/python.exe -X utf8 scripts/workflow-package.py verify --package .local/workflow-packages/my-workflow-v1 --comfy-root C:/ComfyUI
+```
 
 1. **建立范围。** 在 Admin 创建或选择租户和项目，配置额度。它们与业务 Key 的限制共同生效；默认音频日额度可能为零，启用音频时需要明确配置各层额度。
 2. **登记 Windows 节点。** 在节点页面登记、发放一次性 Worker 凭证并保存到设备私有文件，核对物理 GPU 身份。配置参考 [worker.example.json](app/config/worker.example.json)。
