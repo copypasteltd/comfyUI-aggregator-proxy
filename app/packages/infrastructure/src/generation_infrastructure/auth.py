@@ -18,6 +18,7 @@ from sqlalchemy import func, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, sessionmaker
 
+from generation_infrastructure.database_diagnostics import database_operation
 from generation_infrastructure.models import (
     AdminSession,
     AdminUser,
@@ -85,7 +86,7 @@ class AuthRepository:
 
     def gateway(self, token: str, peer: str) -> GatewayIdentity:
         identifier = secret_identifier("gateway", token)
-        with self.sessions.begin() as session:
+        with database_operation("gateway_auth"), self.sessions.begin() as session:
             row = session.scalar(select(GatewayService).where(GatewayService.credential_identifier == identifier))
             if not row or not row.enabled or row.pepper_version != self.settings.credential_pepper_version or not verify_secret(token, row.credential_verifier, self.pepper):
                 raise DomainError("invalid_credentials", "网关服务凭证无效", 401)

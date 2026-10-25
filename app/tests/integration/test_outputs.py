@@ -6,6 +6,7 @@ from typing import Any
 from uuid import uuid4
 
 import pytest
+from generation_application.ports import BusinessIdentity
 from generation_contracts.outputs import Complete, UploadAuthorization
 from generation_contracts.validation import WorkerEvent
 from generation_domain.errors import DomainError
@@ -18,7 +19,7 @@ from generation_infrastructure.security import SecretVault
 from generation_infrastructure.settings import Settings
 from generation_infrastructure.storage import LocalDevelopmentStore
 from PIL import Image
-from sqlalchemy import func, select
+from sqlalchemy import event, func, select
 from sqlalchemy.orm import Session, sessionmaker
 
 pytestmark = pytest.mark.integration
@@ -76,3 +77,58 @@ def test_corrupt_upload_cannot_publish_success(pg: sessionmaker[Session], catalo
     with pg() as session:
         assert session.get(Job, parse_id("job", claim["job_id"])).state == "uploading"
         assert session.scalar(select(func.count()).select_from(Artifact)) == 0
+
+
+@pytest.mark.parametrize("read_artifacts", [True, False])
+def test_job_detail_stays_consistent_when_completion_commits_between_reads(pg: sessionmaker[Session], catalog: dict[str, Any], test_settings: Settings, tmp_path: Path, read_artifacts: bool) -> None:
+    path = tmp_path / "snapshot.png"
+    Image.new("RGB", (1024, 1024), "teal").save(path)
+    outputs, _, claim, spec = ready(pg, catalog, test_settings, path)
+    attempt_id = parse_id("att", claim["attempt_id"])
+    job_id = parse_id("job", claim["job_id"])
+    auth = {"protocol_version": "0.4.0", "boot_id": claim["boot_id"], "fencing_token": claim["fencing_token"]}
+    plan = outputs.authorize(catalog["node_id"], attempt_id, UploadAuthorization(**auth, outputs=[spec]))
+    completion = Complete(**auth, upload_ids=[plan["uploads"][0]["id"]], manifest_digest=plan["manifest_digest"])
+    outputs.accept(catalog["node_id"], parse_id("upl", completion.upload_ids[0]), catalog["boot_id"], claim["fencing_token"], path)
+    owner = catalog["identity"]
+    identity = BusinessIdentity(owner.tenant_id, owner.project_id, owner.key_id, {**owner.policy, "scopes": [scope for scope in owner.policy["scopes"] if read_artifacts or scope != "artifacts:read"]})
+    jobs = JobRepository(pg)
+    before = jobs.get(identity, job_id)
+    committed: list[dict[str, Any]] = []
+    fired = False
+
+    def finish_after_job_read(connection: Any, cursor: Any, statement: str, parameters: Any, context: Any, executemany: bool) -> None:
+        nonlocal fired
+        compiled = context.compiled
+        query = compiled.statement if compiled is not None else None
+        if fired or query is None or not getattr(query, "is_select", False) or Job.__table__ not in query.get_final_froms():
+            return
+        fired = True
+        # Commit through the real completion use case on another connection,
+        # after PostgreSQL has selected the original Job row for this reader.
+        committed.append(outputs.complete(catalog["node_id"], attempt_id, completion))
+
+    engine = pg.kw["bind"]
+    event.listen(engine, "after_cursor_execute", finish_after_job_read)
+    try:
+        observed = jobs.get(identity, job_id)
+    finally:
+        event.remove(engine, "after_cursor_execute", finish_after_job_read)
+    assert fired and len(committed) == 1
+    assert observed["status"] == before["status"] == "uploading"
+    assert observed["updated_revision"] == before["updated_revision"]
+    assert "completed_at" not in observed and "input" not in observed
+    if read_artifacts:
+        assert observed["artifacts"] == []
+    else:
+        assert "artifacts" not in observed
+    after = jobs.get(identity, job_id)
+    assert after["status"] == "succeeded" and after["updated_revision"] > observed["updated_revision"]
+    assert "completed_at" in after and "input" not in after
+    if read_artifacts:
+        assert after["artifacts"] == [{"id": committed[0]["artifacts"][0]["id"], "position": 0}]
+    else:
+        assert "artifacts" not in after
+    with pg() as session:
+        assert session.scalar(select(func.count()).select_from(Artifact).where(Artifact.job_id == job_id)) == 1
+        assert session.scalar(select(func.count()).select_from(UsageLedger).where(UsageLedger.job_id == job_id)) == 1

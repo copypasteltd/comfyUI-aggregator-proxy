@@ -1,0 +1,111 @@
+{
+  "scope": "Actual native HTTPS responses with synthetic protocol resources",
+  "real_comfyui": false,
+  "real_redis": false,
+  "real_s3": false,
+  "metrics": {
+    "status": 200,
+    "content_type": "text/plain; version=0.0.4; charset=utf-8",
+    "request_id_present": true,
+    "selected_samples": [
+      {
+        "name": "render_control_snapshot_success",
+        "labels": {},
+        "value": 1.0
+      },
+      {
+        "name": "render_control_gpu_resources",
+        "labels": {
+          "status": "enabled"
+        },
+        "value": 2.0
+      },
+      {
+        "name": "render_control_gpu_resources",
+        "labels": {
+          "status": "management_hold"
+        },
+        "value": 0.0
+      },
+      {
+        "name": "render_control_gpu_resources",
+        "labels": {
+          "status": "registered"
+        },
+        "value": 2.0
+      },
+      {
+        "name": "render_control_channels",
+        "labels": {
+          "status": "enabled"
+        },
+        "value": 2.0
+      },
+      {
+        "name": "render_control_channels",
+        "labels": {
+          "status": "stale"
+        },
+        "value": 2.0
+      },
+      {
+        "name": "render_control_channels",
+        "labels": {
+          "status": "unverified"
+        },
+        "value": 2.0
+      },
+      {
+        "name": "render_control_worker_capacity_samples",
+        "labels": {
+          "status": "blocked"
+        },
+        "value": 0.0
+      },
+      {
+        "name": "render_control_worker_capacity_samples",
+        "labels": {
+          "status": "ready"
+        },
+        "value": 0.0
+      },
+      {
+        "name": "render_control_worker_capacity_samples",
+        "labels": {
+          "status": "unavailable"
+        },
+        "value": 0.0
+      },
+      {
+        "name": "render_control_worker_capacity_samples",
+        "labels": {
+          "status": "unknown"
+        },
+        "value": 1.0
+      }
+    ]
+  },
+  "configuration": {
+    "status": 200,
+    "body": {
+      "protocol": "monitoring-v1",
+      "enabled": true,
+      "credential_slots": 1,
+      "source_network_count": 1,
+      "cache_seconds": 5,
+      "database_budget_seconds": 2,
+      "recent_window_seconds": 3600,
+      "capacity_node_limit": 256,
+      "maximum_exposition_bytes": 2097152,
+      "thresholds": {
+        "queue_age_seconds": 300,
+        "pending_age_seconds": 60,
+        "settlement_age_seconds": 300,
+        "node_stale_seconds": 30,
+        "http_error_ratio": 0.05,
+        "minimum_requests": 20,
+        "alert_for_seconds": 120
+      }
+    }
+  }
+}

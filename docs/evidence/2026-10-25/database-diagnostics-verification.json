@@ -1,0 +1,69 @@
+{
+  "at": "2026-10-25T09:54:27.313889+00:00",
+  "passed": true,
+  "increment": 86,
+  "baseline_commit": "7c5177cd620d2164d70f8a9c29a1a33aa9f74396",
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 3593,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "sources": {
+      "inputs": 587,
+      "drift": []
+    }
+  },
+  "complete_concurrent_native": {
+    "cases": 29,
+    "sources": {
+      "inputs": 264,
+      "drift": []
+    },
+    "cleanup": {
+      "processes": true,
+      "databases": true,
+      "database_observer": true,
+      "media_and_credentials": true
+    }
+  },
+  "candidate": {
+    "release_id": "rc-20261025.86.1",
+    "archive_sha256": "2b1e3ec8b14f4b3075e34f33bc0f910fd65c007ed726fdef74a550c6ef178e51",
+    "build_inputs": 488,
+    "payload_files": 166,
+    "wheels": 58,
+    "runtime_contracts": 62,
+    "installation_checks": 28,
+    "installed_browser_checks": 8
+  },
+  "references": {
+    "database-diagnostics-final-ci-verification.json": "7ea09d74246c1444224902a2085ef9e1bd0200e62f879b1becf00a21f6114419",
+    "database-diagnostics-maintained-concurrency-verification.json": "234aba3bec95330dfb0d9f9cc631c014415d3e6a02fd8eb07dd401b8f05a0dab",
+    "database-diagnostics-release-build.json": "b84d37236bdc27ce367fad20a4483d14c5e7ac3d2ac9c52c48b6f387480ae36b",
+    "database-diagnostics-release-verification.json": "277415489dd746532fe2327ff0a4e8d1d9c7d56dd536e66b0da70beff5e9e6aa",
+    "database-diagnostics-focused-validation.json": "22070870f84bf722ddec62db88edff0db0bb950096d044255c26ce249cbee181",
+    "database-diagnostics-snapshot-validation.json": "4ef8fc798b6d3c36ea443532c104366046abfc1a07551dcd8b6120ddbf10aa65",
+    "database-diagnostics-final-engineering-validation.json": "5988c6b44987754b19f2ed29c2d347d9ed3ba5e05de05bef5e46f997efdd1a87",
+    "database-diagnostics-historical-review.json": "784b19773e2eb247e7a673752088e56360b3fa40e6f9b04d18f3a38c768e0df1",
+    "database-diagnostics-final-ci-failures.json": "f2ab9b8cdcd9876a096895bdd482fd0b3c0fa8928d3ed16788d3a0b7fdb456ea",
+    "database-diagnostics-test-database-maintenance.json": "a5b7f81ab9e2cecce95ac9aa56614772bfc8d9371fbcdfe8362a2a86fc54fd78",
+    "database-diagnostics-maintenance-focused-validation.json": "19e7dbc1e2894286402699f3ae9b881d15f6ae60fb4cfb9da870e05836be335f",
+    "database-diagnostics-development-readiness.json": "45abe727185b150a6a9d29e5d441ae24143488e47d1643c69dbf12ba3e058d97",
+    "database-diagnostics-development-precheck-failure.json": "9ebef3acb7cd857457d6d576c3959723a99610a324f6e648646de4fe53106e6c",
+    "database-diagnostics-development-precheck-validation.json": "1ad1834194525b2a0ce88ea165a2602a04a8b8374d0849fdcc2354304c8f0028",
+    "database-diagnostics-closeout-backlog.json": "523d8511fff57c4b95598a2e60adea89923d523ef949554e6634b63556f8bb09"
+  },
+  "historical_failures_retained": true,
+  "job_detail_read_race_fixed": true,
+  "historical_root_causes_resolved": false,
+  "remaining_items": 70,
+  "real_workflows_accepted": false,
+  "physical_fleet_accepted": false,
+  "ci_remote_acceptance": false,
+  "actual_scm_lifecycle_accepted": false,
+  "production_accepted": false,
+  "virtualization_used": false
+}

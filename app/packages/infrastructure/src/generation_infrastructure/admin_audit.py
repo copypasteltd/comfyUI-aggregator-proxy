@@ -13,6 +13,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.exc import DBAPIError
 
 from generation_infrastructure.admin_base import AdminBase, timestamp
+from generation_infrastructure.database_diagnostics import record_database_failure
 from generation_infrastructure.models import AdminUser, ApiKey, AuditEvent, GatewayService, Node
 
 DETAIL_MAX_BYTES = 16384
@@ -65,7 +66,8 @@ class AuditQueries(AdminBase):
     def snapshot(self, query: AuditQuery) -> dict[str, Any]:
         try:
             return self._snapshot(query)
-        except DBAPIError:
+        except DBAPIError as error:
+            record_database_failure("audit_snapshot", error)
             raise DomainError("audit_query_unavailable", "审计查询暂时不可用，请缩小筛选范围后重试", 503) from None
 
     def _snapshot(self, query: AuditQuery) -> dict[str, Any]:

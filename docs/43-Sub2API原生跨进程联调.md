@@ -65,3 +65,12 @@ Go 客户端的配置必须显式给出稳定 `GatewayID`，即 Admin 返回的 
 运行入口为 `app/scripts/check.ps1 -Suite Sub2APINative`，要求已按项目锁文件准备原生工具链、项目开发 PG 和当前 Provider 构建；子脚本会再次校验源码和二进制摘要。该命令只创建本次随机测试资源。完整 `All` 顺序包含客户端、账本、实际入口构建后再执行本项；不会获取真实设备或安装模型。
 
 本节证明明确边界内的原生跨进程协议链路。真实 Redis、真实 ComfyUI/五类 Workflow、私有 S3、公网 TLS 代理、其他供应商混合在途额度、10/20 台实机和完整发布验收仍未完成；WP-11/13 等保持进行中。
+
+
+## 第 86 增量：数据库诊断与只读观测
+
+原生驱动按 [86](./86-数据库故障脱敏诊断与并发观测.md) 增加两个实际 HTTPS API 锁故障及恢复场景，并在本次随机双库运行期间进行有界只读阻塞链采样。日志只保留固定数据库错误类别，报告仅输出后端别名、状态/等待桶和最大年龄，不读取 SQL 文本；停止采样线程后关闭所属连接。已有历史协议记录不改写，真实 ComfyUI/Redis/S3、物理 GPU 和生产验收继续独立。
+
+## 第 86 增量最终验证范围
+
+[86 最终验证](./86-数据库故障脱敏诊断与并发观测.md)完成完整 16 门禁/3593 Python、29 项完整 CI 窗口内原生协议、28 项候选安装与 8 项安装后浏览器检查；587 CI、264 协议运行、488 候选构建输入均与验证源码一致。候选 rc-20261025.86.1 含 166 载荷、58 wheels、62 运行契约。原失败与一次性测试库维护保留；未将本地通过提升为真实设备、实际 WinSW/SCM、远端 CI 或生产验收，70 项仍开放。最终证据见 [汇总](./evidence/2026-10-25/database-diagnostics-verification.json)、[完整门禁](./evidence/2026-10-25/database-diagnostics-final-ci-verification.json)、[并发窗口](./evidence/2026-10-25/database-diagnostics-maintained-concurrency-verification.json)与[候选安装](./evidence/2026-10-25/database-diagnostics-release-verification.json)。

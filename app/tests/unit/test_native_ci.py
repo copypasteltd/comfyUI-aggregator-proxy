@@ -6,6 +6,7 @@ import os
 import shutil
 import subprocess
 import sys
+import time
 from contextlib import nullcontext
 from pathlib import Path
 
@@ -221,3 +222,49 @@ def test_ci_refuses_wrong_database_before_any_connection(monkeypatch: pytest.Mon
     monkeypatch.setattr("generation_infrastructure.settings.Settings", lambda: SimpleNamespace(environment=environment, database_url=SecretStr(url)))
     with pytest.raises(ci.CIError, match="unsafe_ci_database"):
         ci.test_url()
+
+
+def test_venv_dispatcher_cannot_spawn_outside_owned_job_before_assignment(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    survived = tmp_path / "survived-timeout"
+    original = ci.ProcessTree.assign
+
+    def delayed_assignment(tree: object, process: subprocess.Popen) -> None:
+        time.sleep(1)
+        original(tree, process)
+
+    monkeypatch.setattr(ci.ProcessTree, "assign", delayed_assignment)
+    code = "import pathlib,time;time.sleep(5);pathlib.Path(" + repr(str(survived)) + ").write_text('escaped');time.sleep(1)"
+    result = ci.execute(ci.Gate("dispatcher", [str(ROOT / ".venv/Scripts/python.exe"), "-c", code], tmp_path, 3), tmp_path / "dispatcher.log", dict(os.environ), limit=4096)
+    assert result["timed_out"] and result["owned_process_tree_closed"]
+    assert not survived.exists(), "The actual interpreter survived its assigned launcher"
+
+
+def test_small_flushed_log_excess_is_stopped_before_child_continues(tmp_path: Path) -> None:
+    continued = tmp_path / "continued-after-log-excess"
+    code = "import pathlib,sys,time;sys.stdout.write('x'*1025);sys.stdout.flush();time.sleep(3);pathlib.Path(" + repr(str(continued)) + ").write_text('continued')"
+    log = tmp_path / "small-excess.log"
+    result = ci.execute(ci.Gate("small-log", [sys.executable, "-c", code], tmp_path, 10), log, dict(os.environ), limit=1024)
+    assert result["log_truncated"] and not result["timed_out"] and result["owned_process_tree_closed"]
+    assert log.stat().st_size == 1024
+    assert not continued.exists(), "Flushed bytes below the pipe buffer still exceed the log budget"
+
+
+@pytest.mark.parametrize("failure,code", [(subprocess.TimeoutExpired(["PRIVATE-COMMAND"], 1), "ci_command_timeout"), (OSError("PRIVATE-IO"), "ci_io_failed"), (UnicodeDecodeError("utf-8", b"\xff", 0, 1, "PRIVATE-ENCODING"), "ci_encoding_failed")])
+def test_preflight_failure_exports_only_owned_phase_and_fixed_code(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], failure: Exception, code: str) -> None:
+    app = tmp_path / "app"
+    (app / "config").mkdir(parents=True)
+    (app / "config/native-ci.json").write_bytes((ROOT / "config/native-ci.json").read_bytes())
+    monkeypatch.setattr(ci, "APP", app)
+    monkeypatch.setattr(ci, "ROOT", tmp_path)
+    monkeypatch.setattr(ci, "workflow_policy", lambda _: None)
+    monkeypatch.setattr(ci, "database_lock", nullcontext)
+    monkeypatch.setattr(ci, "git", lambda _: b"a" * 40)
+    def fail_snapshot() -> None:
+        raise failure
+    monkeypatch.setattr(ci, "snapshot", fail_snapshot)
+    monkeypatch.setattr(sys, "argv", ["native_ci.py", "--run-id", "unit-preflight-123"])
+    assert ci.main() == 1
+    report = json.loads((tmp_path / "docs/evidence/native-ci/unit-preflight-123/summary.json").read_bytes())
+    assert report["preflight_phase"] == "source_snapshot" and report["failure_code"] == code
+    assert all(gate["status"] == "not_run" for gate in report["gates"])
+    assert "PRIVATE" not in json.dumps(report) + capsys.readouterr().out

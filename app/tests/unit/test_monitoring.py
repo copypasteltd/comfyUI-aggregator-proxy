@@ -10,8 +10,10 @@ from typing import Any
 from uuid import UUID
 
 import pytest
-from control_api.monitoring import MonitoringMiddleware, RequestLog
+from control_api.monitoring import MonitoringMiddleware, ObservedAPI, RequestLog
 from control_api.monitoring_cli import alert_rules, main
+from fastapi import APIRouter, FastAPI
+from fastapi.testclient import TestClient
 from generation_contracts.monitoring import MonitoringConfiguration, MonitoringThresholds
 from generation_infrastructure.monitoring import (
     HTTP_BUCKETS,
@@ -252,3 +254,38 @@ def test_cli_invalid_configuration_never_formats_private_values(tmp_path: Path, 
         main()
     assert str(failure.value) == "monitoring_configuration_invalid"
     assert "synthetic-private" not in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("mount_prefix", ["", "/proxy"])
+def test_included_router_log_templates_cover_nested_prefixes_and_hidden_routes(mount_prefix: str) -> None:
+    metrics = ProcessMetrics()
+    log = RequestLog(metrics)
+    application = ObservedAPI(metrics=metrics, request_log=log)
+    leaf, branch = APIRouter(), APIRouter()
+
+    @leaf.get("/jobs/{identifier}", include_in_schema=False)
+    def detail(identifier: str) -> dict[str, bool]:
+        return {"ok": True}
+
+    @application.get("/health/ready")
+    def health() -> dict[str, bool]:
+        return {"ready": True}
+
+    branch.include_router(leaf, prefix="/branch")
+    application.include_router(branch, prefix="/v1")
+    application.include_router(branch, prefix="/gateway/v1")
+    mounted = FastAPI()
+    if mount_prefix:
+        mounted.mount(mount_prefix, application)
+    target = mounted if mount_prefix else application
+    try:
+        with TestClient(target) as client:
+            for route, status in [("/health/ready", 200), ("/v1/branch/jobs/PRIVATE-BUSINESS-ID", 200), ("/gateway/v1/branch/jobs/PRIVATE-GATEWAY-ID", 200), ("/v1/PRIVATE-NOT-REGISTERED", 404)]:
+                assert client.get(mount_prefix + route + "?secret=PRIVATE-QUERY", headers={"authorization": "Bearer PRIVATE-CREDENTIAL"}).status_code == status
+        events = [json.loads(log.queue.get_nowait()) for _ in range(4)]
+        assert [entry["route"] for entry in events] == ["/health/ready", "/v1/branch/jobs/{identifier}", "/gateway/v1/branch/jobs/{identifier}", "<unmatched>"]
+        assert "/v1/branch/jobs/{identifier}" not in application.openapi()["paths"]
+        assert "PRIVATE" not in json.dumps(events)
+        assert log.queue.empty()
+    finally:
+        log.close()

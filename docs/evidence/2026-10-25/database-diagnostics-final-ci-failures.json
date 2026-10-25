@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-25T09:11:11.725671+00:00",
+  "run_id": "ci86-20261025-preflight-diagnostics",
+  "tests": 3593,
+  "failures": [
+    {
+      "test": "tests.integration.test_admin_audit.test_http_identity_permission_and_query_shape[administrator]",
+      "seconds": 6.136,
+      "failure": "audit_unavailable_503"
+    },
+    {
+      "test": "tests.integration.test_audit_retention.test_each_batch_is_bounded_and_restart_only_deletes_remaining_rows[default]",
+      "seconds": 30.206,
+      "failure": "statement_timeout_57014"
+    },
+    {
+      "test": "tests.integration.test_operational_monitoring.test_pg_queue_is_deduplicated_and_does_not_export_private_identifiers",
+      "seconds": 1.825,
+      "failure": "statement_timeout_57014"
+    }
+  ],
+  "errors": 0,
+  "skipped": 0,
+  "junit_sha256": "a0d83e887d6760374af821f5d6dbf72826bf0f908762474943fd729a49a195a7",
+  "ci_summary_sha256": "ab7feb99a154f3ccfdc943fcd46a83e594411a5e02856655c1485fb6dbb60921",
+  "python_gate_log_complete": true,
+  "owned_process_tree_closed": true,
+  "python_gate_timed_out": false,
+  "timeouts_increased": false,
+  "historical_root_cause_resolved": false,
+  "raw_log_published": false
+}

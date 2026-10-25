@@ -1,0 +1,34 @@
+{
+  "at": "2026-10-25T07:01:22.127348+00:00",
+  "passed": false,
+  "raw_logs_published": false,
+  "attempts": [
+    {
+      "private_report": ".local/db86-focused.xml",
+      "sha256": "5d0d62c7a0e95373160046d38d17bff06cd2907a6d861920bb58fd71676fcaf5",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "failed_cases": [
+        "tests.integration.test_database_diagnostics"
+      ]
+    },
+    {
+      "private_report": ".local/db86-focused2.xml",
+      "sha256": "88463682791e60c57560c2ac7b203d1f5f1d77ea118aedd134470c21619c6595",
+      "tests": 143,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0,
+      "failed_cases": [
+        "test_audit_relation_wait_uses_existing_budget_and_recovers",
+        "test_pg_queue_is_deduplicated_and_does_not_export_private_identifiers",
+        "test_expired_disabled_gpu_remains_occupied_and_unknown",
+        "test_capacity_unknown_is_not_healthy_or_zero_pressure[missing]"
+      ]
+    }
+  ],
+  "failures_replaced_by_rechecks": false,
+  "historical_roots_resolved": false
+}

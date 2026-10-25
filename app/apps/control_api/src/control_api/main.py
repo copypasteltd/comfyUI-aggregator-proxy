@@ -201,6 +201,7 @@ from generation_infrastructure.commands import CommandRepository
 from generation_infrastructure.content import ContentRepository
 from generation_infrastructure.cursors import CursorCodec
 from generation_infrastructure.database import make_sessions
+from generation_infrastructure.database_diagnostics import record_database_failure
 from generation_infrastructure.gateway import GatewayRepository
 from generation_infrastructure.job_cancellations import JobCancellations
 from generation_infrastructure.jobs import JobRepository
@@ -224,7 +225,7 @@ from generation_infrastructure.validation_jobs import ValidationJobs
 from generation_infrastructure.workflow_directory import WorkflowDirectory
 from generation_infrastructure.workflow_history import WorkflowHistory
 from sqlalchemy import text
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import DBAPIError, IntegrityError
 from starlette.exceptions import HTTPException
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -368,6 +369,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def integrity_error(request: Request, exc: IntegrityError) -> JSONResponse:
         request.state.access_error_code = "resource_conflict"
         return JSONResponse({"error": {"code": "resource_conflict", "message": "资源冲突或关联约束不满足", "request_id": request.state.request_id}}, status_code=409)
+
+    @app.exception_handler(DBAPIError)
+    async def database_error(request: Request, exc: DBAPIError) -> JSONResponse:
+        record_database_failure("http_request", exc)
+        request.state.access_error_code = "internal_error"
+        return JSONResponse({"error": {"code": "internal_error", "message": "服务处理失败", "request_id": request.state.request_id}}, status_code=500)
 
     @app.exception_handler(Exception)
     async def unexpected(request: Request, exc: Exception) -> JSONResponse:

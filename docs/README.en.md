@@ -10,7 +10,9 @@ The [checklist](78-完整待办与首版收口清单.md) preserves 76 stable IDs
 
 The preceding engineering increment is [84: monitoring](84-监控指标与脱敏请求关联.md). All 87 focused checks, 16 gates/3399 Python checks, 27 native scenarios, 50 PromQL assertions, 26 exact-candidate installation checks and eight installed-browser checks passed. Synchronization covers 57 schemas/902 fixtures, 60 runtime contracts, 190 design endpoints and 156 paths/197 methods. Actual [GitHub Runner](83-原生CI门禁与失败证据.md) enablement remains open under item 11; production collection/logging/notification remains open under item 68. The [complete checklist](78-完整待办与首版收口清单.md) retains all 70 open items and their exit conditions.
 
-The latest increment, [85: native service tools](85-原生系统服务封装与受控生命周期.md), passes 161 focused checks, all 16 gates/3524 Python checks, 28 exact-candidate installation checks and eight browser checks. It synchronizes 58 schemas/937 fixtures and 61 runtime contracts. [Verification](evidence/2026-10-25/native-services-verification.json) retains failed attempts and their cleanup. Actual WinSW/SCM, service-account ACLs, boot recovery and new gateway-supervisor lifecycles remain open under item 66.
+The previous increment, [85: native service tools](85-原生系统服务封装与受控生命周期.md), passes 161 focused checks, all 16 gates/3524 Python checks, 28 exact-candidate installation checks and eight browser checks. It synchronizes 58 schemas/937 fixtures and 61 runtime contracts. [Verification](evidence/2026-10-25/native-services-verification.json) retains failed attempts and their cleanup. Actual WinSW/SCM, service-account ACLs, boot recovery and new gateway-supervisor lifecycles remain open under item 66.
+
+[Increment 86](86-数据库故障脱敏诊断与并发观测.md) adds allowlisted database failures, request isolation, a dedicated database exception handler and bounded read-only blocker observation. Historical causes and real-resource acceptance remain open.
 
 ## Requirements and engineering baseline
 
@@ -120,6 +122,7 @@ The latest increment, [85: native service tools](85-原生系统服务封装与�
 | 82 | [Confirmed failure classification, retry budget and physical GPU constraints](82-确认失败重试分类与跨GPU约束.md) |
 | 83 | [Native CI gates, process cleanup and safe failure evidence](83-原生CI门禁与失败证据.md) |
 | 84 | [Monitoring metrics, isolated read-only identity and sanitized request correlation](84-监控指标与脱敏请求关联.md) |
+| 86 | [Sanitized database failures, request isolation and native lock observation](86-数据库故障脱敏诊断与并发观测.md) |
 | 85 | [Native system service plans, controlled lifecycle and dedicated interpreter](85-原生系统服务封装与受控生命周期.md) |
 
 ## Contracts, examples and media
@@ -130,3 +133,7 @@ The latest increment, [85: native service tools](85-原生系统服务封装与�
 - [Contribution/synchronization rules](../CONTRIBUTING.md): update both READMEs, change notes and applicable media, run checks, commit and push.
 
 Production acceptance remains open for actual devices and Workflows, model quality, real storage/gateway dependencies, system services, joint recovery and physical-fleet capacity. The delivery checklist is authoritative for completion status.
+
+## Increment 86 final evidence
+
+[Database diagnostics and concurrency](86-数据库故障脱敏诊断与并发观测.md) passed all 16 gates/3593 Python checks, 29 native cases within the complete concurrent CI window, 28 exact-candidate installation checks and eight installed-browser checks. The candidate matches 488 build inputs; 587 CI and 264 native runtime inputs are unchanged. It contains 166 payload files, 58 wheels and 62 runtime contracts. Failed attempts, one-time test-database maintenance and unresolved historical roots remain visible. See the [verification](evidence/2026-10-25/database-diagnostics-verification.json). All 70 pending items retain their acceptance boundaries.

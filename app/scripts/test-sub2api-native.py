@@ -43,6 +43,8 @@ from generation_infrastructure.models import (
 )
 from generation_infrastructure.security import password_hash
 from generation_infrastructure.settings import Settings
+from native_database_observer import DatabaseObserver
+from native_database_probe import exercise as database_faults
 from prometheus_client.parser import text_string_to_metric_families
 from psycopg import sql
 from sqlalchemy import create_engine, select
@@ -572,7 +574,7 @@ def main() -> None:
     root.mkdir(parents=True, exist_ok=False)
     ledger = module("native_ledger_harness", "test-sub2api-ledger.py")
     fixtures = module("native_provider_fixtures", "native-provider-fixtures.py")
-    source_paths = [Path(__file__), ROOT / "scripts/native-provider-fixtures.py", ROOT / "integrations/sub2api/protocol-fixture/main.go"]
+    source_paths = [Path(__file__), ROOT / "scripts/native-provider-fixtures.py", ROOT / "integrations/sub2api/protocol-fixture/main.go", ROOT / "scripts/native_database_observer.py", ROOT / "scripts/native_database_probe.py"]
     for directory in ("packages", "apps/control_api", "apps/control_runner", "apps/windows_worker", "migrations"):
         source_paths.extend(sorted((ROOT / directory).rglob("*.py")))
     source_paths.extend(sorted((ROOT / "packages/contracts/src/generation_contracts/schemas").glob("*.json")))
@@ -584,6 +586,7 @@ def main() -> None:
     comfy, alternative_comfy, engine, api_client, provider_client = None, None, None, None, None
     admin = None
     managed: NativeCatalog | None = None
+    observer: DatabaseObserver | None = None
     phase = "verify_sources"
     failure: BaseException | None = None
     try:
@@ -658,9 +661,13 @@ def main() -> None:
             worker_config["channels"].append({"base_url": f"http://127.0.0.1:{alternative_port}", "hardware_id": fixtures.HARDWARE + "-ALT", "comfy_root": str(root / "comfy")})
             write(root / "worker.json", worker_config)
         phase = "start_native_services"
+        observer = DatabaseObserver(options, [control_database, upstream_database])
+        observer.start()
         api = processes.start("control-api", [sys.executable, "-m", "uvicorn", "control_api.main:create_app", "--factory", "--host", "127.0.0.1", "--port", str(api_port), "--ssl-certfile", str(cert), "--ssl-keyfile", str(key), "--no-proxy-headers", "--no-access-log"], env)
         api_client = httpx.Client(base_url=api_origin, verify=ssl.create_default_context(cafile=str(cert)), timeout=5, trust_env=False, follow_redirects=False)
         wait_http(api_client, "/health/ready", api)
+        phase = "database_failure_diagnostics"
+        report["cases"].extend(database_faults(api_client, options, control_database, factory, catalog["gateway_id"], catalog["gateway_token"], root / "control-api.log"))
         metrics_path = "/internal/monitoring/v1/metrics"
         check(api_client.get(metrics_path).status_code == 401, "monitoring_requires_own_identity")
         metrics = api_client.get(metrics_path, headers={"Authorization": "Bearer " + monitoring_token})
@@ -791,6 +798,12 @@ def main() -> None:
                     diagnostics[database] = {"unavailable": type(diagnostic_error).__name__}
             report["safe_failure_state"] = diagnostics
     finally:
+        if observer:
+            report["database_observation"] = observer.close()
+            report["cleanup"]["database_observer"] = report["database_observation"]["thread_closed"]
+            if not report["database_observation"]["passed"]:
+                report["passed"] = False
+                failure = failure or RuntimeError("database_observer_failed")
         for client in (provider_client, api_client):
             if client:
                 client.close()

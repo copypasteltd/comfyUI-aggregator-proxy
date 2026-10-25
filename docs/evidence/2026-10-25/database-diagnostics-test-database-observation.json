@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-25T09:02:05.839990+00:00",
+  "read_only_observation": true,
+  "database_scope": "render_control_test at 127.0.0.1:55438",
+  "audit_query_plan": {
+    "node": "Limit/Index Scan",
+    "index": "ix_audit_events_created",
+    "total_cost": 261.67,
+    "jit_selected": false
+  },
+  "settings": {
+    "autovacuum": "on",
+    "autovacuum_naptime": 60,
+    "autovacuum_max_workers": 3,
+    "track_counts": "on",
+    "fsync": "on",
+    "synchronous_commit": "on"
+  },
+  "largest_observed_tables": [
+    {
+      "name": "api_keys",
+      "heap_bytes": 71565312,
+      "estimated_live": 1003,
+      "estimated_dead": 34774,
+      "last_autovacuum_recorded": false
+    },
+    {
+      "name": "public_models",
+      "heap_bytes": 18243584,
+      "estimated_live": 4100,
+      "estimated_dead": 100417,
+      "last_autovacuum_recorded": false
+    },
+    {
+      "name": "audit_events",
+      "heap_bytes": 13082624,
+      "estimated_live": 1499,
+      "estimated_dead": 98673,
+      "last_autovacuum_recorded": false
+    }
+  ],
+  "vacuum_or_config_mutation_performed": false,
+  "bloat_as_timeout_root_proven": false,
+  "historical_audit_root_resolved": false,
+  "virtualization_used": false
+}

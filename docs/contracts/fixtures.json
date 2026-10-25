@@ -44085,6 +44085,116 @@
           }
         ]
       }
+    },
+    {
+      "id": "database_failure_lock",
+      "schema": "database-failure.schema.json",
+      "valid": true,
+      "data": {
+        "operation": "gateway_auth",
+        "reason": "lock_unavailable",
+        "sqlstate": "55P03",
+        "connection_invalidated": false
+      }
+    },
+    {
+      "id": "database_failure_cancelled",
+      "schema": "database-failure.schema.json",
+      "valid": true,
+      "data": {
+        "operation": "audit_snapshot",
+        "reason": "query_cancelled",
+        "sqlstate": "57014",
+        "connection_invalidated": false
+      }
+    },
+    {
+      "id": "database_failure_unknown",
+      "schema": "database-failure.schema.json",
+      "valid": true,
+      "data": {
+        "operation": "http_request",
+        "reason": "other",
+        "sqlstate": null,
+        "connection_invalidated": false
+      }
+    },
+    {
+      "id": "database_failure_reject_operation",
+      "schema": "database-failure.schema.json",
+      "valid": false,
+      "data": {
+        "operation": "PRIVATE",
+        "reason": "lock_unavailable",
+        "sqlstate": "55P03",
+        "connection_invalidated": false
+      }
+    },
+    {
+      "id": "database_failure_reject_reason",
+      "schema": "database-failure.schema.json",
+      "valid": false,
+      "data": {
+        "operation": "gateway_auth",
+        "reason": "PRIVATE",
+        "sqlstate": "55P03",
+        "connection_invalidated": false
+      }
+    },
+    {
+      "id": "database_failure_reject_sqlstate",
+      "schema": "database-failure.schema.json",
+      "valid": false,
+      "data": {
+        "operation": "gateway_auth",
+        "reason": "lock_unavailable",
+        "sqlstate": "PRIVATE",
+        "connection_invalidated": false
+      }
+    },
+    {
+      "id": "database_failure_reject_connection_invalidated",
+      "schema": "database-failure.schema.json",
+      "valid": false,
+      "data": {
+        "operation": "gateway_auth",
+        "reason": "lock_unavailable",
+        "sqlstate": "55P03",
+        "connection_invalidated": 1
+      }
+    },
+    {
+      "id": "database_failure_reject_mismatch",
+      "schema": "database-failure.schema.json",
+      "valid": false,
+      "data": {
+        "operation": "gateway_auth",
+        "reason": "query_cancelled",
+        "sqlstate": "55P03",
+        "connection_invalidated": false
+      }
+    },
+    {
+      "id": "database_failure_reject_sql",
+      "schema": "database-failure.schema.json",
+      "valid": false,
+      "data": {
+        "operation": "gateway_auth",
+        "reason": "lock_unavailable",
+        "sqlstate": "55P03",
+        "connection_invalidated": false,
+        "sql": "PRIVATE"
+      }
+    },
+    {
+      "id": "database_failure_reject_missing",
+      "schema": "database-failure.schema.json",
+      "valid": false,
+      "data": {
+        "operation": "gateway_auth",
+        "reason": "lock_unavailable",
+        "connection_invalidated": false
+      }
     }
   ]
 }

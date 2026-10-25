@@ -22,7 +22,7 @@ from generation_domain.workflows import (
     matching_presets,
     validate_reference_inputs,
 )
-from sqlalchemy import literal, select, tuple_
+from sqlalchemy import literal, select, text, tuple_
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, defer, sessionmaker
 
@@ -272,6 +272,8 @@ class JobRepository:
 
     def get(self, identity: BusinessIdentity, job_id: UUID) -> dict[str, Any]:
         with self.sessions() as session:
+            # Read status, revision and publication from one committed snapshot.
+            session.execute(text("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY"))
             job = owned_job(session, identity, job_id)
             result = job_projection(job, sensitive="content:sensitive" in identity.policy["scopes"])
             if "artifacts:read" in identity.policy["scopes"]:

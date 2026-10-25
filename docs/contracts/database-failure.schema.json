@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.local/contracts/database-failure.schema.json",
+  "title": "Bounded database failure metadata in the private HTTP request log",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["operation", "reason", "sqlstate", "connection_invalidated"],
+  "properties": {
+    "operation": {"enum": ["gateway_auth", "audit_snapshot", "http_request"]},
+    "reason": {"type": "string"},
+    "sqlstate": {"type": ["string", "null"]},
+    "connection_invalidated": {"type": "boolean"}
+  },
+  "oneOf": [
+    {"properties": {"sqlstate": {"const": "55P03"}, "reason": {"const": "lock_unavailable"}}},
+    {"properties": {"sqlstate": {"const": "57014"}, "reason": {"const": "query_cancelled"}}},
+    {"properties": {"sqlstate": {"const": "40P01"}, "reason": {"const": "deadlock"}}},
+    {"properties": {"sqlstate": {"const": "40001"}, "reason": {"const": "serialization_failure"}}},
+    {"properties": {"sqlstate": {"enum": ["08000", "08001", "08003", "08004", "08006", "08007", "08P01"]}, "reason": {"const": "connection_failure"}}},
+    {"properties": {"sqlstate": {"enum": ["53100", "53200", "53300", "53400"]}, "reason": {"const": "resource_exhausted"}}},
+    {"properties": {"sqlstate": {"enum": ["57P01", "57P02", "57P03"]}, "reason": {"const": "database_unavailable"}}},
+    {"properties": {"sqlstate": {"const": "25006"}, "reason": {"const": "read_only"}}},
+    {"properties": {"sqlstate": {"const": "42501"}, "reason": {"const": "permission_denied"}}},
+    {"properties": {"sqlstate": {"const": "42P01"}, "reason": {"const": "undefined_relation"}}},
+    {"properties": {"sqlstate": {"type": "null"}, "reason": {"const": "other"}}}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-25T07:05:19.426737+00:00",
+  "passed": true,
+  "private_source": "app/.local/postgres/server.log",
+  "prefix_bytes": 4796834,
+  "prefix_sha256": "3f18032d52444695899576eae8e66494dcccbfe57fc1b1dbe6358a5ba624c063",
+  "observations": [
+    {
+      "historical_increment": 82,
+      "timestamp": "2026-10-25T08:52:20.819+08:00",
+      "failure_kind": "lock_timeout",
+      "operation": "gateway_auth",
+      "blocking_transaction_captured": false
+    },
+    {
+      "historical_increment": 85,
+      "timestamp": "2026-10-25T13:28:38.015+08:00",
+      "failure_kind": "statement_timeout",
+      "operation": "audit_snapshot",
+      "statement_kind": "audit_page_projection",
+      "cause_of_slow_query_proven": false
+    }
+  ],
+  "raw_sql_or_driver_text_published": false,
+  "historical_roots_resolved": false
+}

@@ -14,7 +14,7 @@ import sys
 import threading
 import time
 import zipfile
-from contextlib import contextmanager
+from contextlib import ExitStack, contextmanager
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from email.parser import BytesParser
@@ -191,69 +191,92 @@ class Gate:
 def execute(gate: Gate, log: Path, environment: dict[str, str], *, limit: int) -> dict:
     """Drain bounded output privately; no child output or exception repr escapes."""
     started = time.monotonic()
-    result = {"name": gate.name, "status": "failed", "exit_code": None, "timed_out": False, "log_truncated": False, "owned_process_tree_closed": False}
+    result = {"name": gate.name, "status": "failed", "exit_code": None, "timed_out": False, "log_truncated": False, "owned_process_tree_closed": False, "log_complete": False}
     process = None
+    output = None
     tree = ProcessTree()
     overflow = threading.Event()
     read_failed = threading.Event()
     reader = None
+    tree_closed = False
     try:
         log.parent.mkdir(parents=True, exist_ok=True)
-        with log.open("xb") as output:
-            process = subprocess.Popen(gate.arguments, cwd=gate.cwd, env=environment, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, creationflags=subprocess.CREATE_NO_WINDOW)  # noqa: S603 -- fixed gate plan, never shell input
+        output = log.open("xb")
+        process = subprocess.Popen(gate.arguments, cwd=gate.cwd, env=environment, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, creationflags=subprocess.CREATE_NO_WINDOW)  # noqa: S603 -- fixed gate plan, never shell input
+        try:
+            tree.assign(process)
+        except CIError:
+            process.kill()
+            process.wait(timeout=10)
+            raise
+
+        def drain() -> None:
+            retained = 0
             try:
-                tree.assign(process)
-            except CIError:
-                process.kill()
+                while block := process.stdout.read1(65536):
+                    keep = min(len(block), max(0, limit - retained))
+                    output.write(block[:keep])
+                    output.flush()
+                    retained += keep
+                    if keep < len(block):
+                        overflow.set()
+            except (OSError, ValueError):
+                read_failed.set()
+            finally:
+                # Only this thread closes streams after it starts. The parent
+                # must not close a file while a late pipe read can still write.
+                for stream in (output, process.stdout):
+                    try:
+                        stream.close()
+                    except (OSError, ValueError):
+                        read_failed.set()
+
+        reader = threading.Thread(target=drain, daemon=True)
+        reader.start()
+        while process.poll() is None:
+            if overflow.is_set() or read_failed.is_set() or time.monotonic() - started > gate.timeout:
+                result["timed_out"] = not overflow.is_set() and not read_failed.is_set()
+                result["log_truncated"] = overflow.is_set()
+                tree.close()
+                tree_closed = True
                 process.wait(timeout=10)
-                raise
-
-            def drain() -> None:
-                retained = 0
-                try:
-                    while block := process.stdout.read(65536):
-                        keep = min(len(block), max(0, limit - retained))
-                        output.write(block[:keep])
-                        retained += keep
-                        if keep < len(block):
-                            overflow.set()
-                except OSError:
-                    read_failed.set()
-
-            reader = threading.Thread(target=drain, daemon=True)
-            reader.start()
-            while process.poll() is None:
-                if overflow.is_set() or time.monotonic() - started > gate.timeout:
-                    result["timed_out"] = not overflow.is_set()
-                    result["log_truncated"] = overflow.is_set()
-                    tree.close()
-                    process.wait(timeout=10)
-                    break
-                time.sleep(0.05)
-            tree.close()
-            reader.join(timeout=10)
-            if reader.is_alive() or read_failed.is_set():
-                raise CIError("private_log_drain_failed")
-            result["exit_code"] = process.returncode
-            result["log_truncated"] = overflow.is_set()
-            result["owned_process_tree_closed"] = True
-            if process.returncode == 0 and not result["timed_out"] and not overflow.is_set():
-                result["status"] = "passed"
-    except (OSError, CIError, subprocess.TimeoutExpired):
+                break
+            time.sleep(0.05)
+        tree.close()
+        tree_closed = True
+        reader.join(timeout=10)
+        if reader.is_alive() or read_failed.is_set():
+            raise CIError("private_log_drain_failed")
+        result["exit_code"] = process.returncode
+        result["log_truncated"] = overflow.is_set()
+        if process.returncode == 0 and not result["timed_out"] and not overflow.is_set():
+            result["status"] = "passed"
+    except (OSError, CIError, subprocess.TimeoutExpired, RuntimeError):
         result["failure_code"] = "gate_process_failed"
     finally:
-        tree.close()
-        if process is not None:
-            if process.poll() is None:
-                process.kill()
-                process.wait(timeout=10)
-            if reader:
-                reader.join(timeout=10)
-            if process.stdout:
-                process.stdout.close()
+        try:
+            tree.close()
+            tree_closed = True
+        except CIError:
+            result["status"] = "failed"
+            result["failure_code"] = "gate_process_failed"
+        if process is not None and process.poll() is None:
+            process.kill()
+            process.wait(timeout=10)
+        if reader is not None and reader.ident is not None:
+            reader.join(timeout=10)
+        else:
+            for stream in (output, process.stdout if process is not None else None):
+                if stream is not None:
+                    stream.close()
+        reader_closed = reader is None or reader.ident is None or not reader.is_alive()
+        result["log_complete"] = reader_closed and not read_failed.is_set() and log.is_file()
+        result["owned_process_tree_closed"] = tree_closed and reader_closed and (process is None or process.poll() is not None)
+        if not result["log_complete"] or not result["owned_process_tree_closed"]:
+            result["status"] = "failed"
         result["seconds"] = round(time.monotonic() - started, 3)
-        result["log_bytes"] = log.stat().st_size if log.is_file() else 0
-        result["log_sha256"] = sha(log) if log.is_file() else None
+        result["log_bytes"] = log.stat().st_size if result["log_complete"] else None
+        result["log_sha256"] = sha(log) if result["log_complete"] else None
     return result
 
 
@@ -288,7 +311,7 @@ def plan(private: Path, policy: dict) -> list[Gate]:
         ("frontend_units", [node, "--test", "tests/workflowJson.test.ts", "tests/gatewayCatalog.test.ts"], frontend),
         ("frontend_build", [node, npm, "run", "build"], frontend),
         ("database_migrate", [python, "scripts/native_ci.py", "--migrate-test"], APP),
-        ("python", [python, "-m", "pytest", "-q", "tests", "--tb=short", "--basetemp=" + str(private / "pytest"), "--junitxml=" + str(private / "python.xml")], APP),
+        ("python", [python, "-m", "pytest", "-q", "tests", "--tb=short", "-o", "faulthandler_timeout=120", "--basetemp=" + str(private / "pytest"), "--junitxml=" + str(private / "python.xml")], APP),
         ("wheels_build", [uv, "build", "--all-packages", "--wheel", "--no-build-isolation", "--offline", "--out-dir", str(private / "wheels")], APP),
         ("wheels_verify", [python, str(APP / "scripts/native_ci.py"), "--check-wheels", str(private / "wheels")], APP),
         ("readme", [python, "scripts/check-readme.py"], APP),
@@ -446,15 +469,29 @@ def main() -> int:
     report = {"format_version": 1, "at": datetime.now(UTC).isoformat(), "run_id": args.run_id, "passed": False, "state": "preflight", "gates": [{"name": gate.name, "status": "not_run"} for gate in gates], "raw_logs_uploaded": False, "private_logs_retained_locally": True, "virtualization_used": False, "real_resource_acceptance": False}
     atomic_json(report_path, report)
     try:
+        report["preflight_phase"] = "workflow_policy"
         workflow_policy(policy)
         report["workflow_policy_verified"] = True
-        with file_lock(APP / ".local/native-ci.lock"), database_lock():
+        with ExitStack() as resources:
+            for phase, resource in (("execution_lock", lambda: file_lock(APP / ".local/native-ci.lock")), ("database_lock", database_lock)):
+                report["preflight_phase"] = phase
+                atomic_json(report_path, report)
+                resources.enter_context(resource())
+            report["preflight_phase"] = "git_revision"
+            atomic_json(report_path, report)
             report["git_revision"] = git(["rev-parse", "HEAD"]).decode().strip()
+            report["preflight_phase"] = "source_snapshot"
+            atomic_json(report_path, report)
             report["source_sha256"] = snapshot()
+            report["preflight_phase"] = "git_status"
+            atomic_json(report_path, report)
             report["source_tree_dirty"] = bool(git(["status", "--porcelain", "--", "app", ".github"]))
             if os.environ.get("GITHUB_ACTIONS") == "true" and report["source_tree_dirty"]:
                 raise CIError("github_checkout_source_dirty")
+            report["preflight_phase"] = "media"
+            atomic_json(report_path, report)
             report["media_files_verified"] = media()
+            report["preflight_phase"] = "complete"
             environment = {**os.environ, "PYTHONUTF8": "1", "PYTHONDONTWRITEBYTECODE": "1", "UV_CACHE_DIR": str(APP / ".local/uv-cache")}
             environment.pop("PYTHONPATH", None)
             environment["PATH"] = os.pathsep.join([str(APP / ".local/toolchains/ffmpeg-8.1/bin"), str(APP / ".local/toolchains/node-24.22.1/node-v24.22.1-win-x64"), environment.get("PATH", "")])
@@ -478,7 +515,7 @@ def main() -> int:
             report["state"] = "passed"
     except Exception as exc:
         report["state"] = "failed"
-        report["failure_code"] = str(exc) if isinstance(exc, CIError) else "ci_infrastructure_failed"
+        report["failure_code"] = str(exc) if isinstance(exc, CIError) else "ci_command_timeout" if isinstance(exc, subprocess.TimeoutExpired) else "ci_io_failed" if isinstance(exc, OSError) else "ci_encoding_failed" if isinstance(exc, UnicodeError) else "ci_infrastructure_failed"
     finally:
         atomic_json(report_path, report)
     print(json.dumps({"passed": report["passed"], "run_id": args.run_id, "state": report["state"]}))

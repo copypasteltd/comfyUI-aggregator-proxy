@@ -1,5 +1,18 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 · Increment 86 / 数据库故障脱敏诊断
+
+- Add allowlisted request-owned database error metadata and handle DBAPIError without forwarding SQL/driver tracebacks to Uvicorn.
+- 增加真实 PostgreSQL 锁等待/恢复验证及原生双库只读阻塞链采样，保持既有 500/503、超时与重试限制。
+- 修复任务详情的 READ COMMITTED 跨语句竞争：状态、revision 和授权产物采用同一个只读快照；真实完成事务交错的回归在修复前失败、修复后通过。
+- Fix inconsistent job-detail reads with a read-only repeatable snapshot; retain the real PostgreSQL before/after regression and strict Provider validation.
+- 修复包含路由模板遗漏，覆盖嵌套、同源多前缀、隐藏接口和挂载路径；不记录客户原始路径或查询参数。
+- Correct included-router metadata and private CI log draining/closure; enforce the existing byte budget on small flushed chunks and add private 120-second per-test stack diagnostics.
+- Preserve failed attempts; historical slow-query and concurrent gateway roots remain open. See [86](docs/86-数据库故障脱敏诊断与并发观测.md).
+
+- 最终验证：完整 16 门禁/3593 Python、29 并发窗口原生协议、28 候选安装及 8 浏览器通过；候选 rc-20261025.86.1 的 488 构建输入一致，全部自有测试进程及浏览器已清理。
+- Final validation: 587 CI inputs unchanged, 40 frontend checks, 59 schemas/947 fixtures and 62 runtime contracts; 166 payload files/58 wheels. Retain prior failures and one-time test-database maintenance; 70 backlog items remain open.
+
 ## 2026-10-25 — 原生固定角色系统服务工具 / Native fixed-role service tooling
 
 - 新增 Windows 离线服务部署契约、固定角色 CLI、WinSW 2.12.0 pin 与 MIT 许可。默认手动启动；独立虚拟账户、外部秘密/状态、确定性 XML 重建和实际 SCM 身份核对，拒绝覆盖同名服务或接管其他进程。

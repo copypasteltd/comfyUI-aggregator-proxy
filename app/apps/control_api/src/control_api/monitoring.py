@@ -11,8 +11,11 @@ from typing import Any
 from uuid import UUID, uuid4
 
 from fastapi import FastAPI
+from fastapi.routing import RouteContext, iter_route_contexts
+from generation_infrastructure.database_diagnostics import capture_database_failure
 from generation_infrastructure.monitoring import ProcessMetrics
 from starlette.requests import ClientDisconnect
+from starlette.routing import Match
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 METHODS = frozenset(("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE", "CONNECT"))
@@ -81,8 +84,21 @@ def rejection_class(status: int, code: object) -> str:
 
 
 class MonitoringMiddleware:
-    def __init__(self, app: ASGIApp, metrics: ProcessMetrics, log: RequestLog, routes: frozenset[str]) -> None:
+    def __init__(self, app: ASGIApp, metrics: ProcessMetrics, log: RequestLog, routes: frozenset[str], contexts: tuple[RouteContext, ...] = ()) -> None:
         self.app, self.metrics, self.log, self.routes = app, metrics, log, routes
+        self.contexts: dict[int, list[RouteContext]] = {}
+        for context in contexts:
+            if context.path in routes:
+                self.contexts.setdefault(id(context.original_route), []).append(context)
+
+    def route_template(self, scope: Scope, operation: str) -> str:
+        original = scope.get("route")
+        for context in self.contexts.get(id(original), ()):
+            template = context.path
+            if template is not None and template in self.routes and context.matches(scope)[0] in (Match.FULL, Match.PARTIAL):
+                return template
+        template = getattr(original, "path", None)
+        return template if template in self.routes else "<admin_static>" if operation == "admin_static" else "<unmatched>"
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         if scope["type"] != "http":
@@ -121,32 +137,35 @@ class MonitoringMiddleware:
                 response_bytes += len(message.get("body", b""))
                 complete = not message.get("more_body", False)
 
-        try:
-            await self.app(scope, counted_receive, counted_send)
-            completion = "completed" if complete else "disconnected" if disconnected else "failed"
-        except (asyncio.CancelledError, ClientDisconnect):
-            completion = "disconnected"
-            raise
-        except Exception:
-            completion = "failed"
-            raise
-        finally:
-            duration = time.monotonic() - started
-            status_class = f"{status // 100}xx" if 100 <= status <= 599 else "other"
-            self.metrics.inflight.labels(operation).dec()
-            self.metrics.requests.labels(operation, method, status_class, completion).inc()
-            self.metrics.response_time.labels(operation).observe(duration)
-            self.metrics.request_bytes.labels(operation).inc(request_bytes)
-            self.metrics.response_bytes.labels(operation).inc(response_bytes)
-            if status >= 400:
-                self.metrics.rejections.labels(operation, rejection_class(status, state.get("access_error_code"))).inc()
-            template = getattr(scope.get("route"), "path", None)
-            route = template if template in self.routes else "<admin_static>" if operation == "admin_static" else "<unmatched>"
+        with capture_database_failure() as database:
             try:
-                request_id = str(UUID(state["request_id"]))
-            except (ValueError, TypeError, KeyError):
-                request_id = str(uuid4())
-            self.log.emit({"event": "http_request", "request_id": request_id, "route": route, "method": method, "status": status, "completion": completion, "headers_milliseconds": round(header_seconds * 1000, 3) if header_seconds is not None else None, "duration_milliseconds": round(duration * 1000, 3), "request_bytes": min(request_bytes, 2**63 - 1), "response_bytes": min(response_bytes, 2**63 - 1)})
+                await self.app(scope, counted_receive, counted_send)
+                completion = "completed" if complete else "disconnected" if disconnected else "failed"
+            except (asyncio.CancelledError, ClientDisconnect):
+                completion = "disconnected"
+                raise
+            except Exception:
+                completion = "failed"
+                raise
+            finally:
+                duration = time.monotonic() - started
+                status_class = f"{status // 100}xx" if 100 <= status <= 599 else "other"
+                self.metrics.inflight.labels(operation).dec()
+                self.metrics.requests.labels(operation, method, status_class, completion).inc()
+                self.metrics.response_time.labels(operation).observe(duration)
+                self.metrics.request_bytes.labels(operation).inc(request_bytes)
+                self.metrics.response_bytes.labels(operation).inc(response_bytes)
+                if status >= 400:
+                    self.metrics.rejections.labels(operation, rejection_class(status, state.get("access_error_code"))).inc()
+                route = self.route_template(scope, operation)
+                try:
+                    request_id = str(UUID(state["request_id"]))
+                except (ValueError, TypeError, KeyError):
+                    request_id = str(uuid4())
+                event = {"event": "http_request", "request_id": request_id, "route": route, "method": method, "status": status, "completion": completion, "headers_milliseconds": round(header_seconds * 1000, 3) if header_seconds is not None else None, "duration_milliseconds": round(duration * 1000, 3), "request_bytes": min(request_bytes, 2**63 - 1), "response_bytes": min(response_bytes, 2**63 - 1)}
+                if database.value is not None:
+                    event["database_failure"] = database.value
+                self.log.emit(event)
 
 
 class ObservedAPI(FastAPI):
@@ -157,5 +176,6 @@ class ObservedAPI(FastAPI):
         self._http_metrics, self._http_request_log = metrics, request_log
 
     def build_middleware_stack(self) -> ASGIApp:
-        routes = frozenset(route.path for route in self.routes if hasattr(route, "path"))
-        return MonitoringMiddleware(super().build_middleware_stack(), self._http_metrics, self._http_request_log, routes)
+        contexts = tuple(iter_route_contexts(self.routes))
+        routes = frozenset(context.path for context in contexts if context.path is not None)
+        return MonitoringMiddleware(super().build_middleware_stack(), self._http_metrics, self._http_request_log, routes, contexts)

@@ -1,0 +1,135 @@
+{
+  "at": "2026-10-25T09:22:23.813512+00:00",
+  "passed": true,
+  "ci_run_id": "ci86-20261025-maintained-database",
+  "native_report": "evidence/2026-10-25/database-diagnostics-maintained-concurrent-native/confirmed-retry-native-protocol.json",
+  "native_report_sha256": "e06d4be8445f23ee36940837f3d33509d1a21059f3ef070a9da6a8a5b451be47",
+  "cases": 29,
+  "native_start": "2026-10-25T09:15:37.782671+00:00",
+  "native_end": "2026-10-25T09:19:41.432671+00:00",
+  "native_seconds": 243.65,
+  "same_ci_pytest_interpreter_creation_times": [
+    "2026-10-25T09:14:47.5881910Z",
+    "2026-10-25T09:14:47.6131730Z"
+  ],
+  "python_gate_still_running_after_native_cleanup": true,
+  "entire_native_window_inside_python": true,
+  "runtime_source_inputs": 264,
+  "source_drift": [],
+  "source_unchanged": true,
+  "observer": {
+    "passed": true,
+    "read_only": true,
+    "thread_closed": true,
+    "failure": null,
+    "samples": 1919,
+    "backend_aliases": 6,
+    "truncated_samples": 0,
+    "alias_limit_hits": 0,
+    "observation_limit_hits": 0,
+    "blocker_limit_hits": 0,
+    "observations": [
+      {
+        "backend": "backend-1",
+        "state": "active",
+        "wait_type": "Lock",
+        "lock_event": "transactionid",
+        "blockers": [
+          "backend-2"
+        ],
+        "samples": 46,
+        "maximum_transaction_milliseconds": 4919,
+        "maximum_query_milliseconds": 4911
+      },
+      {
+        "backend": "backend-2",
+        "state": "idle in transaction",
+        "wait_type": "Client",
+        "lock_event": "other",
+        "blockers": [],
+        "samples": 40,
+        "maximum_transaction_milliseconds": 5163,
+        "maximum_query_milliseconds": 0
+      },
+      {
+        "backend": "backend-1",
+        "state": "active",
+        "wait_type": "Lock",
+        "lock_event": "relation",
+        "blockers": [
+          "backend-2"
+        ],
+        "samples": 10,
+        "maximum_transaction_milliseconds": 1006,
+        "maximum_query_milliseconds": 998
+      },
+      {
+        "backend": "backend-3",
+        "state": "active",
+        "wait_type": "Lock",
+        "lock_event": "transactionid",
+        "blockers": [
+          "backend-4"
+        ],
+        "samples": 3,
+        "maximum_transaction_milliseconds": 102,
+        "maximum_query_milliseconds": 98
+      },
+      {
+        "backend": "backend-5",
+        "state": "active",
+        "wait_type": "IO",
+        "lock_event": "other",
+        "blockers": [],
+        "samples": 1,
+        "maximum_transaction_milliseconds": 608,
+        "maximum_query_milliseconds": 600
+      },
+      {
+        "backend": "backend-6",
+        "state": "active",
+        "wait_type": "LWLock",
+        "lock_event": "other",
+        "blockers": [],
+        "samples": 1,
+        "maximum_transaction_milliseconds": 556,
+        "maximum_query_milliseconds": 528
+      },
+      {
+        "backend": "backend-4",
+        "state": "active",
+        "wait_type": "Lock",
+        "lock_event": "transactionid",
+        "blockers": [
+          "backend-1"
+        ],
+        "samples": 3,
+        "maximum_transaction_milliseconds": 40,
+        "maximum_query_milliseconds": 38
+      }
+    ]
+  },
+  "cleanup": {
+    "processes": true,
+    "databases": true,
+    "database_observer": true,
+    "media_and_credentials": true
+  },
+  "ci_complete_at_observation": false,
+  "historical_roots_resolved": false,
+  "real_gpu": false,
+  "real_redis": false,
+  "real_s3": false,
+  "production_accepted": false,
+  "virtualization_used": false,
+  "complete_ci_verified_at": "2026-10-25T09:32:05.129712+00:00",
+  "complete_ci_passed": true,
+  "complete_ci_gates": 16,
+  "complete_ci_python": {
+    "tests": 3593,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "complete_ci_summary_sha256": "b9008842750bca0a3ebe7f7b642eee3f4bc796a9e81da623b7653d5a60fd6591"
+}

@@ -177,3 +177,7 @@ GET /admin/api/v1/channels 使用 admin-channel-query，未知查询字段拒绝
 ## 第 76 增量补充
 
 新增 POST /admin/api/v1/workflows/{identifier}/lifecycle，管理会话/CSRF/workflows:write/Idempotency-Key/If-Match 齐备，请求 expected_revision 与严格 archived 布尔，结果 workflow_id/archived/previous_revision/revision。新键同状态、CAS/公开模型/同步阻塞均 409，缺失 404；生命周期锁等待 1 秒/语句 5 秒，数据库异常固定 503。原键同正文优先回放原事务，即使后来反向变更也不再写；旧任务、版本与文件不删除，Worker 协议不增加动作。 详见 [76](./76-Workflow归档与恢复管理.md)。
+
+## 第 86 增量：任务详情快照
+
+GET /v1/jobs/{job_id} 及网关同源详情的状态、updated_revision、completed_at 和授权 artifacts 来自一次一致数据库快照。允许返回完成提交前的完整旧状态；禁止在非 succeeded 状态返回并发完成产生的新产物。主体、权限、响应形状、取消语义和 Worker 协议保持。Provider 继续拒绝无效状态/产物组合，不通过放宽客户端校验掩盖服务端读取竞争；见 [86](./86-数据库故障脱敏诊断与并发观测.md)。
