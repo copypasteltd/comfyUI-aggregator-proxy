@@ -12,7 +12,11 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: local implementation/traceability items 01–05, 10 and 12 are complete, leaving 69 open items (67 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md), [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md), [confirmed failure retries](docs/82-确认失败重试分类与跨GPU约束.md) and [monitoring](docs/84-监控指标与脱敏请求关联.md) have implementations and separate verification evidence. Actual Workflows, joint gateway behavior, failures and production still require acceptance.
 
-The latest [increment 89: bounded audit projections](docs/89-审计分页投影上限与版本化复验.md) selects at most 51 page rows before converting audit details, enforcing the existing 16 KiB SQL projection limit within that page. Empty pages perform no detail conversion. Counts, permissions, snapshot consistency and timeout budgets are preserved. New executions bind current inputs through separate versioned evidence; historical authentication/audit timeout causes and all 69 remaining items stay open.
+The latest [increment 90: pinned SDK clients](docs/90-固定SDK客户端兼容矩阵.md) uses actual Python 3.37.0 and Node 7.43.0 SDKs to verify model discovery, image generation/editing, error correlation, idempotency/retries and explicit asynchronous extensions. Strict decoding exposed missing standard metadata in ordinary upstream models. The Provider now fills absent fields, preserves existing values and extensions, and rejects invalid metadata. [Local protocol evidence](docs/evidence/2026-10-25/openai-sdk-native-90-fifth/openai-sdk-native-protocol.json) passes 20 SDK checks within 24 native scenarios, creating only the expected six jobs and usage records. Actual Workflows, the complete client matrix and all 69 remaining items stay open.
+
+[Final verification 90](docs/evidence/2026-10-25/openai-sdk-verification-90.json) passes 206 focused checks, 173 top-level/331 subtests in the Go component suite, all 16 gates/3696 Python cases, 28 exact-candidate installation checks and ten installed-browser checks. All 606 CI, 271 native-runtime and 501 candidate source inputs match. SDK failures, the CI budget failure and controlled test-database statistics experiments remain recorded; the original 1200-second budget is preserved. Candidate `rc-20261025.90.1` contains 169 payload files, 58 wheels and 63 runtime contracts. Actual-resource and production acceptance remain pending.
+
+The earlier [increment 89: bounded audit projections](docs/89-审计分页投影上限与版本化复验.md) selects at most 51 page rows before converting audit details, enforcing the existing 16 KiB SQL projection limit within that page. Empty pages perform no detail conversion. Counts, permissions, snapshot consistency and timeout budgets are preserved. New executions bind current inputs through separate versioned evidence; historical authentication/audit timeout causes and all 69 remaining items stay open.
 
 [Verification 89](docs/evidence/2026-10-25/audit-page-projection-verification.json) passes 179 focused checks, all 16 gates/3671 Python cases, 28 exact-candidate installation checks and ten installed-browser checks. All 600 CI inputs and 499 candidate source inputs match. Owned test browsers, processes, temporary database and directory are cleaned up; the development preview is updated. Candidate `rc-20261025.89.1` retains pending production and physical-resource acceptance.
 
@@ -234,6 +238,29 @@ These paths belong to a **Sub2API origin configured with this project's Provider
 
 Compatibility is an explicit OpenAI-format subset. Frozen contracts define accepted fields, file inputs, URL/binary delivery and errors. `n=1`; arbitrary SDK features and OpenAI parameters are not implied. **Audio currently uses native `/v1/jobs`; the synchronous binary `/v1/audio/speech` protocol is not implemented.** See [generation compatibility](docs/34-Sub2API生成兼容与产物访问.md), [assets and image edits](docs/35-Sub2API素材与图片编辑接入.md) and [audio migration](docs/55-音频契约与兼容迁移.md).
 
+### Pinned SDK clients
+
+[Topic 90](docs/90-固定SDK客户端兼容矩阵.md) documents the pinned client matrix: Python `openai==3.37.0` and Node `openai@7.43.0`. Set the API address explicitly to this service's `/v1`, use a published model and business Key, and persist the `Idempotency-Key` before the first submission. Examples disable automatic retries and reuse the same key for recovery. Encode the multipart `workflow_options` extension as JSON form text.
+
+Before running the repository's SDK rehearsal, explicitly install the sdk-compat dependency group and isolated locked Node dependencies as described in topic 90. These client verification tools do not enter the Admin or production runtime bundle.
+
+```python
+import os
+from openai import OpenAI
+
+with OpenAI(api_key=os.environ['GENERATION_API_KEY'],
+            base_url=os.environ['GENERATION_BASE_URL'],
+            max_retries=0, timeout=70) as client:
+    result = client.images.generate(
+        model=os.environ['GENERATION_MODEL'], prompt='A small green robot',
+        n=1, size='1024x1024', quality='standard', response_format='b64_json',
+        extra_headers={'Idempotency-Key': os.environ['GENERATION_REQUEST_ID']},
+    )
+    encoded_image = result.data[0].b64_json
+```
+
+When stock catalog entries lack a creation time, the merged response uses `created=0` to mean unknown and supplies the standard model fields. Existing valid values and extensions are preserved. A generation timeout does not cancel the job: query its original ID or recover using the original idempotency key. Pinned clients and local protocol verification do not establish acceptance of real Workflows.
+
 ## API Keys, content and quotas
 
 - **Business Keys** protect public generation/content APIs. Admin accounts/sessions, Worker credentials and gateway service identities are separate. A business Key cannot sign in to Admin or call management APIs.
@@ -319,6 +346,7 @@ comfyUI-aggregator-proxy/
 │  ├─ apps/                      Control API / Runner / Windows Worker / Vue Admin
 │  ├─ packages/                  domain / application / contracts / infrastructure
 │  ├─ integrations/sub2api/      Pinned upstream, Go client and narrow overlay
+│  ├─ integrations/openai-clients/ Isolated pinned Node SDK rehearsal client
 │  ├─ migrations/                Alembic migrations
 │  ├─ scripts/                   Native development, checks, builds, recordings and publication audit
 │  ├─ config/                    Example settings, toolchain and contract hashes

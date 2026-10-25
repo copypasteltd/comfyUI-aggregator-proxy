@@ -1,0 +1,80 @@
+{
+  "at": "2026-10-25T14:39:46.704960+00:00",
+  "run_id": "ci90-20261025-sdk-clients",
+  "state": "interrupted_for_sdk_client_correction",
+  "passed": false,
+  "complete_ci_run": false,
+  "source_changed_only_after_owned_driver_exit": true,
+  "owned_driver_pid_identity_checked": true,
+  "owned_driver_exit_verified": true,
+  "old_summary_sha256": "b89bc37dd5a3013defca8e8db2650ffc745e7dfe8d46d3b52c7ae507cdebb65b",
+  "gates": [
+    {
+      "name": "docs",
+      "status": "passed"
+    },
+    {
+      "name": "lock",
+      "status": "passed"
+    },
+    {
+      "name": "ruff",
+      "status": "passed"
+    },
+    {
+      "name": "mypy",
+      "status": "passed"
+    },
+    {
+      "name": "contracts",
+      "status": "passed"
+    },
+    {
+      "name": "openapi",
+      "status": "passed"
+    },
+    {
+      "name": "types_generate",
+      "status": "passed"
+    },
+    {
+      "name": "types_compare",
+      "status": "passed"
+    },
+    {
+      "name": "frontend_units",
+      "status": "passed"
+    },
+    {
+      "name": "frontend_build",
+      "status": "passed"
+    },
+    {
+      "name": "database_migrate",
+      "status": "passed"
+    },
+    {
+      "name": "python",
+      "status": "running"
+    },
+    {
+      "name": "wheels_build",
+      "status": "not_run"
+    },
+    {
+      "name": "wheels_verify",
+      "status": "not_run"
+    },
+    {
+      "name": "readme",
+      "status": "not_run"
+    },
+    {
+      "name": "publication",
+      "status": "not_run"
+    }
+  ],
+  "reason": "Node 7.43.0 errors expose requestID; correct the test driver before a new source snapshot.",
+  "virtualization_used": false,
+  "real_resource_acceptance": false
+}

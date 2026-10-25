@@ -15,6 +15,7 @@
 | [workflow-catalog-receipt.schema.json](./workflow-catalog-receipt.schema.json) | 目录页的有界元信息与规范摘要；路径/游标/排序、创建者和 boot/revision 仍由应用检查 |
 | [workflow-source-receipt.schema.json](./workflow-source-receipt.schema.json) | 成功读取的源图/发布包与摘要、格式、字节数；规范化摘要和复杂度还需领域语义校验 |
 | [model-discovery.schema.json](./model-discovery.schema.json) | 发布能力安全投影、版本摘要、规格与输出类型；不返回 Workflow 图或私有节点值 |
+| [sdk-model-list.schema.json](./sdk-model-list.schema.json) | Sub2API 合并普通/Provider 模型后的标准核心字段；缺少普通模型创建时间用 0 明示未知，保留上游扩展；不替代能力目录 |
 | [job-state-machine.json](./job-state-machine.json) | 允许状态边、触发动作和 guard 标识；guard 的运行证据由应用验证 |
 | [endpoint-catalog.json](./endpoint-catalog.json) | 公共/管理/Worker/网关端点、身份、权限、幂等和 revision 条件清单；不代替完整请求/响应 OpenAPI |
 | [worker-node-command.schema.json](./worker-node-command.schema.json) | Windows 节点创建、改名与固定生命周期动作；名称拒绝空白/控制字符，停用/轮换/归档的空闲及引用条件仍由数据库事务核验，见 [56](../56-Windows节点登记与凭证管理.md) |

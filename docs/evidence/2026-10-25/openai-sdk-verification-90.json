@@ -1,0 +1,212 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T16:01:11.874223+00:00",
+  "passed": true,
+  "increment": 90,
+  "scope": "Executed local SDK, native protocol, complete native CI, exact candidate and installed-browser verification. Documentation/publication audits are separate. No real-resource or complete release acceptance.",
+  "baseline_commit": "bae6d15d5a4983680bc5a949da7948bbcbadbe4f",
+  "virtualization_used": false,
+  "full_acceptance": "pending",
+  "real_resource_acceptance": false,
+  "complete_ci": {
+    "path": "docs/evidence/native-ci/ci90-20261025-sdk-clients-analyzed/summary.json",
+    "sha256": "b1cfef24918b5e7d766fe47c60c5a301a42e09be9f1df01b6f595ed80026cf84",
+    "gates": 16,
+    "python": {
+      "tests": 3696,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_gate_seconds": 1082.096,
+    "source_inputs": 606,
+    "sources_match_current_tree": true,
+    "all_owned_process_trees_closed": true,
+    "all_private_logs_complete": true
+  },
+  "focused": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-focused-90.json",
+    "sha256": "555c7b9162a1784d3574e254206d3d18c79c1b100e31c143dda6d0951925d86c"
+  },
+  "provider_component": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-go-90/sub2api-ledger-tests.json",
+    "sha256": "5854c1768ec2c986aa96fa5107fb2bfe8b858d6e7963b9e408bab96177da2da4",
+    "top_level_passed": 173,
+    "subtests_passed": 331,
+    "expected_helper_skips": [
+      "TestProcessBoundaryHelper"
+    ]
+  },
+  "provider_build": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-provider-build-90/sub2api-provider-native-build.json",
+    "sha256": "35c42335dd50bc4880deba6259216a2c02c0a4ef918bd7398f65724bce6402dc"
+  },
+  "sdk_protocol": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-native-90-fifth/openai-sdk-native-protocol.json",
+    "sha256": "e10719442f89aa3cb8315f18245388204a6cd49bc161354198826fd049c3a870",
+    "native_cases": 24,
+    "python_sdk": "3.37.0",
+    "node_sdk": "7.43.0",
+    "python_cases": 11,
+    "node_cases": 9,
+    "new_jobs": 6,
+    "new_intents": 6,
+    "new_usage_logs": 6,
+    "source_inputs": 271,
+    "sources_match_current_tree": true,
+    "temporary_resources_cleaned": true,
+    "public_url_tls_frontend_verified": false,
+    "production_openai_called": false
+  },
+  "source_bindings": {
+    "ci": 606,
+    "native": 271,
+    "candidate": 501,
+    "overlay_reports_and_generated_workspace": 73,
+    "maintained_overlay_sources": 71,
+    "all_match_current_inputs": true,
+    "provider_binary_matches_build_native_and_candidate": true
+  },
+  "candidate": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-release-build-90.json",
+    "sha256": "1352cd1b2526e02f38340119c33655fc1b52de6239e3c4548935633fa6d0e962",
+    "release_id": "rc-20261025.90.1",
+    "archive_sha256": "caa6627952733f8cff32eab72ff01c0f980d65c155e7d279afd589b071ead785",
+    "source_inputs": 501,
+    "payload_files": 169,
+    "wheels": 58,
+    "runtime_contracts": 63,
+    "sources_match_current_tree": true,
+    "sdk_test_dependencies_in_runtime": false
+  },
+  "installation": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-release-install-90/native-release-installation.json",
+    "sha256": "4df75792370444c40d58e4239f11f7b5cbb4ccd4b40406e044df651ac7b38322",
+    "checks": 28,
+    "owned_processes_cleaned": 4,
+    "temporary_database_and_directory_removed": true
+  },
+  "installed_browser": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-release-install-90/native-release-installed-browser.json",
+    "sha256": "7c28faf2dde313fb09224c0464128924afc789554c5f5b9b1416a35e676e794a",
+    "checks": 10,
+    "closed_contexts": 2,
+    "browser_closed": true
+  },
+  "original_lime_source": {
+    "tracked_files_verified": 5,
+    "fonts": 2,
+    "full_html_and_components_match_lock": true,
+    "ui_changed": false,
+    "existing_png": 20,
+    "existing_mp4": 4,
+    "existing_gif": 4,
+    "media_rerecorded": false
+  },
+  "preserved_failures": {
+    "sdk_runs": [
+      {
+        "path": "docs/evidence/2026-10-25/openai-sdk-native-90-first/openai-sdk-native-protocol.json",
+        "sha256": "efb16133cd50bd0217d4761babfda6543af9108b917b882ce94986dae1ffcfd5"
+      },
+      {
+        "path": "docs/evidence/2026-10-25/openai-sdk-native-90-second/openai-sdk-native-protocol.json",
+        "sha256": "ae0ca705d489f9899441ebf0ae09137ceacf03f52081e5a9991cd49cf7c8c023"
+      },
+      {
+        "path": "docs/evidence/2026-10-25/openai-sdk-native-90-third/openai-sdk-native-protocol.json",
+        "sha256": "f2aa3f4f0381b67cf41d743cdb36deacc46323fc06bbceedd332f4a1e91e8ac1"
+      },
+      {
+        "path": "docs/evidence/2026-10-25/openai-sdk-native-90-fourth/openai-sdk-native-protocol.json",
+        "sha256": "53418fe1e3ea07d4282f25e1fc6b787a388c058cb5ba0117b36ae56cffde509e"
+      }
+    ],
+    "interrupted_ci": {
+      "path": "docs/evidence/2026-10-25/openai-sdk-ci90-interrupted.json",
+      "sha256": "de20a33723b4c14f8d86b4c2405bf6d9a4e2b8ef2dd7ee2c39896c3bff527003"
+    },
+    "ci_budget_timeout": {
+      "path": "docs/evidence/2026-10-25/openai-sdk-ci90-budget-timeout.json",
+      "sha256": "b1e647a3fe0c1594c91d922f0ecb798c6c94dba692ec9fb966966e487d9d8915"
+    },
+    "bounded_maintenance_timeout": {
+      "path": "docs/evidence/2026-10-25/openai-sdk-test-database-maintenance-90.json",
+      "sha256": "ae03e0b50fb5ad3e5c80f24aea6313c314065583a4055608c350ad5ca8f6499e"
+    },
+    "maintenance_preservation": {
+      "path": "docs/evidence/2026-10-25/openai-sdk-test-database-maintenance-preservation-90.json",
+      "sha256": "b9aed80934d37f0503c1886851c0d67932f20d35b08709505e88d499ee35e503"
+    }
+  },
+  "test_database_statistics_experiment": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-test-database-analyze-90.json",
+    "sha256": "fb1f479342759656af53828358a561efbf6af9e20f7ffb147b990537bae6c515",
+    "ordinary_maintenance_completed": false,
+    "statistics_only_tables": 45,
+    "visible_rows_filenodes_and_triggers_unchanged": true,
+    "root_cause_proven": false,
+    "automatic_ci_maintenance_added": false,
+    "ci_python_budget_seconds": 1200,
+    "budgets_changed": false
+  },
+  "backlog": {
+    "stable_ids": 76,
+    "locally_closed": 7,
+    "open": 69,
+    "first_release_open": 67,
+    "optional_open": 2,
+    "item_30_complete": false
+  },
+  "limits": {
+    "real_comfyui_workflows": false,
+    "real_redis_s3": false,
+    "physical_fleet_capacity": false,
+    "actual_scm_winsw_lifecycle": false,
+    "remote_github_runner": false,
+    "complete_client_matrix": false,
+    "historical_timeout_roots_resolved": false
+  },
+  "documentation": {
+    "passed": true,
+    "documents": 94,
+    "schemas": 60,
+    "fixtures": 959,
+    "positive_fixtures": 218,
+    "negative_fixtures": 741,
+    "selected_source_evidence": {
+      "passed": true,
+      "requirements": 73,
+      "acceptance_gates": 98,
+      "local_statuses": {
+        "framework": 6,
+        "implemented": 67
+      },
+      "named_test_references": 101,
+      "baseline_python_cases": 3593,
+      "reports": 8,
+      "current_source_files": 144,
+      "full_acceptance": "pending"
+    },
+    "report_path": "docs/文档校验记录.json"
+  },
+  "readme_and_media": {
+    "path": "docs/evidence/2026-10-25/openai-sdk-readme-validation-90.json",
+    "sha256": "2aa4a88986e3c6fe2264bb071a3ae55050e8820b5c2905af4eb0b2645b78b1fa",
+    "passed": true,
+    "screenshots": 20,
+    "fully_decoded_mp4_and_gif": 8,
+    "media_rerecorded": false
+  },
+  "development_preview": {
+    "checked_at": "2026-10-25T16:06:34.413694+00:00",
+    "registered_processes": 9,
+    "executable_and_utc_start_ticks_match": true,
+    "initial_probe_date_string_comparison_replaced_by_utc_ticks": true,
+    "tls_verified": true,
+    "https_ready_status": 200,
+    "admin_status": 200,
+    "services_restarted": false,
+    "purpose": "Keep the existing local Admin/API/Runner/GC preview and native PostgreSQL available; owned test resources have been cleaned up."
+  }
+}

@@ -44195,6 +44195,315 @@
         "reason": "lock_unavailable",
         "connection_invalidated": false
       }
+    },
+    {
+      "id": "sdk_models_valid_unknown_date_and_extensions",
+      "schema": "sdk-model-list.schema.json",
+      "valid": true,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": 0,
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_invalid_created_1",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": null,
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_invalid_created_2",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": -1,
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_invalid_created_3",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": "123",
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_invalid_created_4",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": 1.5,
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_invalid_created_5",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": 253402300800,
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_invalid_object_6",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "unknown",
+            "created": 0,
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_invalid_owned_by_7",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": 0,
+            "owned_by": null,
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_invalid_owned_by_8",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": 0,
+            "owned_by": "",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_missing_object",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "created": 0,
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_missing_created",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "owned_by": "sub2api",
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
+    },
+    {
+      "id": "sdk_models_missing_owned_by",
+      "schema": "sdk-model-list.schema.json",
+      "valid": false,
+      "data": {
+        "object": "list",
+        "data": [
+          {
+            "id": "synthetic-stock",
+            "object": "model",
+            "created": 0,
+            "vendor_extra": {
+              "kept": true
+            }
+          },
+          {
+            "id": "protocol-text-to-image",
+            "object": "model",
+            "created": 1792872000,
+            "owned_by": "render-control"
+          }
+        ],
+        "stock_extension": true
+      }
     }
   ]
 }

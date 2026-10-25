@@ -273,13 +273,30 @@ func decodeStockCatalog(raw []byte) (map[string]json.RawMessage, []json.RawMessa
 	if json.Unmarshal(raw, &root) != nil || json.Unmarshal(root["object"], &object) != nil || object != "list" || json.Unmarshal(root["data"], &items) != nil || items == nil || len(items) > 16384 {
 		return nil, nil, ErrInvalid
 	}
-	for _, item := range items {
-		var model struct {
-			ID string `json:"id"`
-		}
-		if json.Unmarshal(item, &model) != nil || !textValue(model.ID, 1, 256) {
+	for index, item := range items {
+		var model map[string]json.RawMessage
+		if json.Unmarshal(item, &model) != nil || model == nil {
 			return nil, nil, ErrInvalid
 		}
+		var id, object, owner string
+		var created int64
+		if json.Unmarshal(model["id"], &id) != nil || !textValue(id, 1, 256) {
+			return nil, nil, ErrInvalid
+		}
+		// Stock catalogs may contain only an ID and provider-specific metadata.
+		// Preserve extensions, and distinguish absent metadata from invalid data.
+		defaults := map[string]json.RawMessage{"object": json.RawMessage(`"model"`), "created": json.RawMessage(`0`), "owned_by": json.RawMessage(`"sub2api"`)}
+		for field, value := range defaults {
+			if _, present := model[field]; !present {
+				model[field] = value
+			}
+		}
+		if json.Unmarshal(model["object"], &object) != nil || object != "model" ||
+			json.Unmarshal(model["owned_by"], &owner) != nil || !textValue(owner, 1, 256) ||
+			json.Unmarshal(model["created"], &created) != nil || bytes.Equal(bytes.TrimSpace(model["created"]), []byte("null")) || created < 0 || created > 253402300799 {
+			return nil, nil, ErrInvalid
+		}
+		items[index], _ = json.Marshal(model)
 	}
 	return root, items, nil
 }

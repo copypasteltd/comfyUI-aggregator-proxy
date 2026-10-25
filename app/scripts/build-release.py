@@ -57,6 +57,7 @@ def wheel_metadata(path: Path) -> tuple[str, str]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--release-id", required=True)
+    parser.add_argument("--provider-build-report", type=Path, help="Explicit immutable Provider build report beneath docs/evidence")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9][a-z0-9.-]{0,63}", args.release_id):
         parser.error("Invalid candidate release ID")
@@ -140,7 +141,10 @@ def main() -> None:
         copy(ROOT / "uv.lock", stage / "provenance/uv.lock")
         (stage / "provenance/source-files.json").write_text(json.dumps(sources, sort_keys=True, indent=2) + "\n", encoding="utf-8")
         backend = ROOT / ".local/bin/sub2api-provider.exe"
-        previous = json.loads((ROOT.parent / "docs/evidence" / datetime.now().date().isoformat() / "sub2api-provider-native-build.json").read_text(encoding="utf-8"))
+        provider_build = (args.provider_build_report or ROOT.parent / "docs/evidence" / datetime.now().date().isoformat() / "sub2api-provider-native-build.json").resolve()
+        if not provider_build.is_relative_to((ROOT.parent / "docs/evidence").resolve()) or provider_build.suffix != ".json" or provider_build.stat().st_size > 1024 * 1024:
+            raise ValueError("Provider build report must be bounded and beneath docs/evidence")
+        previous = json.loads(provider_build.read_text(encoding="utf-8"))
         marker = json.loads((ROOT / ".local/sub2api-overlay-workspace.json").read_text(encoding="utf-8"))
         if not previous["passed"] or not marker["passed"] or previous["binary_sha256"] != digest_file(backend) or previous["source_commit"] != UPSTREAM_COMMIT or previous["frontend_embedded"]:
             raise ValueError("Native Provider provenance mismatch")

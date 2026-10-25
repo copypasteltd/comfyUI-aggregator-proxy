@@ -227,6 +227,20 @@ func TestHostedDiscoveryMergesStockFieldsAndPreservesCodexAndUnownedModels(t *te
 	}
 }
 
+func TestStockCatalogCompletesAbsentMetadataAndPreservesExtensions(t *testing.T) {
+	root, items, err := decodeStockCatalog([]byte(`{"object":"list","extra":{"retained":true},"data":[{"id":"ordinary","extension":[1,2]},{"id":"complete","created":123,"object":"model","owned_by":"original","permission":["kept"]}]}`))
+	if err != nil || len(items) != 2 || string(root["extra"]) != `{"retained":true}` {
+		t.Fatal("stock model metadata could not be normalized")
+	}
+	var first, second map[string]json.RawMessage
+	_ = json.Unmarshal(items[0], &first)
+	_ = json.Unmarshal(items[1], &second)
+	if string(first["created"]) != "0" || string(first["object"]) != `"model"` || string(first["owned_by"]) != `"sub2api"` || string(first["extension"]) != "[1,2]" ||
+		string(second["created"]) != "123" || string(second["owned_by"]) != `"original"` || string(second["permission"]) != `["kept"]` {
+		t.Fatal("absent metadata or existing fields changed")
+	}
+}
+
 func TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections(t *testing.T) {
 	for name, response := range map[string]struct {
 		status int
@@ -236,6 +250,12 @@ func TestHostedDiscoveryRejectsBadStockCatalogAndKeepsRejections(t *testing.T) {
 		"duplicate_keys": {200, `{"object":"list","data":[],"data":[]}`},
 		"null_data":      {200, `{"object":"list","data":null}`},
 		"bad_item":       {200, `{"object":"list","data":[{"created":1}]}`},
+		"bad_created":    {200, `{"object":"list","data":[{"id":"ordinary","created":"123"}]}`},
+		"null_created":   {200, `{"object":"list","data":[{"id":"ordinary","created":null}]}`},
+		"negative_time":  {200, `{"object":"list","data":[{"id":"ordinary","created":-1}]}`},
+		"float_time":     {200, `{"object":"list","data":[{"id":"ordinary","created":1.5}]}`},
+		"bad_object":     {200, `{"object":"list","data":[{"id":"ordinary","object":"unknown"}]}`},
+		"bad_owner":      {200, `{"object":"list","data":[{"id":"ordinary","owned_by":null}]}`},
 		"over_limit":     {200, strings.Repeat("x", (4<<20)+1)},
 		"unexpected_304": {304, ""},
 		"denied":         {403, `{"error":{"code":"stock_denied"}}`},

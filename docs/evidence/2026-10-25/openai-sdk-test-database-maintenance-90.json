@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-25T15:33:12.565711+00:00",
+  "operation": "ordinary_vacuum_analyze_owned_test_database",
+  "virtualization_used": false,
+  "automatic_ci_maintenance_added": false,
+  "root_cause_proven": false,
+  "purpose": "One controlled experiment after 3696 passing cases exceeded the existing 1200-second CI gate; no CI or test budgets changed",
+  "phase": "vacuum",
+  "passed": false,
+  "server_identity_verified": true,
+  "table_allowlist_verified": true,
+  "before": {
+    "table_count": 45,
+    "visible_rows": 35,
+    "row_filenode_sha256": "588846f3a6a25ccb08ceeb6b410710e2aa88b608c199a3c96257b675307fde6c",
+    "trigger_sha256": "e43a032b791b9a314e1a96e0914d0b641cc501a04423ace641cdb79d94de813a",
+    "estimated_dead": 153056
+  },
+  "tables_maintained": 9,
+  "failure_code": "test_database_maintenance_failed",
+  "sqlstate": "57014",
+  "seconds": 41.282,
+  "owned_connections_closed": true
+}

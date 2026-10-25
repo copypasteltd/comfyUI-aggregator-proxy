@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.invalid/contracts/sdk-model-list.schema.json",
+  "title": "SDK model collection after stock and Provider merging",
+  "type": "object",
+  "required": ["object", "data"],
+  "properties": {
+    "object": { "const": "list" },
+    "data": {
+      "type": "array",
+      "maxItems": 32768,
+      "items": {
+        "type": "object",
+        "required": ["id", "object", "created", "owned_by"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 256 },
+          "object": { "const": "model" },
+          "created": { "type": "integer", "minimum": 0, "maximum": 253402300799 },
+          "owned_by": { "type": "string", "minLength": 1, "maxLength": 256 }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,5 +1,18 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 90 / 固定 SDK 客户端兼容
+
+- 使用实际 OpenAI Python 3.37.0 / Node 7.43.0 SDK 测试本次所属 loopback Provider，覆盖模型发现、图片生成与单/多图编辑、请求关联、错误、幂等、冲突重试和显式异步扩展；不调用 OpenAI 公网，不使用真实客户 Key。
+- Exercise actual pinned SDK clients against the owned local Provider. Keep SDK dependencies in an explicit development group/isolated Node directory; production retains 58 runtime wheels without these SDK dependencies.
+- 严格解析复现普通模型条目缺少标准字段：仅补缺省 object=model、created=0、owned_by=sub2api，保留已有正确字段和扩展；原有无效字段继续拒绝。新增模型列表契约及 12 个正/反例，63 运行契约同步。
+- Normalize absent stock model metadata while preserving extensions and rejecting invalid values. Preserve Codex and unowned single-model passthrough behavior. Add a machine-readable model-list contract and versioned component/build reports without rewriting historical evidence.
+- 保留四次 SDK 失败及修正、旧 CI 因改源码而主动中断的记录；第五轮 24 项原生场景与 20 项 SDK 检查通过，只新增预期的 6 个任务和计量记录，所属临时资源清理通过。
+- Retain failed attempts and the interrupted CI scope. The successful SDK run verifies the internal authorized delivery path; it does not accept the public TLS frontend, real Workflows, storage/Redis, physical capacity or the complete client matrix. Item 30 and all 69 remaining exits stay open; see [90](docs/90-固定SDK客户端兼容矩阵.md).
+- 最终验证：206 项 Python 专项、173 个 Go 顶层/331 个子测试、完整 16 门禁/3696 Python、28 项候选安装及 10 项安装后浏览器通过；606 CI/271 原生/501 候选源输入与 73 个 overlay 摘要已核对。63 运行契约、60 schema/959 fixture 同步，原始青柠 5 文件/2 字体保持。候选 rc-20261025.90.1；所属测试资源已清理，原生 PG 与已有开发预览保留。
+- 首次完整运行的 3696 项 Python 无失败/错误/跳过，但触发原 1200 秒 CI 截止时间，整轮保持失败。受控普通测试库维护在第 10 表触发原语句预算并停止，保全核对通过；随后仅刷新 45 表统计，可见行数、filenode 和触发器保持，复验沿用原预算。
+- Preserve the actual CI budget failure and the bounded maintenance failure. A subsequent explicit statistics-only refresh does not establish root cause or complete CI acceptance; no automatic maintenance or higher timeout is introduced.
+- Final validation passes all 16 gates, including 3696 Python cases in a 1082.096-second gate under the original 1200-second budget. Exact source/binary/candidate bindings, installed-browser cleanup and remaining acceptance limits are recorded in [verification 90](docs/evidence/2026-10-25/openai-sdk-verification-90.json).
+
 ## 2026-10-25 · Increment 89 / 审计分页投影上限
 
 - 真实 PostgreSQL 回归证明第二页、末页和空页会对被跳过的记录执行详情转换；修复为 MATERIALIZED 分页后再做 16 KiB SQL 脱敏投影，保留计数、稳定顺序、只读快照和超时预算。

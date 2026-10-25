@@ -1,6 +1,7 @@
 """Test our additive Sub2API ledger overlay against an isolated native PG database."""
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -250,6 +251,15 @@ def execute_tests(backend: Path, go: Path, environment: dict[str, str], log: Pat
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--evidence-dir", type=Path, help="New directory beneath docs/evidence; preserve earlier component reports")
+    args = parser.parse_args()
+    evidence = ROOT.parent / "docs/evidence" / datetime.now().strftime("%Y-%m-%d")
+    if args.evidence_dir is not None:
+        evidence = args.evidence_dir.resolve()
+        if not evidence.is_relative_to((ROOT.parent / "docs/evidence").resolve()) or evidence == (ROOT.parent / "docs/evidence").resolve():
+            raise RuntimeError("Evidence directory must remain beneath docs/evidence")
+        evidence.mkdir(parents=True, exist_ok=False)
     started = time.monotonic()
     harness_digest = sha256(Path(__file__))
     lock = json.loads((ROOT / "integrations/sub2api/upstream-lock.json").read_text(encoding="utf-8"))
@@ -329,7 +339,6 @@ def main() -> None:
     report["coverage_boundary"] = "Ledger, recovery, hosted lifecycle, image/video/reference inputs, asset/content access, discovery/collections, durable native usage/cache effects, exact media/group/user multipliers, native subscription reservations/settlement, persistent Provider catalog pull/receipts, immutable snapshots and original stamped recovery against pinned upstream authentication/schema/repositories, native PostgreSQL, HTTPS protocol fixtures and an in-process Redis protocol service; native crash/restart tests retained. Stock cmd/server compiled separately. This component run does not verify full cross-service runtime, mixed stock-provider inflight guarantees, real Redis, real media/storage/hardware"
     report["reviewed_stock_patches"] = [{key: item[key] for key in ("path", "stock_sha256", "patched_sha256")} for item in patches]
     report.update({"command": "verified native ledger binary via test2json -test.count=1 -test.timeout=240s", "build_command": "go test -c -trimpath -vet=off -mod=readonly -p=2 -o <app-local binary> ./internal/rendercontrol", "binary_build": binary_build, "production_repository_compiled": binary_build.get("compiled", False) and package_started})
-    evidence = ROOT.parent / "docs/evidence" / datetime.now().strftime("%Y-%m-%d")
     evidence.mkdir(parents=True, exist_ok=True)
     (evidence / "sub2api-ledger-tests.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     (ROOT / ".local/sub2api-overlay-workspace.json").write_text(json.dumps({"backend": str(backend), "passed": passed, "overlay_files_sha256": sources}, indent=2) + "\n", encoding="utf-8")

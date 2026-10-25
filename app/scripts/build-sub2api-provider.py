@@ -1,6 +1,7 @@
 """Build the reviewed Provider composition using the pinned native Go runtime."""
 from __future__ import annotations
 
+import argparse
 import importlib.util
 import json
 import subprocess
@@ -12,6 +13,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--evidence-dir", type=Path, help="New directory beneath docs/evidence; preserve earlier build reports")
+    args = parser.parse_args()
+    evidence = ROOT.parent / "docs/evidence" / datetime.now().strftime("%Y-%m-%d")
+    if args.evidence_dir is not None:
+        evidence = args.evidence_dir.resolve()
+        if not evidence.is_relative_to((ROOT.parent / "docs/evidence").resolve()) or evidence == (ROOT.parent / "docs/evidence").resolve():
+            raise RuntimeError("Evidence directory must remain beneath docs/evidence")
+        evidence.mkdir(parents=True, exist_ok=False)
     spec = importlib.util.spec_from_file_location("sub2api_ledger_harness", ROOT / "scripts/test-sub2api-ledger.py")
     if spec is None or spec.loader is None:
         raise RuntimeError("Native source verification entry is unavailable")
@@ -53,7 +63,6 @@ def main() -> None:
     }
     if passed:
         report.update({"binary_sha256": sha256(binary), "binary_bytes": binary.stat().st_size})
-    evidence = ROOT.parent / "docs/evidence" / datetime.now().strftime("%Y-%m-%d")
     evidence.mkdir(parents=True, exist_ok=True)
     (evidence / "sub2api-provider-native-build.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     marker.write_text(json.dumps({"backend": str(backend), "passed": passed, "overlay_files_sha256": sources}, indent=2) + "\n", encoding="utf-8")

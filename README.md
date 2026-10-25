@@ -12,7 +12,11 @@
 
 [完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05、10、12 共 7 项本地实现/追踪出口已收口，69 项仍开放（67 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md)、[确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 及 [监控接线](docs/84-监控指标与脱敏请求关联.md) 已有实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
 
-最新 [89 · 审计分页计算上限](docs/89-审计分页投影上限与版本化复验.md) 修复分页前对跳过记录转换详情的问题：先固定本页最多 51 条，再在 SQL 内执行 16 KiB 检查与脱敏；空页不再转换详情。计数、权限、一致快照及原有超时预算保持。新测试与当前源码单独绑定版本化证据，历史鉴权/审计超时的完整根因和 69 项完整待办继续开放。
+最新 [90 · 固定 SDK 客户端](docs/90-固定SDK客户端兼容矩阵.md) 使用真实 Python 3.37.0 / Node 7.43.0 SDK，验证模型发现、图片生成/编辑、错误关联、幂等与重试及明确的异步扩展。严格解析发现上游普通模型缺少标准元数据，现仅补齐缺省字段，保留已有字段和扩展；无效元数据继续拒绝。[本机协议](docs/evidence/2026-10-25/openai-sdk-native-90-fifth/openai-sdk-native-protocol.json) 通过 20 项 SDK / 24 项原生场景，仅新增预期的 6 个任务与计量记录。真实 Workflow、客户端完整矩阵和 69 项待办继续开放。
+
+[90 最终验证](docs/evidence/2026-10-25/openai-sdk-verification-90.json)：206 项专项、173 顶层/331 子测试的 Go 组件、完整 16 门禁/3696 Python、28 项精确候选安装及 10 项安装后浏览器检查通过。606 项 CI、271 项原生运行及 501 项候选源输入核对一致；保留 SDK 失败、CI 预算失败及受控测试库统计实验，原有 1200 秒预算保持。候选 `rc-20261025.90.1` 含 169 载荷、58 wheels 和 63 运行契约，实际资源及生产仍待验收。
+
+此前 [89 · 审计分页计算上限](docs/89-审计分页投影上限与版本化复验.md) 修复分页前对跳过记录转换详情的问题：先固定本页最多 51 条，再在 SQL 内执行 16 KiB 检查与脱敏；空页不再转换详情。计数、权限、一致快照及原有超时预算保持。新测试与当前源码单独绑定版本化证据，历史鉴权/审计超时的完整根因和 69 项完整待办继续开放。
 
 [89 验证](docs/evidence/2026-10-25/audit-page-projection-verification.json)：179 项专项、完整 16 门禁/3671 Python、28 项精确候选安装及 10 项安装后浏览器检查通过；600 项 CI 输入与候选 499 项源输入核对一致，测试浏览器/进程/临时数据库和目录已清理。开发预览已受控更新；候选 `rc-20261025.89.1` 保持未签收生产和真实资源的状态。
 
@@ -234,6 +238,29 @@ curl.exe --cacert .local/tls/localhost.crt `
 
 本项目追求 OpenAI 格式兼容的明确子集，支持的字段、文件输入、URL/二进制交付及错误行为由冻结契约定义。`n=1`；不支持任意 SDK 功能或任意 OpenAI 参数。**音频当前走原生 `/v1/jobs`，并未实现 `/v1/audio/speech` 的同步二进制协议。** 详见 [兼容与交付](docs/34-Sub2API生成兼容与产物访问.md)、[素材与图片编辑](docs/35-Sub2API素材与图片编辑接入.md)、[音频迁移](docs/55-音频契约与兼容迁移.md)。
 
+### 固定 SDK 客户端
+
+固定 SDK 客户端的用法与兼容矩阵见 [90](docs/90-固定SDK客户端兼容矩阵.md)：Python `openai==3.37.0`、Node `openai@7.43.0`。API 地址必须显式指向本服务的 `/v1`；使用已发布模型和业务 Key。自动重试默认在示例中关闭，调用方在首次提交前保存 `Idempotency-Key`，恢复时重用同一值。multipart 的 `workflow_options` 扩展传 JSON 字符串。
+
+在本仓库运行 SDK 演练前，按专题 90 显式安装 sdk-compat 依赖组及独立 Node 锁依赖。SDK 是客户端验证工具，不进入 Admin 或生产运行包。
+
+```python
+import os
+from openai import OpenAI
+
+with OpenAI(api_key=os.environ['GENERATION_API_KEY'],
+            base_url=os.environ['GENERATION_BASE_URL'],
+            max_retries=0, timeout=70) as client:
+    result = client.images.generate(
+        model=os.environ['GENERATION_MODEL'], prompt='A small green robot',
+        n=1, size='1024x1024', quality='standard', response_format='b64_json',
+        extra_headers={'Idempotency-Key': os.environ['GENERATION_REQUEST_ID']},
+    )
+    encoded_image = result.data[0].b64_json
+```
+
+上游模型目录缺少创建时间时，合并响应以 `created=0` 明示未知，并补齐标准模型对象字段；原有正确值和扩展字段保留。生成超时不表示任务取消，按原任务 ID 查询或原幂等键恢复。SDK 版本固定及本机协议验证均不替代真实 Workflow 的最终验收。
+
 ## API Key、内容与额度
 
 - **业务 Key** 保护对外生成及内容 API；管理账号/会话、Worker 凭证、网关服务身份分别独立。业务 Key 不能登录 Admin 或调用管理 API。
@@ -319,6 +346,7 @@ comfyUI-aggregator-proxy/
 │  ├─ apps/                      Control API / Runner / Windows Worker / Vue Admin
 │  ├─ packages/                  domain / application / contracts / infrastructure
 │  ├─ integrations/sub2api/      固定上游、Go 客户端与窄范围 overlay
+│  ├─ integrations/openai-clients/ 固定 Node SDK 的独立演练客户端
 │  ├─ migrations/                Alembic 迁移
 │  ├─ scripts/                   原生开发、验证、构建、录屏与发布审查
 │  ├─ config/                    配置示例、工具链与契约摘要

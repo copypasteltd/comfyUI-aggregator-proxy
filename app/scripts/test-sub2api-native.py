@@ -560,8 +560,14 @@ def main() -> None:
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--managed-catalog", action="store_true", help="Exercise Admin publication and automatic Provider catalog confirmation")
     modes.add_argument("--confirmed-oom", action="store_true", help="Inject confirmed OOM across all six task types using two protocol GPUs")
+    modes.add_argument("--openai-sdk", action="store_true", help="Also exercise pinned Python and Node OpenAI SDK clients")
     parser.add_argument("--evidence-dir", type=Path, help="New directory beneath docs/evidence; preserve previous runtime evidence")
+    parser.add_argument("--provider-build-report", type=Path, help="Explicit immutable Provider build report beneath docs/evidence")
     args = parser.parse_args()
+    if args.openai_sdk:
+        from native_openai_sdk import preflight
+
+        preflight()
     evidence = EVIDENCE
     if args.evidence_dir is not None:
         evidence = args.evidence_dir.resolve()
@@ -575,6 +581,8 @@ def main() -> None:
     ledger = module("native_ledger_harness", "test-sub2api-ledger.py")
     fixtures = module("native_provider_fixtures", "native-provider-fixtures.py")
     source_paths = [Path(__file__), ROOT / "scripts/native-provider-fixtures.py", ROOT / "integrations/sub2api/protocol-fixture/main.go", ROOT / "scripts/native_database_observer.py", ROOT / "scripts/native_database_probe.py"]
+    if args.openai_sdk:
+        source_paths.extend(ROOT / name for name in ("scripts/native_openai_sdk.py", "integrations/openai-clients/client.mjs", "integrations/openai-clients/package.json", "integrations/openai-clients/package-lock.json", "pyproject.toml", "uv.lock"))
     for directory in ("packages", "apps/control_api", "apps/control_runner", "apps/windows_worker", "migrations"):
         source_paths.extend(sorted((ROOT / directory).rglob("*.py")))
     source_paths.extend(sorted((ROOT / "packages/contracts/src/generation_contracts/schemas").glob("*.json")))
@@ -596,7 +604,10 @@ def main() -> None:
         report["overlay_sha256"] = sources
         report["upstream_commit"] = lock["commit"]
         provider_binary = ROOT / ".local/bin/sub2api-provider.exe"
-        build_report = json.loads((EVIDENCE / "sub2api-provider-native-build.json").read_text(encoding="utf-8"))
+        build_path = (args.provider_build_report or EVIDENCE / "sub2api-provider-native-build.json").resolve()
+        check(build_path.is_relative_to((ROOT.parent / "docs/evidence").resolve()) and build_path.suffix == ".json" and build_path.stat().st_size <= 1024 * 1024, "provider_build_report_invalid")
+        build_report = json.loads(build_path.read_text(encoding="utf-8"))
+        report["provider_build_report_sha256"] = sha(build_path)
         check(build_report["passed"] and build_report["overlay_files_sha256"] == sources, "provider_build_sources_stale")
         check(sha(provider_binary) == build_report["binary_sha256"], "provider_binary_changed")
         test_binary = ROOT / ".local/bin/sub2api-ledger.test.exe"
@@ -753,9 +764,18 @@ def main() -> None:
                 report["managed_catalog"] = {"initial_revision": 1, "empty_bootstrap_models": True, "receipts_generated_by_actual_provider": True, "physical_runtime_approval": False}
                 report["cases"].append({"case": "managed_catalog_empty_bootstrap_onboarding", "passed": True})
             scenario(provider_client, upstream, pg, control, fixtures, processes, provider, restart, root, report["cases"], pepper, comfy, managed, args.confirmed_oom)
+            if args.openai_sdk:
+                from native_openai_sdk import exercise
+
+                phase = "actual_openai_sdk_clients"
+                # The original scenario intentionally revoked key 0. Exercise
+                # clients with the independent, still-authorized fixture Key.
+                report["sdk_compatibility"] = exercise(str(provider_client.base_url), upstream["credentials"][1], root, pg, control, report["cases"])
         phase = "worker_retention_after_cloud_ack"
         state = root / "worker-state"
         expected_outputs = len(fixtures.TASKS) + 5 + (2 if managed else 0)
+        if args.openai_sdk:
+            expected_outputs += report["sdk_compatibility"]["new_jobs"]
         deadline = time.monotonic() + 30
         while True:
             with closing(sqlite3.connect(state / "journal.sqlite3")) as journal:
@@ -826,7 +846,7 @@ def main() -> None:
                 # Preserve private logs/backups, remove generated media/secrets.
                 for directory in ("comfy", "worker-state", "objects", "spool", "provider-uploads"):
                     remove_fixture_tree(root / directory, root)
-                for filename in ("worker-credential.json", "worker.json", "redis.json", "gateway.key", "provider.key", "provider.json", "config.yaml"):
+                for filename in ("worker-credential.json", "worker.json", "redis.json", "gateway.key", "provider.key", "provider.json", "config.yaml", "sdk-client.json"):
                     (root / filename).unlink(missing_ok=True)
                 report["cleanup"]["media_and_credentials"] = True
             except BaseException as exc:
@@ -847,7 +867,7 @@ def main() -> None:
         report["duration_seconds"] = round(time.monotonic() - started, 2)
         report["passed"] = report["passed"] and all(report["cleanup"].values())
         write(root / "report.json", report)
-        write(evidence / ("confirmed-retry-native-protocol.json" if args.confirmed_oom else "provider-catalog-native-protocol.json" if args.managed_catalog else "sub2api-native-protocol.json"), report)
+        write(evidence / ("openai-sdk-native-protocol.json" if args.openai_sdk else "confirmed-retry-native-protocol.json" if args.confirmed_oom else "provider-catalog-native-protocol.json" if args.managed_catalog else "sub2api-native-protocol.json"), report)
         print(json.dumps({"passed": report["passed"], "phase": phase, "cases": len(report["cases"]), "cleanup": report["cleanup"], "failure": report.get("failure")}, ensure_ascii=False), flush=True)
     if failure:
         raise SystemExit(1)

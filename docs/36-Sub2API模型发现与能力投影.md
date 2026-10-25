@@ -26,6 +26,8 @@ Provider 只展示三个集合的交集：本机受信模型配置、当前上�
 
 ## 验证边界
 
+2026-10-25 的 [90 · 固定 SDK](./90-固定SDK客户端兼容矩阵.md) 补充合并集合的标准核心字段：普通条目仅在缺少字段时补 object=model、created=0（上游未提供时间）、owned_by=sub2api（目录代理归属）。保留已存在的正确值与其他字段；核心字段已存在但无效时返回原 catalog_unavailable。Codex manifest、配置外单项透传、权限和别名冲突规则继续按本节原边界处理。首次 SDK 严格解析失败和修复后证据分别保留。
+
 以真实原生 PostgreSQL、上游认证/仓储、HTTPS 协议替身覆盖：当前权限撤销、模型/渠道/版本选择器、发布下线、同名冲突、无效/重复/超大响应、固定原目标、并行限额、条件头、Codex 原文保留与普通模型字段保留。控制面验证能力投影不泄露内部字段，公开与网关单项查询一致；OpenAPI、生成的 TypeScript 客户端和应用回归同步更新。
 
 协议格式依据 2026-10-23 核对的 OpenAI [模型列表](https://developers.openai.com/api/reference/resources/models/methods/list) 与 [单模型查询](https://developers.openai.com/api/reference/resources/models/methods/retrieve)；能力字段为本项目扩展。上游共存行为依据固定的 7da09cab4e875463baa79fc150adde700c5438df 本地源码，不宣称覆盖其他 Sub2API 版本。完整上游/控制面运行、实际 Workflow/S3 和设备规模仍待独立验收。
