@@ -13,7 +13,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[2]
 PATTERNS = {
     "private_key": re.compile(rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
-    "credential": re.compile(rb"(?:admin|worker|key|gateway|sk(?:-gen)?)_[0-9a-f]{32}\.[A-Za-z0-9_-]{43,}"),
+    "credential": re.compile(rb"(?:admin|worker|key|gateway|mon|sk(?:-gen)?)_[0-9a-f]{32}\.[A-Za-z0-9_-]{43,}"),
     "github_token": re.compile(rb"(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})"),
     "database_password": re.compile(rb"postgres(?:ql)?(?:\+psycopg)?://[^\s:/]+:([^\s@]+)@"),
 }

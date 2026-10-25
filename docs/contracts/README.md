@@ -42,7 +42,7 @@ JSON Schema 使用 draft 2020-12，引用限定本文件 `#/$defs`，禁止在�
 
 集合游标契约见 [collection-page.schema.json](./collection-page.schema.json) 与 [37](../37-任务与内容游标及共享访问.md)；公开/网关响应、分页边界与共享路由须同步实现。
 
-以下分增量保留的数字是各阶段历史快照；最新汇总见文末第 63 增量。
+以下分增量保留的数字和当时状态是历史快照；最新契约汇总见文末第 84 增量。早期段落中的“待实现”不覆盖后续实现记录，当前开发与验收状态见文档 16、17 和 78。
 
 模型文件回执契约见 [model-file-receipt.schema.json](./model-file-receipt.schema.json) 和 [45](../45-渠道模型清单与受控登记.md)：当前 15 份 schema、128 份 fixture（41 正例、87 反例）。JSON Schema 验证形状；目录摘要、路径与类别对应、当前 boot/revision/时效及登记事务仍由应用语义校验。OpenAPI 当前登记 155 个方法、122 个路径，匹配 148 项设计端点，不能替代整体验收。
 
@@ -126,4 +126,8 @@ JSON Schema 使用 draft 2020-12，引用限定本文件 `#/$defs`，禁止在�
 
 第 76 增量新增 admin-workflow-lifecycle.schema.json / admin-workflow-lifecycle-result.schema.json，供归档/解除归档的严格布尔、CAS 与原事务结果使用；结果 revision 恰好增加一次。51 schema、833 fixture（197 正/636 反），53 运行契约、180 设计端点，无 DDL，见 [76](../76-Workflow归档与恢复管理.md)。
 
-第 79 增量新增网关目录发布、重放、准入 stamp、服务回执及完整配置五份 schema，增加 22 个 fixture（8 正/14 反）；累计 56 schema、855 fixture（205 正/650 反），58 运行契约、187 设计端点。期望与确认版本独立，首次确认前兼容 legacy；服务配置端点不接收客户委托身份。控制面持久化与版本校验已有实际 PostgreSQL 证据，Provider 自动消费者和 Admin 映射 UI 仍待实现，见 [79](../79-网关模型目录持久发布协议.md)。
+第 79 增量新增网关目录发布、重放、准入 stamp、服务回执及完整配置五份 schema，增加 22 个 fixture（8 正/14 反）；累计 56 schema、855 fixture（205 正/650 反），58 运行契约、187 设计端点。期望与确认版本独立，首次确认前兼容 legacy；服务配置端点不接收客户委托身份。79 阶段控制面持久化与版本校验已有实际 PostgreSQL 证据；当时待实现的 Provider 自动消费者和 Admin 映射 UI 已分别由 [80](../80-Provider目录消费与版本快照.md) 和 [81](../81-Admin网关目录映射与发布核对.md) 补齐，保留 [79](../79-网关模型目录持久发布协议.md) 的设计历史。
+
+## 第 84 增量：监控配置与指标目录
+
+新增 [monitoring-configuration.schema.json](./monitoring-configuration.schema.json) 和 [monitoring-metrics.json](./monitoring-metrics.json)，分别冻结封闭安全响应/严格阈值与固定指标/标签/预算。37 个新增 fixture（3 正/34 反）与严格 DTO 对照；累计 **57 schema、902 fixture（210 正/692 反）、60 运行契约、190 设计端点、156 OpenAPI 路径/197 方法**。监控两个 GET 入口使用独立只读身份，默认关闭，原四类身份不可代用；来源、只读事务、流式观测和失效语义须运行验证，不能从 JSON Schema 推定通过。应用契约继续 0.5.0、Worker 协议继续 0.4.0，16 状态/64 转换/24 条件不变；详见 [84](../84-监控指标与脱敏请求关联.md)。

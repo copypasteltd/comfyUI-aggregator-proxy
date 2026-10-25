@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:monitoring-configuration:0.5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "enabled",
+    "credential_slots",
+    "source_network_count",
+    "cache_seconds",
+    "database_budget_seconds",
+    "recent_window_seconds",
+    "capacity_node_limit",
+    "maximum_exposition_bytes",
+    "thresholds"
+  ],
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "const": "monitoring-v1"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "credential_slots": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "source_network_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32
+    },
+    "cache_seconds": {
+      "type": "integer",
+      "const": 5
+    },
+    "database_budget_seconds": {
+      "type": "integer",
+      "const": 2
+    },
+    "recent_window_seconds": {
+      "type": "integer",
+      "const": 3600
+    },
+    "capacity_node_limit": {
+      "type": "integer",
+      "const": 256
+    },
+    "maximum_exposition_bytes": {
+      "type": "integer",
+      "const": 2097152
+    },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "queue_age_seconds",
+        "pending_age_seconds",
+        "settlement_age_seconds",
+        "node_stale_seconds",
+        "http_error_ratio",
+        "minimum_requests",
+        "alert_for_seconds"
+      ],
+      "properties": {
+        "queue_age_seconds": {
+          "type": "integer",
+          "minimum": 30,
+          "maximum": 86400
+        },
+        "pending_age_seconds": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 3600
+        },
+        "settlement_age_seconds": {
+          "type": "integer",
+          "minimum": 30,
+          "maximum": 86400
+        },
+        "node_stale_seconds": {
+          "type": "integer",
+          "minimum": 15,
+          "maximum": 3600
+        },
+        "http_error_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minimum_requests": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "alert_for_seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3600
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "enabled": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "credential_slots": {
+            "minimum": 1
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "credential_slots": {
+            "const": 0
+          }
+        }
+      }
+    }
+  ]
+}

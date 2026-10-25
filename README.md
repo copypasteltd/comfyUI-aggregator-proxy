@@ -10,11 +10,13 @@
 
 **当前状态：开发中。** 原生 Windows 本地实现、协议测试和隔离候选安装已有验证记录；真实 Workflow、模型质量、真实 S3/Redis、生产系统服务与 10～20 台实机容量尚未完成验收。文中的截图和录屏使用真实页面与 API、独立 PostgreSQL 和明确标记的合成数据，不代表真实 GPU 生成或生产压测结果。
 
-[完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05 的发布与重试实现已补齐，71 项仍待收口（69 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md) 与 [确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 已有本地实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
+[完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05、10 共 6 项本地实现已收口，70 项仍开放（68 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md)、[确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 及 [监控接线](docs/84-监控指标与脱敏请求关联.md) 已有实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
 
-新增 [原生 CI](docs/83-原生CI门禁与失败证据.md)：固定 16 项串行门禁、独立测试目录、测试库备份后迁移、只公开脱敏摘要，原始日志/JUnit 留在私有目录。[本地完整验证](docs/evidence/2026-10-25/native-ci-verification.json) 16 项门禁和 3275 项 Python 回归通过，包含 [43 项 CI 专项](docs/evidence/2026-10-25/native-ci-unit-summary.json)；专用物理 Runner、仓库变量启用及实际 GitHub 成功/失败 artifact 仍待验收，待办 11 继续开放。
+最新增量 [84 · 监控与请求关联](docs/84-监控指标与脱敏请求关联.md) 增加独立只读身份、固定标签指标、只读 PG 快照、流式脱敏日志和十条告警规则。[本轮验证](docs/evidence/2026-10-25/monitoring-verification.json) 通过完整 16 门禁/3399 项 Python、87 项监控专项、27 组原生协议、50 个 PromQL 断言、26 项候选安装及安装后 8 项浏览器检查。候选 rc-20261025.84.1 的 476 项源输入已核对，包含 159 个载荷文件、58 个 wheel；生产采集和通知仍按第 68 项验收。
 
-第 82 增量 [验证记录](docs/evidence/2026-10-25/confirmed-retry-verification.json)：完整 Python 回归 3232 项、契约/单元 2156 项、前端 40 项单元、重试界面 8 项、候选安装 24 项及安装后浏览器 8 项通过；实际服务跨进程 26 个场景覆盖六类任务、OOM 换卡和唯一结算。ComfyUI/Redis/存储仍为协议夹具；并行运行中出现的鉴权行锁超时/502 保留待定位，不以隔离通过替代并发容量验收。该候选与运行证据描述当时版本；本次工具链变更不冒称已经重建候选。
+仓库 [原生 CI](docs/83-原生CI门禁与失败证据.md) 固定 16 项串行门禁、独立测试目录、测试库备份后迁移，仅公开脱敏摘要，原始日志/JUnit 留在私有目录。专用物理 Runner、仓库变量启用及实际 GitHub 成功/失败 artifact 仍待验收，第 11 项继续开放。
+
+[原生链路证据](docs/evidence/2026-10-25/monitoring-native-final/confirmed-retry-native-protocol.json) 使用实际 Sub2API/API/Runner/Worker/PostgreSQL 进程，ComfyUI、Redis 和存储仍为明确的协议夹具。[82 的历史记录](docs/82-确认失败重试分类与跨GPU约束.md) 保留并行检查中出现的鉴权行锁超时/502；该问题尚未定位，隔离通过不代替并发容量验收。真实设备、生产 Workflow 和模型质量仍待后续资源验证。
 
 ## 目录
 
@@ -246,6 +248,24 @@ Worker 离线、租约到期或 HTTP 超时都不证明 GPU 已空闲。提交�
 | `GEN_STORAGE_BACKEND`、`GEN_S3_*` | 开发本地存储或生产私有 S3；真实 S3 需独立验收 |
 | `GEN_SESSION_SECONDS`、`GEN_SESSION_IDLE_SECONDS` | 管理会话绝对寿命和空闲时间 |
 | `GEN_AUDIT_RETENTION_DAYS` | 显式批准后启用审计保留期；缺省不自动删除管理审计 |
+| `GEN_MONITORING_TOKEN_SHA256` | 独立只读监控凭证的 SHA-256 JSON 数组，缺省关闭，最多两把轮换 |
+| `GEN_MONITORING_ALLOWED_NETWORKS` | 监控连接来源 CIDR，缺省仅回环；不相信任意转发头 |
+| `GEN_MONITORING_THRESHOLDS` | 严格校验的队列、准入、结算、心跳及 HTTP 错误告警阈值 |
+
+监控接入见 [84 · 指标与请求关联](docs/84-监控指标与脱敏请求关联.md)。`GET /internal/monitoring/v1/metrics` 导出 Prometheus 指标，`GET /internal/monitoring/v1/configuration` 读取安全配置；两者均要求专用 Bearer 和来源校验。业务 Key、Admin 会话、Worker 和网关凭证不能代用。没有配置监控摘要时返回 404。配置 API 不提供修改业务或读取客户文件的能力。
+
+在 `app/` 原生环境中生成一次性令牌和规则：
+
+```powershell
+.\.venv\Scripts\gen-monitoring.exe issue-token --output .local\monitoring.token
+# 把输出的 sha256 配入 GEN_MONITORING_TOKEN_SHA256 后重启 API；保护令牌文件 ACL。
+.\.venv\Scripts\gen-monitoring.exe configuration
+.\.venv\Scripts\gen-monitoring.exe rules --output .local\render-control.rules.json
+```
+
+令牌只写入指定的新文件，控制台只显示摘要；已有文件拒绝覆盖。隔离安装或外部状态目录使用 `configuration --env-file <private-env-file>` 和 `rules --env-file <private-env-file> --output <new-file>`；这些命令不连接数据库。采集端配置参考 [原生 Prometheus 示例](app/deploy/observability/prometheus.example.yml)，使用凭证文件和可信 CA。规则涵盖十类异常，宿主仍需自行部署采集和通知。API 多实例须逐进程抓取，全局数据库指标使用 `max` 去重，HTTP counter 按实例采集后聚合。
+
+指标包括任务积压、有效耗时样本、物理 GPU 占用、节点容量覆盖、结算积压和待删对象。数据库使用独立只读连接池及五秒缓存；观测失败时输出 `snapshot_success=0` 并省略数据库指标。上传、下载与 SSE 持续流式传递，脱敏请求 JSON 日志通过服务端请求 ID 关联；不记录提示词、凭证、查询串或路径参数。外部监控阈值与 Admin 现有派生告警分别管理。
 
 生产迁移前先停止/排空对应服务、备份并验证归档，再单独执行迁移。数据库备份不等于联合恢复：对象版本、Worker journal、Sub2API 账本/幂等事实及凭证也必须一致恢复和核对。Windows 服务 ACL、Linux/systemd、生产反向代理、真实 Redis/S3 和联合恢复仍是独立验收项。不要把开发启动脚本注册成已经验收的生产服务。
 

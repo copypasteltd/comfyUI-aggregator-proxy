@@ -1,0 +1,128 @@
+{
+  "contract_version": "0.5.0",
+  "protocol": "monitoring-v1",
+  "prefix": "render_control_",
+  "database_gauges": {
+    "jobs_active": [
+      "state",
+      "task_type",
+      "kind"
+    ],
+    "jobs_oldest_seconds": [
+      "state",
+      "kind"
+    ],
+    "queued_candidates": [
+      "coverage"
+    ],
+    "jobs_recent": [
+      "outcome",
+      "task_type",
+      "kind"
+    ],
+    "job_failures_recent": [
+      "error_class",
+      "task_type",
+      "kind"
+    ],
+    "job_duration_seconds": [
+      "task_type",
+      "kind",
+      "quantile"
+    ],
+    "job_duration_observations": [
+      "task_type",
+      "kind"
+    ],
+    "gpu_resources": [
+      "status"
+    ],
+    "gpu_occupancy": [
+      "status"
+    ],
+    "nodes": [
+      "status"
+    ],
+    "node_heartbeat_oldest_seconds": [],
+    "channels": [
+      "status"
+    ],
+    "spec_isolations": [],
+    "worker_capacity_samples": [
+      "status"
+    ],
+    "worker_capacity_observed": [
+      "resource"
+    ],
+    "worker_capacity_bytes": [
+      "resource",
+      "aggregation"
+    ],
+    "worker_pending_uploads": [],
+    "outbox_pending": [
+      "kind"
+    ],
+    "outbox_oldest_seconds": [
+      "kind"
+    ],
+    "objects_pending_delete": [],
+    "objects_pending_delete_bytes": [],
+    "objects_pending_delete_oldest_seconds": [],
+    "pg_connections": [
+      "state"
+    ],
+    "pg_lock_waits": [],
+    "jobs_age_unknown": [
+      "state",
+      "kind"
+    ]
+  },
+  "http_operation_groups": [
+    "health",
+    "admin_read",
+    "admin_write",
+    "business_read",
+    "business_write",
+    "gateway_read",
+    "gateway_write",
+    "worker_read",
+    "worker_write",
+    "monitoring",
+    "admin_static",
+    "other"
+  ],
+  "http_histogram_buckets_seconds": [
+    0.005,
+    0.01,
+    0.025,
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1,
+    2.5,
+    5,
+    15,
+    60,
+    300,
+    3600
+  ],
+  "http_rejection_classes": [
+    "identity",
+    "permission",
+    "quota",
+    "capacity",
+    "conflict",
+    "validation",
+    "internal",
+    "other"
+  ],
+  "snapshot_cache_seconds": 5,
+  "snapshot_sql_budget_seconds": 2,
+  "snapshot_statement_budget_seconds": 1,
+  "capacity_nodes_limit": 256,
+  "capacity_json_bytes_limit": 8192,
+  "exposition_bytes_limit": 2097152,
+  "recent_window_seconds": 3600,
+  "dependency": "prometheus-client==0.26.0"
+}

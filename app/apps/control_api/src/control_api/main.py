@@ -84,6 +84,7 @@ from generation_contracts.model_files import (
     ModelFileReadView,
     ModelFileRegistration,
 )
+from generation_contracts.monitoring import MonitoringConfiguration
 from generation_contracts.operational import QueueStatistics, QueueStatisticsQuery
 from generation_contracts.outputs import Complete, UploadAuthorization
 from generation_contracts.queue_queries import QueueOptionQuery, QueueOptions, QueueQuery
@@ -207,6 +208,12 @@ from generation_infrastructure.key_generation_options import KeyGenerationDirect
 from generation_infrastructure.key_policy_options import KeyPolicyDirectory
 from generation_infrastructure.leases import LeaseRepository
 from generation_infrastructure.model_mapping_options import ModelMappingReads
+from generation_infrastructure.monitoring import (
+    MonitoringService,
+    configuration,
+    monitoring_authorized,
+)
+from generation_infrastructure.monitoring_snapshot import SnapshotUnavailable
 from generation_infrastructure.operational import OperationalQueries
 from generation_infrastructure.outputs import OutputRepository
 from generation_infrastructure.recovery import RecoveryRepository
@@ -226,6 +233,7 @@ from control_api.collections import content_query, job_query
 from control_api.compatibility import compatibility_routes
 from control_api.gateway import gateway_routes
 from control_api.limits import BodyLimitMiddleware, body_limit
+from control_api.monitoring import ObservedAPI, RequestLog
 from control_api.static import AdminFiles
 from control_api.uploads import upload_token
 
@@ -298,20 +306,27 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     recovery = RecoveryRepository(leases)
     access_writer = AccessEventWriter(settings)
     access_queries = AccessEventQueries(sessions, settings.access_log_retention_days)
+    monitoring = MonitoringService(settings)
+    request_log = RequestLog(monitoring.process)
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         try:
             if check_bucket := getattr(store, "check_private_versioned_bucket", None):
                 await asyncio.to_thread(check_bucket)
+            request_log.start()
             yield
         finally:
             await access_writer.close()
+            await asyncio.to_thread(request_log.close)
+            await asyncio.to_thread(monitoring.close)
             await asyncio.to_thread(sessions.kw["bind"].dispose)
 
-    app = FastAPI(title="Render Control", version="0.1.0", docs_url=None, redoc_url=None, lifespan=lifespan)
+    app = ObservedAPI(metrics=monitoring.process, request_log=request_log, title="Render Control", version="0.1.0", docs_url=None, redoc_url=None, lifespan=lifespan)
     app.state.sessions = sessions
     app.state.settings = settings
     app.state.access_writer = access_writer
+    app.state.monitoring = monitoring
+    app.state.request_log = request_log
     app.add_middleware(BodyLimitMiddleware)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=[__import__("urllib.parse", fromlist=["urlparse"]).urlparse(settings.public_origin).hostname])
 
@@ -1087,6 +1102,23 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.post("/internal/v1/commands/{identifier}/reconciliations", response_model=CommandReconciliationResult)
     def command_reconciliation(identifier: str, data: CommandReconciliation, node: Annotated[UUID, Depends(worker)]) -> dict[str, Any]:
         return commands.reconcile(node, parse_id("cmd", identifier), data)
+
+    def monitoring_identity(request: Request) -> None:
+        if not settings.monitoring_token_sha256:
+            raise DomainError("not_found", "资源不存在", 404)
+        if not monitoring_authorized(settings, request.headers.get("authorization", ""), request.client.host if request.client else None):
+            raise DomainError("invalid_credentials", "监控凭证或连接来源无效", 401)
+
+    @app.get("/internal/monitoring/v1/metrics", response_class=Response, responses={200: {"content": {"text/plain": {"schema": {"type": "string"}}}}})
+    def monitoring_metrics(identity: Annotated[None, Depends(monitoring_identity)]) -> Response:
+        try:
+            return Response(monitoring.render(), headers={"Content-Type": "text/plain; version=0.0.4; charset=utf-8", "Cache-Control": "no-store"})
+        except SnapshotUnavailable as exc:
+            raise DomainError("monitoring_unavailable", "监控快照超过输出预算", 503) from exc
+
+    @app.get("/internal/monitoring/v1/configuration", response_model=MonitoringConfiguration)
+    def monitoring_configuration(identity: Annotated[None, Depends(monitoring_identity)]) -> MonitoringConfiguration:
+        return configuration(settings)
 
     app.include_router(compatibility_routes(jobs, content, business, settings.public_origin))
     app.include_router(gateway_routes(GatewayRepository(sessions), GatewayAdministration(sessions, settings), catalog, content, jobs, gateway, permission, admin_token, expected_revision, cursors))

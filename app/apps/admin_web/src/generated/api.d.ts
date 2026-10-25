@@ -1974,6 +1974,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/internal/monitoring/v1/metrics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Monitoring Metrics */
+        get: operations["monitoring_metrics_internal_monitoring_v1_metrics_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/internal/monitoring/v1/configuration": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Monitoring Configuration */
+        get: operations["monitoring_configuration_internal_monitoring_v1_configuration_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/images/generations": {
         parameters: {
             query?: never;
@@ -5077,6 +5111,90 @@ export interface components {
             revision: number;
             /** Published */
             published: boolean;
+        };
+        /** MonitoringConfiguration */
+        MonitoringConfiguration: {
+            /**
+             * Protocol
+             * @default monitoring-v1
+             * @constant
+             */
+            protocol: "monitoring-v1";
+            /** Enabled */
+            enabled: boolean;
+            /** Credential Slots */
+            credential_slots: number;
+            /** Source Network Count */
+            source_network_count: number;
+            /**
+             * Cache Seconds
+             * @default 5
+             * @constant
+             */
+            cache_seconds: 5;
+            /**
+             * Database Budget Seconds
+             * @default 2
+             * @constant
+             */
+            database_budget_seconds: 2;
+            /**
+             * Recent Window Seconds
+             * @default 3600
+             * @constant
+             */
+            recent_window_seconds: 3600;
+            /**
+             * Capacity Node Limit
+             * @default 256
+             * @constant
+             */
+            capacity_node_limit: 256;
+            /**
+             * Maximum Exposition Bytes
+             * @default 2097152
+             * @constant
+             */
+            maximum_exposition_bytes: 2097152;
+            thresholds: components["schemas"]["MonitoringThresholds"];
+        };
+        /** MonitoringThresholds */
+        MonitoringThresholds: {
+            /**
+             * Queue Age Seconds
+             * @default 300
+             */
+            queue_age_seconds: number;
+            /**
+             * Pending Age Seconds
+             * @default 60
+             */
+            pending_age_seconds: number;
+            /**
+             * Settlement Age Seconds
+             * @default 300
+             */
+            settlement_age_seconds: number;
+            /**
+             * Node Stale Seconds
+             * @default 30
+             */
+            node_stale_seconds: number;
+            /**
+             * Http Error Ratio
+             * @default 0.05
+             */
+            http_error_ratio: number;
+            /**
+             * Minimum Requests
+             * @default 20
+             */
+            minimum_requests: number;
+            /**
+             * Alert For Seconds
+             * @default 120
+             */
+            alert_for_seconds: number;
         };
         /** NewImportTarget */
         NewImportTarget: {
@@ -11702,6 +11820,46 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    monitoring_metrics_internal_monitoring_v1_metrics_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+        };
+    };
+    monitoring_configuration_internal_monitoring_v1_configuration_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MonitoringConfiguration"];
                 };
             };
         };

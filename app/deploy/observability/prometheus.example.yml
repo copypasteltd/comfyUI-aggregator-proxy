@@ -1,0 +1,19 @@
+# Native Prometheus host configuration. One distinct job per control-plane database.
+# Generate render-control.rules.json using gen-monitoring rules --output <new-file>.
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+rule_files:
+  - render-control.rules.json
+scrape_configs:
+  - job_name: render-control
+    scheme: https
+    metrics_path: /internal/monitoring/v1/metrics
+    scrape_timeout: 5s
+    authorization:
+      type: Bearer
+      credentials_file: C:/ProgramData/RenderControl/private/monitoring.token
+    tls_config:
+      ca_file: C:/ProgramData/RenderControl/private/control-plane-ca.pem
+    static_configs:
+      - targets: [localhost:8443]

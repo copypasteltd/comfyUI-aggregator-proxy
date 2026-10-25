@@ -10,11 +10,13 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 **Status: in development.** Native Windows implementation, protocol tests and isolated candidate installation have recorded verification. Actual Workflows, model quality, real S3/Redis, production system services and capacity on 10–20 physical machines still require acceptance. Screenshots and recordings show the real UI and API backed by isolated PostgreSQL and explicitly synthetic fixtures. They demonstrate neither real GPU generation nor production throughput.
 
-The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: implementation items 01–05 are complete, with 71 still open (69 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md), [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md) and [confirmed failure retries](docs/82-确认失败重试分类与跨GPU约束.md) have local implementations and separate verification evidence. Actual Workflows, joint gateway behavior, failures and production still require acceptance.
+The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: local implementation items 01–05 and 10 are complete, leaving 70 open items (68 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md), [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md), [confirmed failure retries](docs/82-确认失败重试分类与跨GPU约束.md) and [monitoring](docs/84-监控指标与脱敏请求关联.md) have implementations and separate verification evidence. Actual Workflows, joint gateway behavior, failures and production still require acceptance.
 
-The new [native CI](docs/83-原生CI门禁与失败证据.md) provides 16 serial gates, isolated test directories, backup before test-database migration and sanitized public summaries. Raw logs/JUnit remain private. [Complete local verification](docs/evidence/2026-10-25/native-ci-verification.json) passed all 16 gates and 3275 Python checks, including [43 focused CI checks](docs/evidence/2026-10-25/native-ci-unit-summary.json). A dedicated physical Runner, repository enablement and actual GitHub success/failure artifacts still require acceptance; item 11 remains open.
+The latest increment, [84: monitoring and request correlation](docs/84-监控指标与脱敏请求关联.md), adds an isolated read-only identity, bounded metrics, read-only PG snapshots, sanitized streaming observation and ten alert rules. [Verification](docs/evidence/2026-10-25/monitoring-verification.json) passed all 16 gates/3399 Python checks, 87 monitoring checks, 27 native scenarios, 50 PromQL assertions, 26 candidate installation checks and eight installed-browser checks. Candidate rc-20261025.84.1 has 476 verified source inputs, 159 payload files and 58 wheels. Production collection and notification remain open under item 68.
 
-The increment 82 [verification record](docs/evidence/2026-10-25/confirmed-retry-verification.json) reports 3232 full Python checks, 2156 contract/unit checks, 40 frontend unit checks, eight retry browser checks, 24 candidate installation checks and eight installed browser checks. Actual service processes passed 26 scenarios covering six task types, OOM rerouting and single settlement. ComfyUI/Redis/storage remain protocol fixtures. A gateway authentication row-lock timeout/502 observed during concurrent checks remains unresolved; an isolated pass does not establish concurrent capacity. That candidate and runtime evidence describe their recorded revision; this tooling change does not claim a rebuilt candidate.
+The [native CI](docs/83-原生CI门禁与失败证据.md) provides 16 serial gates, isolated test directories, backup before test-database migration and sanitized public summaries. Raw logs/JUnit remain private. A dedicated physical Runner, repository enablement and actual GitHub success/failure artifacts still require acceptance; item 11 remains open.
+
+The [native evidence](docs/evidence/2026-10-25/monitoring-native-final/confirmed-retry-native-protocol.json) uses actual Sub2API/API/Runner/Worker/PostgreSQL processes, with explicitly synthetic ComfyUI, Redis and storage protocol fixtures. [Increment 82](docs/82-确认失败重试分类与跨GPU约束.md) retains a gateway authentication row-lock timeout/502 observed during concurrent checks. Its cause remains unresolved; an isolated pass does not establish concurrent capacity. Physical devices, production Workflows and model quality still require later resource acceptance.
 
 ## Contents
 
@@ -246,6 +248,24 @@ See [task mechanisms](docs/02-系统架构与任务机制.md), [Worker protocol]
 | `GEN_STORAGE_BACKEND`, `GEN_S3_*` | Local development storage or private production S3; real S3 requires separate acceptance |
 | `GEN_SESSION_SECONDS`, `GEN_SESSION_IDLE_SECONDS` | Absolute and idle lifetimes of Admin sessions |
 | `GEN_AUDIT_RETENTION_DAYS` | Explicitly approved audit retention; management audit is not automatically pruned by default |
+| `GEN_MONITORING_TOKEN_SHA256` | SHA-256 JSON array for a dedicated read-only monitoring identity; disabled by default, two rotation slots |
+| `GEN_MONITORING_ALLOWED_NETWORKS` | Actual connection-source CIDRs; loopback by default, arbitrary forwarding headers are ignored |
+| `GEN_MONITORING_THRESHOLDS` | Strict queue, admission, settlement, heartbeat and HTTP-error alert thresholds |
+
+See [monitoring and request correlation](docs/84-监控指标与脱敏请求关联.md). `GET /internal/monitoring/v1/metrics` exports Prometheus metrics; `GET /internal/monitoring/v1/configuration` returns a safe configuration projection. Both require a dedicated Bearer token and permitted connection source. Business Keys, Admin sessions, Workers and gateways cannot substitute their credentials. With no configured token digest, both routes return 404. Monitoring cannot change business configuration or read customer files.
+
+From the native environment under `app/`, provision a one-time token and generate rules:
+
+```powershell
+.\.venv\Scripts\gen-monitoring.exe issue-token --output .local\monitoring.token
+# Configure the printed sha256 in GEN_MONITORING_TOKEN_SHA256, restart API, and protect the token file ACL.
+.\.venv\Scripts\gen-monitoring.exe configuration
+.\.venv\Scripts\gen-monitoring.exe rules --output .local\render-control.rules.json
+```
+
+Only the specified new file receives the token; stdout contains its digest. Existing files cannot be overwritten. Isolated installations and external state directories use `configuration --env-file <private-env-file>` and `rules --env-file <private-env-file> --output <new-file>`; these commands do not connect to the database. The [native Prometheus example](app/deploy/observability/prometheus.example.yml) uses a credentials file and trusted CA. Generated rules cover ten anomaly classes; actual collection and notification still require deployment. Scrape each API process separately. Deduplicate global database gauges across instances with `max`; collect HTTP counters per instance before aggregation.
+
+Metrics cover task backlogs, valid duration samples, physical GPU occupancy, node capacity coverage, settlement backlog and pending object deletion. A separate read-only database pool and five-second cache isolate observation from business traffic. Failed observation emits `snapshot_success=0` and omits database gauges. Uploads, downloads and SSE remain streaming. Sanitized JSON request logs correlate through server-generated request IDs and exclude prompts, credentials, query strings and path parameters. External monitoring thresholds and existing Admin-derived alerts remain separate.
 
 Before production migration, stop/drain affected services, back up and verify the archive, then migrate separately. A database backup is not joint recovery: object versions, Worker journals, Sub2API ledger/idempotency facts and credentials require consistent restoration and reconciliation. Windows service ACLs, Linux/systemd, production proxies, real Redis/S3 and joint recovery remain independent acceptance items. Development launchers are not verified production service wrappers.
 

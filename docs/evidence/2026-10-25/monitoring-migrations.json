@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "databases": [
+    {
+      "database": "render_control",
+      "before": "2c9f1d6a4830",
+      "after": "3da02e7b5941",
+      "active_jobs_before": 0,
+      "business_tables": 45,
+      "indexes": [
+        "ix_jobs_monitoring_active",
+        "ix_jobs_monitoring_terminal",
+        "ix_objects_monitoring_pending_delete",
+        "ix_outbox_monitoring_pending"
+      ],
+      "backup_sha256": "ef46e097ef1c10ca13ccf2d40d60bea5e1fd183f2c08f32e4afa87102477e24e",
+      "archive_list_verified": true,
+      "restore_rehearsed": false
+    },
+    {
+      "database": "render_control_test",
+      "before": "2c9f1d6a4830",
+      "after": "3da02e7b5941",
+      "active_jobs_before": 0,
+      "business_tables": 45,
+      "indexes": [
+        "ix_jobs_monitoring_active",
+        "ix_jobs_monitoring_terminal",
+        "ix_objects_monitoring_pending_delete",
+        "ix_outbox_monitoring_pending"
+      ],
+      "backup_sha256": "6e8523ca2d9cb11b1e36e9814d6fa0d2b6fd00cef9d99645febd57d9d895985d",
+      "archive_list_verified": true,
+      "restore_rehearsed": false
+    }
+  ],
+  "production_migrated": false
+}

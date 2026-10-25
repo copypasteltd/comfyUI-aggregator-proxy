@@ -1,5 +1,19 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 — 监控指标与请求关联 / Monitoring and request correlation
+
+- 新增两个默认关闭的只读监控入口，使用独立 Bearer 摘要及实际连接 CIDR，支持双凭证轮换；业务、管理、Worker 和网关身份不可代用。安全配置响应不公开凭证、网段、DSN 或客户/设备标识。
+- Add two disabled-by-default read-only monitoring routes with separate Bearer digests, actual connection-source CIDRs and two rotation slots. Keep business, Admin, Worker and gateway identities isolated; configuration responses expose no credentials, networks, DSNs or customer/device IDs.
+- 增加固定标签的 Prometheus 进程/HTTP、队列、物理 GPU、节点容量、结算、待删对象与 PG 指标；专用只读池、五秒缓存、两秒 SQL 总预算，观测失败省略数据库指标并明确标记不可用。多实例全局数据库快照使用 max 去重。
+- Add bounded Prometheus process/HTTP, queue, physical GPU, capacity, settlement, deletion and PG metrics. Use a dedicated read-only pool, five-second cache and two-second SQL budget; unavailable snapshots omit database gauges. Deduplicate shared database snapshots across instances with max.
+- 纯 ASGI 包装保留上传/下载/SSE 背压，区分响应头与完整流时长；500 最终响应同样记录字节与服务端请求 ID。脱敏 JSON 日志采用有界异步队列，不记录正文、提示词、凭证、查询串或路径参数。
+- Observe streaming uploads/downloads/SSE without buffering, separate header latency from full-stream duration, and correlate final 500 responses through bytes and server-generated request IDs. Bounded queued JSON events exclude bodies, prompts, credentials, query strings and path parameters.
+- 新增 gen-monitoring 一次性文件凭证、显式外部配置和规则生成命令，以及原生 Prometheus/CA/凭证文件示例。向前迁移 3da02e7b5941 新增四个观测索引；先备份验证，再迁移，业务表数仍为 45。
+- Add exclusive-file gen-monitoring provisioning, explicit external configuration, rule generation and native Prometheus/CA/credential-file examples. Forward migration 3da02e7b5941 adds four monitoring indexes after verified backup; the business-table count remains 45.
+- 验证/Validation：完整 16 门禁/3399 Python、87 项监控专项、40 前端单元、162 文件 mypy、76 包锁、27 组原生协议、10 条告警的 5 场景/50 个 PromQL 断言、26 项候选安装和 8 项安装后浏览器通过。57 schema、902 fixture、60 运行契约、190 设计端点与 156 OpenAPI 路径/197 方法同步，详见 [84](docs/84-监控指标与脱敏请求关联.md)。
+- 候选/Candidate：rc-20261025.84.1，476 源输入一致、159 载荷、58 wheels；SHA-256 8b35d2405befed546a0e68cc28ee8d4466c0090d02d4faf5d977de17ac340c4c。浏览器与所属临时资源清理，第 10 项本地实现关闭，70 项仍开放（首版 68、可选 2）。真实生产采集/通知、Workflow、S3/Redis、系统服务和实机容量继续独立验收。
+- Exact-candidate installation, browser cleanup and all listed local checks passed. Item 10 closes locally, leaving 70 items (68 first-release and two optional). Actual production monitoring/notification, Workflows, S3/Redis, system services and physical-fleet capacity remain open; retain the unresolved concurrent authentication row-lock timeout/502.
+
 ## 2026-10-25 — 原生 CI 与完整待办追踪 / Native CI and complete backlog tracking
 
 - 新增专用原生 Windows x64 自托管 CI；仅受信主分支且显式启用时执行。固定 Action 提交、只读仓库权限、串行门禁、OS/数据库锁和独立目录；不调用 Docker/WSL/VM，不自动注册开发主机。

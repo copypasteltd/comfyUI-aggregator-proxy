@@ -43,6 +43,7 @@ from generation_infrastructure.models import (
 )
 from generation_infrastructure.security import password_hash
 from generation_infrastructure.settings import Settings
+from prometheus_client.parser import text_string_to_metric_families
 from psycopg import sql
 from sqlalchemy import create_engine, select
 from sqlalchemy.engine import make_url
@@ -557,7 +558,13 @@ def main() -> None:
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--managed-catalog", action="store_true", help="Exercise Admin publication and automatic Provider catalog confirmation")
     modes.add_argument("--confirmed-oom", action="store_true", help="Inject confirmed OOM across all six task types using two protocol GPUs")
+    parser.add_argument("--evidence-dir", type=Path, help="New directory beneath docs/evidence; preserve previous runtime evidence")
     args = parser.parse_args()
+    evidence = EVIDENCE
+    if args.evidence_dir is not None:
+        evidence = args.evidence_dir.resolve()
+        check((ROOT.parent / "docs/evidence").resolve() in evidence.parents, "evidence_directory_outside_project")
+        evidence.mkdir(parents=True, exist_ok=False)
     check(os.name == "nt", "native_windows_required")
     started = time.monotonic()
     run_id = uuid4().hex[:12]
@@ -623,6 +630,9 @@ def main() -> None:
         pepper = secrets.token_urlsafe(48)
         api_port, redis_port, provider_port, comfy_port = port(), port(), port(), port()
         api_origin = f"https://127.0.0.1:{api_port}"
+        monitoring_token = "mon_" + secrets.token_hex(16) + "." + secrets.token_urlsafe(32)
+        env["GEN_MONITORING_TOKEN_SHA256"] = json.dumps([hashlib.sha256(monitoring_token.encode()).hexdigest()])
+        env["GEN_MONITORING_ALLOWED_NETWORKS"] = '["127.0.0.1/32"]'
         env.update({"GEN_ENVIRONMENT": "test", "GEN_DATABASE_URL": control_url, "GEN_CREDENTIAL_PEPPER": pepper, "GEN_ENCRYPTION_KEY": Fernet.generate_key().decode(), "GEN_PUBLIC_ORIGIN": api_origin, "GEN_STORAGE_BACKEND": "local_development", "GEN_LOCAL_STORAGE_ROOT": str(root / "objects"), "GEN_SPOOL_ROOT": str(root / "spool"), "PYTHONUTF8": "1", "PYTHONUNBUFFERED": "1", "RC_SUB2API_TEST_DSN": psycopg.conninfo.make_conninfo(**{**options, "dbname": upstream_database})})
         for name, command in (("control-migrations", [sys.executable, "-m", "alembic", "upgrade", "head"]), ("upstream-migrations", [str(test_binary), "-test.run=^$", "-test.timeout=180s"])):
             code, timeout = ledger.run_owned(command, ROOT, env, root / (name + ".log"), 240)
@@ -651,6 +661,18 @@ def main() -> None:
         api = processes.start("control-api", [sys.executable, "-m", "uvicorn", "control_api.main:create_app", "--factory", "--host", "127.0.0.1", "--port", str(api_port), "--ssl-certfile", str(cert), "--ssl-keyfile", str(key), "--no-proxy-headers", "--no-access-log"], env)
         api_client = httpx.Client(base_url=api_origin, verify=ssl.create_default_context(cafile=str(cert)), timeout=5, trust_env=False, follow_redirects=False)
         wait_http(api_client, "/health/ready", api)
+        metrics_path = "/internal/monitoring/v1/metrics"
+        check(api_client.get(metrics_path).status_code == 401, "monitoring_requires_own_identity")
+        metrics = api_client.get(metrics_path, headers={"Authorization": "Bearer " + monitoring_token})
+        check(metrics.status_code == 200 and "version=0.0.4" in metrics.headers.get("content-type", ""), "native_monitoring_scrape_failed")
+        metric_values = {sample.name: sample.value for family in text_string_to_metric_families(metrics.text) for sample in family.samples if not sample.labels}
+        check(metric_values.get("render_control_snapshot_success") == 1, "native_monitoring_snapshot_unavailable")
+        check(monitoring_token not in metrics.text and catalog["gateway_token"] not in metrics.text, "native_monitoring_secret_exposure")
+        monitoring_configuration = api_client.get("/internal/monitoring/v1/configuration", headers={"Authorization": "Bearer " + monitoring_token})
+        check(monitoring_configuration.status_code == 200, "native_monitoring_configuration_failed")
+        selected_samples = [{"name": sample.name, "labels": sample.labels, "value": sample.value} for family in text_string_to_metric_families(metrics.text) for sample in family.samples if sample.name in {"render_control_snapshot_success", "render_control_gpu_resources", "render_control_channels", "render_control_worker_capacity_samples"}]
+        write(evidence / "monitoring-api-responses.json", {"scope": "Actual native HTTPS responses with synthetic protocol resources", "real_comfyui": False, "real_redis": False, "real_s3": False, "metrics": {"status": metrics.status_code, "content_type": metrics.headers["content-type"], "request_id_present": "x-request-id" in metrics.headers, "selected_samples": selected_samples}, "configuration": {"status": monitoring_configuration.status_code, "body": monitoring_configuration.json()}})
+        report["cases"].append({"case": "native_https_monitoring_identity_and_readonly_snapshot", "passed": True, "prometheus_parsed": True, "snapshot_success": True, "payload_bytes": len(metrics.content)})
         worker = processes.start("windows-worker", [sys.executable, "-m", "windows_worker.main", "--config", str(root / "worker.json")], env)
         deadline = time.monotonic() + 30
         while time.monotonic() < deadline:
@@ -812,7 +834,7 @@ def main() -> None:
         report["duration_seconds"] = round(time.monotonic() - started, 2)
         report["passed"] = report["passed"] and all(report["cleanup"].values())
         write(root / "report.json", report)
-        write(EVIDENCE / ("confirmed-retry-native-protocol.json" if args.confirmed_oom else "provider-catalog-native-protocol.json" if args.managed_catalog else "sub2api-native-protocol.json"), report)
+        write(evidence / ("confirmed-retry-native-protocol.json" if args.confirmed_oom else "provider-catalog-native-protocol.json" if args.managed_catalog else "sub2api-native-protocol.json"), report)
         print(json.dumps({"passed": report["passed"], "phase": phase, "cases": len(report["cases"]), "cleanup": report["cleanup"], "failure": report.get("failure")}, ensure_ascii=False), flush=True)
     if failure:
         raise SystemExit(1)

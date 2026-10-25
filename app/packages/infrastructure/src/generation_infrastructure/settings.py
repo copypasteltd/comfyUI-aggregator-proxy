@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import re
+from ipaddress import ip_network
 from pathlib import Path
 from typing import Any, Literal
 from urllib.parse import urlparse
 
 from cryptography.fernet import Fernet
+from generation_contracts.monitoring import MonitoringThresholds
 from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -30,6 +33,22 @@ class Settings(BaseSettings):
     admin_dist: Path = Path("apps/admin_web/dist")
     access_log_retention_days: int = Field(default=30, ge=1, le=365)
     audit_retention_days: int | None = Field(default=None, ge=1, le=3650)
+    monitoring_token_sha256: list[SecretStr] = Field(default_factory=list, max_length=2)
+    monitoring_allowed_networks: list[str] = Field(default_factory=lambda: ["127.0.0.1/32", "::1/128"], min_length=1, max_length=32)
+    monitoring_thresholds: MonitoringThresholds = Field(default_factory=MonitoringThresholds)
+
+    @field_validator("monitoring_token_sha256")
+    @classmethod
+    def monitoring_hashes(cls, values: list[SecretStr]) -> list[SecretStr]:
+        hashes = [value.get_secret_value() for value in values]
+        if any(not re.fullmatch(r"[0-9a-f]{64}", value) for value in hashes) or len(set(hashes)) != len(hashes):
+            raise ValueError("Monitoring requires distinct SHA-256 digests")
+        return values
+
+    @field_validator("monitoring_allowed_networks")
+    @classmethod
+    def monitoring_networks(cls, values: list[str]) -> list[str]:
+        return list(dict.fromkeys(str(ip_network(value, strict=False)) for value in values))
 
     @field_validator("audit_retention_days", mode="before")
     @classmethod

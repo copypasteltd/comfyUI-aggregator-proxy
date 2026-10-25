@@ -42274,6 +42274,932 @@
           }
         }
       }
+    },
+    {
+      "id": "monitoring_configuration_enabled",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": true,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_disabled",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": true,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": false,
+        "credential_slots": 0,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_rotation",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": true,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 2,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_credential_slots_3",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 0,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_credential_slots_4",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 3,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_enabled_5",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": "true",
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_database_budget_seconds_6",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 10,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_source_network_count_7",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 0,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_token_8",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        },
+        "token": "sensitive"
+      }
+    },
+    {
+      "id": "monitoring_configuration_queue_age_seconds_below",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 29,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_queue_age_seconds_above",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 86401,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_queue_age_seconds_bool",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": true,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_queue_age_seconds_string",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": "30",
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_pending_age_seconds_below",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 9,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_pending_age_seconds_above",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 3601,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_pending_age_seconds_bool",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": true,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_pending_age_seconds_string",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": "10",
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_settlement_age_seconds_below",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 29,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_settlement_age_seconds_above",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 86401,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_settlement_age_seconds_bool",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": true,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_settlement_age_seconds_string",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": "30",
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_node_stale_seconds_below",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 14,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_node_stale_seconds_above",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 3601,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_node_stale_seconds_bool",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": true,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_node_stale_seconds_string",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": "15",
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_http_error_ratio_below",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": -1,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_http_error_ratio_above",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 2,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_http_error_ratio_bool",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": true,
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_http_error_ratio_string",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": "0",
+          "minimum_requests": 20,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_minimum_requests_below",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 0,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_minimum_requests_above",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 1000001,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_minimum_requests_bool",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": true,
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_minimum_requests_string",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": "1",
+          "alert_for_seconds": 120
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_alert_for_seconds_below",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": -1
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_alert_for_seconds_above",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": 3601
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_alert_for_seconds_bool",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": true
+        }
+      }
+    },
+    {
+      "id": "monitoring_configuration_alert_for_seconds_string",
+      "schema": "monitoring-configuration.schema.json",
+      "valid": false,
+      "data": {
+        "protocol": "monitoring-v1",
+        "enabled": true,
+        "credential_slots": 1,
+        "source_network_count": 2,
+        "cache_seconds": 5,
+        "database_budget_seconds": 2,
+        "recent_window_seconds": 3600,
+        "capacity_node_limit": 256,
+        "maximum_exposition_bytes": 2097152,
+        "thresholds": {
+          "queue_age_seconds": 300,
+          "pending_age_seconds": 60,
+          "settlement_age_seconds": 300,
+          "node_stale_seconds": 30,
+          "http_error_ratio": 0.05,
+          "minimum_requests": 20,
+          "alert_for_seconds": "0"
+        }
+      }
     }
   ]
 }

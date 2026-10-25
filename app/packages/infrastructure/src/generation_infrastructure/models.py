@@ -689,3 +689,10 @@ class ClaimRequest(Entity, Base):
     attempt_id: Mapped[UUID | None] = mapped_column(ForeignKey("attempts.id"))
     empty: Mapped[bool] = mapped_column(default=False)
     __table_args__ = (UniqueConstraint("node_id", "boot_id", "request_id"),)
+
+
+# Lifecycle windows used by the isolated read-only monitoring connection.
+Index("ix_jobs_monitoring_active", Job.state, Job.accepted_at, postgresql_where=Job.state.not_in(("succeeded", "failed", "cancelled", "expired")))
+Index("ix_jobs_monitoring_terminal", Job.terminal_at, postgresql_where=Job.terminal_at.is_not(None), postgresql_include=["task_type", "state", "error_code", "is_validation", "accepted_at", "created_at"])
+Index("ix_outbox_monitoring_pending", OutboxEvent.created_at, postgresql_where=OutboxEvent.delivered_at.is_(None), postgresql_include=["kind"])
+Index("ix_objects_monitoring_pending_delete", ObjectRecord.delete_requested_at, postgresql_where=ObjectRecord.delete_requested_at.is_not(None) & ObjectRecord.deleted_at.is_(None), postgresql_include=["bytes"])

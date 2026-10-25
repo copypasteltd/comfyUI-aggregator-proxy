@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-25T10:24:35+08:00",
+  "checked_at": "2026-10-25T12:04:52+08:00",
   "baseline": "v0.4",
   "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
   "project": "E:\\dev\\sandbox\\生图生视API封装",
@@ -10,19 +10,19 @@
   },
   "checks": {
     "markdown": {
-      "documents": 87,
+      "documents": 88,
       "instruction_files": 1,
       "fenced_blocks": 40,
       "json_examples": 15,
       "yaml_examples": 1,
-      "local_links_checked": 1582
+      "local_links_checked": 1624
     },
     "contracts": {
-      "json_files": 60,
-      "schemas": 56,
-      "fixtures": 865,
-      "positive_fixtures": 207,
-      "negative_fixtures": 658,
+      "json_files": 62,
+      "schemas": 57,
+      "fixtures": 902,
+      "positive_fixtures": 210,
+      "negative_fixtures": 692,
       "capabilities_covered": [
         "image_to_image",
         "references_to_image",
@@ -39,13 +39,14 @@
       "guards": 24
     },
     "endpoints": {
-      "total": 188,
+      "total": 190,
       "by_identity": {
         "service": 27,
         "admin_login": 1,
         "admin": 120,
         "worker": 12,
-        "gateway": 28
+        "gateway": 28,
+        "monitoring": 2
       },
       "admin_permissions": 25
     },
@@ -69,9 +70,9 @@
   "files": [
     {
       "file": "AGENTS.md",
-      "bytes": 4403,
+      "bytes": 4552,
       "lines": 19,
-      "sha256": "fb1daddba48ae5bfd23b30365c1531341c10fc0236177ac70c8169bfe70d5abc"
+      "sha256": "a0029b6c69576cd8eb8a06b020a346ab88ead0322a5c739131864e5f0166a2a4"
     },
     {
       "file": "docs/01-需求规格与约束.md",
@@ -123,9 +124,9 @@
     },
     {
       "file": "docs/09-开发总纲与强制约束.md",
-      "bytes": 10863,
+      "bytes": 10915,
       "lines": 78,
-      "sha256": "5c76ea486e6556d914825901b43b404b762b16930c80664bec921dffbaabbf11"
+      "sha256": "073ddad76b4f89f743ab95b468f57841539d5a63d2304821b467d86faca4fad4"
     },
     {
       "file": "docs/10-技术栈与工程结构.md",
@@ -159,21 +160,21 @@
     },
     {
       "file": "docs/15-原生部署配置与运维.md",
-      "bytes": 28054,
-      "lines": 181,
-      "sha256": "358ffcf8593404812fcd9d7d81ca0d92fb52232eef419c1aa984704e73e78bdc"
+      "bytes": 28564,
+      "lines": 183,
+      "sha256": "ec95a3d2d6861466a67f8708b78ced9e9bfe96aa5486f3eb9a6f19b00ae0357e"
     },
     {
       "file": "docs/16-开发任务分解与交付清单.md",
-      "bytes": 73362,
-      "lines": 352,
-      "sha256": "d726995036a4b65024e8d6621a42ded93a8f4f94191fce1a08fabe9f94c3de32"
+      "bytes": 75724,
+      "lines": 363,
+      "sha256": "64758b4caa01930f8b3c8ce1f651e009bc6dcbcc15227434c6d19ada44ca3650"
     },
     {
       "file": "docs/17-开发记录与运行说明.md",
-      "bytes": 139495,
-      "lines": 616,
-      "sha256": "92ae652a7f53d84e700e8bd4da0d6ecc284fbbe072d2ff60e90dda5f22a91b00"
+      "bytes": 141857,
+      "lines": 627,
+      "sha256": "346b7b6053a71eb49dbc0ca576ef3c84cf21e2dcd9b812a2be16d4c175d4d8e7"
     },
     {
       "file": "docs/18-Admin界面实现约定.md",
@@ -537,9 +538,9 @@
     },
     {
       "file": "docs/78-完整待办与首版收口清单.md",
-      "bytes": 25225,
-      "lines": 169,
-      "sha256": "3d1520b71268c941a31ef3324bf58faf263bd71097e0b65c67f85f324084dde6"
+      "bytes": 26177,
+      "lines": 171,
+      "sha256": "72e7a5b723978643e7d77f411533a3a70bf821a1015cd5a0595a3da5a0b6cfeb"
     },
     {
       "file": "docs/79-网关模型目录持久发布协议.md",
@@ -570,6 +571,12 @@
       "bytes": 12754,
       "lines": 100,
       "sha256": "1662ef024fa0b361ff82cf90da62b441779312798bfc3f6d8eb1b8ce986be1a2"
+    },
+    {
+      "file": "docs/84-监控指标与脱敏请求关联.md",
+      "bytes": 13254,
+      "lines": 72,
+      "sha256": "483dd989c15569b202cb5a3a7a5a37c4cd86107bd0c0a7d3da130177feb97e96"
     },
     {
       "file": "docs/contracts/admin-alert-failure.schema.json",
@@ -765,15 +772,15 @@
     },
     {
       "file": "docs/contracts/endpoint-catalog.json",
-      "bytes": 109392,
-      "lines": 3554,
-      "sha256": "01f1f9672d0d0e089a9de2d3b4d69fbcf30b63162cbb3c178d182f3ff84bc8cc"
+      "bytes": 110580,
+      "lines": 3588,
+      "sha256": "dc6ada8d91b55cd20ca7bf00a667958966690a1174e35a7751be60f88a696fc9"
     },
     {
       "file": "docs/contracts/fixtures.json",
-      "bytes": 1391470,
-      "lines": 42279,
-      "sha256": "2c7d5997aaca09872271c1d55665a361710f3c1fda552b72f24711d32ec768e9"
+      "bytes": 1421319,
+      "lines": 43205,
+      "sha256": "af7d5afb5805ace8e94515ac9d6a609a97136b69db2acaf3598eade42fe5dcec"
     },
     {
       "file": "docs/contracts/gateway-catalog-configuration.schema.json",
@@ -866,10 +873,22 @@
       "sha256": "1a10929d0ae752a04049e9081c2858eeb16b057319a30cb88078a035ac297ed9"
     },
     {
+      "file": "docs/contracts/monitoring-configuration.schema.json",
+      "bytes": 2808,
+      "lines": 132,
+      "sha256": "2e48a3ff39d29b6f01c5f6f5a9baa0d6a3a8ae969a5b2a79fbfa1159cb2027d6"
+    },
+    {
+      "file": "docs/contracts/monitoring-metrics.json",
+      "bytes": 2327,
+      "lines": 128,
+      "sha256": "d6903d7c91d20d4b0c6d776b86843f52af643490608b82d60bc8296b73a2b8a0"
+    },
+    {
       "file": "docs/contracts/README.md",
-      "bytes": 17121,
-      "lines": 129,
-      "sha256": "f964560d7084211be41477fe4714d0436bd2728ef748d3220f9feb62ef354f2f"
+      "bytes": 18227,
+      "lines": 133,
+      "sha256": "a654df3560d39d3f62cbcbc819acdf9400a7802d57b9527867489ba5ff38a4a3"
     },
     {
       "file": "docs/contracts/recovery-checkpoint.schema.json",
@@ -945,21 +964,21 @@
     },
     {
       "file": "docs/README.en.md",
-      "bytes": 11090,
-      "lines": 128,
-      "sha256": "4880806bf386de901dfe8452ac0c8b01a303524d03d6b1acc7eee968ac0cab82"
+      "bytes": 11381,
+      "lines": 129,
+      "sha256": "3d8e0c8fd44c10dcd9fbb2cdd76176a16df71f5021fd993bcc8d5150a0ff5242"
     },
     {
       "file": "docs/README.md",
-      "bytes": 23842,
-      "lines": 163,
-      "sha256": "e34b45dc7286e5e0852e928be186824bfe916a5c4d51bf07271380deeda85910"
+      "bytes": 24229,
+      "lines": 164,
+      "sha256": "8f33aa27705cf5592bbc2b3b8a8ee55f549df0ade6e6efeac6e7c3d3a0efe6e4"
     },
     {
       "file": "docs/tools/verify_docs.py",
-      "bytes": 25605,
-      "lines": 397,
-      "sha256": "e452b1c7376bd8f1369a0d8bf8f5a054920ac322a3a770ae2cc2a6466e1649df"
+      "bytes": 26096,
+      "lines": 400,
+      "sha256": "bdc5f3e4ca2863b9e24095aa5e934218821582ef971c6e28c8df7cb89394b8d8"
     }
   ],
   "errors": [],

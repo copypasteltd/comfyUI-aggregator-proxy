@@ -100,9 +100,9 @@ def main() -> None:
             raise ValueError("Seven application wheels required")
         (stage / "runtime-requirements.txt").write_text("\n".join(value for _, value in sorted(requirements.items())) + "\n", encoding="ascii")
         sources: dict[str, str] = {}
-        for folder in ("packages", "apps/control_api", "apps/control_runner", "apps/windows_worker", "migrations", "config", "scripts", "integrations/sub2api"):
+        for folder in ("packages", "apps/control_api", "apps/control_runner", "apps/windows_worker", "migrations", "config", "scripts", "integrations/sub2api", "deploy"):
             for path in sorted((ROOT / folder).rglob("*")):
-                if path.is_file() and path.suffix in (".py", ".toml", ".json", ".ini", ".mako", ".go", ".mod", ".sum", ".ps1", ".sql") and "__pycache__" not in path.parts:
+                if path.is_file() and path.suffix in (".py", ".toml", ".json", ".ini", ".mako", ".go", ".mod", ".sum", ".ps1", ".sql", ".yml", ".yaml", ".example") and "__pycache__" not in path.parts:
                     sources[path.relative_to(ROOT).as_posix()] = digest_file(path)
         for path in sorted((ROOT / "apps/admin_web/src").rglob("*")):
             if path.is_file():
@@ -123,6 +123,8 @@ def main() -> None:
         for name in ("alembic.ini", "scripts/release_bundle.py", "scripts/release-entrypoint.py", "scripts/migrate.py", "scripts/verify-recovery.py", "config/environment.example", "config/worker.example.json", "config/worker.workflow-pull.example.json", "config/contract-hashes.json", "integrations/sub2api/upstream-lock.json"):
             copy(ROOT / name, stage / name)
         copy(ROOT / "packages/contracts/src/generation_contracts/schemas/release-manifest.schema.json", stage / "config/release-manifest.schema.json")
+        for name in ("prometheus.example.yml", "monitoring.env.example"):
+            copy(ROOT / "deploy/observability" / name, stage / "deploy/observability" / name)
         media_lock = json.loads((ROOT / "config/media-tools.lock.json").read_text(encoding="utf-8"))
         copy(ROOT / "config/media-tools.lock.json", stage / "config/media-tools.lock.json")
         for name in media_lock["files"]:

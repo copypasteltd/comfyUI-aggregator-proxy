@@ -8462,6 +8462,42 @@
         }
       }
     },
+    "/internal/monitoring/v1/metrics": {
+      "get": {
+        "summary": "Monitoring Metrics",
+        "operationId": "monitoring_metrics_internal_monitoring_v1_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/monitoring/v1/configuration": {
+      "get": {
+        "summary": "Monitoring Configuration",
+        "operationId": "monitoring_configuration_internal_monitoring_v1_configuration_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonitoringConfiguration"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/images/generations": {
       "post": {
         "summary": "Generate",
@@ -18332,6 +18368,130 @@
           "published"
         ],
         "title": "ModelView"
+      },
+      "MonitoringConfiguration": {
+        "properties": {
+          "protocol": {
+            "type": "string",
+            "const": "monitoring-v1",
+            "title": "Protocol",
+            "default": "monitoring-v1"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "credential_slots": {
+            "type": "integer",
+            "maximum": 2.0,
+            "minimum": 0.0,
+            "title": "Credential Slots"
+          },
+          "source_network_count": {
+            "type": "integer",
+            "maximum": 32.0,
+            "minimum": 1.0,
+            "title": "Source Network Count"
+          },
+          "cache_seconds": {
+            "type": "integer",
+            "const": 5,
+            "title": "Cache Seconds",
+            "default": 5
+          },
+          "database_budget_seconds": {
+            "type": "integer",
+            "const": 2,
+            "title": "Database Budget Seconds",
+            "default": 2
+          },
+          "recent_window_seconds": {
+            "type": "integer",
+            "const": 3600,
+            "title": "Recent Window Seconds",
+            "default": 3600
+          },
+          "capacity_node_limit": {
+            "type": "integer",
+            "const": 256,
+            "title": "Capacity Node Limit",
+            "default": 256
+          },
+          "maximum_exposition_bytes": {
+            "type": "integer",
+            "const": 2097152,
+            "title": "Maximum Exposition Bytes",
+            "default": 2097152
+          },
+          "thresholds": {
+            "$ref": "#/components/schemas/MonitoringThresholds"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "enabled",
+          "credential_slots",
+          "source_network_count",
+          "thresholds"
+        ],
+        "title": "MonitoringConfiguration"
+      },
+      "MonitoringThresholds": {
+        "properties": {
+          "queue_age_seconds": {
+            "type": "integer",
+            "maximum": 86400.0,
+            "minimum": 30.0,
+            "title": "Queue Age Seconds",
+            "default": 300
+          },
+          "pending_age_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 10.0,
+            "title": "Pending Age Seconds",
+            "default": 60
+          },
+          "settlement_age_seconds": {
+            "type": "integer",
+            "maximum": 86400.0,
+            "minimum": 30.0,
+            "title": "Settlement Age Seconds",
+            "default": 300
+          },
+          "node_stale_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 15.0,
+            "title": "Node Stale Seconds",
+            "default": 30
+          },
+          "http_error_ratio": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Http Error Ratio",
+            "default": 0.05
+          },
+          "minimum_requests": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Minimum Requests",
+            "default": 20
+          },
+          "alert_for_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 0.0,
+            "title": "Alert For Seconds",
+            "default": 120
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "MonitoringThresholds"
       },
       "NewImportTarget": {
         "properties": {

@@ -149,7 +149,7 @@ def run() -> int:
     schemas = {}
     for name, value in data.items():
         if not name.endswith(".schema.json"):
-            expected_version = "0.5.0" if name == "fixtures.json" else "0.4.0"
+            expected_version = "0.5.0" if name in {"fixtures.json", "monitoring-metrics.json"} else "0.4.0"
             require(value.get("contract_version") == expected_version, f"{name}: inconsistent contract version")
             continue
         try:
@@ -237,7 +237,7 @@ def run() -> int:
     unique(endpoints, "operation_id", "endpoints")
     route_keys = [(item["method"], item["path"]) for item in endpoints]
     require(len(route_keys) == len(set(route_keys)), "Duplicate method/path in endpoint catalog")
-    identity_prefix = {"service": "/v1/", "admin": "/admin/api/v1/", "admin_login": "/admin/api/v1/session", "worker": "/internal/v1/", "gateway": "/gateway/v1/"}
+    identity_prefix = {"service": "/v1/", "admin": "/admin/api/v1/", "admin_login": "/admin/api/v1/session", "worker": "/internal/v1/", "gateway": "/gateway/v1/", "monitoring": "/internal/monitoring/v1/"}
     allowed_scopes = set(data.get("key-policy.schema.json", {}).get("properties", {}).get("scopes", {}).get("items", {}).get("enum", []))
     permissions = set(catalog.get("permissions", []))
     require(permissions, "Missing admin permissions")
@@ -272,6 +272,9 @@ def run() -> int:
                     require(item["idempotency"] == "required", f"Admin write lacks idempotency: {label}")
         if identity == "admin_login":
             require(item["path"] == "/admin/api/v1/session" and item["method"] == "POST", "Anonymous realm allowed beyond login")
+        if identity == "monitoring":
+            require(item["method"] == "GET" and item["path"] in {"/internal/monitoring/v1/metrics", "/internal/monitoring/v1/configuration"}, f"Monitoring must remain read-only: {label}")
+            require(item["resource_guard"] == "monitoring_token_and_source_network" and not item["scopes_all"] and not item["permissions_all"], f"Monitoring identity isolation missing: {label}")
         if identity == "gateway":
             if item.get("configuration_service_only"):
                 configuration_endpoints = {("GET", "/gateway/v1/catalog"), ("POST", "/gateway/v1/catalog/receipts")}

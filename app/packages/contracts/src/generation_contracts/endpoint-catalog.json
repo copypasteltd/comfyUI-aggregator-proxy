@@ -3548,6 +3548,40 @@
       "request_schemas": [],
       "response_schemas": [],
       "description": "按名称搜索和分页选择目录网关，仅返回 id/name/enabled，不披露服务凭证或访问网段"
+    },
+    {
+      "operation_id": "monitoring_metrics",
+      "method": "GET",
+      "path": "/internal/monitoring/v1/metrics",
+      "identity": "monitoring",
+      "scopes_all": [],
+      "permissions_all": [],
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "resource_guard": "monitoring_token_and_source_network",
+      "request_schemas": [],
+      "work_package": "WP-14",
+      "response_schemas": [],
+      "description": "独立监控凭证与实际来源限制的只读运维投影"
+    },
+    {
+      "operation_id": "monitoring_configuration",
+      "method": "GET",
+      "path": "/internal/monitoring/v1/configuration",
+      "identity": "monitoring",
+      "scopes_all": [],
+      "permissions_all": [],
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "resource_guard": "monitoring_token_and_source_network",
+      "request_schemas": [],
+      "work_package": "WP-14",
+      "response_schemas": [
+        "monitoring-configuration.schema.json"
+      ],
+      "description": "独立监控凭证与实际来源限制的只读运维投影"
     }
   ],
   "inventory_revision": "2026-10-25-increment-81"

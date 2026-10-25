@@ -20,6 +20,7 @@ import httpx
 import psycopg
 from cryptography.fernet import Fernet
 from generation_infrastructure.settings import Settings
+from prometheus_client.parser import text_string_to_metric_families
 from psycopg import sql
 from release_bundle import (
     clean_environment,
@@ -44,7 +45,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, required=True)
     parser.add_argument("--sha256", required=True)
+    parser.add_argument("--evidence-dir", type=Path, help="New directory beneath docs/evidence; preserve previous installation evidence")
     args = parser.parse_args()
+    evidence = EVIDENCE
+    if args.evidence_dir is not None:
+        evidence = args.evidence_dir.resolve()
+        if (ROOT.parent / "docs/evidence").resolve() not in evidence.parents:
+            raise SystemExit("Evidence directory must be beneath project docs/evidence")
+        evidence.mkdir(parents=True, exist_ok=False)
     args.archive = args.archive.resolve(strict=True)
     started = time.monotonic()
     run_id = uuid4().hex[:12]
@@ -144,6 +152,24 @@ print(json.dumps({'passed':True,'isolated_installed_module':True,'valid_stream_a
         values = {"GEN_ENVIRONMENT": "test", "GEN_DATABASE_URL": url.set(database=database).render_as_string(hide_password=False), "GEN_CREDENTIAL_PEPPER": pepper, "GEN_ENCRYPTION_KEY": Fernet.generate_key().decode(), "GEN_PUBLIC_ORIGIN": origin, "GEN_STORAGE_BACKEND": "local_development", "GEN_LOCAL_STORAGE_ROOT": str(state / "objects"), "GEN_SPOOL_ROOT": str(state / "spool")}
         config = state / "cloud.env"
         config.write_text("\n".join(f'{name}={json.dumps(value)}' for name, value in values.items()) + "\n", encoding="utf-8")
+        monitor_token_file = state / "monitoring.token"
+        monitor_cli = [python, "-I", "-m", "control_api.monitoring_cli"]
+        generated = execute("installed-monitoring-token", [*monitor_cli, "issue-token", "--output", str(monitor_token_file)], env=environment)
+        monitoring_token = monitor_token_file.read_text(encoding="utf-8").strip()
+        generated_data = json.loads(generated.stdout)
+        assert monitoring_token not in generated.stdout.decode() and generated_data["credential_written"]
+        refused = execute("installed-monitoring-token-existing", [*monitor_cli, "issue-token", "--output", str(monitor_token_file)], env=environment, expected=1)
+        assert refused.stderr.strip() == b"monitoring_output_exists" and monitor_token_file.read_text(encoding="utf-8").strip() == monitoring_token
+        with config.open("a", encoding="utf-8") as output:
+            output.write("GEN_MONITORING_TOKEN_SHA256=" + json.dumps([generated_data["sha256"]]) + "\n")
+        projected = execute("installed-monitoring-config", [*monitor_cli, "configuration", "--env-file", str(config)], env=environment)
+        assert json.loads(projected.stdout)["credential_slots"] == 1
+        assert (destination / "venv/Scripts/gen-monitoring.exe").is_file()
+        assert (payload / "deploy/observability/prometheus.example.yml").is_file()
+        rules_output = state / "monitoring-rules.json"
+        generated_rules = execute("installed-monitoring-rules", [*monitor_cli, "rules", "--env-file", str(config), "--output", str(rules_output)], env=environment)
+        assert json.loads(generated_rules.stdout)["alerts"] == 10 and len(json.loads(rules_output.read_text())["groups"][0]["rules"]) == 10
+        checks.append("installed_monitoring_cli_external_config_secret_once_no_implicit_database_or_dotenv")
         common = [python, "-I", entry]
         cloud = ["--config", str(config), "--state-dir", str(state)]
         missing = execute("missing-revision", [*common, "runner", *cloud, "--once"], env=environment, expected=1)
@@ -209,6 +235,12 @@ print(json.dumps({'passed':True,'isolated_installed_module':True,'valid_stream_a
         assets = re.findall(r'(?:src|href)="(/admin/assets/[^" ]+)"', html.text)
         assert assets and all(client.get(path).status_code == 200 for path in assets)
         checks.append("installed_https_health_and_bundled_admin_assets")
+        assert client.get("/internal/monitoring/v1/metrics").status_code == 401
+        scrape = client.get("/internal/monitoring/v1/metrics", headers={"Authorization": "Bearer " + monitoring_token})
+        assert scrape.status_code == 200 and monitoring_token not in scrape.text
+        snapshot_values = [s.value for f in text_string_to_metric_families(scrape.text) for s in f.samples if s.name == "render_control_snapshot_success"]
+        assert snapshot_values == [1]
+        checks.append("installed_https_monitoring_own_identity_dependency_and_readonly_snapshot")
         for path in ("/admin/api/v1/session", "/admin/api/v1/audit-retention", "/admin/api/v1/content", "/admin/api/v1/queues/statistics", "/admin/api/v1/channels/ch_" + "f" * 32 + "/deletion-check", "/v1/models"):
             assert client.get(path).status_code == 401
         assert client.get("/admin/api/v1/content", headers={"Authorization": "Bearer sk-synthetic-invalid"}).status_code == 401
@@ -283,8 +315,8 @@ print(json.dumps({'passed':True,'isolated_installed_module':True,'valid_stream_a
             connection.execute("UPDATE alembic_version SET version_num=%s", (manifest["database"]["head"],))
         checks.append("incompatible_database_revision_blocks_startup_without_migration")
         fixture = root / "browser-private.json"
-        browser_report = EVIDENCE / "native-release-installed-browser.json"
-        fixture.write_text(json.dumps({"origin": origin, "password": password, "report": str(browser_report), "screenshot_desktop": str(EVIDENCE / "native-release-installed-desktop.png"), "screenshot_mobile": str(EVIDENCE / "native-release-installed-mobile.png")}), encoding="utf-8")
+        browser_report = evidence / "native-release-installed-browser.json"
+        fixture.write_text(json.dumps({"origin": origin, "password": password, "report": str(browser_report), "screenshot_desktop": str(evidence / "native-release-installed-desktop.png"), "screenshot_mobile": str(evidence / "native-release-installed-mobile.png")}), encoding="utf-8")
         # Playwright is an existing test-host user-site dependency. Only this
         # external browser driver may load it; installed product commands above
         # keep -I and PYTHONNOUSERSITE=1 throughout.
@@ -335,7 +367,7 @@ print(json.dumps({'passed':True,'isolated_installed_module':True,'valid_stream_a
                 path.unlink(missing_ok=True)
             report["private_resources_cleaned"] = True
         report["duration_seconds"] = round(time.monotonic() - started, 2)
-        (EVIDENCE / "native-release-installation.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        (evidence / "native-release-installation.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"passed": report["passed"], "run_id": run_id, "checks": len(checks), "cleaned": report.get("temporary_root_removed", report.get("private_resources_cleaned", False))}))
 
 

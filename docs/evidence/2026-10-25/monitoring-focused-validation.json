@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-25T03:40:00.194827+00:00",
+  "passed": true,
+  "scope": "Monitoring unit and real PostgreSQL/ASGI integration checks, not physical fleet or production acceptance",
+  "python": {
+    "tests": 87,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "test_sources_sha256": {
+    "tests/unit/test_monitoring.py": "55d84a1b645cb77d4d698274079b0f34907add7b1eb3625d725834491f77e8d1",
+    "tests/integration/test_operational_monitoring.py": "9f8aa844a43819ab797586375584ea6125c1fb1e8f2fffc0ac03563ae123ee0b"
+  },
+  "private_junit_sha256": "76216743506869f44e5398c567a832b5606a28c24b9fc8f9b32d874b37820248",
+  "raw_junit_published": false,
+  "coverage": [
+    "Strict frozen configuration and fixture agreement",
+    "Separate identity, token rotation, connection CIDR and zero unauthorized DB access",
+    "No sensitive or unbounded URL labels/logs",
+    "Streaming backpressure, disconnects and exception propagation",
+    "Outer-stack 500 response byte/header/request-ID correlation",
+    "Read-only independent PostgreSQL pool and bounded cached snapshots",
+    "Unique candidate/GPU accounting, unknown execution and invalid capacity",
+    "Future timestamps, missing duration samples and explicit unknowns",
+    "Offline exclusive-file CLI with explicit external configuration and safe error codes"
+  ],
+  "retained_development_failures": [
+    {
+      "case": "Unit and integration module basename collision",
+      "resolution": "Renamed integration module without changing import policy",
+      "fixed": true
+    },
+    {
+      "case": "Read-only test incorrectly required exactly one captured statement",
+      "resolution": "Assert every captured transaction read-only observation is enabled",
+      "fixed": true
+    },
+    {
+      "case": "500 response bypassed inner observation middleware",
+      "resolution": "Wrap complete framework stack; verify final headers, body bytes and request ID",
+      "fixed": true
+    },
+    {
+      "case": "PromQL fixture omitted instance label for target-down alert",
+      "resolution": "Preserve target-specific instance expectation; production rule unchanged",
+      "fixed": true
+    }
+  ],
+  "real_workflows_accepted": false,
+  "physical_fleet_accepted": false,
+  "production_accepted": false
+}

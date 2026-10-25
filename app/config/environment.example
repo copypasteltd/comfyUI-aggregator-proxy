@@ -17,3 +17,6 @@ GEN_ADMIN_DIST=apps/admin_web/dist
 GEN_ACCESS_LOG_RETENTION_DAYS=30
 # Set an explicitly approved audit retention period to enable automatic pruning.
 # GEN_AUDIT_RETENTION_DAYS=180
+# Dedicated read-only monitoring identity; disabled until hashes are configured.
+GEN_MONITORING_TOKEN_SHA256=[]
+GEN_MONITORING_ALLOWED_NETWORKS=["127.0.0.1/32","::1/128"]
