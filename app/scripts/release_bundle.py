@@ -232,7 +232,7 @@ def verify_candidate(payload: Path, manifest: dict) -> None:
     """Check that provenance fields actually describe the authenticated payload."""
     contracts = strict_json((payload / "config/contract-hashes.json").read_bytes())
     sources = strict_json((payload / "provenance/source-files.json").read_bytes())
-    if not isinstance(contracts, dict) or not 17 <= len(contracts) <= 64 or canonical_digest(contracts) != manifest["contracts"]["sha256"]:
+    if not isinstance(contracts, dict) or not 17 <= len(contracts) <= 128 or canonical_digest(contracts) != manifest["contracts"]["sha256"]:
         raise ReleaseError("candidate_contract_provenance")
     for name, digest in contracts.items():
         safe_member(name)

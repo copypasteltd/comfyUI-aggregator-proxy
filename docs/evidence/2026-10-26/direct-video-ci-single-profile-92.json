@@ -1,0 +1,31 @@
+{
+  "format_version": 1,
+  "inspected_at": "2026-10-25T19:58:27.713941+00:00",
+  "scope": "One existing dedicated-PG HTTP test executed under cProfile after terminal CI; profiler overhead and imports included; no whole-suite or root-cause acceptance",
+  "passed": true,
+  "test": "tests/integration/test_video_projection.py::test_video_projection_freezes_defaults_across_replay_and_reads",
+  "gate": {
+    "name": "single_video_test_profile",
+    "status": "passed",
+    "exit_code": 0,
+    "timed_out": false,
+    "log_truncated": false,
+    "owned_process_tree_closed": true,
+    "log_complete": true,
+    "seconds": 24.29,
+    "log_bytes": 551,
+    "log_sha256": "c553e59ece94e89ce72bd7720e86953c2ed280af3e87cffe9ff4b234fe11b1db"
+  },
+  "pytest_reported_seconds": 11.05,
+  "pytest_phases_seconds": {
+    "setup": 4.36,
+    "call": 1.75,
+    "teardown": 0.09
+  },
+  "private_profile_sha256": "b6f62d50963e84e02f7c110a83b19ac253b702a816c310ec1fbb23e06b7e7b8c",
+  "complete_source_snapshot_captured_before_execution": false,
+  "manual_vacuum_or_analyze_performed": false,
+  "root_cause_established": false,
+  "raw_logs_or_profile_published": false,
+  "real_resource_acceptance": false
+}

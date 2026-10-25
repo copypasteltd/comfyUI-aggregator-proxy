@@ -1,0 +1,32 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T18:34:12.760127+00:00",
+  "increment": 92,
+  "passed": false,
+  "expected_regression": true,
+  "scope": "One direct control HTTP/real PostgreSQL regression before implementation; no real GPU or full-suite claim.",
+  "command": [
+    "pytest",
+    "tests/integration/test_video_projection.py::test_video_projection_freezes_defaults_across_replay_and_reads",
+    "-q",
+    "--tb=short"
+  ],
+  "python_tests": 1,
+  "failures": 1,
+  "failure": "Direct video creation returned HTTP 202 but omitted frozen seconds/size.",
+  "source_revision": "ad2b576aadfab561614dc52f4b831ad5497f1cb0",
+  "sources_sha256": {
+    "app/apps/control_api/src/control_api/compatibility.py": "2509087a0021fee8e03ee00d4aa5ebb01eae0d55b9449a1ba06a0bdd38fd7caa",
+    "app/packages/infrastructure/src/generation_infrastructure/jobs.py": "b09c05f30c255052645f97d1fddf045d84780ae65d455c4cbb88537fedb31593",
+    "app/tests/integration/test_video_projection.py": "6a13b062278b1716572de0b00147fb8c3497c8cdaf02fe2cfdd4736cf8f9f73f",
+    "docs/contracts/control-video-response.schema.json": "b83fa0a23c8f43413850796b3df5ea89e61f2efef31c6ea278e8ab38ae8079ab"
+  },
+  "junit_sha256": "8523e2b5f1c828fd18522b8f271d2a7823820320dacaad34cf8143e6b906c4b0",
+  "private_log_sha256": "e663ef3041de036423c5c651d1c3d8474a5a3a11d65f441e71175d67bb89a843",
+  "native_test_database_guarded": true,
+  "ci_file_and_database_mutex_held": true,
+  "test_database_retained_for_next_fixture_reset": true,
+  "raw_logs_published": false,
+  "virtualization_used": false,
+  "real_resource_acceptance": false
+}

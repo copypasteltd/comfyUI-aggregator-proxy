@@ -1,0 +1,19 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T18:46:11.565535+00:00",
+  "passed": false,
+  "increment": 92,
+  "tests": 1706,
+  "passed_cases": 1705,
+  "failures": 1,
+  "cause": "The replacement 30-second positive test was chosen without first inspecting the default Key policy. The authoritative policy is 15000 milliseconds, so its 403 is correct. Correct the fixture to the verified 15-second boundary and retain explicit over-limit negatives.",
+  "verified_default_video_max_milliseconds": 15000,
+  "production_limits_changed": false,
+  "source_sha256": {
+    "app/tests/integration/test_video_projection.py": "90e853944559ffa8d3805ac43039e23058b41ec9bd4a0eedf45ff61095ee918e"
+  },
+  "junit_sha256": "4cbac889cb28fc402412191d9d707524b3a2e9a90a85c469500fab1e024c2c8c",
+  "private_log_sha256": "b55679af02b9134f3dbe60db93afa088349079f196a033e1ea47cccfd9bc0edc",
+  "raw_sql_or_credentials_published": false,
+  "virtualization_used": false
+}

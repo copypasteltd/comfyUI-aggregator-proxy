@@ -1,0 +1,617 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T19:41:56.885910+00:00",
+  "scope": "Three controlled invocations of the existing synthetic fixture reset after terminal CI; no maintenance or performance acceptance",
+  "passed": true,
+  "synthetic_fixture_reset_performed": true,
+  "rounds": [
+    {
+      "round": 1,
+      "elapsed_seconds": 0.579295,
+      "observed_sql_seconds": 0.451794,
+      "statement_count": 50,
+      "categories": {
+        "delete:api_keys": {
+          "statements": 1,
+          "seconds": 0.054138
+        },
+        "delete:workflow_releases": {
+          "statements": 1,
+          "seconds": 0.034917
+        },
+        "break_job_attempt_cycle": {
+          "statements": 1,
+          "seconds": 0.025839
+        },
+        "delete:projects": {
+          "statements": 1,
+          "seconds": 0.019267
+        },
+        "delete:audit_events": {
+          "statements": 1,
+          "seconds": 0.015645
+        },
+        "delete:public_models": {
+          "statements": 1,
+          "seconds": 0.014641
+        },
+        "delete:nodes": {
+          "statements": 1,
+          "seconds": 0.012119
+        },
+        "delete:access_events": {
+          "statements": 1,
+          "seconds": 0.011814
+        },
+        "identity_or_guard": {
+          "statements": 2,
+          "seconds": 0.011422
+        },
+        "delete:channels": {
+          "statements": 1,
+          "seconds": 0.01134
+        },
+        "delete:gateway_admissions": {
+          "statements": 1,
+          "seconds": 0.011134
+        },
+        "delete:artifacts": {
+          "statements": 1,
+          "seconds": 0.010703
+        },
+        "delete:gpu_resources": {
+          "statements": 1,
+          "seconds": 0.010618
+        },
+        "delete:worker_inbox": {
+          "statements": 1,
+          "seconds": 0.010457
+        },
+        "delete:idempotency": {
+          "statements": 1,
+          "seconds": 0.010406
+        },
+        "delete:object_records": {
+          "statements": 1,
+          "seconds": 0.009586
+        },
+        "delete:external_identity_bindings": {
+          "statements": 1,
+          "seconds": 0.009418
+        },
+        "delete:workflows": {
+          "statements": 1,
+          "seconds": 0.009214
+        },
+        "delete:outbox_events": {
+          "statements": 1,
+          "seconds": 0.008913
+        },
+        "delete:assets": {
+          "statements": 1,
+          "seconds": 0.008098
+        },
+        "delete:tenants": {
+          "statements": 1,
+          "seconds": 0.008056
+        },
+        "delete:attempts": {
+          "statements": 1,
+          "seconds": 0.008039
+        },
+        "delete:model_artifacts": {
+          "statements": 1,
+          "seconds": 0.0079
+        },
+        "delete:spec_isolations": {
+          "statements": 1,
+          "seconds": 0.007674
+        },
+        "delete:workflow_bindings": {
+          "statements": 1,
+          "seconds": 0.00712
+        },
+        "delete:admin_users": {
+          "statements": 1,
+          "seconds": 0.007102
+        },
+        "delete:job_asset_references": {
+          "statements": 1,
+          "seconds": 0.006209
+        },
+        "delete:gateway_request_fences": {
+          "statements": 1,
+          "seconds": 0.005439
+        },
+        "delete:quota_buckets": {
+          "statements": 1,
+          "seconds": 0.00538
+        },
+        "delete:node_boots": {
+          "statements": 1,
+          "seconds": 0.005218
+        },
+        "delete:worker_commands": {
+          "statements": 1,
+          "seconds": 0.005204
+        },
+        "delete:api_credentials": {
+          "statements": 1,
+          "seconds": 0.005003
+        },
+        "delete:workflow_import_previews": {
+          "statements": 1,
+          "seconds": 0.004871
+        },
+        "delete:admin_mutations": {
+          "statements": 1,
+          "seconds": 0.004731
+        },
+        "delete:gateway_services": {
+          "statements": 1,
+          "seconds": 0.00472
+        },
+        "delete:gateway_catalog_receipts": {
+          "statements": 1,
+          "seconds": 0.004513
+        },
+        "delete:output_uploads": {
+          "statements": 1,
+          "seconds": 0.004471
+        },
+        "delete:claim_requests": {
+          "statements": 1,
+          "seconds": 0.004294
+        },
+        "delete:gateway_catalog_releases": {
+          "statements": 1,
+          "seconds": 0.00417
+        },
+        "delete:rate_states": {
+          "statements": 1,
+          "seconds": 0.004046
+        },
+        "delete:gateway_catalogs": {
+          "statements": 1,
+          "seconds": 0.003995
+        },
+        "delete:admin_sessions": {
+          "statements": 1,
+          "seconds": 0.003925
+        },
+        "fence_trigger_toggle": {
+          "statements": 2,
+          "seconds": 0.003601
+        },
+        "delete:gpu_occupancies": {
+          "statements": 1,
+          "seconds": 0.003497
+        },
+        "delete:channel_revisions": {
+          "statements": 1,
+          "seconds": 0.003317
+        },
+        "delete:management_operations": {
+          "statements": 1,
+          "seconds": 0.003293
+        },
+        "delete:jobs": {
+          "statements": 1,
+          "seconds": 0.003282
+        },
+        "delete:usage_ledger": {
+          "statements": 1,
+          "seconds": 0.00304
+        }
+      }
+    },
+    {
+      "round": 2,
+      "elapsed_seconds": 0.15512,
+      "observed_sql_seconds": 0.131202,
+      "statement_count": 50,
+      "categories": {
+        "delete:api_keys": {
+          "statements": 1,
+          "seconds": 0.043138
+        },
+        "delete:projects": {
+          "statements": 1,
+          "seconds": 0.008608
+        },
+        "delete:workflow_releases": {
+          "statements": 1,
+          "seconds": 0.007519
+        },
+        "delete:audit_events": {
+          "statements": 1,
+          "seconds": 0.007493
+        },
+        "delete:quota_buckets": {
+          "statements": 1,
+          "seconds": 0.005205
+        },
+        "delete:access_events": {
+          "statements": 1,
+          "seconds": 0.004581
+        },
+        "delete:outbox_events": {
+          "statements": 1,
+          "seconds": 0.004039
+        },
+        "delete:jobs": {
+          "statements": 1,
+          "seconds": 0.003141
+        },
+        "break_job_attempt_cycle": {
+          "statements": 1,
+          "seconds": 0.003017
+        },
+        "delete:gateway_request_fences": {
+          "statements": 1,
+          "seconds": 0.002896
+        },
+        "delete:public_models": {
+          "statements": 1,
+          "seconds": 0.002852
+        },
+        "delete:gpu_resources": {
+          "statements": 1,
+          "seconds": 0.002424
+        },
+        "delete:nodes": {
+          "statements": 1,
+          "seconds": 0.002395
+        },
+        "delete:tenants": {
+          "statements": 1,
+          "seconds": 0.002342
+        },
+        "delete:channels": {
+          "statements": 1,
+          "seconds": 0.002259
+        },
+        "delete:admin_users": {
+          "statements": 1,
+          "seconds": 0.002216
+        },
+        "delete:worker_inbox": {
+          "statements": 1,
+          "seconds": 0.001895
+        },
+        "delete:rate_states": {
+          "statements": 1,
+          "seconds": 0.001796
+        },
+        "delete:workflows": {
+          "statements": 1,
+          "seconds": 0.001785
+        },
+        "delete:idempotency": {
+          "statements": 1,
+          "seconds": 0.001727
+        },
+        "delete:workflow_bindings": {
+          "statements": 1,
+          "seconds": 0.001637
+        },
+        "delete:admin_mutations": {
+          "statements": 1,
+          "seconds": 0.001609
+        },
+        "fence_trigger_toggle": {
+          "statements": 2,
+          "seconds": 0.001477
+        },
+        "delete:gpu_occupancies": {
+          "statements": 1,
+          "seconds": 0.001319
+        },
+        "delete:spec_isolations": {
+          "statements": 1,
+          "seconds": 0.001315
+        },
+        "identity_or_guard": {
+          "statements": 2,
+          "seconds": 0.001111
+        },
+        "delete:object_records": {
+          "statements": 1,
+          "seconds": 0.001047
+        },
+        "delete:node_boots": {
+          "statements": 1,
+          "seconds": 0.000832
+        },
+        "delete:worker_commands": {
+          "statements": 1,
+          "seconds": 0.000705
+        },
+        "delete:admin_sessions": {
+          "statements": 1,
+          "seconds": 0.000659
+        },
+        "delete:gateway_services": {
+          "statements": 1,
+          "seconds": 0.000656
+        },
+        "delete:gateway_catalog_releases": {
+          "statements": 1,
+          "seconds": 0.000576
+        },
+        "delete:claim_requests": {
+          "statements": 1,
+          "seconds": 0.000554
+        },
+        "delete:attempts": {
+          "statements": 1,
+          "seconds": 0.00055
+        },
+        "delete:external_identity_bindings": {
+          "statements": 1,
+          "seconds": 0.000548
+        },
+        "delete:workflow_import_previews": {
+          "statements": 1,
+          "seconds": 0.000527
+        },
+        "delete:management_operations": {
+          "statements": 1,
+          "seconds": 0.000512
+        },
+        "delete:output_uploads": {
+          "statements": 1,
+          "seconds": 0.000495
+        },
+        "delete:usage_ledger": {
+          "statements": 1,
+          "seconds": 0.000426
+        },
+        "delete:gateway_admissions": {
+          "statements": 1,
+          "seconds": 0.000397
+        },
+        "delete:job_asset_references": {
+          "statements": 1,
+          "seconds": 0.000393
+        },
+        "delete:gateway_catalogs": {
+          "statements": 1,
+          "seconds": 0.000386
+        },
+        "delete:assets": {
+          "statements": 1,
+          "seconds": 0.000377
+        },
+        "delete:model_artifacts": {
+          "statements": 1,
+          "seconds": 0.000371
+        },
+        "delete:channel_revisions": {
+          "statements": 1,
+          "seconds": 0.00036
+        },
+        "delete:api_credentials": {
+          "statements": 1,
+          "seconds": 0.000357
+        },
+        "delete:artifacts": {
+          "statements": 1,
+          "seconds": 0.000351
+        },
+        "delete:gateway_catalog_receipts": {
+          "statements": 1,
+          "seconds": 0.000326
+        }
+      }
+    },
+    {
+      "round": 3,
+      "elapsed_seconds": 0.111267,
+      "observed_sql_seconds": 0.095581,
+      "statement_count": 50,
+      "categories": {
+        "delete:api_keys": {
+          "statements": 1,
+          "seconds": 0.040202
+        },
+        "delete:workflow_releases": {
+          "statements": 1,
+          "seconds": 0.005156
+        },
+        "break_job_attempt_cycle": {
+          "statements": 1,
+          "seconds": 0.00483
+        },
+        "delete:jobs": {
+          "statements": 1,
+          "seconds": 0.003675
+        },
+        "delete:public_models": {
+          "statements": 1,
+          "seconds": 0.00357
+        },
+        "delete:projects": {
+          "statements": 1,
+          "seconds": 0.002611
+        },
+        "delete:audit_events": {
+          "statements": 1,
+          "seconds": 0.002564
+        },
+        "delete:access_events": {
+          "statements": 1,
+          "seconds": 0.002416
+        },
+        "delete:channels": {
+          "statements": 1,
+          "seconds": 0.002353
+        },
+        "delete:idempotency": {
+          "statements": 1,
+          "seconds": 0.001997
+        },
+        "delete:gateway_request_fences": {
+          "statements": 1,
+          "seconds": 0.00193
+        },
+        "identity_or_guard": {
+          "statements": 2,
+          "seconds": 0.00163
+        },
+        "fence_trigger_toggle": {
+          "statements": 2,
+          "seconds": 0.001323
+        },
+        "delete:worker_inbox": {
+          "statements": 1,
+          "seconds": 0.001304
+        },
+        "delete:workflows": {
+          "statements": 1,
+          "seconds": 0.00121
+        },
+        "delete:quota_buckets": {
+          "statements": 1,
+          "seconds": 0.001129
+        },
+        "delete:outbox_events": {
+          "statements": 1,
+          "seconds": 0.001096
+        },
+        "delete:nodes": {
+          "statements": 1,
+          "seconds": 0.000961
+        },
+        "delete:spec_isolations": {
+          "statements": 1,
+          "seconds": 0.000936
+        },
+        "delete:worker_commands": {
+          "statements": 1,
+          "seconds": 0.000835
+        },
+        "delete:gpu_occupancies": {
+          "statements": 1,
+          "seconds": 0.000775
+        },
+        "delete:assets": {
+          "statements": 1,
+          "seconds": 0.000761
+        },
+        "delete:workflow_bindings": {
+          "statements": 1,
+          "seconds": 0.000759
+        },
+        "delete:gpu_resources": {
+          "statements": 1,
+          "seconds": 0.000685
+        },
+        "delete:attempts": {
+          "statements": 1,
+          "seconds": 0.000676
+        },
+        "delete:admin_users": {
+          "statements": 1,
+          "seconds": 0.000648
+        },
+        "delete:output_uploads": {
+          "statements": 1,
+          "seconds": 0.000604
+        },
+        "delete:claim_requests": {
+          "statements": 1,
+          "seconds": 0.000572
+        },
+        "delete:channel_revisions": {
+          "statements": 1,
+          "seconds": 0.00057
+        },
+        "delete:node_boots": {
+          "statements": 1,
+          "seconds": 0.00055
+        },
+        "delete:external_identity_bindings": {
+          "statements": 1,
+          "seconds": 0.000545
+        },
+        "delete:api_credentials": {
+          "statements": 1,
+          "seconds": 0.000542
+        },
+        "delete:workflow_import_previews": {
+          "statements": 1,
+          "seconds": 0.000521
+        },
+        "delete:rate_states": {
+          "statements": 1,
+          "seconds": 0.000489
+        },
+        "delete:tenants": {
+          "statements": 1,
+          "seconds": 0.000473
+        },
+        "delete:object_records": {
+          "statements": 1,
+          "seconds": 0.00044
+        },
+        "delete:admin_mutations": {
+          "statements": 1,
+          "seconds": 0.000431
+        },
+        "delete:usage_ledger": {
+          "statements": 1,
+          "seconds": 0.000429
+        },
+        "delete:model_artifacts": {
+          "statements": 1,
+          "seconds": 0.000415
+        },
+        "delete:artifacts": {
+          "statements": 1,
+          "seconds": 0.000405
+        },
+        "delete:admin_sessions": {
+          "statements": 1,
+          "seconds": 0.000391
+        },
+        "delete:gateway_catalog_releases": {
+          "statements": 1,
+          "seconds": 0.000364
+        },
+        "delete:management_operations": {
+          "statements": 1,
+          "seconds": 0.000363
+        },
+        "delete:gateway_admissions": {
+          "statements": 1,
+          "seconds": 0.000357
+        },
+        "delete:job_asset_references": {
+          "statements": 1,
+          "seconds": 0.000332
+        },
+        "delete:gateway_services": {
+          "statements": 1,
+          "seconds": 0.00028
+        },
+        "delete:gateway_catalog_receipts": {
+          "statements": 1,
+          "seconds": 0.000269
+        },
+        "delete:gateway_catalogs": {
+          "statements": 1,
+          "seconds": 0.000207
+        }
+      }
+    }
+  ],
+  "empty_application_tables_verified": 45,
+  "remaining_rows": 0,
+  "gateway_fence_trigger_enabled": true,
+  "native_ci_file_and_database_mutex_used": true,
+  "vacuum_analyze_performed": false,
+  "query_text_or_credentials_published": false,
+  "root_cause_established": false,
+  "virtualization_used": false
+}

@@ -1,5 +1,13 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 92 / 直接视频接口冻结投影
+
+- 直接视频创建、重放和详情使用冻结 seconds/size；毫秒精度、旧字段省略、畸形元数据固定 503、16 种状态和安全终态错误均有回归。Location 与 poll_url 对齐，当前权限和跨主体隔离继续生效，列表保持轻量。
+- Preserve frozen direct-video metadata, exact durations, safe errors and scoped native extensions without changing job/GPU/accounting state. Keep strict official Video-type limitations explicit; see [92](docs/92-直接视频接口冻结投影与权限边界.md).
+- 新增直接视频响应契约；累计 62 schema、1022 fixture（245 正/777 反）和 65 运行契约。发行验证器在第 65 份契约处的真实失败保留，修正为 128 项有界上限，继续核对全部成员及摘要。
+- Retain the failed candidate and build a new release ID. README verification defaults to read-only; explicit reports create new evidence files and refuse overwriting prior results. Source-bound runs pass 28 video and 74 release-security cases. [Final verification](docs/evidence/2026-10-26/direct-video-verification-92.json) passes all 16 gates/3790 Python tests, 39 SDK checks/24 native scenarios, 29 exact-candidate installation checks and ten browser checks. Candidate rc-20261026.92.2 binds 508 source inputs, 169 payload files, 58 runtime wheels and 65 contracts. Preserve both CI timeouts, the bounded statistics experiment and native observation failure; no budget was raised.
+- 再次直接下载 04 青柠完整源码并核对原 CSS、字体及组件摘要；运行入口继续导入原 CSS。来源证据与双语 README 同步，界面未变化，沿用现有截图/录屏/GIF。Direct source retrieval matches the locked original assets; owned test browsers and temporary resources are closed. Actual resources, production and all 69 remaining full-acceptance items stay open.
+
 ## 2026-10-26 · Increment 91 / 多媒体 SDK 与视频冻结规格
 
 - 双语 README 突出当前方案与原始青柠源码，历史增量证据折叠保存；服务启停顺序归入运维段落，完整设计与使用内容保留。Organize both entry points around current behavior, original Lime sources and usage, retaining historical evidence in a collapsible section.

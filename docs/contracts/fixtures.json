@@ -44795,6 +44795,1148 @@
           "message": "Synthetic private driver text"
         }
       }
+    },
+    {
+      "id": "control_video_frozen_specification",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_legacy_unknown",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        }
+      }
+    },
+    {
+      "id": "control_video_authorized_sensitive_input",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "input": {
+          "prompt": "Synthetic explicit sensitive permission",
+          "references": [
+            {
+              "asset_id": "asset_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "role": "first_frame"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "control_video_completed_content",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "completed",
+        "job_status": "succeeded",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "completed_at": 1792944001,
+        "artifacts": [
+          {
+            "id": "content_cccccccccccccccccccccccccccccccc",
+            "position": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "control_video_state_admission_pending",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_queued",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_leased",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "leased",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_preparing",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "preparing",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_submitting",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "submitting",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_running",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "running",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_collecting",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "collecting",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_uploading",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "uploading",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_verifying",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "verifying",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_reconciling",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "reconciling",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_retry_wait",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "retry_wait",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 1,
+          "limit": 2,
+          "next_at": 1792944001,
+          "last_error": "comfy_oom"
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_cancel_requested",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "in_progress",
+        "job_status": "cancel_requested",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_succeeded",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "completed",
+        "job_status": "succeeded",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_state_failed",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "failed",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "error": {
+          "code": "generation_failed",
+          "message": "Generation did not complete"
+        }
+      }
+    },
+    {
+      "id": "control_video_state_cancelled",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "cancelled",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "error": {
+          "code": "task_cancelled",
+          "message": "Generation was cancelled"
+        }
+      }
+    },
+    {
+      "id": "control_video_state_expired",
+      "schema": "control-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "expired",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "error": {
+          "code": "task_expired",
+          "message": "Generation expired"
+        }
+      }
+    },
+    {
+      "id": "control_video_provider_id",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_provider_locator",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_wrong_state",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "completed",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_unknown_progress",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "progress": 50
+      }
+    },
+    {
+      "id": "control_video_null_seconds",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": null,
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_numeric_seconds",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": 5,
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_fraction_too_precise",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.0001",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_seconds_zero",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "0",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_seconds_limit",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "86400.001",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_negative_seconds",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "-1",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_invalid_size",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "private-path"
+      }
+    },
+    {
+      "id": "control_video_null_size",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": null
+      }
+    },
+    {
+      "id": "control_video_image_task",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_image",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_zero_revision",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 0,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_unsafe_error",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "error": {
+          "code": "raw_driver",
+          "message": "Synthetic private prompt"
+        }
+      }
+    },
+    {
+      "id": "control_video_null_error",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "error": null
+      }
+    },
+    {
+      "id": "control_video_unknown_field",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "private_request": {}
+      }
+    },
+    {
+      "id": "control_video_nonterminal_completed_at",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "completed_at": 1792944001
+      }
+    },
+    {
+      "id": "control_video_invalid_artifact",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "artifacts": [
+          {
+            "id": "private-path",
+            "position": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "control_video_unsafe_retry",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 1,
+          "limit": 2,
+          "next_at": null,
+          "last_error": "raw_driver"
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_unknown_input",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024",
+        "input": {
+          "prompt": "Synthetic",
+          "private_token": "Do not echo"
+        }
+      }
+    },
+    {
+      "id": "control_video_missing_frozen_envelope",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_missing_error_failed",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "failed",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_missing_error_cancelled",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "cancelled",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_missing_error_expired",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "expired",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "control_video_single_digit_dimensions_rejected",
+      "schema": "control-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "queued",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "task_type": "text_to_video",
+        "updated_revision": 1,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "seconds": "5.125",
+        "size": "1x1"
+      }
     }
   ]
 }

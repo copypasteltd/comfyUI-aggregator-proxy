@@ -16,6 +16,7 @@
 | [workflow-source-receipt.schema.json](./workflow-source-receipt.schema.json) | 成功读取的源图/发布包与摘要、格式、字节数；规范化摘要和复杂度还需领域语义校验 |
 | [model-discovery.schema.json](./model-discovery.schema.json) | 发布能力安全投影、版本摘要、规格与输出类型；不返回 Workflow 图或私有节点值 |
 | [sdk-model-list.schema.json](./sdk-model-list.schema.json) | Sub2API 合并普通/Provider 模型后的标准核心字段；缺少普通模型创建时间用 0 明示未知，保留上游扩展；不替代能力目录 |
+| [control-video-response.schema.json](./control-video-response.schema.json) | 直接 job_ 视频的冻结规格、安全终态错误和原生扩展；敏感输入/产物仍由当前 Key 权限约束，不等同于严格官方 Video 类型 |
 | [job-state-machine.json](./job-state-machine.json) | 允许状态边、触发动作和 guard 标识；guard 的运行证据由应用验证 |
 | [endpoint-catalog.json](./endpoint-catalog.json) | 公共/管理/Worker/网关端点、身份、权限、幂等和 revision 条件清单；不代替完整请求/响应 OpenAPI |
 | [worker-node-command.schema.json](./worker-node-command.schema.json) | Windows 节点创建、改名与固定生命周期动作；名称拒绝空白/控制字符，停用/轮换/归档的空闲及引用条件仍由数据库事务核验，见 [56](../56-Windows节点登记与凭证管理.md) |
@@ -138,3 +139,5 @@ JSON Schema 使用 draft 2020-12，引用限定本文件 `#/$defs`，禁止在�
 新增 [monitoring-configuration.schema.json](./monitoring-configuration.schema.json) 和 [monitoring-metrics.json](./monitoring-metrics.json)，分别冻结封闭安全响应/严格阈值与固定指标/标签/预算。37 个新增 fixture（3 正/34 反）与严格 DTO 对照；累计 **57 schema、902 fixture（210 正/692 反）、60 运行契约、190 设计端点、156 OpenAPI 路径/197 方法**。监控两个 GET 入口使用独立只读身份，默认关闭，原四类身份不可代用；来源、只读事务、流式观测和失效语义须运行验证，不能从 JSON Schema 推定通过。应用契约继续 0.5.0、Worker 协议继续 0.4.0，16 状态/64 转换/24 条件不变；详见 [84](../84-监控指标与脱敏请求关联.md)。
 
 第 91 增量新增 Provider 视频响应 sdk-video-response.schema.json 与 17 个 fixture（7 正/10 反），累计 61 schema/976 fixture（225 正/751 反）、64 运行契约。冻结已知 seconds/size、状态映射和固定安全错误，未知进度省略；只适用于 rc_ Provider 投影，不声明官方 Video 类型完整兼容。见 [91](../91-多媒体SDK与视频冻结规格.md)。
+
+第 92 增量新增 [直接视频响应](./control-video-response.schema.json) 和 46 个 fixture（20 正/26 反），累计 **62 schema、1022 fixture（245 正/777 反）、65 运行契约**。job_ 投影独立保留原生扩展，已知冻结时长按整数毫秒表达，两至五位尺寸字段与运行投影一致；权限/归属/读取无副作用仍由 PostgreSQL 和 HTTP 回归验证，见 [92](../92-直接视频接口冻结投影与权限边界.md)。Provider rc_ 契约及原有公开请求上限不变。

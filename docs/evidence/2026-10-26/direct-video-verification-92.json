@@ -1,0 +1,263 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T20:46:31.915540+00:00",
+  "passed": true,
+  "increment": 92,
+  "scope": "Direct video frozen specification, safe terminal errors, current scope and release packaging regression; native protocol and installed HTTPS are distinct from physical-resource acceptance",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci92-20261026-direct-video-analyzed/summary.json",
+      "sha256": "82be91934aa47a00b8d56ef4908108bb4113525870c94bdcfde8ea4bad7502c4"
+    },
+    "video": {
+      "path": "docs/evidence/2026-10-26/direct-video-python-92.json",
+      "sha256": "eb5524ad732b23304ef64424054f517fbbc9124f104b81aeb67ae0457bfee517"
+    },
+    "release": {
+      "path": "docs/evidence/2026-10-26/direct-video-release-python-92.json",
+      "sha256": "90bad0dbbcf322d8cb9b9e1f47cce9b5b854896dc773220fbde8f6203d9c9c69"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/direct-video-release-build-92.json",
+      "sha256": "eed4a120662560624e2aa40c1795c49f04b483aaa50d5a8c56bbe89f28d7bd94"
+    },
+    "native": {
+      "path": "docs/evidence/2026-10-26/direct-video-native-second-92/openai-sdk-native-protocol.json",
+      "sha256": "49b3505af309a5e32972a8c8df7c8b6fdb8c0e7b8a13643d73c4c79f604f72a2"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/direct-video-installed-92/native-release-installation.json",
+      "sha256": "d65300e5bb1d355d321b9ec7ca073cf78ae9de71ae79bba87195982d495f5a6d"
+    },
+    "manual_statistics": {
+      "path": "docs/evidence/2026-10-26/direct-video-test-db-analyze-92.json",
+      "sha256": "9256fa241381ccbb5e0b889ad654d501ccc101b0f7ce27ab572e2835592ccc52"
+    },
+    "lime_direct_source": {
+      "path": "docs/evidence/2026-10-26/lime-direct-source-retrieval-92.json",
+      "sha256": "9a78b4c378dd66eebf5363230edef4d2dc6e59a8e6ad09849f5095673b8de761"
+    },
+    "existing_readme_report_refusal": {
+      "path": "docs/evidence/2026-10-26/direct-video-readme-existing-refusal-92.json",
+      "sha256": "9ec463cbaa14f4f8529d1fff50b909407c78a23f254b1a355f042f0341187aec"
+    }
+  },
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 3790,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_gate_seconds": 1171.257,
+    "python_gate_budget_seconds": 1200,
+    "source_inputs": 615,
+    "sources_match_current": true,
+    "owned_gate_process_trees_closed": true,
+    "manual_statistics_only_experiment_performed": true,
+    "vacuum_performed": false,
+    "successful_repeat_after_bounded_statistics_only_experiment": true,
+    "controlled_existing_synthetic_fixture_resets_before_repeat": 3
+  },
+  "component": {
+    "video_cases": 28,
+    "release_security_cases": 74,
+    "video_current_selected_inputs": 6,
+    "video_full_snapshot_preserved_with_its_original_scope": true,
+    "release_current_source_inputs": 615
+  },
+  "actual_sdk": {
+    "checks": 39,
+    "native_scenarios": 24,
+    "new_jobs": 12,
+    "new_intents": 12,
+    "new_usage_logs": 12,
+    "media_usage": {
+      "images": 6,
+      "videos": 4,
+      "video_milliseconds": 20000,
+      "video_billed_seconds": 20,
+      "audio_count": 2,
+      "audio_milliseconds": 1000,
+      "cross_media_contamination": false
+    },
+    "strict_official_video_type_limitation_preserved": true,
+    "sources": 276,
+    "maintained_overlay_inputs": 67,
+    "materialized_overlay_and_patched_stock_inputs": 75,
+    "cleanup": {
+      "processes": true,
+      "databases": true,
+      "database_observer": true,
+      "media_and_credentials": true
+    },
+    "worker_retention": {
+      "confirmed_packages": 23,
+      "retained_files_verified": 23,
+      "minimum_retention_seconds": 3600,
+      "journal_and_files_removed_only_by_test_resource_cleanup": true
+    }
+  },
+  "candidate": {
+    "release_id": "rc-20261026.92.2",
+    "archive_sha256": "fd51e9c1f38a2a8e29f674a6f8994fef358d567059aa8f0c5bf4b4fecdc2e5b9",
+    "source_inputs": 508,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 65,
+    "database_head": "3da02e7b5941",
+    "provider_rebuilt_this_increment": false,
+    "development_sdks_excluded_from_production": true,
+    "acceptance": {
+      "production": false,
+      "linux_runtime": false,
+      "real_fleet": false,
+      "real_workflows": false,
+      "private_s3": false
+    }
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "browser_closed": true,
+    "closed_contexts": 2,
+    "application_processes_stopped_normally": 4,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "direct_video": {
+      "passed": true,
+      "exact_installed_modules": true,
+      "https_tls_verified": true,
+      "json_multipart_original_key_replay": true,
+      "frozen_seconds": "5.125",
+      "frozen_size": "1024x1024",
+      "current_scope_and_revocation_enforced": true,
+      "cross_key_status_and_head_denied": true,
+      "safe_cancelled_error": true,
+      "new_jobs": 1,
+      "unique_cancelled_usage_entries": 1,
+      "video_billed_milliseconds": 0,
+      "production_comfyui_called": false,
+      "real_gpu": false,
+      "caller_owns_database_cleanup": true,
+      "credentials_printed": false
+    }
+  },
+  "test_database_statistics_experiment": {
+    "tables": 45,
+    "seconds": 2.551,
+    "before": {
+      "table_count": 45,
+      "visible_rows": 22,
+      "row_count_filenode_sha256": "ecb9e719ba1a155992e6d7cc26dde3898d7461590c40d7a3fff610f8699f05e8",
+      "row_content_sha256": "45a39cbcee4f618cd1cebd3f526eb1a080e779240f944192b234cba2807f4622",
+      "trigger_sha256": "3efac62041d70ebdf721ea2e1fb267c02eb960c3e6f81c5bffca180ae61f5bdb",
+      "constraint_sha256": "a9d80e2c8054e3fb19816a158a280924ecc9a566cf9b03ee6cbcbb8b677e4f6b",
+      "estimated_dead": 376744,
+      "modifications_since_analyze": 327514,
+      "snapshot_bytes": 12504
+    },
+    "after": {
+      "table_count": 45,
+      "visible_rows": 22,
+      "row_count_filenode_sha256": "ecb9e719ba1a155992e6d7cc26dde3898d7461590c40d7a3fff610f8699f05e8",
+      "row_content_sha256": "45a39cbcee4f618cd1cebd3f526eb1a080e779240f944192b234cba2807f4622",
+      "trigger_sha256": "3efac62041d70ebdf721ea2e1fb267c02eb960c3e6f81c5bffca180ae61f5bdb",
+      "constraint_sha256": "a9d80e2c8054e3fb19816a158a280924ecc9a566cf9b03ee6cbcbb8b677e4f6b",
+      "estimated_dead": 376744,
+      "modifications_since_analyze": 0,
+      "snapshot_bytes": 12504
+    },
+    "unchanged_fields": {
+      "table_count": true,
+      "visible_rows": true,
+      "row_count_filenode_sha256": true,
+      "row_content_sha256": true,
+      "trigger_sha256": true,
+      "constraint_sha256": true,
+      "snapshot_bytes": true
+    },
+    "automatic_ci_maintenance_added": false,
+    "root_cause_established": false
+  },
+  "documented_direct_video_response_matches_runtime_contract": true,
+  "preserved_failures": [
+    "docs/evidence/native-ci/ci92-20261026-direct-video-serial/summary.json",
+    "docs/evidence/native-ci/ci92-20261026-direct-video/summary.json",
+    "docs/evidence/2026-10-26/direct-video-before-92.json",
+    "docs/evidence/2026-10-26/direct-video-focused-initial-failures-92.json",
+    "docs/evidence/2026-10-26/direct-video-focused-policy-boundary-92.json",
+    "docs/evidence/2026-10-26/direct-video-focused-default-policy-92.json",
+    "docs/evidence/2026-10-26/direct-video-build-first-failure-92.json",
+    "docs/evidence/2026-10-26/direct-video-native-92/openai-sdk-native-protocol.json"
+  ],
+  "additional_scoped_evidence": [
+    "docs/evidence/2026-10-26/direct-video-ci-two-timeouts-92.json",
+    "docs/evidence/2026-10-26/direct-video-ci-readonly-before-92.json",
+    "docs/evidence/2026-10-26/direct-video-ci-reset-profile-92.json",
+    "docs/evidence/2026-10-26/direct-video-ci-single-profile-92.json",
+    "docs/evidence/2026-10-26/direct-video-ci-serial-activity-92.json",
+    "docs/evidence/2026-10-26/direct-video-focused-fourth-92.json",
+    "docs/evidence/2026-10-26/direct-video-native-first-observation-92.json"
+  ],
+  "remaining_work": {
+    "stable_ids": 76,
+    "closed_local_items": 7,
+    "open_items": 69,
+    "first_release": 67,
+    "optional": 2,
+    "complete_ci_timeout_root_cause_established": false,
+    "first_native_log_observation_failure_root_cause_established": false,
+    "real_resources_and_production_acceptance": "pending"
+  },
+  "visual_style": {
+    "original_lime_direct_import_preserved": true,
+    "ui_changed": false,
+    "new_gallery_recordings_needed": false
+  },
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "production_accepted": false,
+  "virtualization_used": false,
+  "final_source_equality": true,
+  "development_preview": {
+    "path": "docs/evidence/2026-10-26/direct-video-preview-92.json",
+    "sha256": "8d3a46c924fd59014da055349793d7b94629140f90cc55386898b1af19e40fb0",
+    "active_execution_jobs_before_refresh": 0,
+    "prior_registered_processes_retired": 9,
+    "new_registered_processes_retained": 9,
+    "readiness_status": 200,
+    "admin_status": 200,
+    "tls_ca_verified": true,
+    "browser_started": false,
+    "native_postgresql_retained": true,
+    "production_accepted": false
+  },
+  "readme_media_verification": {
+    "path": "docs/evidence/2026-10-26/direct-video-readme-validation-92.json",
+    "sha256": "6d771571d992026c0e0bb6d0740f1455804e3f5df30f7996e22fcee120eb33bf",
+    "entry_documents": 7,
+    "local_links_checked": 427,
+    "request_examples_validated": 3,
+    "screenshots_verified": 20,
+    "mp4_fully_decoded": 4,
+    "gif_fully_decoded": 4,
+    "gallery_unchanged_this_increment": true
+  },
+  "final_document_checks": {
+    "passed": true,
+    "numbered_documents_and_entries": 96,
+    "schemas": 62,
+    "fixtures": 1022,
+    "positive_fixtures": 245,
+    "negative_fixtures": 777,
+    "runtime_contracts": 65,
+    "requirements": 73,
+    "acceptance_gates": 98,
+    "named_tests_referenced": 114,
+    "referenced_current_source_files": 150,
+    "versioned_trace_reports": 12,
+    "scope": "Offline documentation and selected source traceability; no full acceptance promotion"
+  }
+}

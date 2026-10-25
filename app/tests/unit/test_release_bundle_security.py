@@ -83,6 +83,44 @@ def test_complete_archive_verifies_without_creating_files(tmp_path: Path) -> Non
     assert set(tmp_path.iterdir()) == before
 
 
+@pytest.mark.parametrize("change", ["none", "too_many", "digest"])
+def test_candidate_checks_full_contract_set_and_rejects_overflow_or_tampering(tmp_path: Path, change: str) -> None:
+    manifest, _ = candidate()
+    contracts = json.loads((ROOT / "config/contract-hashes.json").read_text(encoding="utf-8"))
+    assert 65 <= len(contracts) <= 128
+    sources = {"app/synthetic.py": "a" * 64}
+    files = {"provenance/uv.lock": b"synthetic lock", "runtime-requirements.txt": b"synthetic requirements", "gateway/sub2api-provider.exe": b"synthetic provider", "admin/index.html": b"synthetic admin", "gateway/LICENSE": b"synthetic license", "alembic.ini": b"synthetic migrations", "scripts/release-entrypoint.py": b"", "scripts/migrate.py": b"", "scripts/release_bundle.py": b""}
+    for name, content in files.items():
+        path = tmp_path / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content)
+    (tmp_path / "config").mkdir()
+    (tmp_path / "config/contract-hashes.json").write_text(json.dumps(contracts), encoding="utf-8")
+    (tmp_path / "provenance/source-files.json").write_text(json.dumps(sources), encoding="utf-8")
+    (tmp_path / "wheels").mkdir()
+    journal = b"synthetic journal source"
+    with zipfile.ZipFile(tmp_path / "wheels/render_windows_worker-0.1.0-py3-none-any.whl", "w") as wheel:
+        wheel.writestr("windows_worker/journal.py", journal)
+    manifest["contracts"] = {"version": "0.4.0", "sha256": bundle.canonical_digest(contracts)}
+    manifest["source_tree_sha256"] = bundle.canonical_digest(sources)
+    manifest["runtime"]["lock_sha256"] = hashlib.sha256(files["provenance/uv.lock"]).hexdigest()
+    manifest["runtime"]["requirements_sha256"] = hashlib.sha256(files["runtime-requirements.txt"]).hexdigest()
+    manifest["gateway"]["provider_binary_sha256"] = hashlib.sha256(files["gateway/sub2api-provider.exe"]).hexdigest()
+    manifest["database"]["migrations_sha256"] = bundle.canonical_digest({})
+    manifest["worker"]["journal_source_sha256"] = hashlib.sha256(journal).hexdigest()
+    if change == "too_many":
+        contracts = {f"contract-{index}.json": "a" * 64 for index in range(129)}
+        (tmp_path / "config/contract-hashes.json").write_text(json.dumps(contracts), encoding="utf-8")
+        manifest["contracts"]["sha256"] = bundle.canonical_digest(contracts)
+    elif change == "digest":
+        manifest["contracts"]["sha256"] = "f" * 64
+    if change == "none":
+        bundle.verify_candidate(tmp_path, manifest)
+    else:
+        with pytest.raises(bundle.ReleaseError, match="candidate_contract_provenance"):
+            bundle.verify_candidate(tmp_path, manifest)
+
+
 def test_archive_digest_is_checked_before_zip_parsing(tmp_path: Path) -> None:
     source, _ = archive(tmp_path)
     with pytest.raises(bundle.ReleaseError, match="archive_digest_mismatch"):

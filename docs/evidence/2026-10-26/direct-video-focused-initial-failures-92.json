@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T18:37:51.371079+00:00",
+  "passed": false,
+  "increment": 92,
+  "scope": "First focused run after implementation; test-fixture corrections are required, not acceptance.",
+  "tests": 1705,
+  "failures": 7,
+  "failed_cases": [
+    "test_video_projection_preserves_exact_milliseconds[0.001-0.001]",
+    "test_video_projection_preserves_exact_milliseconds[0.01-0.01]",
+    "test_video_projection_preserves_exact_milliseconds[0.1-0.1]",
+    "test_video_projection_preserves_exact_milliseconds[5.125-5.125]",
+    "test_video_projection_preserves_exact_milliseconds[5.0-5]",
+    "test_video_projection_preserves_exact_milliseconds[120.0-120]",
+    "test_native_video_list_keeps_json_deferred_and_nonvideo_routes_unchanged"
+  ],
+  "causes": [
+    {
+      "cases": 6,
+      "kind": "immutable_fixture_update",
+      "detail": "The duration fixture attempted to edit a published WorkflowRelease; the existing database guard correctly rejected it. Replace it with a freshly inserted immutable release."
+    },
+    {
+      "cases": 1,
+      "kind": "query_assertion_prefix",
+      "detail": "The SQL observation matched execution_fingerprint as execution. Match the exact JSON column token; one paged job SELECT was observed."
+    }
+  ],
+  "ruff_import_formatting_required": true,
+  "source_sha256": {
+    "app/tests/integration/test_video_projection.py": "6a13b062278b1716572de0b00147fb8c3497c8cdaf02fe2cfdd4736cf8f9f73f"
+  },
+  "junit_sha256": "171010cb471de8ef6ce4b813c8a34b7010171ae1b380155eeffcee8668cb746a",
+  "private_log_sha256": "296919bcce53a73c4743cab4d09b66f286a53d883b54ac92a99e8221f56b3f34",
+  "ci_file_and_database_mutex_held": true,
+  "database_guard_weakened": false,
+  "budgets_changed": false,
+  "raw_sql_or_credentials_published": false,
+  "virtualization_used": false
+}

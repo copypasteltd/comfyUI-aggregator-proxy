@@ -1,0 +1,75 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T19:17:20.203623+00:00",
+  "scope": "Post-terminal inspection of first failed native run private metadata log; original request/header correlations and event visibility time are not reconstructed",
+  "original_failure": "database_probe_event_not_observed",
+  "private_log_sha256": "834fb4a69a8a2a91e7c1ae5872d2bc741df0fdc4fa58396d39ec5a6ce8c99099",
+  "events_observed_after_termination": [
+    {
+      "event": "http_request",
+      "route": "/health/ready",
+      "status": 200,
+      "completion": "completed",
+      "duration_milliseconds": 594.022
+    },
+    {
+      "event": "http_request",
+      "route": "/gateway/v1/settlements",
+      "status": 200,
+      "completion": "completed",
+      "duration_milliseconds": 234.41
+    },
+    {
+      "event": "http_request",
+      "route": "/admin/api/v1/session",
+      "status": 200,
+      "completion": "completed",
+      "duration_milliseconds": 246.695
+    },
+    {
+      "event": "http_request",
+      "route": "/gateway/v1/settlements",
+      "status": 500,
+      "completion": "completed",
+      "duration_milliseconds": 5157.763,
+      "database_failure": {
+        "operation": "gateway_auth",
+        "reason": "lock_unavailable",
+        "sqlstate": "55P03",
+        "connection_invalidated": false
+      }
+    },
+    {
+      "event": "http_request",
+      "route": "/gateway/v1/settlements",
+      "status": 200,
+      "completion": "completed",
+      "duration_milliseconds": 239.494
+    },
+    {
+      "event": "http_request",
+      "route": "/admin/api/v1/audit-events",
+      "status": 503,
+      "completion": "completed",
+      "duration_milliseconds": 1166.947,
+      "database_failure": {
+        "operation": "audit_snapshot",
+        "reason": "lock_unavailable",
+        "sqlstate": "55P03",
+        "connection_invalidated": false
+      }
+    },
+    {
+      "event": "http_request",
+      "route": "/admin/api/v1/audit-events",
+      "status": 200,
+      "completion": "completed",
+      "duration_milliseconds": 105.211
+    }
+  ],
+  "original_three_second_observation_budget_preserved": true,
+  "root_cause_established": false,
+  "failures_removed": false,
+  "credential_values_or_sql_published": false,
+  "real_resource_acceptance": false
+}

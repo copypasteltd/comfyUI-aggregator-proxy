@@ -141,13 +141,21 @@ def compatibility_routes(jobs: GenerationService, content: ContentRepository, bu
     def video_view(result: dict[str, Any]) -> dict[str, Any]:
         if not result["task_type"].endswith("video"):
             raise DomainError("not_found", "视频任务不存在", 404)
-        state = "completed" if result["status"] == "succeeded" else "failed" if result["status"] in TERMINAL else "queued" if result["status"] in ("queued", "admission_pending") else "in_progress"
-        return {**result, "object": "video", "status": state, "job_status": result["status"]}
+        state = "completed" if result["status"] == "succeeded" else "failed" if result["status"] in TERMINAL else "queued" if result["status"] in ("queued", "admission_pending", "leased") else "in_progress"
+        view = {**result, "object": "video", "status": state, "job_status": result["status"], "poll_url": "/v1/videos/" + result["id"]}
+        view.pop("error", None)
+        errors = {"failed": ("generation_failed", "Generation did not complete"), "cancelled": ("task_cancelled", "Generation was cancelled"), "expired": ("task_expired", "Generation expired")}
+        if result["status"] in errors:
+            code, message = errors[result["status"]]
+            view["error"] = {"code": code, "message": message}
+        return view
 
     @router.post("/v1/videos", status_code=202, openapi_extra=media_request_schema(True))
     async def video_create(request: Request, response: Response, identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:
         data, _ = await parse_media(request, identity, video=True)
-        return video_view(await asyncio.to_thread(submit, data, request, response, identity))
+        result = video_view(await asyncio.to_thread(submit, data, request, response, identity))
+        response.headers["Location"] = result["poll_url"]
+        return result
 
     @router.get("/v1/videos/{identifier}")
     def video_get(identifier: str, identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:

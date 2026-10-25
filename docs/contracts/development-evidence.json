@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 88,
+  "increment": 92,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-91.json",
-    "sha256": "0862a965fc294dc1db59c3800d1258c6a7d0452b3a8c081bc3e8f6015ae1300a"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-92.json",
+    "sha256": "8604a0efd691d21528895e561f20ef9cc32eb0dae3c09cba87414471fc857e8d"
   },
   "requirements": [
     {
@@ -19,7 +19,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -35,7 +35,8 @@
       ],
       "evidence": [
         "ci86",
-        "native86"
+        "native86",
+        "video92"
       ],
       "remaining_backlog": [
         "18",
@@ -129,7 +130,7 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         }
       ],
       "tests": [
@@ -141,7 +142,8 @@
       ],
       "evidence": [
         "ci86",
-        "native86"
+        "native86",
+        "video92"
       ],
       "remaining_backlog": [
         "21",
@@ -223,7 +225,8 @@
         "installed87",
         "native86",
         "visual87",
-        "sdk91"
+        "sdk91",
+        "sdk92"
       ],
       "remaining_backlog": [
         "23",
@@ -316,7 +319,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -338,7 +341,9 @@
       "evidence": [
         "ci86",
         "sdk90",
-        "sdk91"
+        "sdk91",
+        "video92",
+        "sdk92"
       ],
       "remaining_backlog": [
         "30",
@@ -356,7 +361,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
@@ -377,7 +382,8 @@
       ],
       "evidence": [
         "ci86",
-        "native86"
+        "native86",
+        "video92"
       ],
       "remaining_backlog": [
         "29",
@@ -417,6 +423,18 @@
         {
           "path": "app/integrations/sub2api/overlay/backend/migrations/258_render_control_video_specification.sql",
           "baseline": "go80"
+        },
+        {
+          "path": "app/apps/control_api/src/control_api/compatibility.py",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/packages/domain/src/generation_domain/videos.py",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
+          "baseline": "video92"
         }
       ],
       "tests": [
@@ -449,6 +467,60 @@
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility_test.go",
           "symbol": "TestCompatibilityVideoJSONAndOriginalTaskContent",
           "language": "go"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_native_video_list_keeps_json_deferred_and_nonvideo_routes_unchanged",
+          "language": "python",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_video_duration_rejection_keeps_public_and_key_limits",
+          "language": "python",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_video_projection_all_states_use_safe_errors_without_mutation",
+          "language": "python",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_video_projection_corrupt_known_metadata_fails_closed",
+          "language": "python",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_video_projection_corrupt_metadata_objects_fail_closed",
+          "language": "python",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_video_projection_current_permissions_and_resource_scope",
+          "language": "python",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_video_projection_freezes_defaults_across_replay_and_reads",
+          "language": "python",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_video_projection_legacy_unknown_fields_are_not_guessed",
+          "language": "python",
+          "baseline": "video92"
+        },
+        {
+          "path": "app/tests/integration/test_video_projection.py",
+          "symbol": "test_video_projection_preserves_exact_milliseconds",
+          "language": "python",
+          "baseline": "video92"
         }
       ],
       "evidence": [
@@ -456,16 +528,19 @@
         "go80",
         "native86",
         "sdk90",
-        "sdk91"
+        "sdk91",
+        "video92",
+        "sdk92"
       ],
       "remaining_backlog": [
         "28",
         "29",
         "30",
         "34",
-        "35"
+        "35",
+        "32"
       ],
-      "limitation": "Provider 冻结规格、重放、安全错误及密文不可用读取有 Go/PG 证据；实际 Python/Node 多媒体协议已测，严格官方 Video 类型仍有进度/尺寸差异。直接控制视频投影、真实 Redis/六类资源/混合供应商仍开放。"
+      "limitation": "Provider 与直接 job_ 视频冻结投影、状态/安全错误、旧字段、当前权限和有界列表已有本地证据；实际 Python/Node 多媒体协议已测。严格官方 Video 类型、真实 Redis/六类资源/混合供应商及完整下载矩阵仍开放。"
     },
     {
       "id": "API-06",
@@ -473,7 +548,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -497,7 +572,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "video92"
       ],
       "remaining_backlog": [
         "30",
@@ -512,7 +588,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
@@ -532,7 +608,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "video92"
       ],
       "remaining_backlog": [
         "29",
@@ -547,7 +624,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
@@ -562,7 +639,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "video92"
       ],
       "remaining_backlog": [
         "29",
@@ -617,7 +695,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         }
       ],
       "tests": [
@@ -634,7 +712,8 @@
       ],
       "evidence": [
         "ci86",
-        "load58"
+        "load58",
+        "video92"
       ],
       "remaining_backlog": [
         "06",
@@ -654,7 +733,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -669,7 +748,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "video92"
       ],
       "remaining_backlog": [
         "25",
@@ -1566,7 +1646,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
@@ -1591,7 +1671,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "video92"
       ],
       "remaining_backlog": [
         "30",
@@ -1607,7 +1688,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/pricing.go",
@@ -1627,7 +1708,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "video92"
       ],
       "remaining_backlog": [
         "06",
@@ -1642,7 +1724,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
@@ -1671,7 +1753,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "video92"
       ],
       "remaining_backlog": [
         "29",
@@ -1713,7 +1796,8 @@
       "evidence": [
         "ci86",
         "go80",
-        "sdk91"
+        "sdk91",
+        "sdk92"
       ],
       "remaining_backlog": [
         "28",
@@ -1769,7 +1853,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility.go",
@@ -1789,7 +1873,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "video92"
       ],
       "remaining_backlog": [
         "30",
@@ -2464,7 +2549,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
@@ -2489,7 +2574,8 @@
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "video92"
       ],
       "remaining_backlog": [
         "29",
@@ -2549,7 +2635,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
@@ -2573,7 +2659,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "video92"
       ],
       "remaining_backlog": [
         "34",
@@ -2719,7 +2806,7 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
@@ -2742,7 +2829,8 @@
         "ci86",
         "go80",
         "installed87",
-        "visual87"
+        "visual87",
+        "video92"
       ],
       "remaining_backlog": [
         "30",
@@ -2808,7 +2896,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "ci86"
+          "baseline": "video92"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
@@ -2832,7 +2920,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "video92"
       ],
       "remaining_backlog": [
         "49",
@@ -3005,7 +3094,8 @@
       "local_evidence": [
         "ci86",
         "go80",
-        "native86"
+        "native86",
+        "video92"
       ],
       "remaining_backlog": [
         "29",
@@ -3038,7 +3128,8 @@
       ],
       "local_evidence": [
         "ci86",
-        "sdk91"
+        "sdk91",
+        "sdk92"
       ],
       "remaining_backlog": [
         "30",
@@ -3077,7 +3168,8 @@
         "ci86",
         "go80",
         "native86",
-        "sdk91"
+        "sdk91",
+        "sdk92"
       ],
       "remaining_backlog": [
         "30",
@@ -3098,7 +3190,9 @@
         "ci86",
         "go80",
         "native86",
-        "sdk91"
+        "sdk91",
+        "video92",
+        "sdk92"
       ],
       "remaining_backlog": [
         "20",
@@ -3138,7 +3232,8 @@
       "local_evidence": [
         "ci86",
         "go80",
-        "sdk91"
+        "sdk91",
+        "sdk92"
       ],
       "remaining_backlog": [
         "28",
@@ -3177,7 +3272,8 @@
       "local_evidence": [
         "ci86",
         "go80",
-        "native86"
+        "native86",
+        "video92"
       ],
       "remaining_backlog": [
         "29",
@@ -4297,7 +4393,8 @@
         "installed87",
         "native86",
         "visual87",
-        "sdk91"
+        "sdk91",
+        "sdk92"
       ],
       "remaining_backlog": [
         "23",
@@ -4362,7 +4459,8 @@
         "installed87",
         "native86",
         "visual87",
-        "sdk91"
+        "sdk91",
+        "sdk92"
       ],
       "remaining_backlog": [
         "23",
@@ -4384,7 +4482,8 @@
         "installed87",
         "native86",
         "visual87",
-        "sdk91"
+        "sdk91",
+        "sdk92"
       ],
       "remaining_backlog": [
         "23",
@@ -4735,7 +4834,8 @@
       ],
       "local_evidence": [
         "ci86",
-        "native86"
+        "native86",
+        "release92"
       ],
       "remaining_backlog": [
         "69",
@@ -4784,7 +4884,8 @@
       "local_evidence": [
         "ci86",
         "go80",
-        "native86"
+        "native86",
+        "video92"
       ],
       "remaining_backlog": [
         "28",

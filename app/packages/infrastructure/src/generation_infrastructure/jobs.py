@@ -17,6 +17,7 @@ from generation_domain.policies import enforce_limit, selected
 from generation_domain.spec_isolation import GLOBAL_UNFINISHED_JOBS
 from generation_domain.state import TERMINAL, transition
 from generation_domain.values import fingerprint, parse_id, public_id, request_fingerprint, utcnow
+from generation_domain.videos import frozen_video_specification
 from generation_domain.workflows import (
     audio_specification,
     matching_presets,
@@ -64,13 +65,16 @@ def check_input_contract(manifest: dict[str, Any], request: dict[str, Any]) -> N
         raise DomainError("parameter_not_supported", "工作流没有声明对应参数能力", 422)
 
 
-def job_projection(job: Job, *, sensitive: bool = False) -> dict[str, Any]:
+def job_projection(job: Job, *, sensitive: bool = False, include_video_specification: bool = False) -> dict[str, Any]:
     result: dict[str, Any] = {"id": public_id("job", job.id), "object": "generation.job", "model": job.model_alias, "task_type": job.task_type, "status": job.state, "created_at": int(job.created_at.timestamp()), "updated_revision": job.revision, "error": {"code": job.error_code} if job.error_code else None}
     result["retry"] = {"count": job.retry_count or 0, "limit": 2, "next_at": int(job.retry_after.timestamp()) if job.retry_after else None, "last_error": job.retry_error_code}
     if job.terminal_at:
         result["completed_at"] = int(job.terminal_at.timestamp())
     if sensitive:
         result["input"] = job.request["input"]
+    if include_video_specification and job.task_type.endswith("video"):
+        execution = job.execution
+        result.update(frozen_video_specification(execution.get("parameters", {}) if isinstance(execution, dict) else None))
     return result
 
 
@@ -148,7 +152,7 @@ class JobRepository:
                     previous = session.scalar(select(GatewayAdmission).where(GatewayAdmission.job_id == idem.resource_id))
                     if not previous or previous.intent_digest != pending_gateway.digest:
                         raise DomainError("idempotency_conflict", "网关准入意图与原请求不一致")
-                return job_projection(owned_job(session, identity, idem.resource_id), sensitive="content:sensitive" in identity.policy["scopes"])
+                return job_projection(owned_job(session, identity, idem.resource_id), sensitive="content:sensitive" in identity.policy["scopes"], include_video_specification=True)
             buckets = lock_buckets(session, identity.tenant_id, identity.project_id, identity.key_id, period)
             # Idempotency inserts already hold an FK KEY SHARE on this parent.
             # NO KEY UPDATE serializes policy edits without a lock upgrade cycle.
@@ -253,7 +257,7 @@ class JobRepository:
                     bucket.daily_video_milliseconds += duration if video else 0
                     bucket.daily_audio_milliseconds += duration if audio else 0
             record_change(session, audit_actor or public_id("key", key.id), "job.accepted", job.id, request_id, {"retry_of": public_id("job", retry_of)} if retry_of else None)
-            return job_projection(job, sensitive="content:sensitive" in policy["scopes"])
+            return job_projection(job, sensitive="content:sensitive" in policy["scopes"], include_video_specification=True)
 
     def _asset_hashes(self, session: Session, identity: BusinessIdentity, request: dict[str, Any], *, require_ready: bool) -> dict[str, str]:
         items = request["input"]
@@ -275,7 +279,7 @@ class JobRepository:
             # Read status, revision and publication from one committed snapshot.
             session.execute(text("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY"))
             job = owned_job(session, identity, job_id)
-            result = job_projection(job, sensitive="content:sensitive" in identity.policy["scopes"])
+            result = job_projection(job, sensitive="content:sensitive" in identity.policy["scopes"], include_video_specification=True)
             if "artifacts:read" in identity.policy["scopes"]:
                 result["artifacts"] = [{"id": public_id("content", a.id), "position": a.position} for a in session.scalars(select(Artifact).where(Artifact.job_id == job.id, Artifact.deleted_at.is_(None)).order_by(Artifact.position))]
             return result

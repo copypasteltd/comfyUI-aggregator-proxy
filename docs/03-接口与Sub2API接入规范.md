@@ -470,3 +470,9 @@ authenticated_proxy 的文件地址不包含长期 Key，GET/HEAD/Range 每次�
 Sub2API Provider 的 rc_ 视频创建/查询响应已按 [91](./91-多媒体SDK与视频冻结规格.md) 与 [严格项目契约](./contracts/sdk-video-response.schema.json) 冻结：seconds 为原请求毫秒精确转换的字符串，size 为已知冻结尺寸；迁移前的未知字段继续省略。failed/cancelled/expired 映射为 failed，并分别返回 generation_failed/task_cancelled/task_expired 与固定安全说明。未知 progress 不输出。旧请求不会从当前模型默认值重建，也不为查询而解密原请求。
 
 官方严格 Python Video 类型对进度与尺寸有额外要求，本项目不宣称完全兼容；通用 SDK JSON 方法与项目契约校验是显式用法。直接控制 API 的 job_ 视频响应仍需对齐，Provider 局部通过不能覆盖该欠项。音频继续使用统一 /v1/jobs 与内容接口。
+
+## 第 92 增量：直接视频接口
+
+直接 job_ 视频创建、重放、详情与 Provider rc_ 的安全投影规则对齐，保持各自 ID 和授权入口；使用 [control-video-response](./contracts/control-video-response.schema.json) 冻结直接接口扩展。按返回的 Location/poll_url 查询，已知 seconds/size 从原任务执行快照精确投影，不读取新别名/defaults；缺失的旧字段省略，存在但畸形的执行元数据返回固定 503/invalid_video_metadata。
+
+leased 与 admission_pending/queued 均显示 queued；失败、取消、到期只返回固定 code/message，未知 progress 省略。task_type、revision、retry、completed_at 继续保留；input 必须有 content:sensitive，artifacts 和内容请求独立鉴权。原生列表不携带新规格、不读取 JSON 大字段。图片、音频、GPU、重试与账本规则不变。完整官方 Video 类型、真实产物及 10～20 台资源验收继续开放，具体实现/失败/验证见 [92](./92-直接视频接口冻结投影与权限边界.md)。

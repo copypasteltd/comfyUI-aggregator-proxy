@@ -1,6 +1,7 @@
 """Validate bilingual entry points, native request examples and published demo media."""
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import re
@@ -22,6 +23,12 @@ def sha(path: Path) -> str:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--report", type=Path, help="New report beneath docs/evidence; default is read-only verification")
+    arguments = parser.parse_args()
+    report_path = arguments.report.resolve() if arguments.report is not None else None
+    if report_path is not None and (not report_path.is_relative_to(ROOT / "docs/evidence") or report_path.exists()):
+        raise SystemExit("Choose a new report file beneath docs/evidence; existing evidence is never overwritten")
     errors: list[str] = []
     documents = [ROOT / name for name in ("README.md", "README.en.md", "CHANGELOG.md", "CONTRIBUTING.md", "docs/README.en.md", "docs/media/README.md", "docs/77-仓库整理与双语文档交付.md")]
     links = 0
@@ -100,7 +107,10 @@ def main() -> None:
         assert response["status"] == ("cancelled" if item["operation"] == "mobile_cancel_result" else "retry_wait")
         assert (response["retry"]["next_at"] is None) == (response["status"] == "cancelled")
     report = {"at": datetime.now(UTC).isoformat(), "passed": not errors, "entry_documents": len(documents), "local_links_checked": links, "request_examples_validated": 3, "screenshots_verified": screenshots, "media_manifests_verified": 3, "video_and_gif_fully_decoded": decoded, "bilingual_capability_topics_present": True, "actual_lifecycle_responses_verified": 2, "catalog_responses_verified": len(catalog_responses["responses"]), "catalog_provider_receipts_are_protocol_fixtures": True, "confirmed_retry_responses_verified": len(retry_responses["responses"]), "synthetic_capture_and_cleanup_passed": True, "errors": errors, "full_python_suite_rerun": False, "runtime_protocol_changed": False}
-    (ROOT / "docs/evidence/2026-10-25/repository-readme-verification.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if report_path is not None:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        with report_path.open("x", encoding="utf-8") as stream:
+            stream.write(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(report, ensure_ascii=False))
     raise SystemExit(0 if report["passed"] else 1)
 

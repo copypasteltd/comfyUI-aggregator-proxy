@@ -1,0 +1,85 @@
+{
+  "format_version": 1,
+  "scope": "Bounded read-only activity sampling during serial CI; no SQL text, identifiers, test changes or maintenance",
+  "read_only": true,
+  "maximum_statement_milliseconds": 5000,
+  "samples": [
+    {
+      "at": "2026-10-25T19:55:04.097605+00:00",
+      "connections": 10,
+      "active": [],
+      "idle_in_transaction": 0
+    },
+    {
+      "at": "2026-10-25T19:55:06.102085+00:00",
+      "connections": 10,
+      "active": [
+        {
+          "statement_kind": "DELETE",
+          "wait_type": null,
+          "wait_event": null,
+          "elapsed_seconds": 0.003
+        }
+      ],
+      "idle_in_transaction": 0
+    },
+    {
+      "at": "2026-10-25T19:55:08.105488+00:00",
+      "connections": 11,
+      "active": [],
+      "idle_in_transaction": 1
+    },
+    {
+      "at": "2026-10-25T19:55:10.109549+00:00",
+      "connections": 10,
+      "active": [],
+      "idle_in_transaction": 0
+    },
+    {
+      "at": "2026-10-25T19:55:12.112917+00:00",
+      "connections": 10,
+      "active": [
+        {
+          "statement_kind": "DELETE",
+          "wait_type": null,
+          "wait_event": null,
+          "elapsed_seconds": 0.004
+        }
+      ],
+      "idle_in_transaction": 0
+    },
+    {
+      "at": "2026-10-25T19:55:14.117083+00:00",
+      "connections": 10,
+      "active": [],
+      "idle_in_transaction": 0
+    },
+    {
+      "at": "2026-10-25T19:55:16.119140+00:00",
+      "connections": 10,
+      "active": [
+        {
+          "statement_kind": "COMMIT",
+          "wait_type": "IO",
+          "wait_event": "WalWrite",
+          "elapsed_seconds": 0.008
+        }
+      ],
+      "idle_in_transaction": 0
+    },
+    {
+      "at": "2026-10-25T19:55:18.121505+00:00",
+      "connections": 10,
+      "active": [
+        {
+          "statement_kind": "DELETE",
+          "wait_type": null,
+          "wait_event": null,
+          "elapsed_seconds": 0.004
+        }
+      ],
+      "idle_in_transaction": 0
+    }
+  ],
+  "raw_queries_exported": false
+}

@@ -394,6 +394,10 @@ print(json.dumps({'passed':True,'isolated_installed_module':True,'valid_stream_a
         assert browser["passed"] and browser["browser_closed"] and browser["closed_contexts"] == 2
         report["browser"] = {key: browser[key] for key in ("passed", "checks", "errors", "closed_contexts", "browser_closed")}
         checks.append("fresh_installed_real_browser_desktop_mobile_admin_and_content")
+        direct_video = execute("installed-video", [python, "-I", str(ROOT / "scripts/release-video-smoke.py"), "--payload", str(payload), "--config", str(config), "--database", database, "--origin", origin, "--ca-file", str(cert)], env=environment)
+        report["direct_video"] = json.loads(direct_video.stdout)
+        assert report["direct_video"]["passed"] and report["direct_video"]["exact_installed_modules"]
+        checks.append("installed_direct_video_https_frozen_spec_json_multipart_replay_scopes_cancel_and_unique_usage")
         verify_payload(payload)
         # Verify after real operation and test a tampered immutable member.
         index = payload / "admin/index.html"
