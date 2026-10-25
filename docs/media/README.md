@@ -6,6 +6,10 @@
 
 All captures use the actual Admin and Control API with disposable native PostgreSQL. Accounts, scopes, models, Workflows, 12 queued tasks and 3 completed illustration artifacts are synthetic fixtures. No real ComfyUI execution, GPU inference or physical-fleet capacity test is recorded. Illustrations are drawn locally and are not model-quality examples. The current UI is Chinese.
 
+本轮按 [87 · 青柠](../87-青柠视觉系统与组件复用.md) 从原始源码统一 Admin，重新拍摄全部 20 张截图、4 个 MP4 和 4 个 GIF。17 个页面通过桌面、390px / 320px 布局检查；原字体本地加载，保留实际响应与合成数据边界。
+
+This increment adopts the original 04 Lime source throughout the Admin. All 20 screenshots, four MP4s and four GIFs are refreshed. Seventeen routes pass desktop and 390px/320px layout checks with local original fonts, explicit synthetic data and actual HTTP responses.
+
 ## 视频与 GIF / Videos and GIFs
 
 | 素材 / Media | 内容 / Content |
@@ -23,6 +27,8 @@ All captures use the actual Admin and Control API with disposable native Postgre
 
 | 文件 / File | 页面 / Page |
 | --- | --- |
+| [login.png](login.png) | 空白登录页，不录制凭证 / Empty login page; no credentials recorded |
+| [mobile-queue.png](mobile-queue.png) | 原始票根组件的移动队列 / Mobile queue using original ticket components |
 | [overview.png](overview.png) | 全局队列与 GPU 占用 / Global queue and GPU occupancy |
 | [channels.png](channels.png) | ComfyUI 渠道 / ComfyUI channels |
 | [nodes.png](nodes.png) | Windows 节点 / Windows nodes |
@@ -60,7 +66,7 @@ Raw WebM/logs remain in ignored `app/.local/readme-media/`. Public MP4 is silent
 
 另增四张截图：[映射编辑](gateway-catalog/catalog-editor.png)、[期望/确认](gateway-catalog/catalog-confirmed.png)、[历史](gateway-catalog/catalog-history.png) 和 [375px 移动端](gateway-catalog/catalog-mobile.png)。[响应](gateway-catalog/api-responses.json) 包含实际 Admin 发布及明确标记的模拟 Provider 回执，不包含身份秘密；[浏览器记录](gateway-catalog/capture.json)、[媒体摘要](gateway-catalog/manifest.json) 和 [临时资源清理](../evidence/2026-10-25/gateway-catalog-browser.json) 分别留证。该增量完成时图库为 15 张图片、3 个 MP4 和 3 个 GIF。
 
-Four additional screenshots show the editor, desired/confirmed versions, history and the 375px layout. Responses contain an actual Admin publication and explicitly simulated Provider receipts, with authentication secrets omitted. The capture, media manifest and isolated-resource cleanup are separate records. The gallery now contains 15 images, three MP4s and three GIFs. Actual Provider automatic application is validated separately in topic 80; these recordings do not establish GPU or production acceptance.
+Four additional screenshots show the editor, desired/confirmed versions, history and the 375px layout. Responses contain an actual Admin publication and explicitly simulated Provider receipts, with authentication secrets omitted. The capture, media manifest and isolated-resource cleanup are separate records. At that increment, the gallery contained 15 images, three MP4s and three GIFs. Actual Provider automatic application is validated separately in topic 80; these recordings do not establish GPU or production acceptance.
 
 ```powershell
 ./.venv/Scripts/python.exe scripts/test-gateway-catalog-browser.py --browser-python C:/path/to/media-python/python.exe
@@ -77,9 +83,9 @@ The catalog recorder closes four owned contexts and its browser. Raw files stay 
 
 Three screenshots and a continuous recording show the OOM cause, shared budget, earliest dispatch time, closed source attempt, priority change and cancellation. Mobile identifiers wrap inside the table. The actual domain/database create the retry state using explicit synthetic data and OOM observations; no physical GPU generation is recorded.
 
-[实际脱敏响应](confirmed-retry/api-responses.json)、[浏览器清理](confirmed-retry/capture.json)、[媒体摘要](confirmed-retry/manifest.json) 和 [隔离资源报告](../evidence/2026-10-25/confirmed-retry-browser-fixture.json) 分别记录；不公开认证头、Cookie、CSRF 或登录过程。两个自有 context/browser、临时 API、数据库和私密配置均已清理。图库现共 18 张图片、4 个 MP4、4 个 GIF。
+[实际脱敏响应](confirmed-retry/api-responses.json)、[浏览器清理](confirmed-retry/capture.json)、[媒体摘要](confirmed-retry/manifest.json) 和 [隔离资源报告](../evidence/2026-10-25/confirmed-retry-browser-fixture.json) 分别记录；不公开认证头、Cookie、CSRF 或登录过程。两个自有 context/browser、临时 API、数据库和私密配置均已清理。该增量完成时图库共 18 张图片、4 个 MP4、4 个 GIF；第 87 增量已全部重新拍摄，并新增登录页与移动队列截图，共 20 张图片。
 
-Sanitized responses, capture cleanup, media hashes and isolated-resource cleanup are recorded separately. Authentication material and login are excluded. Both owned contexts, the browser, temporary API/database and private configuration are removed. The gallery now contains 18 screenshots, four MP4 files and four GIF files.
+Sanitized responses, capture cleanup, media hashes and isolated-resource cleanup are recorded separately. Authentication material and login are excluded. Both owned contexts, the browser, temporary API/database and private configuration are removed. At that increment, the gallery contained 18 screenshots, four MP4 files and four GIF files. Increment 87 recaptures them all and adds login/mobile-queue screenshots, bringing the current total to 20 images.
 
 ```powershell
 ./.venv/Scripts/python.exe scripts/test-confirmed-retry-browser.py --browser-python C:/path/to/media-python/python.exe

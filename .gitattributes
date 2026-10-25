@@ -1,5 +1,9 @@
 # Preserve exact bytes: frozen contracts, upstream patches and evidence use SHA-256.
 * -text whitespace=cr-at-eol
+# Preserve exact upstream CSS and license bytes, including original whitespace.
+app/apps/admin_web/src/theme/reference/lime.css -whitespace
+app/apps/admin_web/src/assets/fonts/Anton-OFL.txt -whitespace
+app/apps/admin_web/src/assets/fonts/Manrope-OFL.txt -whitespace
 # Captured logs and test reports retain the original diagnostic whitespace.
 docs/evidence/**/*.log -whitespace
 docs/evidence/**/*.xml -whitespace
@@ -7,4 +11,5 @@ docs/evidence/**/*.xml -whitespace
 *.gif binary
 *.mp4 binary
 *.webm binary
+*.woff binary
 *.woff2 binary

@@ -113,7 +113,7 @@ def main() -> None:
         for path in sorted((ROOT / "apps/admin_web/dist").rglob("*")):
             if path.is_file():
                 relative = path.relative_to(ROOT / "apps/admin_web/dist")
-                if path.suffix not in (".html", ".js", ".css", ".svg", ".png", ".ico", ".woff2"):
+                if path.suffix not in (".html", ".js", ".css", ".svg", ".png", ".ico", ".woff", ".woff2"):
                     raise ValueError("Unexpected Admin build artifact")
                 copy(path, stage / "admin" / relative)
         if not (stage / "admin/index.html").is_file():

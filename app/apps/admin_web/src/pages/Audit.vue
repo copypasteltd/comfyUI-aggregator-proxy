@@ -75,8 +75,8 @@ onUnmounted(() => { disposed = true; stop(); document.removeEventListener('visib
 </script>
 
 <template>
-  <div class="page-heading"><div><p class="eyebrow">GOVERNANCE / AUDIT</p><h1>审计事件</h1><p class="muted">按主体、动作和请求追踪管理变更。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh(true)">刷新记录</el-button></div>
-  <section class="panel audit-retention" aria-label="审计保留策略">
+  <div class="page-heading"><div><p class="eyebrow li-lab">GOVERNANCE / AUDIT</p><h1>审计事件</h1><p class="muted">按主体、动作和请求追踪管理变更。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh(true)">刷新记录</el-button></div>
+  <section class="panel li-card audit-retention" aria-label="审计保留策略">
     <div class="panel-heading"><h2>审计保留策略</h2><el-tag v-if="retention" :type="retention.enabled ? 'warning' : 'info'">{{ retention.enabled ? `已配置保留 ${retention.retention_days} 天` : '自动清理未启用' }}</el-tag></div>
     <el-alert v-if="retentionError" title="保留状态读取失败" :description="retentionError" type="warning" :closable="false"/>
     <template v-if="retention"><p class="muted">{{ retention.enabled ? `按部署配置分批清理到期审计，每批最多 ${retention.batch_limit} 条。` : '当前配置不会自动删除管理审计记录。' }}</p>
@@ -84,7 +84,7 @@ onUnmounted(() => { disposed = true; stop(); document.removeEventListener('visib
       <small class="muted">{{ retentionError || suspended ? '上次成功状态' : '状态快照' }} {{ time(retention.snapshot_at) }}</small>
     </template><p v-else class="muted">尚未取得保留状态。</p>
   </section>
-  <section class="panel audit-filters" aria-label="审计筛选">
+  <section class="panel li-card audit-filters" aria-label="审计筛选">
     <el-form label-position="top" @submit.prevent="apply">
       <div class="audit-filter-grid">
         <el-form-item label="操作主体 ID" for="audit-actor"><el-input id="audit-actor" v-model="draft.actor" maxlength="128" placeholder="usr_… / key_… / system" clearable/></el-form-item>
@@ -99,7 +99,7 @@ onUnmounted(() => { disposed = true; stop(); document.removeEventListener('visib
   </section>
   <el-alert v-if="error" :title="error" type="error" :closable="false"/>
   <p class="snapshot-line" role="status"><template v-if="snapshot">{{ error || suspended ? '上次成功快照' : '查询快照' }} {{ time(snapshot) }} · 匹配 {{ total.toLocaleString() }} 条</template><template v-else>尚未取得审计快照</template><span v-if="suspended"> · 页面隐藏，已暂停</span><span v-else-if="loading"> · 正在查询</span></p>
-  <section class="panel audit-results" aria-label="审计结果">
+  <section class="panel li-card audit-results" aria-label="审计结果">
     <el-table :data="rows" v-loading="loading" empty-text="没有匹配的审计记录" table-layout="auto">
       <el-table-column label="动作" min-width="185"><template #default="{ row }">{{ actionNames[row.action] ?? row.action }}<span class="id-line">{{ row.action }}</span></template></el-table-column>
       <el-table-column label="操作主体" min-width="240"><template #default="{ row }">{{ row.actor_name ?? row.actor }}<span v-if="row.actor_name" class="id-line">{{ row.actor }}</span></template></el-table-column>
@@ -111,7 +111,7 @@ onUnmounted(() => { disposed = true; stop(); document.removeEventListener('visib
   </section>
   <el-drawer v-model="detailOpen" title="审计记录详情" size="min(680px, 100vw)">
     <template v-if="selected">
-      <p class="eyebrow">{{ selected.action }}</p><h2>{{ actionNames[selected.action] ?? '审计事件' }}</h2>
+      <p class="eyebrow li-lab">{{ selected.action }}</p><h2>{{ actionNames[selected.action] ?? '审计事件' }}</h2>
       <dl class="audit-detail"><dt>发生时间</dt><dd>{{ time(selected.created_at) }}</dd><dt>操作主体</dt><dd>{{ selected.actor_name ?? '未记录名称' }}<span class="id-line">{{ selected.actor }}</span><small v-if="selected.actor_name" class="muted">名称为当前名称，主体 ID 保持不变。</small></dd><dt>资源 ID</dt><dd class="mono">{{ selected.resource }}</dd><dt>请求 ID</dt><dd><span class="mono">{{ selected.request_id }}</span><br/><el-button text @click="sameRequest(selected.request_id)">筛选同一请求</el-button></dd><dt>记录 ID</dt><dd class="mono">{{ selected.id }}</dd><dt>关联操作</dt><dd><template v-if="selected.operation_id"><span class="mono">{{ selected.operation_id }}</span><br/><router-link v-if="session.allows('operations:read')" :to="{ path: '/operations', query: { operation_id: selected.operation_id } }">查看操作与执行目标</router-link></template><span v-else>未记录</span></dd></dl>
       <h3>变更版本</h3><div class="audit-versions"><div><span>变更前</span><strong>{{ selected.revision_before ?? '未记录' }}</strong></div><span aria-hidden="true">→</span><div><span>变更后</span><strong>{{ selected.revision_after ?? '未记录' }}</strong></div></div>
       <h3>已记录的补充信息</h3><dl v-if="supplement.length" class="audit-detail"><template v-for="[key, value] in supplement" :key="key"><dt>{{ ({ deleted: '清理条数', cutoff: '清理截止', retention_days: '保留天数' } as Record<string, string>)[key] ?? labels[key] ?? key }}</dt><dd class="audit-value">{{ valueText(value, key) }}</dd></template></dl><p v-else class="muted">无补充信息</p>
@@ -131,7 +131,7 @@ onUnmounted(() => { disposed = true; stop(); document.removeEventListener('visib
 .audit-detail dd { margin: 0; overflow-wrap: anywhere; }
 .audit-detail a { color: var(--el-color-primary); }
 .audit-value { white-space: pre-wrap; }
-.audit-versions { display: flex; align-items: center; gap: 22px; padding: 18px; background: #f3f6fa; border: 1px solid #e4e9f0; border-radius: 8px; margin: 16px 0 28px; }
+.audit-versions { display: flex; align-items: center; gap: 22px; padding: 18px; background: var(--rc-canvas); border: 1px solid var(--rc-line); border-radius: 8px; margin: 16px 0 28px; }
 .audit-versions div { display: grid; gap: 8px; }
 .audit-versions span { color: var(--el-text-color-secondary); font-size: 13px; }
 .audit-versions strong { font: 600 20px ui-monospace, monospace; }

@@ -1,0 +1,199 @@
+{
+  "at": "2026-10-25T11:12:06.988101+00:00",
+  "passed": true,
+  "increment": 87,
+  "baseline_commit": "abfdab4e2bda209848417a1f068be2a92b3f72af",
+  "source_url": "https://html.cafe/x5b381ea1",
+  "source_files_and_fonts_unchanged": true,
+  "source_files": {
+    "apps/admin_web/src/theme/reference/lime.css": {
+      "bytes": 21092,
+      "sha256": "f593ce1d5446edf2d883ab177ed3b40b6230f5ce01acdee1269f7c5fc24d24fb"
+    },
+    "apps/admin_web/src/theme/reference/fonts.css": {
+      "bytes": 41178,
+      "sha256": "aa4e22654cd13c005dc13e2dd391016cc9779e7da04e26e20e7cc3bfb6a71b12"
+    },
+    "apps/admin_web/src/theme/fonts.css": {
+      "bytes": 300,
+      "sha256": "13229edcd23d2ed1438234aca7d8173baee1ac3ac15204ea5ba0980368996655"
+    },
+    "apps/admin_web/src/assets/fonts/Manrope-Reference.woff": {
+      "bytes": 17132,
+      "sha256": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd"
+    },
+    "apps/admin_web/src/assets/fonts/Anton-Reference.woff": {
+      "bytes": 13548,
+      "sha256": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a"
+    }
+  },
+  "font_licenses_preserved": true,
+  "existing_csp_relaxed": false,
+  "checks": {
+    "frontend_units": {
+      "passed": true,
+      "tests": 40,
+      "command": "node --test tests/workflowJson.test.ts tests/gatewayCatalog.test.ts",
+      "node": "24.22.1"
+    },
+    "frontend_typecheck_and_build": {
+      "passed": true,
+      "command": "npm run build",
+      "vite": "7.3.7",
+      "modules": 1816,
+      "known_chunk_size_warning": true
+    },
+    "release_bundle_units": {
+      "passed": true,
+      "tests": 71,
+      "command": "python -m pytest tests/unit/test_release_bundle_security.py"
+    },
+    "ruff_modified_python": true,
+    "runtime_contracts": {
+      "passed": true,
+      "count": 62,
+      "drift": []
+    }
+  },
+  "admin": {
+    "routes": 17,
+    "widths": [
+      320,
+      390,
+      1440
+    ],
+    "layout_measurements": 52,
+    "page_overflows": 0,
+    "original_fonts_loaded": true,
+    "runtime_external_requests": 0,
+    "short_screen_keyboard_navigation": true,
+    "reduced_motion": true,
+    "catalog_checks": 16,
+    "retry_checks": 8
+  },
+  "captures": {
+    "main": {
+      "passed": true,
+      "contexts_closed": 3,
+      "browser_closed": true,
+      "screenshots": 13,
+      "mp4": 2,
+      "gif": 2,
+      "cleanup": {
+        "processes": true,
+        "database": true,
+        "credentials": true
+      }
+    },
+    "catalog": {
+      "passed": true,
+      "contexts_closed": 4,
+      "browser_closed": true,
+      "screenshots": 4,
+      "mp4": 1,
+      "gif": 1,
+      "cleanup": {
+        "processes": true,
+        "database": true,
+        "credentials": true
+      }
+    },
+    "retry": {
+      "passed": true,
+      "contexts_closed": 2,
+      "browser_closed": true,
+      "screenshots": 3,
+      "mp4": 1,
+      "gif": 1,
+      "cleanup": {
+        "processes": true,
+        "database": true,
+        "private_fixture": true
+      }
+    }
+  },
+  "candidate": {
+    "passed": true,
+    "release_id": "rc-20261025.87.2",
+    "archive_sha256": "3400485d53e280c1af8918875ff4db7305a565b6656e7c7ec647841710988599",
+    "source_tree_sha256": "977d86c70b81ce48b85e1b39677a555f1f0018b89a1ef2cee33b406095cdb32d",
+    "build_inputs": 499,
+    "drift": [],
+    "payload_files": 169,
+    "wheels": 58,
+    "runtime_contracts": 62,
+    "woff_assets": [
+      "admin/assets/Anton-Reference-CzBGNwCM.woff",
+      "admin/assets/Manrope-Reference-gasizvWU.woff"
+    ],
+    "font_licenses": [
+      "admin/licenses/fonts.html"
+    ],
+    "theme_color": "#f2f1ec",
+    "production_accepted": false,
+    "installation_checks": 28,
+    "installed_browser_checks": 10,
+    "closed_browser_contexts": 2,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "service_entries_exit_zero_no_descendants": true,
+    "journal_reopened": true
+  },
+  "references": {
+    "lime-source-focused-verification.json": "321101ba8c8cf07960d6857be6dfb20c68ad74d577bad697499e7f57f4ba1cea",
+    "lime-source-final-release-build.json": "cc42c414eb170e79f5e622e7cf2797f72165d61a00fc3e9371070ece10d3af94",
+    "lime-source-input-scope.json": "8232f9f706a15f3ea605beb99c8800430ea0534340f94094cced1cd558d601ee",
+    "lime-source-metadata-review.json": "e6c833528e07ffb3cc2f30bb076d9513412fa532102d4256d7e0224d78c1de20",
+    "lime-source-first-browser-failure.json": "780975eb07fc37f9522d3f59e07a955b51b5e3b4f023add74547639358b59ac8",
+    "lime-source-second-browser-failure.json": "c88c4a15b6871f1dfd1b16042ae4b7065b0356b3c1180ac0931cffd60baadf52",
+    "lime-source-release/native-release-installation.json": "10a3a99fd78a6c0cca463e11e478fccacc0d41e44b3f928dfa580555f190de1c",
+    "lime-source-release/native-release-installed-browser.json": "7c28faf2dde313fb09224c0464128924afc789554c5f5b9b1416a35e676e794a",
+    "lime-source-final-release/native-release-installation.json": "6f85e98fc2cf2b2eae9a9883f8f002a83209aaf17cb7b903f4cb3d99614d70ff",
+    "lime-source-final-release/native-release-installed-browser.json": "7c28faf2dde313fb09224c0464128924afc789554c5f5b9b1416a35e676e794a",
+    "readme-media-capture.json": "87bc640340482bf25999c50953c2d11c5cb5aea582f3a737c9e01deb2b6b7aff",
+    "gateway-catalog-browser.json": "e37a7d10fa1aacefc666bdb80fa2aa3bf489c132026c990f8564782739da960a",
+    "confirmed-retry-browser-fixture.json": "fe0bb1730d57f5a6343acdd14103b7f5ffc49019c0e3015f8bf6633a66e8496a",
+    "repository-readme-verification.json": "4d84955b8e5db17cd5c55bae46c25eee7272cfa8e21b7e537c1fa2769c4c1d5e"
+  },
+  "full_python_suite_rerun": false,
+  "native_protocol_suite_rerun": false,
+  "backend_application_sources_changed": false,
+  "media_match_final_css_js_fonts_and_licenses": true,
+  "failed_attempts_retained": true,
+  "retained_development_preview": "https://127.0.0.1:8443/admin/",
+  "retained_development_process_identities": 9,
+  "remaining_items": 70,
+  "real_comfyui": false,
+  "physical_fleet_accepted": false,
+  "actual_scm_lifecycle_accepted": false,
+  "production_accepted": false,
+  "virtualization_used": false,
+  "documentation": {
+    "passed": true,
+    "documents": 91,
+    "local_links_checked": 1754,
+    "rules": 32,
+    "schemas": 59,
+    "fixtures": 947
+  },
+  "readme_media": {
+    "passed": true,
+    "screenshots_verified": 20,
+    "media_manifests_verified": 3,
+    "video_and_gif_fully_decoded": [
+      "admin-tour.mp4",
+      "admin-tour.gif",
+      "workflow-lifecycle.mp4",
+      "workflow-lifecycle.gif",
+      "gateway-catalog/gateway-catalog.mp4",
+      "gateway-catalog/gateway-catalog.gif",
+      "confirmed-retry/confirmed-retry.mp4",
+      "confirmed-retry/confirmed-retry.gif"
+    ],
+    "actual_lifecycle_responses_verified": 2,
+    "catalog_responses_verified": 5,
+    "confirmed_retry_responses_verified": 3,
+    "synthetic_capture_and_cleanup_passed": true
+  },
+  "source_vendor_whitespace_preserved": true
+}

@@ -64,7 +64,7 @@ onUnmounted(() => { alive = false; stop(); document.removeEventListener('visibil
 </script>
 
 <template>
-  <section class="panel content-filters" aria-label="内容筛选">
+  <section class="panel li-card content-filters" aria-label="内容筛选">
     <el-form label-position="top" @submit.prevent="apply">
       <div class="content-filter-grid">
         <el-form-item v-for="field in fields" :key="field.kind" :label="field.label">

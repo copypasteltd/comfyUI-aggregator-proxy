@@ -28,6 +28,8 @@ Increment 86 adds [sanitized database failure diagnostics and concurrency observ
 
 [Increment 86 verification](docs/evidence/2026-10-25/database-diagnostics-final-ci-verification.json) passes all 16 gates/3593 Python checks, 29 native protocol cases within the complete concurrent CI window, 28 exact-candidate installation checks and eight installed-browser checks. Candidate `rc-20261025.86.1` matches 488 build inputs and contains 166 payload files, 58 wheels and 62 runtime contracts; 59 schemas/947 fixtures agree. [86](docs/86-数据库故障脱敏诊断与并发观测.md) retains failed attempts, the one-time test-database maintenance and unresolved historical roots.
 
+Increment 87 imports the user-selected [original 04 Lime source](docs/87-青柠视觉系统与组件复用.md). Seventeen routes, 390px/320px layouts and all demonstration media are refreshed. Forty frontend tests, 71 release security tests, 28 final-candidate installation checks and ten installed-browser checks pass. Full backend/native protocol suites were not rerun; [verification 87](docs/evidence/2026-10-25/lime-source-visual-verification.json) records scope and evidence.
+
 ## Contents
 
 - [Capabilities and boundaries](#capabilities-and-boundaries)
@@ -87,6 +89,8 @@ PostgreSQL is authoritative for jobs and resources. SQLite is only a single Work
 
 ## Admin and demonstrations
 
+The Admin follows the user-selected [04 · Lime source](https://html.cafe/x5b381ea1?c=lime). It imports the pulled original CSS and reuses its warm white/black/lime palette, ticket/card components and Anton/Manrope fonts. [87: visual system](docs/87-青柠视觉系统与组件复用.md) records the source files, hashes and shared component adapters, including teleported overlays. Original font bytes are decoded into local assets with bundled SIL OFL 1.1 notices. Future pages and components use the same system. Seventeen routes pass desktop and 390px/320px layout checks; all 20 screenshots and four MP4/GIF pairs are refreshed. Run `app/scripts/pull-lime-reference.py` for a local hash check, or add `--pull` to retrieve the fixed source again.
+
 Open **网关接入 → 模型目录** (gateway catalog) or **模型与路由 → 网关模型目录** (model-page catalog entry). `models:read` permits state, mapping differences, failure receipts and paginated history; `models:publish` permits editing, publication, retry and rollback. The model-page read entry does not require gateway credential-management permission.
 
 For the first publication, enter the same logical instance as the Provider startup file, select published models, and enter existing Sub2API usage-account/group IDs, price versions and unit prices. IDs remain decimal strings to preserve 64-bit precision. Publish the complete desired catalog after confirmation. The Provider polls, validates and persists candidates, then activates new-request rules only after a valid applied receipt. Desired and confirmed versions remain separate. After first activation, startup rules are no longer an automatic fallback; an empty catalog withdraws new tasks. Existing tasks and idempotent recovery retain their original model, Workflow, target and price. Rejection preserves the previous catalog; retry/rollback creates a new revision. Back up, drain and independently migrate Sub2API through migration 257 before deployment; startup only probes the schema. See the [publication protocol](docs/79-网关模型目录持久发布协议.md), [Provider recovery](docs/80-Provider目录消费与版本快照.md) and [Admin behavior](docs/81-Admin网关目录映射与发布核对.md).
@@ -115,7 +119,7 @@ Workflow archival requires confirmation, revision CAS and an idempotent request.
 
 If a response is lost, the UI offers reconciliation using the original body, key and revision. It does not replace the key to overwrite another administrator's change. See [Workflow lifecycle](docs/76-Workflow归档与恢复管理.md).
 
-More screenshots: [channels](docs/media/channels.png), [job queue](docs/media/queue.png), [model routing](docs/media/models.png), [API Keys](docs/media/api-keys.png), [content](docs/media/content.png), [release history](docs/media/workflow-history.png), [mobile](docs/media/mobile-overview.png). The current Admin UI is in Chinese.
+More screenshots: [login](docs/media/login.png), [mobile queue](docs/media/mobile-queue.png), [channels](docs/media/channels.png), [job queue](docs/media/queue.png), [model routing](docs/media/models.png), [API Keys](docs/media/api-keys.png), [content](docs/media/content.png), [release history](docs/media/workflow-history.png), [mobile](docs/media/mobile-overview.png). The current Admin UI is in Chinese.
 
 ## Native Windows quick start
 

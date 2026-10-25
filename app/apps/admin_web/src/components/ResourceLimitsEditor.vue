@@ -32,10 +32,10 @@ function used(key: Name) { return props.usage && key in props.usage ? Number(pro
 </template>
 
 <style scoped>
-.limit-editor { border-top: 1px solid #dce5ea; }
-.limit-editor-row { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(240px, 1.1fr); align-items: center; gap: 18px; padding: 15px 0; border-bottom: 1px solid #e6edf1; }
+.limit-editor { border-top: 1px solid var(--rc-line); }
+.limit-editor-row { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(240px, 1.1fr); align-items: center; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--rc-line); }
 .limit-editor-label strong { display: block; font-size: 13px; font-weight: 500; }
-.limit-editor-label small { display: block; color: #617482; line-height: 1.8; font-size: 11px; }
+.limit-editor-label small { display: block; color: var(--rc-text-muted); line-height: 1.8; font-size: 11px; }
 .limit-editor-controls { display: grid; grid-template-columns: 110px minmax(120px, 1fr); gap: 8px; }
 .limit-editor-controls :deep(.el-input-number) { width: 100%; }
 .limit-unlimited { align-self: center; }

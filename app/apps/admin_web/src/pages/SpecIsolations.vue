@@ -53,10 +53,10 @@ onUnmounted(() => { disposed = true; controller?.abort(); mutationController?.ab
 </script>
 
 <template>
-  <div class="page-heading"><div><p class="eyebrow">GENERATION / SPECIFICATIONS</p><h1>规格隔离</h1><p class="muted">暂停反复失败的生成规格，验证修复后恢复派单。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新隔离状态</el-button></div>
+  <div class="page-heading"><div><p class="eyebrow li-lab">GENERATION / SPECIFICATIONS</p><h1>规格隔离</h1><p class="muted">暂停反复失败的生成规格，验证修复后恢复派单。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新隔离状态</el-button></div>
   <el-alert v-if="error" :title="error + (snapshot ? ' · 当前展示最后一次成功快照' : '')" type="error" :closable="false" show-icon/>
   <div class="snapshot-line"><span>更新于 {{ time(updatedAt) }}</span><span>每 5 秒刷新</span></div>
-  <section class="panel"><div class="toolbar"><el-select v-model="state" aria-label="隔离状态" style="width: 220px" @change="changed()"><el-option label="已隔离" value="isolated"/><el-option label="观察中" value="watching"/><el-option label="正常 / 已恢复" value="clear"/><el-option label="全部状态" value="all"/></el-select></div>
+  <section class="panel li-card"><div class="toolbar"><el-select v-model="state" aria-label="隔离状态" style="width: 220px" @change="changed()"><el-option label="已隔离" value="isolated"/><el-option label="观察中" value="watching"/><el-option label="正常 / 已恢复" value="clear"/><el-option label="全部状态" value="all"/></el-select></div>
     <el-table :data="snapshot?.data ?? []" v-loading="loading" table-layout="auto" :empty-text="!snapshot ? (error ? '读取失败，请刷新重试' : '正在读取隔离状态…') : '当前筛选没有规格记录'">
       <el-table-column label="状态" width="120"><template #default="{ row }"><el-tag :type="row.is_active ? 'danger' : row.failure_count ? 'warning' : 'success'">{{ row.is_active ? '已隔离' : row.failure_count ? '观察中' : row.cleared_validation_job_id ? '已恢复' : '正常' }}</el-tag></template></el-table-column>
       <el-table-column label="GPU / 发布版本" min-width="300"><template #default="{ row }"><span class="mono">{{ row.gpu_id }}</span><span class="id-line">{{ row.release_id }}</span></template></el-table-column>

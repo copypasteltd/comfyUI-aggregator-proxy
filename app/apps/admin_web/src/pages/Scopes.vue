@@ -85,9 +85,9 @@ onBeforeUnmount(() => { sequence++; request?.abort(); detailRequest?.abort() })
 </script>
 
 <template>
-  <div class="page-heading"><div><p class="eyebrow">ACCESS / RESOURCE LIMITS</p><h1>租户与项目</h1><p class="muted">管理业务归属与资源上限，查看当前已用与预留。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button><el-button v-if="writable" type="primary" :icon="Plus" @click="create(kind === 'tenants' ? 'tenant' : 'project')">{{ kind === 'tenants' ? '新建租户' : context ? '添加项目' : '选择租户添加项目' }}</el-button></div></div>
+  <div class="page-heading"><div><p class="eyebrow li-lab">ACCESS / RESOURCE LIMITS</p><h1>租户与项目</h1><p class="muted">管理业务归属与资源上限，查看当前已用与预留。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button><el-button v-if="writable" type="primary" :icon="Plus" @click="create(kind === 'tenants' ? 'tenant' : 'project')">{{ kind === 'tenants' ? '新建租户' : context ? '添加项目' : '选择租户添加项目' }}</el-button></div></div>
   <el-alert v-if="error" :title="error" type="error" :closable="false"/>
-  <div class="panel scope-directory"><el-tabs v-model="kind"><el-tab-pane label="租户" name="tenants"/><el-tab-pane label="项目" name="projects"/></el-tabs>
+  <div class="panel li-card scope-directory"><el-tabs v-model="kind"><el-tab-pane label="租户" name="tenants"/><el-tab-pane label="项目" name="projects"/></el-tabs>
     <div v-if="kind === 'projects' && context" class="scope-context"><div><span class="muted">所属租户</span><strong>{{ context.name }}</strong><span v-if="!context.enabled" class="muted">已停用</span></div><el-button size="small" @click="allProjects">查看全部项目</el-button></div>
     <form class="scope-search" @submit.prevent="apply"><el-input v-model="query" aria-label="搜索租户或项目" placeholder="搜索名称或完整 ID" clearable/><el-select v-model="state" aria-label="启停状态" placeholder="全部状态" clearable><el-option label="启用" :value="true"/><el-option label="停用" :value="false"/></el-select><el-button type="primary" native-type="submit">查询</el-button></form>
     <p class="form-help scope-policy">租户、项目与 Key 的限制共同生效。收紧上限保留在途任务；停用后拒绝新的业务调用。</p>
@@ -99,13 +99,13 @@ onBeforeUnmount(() => { sequence++; request?.abort(); detailRequest?.abort() })
 
 <style scoped>
 .scope-directory { padding: 18px 20px 0; }
-.scope-context { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 12px 16px; margin-bottom: 16px; background: #f3f6f8; border-left: 3px solid #087e8b; }
+.scope-context { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 12px 16px; margin-bottom: 16px; background: var(--rc-canvas); border-left: 3px solid var(--rc-ink); }
 .scope-context strong { margin: 0 12px; }
 .scope-search { display: grid; grid-template-columns: minmax(160px, 1fr) 150px auto; gap: 12px; max-width: 740px; }
 .scope-policy { margin: 16px 0; }
 :deep(.el-switch) { margin-right: 12px; }
-.scope-parent-off { color: #bf5e31; font-size: 11px; margin-top: 6px; }
-.scope-parent-label { margin-bottom: 18px; color: #617482; }
+.scope-parent-off { color: var(--rc-warning); font-size: 11px; margin-top: 6px; }
+.scope-parent-label { margin-bottom: 18px; color: var(--rc-text-muted); }
 .scope-limit-title { margin: 20px 0 8px; }
 .scope-limit-title + p { margin-bottom: 14px; }
 .scope-snapshot { margin-top: 20px; line-height: 1.8; }

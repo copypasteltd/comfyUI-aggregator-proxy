@@ -85,9 +85,9 @@ onBeforeUnmount(() => { cancelBrowse(); cancelResolve() })
 .policy-directory-option { height: auto; min-height: 64px; line-height: 1.5; padding-top: 8px; padding-bottom: 8px; }
 .policy-directory-option strong, .directory-option-detail, .directory-option-id { display: block; }
 .policy-directory-option strong { overflow: hidden; text-overflow: ellipsis; font-size: 13px; }
-.directory-option-detail, .directory-option-id { font-size: 11px; color: #617482; }
+.directory-option-detail, .directory-option-id { font-size: 11px; color: var(--rc-text-muted); }
 .directory-option-id { overflow-wrap: anywhere; white-space: normal; }
-.directory-error { color: #a34c21; font-size: 12px; }
+.directory-error { color: var(--rc-warning); font-size: 12px; }
 .directory-status { margin: 6px 0 0; line-height: 1.7; }
 .directory-pagination { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; }
 </style>

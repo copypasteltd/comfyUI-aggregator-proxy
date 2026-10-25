@@ -11,5 +11,5 @@ defineEmits<{ retry: []; clear: [] }>()
   </section>
 </template>
 <style scoped>
-.model-request-status { padding: 14px; margin: 16px 0; border: 1px solid #d7e1e8; border-radius: 4px; background: #f5f8fa; overflow-wrap: anywhere; }
+.model-request-status { padding: 14px; margin: 16px 0; border: 1px solid var(--rc-line); border-radius: 4px; background: var(--rc-canvas); overflow-wrap: anywhere; }
 </style>

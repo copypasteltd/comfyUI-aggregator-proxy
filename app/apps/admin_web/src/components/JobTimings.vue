@@ -18,12 +18,12 @@ const stages = [['elapsed', '本次尝试历时'], ['preparing', '准备'], ['su
   </section>
 </template>
 <style scoped>
-.job-timings { margin: 24px 0; padding: 18px; background: #f7f9fa; border: 1px solid #dce5ea; border-radius: 5px; }
+.job-timings { margin: 24px 0; padding: 18px; background: var(--rc-canvas); border: 1px solid var(--rc-line); border-radius: 5px; }
 .timing-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; }
 h3 { margin: 0; font-size: 15px; } dl { display: grid; gap: 18px; margin: 18px 0; }
 .job-spans { grid-template-columns: repeat(2, minmax(0, 1fr)); } .phase-spans { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0 12px; }
-dt { color: #617482; font-size: 12px; margin-bottom: 8px; } dd { margin: 0; }
-details { border-top: 1px solid #dce5ea; margin-top: 12px; } summary { cursor: pointer; padding: 14px 0 4px; font-size: 12px; }
-summary > span:last-child { margin-left: 12px; font-size: 11px; } .timing-limit { font-size: 12px; color: #926c46; margin-top: 12px; }
+dt { color: var(--rc-text-muted); font-size: 12px; margin-bottom: 8px; } dd { margin: 0; }
+details { border-top: 1px solid var(--rc-line); margin-top: 12px; } summary { cursor: pointer; padding: 14px 0 4px; font-size: 12px; }
+summary > span:last-child { margin-left: 12px; font-size: 11px; } .timing-limit { font-size: 12px; color: var(--rc-warning); margin-top: 12px; }
 @media (max-width: 600px) { .job-timings { padding: 14px; } .phase-spans { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; } }
 </style>

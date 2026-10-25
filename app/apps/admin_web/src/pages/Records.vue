@@ -60,10 +60,10 @@ const reasons: Record<string, string> = { expired: '租约已过期', previous_b
 function stateType(state: string) { return state === 'succeeded' ? 'success' : state === 'failed' ? 'danger' : state === 'partial_failed' ? 'warning' : 'info' }
 </script>
 <template>
-  <div class="page-heading"><div><p class="eyebrow">MANAGEMENT / OPERATIONS</p><h1>操作中心</h1><p class="muted">核对各渠道的管理指令与执行结果。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button></div>
+  <div class="page-heading"><div><p class="eyebrow li-lab">MANAGEMENT / OPERATIONS</p><h1>操作中心</h1><p class="muted">核对各渠道的管理指令与执行结果。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button></div>
   <el-alert v-if="error" :title="error" type="error" :closable="false"/>
   <p v-if="readAt" class="muted">读取于 {{ time(readAt) }}{{ error || loading ? ' · 显示上次结果' : '' }}</p>
-  <section class="panel">
+  <section class="panel li-card">
     <el-table :data="operations" v-loading="loading" empty-text="暂无管理操作" table-layout="auto"><el-table-column label="操作" min-width="180"><template #default="{ row }">{{ commandNames[row.command] ?? row.command }}<span class="id-line">{{ row.id }}</span></template></el-table-column><el-table-column label="状态" min-width="110"><template #default="{ row }"><el-tag :type="stateType(row.status)" size="small">{{ states[row.status] ?? row.status }}</el-tag></template></el-table-column><el-table-column label="提交时间" min-width="180"><template #default="{ row }">{{ time(row.created_at) }}</template></el-table-column><el-table-column label="执行目标" width="120" fixed="right"><template #default="{ row }"><router-link v-if="row.command === 'cancel_jobs' && session.allows('jobs:read')" :to="{ path: '/jobs', query: { cancellation: row.id } }">查看任务结果</router-link><el-button v-else text @click="open(row.id)">查看目标</el-button></template></el-table-column></el-table>
     <div class="pagination"><el-button size="small" :disabled="page === 1 || loading" @click="goPage(-1)">上一页</el-button><span>第 {{ page }} 页</span><el-button size="small" :disabled="!hasMore || loading || page >= 10000" @click="goPage(1)">下一页</el-button></div>
   </section>

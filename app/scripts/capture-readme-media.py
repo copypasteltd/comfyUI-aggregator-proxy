@@ -68,10 +68,19 @@ def seed(sessions: sessionmaker[Session], fixtures: Any, pepper: str, password: 
         assert tenant and project and node and key and channel
         tenant.name = "DEMO · 合成演示租户"
         project.name = "图片 · 视频 · 音频演示"
+        # Protocol seeds omit the optional audio quota value. Admin DTOs
+        # serialize it explicitly, so normalize only this UI fixture.
+        for scope in (tenant, project):
+            limits = json.loads(json.dumps(scope.limits))
+            limits["daily_audio_milliseconds"].setdefault("value", None)
+            scope.limits = limits
         node.name = "DEMO Windows 01 · Synthetic"
         channel.name = "DEMO ComfyUI 01 · 合成渠道"
         for index, item in enumerate(session.scalars(select(ApiKey))):
             item.name = ("DEMO 内容应用", "DEMO 工作室客户端")[index]
+            policy = json.loads(json.dumps(item.policy))
+            policy["limits"]["daily_audio_milliseconds"].setdefault("value", None)
+            item.policy = policy
         models = list(session.scalars(select(PublicModel)))
         for index, model in enumerate(models):
             model.alias = "demo-" + model.task_type.replace("_", "-")

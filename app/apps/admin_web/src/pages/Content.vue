@@ -98,10 +98,10 @@ onBeforeUnmount(() => { alive = false; ++visibilityEpoch; stop(); document.remov
 </script>
 
 <template>
-  <div class="page-heading"><div><p class="eyebrow">CONTENT / ASSETS</p><h1>内容管理</h1><p class="muted">查找输入素材与生成产物，整理标签并按权限预览。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button></div>
+  <div class="page-heading"><div><p class="eyebrow li-lab">CONTENT / ASSETS</p><h1>内容管理</h1><p class="muted">查找输入素材与生成产物，整理标签并按权限预览。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button></div>
   <el-alert v-if="error" :title="error" type="error" :closable="false"/>
   <ContentFilters @apply="apply"/>
-  <section class="panel">
+  <section class="panel li-card">
     <el-tabs v-model="kind"><el-tab-pane label="生成产物" name="output"/><el-tab-pane label="输入素材" name="input"/></el-tabs>
     <p class="muted content-snapshot">第 {{ page }} 页 · 每页最多 50 条 · 查询时间 {{ time(data?.snapshot_at) }}</p>
     <el-table :data="rows" v-loading="loading" :empty-text="kind === 'input' ? '暂无输入素材' : '暂无生成产物'" table-layout="auto">
@@ -158,5 +158,5 @@ onBeforeUnmount(() => { alive = false; ++visibilityEpoch; stop(); document.remov
 .content-tag-actions small { flex: 1; min-width: 180px; }
 .content-preview { border-top: 1px solid var(--el-border-color); padding-top: 10px; }
 .content-preview audio { display: block; width: 100%; min-height: 54px; }
-.content-preview img, .content-preview video { display: block; max-width: 100%; width: 100%; max-height: 55vh; object-fit: contain; background: #101820; border-radius: 8px; }
+.content-preview img, .content-preview video { display: block; max-width: 100%; width: 100%; max-height: 55vh; object-fit: contain; background: var(--rc-ink); border-radius: 8px; }
 </style>

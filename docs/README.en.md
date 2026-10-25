@@ -14,6 +14,8 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 
 [Increment 86](86-数据库故障脱敏诊断与并发观测.md) adds allowlisted database failures, request isolation, a dedicated database exception handler and bounded read-only blocker observation. Historical causes and real-resource acceptance remain open.
 
+[Increment 87](87-青柠视觉系统与组件复用.md) imports the original 04 Lime CSS and exact decoded fonts, adapts all Admin components and overlays, and records the continuing visual constraint. Seventeen routes pass desktop and 390px/320px layout checks; the gallery contains 20 refreshed screenshots and four MP4/GIF pairs. Forty frontend and 71 release security tests pass, along with 28 final-candidate installation and ten installed-browser checks. [Verification](evidence/2026-10-25/lime-source-visual-verification.json) keeps the 70 backlog items and actual-resource acceptance open.
+
 ## Requirements and engineering baseline
 
 | Topic | Document |
@@ -122,6 +124,7 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 | 82 | [Confirmed failure classification, retry budget and physical GPU constraints](82-确认失败重试分类与跨GPU约束.md) |
 | 83 | [Native CI gates, process cleanup and safe failure evidence](83-原生CI门禁与失败证据.md) |
 | 84 | [Monitoring metrics, isolated read-only identity and sanitized request correlation](84-监控指标与脱敏请求关联.md) |
+| 87 | [Original 04 Lime source, typography and shared Admin component system](87-青柠视觉系统与组件复用.md) |
 | 86 | [Sanitized database failures, request isolation and native lock observation](86-数据库故障脱敏诊断与并发观测.md) |
 | 85 | [Native system service plans, controlled lifecycle and dedicated interpreter](85-原生系统服务封装与受控生命周期.md) |
 
@@ -129,7 +132,7 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 
 - [Machine contracts](contracts/README.md): frozen JSON Schemas, fixtures, state machine, endpoint inventory and development traceability.
 - Complete native requests: [image](examples/create-image.json), [video](examples/create-video.json), [audio](examples/create-audio.json).
-- [Demonstration gallery](media/README.md): 18 screenshots, four recordings in MP4/GIF, selected actual API responses, explicitly labeled receipt/failure fixtures, hashes and reproduction steps.
+- [Demonstration gallery](media/README.md): 20 screenshots, four recordings in MP4/GIF, selected actual API responses, explicitly labeled receipt/failure fixtures, hashes and reproduction steps.
 - [Contribution/synchronization rules](../CONTRIBUTING.md): update both READMEs, change notes and applicable media, run checks, commit and push.
 
 Production acceptance remains open for actual devices and Workflows, model quality, real storage/gateway dependencies, system services, joint recovery and physical-fleet capacity. The delivery checklist is authoritative for completion status.

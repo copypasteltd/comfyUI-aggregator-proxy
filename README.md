@@ -28,6 +28,8 @@
 
 [第 86 增量验证](docs/evidence/2026-10-25/database-diagnostics-final-ci-verification.json)：完整 16 门禁/3593 Python、29 项完整窗口并发原生协议、28 项精确候选安装及 8 项安装后浏览器检查通过。候选 `rc-20261025.86.1` 的 488 个构建输入与源码一致，含 166 载荷、58 wheels、62 运行契约；59 schema/947 fixture 同步。原失败、一次性测试库维护和未关闭的根因均保留于 [86](docs/86-数据库故障脱敏诊断与并发观测.md)。
 
+第 87 增量直接接入用户指定的 [原始青柠样式](docs/87-青柠视觉系统与组件复用.md)。17 个页面、390px / 320px 布局及全部演示素材已刷新；前端 40 项、发布安全 71 项、最终候选 28 项安装和 10 项安装后浏览器检查通过。完整后端与原生协议套件未重跑，变更范围及证据见 [87 验证](docs/evidence/2026-10-25/lime-source-visual-verification.json)。
+
 ## 目录
 
 - [功能与边界](#功能与边界)
@@ -87,6 +89,8 @@ PostgreSQL 是任务和资源权威源；SQLite 仅是单机 Worker journal。Su
 
 ## Admin 操作与演示
 
+Admin 统一采用用户指定的 [04 · 青柠](https://html.cafe/x5b381ea1?c=lime)：直接拉取并引用原始 CSS，复用暖白/黑/青柠、原票根与卡片组件和 Anton / Manrope 字体。原始文件与来源摘要见 [87 · 视觉系统](docs/87-青柠视觉系统与组件复用.md)；管理组件和弹层共用适配层。字体从原声明原样解码到本地，并随包附带 SIL OFL 1.1 许可。后续页面与组件继续遵循同一规范。17 个页面已通过桌面、390px / 320px 布局检查，20 张截图及 4 组 MP4/GIF 已重新拍摄。原始文件可用 `app/scripts/pull-lime-reference.py` 默认只读校验；加 `--pull` 可重新从固定来源提取。
+
 模型目录可从“网关接入 → 模型目录”或“模型与路由 → 网关模型目录”管理。`models:read` 可以核对期望/确认版本、映射差异、失败回执和分页历史；`models:publish` 才能编辑、发布、重试或回滚。模型页的只读入口不要求网关凭证管理权限。
 
 首次填写与 Provider 启动文件相同的逻辑 instance，选择已发布模型并填写既有 Sub2API 用量账户、分组、价格版本及单位价格；账户/分组 ID 使用十进制字符串，避免 64 位精度丢失。确认后发布完整期望目录。Provider 自动拉取、校验并持久保存候选，取得有效 applied 回执后切换新请求；后台分别展示期望和已确认版本。首次确认后不自动回退启动规则；空目录表示下架该网关的新任务，旧在途任务和幂等重放保留原模型、Workflow、目标与价格。失败保留上一有效目录，历史重试/回滚创建新版本。部署前须备份、排空并独立迁移 Sub2API 至 257；启动只读探测结构。详见 [持久发布协议](docs/79-网关模型目录持久发布协议.md)、[Provider 应用与恢复](docs/80-Provider目录消费与版本快照.md) 和 [Admin 操作约束](docs/81-Admin网关目录映射与发布核对.md)。
@@ -115,7 +119,7 @@ Workflow 归档使用二次确认、revision CAS 和幂等请求。仍有已发�
 
 界面发生响应丢失时提供“使用原请求核对”，继续使用原正文、幂等键和 revision；不会自动换键覆盖其他管理员的修改。操作行为见 [Workflow 生命周期](docs/76-Workflow归档与恢复管理.md)。
 
-更多截图：[渠道](docs/media/channels.png)、[任务队列](docs/media/queue.png)、[模型路由](docs/media/models.png)、[API Key](docs/media/api-keys.png)、[内容](docs/media/content.png)、[版本历史](docs/media/workflow-history.png)、[移动端](docs/media/mobile-overview.png)。当前 Admin 界面语言为中文。
+更多截图：[登录](docs/media/login.png)、[移动队列](docs/media/mobile-queue.png)、[渠道](docs/media/channels.png)、[任务队列](docs/media/queue.png)、[模型路由](docs/media/models.png)、[API Key](docs/media/api-keys.png)、[内容](docs/media/content.png)、[版本历史](docs/media/workflow-history.png)、[移动端](docs/media/mobile-overview.png)。当前 Admin 界面语言为中文。
 
 ## 原生 Windows 快速开始
 

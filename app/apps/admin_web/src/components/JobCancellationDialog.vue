@@ -106,8 +106,8 @@ onBeforeUnmount(() => { alive = false; stopPoll(); write?.abort(); write = null;
 <style scoped>
 .cancellation-intro { margin: 14px 0; line-height: 1.7; }
 .cancellation-reason { width: min(300px, 100%); margin-bottom: 12px; }
-.cancellation-targets { max-height: 48vh; overflow: auto; border-block: 1px solid #dce5ea; }
-.cancellation-target { padding: 14px 4px; border-bottom: 1px solid #e8eef1; display: flex; gap: 9px 12px; flex-wrap: wrap; align-items: center; font-size: 13px; line-height: 1.6; }
+.cancellation-targets { max-height: 48vh; overflow: auto; border-block: 1px solid var(--rc-line); }
+.cancellation-target { padding: 14px 4px; border-bottom: 1px solid var(--rc-line); display: flex; gap: 9px 12px; flex-wrap: wrap; align-items: center; font-size: 13px; line-height: 1.6; }
 .cancellation-target > code, .cancellation-target > a, .cancellation-target > p { flex-basis: 100%; overflow-wrap: anywhere; }
 .cancellation-target > code, .cancellation-target > a { font-family: "Cascadia Mono", Consolas, monospace; }
 .cancellation-operation { margin-top: 12px; overflow-wrap: anywhere; }

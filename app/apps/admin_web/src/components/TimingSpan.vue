@@ -8,7 +8,7 @@ const note = computed(() => props.value?.status === 'open' ? '截至快照 · �
 <template><span class="timing-span" :class="value?.status"><strong class="mono">{{ value?.status === 'unknown' ? '未知' : durationLabel(value?.milliseconds) }}</strong><small>{{ note }}</small></span></template>
 <style scoped>
 .timing-span { display: inline-flex; flex-direction: column; gap: 5px; }
-strong { font-size: 13px; font-weight: 500; color: #173346; }
-small { color: #617482; font-size: 11px; }
-.open strong { color: #087e8b; } .unknown strong { color: #617482; }
+strong { font-size: 13px; font-weight: 500; color: var(--rc-ink); }
+small { color: var(--rc-text-muted); font-size: 11px; }
+.open strong { color: var(--rc-ink); } .unknown strong { color: var(--rc-text-muted); }
 </style>

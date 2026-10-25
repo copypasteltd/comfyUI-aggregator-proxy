@@ -1,5 +1,15 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 · Increment 87 / 原始青柠视觉系统复用
+
+- 按用户指定直接拉取 html.cafe/x5b381ea1 的 04 · 青柠源码，原样保存第四套 CSS 和字体声明，登记完整页面、片段、字体及许可证摘要；原始文件与适配层分开维护。
+- Pull and retain the original 04 Lime CSS and embedded font declarations. Reuse source variables, tickets, cards and typography across the Admin; keep a bounded pull/check tool and provenance lock.
+- 统一所有页面、登录、导航、表格、表单、状态和弹层。原字体原样解码为本地 WOFF，保持现有 CSP；构建附带完整 OFL 许可，并锁定构建配置所需的 Node 类型。
+- Share one Element Plus adapter, preserve semantic status text, keyboard focus, narrow layouts and reduced-motion behavior. Store the continuing visual constraint in AGENTS.md and [87](docs/87-青柠视觉系统与组件复用.md).
+
+- 验证/Validation：原始 5 文件与 2 字体摘要一致；40 前端、71 发布安全、17 页面三种宽度、目录 16 项、重试 8 项、最终候选 28 安装 / 10 浏览器通过；20 PNG / 4 MP4 / 4 GIF 全部刷新并完整核验。候选 `rc-20261025.87.2` 对应 499 输入 / 169 载荷 / 58 wheels / 62 契约。
+- Preserve original CSS/license whitespace, source hashes and failed attempts. Exact original WOFF bytes load locally under the existing CSP. All owned test browsers/resources close; full Python/native protocol suites were not rerun because backend inputs are unchanged. The 70 backlog items and physical/production acceptance stay open; see [87 verification](docs/evidence/2026-10-25/lime-source-visual-verification.json).
+
 ## 2026-10-25 · Increment 86 / 数据库故障脱敏诊断
 
 - Add allowlisted request-owned database error metadata and handle DBAPIError without forwarding SQL/driver tracebacks to Uvicorn.

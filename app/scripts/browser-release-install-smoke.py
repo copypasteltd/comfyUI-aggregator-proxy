@@ -30,6 +30,13 @@ def main() -> None:
                 expect(page.get_by_role("heading", name="运行总览", exact=True)).to_be_visible()
                 assert context.request.get(fixture["origin"] + "/admin/api/v1/session").status == 200
                 report["checks"].append(name + "_installed_admin_login_and_live_queue")
+                page.evaluate("document.fonts.ready")
+                assert page.evaluate("document.documentElement.dataset.c === 'lime'")
+                assert page.locator(".li-tk .li-d").count() == 4
+                assert page.evaluate('document.fonts.check(\'54px "Anton"\') && document.fonts.check(\'14px "Manrope"\')')
+                licenses = context.request.get(fixture["origin"] + "/admin/licenses/fonts.html")
+                assert licenses.status == 200 and all(word in licenses.text() for word in ("Anton", "Manrope", "SIL OPEN FONT LICENSE"))
+                report["checks"].append(name + "_installed_lime_source_fonts_and_offline_licenses")
                 expect(page.locator(".statistics-panel .history-metrics")).to_be_visible()
                 statistics = context.request.get(fixture["origin"] + "/admin/api/v1/queues/statistics?window=1h&task_type=text_to_audio")
                 assert statistics.status == 200

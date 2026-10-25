@@ -152,10 +152,10 @@ onUnmounted(() => { disposed = true; visibilityEpoch++; stopReads(); form.value.
 <template>
   <ChannelDeletionDialog v-model="deletionOpen" :target="deletionTarget" :active="visible" @deleted="refresh"/>
   <ChannelReapplyDialog v-model="reapplyOpen" :target="inspecting" :active="visible && detailOpen" @applied="refresh"/>
-  <div class="page-heading"><div><p class="eyebrow">INFRASTRUCTURE / CHANNELS</p><h1>Windows 渠道</h1><p class="muted">管理 ComfyUI 接入地址、凭据与运行环境版本。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" @click="refresh(); loadNodes()">刷新</el-button><el-button v-if="session.allows('channels:write')" type="primary" :icon="Plus" @click="open()">添加渠道</el-button></div></div>
+  <div class="page-heading"><div><p class="eyebrow li-lab">INFRASTRUCTURE / CHANNELS</p><h1>Windows 渠道</h1><p class="muted">管理 ComfyUI 接入地址、凭据与运行环境版本。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" @click="refresh(); loadNodes()">刷新</el-button><el-button v-if="session.allows('channels:write')" type="primary" :icon="Plus" @click="open()">添加渠道</el-button></div></div>
   <el-alert v-if="error && !drawer" :title="error + (readAt ? ' · 当前展示最后一次成功读取' : '')" type="error" :closable="false" show-icon/>
   <el-alert v-if="nodeError && !drawer" :title="'节点选项读取失败 · ' + nodeError" type="warning" :closable="false" show-icon/>
-  <section class="panel channel-filter-panel"><el-form class="channel-filters" label-position="top" @submit.prevent="applyFilters">
+  <section class="panel li-card channel-filter-panel"><el-form class="channel-filters" label-position="top" @submit.prevent="applyFilters">
     <el-form-item label="名称或地址"><el-input v-model="draft.q" aria-label="名称或地址" maxlength="128" clearable placeholder="按名称或 ComfyUI 地址查找"/></el-form-item>
     <el-form-item label="所属项目"><ScopeSelect v-model="draft.project_id" :active="visible" allow-inactive clearable label="筛选项目"/></el-form-item>
     <el-form-item label="Windows 节点"><el-select v-model="draft.node_id" aria-label="筛选节点" filterable clearable placeholder="全部节点"><el-option v-for="n in nodes" :key="n.id" :value="n.id" :label="n.name"/></el-select></el-form-item>
@@ -164,7 +164,7 @@ onUnmounted(() => { disposed = true; visibilityEpoch++; stopReads(); form.value.
     <div class="channel-filter-actions"><el-button type="primary" native-type="submit">应用筛选</el-button><el-button @click="resetFilters">重置筛选</el-button></div>
   </el-form><p class="form-help">所有条件取交集；名称和地址按字面匹配，编辑后点击应用。全部状态包含已删除历史。</p></section>
   <div class="snapshot-line"><span>上次读取 {{ time(readAt) }}</span><span>第 {{ page }} 页 · 每页 50 条</span></div>
-  <section class="panel"><el-table :data="rows" v-loading="loading" :empty-text="loading ? '正在读取渠道…' : error && !readAt ? '渠道读取失败' : '当前条件没有渠道登记'" table-layout="auto">
+  <section class="panel li-card"><el-table :data="rows" v-loading="loading" :empty-text="loading ? '正在读取渠道…' : error && !readAt ? '渠道读取失败' : '当前条件没有渠道登记'" table-layout="auto">
     <el-table-column label="渠道 / 地址" min-width="250"><template #default="{ row }"><router-link :to="{ path: '/channels', query: { channel: row.id } }"><strong>{{ row.name }}</strong></router-link><span class="id-line">{{ row.base_url }}</span><span class="id-line mono">{{ row.id }}</span></template></el-table-column>
     <el-table-column label="详情" width="80"><template #default="{ row }"><el-button text size="small" @click="openDetails(row)">查看</el-button></template></el-table-column>
     <el-table-column label="配置版本" min-width="165"><template #default="{ row }"><span class="mono">{{ row.desired_revision }} / {{ row.applied_revision ?? '—' }} / {{ row.verified_revision ?? '—' }}</span><span class="id-line">期望 / 已应用 / 已验证</span></template></el-table-column>

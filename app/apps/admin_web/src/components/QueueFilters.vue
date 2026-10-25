@@ -60,7 +60,7 @@ onUnmounted(() => { alive = false; stop(); document.removeEventListener('visibil
 </script>
 
 <template>
-  <section class="panel queue-filters" aria-label="队列筛选">
+  <section class="panel li-card queue-filters" aria-label="队列筛选">
     <el-form label-position="top" @submit.prevent="apply">
       <div class="queue-filter-grid">
         <el-form-item v-for="field in fields" :key="field.kind" :label="field.label">

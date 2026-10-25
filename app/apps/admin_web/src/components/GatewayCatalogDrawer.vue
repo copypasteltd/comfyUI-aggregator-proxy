@@ -179,7 +179,7 @@ onUnmounted(() => { disposed = true; stopAll(); clearData(); if (poll) clearInte
 
 <template>
   <el-drawer :model-value="modelValue" title="网关模型目录" size="min(1120px, 100vw)" class="gateway-catalog" :before-close="beforeClose" :close-on-click-modal="false" @update:model-value="emit('update:modelValue', $event)">
-    <div class="catalog-heading"><div><p class="eyebrow">GATEWAY / CATALOG</p><h2>{{ gateway?.name }}</h2><p class="muted mono">{{ gateway?.id }}</p></div><el-button :loading="loading" :disabled="!active" @click="refresh">刷新目录状态</el-button></div>
+    <div class="catalog-heading"><div><p class="eyebrow li-lab">GATEWAY / CATALOG</p><h2>{{ gateway?.name }}</h2><p class="muted mono">{{ gateway?.id }}</p></div><el-button :loading="loading" :disabled="!active" @click="refresh">刷新目录状态</el-button></div>
     <el-alert v-if="error" :title="error + (state ? ' · 展示最后一次成功快照' : '')" type="error" :closable="false"/>
     <el-alert v-if="writeError" :title="writeError" type="error" :closable="false"/>
     <section v-if="pending" class="catalog-request" aria-label="目录请求核对" aria-live="polite"><strong>{{ writing ? '正在保存期望目录' : '发布结果待核对' }}</strong><p>{{ pending.description }}</p><p class="form-help">保留原正文、版本和幂等键。关闭本地记录不会撤销服务器操作。</p><div class="catalog-toolbar"><el-button type="primary" :disabled="!uncertain || writing || !active" @click="execute(pending)">使用原请求核对</el-button><el-button :disabled="writing || !active" @click="clearPending">关闭本地记录</el-button></div></section>

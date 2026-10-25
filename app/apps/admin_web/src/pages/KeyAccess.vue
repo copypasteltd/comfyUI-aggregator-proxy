@@ -53,17 +53,17 @@ onUnmounted(() => { controller?.abort(); document.removeEventListener('visibilit
 
 <template>
   <div class="page-heading access-heading">
-    <div><p class="eyebrow">ACCESS CONTROL / REQUEST HISTORY</p><h1>Key 访问记录</h1><p class="muted">查看生成与内容 API 的调用结果，核对拒绝原因和中断响应。</p></div>
+    <div><p class="eyebrow li-lab">ACCESS CONTROL / REQUEST HISTORY</p><h1>Key 访问记录</h1><p class="muted">查看生成与内容 API 的调用结果，核对拒绝原因和中断响应。</p></div>
     <div class="toolbar"><router-link to="/keys"><el-button :icon="ArrowLeft">返回 API 密钥</el-button></router-link><el-button :icon="Refresh" :loading="loading" @click="restart()">刷新记录</el-button></div>
   </div>
   <el-alert v-if="error" :title="error" type="error" :closable="false" show-icon/>
   <el-alert v-if="error && snapshot" title="以下是上次成功取得的记录，请刷新后再确认。" type="warning" :closable="false"/>
   <el-alert v-if="snapshot && (snapshot.capture_health.failed || snapshot.capture_health.overloaded)" title="访问记录可能不完整：当前服务曾发生记录写入失败或容量不足，请核对服务日志。" type="warning" :closable="false" show-icon/>
-  <section v-if="snapshot" class="panel">
+  <section v-if="snapshot" class="panel li-card">
     <div class="panel-heading access-subject"><div><h2>{{ snapshot.key_name }}</h2><p class="id-line break-id">{{ snapshot.key_id }}</p></div><el-tag :type="snapshot.deleted_at ? 'info' : snapshot.enabled ? 'success' : 'warning'">{{ snapshot.deleted_at ? '已删除 · 历史保留' : snapshot.enabled ? 'Key 已启用' : 'Key 已停用' }}</el-tag></div>
   </section>
   <div class="snapshot-line access-snapshot"><span>{{ snapshot ? `查询截止 ${time(snapshot.snapshot_at)} · 保留 ${snapshot.retention_days} 天` : '尚未取得访问记录' }}</span><span>每页最多 50 条</span></div>
-  <section class="panel">
+  <section class="panel li-card">
     <div class="panel-heading access-filter"><label for="access-result">调用结果</label><el-select id="access-result" v-model="selected" aria-label="调用结果" style="width: 180px"><el-option label="全部结果" value="all"/><el-option label="成功" value="success"/><el-option label="拒绝" value="denied"/><el-option label="错误 / 未完成" value="error"/></el-select></div>
     <el-table :data="snapshot?.data ?? []" v-loading="loading" :empty-text="loading ? '正在读取访问记录' : error ? '访问记录读取失败，请刷新重试' : snapshot ? '该筛选暂无访问记录' : '尚未取得访问记录'" table-layout="auto">
       <el-table-column label="时间 / 请求 ID" min-width="250"><template #default="{ row }"><span>{{ time(row.started_at) }}</span><span class="id-line break-id">{{ row.request_id }}</span></template></el-table-column>

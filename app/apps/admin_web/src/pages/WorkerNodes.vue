@@ -127,11 +127,11 @@ onUnmounted(() => { document.removeEventListener('visibilitychange', resume); wi
 </script>
 
 <template>
-  <div class="page-heading"><div><p class="eyebrow">INFRASTRUCTURE / WINDOWS NODES</p><h1>Windows 节点</h1><p class="muted">登记服务器、查看硬件与占用，管理 Worker 接入凭证。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button><el-button v-if="canManage" type="primary" :icon="Plus" :disabled="saving" @click="openEdit()">登记节点</el-button></div></div>
+  <div class="page-heading"><div><p class="eyebrow li-lab">INFRASTRUCTURE / WINDOWS NODES</p><h1>Windows 节点</h1><p class="muted">登记服务器、查看硬件与占用，管理 Worker 接入凭证。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" @click="refresh">刷新</el-button><el-button v-if="canManage" type="primary" :icon="Plus" :disabled="saving" @click="openEdit()">登记节点</el-button></div></div>
   <section class="node-setup" aria-label="Windows 接入顺序"><div><span class="node-step">01</span><strong>登记节点</strong><p>命名服务器并保存一次性凭证</p></div><div><span class="node-step">02</span><strong>Worker 上报 GPU</strong><p>配置 Windows Worker 后启动接入</p></div><div><span class="node-step">03</span><router-link v-if="session.allows('channels:read')" to="/channels"><strong>添加 ComfyUI 渠道 →</strong></router-link><strong v-else>添加 ComfyUI 渠道</strong><p>选择物理 GPU，验证 Workflow</p></div></section>
   <el-alert v-if="error" :title="error" type="error" :closable="false" show-icon/>
   <el-form class="node-filters" inline @submit.prevent="filter"><el-form-item label="名称或节点 ID"><el-input v-model="q" placeholder="搜索 Windows 节点" maxlength="128" clearable/></el-form-item><el-form-item label="节点状态"><el-select v-model="state" class="node-state"><el-option label="全部状态" value=""/><el-option label="已启用" value="enabled"/><el-option label="已停用" value="disabled"/><el-option label="已归档" value="archived"/></el-select></el-form-item><el-form-item><el-button native-type="submit" :disabled="loading">应用筛选</el-button></el-form-item></el-form>
-  <section class="panel"><div class="panel-heading"><h2>节点清单 <span class="muted">{{ total }} 台</span></h2><span class="muted">每 5 秒更新 · {{ time(snapshot) }}</span></div>
+  <section class="panel li-card"><div class="panel-heading"><h2>节点清单 <span class="muted">{{ total }} 台</span></h2><span class="muted">每 5 秒更新 · {{ time(snapshot) }}</span></div>
     <el-table :data="rows" v-loading="loading" empty-text="暂无 Windows 节点。登记后启动 Worker，上报的硬件将在此显示。" table-layout="auto">
       <el-table-column label="Windows 节点" min-width="220"><template #default="{ row }"><strong>{{ row.name }}</strong><span class="id-line">{{ row.id }}</span></template></el-table-column>
       <el-table-column label="状态" min-width="155"><template #default="{ row }"><el-tag size="small" :type="statusType(row)">{{ status(row) }}</el-tag><span class="id-line">版本 {{ row.revision }}</span></template></el-table-column>
@@ -148,19 +148,19 @@ onUnmounted(() => { document.removeEventListener('visibilitychange', resume); wi
 </template>
 
 <style scoped>
-.node-setup { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 2px solid #087e8b; border-bottom: 1px solid #d8e3e9; margin: 20px 0 26px; background: #eaf2f4; }
-.node-setup > div { padding: 18px 22px; border-right: 1px solid #d8e3e9; }
+.node-setup { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 2px solid var(--rc-ink); border-bottom: 1px solid var(--rc-line); margin: 20px 0 26px; background: var(--rc-lime-soft); border-radius: var(--rc-radius-card); overflow: hidden; }
+.node-setup > div { padding: 18px 22px; border-right: 1px solid var(--rc-line); }
 .node-setup > div:last-child { border-right: 0; }
-.node-step { font: 12px Consolas, monospace; color: #087e8b; margin-right: 12px; }
+.node-step { font: 400 22px var(--rc-font-display); color: var(--rc-ink); margin-right: 12px; }
 .node-setup strong { font-size: 13px; }
-.node-setup p { color: #617482; font-size: 12px; line-height: 1.7; margin-top: 8px; }
-.node-setup a { color: #087e8b; }
+.node-setup p { color: var(--rc-text-muted); font-size: 12px; line-height: 1.7; margin-top: 8px; }
+.node-setup a { color: var(--rc-ink); }
 .node-filters { margin: 20px 0 4px; }
 .node-state { width: 150px; }
-.node-warning { display: block; color: #a84d25; font-size: 11px; margin-top: 6px; }
+.node-warning { display: block; color: var(--rc-warning); font-size: 11px; margin-top: 6px; }
 .node-credential-id { overflow-wrap: anywhere; margin: 20px 0 12px; font-size: 12px; }
 .node-credential-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
 .node-details { margin: 22px 0; }
 .node-detail-heading { margin-top: 26px; }
-@media(max-width: 700px) { .node-setup { grid-template-columns: 1fr; } .node-setup > div { border-right: 0; border-bottom: 1px solid #d8e3e9; padding: 14px 16px; } .node-setup > div:last-child { border-bottom: 0; } .node-setup p { margin-left: 29px; } .page-heading { gap: 14px; flex-wrap: wrap; } .node-filters :deep(.el-form-item) { margin-right: 12px; } }
+@media(max-width: 700px) { .node-setup { grid-template-columns: 1fr; } .node-setup > div { border-right: 0; border-bottom: 1px solid var(--rc-line); padding: 14px 16px; } .node-setup > div:last-child { border-bottom: 0; } .node-setup p { margin-left: 29px; } .page-heading { gap: 14px; flex-wrap: wrap; } .node-filters :deep(.el-form-item) { margin-right: 12px; } }
 </style>

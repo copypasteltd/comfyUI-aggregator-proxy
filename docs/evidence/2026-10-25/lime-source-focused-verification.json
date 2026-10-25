@@ -1,0 +1,98 @@
+{
+  "at": "2026-10-25T11:06:11.907660+00:00",
+  "passed": true,
+  "increment": 87,
+  "baseline_commit": "abfdab4e2bda209848417a1f068be2a92b3f72af",
+  "source": {
+    "url": "https://html.cafe/x5b381ea1",
+    "selection": "04 · 青柠 / Lime",
+    "source_sha256": "de1e2166428950723ce52f1ae586a66009c46bc226865f4a7def64949c843c06",
+    "files": {
+      "apps/admin_web/src/theme/reference/lime.css": {
+        "bytes": 21092,
+        "sha256": "f593ce1d5446edf2d883ab177ed3b40b6230f5ce01acdee1269f7c5fc24d24fb"
+      },
+      "apps/admin_web/src/theme/reference/fonts.css": {
+        "bytes": 41178,
+        "sha256": "aa4e22654cd13c005dc13e2dd391016cc9779e7da04e26e20e7cc3bfb6a71b12"
+      },
+      "apps/admin_web/src/theme/fonts.css": {
+        "bytes": 300,
+        "sha256": "13229edcd23d2ed1438234aca7d8173baee1ac3ac15204ea5ba0980368996655"
+      },
+      "apps/admin_web/src/assets/fonts/Manrope-Reference.woff": {
+        "bytes": 17132,
+        "sha256": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd"
+      },
+      "apps/admin_web/src/assets/fonts/Anton-Reference.woff": {
+        "bytes": 13548,
+        "sha256": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a"
+      }
+    },
+    "font_license_files": {
+      "apps/admin_web/src/assets/fonts/Anton-OFL.txt": "ee67e6ee22790b7929f1a3769ca2801d565c64b5a9096942c1adf5596de9c9e4",
+      "apps/admin_web/src/assets/fonts/Manrope-OFL.txt": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c"
+    },
+    "source_css_unchanged": true,
+    "source_font_bytes_unchanged": true,
+    "runtime_external_requests": 0,
+    "existing_csp_relaxed": false
+  },
+  "checks": {
+    "frontend_units": {
+      "passed": true,
+      "tests": 40,
+      "command": "node --test tests/workflowJson.test.ts tests/gatewayCatalog.test.ts",
+      "node": "24.22.1"
+    },
+    "frontend_typecheck_and_build": {
+      "passed": true,
+      "command": "npm run build",
+      "vite": "7.3.7",
+      "modules": 1816,
+      "known_chunk_size_warning": true
+    },
+    "release_bundle_units": {
+      "passed": true,
+      "tests": 71,
+      "command": "python -m pytest tests/unit/test_release_bundle_security.py"
+    },
+    "ruff_modified_python": true,
+    "runtime_contracts": {
+      "passed": true,
+      "count": 62,
+      "drift": []
+    }
+  },
+  "failure_history": [
+    {
+      "phase": "initial_frontend_build",
+      "type": "TS2307",
+      "module": "node:fs",
+      "resolution": "Pin Node type declarations for the license-emitting Vite configuration"
+    },
+    {
+      "phase": "first_browser_capture",
+      "reference": "lime-source-first-browser-failure.json",
+      "resolution": "Serve exact decoded original WOFF assets under the existing self-only CSP"
+    },
+    {
+      "phase": "second_browser_capture",
+      "reference": "lime-source-second-browser-failure.json",
+      "resolution": "Normalize explicit nullable audio quota values only in the documentation UI seed"
+    },
+    {
+      "phase": "metadata_review_byte_comparison",
+      "reference": "lime-source-metadata-review.json",
+      "resolution": "Confirm the browser theme-color and HTML line endings are the only changed Admin artifact"
+    }
+  ],
+  "full_python_suite_rerun": false,
+  "native_protocol_suite_rerun": false,
+  "backend_application_sources_changed": false,
+  "remaining_items": 70,
+  "real_comfyui": false,
+  "physical_fleet_accepted": false,
+  "production_accepted": false,
+  "virtualization_used": false
+}
