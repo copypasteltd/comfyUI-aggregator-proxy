@@ -136,3 +136,5 @@ JSON Schema 使用 draft 2020-12，引用限定本文件 `#/$defs`，禁止在�
 ## 第 84 增量：监控配置与指标目录
 
 新增 [monitoring-configuration.schema.json](./monitoring-configuration.schema.json) 和 [monitoring-metrics.json](./monitoring-metrics.json)，分别冻结封闭安全响应/严格阈值与固定指标/标签/预算。37 个新增 fixture（3 正/34 反）与严格 DTO 对照；累计 **57 schema、902 fixture（210 正/692 反）、60 运行契约、190 设计端点、156 OpenAPI 路径/197 方法**。监控两个 GET 入口使用独立只读身份，默认关闭，原四类身份不可代用；来源、只读事务、流式观测和失效语义须运行验证，不能从 JSON Schema 推定通过。应用契约继续 0.5.0、Worker 协议继续 0.4.0，16 状态/64 转换/24 条件不变；详见 [84](../84-监控指标与脱敏请求关联.md)。
+
+第 91 增量新增 Provider 视频响应 sdk-video-response.schema.json 与 17 个 fixture（7 正/10 反），累计 61 schema/976 fixture（225 正/751 反）、64 运行契约。冻结已知 seconds/size、状态映射和固定安全错误，未知进度省略；只适用于 rc_ Provider 投影，不声明官方 Video 类型完整兼容。见 [91](../91-多媒体SDK与视频冻结规格.md)。

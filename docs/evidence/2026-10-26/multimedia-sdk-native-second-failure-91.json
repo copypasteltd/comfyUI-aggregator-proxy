@@ -1,0 +1,31 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T17:01:19.341122+00:00",
+  "passed": false,
+  "increment": 91,
+  "scope": "Actual pinned SDK rehearsal failure; no acceptance promotion.",
+  "full_acceptance": "pending",
+  "real_resource_acceptance": false,
+  "report": {
+    "path": "docs/evidence/2026-10-26/multimedia-sdk-native-91-second/openai-sdk-native-protocol.json",
+    "sha256": "ae632cac7cb30ff22daeeee9f64ad73f6899647aaff7e70f1a560305be7761e4"
+  },
+  "failure": {
+    "phase": "actual_openai_sdk_clients",
+    "client": "python",
+    "sdk": "3.37.0",
+    "operation": "reference_asset_upload",
+    "type": "BadRequestError",
+    "http_status": 400,
+    "error_code": "invalid_request",
+    "reason": "Generic SDK file upload retained its default JSON Content-Type because the multipart header was not specified.",
+    "video_head_correction_reached": true
+  },
+  "cleanup": {
+    "processes": true,
+    "databases": true,
+    "database_observer": true,
+    "media_and_credentials": true
+  },
+  "correction": "Declare multipart/form-data as generated SDK file methods do; let the SDK generate its boundary. Keep the server request contract and budgets."
+}

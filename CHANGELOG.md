@@ -1,5 +1,15 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 91 / 多媒体 SDK 与视频冻结规格
+
+- 双语 README 突出当前方案与原始青柠源码，历史增量证据折叠保存；服务启停顺序归入运维段落，完整设计与使用内容保留。Organize both entry points around current behavior, original Lime sources and usage, retaining historical evidence in a collapsible section.
+- Provider 视频创建/查询返回原请求冻结的 seconds/size，失败/取消/到期仅返回固定安全错误；向前迁移 258 与预留事务保存不可变元数据，旧行未知字段不猜测，不在客户查询中解密请求。
+- Preserve frozen Provider video specifications and safe terminal errors. Keep unknown progress absent, legacy metadata unknown and all original authentication, accounting and GPU protections.
+- 扩展固定 Python 3.37.0 / Node 7.43.0 的视频、多参考视频与音频统一任务/内容验证。严格官方 Video 类型的进度/尺寸限制明确保留；不关闭严格验证，不声明 /audio/speech。
+- Exercise pinned SDK multimedia paths using the project response contract. Preserve actual regression/SDK failures and scoped cleanup evidence. Direct control video projection parity, actual resources and the 69 remaining exits stay open; see [91](docs/91-多媒体SDK与视频冻结规格.md).
+- [91 最终验证](docs/evidence/2026-10-26/multimedia-sdk-verification-91.json)：Go/PostgreSQL 176 顶层/342 子测试、1703 项 Python 专项、39 SDK 检查/24 原生场景、完整 16 门禁/3713 Python、28 精确候选安装及 10 浏览器检查通过。611 CI/274 原生/505 候选输入一致；候选 rc-20261026.91.1 保留未生产签收标志，169 载荷/58 wheels/64 运行契约。
+- Preserve the first CI budget failure and one controlled statistics-only test-database experiment. The successful Python gate takes 954.897 seconds under the unchanged 1200-second budget; this does not establish the complete historical cause. All owned verification processes, browser contexts and temporary databases/directories are cleaned up. Original Lime assets remain directly imported; no UI change or replacement recording is introduced.
+
 ## 2026-10-26 · Increment 90 / 固定 SDK 客户端兼容
 
 - 使用实际 OpenAI Python 3.37.0 / Node 7.43.0 SDK 测试本次所属 loopback Provider，覆盖模型发现、图片生成与单/多图编辑、请求关联、错误、幂等、冲突重试和显式异步扩展；不调用 OpenAI 公网，不使用真实客户 Key。

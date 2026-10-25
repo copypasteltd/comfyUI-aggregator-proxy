@@ -1,0 +1,24 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T17:48:17.612864+00:00",
+  "scope": "Read-only fixed maintenance settings during the second CI run; no query text, connection secrets or configuration changes.",
+  "root_cause_proven": false,
+  "settings": {
+    "autovacuum": "on",
+    "autovacuum_analyze_scale_factor": "0.1",
+    "autovacuum_analyze_threshold": "50",
+    "autovacuum_naptime": "60",
+    "autovacuum_vacuum_scale_factor": "0.2",
+    "autovacuum_vacuum_threshold": "50",
+    "track_counts": "on"
+  },
+  "tables_with_reloptions": 0,
+  "background_worker_counts": [
+    {
+      "backend_type": "autovacuum launcher",
+      "count": 1
+    }
+  ],
+  "passed": true,
+  "owned_connection_closed": true
+}

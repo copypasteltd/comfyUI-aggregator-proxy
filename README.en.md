@@ -12,7 +12,16 @@ The internal service name is **Render Control**. The system combines a visual Ad
 
 The Chinese [tracking checklist](docs/78-完整待办与首版收口清单.md) retains 76 stable IDs: local implementation/traceability items 01–05, 10 and 12 are complete, leaving 69 open items (67 first-release and two optional). [Provider consumption](docs/80-Provider目录消费与版本快照.md), [Admin mapping management](docs/81-Admin网关目录映射与发布核对.md), [confirmed failure retries](docs/82-确认失败重试分类与跨GPU约束.md) and [monitoring](docs/84-监控指标与脱敏请求关联.md) have implementations and separate verification evidence. Actual Workflows, joint gateway behavior, failures and production still require acceptance.
 
-The latest [increment 90: pinned SDK clients](docs/90-固定SDK客户端兼容矩阵.md) uses actual Python 3.37.0 and Node 7.43.0 SDKs to verify model discovery, image generation/editing, error correlation, idempotency/retries and explicit asynchronous extensions. Strict decoding exposed missing standard metadata in ordinary upstream models. The Provider now fills absent fields, preserves existing values and extensions, and rejects invalid metadata. [Local protocol evidence](docs/evidence/2026-10-25/openai-sdk-native-90-fifth/openai-sdk-native-protocol.json) passes 20 SDK checks within 24 native scenarios, creating only the expected six jobs and usage records. Actual Workflows, the complete client matrix and all 69 remaining items stay open.
+Current [increment 91](docs/91-多媒体SDK与视频冻结规格.md) preserves frozen Provider video seconds/size and safe terminal errors using forward migration 258 and immutable metadata. Go/PostgreSQL checks pass 176 top-level tests and 342 subtests; actual Python/Node clients pass 39 SDK checks (including the expected strict Video-type rejection) within 24 native scenarios, creating exactly 12 jobs/intents/usage records. Differences from the strict official Video type remain explicit. See the topic for results and limitations.
+
+[Final verification 91](docs/evidence/2026-10-26/multimedia-sdk-verification-91.json) passes all 16 gates/3713 Python cases, 28 exact-candidate installation checks and ten installed-browser checks. All 611 CI, 274 native-runtime and 505 candidate inputs match the current code. Candidate `rc-20261026.91.1` contains 169 payload files, 58 wheels and 64 runtime contracts. The original CI budget failure and controlled statistics experiment remain recorded; the successful Python gate takes 954.897 seconds within the unchanged 1200-second budget. Owned test browsers, processes and temporary databases are cleaned up; actual-resource and production acceptance remain pending.
+
+The Admin directly reuses the downloaded [original 04 Lime CSS](app/apps/admin_web/src/theme/reference/lime.css) and local original fonts. Future screens use the same shared theme and component adapter. See [source provenance and reuse rules](docs/87-青柠视觉系统与组件复用.md).
+
+<details>
+<summary>Historical verification (increments 84–90; results apply to those versions)</summary>
+
+Previous [increment 90: pinned SDK clients](docs/90-固定SDK客户端兼容矩阵.md) uses actual Python 3.37.0 and Node 7.43.0 SDKs to verify model discovery, image generation/editing, error correlation, idempotency/retries and explicit asynchronous extensions. Strict decoding exposed missing standard metadata in ordinary upstream models. The Provider now fills absent fields, preserves existing values and extensions, and rejects invalid metadata. [Local protocol evidence](docs/evidence/2026-10-25/openai-sdk-native-90-fifth/openai-sdk-native-protocol.json) passes 20 SDK checks within 24 native scenarios, creating only the expected six jobs and usage records. Actual Workflows, the complete client matrix and all 69 remaining items stay open.
 
 [Final verification 90](docs/evidence/2026-10-25/openai-sdk-verification-90.json) passes 206 focused checks, 173 top-level/331 subtests in the Go component suite, all 16 gates/3696 Python cases, 28 exact-candidate installation checks and ten installed-browser checks. All 606 CI, 271 native-runtime and 501 candidate source inputs match. SDK failures, the CI budget failure and controlled test-database statistics experiments remain recorded; the original 1200-second budget is preserved. Candidate `rc-20261025.90.1` contains 169 payload files, 58 wheels and 63 runtime contracts. Actual-resource and production acceptance remain pending.
 
@@ -28,8 +37,6 @@ Increment 85 adds [native Windows service deployment tools](docs/85-原生系统
 
 [Increment 85 verification](docs/evidence/2026-10-25/native-services-verification.json) passes all 16 gates, 3524 Python checks with zero failures/errors/skips, 161 service/release checks, 40 frontend units, 28 exact-candidate installation checks and eight installed-browser checks. Candidate `rc-20261025.85.3` matches 484 source inputs and contains 166 payload files, 58 wheels and 61 runtime contracts; all 581 CI inputs match. Four application roles exit cleanly with journals preserved and private resources removed. Actual WinSW/SCM and new gateway-supervisor lifecycles remain open.
 
-Within one deployment, start API → Worker → GC → Runner → Gateway and stop in reverse so the API remains available during Worker shutdown. First use `install` to register stopped services, apply each account's read/modify permissions from `acl-plan.json`, then `start` and separately check SCM, HTTPS readiness and Worker registration. Drain and reconcile unknown work before an upgrade; uninstall preserves state and configuration.
-
 The [native CI](docs/83-原生CI门禁与失败证据.md) provides 16 serial gates, isolated test directories, backup before test-database migration and sanitized public summaries. Raw logs/JUnit remain private. A dedicated physical Runner, repository enablement and actual GitHub success/failure artifacts still require acceptance; item 11 remains open.
 
 The [native evidence](docs/evidence/2026-10-25/monitoring-native-final/confirmed-retry-native-protocol.json) uses actual Sub2API/API/Runner/Worker/PostgreSQL processes, with explicitly synthetic ComfyUI, Redis and storage protocol fixtures. [Increment 82](docs/82-确认失败重试分类与跨GPU约束.md) retains a gateway authentication row-lock timeout/502 observed during concurrent checks. Its cause remains unresolved; an isolated pass does not establish concurrent capacity. Physical devices, production Workflows and model quality still require later resource acceptance.
@@ -39,6 +46,8 @@ Increment 86 adds [sanitized database failure diagnostics and concurrency observ
 [Increment 86 verification](docs/evidence/2026-10-25/database-diagnostics-final-ci-verification.json) passes all 16 gates/3593 Python checks, 29 native protocol cases within the complete concurrent CI window, 28 exact-candidate installation checks and eight installed-browser checks. Candidate `rc-20261025.86.1` matches 488 build inputs and contains 166 payload files, 58 wheels and 62 runtime contracts; 59 schemas/947 fixtures agree. [86](docs/86-数据库故障脱敏诊断与并发观测.md) retains failed attempts, the one-time test-database maintenance and unresolved historical roots.
 
 Increment 87 imports the user-selected [original 04 Lime source](docs/87-青柠视觉系统与组件复用.md). Seventeen routes, 390px/320px layouts and all demonstration media are refreshed. Forty frontend tests, 71 release security tests, 28 final-candidate installation checks and ten installed-browser checks pass. Full backend/native protocol suites were not rerun; [verification 87](docs/evidence/2026-10-25/lime-source-visual-verification.json) records scope and evidence.
+
+</details>
 
 ## Contents
 
@@ -242,6 +251,8 @@ Compatibility is an explicit OpenAI-format subset. Frozen contracts define accep
 
 [Topic 90](docs/90-固定SDK客户端兼容矩阵.md) documents the pinned client matrix: Python `openai==3.37.0` and Node `openai@7.43.0`. Set the API address explicitly to this service's `/v1`, use a published model and business Key, and persist the `Idempotency-Key` before the first submission. Examples disable automatic retries and reuse the same key for recovery. Encode the multipart `workflow_options` extension as JSON form text.
 
+See [topic 91](docs/91-多媒体SDK与视频冻结规格.md) for video and audio. Provider video responses retain frozen `seconds` / `size` and omit unknown `progress`; validate against the [project video contract](docs/contracts/sdk-video-response.schema.json). The strict Python official `Video` type differs in progress and allowed sizes. Use generic SDK JSON methods to recover or poll the original job, then the video content method to download. Audio uses asynchronous `/jobs` with `text_to_audio`, followed by the original artifact’s `/content/{id}/download`; it does not use `/audio/speech`.
+
 Before running the repository's SDK rehearsal, explicitly install the sdk-compat dependency group and isolated locked Node dependencies as described in topic 90. These client verification tools do not enter the Admin or production runtime bundle.
 
 ```python
@@ -286,6 +297,8 @@ Internal retries share a maximum of two retries with 5/15-second backoffs. A pre
 See [task mechanisms](docs/02-系统架构与任务机制.md), [Worker protocol](docs/12-接口契约与Worker协议.md), and [joint recovery](docs/60-数据库对象与密钥联合恢复校验.md).
 
 ## Configuration, deployment and operations
+
+Within one deployment, start API → Worker → GC → Runner → Gateway and stop in reverse so the API remains available during Worker shutdown. First use `install` to register stopped services, apply each account's read/modify permissions from `acl-plan.json`, then `start` and separately check SCM, HTTPS readiness and Worker registration. Drain and reconcile unknown work before an upgrade; uninstall preserves state and configuration.
 
 | Setting | Purpose |
 | --- | --- |

@@ -273,10 +273,14 @@ func TestCompatibilityVideoJSONAndOriginalTaskContent(t *testing.T) {
 	f := compatibilitySetup(t)
 	f.config.Models = append(f.config.Models, PublicModelRule{Model: "studio-video-v1", TaskType: "text_to_video", Target: testTarget(t), PriceVersion: "prices-v1", UnitPrice: money(t, "1"), GroupIDs: []int64{f.groupID}, Defaults: map[string]any{"seconds": json.Number("2")}})
 	f.start(t)
-	body := `{"model":"studio-video-v1","prompt":"synthetic video"}`
+	body := `{"model":"studio-video-v1","prompt":"synthetic video","size":"1280x720"}`
 	status, raw, headers := f.call(t, "POST", "/v1/videos", body, map[string]string{"Idempotency-Key": "video-compat"})
 	if status != 202 || !bytes.Contains(raw, []byte(`"object":"video"`)) || !bytes.Contains(raw, []byte(`"status":"queued"`)) {
 		t.Fatal("video create did not use async video projection", status)
+	}
+	var frozen map[string]any
+	if json.Unmarshal(raw, &frozen) != nil || frozen["seconds"] != "2" || frozen["size"] != "1280x720" {
+		t.Fatal("video create omitted its frozen duration or size")
 	}
 	id := resultID(t, raw)
 	if headers.Get("Location") != "/v1/videos/"+id {
@@ -285,6 +289,12 @@ func TestCompatibilityVideoJSONAndOriginalTaskContent(t *testing.T) {
 	i, _, err := f.s.Recover(ctx(), id)
 	if err != nil || i.TaskType != "text_to_video" || i.MaxUnits != 2 {
 		t.Fatal("video defaults were not frozen")
+	}
+	f.config.Models[len(f.config.Models)-1].Defaults = map[string]any{"seconds": json.Number("9"), "size": "512x512"}
+	f.start(t)
+	status, raw, _ = f.call(t, "POST", "/v1/videos", body, map[string]string{"Idempotency-Key": "video-compat"})
+	if status != 202 || json.Unmarshal(raw, &frozen) != nil || frozen["id"] != id || frozen["seconds"] != "2" || frozen["size"] != "1280x720" {
+		t.Fatal("changed defaults replaced the original video specification")
 	}
 	status, _, _ = f.call(t, "GET", "/v1/images/tasks/"+id, "", nil)
 	if status != 404 {
@@ -298,6 +308,9 @@ func TestCompatibilityVideoJSONAndOriginalTaskContent(t *testing.T) {
 	status, raw, _ = f.call(t, "GET", "/v1/videos/"+id, "", nil)
 	if status != 200 || !bytes.Contains(raw, []byte(`"status":"completed"`)) || bytes.Contains(raw, []byte(i.ProviderRequestID)) {
 		t.Fatal("video public projection incorrect")
+	}
+	if json.Unmarshal(raw, &frozen) != nil || frozen["seconds"] != "2" || frozen["size"] != "1280x720" {
+		t.Fatal("video polling lost its frozen duration or size")
 	}
 	status, raw, headers = f.call(t, "GET", "/v1/videos/"+id+"/content", "", map[string]string{"Range": "bytes=1-3"})
 	if status != 206 || !bytes.Equal(raw, fixtureImage[1:4]) || headers.Get("Content-Type") != "video/mp4" {

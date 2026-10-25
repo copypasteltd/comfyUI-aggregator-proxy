@@ -113,6 +113,8 @@ type Request struct {
 	hash           string
 	units          int64
 	requireAssets  bool
+	videoMillis    int64
+	videoSize      string
 }
 
 func (Request) String() string   { return "rendercontrol.Request{redacted}" }
@@ -151,6 +153,8 @@ func NewRequest(operation string, request controlclient.JobRequest) (Request, er
 	}
 	parameters, _ := canonical["parameters"].(map[string]any)
 	units := int64(1)
+	var videoMillis int64
+	var videoSize string
 	if image {
 		if value, exists := parameters["n"]; exists {
 			number, ok := value.(json.Number)
@@ -178,8 +182,18 @@ func NewRequest(operation string, request controlclient.JobRequest) (Request, er
 			return Request{}, ErrInvalid
 		}
 		units = (duration + 999) / 1000
+		if video {
+			videoMillis = duration
+			if value, present := parameters["size"]; present {
+				var valid bool
+				videoSize, valid = value.(string)
+				if !valid || !publicSizePattern.MatchString(videoSize) {
+					return Request{}, ErrInvalid
+				}
+			}
+		}
 	}
-	return Request{operation: operation, taskType: request.TaskType, model: request.Model, inputHash: digest(body), body: body, hash: digest(body), units: units}, nil
+	return Request{operation: operation, taskType: request.TaskType, model: request.Model, inputHash: digest(body), body: body, hash: digest(body), units: units, videoMillis: videoMillis, videoSize: videoSize}, nil
 }
 
 func validateJSON(decoder *json.Decoder, depth int, count *int) error {
@@ -234,43 +248,45 @@ func NewTarget(gatewayID string) (Target, error) {
 
 // Intent is a metadata-only projection; ciphertext and plaintext stay private.
 type Intent struct {
-	Catalog           *controlclient.CatalogStamp
-	ID                string
-	UsageAccountID    int64
-	BillingGroupID    int64
-	RateMultiplier    Rate
-	RateSource        string
-	BillingType       int
-	SubscriptionID    int64
-	Model             string
-	CreatedAt         time.Time
-	ClientRequestHash string
-	Instance          string
-	TargetGatewayID   string
-	UserID            int64
-	KeyID             int64
-	TrustedIP         netip.Addr
-	Operation         string
-	RequestHash       string
-	TaskType          string
-	ProviderRequestID string
-	AuthorizationRef  string
-	PriceVersion      string
-	UnitPrice         Money
-	MaxUnits          int64
-	HoldAmount        Money
-	State             string
-	DispatchCount     int
-	AdmissionID       string
-	RemoteJobID       string
-	TerminalEventID   string
-	TerminalHash      string
-	Outcome           string
-	ActualAmount      Money
-	ImageCount        int64
-	VideoMilliseconds int64
-	AudioMilliseconds int64
-	LedgerRef         string
+	Catalog                    *controlclient.CatalogStamp
+	ID                         string
+	UsageAccountID             int64
+	BillingGroupID             int64
+	RateMultiplier             Rate
+	RateSource                 string
+	BillingType                int
+	SubscriptionID             int64
+	Model                      string
+	CreatedAt                  time.Time
+	ClientRequestHash          string
+	Instance                   string
+	TargetGatewayID            string
+	UserID                     int64
+	KeyID                      int64
+	TrustedIP                  netip.Addr
+	Operation                  string
+	RequestHash                string
+	TaskType                   string
+	ProviderRequestID          string
+	AuthorizationRef           string
+	PriceVersion               string
+	UnitPrice                  Money
+	MaxUnits                   int64
+	HoldAmount                 Money
+	State                      string
+	DispatchCount              int
+	AdmissionID                string
+	RemoteJobID                string
+	TerminalEventID            string
+	TerminalHash               string
+	Outcome                    string
+	ActualAmount               Money
+	ImageCount                 int64
+	VideoMilliseconds          int64
+	AudioMilliseconds          int64
+	LedgerRef                  string
+	RequestedVideoMilliseconds int64
+	VideoSize                  string
 }
 
 func (i Intent) Terminal() bool { return i.State == "settled" || i.State == "released" }

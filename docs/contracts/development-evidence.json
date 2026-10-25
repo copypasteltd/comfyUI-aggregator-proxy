@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-25/development-trace-baselines-90.json",
-    "sha256": "22b8bf7b6ec4224b463f4a97833ee80357f604da12f4ecba3f5a227dd3dac704"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-91.json",
+    "sha256": "0862a965fc294dc1db59c3800d1258c6a7d0452b3a8c081bc3e8f6015ae1300a"
   },
   "requirements": [
     {
@@ -222,7 +222,8 @@
         "ci86",
         "installed87",
         "native86",
-        "visual87"
+        "visual87",
+        "sdk91"
       ],
       "remaining_backlog": [
         "23",
@@ -336,7 +337,8 @@
       ],
       "evidence": [
         "ci86",
-        "sdk90"
+        "sdk90",
+        "sdk91"
       ],
       "remaining_backlog": [
         "30",
@@ -399,6 +401,22 @@
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility.go",
+          "baseline": "go80"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/types.go",
+          "baseline": "go80"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/store.go",
+          "baseline": "go80"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/migrations/258_render_control_video_specification.sql",
+          "baseline": "go80"
         }
       ],
       "tests": [
@@ -411,13 +429,34 @@
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/catalog_consumer_test.go",
           "symbol": "TestProviderCatalogActivationSnapshotsWithdrawalAndRestart",
           "language": "go"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/video_specification_test.go",
+          "symbol": "TestVideoSpecificationPreservesExactMillisecondsAndSafeTerminalErrors",
+          "language": "go"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/video_specification_test.go",
+          "symbol": "TestVideoReadRetainsFrozenMetadataWhenRequestCipherUnavailable",
+          "language": "go"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/video_specification_test.go",
+          "symbol": "TestVideoSpecificationMigrationPreservesLegacyUnknownAndRejectsMutation",
+          "language": "go"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility_test.go",
+          "symbol": "TestCompatibilityVideoJSONAndOriginalTaskContent",
+          "language": "go"
         }
       ],
       "evidence": [
         "ci86",
         "go80",
         "native86",
-        "sdk90"
+        "sdk90",
+        "sdk91"
       ],
       "remaining_backlog": [
         "28",
@@ -426,7 +465,7 @@
         "34",
         "35"
       ],
-      "limitation": "Sub2API Provider 组件和原生协议已测；实际 Redis/六类资源/混合供应商仍开放。"
+      "limitation": "Provider 冻结规格、重放、安全错误及密文不可用读取有 Go/PG 证据；实际 Python/Node 多媒体协议已测，严格官方 Video 类型仍有进度/尺寸差异。直接控制视频投影、真实 Redis/六类资源/混合供应商仍开放。"
     },
     {
       "id": "API-06",
@@ -1673,7 +1712,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "sdk91"
       ],
       "remaining_backlog": [
         "28",
@@ -2997,14 +3037,15 @@
         "API-03"
       ],
       "local_evidence": [
-        "ci86"
+        "ci86",
+        "sdk91"
       ],
       "remaining_backlog": [
         "30",
         "31",
         "38"
       ],
-      "remaining_evidence": "固定 SDK 本机图片检查已通过；真实同步结果/超时/撤销、视频/音频客户端与实际媒体仍待验收"
+      "remaining_evidence": "固定 SDK 本机图片/视频/音频检查已通过；严格官方 Video 类型差异、直接控制入口视频对齐、真实同步超时/撤销与实际媒体仍待完善/验收"
     },
     {
       "id": "COMPAT-04",
@@ -3035,7 +3076,8 @@
       "local_evidence": [
         "ci86",
         "go80",
-        "native86"
+        "native86",
+        "sdk91"
       ],
       "remaining_backlog": [
         "30",
@@ -3055,7 +3097,8 @@
       "local_evidence": [
         "ci86",
         "go80",
-        "native86"
+        "native86",
+        "sdk91"
       ],
       "remaining_backlog": [
         "20",
@@ -3094,7 +3137,8 @@
       ],
       "local_evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "sdk91"
       ],
       "remaining_backlog": [
         "28",
@@ -4252,7 +4296,8 @@
         "ci86",
         "installed87",
         "native86",
-        "visual87"
+        "visual87",
+        "sdk91"
       ],
       "remaining_backlog": [
         "23",
@@ -4316,7 +4361,8 @@
         "ci86",
         "installed87",
         "native86",
-        "visual87"
+        "visual87",
+        "sdk91"
       ],
       "remaining_backlog": [
         "23",
@@ -4337,7 +4383,8 @@
         "ci86",
         "installed87",
         "native86",
-        "visual87"
+        "visual87",
+        "sdk91"
       ],
       "remaining_backlog": [
         "23",

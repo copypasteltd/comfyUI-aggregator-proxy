@@ -12,7 +12,16 @@
 
 [完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05、10、12 共 7 项本地实现/追踪出口已收口，69 项仍开放（67 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md)、[确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 及 [监控接线](docs/84-监控指标与脱敏请求关联.md) 已有实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
 
-最新 [90 · 固定 SDK 客户端](docs/90-固定SDK客户端兼容矩阵.md) 使用真实 Python 3.37.0 / Node 7.43.0 SDK，验证模型发现、图片生成/编辑、错误关联、幂等与重试及明确的异步扩展。严格解析发现上游普通模型缺少标准元数据，现仅补齐缺省字段，保留已有字段和扩展；无效元数据继续拒绝。[本机协议](docs/evidence/2026-10-25/openai-sdk-native-90-fifth/openai-sdk-native-protocol.json) 通过 20 项 SDK / 24 项原生场景，仅新增预期的 6 个任务与计量记录。真实 Workflow、客户端完整矩阵和 69 项待办继续开放。
+本轮 [91 · 多媒体 SDK 与视频冻结规格](docs/91-多媒体SDK与视频冻结规格.md) 修复 Provider 视频响应的冻结 seconds/size 和安全终态错误，通过向前迁移 258 原子保存不可变元数据。Go/PostgreSQL 组件复验通过 176 顶层/342 子测试；实际 Python/Node 通过 39 项多媒体 SDK 检查（包含严格 Video 类型预期拒绝）及 24 个原生场景，新增任务/意图/用量各 12 条。严格官方 Video 类型与项目规格的差异明确保留。
+
+[91 最终验证](docs/evidence/2026-10-26/multimedia-sdk-verification-91.json) 通过完整 16 门禁/3713 Python、28 项精确候选安装和 10 项安装后浏览器检查。611 CI、274 原生及 505 候选源输入与当前代码一致；候选 `rc-20261026.91.1` 含 169 载荷、58 wheels、64 运行契约。原 CI 预算失败与受控统计实验保留；复验沿用 1200 秒预算，Python 为 954.897 秒。所有本轮测试浏览器、进程和临时库已清理，真实资源与生产验收继续开放。
+
+Admin 全面复用直接拉取的 [04 · 青柠原始 CSS](app/apps/admin_web/src/theme/reference/lime.css) 与本地原字体；后续界面继续使用同一共享主题与组件适配。[来源、源码和复用规则](docs/87-青柠视觉系统与组件复用.md)。
+
+<details>
+<summary>历史验证记录（增量 84～90，各结果仅代表当时版本）</summary>
+
+此前 [90 · 固定 SDK 客户端](docs/90-固定SDK客户端兼容矩阵.md) 使用真实 Python 3.37.0 / Node 7.43.0 SDK，验证模型发现、图片生成/编辑、错误关联、幂等与重试及明确的异步扩展。严格解析发现上游普通模型缺少标准元数据，现仅补齐缺省字段，保留已有字段和扩展；无效元数据继续拒绝。[本机协议](docs/evidence/2026-10-25/openai-sdk-native-90-fifth/openai-sdk-native-protocol.json) 通过 20 项 SDK / 24 项原生场景，仅新增预期的 6 个任务与计量记录。真实 Workflow、客户端完整矩阵和 69 项待办继续开放。
 
 [90 最终验证](docs/evidence/2026-10-25/openai-sdk-verification-90.json)：206 项专项、173 顶层/331 子测试的 Go 组件、完整 16 门禁/3696 Python、28 项精确候选安装及 10 项安装后浏览器检查通过。606 项 CI、271 项原生运行及 501 项候选源输入核对一致；保留 SDK 失败、CI 预算失败及受控测试库统计实验，原有 1200 秒预算保持。候选 `rc-20261025.90.1` 含 169 载荷、58 wheels 和 63 运行契约，实际资源及生产仍待验收。
 
@@ -28,8 +37,6 @@
 
 [85 验证汇总](docs/evidence/2026-10-25/native-services-verification.json)：完整 16 门禁、3524 项 Python（零失败/错误/跳过）、161 项服务/发行专项、40 项前端单元、28 项精确候选安装及 8 项安装后浏览器检查通过。最终候选 `rc-20261025.85.3` 的 484 源输入与代码一致，包含 166 载荷、58 wheels 和 61 运行契约；581 项 CI 输入一致。四个应用角色正常退出、journal 保留与私有资源清理已核对；WinSW/SCM 和新网关监督器的真实生命周期继续待验收。
 
-同一部署按 API → Worker → GC → Runner → Gateway 启动，反向停止，使 Worker 停止时 API 仍可接收回报。先 `install` 登记未启动的服务，再按生成的 `acl-plan.json` 落实各角色读取/修改权限，最后 `start` 并分别核对 SCM、HTTPS readiness 和 Worker 登记；服务状态不能代替业务健康。升级前先排空并核对未知任务，卸载保留状态和配置。
-
 仓库 [原生 CI](docs/83-原生CI门禁与失败证据.md) 固定 16 项串行门禁、独立测试目录、测试库备份后迁移，仅公开脱敏摘要，原始日志/JUnit 留在私有目录。专用物理 Runner、仓库变量启用及实际 GitHub 成功/失败 artifact 仍待验收，第 11 项继续开放。
 
 [原生链路证据](docs/evidence/2026-10-25/monitoring-native-final/confirmed-retry-native-protocol.json) 使用实际 Sub2API/API/Runner/Worker/PostgreSQL 进程，ComfyUI、Redis 和存储仍为明确的协议夹具。[82 的历史记录](docs/82-确认失败重试分类与跨GPU约束.md) 保留并行检查中出现的鉴权行锁超时/502；该问题尚未定位，隔离通过不代替并发容量验收。真实设备、生产 Workflow 和模型质量仍待后续资源验证。
@@ -39,6 +46,8 @@
 [第 86 增量验证](docs/evidence/2026-10-25/database-diagnostics-final-ci-verification.json)：完整 16 门禁/3593 Python、29 项完整窗口并发原生协议、28 项精确候选安装及 8 项安装后浏览器检查通过。候选 `rc-20261025.86.1` 的 488 个构建输入与源码一致，含 166 载荷、58 wheels、62 运行契约；59 schema/947 fixture 同步。原失败、一次性测试库维护和未关闭的根因均保留于 [86](docs/86-数据库故障脱敏诊断与并发观测.md)。
 
 第 87 增量直接接入用户指定的 [原始青柠样式](docs/87-青柠视觉系统与组件复用.md)。17 个页面、390px / 320px 布局及全部演示素材已刷新；前端 40 项、发布安全 71 项、最终候选 28 项安装和 10 项安装后浏览器检查通过。完整后端与原生协议套件未重跑，变更范围及证据见 [87 验证](docs/evidence/2026-10-25/lime-source-visual-verification.json)。
+
+</details>
 
 ## 目录
 
@@ -242,6 +251,8 @@ curl.exe --cacert .local/tls/localhost.crt `
 
 固定 SDK 客户端的用法与兼容矩阵见 [90](docs/90-固定SDK客户端兼容矩阵.md)：Python `openai==3.37.0`、Node `openai@7.43.0`。API 地址必须显式指向本服务的 `/v1`；使用已发布模型和业务 Key。自动重试默认在示例中关闭，调用方在首次提交前保存 `Idempotency-Key`，恢复时重用同一值。multipart 的 `workflow_options` 扩展传 JSON 字符串。
 
+视频与音频用法见 [91](docs/91-多媒体SDK与视频冻结规格.md)。Provider 视频响应使用冻结的 `seconds` / `size`，未知 `progress` 省略；须按[项目视频契约](docs/contracts/sdk-video-response.schema.json)校验。严格 Python 官方 `Video` 类型与项目进度/尺寸存在差异，使用 SDK 通用 JSON 方法恢复或查询原任务，完成后用视频内容方法下载。音频通过 `/jobs` 的 `text_to_audio` 异步提交，再从原任务产物访问 `/content/{id}/download`，不使用 `/audio/speech`。
+
 在本仓库运行 SDK 演练前，按专题 90 显式安装 sdk-compat 依赖组及独立 Node 锁依赖。SDK 是客户端验证工具，不进入 Admin 或生产运行包。
 
 ```python
@@ -286,6 +297,8 @@ Worker 离线、租约到期或 HTTP 超时都不证明 GPU 已空闲。提交�
 关键说明：[任务机制](docs/02-系统架构与任务机制.md)、[Worker 协议](docs/12-接口契约与Worker协议.md)、[恢复演练](docs/60-数据库对象与密钥联合恢复校验.md)。
 
 ## 配置、部署与运维
+
+同一部署按 API → Worker → GC → Runner → Gateway 启动，反向停止，使 Worker 停止时 API 仍可接收回报。先 `install` 登记未启动的服务，再按生成的 `acl-plan.json` 落实各角色读取/修改权限，最后 `start` 并分别核对 SCM、HTTPS readiness 和 Worker 登记；服务状态不能代替业务健康。升级前先排空并核对未知任务，卸载保留状态和配置。
 
 | 配置 | 用途 |
 | --- | --- |

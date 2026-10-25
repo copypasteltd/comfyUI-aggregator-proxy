@@ -54,7 +54,7 @@ func commit(tx *sql.Tx) error {
 const columns = `id, instance, COALESCE(target_gateway_id,''), user_id, api_key_id, host(client_ip), operation, request_hash, task_type,
  provider_request_id, authorization_ref, price_version, unit_price::text, max_units, hold_amount::text,
  state, dispatch_count, COALESCE(admission_id,''), COALESCE(remote_job_id,''), COALESCE(terminal_event_id,''),
- COALESCE(terminal_hash,''), COALESCE(outcome,''), COALESCE(actual_amount,0)::text, COALESCE(ledger_ref,''), image_count, video_milliseconds, audio_milliseconds, COALESCE(public_model,''), created_at, COALESCE(client_request_hash,request_hash), COALESCE(usage_account_id,0), COALESCE(billing_group_id,0), rate_multiplier::text,rate_source,billing_type,COALESCE(subscription_id,0),COALESCE(catalog_revision,0),COALESCE(catalog_digest,'')`
+ COALESCE(terminal_hash,''), COALESCE(outcome,''), COALESCE(actual_amount,0)::text, COALESCE(ledger_ref,''), image_count, video_milliseconds, audio_milliseconds, COALESCE(public_model,''), created_at, COALESCE(client_request_hash,request_hash), COALESCE(usage_account_id,0), COALESCE(billing_group_id,0), rate_multiplier::text,rate_source,billing_type,COALESCE(subscription_id,0),COALESCE(catalog_revision,0),COALESCE(catalog_digest,''),COALESCE(requested_video_milliseconds,0),COALESCE(video_size,'')`
 
 type scanner interface{ Scan(...any) error }
 
@@ -65,13 +65,19 @@ func scanIntent(row scanner) (Intent, error) {
 	var catalogDigest string
 	if err := row.Scan(&i.ID, &i.Instance, &i.TargetGatewayID, &i.UserID, &i.KeyID, &ip, &i.Operation, &i.RequestHash, &i.TaskType,
 		&i.ProviderRequestID, &i.AuthorizationRef, &i.PriceVersion, &unit, &i.MaxUnits, &hold, &i.State, &i.DispatchCount,
-		&i.AdmissionID, &i.RemoteJobID, &i.TerminalEventID, &i.TerminalHash, &i.Outcome, &actual, &i.LedgerRef, &i.ImageCount, &i.VideoMilliseconds, &i.AudioMilliseconds, &i.Model, &i.CreatedAt, &i.ClientRequestHash, &i.UsageAccountID, &i.BillingGroupID, &rate, &i.RateSource, &i.BillingType, &i.SubscriptionID, &catalogRevision, &catalogDigest); err != nil {
+		&i.AdmissionID, &i.RemoteJobID, &i.TerminalEventID, &i.TerminalHash, &i.Outcome, &actual, &i.LedgerRef, &i.ImageCount, &i.VideoMilliseconds, &i.AudioMilliseconds, &i.Model, &i.CreatedAt, &i.ClientRequestHash, &i.UsageAccountID, &i.BillingGroupID, &rate, &i.RateSource, &i.BillingType, &i.SubscriptionID, &catalogRevision, &catalogDigest, &i.RequestedVideoMilliseconds, &i.VideoSize); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return Intent{}, ErrNotFound
 		}
 		return Intent{}, ErrStorage
 	}
 	var err error
+	video := i.TaskType == "text_to_video" || i.TaskType == "references_to_video"
+	if i.RequestedVideoMilliseconds < 0 || i.RequestedVideoMilliseconds > 86400000 ||
+		!video && (i.RequestedVideoMilliseconds != 0 || i.VideoSize != "") ||
+		i.VideoSize != "" && (i.RequestedVideoMilliseconds == 0 || !publicSizePattern.MatchString(i.VideoSize)) {
+		return Intent{}, ErrStorage
+	}
 	if catalogRevision != 0 {
 		i.Catalog = &controlclient.CatalogStamp{InstanceID: i.Instance, Revision: catalogRevision, Digest: catalogDigest}
 		if !i.Catalog.Valid() {
@@ -234,6 +240,8 @@ func (s *Store) Reserve(ctx context.Context, subject Subject, target Target, ide
 	i.Model = request.model
 	i.ClientRequestHash = request.inputHash
 	i.UsageAccountID = request.usageAccountID
+	i.RequestedVideoMilliseconds = request.videoMillis
+	i.VideoSize = request.videoSize
 	if request.catalog != nil {
 		stamp := *request.catalog
 		i.Catalog = &stamp
@@ -274,8 +282,8 @@ func (s *Store) Reserve(ctx context.Context, subject Subject, target Target, ide
 	if i.Catalog != nil {
 		revision, catalogDigest = i.Catalog.Revision, i.Catalog.Digest
 	}
-	err = tx.QueryRowContext(ctx, `INSERT INTO render_control_intents(id,instance,user_id,api_key_id,client_ip,operation,idempotency_hash,request_hash,request_cipher,cipher_key_id,task_type,provider_request_id,authorization_ref,price_version,unit_price,max_units,hold_amount,target_gateway_id,public_model,client_request_hash,usage_account_id,billing_group_id,rate_multiplier,rate_source,billing_type,subscription_id,catalog_revision,catalog_digest)
-		VALUES ($1,$2,$3,$4,$5::inet,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15::numeric,$16,$17::numeric,$18,$19,$20,NULLIF($21,0),$22,$23::numeric,$24,$25,NULLIF($26,0),$27,$28) RETURNING created_at`, i.ID, i.Instance, i.UserID, i.KeyID, i.TrustedIP.String(), i.Operation, idem, i.RequestHash, encrypted, s.vault.active, i.TaskType, i.ProviderRequestID, i.AuthorizationRef, i.PriceVersion, i.UnitPrice.String(), i.MaxUnits, i.HoldAmount.String(), i.TargetGatewayID, i.Model, i.ClientRequestHash, i.UsageAccountID, i.BillingGroupID, i.RateMultiplier.String(), i.RateSource, i.BillingType, i.SubscriptionID, revision, catalogDigest).Scan(&i.CreatedAt)
+	err = tx.QueryRowContext(ctx, `INSERT INTO render_control_intents(id,instance,user_id,api_key_id,client_ip,operation,idempotency_hash,request_hash,request_cipher,cipher_key_id,task_type,provider_request_id,authorization_ref,price_version,unit_price,max_units,hold_amount,target_gateway_id,public_model,client_request_hash,usage_account_id,billing_group_id,rate_multiplier,rate_source,billing_type,subscription_id,catalog_revision,catalog_digest,requested_video_milliseconds,video_size)
+		VALUES ($1,$2,$3,$4,$5::inet,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15::numeric,$16,$17::numeric,$18,$19,$20,NULLIF($21,0),$22,$23::numeric,$24,$25,NULLIF($26,0),$27,$28,NULLIF($29,0),NULLIF($30,'')) RETURNING created_at`, i.ID, i.Instance, i.UserID, i.KeyID, i.TrustedIP.String(), i.Operation, idem, i.RequestHash, encrypted, s.vault.active, i.TaskType, i.ProviderRequestID, i.AuthorizationRef, i.PriceVersion, i.UnitPrice.String(), i.MaxUnits, i.HoldAmount.String(), i.TargetGatewayID, i.Model, i.ClientRequestHash, i.UsageAccountID, i.BillingGroupID, i.RateMultiplier.String(), i.RateSource, i.BillingType, i.SubscriptionID, revision, catalogDigest, i.RequestedVideoMilliseconds, i.VideoSize).Scan(&i.CreatedAt)
 	if err != nil {
 		return Intent{}, ErrStorage
 	}

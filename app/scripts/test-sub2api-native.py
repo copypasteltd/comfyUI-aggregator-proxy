@@ -582,7 +582,7 @@ def main() -> None:
     fixtures = module("native_provider_fixtures", "native-provider-fixtures.py")
     source_paths = [Path(__file__), ROOT / "scripts/native-provider-fixtures.py", ROOT / "integrations/sub2api/protocol-fixture/main.go", ROOT / "scripts/native_database_observer.py", ROOT / "scripts/native_database_probe.py"]
     if args.openai_sdk:
-        source_paths.extend(ROOT / name for name in ("scripts/native_openai_sdk.py", "integrations/openai-clients/client.mjs", "integrations/openai-clients/package.json", "integrations/openai-clients/package-lock.json", "pyproject.toml", "uv.lock"))
+        source_paths.extend(ROOT / name for name in ("scripts/native_openai_sdk.py", "scripts/native_multimedia_sdk.py", "integrations/openai-clients/client.mjs", "integrations/openai-clients/multimedia.mjs", "integrations/openai-clients/package.json", "integrations/openai-clients/package-lock.json", "pyproject.toml", "uv.lock"))
     for directory in ("packages", "apps/control_api", "apps/control_runner", "apps/windows_worker", "migrations"):
         source_paths.extend(sorted((ROOT / directory).rglob("*.py")))
     source_paths.extend(sorted((ROOT / "packages/contracts/src/generation_contracts/schemas").glob("*.json")))

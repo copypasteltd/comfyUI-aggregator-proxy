@@ -1,0 +1,78 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T17:44:26.914604+00:00",
+  "passed": true,
+  "scope": "Read-only observation of the exact owned native test database after CI timeout; no maintenance, data, configuration or timeout changes.",
+  "root_cause_proven": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "server_identity_verified": true,
+  "table_allowlist_verified": true,
+  "table_count": 45,
+  "visible_rows": 35,
+  "row_filenode_sha256": "588846f3a6a25ccb08ceeb6b410710e2aa88b608c199a3c96257b675307fde6c",
+  "trigger_sha256": "e43a032b791b9a314e1a96e0914d0b641cc501a04423ace641cdb79d94de813a",
+  "estimated_dead": 228546,
+  "modifications_since_analyze": 206897,
+  "heap_and_toast_bytes": 228261888,
+  "top_estimated_dead": [
+    {
+      "table": "audit_events",
+      "live_estimate": 349,
+      "dead_estimate": 40083,
+      "modifications_since_analyze": 25682,
+      "table_bytes": 13189120,
+      "analyze_age_seconds": 7552
+    },
+    {
+      "table": "public_models",
+      "live_estimate": 1002,
+      "dead_estimate": 30380,
+      "modifications_since_analyze": 24476,
+      "table_bytes": 18505728,
+      "analyze_age_seconds": 7552
+    },
+    {
+      "table": "channels",
+      "live_estimate": 1004,
+      "dead_estimate": 19180,
+      "modifications_since_analyze": 15480,
+      "table_bytes": 8495104,
+      "analyze_age_seconds": 7552
+    },
+    {
+      "table": "outbox_events",
+      "live_estimate": 26,
+      "dead_estimate": 16279,
+      "modifications_since_analyze": 12738,
+      "table_bytes": 4227072,
+      "analyze_age_seconds": 7552
+    },
+    {
+      "table": "jobs",
+      "live_estimate": 108,
+      "dead_estimate": 15561,
+      "modifications_since_analyze": 9671,
+      "table_bytes": 13737984,
+      "analyze_age_seconds": 7552
+    },
+    {
+      "table": "quota_buckets",
+      "live_estimate": 36,
+      "dead_estimate": 15288,
+      "modifications_since_analyze": 25150,
+      "table_bytes": 3825664,
+      "analyze_age_seconds": 7552
+    }
+  ],
+  "other_connection_states": [
+    {
+      "state": "idle",
+      "wait_class": "Client",
+      "count": 1
+    }
+  ],
+  "seconds": 1.254,
+  "owned_connections_closed": true
+}

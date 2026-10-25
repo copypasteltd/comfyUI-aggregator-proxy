@@ -1,0 +1,29 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T16:55:34.164555+00:00",
+  "passed": false,
+  "increment": 91,
+  "scope": "Actual pinned SDK rehearsal failure, not an acceptance report.",
+  "full_acceptance": "pending",
+  "real_resource_acceptance": false,
+  "report": {
+    "path": "docs/evidence/2026-10-26/multimedia-sdk-native-91-first/openai-sdk-native-protocol.json",
+    "sha256": "4b686d510104cbc369fbcbd17c1ea23b44c5cfa17d92459dcd4f9efe2115d1e3"
+  },
+  "failure": {
+    "phase": "actual_openai_sdk_clients",
+    "client": "python",
+    "sdk": "3.37.0",
+    "operation": "video_content_head",
+    "type": "AttributeError",
+    "reason": "Generic request was given a dict rather than the pinned SDK FinalRequestOptions model.",
+    "earlier_video_create_replay_schema_and_binary_checks_reached": true
+  },
+  "cleanup": {
+    "processes": true,
+    "databases": true,
+    "database_observer": true,
+    "media_and_credentials": true
+  },
+  "correction": "Use the pinned SDK request options model for HEAD; do not alter the server protocol, disable strict validation or increase budgets."
+}

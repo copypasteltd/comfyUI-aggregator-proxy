@@ -8,6 +8,7 @@ import (
 	"errors"
 	"io"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -138,6 +139,26 @@ func compatibilityView(job publicJob, video bool) gin.H {
 	result := gin.H{"id": job.ID, "object": object, "model": job.Model, "status": compatibilityStatus(job.Status, video), "job_status": job.Status, "created_at": job.CreatedAt, "poll_url": path + job.ID}
 	if !video {
 		result["task_id"] = job.ID
+	} else {
+		if job.VideoMilliseconds > 0 {
+			seconds := strconv.FormatInt(job.VideoMilliseconds/1000, 10)
+			if remainder := job.VideoMilliseconds % 1000; remainder != 0 {
+				fraction := strconv.FormatInt(1000+remainder, 10)[1:]
+				seconds += "." + strings.TrimRight(fraction, "0")
+			}
+			result["seconds"] = seconds
+		}
+		if job.VideoSize != "" {
+			result["size"] = job.VideoSize
+		}
+		switch job.Status {
+		case "failed":
+			result["error"] = gin.H{"code": "generation_failed", "message": "Generation did not complete"}
+		case "cancelled":
+			result["error"] = gin.H{"code": "task_cancelled", "message": "Generation was cancelled"}
+		case "expired":
+			result["error"] = gin.H{"code": "task_expired", "message": "Generation expired"}
+		}
 	}
 	return result
 }

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import OpenAI, { toFile } from 'openai';
+import { exerciseMultimedia } from './multimedia.mjs';
 
 const configuration = JSON.parse(await readFile(process.argv[2], 'utf8'));
 const origin = new URL(configuration.origin);
@@ -21,6 +22,8 @@ const row = (name, facts = {}) => cases.push({ case: name, passed: true, ...fact
 const generation = { model: 'protocol-text-to-image', prompt: 'Synthetic Node SDK compatibility', n: 1,
   size: '1024x1024', quality: 'standard', response_format: 'b64_json', user: 'sdk-node-fixture' };
 const idem = 'sdk-node-generation-0001';
+let multimediaJobs = 0;
+const videoSamples = [];
 const client = new OpenAI({ apiKey: configuration.token, baseURL: `${origin.origin}/v1`, maxRetries: 0,
   timeout: 70000, organization: null, project: null, logLevel: 'off',
   fetch: async (url, options) => {
@@ -87,11 +90,13 @@ try {
   assert.equal(asynchronous.object, 'image.generation.task');
   assert.equal(asynchronous.status, 'completed');
   row('async_extension_reuses_sync_job', { http_status: 202, extension: true });
+  multimediaJobs = await exerciseMultimedia(client, configuration, image, row, videoSamples);
 } finally {
   // Native fetch owns its pool. This bounded child process exits after all
   // response bodies are consumed; the harness owns and closes its process tree.
   if (typeof client.close === 'function') await client.close();
 }
 await writeFile(configuration.result, JSON.stringify({ sdk: 'openai-node', version, passed: true, cases,
-  new_generation_jobs: 3, requests_finished: true, minimum_inter_request_seconds: 3,
+  video_validation_samples: videoSamples,
+  new_generation_jobs: 3 + multimediaJobs, requests_finished: true, minimum_inter_request_seconds: 3,
   production_openai_called: false }, null, 2) + '\n');

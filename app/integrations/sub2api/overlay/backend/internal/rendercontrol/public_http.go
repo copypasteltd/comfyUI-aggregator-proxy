@@ -254,14 +254,16 @@ func authorizePublicRule(key *service.APIKey, model, task string, rule publicRul
 }
 
 type publicJob struct {
-	ID        string                   `json:"id"`
-	Object    string                   `json:"object"`
-	Model     string                   `json:"model"`
-	TaskType  string                   `json:"task_type"`
-	Status    string                   `json:"status"`
-	CreatedAt int64                    `json:"created_at"`
-	PollURL   string                   `json:"poll_url"`
-	Artifacts []controlclient.Artifact `json:"artifacts"`
+	ID                string                   `json:"id"`
+	Object            string                   `json:"object"`
+	Model             string                   `json:"model"`
+	TaskType          string                   `json:"task_type"`
+	Status            string                   `json:"status"`
+	CreatedAt         int64                    `json:"created_at"`
+	PollURL           string                   `json:"poll_url"`
+	Artifacts         []controlclient.Artifact `json:"artifacts"`
+	VideoMilliseconds int64                    `json:"-"`
+	VideoSize         string                   `json:"-"`
 }
 
 func localPublicJob(i Intent) publicJob {
@@ -272,7 +274,7 @@ func localPublicJob(i Intent) publicJob {
 			status = "cancelled"
 		}
 	}
-	return publicJob{ID: i.ID, Object: "job", Model: i.Model, TaskType: i.TaskType, Status: status, CreatedAt: i.CreatedAt.Unix(), PollURL: "/v1/jobs/" + i.ID, Artifacts: []controlclient.Artifact{}}
+	return publicJob{ID: i.ID, Object: "job", Model: i.Model, TaskType: i.TaskType, Status: status, CreatedAt: i.CreatedAt.Unix(), PollURL: "/v1/jobs/" + i.ID, Artifacts: []controlclient.Artifact{}, VideoMilliseconds: i.RequestedVideoMilliseconds, VideoSize: i.VideoSize}
 }
 
 func (h *PublicHandler) submit(c *gin.Context) {

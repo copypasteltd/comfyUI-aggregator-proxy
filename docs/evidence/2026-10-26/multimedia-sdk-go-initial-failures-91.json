@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-25T16:41:27.566198+00:00",
+  "passed": false,
+  "scope": "Initial post-implementation component failures; no acceptance raised",
+  "component_report": "docs/evidence/2026-10-26/multimedia-sdk-go-after-91/sub2api-ledger-tests.json",
+  "component_sha256": "11ff1b24c1f5b4e9f668cabc63e146b20f3dca2ff8ec8b1ba85a63bbf045a188",
+  "temporary_database_dropped": true,
+  "overlay_unchanged_during_run": true,
+  "failed_top_level": [
+    "TestClosureProofReleasesOnceAfterRevocation",
+    "TestVideoSpecificationPreservesExactMillisecondsAndSafeTerminalErrors",
+    "TestVideoSpecificationMigrationPreservesLegacyUnknownAndRejectsMutation"
+  ],
+  "fixture_corrections": [
+    "Exercise the internal 86400-second storage bound through NewRequest; public parser retains 120 seconds",
+    "Read the fixed migration relative to native binary or standard go test working directory"
+  ],
+  "observed_lock_events": [
+    {
+      "time": "2026-10-26 00:37:15.881 CST",
+      "category": "lock_timeout",
+      "operation": "customer_row_lock"
+    }
+  ],
+  "complete_blocker_chain_available": false,
+  "historical_root_cause_proven": false,
+  "budgets_or_concurrency_increased": false,
+  "private_log_sha256": "d312c6e43bfa64907e8ed01535da1621f50142ec806da4ac7b7538c3f3cce735",
+  "private_pg_window_sha256": "8ab9404801289e3782d604673485cbfb659494cd8a3182038d0b4c16dbe60fa7",
+  "raw_statements_published": false,
+  "full_acceptance": "pending"
+}

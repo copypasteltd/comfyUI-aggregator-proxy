@@ -464,3 +464,9 @@ authenticated_proxy 的文件地址不包含长期 Key，GET/HEAD/Range 每次�
 ## 正式范围补充：ComfyUI 音频产物
 
 正式交付须支持 ComfyUI Workflow 音频产物，先纳入统一异步任务/查询/下载。音频任务标识、输入、媒体元数据、配额和兼容投影需显式版本化并同步 DTO/schema/fixture/OpenAPI/生成类型；不直接改写已发布 0.4 的枚举。兼容声明按实际验证范围发布，当前候选尚无音频接口验收，详见 [54](./54-ComfyUI音频产物范围与开发约束.md)。
+
+## 第 91 增量：Provider 视频响应规格
+
+Sub2API Provider 的 rc_ 视频创建/查询响应已按 [91](./91-多媒体SDK与视频冻结规格.md) 与 [严格项目契约](./contracts/sdk-video-response.schema.json) 冻结：seconds 为原请求毫秒精确转换的字符串，size 为已知冻结尺寸；迁移前的未知字段继续省略。failed/cancelled/expired 映射为 failed，并分别返回 generation_failed/task_cancelled/task_expired 与固定安全说明。未知 progress 不输出。旧请求不会从当前模型默认值重建，也不为查询而解密原请求。
+
+官方严格 Python Video 类型对进度与尺寸有额外要求，本项目不宣称完全兼容；通用 SDK JSON 方法与项目契约校验是显式用法。直接控制 API 的 job_ 视频响应仍需对齐，Provider 局部通过不能覆盖该欠项。音频继续使用统一 /v1/jobs 与内容接口。

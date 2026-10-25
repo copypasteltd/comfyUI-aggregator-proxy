@@ -44504,6 +44504,297 @@
         ],
         "stock_extension": true
       }
+    },
+    {
+      "id": "sdk_video_frozen_queued",
+      "schema": "sdk-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_legacy_metadata_unknown",
+      "schema": "sdk-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "sdk_video_failed",
+      "schema": "sdk-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "failed",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024",
+        "error": {
+          "code": "generation_failed",
+          "message": "Generation did not complete"
+        }
+      }
+    },
+    {
+      "id": "sdk_video_cancelled",
+      "schema": "sdk-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "cancelled",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024",
+        "error": {
+          "code": "task_cancelled",
+          "message": "Generation was cancelled"
+        }
+      }
+    },
+    {
+      "id": "sdk_video_expired",
+      "schema": "sdk-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "expired",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024",
+        "error": {
+          "code": "task_expired",
+          "message": "Generation expired"
+        }
+      }
+    },
+    {
+      "id": "sdk_video_fractional_duration",
+      "schema": "sdk-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "0.001",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_completed",
+      "schema": "sdk-video-response.schema.json",
+      "valid": true,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "completed",
+        "job_status": "succeeded",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_numeric_seconds",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": 5,
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_zero_duration",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "0",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_overlong_duration",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "86400.001",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_wrong_object",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "job",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_made_up_progress",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024",
+        "progress": 32
+      }
+    },
+    {
+      "id": "sdk_video_wrong_status_mapping",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "completed",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_null_size",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": null
+      }
+    },
+    {
+      "id": "sdk_video_missing_terminal_error",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "cancelled",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024"
+      }
+    },
+    {
+      "id": "sdk_video_nonterminal_error",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "queued",
+        "job_status": "admission_pending",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024",
+        "error": {
+          "code": "generation_failed",
+          "message": "Generation did not complete"
+        }
+      }
+    },
+    {
+      "id": "sdk_video_unsafe_error",
+      "schema": "sdk-video-response.schema.json",
+      "valid": false,
+      "data": {
+        "id": "rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "object": "video",
+        "model": "synthetic-video",
+        "status": "failed",
+        "job_status": "failed",
+        "created_at": 1792944000,
+        "poll_url": "/v1/videos/rc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seconds": "5",
+        "size": "1024x1024",
+        "error": {
+          "code": "driver_error",
+          "message": "Synthetic private driver text"
+        }
+      }
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T16:59:44.014075+00:00",
+  "increment": 91,
+  "passed": true,
+  "scope": "Executed focused contract, SDK-boundary and release-security tests. This is not an actual SDK media execution report or full CI acceptance. Run preceded the separately retained SDK HEAD harness correction.",
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/contract/test_frozen_contracts.py",
+    "tests/unit/test_sdk_client_boundary.py",
+    "tests/unit/test_release_bundle_security.py"
+  ],
+  "python": {
+    "tests": 1703,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "0b711e9005d97ba6a2e9e75068c91e3f0f1f234e1198ee004776f3bf97d1aa2e",
+  "python_log_sha256": "08ca535297cce818a03853092bede9cfe66b4be386295e1e9ee841be5ec7487d",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false
+}

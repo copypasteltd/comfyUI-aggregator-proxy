@@ -6,7 +6,9 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
-The latest [increment 90](90-固定SDK客户端兼容矩阵.md) passes 20 checks using actual Python 3.37.0 / Node 7.43.0 SDKs within 24 native scenarios. It fixes strict decoding of ordinary model entries with missing standard metadata, preserves failed attempts and records owned-resource cleanup. Actual resources, the complete client matrix and all 69 remaining items stay open.
+Current [increment 91](91-多媒体SDK与视频冻结规格.md) adds immutable Provider video specifications, safe terminal errors and actual Python/Node multimedia checks. Go/PostgreSQL passes 176 top-level/342 subtests; actual clients pass 39 SDK checks, including the known strict-type rejection, within 24 native scenarios. [Final verification](evidence/2026-10-26/multimedia-sdk-verification-91.json) passes all 16 gates/3713 Python cases, 28 exact-candidate installation checks and ten browser checks. All 611 CI/274 native/505 candidate inputs match; 95 documents, 61 schemas/976 fixtures and 64 runtime contracts are synchronized. Historical failures, strict-type limitations, direct-control video projection parity and actual-resource exits remain explicit.
+
+Previous [increment 90](90-固定SDK客户端兼容矩阵.md) passes 20 checks using actual Python 3.37.0 / Node 7.43.0 SDKs within 24 native scenarios. It fixes strict decoding of ordinary model entries with missing standard metadata, preserves failed attempts and records owned-resource cleanup. Actual resources, the complete client matrix and all 69 remaining items stay open.
 
 [Final verification 90](evidence/2026-10-25/openai-sdk-verification-90.json) passes all 16 gates/3696 Python cases, 206 focused checks, 173 top-level/331 Go subtests, 28 exact-candidate installation checks and ten browser checks. All 606 CI/271 native/501 candidate inputs match. Preserve the CI budget failure and controlled statistics experiment; the original 1200-second budget stays fixed. Synchronization covers 94 documents, 60 schemas/959 fixtures and 63 runtime contracts.
 
@@ -136,6 +138,7 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 | 88 | [Requirement implementation, named tests and layered acceptance evidence](88-需求实现与分层证据追踪.md) |
 | 89 | [Bounded audit-page projections and versioned Python verification](89-审计分页投影上限与版本化复验.md) |
 | 90 | [Pinned Python/Node SDK clients, catalog normalization and compatibility matrix](90-固定SDK客户端兼容矩阵.md) |
+| 91 | [Immutable video specifications and actual multimedia SDK clients](91-多媒体SDK与视频冻结规格.md) |
 | 86 | [Sanitized database failures, request isolation and native lock observation](86-数据库故障脱敏诊断与并发观测.md) |
 | 85 | [Native system service plans, controlled lifecycle and dedicated interpreter](85-原生系统服务封装与受控生命周期.md) |
 

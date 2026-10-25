@@ -1,0 +1,47 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T18:05:38.719029+00:00",
+  "passed": true,
+  "increment": 91,
+  "scope": "Actual component, maintained binary, SDK/native and complete CI source bindings; selected source equality does not accept real resources or the full release.",
+  "reports": {
+    "component": {
+      "path": "docs/evidence/2026-10-26/multimedia-sdk-go-corrected-91/sub2api-ledger-tests.json",
+      "sha256": "539f555ad6a145df6ce27b6b80a8fdde0f8008f35171d2e88acc14a3087efb23"
+    },
+    "provider_build": {
+      "path": "docs/evidence/2026-10-26/multimedia-sdk-provider-build-91/sub2api-provider-native-build.json",
+      "sha256": "d6f00982de84dc2ed9a9a367ef786153a7e1fc08047800736cf8378adb845b91"
+    },
+    "sdk_native": {
+      "path": "docs/evidence/2026-10-26/multimedia-sdk-native-91-third/openai-sdk-native-protocol.json",
+      "sha256": "50f57cebd1b30974df58ead5f04f26e340158a9b809768b06a72bf70051f48a5"
+    },
+    "complete_ci": {
+      "path": "docs/evidence/native-ci/ci91-20261026-multimedia-sdk-analyzed/summary.json",
+      "sha256": "d2085c84dbb9f42110991fd984e8fc0601a779d14ce5b4e7d2bcabe49a1a49b7"
+    }
+  },
+  "counts": {
+    "ci_sources": 611,
+    "native_sources": 274,
+    "overlay_reports_and_generated_files": 75,
+    "maintained_overlay_files": 73
+  },
+  "all_referenced_current_sources_match": true,
+  "ci_sources_unchanged_during_execution": true,
+  "native_sources_unchanged_during_execution": true,
+  "provider_binary_matches_actual_native_run": true,
+  "provider_binary_sha256": "20a022de876e245bb76d4fad0febc12469f85a155d32c742d903539fb7f465fb",
+  "all_ci_owned_process_trees_closed": true,
+  "all_ci_private_logs_complete": true,
+  "sdk_native_cleanup": {
+    "processes": true,
+    "databases": true,
+    "database_observer": true,
+    "media_and_credentials": true
+  },
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false
+}
