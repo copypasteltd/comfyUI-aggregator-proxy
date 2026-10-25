@@ -6,6 +6,8 @@
 
 原生 CI 使用 `app/scripts/ci.ps1 -Action Verify`（在 app 执行）。GitHub 必需的根 `.github/workflows` 仅保存平台入口；业务脚本仍在 app。主分支受信代码在专用原生 Windows Runner 执行，启用与准备步骤见 [83](docs/83-原生CI门禁与失败证据.md)。CI 报告不可自动包含原始日志、JUnit、凭证或数据库备份；生成文件漂移应修复后新开一轮。
 
+需求/测试证据维护见 [88](docs/88-需求实现与分层证据追踪.md)。被引用实现或测试变化后，先独立执行适当验证并保存新的版本化证据，再更新机器清单和矩阵；不要覆盖旧报告摘要。`docs/tools/development_evidence.py --write-report` 与文档主门禁会检查引用及来源，完整验收继续单独签收。
+
 1. 从 `AGENTS.md`、`docs/09-开发总纲与强制约束.md` 和对应专题开始。应用代码、配置、脚本与构建位于 `app/`；设计、机器契约、演示素材和证据位于 `docs/`。根目录保留仓库入口文件。
 2. 使用原生进程，禁止 Docker/WSL/VM。浏览器自动化须在 `finally` 关闭自己创建的 page/context/browser，不关闭用户已有标签页。
 3. 冻结契约变化先修改文档/机器契约，再同步实现、OpenAPI/前端类型、迁移及相应验证。维护 PostgreSQL 权威、物理 GPU 栅栏、提交前 journal、租户/Key 隔离和幂等不变量。
@@ -35,6 +37,8 @@ git push
 ## English
 
 Run native CI with `app/scripts/ci.ps1 -Action Verify` from `app`. The root `.github/workflows` exception contains only the required platform entry; implementation stays in `app`. A dedicated native Windows Runner executes trusted main-branch code; provisioning and activation are documented in [topic 83](docs/83-原生CI门禁与失败证据.md). Public artifacts must exclude raw logs, JUnit, credentials and database backups. Fix generated-file drift before starting a new run.
+
+Maintain requirement/test evidence according to [topic 88](docs/88-需求实现与分层证据追踪.md). After changing a referenced implementation or test, run appropriate validation independently, preserve new versioned evidence, then update the registry and matrix. Do not overwrite historical report hashes. The standalone evidence audit and documentation gate check these references; full acceptance remains separate.
 
 1. Read `AGENTS.md`, the development rules and the relevant topic before editing. Keep code/configuration/scripts/builds under `app/` and design/contracts/media/evidence under `docs/`. Repository entry points belong at the root.
 2. Use native processes; Docker, WSL and VMs are prohibited. Browser automation must close only its own page/context/browser in `finally`.

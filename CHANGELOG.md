@@ -1,5 +1,15 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 · Increment 88 / 需求实现与分层证据追踪
+
+- 将 73 条需求、98 项验收逐条关联实现、99 个具名测试、6 份历史报告和剩余稳定待办，明确六类生成的框架与真实产品化边界；保留 79 的原始状态，修正 Provider/Admin 尚未接线的过时结论。
+- Map every requirement and gate to implementation, named tests, historical evidence and remaining exits. Preserve old status records, distinguish six capability frameworks from actual Workflow products, and correct stale Provider/Admin integration status.
+- 新增只读有界校验器并接入 docs 门禁：核对 141 个引用代码/测试输入、报告摘要、真实执行测试名、编号全集和可读矩阵，拒绝路径越界/目录联接、漂移、缺项和错误提升验收。
+- Add a bounded offline audit to the documentation gate. Verify referenced inputs, report hashes, executed test symbols and complete mappings; reject unsafe paths, drift, missing links and false acceptance. Export sanitized historical Python/installed-UI provenance without raw logs or credentials.
+- 稳定待办 12 的追踪出口关闭；共 7 项完成、69 项开放（首版 67、可选 2）。历史 3593 Python、Go、浏览器及协议负载证据按声明范围复用，没有重跑或提升真实资源/生产标志。未改运行接口/数据库/UI，不更新旧候选或重复录屏；专项及文档校验见 [88](docs/88-需求实现与分层证据追踪.md)。
+- Item 12 closes locally; 69 items remain. Historical runtime evidence is reused within its original scope. Runtime APIs, database and UI are unchanged; actual-resource and complete release acceptance remain pending. Synchronize both READMEs, navigation, status records and this changelog.
+- 验证/Validation：57 项专项、92 篇文档/59 schema/947 fixture、62 运行契约与双语入口/现有 20 PNG、4 MP4/4 GIF 核验通过；保留首轮 Windows 换行误报，见 [88 验证](docs/evidence/2026-10-25/development-trace-verification.json)。These are new focused/offline checks; historical full Python, Go, browser and native runtime suites were not rerun.
+
 ## 2026-10-25 · Increment 87 / 原始青柠视觉系统复用
 
 - 按用户指定直接拉取 html.cafe/x5b381ea1 的 04 · 青柠源码，原样保存第四套 CSS 和字体声明，登记完整页面、片段、字体及许可证摘要；原始文件与适配层分开维护。

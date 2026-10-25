@@ -1,6 +1,6 @@
 {
   "contract_version": "0.4.0",
-  "status_scope": "第 79 增量实现控制面网关目录协议：不可变完整配置、期望/确认分离、严格应用回执、CAS/幂等重试与回滚、legacy 启用边界及新准入版本/绑定校验。新增迁移 1b8e0c5f3247 和五份机器 schema。Provider 自动拉取/应用、持久路由快照与 Admin 映射 UI 尚待接线，01～04 及 WP-11 保持进行中；本增量不提升真实 Workflow、存储、设备、生产或完整首版验收。验证的具体范围见文档 79 和对应证据。历史基线：第 76 增量完成 Workflow 归档/解除归档图形管理，覆盖原五类及 ComfyUI 音频。二次确认、revision CAS、原请求幂等、元数据行锁、公开模型/待完成同步阻塞及安全审计已实现；新模型发布、同步/绑定/重试、批准、验证与任务准入持有 Workflow 共享锁并检查未归档。归档对象仍可查看草稿/历史/导出，已接收任务保留原版本并可继续领取，不新增任务或同步指令。未知响应重放首次事务结果，后来反向变更不会被重复覆盖；观察者只读，关闭/隐藏/离页/注销清理确认选择，恢复可见先核对会话。新执行 Python 3087 项、定向 1498 项、前端 33 项、mypy 153 文件；26 组归档图形检查、30 组表单/13 组历史/22 组恢复回归、20 组原生协议/11 合成任务、隔离安装 24 项及安装后浏览器 8 组通过。未改 Go 代码及二进制按摘要复用 45 顶层/192 子测试与 491 项账本证明，非本轮重跑。候选 rc-20261025.76.3，431 源输入、149 载荷、57 wheels、53 运行契约；51 schema/833 fixture（197 正/636 反），187 API 方法/147 路径、180 设计端点。无 DDL，两库 head 0a7d9b4e2136、42 业务表。真实 Windows/六类 Workflow/模型质量、S3/Redis、生产部署/系统服务与联合恢复、10/20 台实机容量仍独立验收，完整目标进行中。 Synthetic checks do not promote complete work packages.",
+  "status_scope": "第 88 增量完成 73 条需求/98 项验收的实现、具名测试、分层历史报告和剩余待办关联，自动校验当前引用源码、测试与报告摘要。第 79 增量当时未接线的 Provider 自动目录消费/持久快照已由 80 完成，Admin 映射/核对由 81 完成；82 补确认失败重试，84 补监控，85 补原生服务工具，86 补数据库诊断，87 统一原始青柠样式。稳定待办 01～05、10、12 已完成本地实现/追踪，69 项仍开放（首版 67、可选 2）。WP-12 真实六类 Workflow 产品化仍待资源，其余 14 个 WP 按完整出口进行中。QC status 记录已登记场景的历史执行状态，不表示局部自动化均未运行，也不表示当前完整场景已验收；逐项证据与完整出口见 development-evidence.json、文档 78/88。历史原文保存于 history_ref；真实设备/Workflow、S3/Redis、远端 CI、SCM、生产恢复及 10/20 台实机容量不提升。",
   "rules": [
     {
       "id": "DEV-01",
@@ -251,7 +251,9 @@
         "DEV-08",
         "DEV-13"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-02",
@@ -261,7 +263,9 @@
         "DEV-10",
         "DEV-11"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-03",
@@ -270,7 +274,9 @@
         "DEV-09",
         "DEV-10"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-04",
@@ -279,7 +285,9 @@
         "DEV-09",
         "DEV-10"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-05",
@@ -289,7 +297,9 @@
         "DEV-23",
         "DEV-24"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-06",
@@ -298,7 +308,9 @@
         "DEV-12",
         "DEV-16"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-07",
@@ -306,7 +318,9 @@
       "rules": [
         "DEV-13"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-08",
@@ -315,7 +329,9 @@
         "DEV-14",
         "DEV-24"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-09",
@@ -324,7 +340,9 @@
         "DEV-15",
         "DEV-18"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-10",
@@ -333,7 +351,9 @@
         "DEV-16",
         "DEV-25"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-11",
@@ -342,7 +362,9 @@
         "DEV-17",
         "DEV-21"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-12",
@@ -351,7 +373,9 @@
         "DEV-19",
         "DEV-20"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-13",
@@ -360,7 +384,9 @@
         "DEV-20",
         "DEV-21"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-14",
@@ -368,7 +394,9 @@
       "rules": [
         "DEV-22"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-15",
@@ -380,7 +408,8 @@
       ],
       "status": "passed",
       "evidence": "evidence/2026-10-24/operational-queue-load.json",
-      "scope": "Current increment 58: 20 authenticated HTTP protocol Workers, 500 unfinished jobs, 3 real browser Admin sessions, 30 rendered update samples and bounded read-only statistics; hidden/logout cleanup. Not physical-fleet acceptance."
+      "scope": "Historical increment 58 only: 20 authenticated HTTP protocol Workers, 500 unfinished jobs, 3 browser Admin sessions and bounded statistics; owned browser/hidden/logout cleanup. Later source revisions and the complete current scenario are not accepted by this historical record. Not physical-fleet acceptance; see development-evidence.json for current pending exits.",
+      "full_acceptance": "pending"
     },
     {
       "id": "QC-16",
@@ -390,7 +419,9 @@
         "DEV-30",
         "DEV-32"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-17",
@@ -400,7 +431,9 @@
         "DEV-20",
         "DEV-29"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     },
     {
       "id": "QC-18",
@@ -410,7 +443,9 @@
         "DEV-18",
         "DEV-24"
       ],
-      "status": "not_run"
+      "status": "not_run",
+      "full_acceptance": "pending",
+      "scope": "Complete registered scenario is not signed off. Related local tests have run; see the corresponding gate in development-evidence.json. This not_run value is not a claim that its implementation has no tests."
     }
   ],
   "work_packages": [
@@ -419,7 +454,7 @@
       "document": "16-开发任务分解与交付清单.md",
       "depends_on": [],
       "status": "in_progress",
-      "progress_ref": "49-原生发布包与离线安装验证.md"
+      "progress_ref": "83-原生CI门禁与失败证据.md"
     },
     {
       "id": "WP-01",
@@ -468,7 +503,7 @@
         "WP-03"
       ],
       "status": "in_progress",
-      "progress_ref": "60-数据库对象与密钥联合恢复校验.md"
+      "progress_ref": "82-确认失败重试分类与跨GPU约束.md"
     },
     {
       "id": "WP-06",
@@ -478,7 +513,7 @@
         "WP-05"
       ],
       "status": "in_progress",
-      "progress_ref": "68-任务批量取消与持久逐项结果.md"
+      "progress_ref": "82-确认失败重试分类与跨GPU约束.md"
     },
     {
       "id": "WP-07",
@@ -499,7 +534,7 @@
         "WP-07"
       ],
       "status": "in_progress",
-      "progress_ref": "76-Workflow归档与恢复管理.md"
+      "progress_ref": "87-青柠视觉系统与组件复用.md"
     },
     {
       "id": "WP-09",
@@ -509,7 +544,7 @@
         "WP-08"
       ],
       "status": "in_progress",
-      "progress_ref": "70-模型目录分页与冻结规格选择.md"
+      "progress_ref": "87-青柠视觉系统与组件复用.md"
     },
     {
       "id": "WP-10",
@@ -520,7 +555,7 @@
         "WP-08"
       ],
       "status": "in_progress",
-      "progress_ref": "76-Workflow归档与恢复管理.md"
+      "progress_ref": "87-青柠视觉系统与组件复用.md"
     },
     {
       "id": "WP-11",
@@ -531,7 +566,7 @@
         "WP-10"
       ],
       "status": "in_progress",
-      "progress_ref": "79-网关模型目录持久发布协议.md"
+      "progress_ref": "81-Admin网关目录映射与发布核对.md"
     },
     {
       "id": "WP-12",
@@ -554,7 +589,7 @@
         "WP-12"
       ],
       "status": "in_progress",
-      "progress_ref": "76-Workflow归档与恢复管理.md"
+      "progress_ref": "86-数据库故障脱敏诊断与并发观测.md"
     },
     {
       "id": "WP-14",
@@ -576,7 +611,7 @@
         "WP-13"
       ],
       "status": "in_progress",
-      "progress_ref": "76-Workflow归档与恢复管理.md"
+      "progress_ref": "85-原生系统服务封装与受控生命周期.md"
     }
   ],
   "requirements": [
@@ -1701,5 +1736,8 @@
         "WP-13"
       ]
     }
-  ]
+  ],
+  "status_review_increment": 88,
+  "evidence_registry": "development-evidence.json",
+  "history_ref": "evidence/2026-10-25/development-trace-history.json"
 }

@@ -27,8 +27,10 @@
 | [admin-session.schema.json](./admin-session.schema.json) | 显式交互固定请求和 Unix 秒寿命响应；鉴权精度、并发/退出和浏览器时序另实测，见 [62](../62-管理会话空闲超时与交互续期.md) |
 | [admin-audit-retention.schema.json](./admin-audit-retention.schema.json) | 当前配置与最近已提交清理批次的封闭只读响应；启用关系、权限、原子清理和图形状态另实测，见 [63](../63-管理审计保留与有界清理.md) |
 | [development-traceability.json](./development-traceability.json) | 全部73项需求、32条规则、18组QC和15个工作包的追踪；完整出口仍未验收，当前进度见文档17 |
+| [development-evidence.json](./development-evidence.json) | 73 需求/98 验收的实现、具名测试、历史报告及剩余待办关联；离线摘要/路径/矩阵校验不提升真实验收，见 [88](../88-需求实现与分层证据追踪.md) |
 | [fixtures.json](./fixtures.json) | 正反例内联集合，包含图片、视频、音频任务、策略和 Worker 事件；为合成示例，无实际 Key 或媒体 |
 | [../tools/verify_docs.py](../tools/verify_docs.py) | 离线验证 Markdown 链接、JSON/YAML示例、JSON Schema/fixture、状态/端点/追踪一致性 |
+| [../tools/development_evidence.py](../tools/development_evidence.py) | 核对实现/测试及报告摘要、实际通过的具名测试、编号全集、剩余待办和可读矩阵；文档主门禁同步执行 |
 
 在项目根运行：
 
@@ -44,7 +46,7 @@ JSON Schema 使用 draft 2020-12，引用限定本文件 `#/$defs`，禁止在�
 
 集合游标契约见 [collection-page.schema.json](./collection-page.schema.json) 与 [37](../37-任务与内容游标及共享访问.md)；公开/网关响应、分页边界与共享路由须同步实现。
 
-以下分增量保留的数字和当时状态是历史快照；最新契约汇总见文末第 84 增量。早期段落中的“待实现”不覆盖后续实现记录，当前开发与验收状态见文档 16、17 和 78。
+以下分增量保留的数字和当时状态是历史快照；运行契约最新汇总见文末第 86 增量。第 88 增量只新增非运行的证据追踪清单，59 schema/947 fixture、62 运行契约不变。早期段落中的“待实现”不覆盖后续实现记录，当前开发与验收状态见文档 78/88。
 
 模型文件回执契约见 [model-file-receipt.schema.json](./model-file-receipt.schema.json) 和 [45](../45-渠道模型清单与受控登记.md)：当前 15 份 schema、128 份 fixture（41 正例、87 反例）。JSON Schema 验证形状；目录摘要、路径与类别对应、当前 boot/revision/时效及登记事务仍由应用语义校验。OpenAPI 当前登记 155 个方法、122 个路径，匹配 148 项设计端点，不能替代整体验收。
 

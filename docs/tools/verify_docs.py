@@ -4,17 +4,18 @@ from __future__ import annotations
 
 import argparse
 import ast
+import hashlib
+import json
+import re
+import sys
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
-import hashlib
 from importlib.metadata import version
-import json
 from pathlib import Path
-import re
-import sys
 from urllib.parse import unquote, urlsplit
 
+from development_evidence import audit as audit_development_evidence
 
 DOCS = Path(__file__).resolve().parents[1]
 PROJECT = DOCS.parent
@@ -65,8 +66,8 @@ def run() -> int:
     parser.add_argument("--write-report", action="store_true")
     args = parser.parse_args()
     try:
-        from jsonschema import Draft202012Validator, FormatChecker
         import yaml
+        from jsonschema import Draft202012Validator, FormatChecker
     except ImportError as exc:
         print(f"Missing native Python documentation dependency: {exc.name}; no installation attempted.", file=sys.stderr)
         return 2
@@ -156,7 +157,7 @@ def run() -> int:
             errors.extend(f"{name}: {issue}" for issue in local_refs(value, value))
             Draft202012Validator.check_schema(value)
             schemas[name] = Draft202012Validator(value, format_checker=FormatChecker())
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 -- Preserve bounded third-party schema diagnostics.
             errors.append(f"{name}: schema invalid: {exc}")
 
     fixtures = data.get("fixtures.json", {}).get("cases", [])
@@ -347,6 +348,10 @@ def run() -> int:
         require(item["work_package"] in package_ids, f"Endpoint has unknown work package: {item['operation_id']}")
     checks["traceability"] = {"rules": len(rules), "quality_scenarios": len(scenarios), "work_packages": len(packages), "requirements": len(requirements), "work_package_statuses": dict(Counter(item["status"] for item in packages)), "admin_acceptance_mapped": 16, "key_acceptance_mapped": 12}
 
+    evidence = audit_development_evidence(PROJECT)
+    errors.extend(f"Development evidence: {message}" for message in evidence["errors"])
+    checks["development_evidence"] = {"passed": evidence["passed"], **evidence["counts"], "full_acceptance": evidence["full_acceptance"]}
+
     topics = {
         "native_only": ("09-开发总纲与强制约束.md", ["DEV-02", "Docker", "WSL"]),
         "browser_cleanup": ("13-Admin前端开发规范.md", ["finally", "context", "隐藏页"]),
@@ -368,7 +373,7 @@ def run() -> int:
         require(not missing, f"Topic {topic}: missing {missing} in {name}")
     checks["topic_presence"] = {"checks": len(topics), "scope": "Text presence only, not proof of correctness"}
 
-    source_files = markdown_paths + ([instruction] if instruction.exists() else []) + json_paths + [Path(__file__).resolve()]
+    source_files = markdown_paths + ([instruction] if instruction.exists() else []) + json_paths + sorted(Path(__file__).resolve().parent.glob("*.py"))
     fingerprints = []
     for path in sorted(source_files):
         raw = path.read_bytes()

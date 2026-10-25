@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-10-25T12:10:20.100219+00:00",
+  "passed": false,
+  "scope": "First attempt of the newly added offline evidence-audit unit suite; no runtime services involved.",
+  "tests": 50,
+  "passed_cases": 48,
+  "failed_cases": 2,
+  "errors": 0,
+  "skipped": 0,
+  "failures": [
+    "test_valid_map_is_read_only_and_does_not_execute_test_sources",
+    "test_report_hash_and_readable_matrix_drift_are_independent_failures"
+  ],
+  "cause": "Windows fixture writes used CRLF while the generated semantic Markdown matrix used LF. The auditor compared raw decoded Markdown and incorrectly reported matrix drift.",
+  "fix": "Normalize only Markdown matrix line endings before semantic comparison; keep code and report SHA-256 comparisons byte-exact.",
+  "subsequent_results": [
+    {
+      "tests": 50,
+      "passed": 50
+    },
+    {
+      "tests": 51,
+      "passed": 51
+    },
+    {
+      "tests": 57,
+      "passed": 57
+    }
+  ],
+  "runtime_bug": false,
+  "virtualization_used": false,
+  "real_resource_acceptance": false
+}

@@ -1,0 +1,211 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T12:15:10.297695+00:00",
+  "increment": 88,
+  "passed": true,
+  "scope": "New offline documentation/evidence gate and 57 focused checks only. Historical test and installed-UI evidence is reused; no fresh full runtime suite or real resource acceptance.",
+  "baseline_commit": "933042e8d20320ecc74e7fd5d2442e8a9f5c6e55",
+  "focused_python": {
+    "tests": 57,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_private_path": "app/.local/development-evidence-unit.xml",
+    "junit_sha256": "441dafc9a7c89678829d0291b6157686aaa489d93f4e736393f235cce132f5ed"
+  },
+  "full_python_suite_rerun": false,
+  "go_tests_rerun": false,
+  "browser_rerun": false,
+  "runtime_protocol_rerun": false,
+  "closed_backlog_ids": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "10",
+    "12"
+  ],
+  "remaining_items": 69,
+  "first_release_remaining": 67,
+  "optional_remaining": 2,
+  "virtualization_used": false,
+  "runtime_code_changed": false,
+  "database_migration": false,
+  "ui_changed": false,
+  "real_resource_acceptance": false,
+  "complete_goal_achieved": false,
+  "checks": {
+    "ruff": {
+      "passed": true,
+      "files": [
+        "docs/tools/development_evidence.py",
+        "docs/tools/verify_docs.py",
+        "app/tests/unit/test_development_evidence.py"
+      ]
+    },
+    "documentation": {
+      "markdown": {
+        "documents": 92,
+        "instruction_files": 1,
+        "fenced_blocks": 43,
+        "json_examples": 15,
+        "yaml_examples": 1,
+        "local_links_checked": 1985
+      },
+      "contracts": {
+        "json_files": 65,
+        "schemas": 59,
+        "fixtures": 947,
+        "positive_fixtures": 217,
+        "negative_fixtures": 730,
+        "capabilities_covered": [
+          "image_to_image",
+          "references_to_image",
+          "references_to_video",
+          "text_to_audio",
+          "text_to_image",
+          "text_to_video"
+        ]
+      },
+      "state_machine": {
+        "states": 16,
+        "terminal_states": 4,
+        "transitions": 64,
+        "guards": 24
+      },
+      "endpoints": {
+        "total": 190,
+        "by_identity": {
+          "service": 27,
+          "admin_login": 1,
+          "admin": 120,
+          "worker": 12,
+          "gateway": 28,
+          "monitoring": 2
+        },
+        "admin_permissions": 25
+      },
+      "traceability": {
+        "rules": 32,
+        "quality_scenarios": 18,
+        "work_packages": 15,
+        "requirements": 73,
+        "work_package_statuses": {
+          "in_progress": 14,
+          "not_started": 1
+        },
+        "admin_acceptance_mapped": 16,
+        "key_acceptance_mapped": 12
+      },
+      "development_evidence": {
+        "passed": true,
+        "requirements": 73,
+        "acceptance_gates": 98,
+        "local_statuses": {
+          "framework": 6,
+          "implemented": 67
+        },
+        "named_test_references": 99,
+        "baseline_python_cases": 3593,
+        "reports": 6,
+        "current_source_files": 141,
+        "full_acceptance": "pending"
+      },
+      "topic_presence": {
+        "checks": 14,
+        "scope": "Text presence only, not proof of correctness"
+      }
+    },
+    "development_evidence": {
+      "requirements": 73,
+      "acceptance_gates": 98,
+      "local_statuses": {
+        "framework": 6,
+        "implemented": 67
+      },
+      "named_test_references": 99,
+      "baseline_python_cases": 3593,
+      "reports": 6,
+      "current_source_files": 141
+    },
+    "runtime_contracts": {
+      "passed": true,
+      "count": 62,
+      "drift": []
+    },
+    "readme_and_existing_media": {
+      "passed": true,
+      "documents": 7,
+      "links": 374,
+      "screenshots": 20,
+      "video_gif_decoded": 8
+    },
+    "stable_backlog": {
+      "ids": 76,
+      "closed": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "10",
+        "12"
+      ],
+      "open": 69,
+      "open_by_type": {
+        "完善": 2,
+        "增强": 2,
+        "开发": 2,
+        "配置": 7,
+        "实测": 46,
+        "产品化": 7,
+        "交付": 3
+      }
+    },
+    "original_trace_metadata_matches_baseline_commit": true
+  },
+  "evidence_sha256": {
+    "docs/文档校验记录.json": "b3a24a34d6f99f4678ae840d655b4edc2f914cd58e69edccc422cce63aba41c3",
+    "docs/需求证据校验记录.json": "f05cf6eeacd2726f17f6422272b83b72e3ad1ee2670bc8e08c1249320f72af0c",
+    "docs/evidence/2026-10-25/repository-readme-verification.json": "ad1be0c5f240dacad1bd2ccd27670ccf64adc2b992dd618c6d54da0c6241eaae",
+    "docs/evidence/2026-10-25/development-trace-baselines.json": "53db1c41838b80ea2d2544f22211406ddf5adeefceddd31c91f66900af157bbd",
+    "docs/evidence/2026-10-25/development-trace-history.json": "22172e10864dfaf1ea5dd839b0f0320664ac94fbc1eb2d6a5448700ced046583",
+    "docs/evidence/2026-10-25/development-trace-initial-unit-failure.json": "6f0cf93c90f7148f893216f85f1f45aaf79eabe0029ace6a0fbac97538141c0a"
+  },
+  "source_sha256": {
+    "AGENTS.md": "cb036066595348e801a20e36de9b4b92778616d3fdae5265eb792a39d0a40af4",
+    "README.md": "8d8803644d57627451978e77021d08fa039cae0f374b2d73f8d78f9f17487706",
+    "README.en.md": "07a91c715f9acbe7a9828310ca2455c0d85c76b9d82cc56217ed78f9bb52fec0",
+    "CHANGELOG.md": "b301a902977b8b9b9da60384213b26eed2bf173537e3295e3cd5efc56f227683",
+    "CONTRIBUTING.md": "0d1aada780af7d7af91156cb915cd60a079e7ae4614605cd47e5f04dd6ff5d9f",
+    "docs/README.md": "f829bbd028c69831e5b31989a5b15b2e060e657ec3d20920cd224eb4affdc440",
+    "docs/README.en.md": "cb0b0e51eea013f2e9e4187662b525b3f8ce9bfd1346aa8c5a17251022373824",
+    "docs/16-开发任务分解与交付清单.md": "68857487c2a9792856c0299f336a6532add76851a13faaf9aa4de674b7bf0981",
+    "docs/17-开发记录与运行说明.md": "4caa5fd512df716bd0b16e1ea4d84d2c0158fc85bc67f82ca2d12635968515fb",
+    "docs/78-完整待办与首版收口清单.md": "572a481599b392b3c1acbf4305db0e318f63a299369ea475448cb5f4f8971018",
+    "docs/88-需求实现与分层证据追踪.md": "a9a271830465364df69c91c7eedb679961ceb724125b582922c16836e475da2d",
+    "docs/contracts/README.md": "d1c9d5d21c8710019a4459320cfe204d2afdf36a6862cb652258b8471b421c25",
+    "docs/contracts/development-evidence.json": "6899b75971f3f3eb94c1d944c3ccc5fb1719e5129c444f010153895f3ea8f283",
+    "docs/contracts/development-traceability.json": "25f4edee7c759704603466270819b1c2055773198155dad2dc64f746d1e87247",
+    "docs/tools/development_evidence.py": "ad1e03d990cada417eb937257153a81360be51abfc1325ba4e8608d5efbdf050",
+    "docs/tools/verify_docs.py": "b617ab2d69154250f505f8eed32ea6650fd3c597bd2259552b797c3c47af2686",
+    "app/tests/unit/test_development_evidence.py": "4b8694ab2cdf2a057ae5f7df25eb7d0a9de16fe7e57e7a160fd6c80b76cfbe25"
+  },
+  "cleanup": {
+    "audit_starts_no_services": true,
+    "focused_suite_completed": true,
+    "temporary_junction_removed": true,
+    "new_browser_sessions": 0
+  },
+  "retained_for_development": [
+    "Existing registered native development preview and its PostgreSQL; not restarted or reconfigured by this increment."
+  ],
+  "known_limitations": [
+    "Hash checks cover referenced files, not every transitive dependency or a fresh runtime execution.",
+    "Historical CI/Go/browser/protocol/load results retain their original local and synthetic scopes.",
+    "Items 11 and 66 still require actual remote Runner and SCM/service-account acceptance.",
+    "Actual Windows resources and six Workflow packages remain pending; no external device authorization inferred.",
+    "Historical concurrent authentication 502 and slow audit-query root causes remain open under items 29 and 50."
+  ]
+}
