@@ -88,9 +88,12 @@ class AuditQueries(AdminBase):
             if query.created_before is not None:
                 conditions.append(AuditEvent.created_at < datetime.fromtimestamp(query.created_before, UTC))
             total = session.scalar(select(func.count()).select_from(AuditEvent).where(*conditions)) or 0
-            size_ok = func.octet_length(cast(AuditEvent.detail, Text)) <= DETAIL_MAX_BYTES
-            bounded_detail = case((size_ok, AuditEvent.detail), else_=cast(literal("{}"), JSONB)).label("bounded_detail")
-            rows = list(session.execute(select(AuditEvent.id, AuditEvent.actor, AuditEvent.action, AuditEvent.resource, AuditEvent.request_id, AuditEvent.created_at, bounded_detail, size_ok.label("size_ok")).where(*conditions).order_by(AuditEvent.created_at.desc(), AuditEvent.id.desc()).offset((query.page - 1) * 50).limit(51)))
+            # Materialize pagination before converting JSON to text. A plain
+            # LIMIT can otherwise evaluate the projection on discarded rows.
+            page = select(AuditEvent.id, AuditEvent.actor, AuditEvent.action, AuditEvent.resource, AuditEvent.request_id, AuditEvent.created_at, AuditEvent.detail).where(*conditions).order_by(AuditEvent.created_at.desc(), AuditEvent.id.desc()).offset((query.page - 1) * 50).limit(51).cte("audit_page").prefix_with("MATERIALIZED", dialect="postgresql")
+            size_ok = func.octet_length(cast(page.c.detail, Text)) <= DETAIL_MAX_BYTES
+            bounded_detail = case((size_ok, page.c.detail), else_=cast(literal("{}"), JSONB)).label("bounded_detail")
+            rows = list(session.execute(select(page.c.id, page.c.actor, page.c.action, page.c.resource, page.c.request_id, page.c.created_at, bounded_detail, size_ok.label("size_ok")).order_by(page.c.created_at.desc(), page.c.id.desc())))
             actors = {row.actor for row in rows[:50]}
             names = {}
             for prefix, identifier_column, label in [("usr", AdminUser.id, AdminUser.username), ("key", ApiKey.id, ApiKey.name), ("node", Node.id, Node.name), ("gateway", GatewayService.id, GatewayService.name)]:

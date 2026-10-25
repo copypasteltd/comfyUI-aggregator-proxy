@@ -132,6 +132,90 @@ def test_existing_python_function_requires_an_executed_baseline_entry(repository
     assert any("was not in executed baseline" in error for error in evidence.audit(repository)["errors"])
 
 
+def fresh_python_run(repository: Path) -> None:
+    """A new execution binds changed inputs without modifying old reports."""
+    write_text(repository, "app/runtime.py", "value = 2\n")
+    report = {
+        "format_version": 1, "passed": True, "sources_unchanged": True,
+        "real_resource_acceptance": False, "full_acceptance": "pending",
+        "python": {"tests": 2, "failures": 0, "errors": 0, "skipped": 0},
+        "junit_sha256": "d" * 64, "python_log_sha256": "e" * 64,
+        "python_tests": [{"path": "app/tests/test_runtime.py", "symbol": "test_protocol", "passed_cases": 2}],
+        "source_sha256": {path: binding(repository, path)["sha256"] for path in ("app/runtime.py", "app/tests/test_runtime.py")},
+    }
+    write_json(repository, "docs/evidence/python89.json", report)
+    baseline = evidence.read_json(repository, "docs/evidence/baseline.json")
+    baseline["python_runs"] = ["python89"]
+    baseline["reports"]["python89"] = binding(repository, "docs/evidence/python89.json", layer="local_component")
+    write_json(repository, "docs/evidence/baseline.json", baseline)
+    registry = evidence.read_json(repository, evidence.REGISTRY)
+    row = registry["requirements"][0]
+    row["implementation"][0]["baseline"] = "python89"
+    row["tests"][0]["baseline"] = "python89"
+    row["evidence"].append("python89")
+    write_json(repository, evidence.REGISTRY, registry)
+    rebind(repository, matrix=True)
+
+
+def test_explicit_new_python_run_preserves_historical_reports(repository: Path) -> None:
+    old = (repository / "docs/evidence/ci86.json").read_bytes()
+    fresh_python_run(repository)
+    result = evidence.audit(repository)
+    assert result["passed"], result["errors"]
+    assert (repository / "docs/evidence/ci86.json").read_bytes() == old
+
+
+@pytest.mark.parametrize("mutation", [
+    "failed", "skipped", "changed", "scope", "full_acceptance", "missing_symbol",
+    "wrong_count", "duplicate_case", "bad_digest", "source_drift", "missing_report",
+    "unbound_test", "unexecuted_baseline", "duplicate_run", "reserved_run", "wrong_layer",
+])
+def test_fresh_python_provenance_cannot_hide_missing_execution(repository: Path, mutation: str) -> None:
+    fresh_python_run(repository)
+    report = evidence.read_json(repository, "docs/evidence/python89.json")
+    if mutation == "failed":
+        report["python"]["failures"] = 1
+    elif mutation == "skipped":
+        report["python"]["skipped"] = 1
+    elif mutation == "changed":
+        report["sources_unchanged"] = False
+    elif mutation == "scope":
+        report["real_resource_acceptance"] = True
+    elif mutation == "full_acceptance":
+        report["full_acceptance"] = "passed"
+    elif mutation == "missing_symbol":
+        report["python_tests"][0]["symbol"] = "test_unrelated"
+    elif mutation == "wrong_count":
+        report["python_tests"][0]["passed_cases"] = 3
+    elif mutation == "duplicate_case":
+        report["python_tests"] *= 2
+    elif mutation == "bad_digest":
+        report["junit_sha256"] = "unknown"
+    elif mutation == "source_drift":
+        report["source_sha256"]["app/runtime.py"] = "f" * 64
+    elif mutation in {"missing_report", "duplicate_run", "reserved_run", "wrong_layer"}:
+        baseline = evidence.read_json(repository, "docs/evidence/baseline.json")
+        if mutation == "missing_report":
+            del baseline["reports"]["python89"]
+        elif mutation == "duplicate_run":
+            baseline["python_runs"] *= 2
+        elif mutation == "reserved_run":
+            baseline["python_runs"] = ["ci86"]
+        else:
+            baseline["reports"]["python89"]["layer"] = "local_browser"
+        write_json(repository, "docs/evidence/baseline.json", baseline)
+    else:
+        registry = evidence.read_json(repository, evidence.REGISTRY)
+        if mutation == "unbound_test":
+            registry["requirements"][0]["evidence"].remove("python89")
+        else:
+            registry["requirements"][0]["tests"][0]["baseline"] = "visual87"
+        write_json(repository, evidence.REGISTRY, registry)
+    write_json(repository, "docs/evidence/python89.json", report)
+    rebind(repository, matrix=True)
+    assert not evidence.audit(repository)["passed"]
+
+
 @pytest.mark.parametrize("result", ["fail", "skip", "run", None])
 def test_go_reference_requires_actual_pass_even_if_symbol_exists(repository: Path, result: str | None) -> None:
     report = evidence.read_json(repository, "docs/evidence/go80.json")

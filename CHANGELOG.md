@@ -1,5 +1,13 @@
 # 更新日志 / Changelog
 
+## 2026-10-25 · Increment 89 / 审计分页投影上限
+
+- 真实 PostgreSQL 回归证明第二页、末页和空页会对被跳过的记录执行详情转换；修复为 MATERIALIZED 分页后再做 16 KiB SQL 脱敏投影，保留计数、稳定顺序、只读快照和超时预算。
+- Bound expensive audit-detail projection to the selected page. Keep response filtering in SQL, preserve authorization and consistent pagination, and retain the failing regression as evidence.
+- 需求证据支持显式绑定新 Python 运行的具名测试和源码；保留旧报告，拒绝未执行测试、源码漂移、失败/跳过和错误扩大验收范围。
+- Bind changed implementations to a fresh, scoped Python execution without rewriting historical reports. Historical complete timeout causes, physical-resource acceptance and the 69 remaining items stay open; see [89](docs/89-审计分页投影上限与版本化复验.md).
+- 验证/Validation：179 项专项、完整 16 门禁/3671 Python、28 项精确候选安装及 10 项安装后浏览器通过；600 项 CI 输入、499 项候选源输入及新证据绑定已核对。候选 `rc-20261025.89.1`，169 载荷/58 wheels/62 契约；所属测试资源清理完成，原生 PG 与受控更新后的开发预览保留。See [verification](docs/evidence/2026-10-25/audit-page-projection-verification.json); actual resources and complete release acceptance remain pending.
+
 ## 2026-10-25 · Increment 88 / 需求实现与分层证据追踪
 
 - 将 73 条需求、98 项验收逐条关联实现、99 个具名测试、6 份历史报告和剩余稳定待办，明确六类生成的框架与真实产品化边界；保留 79 的原始状态，修正 Provider/Admin 尚未接线的过时结论。

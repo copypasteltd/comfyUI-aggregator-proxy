@@ -6,7 +6,9 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
-The latest [increment 88](88-需求实现与分层证据追踪.md) maps 73 requirements and 98 gates to implementation, 99 named tests, six historical reports and remaining items. Its offline audit checks 141 referenced code/test files, report hashes, complete ID sets and the readable matrix. It rejects drift and false acceptance. Item 12 closes; the following older counts describe their historical revisions.
+The latest [increment 89](89-审计分页投影上限与版本化复验.md) bounds audit-detail conversion to at most 51 selected page rows, with native PostgreSQL expression-count regressions and fresh versioned Python evidence. Snapshot consistency, SQL redaction and timeouts are preserved; complete historical causes and all 69 remaining items stay open.
+
+[Increment 88](88-需求实现与分层证据追踪.md) maps 73 requirements and 98 gates to implementation, 99 named tests, six historical reports and remaining items. Its offline audit originally checked 141 referenced code/test files, report hashes, complete ID sets and the readable matrix. It rejects drift and false acceptance. Item 12 closes; the following older counts describe their historical revisions.
 
 The [checklist](78-完整待办与首版收口清单.md) preserves 76 stable IDs. Local implementation/traceability items 01–05, 10 and 12 are complete, leaving 69 items (67 first-release, two optional). [Topic 79](79-网关模型目录持久发布协议.md) connects to [Provider consumption](80-Provider目录消费与版本快照.md) and [Admin mapping management](81-Admin网关目录映射与发布核对.md). [Topic 82](82-确认失败重试分类与跨GPU约束.md) defines confirmed-failure retries; [topic 84](84-监控指标与脱敏请求关联.md) implements separate read-only monitoring and sanitized request correlation. Physical-resource and complete release acceptance remain open.
 
@@ -128,6 +130,7 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 | 84 | [Monitoring metrics, isolated read-only identity and sanitized request correlation](84-监控指标与脱敏请求关联.md) |
 | 87 | [Original 04 Lime source, typography and shared Admin component system](87-青柠视觉系统与组件复用.md) |
 | 88 | [Requirement implementation, named tests and layered acceptance evidence](88-需求实现与分层证据追踪.md) |
+| 89 | [Bounded audit-page projections and versioned Python verification](89-审计分页投影上限与版本化复验.md) |
 | 86 | [Sanitized database failures, request isolation and native lock observation](86-数据库故障脱敏诊断与并发观测.md) |
 | 85 | [Native system service plans, controlled lifecycle and dedicated interpreter](85-原生系统服务封装与受控生命周期.md) |
 

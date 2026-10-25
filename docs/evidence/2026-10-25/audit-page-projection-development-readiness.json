@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-25T13:29:00.267674+00:00",
+  "passed": true,
+  "identities": {
+    "previous_identities_exited": true,
+    "current_identities": 9,
+    "passed": true,
+    "current_identities_verified": 9,
+    "roles": [
+      "api",
+      "runner",
+      "object-gc"
+    ],
+    "previous_identities": 9
+  },
+  "precheck": {
+    "passed": true,
+    "active_jobs": 0,
+    "read_only": true,
+    "database_identity_verified": true,
+    "statement_timeout_milliseconds": 5000,
+    "lock_timeout_milliseconds": 100,
+    "developer_preview_only": true
+  },
+  "http_status": {
+    "/health/live": 200,
+    "/health/ready": 200,
+    "/admin/": 200,
+    "/v1/models": 401,
+    "/admin/api/v1/audit-events": 401
+  },
+  "tls_certificate_verified": true,
+  "postgresql_restarted": false,
+  "browser_used": false,
+  "retained_for_development": true,
+  "virtualization_used": false,
+  "production_accepted": false
+}

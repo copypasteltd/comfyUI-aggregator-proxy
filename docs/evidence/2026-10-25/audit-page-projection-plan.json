@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-25T12:51:51.262172+00:00",
+  "passed": true,
+  "captured_actual_repository_query": true,
+  "explain_only": true,
+  "unmodified_postgresql_functions": true,
+  "page_materialized_before_detail_conversion": true,
+  "raw_sql_or_parameters_published": false,
+  "virtualization_used": false,
+  "plan": {
+    "node": "CTE Scan",
+    "estimated_rows": 1,
+    "detail_projection": true,
+    "page_cte": false,
+    "children": [
+      {
+        "node": "Limit",
+        "estimated_rows": 1,
+        "detail_projection": false,
+        "page_cte": true,
+        "children": [
+          {
+            "node": "Sort",
+            "estimated_rows": 7,
+            "detail_projection": false,
+            "page_cte": false,
+            "children": [
+              {
+                "node": "Seq Scan",
+                "estimated_rows": 7,
+                "detail_projection": false,
+                "page_cte": false,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "historical_roots_resolved": false
+}

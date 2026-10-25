@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "at": "2026-10-25T12:40:33.839224+00:00",
+  "passed": false,
+  "expected_regression_failure": true,
+  "scope": "Native PostgreSQL projection-call regression; synthetic audit data; historical timeout roots remain unproven.",
+  "baseline_commit": "797f177b7242ef93b75f7ce6069815573d801333",
+  "python": {
+    "tests": 4,
+    "failures": 3,
+    "errors": 0,
+    "skipped": 0
+  },
+  "seconds": 128.187,
+  "observed_projection_calls": {
+    "page_2": 202,
+    "page_4": 306,
+    "empty_page_10000": 306
+  },
+  "allowed_projection_calls": {
+    "page_2": 102,
+    "page_4": 6,
+    "empty_page_10000": 0
+  },
+  "junit_sha256": "b64f4bc1d077b92134b51a10e48de2b63ee740c4b2153300e29cfd7b5fc60ebb",
+  "python_log_sha256": "417856f8cc1895f268effbd00f24c0f7eae29e8097f331cae5aded16ded3005f",
+  "source_sha256": {
+    "app/packages/infrastructure/src/generation_infrastructure/admin_audit.py": "c1caa994612ad112c3afc18b9745db4a9a254be6f91a4857db2967fd8b4277cc",
+    "app/tests/integration/test_audit_page_projection.py": "c978ffd9466def3c2ea7704743f6e42e2a53760571cf0cfe68a1a88b2a939aa4"
+  },
+  "read_only_plan_nodes": [
+    "Limit",
+    "Sort",
+    "Seq Scan"
+  ],
+  "detail_projection_below_limit_and_sort": true,
+  "timeouts_increased": false,
+  "virtualization_used": false,
+  "raw_sql_or_logs_published": false,
+  "historical_roots_resolved": false
+}

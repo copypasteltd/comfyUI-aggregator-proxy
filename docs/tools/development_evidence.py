@@ -200,6 +200,30 @@ def audit(root: Path, *, check_matrix: bool = True) -> dict:
         require(sum(case["passed_cases"] for case in test_index.values()) == python["tests"] == inventory["case_count"], "Python inventory count differs from executed baseline")
 
         source_indexes = {"ci86": ci["source_sha256"]}
+        test_indexes = {"ci86": test_index}
+        python_runs = baseline.get("python_runs", [])
+        require(isinstance(python_runs, list) and len(python_runs) <= 32, "invalid Python run collection")
+        require(len(python_runs) == len(set(python_runs)), "duplicate Python run binding")
+        for run_key in python_runs:
+            require(isinstance(run_key, str) and re.fullmatch(r"[a-z][a-z0-9_]{0,31}", run_key), "invalid Python run name")
+            require(run_key not in {"ci86", "admin87", "go80"}, "reserved Python run name")
+            run = reports[run_key]
+            require(baseline["reports"][run_key]["layer"] == "local_component", "Python run must preserve component scope")
+            require(run.get("format_version") == 1 and run.get("sources_unchanged") is True, "Python run inputs changed or format is unknown")
+            require(run.get("real_resource_acceptance") is False and run.get("full_acceptance") == "pending", "Python run cannot accept real resources or the full release")
+            results = run["python"]
+            require(type(results["tests"]) is int and results["tests"] > 0, "Python run contains no cases")
+            require(all(type(results[name]) is int and results[name] == 0 for name in ("failures", "errors", "skipped")), "Python run contains failed or skipped cases")
+            require(all(isinstance(run.get(name), str) and re.fullmatch(r"[0-9a-f]{64}", run[name]) for name in ("junit_sha256", "python_log_sha256")), "Python run lacks raw result provenance")
+            current_tests = {}
+            for case in run["python_tests"]:
+                key = (case["path"], case["symbol"])
+                require(key not in current_tests, "duplicate Python run test symbol")
+                require(type(case["passed_cases"]) is int and case["passed_cases"] > 0, "Python run test contains non-passing cases")
+                current_tests[key] = case
+            require(sum(case["passed_cases"] for case in current_tests.values()) == results["tests"], "Python run case count differs from executed inventory")
+            source_indexes[run_key] = run["source_sha256"]
+            test_indexes[run_key] = current_tests
         admin = baseline["admin_sources"]
         require(admin["archive_sha256"] == reports["visual87"]["candidate"]["archive_sha256"], "Admin source snapshot has unrelated candidate")
         require(reports["installed87"]["browser_closed"] is True, "installed browser evidence left resources open")
@@ -235,14 +259,16 @@ def audit(root: Path, *, check_matrix: bool = True) -> dict:
             for ref in row["tests"]:
                 relative, symbol = ref["path"], ref["symbol"]
                 language = ref["language"]
-                raw = verify_source(relative, "ci86" if language == "python" else "go80")
+                provenance = ref.get("baseline", "ci86" if language == "python" else "go80")
+                raw = verify_source(relative, provenance)
                 require(language in {"python", "go"}, f"unknown test language: {key}")
                 if language == "python":
                     names = {node.name for node in ast.walk(ast.parse(raw.decode("utf-8-sig"))) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))}
                     require(symbol in names, f"Python test symbol missing: {relative}::{symbol}")
-                    require((relative, symbol) in test_index, f"Python test was not in executed baseline: {relative}::{symbol}")
-                    require("ci86" in row["evidence"], f"Python test missing CI evidence: {key}")
+                    require((relative, symbol) in test_indexes.get(provenance, {}), f"Python test was not in executed baseline: {relative}::{symbol}")
+                    require(provenance in row["evidence"], f"Python test missing executed evidence: {key}")
                 else:
+                    require(provenance == "go80", f"unknown Go component baseline: {key}")
                     require(re.fullmatch(r"Test[A-Za-z0-9_]+", symbol) is not None and re.search(r"^func " + re.escape(symbol) + r"\(t \*testing\.T\)", raw.decode("utf-8"), re.MULTILINE), f"Go test symbol missing: {relative}::{symbol}")
                     require(reports["go80"]["tests"].get(symbol, {}).get("result") == "pass", f"Go test not passed in baseline: {symbol}")
                     require("go80" in row["evidence"], f"Go test missing component evidence: {key}")

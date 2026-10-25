@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-25/development-trace-baselines.json",
-    "sha256": "53db1c41838b80ea2d2544f22211406ddf5adeefceddd31c91f66900af157bbd"
+    "path": "docs/evidence/2026-10-25/development-trace-baselines-89.json",
+    "sha256": "4a887027c615ffbeee39f4ddecd7acb96dab57c8b11613fd84f5ad6208fd8061"
   },
   "requirements": [
     {
@@ -2252,7 +2252,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_audit.py",
-          "baseline": "ci86"
+          "baseline": "python89"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_base.py",
@@ -2267,18 +2267,26 @@
         {
           "path": "app/tests/integration/test_admin_audit.py",
           "symbol": "test_revision_replay_and_audit_outbox_entity_atomic_rollback",
-          "language": "python"
+          "language": "python",
+          "baseline": "python89"
         },
         {
           "path": "app/tests/integration/test_admin_controls.py",
           "symbol": "test_http_admin_jobs_users_csrf_permissions_and_sensitive_reads",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_audit_page_projection.py",
+          "symbol": "test_detail_conversion_is_bounded_by_selected_page",
+          "language": "python",
+          "baseline": "python89"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "python89"
       ],
       "remaining_backlog": [
         "45",
@@ -3665,7 +3673,8 @@
       "local_evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "python89"
       ],
       "remaining_backlog": [
         "50",
@@ -3928,7 +3937,8 @@
       "local_evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "python89"
       ],
       "remaining_backlog": [
         "45",
@@ -4569,7 +4579,8 @@
       "local_evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "python89"
       ],
       "remaining_backlog": [
         "45",
