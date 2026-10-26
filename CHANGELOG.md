@@ -6,6 +6,12 @@
 - Rehash 649 current inputs and all increment-112 candidate payloads; distinguish the pre-existing uncommitted metadata correction from complete current-source CI/candidate evidence. No functional suite, device or production acceptance is claimed.
 - 新增 [114 审计](docs/114-当前工作区系统审计与完整目标差距.md) 和版本化机器记录；本轮只同步审计，原第 113 增量仍待完成。
 
+## 2026-10-26 · Increment 113 / Provider 状态元数据
+
+- 更正 Provider 实现状态错标：provider_implemented=true，并关联源码/补丁/实际二进制均一致的 101 构建报告；runtime_integration_verified=false 保留为完整真实依赖尚未验收的边界。只改变一份打包元数据，运行时、测试及 Go 二进制不变；112 的 30 原生场景经 275 输入逐项摘要一致后复用，不重复声称执行。新元数据的完整 CI/候选安装待继续，69 稳定出口和真实六类 0/6 不提升。
+- Correct provider_implemented to true and reference build 101 after verifying the reviewed sources, patches and actual Provider binary. runtime_integration_verified remains false for complete real dependencies. Only packaged metadata changes; runtime/test code and the Go binary remain unchanged. Reuse the 30 native scenarios from 112 only after all 275 covered input digests match, without claiming a new run. Full CI and candidate installation for the new metadata remain pending; all 69 stable exits and six real Workflow acceptances stay open.
+
+
 ## 2026-10-26 · Increment 112 / 输入素材发布未决事务与清理保护
 
 - 输入素材清理先等待原发布持有的 API Key 行锁，再核对精确版本，外部删除不持有数据库连接。当前 e12f604 的 122 专项（6 新场景）、完整 16 门禁/4280 Python、30 原生及 rc-20261026.112.1 的 29 安装/10 浏览器通过；649/275/525 来源与实际 content.py wheel 字节一致。保留 2 次有效误删复现及 4 次测试 ID 解析错误记录，后者不计行为证据。所属临时资源清理；真实六类 0/6、69 稳定出口、98 完整门禁及历史数据库根因继续开放。
