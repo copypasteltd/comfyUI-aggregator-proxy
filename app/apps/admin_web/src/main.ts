@@ -6,6 +6,9 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import 'element-plus/dist/index.css'
 import './style.css'
 import App from './App.vue'
+import { ensureRandomUUID } from './randomUuid'
+
+ensureRandomUUID()
 const Overview = () => import('./pages/Overview.vue')
 const Channels = () => import('./pages/Channels.vue')
 const WorkerNodes = () => import('./pages/WorkerNodes.vue')

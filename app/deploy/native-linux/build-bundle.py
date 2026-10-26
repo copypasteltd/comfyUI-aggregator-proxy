@@ -27,7 +27,9 @@ def main() -> None:
     parser.add_argument("--candidate-sha256", required=True)
     parser.add_argument("--uv", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--rebuild-wheels", action="store_true", help="Build all project wheels from clean committed sources; Admin sources must still match the seed")
+    parser.add_argument("--rebuild-wheels", action="store_true", help="Build all project wheels from clean committed sources")
+    parser.add_argument("--rebuild-admin", action="store_true", help="Rebuild Admin from the same committed source snapshot")
+    parser.add_argument("--node", type=Path)
     parser.add_argument("--git", type=Path)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
@@ -46,6 +48,8 @@ def main() -> None:
     payload: dict[str, bytes] = {}
     revision = None
     current_sources = {}
+    if args.rebuild_admin and (not args.rebuild_wheels or args.node is None):
+        raise SystemExit("Admin rebuild requires --rebuild-wheels and an explicit native Node binary")
     if args.rebuild_wheels:
         if args.git is None:
             raise SystemExit("Rebuilding requires an explicit native Git binary")
@@ -62,6 +66,15 @@ def main() -> None:
     if args.rebuild_wheels:
         wheel_root = tempfile.TemporaryDirectory(prefix="linux-project-wheels-", dir=root / ".local")
         subprocess.run([str(args.uv), "build", "--all-packages", "--wheel", "--no-build-isolation", "--out-dir", wheel_root.name], cwd=root, check=True, capture_output=True)  # noqa: S603 -- fixed native operation with trusted deployment configuration
+    admin_root = None
+    if args.rebuild_admin:
+        node_version = subprocess.run([str(args.node), "--version"], check=True, capture_output=True, text=True).stdout.strip()  # noqa: S603 -- explicit native tool, no shell
+        if node_version != "v24.22.1":
+            raise SystemExit("This deployment requires Node 24.22.1 for its Admin build")
+        admin_root = tempfile.TemporaryDirectory(prefix="linux-admin-", dir=root / ".local")
+        frontend = root / "apps/admin_web"
+        subprocess.run([str(args.node), str(frontend / "node_modules/vue-tsc/bin/vue-tsc.js"), "--noEmit"], cwd=frontend, check=True, capture_output=True)  # noqa: S603 -- explicit native tools and fixed project inputs
+        subprocess.run([str(args.node), str(frontend / "node_modules/vite/bin/vite.js"), "build", "--outDir", admin_root.name], cwd=frontend, check=True, capture_output=True)  # noqa: S603 -- explicit native tools and fixed project inputs
     changed_sources = []
     with zipfile.ZipFile(args.candidate) as archive:
         if len(archive.namelist()) != len(set(archive.namelist())):
@@ -75,7 +88,8 @@ def main() -> None:
                 raise SystemExit("Unsafe source path")
             if digest((root / relative).read_bytes()) != expected:
                 portable_change = relative.startswith(("packages/", "apps/control_api/", "apps/control_runner/", "apps/windows_worker/")) or relative == "config/environment.example"
-                if not args.rebuild_wheels or not portable_change:
+                admin_change = args.rebuild_admin and relative.startswith("apps/admin_web/")
+                if not args.rebuild_wheels or not (portable_change or admin_change):
                     raise SystemExit(f"Candidate source changed: {relative}")
                 changed_sources.append(relative)
         lock = (root / "uv.lock").read_bytes()
@@ -105,6 +119,11 @@ def main() -> None:
             payload[name] = data
         if len(wheel_lines) != len(projects):
             raise SystemExit("Expected all seven portable project wheels")
+    if admin_root is not None:
+        payload = {name: data for name, data in payload.items() if not name.startswith("admin/")}
+        for path in sorted(Path(admin_root.name).rglob("*")):
+            if path.is_file():
+                payload["admin/" + path.relative_to(admin_root.name).as_posix()] = path.read_bytes()
     payload["provenance/uv.lock"] = lock
     payload["provenance/seed-release-manifest.json"] = manifest_bytes
     if current_sources:
@@ -120,6 +139,7 @@ def main() -> None:
         "seed_release_id": manifest["release_id"], "seed_archive_sha256": args.candidate_sha256,
         "seed_source_files_checked": len(sources), "unchanged_seed_source_files": len(sources) - len(changed_sources), "current_source_files_recorded": len(current_sources), "database_head": manifest["database"]["head"],
         "project_wheels_rebuilt": args.rebuild_wheels, "changed_seed_sources": changed_sources,
+        "admin_rebuilt": args.rebuild_admin, "admin_node": "24.22.1" if args.rebuild_admin else None,
         "uv": "0.13.5", "python": "3.13.1", "auto_migrate": False,
         "gateway_included": False, "worker_service_included": False,
         "files": [{"path": name, "bytes": len(data), "sha256": digest(data)} for name, data in sorted(payload.items())],
@@ -135,6 +155,8 @@ def main() -> None:
         print(json.dumps({"archive": args.output.name, "sha256": hashlib.file_digest(source, "sha256").hexdigest(), "bytes": args.output.stat().st_size, "files": len(payload), "seed_source_files_checked": len(sources), "changed_seed_sources": changed_sources}))
     if wheel_root is not None:
         wheel_root.cleanup()
+    if admin_root is not None:
+        admin_root.cleanup()
 
 
 if __name__ == "__main__":
