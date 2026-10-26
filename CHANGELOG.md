@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 106 / Worker 产物中断复制恢复
+
+- 同源稳定文件的完整前缀验证后续写，完整副本复用；保留不同内容/超长/硬链接/重解析路径，不截断、覆盖、删除或重新生成。最终摘要、flush/fsync 后才保存产物包并走原回传协议，无公开契约/迁移/UI 改动。
+- All 115 focused cases pass, including 63 new filesystem/collection/reopened Worker cases. Preserve 24 pre-fix failures, 31 initial implementation failures and the native Windows ctime diagnostic; use stable file identity/size/mtime observations across handle and path checks.
+- 来源绑定与双语说明同步；完整 CI/原生/当前候选检查待本轮继续，42/55/61 真实环境出口与全部首版验收保持开放。
+
 ## 2026-10-26 · Audit 105 / 当前项目与完整目标差距
 
 - 重新核对当前 main/远端、640 CI/274 原生/524 候选来源、104 报告摘要及实际 ZIP 的全部 169 载荷；未重跑既有完整功能/安装/浏览器测试。当前内存探针验证 6 合法图与 24 非法阶段检查，确认 103/F01 已由 104 修复。

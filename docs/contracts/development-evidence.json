@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 104,
+  "increment": 106,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-104.json",
-    "sha256": "5425167071ff92848e9516950c9f4abb7f0307616c13a0f17400e01fa44a6e68"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-106.json",
+    "sha256": "e1323ef23c218924887cf0362f78053031b9fa908c8df359015810f7776467cd"
   },
   "requirements": [
     {
@@ -23,11 +23,15 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "ci86"
+          "baseline": "copy106"
         },
         {
           "path": "app/scripts/workflow_package.py",
           "baseline": "package93"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -59,6 +63,24 @@
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
           "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_six_capabilities_resume_only_identical_output_copies",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
@@ -66,7 +88,8 @@
         "native86",
         "video92",
         "package93",
-        "scalar104"
+        "scalar104",
+        "copy106"
       ],
       "remaining_backlog": [
         "18",
@@ -75,7 +98,7 @@
         "26",
         "29"
       ],
-      "limitation": "图片编译、准入与协议路径已测；缺真实文生图图、依赖、输出及质量评审。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
+      "limitation": "图片编译、准入与协议路径已测；缺真实文生图图、依赖、输出及质量评审。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。 106 已测六类同源副本续写/复用及重开 journal 的 Worker 回传，不签收真实生成或物理故障。"
     },
     {
       "id": "CAP-02",
@@ -92,6 +115,14 @@
         {
           "path": "app/scripts/workflow_package.py",
           "baseline": "package93"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -123,12 +154,31 @@
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
           "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_six_capabilities_resume_only_identical_output_copies",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
         "ci86",
         "package93",
-        "scalar104"
+        "scalar104",
+        "copy106"
       ],
       "remaining_backlog": [
         "19",
@@ -137,7 +187,7 @@
         "26",
         "31"
       ],
-      "limitation": "受控输入已测；真实重绘强度、原图作用与蒙版语义仍须分别批准。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
+      "limitation": "受控输入已测；真实重绘强度、原图作用与蒙版语义仍须分别批准。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。 106 已测六类同源副本续写/复用及重开 journal 的 Worker 回传，不签收真实生成或物理故障。"
     },
     {
       "id": "CAP-03",
@@ -154,6 +204,14 @@
         {
           "path": "app/scripts/workflow_package.py",
           "baseline": "package93"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -190,12 +248,31 @@
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
           "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_six_capabilities_resume_only_identical_output_copies",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
         "ci86",
         "package93",
-        "scalar104"
+        "scalar104",
+        "copy106"
       ],
       "remaining_backlog": [
         "20",
@@ -204,7 +281,7 @@
         "26",
         "29"
       ],
-      "limitation": "编译与顺序拒绝可证明；两张参考图的真实生成作用不能由夹具证明。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
+      "limitation": "编译与顺序拒绝可证明；两张参考图的真实生成作用不能由夹具证明。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。 106 已测六类同源副本续写/复用及重开 journal 的 Worker 回传，不签收真实生成或物理故障。"
     },
     {
       "id": "CAP-04",
@@ -225,6 +302,14 @@
         {
           "path": "app/scripts/workflow_package.py",
           "baseline": "package93"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -256,6 +341,24 @@
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
           "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_six_capabilities_resume_only_identical_output_copies",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
@@ -263,7 +366,8 @@
         "native86",
         "video92",
         "package93",
-        "scalar104"
+        "scalar104",
+        "copy106"
       ],
       "remaining_backlog": [
         "21",
@@ -272,7 +376,7 @@
         "26",
         "32"
       ],
-      "limitation": "具备视频协议与校验框架；真实时长、编码、播放及质量未验收。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
+      "limitation": "具备视频协议与校验框架；真实时长、编码、播放及质量未验收。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。 106 已测六类同源副本续写/复用及重开 journal 的 Worker 回传，不签收真实生成或物理故障。"
     },
     {
       "id": "CAP-05",
@@ -289,6 +393,14 @@
         {
           "path": "app/scripts/workflow_package.py",
           "baseline": "package93"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -325,12 +437,31 @@
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
           "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_six_capabilities_resume_only_identical_output_copies",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
         "ci86",
         "package93",
-        "scalar104"
+        "scalar104",
+        "copy106"
       ],
       "remaining_backlog": [
         "22",
@@ -339,7 +470,7 @@
         "26",
         "32"
       ],
-      "limitation": "不能将单首帧、首尾帧或测试图视作真实多参考视频；须证明各参考的条件作用。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
+      "limitation": "不能将单首帧、首尾帧或测试图视作真实多参考视频；须证明各参考的条件作用。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。 106 已测六类同源副本续写/复用及重开 journal 的 Worker 回传，不签收真实生成或物理故障。"
     },
     {
       "id": "CAP-06",
@@ -351,7 +482,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "ci86"
+          "baseline": "copy106"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
@@ -364,6 +495,10 @@
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
           "baseline": "scalar104"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -400,6 +535,24 @@
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
           "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_six_capabilities_resume_only_identical_output_copies",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_collection_resume.py",
+          "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
@@ -410,7 +563,8 @@
         "sdk91",
         "sdk92",
         "package93",
-        "scalar104"
+        "scalar104",
+        "copy106"
       ],
       "remaining_backlog": [
         "23",
@@ -420,7 +574,7 @@
         "33",
         "44"
       ],
-      "limitation": "合成音频解码/计量与页面已测；实际 ComfyUI 音频节点及各声明规格仍待验证。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
+      "limitation": "合成音频解码/计量与页面已测；实际 ComfyUI 音频节点及各声明规格仍待验证。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。 106 已测六类同源副本续写/复用及重开 journal 的 Worker 回传，不签收真实生成或物理故障。"
     },
     {
       "id": "API-01",
@@ -1033,7 +1187,11 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "ci86"
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -1041,12 +1199,19 @@
           "path": "app/tests/integration/test_phase_observations.py",
           "symbol": "test_phase_observations_commit_with_event_and_ignore_replay_or_fenced_delivery",
           "language": "python"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
         "ci86",
         "video92",
-        "wait94"
+        "wait94",
+        "copy106"
       ],
       "remaining_backlog": [
         "25",
@@ -1259,11 +1424,15 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "ci86"
+          "baseline": "copy106"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -1276,11 +1445,30 @@
           "path": "app/tests/protocol/test_comfy_metadata.py",
           "symbol": "test_ambiguous_prompt_receipt_survives_restart_without_second_post",
           "language": "python"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/unit/test_output_copy_recovery.py",
+          "symbol": "test_native_writer_exit_preserves_prefix_and_copy_continues",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/unit/test_output_copy_recovery.py",
+          "symbol": "test_fsync_failure_keeps_copy_for_verified_reuse",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
         "ci86",
-        "native86"
+        "native86",
+        "copy106"
       ],
       "remaining_backlog": [
         "55",
@@ -1852,7 +2040,7 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "ci86"
+          "baseline": "copy106"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
@@ -1861,6 +2049,10 @@
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+          "baseline": "copy106"
         }
       ],
       "tests": [
@@ -1868,10 +2060,47 @@
           "path": "app/tests/protocol/test_capacity_retention.py",
           "symbol": "test_retention_survives_restart_duplicate_confirm_and_clock_rollback",
           "language": "python"
+        },
+        {
+          "path": "app/tests/protocol/test_output_copy_worker.py",
+          "symbol": "test_restarted_worker_reuses_original_output_without_generation",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/unit/test_output_copy_recovery.py",
+          "symbol": "test_native_writer_exit_preserves_prefix_and_copy_continues",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/unit/test_output_copy_recovery.py",
+          "symbol": "test_existing_unique_or_longer_file_is_never_truncated_or_overwritten",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/unit/test_output_copy_recovery.py",
+          "symbol": "test_source_changes_during_prefix_validation_prevent_any_append",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/unit/test_output_copy_recovery.py",
+          "symbol": "test_hardlinked_target_is_preserved",
+          "language": "python",
+          "baseline": "copy106"
+        },
+        {
+          "path": "app/tests/unit/test_output_copy_recovery.py",
+          "symbol": "test_directory_reparse_target_cannot_redirect_copy",
+          "language": "python",
+          "baseline": "copy106"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "copy106"
       ],
       "remaining_backlog": [
         "43",

@@ -1,0 +1,102 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T07:41:13.132621+00:00",
+  "check": "docs",
+  "scope": "Read-only current source/documentation check; no complete functional test, real-resource or production acceptance",
+  "command": [
+    "app\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "docs/tools/verify_docs.py"
+  ],
+  "working_directory": ".",
+  "exit_code": 1,
+  "passed": false,
+  "seconds": 5.664,
+  "private_log_sha256": "48dd403916b0294ecde55fd47fc7dc87f6dcdf0fab9c811c882b49da594c9896",
+  "private_log_bytes": 1950,
+  "result": {
+    "baseline": "v0.4",
+    "passed": false,
+    "checks": {
+      "markdown": {
+        "documents": 109,
+        "instruction_files": 1,
+        "fenced_blocks": 55,
+        "json_examples": 17,
+        "yaml_examples": 1,
+        "local_links_checked": 2384
+      },
+      "contracts": {
+        "json_files": 70,
+        "schemas": 63,
+        "fixtures": 1037,
+        "positive_fixtures": 248,
+        "negative_fixtures": 789,
+        "capabilities_covered": [
+          "image_to_image",
+          "references_to_image",
+          "references_to_video",
+          "text_to_audio",
+          "text_to_image",
+          "text_to_video"
+        ]
+      },
+      "state_machine": {
+        "states": 16,
+        "terminal_states": 4,
+        "transitions": 64,
+        "guards": 24
+      },
+      "endpoints": {
+        "total": 191,
+        "by_identity": {
+          "service": 27,
+          "admin_login": 1,
+          "admin": 121,
+          "worker": 12,
+          "gateway": 28,
+          "monitoring": 2
+        },
+        "admin_permissions": 25
+      },
+      "traceability": {
+        "rules": 32,
+        "quality_scenarios": 18,
+        "work_packages": 15,
+        "requirements": 73,
+        "work_package_statuses": {
+          "in_progress": 15
+        },
+        "admin_acceptance_mapped": 16,
+        "key_acceptance_mapped": 12
+      },
+      "development_evidence": {
+        "passed": false,
+        "requirements": 73,
+        "acceptance_gates": 98,
+        "local_statuses": {
+          "framework": 6,
+          "implemented": 67
+        },
+        "named_test_references": 145,
+        "baseline_python_cases": 3593,
+        "reports": 19,
+        "current_source_files": 169,
+        "full_acceptance": "pending"
+      },
+      "topic_presence": {
+        "checks": 14,
+        "scope": "Text presence only, not proof of correctness"
+      }
+    },
+    "errors": [
+      "Development evidence: readable matrix drift; review registry then --refresh-matrix"
+    ],
+    "report_written": false
+  },
+  "browser_started": false,
+  "virtualization_used": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending"
+}

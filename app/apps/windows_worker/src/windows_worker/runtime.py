@@ -3,7 +3,6 @@ from __future__ import annotations
 import asyncio
 import json
 import mimetypes
-import os
 import subprocess
 import time
 from collections.abc import Callable
@@ -46,6 +45,7 @@ from windows_worker.failure_causes import (
 )
 from windows_worker.journal import Journal
 from windows_worker.observations import observe_queue
+from windows_worker.output_copy import copy_output
 from windows_worker.process_lock import NodeProcessLock
 from windows_worker.workflow_exports import observe_export
 
@@ -140,19 +140,7 @@ class Execution:
                 raise DomainError("output_not_stable", "ComfyUI 输出文件仍在变化")
             maximum = min(adapter["max_bytes"], 32 * 1024 * 1024 if adapter["adapter"] == "save-image-v1" else 2147483648)
             target = self.worker.settings.state_root / "outputs" / self.aid / f"{i}{source.suffix}"
-            target.parent.mkdir(parents=True, exist_ok=True)
-            def copy(source: Path = source, target: Path = target, maximum: int = maximum) -> None:
-                size = 0
-                with source.open("rb") as incoming, target.open("xb") as outgoing:
-                    while chunk := incoming.read(1024 * 1024):
-                        size += len(chunk)
-                        if size > maximum:
-                            raise DomainError("output_too_large", "输出超过发布包大小限制")
-                        outgoing.write(chunk)
-                    outgoing.flush()
-                    os.fsync(outgoing.fileno())
-            await self.worker.blocking(copy)
-            digest, size = await self.worker.blocking(file_digest, target, maximum)
+            digest, size = await self.worker.blocking(copy_output, source, target, maximum, self.worker.settings.state_root)
             media = output_mime(target.suffix) or mimetypes.guess_type(target.name)[0]
             if media not in adapter["mime_types"]:
                 raise DomainError("output_media_mismatch", "输出格式未在发布包登记")
