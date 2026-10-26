@@ -1,0 +1,141 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T05:36:04.978061+00:00",
+  "passed": true,
+  "scope": "Source-bound current local engineering, native PostgreSQL/HTTP/Provider protocol and exact native candidate installation. ComfyUI/Redis/S3 remain fixtures; full first-release and production acceptance remain pending.",
+  "application_source_revision": "6e4b78fadc02a28e3b4908ca623a64df55a625fd",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci101-20261026-dependency-errors/summary.json",
+      "sha256": "fc722d656bd0fdb1b902944c8d68529cbacfd1e4cbafd637ac111cf33ce835f2"
+    },
+    "focused": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-focused-101.json",
+      "sha256": "b3b7c49a73c5fda5be0e8413720bcf33bbb7cca5410d5e59f3d1b07bb6901531"
+    },
+    "go": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-go-corrected-101/sub2api-ledger-tests.json",
+      "sha256": "af586b7e3f82c4a54c0f2bf9e9b7b2ba89aaef9c009fa09225ed1be168faa0a0"
+    },
+    "provider": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-provider-101/sub2api-provider-native-build.json",
+      "sha256": "ad4082847929a50656ba2488cb509c5618f1b953b3a6e5f99b5891f7c8f6fcce"
+    },
+    "native": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-native-101/confirmed-retry-native-protocol.json",
+      "sha256": "aeb43face128234b8a827d84e8af847e4b3953b272f433f98c48d9364247c516"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-release-build-101.json",
+      "sha256": "84b3f7c45e9278071077755455ac43b534e2e04ca9cb76f708c4ce4f355793a2"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-installed-101/native-release-installation.json",
+      "sha256": "fcbe1037045728a82fb6d0abb1c5adc7d4cd58b4b8581bdb1c70a9460ed09764"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-installed-101/native-release-installed-browser.json",
+      "sha256": "3e080f570e84e5fa03b1a9bb95d67ec318a121392495fb6950948764383764e2"
+    }
+  },
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 4013,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_seconds": 698.337,
+    "python_budget_seconds": 1200,
+    "inputs": 637,
+    "all_inputs_match_current": true,
+    "owned_process_trees_closed": true
+  },
+  "focused_python": {
+    "tests": 148,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "go": {
+    "top_level": 178,
+    "subtests": 356,
+    "original_failed_report_preserved": true
+  },
+  "native": {
+    "cases": 30,
+    "inputs": 274,
+    "all_inputs_match_current": true,
+    "new_dependency_case": {
+      "case": "native_provider_dependency_503_and_recovery",
+      "passed": true,
+      "http_status": 503,
+      "error_code": "dependency_unavailable",
+      "retry_after": "2",
+      "cache_control": "no-store",
+      "request_id_present": true,
+      "recovered_status": 200,
+      "failed_request_consumed_rate": false,
+      "jobs_created": false,
+      "automatic_retry_added": false,
+      "budgets_increased": false,
+      "chain_observed": true,
+      "wait_type": "Lock",
+      "blocker_state": "idle in transaction"
+    },
+    "cleanup": {
+      "processes": true,
+      "databases": true,
+      "database_observer": true,
+      "media_and_credentials": true
+    },
+    "real_comfyui": false,
+    "real_redis": false,
+    "real_s3": false
+  },
+  "candidate": {
+    "release_id": "rc-20261026.101.1",
+    "archive": "app/.local/releases/rc-20261026.101.1/rc-20261026.101.1.zip",
+    "archive_sha256": "ab37bbbabd8175b1489cf3d7f5190698dae694749edb9fadeb64b9b02d25e205",
+    "archive_bytes": 281332899,
+    "manifest_source_revision": "6e4b78fadc02a28e3b4908ca623a64df55a625fd",
+    "source_inputs": 524,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 67,
+    "database_head": "3da02e7b5941"
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "browser_closed": true,
+    "closed_contexts": 2,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "cleanup_errors": []
+  },
+  "closed_local_audit102_followups": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06"
+  ],
+  "publication_requires_final_git_push": true,
+  "historical_database_root_causes_closed": false,
+  "remaining_work": {
+    "stable_ids": 76,
+    "closed_local": 7,
+    "open": 69,
+    "first_release": 67,
+    "optional": 2,
+    "physical_workflows_accepted": 0
+  },
+  "production_accepted": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "virtualization_used": false
+}

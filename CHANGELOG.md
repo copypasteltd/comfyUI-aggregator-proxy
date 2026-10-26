@@ -4,7 +4,7 @@
 
 - 控制 API 对明确依赖故障、断连和连接池超时返回固定脱敏 503/dependency_unavailable；Provider 保留 503、Retry-After: 2、no-store 和原请求关联。配置/权限/结构错误仍为 500，约束冲突和领域专属错误保持。
 - Preserve uncertain writes and original durable admission identity/reservations; add no database or GPU automatic retry. A committed admission followed by 503 recovers through lookup and settles once.
-- 保留修复前 44 项预期失败、首次 Go 夹具失败和 standalone mypy 失败。专项 Python 148、修正后 Go 178 顶层/356 子测试、当前 Provider 构建及 30 原生场景通过；文档/来源门禁以新不可变证据索引恢复。完整 CI、新候选与安装正在执行，未提升实机、生产或历史根因。
+- 保留修复前 44 项预期失败、首次 Go 夹具失败和 standalone mypy 失败。专项 Python 148、修正后 Go 178 顶层/356 子测试、当前 Provider 构建及 30 原生场景通过；文档/来源门禁以新不可变证据索引恢复。完整 16 门禁/4013 Python、新候选 rc-20261026.101.1、29 安装/10 浏览器检查均通过；637 CI/274 原生/524 候选来源匹配应用提交 6e4b78f，临时资源清理。见 [最终验证](docs/evidence/2026-10-26/dependency-errors-verification-101.json)；未提升实机、生产或历史根因。
 
 ## 2026-10-26 · Audit 102 / 当前工作区与目标差距
 

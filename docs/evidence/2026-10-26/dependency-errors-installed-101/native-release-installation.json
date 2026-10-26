@@ -1,0 +1,233 @@
+{
+  "at": "2026-10-26T05:28:20.572091+00:00",
+  "passed": true,
+  "run_id": "1fc920db404e",
+  "checks": [
+    "fresh_offline_wheels_seven_modules_frozen_contracts_no_editable_dependencies",
+    "installed_s3_exact_version_guard_and_bounded_read_close_without_source_checkout",
+    "installed_four_audio_formats_decode_without_global_ffmpeg",
+    "existing_installation_refused_without_modification",
+    "installed_monitoring_cli_external_config_secret_once_no_implicit_database_or_dotenv",
+    "startup_on_empty_database_refuses_without_implicit_ddl",
+    "installed_migration_takes_native_pg18_backup_and_verifies_archive_before_ddl",
+    "installed_recovery_keygen_is_independent_private_and_never_overwrites",
+    "installed_readonly_recovery_snapshot_and_verify_use_exact_candidate_modules",
+    "installed_recovery_rejects_tampering_before_any_config_database_or_storage_access",
+    "invalid_configuration_and_missing_tls_fail_without_secret_output",
+    "installed_https_health_and_bundled_admin_assets",
+    "installed_https_monitoring_own_identity_dependency_and_readonly_snapshot",
+    "unauthenticated_and_business_bearer_cannot_enter_admin",
+    "installed_service_plan_render_validate_readonly_scm_nonadmin_no_uac_and_tamper_rejection",
+    "installed_audit_retention_defaults_disabled_and_status_is_read_only",
+    "installed_channel_query_literal_filters_bounds_and_unknown_fields",
+    "installed_channel_deletion_endpoint_requires_identity_and_validates_identifiers",
+    "installed_reapply_revision_and_worker_reconciliation_identity_boundaries",
+    "installed_session_lifetime_csrf_explicit_activity_and_logout_without_source_checkout",
+    "installed_runner_and_independent_gc_execute_once",
+    "worker_explicit_config_preserves_unresolved_durable_journal_without_comfy_call",
+    "installed_worker_refuses_unbound_legacy_journal_without_changing_execution_facts",
+    "installed_worker_explicit_adoption_verifies_backup_and_retains_unknown_submit",
+    "incompatible_database_revision_blocks_startup_without_migration",
+    "fresh_installed_real_browser_desktop_mobile_admin_and_content",
+    "installed_direct_video_https_frozen_spec_json_multipart_replay_scopes_cancel_and_unique_usage",
+    "runtime_tampered_payload_is_rejected_and_manifest_stays_immutable",
+    "installed_native_service_entries_https_worker_registration_runner_gc_sigint_clean_exit_no_descendants_and_journal_retained"
+  ],
+  "virtualization_used": false,
+  "production_accepted": false,
+  "archive_sha256": "ab37bbbabd8175b1489cf3d7f5190698dae694749edb9fadeb64b9b02d25e205",
+  "release_id": "rc-20261026.101.1",
+  "source_tree_sha256": "7da761080c8cb83f948d0d797a87d4bfff7fd3790262cd00de8e123adca17bd7",
+  "payload_files": 169,
+  "database_head": "3da02e7b5941",
+  "installation": {
+    "application_modules": [
+      "generation_domain",
+      "generation_application",
+      "generation_contracts",
+      "generation_infrastructure",
+      "control_api",
+      "control_runner",
+      "windows_worker"
+    ],
+    "archive_sha256": "ab37bbbabd8175b1489cf3d7f5190698dae694749edb9fadeb64b9b02d25e205",
+    "contracts_verified": 67,
+    "editable": false,
+    "format_version": 1,
+    "manifest_sha256": "3a640afd77c1d6d303c3c335d56d31933eb05e0aef8ab2177688e86d1d85cff7",
+    "offline": true,
+    "python_version": "3.13.1",
+    "release_id": "rc-20261026.101.1",
+    "requirements": 58,
+    "service_python": {
+      "files": {
+        "python-service.exe": {
+          "bytes": 105840,
+          "sha256": "03573716a7fcbd8b7fed8fe0163bbfbd3a852546920d6a666123f307c8dac7d9"
+        },
+        "python3.dll": {
+          "bytes": 72560,
+          "sha256": "c1de4bfe57dc4a5be8c72c865d617dc39dfd8162fcd2ce1fac9f401cf9efb504"
+        },
+        "python313.dll": {
+          "bytes": 6093816,
+          "sha256": "78b1dd211c0e66a0603df48da2c9b67a915ab3258701b9285d3faa255ed8dc25"
+        },
+        "vcruntime140.dll": {
+          "bytes": 120400,
+          "sha256": "36585912e5eaf83ba9fea0631534f690ccdc2d7ba91537166fe53e56c221e153"
+        },
+        "vcruntime140_1.dll": {
+          "bytes": 49744,
+          "sha256": "82a2f9ae1e6146ae3cb0f4bc5a62b7227e0384209d9b1aef86bbcc105912f7cd"
+        }
+      },
+      "protocol": "host-cpython-service-v1",
+      "python_version": "3.13.1"
+    }
+  },
+  "s3_boundary": {
+    "passed": true,
+    "isolated_installed_module": true,
+    "valid_stream_and_wrong_version_guard": true,
+    "response_bodies_closed": true,
+    "real_s3": false
+  },
+  "audio_media": {
+    "passed": true,
+    "formats": [
+      "wav",
+      "flac",
+      "mp3",
+      "opus"
+    ],
+    "global_media_tools_unavailable": true,
+    "bundled_tools_used": true
+  },
+  "pre_migration_backup": {
+    "archive_list_verified": true,
+    "sha256": "183f13949a65941c313f036bfb085f193f79e83c6df207100f8db11e133eede4",
+    "created_before_ddl": true
+  },
+  "recovery_verification": {
+    "passed": true,
+    "tables": 45,
+    "rows": 1,
+    "objects": 0,
+    "object_bytes": 0,
+    "media": {
+      "images": 0,
+      "videos": 0,
+      "audio": 0,
+      "other": 0
+    },
+    "encrypted_values": 0,
+    "master_key_verified": true,
+    "pepper_verified": true,
+    "database_read_only": true,
+    "reconciliation_required_before_dispatch": true,
+    "production_recovery_accepted": false
+  },
+  "browser": {
+    "passed": true,
+    "checks": [
+      "desktop_installed_admin_login_and_live_queue",
+      "desktop_installed_lime_source_fonts_and_offline_licenses",
+      "desktop_installed_statistics_audio_empty_unknown_and_responsive",
+      "desktop_installed_content_route_and_authorization",
+      "desktop_installed_audit_query_and_responsive_filters",
+      "mobile_installed_admin_login_and_live_queue",
+      "mobile_installed_lime_source_fonts_and_offline_licenses",
+      "mobile_installed_statistics_audio_empty_unknown_and_responsive",
+      "mobile_installed_content_route_and_authorization",
+      "mobile_installed_audit_query_and_responsive_filters"
+    ],
+    "errors": [],
+    "closed_contexts": 2,
+    "browser_closed": true
+  },
+  "direct_video": {
+    "passed": true,
+    "exact_installed_modules": true,
+    "https_tls_verified": true,
+    "json_multipart_original_key_replay": true,
+    "frozen_seconds": "5.125",
+    "frozen_size": "1024x1024",
+    "current_scope_and_revocation_enforced": true,
+    "cross_key_status_and_head_denied": true,
+    "safe_cancelled_error": true,
+    "new_jobs": 1,
+    "unique_cancelled_usage_entries": 1,
+    "video_billed_milliseconds": 0,
+    "production_comfyui_called": false,
+    "real_gpu": false,
+    "caller_owns_database_cleanup": true,
+    "credentials_printed": false
+  },
+  "native_service_entry_lifecycle": {
+    "roles": {
+      "worker": {
+        "exit_code": 0,
+        "signal": "CTRL_C",
+        "owned_job_active_processes_before_cleanup": 0,
+        "scm_registered": false,
+        "wrapper_lifecycle_verified": false
+      },
+      "runner": {
+        "exit_code": 0,
+        "signal": "CTRL_C",
+        "owned_job_active_processes_before_cleanup": 0,
+        "scm_registered": false,
+        "wrapper_lifecycle_verified": false
+      },
+      "gc": {
+        "exit_code": 0,
+        "signal": "CTRL_C",
+        "owned_job_active_processes_before_cleanup": 0,
+        "scm_registered": false,
+        "wrapper_lifecycle_verified": false
+      },
+      "api": {
+        "exit_code": 0,
+        "signal": "CTRL_C",
+        "owned_job_active_processes_before_cleanup": 0,
+        "scm_registered": false,
+        "wrapper_lifecycle_verified": false
+      }
+    },
+    "worker_identity_journal_reopened": true,
+    "real_gpu": false,
+    "gateway_supervision_verified": false,
+    "wrapper_and_scm_verified": false
+  },
+  "processes": [
+    {
+      "name": "service-entry-worker",
+      "pid": 3508,
+      "stopped": true,
+      "exit_code": 0
+    },
+    {
+      "name": "service-entry-gc",
+      "pid": 22824,
+      "stopped": true,
+      "exit_code": 0
+    },
+    {
+      "name": "service-entry-runner",
+      "pid": 9440,
+      "stopped": true,
+      "exit_code": 0
+    },
+    {
+      "name": "installed-api",
+      "pid": 25632,
+      "stopped": true,
+      "exit_code": 0
+    }
+  ],
+  "temporary_database_removed": true,
+  "temporary_root_removed": true,
+  "cleanup_errors": [],
+  "duration_seconds": 356.42
+}
