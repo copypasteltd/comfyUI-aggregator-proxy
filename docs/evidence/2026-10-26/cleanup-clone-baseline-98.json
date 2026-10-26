@@ -1,0 +1,703 @@
+{
+  "at": "2026-10-26T02:51:30.122636+00:00",
+  "variant": "baseline",
+  "scope": "Exact native clone of the preserved94 database; original is never changed. Replay fixture cleanup with original 30s statement/15s lock budgets and roll back all deletes.",
+  "passed": true,
+  "source_database_oid": 16389,
+  "original_database_modified": false,
+  "manual_analyze_or_vacuum": false,
+  "profiles": [
+    {
+      "table": "worker_inbox",
+      "seconds": 0.004896,
+      "plan_milliseconds": 0.501,
+      "shared_hit_blocks": 222,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "output_uploads",
+      "seconds": 0.004389,
+      "plan_milliseconds": 0.088,
+      "shared_hit_blocks": 4,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "gpu_occupancies",
+      "seconds": 0.002938,
+      "plan_milliseconds": 0.169,
+      "shared_hit_blocks": 53,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "claim_requests",
+      "seconds": 0.005601,
+      "plan_milliseconds": 2.949,
+      "shared_hit_blocks": 1,
+      "shared_read_blocks": 121,
+      "triggers": []
+    },
+    {
+      "table": "usage_ledger",
+      "seconds": 0.005584,
+      "plan_milliseconds": 1.826,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 47,
+      "triggers": []
+    },
+    {
+      "table": "spec_isolations",
+      "seconds": 0.006413,
+      "plan_milliseconds": 0.145,
+      "shared_hit_blocks": 73,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "job_asset_references",
+      "seconds": 0.003682,
+      "plan_milliseconds": 0.147,
+      "shared_hit_blocks": 1,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "gateway_admissions",
+      "seconds": 0.006016,
+      "plan_milliseconds": 0.586,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 3,
+      "triggers": []
+    },
+    {
+      "table": "attempts",
+      "seconds": 0.013974,
+      "plan_milliseconds": 10.723,
+      "shared_hit_blocks": 34,
+      "shared_read_blocks": 149,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_1464303",
+          "milliseconds": 2.998,
+          "calls": 11
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_63219",
+          "milliseconds": 2.678,
+          "calls": 11
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18958",
+          "milliseconds": 0.85,
+          "calls": 11
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18347",
+          "milliseconds": 0.577,
+          "calls": 11
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18313",
+          "milliseconds": 0.56,
+          "calls": 11
+        }
+      ]
+    },
+    {
+      "table": "artifacts",
+      "seconds": 0.005758,
+      "plan_milliseconds": 0.082,
+      "shared_hit_blocks": 18,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "workflow_import_previews",
+      "seconds": 0.002749,
+      "plan_milliseconds": 0.445,
+      "shared_hit_blocks": 249,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "workflow_bindings",
+      "seconds": 0.009107,
+      "plan_milliseconds": 4.813,
+      "shared_hit_blocks": 3,
+      "shared_read_blocks": 342,
+      "triggers": []
+    },
+    {
+      "table": "public_models",
+      "seconds": 0.032065,
+      "plan_milliseconds": 28.644,
+      "shared_hit_blocks": 1,
+      "shared_read_blocks": 2254,
+      "triggers": []
+    },
+    {
+      "table": "jobs",
+      "seconds": 0.022033,
+      "plan_milliseconds": 21.11,
+      "shared_hit_blocks": 1445,
+      "shared_read_blocks": 0,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_18191",
+          "milliseconds": 2.603,
+          "calls": 11
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_33540",
+          "milliseconds": 2.503,
+          "calls": 11
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_34655",
+          "milliseconds": 2.503,
+          "calls": 11
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18323",
+          "milliseconds": 2.44,
+          "calls": 11
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18263",
+          "milliseconds": 2.439,
+          "calls": 11
+        }
+      ]
+    },
+    {
+      "table": "access_events",
+      "seconds": 0.010324,
+      "plan_milliseconds": 5.219,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 362,
+      "triggers": []
+    },
+    {
+      "table": "workflow_releases",
+      "seconds": 0.044326,
+      "plan_milliseconds": 38.421,
+      "shared_hit_blocks": 19,
+      "shared_read_blocks": 2001,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_18050",
+          "milliseconds": 1.955,
+          "calls": 2
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18102",
+          "milliseconds": 1.296,
+          "calls": 2
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_1102589",
+          "milliseconds": 0.862,
+          "calls": 2
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18060",
+          "milliseconds": 0.377,
+          "calls": 2
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18107",
+          "milliseconds": 0.267,
+          "calls": 2
+        }
+      ]
+    },
+    {
+      "table": "worker_commands",
+      "seconds": 0.002804,
+      "plan_milliseconds": 0.095,
+      "shared_hit_blocks": 18,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "idempotency",
+      "seconds": 0.007235,
+      "plan_milliseconds": 4.361,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 303,
+      "triggers": []
+    },
+    {
+      "table": "external_identity_bindings",
+      "seconds": 0.00625,
+      "plan_milliseconds": 0.055,
+      "shared_hit_blocks": 4,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "channel_revisions",
+      "seconds": 0.003413,
+      "plan_milliseconds": 0.862,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 21,
+      "triggers": []
+    },
+    {
+      "table": "assets",
+      "seconds": 0.005827,
+      "plan_milliseconds": 0.084,
+      "shared_hit_blocks": 22,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "api_credentials",
+      "seconds": 0.003994,
+      "plan_milliseconds": 0.879,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 17,
+      "triggers": []
+    },
+    {
+      "table": "workflows",
+      "seconds": 0.007789,
+      "plan_milliseconds": 4.138,
+      "shared_hit_blocks": 11,
+      "shared_read_blocks": 240,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_17994",
+          "milliseconds": 0.663,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_661006",
+          "milliseconds": 0.226,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18009",
+          "milliseconds": 0.156,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "table": "object_records",
+      "seconds": 0.005202,
+      "plan_milliseconds": 0.155,
+      "shared_hit_blocks": 44,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "model_artifacts",
+      "seconds": 0.004774,
+      "plan_milliseconds": 0.65,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 2,
+      "triggers": []
+    },
+    {
+      "table": "gateway_catalogs",
+      "seconds": 0.002495,
+      "plan_milliseconds": 0.585,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 2,
+      "triggers": []
+    },
+    {
+      "table": "gateway_catalog_receipts",
+      "seconds": 0.002748,
+      "plan_milliseconds": 0.58,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 2,
+      "triggers": []
+    },
+    {
+      "table": "channels",
+      "seconds": 0.016278,
+      "plan_milliseconds": 12.781,
+      "shared_hit_blocks": 22,
+      "shared_read_blocks": 1032,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_17895",
+          "milliseconds": 0.5,
+          "calls": 2
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18253",
+          "milliseconds": 0.331,
+          "calls": 2
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_661001",
+          "milliseconds": 0.255,
+          "calls": 2
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18151",
+          "milliseconds": 0.202,
+          "calls": 2
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18141",
+          "milliseconds": 0.172,
+          "calls": 2
+        }
+      ]
+    },
+    {
+      "table": "api_keys",
+      "seconds": 0.029471,
+      "plan_milliseconds": 28.721,
+      "shared_hit_blocks": 72,
+      "shared_read_blocks": 9107,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_18045",
+          "milliseconds": 0.459,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18055",
+          "milliseconds": 0.349,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_137370",
+          "milliseconds": 0.328,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_17918",
+          "milliseconds": 0.284,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18196",
+          "milliseconds": 0.246,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "table": "projects",
+      "seconds": 0.024254,
+      "plan_milliseconds": 21.665,
+      "shared_hit_blocks": 43,
+      "shared_read_blocks": 1703,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_1102579",
+          "milliseconds": 0.343,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_17928",
+          "milliseconds": 0.163,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_17771",
+          "milliseconds": 0.134,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_17706",
+          "milliseconds": 0.122,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18161",
+          "milliseconds": 0.116,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "table": "node_boots",
+      "seconds": 0.00278,
+      "plan_milliseconds": 0.042,
+      "shared_hit_blocks": 4,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "management_operations",
+      "seconds": 0.001823,
+      "plan_milliseconds": 0.062,
+      "shared_hit_blocks": 13,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "gpu_resources",
+      "seconds": 0.00951,
+      "plan_milliseconds": 6.743,
+      "shared_hit_blocks": 17,
+      "shared_read_blocks": 318,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_17691",
+          "milliseconds": 0.73,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_17696",
+          "milliseconds": 0.571,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_1102584",
+          "milliseconds": 0.361,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18258",
+          "milliseconds": 0.136,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18318",
+          "milliseconds": 0.124,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "table": "gateway_request_fences",
+      "seconds": 0.003405,
+      "plan_milliseconds": 0.054,
+      "shared_hit_blocks": 6,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "gateway_catalog_releases",
+      "seconds": 0.003807,
+      "plan_milliseconds": 0.925,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 16,
+      "triggers": []
+    },
+    {
+      "table": "admin_sessions",
+      "seconds": 0.00457,
+      "plan_milliseconds": 2.219,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 152,
+      "triggers": []
+    },
+    {
+      "table": "admin_mutations",
+      "seconds": 0.002821,
+      "plan_milliseconds": 0.386,
+      "shared_hit_blocks": 124,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "tenants",
+      "seconds": 0.006588,
+      "plan_milliseconds": 4.697,
+      "shared_hit_blocks": 50,
+      "shared_read_blocks": 255,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_1102574",
+          "milliseconds": 0.247,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18070",
+          "milliseconds": 0.166,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_33484",
+          "milliseconds": 0.15,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18004",
+          "milliseconds": 0.142,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_17741",
+          "milliseconds": 0.111,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "table": "rate_states",
+      "seconds": 0.002184,
+      "plan_milliseconds": 0.335,
+      "shared_hit_blocks": 111,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "quota_buckets",
+      "seconds": 0.008521,
+      "plan_milliseconds": 7.252,
+      "shared_hit_blocks": 8,
+      "shared_read_blocks": 463,
+      "triggers": []
+    },
+    {
+      "table": "outbox_events",
+      "seconds": 0.005274,
+      "plan_milliseconds": 1.071,
+      "shared_hit_blocks": 512,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "nodes",
+      "seconds": 0.011742,
+      "plan_milliseconds": 9.147,
+      "shared_hit_blocks": 20,
+      "shared_read_blocks": 568,
+      "triggers": [
+        {
+          "name": "RI_ConstraintTrigger_a_17701",
+          "milliseconds": 0.528,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_17590",
+          "milliseconds": 0.322,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_17962",
+          "milliseconds": 0.286,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18268",
+          "milliseconds": 0.155,
+          "calls": 1
+        },
+        {
+          "name": "RI_ConstraintTrigger_a_18963",
+          "milliseconds": 0.105,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "table": "gateway_services",
+      "seconds": 0.004457,
+      "plan_milliseconds": 0.471,
+      "shared_hit_blocks": 24,
+      "shared_read_blocks": 0,
+      "triggers": []
+    },
+    {
+      "table": "audit_events",
+      "seconds": 0.030674,
+      "plan_milliseconds": 23.829,
+      "shared_hit_blocks": 1,
+      "shared_read_blocks": 1605,
+      "triggers": []
+    },
+    {
+      "table": "admin_users",
+      "seconds": 0.006643,
+      "plan_milliseconds": 3.158,
+      "shared_hit_blocks": 0,
+      "shared_read_blocks": 156,
+      "triggers": []
+    }
+  ],
+  "cleanup": {
+    "owned_clone_removed": true
+  },
+  "clone_seconds": 288.686,
+  "schema_head": "3da02e7b5941",
+  "initial_relations": [
+    [
+      "api_keys",
+      1.0,
+      9138,
+      74858496
+    ],
+    [
+      "public_models",
+      1.0,
+      2254,
+      18464768
+    ],
+    [
+      "workflow_releases",
+      2.0,
+      2001,
+      16392192
+    ],
+    [
+      "projects",
+      1.0,
+      1702,
+      13942784
+    ],
+    [
+      "audit_events",
+      2.0,
+      1605,
+      13148160
+    ],
+    [
+      "jobs",
+      0.0,
+      1423,
+      11657216
+    ],
+    [
+      "channels",
+      2.0,
+      1032,
+      8454144
+    ],
+    [
+      "nodes",
+      1.0,
+      568,
+      4653056
+    ],
+    [
+      "outbox_events",
+      2.0,
+      511,
+      4186112
+    ],
+    [
+      "quota_buckets",
+      0.0,
+      463,
+      3792896
+    ],
+    [
+      "access_events",
+      0.0,
+      362,
+      2965504
+    ],
+    [
+      "workflow_bindings",
+      2.0,
+      342,
+      2801664
+    ]
+  ],
+  "clone_deletes_rolled_back": true,
+  "api_key_rows": 1,
+  "original_oid_unchanged": true
+}

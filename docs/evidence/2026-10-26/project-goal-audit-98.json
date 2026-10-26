@@ -1,0 +1,654 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T03:10:25.291073+00:00",
+  "passed": true,
+  "scope": "Read-only systematic audit of current source, exact candidate and layered evidence; no new functional/full-CI/browser/GPU execution",
+  "audit_start_head": "04d0c9818465735bd6ce686cd3f2b7696d5d6716",
+  "audit_start_remote_main": "04d0c9818465735bd6ce686cd3f2b7696d5d6716",
+  "application_source_revision": "31f3798727d267a208134aceb9be37b1f63ba8ab",
+  "application_inputs_modified_by_audit": false,
+  "ci": {
+    "path": "docs/evidence/native-ci/ci97-20261026-release-provenance/summary.json",
+    "sha256": "f4461d708be1b1278c537518f791daf4af8a616f3bbbbdb9e69ac48d61e9fd28",
+    "matched_current_inputs": 632,
+    "gates": 16,
+    "python": {
+      "tests": 3915,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "tests_reexecuted_by_audit": false
+  },
+  "candidate": {
+    "path": "docs/evidence/2026-10-26/release-provenance-build-97.json",
+    "sha256": "febdd38c24ddbeda97f1648fe3fcadf8363ed5ddf0d34e58f0f3fb6be4f83377",
+    "matched_current_inputs": 521,
+    "release_id": "rc-20261026.97.1",
+    "archive_sha256_rechecked": true,
+    "archive_sha256": "9ffda463c6c57724a4a564d17396d19991f4130005f2d9483fe789447b72d607",
+    "manifest_source_revision": "31f3798727d267a208134aceb9be37b1f63ba8ab",
+    "payload_files": 169,
+    "validated_releases": [],
+    "acceptance": {
+      "production": false,
+      "linux_runtime": false,
+      "real_fleet": false,
+      "real_workflows": false,
+      "private_s3": false
+    }
+  },
+  "verification": {
+    "path": "docs/evidence/2026-10-26/release-provenance-verification-97.json",
+    "sha256": "5a194a8a3adaa13863ae1dd30287fdeeffa85ff577a9fd6877bd193834039b4f",
+    "report_hashes_rechecked": 7,
+    "exact_installation_checks": 29,
+    "installed_browser_checks": 10,
+    "tests_reexecuted_by_audit": false
+  },
+  "requirements": {
+    "total": 73,
+    "local_statuses": {
+      "framework": 6,
+      "implemented": 67
+    }
+  },
+  "complete_gates": {
+    "total": 98,
+    "statuses": {
+      "pending_full_acceptance": 98
+    }
+  },
+  "work_packages": {
+    "total": 15,
+    "statuses": {
+      "in_progress": 15
+    }
+  },
+  "admin_routes": [
+    {
+      "path": "/",
+      "component": "Overview",
+      "title": "运行总览"
+    },
+    {
+      "path": "/channels",
+      "component": "Channels",
+      "title": "Windows 渠道"
+    },
+    {
+      "path": "/worker-nodes",
+      "component": "WorkerNodes",
+      "title": "Windows 节点"
+    },
+    {
+      "path": "/spec-isolations",
+      "component": "SpecIsolations",
+      "title": "规格隔离"
+    },
+    {
+      "path": "/jobs",
+      "component": "Jobs",
+      "title": "任务管理"
+    },
+    {
+      "path": "/workflows",
+      "component": "Workflows",
+      "title": "Workflow 管理"
+    },
+    {
+      "path": "/models",
+      "component": "Models",
+      "title": "模型与路由"
+    },
+    {
+      "path": "/model-artifacts",
+      "component": "ModelArtifacts",
+      "title": "模型文件目录"
+    },
+    {
+      "path": "/keys",
+      "component": "Keys",
+      "title": "API 密钥"
+    },
+    {
+      "path": "/scopes",
+      "component": "Scopes",
+      "title": "租户与项目"
+    },
+    {
+      "path": "/keys/:identifier/access",
+      "component": "KeyAccess",
+      "title": "Key 访问记录"
+    },
+    {
+      "path": "/content",
+      "component": "Content",
+      "title": "内容管理"
+    },
+    {
+      "path": "/gateways",
+      "component": "Gateways",
+      "title": "网关接入"
+    },
+    {
+      "path": "/operations",
+      "component": "Records",
+      "title": "操作中心"
+    },
+    {
+      "path": "/alerts",
+      "component": "Alerts",
+      "title": "运行告警"
+    },
+    {
+      "path": "/audit",
+      "component": "Audit",
+      "title": "审计事件"
+    },
+    {
+      "path": "/users",
+      "component": "Users",
+      "title": "管理账号"
+    }
+  ],
+  "openapi_paths": 157,
+  "openapi_methods": 198,
+  "python_placeholder_scan": {
+    "files": 168,
+    "pass_only_or_not_implemented_functions": [],
+    "limitation": "A bounded AST scan is not a complete business, safety or distributed-system correctness audit"
+  },
+  "actual_workflow_package_files": [],
+  "actual_workflows_accepted": 0,
+  "required_capabilities": 6,
+  "backlog": {
+    "stable_ids": 76,
+    "closed_local_ids": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "10",
+      "12"
+    ],
+    "open": 69,
+    "first_release_open": 67,
+    "optional_open": 2,
+    "types": {
+      "完善": 2,
+      "增强": 2,
+      "开发": 2,
+      "配置": 7,
+      "实测": 46,
+      "产品化": 7,
+      "交付": 3
+    },
+    "items": [
+      {
+        "id": "06",
+        "type": "完善",
+        "title": "调度成本数据与预算校准",
+        "closure_condition": "使用已批准设备/规格的真实冷启动、热启动、执行和回传数据校准成本与超时，保留基准值和实测值区别"
+      },
+      {
+        "id": "07",
+        "type": "增强",
+        "title": "动态资源池份额与保留能力",
+        "closure_condition": "在现有模型/渠道绑定、等份额与等待老化基础上，评估可配置资源保留及其防饥饿规则；非首版阻断"
+      },
+      {
+        "id": "08",
+        "type": "增强",
+        "title": "有界热模型偏好和切换优化",
+        "closure_condition": "依据实际模型加载成本优化选择，并证明冷模型任务不会永久等待；非首版阻断"
+      },
+      {
+        "id": "09",
+        "type": "完善",
+        "title": "有依据的预计等待区间",
+        "closure_condition": "[94](./94-队列等待估算与运行样本.md) 已实现只读队列场景、同依据运行样本与 Admin 区间/未知/过期展示；仍需真实设备的样本充分性、误差、冷/热启动和外部队列校准，不把实际已等待或服务成本当作精确 ETA"
+      },
+      {
+        "id": "11",
+        "type": "开发",
+        "title": "仓库原生 CI 的远端启用与验收",
+        "closure_condition": "83 已提供原生驱动、GitHub 入口与 43 项专项检查；仍须在专用物理 Runner 启用并核对实际成功及失败 artifact。完整本地门禁结果见 83；不以本地通过关闭远端出口"
+      },
+      {
+        "id": "13",
+        "type": "配置",
+        "title": "设备与环境清单",
+        "closure_condition": "记录每台 Windows、GPU/显存、物理标识、驱动、内存/磁盘、ComfyUI、自定义节点、模型及网络；不按显卡名称推测能力"
+      },
+      {
+        "id": "14",
+        "type": "实测",
+        "title": "真实 Worker 安装和接入",
+        "closure_condition": "在真实设备使用独立原生环境登记、配置凭证与持久 journal/spool，完成启动、重启、轮换和恢复验证"
+      },
+      {
+        "id": "15",
+        "type": "实测",
+        "title": "物理 GPU 与渠道关系",
+        "closure_condition": "核对多 GPU、同 GPU 多 ComfyUI 渠道、共享锁和人工任务隔离，禁止重复登记绕过单生成槽"
+      },
+      {
+        "id": "16",
+        "type": "实测",
+        "title": "私网、NAT 与访问矩阵",
+        "closure_condition": "测直连/中继、断连重连、时延及上行；客户不能访问 ComfyUI，Worker 不直接访问数据库，浏览器不持有设备凭证"
+      },
+      {
+        "id": "17",
+        "type": "实测",
+        "title": "ComfyUI 版本与提交/取消能力",
+        "closure_condition": "对实际版本验证 prompt 关联、queue/history、取消与停止证据；不因某个版本或返回 200 就假定所有设备相同"
+      },
+      {
+        "id": "18",
+        "type": "产品化",
+        "title": "文生图生产 Workflow",
+        "closure_condition": "冻结真实 API 图、绑定、尺寸/质量档和输出适配，提供真实合格图片与依赖记录"
+      },
+      {
+        "id": "19",
+        "type": "产品化",
+        "title": "图生图生产 Workflow",
+        "closure_condition": "验证源图语义、强度与尺寸处理；只有蒙版样本通过后才声明支持蒙版"
+      },
+      {
+        "id": "20",
+        "type": "产品化",
+        "title": "多参考图生图生产 Workflow",
+        "closure_condition": "实际消费至少两张有序参考图，验证交换顺序、角色和第二张图的作用，不能只使用首图"
+      },
+      {
+        "id": "21",
+        "type": "产品化",
+        "title": "文生视频生产 Workflow",
+        "closure_condition": "提供真实可播放视频，核对画幅、时长、帧率、编码、音轨声明和执行/编码资源"
+      },
+      {
+        "id": "22",
+        "type": "产品化",
+        "title": "多参考图生视频生产 Workflow",
+        "closure_condition": "证明至少两张参考图确实参与条件生成；单首帧、首尾帧或未声明的两阶段流程不能替代多参考语义"
+      },
+      {
+        "id": "23",
+        "type": "产品化",
+        "title": "ComfyUI 音频生产 Workflow",
+        "closure_condition": "实测真实输出节点/history 结构并补适配；验证声明的 WAV/FLAC/MP3/Ogg Opus 规格、时长、采样率、声道和可播放性"
+      },
+      {
+        "id": "24",
+        "type": "产品化",
+        "title": "六类不可变发布包及来源",
+        "closure_condition": "固定 API 图、参数/输出绑定、预设、模型哈希、自定义节点/环境版本、样本和许可来源；测试夹具不能作为生产包"
+      },
+      {
+        "id": "25",
+        "type": "实测",
+        "title": "GPU 能力和耗时画像",
+        "closure_condition": "按设备/精度/尺寸/帧数测峰值 VRAM/RAM/磁盘、冷热启动、P50/P95、成功率，批准后才能用于生产派单"
+      },
+      {
+        "id": "26",
+        "type": "实测",
+        "title": "质量样本与回归集",
+        "closure_condition": "六类各有受控输入、seed、输出、失败样本和人工质量评审；参考一致性、运动与声音质量分别验收"
+      },
+      {
+        "id": "27",
+        "type": "实测",
+        "title": "真实依赖漂移与重新批准",
+        "closure_condition": "测缺模型、同名异哈希、自定义节点变更、环境变化使旧验证失效，并通过重新探测/验证恢复"
+      },
+      {
+        "id": "28",
+        "type": "实测",
+        "title": "真实 Redis、L1 和失效通知",
+        "closure_condition": "在实际宿主配置下验证认证/余额/订阅缓存、两遍失效和 pubsub、重连与失败退避，不以协议替身代替"
+      },
+      {
+        "id": "29",
+        "type": "实测",
+        "title": "六类真实网关端到端",
+        "closure_condition": "实际 Sub2API、控制面、Worker、ComfyUI 和私有存储贯通发现、上传、生成、查询、取消、下载与结算；复现/定位并发鉴权 rate_states 行锁超时导致的 502，不能以隔离通过关闭"
+      },
+      {
+        "id": "30",
+        "type": "实测",
+        "title": "目标 HTTP/SDK 兼容矩阵",
+        "closure_condition": "固定客户端版本，逐项记录字段、状态码、错误、请求 ID、幂等与重试语义；明确 OpenAI 子集及项目扩展"
+      },
+      {
+        "id": "31",
+        "type": "实测",
+        "title": "同步图片与编辑真实边界",
+        "closure_condition": "验证 JSON/multipart、同步等待超时、受限 Base64、下载权限和等待期间撤销，不能把异步任务外形伪装成同步图片结果"
+      },
+      {
+        "id": "32",
+        "type": "实测",
+        "title": "视频标准参考输入与下载",
+        "closure_condition": "验证 JSON/multipart、首帧/多参考角色与顺序的转发、查询状态、HEAD/Range 和实际可播放产物"
+      },
+      {
+        "id": "33",
+        "type": "实测",
+        "title": "音频统一异步入口与计量",
+        "closure_condition": "用真实音频完成原生/网关任务、权限与毫秒额度、实际时长和唯一结算；当前不承诺 /v1/audio/speech"
+      },
+      {
+        "id": "34",
+        "type": "实测",
+        "title": "混合供应商在途额度",
+        "closure_condition": "本 Provider 与其他供应商、多个 Key/实例并发时，核对余额、套餐、请求窗口、冻结金额及终态唯一性"
+      },
+      {
+        "id": "35",
+        "type": "实测",
+        "title": "持久副作用与长期对账",
+        "closure_condition": "在实际缓存/通知与重启条件下验证用量、outbox、结算 ack 和退避，客户停止轮询仍能收尾，无孤儿意图"
+      },
+      {
+        "id": "36",
+        "type": "配置",
+        "title": "生产价格与退款规则",
+        "closure_condition": "为六类规格固定价格/倍率/套餐版本及失败、取消、到期策略，完成账目对照；不创建第二套客户货币账本"
+      },
+      {
+        "id": "37",
+        "type": "实测",
+        "title": "真实私有 S3 桶与权限",
+        "closure_condition": "验证版本化、IAM/最小权限、不可公开访问、任务范围上传、指定原版本读取和精确删除"
+      },
+      {
+        "id": "38",
+        "type": "实测",
+        "title": "真实大文件交付和撤销",
+        "closure_condition": "对实际图片/视频/音频测鉴权代理、GET/HEAD/Range、断点和签名模式；记录已签发 URL/已开始流的撤销边界"
+      },
+      {
+        "id": "39",
+        "type": "实测",
+        "title": "并发上传/下载与背压",
+        "closure_condition": "测多节点同时回传、代理下载、带宽、连接/缓冲/磁盘预算；文件流不能阻塞控制 API"
+      },
+      {
+        "id": "40",
+        "type": "配置",
+        "title": "生产内容保留策略",
+        "closure_condition": "确定输入、产物、元数据、暂存、访问日志与管理审计保留期及容量预算；不把建议初值当成已配置策略"
+      },
+      {
+        "id": "41",
+        "type": "实测",
+        "title": "云端孤儿对象与 GC",
+        "closure_condition": "验证活动输入保护、过期/删除/待确认对象、未完成上传及精确版本回收，不误删活动或唯一产物"
+      },
+      {
+        "id": "42",
+        "type": "实测",
+        "title": "Worker 本地容量与保留",
+        "closure_condition": "在真实磁盘/内存压力、spool/上传积压下拒绝新任务并保留恢复；确认后至少保留一小时，到期有界清理"
+      },
+      {
+        "id": "43",
+        "type": "实测",
+        "title": "实际对象异常拒绝与回传恢复",
+        "closure_condition": "测摘要/大小/版本/媒体不符、凭证过期、上传和确认回执丢失；恢复已有产物，不再次消耗 GPU"
+      },
+      {
+        "id": "44",
+        "type": "实测",
+        "title": "真实媒体预览与播放",
+        "closure_condition": "用实际编码/尺寸产物检查图片、视频、音频的授权预览、播放、下载，以及离页后的播放/URL/连接释放"
+      },
+      {
+        "id": "45",
+        "type": "实测",
+        "title": "真实渠道全生命周期",
+        "closure_condition": "页面完成新增/编辑地址和凭证、探测、排空、禁用/恢复与受控删除；活动任务可收尾，配置分层与引用保护正确"
+      },
+      {
+        "id": "46",
+        "type": "实测",
+        "title": "Workflow 双向同步与恢复",
+        "closure_condition": "用真实文件完成授权目录拉取、差异/草稿、冻结、批量同步、部分失败目标重试、原操作恢复与运行批准"
+      },
+      {
+        "id": "47",
+        "type": "实测",
+        "title": "模型发布、停用和回滚",
+        "closure_condition": "通过 Admin 核对实际网关确认及客户端发现；旧队列保持原 Workflow/规格/价格，新任务使用确认后的版本"
+      },
+      {
+        "id": "48",
+        "type": "实测",
+        "title": "实时全局/渠道队列",
+        "closure_condition": "与真实 ComfyUI 和数据库核对共享候选、分配/执行/回传/核对、未知占用、等待与过期观测；SSE 重连及隐藏/退出清理正确"
+      },
+      {
+        "id": "49",
+        "type": "实测",
+        "title": "真实任务管理操作",
+        "closure_condition": "对图片/视频/音频验证详情、取消、批量逐项结果、终态关联重试和优先级；不能提前宣告 GPU 停止或重复结算"
+      },
+      {
+        "id": "50",
+        "type": "实测",
+        "title": "多管理员与权限边界",
+        "closure_condition": "在真实环境验证角色、CSRF、并发 CAS、会话过期/撤销、响应丢失原请求核对、历史/归档只读和审计；85 首轮审计查询 503 已从原生 PG 日志确认触发分页语句预算；86 增加脱敏诊断及故障观测，慢查询完整根因仍开放，独立回归通过不等于根因解决；97 的 DOM 测量修正 UI-96-01 为入场动画中间帧，取消状态动画并补正文留白；19 项三宽度 UI 检查通过，真实权限和完整慢查询根因仍待验收"
+      },
+      {
+        "id": "51",
+        "type": "实测",
+        "title": "多 Key 授权与额度矩阵",
+        "closure_condition": "在所有真实入口核对六类能力、模型/版本/渠道/规格、父级和 Key 限额、IP/CIDR、有效期、轮换/撤销及日切"
+      },
+      {
+        "id": "52",
+        "type": "实测",
+        "title": "内容隔离与即时策略变更",
+        "closure_condition": "验证默认隔离、同租户显式共享、列表/计数/游标/详情/预览/Base64/下载一致；收紧权限后不沿旧缓存放行"
+      },
+      {
+        "id": "53",
+        "type": "实测",
+        "title": "多网关客户映射和凭证轮换",
+        "closure_condition": "验证 issuer/外部引用映射、逻辑 Key 稳定归属、网关稳定 ID、凭证轮换、无映射/伪造拒绝及跨客户不混用"
+      },
+      {
+        "id": "54",
+        "type": "实测",
+        "title": "ComfyUI 已接收但响应丢失",
+        "closure_condition": "保留 journal 和原 prompt 关联，核对原执行，禁止盲目再次 POST、换机重跑或释放 GPU"
+      },
+      {
+        "id": "55",
+        "type": "实测",
+        "title": "Worker 进程/本地状态故障",
+        "closure_condition": "在提交和确认边界结束 Worker 后恢复；对 journal/spool 损坏或丢失保持隔离与受控决策"
+      },
+      {
+        "id": "56",
+        "type": "实测",
+        "title": "Windows/ComfyUI 重启及 history 丢失",
+        "closure_condition": "依据真实进程、boot、journal 与输出恢复；旧 fence 不能覆盖新状态，不因空 history 推断未执行"
+      },
+      {
+        "id": "57",
+        "type": "实测",
+        "title": "长时间网络分区与旧节点回归",
+        "closure_condition": "GPU 仍运行时隔离未知占用、暂停新派单；迟到事件/产物不能覆盖当前尝试或再次收费"
+      },
+      {
+        "id": "58",
+        "type": "实测",
+        "title": "进度通道断连",
+        "closure_condition": "验证实际 WebSocket/HTTP 观测降级、重连和状态核对；进度未知不伪造百分比或误判失败"
+      },
+      {
+        "id": "59",
+        "type": "实测",
+        "title": "真实取消与完成竞争",
+        "closure_condition": "覆盖排队、准备、GPU、编码、上传、核对阶段；唯一终态和停止证据成立，批量操作不掩盖逐项结果"
+      },
+      {
+        "id": "60",
+        "type": "实测",
+        "title": "OOM、缺模型、磁盘满与坏产物",
+        "closure_condition": "验证固定失败归因、规格/节点隔离、诊断、恢复验证和重试预算；不无限重启、不静默降低质量"
+      },
+      {
+        "id": "61",
+        "type": "实测",
+        "title": "大文件中断与回执丢失恢复",
+        "closure_condition": "真实节点保留唯一文件，复用对象/上传状态并完成确认；无重复执行、重复发布和重复收费"
+      },
+      {
+        "id": "62",
+        "type": "实测",
+        "title": "控制面、数据库与网关重启",
+        "closure_condition": "有真实在途任务时分别恢复 API/Runner/PG/Sub2API；任务、配额、公共 ID、占用和账本一致"
+      },
+      {
+        "id": "63",
+        "type": "实测",
+        "title": "10 台真实设备混合长稳",
+        "closure_condition": "覆盖异构 GPU、三类媒体、多租户、模型切换、节点上下线；记录吞吐、积压、失败率、资源增长和账目"
+      },
+      {
+        "id": "64",
+        "type": "实测",
+        "title": "20 台规模与完整容量目标",
+        "closure_condition": "实际计划使用 20 台时补齐 20 台记录；包含同时上传、500 任务控制面与 3 管理会话、提交/查询/派单/刷新分位及持续时间"
+      },
+      {
+        "id": "65",
+        "type": "配置",
+        "title": "生产主机、域名与网络入口",
+        "closure_condition": "确定宿主、地域、HTTPS 证书、可信 origin、代理超时、私网和端口边界；不直接复制开发配置上线"
+      },
+      {
+        "id": "66",
+        "type": "开发",
+        "title": "原生系统服务部署",
+        "closure_condition": "85 已提供固定角色计划、专用解释器、身份核验与受控启停工具及本地应用入口验证；仍须通过真实 WinSW/SCM、独立账户 ACL、异常恢复及开机/关机。Linux 仅在选定该宿主时交付对应原生产物"
+      },
+      {
+        "id": "67",
+        "type": "配置",
+        "title": "生产账号、ACL 与秘密管理",
+        "closure_condition": "配置最小权限数据库/存储/服务账号、私密目录、证书、pepper/Fernet/网关和 Worker 凭证的保管及轮换"
+      },
+      {
+        "id": "68",
+        "type": "配置",
+        "title": "生产监控、日志与告警策略",
+        "closure_condition": "实际部署采集、日志轮转/保留、队列/未知 GPU/磁盘/存储/outbox/结算告警阈值和处置流程"
+      },
+      {
+        "id": "69",
+        "type": "配置",
+        "title": "联合备份与调度",
+        "closure_condition": "落实 DB/PITR、对象原版本、主密钥、网关账本/绑定和 Worker journal 的备份、保管隔离及定期校验"
+      },
+      {
+        "id": "70",
+        "type": "实测",
+        "title": "生产联合恢复与 RPO/RTO",
+        "closure_condition": "从真实备份恢复到明确时点，核对对象字节/版本、密钥、journal、占用和网关账本；隔离旧写入后分批开放"
+      },
+      {
+        "id": "71",
+        "type": "实测",
+        "title": "排空与滚动升级",
+        "closure_condition": "验证新旧 API/Worker/契约/迁移兼容、活动任务/唯一文件保留和逐节点恢复，禁止未知执行直接重发"
+      },
+      {
+        "id": "72",
+        "type": "实测",
+        "title": "应用与能力回退",
+        "closure_condition": "分别演练应用、Workflow、公开别名、价格和网关配置回退；不做破坏性自动数据库降级，不改写旧任务"
+      },
+      {
+        "id": "73",
+        "type": "实测",
+        "title": "全新宿主与依赖准备",
+        "closure_condition": "从 clone 或离线候选在新环境准备原生 Python/Node/PG/媒体工具，完成 bootstrap、安装、迁移和运行；同机隔离 venv 不代替新宿主验证"
+      },
+      {
+        "id": "74",
+        "type": "交付",
+        "title": "基于已验收资源的正式发行物",
+        "closure_condition": "关联 Git commit、锁文件/契约/数据库/Worker/Sub2API 版本及真实批准的 Workflow；空的 validated_releases 不能当作生产发布证明；96 补齐当前源码候选/安装，REL-96-01 已由 97 实现实际 commit/blob 来源核对和漂移拒绝，90 项专项通过；新候选 rc-20261026.97.1 已核对实际 Git 31f3798 和 521 输入，并通过 29 安装/10 浏览器检查；完整正式发行继续待真实资源批准"
+      },
+      {
+        "id": "75",
+        "type": "交付",
+        "title": "全部首版门禁签收",
+        "closure_condition": "逐项汇总六类 CAP、ADMIN/KEY、SCALE/FAIL/DATA、QC 与 AUDIO-01～08 的实际证据、版本、失败和已知限制"
+      },
+      {
+        "id": "76",
+        "type": "交付",
+        "title": "实机验收后的文档与演示同步",
+        "closure_condition": "97 后演示图库为 30 PNG/6 MP4/6 GIF，96 的 2 张安装证据截图另留；88 补齐逐项追踪，UI-96-01 的入场帧和正文留白已有 97 的三宽度专项验证；真实链路验收后继续同步双语操作样本、限制、截图/录屏/GIF、响应和变更说明并推送"
+      }
+    ]
+  },
+  "media": {
+    "png": 30,
+    "mp4": 6,
+    "gif": 6,
+    "manifests": 5,
+    "synthetic_business_fixtures": true
+  },
+  "new_diagnostic_evidence_reviewed": {
+    "rate": {
+      "path": "docs/evidence/2026-10-26/rate-contention-baseline-98.json",
+      "sha256": "36220a4e841065c83ea68e737048a5b1c585a7f5bbf8955e9b03990f02c44d0a",
+      "sources_current_match": true,
+      "calls": 500,
+      "threads": 20,
+      "results": {
+        "accepted": 130,
+        "rate_limited": 370
+      },
+      "unexpected_failures": 0,
+      "original_concurrent_scenario_reproduced": false,
+      "root_closed": false
+    },
+    "cleanup": {
+      "path": "docs/evidence/2026-10-26/cleanup-clone-baseline-98.json",
+      "sha256": "ca5ca1923cdd8525ff3e76249f55296c8c76c6110495081c0a1a96725eb236f6",
+      "clone_seconds": 288.686,
+      "delete_profiles_passed": 45,
+      "original_database_modified": false,
+      "delete_changes_rolled_back": true,
+      "root_closed": false
+    },
+    "diagnostic_drivers_published": false,
+    "limitation": "These diagnostic baselines narrow the next experiment but do not replace the complete original concurrency/transaction/cold-storage scenario or full acceptance. Local diagnostic drivers remain ignored; reports are retained without promoting gates."
+  },
+  "historical_risks_open": [
+    "R01 concurrent gateway auth row-lock timeout / 502",
+    "R02 original audit query budget / 503",
+    "R03 original test-database cleanup and CI timeouts",
+    "R04 strict official Video response-type limitations"
+  ],
+  "browser_started_by_audit": false,
+  "virtualization_used": false,
+  "database_modified_by_audit": false,
+  "services_created_by_audit": [],
+  "retained_existing_service": "Project-owned native PostgreSQL for ongoing development; not started or stopped by this audit",
+  "real_resource_acceptance": false,
+  "production_accepted": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false
+}

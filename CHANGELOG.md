@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Audit 98 / 当前项目与目标复核
+
+- [最新审计第 8 节](docs/95-项目现状审计与目标产物差距.md) 重新核对实际代码、17 个 Admin 路由、66 运行契约、OpenAPI、原青柠来源、632 CI/521 候选输入及实际发行 ZIP 摘要；168 个 Python 文件的有界 AST 扫描未发现 pass-only/NotImplementedError 函数。静态/摘要核对不替代业务与实机验收。
+- Keep all 69 remaining exits explicit: 67 first-release and two optional; 0/6 actual Workflows, physical capacity and production remain pending. Existing 16-gate/3915-test CI, 29 installation and ten installed-browser checks are historical source-matched evidence, not new executions.
+- 保留两份同日诊断：20 线程/500 次真实鉴权得到 130 成功、370 合法限流、无非预期失败；保留库的独立克隆耗时 288.686 秒，45 表清理通过并回滚，随后移除克隆。原库未修改、预算未提高；原始并发/冷状态未复现，历史根因继续开放，本地诊断驱动尚未发布。
+- Synchronize bilingual navigation and correct the current English gallery count to 30 PNG/six MP4/six GIF. No application, contract, UI or acceptance flag changes; no new browser, GPU run or virtualization.
+
 ## 2026-10-26 · Increment 97 / 发行来源与审计状态
 
 - 新构建从昂贵步骤前固定源输入，要求真实 Git commit、普通已跟踪文件及 HEAD blob 字节匹配，构建结束前再次核对来源；拒绝未提交/未跟踪/忽略输入、Git stat-cache 隐藏变化和构建期间漂移。旧 null 清单读取保持兼容。

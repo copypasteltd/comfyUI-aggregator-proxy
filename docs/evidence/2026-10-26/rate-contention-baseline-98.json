@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-26T02:44:37.527393+00:00",
+  "scope": "Actual gateway AuthRepository and native PG, 20 threads/500 calls, current fixed 1200 RPM/100 burst; not original historical concurrent-run reproduction",
+  "passed": true,
+  "sources": {
+    "app/packages/infrastructure/src/generation_infrastructure/auth.py": "50553c36b07a6105b7e8130b52baa1b7c4e0ac4ab63eef9aed3beddecdf68914",
+    "app/packages/infrastructure/src/generation_infrastructure/database.py": "5ec12cf7bbbe03eb9f55573293e75ebcce1661e10326bd603dd56e4d735397d3",
+    "app/packages/infrastructure/src/generation_infrastructure/models.py": "7d91531621e429b02f4c08a449423541cfaaa70811e3eaedbb903c77246c3e5f",
+    "app/packages/infrastructure/src/generation_infrastructure/security.py": "ba6ece94a0c42a1f703929b458e75084b59425001d15e266aa2203249fc7d609"
+  },
+  "cleanup": {
+    "observer_closed": true,
+    "temporary_database_removed": true
+  },
+  "calls": 500,
+  "threads": 20,
+  "results": {
+    "accepted": 130,
+    "rate_limited": 370
+  },
+  "seconds": 1.564,
+  "latency_p95_seconds": 0.116003,
+  "latency_max_seconds": 0.357824,
+  "unexpected_failures": 0,
+  "observed_samples": 13,
+  "max_waiting_backends": 18,
+  "max_blocked_backends": 18,
+  "max_transaction_seconds": 0.128898,
+  "original_historical_root_closed": false
+}
