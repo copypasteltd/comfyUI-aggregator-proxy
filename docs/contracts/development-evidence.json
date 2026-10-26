@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 110,
+  "increment": 112,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-110.json",
-    "sha256": "984f0c4f8694f2389448b77e841c94eb64e7a4cb2409db2d87f611f29e1c6ccb"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-112.json",
+    "sha256": "7ec631aa280425bb7ed357bcb42e80448c6fdf84ed2c178ea64a3ed609b91baf"
   },
   "requirements": [
     {
@@ -1995,7 +1995,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "ci86"
+          "baseline": "asset112"
         },
         {
           "path": "app/apps/control_api/src/control_api/uploads.py",
@@ -2012,17 +2012,36 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_corrupt_checksum_image_returns_controlled_error_without_publication",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_asset_publication_cleanup.py",
+          "symbol": "test_asset_cleanup_waits_for_publication_commit",
+          "language": "python",
+          "baseline": "asset112"
+        },
+        {
+          "path": "app/tests/integration/test_asset_publication_cleanup.py",
+          "symbol": "test_asset_rollback_cleanup_requires_verified_absence",
+          "language": "python",
+          "baseline": "asset112"
+        },
+        {
+          "path": "app/tests/integration/test_asset_publication_cleanup.py",
+          "symbol": "test_asset_duplicate_cleanup_releases_database_before_delete",
+          "language": "python",
+          "baseline": "asset112"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "asset112"
       ],
       "remaining_backlog": [
         "29",
         "37",
         "43"
       ],
-      "limitation": "合成媒体与归属校验已测；真实输入与桶待联验。"
+      "limitation": "合成媒体与归属校验已测；真实输入与桶待联验。 112 已以真实 PG 未决输入发布锁等待、回滚、失败查询和重复清理验证精确版本保护；外部删除不持有数据库连接，真实 S3/设备故障出口仍开放。"
     },
     {
       "id": "DATA-02",
@@ -2174,7 +2193,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "ci86"
+          "baseline": "asset112"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
@@ -2194,7 +2213,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "asset112"
       ],
       "remaining_backlog": [
         "37",
@@ -2210,7 +2230,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "ci86"
+          "baseline": "asset112"
         },
         {
           "path": "app/apps/control_api/src/control_api/collections.py",
@@ -2235,7 +2255,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "asset112"
       ],
       "remaining_backlog": [
         "32",
@@ -2268,6 +2289,10 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
           "baseline": "history107"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
+          "baseline": "asset112"
         }
       ],
       "tests": [
@@ -2335,19 +2360,26 @@
           "symbol": "test_rollback_cleanup_requires_successful_absence_read",
           "language": "python",
           "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_asset_publication_cleanup.py",
+          "symbol": "test_asset_cleanup_waits_for_publication_commit",
+          "language": "python",
+          "baseline": "asset112"
         }
       ],
       "evidence": [
         "ci86",
         "copy106",
         "history107",
-        "publication110"
+        "publication110",
+        "asset112"
       ],
       "remaining_backlog": [
         "43",
         "61"
       ],
-      "limitation": "本地保留/重放已有证明；真实中断上传及过期凭证恢复待验收。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。"
+      "limitation": "本地保留/重放已有证明；真实中断上传及过期凭证恢复待验收。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。 112 已以真实 PG 未决输入发布锁等待、回滚、失败查询和重复清理验证精确版本保护；外部删除不持有数据库连接，真实 S3/设备故障出口仍开放。"
     },
     {
       "id": "DATA-08",
@@ -2368,6 +2400,10 @@
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
           "baseline": "publication110"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
+          "baseline": "asset112"
         }
       ],
       "tests": [
@@ -2404,11 +2440,30 @@
           "symbol": "test_cleanup_waits_for_inflight_publication_before_absence_read",
           "language": "python",
           "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_asset_publication_cleanup.py",
+          "symbol": "test_asset_cleanup_waits_for_publication_commit",
+          "language": "python",
+          "baseline": "asset112"
+        },
+        {
+          "path": "app/tests/integration/test_asset_publication_cleanup.py",
+          "symbol": "test_asset_rollback_cleanup_requires_verified_absence",
+          "language": "python",
+          "baseline": "asset112"
+        },
+        {
+          "path": "app/tests/integration/test_asset_publication_cleanup.py",
+          "symbol": "test_asset_duplicate_cleanup_releases_database_before_delete",
+          "language": "python",
+          "baseline": "asset112"
         }
       ],
       "evidence": [
         "ci86",
-        "publication110"
+        "publication110",
+        "asset112"
       ],
       "remaining_backlog": [
         "40",
@@ -2416,7 +2471,7 @@
         "42",
         "69"
       ],
-      "limitation": "清理与保护已有测试；实际保留值、容量预算及备份未落实。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。"
+      "limitation": "清理与保护已有测试；实际保留值、容量预算及备份未落实。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。 112 已以真实 PG 未决输入发布锁等待、回滚、失败查询和重复清理验证精确版本保护；外部删除不持有数据库连接，真实 S3/设备故障出口仍开放。"
     },
     {
       "id": "DATA-09",
@@ -2463,7 +2518,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "ci86"
+          "baseline": "asset112"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content_routes.go",
@@ -2485,7 +2540,8 @@
       "evidence": [
         "ci86",
         "go80",
-        "video92"
+        "video92",
+        "asset112"
       ],
       "remaining_backlog": [
         "30",
@@ -3517,7 +3573,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "ci86"
+          "baseline": "asset112"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
@@ -3547,7 +3603,8 @@
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "asset112"
       ],
       "remaining_backlog": [
         "51",
@@ -3725,7 +3782,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "ci86"
+          "baseline": "asset112"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content.go",
@@ -3757,7 +3814,8 @@
         "go80",
         "installed87",
         "visual87",
-        "video92"
+        "video92",
+        "asset112"
       ],
       "remaining_backlog": [
         "30",

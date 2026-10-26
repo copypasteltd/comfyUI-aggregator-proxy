@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 112 / 输入素材发布未决事务与清理保护
+
+- 输入素材清理先等待发布事务已经持有的 API Key 行锁，再核对精确对象版本；成功查明无引用后，在数据库事务外删除。修正测试准备错误后，两类修复前误删已由实际下载缺失字节复现；122 专项（6 新场景）通过，649 输入一致。完整门禁/原生/新候选待执行，69 稳定出口、真实六类 0/6 和生产验收保持开放。
+- Input cleanup now waits for the API Key row lock already held by publication, checks the exact object version, and deletes only confirmed unreferenced bytes after ending the database transaction. After correcting an ID-parsing test error, both pre-fix upload modes prove missing bytes after committed references. All 122 focused cases pass, including six new cases, with 649 unchanged inputs. Current full CI/native/rebuilt installation remain pending; all 69 stable exits, six real Workflow acceptances and production gates remain open.
+
+
 ## 2026-10-26 · Audit 111 / 当前项目完整目标与逐项差距
 
 - 重新核对当前 c20b765：完整 16 门禁/4274 Python、30 原生及 rc-20261026.110.1 的 29 安装/10 浏览器均与当前来源和实际载荷一致。完整表格保留 69 个开放出口（首版 67、可选 2），六类真实 0/6、98 完整门禁和历史根因仍开放；主要核心/Admin 已实现不等于生产签收。

@@ -130,11 +130,14 @@ class ContentRepository:
             raise DomainError("key_disabled", "上传身份已失效", 403)
         BusinessIdentity(identity.tenant_id, identity.project_id, identity.key_id, key.policy).require("assets:upload")
 
-    def _discard_unpublished(self, key: str, version: str) -> None:
+    def _discard_unpublished(self, key: str, version: str, key_id: UUID) -> None:
         # A failed COMMIT acknowledgement does not prove that publication failed.
-        # Only a successful fresh lookup proving absence permits exact-version deletion.
+        # Wait for the publisher's existing key lock before a fresh absence lookup.
         try:
-            with self.sessions() as session:
+            with self.sessions.begin() as session:
+                owner = session.scalar(select(ApiKey.id).where(ApiKey.id == key_id).with_for_update(key_share=True))
+                if owner is None:
+                    return
                 published = session.scalar(select(ObjectRecord.id).where(ObjectRecord.object_key == key, ObjectRecord.version_id == version).limit(1))
             if published is None:
                 self.store.delete(key, version)
@@ -193,7 +196,7 @@ class ContentRepository:
                 record_change(session, public_id("key", identity.key_id), "asset.uploaded", asset.id, request_id)
                 return self._uploaded_asset(session, identity, asset.id)
         finally:
-            self._discard_unpublished(stored.key, stored.version)
+            self._discard_unpublished(stored.key, stored.version, identity.key_id)
 
     def _content_filter(self, identity: BusinessIdentity, entity: Any) -> Any:
         grant = identity.policy["content"]
