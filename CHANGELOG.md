@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-27 · 117 · ZeroTier private-network access
+
+- 服务器原生安装 ZeroTier 1.16.2，加入指定网络，经用户授权后状态 OK 并取得私网地址；常驻服务已开启开机启动。
+- 同网 Windows 到服务器的三项 HTTP 200、业务无 Key 的 401 / CORS 及固定主机密钥的 SSH 验证通过；默认路由、DNS 和原有 64 个运行服务检查正常。
+- Install the single signed official APT package without upgrading/removing other packages. Record native membership and actual cross-machine checks; keep network identities/topology private. Application contracts, database and UI remain unchanged; no GPU or Worker integration is claimed.
+
 ## 2026-10-27 · 115 / 116 · Native Linux deployment and HTTP / CORS
 
 - 已部署真实 PostgreSQL 18、限权私有版本化 S3、五个原生服务及定时数据库备份；普通 HTTP 39443、任意来源 CORS 已生效。修复公网 HTTP 不提供 randomUUID 导致后台无法登录的问题，各管理组件共用安全随机数兼容入口。

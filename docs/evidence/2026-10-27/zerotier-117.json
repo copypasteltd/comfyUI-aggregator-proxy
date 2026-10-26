@@ -1,0 +1,60 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T22:48:26.953292+00:00",
+  "passed": true,
+  "scope": "Native Ubuntu ZeroTier install, authorized network membership and local service checks on the assigned overlay address. Cross-machine reachability is recorded separately.",
+  "package": {
+    "name": "zerotier-one",
+    "version": "1.16.2",
+    "architecture": "amd64",
+    "repository": "https://download.zerotier.com/debian/noble",
+    "signing_key_fingerprint": "74A5E9C458E1A431F1DA57A71657198823E52A61",
+    "deb_sha256": "fe78e8d3b03fe77d1607bffd67dcd6723e2bacc4ac063afb5e311400fda12ea6",
+    "installer_signature_verified": true,
+    "official_signed_script_sha256": "ca7b66cf85bf32a6727eae4690ad009fa1be9cffb5eede2af029efce017c029f",
+    "remote_installer_executed": false,
+    "other_packages_upgraded": 0,
+    "packages_removed": 0
+  },
+  "service": {
+    "NRestarts": "0",
+    "MemoryCurrent": "9793536",
+    "ActiveState": "active",
+    "UnitFileState": "enabled"
+  },
+  "node_online": true,
+  "network_id_sha256": "7028438ea542c5a1250ca4166047f281a3a6b22c79d924eefdef55854918f042",
+  "member_status": "OK",
+  "assigned_ipv4_count": 1,
+  "interface_up": true,
+  "membership_persisted": true,
+  "settings": {
+    "allowManaged": true,
+    "allowGlobal": false,
+    "allowDefault": false,
+    "allowDNS": false
+  },
+  "default_route_unchanged": true,
+  "dns_unchanged": true,
+  "pre_existing_running_services_checked": 64,
+  "pre_existing_services_not_active": [],
+  "http_on_overlay_address": [
+    {
+      "path": "/health/live",
+      "status": 200
+    },
+    {
+      "path": "/health/ready",
+      "status": 200
+    },
+    {
+      "path": "/admin/",
+      "status": 200
+    }
+  ],
+  "controller_authorization_required": true,
+  "controller_authorization_confirmed": true,
+  "virtualization_used": false,
+  "browser_used": false,
+  "real_generation_verified": false
+}

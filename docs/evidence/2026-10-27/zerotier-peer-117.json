@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T22:53:08.447385+00:00",
+  "passed": true,
+  "scope": "Actual cross-machine checks from the existing native Windows ZeroTier interface to the Ubuntu overlay address. No gateway or generation resources are created.",
+  "source_interface_present": true,
+  "source_and_destination_network_match": true,
+  "overlay_http_checks": [
+    {
+      "path": "/health/live",
+      "status": 200,
+      "cors_origin_reflected": true,
+      "milliseconds": 1029.9
+    },
+    {
+      "path": "/health/ready",
+      "status": 200,
+      "cors_origin_reflected": true,
+      "milliseconds": 138.5
+    },
+    {
+      "path": "/admin/",
+      "status": 200,
+      "cors_origin_reflected": true,
+      "milliseconds": 141.6
+    },
+    {
+      "path": "/v1/models",
+      "status": 401,
+      "cors_origin_reflected": true,
+      "milliseconds": 162.0
+    }
+  ],
+  "overlay_ssh_connected": true,
+  "overlay_ssh_host_key_matches_previously_pinned_public_server": true,
+  "remote_zerotier_service": "active",
+  "ssh_connection_closed": true,
+  "browser_used": false,
+  "virtualization_used": false,
+  "real_generation_verified": false
+}
