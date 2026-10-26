@@ -1,0 +1,113 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T08:19:33.267160+00:00",
+  "passed": true,
+  "scope": "Source-bound interrupted output-copy recovery with native filesystem faults, six-capability collection/reopened Worker protocol, complete native CI and exact candidate installation. ComfyUI/Redis/S3 remain fixtures; full first-release acceptance stays pending.",
+  "application_source_revision": "1f62868a88a90643e1fcb8cad00a8204625d1e61",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci106-20261026-output-copy/summary.json",
+      "sha256": "a74403fd6a1edda3eaf33f038c60d423a47e1ab4a82c2808d0983de390ea2b83"
+    },
+    "focused": {
+      "path": "docs/evidence/2026-10-26/output-copy-focused-final-106.json",
+      "sha256": "615e45c6ee2063c595ca30f5c2b69b607e272b7926c5e37e2f12721b2e2ea567"
+    },
+    "native": {
+      "path": "docs/evidence/2026-10-26/output-copy-native-106/confirmed-retry-native-protocol.json",
+      "sha256": "3681bd65215b65187c8b21cc6de2b794b1bb7bdcd98ccc65d600e040df6a97f8"
+    },
+    "provider_unchanged": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-provider-101/sub2api-provider-native-build.json",
+      "sha256": "ad4082847929a50656ba2488cb509c5618f1b953b3a6e5f99b5891f7c8f6fcce"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/output-copy-release-build-106.json",
+      "sha256": "a3af56c6a274cc830980418214192fbd794fc2ad3cefbf4d2b64e2a41de7ed6e"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/output-copy-installed-106/native-release-installation.json",
+      "sha256": "f57ab4db8fbedee40c89f86c63612f87e69ee0d3c470c6804a18807379a769ec"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-26/output-copy-installed-106/native-release-installed-browser.json",
+      "sha256": "3e080f570e84e5fa03b1a9bb95d67ec318a121392495fb6950948764383764e2"
+    }
+  },
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 4137,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_seconds": 765.332,
+    "python_budget_seconds": 1200,
+    "inputs": 644,
+    "all_inputs_match_current": true,
+    "owned_process_trees_closed": true
+  },
+  "focused_python": {
+    "tests": 115,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "new_cases": {
+    "native_filesystem": 15,
+    "six_capability_collection": 30,
+    "reopened_worker_protocol": 18
+  },
+  "pre_fix_failures_preserved": 24,
+  "initial_windows_timestamp_failures_preserved": true,
+  "native": {
+    "cases": 30,
+    "inputs": 275,
+    "all_inputs_match_current": true,
+    "cleanup": {
+      "processes": true,
+      "databases": true,
+      "database_observer": true,
+      "media_and_credentials": true
+    },
+    "real_comfyui": false,
+    "real_redis": false,
+    "real_s3": false
+  },
+  "candidate": {
+    "release_id": "rc-20261026.106.1",
+    "archive": "app/.local/releases/rc-20261026.106.1/rc-20261026.106.1.zip",
+    "archive_sha256": "0701b81bbb0372604df58a511602c118fd76fa5fc10e76427131eb079a502350",
+    "archive_bytes": 281334837,
+    "manifest_source_revision": "1f62868a88a90643e1fcb8cad00a8204625d1e61",
+    "source_inputs": 525,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 67,
+    "database_head": "3da02e7b5941"
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "closed_contexts": 2,
+    "browser_closed": true,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "cleanup_errors": []
+  },
+  "output_copy_local_recovery_exit_closed": true,
+  "stable_backlog_items_42_55_61_fully_closed": false,
+  "historical_database_root_causes_closed": false,
+  "remaining_work": {
+    "open": 69,
+    "first_release": 67,
+    "optional": 2,
+    "physical_workflows_accepted": 0
+  },
+  "production_accepted": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "virtualization_used": false
+}

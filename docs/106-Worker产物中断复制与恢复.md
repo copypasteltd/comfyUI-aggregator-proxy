@@ -28,4 +28,22 @@
 
 [首次专项](evidence/2026-10-26/output-copy-focused-106.json) 的 31 个实现失败保留。[本机 Windows 观测](evidence/2026-10-26/output-copy-windows-stat-106.json) 证明同一稳定文件的路径/句柄 ctime 可不同，导致初版误拒；已改用文件身份、大小及 mtime，并增加创建/修改时间不同的原生回归。未放宽内容前缀、源变化、大小、fsync 和摘要要求。
 
-来源索引为 [106](evidence/2026-10-26/development-trace-baselines-106.json)。CAP framework、98 完整门禁与 69 稳定待办不提升。完整工程与候选结果待实际执行后追加。
+来源索引为 [106](evidence/2026-10-26/development-trace-baselines-106.json)。CAP framework、98 完整门禁与 69 稳定待办不提升。完整工程与候选结果见下节。
+
+## 完整工程与候选结果
+
+| 层级 | 实际结果 | 范围与边界 |
+| --- | --- | --- |
+| 完整原生 CI | 16 门禁/4137 Python 全通过，零失败/错误/跳过；Python 765.332 秒 | 原 1200 秒预算，644 来源前后一致，应用提交 1f62868 |
+| 原生跨进程 | 30 场景通过，275 来源一致 | 实际 API/Provider/Worker/PG；ComfyUI/Redis/S3 为夹具，运行包含于完整 Python 门禁窗口 |
+| 当前候选 | rc-20261026.106.1；525 来源、169 载荷/58 wheels/67 契约 | 归档摘要和全部 payload 逐项匹配，真实批准清单仍空 |
+| 实际 Worker wheel | output_copy.py 与 runtime.py 均逐字节匹配 | 新副本恢复逻辑实际进入发行物，未借用旧 Worker wheel |
+| 精确隔离安装 | 29 项安装与 10 项桌面/移动浏览器检查通过 | 两个 context/browser、临时数据库/目录与所属进程清理，cleanup_errors 为空 |
+
+[最终来源核对](evidence/2026-10-26/output-copy-verification-106.json)、[候选归档核对](evidence/2026-10-26/output-copy-release-build-106.json) 和 [精确安装](evidence/2026-10-26/output-copy-installed-106/native-release-installation.json) 保留实际结果。Provider 没有代码改动；仍由现有维护 overlay/二进制摘要守卫复用 101 构建，不宣称本轮重新编译或运行 Go 单元测试。
+
+初次文档/追踪检查提示派生可读矩阵未刷新，原报告保留；按新来源索引刷新后通过，未修改旧测试报告。UI、DTO、迁移和 Worker 协议形状未扩展；青柠资源与既有合成图库保持原范围，安装截图另留证据目录。本轮未提高预算或修改保留、GPU/未知执行、重试和计量规则。
+
+42/55/61 的本地缺口完成修复，但其真实设备/物理故障/存储出口没有签收。69 项开放（67 首版、2 可选）、0/6 真实 Workflow、98 完整门禁和历史数据库根因均保持开放。仅原项目原生 PostgreSQL 继续保留；没有 Docker/WSL/虚拟化环境，没有遗留所属浏览器或测试服务。
+
+最终汇总辅助脚本初次沿用了上一增量的专项数量 173，实际本轮为 115，导致汇总断言和依赖的文档脚本停止；未修改应用、候选或原安装结果，修正实际计数后逐项核对通过。[原辅助失败](evidence/2026-10-26/output-copy-final-verifier-initial-106.json) 保留。

@@ -4,7 +4,7 @@
 
 - 同源稳定文件的完整前缀验证后续写，完整副本复用；保留不同内容/超长/硬链接/重解析路径，不截断、覆盖、删除或重新生成。最终摘要、flush/fsync 后才保存产物包并走原回传协议，无公开契约/迁移/UI 改动。
 - All 115 focused cases pass, including 63 new filesystem/collection/reopened Worker cases. Preserve 24 pre-fix failures, 31 initial implementation failures and the native Windows ctime diagnostic; use stable file identity/size/mtime observations across handle and path checks.
-- 来源绑定与双语说明同步；完整 CI/原生/当前候选检查待本轮继续，42/55/61 真实环境出口与全部首版验收保持开放。
+- Final verification: all 16 gates/4137 Python and 30 native scenarios pass; rc-20261026.106.1 binds 644 CI/275 native/525 candidate inputs to 1f62868, verifies both Worker copy/runtime wheel members and passes 29 installation/10 browser checks. Owned temporary resources are cleaned up; unchanged Provider reuse remains provenance guarded. Full real-resource acceptance is still pending.
 
 ## 2026-10-26 · Audit 105 / 当前项目与完整目标差距
 
