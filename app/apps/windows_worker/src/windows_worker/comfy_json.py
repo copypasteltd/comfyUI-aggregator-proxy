@@ -154,6 +154,25 @@ def checked_history(value: dict[str, Any]) -> dict[str, Any]:
     return value
 
 
+def output_files(history: dict[str, Any], node_ids: list[str], field: str) -> list[dict[str, Any]]:
+    outputs = history.get("outputs")
+    if not isinstance(outputs, dict):
+        raise invalid_response()
+    files = []
+    for identifier in node_ids:
+        node = outputs.get(identifier, {})
+        if not isinstance(node, dict) or not isinstance(entries := node.get(field, []), list):
+            raise invalid_response()
+        for entry in entries:
+            if (not isinstance(entry, dict)
+                    or not isinstance(entry.get("filename"), str) or not entry["filename"]
+                    or not isinstance(entry.get("type"), str) or not entry["type"]
+                    or not isinstance(entry.get("subfolder", ""), str)):
+                raise invalid_response()
+            files.append(entry)
+    return files
+
+
 def uploaded_input(value: dict[str, Any]) -> str:
     name, folder = value.get("name"), value.get("subfolder", "")
     if value.get("type") != "input" or not isinstance(name, str) or not 1 <= len(name) <= 255 or "/" in name or "\\" in name or not isinstance(folder, str) or len(folder) > 1024:

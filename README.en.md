@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[108 · Current workspace versus the complete goal](docs/108-当前工作区与完整目标差距复核.md) rehashes all 647 application inputs and the actual previous candidate. The 248 focused checks cover current increment 107; two Worker sources differ from the 106 full CI/native/candidate, so a current full regression, native run and rebuilt installation remain pending. The numbered inventory retains 69 open exits (67 V1, two optional), zero of six real Workflow acceptances and 98 pending complete gates. Local implementation, historical tests and production acceptance are distinct.
+
 **Turn ComfyUI installations on multiple Windows machines into managed, queued and traceable image, video and audio APIs.**
 
 [中文](README.md) · English · [Documentation](docs/README.en.md) · [Changelog](CHANGELOG.md) · [Contributing and synchronization](CONTRIBUTING.md)
@@ -9,6 +11,8 @@
 The internal service name is **Render Control**. The system combines a visual Admin, a durable generation control plane, Windows Workers and a Sub2API integration. Images, videos and audio all come from ComfyUI Workflows; audio uses the same execution and management system.
 
 **Status: in development.** Native Windows implementation, protocol tests and isolated candidate installation have recorded verification. Actual Workflows, model quality, real S3/Redis, production system services and capacity on 10–20 physical machines still require acceptance. Screenshots and recordings show the real UI and API backed by isolated PostgreSQL and explicitly synthetic fixtures. They demonstrate neither real GPU generation nor production throughput.
+
+[107 · Final-output shape and Worker isolation](docs/107-ComfyUI最终产物结构与Worker隔离.md) fixes uncaught malformed ComfyUI history and a recovery scan clearing a newly raised quarantine. Only declared final nodes/fields are checked; malformed shapes retain the journal under the fixed invalid_comfy_response error, and a final pending-journal scan keeps unresolved tasks from admitting new work. All 248 focused cases pass, covering six capabilities, valid images/gifs/videos/audio and isolation while another task completes in the same Worker main loop. The 90 pre-fix failures and 12 recovery-race failures are preserved. Complete current-source CI, native and candidate verification remain pending; real-resource and production acceptance stay open.
 
 [106 · Interrupted Worker output-copy recovery](docs/106-Worker产物中断复制与恢复.md) fixes existing spool files blocking recovery through full-prefix verification and bounded append/exact-copy reuse. Different, longer, hardlinked or reparse targets stay isolated without truncation, overwrite or regeneration. All 115 focused cases, 16 gates/4137 Python tests, 30 native scenarios and 29 installation/10 browser checks of rc-20261026.106.1 pass. All 644 CI/275 native/525 candidate inputs and actual Worker wheel bytes match application commit 1f62868. Initial failures and the native Windows timestamp diagnostic remain intact, and owned temporary resources are cleaned up. Real-device exits 42/55/61, all six real Workflows, 69 remaining items and complete production acceptance stay open.
 

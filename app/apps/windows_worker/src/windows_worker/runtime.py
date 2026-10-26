@@ -29,6 +29,7 @@ from windows_worker.comfy_json import (
     async_request_json,
     checked_history,
     checked_queue,
+    output_files,
     prompt_identifier,
     uploaded_input,
 )
@@ -56,6 +57,7 @@ class Execution:
         self.aid = claim["attempt_id"]
         self.valid_until = time.monotonic() + max(0, claim["lease_expires_at"] - claim["server_time"])
         self.cancelled, self.released = False, False
+        self.attention_required = False
         self.auth = {"protocol_version": "0.4.0", "boot_id": worker.boot, "fencing_token": claim["fencing_token"]}
 
     def current(self) -> None:
@@ -121,9 +123,7 @@ class Execution:
 
     async def collect(self, history: dict[str, Any], local: LocalChannel) -> tuple[list[Path], list[dict[str, Any]]]:
         adapter = self.claim["workflow"]["output"]
-        files = []
-        for identifier in adapter["final_node_ids"]:
-            files.extend(history["outputs"].get(identifier, {}).get(adapter["history_field"], []))
+        files = output_files(history, adapter["final_node_ids"], adapter["history_field"])
         if len(files) != adapter["expected_count"]:
             raise DomainError("output_count_mismatch", "最终节点没有提供预期数量的产物")
         outputs, specs = [], []
@@ -260,8 +260,10 @@ class Execution:
                 except (httpx.HTTPError, DomainError):
                     pass
             else:
+                self.attention_required = True
                 self.worker.quarantined = True
             if (row := self.worker.journal.get(self.aid)) and not row["cloud_ack"]:
+                self.attention_required = True
                 self.worker.quarantined = True
             print(json.dumps({"event": "attempt_attention", "attempt_id": self.aid, "code": exc.code if isinstance(exc, DomainError) else "transport_or_runtime_failure"}), flush=True)
         finally:
@@ -448,6 +450,12 @@ class Worker:
                 else:
                     remaining = True
             except httpx.HTTPError:
+                remaining = True
+        # A resumed task can fail while another journal row is being reconciled.
+        # Do not clear its quarantine from the earlier scan's local result.
+        for pending in self.journal.recovery():
+            active = self.active.get(pending["id"])
+            if active is None or active[1].done() or active[0].attention_required:
                 remaining = True
         self.quarantined = remaining
 
