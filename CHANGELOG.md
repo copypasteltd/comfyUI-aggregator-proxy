@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · 114 / Current workspace audit
+
+- 保留 69 项稳定开放出口（首版 67、可选 2），逐项列出已有基础、剩余条件和执行顺序。
+- Rehash 649 current inputs and all increment-112 candidate payloads; distinguish the pre-existing uncommitted metadata correction from complete current-source CI/candidate evidence. No functional suite, device or production acceptance is claimed.
+- 新增 [114 审计](docs/114-当前工作区系统审计与完整目标差距.md) 和版本化机器记录；本轮只同步审计，原第 113 增量仍待完成。
+
 ## 2026-10-26 · Increment 112 / 输入素材发布未决事务与清理保护
 
 - 输入素材清理先等待原发布持有的 API Key 行锁，再核对精确版本，外部删除不持有数据库连接。当前 e12f604 的 122 专项（6 新场景）、完整 16 门禁/4280 Python、30 原生及 rc-20261026.112.1 的 29 安装/10 浏览器通过；649/275/525 来源与实际 content.py wheel 字节一致。保留 2 次有效误删复现及 4 次测试 ID 解析错误记录，后者不计行为证据。所属临时资源清理；真实六类 0/6、69 稳定出口、98 完整门禁及历史数据库根因继续开放。
