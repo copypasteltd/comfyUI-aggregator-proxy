@@ -3,7 +3,7 @@
 ## 2026-10-26 · Increment 99 / 数据库等待分类与并发复验
 
 - 修复一次性双测试库观测器的 I/O 等待信息丢失：增加按类型白名单的 wait_event，保留原 lock_event；同后端不同 I/O 阶段分别聚合，未知和错配事件仍为 other。原只读/范围/内存/语句预算和业务行为保持。
-- Preserve the 23 expected before-fix failures and source-bound 73-check native PostgreSQL/ASGI and unit verification. The [scope and verification](docs/99-原生数据库等待分类与并发复验.md) keep synthetic observations distinct from actual I/O evidence. Complete overlapping CI/runtime results follow separately; no historical root or real-resource gate is promoted.
+- Preserve the 23 expected before-fix failures and source-bound 73-check native PostgreSQL/ASGI and unit verification. The [scope and verification](docs/99-原生数据库等待分类与并发复验.md) keep synthetic observations distinct from actual I/O evidence. [Final verification](docs/evidence/2026-10-26/database-waits-verification-99.json) passes all 16 gates/3938 Python tests (702.257 seconds within the unchanged 1200-second budget) and 29 native scenarios entirely within that Python gate. All 633 CI/273 native inputs match commit 21d6ac2; 1585 bounded samples capture the injected locks but no slow I/O. Owned native resources are cleaned up. Candidate 97 is retained with its historical observer source manifest; no new installation/browser acceptance is claimed. Historical roots and all 69 full-acceptance items remain open.
 
 ## 2026-10-26 · Audit 98 / 当前项目与目标复核
 

@@ -1,0 +1,100 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T03:45:36.576084+00:00",
+  "passed": true,
+  "scope": "Allowlisted native database wait observations and complete CI with one contained 29-case native runtime; historical causes and actual resources remain pending",
+  "source_revision": "21d6ac299756b5e5ae471a4f43300af1e7c52e5f",
+  "reports": {
+    "before": {
+      "path": "docs/evidence/2026-10-26/database-waits-before-99.json",
+      "sha256": "8889147d656ac4088b0eec6c7e9e59df698ea92ebbdab93f817f4c1d56556e0e"
+    },
+    "focused": {
+      "path": "docs/evidence/2026-10-26/database-waits-python-99.json",
+      "sha256": "ae07431e172c2f7c6f7239d64b3591b591b4fb67ebcee009095010c078b83c3f"
+    },
+    "ci": {
+      "path": "docs/evidence/native-ci/ci99-20261026-wait-events/summary.json",
+      "sha256": "bb6fa05fae25a6c51d815723f1913e64444e89eba78755afbbc7706003f5b55a"
+    },
+    "native": {
+      "path": "docs/evidence/2026-10-26/database-waits-native-99/confirmed-retry-native-protocol.json",
+      "sha256": "e8b6db4887840d784029b6fbbc5764fd493cb846c52c2b8877838b23a588c17e"
+    }
+  },
+  "current_ci_inputs": 633,
+  "current_ci_inputs_match": true,
+  "native_inputs": 273,
+  "native_inputs_match": true,
+  "changed_since_ci97": [
+    "app/scripts/native_database_observer.py"
+  ],
+  "added_since_ci97": [
+    "app/tests/unit/test_native_database_waits.py"
+  ],
+  "python": {
+    "tests": 3938,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "gates": 16,
+  "python_seconds": 702.257,
+  "python_budget_seconds": 1200,
+  "focused_checks": 73,
+  "native_cases": 29,
+  "overlap": {
+    "private_python_log_created_at": "2026-10-26T03:33:10.800279+00:00",
+    "native_started_at": "2026-10-26T03:33:48.985411+00:00",
+    "native_ended_at_rounded": "2026-10-26T03:38:48.895411+00:00",
+    "python_still_running_after_native_exit_observed_at": "2026-10-26T03:40:04.624789+00:00",
+    "entire_native_run_contained_in_python_gate": true,
+    "manual_observation": "Python gate was observed running immediately before native launch and after native exit; timestamped private log creation and native report confirm order"
+  },
+  "database_observation": {
+    "samples": 1585,
+    "observations": 5,
+    "wait_type_event_pairs": [
+      [
+        "Client",
+        "other"
+      ],
+      [
+        "Lock",
+        "relation"
+      ],
+      [
+        "Lock",
+        "transactionid"
+      ]
+    ],
+    "slow_io_observed": false,
+    "all_capacity_counters_zero": true,
+    "read_only": true,
+    "thread_closed": true
+  },
+  "cleanup": {
+    "processes": true,
+    "databases": true,
+    "database_observer": true,
+    "media_and_credentials": true
+  },
+  "native_owned_processes": 8,
+  "complete_ci_process_trees_closed": true,
+  "candidate": {
+    "release_id": "rc-20261026.97.1",
+    "rebuilt_this_increment": false,
+    "scope": "Existing candidate retains its historical source manifest; all previously indexed inputs match except the diagnostic observer script. No new candidate or installed-browser acceptance is claimed.",
+    "current_source_map_differences": [
+      "scripts/native_database_observer.py"
+    ]
+  },
+  "root_causes_closed": false,
+  "original_concurrent_502_reproduced": false,
+  "browser_used": false,
+  "virtualization_used": false,
+  "real_resource_acceptance": false,
+  "production_accepted": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false
+}
