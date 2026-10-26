@@ -1,0 +1,23 @@
+{
+  "contract_version": "0.4.0",
+  "format_version": 1,
+  "increment": 101,
+  "scope": "Public error projection only; HTTP 503 never proves a write was not committed",
+  "unavailable_sqlstates": ["55P03", "57014", "40P01", "40001", "08000", "08001", "08003", "08004", "08006", "08007", "08P01", "53100", "53200", "53300", "53400", "57P01", "57P02", "57P03"],
+  "non_dependency_sqlstates": ["25006", "42501", "42P01"],
+  "unknown_state_connection_invalidated_requires_exact_true": true,
+  "known_non_dependency_state_overrides_invalidated": true,
+  "sqlalchemy_pool_timeout_unavailable": true,
+  "control_api": {"status": 503, "code": "dependency_unavailable", "message": "服务暂时不可用，请稍后核对原请求"},
+  "provider": {"upstream_status": 503, "status": 503, "type": "api_error", "code": "dependency_unavailable", "message": "Provider request could not be completed"},
+  "headers": {"Retry-After": "2", "Cache-Control": "no-store"},
+  "unknown_control_error": {"status": 500, "code": "internal_error"},
+  "other_upstream_server_error": {"status": 502, "code": "gateway_unavailable"},
+  "integrity_error_status": 409,
+  "client_diagnostics_allowed": false,
+  "raw_remote_error_forwarded": false,
+  "database_automatic_retry_added": false,
+  "generation_automatic_retry_added": false,
+  "uncertain_write_releases_reservation": false,
+  "recovery_uses_original_request_identity": true
+}

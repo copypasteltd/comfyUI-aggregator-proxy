@@ -25,6 +25,27 @@ REASONS = {
 }
 
 
+# Explicit dependency categories only. Unknown writes still require reconciliation.
+UNAVAILABLE_SQLSTATES = frozenset({
+    "55P03", "57014", "40P01", "40001",
+    "08000", "08001", "08003", "08004", "08006", "08007", "08P01",
+    "53100", "53200", "53300", "53400", "57P01", "57P02", "57P03",
+})
+
+
+def _sqlstate(error: DBAPIError) -> str | None:
+    try:
+        state = getattr(error.orig, "sqlstate", None)
+    except Exception:
+        state = None
+    return state if type(state) is str and state in REASONS else None
+
+
+def database_dependency_unavailable(error: DBAPIError) -> bool:
+    state = _sqlstate(error)
+    return state in UNAVAILABLE_SQLSTATES or state is None and error.connection_invalidated is True
+
+
 @dataclass
 class DatabaseFailureCapture:
     value: dict[str, str | bool | None] | None = None
@@ -33,11 +54,7 @@ class DatabaseFailureCapture:
     def record(self, operation: Operation, error: DBAPIError) -> None:
         with self._lock:
             if self.value is None:
-                try:
-                    state = getattr(error.orig, "sqlstate", None)
-                except Exception:
-                    state = None
-                state = state if type(state) is str and state in REASONS else None
+                state = _sqlstate(error)
                 self.value = {"operation": operation, "reason": REASONS[state] if state else "other", "sqlstate": state, "connection_invalidated": error.connection_invalidated is True}
 
 

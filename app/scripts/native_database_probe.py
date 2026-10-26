@@ -68,18 +68,23 @@ def exercise(client: httpx.Client, options: dict[str, Any], database: str, facto
             check(holder.execute("SELECT current_database(),host(inet_server_addr()),current_setting('port')").fetchone() == (database, "127.0.0.1", "55438"), "database_probe_identity_mismatch")
             holder.rollback()
             rate_id = "gateway:" + str(UUID(gateway_id.removeprefix("gateway_")))
-            for operation, path, status in (("gateway_auth", "/gateway/v1/settlements", 500), ("audit_snapshot", "/admin/api/v1/audit-events", 503)):
+            for operation, path, status in (("gateway_auth", "/gateway/v1/settlements", 503), ("audit_snapshot", "/admin/api/v1/audit-events", 503)):
                 with holder.transaction():
                     if operation == "gateway_auth":
                         before = holder.execute("SELECT tokens,updated_at,recent FROM rate_states WHERE identity=%s FOR UPDATE", (rate_id,)).fetchone()
                         check(before is not None, "database_probe_rate_state_missing")
                     else:
                         holder.execute("LOCK TABLE audit_events IN ACCESS EXCLUSIVE MODE")
-                    pid = holder.execute("SELECT pg_backend_pid()").fetchone()[0]
+                    pid_row = holder.execute("SELECT pg_backend_pid()").fetchone()
+                    if pid_row is None:
+                        raise RuntimeError("database_probe_backend_identity_missing")
+                    pid = pid_row[0]
                     request = pool.submit(client.get, path, headers=headers if operation == "gateway_auth" else {}, timeout=10)
                     chain = blocked(monitor, pid, request)
                     response = request.result(timeout=12)
                     check(response.status_code == status, "database_probe_unexpected_status")
+                    if operation == "gateway_auth":
+                        check(response.json()["error"]["code"] == "dependency_unavailable" and response.headers.get("retry-after") == "2" and response.headers.get("cache-control") == "no-store", "database_probe_dependency_projection_invalid")
                     event = log_event(log, response.headers["x-request-id"])
                     check(event.get("database_failure") == {"operation": operation, "reason": "lock_unavailable", "sqlstate": "55P03", "connection_invalidated": False}, "database_probe_wrong_classification")
                     check(event["completion"] == "completed" and "database_failure" not in response.text, "database_probe_diagnostic_boundary_failed")
@@ -97,3 +102,32 @@ def exercise(client: httpx.Client, options: dict[str, Any], database: str, facto
         return cases
     finally:
         client.cookies.clear()
+
+
+def provider_dependency_fault(client: httpx.Client, credential: str, options: dict[str, Any], database: str, gateway_id: str) -> dict[str, Any]:
+    """Hold only this disposable control DB row; call the actual Provider."""
+    check(options.get("host") == "127.0.0.1" and options.get("port") == 55438 and re.fullmatch(r"render_control_native_[a-f0-9]{12}", database), "provider_dependency_probe_scope_invalid")
+    headers = {"Authorization": "Bearer " + credential}
+    check(client.get("/v1/content", headers=headers).status_code == 200, "provider_dependency_probe_not_ready")
+    rate_id = "gateway:" + str(UUID(gateway_id.removeprefix("gateway_")))
+    with psycopg.connect(**{**options, "dbname": database, "options": "-c statement_timeout=1000 -c lock_timeout=1000"}) as holder, psycopg.connect(**{**options, "dbname": database, "options": "-c statement_timeout=1000 -c lock_timeout=100"}, autocommit=True) as monitor, ThreadPoolExecutor(max_workers=1) as pool:
+        check(holder.execute("SELECT current_database(),host(inet_server_addr()),current_setting('port')").fetchone() == (database, "127.0.0.1", "55438"), "provider_dependency_probe_identity_mismatch")
+        holder.rollback()
+        with holder.transaction():
+            jobs_before = holder.execute("SELECT count(*) FROM jobs").fetchone()
+            before = holder.execute("SELECT tokens,updated_at,recent FROM rate_states WHERE identity=%s FOR UPDATE", (rate_id,)).fetchone()
+            check(before is not None, "provider_dependency_probe_rate_missing")
+            pid_row = holder.execute("SELECT pg_backend_pid()").fetchone()
+            if pid_row is None:
+                raise RuntimeError("database_probe_backend_identity_missing")
+            pid = pid_row[0]
+            future = pool.submit(client.get, "/v1/content", headers=headers, timeout=15)
+            chain = blocked(monitor, pid, future)
+            response = future.result(timeout=18)
+            check(response.status_code == 503 and response.json() == {"error": {"type": "api_error", "code": "dependency_unavailable", "message": "Provider request could not be completed"}}, "provider_dependency_probe_projection_invalid")
+            check(response.headers.get("retry-after") == "2" and response.headers.get("cache-control") == "no-store" and response.headers.get("x-request-id"), "provider_dependency_probe_headers_invalid")
+            check(holder.execute("SELECT tokens,updated_at,recent FROM rate_states WHERE identity=%s", (rate_id,)).fetchone() == before, "provider_dependency_probe_rate_consumed")
+        recovered = client.get("/v1/content", headers=headers, timeout=15)
+        check(recovered.status_code == 200 and recovered.json().get("object") == "list", "provider_dependency_probe_recovery_failed")
+        check(holder.execute("SELECT count(*) FROM jobs").fetchone() == jobs_before, "provider_dependency_probe_created_job")
+    return {"case": "native_provider_dependency_503_and_recovery", "passed": True, "http_status": 503, "error_code": "dependency_unavailable", "retry_after": "2", "cache_control": "no-store", "request_id_present": True, "recovered_status": 200, "failed_request_consumed_rate": False, "jobs_created": False, "automatic_retry_added": False, "budgets_increased": False, **chain}

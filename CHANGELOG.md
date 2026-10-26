@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 101 / 依赖错误与未知写入恢复
+
+- 控制 API 对明确依赖故障、断连和连接池超时返回固定脱敏 503/dependency_unavailable；Provider 保留 503、Retry-After: 2、no-store 和原请求关联。配置/权限/结构错误仍为 500，约束冲突和领域专属错误保持。
+- Preserve uncertain writes and original durable admission identity/reservations; add no database or GPU automatic retry. A committed admission followed by 503 recovers through lookup and settles once.
+- 保留修复前 44 项预期失败、首次 Go 夹具失败和 standalone mypy 失败。专项 Python 148、修正后 Go 178 顶层/356 子测试、当前 Provider 构建及 30 原生场景通过；文档/来源门禁以新不可变证据索引恢复。完整 CI、新候选与安装正在执行，未提升实机、生产或历史根因。
+
 ## 2026-10-26 · Audit 102 / 当前工作区与目标差距
 
 - [系统检查](docs/102-当前工作区系统检查与目标差距.md) 重新核对 637 当前应用输入、实际候选归档、73 需求/98 完整门禁/15 工作包与全部 69 个稳定待办；保留 67 首版、2 可选、0/6 真实 Workflow 和生产未验收。

@@ -141,3 +141,6 @@ JSON Schema 使用 draft 2020-12，引用限定本文件 `#/$defs`，禁止在�
 第 91 增量新增 Provider 视频响应 sdk-video-response.schema.json 与 17 个 fixture（7 正/10 反），累计 61 schema/976 fixture（225 正/751 反）、64 运行契约。冻结已知 seconds/size、状态映射和固定安全错误，未知进度省略；只适用于 rc_ Provider 投影，不声明官方 Video 类型完整兼容。见 [91](../91-多媒体SDK与视频冻结规格.md)。
 
 第 92 增量新增 [直接视频响应](./control-video-response.schema.json) 和 46 个 fixture（20 正/26 反），累计 **62 schema、1022 fixture（245 正/777 反）、65 运行契约**。job_ 投影独立保留原生扩展，已知冻结时长按整数毫秒表达，两至五位尺寸字段与运行投影一致；权限/归属/读取无副作用仍由 PostgreSQL 和 HTTP 回归验证，见 [92](../92-直接视频接口冻结投影与权限边界.md)。Provider rc_ 契约及原有公开请求上限不变。
+
+
+第 101 增量冻结 [dependency-error-policy.json](dependency-error-policy.json)：控制 API 的固定依赖不可用分类、503 安全投影、Provider 传递及原幂等身份/资金预留保护。它只定义错误识别，不证明写入未发生，也不签收历史数据库根因；详见 [101](../101-依赖不可用错误与安全重试边界.md)。

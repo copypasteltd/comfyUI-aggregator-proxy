@@ -1,0 +1,24 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T05:07:26.380872+00:00",
+  "check": "probe_types",
+  "scope": "Read-only current source/documentation check; no complete functional test, real-resource or production acceptance",
+  "command": [
+    "app\\.venv\\Scripts\\mypy.exe",
+    "scripts/native_database_probe.py"
+  ],
+  "working_directory": "app",
+  "exit_code": 0,
+  "passed": true,
+  "seconds": 0.815,
+  "private_log_sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff",
+  "private_log_bytes": 43,
+  "result": null,
+  "browser_started": false,
+  "virtualization_used": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "diagnostic_lines": [
+    "Success: no issues found in 1 source file"
+  ]
+}

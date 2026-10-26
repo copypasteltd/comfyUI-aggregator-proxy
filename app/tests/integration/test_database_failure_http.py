@@ -64,7 +64,8 @@ def test_gateway_row_wait_is_observed_sanitized_and_recovers_without_retry(pg: s
             future = pool.submit(client.get, "/gateway/v1/settlements", headers=headers)
             observe_blocker(pg, blocker, future)
             response = future.result(timeout=10)
-            assert response.status_code == 500 and response.json()["error"]["code"] == "internal_error"
+            assert response.status_code == 503 and response.json()["error"]["code"] == "dependency_unavailable"
+            assert response.headers["retry-after"] == "2"
             diagnostic(events, response, "gateway_auth", "55P03")
             assert holder.get(RateState, rate_id).tokens == 100
         recovered = client.get("/gateway/v1/settlements", headers=headers)
@@ -110,7 +111,7 @@ def test_real_cancelled_query_is_classified_without_escaping_framework(pg: sessi
             session.execute(text("SELECT pg_sleep(0.2)"))
     with TestClient(app, base_url=test_settings.public_origin) as client:
         response = client.get("/health/synthetic-query-cancel")
-        assert response.status_code == 500
+        assert response.status_code == 503 and response.headers["retry-after"] == "2"
         diagnostic(events, response, "http_request", "57014")
         assert client.get("/health/ready").status_code == 200
         assert "database_failure" not in events[-1]
@@ -128,7 +129,7 @@ def test_driver_sql_parameters_and_text_never_escape(test_settings: Settings, mo
         raise DBAPIError("PRIVATE-SQL", {"token": "PRIVATE-PARAMETER"}, DriverError("PRIVATE-DRIVER"))
     with TestClient(app, base_url=test_settings.public_origin) as client:
         response = client.get("/health/synthetic-private-driver?token=PRIVATE-QUERY")
-        assert response.status_code == 500
+        assert response.status_code == (503 if state in ("55P03", "57014") else 500)
     assert "PRIVATE" not in response.text + json.dumps(events)
     assert events[0]["database_failure"]["sqlstate"] == (state if state in ("55P03", "57014") else None)
 

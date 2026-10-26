@@ -45,6 +45,7 @@ from generation_infrastructure.security import password_hash
 from generation_infrastructure.settings import Settings
 from native_database_observer import DatabaseObserver
 from native_database_probe import exercise as database_faults
+from native_database_probe import provider_dependency_fault
 from prometheus_client.parser import text_string_to_metric_families
 from psycopg import sql
 from sqlalchemy import create_engine, select
@@ -756,6 +757,8 @@ def main() -> None:
         provider = restart()
         provider_client = httpx.Client(base_url=f"http://127.0.0.1:{provider_port}", timeout=70, trust_env=False, follow_redirects=False)
         wait_http(provider_client, "/health", provider)
+        phase = "provider_dependency_projection"
+        report["cases"].append(provider_dependency_fault(provider_client, upstream["credentials"][1], options, control_database, catalog["gateway_id"]))
         phase = "public_generation_and_delivery"
         print(json.dumps({"phase": phase, "native_servers_started": True, "redis_is_protocol_fixture": True, "comfy_is_protocol_fixture": True}), flush=True)
         with psycopg.connect(**{**options, "dbname": upstream_database}) as pg, psycopg.connect(**{**options, "dbname": control_database}) as control:

@@ -181,3 +181,8 @@ GET /admin/api/v1/channels 使用 admin-channel-query，未知查询字段拒绝
 ## 第 86 增量：任务详情快照
 
 GET /v1/jobs/{job_id} 及网关同源详情的状态、updated_revision、completed_at 和授权 artifacts 来自一次一致数据库快照。允许返回完成提交前的完整旧状态；禁止在非 succeeded 状态返回并发完成产生的新产物。主体、权限、响应形状、取消语义和 Worker 协议保持。Provider 继续拒绝无效状态/产物组合，不通过放宽客户端校验掩盖服务端读取竞争；见 [86](./86-数据库故障脱敏诊断与并发观测.md)。
+
+
+## 第 101 增量：依赖不可用错误
+
+通用数据库依赖不可用按固定 SQLSTATE/明确断连标志及 SQLAlchemy 连接池超时返回脱敏 503/dependency_unavailable，附 Retry-After: 2；Provider 保留上游 503 并使用固定安全错误码。已知配置/权限/结构错误和未知非断连保持 500，IntegrityError 409 及领域专属错误不变。503 不证明事务未提交，写入仍按原意图/幂等身份核对，禁止盲目重提或释放预留。分类、头和重试边界以 [101](101-依赖不可用错误与安全重试边界.md) 及 [机器策略](contracts/dependency-error-policy.json) 为准。

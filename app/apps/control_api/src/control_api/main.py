@@ -202,7 +202,10 @@ from generation_infrastructure.commands import CommandRepository
 from generation_infrastructure.content import ContentRepository
 from generation_infrastructure.cursors import CursorCodec
 from generation_infrastructure.database import make_sessions
-from generation_infrastructure.database_diagnostics import record_database_failure
+from generation_infrastructure.database_diagnostics import (
+    database_dependency_unavailable,
+    record_database_failure,
+)
 from generation_infrastructure.gateway import GatewayRepository
 from generation_infrastructure.job_cancellations import JobCancellations
 from generation_infrastructure.jobs import JobRepository
@@ -228,6 +231,7 @@ from generation_infrastructure.workflow_directory import WorkflowDirectory
 from generation_infrastructure.workflow_history import WorkflowHistory
 from sqlalchemy import text
 from sqlalchemy.exc import DBAPIError, IntegrityError
+from sqlalchemy.exc import TimeoutError as SQLAlchemyTimeoutError
 from starlette.exceptions import HTTPException
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -372,9 +376,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         request.state.access_error_code = "resource_conflict"
         return JSONResponse({"error": {"code": "resource_conflict", "message": "资源冲突或关联约束不满足", "request_id": request.state.request_id}}, status_code=409)
 
+    def dependency_unavailable(request: Request) -> JSONResponse:
+        request.state.access_error_code = "dependency_unavailable"
+        return JSONResponse({"error": {"code": "dependency_unavailable", "message": "服务暂时不可用，请稍后核对原请求", "request_id": request.state.request_id}}, status_code=503, headers={"Retry-After": "2"})
+
+    @app.exception_handler(SQLAlchemyTimeoutError)
+    async def database_pool_error(request: Request, exc: SQLAlchemyTimeoutError) -> JSONResponse:
+        logger.error("database_pool_unavailable request_id=%s", request.state.request_id)
+        return dependency_unavailable(request)
+
     @app.exception_handler(DBAPIError)
     async def database_error(request: Request, exc: DBAPIError) -> JSONResponse:
         record_database_failure("http_request", exc)
+        if database_dependency_unavailable(exc):
+            return dependency_unavailable(request)
         request.state.access_error_code = "internal_error"
         return JSONResponse({"error": {"code": "internal_error", "message": "服务处理失败", "request_id": request.state.request_id}}, status_code=500)
 

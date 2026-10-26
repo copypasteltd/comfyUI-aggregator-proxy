@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 97,
+  "increment": 101,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-97.json",
-    "sha256": "9d0ae18fadeee8d09f094fbeeceddb9a4d6f167b5ac4db8745d5ac9bd9b22a5b"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-101.json",
+    "sha256": "96b705cecb38f25c4d63cda62890abe42b4576329155bd51373acd880113aafd"
   },
   "requirements": [
     {
@@ -339,7 +339,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "wait94"
+          "baseline": "dependency101"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
@@ -371,7 +371,8 @@
         "ci86",
         "go80",
         "sdk90",
-        "wait94"
+        "wait94",
+        "dependency101"
       ],
       "remaining_backlog": [
         "30",
@@ -391,6 +392,10 @@
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/database_diagnostics.py",
+          "baseline": "dependency101"
         }
       ],
       "tests": [
@@ -403,6 +408,18 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_image_standard_sources_roles_and_options_reach_native_job",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_dependency_error_http.py",
+          "symbol": "test_dependency_errors_are_safe_and_do_not_retry_the_request",
+          "language": "python",
+          "baseline": "dependency101"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/dependency_error_test.go",
+          "symbol": "TestDependencyErrorProjectionPreservesStatusAndUncertainWrites",
+          "language": "go",
+          "baseline": "go80"
         }
       ],
       "evidence": [
@@ -410,13 +427,15 @@
         "sdk90",
         "sdk91",
         "video92",
-        "sdk92"
+        "sdk92",
+        "dependency101",
+        "go80"
       ],
       "remaining_backlog": [
         "30",
         "31"
       ],
-      "limitation": "协议子集、本地输入及固定 Python/Node SDK 生成/编辑/重放已测；真实同步等待、撤销及完整客户端矩阵待验收。"
+      "limitation": "协议子集、本地输入及固定 Python/Node SDK 生成/编辑/重放已测；真实同步等待、撤销及完整客户端矩阵待验收。 固定依赖错误 503、请求关联和不重试边界已有 HTTP/Go 组件证据；不关闭历史数据库根因。"
     },
     {
       "id": "API-04",
@@ -424,7 +443,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "wait94"
+          "baseline": "dependency101"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -445,13 +464,20 @@
           "path": "app/tests/integration/test_admin_controls.py",
           "symbol": "test_admin_cancel_keeps_gpu_and_retry_refuses_uncertain_execution",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_dependency_error_http.py",
+          "symbol": "test_503_after_actual_commit_does_not_promise_rollback_or_retry",
+          "language": "python",
+          "baseline": "dependency101"
         }
       ],
       "evidence": [
         "ci86",
         "native86",
         "video92",
-        "wait94"
+        "wait94",
+        "dependency101"
       ],
       "remaining_backlog": [
         "29",
@@ -673,11 +699,18 @@
           "path": "app/tests/integration/test_access_events.py",
           "symbol": "test_http_records_real_results_without_payloads_or_client_identity",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_dependency_error_http.py",
+          "symbol": "test_dependency_errors_are_safe_and_do_not_retry_the_request",
+          "language": "python",
+          "baseline": "dependency101"
         }
       ],
       "evidence": [
         "ci86",
-        "video92"
+        "video92",
+        "dependency101"
       ],
       "remaining_backlog": [
         "29",
@@ -1911,6 +1944,12 @@
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/ledger_test.go",
           "symbol": "TestReserveTransactionRollsBackOnOutboxFailure",
           "language": "go"
+        },
+        {
+          "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/dependency_error_test.go",
+          "symbol": "TestDependency503AfterAcceptedAdmissionKeepsOriginalIntentAndHold",
+          "language": "go",
+          "baseline": "go80"
         }
       ],
       "evidence": [
@@ -1924,7 +1963,7 @@
         "35",
         "36"
       ],
-      "limitation": "事务预留/释放已有测试；真实混合供应商与价格规则仍待联验。"
+      "limitation": "事务预留/释放已有测试；真实混合供应商与价格规则仍待联验。 已测准入持久化后 503 保留原意图/预留并恢复唯一计量；真实联合对账仍待验收。"
     },
     {
       "id": "BILL-03",
@@ -2135,7 +2174,7 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "wait94"
+          "baseline": "dependency101"
         },
         {
           "path": "app/apps/admin_web/src/pages/Users.vue",
@@ -2164,7 +2203,8 @@
         "ci86",
         "installed87",
         "visual87",
-        "wait94"
+        "wait94",
+        "dependency101"
       ],
       "remaining_backlog": [
         "50",

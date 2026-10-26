@@ -1,0 +1,12 @@
+{
+  "format_version": 1,
+  "passed": false,
+  "scope": "Initial standalone native probe type check from repository root, before nullable cursor-result guards",
+  "command": "app/.venv/Scripts/mypy.exe app/scripts/native_database_probe.py",
+  "working_directory": ".",
+  "errors": {"import_untyped_without_app_configuration": 2, "nullable_cursor_result_indexing": 2},
+  "resolution_required": "Guard both cursor results and rerun from app using its checked-in mypy configuration; do not weaken type-check settings",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false
+}

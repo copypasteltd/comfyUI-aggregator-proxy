@@ -487,6 +487,9 @@ func publicError(c *gin.Context, err error) {
 		c.Header("Retry-After", "2")
 	case errors.As(err, &call):
 		status, code = http.StatusBadGateway, "gateway_unavailable"
+		if call.HTTPStatus == http.StatusServiceUnavailable {
+			status, code = http.StatusServiceUnavailable, "dependency_unavailable"
+		}
 		if call.HTTPStatus == 401 || call.HTTPStatus == 403 {
 			status, code, kind = 403, "permission_denied", "permission_error"
 		}
@@ -517,6 +520,10 @@ func publicError(c *gin.Context, err error) {
 		status, code, kind = 422, "billing_mode_unsupported", "invalid_request_error"
 	case errors.Is(err, ErrConflict):
 		status, code, kind = 409, "task_conflict", "invalid_request_error"
+	}
+	if status == http.StatusServiceUnavailable {
+		c.Header("Retry-After", "2")
+		c.Header("Cache-Control", "no-store")
 	}
 	c.AbortWithStatusJSON(status, gin.H{"error": gin.H{"type": kind, "code": code, "message": "Provider request could not be completed"}})
 }

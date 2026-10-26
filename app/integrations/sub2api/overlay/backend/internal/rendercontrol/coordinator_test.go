@@ -22,47 +22,48 @@ import (
 )
 
 type recoveryGateway struct {
-	mu                   sync.Mutex
-	t                    *testing.T
-	i                    Intent
-	server               *httptest.Server
-	client               *controlclient.Client
-	state                string
-	closed               bool
-	calls                map[string]int
-	dropAfter            map[string]int
-	dropBeforeAdmission  bool
-	denyAdmission        bool
-	denyConfirm          bool
-	confirmOnClose       bool
-	expireLeaseOn        string
-	requests             []string
-	outcome              string
-	ackFailures          int
-	acked                bool
-	ledgerRefs           []string
-	foreignEvents        []controlclient.Settlement
-	jobModelOverride     string
-	jobDenied            bool
-	cancelDenied         bool
-	businessIP           string
-	policyScopes         []string
-	jobArtifacts         []controlclient.Artifact
-	contentData          []byte
-	contentType          string
-	contentDenied        bool
-	contentFailure       int
-	contentTruncated     bool
-	assets               map[string]controlclient.UploadedAsset
-	assetData            map[string][]byte
-	assetDeleted         map[string]bool
-	assetDenied          bool
-	dropAssetAfter       bool
-	corruptAssetResponse bool
-	catalogStatus        int
-	catalogRaw           []byte
-	catalogModels        []controlclient.PublishedModel
-	catalogCapabilities  []controlclient.PublishedCapability
+	mu                      sync.Mutex
+	t                       *testing.T
+	i                       Intent
+	server                  *httptest.Server
+	client                  *controlclient.Client
+	state                   string
+	closed                  bool
+	calls                   map[string]int
+	dropAfter               map[string]int
+	dropBeforeAdmission     bool
+	admission503AfterAccept bool
+	denyAdmission           bool
+	denyConfirm             bool
+	confirmOnClose          bool
+	expireLeaseOn           string
+	requests                []string
+	outcome                 string
+	ackFailures             int
+	acked                   bool
+	ledgerRefs              []string
+	foreignEvents           []controlclient.Settlement
+	jobModelOverride        string
+	jobDenied               bool
+	cancelDenied            bool
+	businessIP              string
+	policyScopes            []string
+	jobArtifacts            []controlclient.Artifact
+	contentData             []byte
+	contentType             string
+	contentDenied           bool
+	contentFailure          int
+	contentTruncated        bool
+	assets                  map[string]controlclient.UploadedAsset
+	assetData               map[string][]byte
+	assetDeleted            map[string]bool
+	assetDenied             bool
+	dropAssetAfter          bool
+	corruptAssetResponse    bool
+	catalogStatus           int
+	catalogRaw              []byte
+	catalogModels           []controlclient.PublishedModel
+	catalogCapabilities     []controlclient.PublishedCapability
 }
 
 const admissionPath = "/gateway/v1/admissions"
@@ -263,6 +264,11 @@ func (g *recoveryGateway) serve(w http.ResponseWriter, r *http.Request) {
 		}
 		if g.state == "unknown" {
 			g.state = "pending"
+		}
+		if g.admission503AfterAccept {
+			g.admission503AfterAccept = false
+			gatewayTestError(w, http.StatusServiceUnavailable)
+			return
 		}
 		result = g.admission()
 	case path == lookupPath || path == closePath:

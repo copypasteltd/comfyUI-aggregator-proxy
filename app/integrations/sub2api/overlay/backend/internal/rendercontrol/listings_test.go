@@ -459,9 +459,9 @@ func TestContentCollectionFailureCapacityAndCancellationRelease(t *testing.T) {
 	g := collectionPeer(t, f)
 	for _, failure := range []int{401, 403, 503} {
 		g.change(func(g *collectionGateway) { g.failure = failure })
-		status, raw, _ := f.call(t, "GET", "/v1/content", "", nil)
+		status, raw, headers := f.call(t, "GET", "/v1/content", "", nil)
 		if failure == 503 {
-			if status != 502 || !bytes.Contains(raw, []byte(`"code":"gateway_unavailable"`)) || bytes.Contains(raw, []byte(`"object":"list"`)) {
+			if status != 503 || !bytes.Contains(raw, []byte(`"code":"dependency_unavailable"`)) || bytes.Contains(raw, []byte(`"object":"list"`)) || headers.Get("Retry-After") != "2" || headers.Get("Cache-Control") != "no-store" || headers.Get("X-Request-ID") == "" {
 				t.Fatal("failed stream was presented as a complete page")
 			}
 		} else if page := collectionPage[publicContent](t, status, raw); len(page.Data) != 0 {
