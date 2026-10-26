@@ -1,0 +1,154 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T12:17:33.982569+00:00",
+  "passed": true,
+  "scope": "Source-bound input publication cleanup while a PostgreSQL publisher remains unresolved; validates existing Key lock waits, rollback, duplicate cleanup, complete native CI and exact candidate installation. ComfyUI/Redis/S3 remain fixtures; production and complete acceptance remain pending.",
+  "application_source_revision": "e12f604aff8d843db4bb6f8e300537f8f4351859",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci112-20261026-asset-publication/summary.json",
+      "sha256": "f33d8655e11c9c5f9678a14c7ff07957da8e3257431d0a290917db67db83df1f"
+    },
+    "focused": {
+      "path": "docs/evidence/2026-10-26/asset-publication-verified-112.json",
+      "sha256": "9e5dce57e71447565850ae7d41816ff6fccbe6373292aac6e1b5a8d13fe81dc7"
+    },
+    "native": {
+      "path": "docs/evidence/2026-10-26/asset-publication-native-112/confirmed-retry-native-protocol.json",
+      "sha256": "a5d7c21bfd5f452cfbe940f61aa359e78d855b40aed52c057b17aa59d0b7e9a0"
+    },
+    "provider_unchanged": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-provider-101/sub2api-provider-native-build.json",
+      "sha256": "ad4082847929a50656ba2488cb509c5618f1b953b3a6e5f99b5891f7c8f6fcce"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/asset-publication-release-build-112.json",
+      "sha256": "e2d945e9f878b7ec7009541f3376c1acbb6579bb099baedd249950ad11518577"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/asset-publication-installed-112/native-release-installation.json",
+      "sha256": "fd7108d6185103743272db2c9fdcfd9c75a9892a75a88563dcc274495dd549a9"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-26/asset-publication-installed-112/native-release-installed-browser.json",
+      "sha256": "3e080f570e84e5fa03b1a9bb95d67ec318a121392495fb6950948764383764e2"
+    },
+    "native_process": {
+      "path": "docs/evidence/2026-10-26/asset-publication-native-process-112.json",
+      "sha256": "92e6c2f7e22bb1dfbff2dd392dc9966a4f08f0f9afae9335e22cbd1f4361e53c"
+    }
+  },
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 4280,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_seconds": 852.278,
+    "python_budget_seconds": 1200,
+    "inputs": 649,
+    "all_inputs_match_current": true,
+    "owned_process_trees_closed": true
+  },
+  "focused_python": {
+    "tests": 122,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "new_cases": {
+    "inflight_publication_lock": 2,
+    "rollback_and_absence": 2,
+    "duplicate_deletion": 2
+  },
+  "pre_fix_behavioral_failures_preserved": 2,
+  "preliminary_id_parsing_test_failures_preserved_not_behavioral_evidence": 4,
+  "native": {
+    "cases": 30,
+    "inputs": 275,
+    "all_inputs_match_current": true,
+    "cleanup": {
+      "processes": true,
+      "databases": true,
+      "database_observer": true,
+      "media_and_credentials": true
+    },
+    "real_comfyui": false,
+    "real_redis": false,
+    "real_s3": false
+  },
+  "candidate": {
+    "release_id": "rc-20261026.112.1",
+    "archive": "app/.local/releases/rc-20261026.112.1/rc-20261026.112.1.zip",
+    "archive_sha256": "0569f7f0489c3f49854b48d07e7fcd9d23ad5e4aa88d6f67f344210dfe57b993",
+    "archive_bytes": 281335434,
+    "manifest_source_revision": "e12f604aff8d843db4bb6f8e300537f8f4351859",
+    "source_inputs": 525,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 67,
+    "database_head": "3da02e7b5941"
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "closed_contexts": 2,
+    "browser_closed": true,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "cleanup_errors": []
+  },
+  "input_publication_cleanup_local_exit_closed": true,
+  "stable_backlog_items_37_41_43_51_55_61_62_fully_closed": false,
+  "historical_database_root_causes_closed": false,
+  "remaining_work": {
+    "open": 69,
+    "first_release": 67,
+    "optional": 2,
+    "physical_workflows_accepted": 0
+  },
+  "production_accepted": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "virtualization_used": false,
+  "observed_process_window": {
+    "scope": "Owned Python log creation plus bounded execute elapsed duration, and native wrapper completion minus bounded execute duration; no raw logs or query data",
+    "python_start_utc": "2026-10-26T11:58:07.606598+00:00",
+    "python_end_by_elapsed_utc": "2026-10-26T12:12:19.884598+00:00",
+    "native_start_by_elapsed_utc": "2026-10-26T11:59:16.178509+00:00",
+    "native_end_utc": "2026-10-26T12:03:19.837509+00:00",
+    "native_inside_complete_python_window": true
+  },
+  "pre_fix_behavioral_evidence": {
+    "path": "docs/evidence/2026-10-26/asset-publication-before-corrected-112.json",
+    "sha256": "9b79094beed6bd6b5ce316080fef1e62a45838761ff327b0a29e76cc13b3ad96",
+    "actual_missing_bytes_after_committed_records": true,
+    "junit_digest_rechecked": true,
+    "failure_class": "FileNotFoundError",
+    "cases": 2,
+    "scope": "Controlled real PostgreSQL publication window and local file store, not a real network disconnect or S3 fault"
+  },
+  "preliminary_harness_error_evidence": [
+    {
+      "report": {
+        "path": "docs/evidence/2026-10-26/asset-publication-before-112.json",
+        "sha256": "d263ea816de0a233c9d6c12800eeb4e2d234c21ab09fdc68e5ef6b4bfefe9348"
+      },
+      "cases": 2,
+      "behavioral_evidence": false,
+      "cause": "Reversed parse_id arguments in initial test harness"
+    },
+    {
+      "report": {
+        "path": "docs/evidence/2026-10-26/asset-publication-before-authorized-112.json",
+        "sha256": "0dc0c64a7ceee12ffe4a4e99e4edb48fab804839b4fdc222143b3fc65ad477f3"
+      },
+      "cases": 2,
+      "behavioral_evidence": false,
+      "cause": "Reversed parse_id arguments in initial test harness"
+    }
+  ]
+}

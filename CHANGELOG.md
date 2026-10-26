@@ -2,8 +2,8 @@
 
 ## 2026-10-26 · Increment 112 / 输入素材发布未决事务与清理保护
 
-- 输入素材清理先等待发布事务已经持有的 API Key 行锁，再核对精确对象版本；成功查明无引用后，在数据库事务外删除。修正测试准备错误后，两类修复前误删已由实际下载缺失字节复现；122 专项（6 新场景）通过，649 输入一致。完整门禁/原生/新候选待执行，69 稳定出口、真实六类 0/6 和生产验收保持开放。
-- Input cleanup now waits for the API Key row lock already held by publication, checks the exact object version, and deletes only confirmed unreferenced bytes after ending the database transaction. After correcting an ID-parsing test error, both pre-fix upload modes prove missing bytes after committed references. All 122 focused cases pass, including six new cases, with 649 unchanged inputs. Current full CI/native/rebuilt installation remain pending; all 69 stable exits, six real Workflow acceptances and production gates remain open.
+- 输入素材清理先等待原发布持有的 API Key 行锁，再核对精确版本，外部删除不持有数据库连接。当前 e12f604 的 122 专项（6 新场景）、完整 16 门禁/4280 Python、30 原生及 rc-20261026.112.1 的 29 安装/10 浏览器通过；649/275/525 来源与实际 content.py wheel 字节一致。保留 2 次有效误删复现及 4 次测试 ID 解析错误记录，后者不计行为证据。所属临时资源清理；真实六类 0/6、69 稳定出口、98 完整门禁及历史数据库根因继续开放。
+- Input cleanup waits for the API Key lock already held by publication before checking the exact object version; external deletion holds no database connection. Source e12f604 passes 122 focused cases (six new), all 16 gates/4280 Python tests, 30 native scenarios, and 29 installation/10 browser checks of rc-20261026.112.1. All 649/275/525 source inputs and actual content.py wheel bytes match. Preserve two valid pre-fix missing-byte reproductions and four ID-parsing test failures, which are not behavioral evidence. Owned temporary resources are closed; six real Workflows, 69 stable exits, 98 complete gates and historical database root causes remain open.
 
 
 ## 2026-10-26 · Audit 111 / 当前项目完整目标与逐项差距
