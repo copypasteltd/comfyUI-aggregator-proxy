@@ -1,0 +1,81 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T04:58:04.063826+00:00",
+  "scope": "Current application/documentation checks at audit start, before audit-entry edits; no full functional rerun. Versioned final documentation review follows separately.",
+  "audit_report": {
+    "path": "docs/evidence/2026-10-26/project-goal-audit-102.json",
+    "sha256": "082c367a5ed218ed5ba0928af9cb9ff3b1d0878ff52854870ad8cbf2980f3cff"
+  },
+  "checks": [
+    {
+      "check": "docs",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-docs-initial.json",
+      "sha256": "a19809794ec2ef338afb8b7a0a41fc79974fb81f4eb3264e91001325f2b6ec65",
+      "passed": false,
+      "exit_code": 1
+    },
+    {
+      "check": "trace",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-trace-initial.json",
+      "sha256": "93796f3d63aa7d0e5cdb3870b111663cd0ebf1167eea9c5c24b061fcb617622e",
+      "passed": false,
+      "exit_code": 1
+    },
+    {
+      "check": "contracts",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-contracts-initial.json",
+      "sha256": "e20ba7c2c2a97bf46584916cce02cef1da2e4aca4934bd520d8e431ec5cdcc62",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "check": "openapi",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-openapi-initial.json",
+      "sha256": "9440e7358b702252b7093a285b1502a260f6d1d27d700b4f4a0a7fff22c759e7",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "check": "lime",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-lime-initial.json",
+      "sha256": "5dde4655e6ed16dd0a11307c2c98f41843a1e6f495441966f4aa8e81bbb59ca3",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "check": "ruff",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-ruff-initial.json",
+      "sha256": "3790d75c4b77a42c94cd7f4ed19ea7a02819d6f3962ac9de70969562d04d7070",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "check": "mypy",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-mypy-initial.json",
+      "sha256": "3321a044fe1c871f20826c047b6b591ec1b54eb3fa0b12a602c279a56af0235d",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "check": "readme",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-readme-initial.json",
+      "sha256": "ab4e30eb69de25de1e525ef90d58c7eea08ed1d8c45d8284e5615a25e067cb4c",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "check": "publication",
+      "path": "docs/evidence/2026-10-26/project-goal-audit-102-publication-initial.json",
+      "sha256": "d6faf7412afef5d3f8c64cbc55242055d6349ad3b8934de12d2844c3e300e93d",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "passed_checks": 7,
+  "failed_checks": 2,
+  "all_project_checks_passed": false,
+  "known_failure": "Five source-evidence references across three changed files in unfinished increment 101",
+  "real_resource_acceptance": false,
+  "production_accepted": false,
+  "virtualization_used": false
+}
