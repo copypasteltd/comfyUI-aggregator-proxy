@@ -299,7 +299,7 @@ class Worker:
         self.settings = settings
         credential, verify = validate_startup(settings)
         self.node_id = credential.node_id
-        self.process_lock = NodeProcessLock(settings.control_origin, self.node_id)
+        self.process_lock = NodeProcessLock(settings.control_origin, self.node_id, allow_http=settings.allow_http)
         self.boot = str(uuid4())
         try:
             self.journal = Journal(settings.state_root)

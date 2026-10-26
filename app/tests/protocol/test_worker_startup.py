@@ -56,6 +56,46 @@ def test_control_origin_is_canonical_for_node_identity(origin: str, expected: st
     assert canonical_origin(origin) == expected
 
 
+@pytest.mark.parametrize("origin,expected", [
+    ("http://CONTROL.invalid:80/", "http://control.invalid"),
+    ("http://[0:0:0:0:0:0:0:1]:39444/", "http://[::1]:39444"),
+    ("https://CONTROL.invalid:443/", ORIGIN),
+])
+def test_http_control_origin_requires_explicit_opt_in(origin: str, expected: str) -> None:
+    if origin.startswith("http:"):
+        with pytest.raises(ValueError):
+            canonical_origin(origin)
+    assert canonical_origin(origin, allow_http=True) == expected
+
+
+@pytest.mark.parametrize("origin", ["http://user:secret@control.invalid", "http://control.invalid/path", "http://control.invalid?token=secret", "http://control.invalid#fragment", "ftp://control.invalid", "http://control.invalid:0", "http://control.invalid:65536", "http://control.invalid\n"])
+def test_http_opt_in_preserves_origin_validation(origin: str) -> None:
+    with pytest.raises(ValueError):
+        canonical_origin(origin, allow_http=True)
+
+
+@pytest.mark.asyncio
+async def test_http_worker_preserves_node_lock_and_journal_identity(tmp_path: Path) -> None:
+    identity = credential(tmp_path)
+    values = dict(credential_file=identity, gpus=[], channels=[], allow_http=True)
+    first = Worker(WorkerSettings(control_origin="http://CONTROL.invalid:80/", state_root=tmp_path / "first", **values))
+    try:
+        assert str(first.http.base_url) == "http://control.invalid"
+        with pytest.raises(DomainError) as conflict:
+            Worker(WorkerSettings(control_origin="http://control.invalid", state_root=tmp_path / "other", **values))
+        assert conflict.value.code == "worker_node_in_use"
+        assert not (tmp_path / "other").exists()
+    finally:
+        await first.close()
+    with pytest.raises(DomainError) as mismatch:
+        Worker(WorkerSettings(control_origin=ORIGIN, state_root=tmp_path / "first", **values))
+    assert mismatch.value.code == "journal_identity_mismatch"
+    with pytest.raises(ValueError):
+        WorkerSettings(control_origin="http://control.invalid", state_root=tmp_path, credential_file=identity, gpus=[], channels=[])
+    with pytest.raises(ValueError):
+        WorkerSettings(control_origin=ORIGIN, state_root=tmp_path, credential_file=identity, gpus=[], channels=[], allow_http="true")
+
+
 @pytest.mark.parametrize("variant", ["duplicate", "unknown", "wrong_realm", "node", "short", "newline", "bom", "oversize", "array", "missing", "constant", "file_directory"])
 def test_bounded_credential_reader_never_exposes_secret(tmp_path: Path, variant: str) -> None:
     path = credential(tmp_path)

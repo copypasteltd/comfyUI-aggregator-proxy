@@ -17,10 +17,10 @@ _registry_lock = threading.Lock()
 class NodeProcessLock:
     """Machine-wide node identity lock, in addition to the journal directory lock."""
 
-    def __init__(self, origin: str, node_id: str) -> None:
+    def __init__(self, origin: str, node_id: str, *, allow_http: bool = False) -> None:
         if sys.platform != "win32":
             raise DomainError("worker_platform_unsupported", "Worker 需要原生 Windows")
-        self.name = "Global\\RenderControl.Worker." + hashlib.sha256((canonical_origin(origin) + "\n" + node_id).encode()).hexdigest()
+        self.name = "Global\\RenderControl.Worker." + hashlib.sha256((canonical_origin(origin, allow_http=allow_http) + "\n" + node_id).encode()).hexdigest()
         self._handle: int | None = None
         self._thread = threading.get_ident()
         kernel = ctypes.WinDLL("kernel32", use_last_error=True)

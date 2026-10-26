@@ -39,10 +39,11 @@ def bounded_file(path: Path, maximum: int) -> bytes:
     return data
 
 
-def canonical_origin(value: str) -> str:
+def canonical_origin(value: str, *, allow_http: bool = False) -> str:
     origin = urlparse(value)
-    if origin.scheme != "https" or not origin.hostname or origin.path not in ("", "/") or origin.username is not None or origin.password is not None or origin.query or origin.fragment or any(ord(c) <= 32 or ord(c) == 127 for c in value):
-        raise ValueError("control_origin must be a plain HTTPS origin")
+    schemes = ("https", "http") if allow_http else ("https",)
+    if origin.scheme not in schemes or not origin.hostname or origin.path not in ("", "/") or origin.username is not None or origin.password is not None or origin.query or origin.fragment or any(ord(c) <= 32 or ord(c) == 127 for c in value):
+        raise ValueError("control_origin requires HTTPS or an explicitly enabled HTTP origin")
     port = origin.port
     if port is not None and not 1 <= port <= 65535:
         raise ValueError("invalid control port")
@@ -52,7 +53,8 @@ def canonical_origin(value: str) -> str:
         host = origin.hostname.encode("idna").decode("ascii").lower()
     else:
         host = "[" + address.compressed + "]" if address.version == 6 else address.compressed
-    return "https://" + host + (":" + str(port) if port not in (None, 443) else "")
+    default_port = 443 if origin.scheme == "https" else 80
+    return origin.scheme + "://" + host + (":" + str(port) if port not in (None, default_port) else "")
 
 
 @dataclass(frozen=True)
@@ -110,6 +112,7 @@ class LocalChannel(BaseModel):
 class WorkerSettings(BaseModel):
     model_config = ConfigDict(extra="forbid")
     control_origin: str
+    allow_http: bool = Field(default=False, strict=True)
     credential_file: Path
     state_root: Path
     ca_file: Path | None = None
@@ -128,7 +131,7 @@ class WorkerSettings(BaseModel):
     def validate_endpoints(self) -> WorkerSettings:
         if self.generation_reserve_bytes > self.maximum_spool_bytes:
             raise ValueError("maximum_spool_bytes must hold one generation reserve")
-        self.control_origin = canonical_origin(self.control_origin)
+        self.control_origin = canonical_origin(self.control_origin, allow_http=self.allow_http)
         ids = [gpu.hardware_id for gpu in self.gpus]
         if len(ids) != len(set(ids)) or len({c.base_url for c in self.channels}) != len(self.channels):
             raise ValueError("duplicate GPU or channel URL")

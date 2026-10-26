@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[118 · 双 GPU ComfyUI 接入](docs/118-双GPU真实ComfyUI接入.md) 正在执行：已核对两台真实设备、现有 ComfyUI 进程与空闲队列，服务器已能通过私网访问。Worker 新增默认关闭的 `allow_http`，仅显式开启后允许 HTTP 控制源，仍保留节点互斥、journal 身份和凭据校验；52 项启动协议检查通过。实际节点、Workflow 发布和生成验证结果在接入完成后单独记录。
+
 [117 · ZeroTier 私网接入](docs/117-ZeroTier原生客户端与私网接入.md)：服务器已原生安装 ZeroTier 1.16.2 并设为开机启动；用户授权后，指定网络状态 `OK`、已分配地址。已从同网 Windows 实测私网 HTTP 39443 与 SSH，默认路由和 DNS 保持，安装前 64 个运行服务均 active。节点与地址单独交付，不公开网络拓扑；真实 ComfyUI / Worker 接入仍待后续配置。
 
 [115 · Linux 原生部署](docs/115-Linux服务器部署与磁盘清理.md) 与 [116 · HTTP / 任意来源访问](docs/116-HTTP高位入口与任意来源访问.md) 已落地：独立 PostgreSQL 18、私有版本化 S3、Admin/API、Runner、GC 和定时数据库备份已运行。按要求提供普通 HTTP 高位端口 `39443`，由用户自行反代；`GEN_ALLOW_HTTP=true`、`GEN_ALLOW_ANY_ORIGIN=true` 允许任意来源、标准方法和请求头，保留 Key 鉴权与 Admin CSRF。309 项相关 Python 回归、2 项 HTTP UUID 检查、55 项最终公网检查和 6 个实际浏览器页面/尺寸检查通过。清理累计约 3.43 GiB，部署后根盘可用约 10.24 GiB；核对原有 49 个运行服务均 active。真实 Windows / 六类 Workflow 继续等待提供，服务器现有 Sub2API 尚未接入本项目定制 Provider。

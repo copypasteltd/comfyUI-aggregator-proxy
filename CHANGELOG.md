@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 2026-10-27 · 118 · Real ComfyUI onboarding
+
+- 按用户授权核对并接入两台现有原生 Windows / ComfyUI；沿用 ZeroTier 和普通 HTTP 部署。
+- Add explicit Worker HTTP opt-in, disabled by default. Keep canonical origin identity, native process exclusion and journal binding; 52 startup protocol cases pass. Real registration, Workflow and generation evidence is tracked in document 118 as onboarding proceeds.
+
 ## 2026-10-27 · 117 · ZeroTier private-network access
 
 - 服务器原生安装 ZeroTier 1.16.2，加入指定网络，经用户授权后状态 OK 并取得私网地址；常驻服务已开启开机启动。
