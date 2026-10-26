@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 101,
+  "increment": 104,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-101.json",
-    "sha256": "96b705cecb38f25c4d63cda62890abe42b4576329155bd51373acd880113aafd"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-104.json",
+    "sha256": "5425167071ff92848e9516950c9f4abb7f0307616c13a0f17400e01fa44a6e68"
   },
   "requirements": [
     {
@@ -15,7 +15,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "ci86"
+          "baseline": "scalar104"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -41,13 +41,32 @@
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
           "baseline": "package93"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_workflow_scalar_worker.py",
+          "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
+          "language": "python",
+          "baseline": "scalar104"
         }
       ],
       "evidence": [
         "ci86",
         "native86",
         "video92",
-        "package93"
+        "package93",
+        "scalar104"
       ],
       "remaining_backlog": [
         "18",
@@ -56,7 +75,7 @@
         "26",
         "29"
       ],
-      "limitation": "图片编译、准入与协议路径已测；缺真实文生图图、依赖、输出及质量评审。"
+      "limitation": "图片编译、准入与协议路径已测；缺真实文生图图、依赖、输出及质量评审。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
     },
     {
       "id": "CAP-02",
@@ -64,7 +83,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "ci86"
+          "baseline": "scalar104"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -86,11 +105,30 @@
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
           "baseline": "package93"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_workflow_scalar_worker.py",
+          "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
+          "language": "python",
+          "baseline": "scalar104"
         }
       ],
       "evidence": [
         "ci86",
-        "package93"
+        "package93",
+        "scalar104"
       ],
       "remaining_backlog": [
         "19",
@@ -99,7 +137,7 @@
         "26",
         "31"
       ],
-      "limitation": "受控输入已测；真实重绘强度、原图作用与蒙版语义仍须分别批准。"
+      "limitation": "受控输入已测；真实重绘强度、原图作用与蒙版语义仍须分别批准。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
     },
     {
       "id": "CAP-03",
@@ -107,7 +145,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "ci86"
+          "baseline": "scalar104"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -134,11 +172,30 @@
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
           "baseline": "package93"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_workflow_scalar_worker.py",
+          "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
+          "language": "python",
+          "baseline": "scalar104"
         }
       ],
       "evidence": [
         "ci86",
-        "package93"
+        "package93",
+        "scalar104"
       ],
       "remaining_backlog": [
         "20",
@@ -147,7 +204,7 @@
         "26",
         "29"
       ],
-      "limitation": "编译与顺序拒绝可证明；两张参考图的真实生成作用不能由夹具证明。"
+      "limitation": "编译与顺序拒绝可证明；两张参考图的真实生成作用不能由夹具证明。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
     },
     {
       "id": "CAP-04",
@@ -155,7 +212,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "ci86"
+          "baseline": "scalar104"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/media.py",
@@ -181,13 +238,32 @@
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
           "baseline": "package93"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_workflow_scalar_worker.py",
+          "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
+          "language": "python",
+          "baseline": "scalar104"
         }
       ],
       "evidence": [
         "ci86",
         "native86",
         "video92",
-        "package93"
+        "package93",
+        "scalar104"
       ],
       "remaining_backlog": [
         "21",
@@ -196,7 +272,7 @@
         "26",
         "32"
       ],
-      "limitation": "具备视频协议与校验框架；真实时长、编码、播放及质量未验收。"
+      "limitation": "具备视频协议与校验框架；真实时长、编码、播放及质量未验收。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
     },
     {
       "id": "CAP-05",
@@ -204,7 +280,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "ci86"
+          "baseline": "scalar104"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -231,11 +307,30 @@
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
           "baseline": "package93"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_workflow_scalar_worker.py",
+          "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
+          "language": "python",
+          "baseline": "scalar104"
         }
       ],
       "evidence": [
         "ci86",
-        "package93"
+        "package93",
+        "scalar104"
       ],
       "remaining_backlog": [
         "22",
@@ -244,7 +339,7 @@
         "26",
         "32"
       ],
-      "limitation": "不能将单首帧、首尾帧或测试图视作真实多参考视频；须证明各参考的条件作用。"
+      "limitation": "不能将单首帧、首尾帧或测试图视作真实多参考视频；须证明各参考的条件作用。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
     },
     {
       "id": "CAP-06",
@@ -265,6 +360,10 @@
         {
           "path": "app/scripts/workflow_package.py",
           "baseline": "package93"
+        },
+        {
+          "path": "app/packages/domain/src/generation_domain/workflows.py",
+          "baseline": "scalar104"
         }
       ],
       "tests": [
@@ -283,6 +382,24 @@
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
           "baseline": "package93"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_scalar_targets.py",
+          "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
+          "language": "python",
+          "baseline": "scalar104"
+        },
+        {
+          "path": "app/tests/protocol/test_workflow_scalar_worker.py",
+          "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
+          "language": "python",
+          "baseline": "scalar104"
         }
       ],
       "evidence": [
@@ -292,7 +409,8 @@
         "visual87",
         "sdk91",
         "sdk92",
-        "package93"
+        "package93",
+        "scalar104"
       ],
       "remaining_backlog": [
         "23",
@@ -302,7 +420,7 @@
         "33",
         "44"
       ],
-      "limitation": "合成音频解码/计量与页面已测；实际 ComfyUI 音频节点及各声明规格仍待验证。"
+      "limitation": "合成音频解码/计量与页面已测；实际 ComfyUI 音频节点及各声明规格仍待验证。 104 已测原图标量目标与连线保护、六类正常编译及旧包提交前拒绝；不签收真实图或质量。"
     },
     {
       "id": "API-01",
@@ -650,7 +768,7 @@
         },
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "ci86"
+          "baseline": "scalar104"
         }
       ],
       "tests": [
@@ -667,7 +785,8 @@
       ],
       "evidence": [
         "ci86",
-        "video92"
+        "video92",
+        "scalar104"
       ],
       "remaining_backlog": [
         "30",
@@ -2322,12 +2441,19 @@
           "path": "app/tests/integration/test_workflow_history.py",
           "symbol": "test_audio_parameters_graph_dependencies_and_exact_zero",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_workflow_scalar_admin.py",
+          "symbol": "test_admin_http_freeze_rejects_edge_writes_without_persistent_side_effects",
+          "language": "python",
+          "baseline": "scalar104"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "scalar104"
       ],
       "remaining_backlog": [
         "18",
@@ -2373,12 +2499,19 @@
           "path": "app/tests/integration/test_workflow_retries.py",
           "symbol": "test_partial_failure_retries_only_failed_preserves_original_and_survives_service_restart",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_workflow_scalar_admin.py",
+          "symbol": "test_channel_import_keeps_unsafe_graph_editable_but_never_publishable",
+          "language": "python",
+          "baseline": "scalar104"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "scalar104"
       ],
       "remaining_backlog": [
         "24",

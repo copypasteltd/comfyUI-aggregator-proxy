@@ -36,6 +36,29 @@ def relative_file(value: str) -> str:
     return value
 
 
+def _scalar_input(graph: dict[str, Any], node_id: Any, input_name: Any) -> bool:
+    node = graph.get(node_id) if isinstance(node_id, str) else None
+    inputs = node.get("inputs") if isinstance(node, dict) else None
+    if not isinstance(inputs, dict) or not isinstance(input_name, str) or input_name not in inputs:
+        return False
+    value = inputs[input_name]
+    return value is None or type(value) in (str, int, float, bool)
+
+
+def _binding_target(graph: dict[str, Any], binding: dict[str, Any]) -> tuple[str, str]:
+    node_id, input_name = binding.get("node_id"), binding.get("input_name")
+    if not isinstance(node_id, str) or not isinstance(input_name, str) or not _scalar_input(graph, node_id, input_name):
+        raise DomainError("invalid_binding", "绑定只能写入已登记的节点标量输入", 422)
+    return node_id, input_name
+
+
+def _preset_target(graph: dict[str, Any], target: str, value: Any) -> tuple[str, str]:
+    node_id, separator, input_name = target.partition(".")
+    if not separator or not _scalar_input(graph, node_id, input_name) or isinstance(value, (list, dict)):
+        raise DomainError("invalid_preset_target", "预设只能写入已登记的节点标量输入", 422)
+    return node_id, input_name
+
+
 def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any]:
     required = {"format_version", "task_type", "workflow_api", "bindings", "output", "presets", "dependency_lock", "runtime_profiles", "supported_parameters"}
     audio = task_type == "text_to_audio"
@@ -58,9 +81,7 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
     for binding in bindings:
         if not isinstance(binding, dict) or set(binding) != {"source", "node_id", "input_name"}:
             raise DomainError("invalid_binding", "绑定只能包含 source、node_id、input_name", 422)
-        node = graph.get(binding["node_id"])
-        if not node or binding["input_name"] not in node["inputs"]:
-            raise DomainError("invalid_binding", "绑定的节点输入不存在", 422)
+        _binding_target(graph, binding)
         source = binding["source"]
         permitted = {"prompt", "negative_prompt", "seed", "width", "height", "seconds", "fps", "strength", "source_image", "mask", "output_prefix"}
         permitted |= {f"reference_{i}" for i in range(4)} | {f"reference_weight_{i}" for i in range(4)}
@@ -114,9 +135,7 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
         elif any(preset.get(name) is not None for name in ("audio_format", "sample_rate", "channels")):
             raise DomainError("invalid_preset", "图像/视频预设不能声明音频规格", 422)
         for target, value in preset["values"].items():
-            node_id, separator, input_name = target.partition(".")
-            if not separator or node_id not in graph or input_name not in graph[node_id]["inputs"] or isinstance(value, (list, dict)):
-                raise DomainError("invalid_preset_target", "预设只能写入已登记的节点标量输入", 422)
+            _preset_target(graph, target, value)
     lock = manifest["dependency_lock"]
     if not isinstance(lock, dict) or not isinstance(lock.get("comfy_commit"), str) or len(lock["comfy_commit"]) != 40 or not isinstance(lock.get("models"), list) or not isinstance(lock.get("custom_nodes"), list):
         raise DomainError("dependency_lock_required", "必须固定 ComfyUI 提交、模型和自定义节点依赖", 422)
@@ -148,9 +167,13 @@ def compile_graph(manifest: dict[str, Any], execution: dict[str, Any], inputs: d
     presets = matching_presets(manifest, parameters)
     if len(presets) != 1:
         raise DomainError("unsupported_specification", "请求规格没有唯一的已冻结预设", 422)
-    graph = deepcopy(manifest["workflow_api"])
-    for target, value in presets[0]["values"].items():
-        node_id, _, input_name = target.partition(".")
+    template = manifest["workflow_api"]
+    for binding in manifest["bindings"]:
+        _binding_target(template, binding)
+    # Check the original graph before applying any preset or request writes.
+    preset_writes = [(_preset_target(template, target, value), value) for target, value in presets[0]["values"].items()]
+    graph = deepcopy(template)
+    for (node_id, input_name), value in preset_writes:
         graph[node_id]["inputs"][input_name] = value
     dimensions = {}
     if manifest.get("task_type") != "text_to_audio":

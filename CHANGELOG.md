@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 104 / Workflow 标量绑定与连线保护
+
+- 绑定/预设统一检查原始 API 图标量目标，拒绝覆盖连线、数组和对象；Worker 在任何覆盖及新的提交意图之前检查旧冻结包。现有 invalid_binding/invalid_preset_target 与 422 保持，无 DTO、迁移、UI 或协议版本变化。
+- Preserve editable draft imports while marking unsafe candidates unpublishable; release rejection rolls back durable side effects. Already submitted or uncertain executions retain their original journal recovery semantics.
+- 173 focused cases pass, including 61 new unit/Admin PostgreSQL/Worker cases. Pre-fix 35 failures, collection/HTTP harness failures and initial type narrowing failure remain immutable. Full current-source regression/candidate verification is still pending at this code commit; real-resource and complete first-release acceptance remain open.
+
 ## 2026-10-26 · Audit 103 / 当前版本与目标差距
 
 - Rehashed 637 current CI, 274 native and 524 candidate sources, the 101 report references and all 169 ZIP payloads. Current local/remote main matched at audit start; prior 102 local closeout gaps have evidence. Existing 16 engineering gates/4013 Python, 30 native cases and 29 installation/10 browser checks are source-bound historical results, not rerun by this audit.

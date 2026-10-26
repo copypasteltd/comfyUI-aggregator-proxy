@@ -144,3 +144,8 @@ JSON Schema 使用 draft 2020-12，引用限定本文件 `#/$defs`，禁止在�
 
 
 第 101 增量冻结 [dependency-error-policy.json](dependency-error-policy.json)：控制 API 的固定依赖不可用分类、503 安全投影、Provider 传递及原幂等身份/资金预留保护。它只定义错误识别，不证明写入未发生，也不签收历史数据库根因；详见 [101](../101-依赖不可用错误与安全重试边界.md)。
+
+
+## Workflow 图内语义约束
+
+WorkflowManifest 的图内目标/可达性由领域校验执行，JSON 结构通过不代表可冻结。绑定与预设只允许写入原图标量输入，禁止覆盖连线或结构化值；Worker 对旧冻结包也在新提交前检查。沿用现有字段及错误码，规则和验证见 [104](../104-Workflow标量绑定与连线保护.md)。

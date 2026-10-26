@@ -1,0 +1,15 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T06:15:25.780084+00:00",
+  "passed": false,
+  "command": [
+    ".venv/Scripts/mypy.exe",
+    "packages/domain"
+  ],
+  "exit_code": 1,
+  "source_sha256": {
+    "app/packages/domain/src/generation_domain/workflows.py": "a8fda8adb7a17e55570221c14b4114a6d4c9f360b74b5dbcad018e9ae42eafa4"
+  },
+  "diagnostic": "_binding_target return tuple[Any | None, Any | None] does not satisfy tuple[str, str]; explicit identifier narrowing required",
+  "real_resource_acceptance": false
+}

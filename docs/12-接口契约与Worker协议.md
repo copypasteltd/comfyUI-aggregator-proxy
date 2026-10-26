@@ -186,3 +186,8 @@ GET /v1/jobs/{job_id} 及网关同源详情的状态、updated_revision、comple
 ## 第 101 增量：依赖不可用错误
 
 通用数据库依赖不可用按固定 SQLSTATE/明确断连标志及 SQLAlchemy 连接池超时返回脱敏 503/dependency_unavailable，附 Retry-After: 2；Provider 保留上游 503 并使用固定安全错误码。已知配置/权限/结构错误和未知非断连保持 500，IntegrityError 409 及领域专属错误不变。503 不证明事务未提交，写入仍按原意图/幂等身份核对，禁止盲目重提或释放预留。分类、头和重试边界以 [101](101-依赖不可用错误与安全重试边界.md) 及 [机器策略](contracts/dependency-error-policy.json) 为准。
+
+
+## Workflow 标量写入与连线保护（104）
+
+绑定和预设仅能覆盖原始 workflow_api 中已存在的 JSON 标量输入，null 可作原占位；原连线、数组及对象均不能作为写入目标。冻结与 Worker 编译共用目标检查，编译先检查原图再应用任何覆盖，未提供值的可选绑定同样检查。非法绑定/预设沿用 invalid_binding / invalid_preset_target、422 和固定说明。导入未完成草稿继续可编辑，但预览 publishable=false，禁止冻结；旧包在新的 submit_intent/begin_post/POST 前拒绝，已经提交或未知的执行仍按原 journal 恢复。DTO/JSON 结构和协议版本不变，具体规则与回归见 [104](104-Workflow标量绑定与连线保护.md)。
