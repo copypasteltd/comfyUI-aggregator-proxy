@@ -1,0 +1,276 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T04:11:29.303Z",
+  "passed": true,
+  "scope": "Current documentation, selected evidence provenance, frozen contract copies, OpenAPI, original Lime assets, published media and stable backlog identifiers only. Historical functional tests are not rerun.",
+  "audit_report": {
+    "path": "docs/evidence/2026-10-26/project-goal-audit-100.json",
+    "sha256": "a3602b0a5a5ab0b2bccf7d61e8d5384169af47351b5204d5405297622268638f"
+  },
+  "checks": [
+    {
+      "check": "docs",
+      "command": [
+        "app/.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "docs/tools/verify_docs.py"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "passed": true,
+      "result": {
+        "baseline": "v0.4",
+        "passed": true,
+        "checks": {
+          "markdown": {
+            "documents": 103,
+            "instruction_files": 1,
+            "fenced_blocks": 55,
+            "json_examples": 17,
+            "yaml_examples": 1,
+            "local_links_checked": 2301
+          },
+          "contracts": {
+            "json_files": 69,
+            "schemas": 63,
+            "fixtures": 1037,
+            "positive_fixtures": 248,
+            "negative_fixtures": 789,
+            "capabilities_covered": [
+              "image_to_image",
+              "references_to_image",
+              "references_to_video",
+              "text_to_audio",
+              "text_to_image",
+              "text_to_video"
+            ]
+          },
+          "state_machine": {
+            "states": 16,
+            "terminal_states": 4,
+            "transitions": 64,
+            "guards": 24
+          },
+          "endpoints": {
+            "total": 191,
+            "by_identity": {
+              "service": 27,
+              "admin_login": 1,
+              "admin": 121,
+              "worker": 12,
+              "gateway": 28,
+              "monitoring": 2
+            },
+            "admin_permissions": 25
+          },
+          "traceability": {
+            "rules": 32,
+            "quality_scenarios": 18,
+            "work_packages": 15,
+            "requirements": 73,
+            "work_package_statuses": {
+              "in_progress": 15
+            },
+            "admin_acceptance_mapped": 16,
+            "key_acceptance_mapped": 12
+          },
+          "development_evidence": {
+            "passed": true,
+            "requirements": 73,
+            "acceptance_gates": 98,
+            "local_statuses": {
+              "framework": 6,
+              "implemented": 67
+            },
+            "named_test_references": 127,
+            "baseline_python_cases": 3593,
+            "reports": 16,
+            "current_source_files": 159,
+            "full_acceptance": "pending"
+          },
+          "topic_presence": {
+            "checks": 14,
+            "scope": "Text presence only, not proof of correctness"
+          }
+        },
+        "errors": [],
+        "report_written": false
+      },
+      "stdout_sha256": "c8e2375f38b70f4c93aecd7bbcfc5af73a2784bd333d30318f9fb423c912d73a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "check": "trace",
+      "command": [
+        "app/.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "docs/tools/development_evidence.py"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "passed": true,
+      "result": {
+        "format_version": 1,
+        "passed": true,
+        "scope": "Offline traceability and selected source provenance only; historical tests are not rerun; complete acceptance remains pending.",
+        "real_resource_acceptance": false,
+        "full_acceptance": "pending",
+        "virtualization_used": false,
+        "counts": {
+          "requirements": 73,
+          "acceptance_gates": 98,
+          "local_statuses": {
+            "framework": 6,
+            "implemented": 67
+          },
+          "named_test_references": 127,
+          "baseline_python_cases": 3593,
+          "reports": 16,
+          "current_source_files": 159
+        },
+        "errors": []
+      },
+      "stdout_sha256": "6c3edb3a4abd8d9ca993ec621c082b4c32d11b8ef7c96e956f8a6d96c0192969",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "check": "contracts",
+      "command": [
+        "app/.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "scripts/sync-contracts.py",
+        "--check"
+      ],
+      "working_directory": "app",
+      "exit_code": 0,
+      "passed": true,
+      "result": {
+        "passed": true,
+        "contracts": 66,
+        "drift": []
+      },
+      "stdout_sha256": "53ec5c2e5888ef95eed1e0e7632bdab6f838c3d67b0ce9674146dd4cd5a3d0f3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "check": "openapi",
+      "command": [
+        "app/.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "scripts/export-openapi.py",
+        "--check"
+      ],
+      "working_directory": "app",
+      "exit_code": 0,
+      "passed": true,
+      "result": {
+        "passed": true,
+        "openapi_paths": 157,
+        "generated_files_unchanged": true
+      },
+      "stdout_sha256": "ec19905192dec396086c9be257ff81815a2d2931669743c53dece99b0a92294a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "check": "lime",
+      "command": [
+        "app/.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "scripts/pull-lime-reference.py"
+      ],
+      "working_directory": "app",
+      "exit_code": 0,
+      "passed": true,
+      "result": {
+        "passed": true,
+        "pulled": false,
+        "source": "https://html.cafe/x5b381ea1",
+        "original_css_and_fonts": true,
+        "files": 5,
+        "fonts": 2,
+        "remote_code_executed": false
+      },
+      "stdout_sha256": "d87c69ead1a7b98c9e6c8e5313ff9b1c66c3073892821fae386ab22b0070da55",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "check": "readme",
+      "command": [
+        "app/.venv/Scripts/python.exe",
+        "-X",
+        "utf8",
+        "app/scripts/check-readme.py"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "passed": true,
+      "result": {
+        "at": "2026-10-26T04:09:46.062679+00:00",
+        "passed": true,
+        "entry_documents": 7,
+        "local_links_checked": 503,
+        "request_examples_validated": 3,
+        "screenshots_verified": 30,
+        "media_manifests_verified": 5,
+        "video_and_gif_fully_decoded": [
+          "admin-tour.mp4",
+          "admin-tour.gif",
+          "workflow-lifecycle.mp4",
+          "workflow-lifecycle.gif",
+          "gateway-catalog/gateway-catalog.mp4",
+          "gateway-catalog/gateway-catalog.gif",
+          "confirmed-retry/confirmed-retry.mp4",
+          "confirmed-retry/confirmed-retry.gif",
+          "wait-estimates/wait-estimates.gif",
+          "wait-estimates/wait-estimates.mp4",
+          "audit-retention/audit-retention.gif",
+          "audit-retention/audit-retention.mp4"
+        ],
+        "bilingual_capability_topics_present": true,
+        "actual_lifecycle_responses_verified": 2,
+        "catalog_responses_verified": 5,
+        "catalog_provider_receipts_are_protocol_fixtures": true,
+        "confirmed_retry_responses_verified": 3,
+        "wait_estimate_responses_verified": 3,
+        "synthetic_capture_and_cleanup_passed": true,
+        "errors": [],
+        "full_python_suite_rerun": false,
+        "runtime_protocol_changed": false
+      },
+      "stdout_sha256": "2df76d7fa46ec2273555b389eadbeb457a74c2ff01e4e73b825d051fd4406487",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    }
+  ],
+  "numbering_and_source_review": {
+    "passed": true,
+    "numbered_open_items": 69,
+    "unique_open_ids": 69,
+    "stable_ids_match": true,
+    "ci_inputs_rechecked_after_audit": 633,
+    "application_differences": [],
+    "git_diff_whitespace_check_passed": true,
+    "audit_report_sha256": "a3602b0a5a5ab0b2bccf7d61e8d5384169af47351b5204d5405297622268638f"
+  },
+  "real_resource_acceptance": false,
+  "production_accepted": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "browser_used": false,
+  "virtualization_used": false,
+  "database_changed": false,
+  "publication_review": {
+    "report": "docs/evidence/2026-10-26/project-goal-audit-100-publication.json",
+    "scope": "Performed after this check summary is assembled; final staged content is inspected before commit."
+  }
+}

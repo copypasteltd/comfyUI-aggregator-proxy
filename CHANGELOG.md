@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Audit 100 / 项目全量检查与目标差距
+
+- [全量审计](docs/100-项目全量检查与目标差距清单.md) 展开全部 69 项开放出口、已有基础、验收条件和推进顺序：67 首版、2 可选；73 需求/98 完整门禁/15 工作包保持各自实现与验收口径，真实 Workflow 仍为 0/6。
+- Recheck all 633 CI and 273 native inputs against current files, immutable report digests and the actual candidate archive. Candidate 97 matches 520/521 inputs; only its diagnostic observer differs. Preserve historical installation scope and database causes; do not rerun or promote historical results.
+- 分别记录已有 Admin/Key/队列/Provider/Worker、真实产品化缺口、数据库错误投影与早期状态元数据维护；修正中英入口对 98 的“最新”标记。机器审计和只读检查结果单独版本化，应用/契约/UI 未改，不补拍重复媒体。
+- Documentation-only audit: no database changes, browser, real GPU, virtualization or new service. Synchronize bilingual entries, the detailed numbered report and change notes to the authorized remote after matching checks.
+
 ## 2026-10-26 · Increment 99 / 数据库等待分类与并发复验
 
 - 修复一次性双测试库观测器的 I/O 等待信息丢失：增加按类型白名单的 wait_event，保留原 lock_event；同后端不同 I/O 阶段分别聚合，未知和错配事件仍为 other。原只读/范围/内存/语句预算和业务行为保持。
