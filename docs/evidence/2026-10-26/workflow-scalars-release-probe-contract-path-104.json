@@ -1,0 +1,10 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T06:45:11.602202+00:00",
+  "passed": false,
+  "scope": "Auxiliary ZIP verifier path assumption; all payload and compiler wheel bytes had already matched",
+  "reason": "Frozen contract inventory is stored in config/contract-hashes.json and runtime schemas are in the contracts wheel, not a top-level contracts folder. Corrected verifier to inspect the actual pinned layout.",
+  "archive_modified": false,
+  "application_modified": false,
+  "real_resource_acceptance": false
+}

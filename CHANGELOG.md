@@ -6,6 +6,8 @@
 - Preserve editable draft imports while marking unsafe candidates unpublishable; release rejection rolls back durable side effects. Already submitted or uncertain executions retain their original journal recovery semantics.
 - 173 focused cases pass, including 61 new unit/Admin PostgreSQL/Worker cases. Pre-fix 35 failures, collection/HTTP harness failures and initial type narrowing failure remain immutable. Full current-source regression/candidate verification is still pending at this code commit; real-resource and complete first-release acceptance remain open.
 
+- Final verification: all 16 native gates/4074 Python tests and 30 native scenarios pass; 640 CI/274 native inputs match d2d53ff. Candidate rc-20261026.104.1 binds 524 sources, 169 payloads/58 wheels/67 contracts, passes 29 exact-installation/10 browser checks and cleans up owned temporary resources. Actual compiler wheel bytes match source; the unchanged Provider is reused only under existing provenance guards. Complete real-resource acceptance remains pending.
+
 ## 2026-10-26 · Audit 103 / 当前版本与目标差距
 
 - Rehashed 637 current CI, 274 native and 524 candidate sources, the 101 report references and all 169 ZIP payloads. Current local/remote main matched at audit start; prior 102 local closeout gaps have evidence. Existing 16 engineering gates/4013 Python, 30 native cases and 29 installation/10 browser checks are source-bound historical results, not rerun by this audit.
