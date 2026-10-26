@@ -1,0 +1,126 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T11:22:01.793645+00:00",
+  "passed": true,
+  "scope": "Source-bound output publication cleanup after uncertain commits, verified by actual PostgreSQL commit loss, rollback, inflight publication locks, complete native CI and exact candidate installation. ComfyUI/Redis/S3 remain fixtures; full first-release acceptance stays pending.",
+  "application_source_revision": "c20b7652b06b3ffc952f0ad17b923b46e9b43a9d",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci110-20261026-output-publication/summary.json",
+      "sha256": "3ee2a5b15e739ff2f927ae9c0bf35292cb37f01f3d53e0b2d1b022fb40e8a8cb"
+    },
+    "focused": {
+      "path": "docs/evidence/2026-10-26/output-publication-verified-110.json",
+      "sha256": "260bdd9b724592db824efa4ac61630fb21798bc9da5a22d37fb0d71b3a6e9e0c"
+    },
+    "native": {
+      "path": "docs/evidence/2026-10-26/output-publication-native-110/confirmed-retry-native-protocol.json",
+      "sha256": "c14d1c340c03926e9de6274c7c648cdbdf8f0f0eb576316a9d71444550e4276f"
+    },
+    "provider_unchanged": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-provider-101/sub2api-provider-native-build.json",
+      "sha256": "ad4082847929a50656ba2488cb509c5618f1b953b3a6e5f99b5891f7c8f6fcce"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/output-publication-release-build-110.json",
+      "sha256": "95d646925c8efeb1fd21b317cab954aaf1951a5399ddc6923a81bd03fd905fd4"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/output-publication-installed-110/native-release-installation.json",
+      "sha256": "7255b9b31bc8a5a84e2c2d6a25acddc44b7090b0db8aa93be446b04dffcae363"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-26/output-publication-installed-110/native-release-installed-browser.json",
+      "sha256": "3e080f570e84e5fa03b1a9bb95d67ec318a121392495fb6950948764383764e2"
+    },
+    "native_process": {
+      "path": "docs/evidence/2026-10-26/output-publication-native-process-110.json",
+      "sha256": "cdfbd9d5d7c2952330dfdb19141ad6f8356d8adc9ddb90b94dd3eb564cbf86aa"
+    }
+  },
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 4274,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_seconds": 967.892,
+    "python_budget_seconds": 1200,
+    "inputs": 648,
+    "all_inputs_match_current": true,
+    "owned_process_trees_closed": true
+  },
+  "focused_python": {
+    "tests": 116,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "new_cases": {
+    "commit_ack_loss": 2,
+    "rollback_and_absence": 2,
+    "delete_error_preservation": 2,
+    "duplicate_recovery": 2,
+    "inflight_publication_lock": 1
+  },
+  "pre_fix_failures_preserved": 2,
+  "native": {
+    "cases": 30,
+    "inputs": 275,
+    "all_inputs_match_current": true,
+    "cleanup": {
+      "processes": true,
+      "databases": true,
+      "database_observer": true,
+      "media_and_credentials": true
+    },
+    "real_comfyui": false,
+    "real_redis": false,
+    "real_s3": false
+  },
+  "candidate": {
+    "release_id": "rc-20261026.110.1",
+    "archive": "app/.local/releases/rc-20261026.110.1/rc-20261026.110.1.zip",
+    "archive_sha256": "be6e720aecaa308d7bd3940f317eec05c1f06288a87264d98deab83ba05719d7",
+    "archive_bytes": 281335427,
+    "manifest_source_revision": "c20b7652b06b3ffc952f0ad17b923b46e9b43a9d",
+    "source_inputs": 525,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 67,
+    "database_head": "3da02e7b5941"
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "closed_contexts": 2,
+    "browser_closed": true,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "cleanup_errors": []
+  },
+  "output_publication_cleanup_local_exit_closed": true,
+  "stable_backlog_items_43_55_61_62_fully_closed": false,
+  "historical_database_root_causes_closed": false,
+  "remaining_work": {
+    "open": 69,
+    "first_release": 67,
+    "optional": 2,
+    "physical_workflows_accepted": 0
+  },
+  "production_accepted": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "virtualization_used": false,
+  "observed_process_window": {
+    "scope": "Owned Python log creation plus bounded execute elapsed duration, and native wrapper completion minus bounded execute duration; no raw logs or query data",
+    "python_start_utc": "2026-10-26T10:59:19.742106+00:00",
+    "python_end_by_elapsed_utc": "2026-10-26T11:15:27.634106+00:00",
+    "native_start_by_elapsed_utc": "2026-10-26T11:00:53.396214+00:00",
+    "native_end_utc": "2026-10-26T11:06:28.270214+00:00",
+    "native_inside_complete_python_window": true
+  }
+}

@@ -1,9 +1,15 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Audit 111 / 当前项目完整目标与逐项差距
+
+- 重新核对当前 c20b765：完整 16 门禁/4274 Python、30 原生及 rc-20261026.110.1 的 29 安装/10 浏览器均与当前来源和实际载荷一致。完整表格保留 69 个开放出口（首版 67、可选 2），六类真实 0/6、98 完整门禁和历史根因仍开放；主要核心/Admin 已实现不等于生产签收。
+- Reaudit current source c20b765: all 16 gates/4274 Python tests, 30 native scenarios and 29 installation/10 browser checks of rc-20261026.110.1 match current sources and actual payloads. Publish all 69 open exits (67 V1, two optional); real Workflow acceptance remains 0/6, with 98 complete gates and historical root causes open. Core/Admin implementation does not establish production acceptance.
+
+
 ## 2026-10-26 · Increment 110 / 输出发布提交不确定与对象清理
 
 - 修复已提交的 OutputUpload/ObjectRecord 在确认丢失后被 finally 清理误删对象的问题。先等待同上传记录的发布事务结束，再查询精确版本引用；无引用且查询成功才删除。查询/删除失败保留字节和原错误，外部删除不占用数据库连接。
-- All 116 focused cases pass, including nine new real-PostgreSQL tests covering durable commit acknowledgement loss, rollback, unavailable cleanup queries/deletion, duplicate upload recovery and an observed inflight publication lock. Preserve both pre-fix failures. Current full CI, native protocol and rebuilt installation remain pending at this source commit; real-resource and complete production acceptance stay open.
+- Protect published outputs when a durable database commit loses its acknowledgement: wait for the same upload publication lock, verify the exact object version, and delete only after a successful absence check. Query or deletion failures preserve bytes and the original error; deletion runs after the database transaction ends. Source c20b765 passes 116 focused cases (nine new), all 16 gates/4274 Python tests, 30 native scenarios, and 29 installation/10 browser checks of rc-20261026.110.1. All 648/275/525 source inputs and the installed output-publication wheel bytes match. Keep both original failed reproductions. Owned temporary resources are closed; all 69 stable exits, six real Workflows, 98 complete gates and historical database root causes remain open.
 
 ## 2026-10-26 · Verification 109 / 当前源码全量验证与安装候选收口
 
