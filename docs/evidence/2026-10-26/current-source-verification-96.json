@@ -1,0 +1,156 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T00:59:31.301978+00:00",
+  "passed": true,
+  "scope": "Current unchanged application source full native CI, rebuilt native candidate and fresh exact installation; synthetic local protocol and media checks remain separate from physical ComfyUI/production acceptance.",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci96-20261026-current-source/summary.json",
+      "sha256": "55ebf0a386ac0157cfc21b4652b8ee41e57199be71ac38614a55ad8f8d462562"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/current-source-release-build-96.json",
+      "sha256": "8cb66f24ed94e0a6408d5da06d9a0adcf66e8ea17fbddf703ef7b04fecc648a2"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/current-source-installed-96/native-release-installation.json",
+      "sha256": "f7d229b1fb0663334fc03f0343960ce26d7b05db0ad829fa900de420bb3e56ed"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-26/current-source-installed-96/native-release-installed-browser.json",
+      "sha256": "7c28faf2dde313fb09224c0464128924afc789554c5f5b9b1416a35e676e794a"
+    },
+    "observer": {
+      "path": "docs/evidence/2026-10-26/current-source-ci-observer-96.json",
+      "sha256": "de495671d8d8e3ce37a0c947bb28d87627e470b337b3a8e9320867671efeb761"
+    }
+  },
+  "source_revision": "cdbdc3eeb072cbafcd2783c92585c0436334da57",
+  "source_inputs": 628,
+  "source_equality": true,
+  "application_code_changed": false,
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 3899,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_seconds": 595.039,
+    "python_budget_seconds": 1200,
+    "all_owned_process_trees_closed": true,
+    "manual_database_maintenance_performed": false
+  },
+  "candidate": {
+    "release_id": "rc-20261026.96.1",
+    "archive": "app/.local/releases/rc-20261026.96.1/rc-20261026.96.1.zip",
+    "archive_sha256": "f893a034b0687e39aa7c5882815f0cb5eb286f87029be76d55b5b608282ff5eb",
+    "archive_bytes": 281331047,
+    "source_inputs": 518,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 66,
+    "database_head": "3da02e7b5941",
+    "wait_estimate_admin_bundle_present": true,
+    "manifest_source_revision": null
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "closed_contexts": 2,
+    "browser_closed": true,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "cleanup_errors": [],
+    "direct_video": {
+      "passed": true,
+      "exact_installed_modules": true,
+      "https_tls_verified": true,
+      "json_multipart_original_key_replay": true,
+      "frozen_seconds": "5.125",
+      "frozen_size": "1024x1024",
+      "current_scope_and_revocation_enforced": true,
+      "cross_key_status_and_head_denied": true,
+      "safe_cancelled_error": true,
+      "new_jobs": 1,
+      "unique_cancelled_usage_entries": 1,
+      "video_billed_milliseconds": 0,
+      "production_comfyui_called": false,
+      "real_gpu": false,
+      "caller_owns_database_cleanup": true,
+      "credentials_printed": false
+    },
+    "native_service_entry_lifecycle": {
+      "roles": {
+        "worker": {
+          "exit_code": 0,
+          "signal": "CTRL_C",
+          "owned_job_active_processes_before_cleanup": 0,
+          "scm_registered": false,
+          "wrapper_lifecycle_verified": false
+        },
+        "runner": {
+          "exit_code": 0,
+          "signal": "CTRL_C",
+          "owned_job_active_processes_before_cleanup": 0,
+          "scm_registered": false,
+          "wrapper_lifecycle_verified": false
+        },
+        "gc": {
+          "exit_code": 0,
+          "signal": "CTRL_C",
+          "owned_job_active_processes_before_cleanup": 0,
+          "scm_registered": false,
+          "wrapper_lifecycle_verified": false
+        },
+        "api": {
+          "exit_code": 0,
+          "signal": "CTRL_C",
+          "owned_job_active_processes_before_cleanup": 0,
+          "scm_registered": false,
+          "wrapper_lifecycle_verified": false
+        }
+      },
+      "worker_identity_journal_reopened": true,
+      "real_gpu": false,
+      "gateway_supervision_verified": false,
+      "wrapper_and_scm_verified": false
+    }
+  },
+  "observer": {
+    "samples": 770,
+    "observations": 78,
+    "errors": 0,
+    "connection_closed": true,
+    "scope": "Contains deliberate fault/locking tests, no query text or real backend identities."
+  },
+  "screenshot_review": {
+    "desktop": "docs/evidence/2026-10-26/current-source-installed-96/native-release-installed-desktop.png",
+    "mobile": "docs/evidence/2026-10-26/current-source-installed-96/native-release-installed-mobile.png",
+    "original_lime_preserved": true,
+    "known_mobile_audit_retention_badge_clips_text": true,
+    "limitation_scope": "Existing mobile audit retention badge clipping is visible; explanatory body remains visible. Automated browser success is not full visual acceptance; refine within Admin audit/responsive delivery."
+  },
+  "remaining_work": {
+    "stable_ids": 76,
+    "closed_local": 7,
+    "open": 69,
+    "first_release": 67,
+    "optional": 2,
+    "physical_workflows_accepted": 0,
+    "historical_database_root_causes_closed": false,
+    "manifest_git_revision_embedding_pending": true
+  },
+  "resources": {
+    "browser_contexts_closed": true,
+    "temporary_application_services_stopped": true,
+    "observer_stopped": true,
+    "existing_native_postgresql_retained": true
+  },
+  "real_resource_acceptance": false,
+  "production_accepted": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "virtualization_used": false
+}

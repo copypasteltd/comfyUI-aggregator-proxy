@@ -1,0 +1,1233 @@
+{
+  "format_version": 1,
+  "scope": "Read-only aggregate PostgreSQL activity during one confirmed live owned native CI process; test database only; no query text, parameters, actual backend IDs or business contents read or exported.",
+  "started_at": "2026-10-26T00:37:12.978867+00:00",
+  "finished_at": "2026-10-26T00:46:51.463477+00:00",
+  "seconds": 578.485,
+  "samples": 770,
+  "observations": [
+    {
+      "backend": "backend-1",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-2"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 608,
+      "maximum_transaction_ms": 612,
+      "first_seconds": 38.445
+    },
+    {
+      "backend": "backend-1",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-3"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 38,
+      "maximum_transaction_ms": 41,
+      "first_seconds": 45.207
+    },
+    {
+      "backend": "backend-2",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-1",
+        "backend-4",
+        "backend-5"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 37,
+      "maximum_transaction_ms": 37,
+      "first_seconds": 45.207
+    },
+    {
+      "backend": "backend-6",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-1",
+        "backend-4",
+        "backend-5",
+        "backend-2",
+        "backend-7"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 35,
+      "maximum_transaction_ms": 36,
+      "first_seconds": 45.207
+    },
+    {
+      "backend": "backend-5",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-1",
+        "backend-4"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 38,
+      "maximum_transaction_ms": 44,
+      "first_seconds": 45.207
+    },
+    {
+      "backend": "backend-7",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-1",
+        "backend-4",
+        "backend-5",
+        "backend-2"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 35,
+      "maximum_transaction_ms": 36,
+      "first_seconds": 45.207
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-1"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 38,
+      "maximum_transaction_ms": 42,
+      "first_seconds": 45.207
+    },
+    {
+      "backend": "backend-1",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-5"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 387,
+      "maximum_transaction_ms": 387,
+      "first_seconds": 57.228
+    },
+    {
+      "backend": "backend-1",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-7"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 704,
+      "maximum_transaction_ms": 706,
+      "first_seconds": 58.731
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-8"
+      ],
+      "samples": 3,
+      "maximum_query_ms": 758,
+      "maximum_transaction_ms": 759,
+      "first_seconds": 67.745
+    },
+    {
+      "backend": "backend-6",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-5"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 433,
+      "maximum_transaction_ms": 434,
+      "first_seconds": 68.497
+    },
+    {
+      "backend": "backend-6",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-7"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 12,
+      "maximum_transaction_ms": 18,
+      "first_seconds": 92.538
+    },
+    {
+      "backend": "backend-5",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-6"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 12,
+      "maximum_transaction_ms": 17,
+      "first_seconds": 92.538
+    },
+    {
+      "backend": "backend-9",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-3"
+      ],
+      "samples": 6,
+      "maximum_query_ms": 4468,
+      "maximum_transaction_ms": 4475,
+      "first_seconds": 130.848
+    },
+    {
+      "backend": "backend-3",
+      "state": "idle in transaction",
+      "wait_type": "Client",
+      "wait_event": "ClientRead",
+      "blockers": [],
+      "samples": 5,
+      "maximum_query_ms": 4525,
+      "maximum_transaction_ms": 4526,
+      "first_seconds": 131.599
+    },
+    {
+      "backend": "backend-10",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-2"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 987,
+      "maximum_transaction_ms": 990,
+      "first_seconds": 136.858
+    },
+    {
+      "backend": "backend-2",
+      "state": "idle in transaction",
+      "wait_type": "Client",
+      "wait_event": "ClientRead",
+      "blockers": [],
+      "samples": 1,
+      "maximum_query_ms": 1157,
+      "maximum_transaction_ms": 1158,
+      "first_seconds": 137.609
+    },
+    {
+      "backend": "backend-1",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-6"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 98,
+      "maximum_transaction_ms": 105,
+      "first_seconds": 267.566
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-6"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 257,
+      "maximum_transaction_ms": 264,
+      "first_seconds": 268.317
+    },
+    {
+      "backend": "backend-8",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-7"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 878,
+      "maximum_transaction_ms": 882,
+      "first_seconds": 294.601
+    },
+    {
+      "backend": "backend-2",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-6"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 492,
+      "maximum_transaction_ms": 498,
+      "first_seconds": 296.105
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-5"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 942,
+      "maximum_transaction_ms": 944,
+      "first_seconds": 296.856
+    },
+    {
+      "backend": "backend-2",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-1"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 315,
+      "maximum_transaction_ms": 317,
+      "first_seconds": 318.637
+    },
+    {
+      "backend": "backend-11",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-3"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 44,
+      "maximum_transaction_ms": 45,
+      "first_seconds": 333.655
+    },
+    {
+      "backend": "backend-7",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-6"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 507,
+      "maximum_transaction_ms": 508,
+      "first_seconds": 337.412
+    },
+    {
+      "backend": "backend-2",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-1",
+        "backend-5",
+        "backend-7"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 29,
+      "maximum_transaction_ms": 33,
+      "first_seconds": 344.92
+    },
+    {
+      "backend": "backend-6",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-1",
+        "backend-5",
+        "backend-7",
+        "backend-2"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 14,
+      "maximum_transaction_ms": 15,
+      "first_seconds": 344.921
+    },
+    {
+      "backend": "backend-8",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-1",
+        "backend-5",
+        "backend-7",
+        "backend-2",
+        "backend-6"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 14,
+      "maximum_transaction_ms": 15,
+      "first_seconds": 344.921
+    },
+    {
+      "backend": "backend-3",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-1",
+        "backend-5",
+        "backend-7",
+        "backend-2",
+        "backend-6",
+        "backend-8"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 13,
+      "maximum_transaction_ms": 13,
+      "first_seconds": 344.921
+    },
+    {
+      "backend": "backend-5",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-1"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 44,
+      "maximum_transaction_ms": 46,
+      "first_seconds": 344.921
+    },
+    {
+      "backend": "backend-7",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-1",
+        "backend-5"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 33,
+      "maximum_transaction_ms": 37,
+      "first_seconds": 344.921
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-1",
+        "backend-5",
+        "backend-7",
+        "backend-2",
+        "backend-6",
+        "backend-8",
+        "backend-3"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 12,
+      "maximum_transaction_ms": 13,
+      "first_seconds": 344.921
+    },
+    {
+      "backend": "backend-12",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-13",
+        "backend-2",
+        "backend-3",
+        "backend-1"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 75,
+      "maximum_transaction_ms": 79,
+      "first_seconds": 382.464
+    },
+    {
+      "backend": "backend-13",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-7"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 145,
+      "maximum_transaction_ms": 150,
+      "first_seconds": 382.464
+    },
+    {
+      "backend": "backend-14",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-13",
+        "backend-2",
+        "backend-3",
+        "backend-1",
+        "backend-12",
+        "backend-5",
+        "backend-4"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 22,
+      "maximum_transaction_ms": 27,
+      "first_seconds": 382.464
+    },
+    {
+      "backend": "backend-1",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-13",
+        "backend-2",
+        "backend-3"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 90,
+      "maximum_transaction_ms": 94,
+      "first_seconds": 382.464
+    },
+    {
+      "backend": "backend-2",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-13"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 131,
+      "maximum_transaction_ms": 135,
+      "first_seconds": 382.464
+    },
+    {
+      "backend": "backend-3",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-13",
+        "backend-2"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 113,
+      "maximum_transaction_ms": 118,
+      "first_seconds": 382.464
+    },
+    {
+      "backend": "backend-5",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-13",
+        "backend-2",
+        "backend-3",
+        "backend-1",
+        "backend-12"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 61,
+      "maximum_transaction_ms": 65,
+      "first_seconds": 382.464
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "tuple",
+      "blockers": [
+        "backend-13",
+        "backend-2",
+        "backend-3",
+        "backend-1",
+        "backend-12",
+        "backend-5"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 40,
+      "maximum_transaction_ms": 44,
+      "first_seconds": 382.464
+    },
+    {
+      "backend": "backend-15",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 192,
+      "maximum_transaction_ms": 202,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-21",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 173,
+      "maximum_transaction_ms": 181,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-23",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25",
+        "backend-26",
+        "backend-27",
+        "backend-28"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 141,
+      "maximum_transaction_ms": 144,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-29",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25",
+        "backend-26",
+        "backend-27",
+        "backend-28",
+        "backend-23"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 134,
+      "maximum_transaction_ms": 135,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-18",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 227,
+      "maximum_transaction_ms": 244,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-27",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25",
+        "backend-26"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 145,
+      "maximum_transaction_ms": 154,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-26",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 145,
+      "maximum_transaction_ms": 149,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-17",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 246,
+      "maximum_transaction_ms": 258,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-20",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 209,
+      "maximum_transaction_ms": 224,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-19",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 223,
+      "maximum_transaction_ms": 237,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-30",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25",
+        "backend-26",
+        "backend-27",
+        "backend-28",
+        "backend-23",
+        "backend-29",
+        "backend-31"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 96,
+      "maximum_transaction_ms": 96,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-28",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25",
+        "backend-26",
+        "backend-27"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 145,
+      "maximum_transaction_ms": 145,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-22",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 180,
+      "maximum_transaction_ms": 187,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-31",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25",
+        "backend-26",
+        "backend-27",
+        "backend-28",
+        "backend-23",
+        "backend-29"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 133,
+      "maximum_transaction_ms": 134,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-32",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25",
+        "backend-26",
+        "backend-27",
+        "backend-28",
+        "backend-23",
+        "backend-29",
+        "backend-31",
+        "backend-30"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 61,
+      "maximum_transaction_ms": 61,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-33",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24",
+        "backend-25",
+        "backend-26",
+        "backend-27",
+        "backend-28",
+        "backend-23",
+        "backend-29",
+        "backend-31",
+        "backend-30",
+        "backend-32"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 25,
+      "maximum_transaction_ms": 25,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-25",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21",
+        "backend-24"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 146,
+      "maximum_transaction_ms": 154,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-24",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "advisory",
+      "blockers": [
+        "backend-16",
+        "backend-17",
+        "backend-18",
+        "backend-19",
+        "backend-20",
+        "backend-15",
+        "backend-22",
+        "backend-21"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 170,
+      "maximum_transaction_ms": 181,
+      "first_seconds": 384.719
+    },
+    {
+      "backend": "backend-14",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-8"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 697,
+      "maximum_transaction_ms": 698,
+      "first_seconds": 436.539
+    },
+    {
+      "backend": "backend-12",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-13"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 395,
+      "maximum_transaction_ms": 396,
+      "first_seconds": 437.29
+    },
+    {
+      "backend": "backend-8",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-14"
+      ],
+      "samples": 3,
+      "maximum_query_ms": 841,
+      "maximum_transaction_ms": 851,
+      "first_seconds": 438.041
+    },
+    {
+      "backend": "backend-3",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-7"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 849,
+      "maximum_transaction_ms": 850,
+      "first_seconds": 441.796
+    },
+    {
+      "backend": "backend-7",
+      "state": "idle in transaction",
+      "wait_type": "Client",
+      "wait_event": "ClientRead",
+      "blockers": [],
+      "samples": 1,
+      "maximum_query_ms": 1601,
+      "maximum_transaction_ms": 1601,
+      "first_seconds": 443.298
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-7"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 588,
+      "maximum_transaction_ms": 589,
+      "first_seconds": 443.298
+    },
+    {
+      "backend": "backend-5",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-34"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 292,
+      "maximum_transaction_ms": 293,
+      "first_seconds": 444.049
+    },
+    {
+      "backend": "backend-34",
+      "state": "idle in transaction",
+      "wait_type": "Client",
+      "wait_event": "ClientRead",
+      "blockers": [],
+      "samples": 2,
+      "maximum_query_ms": 1795,
+      "maximum_transaction_ms": 1795,
+      "first_seconds": 444.799
+    },
+    {
+      "backend": "backend-6",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-34"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 784,
+      "maximum_transaction_ms": 786,
+      "first_seconds": 444.799
+    },
+    {
+      "backend": "backend-5",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-7"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 77,
+      "maximum_transaction_ms": 79,
+      "first_seconds": 465.08
+    },
+    {
+      "backend": "backend-8",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-4"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 810,
+      "maximum_transaction_ms": 811,
+      "first_seconds": 466.583
+    },
+    {
+      "backend": "backend-8",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-12"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 957,
+      "maximum_transaction_ms": 957,
+      "first_seconds": 468.085
+    },
+    {
+      "backend": "backend-1",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-12"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 5,
+      "maximum_transaction_ms": 6,
+      "first_seconds": 474.845
+    },
+    {
+      "backend": "backend-2",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-12"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 9,
+      "maximum_transaction_ms": 10,
+      "first_seconds": 474.845
+    },
+    {
+      "backend": "backend-5",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-12"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 6,
+      "maximum_transaction_ms": 8,
+      "first_seconds": 474.845
+    },
+    {
+      "backend": "backend-7",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-12"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 8,
+      "maximum_transaction_ms": 9,
+      "first_seconds": 474.845
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-12"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 11,
+      "maximum_transaction_ms": 11,
+      "first_seconds": 474.845
+    },
+    {
+      "backend": "backend-7",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-4"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 992,
+      "maximum_transaction_ms": 994,
+      "first_seconds": 486.114
+    },
+    {
+      "backend": "backend-12",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "relation",
+      "blockers": [
+        "backend-2"
+      ],
+      "samples": 1,
+      "maximum_query_ms": 369,
+      "maximum_transaction_ms": 372,
+      "first_seconds": 487.616
+    },
+    {
+      "backend": "backend-4",
+      "state": "active",
+      "wait_type": "Lock",
+      "wait_event": "transactionid",
+      "blockers": [
+        "backend-7"
+      ],
+      "samples": 2,
+      "maximum_query_ms": 861,
+      "maximum_transaction_ms": 865,
+      "first_seconds": 502.636
+    }
+  ],
+  "errors": [],
+  "connection_closed": true,
+  "process_handle_closed": true,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "ci_report": {
+    "path": "docs/evidence/native-ci/ci96-20261026-current-source/summary.json",
+    "sha256": "55ebf0a386ac0157cfc21b4652b8ee41e57199be71ac38614a55ad8f8d462562"
+  },
+  "historical_root_causes_closed": false,
+  "observation_scope": "Includes deliberate transaction/lock fault tests; observed lock waits are not all unexpected defects. No query text was read."
+}

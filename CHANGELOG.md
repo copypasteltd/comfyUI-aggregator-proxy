@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Verification 96 / 当前源码完整验证与原生候选
+
+- 对不变的 628 个应用输入完成新一轮原生 CI：16 门禁/3899 Python 全通过、零失败/错误/跳过，595.039 秒且保留原 1200 秒预算；本轮没有手工数据库维护，旧库与历史失败保留。
+- Build rc-20261026.96.1 from 518 matching inputs: 169 payload files, 58 wheels and 66 runtime contracts. Inspect actual wait-estimate wheel members and Admin bundle; reuse the unchanged pinned Provider binary with rechecked source hashes.
+- 精确候选通过 29 项全新隔离安装和 10 项桌面/移动浏览器检查；4 个应用角色正常停止、2 个 context/browser 关闭、临时库/目录清理。补充两张安装后截图；既有 26 PNG/5 MP4/5 GIF 演示图库保持。
+- [Versioned evidence and limitations](docs/96-当前源码完整验证与原生发行候选.md) fill audit 95 local release gap R05 without promoting physical Workflow, fleet, SCM or production acceptance. Keep 69 full-acceptance items open. Record REL-96-01 for manifest Git-revision embedding and UI-96-01 for visible mobile audit-badge clipping; neither is claimed fixed. Synchronize bilingual entries and change notes.
+
 ## 2026-10-26 · Audit 95 / 现状与目标差距审计
 
 - [系统审计](docs/95-项目现状审计与目标产物差距.md) 逐项列出 69 个剩余出口及顺序：67 首版、2 可选；73 条需求、98 完整门禁和 15 工作包保持各自实现/验收口径，0/6 真实 Workflow 未提升。

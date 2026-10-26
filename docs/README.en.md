@@ -6,7 +6,9 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
-The [current project audit](95-项目现状审计与目标产物差距.md) expands all 69 remaining items (67 first-release, two optional), current source provenance and five unresolved defect/compatibility/release boundaries. All 98 full gates remain pending; current focused evidence and historical full CI/candidate are distinct. This audit changes documentation only.
+[Current-source verification and candidate 96](96-当前源码完整验证与原生发行候选.md) pass all 16 gates and 3899 Python tests with zero failures, errors or skips; all 628 application inputs remain identical. Python takes 595.039 seconds within the unchanged 1200-second budget. Candidate rc-20261026.96.1 contains 169 payload files, 58 wheels and 66 runtime contracts and passes 29 fresh isolated-installation checks and ten installed-browser checks. Temporary resources are cleaned up. Actual resources, production and historical failure root causes remain pending; manifest Git-revision embedding and mobile audit-badge clipping have explicit follow-up IDs.
+
+The [project audit at increment 95](95-项目现状审计与目标产物差距.md) expands all 69 remaining items (67 first-release, two optional), current source provenance and five unresolved defect/compatibility/release boundaries. At that audit, focused evidence and historical full CI/candidate were distinct; verification 96 subsequently fills the local full-CI/candidate gap. All 98 full acceptance gates remain pending.
 
 Current functional [increment 94](94-队列等待估算与运行样本.md) adds on-demand queue estimates to Admin job details. A consistent snapshot combines physical GPU occupancy, scheduling policy and matching runtime samples from the last 24 hours. It shows a conditional allocation-wait interval, sample counts and a 15-second validity window. Missing samples, stale devices or uncertain execution produce unknown; actual-device calibration remains open.
 
@@ -149,7 +151,8 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 | 91 | [Immutable video specifications and actual multimedia SDK clients](91-多媒体SDK与视频冻结规格.md) |
 | [93-真实Workflow离线发布包构建](./93-真实Workflow离线发布包构建.md) | Offline package preparation, native dependency locking and import/compile verification |
 | [94 · Queue waiting estimates and runtime samples](94-队列等待估算与运行样本.md) | Matching observations, bounded read-only queue scenarios, conditional intervals and Admin UI |
-| [95 · Current project audit and goal gaps](95-项目现状审计与目标产物差距.md) | Current evidence, all 69 open items, known defects, release differences and delivery order |
+| [95 · Current project audit and goal gaps](95-项目现状审计与目标产物差距.md) | Evidence at that revision, all 69 open items, known defects, release differences and delivery order |
+| [96 · Current-source verification and native candidate](96-当前源码完整验证与原生发行候选.md) | 3899 Python tests, rc-20261026.96.1, exact installation/browser evidence and remaining acceptance boundaries |
 | 92 | [Direct video projection, scope boundaries and installed verification](92-直接视频接口冻结投影与权限边界.md) |
 | 86 | [Sanitized database failures, request isolation and native lock observation](86-数据库故障脱敏诊断与并发观测.md) |
 | 85 | [Native system service plans, controlled lifecycle and dedicated interpreter](85-原生系统服务封装与受控生命周期.md) |
