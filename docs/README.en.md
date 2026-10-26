@@ -6,7 +6,9 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
-Current [increment 94](94-队列等待估算与运行样本.md) adds on-demand queue estimates to Admin job details. A consistent snapshot combines physical GPU occupancy, scheduling policy and matching runtime samples from the last 24 hours. It shows a conditional allocation-wait interval, sample counts and a 15-second validity window. Missing samples, stale devices or uncertain execution produce unknown; actual-device calibration remains open.
+The [current project audit](95-项目现状审计与目标产物差距.md) expands all 69 remaining items (67 first-release, two optional), current source provenance and five unresolved defect/compatibility/release boundaries. All 98 full gates remain pending; current focused evidence and historical full CI/candidate are distinct. This audit changes documentation only.
+
+Current functional [increment 94](94-队列等待估算与运行样本.md) adds on-demand queue estimates to Admin job details. A consistent snapshot combines physical GPU occupancy, scheduling policy and matching runtime samples from the last 24 hours. It shows a conditional allocation-wait interval, sample counts and a 15-second validity window. Missing samples, stale devices or uncertain execution produce unknown; actual-device calibration remains open.
 
 Previous [increment 93](93-真实Workflow离线发布包构建.md) implements offline package preparation for all six capabilities using existing local model hashes and Git revisions. It emits an importable manifest, clears prior runtime claims and supports dependency-drift checks. See [focused evidence](evidence/2026-10-26/workflow-package-python-93.json); physical-resource and full-release exits remain open.
 
@@ -147,6 +149,7 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 | 91 | [Immutable video specifications and actual multimedia SDK clients](91-多媒体SDK与视频冻结规格.md) |
 | [93-真实Workflow离线发布包构建](./93-真实Workflow离线发布包构建.md) | Offline package preparation, native dependency locking and import/compile verification |
 | [94 · Queue waiting estimates and runtime samples](94-队列等待估算与运行样本.md) | Matching observations, bounded read-only queue scenarios, conditional intervals and Admin UI |
+| [95 · Current project audit and goal gaps](95-项目现状审计与目标产物差距.md) | Current evidence, all 69 open items, known defects, release differences and delivery order |
 | 92 | [Direct video projection, scope boundaries and installed verification](92-直接视频接口冻结投影与权限边界.md) |
 | 86 | [Sanitized database failures, request isolation and native lock observation](86-数据库故障脱敏诊断与并发观测.md) |
 | 85 | [Native system service plans, controlled lifecycle and dedicated interpreter](85-原生系统服务封装与受控生命周期.md) |
@@ -155,7 +158,7 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 
 - [Machine contracts](contracts/README.md): frozen JSON Schemas, fixtures, state machine, endpoint inventory and development traceability.
 - Complete native requests: [image](examples/create-image.json), [video](examples/create-video.json), [audio](examples/create-audio.json).
-- [Demonstration gallery](media/README.md): 20 screenshots, four recordings in MP4/GIF, selected actual API responses, explicitly labeled receipt/failure fixtures, hashes and reproduction steps.
+- [Demonstration gallery](media/README.md): 26 screenshots, five recordings in MP4/GIF, selected actual API responses, explicitly labeled receipt/failure fixtures, hashes and reproduction steps; all use synthetic business fixtures.
 - [Contribution/synchronization rules](../CONTRIBUTING.md): update both READMEs, change notes and applicable media, run checks, commit and push.
 
 Production acceptance remains open for actual devices and Workflows, model quality, real storage/gateway dependencies, system services, joint recovery and physical-fleet capacity. The delivery checklist is authoritative for completion status.

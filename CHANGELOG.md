@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Audit 95 / 现状与目标差距审计
+
+- [系统审计](docs/95-项目现状审计与目标产物差距.md) 逐项列出 69 个剩余出口及顺序：67 首版、2 可选；73 条需求、98 完整门禁和 15 工作包保持各自实现/验收口径，0/6 真实 Workflow 未提升。
+- Inspect current code, Admin routes, Worker/GPU/journal/storage boundaries, source-bound evidence, contracts, release provenance and media. Separate current focused checks from increment 92 full CI/candidate; preserve concurrent 502, audit 503, CI/test-database root causes and strict official Video limitations.
+- 修正完整清单中的过时“当前”端点/工作包说明和英文媒体导航数量，更新中英 README 与索引；本轮只读门禁结果另存版本化证据，应用输入保持不变。
+- Documentation audit only: no functional changes, historical test reruns, browser or virtualization, database changes, service installation or new production acceptance. Commit and synchronize the audit and change notes to the authorized remote.
+
 ## 2026-10-26 · Increment 94 / 队列等待估算
 
 - Admin 任务详情新增按需等待区间、样本数量、采样范围和 15 秒过期提示；样本不足、观测过期和执行不确定时显示未知。保持 04·青柠原始资源与共享主题。
