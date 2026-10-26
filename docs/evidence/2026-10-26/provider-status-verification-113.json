@@ -1,0 +1,127 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T13:37:55.899812+00:00",
+  "passed": true,
+  "scope": "Provider implementation metadata correction, current-source complete CI and exact new candidate installation. Reuses previous native execution only after all 275 inputs, upstream commit, overlay and actual binary match; no native or Go rerun is claimed.",
+  "application_source_revision": "7935b7dbc2e71066d7632c9c071b2b800f54622f",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci113-20261026-provider-status/summary.json",
+      "sha256": "269e4b6605a4ccced35f5ab0beae5a3d52bde73cfc445363b002fc07fdb4ccc9"
+    },
+    "native_reused": {
+      "path": "docs/evidence/2026-10-26/asset-publication-native-112/confirmed-retry-native-protocol.json",
+      "sha256": "a5d7c21bfd5f452cfbe940f61aa359e78d855b40aed52c057b17aa59d0b7e9a0"
+    },
+    "provider_unchanged": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-provider-101/sub2api-provider-native-build.json",
+      "sha256": "ad4082847929a50656ba2488cb509c5618f1b953b3a6e5f99b5891f7c8f6fcce"
+    },
+    "source_comparison": {
+      "path": "docs/evidence/2026-10-26/provider-status-sources-113.json",
+      "sha256": "0edb58b45f02faf47eaf55a084a9bdd6a3f74e646d67e2ef6d95f465ad35df88"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/provider-status-release-build-113.json",
+      "sha256": "55dede4bf08114a98651f6eae70cf6a6543ebaaccc4f1c4f233ae5a9072b5f3a"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/provider-status-installed-113/native-release-installation.json",
+      "sha256": "d5c54e052729e0ebddc9df3dccfbaff44de028b5ec213265ef4d9dd413f3c635"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-26/provider-status-installed-113/native-release-installed-browser.json",
+      "sha256": "3e080f570e84e5fa03b1a9bb95d67ec318a121392495fb6950948764383764e2"
+    },
+    "release-build_process": {
+      "path": "docs/evidence/2026-10-26/provider-status-release-build-process-113.json",
+      "sha256": "d5815e6907a4ae935ddf920d0a5862d1d741f9ffb9e9f52e1ca7781683d12b31"
+    },
+    "release-install_process": {
+      "path": "docs/evidence/2026-10-26/provider-status-release-install-process-113.json",
+      "sha256": "320283980999b52fbfc384de57e2f03ffdd1e3ca197a2f75fe4927622675d010"
+    }
+  },
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 4280,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_seconds": 1147.115,
+    "python_budget_seconds": 1200,
+    "inputs": 649,
+    "all_inputs_match_current": true,
+    "owned_process_trees_closed": true
+  },
+  "native": {
+    "cases": 30,
+    "inputs": 275,
+    "all_inputs_match_current": true,
+    "reexecuted": false,
+    "cleanup": {
+      "processes": true,
+      "databases": true,
+      "database_observer": true,
+      "media_and_credentials": true
+    },
+    "real_comfyui": false,
+    "real_redis": false,
+    "real_s3": false,
+    "physical_fleet_validated": false
+  },
+  "provider": {
+    "implemented": true,
+    "implementation_scope": "reviewed_provider_composition",
+    "runtime_integration_verified": false,
+    "runtime_integration_scope": "complete_real_dependencies",
+    "recompiled": false,
+    "actual_binary_and_overlay_sources_match": true
+  },
+  "candidate": {
+    "release_id": "rc-20261026.113.1",
+    "archive": "app/.local/releases/rc-20261026.113.1/rc-20261026.113.1.zip",
+    "archive_sha256": "35aad1f218cb5ec5200617cb7ce25a604afc5f4c4494c6c632efc57679a4823b",
+    "archive_bytes": 281335481,
+    "manifest_source_revision": "7935b7dbc2e71066d7632c9c071b2b800f54622f",
+    "source_inputs": 525,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 67,
+    "database_head": "3da02e7b5941"
+  },
+  "embedded_provider_metadata": {
+    "path": "integrations/sub2api/upstream-lock.json",
+    "sha256": "2cafee3c2a148c344c588f3c72b3684dfb1f88fb1c56bf9c216cc321e5e16591",
+    "provider_implemented": true,
+    "provider_implementation_scope": "reviewed_provider_composition",
+    "runtime_integration_verified": false,
+    "runtime_integration_scope": "complete_real_dependencies",
+    "stock_provider_composition_build_report": "docs/evidence/2026-10-26/dependency-errors-provider-101/sub2api-provider-native-build.json",
+    "byte_identical_to_current_source": true
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "closed_contexts": 2,
+    "browser_closed": true,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "cleanup_errors": []
+  },
+  "audit_114_local_exits_V01_V02_R05_closed": true,
+  "historical_database_root_causes_closed": false,
+  "remaining_work": {
+    "open": 69,
+    "first_release": 67,
+    "optional": 2,
+    "physical_workflows_accepted": 0
+  },
+  "real_resource_acceptance": false,
+  "production_accepted": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "virtualization_used": false
+}

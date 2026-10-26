@@ -1,16 +1,16 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 113 / Provider 状态与候选（114 审计后收口）
+
+- 已更正 Provider 实现状态及范围，保留 runtime_integration_verified=false 的真实依赖验收边界。当前 7935b7d 的完整 16 门禁/4280 Python 与 rc-20261026.113.1 的 29 安装/10 浏览器通过；649/525 来源及包内元数据逐字节一致，实际 Provider 源码/补丁/exe 守卫一致。112 的 30 原生场景经 275 输入一致后复用，没有重新执行。114 审计的 V01/V02/R05 本地出口已收口；真实六类 0/6、69 稳定出口、98 完整门禁及历史根因仍开放。
+- Corrected Provider implementation status and scope while retaining runtime_integration_verified=false for unaccepted real dependencies. Source 7935b7d passes all 16 gates/4280 Python tests and 29 installation/10 browser checks of rc-20261026.113.1. All 649/525 inputs and embedded metadata match; actual Provider sources, patches and binary pass provenance guards. Reuse 30 native scenarios from 112 after all 275 inputs match; no new native execution is claimed. Local V01/V02/R05 exits from audit 114 are closed; real capabilities remain accepted at 0/6, with 69 stable exits, 98 complete gates and historical root causes open.
+
+
 ## 2026-10-26 · 114 / Current workspace audit
 
 - 保留 69 项稳定开放出口（首版 67、可选 2），逐项列出已有基础、剩余条件和执行顺序。
 - Rehash 649 current inputs and all increment-112 candidate payloads; distinguish the pre-existing uncommitted metadata correction from complete current-source CI/candidate evidence. No functional suite, device or production acceptance is claimed.
 - 新增 [114 审计](docs/114-当前工作区系统审计与完整目标差距.md) 和版本化机器记录；本轮只同步审计，原第 113 增量仍待完成。
-
-## 2026-10-26 · Increment 113 / Provider 状态元数据
-
-- 更正 Provider 实现状态错标：provider_implemented=true，并关联源码/补丁/实际二进制均一致的 101 构建报告；runtime_integration_verified=false 保留为完整真实依赖尚未验收的边界。只改变一份打包元数据，运行时、测试及 Go 二进制不变；112 的 30 原生场景经 275 输入逐项摘要一致后复用，不重复声称执行。新元数据的完整 CI/候选安装待继续，69 稳定出口和真实六类 0/6 不提升。
-- Correct provider_implemented to true and reference build 101 after verifying the reviewed sources, patches and actual Provider binary. runtime_integration_verified remains false for complete real dependencies. Only packaged metadata changes; runtime/test code and the Go binary remain unchanged. Reuse the 30 native scenarios from 112 only after all 275 covered input digests match, without claiming a new run. Full CI and candidate installation for the new metadata remain pending; all 69 stable exits and six real Workflow acceptances stay open.
-
 
 ## 2026-10-26 · Increment 112 / 输入素材发布未决事务与清理保护
 
