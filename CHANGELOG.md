@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-27 · 115 / 116 · Native Linux deployment and HTTP / CORS
+
+- 新增 Linux 便携载荷构建、独立 systemd 服务、数据库备份及 HTTP/存储核验工具；初始化真实 PostgreSQL 18 和限权私有版本化对象桶，回收约 2.76 GiB 旧日志及下载缓存。
+- 按用户明确要求提供普通 HTTP 39443、任意来源/标准方法/请求头的 CORS；跨源管理写入继续检查 CSRF，会话 Cookie 按公开传输方式配置。新增模式与既有鉴权/会话共 59 项回归通过，最终服务器验收记录随后补齐。
+- Add explicit HTTP and unrestricted-origin options without changing default deployment behavior, database schema or Worker protocol. Real generation, fleet capacity, custom Sub2API integration and full disaster recovery remain unaccepted.
+
 ## 2026-10-26 · Increment 113 / Provider 状态与候选（114 审计后收口）
 
 - 已更正 Provider 实现状态及范围，保留 runtime_integration_verified=false 的真实依赖验收边界。当前 7935b7d 的完整 16 门禁/4280 Python 与 rc-20261026.113.1 的 29 安装/10 浏览器通过；649/525 来源及包内元数据逐字节一致，实际 Provider 源码/补丁/exe 守卫一致。112 的 30 原生场景经 275 输入一致后复用，没有重新执行。114 审计的 V01/V02/R05 本地出口已收口；真实六类 0/6、69 稳定出口、98 完整门禁及历史根因仍开放。

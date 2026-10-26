@@ -1,0 +1,260 @@
+{
+  "at": "2026-10-26T20:33:43.003567+00:00",
+  "kind": "real_linux_public_https",
+  "passed": true,
+  "checks": [
+    {
+      "check": "public_https_/health/live",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "public_https_/health/ready",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "public_https_/admin/",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "production_with_real_s3_adapter",
+      "passed": true
+    },
+    {
+      "check": "unauthenticated_boundary_/internal/v1/heartbeat",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "check": "unauthenticated_boundary_/internal/monitoring/v1/metrics",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "check": "unauthenticated_boundary_/v1/models",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "check": "unauthenticated_boundary_/admin/api/v1/session",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "check": "wrong_login_origin_denied",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "check": "administrator_login",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "secure_session_cookie",
+      "passed": true
+    },
+    {
+      "check": "admin_read_worker-nodes",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_channels",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_workflows",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_public-models",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_model-artifacts",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_queues/snapshot",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_queues/statistics",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_queues/jobs",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_api-keys",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_content",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_tenants",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_projects",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_admin-users",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_operations",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_alerts",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_audit-events",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_audit-retention",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "management_write_without_csrf_denied",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "check": "create_disposable_business_key_0",
+      "passed": true,
+      "status": 201
+    },
+    {
+      "check": "create_disposable_business_key_1",
+      "passed": true,
+      "status": 201
+    },
+    {
+      "check": "business_key_cannot_open_admin_session",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "check": "unapproved_models_not_published",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "real_s3_asset_upload",
+      "passed": true,
+      "status": 201
+    },
+    {
+      "check": "uploaded_hash_matches",
+      "passed": true
+    },
+    {
+      "check": "sensitive_input_scope_required",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "check": "explicitly_grant_input_download_0",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "explicitly_grant_input_download_1",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "authenticated_asset_download",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "authenticated_range_download",
+      "passed": true,
+      "status": 206
+    },
+    {
+      "check": "authenticated_head",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_cookie_cannot_replace_business_key",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "check": "second_key_cannot_read_owner_asset",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "check": "set_ip_restriction",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "client_cannot_spoof_forwarded_ip",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "check": "asset_delete_accepted",
+      "passed": true,
+      "status": 202
+    },
+    {
+      "check": "deleted_asset_immediately_denied",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "check": "cleanup_probe_key",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "cleanup_probe_key",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "administrator_logout",
+      "passed": true,
+      "status": 204
+    },
+    {
+      "check": "session_revoked",
+      "passed": true
+    }
+  ],
+  "real_workflows_verified": 0,
+  "generation_acceptance": false
+}

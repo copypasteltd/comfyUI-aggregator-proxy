@@ -328,7 +328,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             await asyncio.to_thread(monitoring.close)
             await asyncio.to_thread(sessions.kw["bind"].dispose)
 
-    app = ObservedAPI(metrics=monitoring.process, request_log=request_log, title="Render Control", version="0.1.0", docs_url=None, redoc_url=None, lifespan=lifespan)
+    app = ObservedAPI(metrics=monitoring.process, request_log=request_log, allow_any_origin=settings.allow_any_origin, title="Render Control", version="0.1.0", docs_url=None, redoc_url=None, lifespan=lifespan)
     app.state.sessions = sessions
     app.state.settings = settings
     app.state.access_writer = access_writer
@@ -437,10 +437,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/admin/api/v1/session", response_model=SessionView)
     def login(data: Login, request: Request, response: Response) -> dict[str, Any]:
-        if request.headers.get("origin") != settings.public_origin:
+        if not settings.accepts_admin_origin(request.headers.get("origin")):
             raise DomainError("origin_denied", "管理登录来源不匹配", 403)
         result = auth.login(data.username, data.password, request.client.host if request.client else "127.0.0.1", request.state.request_id)
-        response.set_cookie(COOKIE, result.pop("token"), max_age=settings.session_seconds, secure=True, httponly=True, samesite="lax", path="/admin")
+        response.set_cookie(COOKIE, result.pop("token"), max_age=settings.session_seconds, secure=settings.secure_cookies, httponly=True, samesite=settings.cookie_same_site, path="/admin")
         return {**result, "permissions": ROLE_PERMISSIONS[result["user"]["role"]], "scopes": queries.scopes()}
 
     @app.get("/admin/api/v1/session", response_model=SessionView)
@@ -455,7 +455,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.delete("/admin/api/v1/session", status_code=204)
     def logout(request: Request, response: Response, identity: Annotated[AdminIdentity, Depends(admin)]) -> None:
         auth.logout(identity, request.state.request_id)
-        response.delete_cookie(COOKIE, path="/admin", secure=True, httponly=True, samesite="lax")
+        response.delete_cookie(COOKIE, path="/admin", secure=settings.secure_cookies, httponly=True, samesite=settings.cookie_same_site)
 
     @app.get("/admin/api/v1/nodes", response_model=NodesView)
     def nodes(identity: Annotated[AdminIdentity, Depends(permission("nodes:read"))]) -> dict[str, Any]:

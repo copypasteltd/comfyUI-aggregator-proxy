@@ -1,0 +1,27 @@
+[Unit]
+Description=ComfyUI Aggregator Isolated PostgreSQL 18
+After=network.target
+
+[Service]
+Type=simple
+User=comfy-postgres
+Group=comfy-postgres
+ExecStart=/usr/lib/postgresql/18/bin/postgres -D /var/lib/comfyui-aggregator/postgres -c config_file=/etc/comfyui-aggregator/postgresql.conf
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+TimeoutStopSec=90
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/comfyui-aggregator/postgres /var/lib/comfyui-aggregator/pg-socket
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryHigh=192M
+MemoryMax=320M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

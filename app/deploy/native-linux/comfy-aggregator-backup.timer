@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily ComfyUI Aggregator PostgreSQL Backup
+
+[Timer]
+OnCalendar=*-*-* 18:30:00 UTC
+RandomizedDelaySec=600
+Persistent=true
+Unit=comfy-aggregator-backup.service
+
+[Install]
+WantedBy=timers.target

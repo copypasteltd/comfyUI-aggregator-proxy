@@ -14,6 +14,7 @@ from fastapi import FastAPI
 from fastapi.routing import RouteContext, iter_route_contexts
 from generation_infrastructure.database_diagnostics import capture_database_failure
 from generation_infrastructure.monitoring import ProcessMetrics
+from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import ClientDisconnect
 from starlette.routing import Match
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
@@ -171,11 +172,15 @@ class MonitoringMiddleware:
 class ObservedAPI(FastAPI):
     """Keep the framework's full stack, observing its final error responses too."""
 
-    def __init__(self, *, metrics: ProcessMetrics, request_log: RequestLog, **kwargs: Any) -> None:
+    def __init__(self, *, metrics: ProcessMetrics, request_log: RequestLog, allow_any_origin: bool = False, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self._http_metrics, self._http_request_log = metrics, request_log
+        self._allow_any_origin = allow_any_origin
 
     def build_middleware_stack(self) -> ASGIApp:
         contexts = tuple(iter_route_contexts(self.routes))
         routes = frozenset(context.path for context in contexts if context.path is not None)
-        return MonitoringMiddleware(super().build_middleware_stack(), self._http_metrics, self._http_request_log, routes, contexts)
+        stack = super().build_middleware_stack()
+        if self._allow_any_origin:
+            stack = CORSMiddleware(stack, allow_origin_regex=".*", allow_credentials=True, allow_methods=["*"], allow_headers=["*"], expose_headers=["X-Request-ID", "ETag", "Retry-After", "Content-Range", "Accept-Ranges", "Content-Disposition", "Content-Length"])
+        return MonitoringMiddleware(stack, self._http_metrics, self._http_request_log, routes, contexts)

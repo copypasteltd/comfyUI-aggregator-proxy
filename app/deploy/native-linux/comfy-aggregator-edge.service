@@ -1,0 +1,27 @@
+[Unit]
+Description=ComfyUI Aggregator Dedicated HTTP Edge
+After=network-online.target comfy-aggregator-api.service
+Wants=comfy-aggregator-api.service
+
+[Service]
+Type=simple
+User=comfy-edge
+Group=comfy-edge
+ExecStart=/usr/bin/nginx -e stderr -p /var/lib/comfyui-aggregator/edge/ -c /etc/comfyui-aggregator/nginx.conf -g "daemon off;"
+ExecReload=/usr/bin/nginx -e stderr -p /var/lib/comfyui-aggregator/edge/ -c /etc/comfyui-aggregator/nginx.conf -s reload
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=45
+KillSignal=SIGQUIT
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/comfyui-aggregator/edge
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryMax=64M
+TasksMax=16
+
+[Install]
+WantedBy=multi-user.target

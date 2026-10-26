@@ -1,0 +1,86 @@
+{
+  "at": "2026-10-26T20:31:43.972348+00:00",
+  "kind": "real_linux_public_https",
+  "passed": false,
+  "checks": [
+    {
+      "check": "public_https_/health/live",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "public_https_/health/ready",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "public_https_/admin/",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "production_with_real_s3_adapter",
+      "passed": true
+    },
+    {
+      "check": "unauthenticated_boundary_/internal/v1/heartbeat",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "check": "unauthenticated_boundary_/internal/monitoring/v1/metrics",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "check": "unauthenticated_boundary_/v1/models",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "check": "unauthenticated_boundary_/admin/api/v1/session",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "check": "wrong_login_origin_denied",
+      "passed": true,
+      "status": 403
+    },
+    {
+      "check": "administrator_login",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "secure_session_cookie",
+      "passed": true
+    },
+    {
+      "check": "admin_read_worker-nodes",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_channels",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "check": "admin_read_workflows",
+      "passed": false,
+      "status": 422
+    },
+    {
+      "check": "administrator_logout",
+      "passed": true,
+      "status": 204
+    },
+    {
+      "check": "session_revoked",
+      "passed": true
+    }
+  ],
+  "real_workflows_verified": 0,
+  "generation_acceptance": false
+}

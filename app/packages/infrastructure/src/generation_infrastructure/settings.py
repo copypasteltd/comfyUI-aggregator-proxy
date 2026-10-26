@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     credential_pepper_version: int = Field(default=1, ge=1)
     encryption_key: SecretStr
     public_origin: str
+    allow_http: bool = False
+    allow_any_origin: bool = False
     session_seconds: int = Field(default=28800, ge=60, le=86400)
     session_idle_seconds: int = Field(default=1800, ge=60, le=86400)
     storage_backend: Literal["s3", "local_development"] = "s3"
@@ -65,7 +67,7 @@ class Settings(BaseSettings):
         origin = urlparse(self.public_origin)
         if origin.path not in ("", "/") or origin.query or origin.fragment or origin.username:
             raise ValueError("public_origin must be a plain origin")
-        if self.environment == "production" and origin.scheme != "https":
+        if self.environment == "production" and origin.scheme != "https" and not (self.allow_http and origin.scheme == "http"):
             raise ValueError("Production requires HTTPS")
         if self.storage_backend == "local_development":
             if self.environment == "production" or origin.hostname not in ("localhost", "127.0.0.1", "::1"):
@@ -73,3 +75,14 @@ class Settings(BaseSettings):
         elif not all((self.s3_bucket, self.s3_access_key, self.s3_secret_key)):
             raise ValueError("Private S3 credentials and bucket are required")
         return self
+
+    def accepts_admin_origin(self, origin: str | None) -> bool:
+        return self.allow_any_origin or origin == self.public_origin
+
+    @property
+    def secure_cookies(self) -> bool:
+        return urlparse(self.public_origin).scheme == "https"
+
+    @property
+    def cookie_same_site(self) -> Literal["lax", "none"]:
+        return "none" if self.allow_any_origin and self.secure_cookies else "lax"

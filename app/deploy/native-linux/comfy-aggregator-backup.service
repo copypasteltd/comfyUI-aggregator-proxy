@@ -1,0 +1,21 @@
+[Unit]
+Description=ComfyUI Aggregator Verified PostgreSQL Backup
+After=comfy-aggregator-postgres.service
+Requires=comfy-aggregator-postgres.service
+
+[Service]
+Type=oneshot
+User=comfy-control
+Group=comfy-control
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/comfyui-aggregator/current/venv/bin/python /opt/comfyui-aggregator/ops/backup-db.py --config /etc/comfyui-aggregator/cloud.env --output-dir /var/lib/comfyui-aggregator/backups
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/comfyui-aggregator/backups
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryMax=128M
+TasksMax=16
+TimeoutStartSec=360

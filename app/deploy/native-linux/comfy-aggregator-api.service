@@ -1,0 +1,30 @@
+[Unit]
+Description=ComfyUI Aggregator Control API
+After=network-online.target comfy-aggregator-postgres.service
+Wants=network-online.target
+Requires=comfy-aggregator-postgres.service
+
+[Service]
+Type=simple
+User=comfy-control
+Group=comfy-control
+WorkingDirectory=/var/lib/comfyui-aggregator/api
+EnvironmentFile=/etc/comfyui-aggregator/cloud.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/comfyui-aggregator/current/venv/bin/python -m uvicorn control_api.main:create_app --factory --host 127.0.0.1 --port 32880 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1 --no-access-log --limit-concurrency 32 --timeout-keep-alive 5
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=45
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/comfyui-aggregator/api /var/lib/comfyui-aggregator/spool
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryHigh=256M
+MemoryMax=384M
+TasksMax=96
+
+[Install]
+WantedBy=multi-user.target

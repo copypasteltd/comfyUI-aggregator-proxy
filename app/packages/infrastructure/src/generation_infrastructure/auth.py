@@ -124,7 +124,7 @@ class AuthRepository:
         now = utcnow()
         if not row or not user or not admin_session_active(row, self.settings, now) or not user.enabled or row.user_revision != user.revision or row.pepper_version != self.settings.credential_pepper_version or not verify_secret(token, row.verifier, self.pepper):
             raise DomainError("invalid_credentials", "管理会话已失效", 401)
-        if write and (origin != self.settings.public_origin or not csrf or not verify_secret(csrf, row.csrf_verifier, self.pepper)):
+        if write and (not self.settings.accepts_admin_origin(origin) or not csrf or not verify_secret(csrf, row.csrf_verifier, self.pepper)):
             raise DomainError("csrf_denied", "管理操作来源或 CSRF 校验失败", 403)
         return row, user, now
 

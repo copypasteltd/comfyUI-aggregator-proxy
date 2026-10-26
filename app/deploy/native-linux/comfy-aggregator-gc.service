@@ -1,0 +1,28 @@
+[Unit]
+Description=ComfyUI Aggregator Object Garbage Collection
+After=network-online.target comfy-aggregator-postgres.service
+Requires=comfy-aggregator-postgres.service
+
+[Service]
+Type=simple
+User=comfy-gc
+Group=comfy-control
+WorkingDirectory=/var/lib/comfyui-aggregator/gc
+EnvironmentFile=/etc/comfyui-aggregator/cloud.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/comfyui-aggregator/current/venv/bin/python -m control_runner.gc
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/comfyui-aggregator/gc /var/lib/comfyui-aggregator/spool
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryHigh=96M
+MemoryMax=160M
+TasksMax=32
+
+[Install]
+WantedBy=multi-user.target
