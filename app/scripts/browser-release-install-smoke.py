@@ -5,6 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
+from audit_retention_browser import retention_geometry
 from playwright.sync_api import expect, sync_playwright
 
 
@@ -59,7 +60,8 @@ def main() -> None:
                 expect(page.get_by_label("动作编码", exact=True)).to_be_visible()
                 assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 2")
                 report["checks"].append(name + "_installed_audit_query_and_responsive_filters")
-                page.screenshot(path=fixture["screenshot_" + name], full_page=True)
+                report.setdefault("audit_retention", {})[name] = retention_geometry(page)
+                page.screenshot(path=fixture["screenshot_" + name], full_page=True, animations="disabled")
             assert not report["errors"]
             report["passed"] = True
         finally:

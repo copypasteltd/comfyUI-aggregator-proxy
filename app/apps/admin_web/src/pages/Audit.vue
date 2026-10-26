@@ -77,12 +77,14 @@ onUnmounted(() => { disposed = true; stop(); document.removeEventListener('visib
 <template>
   <div class="page-heading"><div><p class="eyebrow li-lab">GOVERNANCE / AUDIT</p><h1>审计事件</h1><p class="muted">按主体、动作和请求追踪管理变更。</p></div><el-button :icon="Refresh" :loading="loading" @click="refresh(true)">刷新记录</el-button></div>
   <section class="panel li-card audit-retention" aria-label="审计保留策略">
-    <div class="panel-heading"><h2>审计保留策略</h2><el-tag v-if="retention" :type="retention.enabled ? 'warning' : 'info'">{{ retention.enabled ? `已配置保留 ${retention.retention_days} 天` : '自动清理未启用' }}</el-tag></div>
+    <div class="panel-heading"><h2>审计保留策略</h2><el-tag v-if="retention" class="audit-retention-status" disable-transitions :type="retention.enabled ? 'warning' : 'info'">{{ retention.enabled ? `已配置保留 ${retention.retention_days} 天` : '自动清理未启用' }}</el-tag></div>
+    <div class="audit-retention-body">
     <el-alert v-if="retentionError" title="保留状态读取失败" :description="retentionError" type="warning" :closable="false"/>
     <template v-if="retention"><p class="muted">{{ retention.enabled ? `按部署配置分批清理到期审计，每批最多 ${retention.batch_limit} 条。` : '当前配置不会自动删除管理审计记录。' }}</p>
       <p v-if="retention.last_batch" class="retention-history">最近清理 {{ time(retention.last_batch.completed_at) }} · {{ retention.last_batch.deleted }} 条 · 当时保留 {{ retention.last_batch.retention_days }} 天<br/>清理截止 {{ time(retention.last_batch.cutoff) }}（不含）</p><p v-else class="muted">尚未观察到已提交的清理批次。</p>
       <small class="muted">{{ retentionError || suspended ? '上次成功状态' : '状态快照' }} {{ time(retention.snapshot_at) }}</small>
     </template><p v-else class="muted">尚未取得保留状态。</p>
+    </div>
   </section>
   <section class="panel li-card audit-filters" aria-label="审计筛选">
     <el-form label-position="top" @submit.prevent="apply">
@@ -121,6 +123,11 @@ onUnmounted(() => { disposed = true; stop(); document.removeEventListener('visib
 </template>
 
 <style scoped>
+.audit-retention .panel-heading { align-items: flex-start; }
+.audit-retention-status { flex-shrink: 0; max-width: 100%; height: auto; min-height: 24px; padding: 4px 10px; }
+.audit-retention-status :deep(.el-tag__content) { white-space: normal; overflow-wrap: anywhere; }
+.audit-retention-body { padding: 16px 24px; overflow-wrap: anywhere; }
+.audit-retention-body p { margin: 0 0 8px; }
 .audit-filters { margin-bottom: 16px; padding: 20px; }
 .audit-filter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 18px; }
 .audit-date { width: 100%; min-width: 0; border: 1px solid var(--el-border-color); border-radius: 4px; padding: 7px 10px; color: var(--el-text-color-regular); background: white; font: inherit; }
@@ -136,5 +143,5 @@ onUnmounted(() => { disposed = true; stop(); document.removeEventListener('visib
 .audit-versions span { color: var(--el-text-color-secondary); font-size: 13px; }
 .audit-versions strong { font: 600 20px ui-monospace, monospace; }
 @media(max-width: 1000px) { .audit-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media(max-width: 550px) { .audit-filter-grid { grid-template-columns: minmax(0, 1fr); } .audit-filters { padding: 16px; } .audit-hint { flex-basis: 100%; } .audit-detail { grid-template-columns: minmax(0, 1fr); gap: 6px; } .audit-detail dd { margin-bottom: 12px; } .pagination { gap: 6px; } }
+@media(max-width: 550px) { .audit-retention-body { padding: 16px; } .audit-filter-grid { grid-template-columns: minmax(0, 1fr); } .audit-filters { padding: 16px; } .audit-hint { flex-basis: 100%; } .audit-detail { grid-template-columns: minmax(0, 1fr); gap: 6px; } .audit-detail dd { margin-bottom: 12px; } .pagination { gap: 6px; } }
 </style>

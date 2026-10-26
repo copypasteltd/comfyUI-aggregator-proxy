@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 97 / 发行来源与审计状态
+
+- 新构建从昂贵步骤前固定源输入，要求真实 Git commit、普通已跟踪文件及 HEAD blob 字节匹配，构建结束前再次核对来源；拒绝未提交/未跟踪/忽略输入、Git stat-cache 隐藏变化和构建期间漂移。旧 null 清单读取保持兼容。
+- Bind new release manifests to the actual source commit. Ninety native Git/archive checks pass; this does not approve real Workflows or production.
+- 只读 DOM 测量修正 UI-96-01 的判断：原截图主要是异步状态入场动画中间帧。取消该状态动画并补正文留白/换行，保留原青柠源文件。19 项三宽度检查覆盖未启用、3650 天、读取失败、旧快照、键盘焦点及 reduced-motion。
+- Preserve both failed UI-fixture runs caused by an incorrect Playwright callback signature. The corrected run closes all three contexts and its owned process tree. Add four screenshots and one original-speed MP4/GIF; the gallery now has 30 PNG, six MP4 and six GIF. Candidate/full-CI evidence follows in topic 97.
+
 ## 2026-10-26 · Verification 96 / 当前源码完整验证与原生候选
 
 - 对不变的 628 个应用输入完成新一轮原生 CI：16 门禁/3899 Python 全通过、零失败/错误/跳过，595.039 秒且保留原 1200 秒预算；本轮没有手工数据库维护，旧库与历史失败保留。

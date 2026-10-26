@@ -29,6 +29,7 @@ from release_bundle import (
     verify_media_runtime,
     verify_service_runtime,
 )
+from release_source import source_revision, source_snapshot, verify_source_unchanged
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -63,6 +64,8 @@ def main() -> None:
         parser.error("Invalid candidate release ID")
     if sys.platform != "win32" or sys.version_info[:2] != (3, 13) or sys.maxsize <= 2**32:
         parser.error("Build requires native Windows amd64 CPython 3.13")
+    sources = source_snapshot(ROOT)
+    revision = source_revision(ROOT, sources)
     output = ROOT / ".local/releases" / args.release_id
     output.parent.mkdir(parents=True, exist_ok=True)
     output.mkdir(exist_ok=False)
@@ -101,16 +104,6 @@ def main() -> None:
         if not PROJECTS <= set(requirements):
             raise ValueError("Seven application wheels required")
         (stage / "runtime-requirements.txt").write_text("\n".join(value for _, value in sorted(requirements.items())) + "\n", encoding="ascii")
-        sources: dict[str, str] = {}
-        for folder in ("packages", "apps/control_api", "apps/control_runner", "apps/windows_worker", "migrations", "config", "scripts", "integrations/sub2api", "deploy"):
-            for path in sorted((ROOT / folder).rglob("*")):
-                if path.is_file() and path.suffix in (".py", ".toml", ".json", ".ini", ".mako", ".go", ".mod", ".sum", ".ps1", ".sql", ".yml", ".yaml", ".example") and "__pycache__" not in path.parts:
-                    sources[path.relative_to(ROOT).as_posix()] = digest_file(path)
-        for path in sorted((ROOT / "apps/admin_web/src").rglob("*")):
-            if path.is_file():
-                sources[path.relative_to(ROOT).as_posix()] = digest_file(path)
-        for name in ("pyproject.toml", "uv.lock", "alembic.ini", "apps/admin_web/package-lock.json", "apps/admin_web/package.json", "apps/admin_web/index.html", "apps/admin_web/vite.config.ts", "apps/admin_web/tsconfig.json"):
-            sources[name] = digest_file(ROOT / name)
         for path in sorted((ROOT / "apps/admin_web/dist").rglob("*")):
             if path.is_file():
                 relative = path.relative_to(ROOT / "apps/admin_web/dist")
@@ -169,7 +162,8 @@ def main() -> None:
         if len(heads) != 1:
             raise ValueError("A single migration head is required")
         files = [{"path": path.relative_to(stage).as_posix(), "bytes": path.stat().st_size, "sha256": digest_file(path)} for path in sorted(stage.rglob("*")) if path.is_file()]
-        manifest = validate_manifest({"format_version": 1, "release_id": args.release_id, "created_at": datetime.now(UTC).isoformat(), "platform": "windows-amd64-cp313", "application_version": "0.1.0", "source_revision": None, "source_tree_sha256": canonical_digest(sources), "python": {"implementation": "CPython", "major": 3, "minor": 13, "build_version": sys.version.split()[0]}, "contracts": {"version": "0.5.0", "sha256": canonical_digest(json.loads((ROOT / "config/contract-hashes.json").read_text()))}, "database": {"head": heads.pop(), "migrations_sha256": canonical_digest(migrations), "auto_migrate": False}, "worker": {"protocols": ["0.4.0"], "journal_source_sha256": digest_file(ROOT / "apps/windows_worker/src/windows_worker/journal.py")}, "workflows": {"required_task_types": TASK_TYPES, "validated_releases": []}, "gateway": {"upstream_repository": "https://github.com/Wei-Shaw/sub2api", "upstream_commit": UPSTREAM_COMMIT, "provider_binary_sha256": digest_file(backend), "frontend_embedded": False}, "runtime": {"requires_python": ">=3.13,<3.14", "lock_sha256": digest_file(ROOT / "uv.lock"), "requirements_sha256": digest_file(stage / "runtime-requirements.txt")}, "files": files, "acceptance": {key: False for key in ("production", "linux_runtime", "real_fleet", "real_workflows", "private_s3")}})
+        verify_source_unchanged(ROOT, sources, revision)
+        manifest = validate_manifest({"format_version": 1, "release_id": args.release_id, "created_at": datetime.now(UTC).isoformat(), "platform": "windows-amd64-cp313", "application_version": "0.1.0", "source_revision": revision, "source_tree_sha256": canonical_digest(sources), "python": {"implementation": "CPython", "major": 3, "minor": 13, "build_version": sys.version.split()[0]}, "contracts": {"version": "0.5.0", "sha256": canonical_digest(json.loads((ROOT / "config/contract-hashes.json").read_text()))}, "database": {"head": heads.pop(), "migrations_sha256": canonical_digest(migrations), "auto_migrate": False}, "worker": {"protocols": ["0.4.0"], "journal_source_sha256": digest_file(ROOT / "apps/windows_worker/src/windows_worker/journal.py")}, "workflows": {"required_task_types": TASK_TYPES, "validated_releases": []}, "gateway": {"upstream_repository": "https://github.com/Wei-Shaw/sub2api", "upstream_commit": UPSTREAM_COMMIT, "provider_binary_sha256": digest_file(backend), "frontend_embedded": False}, "runtime": {"requires_python": ">=3.13,<3.14", "lock_sha256": digest_file(ROOT / "uv.lock"), "requirements_sha256": digest_file(stage / "runtime-requirements.txt")}, "files": files, "acceptance": {key: False for key in ("production", "linux_runtime", "real_fleet", "real_workflows", "private_s3")}})
         (stage / "release-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         verify_candidate(stage, manifest)
         archive = output / (args.release_id + ".zip")
@@ -179,11 +173,12 @@ def main() -> None:
                     bundle.write(path, path.relative_to(stage).as_posix())
         digest = digest_file(archive)
         verify_archive(archive, digest)
+        verify_source_unchanged(ROOT, sources, revision)
         (output / (args.release_id + ".sha256")).write_text(digest + "  " + archive.name + "\n", encoding="ascii")
-        copy(ROOT / "scripts/release_bundle.py", output / "release_bundle.py")
+        copy(stage / "scripts/release_bundle.py", output / "release_bundle.py")
         remove_created(stage, output)
         remove_created(tools, output)
-        print(json.dumps({"passed": True, "release_id": args.release_id, "archive": str(archive), "archive_sha256": digest, "files": len(files), "wheels": len(requirements), "production_accepted": False}))
+        print(json.dumps({"passed": True, "release_id": args.release_id, "source_revision": revision, "archive": str(archive), "archive_sha256": digest, "files": len(files), "wheels": len(requirements), "production_accepted": False}))
     except BaseException:
         (output / "FAILED").write_text("Build failed; candidate must not be installed. Use a new release ID.\n", encoding="ascii")
         raise

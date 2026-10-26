@@ -6,6 +6,8 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
+[Increment 97: release provenance and audit readability](97-发行来源绑定与审计状态可读性.md) binds new builds to an actual Git commit and committed source bytes, rejecting changes during packaging. Commit application/CI changes before building; documentation may follow. Audit policy status appears immediately with readable padding and mobile wrapping in the original Lime system. Ninety release checks and 19 UI checks across three widths pass; screenshots, original-speed MP4/GIF and verification limits are documented. Final candidate verification follows separately.
+
 [Current-source verification and candidate 96](96-当前源码完整验证与原生发行候选.md) pass all 16 gates and 3899 Python tests with zero failures, errors or skips; all 628 application inputs remain identical. Python takes 595.039 seconds within the unchanged 1200-second budget. Candidate rc-20261026.96.1 contains 169 payload files, 58 wheels and 66 runtime contracts and passes 29 fresh isolated-installation checks and ten installed-browser checks. Temporary resources are cleaned up. Actual resources, production and historical failure root causes remain pending; manifest Git-revision embedding and mobile audit-badge clipping have explicit follow-up IDs.
 
 The [project audit at increment 95](95-项目现状审计与目标产物差距.md) expands all 69 remaining items (67 first-release, two optional), current source provenance and five unresolved defect/compatibility/release boundaries. At that audit, focused evidence and historical full CI/candidate were distinct; verification 96 subsequently fills the local full-CI/candidate gap. All 98 full acceptance gates remain pending.
@@ -153,6 +155,7 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 | [94 · Queue waiting estimates and runtime samples](94-队列等待估算与运行样本.md) | Matching observations, bounded read-only queue scenarios, conditional intervals and Admin UI |
 | [95 · Current project audit and goal gaps](95-项目现状审计与目标产物差距.md) | Evidence at that revision, all 69 open items, known defects, release differences and delivery order |
 | [96 · Current-source verification and native candidate](96-当前源码完整验证与原生发行候选.md) | 3899 Python tests, rc-20261026.96.1, exact installation/browser evidence and remaining acceptance boundaries |
+| [97 · Release provenance and audit policy readability](97-发行来源绑定与审计状态可读性.md) | Actual Git/blob identity, build drift rejection, three-width policy UI and original-speed recordings |
 | 92 | [Direct video projection, scope boundaries and installed verification](92-直接视频接口冻结投影与权限边界.md) |
 | 86 | [Sanitized database failures, request isolation and native lock observation](86-数据库故障脱敏诊断与并发观测.md) |
 | 85 | [Native system service plans, controlled lifecycle and dedicated interpreter](85-原生系统服务封装与受控生命周期.md) |

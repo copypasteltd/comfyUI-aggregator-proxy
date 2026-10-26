@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 94,
+  "increment": 97,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-94.json",
-    "sha256": "4b753a0a02f5261d80f6a2cf54a934cdd2ae2849ad16cd25496a036d52efa6fb"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-97.json",
+    "sha256": "9d0ae18fadeee8d09f094fbeeceddb9a4d6f167b5ac4db8745d5ac9bd9b22a5b"
   },
   "requirements": [
     {
@@ -2645,7 +2645,7 @@
         },
         {
           "path": "app/apps/admin_web/src/pages/Audit.vue",
-          "baseline": "admin87"
+          "baseline": "browser97"
         }
       ],
       "tests": [
@@ -2671,7 +2671,8 @@
         "ci86",
         "installed87",
         "visual87",
-        "python89"
+        "python89",
+        "browser97"
       ],
       "remaining_backlog": [
         "45",
@@ -2679,7 +2680,7 @@
         "49",
         "50"
       ],
-      "limitation": "CAS/幂等/审计已测；完整慢查询根因仍开放，隔离通过不替代根因闭环。"
+      "limitation": "CAS/幂等/审计已测；完整慢查询根因仍开放，隔离通过不替代根因闭环。 97 的保留状态三宽度/失败/旧快照/焦点已验证；使用明确 UI 夹具，实际权限仍按原生接口层证据。"
     },
     {
       "id": "ADMIN-12",

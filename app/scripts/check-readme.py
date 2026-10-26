@@ -57,7 +57,7 @@ def main() -> None:
     ffmpeg = ROOT / "app/.local/toolchains/ffmpeg-8.1/bin/ffmpeg.exe"
     lock = json.loads((ROOT / "app/config/media-tools.lock.json").read_text(encoding="utf-8"))
     assert sha(ffmpeg) == lock["files"]["bin/ffmpeg.exe"]["sha256"]
-    directories = (MEDIA, MEDIA / "gateway-catalog", MEDIA / "confirmed-retry", MEDIA / "wait-estimates")
+    directories = (MEDIA, MEDIA / "gateway-catalog", MEDIA / "confirmed-retry", MEDIA / "wait-estimates", MEDIA / "audit-retention")
     for directory in directories:
         manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
         assert manifest["passed"] and manifest["synthetic_data"] and not manifest["real_gpu_generation"]
@@ -77,6 +77,17 @@ def main() -> None:
                     errors.append("media_decode:" + path.name)
                 else:
                     decoded.append(path.relative_to(MEDIA).as_posix())
+    audit_manifest = json.loads((MEDIA / "audit-retention/manifest.json").read_text(encoding="utf-8"))
+    audit_source = (ROOT / audit_manifest["source_report"]["path"]).resolve()
+    assert audit_source.is_relative_to(ROOT / "docs/evidence") and sha(audit_source) == audit_manifest["source_report"]["sha256"]
+    audit_capture = json.loads(audit_source.read_text(encoding="utf-8"))
+    assert audit_capture["passed"] and audit_capture["browser_closed"] and audit_capture["closed_contexts"] == 3
+    assert audit_capture["sources_unchanged"] and all(audit_capture["cleanup"].values()) and audit_capture["browser_process"]["owned_process_tree_closed"]
+    assert not audit_capture["real_resource_acceptance"] and audit_capture["full_acceptance"] == "pending"
+    assert {(item["viewport"], item["state"]) for item in audit_capture["observations"]} == {(width, state) for width in (1360, 390, 320) for state in ("disabled", "enabled", "stale")}
+    assert all(item["transform"] == "none" and item["opacity"] == 1 and not item["page_overflow"] for item in audit_capture["observations"])
+    for item in audit_capture["screenshots"]:
+        assert sha(MEDIA / "audit-retention" / item["path"]) == item["sha256"]
     wait_manifest = json.loads((MEDIA / "wait-estimates/manifest.json").read_text(encoding="utf-8"))
     wait_source = (ROOT / wait_manifest["source_report"]["path"]).resolve()
     assert wait_source.is_relative_to(ROOT / "docs/evidence") and sha(wait_source) == wait_manifest["source_report"]["sha256"]

@@ -111,3 +111,9 @@ Six new screenshots and an original-speed recording demonstrate conditional wait
 [MP4](wait-estimates/wait-estimates.mp4) · [GIF](wait-estimates/wait-estimates.gif) · [Actual responses and capture](../evidence/2026-10-26/wait-estimate-94-bounded/summary.json) · [Media hashes](wait-estimates/manifest.json)
 
 ![Conditional wait and unknown state](wait-estimates/wait-estimates.gif)
+
+## 审计保留状态 / Audit retention policy
+
+第 97 增量的 [原速 MP4](audit-retention/audit-retention.mp4) / [GIF](audit-retention/audit-retention.gif) 展示未启用、3650 天、读取失败与旧快照。四张截图：[桌面](audit-retention/desktop-enabled.png)、[390px](audit-retention/mobile-disabled.png)、[320px 保留](audit-retention/narrow-enabled.png)、[320px 失败](audit-retention/narrow-failed.png)。
+
+These are the actual built Lime Admin with explicit UI API fixtures, without a live production API or real GPU. Nineteen checks cover three widths, full status text, focus and reduced motion. The gallery now contains 30 PNG, six MP4 and six GIF; this increment adds four PNG and one video/GIF pair. [Source report](../evidence/2026-10-26/audit-retention-97-final/summary.json) and [manifest](audit-retention/manifest.json) bind the assets and cleanup evidence.
