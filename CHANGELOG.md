@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 99 / 数据库等待分类与并发复验
+
+- 修复一次性双测试库观测器的 I/O 等待信息丢失：增加按类型白名单的 wait_event，保留原 lock_event；同后端不同 I/O 阶段分别聚合，未知和错配事件仍为 other。原只读/范围/内存/语句预算和业务行为保持。
+- Preserve the 23 expected before-fix failures and source-bound 73-check native PostgreSQL/ASGI and unit verification. The [scope and verification](docs/99-原生数据库等待分类与并发复验.md) keep synthetic observations distinct from actual I/O evidence. Complete overlapping CI/runtime results follow separately; no historical root or real-resource gate is promoted.
+
 ## 2026-10-26 · Audit 98 / 当前项目与目标复核
 
 - [最新审计第 8 节](docs/95-项目现状审计与目标产物差距.md) 重新核对实际代码、17 个 Admin 路由、66 运行契约、OpenAPI、原青柠来源、632 CI/521 候选输入及实际发行 ZIP 摘要；168 个 Python 文件的有界 AST 扫描未发现 pass-only/NotImplementedError 函数。静态/摘要核对不替代业务与实机验收。

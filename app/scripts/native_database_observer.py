@@ -1,4 +1,4 @@
-"""Bounded, read-only lock evidence for this run's two disposable databases."""
+"""Bounded, read-only wait evidence for this run's two disposable databases."""
 from __future__ import annotations
 
 import re
@@ -10,6 +10,11 @@ import psycopg
 STATES = frozenset(("active", "idle", "idle in transaction", "idle in transaction (aborted)", "fastpath function call", "disabled"))
 WAIT_TYPES = frozenset(("Lock", "LWLock", "IO", "IPC", "Timeout", "Client", "BufferPin", "Activity", "Extension"))
 LOCK_EVENTS = frozenset(("transactionid", "tuple", "relation", "virtualxid", "advisory", "extend", "object", "frozenid", "spectoken", "applytransaction", "userlock"))
+WAIT_EVENTS = {
+    "Lock": LOCK_EVENTS,
+    "IO": frozenset(("AioIoCompletion", "BuffileRead", "BuffileWrite", "BuffileTruncate", "CopyFileCopy", "CopyFileRead", "CopyFileWrite", "DataFileExtend", "DataFileFlush", "DataFileImmediateSync", "DataFilePrefetch", "DataFileRead", "DataFileSync", "DataFileTruncate", "DataFileWrite", "WalRead", "WalSync", "WalWrite", "WalInitSync", "WalInitWrite")),
+    "IPC": frozenset(("BufferIo", "CheckpointDelayComplete", "CheckpointDelayStart", "CheckpointDone", "CheckpointStart")),
+}
 QUERY = """SELECT pid,state,wait_event_type,wait_event,
  GREATEST(0,EXTRACT(EPOCH FROM (clock_timestamp()-xact_start))*1000)::bigint,
  GREATEST(0,EXTRACT(EPOCH FROM (clock_timestamp()-query_start))*1000)::bigint,
@@ -63,13 +68,14 @@ class DatabaseObserver:
             normalized_state = state if state in STATES else "other"
             normalized_type = wait_type if wait_type in WAIT_TYPES else "other" if wait_type else "none"
             normalized_event = wait_event if wait_type == "Lock" and wait_event in LOCK_EVENTS else "other" if wait_event else "none"
-            key = (backend, normalized_state, normalized_type, normalized_event, bounded_blockers)
+            wait = wait_event if wait_event in WAIT_EVENTS.get(wait_type, ()) else "other" if wait_event else "none"
+            key = (backend, normalized_state, normalized_type, wait, bounded_blockers)
             observation = self._observations.get(key)
             if observation is None:
                 if len(self._observations) == 128:
                     self._observation_limit += 1
                     continue
-                observation = {"backend": backend, "state": normalized_state, "wait_type": normalized_type, "lock_event": normalized_event, "blockers": list(bounded_blockers), "samples": 0, "maximum_transaction_milliseconds": 0, "maximum_query_milliseconds": 0}
+                observation = {"backend": backend, "state": normalized_state, "wait_type": normalized_type, "wait_event": wait, "lock_event": normalized_event, "blockers": list(bounded_blockers), "samples": 0, "maximum_transaction_milliseconds": 0, "maximum_query_milliseconds": 0}
                 self._observations[key] = observation
             observation["samples"] += 1
             observation["maximum_transaction_milliseconds"] = max(transaction_age, observation["maximum_transaction_milliseconds"])
