@@ -2,6 +2,10 @@
 
 [中文项目入口](../../README.md) · [English project entry](../../README.en.md)
 
+新增 [116 · 实际 Linux HTTP 后台](linux-deployment-116/README.md)：6 张截图、13.84 秒原速 MP4 和 GIF，来自已部署服务的空业务数据库，未注入 fixture，未进行真实 ComfyUI / GPU 生成。下面各节及原根目录 manifest 继续描述历史本地合成演示数据，不能把两组数据状态混用。
+
+New: [116 · actual Linux HTTP Admin](linux-deployment-116/README.md), with six screenshots, an original-speed 13.84-second MP4 and GIF from the deployed empty business database. No injected fixture or real GPU generation. The original material and manifests below continue to describe local synthetic demonstrations.
+
 所有画面来自实际 Admin 和 Control API，使用独立、临时的原生 PostgreSQL。账号、租户、模型、Workflow、12 个排队任务和 3 个完成的示意产物均为合成夹具；没有运行真实 ComfyUI、GPU 推理或实机容量测试。示意产物由本地程序绘制，不能作为模型质量样例。当前 Admin 使用中文。
 
 All captures use the actual Admin and Control API with disposable native PostgreSQL. Accounts, scopes, models, Workflows, 12 queued tasks and 3 completed illustration artifacts are synthetic fixtures. No real ComfyUI execution, GPU inference or physical-fleet capacity test is recorded. Illustrations are drawn locally and are not model-quality examples. The current UI is Chinese.

@@ -1,0 +1,154 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T21:35:10.630140+00:00",
+  "passed": true,
+  "platform": "Ubuntu 24.04.4 amd64",
+  "release": "linux-20261027.116.2",
+  "source_revision": "13e00b82a92f1ff79e5ae4f7fa19b802c230f560",
+  "payload_files_verified": 94,
+  "seed_release_id": "rc-20261026.113.1",
+  "admin_rebuilt": true,
+  "services": {
+    "postgres": {
+      "NRestarts": "0",
+      "MemoryCurrent": "52482048",
+      "ActiveState": "active",
+      "SubState": "running",
+      "UnitFileState": "enabled"
+    },
+    "api": {
+      "NRestarts": "0",
+      "MemoryCurrent": "148336640",
+      "ActiveState": "active",
+      "SubState": "running",
+      "UnitFileState": "enabled"
+    },
+    "runner": {
+      "NRestarts": "0",
+      "MemoryCurrent": "76140544",
+      "ActiveState": "active",
+      "SubState": "running",
+      "UnitFileState": "enabled"
+    },
+    "gc": {
+      "NRestarts": "0",
+      "MemoryCurrent": "93396992",
+      "ActiveState": "active",
+      "SubState": "running",
+      "UnitFileState": "enabled"
+    },
+    "edge": {
+      "NRestarts": "0",
+      "MemoryCurrent": "3051520",
+      "ActiveState": "active",
+      "SubState": "running",
+      "UnitFileState": "enabled"
+    }
+  },
+  "backup_timer": {
+    "NextElapseUSecRealtime": "Wed 2026-10-28 02:39:26 CST",
+    "ActiveState": "active",
+    "UnitFileState": "enabled"
+  },
+  "backup_service": {
+    "Result": "success",
+    "ExecMainStatus": "0"
+  },
+  "backups": [
+    {
+      "file": "control-20261026T203703838885Z.dump",
+      "bytes": 194496,
+      "sha256": "938ffbf395241d26c44dcdf5040b6a458f54b879eaa7a78c21f068f036b35ec2",
+      "archive_list_verified": true
+    },
+    {
+      "file": "control-20261026T210432806119Z.dump",
+      "bytes": 198424,
+      "sha256": "a8ad2203f95f5209c84c4613e8a56c21398b9e025b6345580550db8853fa62d8",
+      "archive_list_verified": true
+    },
+    {
+      "file": "control-20261026T213428024940Z.dump",
+      "bytes": 202702,
+      "sha256": "a891ab6097b501a15b3aad833eb912b5f3349626788f3b05042d2534450e1773",
+      "archive_list_verified": true
+    }
+  ],
+  "full_disaster_recovery_verified": false,
+  "plain_http_port": 39443,
+  "any_origin": true,
+  "internal_ports_loopback": [
+    32880,
+    55439,
+    19000
+  ],
+  "database_head": "3da02e7b5941",
+  "observed_record_counts": {
+    "jobs": 0,
+    "nodes": 0,
+    "channels": 0,
+    "workflows": 0,
+    "public_models": 0,
+    "active_api_keys": 0,
+    "unreclaimed_objects": 0
+  },
+  "private_bucket_object_versions": {
+    "versions": 0,
+    "delete_markers": 0,
+    "truncated": false
+  },
+  "root_disk_bytes": {
+    "total": 42156257280,
+    "used": 29322903552,
+    "available": 10991493120
+  },
+  "memory_bytes": {
+    "MemTotal": 2029674496,
+    "MemAvailable": 586457088,
+    "SwapTotal": 2084564992,
+    "SwapFree": 111050752
+  },
+  "virtualization_used": false,
+  "real_generation_verified": false,
+  "pre_existing_running_services_checked": 49,
+  "pre_existing_services_not_active": [],
+  "key_existing_service_pids_unchanged": {
+    "minio.service": true,
+    "postgresql@16-aidesign.service": true,
+    "sub2api.service": true
+  },
+  "nginx_pid_comparison_scope": "The pre-existing SysV nginx unit has no reliable MainPID. Check its active state and retained original worker PIDs separately; do not compare a worker PID to systemd MainPID.",
+  "cleanup": {
+    "before_used_bytes": 31627575296,
+    "after_used_bytes": 28662788096,
+    "reclaimed_bytes": 2964787200,
+    "scope": "Archived journals after rotation with a seven-day/512 MiB cap, APT package download cache and root pip HTTP download cache. Application data and active business logs retained.",
+    "final_pass": {
+      "before_used_bytes": 30027132928,
+      "after_used_bytes": 29314240512,
+      "reclaimed_bytes": 712892416,
+      "uv_cache_files_removed": 5163,
+      "uv_cache_removed_mib": 161.1,
+      "superseded_own_releases_removed": [
+        "linux-20261027.115.1",
+        "linux-20261027.116.1"
+      ]
+    },
+    "combined_reclaimed_bytes": 3677679616
+  },
+  "original_nginx_workers_retained": {
+    "pids": [
+      1210,
+      1211,
+      1212,
+      1215
+    ],
+    "started": "2026-10-24 00:14:07 server time",
+    "systemd_main_pid": 0
+  },
+  "bundle": {
+    "name": "linux-20261027.116.2.tar.gz",
+    "bytes": 1122024,
+    "sha256": "6f93aef22eda844bcc3171f410dd472baca7abebd06559d760f2ec5b69f997ba"
+  }
+}

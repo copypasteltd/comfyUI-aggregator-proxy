@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 112,
+  "increment": 116,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-112.json",
-    "sha256": "7ec631aa280425bb7ed357bcb42e80448c6fdf84ed2c178ea64a3ed609b91baf"
+    "path": "docs/evidence/2026-10-27/development-trace-baselines-116.json",
+    "sha256": "fcec9c5de834d9531db9c118ea3ffef177e19a8b23d585d6ba22b0c3249dab6a"
   },
   "requirements": [
     {
@@ -720,7 +720,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "ci86"
+          "baseline": "cors116"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
@@ -731,11 +731,13 @@
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "cors116"
       ],
       "remaining_backlog": [
         "51",
@@ -749,7 +751,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "dependency101"
+          "baseline": "cors116"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
@@ -764,12 +766,14 @@
         {
           "path": "app/tests/integration/test_discovery.py",
           "symbol": "test_capability_projection_uses_published_contract_without_private_fields",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_discovery.py",
           "symbol": "test_discovery_visibility_selectors_filter_single_and_collection",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/discovery_test.go",
@@ -782,7 +786,8 @@
         "go80",
         "sdk90",
         "wait94",
-        "dependency101"
+        "dependency101",
+        "cors116"
       ],
       "remaining_backlog": [
         "30",
@@ -853,7 +858,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "dependency101"
+          "baseline": "cors116"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -868,18 +873,20 @@
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_admin_controls.py",
           "symbol": "test_admin_cancel_keeps_gpu_and_retry_refuses_uncertain_execution",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_dependency_error_http.py",
           "symbol": "test_503_after_actual_commit_does_not_promise_rollback_or_retry",
           "language": "python",
-          "baseline": "dependency101"
+          "baseline": "cors116"
         }
       ],
       "evidence": [
@@ -887,7 +894,8 @@
         "native86",
         "video92",
         "wait94",
-        "dependency101"
+        "dependency101",
+        "cors116"
       ],
       "remaining_backlog": [
         "29",
@@ -2851,11 +2859,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "ci86"
+          "baseline": "cors116"
         },
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "dependency101"
+          "baseline": "cors116"
         },
         {
           "path": "app/apps/admin_web/src/pages/Users.vue",
@@ -2866,18 +2874,20 @@
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_admin_sessions.py",
           "symbol": "test_activity_waiting_on_revocation_cannot_revive_session",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_admin_session_permission_and_missing_job_http",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "cors116"
         }
       ],
       "evidence": [
@@ -2885,7 +2895,8 @@
         "installed87",
         "visual87",
         "wait94",
-        "dependency101"
+        "dependency101",
+        "cors116"
       ],
       "remaining_backlog": [
         "50",
@@ -3498,7 +3509,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "ci86"
+          "baseline": "cors116"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
@@ -3509,16 +3520,19 @@
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_business_key_cannot_access_any_scope_management_route",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "cors116"
       ],
       "remaining_backlog": [
         "51",
@@ -3577,7 +3591,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "ci86"
+          "baseline": "cors116"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/key_policy_options.py",
@@ -3592,19 +3606,22 @@
         {
           "path": "app/tests/integration/test_key_policy_options.py",
           "symbol": "test_resolved_historical_creator_grants_control_real_content_reads_and_revocation",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_content.py",
           "symbol": "test_content_sharing_stays_inside_tenant_and_is_explicit",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
         "visual87",
-        "asset112"
+        "asset112",
+        "cors116"
       ],
       "remaining_backlog": [
         "51",
@@ -3623,7 +3640,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "ci86"
+          "baseline": "cors116"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_scopes.py",
@@ -3634,17 +3651,20 @@
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_parallel_keys_share_parent_budget_and_other_tenant_is_independent",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_parent_and_key_rate_rejection_rolls_back_all_levels",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         }
       ],
       "evidence": [
         "ci86",
-        "video92"
+        "video92",
+        "cors116"
       ],
       "remaining_backlog": [
         "34",
@@ -3659,7 +3679,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "ci86"
+          "baseline": "cors116"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
@@ -3670,16 +3690,19 @@
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_key_policy_options.py",
           "symbol": "test_resolved_historical_creator_grants_control_real_content_reads_and_revocation",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "cors116"
       ],
       "remaining_backlog": [
         "51",
@@ -3699,7 +3722,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "ci86"
+          "baseline": "cors116"
         },
         {
           "path": "app/apps/admin_web/src/pages/Keys.vue",
@@ -3710,18 +3733,21 @@
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_access_events.py",
           "symbol": "test_verified_denials_rotation_and_invalid_secret_are_attributed_correctly",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "cors116"
       ],
       "remaining_backlog": [
         "50",
@@ -3925,7 +3951,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "ci86"
+          "baseline": "cors116"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
@@ -3936,16 +3962,19 @@
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_scope_concurrent_idempotency_revision_noop_and_rollback",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_usage_snapshot_timezone_and_limits_edits_preserve_buckets",
-          "language": "python"
+          "language": "python",
+          "baseline": "cors116"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "cors116"
       ],
       "remaining_backlog": [
         "50",

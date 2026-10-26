@@ -1,6 +1,10 @@
 # ComfyUI Aggregator Proxy
 
-[115 · Linux 原生部署](docs/115-Linux服务器部署与磁盘清理.md) 与 [116 · HTTP / 任意来源访问](docs/116-HTTP高位入口与任意来源访问.md)：已在授权服务器初始化独立 PostgreSQL 18、私有版本化 S3、Admin/API、Runner、GC 和备份服务，并清理约 2.76 GiB 日志/下载缓存。按用户要求，最终入口使用普通 HTTP 高位端口 `39443`，由用户自行反代；显式启用 `GEN_ALLOW_HTTP=true`、`GEN_ALLOW_ANY_ORIGIN=true`，允许任意来源、标准方法和请求头，保留 Key 鉴权及 Admin CSRF。相关回归 59 项通过，最终 HTTP 部署复验与截图正在收尾。真实 Windows / 六类 Workflow 继续等待提供，服务器现有 Sub2API 尚未接入本项目定制 Provider。
+[115 · Linux 原生部署](docs/115-Linux服务器部署与磁盘清理.md) 与 [116 · HTTP / 任意来源访问](docs/116-HTTP高位入口与任意来源访问.md) 已落地：独立 PostgreSQL 18、私有版本化 S3、Admin/API、Runner、GC 和定时数据库备份已运行。按要求提供普通 HTTP 高位端口 `39443`，由用户自行反代；`GEN_ALLOW_HTTP=true`、`GEN_ALLOW_ANY_ORIGIN=true` 允许任意来源、标准方法和请求头，保留 Key 鉴权与 Admin CSRF。309 项相关 Python 回归、2 项 HTTP UUID 检查、55 项最终公网检查和 6 个实际浏览器页面/尺寸检查通过。清理累计约 3.43 GiB，部署后根盘可用约 10.24 GiB；核对原有 49 个运行服务均 active。真实 Windows / 六类 Workflow 继续等待提供，服务器现有 Sub2API 尚未接入本项目定制 Provider。
+
+![实际 Linux HTTP Admin：无已接入渠道或真实生成任务](docs/media/linux-deployment-116/admin-http.gif)
+
+这组 [实际部署截图、原速 MP4 与 GIF](docs/media/linux-deployment-116/README.md) 使用已部署数据库；下方原有演示素材继续明确标记为合成数据。入口使用逻辑：先通过 `/admin/` 登录，按需管理租户/项目和多个业务 API Key；取得 Windows 测试资源后登记 Worker、GPU 与 ComfyUI 渠道，导入并同步图像/视频/音频 Workflow，验证并发布模型别名，再用 Key 提交异步任务、查询状态和下载内容。当前可以使用管理面与内容/鉴权接口，生成服务须待真实节点和 Workflow 接入验证。初始管理员密码由受限文件交付，不放入仓库。
 
 [113 · Provider 状态与候选收口](docs/113-Provider实现状态与真实运行验收边界.md) 已更正 Provider 实现状态及范围，保留 runtime_integration_verified=false 的真实依赖验收边界。当前 7935b7d 的完整 16 门禁/4280 Python 与 rc-20261026.113.1 的 29 安装/10 浏览器通过；649/525 来源及包内元数据逐字节一致，实际 Provider 源码/补丁/exe 守卫一致。112 的 30 原生场景经 275 输入一致后复用，没有重新执行。114 审计的 V01/V02/R05 本地出口已收口；真实六类 0/6、69 稳定出口、98 完整门禁及历史根因仍开放。
 
@@ -24,7 +28,7 @@
 
 本项目内部服务名为 **Render Control**。它由可视化 Admin、持久化任务控制面、Windows Worker 和 Sub2API 集成组成。图像、视频、音频均来自 ComfyUI Workflow；音频不另接一套外部生成服务。
 
-**当前状态：开发中。** 原生 Windows 本地实现、协议测试和隔离候选安装已有验证记录；真实 Workflow、模型质量、真实 S3/Redis、生产系统服务与 10～20 台实机容量尚未完成验收。文中的截图和录屏使用真实页面与 API、独立 PostgreSQL 和明确标记的合成数据，不代表真实 GPU 生成或生产压测结果。
+**当前状态：开发中，Linux 管理面已部署。** 原生 Windows 本地实现、协议测试和隔离候选安装已有记录；Linux 的真实 PostgreSQL、私有 S3、systemd 服务和数据库归档已分别验证。真实 Workflow、模型质量、Windows 服务与 10～20 台实机容量、定制网关联合运行和完整灾备尚未完成验收。素材分别标记实际部署空后台与本地合成演示，不代表真实 GPU 生成或生产压测结果。
 
 [107 · 最终产物结构与 Worker 隔离](docs/107-ComfyUI最终产物结构与Worker隔离.md) 已完成错误 history 的受控拒绝及恢复隔离竞争修复，包含失败任务仍在清理的时序窗口。248 加强专项、完整 16 门禁/4265 Python、30 原生场景及 rc-20261026.107.1 的 29 安装/10 浏览器检查通过；647 CI/275 原生/525 候选来源匹配 75db9a0，实际 Worker 元数据/运行时 wheel 字节一致。90/12/1 原失败保留，所属临时资源已清理；17/23/43/55/60 的真实环境出口、69 待办及完整生产验收保持开放。
 

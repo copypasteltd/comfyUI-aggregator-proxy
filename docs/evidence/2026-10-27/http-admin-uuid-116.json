@@ -1,0 +1,27 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T21:39:32.044959+00:00",
+  "passed": true,
+  "scope": "Two native Node/Vitest tests for the HTTP UUID compatibility entry, plus successful vue-tsc --noEmit; actual browser execution is recorded separately.",
+  "source_revision": "13e00b82a92f1ff79e5ae4f7fa19b802c230f560",
+  "test_count": 2,
+  "tests": [
+    {
+      "name": "HTTP-compatible request identifiers preserves the browser implementation when available",
+      "status": "passed"
+    },
+    {
+      "name": "HTTP-compatible request identifiers uses secure random bytes for version 4 identifiers when HTTP hides randomUUID",
+      "status": "passed"
+    }
+  ],
+  "source_sha256": {
+    "app/apps/admin_web/src/main.ts": "e414e910a9059a7fffa509065ae98951f4691ed7d8f5454ad8fc8cc06b89db43",
+    "app/apps/admin_web/src/randomUuid.ts": "d42bb6c0c5393725aeaaf1c510ff4cb135b4d171cbd0f9a9c2b7dcfb1014782b",
+    "app/apps/admin_web/src/randomUuid.test.ts": "dd0a16af3a7a0d9621c73def482e85eadf5f9d1111906fb12f612e2dc00aa8f5"
+  },
+  "vitest_report_sha256": "9d1246988bc20cfff2ee72e2855f04b560794f661ee34b740c754922cfcac6d1",
+  "vue_typecheck_passed": true,
+  "node": "24.22.1",
+  "real_generation_verified": false
+}

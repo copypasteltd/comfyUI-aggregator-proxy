@@ -15,3 +15,15 @@
 ## 兼容与验证
 
 不增加数据库迁移，不修改 Worker 协议、任务状态或生成计量。涉及 DEV-05、14、17、18、24、27、31、32。验证默认配置仍要求生产 HTTPS、显式 HTTP 管理登录、任意来源预检/401/500、不同来源的登录与 CSRF 写入、来源伪造不能绕过 Key IP 限制；再对服务器最终 HTTP 入口实测。前期 HTTPS 报告不替代最终 HTTP / CORS 证据。
+
+实际浏览器复验发现普通公网 HTTP 不提供 `crypto.randomUUID()`，使原前端的登录请求在发出前失败。Admin 启动时现在仅在缺少该方法时安装兼容实现，使用 HTTP 下可用的 `crypto.getRandomValues()` 生成标准 v4 UUID；原生实现存在时保持原方法。登录、幂等键以及各管理组件共享该入口，避免只修登录而遗留 Workflow / Key 写入。复制凭据仍受浏览器剪贴板能力约束，可手动选中保存。
+
+| 编号 | 验证 | 结果与证据 |
+| --- | --- | --- |
+| 01 | HTTP/CORS、相关鉴权、权限与监控 | 309 项 Python 专项通过，零失败/错误/跳过；[当前来源报告](evidence/2026-10-27/http-cors-component-116.json)。此前 59 / 89 项是较窄检查，不与这 309 项相加计数。 |
+| 02 | 普通 HTTP 请求 UUID | 两项专项检查原生方法保留、安全随机数、v4 格式、128 次无重复和重复初始化；前端类型检查通过。[报告](evidence/2026-10-27/http-admin-uuid-116.json)。 |
+| 03 | 公网 HTTP 与 CORS | 最终 116.2 的 55 项通过，覆盖任意 HTTPS/http/null Origin、预检方法/头、401、跨源 Admin 与 CSRF、Key 范围与 IP 防伪、输入上传和 Range/HEAD 下载；探针 Key/文件删除、会话退出。[最终报告](evidence/2026-10-27/linux-public-http-cors-116-2.json)。116.1 的 55 项仅为更早 API 检查，浏览器兼容修复后另复验。 |
+| 04 | 实际浏览器 | 普通公网 HTTP 登录、总览、渠道、Workflow、模型、API Key 页面及移动总览；[截图与原速录屏](media/linux-deployment-116/README.md)、[浏览器记录](evidence/2026-10-27/linux-admin-browser-116.json)。使用实际空业务数据库，不注入 fixture，也不使用浏览器安全例外。 |
+| 05 | 平台运行 | [Linux 运行、服务、数据库、对象和备份记录](evidence/2026-10-27/linux-runtime-116.json)；单独保留真实生成未签收状态。 |
+
+用户后续配置反代时，只需把上游指向普通 HTTP `39443`，保留 `/admin/` 与 `/v1/` 路径、请求体和 Range 请求。公开域名改变时再修改 `GEN_PUBLIC_ORIGIN`，通过服务重启生效。若反代增加另一跳，应按实际代理拓扑核对可信地址与真实客户端 IP；不能为兼容新反代而直接相信公网任意 `X-Forwarded-For`。

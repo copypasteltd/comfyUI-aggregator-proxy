@@ -2,9 +2,9 @@
 
 ## 2026-10-27 · 115 / 116 · Native Linux deployment and HTTP / CORS
 
-- 新增 Linux 便携载荷构建、独立 systemd 服务、数据库备份及 HTTP/存储核验工具；初始化真实 PostgreSQL 18 和限权私有版本化对象桶，回收约 2.76 GiB 旧日志及下载缓存。
-- 按用户明确要求提供普通 HTTP 39443、任意来源/标准方法/请求头的 CORS；跨源管理写入继续检查 CSRF，会话 Cookie 按公开传输方式配置。新增模式与既有鉴权/会话共 59 项回归通过，最终服务器验收记录随后补齐。
-- Add explicit HTTP and unrestricted-origin options without changing default deployment behavior, database schema or Worker protocol. Real generation, fleet capacity, custom Sub2API integration and full disaster recovery remain unaccepted.
+- 已部署真实 PostgreSQL 18、限权私有版本化 S3、五个原生服务及定时数据库备份；普通 HTTP 39443、任意来源 CORS 已生效。修复公网 HTTP 不提供 randomUUID 导致后台无法登录的问题，各管理组件共用安全随机数兼容入口。
+- 309 项相关 Python 回归、2 项 UUID、55 项最终公网和 6 个实际浏览器页面/尺寸检查通过；补齐原青柠样式的实际部署截图、原速录屏、GIF 与机器证据。两轮累计清理约 3.43 GiB，部署后约 10.24 GiB 可用，原有 49 个运行服务均 active。
+- Deploy native Linux release 116.2 from source 13e00b8 with rebuilt Admin and seven portable project wheels; preserve API Key authorization and Admin CSRF while allowing arbitrary origins. Public HTTP, actual database/S3 and browser checks pass. Bilingual documentation and media distinguish the deployed management plane from pending real generation, Windows fleet capacity, custom Sub2API runtime integration and full disaster recovery.
 
 ## 2026-10-26 · Increment 113 / Provider 状态与候选（114 审计后收口）
 

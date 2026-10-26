@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-26T04:49:26+08:00",
+  "checked_at": "2026-10-27T05:41:14+08:00",
   "baseline": "v0.4",
   "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
   "project": "E:\\dev\\sandbox\\生图生视API封装",
@@ -10,19 +10,19 @@
   },
   "checks": {
     "markdown": {
-      "documents": 96,
+      "documents": 120,
       "instruction_files": 1,
-      "fenced_blocks": 47,
-      "json_examples": 16,
+      "fenced_blocks": 56,
+      "json_examples": 17,
       "yaml_examples": 1,
-      "local_links_checked": 2137
+      "local_links_checked": 2526
     },
     "contracts": {
-      "json_files": 68,
-      "schemas": 62,
-      "fixtures": 1022,
-      "positive_fixtures": 245,
-      "negative_fixtures": 777,
+      "json_files": 70,
+      "schemas": 63,
+      "fixtures": 1037,
+      "positive_fixtures": 248,
+      "negative_fixtures": 789,
       "capabilities_covered": [
         "image_to_image",
         "references_to_image",
@@ -39,11 +39,11 @@
       "guards": 24
     },
     "endpoints": {
-      "total": 190,
+      "total": 191,
       "by_identity": {
         "service": 27,
         "admin_login": 1,
-        "admin": 120,
+        "admin": 121,
         "worker": 12,
         "gateway": 28,
         "monitoring": 2
@@ -56,8 +56,7 @@
       "work_packages": 15,
       "requirements": 73,
       "work_package_statuses": {
-        "in_progress": 14,
-        "not_started": 1
+        "in_progress": 15
       },
       "admin_acceptance_mapped": 16,
       "key_acceptance_mapped": 12
@@ -70,10 +69,10 @@
         "framework": 6,
         "implemented": 67
       },
-      "named_test_references": 114,
+      "named_test_references": 156,
       "baseline_python_cases": 3593,
-      "reports": 12,
-      "current_source_files": 150,
+      "reports": 23,
+      "current_source_files": 175,
       "full_acceptance": "pending"
     },
     "topic_presence": {
@@ -108,9 +107,9 @@
     },
     {
       "file": "docs/04-工作流产品化规范.md",
-      "bytes": 16775,
+      "bytes": 17062,
       "lines": 217,
-      "sha256": "ae7ee71ab1366528007332455f7ef770f9a5443ea0bb1b48336a61f707135e10"
+      "sha256": "05de15a9d802740b51a6af8dbb475af4aee9c31fa9769f7fbf01a342c890a28c"
     },
     {
       "file": "docs/05-实施路线与验收.md",
@@ -149,16 +148,118 @@
       "sha256": "20e9c2664a0691917bedbd386b72f0b972809703f06df98857499c589e29d142"
     },
     {
+      "file": "docs/100-项目全量检查与目标差距清单.md",
+      "bytes": 24700,
+      "lines": 192,
+      "sha256": "d6d119456ee5bf284f3d2757511394787ab235147dd991236e3ac9a70b447470"
+    },
+    {
+      "file": "docs/101-依赖不可用错误与安全重试边界.md",
+      "bytes": 9311,
+      "lines": 71,
+      "sha256": "9937abcbe02f6d99e54642c3514e026f4b5d6ddf9fab7aff0256042e2563e0c6"
+    },
+    {
+      "file": "docs/102-当前工作区系统检查与目标差距.md",
+      "bytes": 26528,
+      "lines": 203,
+      "sha256": "b1513f2f19bd7a81aae835e08c66a58d5e0f9ef00089481fad0f24cdb84991f2"
+    },
+    {
+      "file": "docs/103-当前版本系统检查与目标产物差距.md",
+      "bytes": 25354,
+      "lines": 198,
+      "sha256": "26d72ae2b87218de274c06ad7ad3fe666b03c65a6393325a620901c150725e33"
+    },
+    {
+      "file": "docs/104-Workflow标量绑定与连线保护.md",
+      "bytes": 7491,
+      "lines": 65,
+      "sha256": "e598c8c6fc6269d6bde4861d6e31b76b0ad1a15b17ee157bb4e1bc04d18276a6"
+    },
+    {
+      "file": "docs/105-当前项目检查与目标差距清单.md",
+      "bytes": 30681,
+      "lines": 195,
+      "sha256": "6111e282302e74ea7c70903b023376afa53d64c455cdfcc4c0d7bc094414abca"
+    },
+    {
+      "file": "docs/106-Worker产物中断复制与恢复.md",
+      "bytes": 6496,
+      "lines": 49,
+      "sha256": "7b3cf4c3ab5e3e9da7722139102faa37d2e346a95378d1d64d821c2ddeb8d15b"
+    },
+    {
+      "file": "docs/107-ComfyUI最终产物结构与Worker隔离.md",
+      "bytes": 5804,
+      "lines": 38,
+      "sha256": "762c31e9e99c4219a1458d649cc82fe9cf21fa93c2ed6c2286a9e1a01b57e8fa"
+    },
+    {
+      "file": "docs/108-当前工作区与完整目标差距复核.md",
+      "bytes": 31215,
+      "lines": 219,
+      "sha256": "832d951e9be5b9617c538af44ab3722a8024a231feb18c11972807c7778e2e23"
+    },
+    {
+      "file": "docs/109-当前源码全量验证与安装候选收口.md",
+      "bytes": 4048,
+      "lines": 36,
+      "sha256": "fb63b36b41bf9f3868b025d9b7ee7329025edb572c2f5423acbc45847e66d6da"
+    },
+    {
       "file": "docs/11-数据字典与数据库事务.md",
       "bytes": 28969,
       "lines": 186,
       "sha256": "64bf1ee044ef99657ee0f080457d15ef70b98ca6e1a44f69f52bd7e83445d63c"
     },
     {
+      "file": "docs/110-输出发布提交不确定与对象清理.md",
+      "bytes": 5917,
+      "lines": 46,
+      "sha256": "e82137ce98afc75ef618ce8d545be717f975b794c5f635082fdaf64ecfaf7fbb"
+    },
+    {
+      "file": "docs/111-当前项目完整目标与逐项差距.md",
+      "bytes": 28727,
+      "lines": 199,
+      "sha256": "3c7a1fb4da26031f0eb3187d9a653d77f12a58ffefbbb7d1310a82405eec3260"
+    },
+    {
+      "file": "docs/112-输入素材发布未决事务与清理保护.md",
+      "bytes": 5698,
+      "lines": 38,
+      "sha256": "674eb173dfcbd494ecf2f377a467b4b7ccf63a882a43a4f0bd4d917207b97dd8"
+    },
+    {
+      "file": "docs/113-Provider实现状态与真实运行验收边界.md",
+      "bytes": 5253,
+      "lines": 39,
+      "sha256": "312ba126d911949eb4543bab9c9fc1be6a7373f6a47f1a37923195555bc5812f"
+    },
+    {
+      "file": "docs/114-当前工作区系统审计与完整目标差距.md",
+      "bytes": 31237,
+      "lines": 213,
+      "sha256": "5cc23a4c92323ff0ce3e90fcffacfb86af8bf5d1036dde82683572fb167cc93d"
+    },
+    {
+      "file": "docs/115-Linux服务器部署与磁盘清理.md",
+      "bytes": 9206,
+      "lines": 70,
+      "sha256": "a3391310623b3df9bf58f3e5e7c9bc97a5147cf3f5f09fdf281f2cbce3a06d12"
+    },
+    {
+      "file": "docs/116-HTTP高位入口与任意来源访问.md",
+      "bytes": 4713,
+      "lines": 29,
+      "sha256": "f1010c91695f5188097ab893dd51bfad126f8c3e5fb6e8e476a0765f3fc1956e"
+    },
+    {
       "file": "docs/12-接口契约与Worker协议.md",
-      "bytes": 28306,
-      "lines": 183,
-      "sha256": "719b22942ee81814bc44df0df3df35f0627729656785f5e654f7632c84b4c866"
+      "bytes": 29711,
+      "lines": 193,
+      "sha256": "78e0127b24413fe746ea9edf998a185216f22b381a90c866bc852db173cba33b"
     },
     {
       "file": "docs/13-Admin前端开发规范.md",
@@ -174,21 +275,21 @@
     },
     {
       "file": "docs/15-原生部署配置与运维.md",
-      "bytes": 29047,
-      "lines": 185,
-      "sha256": "957cd2dd82fb8c0abfd2df51e57ca3896671582f3cb81b9a5c8ab37302c0f33d"
+      "bytes": 29465,
+      "lines": 187,
+      "sha256": "69fb170e21e34ce4645520bf4dc2ee3000029b27c4dd7ff4337e341ce53bf6ba"
     },
     {
       "file": "docs/16-开发任务分解与交付清单.md",
-      "bytes": 78134,
+      "bytes": 78243,
       "lines": 376,
-      "sha256": "68857487c2a9792856c0299f336a6532add76851a13faaf9aa4de674b7bf0981"
+      "sha256": "9f37ac9093b989e14d17e7d5cff448183fd1d27704ca5467d47deca29530f284"
     },
     {
       "file": "docs/17-开发记录与运行说明.md",
-      "bytes": 152927,
-      "lines": 677,
-      "sha256": "4ea757ab6693b266a92218d5d0be7728813fba16dc2e51bbfef4671fe829a713"
+      "bytes": 168841,
+      "lines": 755,
+      "sha256": "14f2013a0edac52d98d57860ce1e18975bfe1695412e6ae7ff580c5bc1c0a49c"
     },
     {
       "file": "docs/18-Admin界面实现约定.md",
@@ -378,9 +479,9 @@
     },
     {
       "file": "docs/49-原生发布包与离线安装验证.md",
-      "bytes": 13880,
-      "lines": 85,
-      "sha256": "8f4d622e7c90c2335e41bb447b86da94da733ded13b0fb8ddb625a6cfcaeebff"
+      "bytes": 14374,
+      "lines": 89,
+      "sha256": "217ae7e490c8fc2478ddcafc4127b6714020e8e3b52596cb032f6cc1173d5803"
     },
     {
       "file": "docs/50-有证据内部重试与计量保全.md",
@@ -552,9 +653,9 @@
     },
     {
       "file": "docs/78-完整待办与首版收口清单.md",
-      "bytes": 29963,
-      "lines": 186,
-      "sha256": "c5c0c33c6ff4fd11d6a355ed459d468a3cf3da53cc5086c671b58ca05493d28d"
+      "bytes": 41094,
+      "lines": 229,
+      "sha256": "93399308a06a08e51a7a7749edcec50fd3646c82bcc05a9df0e46ddc79a85c9f"
     },
     {
       "file": "docs/79-网关模型目录持久发布协议.md",
@@ -600,21 +701,21 @@
     },
     {
       "file": "docs/86-数据库故障脱敏诊断与并发观测.md",
-      "bytes": 17913,
-      "lines": 102,
-      "sha256": "ca967a170927abd4c70a538a71f4499303ad51a6918b454e1ab54611dd02797e"
+      "bytes": 18283,
+      "lines": 107,
+      "sha256": "c9022ae7e95005ede1ee2aa11de8c4de56be0ee64e500d9e6b2958af426f5f99"
     },
     {
       "file": "docs/87-青柠视觉系统与组件复用.md",
-      "bytes": 13406,
-      "lines": 106,
-      "sha256": "c4ed9015aab2092f2287ba775df23c663ad11fb85c624a92fdd3883fc9e6233a"
+      "bytes": 13793,
+      "lines": 110,
+      "sha256": "3fd2f5c22fabb2f4ab0e950af490334e49b4d514b8835741b98ef682c6d546de"
     },
     {
       "file": "docs/88-需求实现与分层证据追踪.md",
-      "bytes": 57363,
-      "lines": 258,
-      "sha256": "6f20c1a28634e5b8455fd7d8962ac82887ec9aeca76da37f8cd442530a2a7fab"
+      "bytes": 71496,
+      "lines": 264,
+      "sha256": "7288943f0f1e71ea6d57f277d342143676963faedc8f89544ba8e19ac9422574"
     },
     {
       "file": "docs/89-审计分页投影上限与版本化复验.md",
@@ -639,6 +740,42 @@
       "bytes": 16207,
       "lines": 96,
       "sha256": "e81833943991f0d2da2fe7eb4b16f2f653503093c013989eb0a03ed3b6750915"
+    },
+    {
+      "file": "docs/93-真实Workflow离线发布包构建.md",
+      "bytes": 6008,
+      "lines": 68,
+      "sha256": "ffd5ef5544084c6d98ee29d0b8a1ad56afe1aa6d55ad6d4b81cff9081b80ce84"
+    },
+    {
+      "file": "docs/94-队列等待估算与运行样本.md",
+      "bytes": 9252,
+      "lines": 73,
+      "sha256": "d3791998051da062aedeed722ffd7582cf387d5ef9374912ad9783c8c128cb47"
+    },
+    {
+      "file": "docs/95-项目现状审计与目标产物差距.md",
+      "bytes": 38939,
+      "lines": 293,
+      "sha256": "3192d52168bb68de8699242c91e5085db1004e84f1bb559770b4e534466456bb"
+    },
+    {
+      "file": "docs/96-当前源码完整验证与原生发行候选.md",
+      "bytes": 9175,
+      "lines": 86,
+      "sha256": "1a82f179e4ac4041da90f6ae18a02a2c145ad73d090d3539afbacbe97a3a9d47"
+    },
+    {
+      "file": "docs/97-发行来源绑定与审计状态可读性.md",
+      "bytes": 8121,
+      "lines": 71,
+      "sha256": "d2a938410314880c2e9b5ce7b8906cedec3e00bcd923af396bf80d6b676a3960"
+    },
+    {
+      "file": "docs/99-原生数据库等待分类与并发复验.md",
+      "bytes": 5904,
+      "lines": 42,
+      "sha256": "bd48260208cbef2369c129dcaa293d54d8692aaabe9aeb1232cd9e57213a061b"
     },
     {
       "file": "docs/contracts/admin-alert-failure.schema.json",
@@ -737,6 +874,12 @@
       "sha256": "bafe2159422f62a7f6051d2f7fcc7af4502fb45285b31d47a6847edb9f3e4c08"
     },
     {
+      "file": "docs/contracts/admin-wait-estimate.schema.json",
+      "bytes": 2405,
+      "lines": 29,
+      "sha256": "2d001615d5cd695df5410cffad1dce9f3e6ac5c6c51790fe63375882f37e8aa9"
+    },
+    {
       "file": "docs/contracts/admin-workflow-catalog-page.schema.json",
       "bytes": 4253,
       "lines": 181,
@@ -833,16 +976,22 @@
       "sha256": "f5455ceffbbe0d4b065dbbc16e56ebb12120b63a80ad2ff21652118a0cd7eba0"
     },
     {
+      "file": "docs/contracts/dependency-error-policy.json",
+      "bytes": 1403,
+      "lines": 23,
+      "sha256": "2575188729ef59f8aad6f9bde1f2d38a4a8bb378b2a21fbde0a6a226958ffae0"
+    },
+    {
       "file": "docs/contracts/development-evidence.json",
-      "bytes": 128661,
-      "lines": 4904,
-      "sha256": "68cf3d105cffc3554103a89bc878249be759eb84b7fef3eed6187bf589d3938c"
+      "bytes": 177282,
+      "lines": 5934,
+      "sha256": "b13a78019be3f3a116442fd6e90385ebfedae8eab64eca2bbda0fb507f6267be"
     },
     {
       "file": "docs/contracts/development-traceability.json",
-      "bytes": 42027,
+      "bytes": 43533,
       "lines": 1743,
-      "sha256": "f20424538a1cd02eeb5616b7c835f4e37c0115cb8ea2ce1d915ab1ba5cee8910"
+      "sha256": "a06e90f26752d5547169e69ef0933c371d721e611e6c5a0ec0e8a5118ffa4cf9"
     },
     {
       "file": "docs/contracts/dispatch-policy.schema.json",
@@ -852,15 +1001,15 @@
     },
     {
       "file": "docs/contracts/endpoint-catalog.json",
-      "bytes": 110580,
-      "lines": 3588,
-      "sha256": "dc6ada8d91b55cd20ca7bf00a667958966690a1174e35a7751be60f88a696fc9"
+      "bytes": 111085,
+      "lines": 3604,
+      "sha256": "5e9fb6fcfb7270bf558ae6f46905361f0d9f28f88fa5cd9b62d5c1e2c217aa77"
     },
     {
       "file": "docs/contracts/fixtures.json",
-      "bytes": 1502663,
-      "lines": 45942,
-      "sha256": "7ddbf04357554c19a7b7340f1c202737a25066f40dd2e706988f12353051cf43"
+      "bytes": 1514121,
+      "lines": 46288,
+      "sha256": "c8f005daff94a3357ce367094c58f3ee8974b592a97106a1d8a7da19c88f0841"
     },
     {
       "file": "docs/contracts/gateway-catalog-configuration.schema.json",
@@ -966,9 +1115,9 @@
     },
     {
       "file": "docs/contracts/README.md",
-      "bytes": 20748,
-      "lines": 143,
-      "sha256": "ad9c4fdc5ea712dbcd5223bacb6d608c99046e9469fa9afe023bef673c8ebfa9"
+      "bytes": 21502,
+      "lines": 151,
+      "sha256": "a1086f1b983ed325b83a0da8fcf81eafe1c6c8dc558861f8f7b91105160a84d3"
     },
     {
       "file": "docs/contracts/recovery-checkpoint.schema.json",
@@ -1055,28 +1204,34 @@
       "sha256": "b648624faaf0fdb9dbb66b5fdd6d50ab9cea323cba0e3dc7dfa51e7f73627240"
     },
     {
+      "file": "docs/media/linux-deployment-116/README.md",
+      "bytes": 2110,
+      "lines": 21,
+      "sha256": "26130490fa326cd6de9140a30337470cf7aae33cd1d1da73aacacc259df6a686"
+    },
+    {
       "file": "docs/media/README.md",
-      "bytes": 11145,
-      "lines": 97,
-      "sha256": "7cbef7ccf14a30123aa2cfcfb9e4973fcaca1dfe0f4d4aa4637d10043426cf08"
+      "bytes": 14207,
+      "lines": 123,
+      "sha256": "157d2a56f7dee361bac34fd10cfba6c14082fc168d4acb47addd628f4a381953"
     },
     {
       "file": "docs/README.en.md",
-      "bytes": 17787,
-      "lines": 159,
-      "sha256": "5713a05bb8e420da684efb187ed4d519a53a0faedaffb34f9c70880625de3300"
+      "bytes": 33160,
+      "lines": 207,
+      "sha256": "f36b27cc48c282e6d280f97d33b9dd4cac98f2feecab561d653f3d3891d5c5e3"
     },
     {
       "file": "docs/README.md",
-      "bytes": 30962,
-      "lines": 194,
-      "sha256": "826bc9e399e0bd35819e419bbc9611abe076915aaaf6f8f89023a082d669c79b"
+      "bytes": 44215,
+      "lines": 241,
+      "sha256": "a04718cffddec0334c8a782b5051555350106e09085573cdde32a144d8f81193"
     },
     {
       "file": "docs/tools/development_evidence.py",
-      "bytes": 19219,
-      "lines": 331,
-      "sha256": "29f698e0a89c61b76ce8b33c52eaa54d4545d7b69ee5eced6668e2585b8664f1"
+      "bytes": 21502,
+      "lines": 354,
+      "sha256": "ddc71110a45f42bb810d514e0f4c4d003306f90c4e1635c2cfd3188f6d3fcce8"
     },
     {
       "file": "docs/tools/verify_docs.py",
