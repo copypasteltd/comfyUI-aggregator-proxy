@@ -1,0 +1,28 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T05:57:00.423045+00:00",
+  "check": "contracts",
+  "scope": "Read-only current source/documentation check; no complete functional test, real-resource or production acceptance",
+  "command": [
+    "app\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "scripts/sync-contracts.py",
+    "--check"
+  ],
+  "working_directory": "app",
+  "exit_code": 0,
+  "passed": true,
+  "seconds": 0.229,
+  "private_log_sha256": "5b78ec994846511ef90a86432747adbad8bb2f746fbc47b2a8da6cde1c9f3fd0",
+  "private_log_bytes": 48,
+  "result": {
+    "passed": true,
+    "contracts": 67,
+    "drift": []
+  },
+  "browser_started": false,
+  "virtualization_used": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending"
+}

@@ -1,0 +1,29 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T05:57:02.366047+00:00",
+  "check": "ruff",
+  "scope": "Read-only current source/documentation check; no complete functional test, real-resource or production acceptance",
+  "command": [
+    "app\\.venv\\Scripts\\ruff.exe",
+    "check",
+    "packages",
+    "apps",
+    "scripts",
+    "tests",
+    "migrations"
+  ],
+  "working_directory": "app",
+  "exit_code": 0,
+  "passed": true,
+  "seconds": 2.146,
+  "private_log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+  "private_log_bytes": 19,
+  "result": null,
+  "browser_started": false,
+  "virtualization_used": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "diagnostic_lines": [
+    "All checks passed!"
+  ]
+}

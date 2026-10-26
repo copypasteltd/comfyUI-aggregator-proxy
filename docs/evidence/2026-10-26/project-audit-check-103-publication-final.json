@@ -1,0 +1,29 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T06:01:09.400934+00:00",
+  "check": "publication",
+  "scope": "Read-only current source/documentation check; no complete functional test, real-resource or production acceptance",
+  "command": [
+    "app\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "app/scripts/audit-repository.py"
+  ],
+  "working_directory": ".",
+  "exit_code": 0,
+  "passed": true,
+  "seconds": 2.14,
+  "private_log_sha256": "952a97c1d3148a0a7d8720411691f4f7b6d39b006df941212b264e4513c50768",
+  "private_log_bytes": 83,
+  "result": {
+    "passed": true,
+    "files": 3243,
+    "MiB": 98.55,
+    "finding_files": 0,
+    "findings": []
+  },
+  "browser_started": false,
+  "virtualization_used": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending"
+}
