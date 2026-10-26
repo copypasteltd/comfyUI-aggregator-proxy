@@ -57,7 +57,8 @@ def main() -> None:
     ffmpeg = ROOT / "app/.local/toolchains/ffmpeg-8.1/bin/ffmpeg.exe"
     lock = json.loads((ROOT / "app/config/media-tools.lock.json").read_text(encoding="utf-8"))
     assert sha(ffmpeg) == lock["files"]["bin/ffmpeg.exe"]["sha256"]
-    for directory in (MEDIA, MEDIA / "gateway-catalog", MEDIA / "confirmed-retry"):
+    directories = (MEDIA, MEDIA / "gateway-catalog", MEDIA / "confirmed-retry", MEDIA / "wait-estimates")
+    for directory in directories:
         manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
         assert manifest["passed"] and manifest["synthetic_data"] and not manifest["real_gpu_generation"]
         for item in manifest["files"]:
@@ -76,6 +77,16 @@ def main() -> None:
                     errors.append("media_decode:" + path.name)
                 else:
                     decoded.append(path.relative_to(MEDIA).as_posix())
+    wait_manifest = json.loads((MEDIA / "wait-estimates/manifest.json").read_text(encoding="utf-8"))
+    wait_source = (ROOT / wait_manifest["source_report"]["path"]).resolve()
+    assert wait_source.is_relative_to(ROOT / "docs/evidence") and sha(wait_source) == wait_manifest["source_report"]["sha256"]
+    wait_capture = json.loads(wait_source.read_text(encoding="utf-8"))
+    assert wait_capture["passed"] and wait_capture["browser_closed"] and wait_capture["closed_contexts"] == 3 and all(wait_capture["cleanup"].values())
+    assert wait_capture["synthetic_data"] and not wait_capture["real_resource_acceptance"] and wait_capture["full_acceptance"] == "pending"
+    wait_schema = json.loads((ROOT / "docs/contracts/admin-wait-estimate.schema.json").read_text(encoding="utf-8"))
+    assert len(wait_capture["responses"]) == 3
+    for response in wait_capture["responses"]:
+        Draft202012Validator(wait_schema).validate(response)
     capture = json.loads((MEDIA / "capture.json").read_text(encoding="utf-8"))
     cleanup = json.loads((ROOT / "docs/evidence/2026-10-25/readme-media-capture.json").read_text(encoding="utf-8"))
     assert capture["passed"] and not capture["errors"] and capture["closed_contexts"] == 3 and capture["browser_closed"]
@@ -106,7 +117,7 @@ def main() -> None:
         assert response["retry"]["last_error"] == "comfy_oom" and response["retry"]["count"] == 1 and response["retry"]["limit"] == 2
         assert response["status"] == ("cancelled" if item["operation"] == "mobile_cancel_result" else "retry_wait")
         assert (response["retry"]["next_at"] is None) == (response["status"] == "cancelled")
-    report = {"at": datetime.now(UTC).isoformat(), "passed": not errors, "entry_documents": len(documents), "local_links_checked": links, "request_examples_validated": 3, "screenshots_verified": screenshots, "media_manifests_verified": 3, "video_and_gif_fully_decoded": decoded, "bilingual_capability_topics_present": True, "actual_lifecycle_responses_verified": 2, "catalog_responses_verified": len(catalog_responses["responses"]), "catalog_provider_receipts_are_protocol_fixtures": True, "confirmed_retry_responses_verified": len(retry_responses["responses"]), "synthetic_capture_and_cleanup_passed": True, "errors": errors, "full_python_suite_rerun": False, "runtime_protocol_changed": False}
+    report = {"at": datetime.now(UTC).isoformat(), "passed": not errors, "entry_documents": len(documents), "local_links_checked": links, "request_examples_validated": 3, "screenshots_verified": screenshots, "media_manifests_verified": len(directories), "video_and_gif_fully_decoded": decoded, "bilingual_capability_topics_present": True, "actual_lifecycle_responses_verified": 2, "catalog_responses_verified": len(catalog_responses["responses"]), "catalog_provider_receipts_are_protocol_fixtures": True, "confirmed_retry_responses_verified": len(retry_responses["responses"]), "wait_estimate_responses_verified": len(wait_capture["responses"]), "synthetic_capture_and_cleanup_passed": True, "errors": errors, "full_python_suite_rerun": False, "runtime_protocol_changed": False}
     if report_path is not None:
         report_path.parent.mkdir(parents=True, exist_ok=True)
         with report_path.open("x", encoding="utf-8") as stream:

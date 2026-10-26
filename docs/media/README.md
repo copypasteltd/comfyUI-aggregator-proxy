@@ -6,9 +6,9 @@
 
 All captures use the actual Admin and Control API with disposable native PostgreSQL. Accounts, scopes, models, Workflows, 12 queued tasks and 3 completed illustration artifacts are synthetic fixtures. No real ComfyUI execution, GPU inference or physical-fleet capacity test is recorded. Illustrations are drawn locally and are not model-quality examples. The current UI is Chinese.
 
-本轮按 [87 · 青柠](../87-青柠视觉系统与组件复用.md) 从原始源码统一 Admin，重新拍摄全部 20 张截图、4 个 MP4 和 4 个 GIF。17 个页面通过桌面、390px / 320px 布局检查；原字体本地加载，保留实际响应与合成数据边界。
+第 87 增量按 [87 · 青柠](../87-青柠视觉系统与组件复用.md) 从原始源码统一 Admin，重新拍摄全部 20 张截图、4 个 MP4 和 4 个 GIF。17 个页面通过桌面、390px / 320px 布局检查；原字体本地加载，保留实际响应与合成数据边界。
 
-This increment adopts the original 04 Lime source throughout the Admin. All 20 screenshots, four MP4s and four GIFs are refreshed. Seventeen routes pass desktop and 390px/320px layout checks with local original fonts, explicit synthetic data and actual HTTP responses.
+Increment 87 adopts the original 04 Lime source throughout the Admin. All 20 screenshots, four MP4s and four GIFs are refreshed. Seventeen routes pass desktop and 390px/320px layout checks with local original fonts, explicit synthetic data and actual HTTP responses.
 
 ## 视频与 GIF / Videos and GIFs
 
@@ -95,3 +95,19 @@ Sanitized responses, capture cleanup, media hashes and isolated-resource cleanup
 原始录屏在忽略的 app/.local/confirmed-retry-browser/<run_id>/recordings；转换只接受对应运行目录，核对锁定工具摘要，并完整解码公开 MP4/GIF。Raw recordings remain under the ignored owned capture run; conversion validates ownership and pinned tools, then fully decodes both outputs.
 
 run_id 从 docs/evidence/<日期>/confirmed-retry-browser-fixture.json 读取。Read run_id from the dated browser-fixture evidence file.
+
+## 第 94 增量等待估算 / Increment 94 queue estimates
+
+六张新截图和原速录屏展示任务详情的等待区间、样本不足、过期和关闭面板。20 条运行样本与占用均为合成夹具，页面、管理会话和 HTTPS API 请求实际执行；不构成真实 GPU 生成或容量验收。三种尺寸共 10 项检查，测试浏览器、临时 API 与数据库清理通过。
+
+Six new screenshots and an original-speed recording demonstrate conditional waits, insufficient samples, expiry and drawer closure. Twenty runtime samples and occupancy are synthetic fixtures; the UI, Admin sessions and HTTPS requests actually run. Ten checks cover three widths and verified resource cleanup. This is component evidence, not physical inference or capacity acceptance.
+
+| 宽度 / Width | 区间 / Interval | 未知 / Unknown |
+| --- | --- | --- |
+| 1440px | [Desktop](wait-estimates/wait-estimate-1440.png) | [Unknown](wait-estimates/wait-unknown-1440.png) |
+| 768px | [Tablet](wait-estimates/wait-estimate-768.png) | [Unknown](wait-estimates/wait-unknown-768.png) |
+| 390px | [Mobile](wait-estimates/wait-estimate-390.png) | [Unknown](wait-estimates/wait-unknown-390.png) |
+
+[MP4](wait-estimates/wait-estimates.mp4) · [GIF](wait-estimates/wait-estimates.gif) · [Actual responses and capture](../evidence/2026-10-26/wait-estimate-94-bounded/summary.json) · [Media hashes](wait-estimates/manifest.json)
+
+![Conditional wait and unknown state](wait-estimates/wait-estimates.gif)

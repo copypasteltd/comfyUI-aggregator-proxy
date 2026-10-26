@@ -134,6 +134,7 @@ from generation_contracts.spec_isolation import (
     SpecIsolationView,
 )
 from generation_contracts.validation import JobCreate, WorkerEvent
+from generation_contracts.wait_estimates import WaitEstimate
 from generation_contracts.worker import AttemptStatus, Claim, Heartbeat, Register, Renew
 from generation_contracts.worker_nodes import (
     WorkerNodeAction,
@@ -222,6 +223,7 @@ from generation_infrastructure.security import SecretVault, secret_identifier
 from generation_infrastructure.settings import Settings
 from generation_infrastructure.storage import make_store
 from generation_infrastructure.validation_jobs import ValidationJobs
+from generation_infrastructure.wait_estimates import WaitEstimates
 from generation_infrastructure.workflow_directory import WorkflowDirectory
 from generation_infrastructure.workflow_history import WorkflowHistory
 from sqlalchemy import text
@@ -692,6 +694,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.post("/admin/api/v1/jobs/{identifier}/cancel", status_code=202, response_model=AdminJobView)
     def admin_job_cancel(identifier: str, request: Request, identity: Annotated[AdminIdentity, Depends(permission("jobs:control"))]) -> dict[str, Any]:
         return admin_jobs.cancel(identity, parse_id("job", identifier), admin_token(request), request.state.request_id)
+
+    @app.get("/admin/api/v1/jobs/{identifier}/wait-estimate", response_model=WaitEstimate)
+    def admin_job_wait_estimate(identifier: str, identity: Annotated[AdminIdentity, Depends(permission("jobs:read"))]) -> dict[str, Any]:
+        return WaitEstimates(admin_jobs.sessions, settings).get(parse_id("job", identifier))
 
     @app.post("/admin/api/v1/jobs/{identifier}/retry", status_code=202, response_model=AdminJobView)
     def admin_job_retry(identifier: str, request: Request, identity: Annotated[AdminIdentity, Depends(permission("jobs:control"))]) -> dict[str, Any]:

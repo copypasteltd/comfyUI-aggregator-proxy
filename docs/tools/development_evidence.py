@@ -224,6 +224,29 @@ def audit(root: Path, *, check_matrix: bool = True) -> dict:
             require(sum(case["passed_cases"] for case in current_tests.values()) == results["tests"], "Python run case count differs from executed inventory")
             source_indexes[run_key] = run["source_sha256"]
             test_indexes[run_key] = current_tests
+        browser_runs = baseline.get("browser_runs", [])
+        require(isinstance(browser_runs, list) and len(browser_runs) <= 16, "invalid browser run collection")
+        require(len(browser_runs) == len(set(browser_runs)), "duplicate browser run binding")
+        for run_key in browser_runs:
+            require(isinstance(run_key, str) and re.fullmatch(r"[a-z][a-z0-9_]{0,31}", run_key), "invalid browser run name")
+            require(run_key not in {*source_indexes, "admin87", "go80"}, "reserved browser run name")
+            run = reports[run_key]
+            require(baseline["reports"][run_key]["layer"] == "local_browser", "browser run must preserve browser scope")
+            require(run.get("format_version") == 1 and run.get("sources_unchanged") is True, "browser run inputs changed or format is unknown")
+            require(run.get("real_resource_acceptance") is False and run.get("full_acceptance") == "pending", "browser run cannot accept real resources or the full release")
+            require(run.get("browser_closed") is True and type(run.get("closed_contexts")) is int and 1 <= run["closed_contexts"] <= 8, "browser run left resources open")
+            require(bool(run.get("cleanup")) and all(value is True for value in run["cleanup"].values()), "browser run cleanup incomplete")
+            require(run["browser_process"]["status"] == "passed" and run["browser_process"]["owned_process_tree_closed"] is True, "browser process did not close successfully")
+            checks = run["checks"]
+            require(isinstance(checks, list) and 0 < len(checks) <= 100 and all(isinstance(check, str) and check for check in checks) and len(checks) == len(set(checks)), "browser run contains no distinct checks")
+            images = run["screenshots"]
+            require(isinstance(images, list) and 0 < len(images) <= 30, "browser run contains no bounded screenshots")
+            parent = PurePosixPath(baseline["reports"][run_key]["path"]).parent
+            for artifact in images:
+                relative = str(parent / artifact["path"])
+                require(sha256(read_raw(root, relative)) == artifact["sha256"], "browser screenshot hash drift")
+                checked_files.add(relative)
+            source_indexes[run_key] = run["source_sha256"]
         admin = baseline["admin_sources"]
         require(admin["archive_sha256"] == reports["visual87"]["candidate"]["archive_sha256"], "Admin source snapshot has unrelated candidate")
         require(reports["installed87"]["browser_closed"] is True, "installed browser evidence left resources open")

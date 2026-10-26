@@ -9,6 +9,7 @@ import { useSession } from '../session'
 import SpecIsolationCreate from '../components/SpecIsolationCreate.vue'
 import QueueFilters from '../components/QueueFilters.vue'
 import JobTimings from '../components/JobTimings.vue'
+import JobWaitEstimate from '../components/JobWaitEstimate.vue'
 import JobCancellationDialog from '../components/JobCancellationDialog.vue'
 import { queueStates as states, useQueueRefresh, waitTime } from '../queue'
 
@@ -80,6 +81,7 @@ onUnmounted(() => { alive = false; controller.abort(); detailController?.abort()
       <el-form v-if="session.allows('jobs:control') && ['queued', 'retry_wait'].includes(detail.status) && !detail.current_attempt_id" inline class="detail-block" @submit.prevent="savePriority"><el-form-item label="优先级"><el-input-number v-model="priority" :min="-100" :max="100" :step="1" :precision="0"/></el-form-item><el-button native-type="submit" :loading="busy">保存优先级</el-button></el-form>
       <p v-if="session.allows('jobs:control') && ['queued', 'retry_wait'].includes(detail.status) && !detail.current_attempt_id" class="form-help">优先级结合租户内等待老化生效；调序不改变租户份额、当前占用或冻结授权。</p>
       <JobTimings :detail="detail"/>
+      <JobWaitEstimate :job-id="detail.id" :revision="detail.updated_revision" :active="detailOpen"/>
       <h3>执行尝试</h3><el-table :data="detail.attempts" empty-text="尚未领取" table-layout="auto"><el-table-column label="尝试 / 渠道" min-width="250"><template #default="{ row }"><span class="mono">{{ row.id }}</span><router-link :to="{ path: '/channels', query: { channel: row.channel_id } }" class="id-line">{{ row.channel_id }}</router-link></template></el-table-column><el-table-column prop="fence" label="栅栏值" width="80"/><el-table-column label="GPU / 结果提交" min-width="190"><template #default="{ row }">{{ row.occupancy_uncertain ? '占用待核对' : row.gpu_occupied ? '占用中' : row.generation_released_at ? '已释放' : '待确认' }} / {{ row.closed_at ? '已关闭' : '未关闭' }}</template></el-table-column></el-table><h3>关联重试</h3><p v-if="!detail.retries.length" class="muted">暂无关联重试任务</p><el-button v-for="id in detail.retries" :key="id" text @click="inspect(id)">{{ id }}</el-button><h3>生成内容</h3><p v-if="!detail.artifacts.length" class="muted">暂无已交付产物</p><p v-for="id in detail.artifacts" :key="id" class="mono">{{ id }}</p>
     </template></div></el-drawer>
 </template>

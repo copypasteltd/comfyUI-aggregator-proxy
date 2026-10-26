@@ -9,6 +9,7 @@ from generation_contracts.validation import WorkerEvent
 from generation_domain.errors import DomainError
 from generation_domain.policies import enforce_limit
 from generation_domain.retries import OOM_CODE, RETRY_POLICY, confirmed_oom_evidence, retry_after
+from generation_domain.spec_isolation import spec_digest
 from generation_domain.state import TERMINAL, transition, uncertain
 from generation_domain.values import fingerprint, parse_id, public_id, utcnow
 from sqlalchemy import select, text
@@ -44,6 +45,7 @@ from generation_infrastructure.retry_routes import (
     oom_attempts,
     retry_route_approved,
 )
+from generation_infrastructure.runtime_basis import wait_basis
 from generation_infrastructure.security import SecretVault
 from generation_infrastructure.spec_isolation import blocks_claim, confirmed_failure
 from generation_infrastructure.transactions import lock_buckets, record_change
@@ -257,7 +259,11 @@ class LeaseRepository:
             session.add(attempt)
             session.flush()
             dispatch = charge_dispatch(buckets, job, release, binding, gpu, utcnow())
-            attempt.channel_snapshot = {**attempt.channel_snapshot, "dispatch": dispatch}
+            profile = next((item for item in release.manifest.get("runtime_profiles", []) if binding.runtime_approval and item["id"] == binding.runtime_approval.get("profile_id") and item["gpu_hardware_id"] == gpu.hardware_id), None)
+            basis = wait_basis(release_digest=release.digest, specification=spec_digest(job.task_type, job.execution), gpu_id=gpu.id,
+                hardware_id=gpu.hardware_id, channel_id=channel.id, revision=channel.desired_revision, approval=binding.runtime_approval,
+                profile=profile, validation=job.is_validation, test_only=bool(release.validation.get("test_only")))
+            attempt.channel_snapshot = {**attempt.channel_snapshot, "dispatch": dispatch, "wait_basis": basis}
             request.attempt_id = attempt.id
             session.add(GpuOccupancy(gpu_id=gpu.id, attempt_id=attempt.id, job_id=job.id))
             job.current_attempt_id = attempt.id

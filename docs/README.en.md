@@ -6,7 +6,9 @@ The project README provides the complete English architecture and operating guid
 
 Start with requirements, development rules, engineering structure and the delivery checklist. For API changes, read the frozen contracts and Worker protocol before implementation. Code/configuration/scripts stay under `app/`; documentation/contracts/evidence/media stay under `docs/`. Native processes only: no Docker, WSL or VMs.
 
-Current [increment 93](93-真实Workflow离线发布包构建.md) implements offline package preparation for all six capabilities using existing local model hashes and Git revisions. It emits an importable manifest, clears prior runtime claims and supports dependency-drift checks. See [focused evidence](evidence/2026-10-26/workflow-package-python-93.json); physical-resource and full-release exits remain open.
+Current [increment 94](94-队列等待估算与运行样本.md) adds on-demand queue estimates to Admin job details. A consistent snapshot combines physical GPU occupancy, scheduling policy and matching runtime samples from the last 24 hours. It shows a conditional allocation-wait interval, sample counts and a 15-second validity window. Missing samples, stale devices or uncertain execution produce unknown; actual-device calibration remains open.
+
+Previous [increment 93](93-真实Workflow离线发布包构建.md) implements offline package preparation for all six capabilities using existing local model hashes and Git revisions. It emits an importable manifest, clears prior runtime claims and supports dependency-drift checks. See [focused evidence](evidence/2026-10-26/workflow-package-python-93.json); physical-resource and full-release exits remain open.
 
 Previous [increment 92](92-直接视频接口冻结投影与权限边界.md) aligns direct job_ video creation, original-key replay and detail reads with frozen specifications, exact millisecond durations and safe terminal errors. It preserves current scopes, revocation, sensitive-input controls, cross-key/tenant isolation and bounded list queries. Verification passes 28 source-bound video cases, 74 release-security cases, all 16 gates/3790 Python tests, 39 actual SDK checks within 24 native scenarios, 29 exact-candidate installation checks and ten browser checks. See [verification 92](evidence/2026-10-26/direct-video-verification-92.json). Preserve both CI timeouts, the bounded statistics experiment and other failures; the original 1200-second budget stays fixed. Original Lime sources and all 69 remaining full-acceptance items are preserved.
 
@@ -144,6 +146,7 @@ The previous increment, [85: native service tools](85-原生系统服务封装�
 | 90 | [Pinned Python/Node SDK clients, catalog normalization and compatibility matrix](90-固定SDK客户端兼容矩阵.md) |
 | 91 | [Immutable video specifications and actual multimedia SDK clients](91-多媒体SDK与视频冻结规格.md) |
 | [93-真实Workflow离线发布包构建](./93-真实Workflow离线发布包构建.md) | Offline package preparation, native dependency locking and import/compile verification |
+| [94 · Queue waiting estimates and runtime samples](94-队列等待估算与运行样本.md) | Matching observations, bounded read-only queue scenarios, conditional intervals and Admin UI |
 | 92 | [Direct video projection, scope boundaries and installed verification](92-直接视频接口冻结投影与权限边界.md) |
 | 86 | [Sanitized database failures, request isolation and native lock observation](86-数据库故障脱敏诊断与并发观测.md) |
 | 85 | [Native system service plans, controlled lifecycle and dedicated interpreter](85-原生系统服务封装与受控生命周期.md) |

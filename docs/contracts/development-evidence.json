@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 93,
+  "increment": 94,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-93.json",
-    "sha256": "33a2a8dc8677a5d33ebfa8953fc986aa893c4b370b8fe7c5b08a0f4640de741f"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-94.json",
+    "sha256": "4b753a0a02f5261d80f6a2cf54a934cdd2ae2849ad16cd25496a036d52efa6fb"
   },
   "requirements": [
     {
@@ -339,7 +339,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "ci86"
+          "baseline": "wait94"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
@@ -370,7 +370,8 @@
       "evidence": [
         "ci86",
         "go80",
-        "sdk90"
+        "sdk90",
+        "wait94"
       ],
       "remaining_backlog": [
         "30",
@@ -423,7 +424,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "ci86"
+          "baseline": "wait94"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -449,7 +450,8 @@
       "evidence": [
         "ci86",
         "native86",
-        "video92"
+        "video92",
+        "wait94"
       ],
       "remaining_backlog": [
         "29",
@@ -762,6 +764,26 @@
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
           "baseline": "video92"
+        },
+        {
+          "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
+          "baseline": "browser94"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/runtime_basis.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/packages/contracts/src/generation_contracts/wait_estimates.py",
+          "baseline": "wait94"
         }
       ],
       "tests": [
@@ -774,12 +796,68 @@
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_same_tenant_old_low_priority_overtakes_new_high_priority",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_six_capabilities_use_actual_slot_samples_and_public_shape",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_unknown_cases_do_not_invent_zero_wait",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/unit/test_wait_estimates.py",
+          "symbol": "test_shared_gpu_channels_do_not_create_extra_capacity",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/unit/test_wait_estimates.py",
+          "symbol": "test_fair_service_history_changes_dispatch_and_inputs_remain_unchanged",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/unit/test_wait_estimates.py",
+          "symbol": "test_retry_readiness_and_deadline_are_not_ignored",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/unit/test_wait_estimates.py",
+          "symbol": "test_compute_budget_returns_unknown_instead_of_stalling",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_forecast_is_read_only_and_uses_bounded_lateral_index_lookups",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_recent_fence_limit_precedes_history_sample_filter",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_actual_claim_freezes_basis_and_replay_preserves_it",
+          "language": "python",
+          "baseline": "wait94"
         }
       ],
       "evidence": [
         "ci86",
         "load58",
-        "video92"
+        "video92",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "06",
@@ -795,7 +873,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "ci86"
+          "baseline": "wait94"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -815,7 +893,8 @@
       ],
       "evidence": [
         "ci86",
-        "video92"
+        "video92",
+        "wait94"
       ],
       "remaining_backlog": [
         "25",
@@ -885,11 +964,18 @@
           "path": "app/tests/integration/test_confirmed_failure_retries.py",
           "symbol": "test_second_oom_is_terminal_even_when_a_third_gpu_exists",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_future_retry_ready_time_and_nonwaiting_states",
+          "language": "python",
+          "baseline": "wait94"
         }
       ],
       "evidence": [
         "ci86",
-        "native86"
+        "native86",
+        "wait94"
       ],
       "remaining_backlog": [
         "54",
@@ -939,7 +1025,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "ci86"
+          "baseline": "wait94"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
@@ -956,10 +1042,17 @@
           "path": "app/tests/integration/test_recovery.py",
           "symbol": "test_cancel_intent_survives_expired_lease_and_reconciliation",
           "language": "python"
+        },
+        {
+          "path": "app/tests/unit/test_wait_estimates.py",
+          "symbol": "test_unknown_or_overrun_occupancy_is_never_assumed_free",
+          "language": "python",
+          "baseline": "wait94"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "wait94"
       ],
       "remaining_backlog": [
         "54",
@@ -1125,7 +1218,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "ci86"
+          "baseline": "wait94"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/worker_capacity.py",
@@ -1145,7 +1238,8 @@
       ],
       "evidence": [
         "ci86",
-        "load58"
+        "load58",
+        "wait94"
       ],
       "remaining_backlog": [
         "14",
@@ -1165,7 +1259,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "ci86"
+          "baseline": "wait94"
         }
       ],
       "tests": [
@@ -1176,7 +1270,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "wait94"
       ],
       "remaining_backlog": [
         "15",
@@ -1416,7 +1511,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "ci86"
+          "baseline": "wait94"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
@@ -1436,7 +1531,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "wait94"
       ],
       "remaining_backlog": [
         "37",
@@ -2039,7 +2135,7 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "ci86"
+          "baseline": "wait94"
         },
         {
           "path": "app/apps/admin_web/src/pages/Users.vue",
@@ -2056,12 +2152,19 @@
           "path": "app/tests/integration/test_admin_sessions.py",
           "symbol": "test_activity_waiting_on_revocation_cannot_revive_session",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_admin_session_permission_and_missing_job_http",
+          "language": "python",
+          "baseline": "wait94"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "wait94"
       ],
       "remaining_backlog": [
         "50",
@@ -2305,6 +2408,18 @@
         {
           "path": "app/apps/admin_web/src/components/QueueFilters.vue",
           "baseline": "admin87"
+        },
+        {
+          "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
+          "baseline": "browser94"
         }
       ],
       "tests": [
@@ -2317,13 +2432,27 @@
           "path": "app/tests/integration/test_operational_statistics.py",
           "symbol": "test_statistics_are_three_bounded_read_only_queries_with_no_accounting_effect",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_six_capabilities_use_actual_slot_samples_and_public_shape",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_unknown_cases_do_not_invent_zero_wait",
+          "language": "python",
+          "baseline": "wait94"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
         "load58",
-        "visual87"
+        "visual87",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "48",
@@ -2380,11 +2509,23 @@
         },
         {
           "path": "app/apps/admin_web/src/pages/Jobs.vue",
-          "baseline": "admin87"
+          "baseline": "browser94"
         },
         {
           "path": "app/apps/admin_web/src/components/JobCancellationDialog.vue",
           "baseline": "admin87"
+        },
+        {
+          "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
+          "baseline": "browser94"
         }
       ],
       "tests": [
@@ -2397,12 +2538,26 @@
           "path": "app/tests/integration/test_job_cancellations.py",
           "symbol": "test_different_batches_do_not_double_account_or_settle",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_six_capabilities_use_actual_slot_samples_and_public_shape",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_unknown_cases_do_not_invent_zero_wait",
+          "language": "python",
+          "baseline": "wait94"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "browser94",
+        "wait94"
       ],
       "remaining_backlog": [
         "49",
@@ -2422,6 +2577,18 @@
         {
           "path": "app/apps/admin_web/src/pages/Overview.vue",
           "baseline": "admin87"
+        },
+        {
+          "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
+          "baseline": "browser94"
         }
       ],
       "tests": [
@@ -2434,13 +2601,27 @@
           "path": "app/tests/integration/test_queue_filter_operations.py",
           "symbol": "test_waiting_stops_at_first_attempt_and_detail_uses_same_clock",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_six_capabilities_use_actual_slot_samples_and_public_shape",
+          "language": "python",
+          "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/integration/test_queue_wait_estimates.py",
+          "symbol": "test_unknown_cases_do_not_invent_zero_wait",
+          "language": "python",
+          "baseline": "wait94"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
         "load58",
-        "visual87"
+        "visual87",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "09",
@@ -3419,7 +3600,9 @@
       ],
       "local_evidence": [
         "ci86",
-        "load58"
+        "load58",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "06",
@@ -3437,7 +3620,9 @@
       ],
       "local_evidence": [
         "ci86",
-        "load58"
+        "load58",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "63",
@@ -4057,7 +4242,9 @@
         "ci86",
         "installed87",
         "load58",
-        "visual87"
+        "visual87",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "48",
@@ -4099,7 +4286,9 @@
         "ci86",
         "installed87",
         "load58",
-        "visual87"
+        "visual87",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "17",
@@ -4120,7 +4309,9 @@
         "ci86",
         "installed87",
         "load58",
-        "visual87"
+        "visual87",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "48",
@@ -4138,7 +4329,9 @@
       "local_evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "49",
@@ -4862,7 +5055,9 @@
         "ci86",
         "installed87",
         "load58",
-        "visual87"
+        "visual87",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "15",
@@ -4883,7 +5078,9 @@
         "installed87",
         "load58",
         "native86",
-        "visual87"
+        "visual87",
+        "wait94",
+        "browser94"
       ],
       "remaining_backlog": [
         "48",

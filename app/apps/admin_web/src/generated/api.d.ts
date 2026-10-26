@@ -733,6 +733,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/admin/api/v1/jobs/{identifier}/wait-estimate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Admin Job Wait Estimate */
+        get: operations["admin_job_wait_estimate_admin_api_v1_jobs__identifier__wait_estimate_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/admin/api/v1/jobs/{identifier}/retry": {
         parameters: {
             query?: never;
@@ -6238,6 +6255,68 @@ export interface components {
             channel_id: string;
             request: components["schemas"]["JobCreate"];
         };
+        /** WaitEstimate */
+        WaitEstimate: {
+            /**
+             * Method
+             * @default queue-runtime-scenarios-v1
+             * @constant
+             */
+            method: "queue-runtime-scenarios-v1";
+            /** Job Id */
+            job_id: string;
+            /** Snapshot At Ms */
+            snapshot_at_ms: number;
+            /** Valid Until Ms */
+            valid_until_ms: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "estimated" | "unknown" | "not_waiting";
+            /** Reason */
+            reason: ("not_queued" | "validation_task" | "no_ready_route" | "stale_observation" | "uncertain_execution" | "insufficient_samples" | "quota_blocked" | "deadline" | "capacity_limit" | "execution_unavailable") | null;
+            /** Lower Wait Ms */
+            lower_wait_ms?: number | null;
+            /** Upper Wait Ms */
+            upper_wait_ms?: number | null;
+            /**
+             * Sample Count
+             * @default 0
+             */
+            sample_count: number;
+            /**
+             * Minimum Samples
+             * @default 10
+             * @constant
+             */
+            minimum_samples: 10;
+            /**
+             * Minimum Route Samples
+             * @default 0
+             */
+            minimum_route_samples: number;
+            /** Oldest Sample At Ms */
+            oldest_sample_at_ms?: number | null;
+            /** Newest Sample At Ms */
+            newest_sample_at_ms?: number | null;
+            /**
+             * History Window Seconds
+             * @default 86400
+             * @constant
+             */
+            history_window_seconds: 86400;
+            /**
+             * Queued Jobs
+             * @default 0
+             */
+            queued_jobs: number;
+            /**
+             * Physical Gpus
+             * @default 0
+             */
+            physical_gpus: number;
+        };
         /** WorkerCapacity */
         WorkerCapacity: {
             /**
@@ -8836,6 +8915,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AdminJobView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    admin_job_wait_estimate_admin_api_v1_jobs__identifier__wait_estimate_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WaitEstimate"];
                 };
             };
             /** @description Validation Error */

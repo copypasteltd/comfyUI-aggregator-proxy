@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:admin-wait-estimate:0.5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["method", "job_id", "snapshot_at_ms", "valid_until_ms", "status", "reason", "lower_wait_ms", "upper_wait_ms", "sample_count", "minimum_samples", "minimum_route_samples", "oldest_sample_at_ms", "newest_sample_at_ms", "history_window_seconds", "queued_jobs", "physical_gpus"],
+  "properties": {
+    "method": {"const": "queue-runtime-scenarios-v1"},
+    "job_id": {"type": "string", "pattern": "^job_[0-9a-f]{32}$"},
+    "snapshot_at_ms": {"type": "integer", "minimum": 0},
+    "valid_until_ms": {"type": "integer", "minimum": 0},
+    "status": {"enum": ["estimated", "unknown", "not_waiting"]},
+    "reason": {"enum": [null, "not_queued", "validation_task", "no_ready_route", "stale_observation", "uncertain_execution", "insufficient_samples", "quota_blocked", "deadline", "capacity_limit", "execution_unavailable"]},
+    "lower_wait_ms": {"type": ["integer", "null"], "minimum": 0, "maximum": 86400000},
+    "upper_wait_ms": {"type": ["integer", "null"], "minimum": 0, "maximum": 86400000},
+    "sample_count": {"type": "integer", "minimum": 0, "maximum": 12800},
+    "minimum_samples": {"const": 10},
+    "minimum_route_samples": {"type": "integer", "minimum": 0, "maximum": 200},
+    "oldest_sample_at_ms": {"type": ["integer", "null"], "minimum": 0},
+    "newest_sample_at_ms": {"type": ["integer", "null"], "minimum": 0},
+    "history_window_seconds": {"const": 86400},
+    "queued_jobs": {"type": "integer", "minimum": 0, "maximum": 500},
+    "physical_gpus": {"type": "integer", "minimum": 0, "maximum": 64}
+  },
+  "allOf": [
+    {"if": {"properties": {"status": {"const": "estimated"}}}, "then": {"properties": {"reason": {"type": "null"}, "lower_wait_ms": {"type": "integer"}, "upper_wait_ms": {"type": "integer"}, "sample_count": {"minimum": 10}, "minimum_route_samples": {"minimum": 10}, "oldest_sample_at_ms": {"type": "integer"}, "newest_sample_at_ms": {"type": "integer"}}}, "else": {"properties": {"reason": {"type": "string"}, "lower_wait_ms": {"type": "null"}, "upper_wait_ms": {"type": "null"}}}},
+    {"if": {"properties": {"status": {"const": "not_waiting"}}}, "then": {"properties": {"reason": {"const": "not_queued"}}}, "else": {"properties": {"reason": {"not": {"const": "not_queued"}}}}}
+  ]
+}

@@ -3583,6 +3583,45 @@
         }
       }
     },
+    "/admin/api/v1/jobs/{identifier}/wait-estimate": {
+      "get": {
+        "summary": "Admin Job Wait Estimate",
+        "operationId": "admin_job_wait_estimate_admin_api_v1_jobs__identifier__wait_estimate_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WaitEstimate"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/api/v1/jobs/{identifier}/retry": {
       "post": {
         "summary": "Admin Job Retry",
@@ -21657,6 +21696,163 @@
           "request"
         ],
         "title": "ValidationJob"
+      },
+      "WaitEstimate": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "const": "queue-runtime-scenarios-v1",
+            "title": "Method",
+            "default": "queue-runtime-scenarios-v1"
+          },
+          "job_id": {
+            "type": "string",
+            "pattern": "^job_[0-9a-f]{32}$",
+            "title": "Job Id"
+          },
+          "snapshot_at_ms": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Snapshot At Ms"
+          },
+          "valid_until_ms": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Valid Until Ms"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "estimated",
+              "unknown",
+              "not_waiting"
+            ],
+            "title": "Status"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "not_queued",
+                  "validation_task",
+                  "no_ready_route",
+                  "stale_observation",
+                  "uncertain_execution",
+                  "insufficient_samples",
+                  "quota_blocked",
+                  "deadline",
+                  "capacity_limit",
+                  "execution_unavailable"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "lower_wait_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 86400000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lower Wait Ms"
+          },
+          "upper_wait_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 86400000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upper Wait Ms"
+          },
+          "sample_count": {
+            "type": "integer",
+            "maximum": 12800.0,
+            "minimum": 0.0,
+            "title": "Sample Count",
+            "default": 0
+          },
+          "minimum_samples": {
+            "type": "integer",
+            "const": 10,
+            "title": "Minimum Samples",
+            "default": 10
+          },
+          "minimum_route_samples": {
+            "type": "integer",
+            "maximum": 200.0,
+            "minimum": 0.0,
+            "title": "Minimum Route Samples",
+            "default": 0
+          },
+          "oldest_sample_at_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oldest Sample At Ms"
+          },
+          "newest_sample_at_ms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Newest Sample At Ms"
+          },
+          "history_window_seconds": {
+            "type": "integer",
+            "const": 86400,
+            "title": "History Window Seconds",
+            "default": 86400
+          },
+          "queued_jobs": {
+            "type": "integer",
+            "maximum": 500.0,
+            "minimum": 0.0,
+            "title": "Queued Jobs",
+            "default": 0
+          },
+          "physical_gpus": {
+            "type": "integer",
+            "maximum": 64.0,
+            "minimum": 0.0,
+            "title": "Physical Gpus",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "job_id",
+          "snapshot_at_ms",
+          "valid_until_ms",
+          "status",
+          "reason"
+        ],
+        "title": "WaitEstimate"
       },
       "WorkerCapacity": {
         "properties": {

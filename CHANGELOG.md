@@ -1,5 +1,13 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 94 / 队列等待估算
+
+- Admin 任务详情新增按需等待区间、样本数量、采样范围和 15 秒过期提示；样本不足、观测过期和执行不确定时显示未知。保持 04·青柠原始资源与共享主题。
+- Add read-only allocation-wait scenarios using matching successful slot-runtime samples, current physical GPU occupancy, tenant fairness, concurrency quotas, retry readiness and deadlines. Four conditional P50/P95 scenarios preserve the distinction between elapsed wait, allocation, generation and upload.
+- 新领取记录不可变等待依据摘要；发布、规格、GPU、渠道 revision 或批准变化时不复用旧样本。无数据库迁移或历史回填；既有 journal、fence、重放、配额和释放规则保持。
+- Freeze the Admin response and synchronize runtime contracts, endpoint catalog, OpenAPI and frontend types. Add native PostgreSQL/claim regressions and three-width actual UI capture, including expiry, unknown state, focus, visibility and request cancellation.
+- 新增 6 张截图、原速 MP4/GIF 和实际响应记录；[浏览器捕获](docs/evidence/2026-10-26/wait-estimate-94-bounded/summary.json) 通过 10 项检查并清理全部本次资源。旧测试库及失败现场保留；本轮专项与历史完整 CI 分开，真实等待误差/六类资源/生产和 69 项完整出口继续开放，见 [94](docs/94-队列等待估算与运行样本.md)。
+
 ## 2026-10-26 · Increment 93 / 六类 Workflow 离线发布准备
 
 - 新增原生 `workflow-package.py build/verify`：基于明确指定的现有 ComfyUI 和六类发布草稿，流式计算模型 SHA-256、固定本地 Git 版本，输出可直接导入现有 Admin 的 manifest、来源及校验和。

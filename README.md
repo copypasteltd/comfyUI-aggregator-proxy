@@ -12,7 +12,9 @@
 
 [完整跟踪清单](docs/78-完整待办与首版收口清单.md) 保留 76 个编号：01～05、10、12 共 7 项本地实现/追踪出口已收口，69 项仍开放（67 项首版、2 项可选增强）。[Provider 自动消费](docs/80-Provider目录消费与版本快照.md)、[Admin 映射管理](docs/81-Admin网关目录映射与发布核对.md)、[确认失败重试](docs/82-确认失败重试分类与跨GPU约束.md) 及 [监控接线](docs/84-监控指标与脱敏请求关联.md) 已有实现和分层证据。真实 Workflow、网关联合、故障与生产验收继续独立。
 
-本轮 [93 · Workflow 离线发布包](docs/93-真实Workflow离线发布包构建.md) 提供六类能力的本机依赖锁定、模型哈希、可导入 manifest 与漂移复验，接续现有 Admin 发布链路。[专项验证](docs/evidence/2026-10-26/workflow-package-python-93.json) 与历史全量 CI 分开记录；真实生成、质量和生产批准仍待实机完成。
+本轮 [94 · 队列等待估算](docs/94-队列等待估算与运行样本.md) 在 Admin 任务详情加入按需估算：读取一致的实时队列、物理 GPU 占用和最近 24 小时同依据运行样本，展示可分配槽位的等待区间、样本数及 15 秒有效期。样本不足、设备失联或执行待核对时显示未知；这不是完成时间承诺。真实设备校准继续列入待办。
+
+此前 [93 · Workflow 离线发布包](docs/93-真实Workflow离线发布包构建.md) 提供六类能力的本机依赖锁定、模型哈希、可导入 manifest 与漂移复验，接续现有 Admin 发布链路。[专项验证](docs/evidence/2026-10-26/workflow-package-python-93.json) 与历史全量 CI 分开记录；真实生成、质量和生产批准仍待实机完成。
 
 此前 [92 · 直接视频接口](docs/92-直接视频接口冻结投影与权限边界.md) 将 job_ 视频的创建、原键恢复和详情对齐到原冻结规格，返回精确毫秒时长、尺寸和固定安全终态错误。跨 Key/租户、敏感输入、当前 scope 与撤销继续校验；分页列表保持一次有界查询。28 项源码绑定视频回归、74 项发行安全回归、完整 16 门禁/3790 Python、39 项实际 SDK 检查/24 原生场景、29 项精确候选安装及 10 浏览器检查通过。见 [92 验证](docs/evidence/2026-10-26/direct-video-verification-92.json)。两轮 CI 超时、统计实验与其他失败独立保留，复验未提高 1200 秒预算。原始青柠源码继续直接引用，69 项完整待办保持开放。
 
@@ -111,6 +113,10 @@ flowchart LR
 PostgreSQL 是任务和资源权威源；SQLite 仅是单机 Worker journal。Sub2API 自己的账本通过固定集成协同，本项目不复制一套独立收费账本。
 
 ## Admin 操作与演示
+
+在“任务管理”打开任务详情，点击“估算等待”。预计时间到可分配 GPU 槽位为止，不含领取后的准备、生成和上传；实际已等待时长另外显示。每组至少 10 条同发布、规格、GPU、渠道配置及批准的成功样本；旧记录不回填。超过 15 秒需要重新估算，新增任务、网络与设备变化会改变结果。只读管理会话可使用此功能，业务 API Key 不能调用管理接口。
+
+[等待估算截图](docs/media/wait-estimates/wait-estimate-1440.png) · [移动端未知提示](docs/media/wait-estimates/wait-unknown-390.png) · [连续录屏 MP4](docs/media/wait-estimates/wait-estimates.mp4) · [GIF](docs/media/wait-estimates/wait-estimates.gif)。均为真实页面与 API、合成运行样本。
 
 Admin 统一采用用户指定的 [04 · 青柠](https://html.cafe/x5b381ea1?c=lime)：直接拉取并引用原始 CSS，复用暖白/黑/青柠、原票根与卡片组件和 Anton / Manrope 字体。原始文件与来源摘要见 [87 · 视觉系统](docs/87-青柠视觉系统与组件复用.md)；管理组件和弹层共用适配层。字体从原声明原样解码到本地，并随包附带 SIL OFL 1.1 许可。后续页面与组件继续遵循同一规范。17 个页面已通过桌面、390px / 320px 布局检查，20 张截图及 4 组 MP4/GIF 已重新拍摄。原始文件可用 `app/scripts/pull-lime-reference.py` 默认只读校验；加 `--pull` 可重新从固定来源提取。
 

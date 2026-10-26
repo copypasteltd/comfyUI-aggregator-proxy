@@ -1,0 +1,68 @@
+{
+  "format_version": 1,
+  "scope": "Preserved failures and interrupted verification; historical inputs/results are not rewritten",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "items": [
+    {
+      "path": "docs/evidence/2026-10-26/queue-wait-python-94.json",
+      "sha256": "82ca35441b8e26fd5f428327dcbdae8fdf70adbea3495d596cfd920a069c7230",
+      "passed": false,
+      "reason": "Joint collection found duplicate unit/integration module basenames; integration file renamed."
+    },
+    {
+      "path": "docs/evidence/2026-10-26/queue-wait-python-94-final.json",
+      "sha256": "0ff4129886817c50efc63884b60b1e14194fd511db6e39f89ae40facd4866b0b",
+      "passed": false,
+      "reason": "Retry fixture incorrectly supplied Attempt.state; fixture corrected without loosening database constraints."
+    },
+    {
+      "path": "docs/evidence/2026-10-26/wait-estimate-94-first/summary.json",
+      "sha256": "1c9c5faf90500f3a4810047cba3168ce0c5df0d4e6f6eda894d86784ae7b01b0",
+      "passed": false,
+      "reason": "Recorder clock was installed after a real component timer; replaced with actual elapsed-time assertion."
+    },
+    {
+      "path": "docs/evidence/2026-10-26/wait-estimate-94-second/summary.json",
+      "sha256": "7b8580db2d611e19e11a48305fd05743ea52dcabce5596a3451145d00f262db0",
+      "passed": false,
+      "reason": "Recorder callback did not bind Playwright route/request parameters correctly; fixed callback signature."
+    },
+    {
+      "kind": "private_initial_postgresql_run",
+      "raw_junit_sha256": "f38b1f813d2b3b5bf2e4d245f4d4a0c1013180974545c64c03add43352e6d6f5",
+      "python": {
+        "tests": 19,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      "reason": "Replay assertion included variable server_time; stable job/attempt/dispatch fields now compared."
+    }
+  ],
+  "other_observations": [
+    {
+      "kind": "partial_browser_capture",
+      "path": "docs/evidence/2026-10-26/wait-estimate-94-final/browser.json",
+      "browser_child_passed": true,
+      "complete_summary_present": false,
+      "source_binding_not_accepted": true
+    },
+    {
+      "kind": "source_inventory_preflight",
+      "system_git_timeout_seconds": 30,
+      "functional_tests_not_reached": true,
+      "resolution": "Use bundled native Git and process-local fsmonitor/untrackedCache settings; no global configuration change."
+    },
+    {
+      "kind": "old_test_fixture_cleanup",
+      "statement": "DELETE FROM api_keys",
+      "functional_assertion_not_reached": true,
+      "original_database_preserved_by_oid": true,
+      "preservation_report": "docs/evidence/2026-10-26/queue-wait-test-database-preservation-94.json",
+      "root_cause_open": true
+    }
+  ],
+  "current_python_report": "docs/evidence/2026-10-26/queue-wait-python-94-verified.json",
+  "current_browser_report": "docs/evidence/2026-10-26/wait-estimate-94-bounded/summary.json"
+}

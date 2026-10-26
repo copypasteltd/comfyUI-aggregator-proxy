@@ -3582,6 +3582,22 @@
         "monitoring-configuration.schema.json"
       ],
       "description": "独立监控凭证与实际来源限制的只读运维投影"
+    },
+    {
+      "operation_id": "get_admin_api_v1_jobs_id_wait_estimate",
+      "method": "GET",
+      "path": "/admin/api/v1/jobs/{id}/wait-estimate",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "jobs:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-09",
+      "response_schema": "admin-wait-estimate.schema.json"
     }
   ],
   "inventory_revision": "2026-10-25-increment-81"

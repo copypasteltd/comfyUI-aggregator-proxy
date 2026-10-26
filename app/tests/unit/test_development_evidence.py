@@ -157,6 +157,69 @@ def fresh_python_run(repository: Path) -> None:
     rebind(repository, matrix=True)
 
 
+def fresh_browser_run(repository: Path) -> None:
+    write_text(repository, "app/ui.vue", "<template>Updated UI</template>\n")
+    write_text(repository, "docs/evidence/view.png", "unit fixture: artifact digest only")
+    report = {
+        "format_version": 1, "passed": True, "sources_unchanged": True,
+        "real_resource_acceptance": False, "full_acceptance": "pending",
+        "browser_closed": True, "closed_contexts": 3, "cleanup": {"processes": True, "database": True},
+        "browser_process": {"status": "passed", "owned_process_tree_closed": True},
+        "checks": ["native_https_layout"],
+        "screenshots": [{"path": "view.png", "sha256": binding(repository, "docs/evidence/view.png")["sha256"]}],
+        "source_sha256": {"app/ui.vue": binding(repository, "app/ui.vue")["sha256"]},
+    }
+    write_json(repository, "docs/evidence/browser94.json", report)
+    baseline = evidence.read_json(repository, "docs/evidence/baseline.json")
+    baseline["browser_runs"] = ["browser94"]
+    baseline["reports"]["browser94"] = binding(repository, "docs/evidence/browser94.json", layer="local_browser")
+    write_json(repository, "docs/evidence/baseline.json", baseline)
+    registry = evidence.read_json(repository, evidence.REGISTRY)
+    registry["requirements"][0]["implementation"][1]["baseline"] = "browser94"
+    registry["requirements"][0]["evidence"].append("browser94")
+    write_json(repository, evidence.REGISTRY, registry)
+    rebind(repository, matrix=True)
+
+
+def test_fresh_browser_binding_keeps_old_sources_and_reports_immutable(repository: Path) -> None:
+    old = (repository / "docs/evidence/visual87.json").read_bytes()
+    fresh_browser_run(repository)
+    result = evidence.audit(repository)
+    assert result["passed"], result["errors"]
+    assert (repository / "docs/evidence/visual87.json").read_bytes() == old
+
+
+@pytest.mark.parametrize("mutation", ["open", "cleanup", "changed", "production", "process", "checks", "image", "path", "layer", "source"])
+def test_browser_binding_rejects_unverified_or_unclosed_execution(repository: Path, mutation: str) -> None:
+    fresh_browser_run(repository)
+    report = evidence.read_json(repository, "docs/evidence/browser94.json")
+    if mutation == "open":
+        report["browser_closed"] = False
+    elif mutation == "cleanup":
+        report["cleanup"]["processes"] = False
+    elif mutation == "changed":
+        report["sources_unchanged"] = False
+    elif mutation == "production":
+        report["real_resource_acceptance"] = True
+    elif mutation == "process":
+        report["browser_process"]["owned_process_tree_closed"] = False
+    elif mutation == "checks":
+        report["checks"] = []
+    elif mutation == "image":
+        report["screenshots"][0]["sha256"] = "0" * 64
+    elif mutation == "path":
+        report["screenshots"][0]["path"] = "../../app/ui.vue"
+    elif mutation == "source":
+        report["source_sha256"]["app/ui.vue"] = "0" * 64
+    elif mutation == "layer":
+        baseline = evidence.read_json(repository, "docs/evidence/baseline.json")
+        baseline["reports"]["browser94"]["layer"] = "local_component"
+        write_json(repository, "docs/evidence/baseline.json", baseline)
+    write_json(repository, "docs/evidence/browser94.json", report)
+    rebind(repository)
+    assert not evidence.audit(repository)["passed"]
+
+
 def test_explicit_new_python_run_preserves_historical_reports(repository: Path) -> None:
     old = (repository / "docs/evidence/ci86.json").read_bytes()
     fresh_python_run(repository)

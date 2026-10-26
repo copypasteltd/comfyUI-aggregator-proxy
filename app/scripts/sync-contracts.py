@@ -21,6 +21,7 @@ hashes = {}
 targets["sdk-model-list.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/sdk-model-list.schema.json"
 targets["sdk-video-response.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/sdk-video-response.schema.json"
 targets["control-video-response.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/control-video-response.schema.json"
+targets["admin-wait-estimate.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/admin-wait-estimate.schema.json"
 targets["database-failure.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/database-failure.schema.json"
 
 targets["service-deployment.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/service-deployment.schema.json"

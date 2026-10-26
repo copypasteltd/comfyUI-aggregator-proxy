@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "checks": [
+    "actual_https_estimate_and_layout_1440",
+    "keyboard_focus",
+    "expired_estimate_hides_numeric_interval",
+    "actual_https_insufficient_samples_1440",
+    "visibility_event_clears_snapshot_and_reduced_motion",
+    "closed_drawer_aborts_request_and_new_job_has_no_stale_result",
+    "actual_https_estimate_and_layout_768",
+    "actual_https_insufficient_samples_768",
+    "actual_https_estimate_and_layout_390",
+    "actual_https_insufficient_samples_390"
+  ],
+  "screenshots": [
+    {
+      "path": "wait-estimate-1440.png",
+      "sha256": "aa7c0a49c9fb5a6bba90458e3f318e06b23577e274e389db03ba00ffa9a66857"
+    },
+    {
+      "path": "wait-unknown-1440.png",
+      "sha256": "76f82e16452f3c59150e2f26be482838d7a2820ab6caf25e39fe1a781c1ae2f3"
+    },
+    {
+      "path": "wait-estimate-768.png",
+      "sha256": "c5fa65d3ef35b024ff517f7a8ccfcaeaf4db7185fc4a9daad94cdb93aac47dbc"
+    },
+    {
+      "path": "wait-unknown-768.png",
+      "sha256": "e044e8c10317b5560506a320e00937db8aa39b08e53baf251d25aa413ce2f298"
+    },
+    {
+      "path": "wait-estimate-390.png",
+      "sha256": "24115d48d167c6d7894e9cc9185ce7b778db83fc12ed0da2089056e69e446717"
+    },
+    {
+      "path": "wait-unknown-390.png",
+      "sha256": "df945790783a13036306344d122f2526e9ec05b498ce78be22a2f69530964ff0"
+    }
+  ],
+  "responses": [
+    {
+      "method": "queue-runtime-scenarios-v1",
+      "job_id": "job_0c99f7ae69294c0d9ff78ca96f0ea37a",
+      "snapshot_at_ms": 1792970533181,
+      "valid_until_ms": 1792970548181,
+      "status": "estimated",
+      "reason": null,
+      "lower_wait_ms": 105333,
+      "upper_wait_ms": 225333,
+      "sample_count": 20,
+      "minimum_samples": 10,
+      "minimum_route_samples": 20,
+      "oldest_sample_at_ms": 1792969293736,
+      "newest_sample_at_ms": 1792969312736,
+      "history_window_seconds": 86400,
+      "queued_jobs": 2,
+      "physical_gpus": 1
+    },
+    {
+      "method": "queue-runtime-scenarios-v1",
+      "job_id": "job_0c99f7ae69294c0d9ff78ca96f0ea37a",
+      "snapshot_at_ms": 1792970550250,
+      "valid_until_ms": 1792970565250,
+      "status": "estimated",
+      "reason": null,
+      "lower_wait_ms": 88264,
+      "upper_wait_ms": 208264,
+      "sample_count": 20,
+      "minimum_samples": 10,
+      "minimum_route_samples": 20,
+      "oldest_sample_at_ms": 1792969293736,
+      "newest_sample_at_ms": 1792969312736,
+      "history_window_seconds": 86400,
+      "queued_jobs": 2,
+      "physical_gpus": 1
+    },
+    {
+      "method": "queue-runtime-scenarios-v1",
+      "job_id": "job_0c99f7ae69294c0d9ff78ca96f0ea37a",
+      "snapshot_at_ms": 1792970551552,
+      "valid_until_ms": 1792970566552,
+      "status": "estimated",
+      "reason": null,
+      "lower_wait_ms": 86962,
+      "upper_wait_ms": 206962,
+      "sample_count": 20,
+      "minimum_samples": 10,
+      "minimum_route_samples": 20,
+      "oldest_sample_at_ms": 1792969293736,
+      "newest_sample_at_ms": 1792969312736,
+      "history_window_seconds": 86400,
+      "queued_jobs": 2,
+      "physical_gpus": 1
+    }
+  ],
+  "closed_contexts": 3,
+  "browser_closed": true,
+  "visual_theme": "04-lime-source",
+  "synthetic_data": true,
+  "browser_version": "156.0.4314.42",
+  "errors": []
+}
