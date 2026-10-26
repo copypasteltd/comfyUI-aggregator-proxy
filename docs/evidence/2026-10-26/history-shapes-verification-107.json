@@ -1,0 +1,126 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T10:11:21.140261+00:00",
+  "passed": true,
+  "scope": "Source-bound final-output metadata validation and Worker quarantine recovery, verified by six-capability collection and same-process Worker main-loop scenarios, complete native CI and exact candidate installation. ComfyUI/Redis/S3 remain fixtures; full first-release acceptance stays pending.",
+  "application_source_revision": "75db9a04a841abfefc9f55aa2b272cabc23a0d85",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci107-20261026-history-shapes/summary.json",
+      "sha256": "f4f02b6848f46bd6e220fa78dbee9d60fb961de0aae1bc56810eb174b6593de9"
+    },
+    "focused": {
+      "path": "docs/evidence/2026-10-26/history-shapes-focused-verified-107.json",
+      "sha256": "8113cf7ed3b9fa79168d7cd7021a8f5292a082b3d81b4c3f95066dca36a6dacb"
+    },
+    "native": {
+      "path": "docs/evidence/2026-10-26/history-shapes-native-107/confirmed-retry-native-protocol.json",
+      "sha256": "1b3460ecdccdc64c06b3f5080f27a6a404bd959fec5187bcf3c3370a2e88150c"
+    },
+    "provider_unchanged": {
+      "path": "docs/evidence/2026-10-26/dependency-errors-provider-101/sub2api-provider-native-build.json",
+      "sha256": "ad4082847929a50656ba2488cb509c5618f1b953b3a6e5f99b5891f7c8f6fcce"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/history-shapes-release-build-107.json",
+      "sha256": "ae520115ce4fc184fc6283a9d625cfe195427b5587334267ed82fc91c09c6ca2"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/history-shapes-installed-107/native-release-installation.json",
+      "sha256": "0bb30c76ae52c47434ddec8126bc1d93cbf63706931d487c8469068dfe3d2e7c"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-26/history-shapes-installed-107/native-release-installed-browser.json",
+      "sha256": "3e080f570e84e5fa03b1a9bb95d67ec318a121392495fb6950948764383764e2"
+    },
+    "native_process": {
+      "path": "docs/evidence/2026-10-26/history-shapes-native-process-107.json",
+      "sha256": "d1752652fd24f3ba4883e4d670b5a7bd966fdf0e64a5990ddbbd23628769d79a"
+    }
+  },
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 4265,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_seconds": 1042.206,
+    "python_budget_seconds": 1200,
+    "inputs": 647,
+    "all_inputs_match_current": true,
+    "owned_process_trees_closed": true
+  },
+  "focused_python": {
+    "tests": 248,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "new_cases": {
+    "six_capability_malformed_output": 90,
+    "metadata_compatibility": 20,
+    "worker_main_loop": 18
+  },
+  "pre_fix_failures_preserved": 90,
+  "initial_recovery_race_failures_preserved": 12,
+  "cleanup_phase_failure_preserved": 1,
+  "native": {
+    "cases": 30,
+    "inputs": 275,
+    "all_inputs_match_current": true,
+    "cleanup": {
+      "processes": true,
+      "databases": true,
+      "database_observer": true,
+      "media_and_credentials": true
+    },
+    "real_comfyui": false,
+    "real_redis": false,
+    "real_s3": false
+  },
+  "candidate": {
+    "release_id": "rc-20261026.107.1",
+    "archive": "app/.local/releases/rc-20261026.107.1/rc-20261026.107.1.zip",
+    "archive_sha256": "a79b36e5297bfcb824e31b526ea41a3faae4778fe33a1e55648d6d7f0596e5a0",
+    "archive_bytes": 281335114,
+    "manifest_source_revision": "75db9a04a841abfefc9f55aa2b272cabc23a0d85",
+    "source_inputs": 525,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 67,
+    "database_head": "3da02e7b5941"
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "closed_contexts": 2,
+    "browser_closed": true,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "cleanup_errors": []
+  },
+  "history_shape_and_quarantine_local_exits_closed": true,
+  "stable_backlog_items_17_23_43_55_60_fully_closed": false,
+  "historical_database_root_causes_closed": false,
+  "remaining_work": {
+    "open": 69,
+    "first_release": 67,
+    "optional": 2,
+    "physical_workflows_accepted": 0
+  },
+  "production_accepted": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "virtualization_used": false,
+  "observed_process_window": {
+    "scope": "Owned Python log creation plus bounded execute elapsed duration, and native wrapper completion minus bounded execute duration; no raw logs or query data",
+    "python_start_utc": "2026-10-26T09:47:31.097650+00:00",
+    "python_end_by_elapsed_utc": "2026-10-26T10:04:53.303650+00:00",
+    "native_start_by_elapsed_utc": "2026-10-26T09:50:21.589043+00:00",
+    "native_end_utc": "2026-10-26T09:57:16.425043+00:00",
+    "native_inside_complete_python_window": true
+  }
+}

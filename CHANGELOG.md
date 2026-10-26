@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Verification 109 / 当前源码全量验证与安装候选收口
+
+- 补齐 108 审计的 V01～V03：当前源码 75db9a0 完整 16 门禁/4265 Python、30 原生、rc-20261026.107.1 的 29 安装/10 浏览器通过，647/275/525 来源与实际 wheel 字节一致。原预算不变，所属临时资源清理。
+- Close the current local validation gaps while retaining audit 108 as a historical snapshot. All 69 stable exits, six real Workflow acceptances, production/fleet/service gates and historical database root causes remain open; no UI or public contract changes.
+
 ## 2026-10-26 · Audit 108 / 当前工作区与完整目标差距
 
 - 系统核对包含 107 的当前工作区、647 应用输入、17 Admin 路由、157 路径/198 方法、169 Python runtime 文件、稳定待办和实际 106 ZIP 全载荷。248 加强专项来源一致；旧 CI/原生/候选各有两个 Worker 源文件变化，明确当前全量回归、原生通路和新候选/精确安装待补，不挪用旧结果。
@@ -9,7 +14,7 @@
 
 - 冻结最终节点的对象/文件数组/成员/字段结构受控检查，合法自定义附加字段、images/gifs/videos/audio、空产物和原路径/MIME拒绝边界保持；异常不再以 AttributeError 停掉整个 Worker。
 - Recheck unacknowledged journal rows after recovery starts tasks; a newly failed resumed task cannot lose quarantine while the scan resumes another task. Existing healthy uploads continue, unresolved attempts cannot claim new work, and healthy-only recovery clears quarantine.
-- 248 focused cases pass, including 128 new cases (90 six-capability malformed outputs, 20 compatibility checks and 18 same-process Worker main-loop scenarios). Preserve 90 pre-fix failures, 12 first-pass recovery-race failures and one deterministic cleanup-in-progress failure. The strengthened 248-case run also verifies quarantine while the failed task is still cleaning up. Full current-source verification and a new candidate remain pending at this source commit; full real-resource acceptance stays open.
+- Final verification passes 248 strengthened focused cases, all 16 gates/4265 Python tests, 30 native scenarios and 29 installation/10 browser checks of rc-20261026.107.1. All 647 CI/275 native/525 candidate inputs and actual Worker metadata/runtime wheel bytes match 75db9a0; owned temporary resources are cleaned up. Preserve the 90/12/1 failed reproductions. Complete real-resource and production acceptance remain pending.
 
 ## 2026-10-26 · Increment 106 / Worker 产物中断复制恢复
 

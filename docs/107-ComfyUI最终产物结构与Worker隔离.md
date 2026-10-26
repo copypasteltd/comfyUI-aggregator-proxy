@@ -31,4 +31,8 @@
 
 主循环中的异常任务没有生成 POST、事件、上传或 GPU 释放；原 prompt/association/journal 保留，节点保持隔离且没有新领取。另一已完成正常任务成功回传并确认一次，Worker 主循环和 HTTP 客户端继续运行。另六个健康场景确认两任务均完成后不会永久隔离。测试在 finally 取消所属循环、关闭 Worker 和原生 HTTP 线程。
 
-[107 最终专项来源索引](evidence/2026-10-26/development-trace-baselines-107-verified.json) 绑定实际具名测试及实现；CAP framework、98 完整门禁和 69 稳定待办保持。完整工程与候选结果待实际执行后追加。
+[107 最终专项来源索引](evidence/2026-10-26/development-trace-baselines-107-verified.json) 绑定实际具名测试及实现；CAP framework、98 完整门禁和 69 稳定待办保持。完整工程与候选结果现已补齐，见 [109](109-当前源码全量验证与安装候选收口.md) 和 [最终来源核对](evidence/2026-10-26/history-shapes-verification-107.json)。
+
+## 完整验证与当前候选
+
+当前 75db9a0 通过完整 16 门禁/4265 Python、30 原生及 rc-20261026.107.1 的 29 安装/10 浏览器检查；647/275/525 来源和实际 Worker 元数据/运行时 wheel 一致。Python 1042.206 秒，原 1200 秒预算不变。临时进程/库/目录/browser 清理，原项目 PG 保留。详见 [109](109-当前源码全量验证与安装候选收口.md)；真实六类、物理故障、10～20 台及生产完整验收保持开放。
