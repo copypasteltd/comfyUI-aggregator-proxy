@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 from datetime import timedelta
 from pathlib import Path
 from typing import Any
@@ -119,7 +120,22 @@ class OutputRepository:
             raise
         finally:
             if not committed:
-                self.store.delete(stored.key, stored.version)
+                self._discard_unpublished(upload_id, stored.key, stored.version)
+
+    def _discard_unpublished(self, upload_id: UUID, key: str, version: str) -> None:
+        # Wait for any uncertain publisher holding this upload row to finish.
+        # A plain absence read can race a COMMIT still in progress.
+        try:
+            with self.sessions.begin() as session:
+                upload = session.scalar(select(OutputUpload.id).where(OutputUpload.id == upload_id, OutputUpload.object_key == key).with_for_update())
+                if upload is None:
+                    return
+                published = session.scalar(select(ObjectRecord.id).where(ObjectRecord.object_key == key, ObjectRecord.version_id == version).limit(1))
+            if published is None:
+                self.store.delete(key, version)
+        except Exception:
+            # Preserve potentially committed bytes and the original request result.
+            logging.getLogger(__name__).warning("output_cleanup_deferred_pending_publication_verification")
 
     def _verify_stored(self, stored: StoredObject) -> None:
         digest, size = hashlib.sha256(), 0

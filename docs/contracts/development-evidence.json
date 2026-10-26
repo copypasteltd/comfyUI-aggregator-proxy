@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 107,
+  "increment": 110,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-26/development-trace-baselines-107-verified.json",
-    "sha256": "6c119b26ea35b1287f942ccab6c1ad0fd9d4518bba565688b29a29c3d00ba902"
+    "path": "docs/evidence/2026-10-26/development-trace-baselines-110.json",
+    "sha256": "984f0c4f8694f2389448b77e841c94eb64e7a4cb2409db2d87f611f29e1c6ccb"
   },
   "requirements": [
     {
@@ -1533,7 +1533,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "ci86"
+          "baseline": "publication110"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
@@ -1550,10 +1550,29 @@
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_committed_output_survives_lost_commit_ack",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_duplicate_cleanup_keeps_original_published_version",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_cleanup_waits_for_inflight_publication_before_absence_read",
+          "language": "python",
+          "baseline": "publication110"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "publication110"
       ],
       "remaining_backlog": [
         "43",
@@ -1561,7 +1580,7 @@
         "59",
         "61"
       ],
-      "limitation": "唯一提交及坏产物拒绝已测；真实存储/乱序回传待验证。"
+      "limitation": "唯一提交及坏产物拒绝已测；真实存储/乱序回传待验证。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。"
     },
     {
       "id": "JOB-10",
@@ -2055,7 +2074,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "ci86"
+          "baseline": "publication110"
         }
       ],
       "tests": [
@@ -2071,7 +2090,8 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "publication110"
       ],
       "remaining_backlog": [
         "21",
@@ -2088,7 +2108,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "ci86"
+          "baseline": "publication110"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
@@ -2105,17 +2125,48 @@
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_committed_output_survives_lost_commit_ack",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_rollback_cleanup_requires_successful_absence_read",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_cleanup_delete_failure_preserves_original_error",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_duplicate_cleanup_keeps_original_published_version",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_cleanup_waits_for_inflight_publication_before_absence_read",
+          "language": "python",
+          "baseline": "publication110"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "publication110"
       ],
       "remaining_backlog": [
         "37",
         "43",
         "61"
       ],
-      "limitation": "事务与版本/摘要拒绝已测；真实对象确认丢失仍需验证。"
+      "limitation": "事务与版本/摘要拒绝已测；真实对象确认丢失仍需验证。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。"
     },
     {
       "id": "DATA-05",
@@ -2208,7 +2259,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "ci86"
+          "baseline": "publication110"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -2272,18 +2323,31 @@
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
           "baseline": "history107"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_committed_output_survives_lost_commit_ack",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_rollback_cleanup_requires_successful_absence_read",
+          "language": "python",
+          "baseline": "publication110"
         }
       ],
       "evidence": [
         "ci86",
         "copy106",
-        "history107"
+        "history107",
+        "publication110"
       ],
       "remaining_backlog": [
         "43",
         "61"
       ],
-      "limitation": "本地保留/重放已有证明；真实中断上传及过期凭证恢复待验收。"
+      "limitation": "本地保留/重放已有证明；真实中断上传及过期凭证恢复待验收。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。"
     },
     {
       "id": "DATA-08",
@@ -2300,6 +2364,10 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/capacity.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
+          "baseline": "publication110"
         }
       ],
       "tests": [
@@ -2312,10 +2380,35 @@
           "path": "app/tests/protocol/test_capacity_retention.py",
           "symbol": "test_scan_limits_fail_closed_and_do_not_delete",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_rollback_cleanup_requires_successful_absence_read",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_cleanup_delete_failure_preserves_original_error",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_duplicate_cleanup_keeps_original_published_version",
+          "language": "python",
+          "baseline": "publication110"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_cleanup_waits_for_inflight_publication_before_absence_read",
+          "language": "python",
+          "baseline": "publication110"
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "publication110"
       ],
       "remaining_backlog": [
         "40",
@@ -2323,7 +2416,7 @@
         "42",
         "69"
       ],
-      "limitation": "清理与保护已有测试；实际保留值、容量预算及备份未落实。"
+      "limitation": "清理与保护已有测试；实际保留值、容量预算及备份未落实。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。"
     },
     {
       "id": "DATA-09",
@@ -2496,7 +2589,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "ci86"
+          "baseline": "publication110"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/coordinator.go",
@@ -2517,13 +2610,20 @@
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/effect_consumer_test.go",
           "symbol": "TestEffectsCacheFailureRetriesWithoutRebillingOrDuplicateUsage",
           "language": "go"
+        },
+        {
+          "path": "app/tests/integration/test_output_publication_cleanup.py",
+          "symbol": "test_committed_output_survives_lost_commit_ack",
+          "language": "python",
+          "baseline": "publication110"
         }
       ],
       "evidence": [
         "ci86",
         "go80",
         "sdk91",
-        "sdk92"
+        "sdk92",
+        "publication110"
       ],
       "remaining_backlog": [
         "28",
@@ -2531,7 +2631,7 @@
         "35",
         "62"
       ],
-      "limitation": "唯一账目及副作用重试已有组件证明；真实缓存/重启仍待联验。"
+      "limitation": "唯一账目及副作用重试已有组件证明；真实缓存/重启仍待联验。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。"
     },
     {
       "id": "BILL-04",

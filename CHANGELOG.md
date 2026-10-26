@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 2026-10-26 · Increment 110 / 输出发布提交不确定与对象清理
+
+- 修复已提交的 OutputUpload/ObjectRecord 在确认丢失后被 finally 清理误删对象的问题。先等待同上传记录的发布事务结束，再查询精确版本引用；无引用且查询成功才删除。查询/删除失败保留字节和原错误，外部删除不占用数据库连接。
+- All 116 focused cases pass, including nine new real-PostgreSQL tests covering durable commit acknowledgement loss, rollback, unavailable cleanup queries/deletion, duplicate upload recovery and an observed inflight publication lock. Preserve both pre-fix failures. Current full CI, native protocol and rebuilt installation remain pending at this source commit; real-resource and complete production acceptance stay open.
+
 ## 2026-10-26 · Verification 109 / 当前源码全量验证与安装候选收口
 
 - 补齐 108 审计的 V01～V03：当前源码 75db9a0 完整 16 门禁/4265 Python、30 原生、rc-20261026.107.1 的 29 安装/10 浏览器通过，647/275/525 来源与实际 wheel 字节一致。原预算不变，所属临时资源清理。
