@@ -1,0 +1,241 @@
+{
+  "format_version": 1,
+  "at": "2026-10-26T02:24:22.106696+00:00",
+  "passed": true,
+  "scope": "Increment 97 source binding and audit readability with complete native CI, new exact candidate and fresh installation; physical resources and production remain pending",
+  "source_revision": "31f3798727d267a208134aceb9be37b1f63ba8ab",
+  "reports": {
+    "ci": {
+      "path": "docs/evidence/native-ci/ci97-20261026-release-provenance/summary.json",
+      "sha256": "f4461d708be1b1278c537518f791daf4af8a616f3bbbbdb9e69ac48d61e9fd28"
+    },
+    "build": {
+      "path": "docs/evidence/2026-10-26/release-provenance-build-97.json",
+      "sha256": "febdd38c24ddbeda97f1648fe3fcadf8363ed5ddf0d34e58f0f3fb6be4f83377"
+    },
+    "installed": {
+      "path": "docs/evidence/2026-10-26/release-provenance-installed-97/native-release-installation.json",
+      "sha256": "c1aadb9adb6c8c62c513c50876ee7274d15295079ff5cebac7752a7dfc1bd0a3"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-26/release-provenance-installed-97/native-release-installed-browser.json",
+      "sha256": "3e080f570e84e5fa03b1a9bb95d67ec318a121392495fb6950948764383764e2"
+    },
+    "ui": {
+      "path": "docs/evidence/2026-10-26/audit-retention-97-final/summary.json",
+      "sha256": "d741e575dccf5e952ac4c8e3cee350167573f259de2b7664cab1164b418347b6"
+    },
+    "component": {
+      "path": "docs/evidence/2026-10-26/release-source-python-97.json",
+      "sha256": "79e447a40e00f2457df22e7ab38dcf4c731fb347676b98ba3af5ee01b3e7df65"
+    },
+    "uncommitted_cli": {
+      "path": "docs/evidence/2026-10-26/release-source-uncommitted-cli-97.json",
+      "sha256": "1b65f45ec2d77c4c910e47ad32e8784c087b9b1f890654439d67ab47aee9e84c"
+    }
+  },
+  "full_ci_inputs": 632,
+  "full_ci_inputs_current_match": true,
+  "candidate_inputs_current_match": true,
+  "component_selected_inputs_current_match": [
+    "app/scripts/build-release.py",
+    "app/scripts/release_source.py",
+    "app/scripts/release_bundle.py",
+    "app/tests/unit/test_release_source.py",
+    "app/tests/unit/test_release_bundle_security.py"
+  ],
+  "ui_product_sources_current_match": [
+    "app/apps/admin_web/src/pages/Audit.vue",
+    "app/scripts/audit_retention_browser.py"
+  ],
+  "complete_ci": {
+    "gates": 16,
+    "python": {
+      "tests": 3915,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "python_seconds": 520.229,
+    "python_budget_seconds": 1200,
+    "owned_process_trees_closed": true
+  },
+  "candidate": {
+    "release_id": "rc-20261026.97.1",
+    "archive": "app/.local/releases/rc-20261026.97.1/rc-20261026.97.1.zip",
+    "archive_sha256": "9ffda463c6c57724a4a564d17396d19991f4130005f2d9483fe789447b72d607",
+    "archive_bytes": 281331396,
+    "manifest_source_revision": "31f3798727d267a208134aceb9be37b1f63ba8ab",
+    "source_inputs": 521,
+    "payload_files": 169,
+    "runtime_wheels": 58,
+    "runtime_contracts": 66,
+    "database_head": "3da02e7b5941"
+  },
+  "exact_install": {
+    "checks": 29,
+    "browser_checks": 10,
+    "policy_geometry": {
+      "desktop": {
+        "text": "自动清理未启用",
+        "card": {
+          "left": 272,
+          "right": 1324,
+          "top": 226.296875,
+          "bottom": 406.46875,
+          "width": 1052,
+          "height": 180.171875
+        },
+        "tag": {
+          "left": 1193,
+          "right": 1299,
+          "top": 247.296875,
+          "bottom": 271.296875,
+          "width": 106,
+          "height": 24
+        },
+        "text_box": {
+          "left": 1204,
+          "right": 1288,
+          "top": 250.296875,
+          "bottom": 267.296875,
+          "width": 84,
+          "height": 17
+        },
+        "body": {
+          "left": 273,
+          "right": 1323,
+          "top": 293.484375,
+          "bottom": 405.46875,
+          "width": 1050,
+          "height": 111.984375
+        },
+        "transform": "none",
+        "opacity": 1,
+        "color": "rgb(85, 85, 79)",
+        "page_overflow": false
+      },
+      "mobile": {
+        "text": "自动清理未启用",
+        "card": {
+          "left": 16,
+          "right": 374,
+          "top": 325.796875,
+          "bottom": 501.96875,
+          "width": 358,
+          "height": 176.171875
+        },
+        "tag": {
+          "left": 251,
+          "right": 357,
+          "top": 344.796875,
+          "bottom": 368.796875,
+          "width": 106,
+          "height": 24
+        },
+        "text_box": {
+          "left": 262,
+          "right": 346,
+          "top": 347.796875,
+          "bottom": 364.796875,
+          "width": 84,
+          "height": 17
+        },
+        "body": {
+          "left": 17,
+          "right": 373,
+          "top": 388.984375,
+          "bottom": 500.96875,
+          "width": 356,
+          "height": 111.984375
+        },
+        "transform": "none",
+        "opacity": 1,
+        "color": "rgb(85, 85, 79)",
+        "page_overflow": false
+      }
+    },
+    "browser_closed": true,
+    "closed_contexts": 2,
+    "temporary_database_removed": true,
+    "temporary_root_removed": true,
+    "cleanup_errors": [],
+    "native_service_entry_lifecycle": {
+      "roles": {
+        "worker": {
+          "exit_code": 0,
+          "signal": "CTRL_C",
+          "owned_job_active_processes_before_cleanup": 0,
+          "scm_registered": false,
+          "wrapper_lifecycle_verified": false
+        },
+        "runner": {
+          "exit_code": 0,
+          "signal": "CTRL_C",
+          "owned_job_active_processes_before_cleanup": 0,
+          "scm_registered": false,
+          "wrapper_lifecycle_verified": false
+        },
+        "gc": {
+          "exit_code": 0,
+          "signal": "CTRL_C",
+          "owned_job_active_processes_before_cleanup": 0,
+          "scm_registered": false,
+          "wrapper_lifecycle_verified": false
+        },
+        "api": {
+          "exit_code": 0,
+          "signal": "CTRL_C",
+          "owned_job_active_processes_before_cleanup": 0,
+          "scm_registered": false,
+          "wrapper_lifecycle_verified": false
+        }
+      },
+      "worker_identity_journal_reopened": true,
+      "real_gpu": false,
+      "gateway_supervision_verified": false,
+      "wrapper_and_scm_verified": false
+    }
+  },
+  "focused_python": {
+    "tests": 90,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "built_ui": {
+    "checks": 19,
+    "viewports": [
+      1360,
+      390,
+      320
+    ],
+    "closed_contexts": 3,
+    "browser_closed": true,
+    "ui_api_fixtures": true,
+    "real_business_api": false
+  },
+  "closed_local_followups": [
+    "REL-96-01",
+    "UI-96-01"
+  ],
+  "remaining_work": {
+    "stable_ids": 76,
+    "closed_local": 7,
+    "open": 69,
+    "first_release": 67,
+    "optional": 2,
+    "physical_workflows_accepted": 0,
+    "historical_database_root_causes_closed": false
+  },
+  "resources": {
+    "owned_test_browsers_closed": true,
+    "temporary_application_services_stopped": true,
+    "existing_native_postgresql_retained": true
+  },
+  "production_accepted": false,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "complete_goal_achieved": false,
+  "virtualization_used": false
+}
