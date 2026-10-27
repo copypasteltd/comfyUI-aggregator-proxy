@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "purpose": "read_only_audit_and_design_not_runtime_acceptance",
+  "application_changed": false,
+  "cleanup_executed": false,
+  "pooled_generation_executed": false,
+  "source": {
+    "base_commit": "77b18fca1c8caa10f783f6512ea5976490dc314a",
+    "files": [
+      {
+        "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
+        "sha256": "5ab43b389e3e88d22a33fde53206ac183f7ada0c6e5f4a7ae88d86c1b389131e"
+      },
+      {
+        "path": "app/apps/windows_worker/src/windows_worker/configuration.py",
+        "sha256": "eb4fa9b1a5a8c3cdef00982fe68ea9d4e9abc1e3369ddc3a648e40be48dc6805"
+      },
+      {
+        "path": "app/apps/windows_worker/src/windows_worker/comfy.py",
+        "sha256": "cab6b1a176f4baf2edbdcb23445c01b7678ad3612068162c5375fb3596a00cdc"
+      },
+      {
+        "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
+        "sha256": "ada5c6e8b2a8353ddd6561274c56462f5e2d2b7eed8ede6cb62efa0272270799"
+      },
+      {
+        "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
+        "sha256": "ee0523fa7dc5f0cb713fe8aef43b4b204dffc0e8c94f1af1664c0e34a5da8314"
+      },
+      {
+        "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
+        "sha256": "1119ff6a7ad8f6c39e6d3746641dab35c3ac9f150816397ce800e9b0fd46021f"
+      },
+      {
+        "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
+        "sha256": "ae37edef8b5bb1ed17a4b8b751f07d5e9c821b15b71031f41af72fa8f39327b0"
+      },
+      {
+        "path": "app/packages/contracts/src/generation_contracts/catalog.py",
+        "sha256": "373074f729ca3cd5c74cc27f94f9d311d4c74fd5e796b2b2be8b8901ef4e3283"
+      },
+      {
+        "path": "app/apps/control_runner/src/control_runner/main.py",
+        "sha256": "d601c93096f39d856e21c044a029956ca15b985ba25d8757263ed726136271eb"
+      },
+      {
+        "path": "app/apps/control_runner/src/control_runner/gc.py",
+        "sha256": "191d7a1e151d979bc1d5677b9ff920d44e0329ebf9ce13d58c80353cf7d81ae5"
+      },
+      {
+        "path": "app/packages/infrastructure/src/generation_infrastructure/commands.py",
+        "sha256": "a2b306d7abe58ef3356e83622a56da7ba9c0bfb7af2289dbd0ceae2462e26684"
+      }
+    ],
+    "idle_unload_search": {
+      "paths": [
+        "app/apps/windows_worker/src",
+        "app/packages/infrastructure/src",
+        "app/apps/control_runner/src"
+      ],
+      "pattern": "unload_models|free_memory|empty_cache|soft_empty_cache|idle_seconds|idle_timeout|[\"']/free",
+      "exit_code": 0,
+      "matching_lines": [
+        "app/packages/infrastructure/src\\generation_infrastructure\\auth.py:72:    return min(row.expires_at, (row.last_activity_at or row.created_at) + timedelta(seconds=settings.session_idle_seconds))",
+        "app/packages/infrastructure/src\\generation_infrastructure\\auth.py:132:        return SessionLifetime(absolute_expires_at=math.ceil(row.expires_at.timestamp()), idle_expires_at=math.ceil(admin_session_deadline(row, self.settings).timestamp()), server_time=int(now.timestamp()), idle_timeout_seconds=self.settings.session_idle_seconds)",
+        "app/packages/infrastructure/src\\generation_infrastructure\\settings.py:26:    session_idle_seconds: int = Field(default=1800, ge=60, le=86400)"
+      ]
+    }
+  },
+  "live_catalog": {
+    "observed_at": "2026-10-27T21:47:17.587363+00:00",
+    "channel_count": 3,
+    "enabled_channel_count": 3,
+    "published_model_count": 10,
+    "multi_channel_published_model_count": 0,
+    "models": [
+      {
+        "alias": "comfy-5070-video-h3-refs",
+        "task_type": "references_to_video",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "37d2e3147f6f1f26a7555a4a1feb1ba2cb379036b21644f5ee3725eb52479322",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "0d22d68df2ace6c822007e50b12249f294db98d981c2a620b17f1c8197ae3e68"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-5070-video-h3-i2v",
+        "task_type": "references_to_video",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "88b5e214e66cc1de2ad0b252371c1cfbdd12f7a719b1fd19e97f9397a47edb43",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "01a4792770a3096549194a995ebbbff49e77b6c58c6ae552a932eb5967b264ab"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-5070-video-h3",
+        "task_type": "text_to_video",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "ebe5081d98eb68930cfcaab6dd04d3118e695d0e3b019c128252b613f66bb6e4",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "d0ad379767b698055798a90c7efdd1c79130423e8c5537d8fa09d0c8bf1621b3"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-4090-video-h3-refs",
+        "task_type": "references_to_video",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "cf3ad7afe7646555af0cca00aa32f1cd8fcbe46f8824ba9ac48ae78a2c3194e1",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "4f60825e18339da417d25471e98b9fb87c8af071a6139930a169b0d954de4945"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-4090-video-h3-i2v",
+        "task_type": "references_to_video",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "882e9c6a22fa67829817931fcdcbf719665002162fe90fbc4fdb4402a4fbab78",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "969453316c822dff0bd3b7e525d2212695d79405518092b88033759c652242e9"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "7a45238eeb7c56dd18b91fe7d9803c194a17fcbaa404fb440de60474585bc10e",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "854256dbbfadf6488272685203b67c1ca4fa8e65bcd60ca1c920707337790e8d"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-3080-image-edit-wai",
+        "task_type": "image_to_image",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "e77f480b18480a7deddd0bc3f0e04ddd48de21fbbed67220271854b1aad12149",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "e200e1197e6d88f6cb0ddfad68a32cab325048c706cb5c3cbb5d0e2c2a545fb9"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-4090-video-h3",
+        "task_type": "text_to_video",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "8bd2e14c3ab95625158853aecc2318a578f82428fc35eb7b903af92724f89348",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "009c3f6f56a49ece1b077340ced7806e3367e5b98ffb24a65eece83d7dd0c280"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-3080-music-yue2",
+        "task_type": "text_to_audio",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "c6ef5a078de1fa207441ca4bed549ddfbe89a1bf0f7cb8dd446a140ad52183bc",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "55fbd6b68080bc0351ba591483dcef43980e744d31554b26d2ee55f2d7351b15"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      },
+      {
+        "alias": "comfy-3080-image-lustify-krea2",
+        "task_type": "text_to_image",
+        "channel_count": 1,
+        "published": true,
+        "release_digest": "37af9154a015bfe0c4e22bafb11f8c30cb6a7d89ec36d5f7d55f0e8b0fba7c01",
+        "release_validated": true,
+        "graph_hashes": {
+          "workflow_api": "0384a6d4f972e239d9fecaa5ddc09861c5783c43548f5e9938d8d6b00e188596"
+        },
+        "explicit_memory_node_names": [],
+        "runtime_profile_count": 1
+      }
+    ]
+  },
+  "device_observations": [
+    {
+      "device": "RTX3080",
+      "observed_at": "2026-10-27T21:47:15.314489+00:00",
+      "observation_only": true,
+      "system": {
+        "comfyui_version": "0.42.1",
+        "ram_total": 68603527168,
+        "ram_free": 37910933504
+      },
+      "memory_flags": [
+        "--disable-dynamic-vram"
+      ],
+      "devices": [
+        {
+          "type": "cuda",
+          "index": 0,
+          "vram_total": 10736762880,
+          "vram_free": 5960433868,
+          "torch_vram_total": 2772434944,
+          "torch_vram_free": 43267072
+        }
+      ],
+      "queue": {
+        "running": 0,
+        "pending": 0
+      }
+    },
+    {
+      "device": "RTX4090",
+      "observed_at": "2026-10-27T21:47:15.616264+00:00",
+      "observation_only": true,
+      "system": {
+        "comfyui_version": "0.42.1",
+        "ram_total": 68612378624,
+        "ram_free": 60002070528
+      },
+      "memory_flags": [],
+      "devices": [
+        {
+          "type": "cuda",
+          "index": 0,
+          "vram_total": 51526369280,
+          "vram_free": 42868486963,
+          "torch_vram_total": 33554432,
+          "torch_vram_free": 25034752
+        }
+      ],
+      "queue": {
+        "running": 0,
+        "pending": 0
+      }
+    },
+    {
+      "device": "RTX5070",
+      "observed_at": "2026-10-27T21:47:15.800374+00:00",
+      "observation_only": true,
+      "system": {
+        "comfyui_version": "0.33.1",
+        "ram_total": 34182275072,
+        "ram_free": 2113552384
+      },
+      "memory_flags": [],
+      "devices": [
+        {
+          "type": "cuda",
+          "index": 0,
+          "vram_total": 12820480000,
+          "vram_free": 496215240,
+          "torch_vram_total": 536870912,
+          "torch_vram_free": 5481672
+        }
+      ],
+      "queue": {
+        "running": 0,
+        "pending": 0
+      }
+    }
+  ],
+  "upstream": {
+    "reference_tag": "v0.42.1",
+    "runtime_versions_verified_against_reference": false,
+    "files": [
+      {
+        "path": "server.py",
+        "sha256": "6e3614c753c95b037e57e25dfc2de979de70136baad2a3abb5d2d32aaf05281e",
+        "url": "https://github.com/Comfy-Org/ComfyUI/blob/63be2f9b82ad0dac88a7ceaa28a9cf3154125a18/server.py",
+        "relevant_lines": [
+          1289
+        ]
+      },
+      {
+        "path": "main.py",
+        "sha256": "226a90fdd2cb0942c587e60ae292cddcebd8f6173224e3b91a80ab0efafa93ef",
+        "url": "https://github.com/Comfy-Org/ComfyUI/blob/63be2f9b82ad0dac88a7ceaa28a9cf3154125a18/main.py",
+        "relevant_lines": [
+          405,
+          408,
+          414,
+          422
+        ]
+      },
+      {
+        "path": "comfy/model_management.py",
+        "sha256": "dbe096a72c675bd49b21c084d28c14028bfdcc5bd5c8ee42f7c0b189d4a70747",
+        "url": "https://github.com/Comfy-Org/ComfyUI/blob/63be2f9b82ad0dac88a7ceaa28a9cf3154125a18/comfy/model_management.py",
+        "relevant_lines": [
+          2143,
+          2161
+        ]
+      }
+    ],
+    "commit": "63be2f9b82ad0dac88a7ceaa28a9cf3154125a18",
+    "reported_version_matches": {
+      "RTX3080": true,
+      "RTX4090": true,
+      "RTX5070": false
+    },
+    "installed_source_bytes_verified": false
+  },
+  "limitations": [
+    "No production /free, interrupt, restart, model update or job submission was performed.",
+    "Device memory is a whole-system/API snapshot; it does not identify ownership or prove a leak.",
+    "No installed ComfyUI source bytes or internal custom-node memory behavior were verified.",
+    "No 600-second idle release or pooled multi-device generation has been executed.",
+    "The source scan matches Admin-session idle timers only; it does not implement generation-memory cleanup.",
+    "Device reachability and channel publication in this snapshot do not imply future availability or full product acceptance."
+  ],
+  "documentation": "docs/123-空闲资源释放与多设备模型池调度设计.md",
+  "design_policy": "docs/contracts/comfy-idle-and-pool-policy.json"
+}

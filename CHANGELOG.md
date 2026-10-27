@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-28 · 123 · Idle memory and multi-device pool audit — design
+
+- 只读核对 Worker、PostgreSQL 领取/发布逻辑、线上 10 个别名及三设备系统/队列：当前释放的是 GPU 槽位，没有 600 秒空闲卸载，所有已发布别名仍为单渠道；同名 4090/5070 H3 三对执行图均不同。
+- Design instance-wide 600-second idle cleanup with durable activity epochs, all-slot maintenance exclusion, conditional ComfyUI execution and actual completion acknowledgement. Preserve file retention and unknown-execution safeguards; unmodified or uncoordinated endpoints remain observe-only.
+- Separate existing same-release multi-channel routing and tenant fairness from proposed device fairness. Specify global expiring offers, weighted ready-member selection, Key/frozen-route boundaries, ten pending development items and fourteen acceptance groups in [123](docs/123-空闲资源释放与多设备模型池调度设计.md). Update bilingual entry points and machine-readable decisions. No application behavior, live mapping, model memory, deployment or generation acceptance changes in this increment.
+
 ## 2026-10-28 · 122 · Explicit HTTP Worker and selected workflow packaging
 
 - 增加纯 HTTP 渠道、原生 Linux Worker、明确 API 依赖声明与回执模式隔离、稳定下载及前缀恢复，不要求 5070 安装 Windows-MCP，不批量发布不完整工作流。
