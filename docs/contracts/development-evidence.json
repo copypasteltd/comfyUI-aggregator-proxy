@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 121,
+  "increment": 122,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-28/development-trace-baselines-121.json",
-    "sha256": "8b4c7aa0da2f26535f2ae9277f4454d0f6bd36ee705fdcb58e40d12a6a6db118"
+    "path": "docs/evidence/2026-10-28/development-trace-baselines-122-final.json",
+    "sha256": "e49195a7d4441cfb5c0e25c04aa6c264747020ea0ae27cfa8cd77d0854edd380"
   },
   "requirements": [
     {
@@ -15,7 +15,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "scalar104"
+          "baseline": "http122"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -23,7 +23,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/scripts/workflow_package.py",
@@ -43,67 +43,67 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
@@ -114,7 +114,8 @@
         "scalar104",
         "copy106",
         "history107",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "18",
@@ -131,7 +132,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "scalar104"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -143,7 +144,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -159,67 +160,67 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_image_standard_sources_roles_and_options_reach_native_job",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
@@ -228,7 +229,8 @@
         "scalar104",
         "copy106",
         "history107",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "19",
@@ -245,7 +247,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "scalar104"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -257,7 +259,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -273,73 +275,73 @@
           "path": "app/tests/unit/test_workflows.py",
           "symbol": "test_second_reference_cannot_be_silently_ignored",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflows.py",
           "symbol": "test_reference_compilation_preserves_order_and_never_modifies_release",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
@@ -348,7 +350,8 @@
         "scalar104",
         "copy106",
         "history107",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "20",
@@ -365,7 +368,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "scalar104"
+          "baseline": "http122"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/media.py",
@@ -381,7 +384,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -397,67 +400,67 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_video_json_multipart_and_native_share_ready_asset_and_job",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
@@ -468,7 +471,8 @@
         "scalar104",
         "copy106",
         "history107",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "21",
@@ -485,7 +489,7 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "scalar104"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -497,7 +501,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -513,73 +517,73 @@
           "path": "app/tests/unit/test_workflows.py",
           "symbol": "test_second_reference_cannot_be_silently_ignored",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_single_video_cannot_enter_a_multiple_reference_workflow_or_consume_quota",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
@@ -588,7 +592,8 @@
         "scalar104",
         "copy106",
         "history107",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "22",
@@ -609,7 +614,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
@@ -621,7 +626,7 @@
         },
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "scalar104"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -637,73 +642,73 @@
           "path": "app/tests/unit/test_audio_media.py",
           "symbol": "test_audio_files_are_probed_and_fully_decoded",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_audio.py",
           "symbol": "test_verified_audio_refunds_reservation_difference_and_replay_is_once",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_six_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
@@ -717,7 +722,8 @@
         "scalar104",
         "copy106",
         "history107",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "23",
@@ -1083,25 +1089,28 @@
         },
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "scalar104"
+          "baseline": "http122"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_video_invalid_json_and_multipart_leave_no_persistent_inputs",
-          "language": "python"
+          "language": "python",
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_request_limits_and_validation_never_echo_secrets",
-          "language": "python"
+          "language": "python",
+          "baseline": "http122"
         }
       ],
       "evidence": [
         "ci86",
         "video92",
-        "scalar104"
+        "scalar104",
+        "http122"
       ],
       "remaining_backlog": [
         "30",
@@ -1348,7 +1357,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -1364,19 +1373,19 @@
           "path": "app/tests/integration/test_phase_observations.py",
           "symbol": "test_phase_observations_commit_with_event_and_ignore_replay_or_fenced_delivery",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
@@ -1385,7 +1394,8 @@
         "wait94",
         "copy106",
         "history107",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "25",
@@ -1620,7 +1630,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
@@ -1640,37 +1650,37 @@
           "path": "app/tests/integration/test_command_recovery.py",
           "symbol": "test_finished_result_closes_once_without_restoring_environment",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_comfy_metadata.py",
           "symbol": "test_ambiguous_prompt_receipt_survives_restart_without_second_post",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_native_writer_exit_preserves_prefix_and_copy_continues",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_fsync_failure_keeps_copy_for_verified_reuse",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
@@ -1678,7 +1688,8 @@
         "native86",
         "copy106",
         "history107",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "55",
@@ -1699,11 +1710,15 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/configuration.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/admin_web/src/pages/WorkerNodes.vue",
           "baseline": "admin87"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/api_environment.py",
+          "baseline": "http122"
         }
       ],
       "tests": [
@@ -1711,14 +1726,21 @@
           "path": "app/tests/integration/test_worker_nodes.py",
           "symbol": "test_concurrent_create_replay_and_no_persisted_secret",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
+        },
+        {
+          "path": "app/tests/unit/test_http_worker.py",
+          "baseline": "http122",
+          "symbol": "test_api_observation_is_honest_and_checks_current_directory",
+          "language": "python"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
         "visual87",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "13",
@@ -1743,7 +1765,11 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/commands.py",
-          "baseline": "worker118"
+          "baseline": "http122"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/commands.py",
+          "baseline": "http122"
         }
       ],
       "tests": [
@@ -1751,12 +1777,19 @@
           "path": "app/tests/integration/test_workflow_management.py",
           "symbol": "test_runtime_approval_requires_same_channel_configuration_and_live_artifact",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
+        },
+        {
+          "path": "app/tests/integration/test_http_worker_sync.py",
+          "baseline": "http122",
+          "symbol": "test_sync_receipt_cannot_cross_dependency_modes",
+          "language": "python"
         }
       ],
       "evidence": [
         "ci86",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "17",
@@ -1932,7 +1965,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/process_lock.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "tests": [
@@ -1940,18 +1973,19 @@
           "path": "app/tests/protocol/test_worker_startup.py",
           "symbol": "test_native_processes_cross_directory_exclusion_crash_and_unknown_journal",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_journal.py",
           "symbol": "test_journal_allows_only_one_writer",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
         "ci86",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "14",
@@ -2001,7 +2035,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/configuration.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
@@ -2013,14 +2047,15 @@
           "path": "app/tests/integration/test_workflow_management.py",
           "symbol": "test_channel_runtime_change_clears_approval_but_label_preserves_runtime_revision",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
         "visual87",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "15",
@@ -2319,7 +2354,7 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
@@ -2340,6 +2375,10 @@
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
           "baseline": "asset112"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/http_output.py",
+          "baseline": "http122"
         }
       ],
       "tests": [
@@ -2347,73 +2386,79 @@
           "path": "app/tests/protocol/test_capacity_retention.py",
           "symbol": "test_retention_survives_restart_duplicate_confirm_and_clock_rollback",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_native_writer_exit_preserves_prefix_and_copy_continues",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_existing_unique_or_longer_file_is_never_truncated_or_overwritten",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_source_changes_during_prefix_validation_prevent_any_append",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_hardlinked_target_is_preserved",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_directory_reparse_target_cannot_redirect_copy",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_committed_output_survives_lost_commit_ack",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_rollback_cleanup_requires_successful_absence_read",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_cleanup_waits_for_publication_commit",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
+        },
+        {
+          "path": "app/tests/unit/test_http_worker.py",
+          "baseline": "http122",
+          "symbol": "test_http_copy_resumes_exact_prefix_and_checks_stable_source",
+          "language": "python"
         }
       ],
       "evidence": [
@@ -2423,7 +2468,8 @@
         "publication110",
         "asset112",
         "worker118",
-        "retention119"
+        "retention119",
+        "http122"
       ],
       "remaining_backlog": [
         "43",
@@ -2445,7 +2491,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/capacity.py",
-          "baseline": "ci86"
+          "baseline": "http122"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
@@ -2469,49 +2515,50 @@
         {
           "path": "app/tests/protocol/test_capacity_retention.py",
           "symbol": "test_scan_limits_fail_closed_and_do_not_delete",
-          "language": "python"
+          "language": "python",
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_rollback_cleanup_requires_successful_absence_read",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_cleanup_delete_failure_preserves_original_error",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_duplicate_cleanup_keeps_original_published_version",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_cleanup_waits_for_inflight_publication_before_absence_read",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_cleanup_waits_for_publication_commit",
           "language": "python",
-          "baseline": "asset112"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_rollback_cleanup_requires_verified_absence",
           "language": "python",
-          "baseline": "asset112"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_duplicate_cleanup_releases_database_before_delete",
           "language": "python",
-          "baseline": "asset112"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_output_retention_policy.py",
@@ -2536,7 +2583,8 @@
         "ci86",
         "publication110",
         "asset112",
-        "retention119"
+        "retention119",
+        "http122"
       ],
       "remaining_backlog": [
         "40",
@@ -3022,7 +3070,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/commands.py",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
@@ -3034,20 +3082,21 @@
           "path": "app/tests/integration/test_command_recovery.py",
           "symbol": "test_unknown_keeps_hold_and_claim_blocks_every_boot",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         },
         {
           "path": "app/tests/integration/test_workflow_management.py",
           "symbol": "test_runtime_approval_requires_same_channel_configuration_and_live_artifact",
           "language": "python",
-          "baseline": "worker118"
+          "baseline": "http122"
         }
       ],
       "evidence": [
         "ci86",
         "installed87",
         "visual87",
-        "worker118"
+        "worker118",
+        "http122"
       ],
       "remaining_backlog": [
         "17",
@@ -3071,6 +3120,10 @@
         {
           "path": "app/apps/admin_web/src/pages/Workflows.vue",
           "baseline": "admin87"
+        },
+        {
+          "path": "app/apps/admin_web/src/components/WorkflowManifestForm.vue",
+          "baseline": "browser122"
         }
       ],
       "tests": [
@@ -3095,7 +3148,8 @@
         "ci86",
         "installed87",
         "visual87",
-        "scalar104"
+        "scalar104",
+        "browser122"
       ],
       "remaining_backlog": [
         "18",

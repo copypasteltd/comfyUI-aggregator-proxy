@@ -1,0 +1,336 @@
+{
+  "format_version": 1,
+  "at": "2026-10-27T20:56:41.047192+00:00",
+  "passed": true,
+  "scope": "Three selected actual RTX 5070 workflows, three release-validation jobs and three independent business API jobs; downloaded and probed actual files. Does not accept all workflows, host files, quality, high resolution, long video or fleet capacity.",
+  "source_workflows": 78,
+  "api_exports": 75,
+  "selected_workflows": 3,
+  "selected_imported": 3,
+  "other_candidates_imported": false,
+  "api_profile_mode": "comfy-api-only-v1",
+  "host_file_verification": false,
+  "model_downloads": 0,
+  "runs": [
+    {
+      "kind": "t2v",
+      "alias": "comfy-5070-video-h3",
+      "phase": "release_validation",
+      "job_id": "job_8ed6e07c1d7c4a57844af75238fabf8b",
+      "content_id": "content_558d533bfcd34a4b872a129cb6027b3c",
+      "bytes": 52312,
+      "sha256": "77dceea6d687e2b1de2128e9b1202126f9ffd62ae5a3286aeeccd748adbd3d0f",
+      "metadata": {
+        "width": 512,
+        "height": 288,
+        "duration_milliseconds": 1625
+      },
+      "expires_at": 1793161538,
+      "completed_at": 1793132738,
+      "head_200": true,
+      "range_206": true,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 512,
+            "height": 288,
+            "r_frame_rate": "24/1",
+            "nb_frames": "39"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "r_frame_rate": "0/0",
+            "nb_frames": "52"
+          }
+        ],
+        "format": {
+          "duration": "1.625000"
+        }
+      },
+      "retention_seconds": 28800
+    },
+    {
+      "kind": "t2v",
+      "alias": "comfy-5070-video-h3",
+      "phase": "business_api",
+      "model": "comfy-5070-video-h3",
+      "mode": "text-video",
+      "job_id": "job_d60fb30bebbd4a97b35030dd5ed4880f",
+      "status": "succeeded",
+      "replay_same_job": true,
+      "content_id": "content_2f2933d9b9dc4c9cb2009c10c3292efc",
+      "bytes": 71440,
+      "sha256": "7c489beb05499d01f1c2051b311404d8bc8d6db230ec980b8806f84a210b02f1",
+      "metadata": {
+        "width": 512,
+        "height": 288,
+        "duration_milliseconds": 1625
+      },
+      "expires_at": 1793162037,
+      "completed_at": 1793133237,
+      "head_200": true,
+      "range_206": true,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 512,
+            "height": 288,
+            "r_frame_rate": "24/1",
+            "nb_frames": "39"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "r_frame_rate": "0/0",
+            "nb_frames": "52"
+          }
+        ],
+        "format": {
+          "duration": "1.625000"
+        }
+      },
+      "retention_seconds": 28800
+    },
+    {
+      "kind": "i2v",
+      "alias": "comfy-5070-video-h3-i2v",
+      "phase": "release_validation",
+      "job_id": "job_a31c18ce2e8b4356ad4e1d9691db5288",
+      "content_id": "content_12e492b171384edfa30e8576fa42a56a",
+      "bytes": 55108,
+      "sha256": "54976be3c05b8e409aaca06fcd444022396810f35a4f9963f2d712f05dc7fb09",
+      "metadata": {
+        "width": 512,
+        "height": 288,
+        "duration_milliseconds": 1625
+      },
+      "expires_at": 1793161583,
+      "completed_at": 1793132783,
+      "head_200": true,
+      "range_206": true,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 512,
+            "height": 288,
+            "r_frame_rate": "24/1",
+            "nb_frames": "39"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "r_frame_rate": "0/0",
+            "nb_frames": "52"
+          }
+        ],
+        "format": {
+          "duration": "1.625000"
+        }
+      },
+      "retention_seconds": 28800
+    },
+    {
+      "kind": "i2v",
+      "alias": "comfy-5070-video-h3-i2v",
+      "phase": "business_api",
+      "model": "comfy-5070-video-h3-i2v",
+      "mode": "video-first-frame",
+      "job_id": "job_c2932b6902f4446d91ae1a06a8ef6259",
+      "status": "succeeded",
+      "replay_same_job": true,
+      "content_id": "content_77ebf2681bc44e0f9ddcfdda02390145",
+      "bytes": 50555,
+      "sha256": "7460df7fd5162e7ad5e397efdc416625b632fad5c73ee023a78fbebb000845ec",
+      "metadata": {
+        "width": 512,
+        "height": 288,
+        "duration_milliseconds": 1625
+      },
+      "expires_at": 1793162083,
+      "completed_at": 1793133283,
+      "head_200": true,
+      "range_206": true,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 512,
+            "height": 288,
+            "r_frame_rate": "24/1",
+            "nb_frames": "39"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "r_frame_rate": "0/0",
+            "nb_frames": "52"
+          }
+        ],
+        "format": {
+          "duration": "1.625000"
+        }
+      },
+      "retention_seconds": 28800
+    },
+    {
+      "kind": "refs",
+      "alias": "comfy-5070-video-h3-refs",
+      "phase": "release_validation",
+      "job_id": "job_72a372362c5940029215eece0b8c4ea0",
+      "content_id": "content_7534e894e89b421d9b4b7865b08bb788",
+      "bytes": 76057,
+      "sha256": "e91f83bb084f3bbc5cf8018bb9b7bacfd0c96660bdfbf2794c39dcc5db307fbe",
+      "metadata": {
+        "width": 512,
+        "height": 288,
+        "duration_milliseconds": 1625
+      },
+      "expires_at": 1793161875,
+      "completed_at": 1793133075,
+      "head_200": true,
+      "range_206": true,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 512,
+            "height": 288,
+            "r_frame_rate": "24/1",
+            "nb_frames": "39"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "r_frame_rate": "0/0",
+            "nb_frames": "52"
+          }
+        ],
+        "format": {
+          "duration": "1.625000"
+        }
+      },
+      "retention_seconds": 28800
+    },
+    {
+      "kind": "refs",
+      "alias": "comfy-5070-video-h3-refs",
+      "phase": "business_api",
+      "model": "comfy-5070-video-h3-refs",
+      "mode": "video-refs",
+      "job_id": "job_a89979f21f774314980ede03b8cf31de",
+      "status": "succeeded",
+      "replay_same_job": true,
+      "content_id": "content_5c9cb389bc9043f59f028fd3779beab2",
+      "bytes": 70338,
+      "sha256": "eeaea7d8cc6daf670a9c9aff4822d5f3b645dcb3fca96a109d63487d03770b81",
+      "metadata": {
+        "width": 512,
+        "height": 288,
+        "duration_milliseconds": 1625
+      },
+      "expires_at": 1793162439,
+      "completed_at": 1793133639,
+      "head_200": true,
+      "range_206": true,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 512,
+            "height": 288,
+            "r_frame_rate": "24/1",
+            "nb_frames": "39"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "r_frame_rate": "0/0",
+            "nb_frames": "52"
+          }
+        ],
+        "format": {
+          "duration": "1.625000"
+        }
+      },
+      "retention_seconds": 28800
+    }
+  ],
+  "published_aliases": [
+    "comfy-5070-video-h3-refs",
+    "comfy-5070-video-h3-i2v",
+    "comfy-5070-video-h3",
+    "comfy-4090-video-h3-refs",
+    "comfy-4090-video-h3-i2v",
+    "comfy-3080-image-refs-wai",
+    "comfy-3080-image-edit-wai",
+    "comfy-4090-video-h3",
+    "comfy-3080-music-yue2",
+    "comfy-3080-image-lustify-krea2"
+  ],
+  "published_alias_count": 10,
+  "selected_bindings": [
+    {
+      "release_id": "wfr_1f2ca4bc45984f889e504964dee3a1ed",
+      "desired_digest": "88b5e214e66cc1de2ad0b252371c1cfbdd12f7a719b1fd19e97f9397a47edb43",
+      "applied_digest": "88b5e214e66cc1de2ad0b252371c1cfbdd12f7a719b1fd19e97f9397a47edb43",
+      "verified_digest": "88b5e214e66cc1de2ad0b252371c1cfbdd12f7a719b1fd19e97f9397a47edb43",
+      "observed_at": 1793132291,
+      "runtime_approved": true
+    },
+    {
+      "release_id": "wfr_4f2ee473a30047c29c396034f43c4bf6",
+      "desired_digest": "37d2e3147f6f1f26a7555a4a1feb1ba2cb379036b21644f5ee3725eb52479322",
+      "applied_digest": "37d2e3147f6f1f26a7555a4a1feb1ba2cb379036b21644f5ee3725eb52479322",
+      "verified_digest": "37d2e3147f6f1f26a7555a4a1feb1ba2cb379036b21644f5ee3725eb52479322",
+      "observed_at": 1793132297,
+      "runtime_approved": true
+    },
+    {
+      "release_id": "wfr_10f77b73aeb04a4696cb67a9185ab92b",
+      "desired_digest": "ebe5081d98eb68930cfcaab6dd04d3118e695d0e3b019c128252b613f66bb6e4",
+      "applied_digest": "ebe5081d98eb68930cfcaab6dd04d3118e695d0e3b019c128252b613f66bb6e4",
+      "verified_digest": "ebe5081d98eb68930cfcaab6dd04d3118e695d0e3b019c128252b613f66bb6e4",
+      "observed_at": 1793132287,
+      "runtime_approved": true
+    }
+  ],
+  "worker_heartbeat_age_seconds": 4.047,
+  "capacity_scope": "worker_spool",
+  "remote_device_disk_observed": false,
+  "queue": {
+    "snapshot_at": 1793134601,
+    "unfinished": 0,
+    "global_unassigned_queued": 0,
+    "occupied_physical_gpus": 0
+  },
+  "enabled_channels": 3,
+  "temporary_business_key_disabled": true,
+  "disabled_key_http_status": 401,
+  "plain_http_port": 39443,
+  "any_origin_cors": true,
+  "source_cleanup_implemented": false,
+  "cloud_output_retention_seconds": 28800,
+  "full_goal_accepted": false
+}

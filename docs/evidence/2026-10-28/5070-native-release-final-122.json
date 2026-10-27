@@ -1,0 +1,99 @@
+{
+  "format_version": 1,
+  "at": "2026-10-27T20:57:16.204542+00:00",
+  "passed": true,
+  "scope": "Read-only final native Linux inspection, immutable release hashes, actual versioned output objects and service state. No host shell access to RTX5070 and no complete disaster-recovery or fleet acceptance.",
+  "release": "linux-20261028.122.1",
+  "source_revision": "e1acd587d08f7215c7169577a9649db3dbac8127",
+  "payload_files_verified": 94,
+  "admin_release": "admin-20261028.122.2",
+  "admin_source_revision": "4c7dbc52ab4482481921eedefd4adc4efb8f2b6a",
+  "static_files_verified": 45,
+  "services": {
+    "postgres": {
+      "NRestarts": "0",
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "api": {
+      "NRestarts": "0",
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "runner": {
+      "NRestarts": "0",
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "gc": {
+      "NRestarts": "0",
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "edge": {
+      "NRestarts": "0",
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "http-worker": {
+      "NRestarts": "1",
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    }
+  },
+  "database_migration": "3da02e7b5941",
+  "active_jobs": 0,
+  "gpu_occupancies": 0,
+  "objects": [
+    {
+      "job_id": "job_8ed6e07c1d7c4a57844af75238fabf8b",
+      "bytes": 52312,
+      "sha256": "77dceea6d687e2b1de2128e9b1202126f9ffd62ae5a3286aeeccd748adbd3d0f",
+      "exact_version_head_verified": true,
+      "retention_seconds": 28800
+    },
+    {
+      "job_id": "job_a31c18ce2e8b4356ad4e1d9691db5288",
+      "bytes": 55108,
+      "sha256": "54976be3c05b8e409aaca06fcd444022396810f35a4f9963f2d712f05dc7fb09",
+      "exact_version_head_verified": true,
+      "retention_seconds": 28800
+    },
+    {
+      "job_id": "job_72a372362c5940029215eece0b8c4ea0",
+      "bytes": 76057,
+      "sha256": "e91f83bb084f3bbc5cf8018bb9b7bacfd0c96660bdfbf2794c39dcc5db307fbe",
+      "exact_version_head_verified": true,
+      "retention_seconds": 28800
+    },
+    {
+      "job_id": "job_d60fb30bebbd4a97b35030dd5ed4880f",
+      "bytes": 71440,
+      "sha256": "7c489beb05499d01f1c2051b311404d8bc8d6db230ec980b8806f84a210b02f1",
+      "exact_version_head_verified": true,
+      "retention_seconds": 28800
+    },
+    {
+      "job_id": "job_c2932b6902f4446d91ae1a06a8ef6259",
+      "bytes": 50555,
+      "sha256": "7460df7fd5162e7ad5e397efdc416625b632fad5c73ee023a78fbebb000845ec",
+      "exact_version_head_verified": true,
+      "retention_seconds": 28800
+    },
+    {
+      "job_id": "job_a89979f21f774314980ede03b8cf31de",
+      "bytes": 70338,
+      "sha256": "eeaea7d8cc6daf670a9c9aff4822d5f3b645dcb3fca96a109d63487d03770b81",
+      "exact_version_head_verified": true,
+      "retention_seconds": 28800
+    }
+  ],
+  "worker_secrets_mode": "0600",
+  "loopback_worker_ingress": 39446,
+  "plain_http_port": 39443,
+  "any_origin_cors": true,
+  "root_disk_available_bytes": 9739919360,
+  "virtualization_used": false,
+  "full_disaster_recovery_verified": false,
+  "full_goal_accepted": false
+}

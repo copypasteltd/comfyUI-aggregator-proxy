@@ -12,10 +12,10 @@
       "framework": 6,
       "implemented": 67
     },
-    "named_test_references": 159,
+    "named_test_references": 162,
     "baseline_python_cases": 3593,
-    "reports": 25,
-    "current_source_files": 177
+    "reports": 27,
+    "current_source_files": 183
   },
   "errors": [],
   "checked_files": [
@@ -26,6 +26,7 @@
     "app/apps/admin_web/src/components/PolicyDirectorySelect.vue",
     "app/apps/admin_web/src/components/QueueFilters.vue",
     "app/apps/admin_web/src/components/WorkflowImportDialog.vue",
+    "app/apps/admin_web/src/components/WorkflowManifestForm.vue",
     "app/apps/admin_web/src/pages/Audit.vue",
     "app/apps/admin_web/src/pages/Channels.vue",
     "app/apps/admin_web/src/pages/Content.vue",
@@ -46,11 +47,13 @@
     "app/apps/control_api/src/control_api/compatibility_inputs.py",
     "app/apps/control_api/src/control_api/main.py",
     "app/apps/control_api/src/control_api/uploads.py",
+    "app/apps/windows_worker/src/windows_worker/api_environment.py",
     "app/apps/windows_worker/src/windows_worker/capacity.py",
     "app/apps/windows_worker/src/windows_worker/comfy.py",
     "app/apps/windows_worker/src/windows_worker/comfy_json.py",
     "app/apps/windows_worker/src/windows_worker/commands.py",
     "app/apps/windows_worker/src/windows_worker/configuration.py",
+    "app/apps/windows_worker/src/windows_worker/http_output.py",
     "app/apps/windows_worker/src/windows_worker/journal.py",
     "app/apps/windows_worker/src/windows_worker/main.py",
     "app/apps/windows_worker/src/windows_worker/observations.py",
@@ -105,6 +108,7 @@
     "app/packages/infrastructure/src/generation_infrastructure/audio_media.py",
     "app/packages/infrastructure/src/generation_infrastructure/auth.py",
     "app/packages/infrastructure/src/generation_infrastructure/command_recovery.py",
+    "app/packages/infrastructure/src/generation_infrastructure/commands.py",
     "app/packages/infrastructure/src/generation_infrastructure/content.py",
     "app/packages/infrastructure/src/generation_infrastructure/content_management.py",
     "app/packages/infrastructure/src/generation_infrastructure/database_diagnostics.py",
@@ -155,6 +159,7 @@
     "app/tests/integration/test_dispatch_transactions.py",
     "app/tests/integration/test_gateway.py",
     "app/tests/integration/test_http_auth.py",
+    "app/tests/integration/test_http_worker_sync.py",
     "app/tests/integration/test_job_cancellations.py",
     "app/tests/integration/test_key_generation_options.py",
     "app/tests/integration/test_key_policy_options.py",
@@ -191,6 +196,7 @@
     "app/tests/unit/test_audio_media.py",
     "app/tests/unit/test_compatibility_delivery.py",
     "app/tests/unit/test_history_output_files.py",
+    "app/tests/unit/test_http_worker.py",
     "app/tests/unit/test_output_copy_recovery.py",
     "app/tests/unit/test_wait_estimates.py",
     "app/tests/unit/test_workflow_package.py",
@@ -230,8 +236,12 @@
     "docs/evidence/2026-10-27/http-cors-component-116.json",
     "docs/evidence/2026-10-27/output-retention-component-119.json",
     "docs/evidence/2026-10-27/worker-onboarding-component-118-final.json",
-    "docs/evidence/2026-10-28/development-trace-baselines-121.json",
+    "docs/evidence/2026-10-28/5070-admin-component-122/api-model-form.png",
+    "docs/evidence/2026-10-28/5070-admin-component-122/api-node-form.png",
+    "docs/evidence/2026-10-28/5070-admin-component-122/summary.json",
+    "docs/evidence/2026-10-28/development-trace-baselines-122-final.json",
+    "docs/evidence/2026-10-28/http-worker-component-122.json",
     "docs/evidence/native-ci/ci86-20261025-maintained-database/summary.json"
   ],
-  "checked_at": "2026-10-27T18:47:52.452149+00:00"
+  "checked_at": "2026-10-27T21:16:12.630130+00:00"
 }

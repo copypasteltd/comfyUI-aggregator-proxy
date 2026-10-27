@@ -1,6 +1,6 @@
 # Documentation index
 
-[122 · RTX 5070 HTTP onboarding](122-RTX5070纯HTTP接入与调用验证.md): explicit API declarations, a native Linux Worker and selected complete workflow graphs. Publication requires real generation verification.
+[122 · RTX 5070 HTTP onboarding](122-RTX5070纯HTTP接入与调用验证.md): select and publish only three complete Workflows out of 78. Six actual generation/download runs and 617 related regressions pass. A native Linux HTTP Worker requires no Windows-MCP; the platform now has three channels and ten published aliases. [Selected packages and English usage](examples/5070/README.en.md), [actual screenshots, recording and GIFs](media/5070-workflows-122/README.en.md) are included.
 
 [121 · ComfyUI source cleanup after durable handoff](121-ComfyUI原始产物移交即清理设计.md): immediately request original-file cleanup after the complete verified spool package and recovery intent commit, independently of cloud upload. Specify the restricted extension, spool-first recovery, bounded retries, eight pending development items and ten acceptance groups. Design only; production originals are still retained and Worker/cloud retention stays as documented.
 

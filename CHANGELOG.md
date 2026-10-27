@@ -4,6 +4,8 @@
 
 - 增加纯 HTTP 渠道、原生 Linux Worker、明确 API 依赖声明与回执模式隔离、稳定下载及前缀恢复，不要求 5070 安装 Windows-MCP，不批量发布不完整工作流。
 - Admin 模型依赖、API 版本和节点目录支持明确的 API-only 表单；保留本地主机依赖字段并复用青柠组件。
+- 从 78 个源工作流中仅整理并发布文生视频、首帧生视频、双参考图生视频 3 个包；3 次真实验证和 3 次独立业务调用全部通过，下载/媒体探测、幂等、HEAD/Range 与八小时期限一致。当前 3 渠道、10 个已发布别名；5070 的首轮批准规格为 512×288、39 帧/24 fps。
+- Publish three complete, sanitized manifests with a catalog, neutral reference images and bilingual usage. All 617 related component cases pass. Native Linux inspection verifies 94 backend payload files, 45 Admin files and six exact-version objects; actual Admin form checks, screenshots, original-speed recording and GIFs are included. Disable the temporary business Key; keep existing Key policies scoped. No remote host-file verification, bulk candidate import, model downloads or automatic ComfyUI source cleanup is claimed.
 - Add opt-in HTTP execution, Linux resource observation and process locking, bounded durable output collection, contract/client updates and deployment examples. Real publication and generation outcomes are recorded in [122](docs/122-RTX5070纯HTTP接入与调用验证.md); original source-file cleanup remains a design.
 
 ## 2026-10-28 · 121 · Source cleanup after durable Worker handoff — design

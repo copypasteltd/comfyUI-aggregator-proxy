@@ -1,0 +1,40 @@
+{
+  "format_version": 1,
+  "at": "2026-10-27T21:14:22.048570+00:00",
+  "passed": true,
+  "scope": "Additional actual deployed API-only form keyboard, readability, mobile and reduced-motion checks; no non-session writes. Not generation, visual-quality or fleet acceptance.",
+  "checks": [
+    {
+      "name": "Keyboard Tab moves between declared API fields with visible focus ring",
+      "passed": true,
+      "observed": {
+        "color": "rgb(12, 12, 12)",
+        "background": "rgb(255, 255, 255)",
+        "shadow": "rgb(12, 12, 12) 0px 0px 0px 1px inset",
+        "focused": true
+      }
+    },
+    {
+      "name": "390px API model form uses one column without page overflow under reduced motion",
+      "passed": true
+    },
+    {
+      "name": "390px API node catalog is readable and keyboard focusable",
+      "passed": true
+    }
+  ],
+  "javascript_errors": [],
+  "non_session_mutations": [],
+  "browser_closed": true,
+  "closed_contexts": 2,
+  "screenshots": [
+    {
+      "path": "docs/media/5070-workflows-122/api-model-form-mobile.png",
+      "sha256": "753533b657d1fdc0a01cc6d20a5808e09e7777c565b651fd68f45094b5efbee3"
+    },
+    {
+      "path": "docs/media/5070-workflows-122/api-node-form-mobile.png",
+      "sha256": "1a36aa33a0965343fc3801a7142861bba86e715f6fe043a12a7f3f6bfd84c048"
+    }
+  ]
+}

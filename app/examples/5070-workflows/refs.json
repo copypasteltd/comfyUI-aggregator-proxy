@@ -1,0 +1,320 @@
+{
+  "format_version": "1.0",
+  "task_type": "references_to_video",
+  "workflow_api": {
+    "92": {
+      "class_type": "SaveVideo",
+      "inputs": {
+        "filename_prefix": "aggregator-placeholder",
+        "format": "auto",
+        "codec": "auto",
+        "video": [
+          "130",
+          0
+        ]
+      }
+    },
+    "119": {
+      "class_type": "VAELoader",
+      "inputs": {
+        "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+      }
+    },
+    "120": {
+      "class_type": "VAELoader",
+      "inputs": {
+        "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+      }
+    },
+    "121": {
+      "class_type": "VAEDecodeAudio",
+      "inputs": {
+        "samples": [
+          "125",
+          0
+        ],
+        "vae": [
+          "120",
+          0
+        ]
+      }
+    },
+    "122": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": [
+          "125",
+          0
+        ],
+        "vae": [
+          "119",
+          0
+        ]
+      }
+    },
+    "124": {
+      "class_type": "BasicScheduler",
+      "inputs": {
+        "scheduler": "simple",
+        "steps": 6,
+        "denoise": 1,
+        "model": [
+          "141",
+          0
+        ]
+      }
+    },
+    "125": {
+      "class_type": "SamplerCustomAdvanced",
+      "inputs": {
+        "noise": [
+          "129",
+          0
+        ],
+        "guider": [
+          "126",
+          0
+        ],
+        "sampler": [
+          "142",
+          0
+        ],
+        "sigmas": [
+          "124",
+          0
+        ],
+        "latent_image": [
+          "136",
+          1
+        ]
+      }
+    },
+    "126": {
+      "class_type": "BasicGuider",
+      "inputs": {
+        "model": [
+          "141",
+          0
+        ],
+        "conditioning": [
+          "136",
+          0
+        ]
+      }
+    },
+    "127": {
+      "class_type": "UNETLoader",
+      "inputs": {
+        "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    "128": {
+      "class_type": "CLIPLoader",
+      "inputs": {
+        "clip_name": "qwen3vl_32b_heretic_minimax_h3_nvfp4.safetensors",
+        "type": "minimax",
+        "device": "default"
+      }
+    },
+    "129": {
+      "class_type": "RandomNoise",
+      "inputs": {
+        "noise_seed": 20261028
+      }
+    },
+    "130": {
+      "class_type": "CreateVideo",
+      "inputs": {
+        "fps": 24,
+        "bit_depth": 8,
+        "images": [
+          "122",
+          0
+        ],
+        "audio": [
+          "121",
+          0
+        ]
+      }
+    },
+    "136": {
+      "class_type": "MiniMaxH3ReferenceToVideo",
+      "inputs": {
+        "prompt": "A fixed camera shows a green lime beside a white ceramic cup on a wooden table. Soft daylight, very subtle movement, quiet room ambience. No people, no text, no dialogue.",
+        "width": 512,
+        "height": 288,
+        "length": 39,
+        "ref_image_size": "match",
+        "clip": [
+          "128",
+          0
+        ],
+        "vae": [
+          "119",
+          0
+        ],
+        "audio_vae": [
+          "120",
+          0
+        ],
+        "ref_images.ref_image_0": [
+          "137",
+          0
+        ],
+        "ref_images.ref_image_1": [
+          "139",
+          0
+        ]
+      }
+    },
+    "137": {
+      "class_type": "LoadImage",
+      "inputs": {
+        "image": "aggregator-reference-0.png"
+      }
+    },
+    "139": {
+      "class_type": "LoadImage",
+      "inputs": {
+        "image": "aggregator-reference-1.png"
+      }
+    },
+    "141": {
+      "class_type": "MiniMaxH3TurboLoRA",
+      "inputs": {
+        "lora_name": "minimax_h3_turbo_v4_step600_ema.safetensors",
+        "strength": 1,
+        "low_vram": false,
+        "model": [
+          "127",
+          0
+        ]
+      }
+    },
+    "142": {
+      "class_type": "MiniMaxH3TurboSampler",
+      "inputs": {}
+    }
+  },
+  "bindings": [
+    {
+      "source": "prompt",
+      "node_id": "136",
+      "input_name": "prompt"
+    },
+    {
+      "source": "width",
+      "node_id": "136",
+      "input_name": "width"
+    },
+    {
+      "source": "height",
+      "node_id": "136",
+      "input_name": "height"
+    },
+    {
+      "source": "output_prefix",
+      "node_id": "92",
+      "input_name": "filename_prefix"
+    },
+    {
+      "source": "seed",
+      "node_id": "129",
+      "input_name": "noise_seed"
+    },
+    {
+      "source": "reference_0",
+      "node_id": "137",
+      "input_name": "image"
+    },
+    {
+      "source": "reference_1",
+      "node_id": "139",
+      "input_name": "image"
+    }
+  ],
+  "output": {
+    "adapter": "video-files-v1",
+    "final_node_ids": [
+      "92"
+    ],
+    "expected_count": 1,
+    "history_field": "images",
+    "max_bytes": 134217728,
+    "mime_types": [
+      "video/mp4"
+    ]
+  },
+  "presets": [
+    {
+      "quality": "standard",
+      "size": "512x288",
+      "seconds": 1.625,
+      "values": {}
+    }
+  ],
+  "dependency_lock": {
+    "mode": "comfy-api-only-v1",
+    "comfy_version": "0.33.1",
+    "node_classes": [
+      "BasicGuider",
+      "BasicScheduler",
+      "CLIPLoader",
+      "CreateVideo",
+      "LoadImage",
+      "MiniMaxH3ReferenceToVideo",
+      "MiniMaxH3TurboLoRA",
+      "MiniMaxH3TurboSampler",
+      "RandomNoise",
+      "SamplerCustomAdvanced",
+      "SaveVideo",
+      "UNETLoader",
+      "VAEDecode",
+      "VAEDecodeAudio",
+      "VAELoader"
+    ],
+    "model_inputs": [
+      {
+        "class_type": "VAELoader",
+        "input_name": "vae_name",
+        "value": "minimax_h3_video_vae_fp16.safetensors"
+      },
+      {
+        "class_type": "VAELoader",
+        "input_name": "vae_name",
+        "value": "minimax_h3_audio_vae_fp32.safetensors"
+      },
+      {
+        "class_type": "UNETLoader",
+        "input_name": "unet_name",
+        "value": "minimax_h3_ref2va_pruned_int8_convrot.safetensors"
+      },
+      {
+        "class_type": "CLIPLoader",
+        "input_name": "clip_name",
+        "value": "qwen3vl_32b_heretic_minimax_h3_nvfp4.safetensors"
+      },
+      {
+        "class_type": "MiniMaxH3TurboLoRA",
+        "input_name": "lora_name",
+        "value": "minimax_h3_turbo_v4_step600_ema.safetensors"
+      }
+    ]
+  },
+  "runtime_profiles": [
+    {
+      "id": "http-5070",
+      "gpu_hardware_id": "comfy-http-5070-slot-0",
+      "approved": false,
+      "execution_timeout_seconds": 7200
+    }
+  ],
+  "supported_parameters": [
+    "quality",
+    "size",
+    "seconds",
+    "seed",
+    "n"
+  ]
+}

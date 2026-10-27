@@ -1,0 +1,59 @@
+{
+  "scope": "Selected workflows only; model weights, credentials, original private workflows and source prompts are not included. Independent business verification is recorded in docs/122.",
+  "items": [
+    {
+      "name": "H3 text to video",
+      "alias": "comfy-5070-video-h3",
+      "workflow_file": "t2v.json",
+      "task_type": "text_to_video",
+      "defaults": {
+        "n": 1,
+        "size": "512x288",
+        "quality": "standard",
+        "seconds": 1.625
+      },
+      "reference_count": 0,
+      "dependency_mode": "comfy-api-only-v1",
+      "original_graph_sha256": "97e46ee6225621d3fa9b36c358c70bdffc29261067041140bb20b5566d0ef3cc",
+      "validated_release_digest": "ebe5081d98eb68930cfcaab6dd04d3118e695d0e3b019c128252b613f66bb6e4",
+      "validated_output_sha256": "77dceea6d687e2b1de2128e9b1202126f9ffd62ae5a3286aeeccd748adbd3d0f",
+      "validated_output_bytes": 52312
+    },
+    {
+      "name": "H3 first-frame video",
+      "alias": "comfy-5070-video-h3-i2v",
+      "workflow_file": "i2v.json",
+      "task_type": "references_to_video",
+      "defaults": {
+        "n": 1,
+        "size": "512x288",
+        "quality": "standard",
+        "seconds": 1.625
+      },
+      "reference_count": 1,
+      "dependency_mode": "comfy-api-only-v1",
+      "original_graph_sha256": "c80933532030a60d0a7bece18df8266edf8b61bdb106146b3c89b3d3f368af48",
+      "validated_release_digest": "88b5e214e66cc1de2ad0b252371c1cfbdd12f7a719b1fd19e97f9397a47edb43",
+      "validated_output_sha256": "54976be3c05b8e409aaca06fcd444022396810f35a4f9963f2d712f05dc7fb09",
+      "validated_output_bytes": 55108
+    },
+    {
+      "name": "H3 two-reference video",
+      "alias": "comfy-5070-video-h3-refs",
+      "workflow_file": "refs.json",
+      "task_type": "references_to_video",
+      "defaults": {
+        "n": 1,
+        "size": "512x288",
+        "quality": "standard",
+        "seconds": 1.625
+      },
+      "reference_count": 2,
+      "dependency_mode": "comfy-api-only-v1",
+      "original_graph_sha256": "6f566d0a90eb45a610c40e9ec1999865cc2a085592cbdd96eeb4fc619c8ec9f8",
+      "validated_release_digest": "37d2e3147f6f1f26a7555a4a1feb1ba2cb379036b21644f5ee3725eb52479322",
+      "validated_output_sha256": "e91f83bb084f3bbc5cf8018bb9b7bacfd0c96660bdfbf2794c39dcc5db307fbe",
+      "validated_output_bytes": 76057
+    }
+  ]
+}

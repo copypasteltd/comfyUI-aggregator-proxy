@@ -1,10 +1,14 @@
 # ComfyUI Aggregator Proxy
 
-[122 · HTTP onboarding for RTX 5070](docs/122-RTX5070纯HTTP接入与调用验证.md) adds an opt-in native HTTP Worker without Windows-MCP. Only selected graphs with available nodes, model options and complete output paths enter real generation validation; the 78 candidates are not bulk published. API declarations do not claim host-file verification. See the record for actual publication and call results. The Admin form distinguishes API model options and node classes from native host digests.
+[122 · RTX 5070 HTTP onboarding and selected packages](docs/122-RTX5070纯HTTP接入与调用验证.md) is deployed. Select and publish only 3 complete Workflows out of 78: text video, first-frame video and two-reference video. Each passes one release-validation job and one independent business API job: 6 actual generations with download hashes, physical specifications, idempotency, HEAD/Range and eight-hour expiry verified. The platform now has **3 enabled channels and 10 published aliases**. All 617 related regression cases pass; remaining candidates are not imported or published in bulk.
+
+[Selected packages and English usage](docs/examples/5070/README.en.md) include complete release JSON, actual model options and project-owned reference images. [Actual screenshots, original-speed recording, GIFs and generated samples](docs/media/5070-workflows-122/README.en.md) document this deployment. A native Linux HTTP Worker requires no remote Windows-MCP. API-only declarations and Admin forms distinguish API observations from host-file verification.
+
+![Actual business generation from the selected 5070 Workflows](docs/media/5070-workflows-122/generated-workflows.gif)
 
 [121 · Delete ComfyUI originals after durable handoff](docs/121-ComfyUI原始产物移交即清理设计.md): once copy 01 reaches Worker spool 02 with complete size/SHA-256 verification, fsync and a committed recovery package, request deletion through a dedicated ComfyUI endpoint immediately, without waiting for cloud copy 03. Restrict deletion to the owning task and retry independently. Keep existing spool retention of one hour after cloud acknowledgement and cloud retention of eight hours after success. **Design only: the extension, Worker recovery changes and production activation remain pending; originals are still retained online.** The specification includes eight development items, ten acceptance groups and a machine-readable policy.
 
-[120 · Reference generation and exact dimensions](docs/120-参考能力发布与精确尺寸验证.md) is complete: publish four new aliases for image editing, two-image generation, first-frame video and two-image video. Add controlled `720x1080` presets to existing text image/video aliases while preserving their defaults. Six Workflows each pass one real validation and one separate business API call, including physical media probes, SHA-256, HEAD, Range and idempotent replay. Nine invalid-input/access-isolation checks pass. The Admin has seven published aliases; each business Key discovers only its authorized, runnable subset.
+[120 · Reference generation and exact dimensions](docs/120-参考能力发布与精确尺寸验证.md) records six real validations, six independent business calls and nine invalid-input/access-isolation checks. Those seven aliases continue to supply image, video and audio generation; the three new 5070 aliases are listed below. Each business Key discovers only its authorized, runnable subset.
 
 ![Actual reference-generation Admin](docs/media/reference-capabilities-120/admin-reference.gif)
 
@@ -16,11 +20,14 @@
 | `comfy-4090-video-h3` | Text video | 720×1080; original default 864×480, about 5.167 s | `/v1/videos` |
 | `comfy-4090-video-h3-i2v` | One first-frame image | 720×1080, about 5.167 s | `/v1/videos` |
 | `comfy-4090-video-h3-refs` | Two reference images | 720×1080, about 5.167 s | `/v1/videos` |
+| `comfy-5070-video-h3` | Text video | 512×288, 1.625 s, 24 fps | `/v1/videos` |
+| `comfy-5070-video-h3-i2v` | One first-frame image | 512×288, 1.625 s, 24 fps | `/v1/videos` |
+| `comfy-5070-video-h3-refs` | Two reference images | 512×288, 1.625 s, 24 fps | `/v1/videos` |
 | `comfy-3080-music-yue2` | Text audio; verified in 118, not rerun here | Up to 30 s, 48 kHz stereo FLAC | `/v1/jobs`, `text_to_audio` |
 
 Usage: grant the Key access to aliases, release IDs, channels and quotas in Admin; upload reference images to `/v1/assets`; submit with the resulting `asset_id`; poll `/v1/jobs/{id}`; download with the same Key. New releases do not automatically expand an existing Key's permissions. Use `source_image` for image editing, `input_reference` for first-frame video, and an ordered two-item `references` array for the selected multi-reference models. See [120](docs/120-参考能力发布与精确尺寸验证.md) for complete JSON and the resumable native [verification CLI](app/scripts/verify_reference_api.py).
 
-The H3/Krea2 720×1080 paths crop fixed edges from 736×1088, so allow composition margins. Dimensions come from frozen presets. Video-file references, arbitrary dimensions/durations/reference counts and every candidate Workflow remain outside this acceptance. Seven distinct Workflows supply the published aliases; 234 of 241 candidates still await preparation/acceptance. Physical 10–20-device capacity, full Sub2API runtime integration and complete-product acceptance remain open.
+The 4090 H3/Krea2 720×1080 paths crop fixed edges from 736×1088, so allow composition margins. Dimensions come from frozen presets; the 5070 releases currently approve only 512×288 at 1.625 seconds. Video-file references, arbitrary dimensions/durations/reference counts and every candidate Workflow remain outside this acceptance. Seven previously validated Workflows are drawn from 241 earlier drafts, with 234 still awaiting preparation; this increment adds only three separate 5070 Workflows. Physical 10–20-device capacity, full Sub2API runtime integration and complete-product acceptance remain open.
 
 ![Real two-image video sample](docs/media/reference-capabilities-120/sample-video-refs.gif)
 
@@ -30,7 +37,7 @@ The H3/Krea2 720×1080 paths crop fixed edges from 736×1088, so allow compositi
 
 ## Historical release notes
 
-Read the following counts/statuses at their original increment date. The table above and document 120 describe the current published capabilities.
+Read the following counts/statuses at their original increment date. The table above and document 122 describe the current published capabilities.
 
 [117 · ZeroTier private-network access](docs/117-ZeroTier原生客户端与私网接入.md): native ZeroTier 1.16.2 is running with startup enabled. After the user's controller authorization, the requested network reports `OK` and assigns an address. Actual HTTP on port 39443 and SSH pass from another Windows member; default routes and DNS remain intact, and all 64 services running before installation remain active. Node/address details are delivered privately; actual ComfyUI and Worker registration remain pending.
 
@@ -62,7 +69,7 @@ The [live deployment screenshots, original-speed MP4 and GIF](docs/media/linux-d
 
 The internal service name is **Render Control**. The system combines a visual Admin, a durable generation control plane, Windows Workers and a Sub2API integration. Images, videos and audio all come from ComfyUI Workflows; audio uses the same execution and management system.
 
-**Status: in development; Linux services and two native Windows GPUs are deployed.** Actual text-to-image, text-to-video and text-to-audio generation and content delivery pass. Reference modes, specialized Workflows, model quality, 10–20 physical machines, custom Sub2API integration and complete disaster recovery still require acceptance. Historical records retain their original scope; increment 118 above describes the current deployment and actual generated samples.
+**Status: in development; Linux control services and three ComfyUI devices (3080, 4090 and 5070) are connected.** Image, video, audio and the published reference capabilities have actual calling evidence. The 5070 is served by a native Linux HTTP Worker without device-management access. Specialized Workflows, high-resolution/long video, model quality, 10–20 physical machines, custom Sub2API integration and complete disaster recovery remain open. Historical records retain their original scope; increment 122 describes the current deployment.
 
 [107 · Final output metadata and Worker isolation](docs/107-ComfyUI最终产物结构与Worker隔离.md) fixes controlled rejection of malformed history and recovery quarantine races, including failed tasks still cleaning up. All 248 strengthened focused cases, 16 gates/4265 Python tests, 30 native scenarios and 29 installation/10 browser checks of rc-20261026.107.1 pass. All 647 CI/275 native/525 candidate inputs and actual Worker metadata/runtime wheel bytes match 75db9a0. Preserve the 90/12/1 failed reproductions and clean up owned temporary resources. Real-resource exits 17/23/43/55/60, all 69 remaining items and full production acceptance stay open.
 

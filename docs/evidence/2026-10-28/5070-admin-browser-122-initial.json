@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "scope": "Initial actual Admin browser capture",
+  "failure": "Test read the visible JSON textarea before its async workflow detail request populated it; initial value was the page default empty object.",
+  "correction": "Wait for the expected dependency_lock in the rendered detail before reading it.",
+  "owned_browser_contexts_closed": true,
+  "owned_browser_closed": true,
+  "production_workflow_changed": false
+}

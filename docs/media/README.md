@@ -1,5 +1,7 @@
 # 演示素材 / Demonstration media
 
+[122 · 实际 5070 精选接入 / Actual selected 5070 workflows](5070-workflows-122/README.md)：当前三渠道、十个发布别名及 API-only 表单的实际截图、原速录屏和 GIF；附三种真实业务视频及自制参考图，来源、摘要及使用边界单独记录。[English](5070-workflows-122/README.en.md)。
+
 [120 · 实际参考生成 / Actual reference generation](reference-capabilities-120/README.md)：七个公开模型的真实 Admin、录屏/GIF、自制参考图及实际单图/双图生图和视频样本。历史合成和空后台演示仍按各自时点阅读。
 
 [118 · 实际双 GPU 接入 / Actual two-GPU onboarding](comfy-onboarding-118/README.md)：当前两台 Windows、正式渠道与已发布生图/视频/音频模型的截图、原速录屏、GIF 和真实生成样本；后续各历史素材保持其原合成或空后台边界。
