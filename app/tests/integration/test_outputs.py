@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+from datetime import timedelta
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
@@ -13,7 +14,7 @@ from generation_domain.errors import DomainError
 from generation_domain.values import fingerprint, parse_id, utcnow
 from generation_infrastructure.jobs import JobRepository
 from generation_infrastructure.leases import LeaseRepository
-from generation_infrastructure.models import Artifact, GpuOccupancy, Job, UsageLedger
+from generation_infrastructure.models import Artifact, GpuOccupancy, Job, ObjectRecord, UsageLedger
 from generation_infrastructure.outputs import OutputRepository
 from generation_infrastructure.security import SecretVault
 from generation_infrastructure.settings import Settings
@@ -58,7 +59,10 @@ def test_complete_is_once_and_does_not_release_reused_gpu(pg: sessionmaker[Sessi
     result = outputs.complete(catalog["node_id"], aid, complete)
     assert outputs.complete(catalog["node_id"], aid, complete) == result
     with pg() as session:
-        assert session.get(Job, parse_id("job", claim["job_id"])).state == "succeeded"
+        job = session.get(Job, parse_id("job", claim["job_id"]))
+        assert job.state == "succeeded"
+        artifact = session.scalar(select(Artifact).where(Artifact.job_id == job.id))
+        assert session.get(ObjectRecord, artifact.object_id).expires_at == job.terminal_at + timedelta(hours=8)
         assert session.get(GpuOccupancy, catalog["gpu_id"]).attempt_id == parse_id("att", second["attempt_id"])
         assert session.scalar(select(func.count()).select_from(Artifact)) == 1
         assert session.scalar(select(func.count()).select_from(UsageLedger)) == 1

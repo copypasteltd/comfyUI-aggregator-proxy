@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import logging
-from datetime import timedelta
 from pathlib import Path
 from typing import Any
 from uuid import UUID, uuid4
@@ -28,6 +27,7 @@ from generation_infrastructure.models import (
     ObjectRecord,
     OutputUpload,
 )
+from generation_infrastructure.output_retention import OUTPUT_RETENTION
 from generation_infrastructure.spec_isolation import verified_success
 from generation_infrastructure.transactions import record_change
 
@@ -108,7 +108,7 @@ class OutputRepository:
                 if upload.object_id:
                     result = {"id": public_id("upl", upload.id), "verified": True}
                 else:
-                    obj = ObjectRecord(tenant_id=job.tenant_id, project_id=job.project_id, object_key=object_key, version_id=stored.version, bytes=stored.bytes, sha256=stored.sha256, media_type=stored.media_type, verified_at=utcnow(), metadata_json=metadata, expires_at=utcnow() + timedelta(days=7))
+                    obj = ObjectRecord(tenant_id=job.tenant_id, project_id=job.project_id, object_key=object_key, version_id=stored.version, bytes=stored.bytes, sha256=stored.sha256, media_type=stored.media_type, verified_at=utcnow(), metadata_json=metadata, expires_at=utcnow() + OUTPUT_RETENTION)
                     session.add(obj)
                     session.flush()
                     upload.object_id = obj.id
@@ -165,12 +165,13 @@ class OutputRepository:
                 raise DomainError("manifest_not_verified", "完成清单没有全部通过云端验证")
             job.state = transition(job.state, "verifying", "complete_manifest", {"current_lease", "outputs_stable"})
             artifacts = []
+            verified_objects = []
             audio_milliseconds = 0
             for row in rows:
                 obj = session.get(ObjectRecord, row.object_id)
                 if not obj or not obj.verified_at or not obj.version_id:
                     raise DomainError("object_not_verified", "缺少已验证的不可变对象")
-                obj.expires_at = utcnow() + timedelta(days=7)
+                verified_objects.append(obj)
                 if job.task_type == "text_to_audio":
                     check_specification(obj.metadata_json, job.execution["parameters"], audio_spec=job.execution.get("audio_spec"))
                     audio_milliseconds += obj.metadata_json["duration_milliseconds"]
@@ -180,6 +181,9 @@ class OutputRepository:
                 artifacts.append({"id": public_id("content", artifact.id), "position": row.position, "bytes": obj.bytes, "sha256": obj.sha256, "media_type": obj.media_type, "download_url": "/v1/content/" + public_id("content", artifact.id) + "/download"})
             job.state = transition(job.state, "succeeded", "finalize_verified_manifest", {"current_lease", "cloud_manifest_verified", "terminal_commit_once", "resources_accounted"})
             terminal_accounting(session, job, buckets, "succeeded", audio_milliseconds=audio_milliseconds)
+            assert job.terminal_at is not None
+            for obj in verified_objects:
+                obj.expires_at = job.terminal_at + OUTPUT_RETENTION
             attempt.closed_at = utcnow()
             job.result_manifest = {"job_id": public_id("job", job.id), "digest": data.manifest_digest, "upload_ids": data.upload_ids, "artifacts": artifacts}
             verified_success(session, job, attempt, data.manifest_digest)
