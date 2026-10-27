@@ -1,5 +1,7 @@
 # Documentation index
 
+[119 · Eight-hour cloud media retention](119-云端产物八小时保留.md): published image, video and audio outputs expire **8 hours after successful job completion**. New downloads are denied at expiry and GC deletes the exact object version. Save required files before expires_at. Existing outputs are shortened to the same deadline; completion replay never renews it. Worker spool retention remains one hour after cloud acknowledgement; ComfyUI originals and client downloads are managed separately. See the linked deployment and validation record.
+
 [118 · Actual dual-GPU onboarding](118-双GPU真实ComfyUI接入.md): two native Windows GPUs, two channels, 241 candidate drafts, 51 model-file registrations and three published models verified through actual image/video/audio generation. All 588 related regression cases and eight Admin page/viewport checks pass. [Actual media](media/comfy-onboarding-118/README.md) is available. The third endpoint, reference modes, specialized Workflows, fleet capacity, gateway runtime and full acceptance remain pending.
 
 [117 · Native ZeroTier and private-network access](117-ZeroTier原生客户端与私网接入.md): installation, startup, controller authorization and address assignment are complete. Actual cross-machine HTTP/SSH pass, existing routes/DNS and services remain intact. Public evidence excludes full network topology and secret files.

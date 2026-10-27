@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[119 · Eight-hour cloud media retention](docs/119-云端产物八小时保留.md): published image, video and audio outputs expire **8 hours after successful job completion**. New downloads are denied at expiry and GC deletes the exact object version. Save required files before expires_at. Existing outputs are shortened to the same deadline; completion replay never renews it. Worker spool retention remains one hour after cloud acknowledgement; ComfyUI originals and client downloads are managed separately. See the linked deployment and validation record.
+
 [118 · Two real Windows GPUs](docs/118-双GPU真实ComfyUI接入.md) are connected: two enabled ComfyUI channels, 241 candidate Workflow drafts, 51 model-file registrations, and three published models approved after actual generation, S3 delivery and authenticated downloads. All 588 related regression cases and eight Admin page/viewport checks pass. The third requested endpoint still times out. Reference generation, specialized Workflows, 10–20 physical machines and complete-product acceptance remain pending.
 
 ![Actual Admin after GPU onboarding: channels, models, Workflows and jobs](docs/media/comfy-onboarding-118/admin-onboarding.gif)

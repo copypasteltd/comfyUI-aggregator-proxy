@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 2026-10-27 · 119 · Eight-hour cloud output retention
+
+- 按用户要求，云端图片、视频和音频从成功任务终态起保留八小时；统一 expires_at，完成重放不延长。增加默认预览、有界批次与同事务审计的历史产物缩期入口，保护输入对象、未发布上传和已有更早期限。
+- Cloud image/video/audio outputs now expire eight hours after successful completion. Add a bounded, audited legacy backfill; preserve input retention, completion idempotency, exact-version GC, Worker spool and local copies. Native PostgreSQL boundary and publication regression results, deployment and remaining observation limits are recorded in document 119.
+
 ## 2026-10-27 · 118 · Real ComfyUI onboarding
 
 - 已接入两台原生 Windows ComfyUI / 独立自动启动 Worker，2 条正式渠道、241 个候选草稿和 51 个模型文件登记；文生图、文生视频、音乐三个模型经真实任务与内容交付批准发布，另验证实际业务 Key 异步生图、幂等、下载与撤销。第三台指定设备仍超时待接入。

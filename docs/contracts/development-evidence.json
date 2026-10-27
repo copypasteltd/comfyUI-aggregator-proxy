@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 118,
+  "increment": 119,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-27/development-trace-baselines-118.json",
-    "sha256": "01907a401979183b5c38d3f0320f17ecbb3ff94e8fd04e9d3d8563b8ee5b1c80"
+    "path": "docs/evidence/2026-10-27/development-trace-baselines-119.json",
+    "sha256": "f57cc47070cde993150715e4115baaa58c67be4dff54734e5aeefa2fca2eb24f"
   },
   "requirements": [
     {
@@ -1558,7 +1558,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "publication110"
+          "baseline": "retention119"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
@@ -1569,12 +1569,14 @@
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_complete_is_once_and_does_not_release_reused_gpu",
-          "language": "python"
+          "language": "python",
+          "baseline": "retention119"
         },
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
-          "language": "python"
+          "language": "python",
+          "baseline": "retention119"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
@@ -1597,7 +1599,8 @@
       ],
       "evidence": [
         "ci86",
-        "publication110"
+        "publication110",
+        "retention119"
       ],
       "remaining_backlog": [
         "43",
@@ -2102,12 +2105,14 @@
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
-          "language": "python"
+          "language": "python",
+          "baseline": "retention119"
         }
       ],
       "evidence": [
         "ci86",
-        "wait94"
+        "wait94",
+        "retention119"
       ],
       "remaining_backlog": [
         "37",
@@ -2130,7 +2135,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "publication110"
+          "baseline": "retention119"
         }
       ],
       "tests": [
@@ -2142,12 +2147,14 @@
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
-          "language": "python"
+          "language": "python",
+          "baseline": "retention119"
         }
       ],
       "evidence": [
         "ci86",
-        "publication110"
+        "publication110",
+        "retention119"
       ],
       "remaining_backlog": [
         "21",
@@ -2164,7 +2171,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "publication110"
+          "baseline": "retention119"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
@@ -2175,12 +2182,14 @@
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_complete_is_once_and_does_not_release_reused_gpu",
-          "language": "python"
+          "language": "python",
+          "baseline": "retention119"
         },
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
-          "language": "python"
+          "language": "python",
+          "baseline": "retention119"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
@@ -2215,7 +2224,8 @@
       ],
       "evidence": [
         "ci86",
-        "publication110"
+        "publication110",
+        "retention119"
       ],
       "remaining_backlog": [
         "37",
@@ -2317,7 +2327,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "publication110"
+          "baseline": "retention119"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -2412,7 +2422,8 @@
         "history107",
         "publication110",
         "asset112",
-        "worker118"
+        "worker118",
+        "retention119"
       ],
       "remaining_backlog": [
         "43",
@@ -2438,11 +2449,15 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "publication110"
+          "baseline": "retention119"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
           "baseline": "asset112"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/output_retention.py",
+          "baseline": "retention119"
         }
       ],
       "tests": [
@@ -2497,12 +2512,31 @@
           "symbol": "test_asset_duplicate_cleanup_releases_database_before_delete",
           "language": "python",
           "baseline": "asset112"
+        },
+        {
+          "path": "app/tests/integration/test_output_retention_policy.py",
+          "symbol": "test_output_access_and_gc_switch_at_eight_hours",
+          "language": "python",
+          "baseline": "retention119"
+        },
+        {
+          "path": "app/tests/integration/test_output_retention_policy.py",
+          "symbol": "test_backfill_is_audited_idempotent_and_preserves_inputs_and_unpublished_objects",
+          "language": "python",
+          "baseline": "retention119"
+        },
+        {
+          "path": "app/tests/integration/test_output_retention_policy.py",
+          "symbol": "test_backfill_never_extends_earlier_expiry_or_shortens_input_backed_output",
+          "language": "python",
+          "baseline": "retention119"
         }
       ],
       "evidence": [
         "ci86",
         "publication110",
-        "asset112"
+        "asset112",
+        "retention119"
       ],
       "remaining_backlog": [
         "40",
@@ -2510,7 +2544,7 @@
         "42",
         "69"
       ],
-      "limitation": "清理与保护已有测试；实际保留值、容量预算及备份未落实。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。 112 已以真实 PG 未决输入发布锁等待、回滚、失败查询和重复清理验证精确版本保护；外部删除不持有数据库连接，真实 S3/设备故障出口仍开放。"
+      "limitation": "清理与保护已有测试；实际保留值、容量预算及备份未落实。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。 112 已以真实 PG 未决输入发布锁等待、回滚、失败查询和重复清理验证精确版本保护；外部删除不持有数据库连接，真实 S3/设备故障出口仍开放。 119 已验证八小时云端输出保留、受控时钟到期回收及历史回填；实际服务器运行观察另记，完整目标不提升。"
     },
     {
       "id": "DATA-09",
@@ -2684,7 +2718,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "publication110"
+          "baseline": "retention119"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/coordinator.go",
@@ -2718,7 +2752,8 @@
         "go80",
         "sdk91",
         "sdk92",
-        "publication110"
+        "publication110",
+        "retention119"
       ],
       "remaining_backlog": [
         "28",

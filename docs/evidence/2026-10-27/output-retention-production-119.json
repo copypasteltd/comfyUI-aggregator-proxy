@@ -1,0 +1,125 @@
+{
+  "format_version": 1,
+  "at": "2026-10-27T09:28:31.446984+00:00",
+  "scope": "Actual production retention deployment, audited legacy backfill, native PostgreSQL and exact private S3 versions; no additional generation or accelerated production clock.",
+  "passed": true,
+  "checks": [
+    {
+      "path": "/health/live",
+      "status": 200
+    },
+    {
+      "path": "/health/ready",
+      "status": 200
+    },
+    {
+      "name": "Actual Admin metadata returns the shortened expiry and original job remains successful",
+      "passed": true
+    },
+    {
+      "name": "Existing original remains downloadable before expiry",
+      "passed": true,
+      "head_status": 200
+    },
+    {
+      "name": "Business API still requires a Key and permits arbitrary origins",
+      "passed": true
+    },
+    {
+      "name": "Installed Linux module bytes match built wheel and committed project source",
+      "passed": true
+    }
+  ],
+  "backup_before_change": {
+    "at": "2026-10-27T09:20:35.834833+00:00",
+    "file": "control-20261027T092034719557Z.dump",
+    "bytes": 2029305,
+    "sha256": "694e4f0d85a1ebca81fab9d6f77a85f4c4a35bfbfe60b0e334d82d8198e42426",
+    "archive_list_verified": true,
+    "full_disaster_recovery_verified": false
+  },
+  "linux_archive_sha256": "b9817538407c68ca0e71b3c0a45def8166f8ede5457e56865f48c4aac31c862e",
+  "production": {
+    "passed": true,
+    "release": "linux-20261027.119.1",
+    "application_source_revision": "3fee0520b40758309e716a8a31cc31d6e5fbfea0",
+    "payload_files_verified": 94,
+    "output_retention_seconds": 28800,
+    "installed_module_sha256": {
+      "outputs": "1f6256927978f83a2687f422b86adba3dd51d90b320df8cf69f6cec8dbf7f27f",
+      "output_retention": "120ddd06ef66ccc7c633d1b5c0ff8a5d46b278d146ac36d2a009e54478ff38d5"
+    },
+    "objects": [
+      {
+        "job_id": "job_2956727b48554a2183702518692abaa9",
+        "task_type": "text_to_image",
+        "completed_at": "2026-10-27T01:34:39.723607+00:00",
+        "expires_at": "2026-10-27T09:34:39.723607+00:00",
+        "retention_seconds": 28800,
+        "bytes": 1021719,
+        "physically_deleted": false,
+        "exact_s3_version_exists": true
+      },
+      {
+        "job_id": "job_b7a061671c8b4f8faf0c1c984a19a0e9",
+        "task_type": "text_to_audio",
+        "completed_at": "2026-10-27T01:36:20.741941+00:00",
+        "expires_at": "2026-10-27T09:36:20.741941+00:00",
+        "retention_seconds": 28800,
+        "bytes": 2422941,
+        "physically_deleted": false,
+        "exact_s3_version_exists": true
+      },
+      {
+        "job_id": "job_648a1a05ea134ea7ad91871ea821a579",
+        "task_type": "text_to_video",
+        "completed_at": "2026-10-27T01:37:59.909887+00:00",
+        "expires_at": "2026-10-27T09:37:59.909887+00:00",
+        "retention_seconds": 28800,
+        "bytes": 423786,
+        "physically_deleted": false,
+        "exact_s3_version_exists": true
+      },
+      {
+        "job_id": "job_240f2e0ed8e944269f06f971ae57486f",
+        "task_type": "text_to_image",
+        "completed_at": "2026-10-27T01:48:09.528558+00:00",
+        "expires_at": "2026-10-27T09:48:09.528558+00:00",
+        "retention_seconds": 28800,
+        "bytes": 1105196,
+        "physically_deleted": false,
+        "exact_s3_version_exists": true
+      },
+      {
+        "job_id": "job_def8aa053e36417fafb578ef0e89a4c2",
+        "task_type": "text_to_image",
+        "completed_at": "2026-10-27T07:54:09.317095+00:00",
+        "expires_at": "2026-10-27T15:54:09.317095+00:00",
+        "retention_seconds": 28800,
+        "bytes": 1034882,
+        "physically_deleted": false,
+        "exact_s3_version_exists": true,
+        "sample_expires_at_taipei": "2026-10-27T23:54:09.317095+08:00"
+      }
+    ],
+    "audit_count": 5,
+    "remaining_backfill_candidates": 0,
+    "services": {
+      "api": "active",
+      "runner": "active",
+      "gc": "active",
+      "postgres": "active",
+      "edge": "active"
+    },
+    "production_eight_hour_wall_clock_observation": "pending",
+    "full_acceptance": "pending"
+  },
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "browser_resources_created": false,
+  "failed_candidate_build": {
+    "release_id": "rc-20261027.119.1",
+    "reason": "Windows candidate build omitted its required explicit historical Provider build report; no candidate was published or deployed. Linux deployment instead derives from verified rc-20261027.118.3 and rebuilds current project wheels.",
+    "published": false
+  }
+}

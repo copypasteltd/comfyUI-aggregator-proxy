@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[119 · 云端产物八小时保留](docs/119-云端产物八小时保留.md)：图片、视频和音频的云端正式产物统一在任务成功完成后保留 **8 小时**，到期禁止新下载并由 GC 删除精确对象版本。客户端应在 expires_at 前保存所需文件；历史产物按同一规则缩短，完成重放不续期。Worker 暂存仍为云端确认后一小时；ComfyUI 原始输出与客户端本地下载分别保留。验证与服务器生效结果见专题。
+
 [118 · 双 GPU 真实接入](docs/118-双GPU真实ComfyUI接入.md) 已完成两台 Windows 的 ComfyUI / Worker 接入：2 条启用渠道、241 个候选 Workflow 草稿、51 个模型文件登记，3 个模型经实际生成、S3 回传和鉴权下载后批准发布。588 项相关回归、8 个后台页面/尺寸检查通过；第三台设备仍连接超时。图生图、参考生成、专用 Workflow、10～20 台容量与完整首版验收继续开放。
 
 ![实际接入后的 Admin：双 GPU 渠道、模型、Workflow 和任务](docs/media/comfy-onboarding-118/admin-onboarding.gif)
