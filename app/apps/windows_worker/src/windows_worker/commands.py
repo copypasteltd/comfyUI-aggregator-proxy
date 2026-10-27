@@ -55,7 +55,7 @@ class CommandExecutor:
         if kind == "apply_workflow_release":
             if not local or fingerprint(payload["manifest"]) != payload["release_digest"]:
                 raise DomainError("workflow_not_verified", "工作流摘要或本地渠道配置不符")
-            checked = verify_environment(local.comfy_root, payload["manifest"])
+            checked = verify_environment(local.comfy_root, payload["manifest"], self.settings.git_executable if self.settings else None)
             target = self.root / (relative_file(payload["release_id"]) + ".json")
             temporary = target.with_suffix(".staged")
             with temporary.open("w", encoding="utf-8") as file:

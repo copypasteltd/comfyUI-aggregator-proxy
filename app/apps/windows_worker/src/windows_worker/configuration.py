@@ -116,6 +116,7 @@ class WorkerSettings(BaseModel):
     credential_file: Path
     state_root: Path
     ca_file: Path | None = None
+    git_executable: Path | None = None
     gpus: list[LocalGpu] = Field(max_length=32)
     channels: list[LocalChannel] = Field(max_length=100)
     maximum_uploads: int = Field(default=2, strict=True, ge=1, le=8)
@@ -132,6 +133,10 @@ class WorkerSettings(BaseModel):
         if self.generation_reserve_bytes > self.maximum_spool_bytes:
             raise ValueError("maximum_spool_bytes must hold one generation reserve")
         self.control_origin = canonical_origin(self.control_origin, allow_http=self.allow_http)
+        if self.git_executable is not None:
+            self.git_executable = self.git_executable.resolve(strict=True)
+            if self.git_executable.name.lower() != "git.exe" or not stat.S_ISREG(self.git_executable.stat().st_mode):
+                raise ValueError("git_executable must select an existing native git.exe")
         ids = [gpu.hardware_id for gpu in self.gpus]
         if len(ids) != len(set(ids)) or len({c.base_url for c in self.channels}) != len(self.channels):
             raise ValueError("duplicate GPU or channel URL")

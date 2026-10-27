@@ -185,7 +185,7 @@ class Execution:
             local = self.worker.settings.channel(self.claim["channel"]["base_url"])
             if not self.claim.get("resume_state"):
                 await self.emit("preparing", {"execution_digest": self.claim["execution_digest"]})
-                await self.worker.blocking(verify_environment, local.comfy_root, self.claim["workflow"])
+                await self.worker.blocking(verify_environment, local.comfy_root, self.claim["workflow"], self.worker.settings.git_executable)
             profile = next((p for p in self.claim["workflow"]["runtime_profiles"] if p["gpu_hardware_id"] == local.hardware_id), None)
             if not profile:
                 raise DomainError("profile_not_available", "发布包没有此物理 GPU 的执行画像")

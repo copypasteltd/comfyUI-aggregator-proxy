@@ -29,18 +29,18 @@ def file_digest(path: Path, maximum: int) -> tuple[str, int]:
     return digest.hexdigest(), size
 
 
-def commit(root: Path) -> str:
-    executable = shutil.which("git")
+def commit(root: Path, git_executable: Path | None = None) -> str:
+    executable = str(git_executable) if git_executable is not None else shutil.which("git")
     if not executable:
         raise DomainError("git_unavailable", "缺少固定依赖版本校验所需的原生 Git")
-    result = subprocess.run([executable, "-C", str(root), "rev-parse", "HEAD"], capture_output=True, timeout=10, check=True)  # noqa: S603
+    result = subprocess.run([executable, "-c", "safe.directory=" + str(root), "-C", str(root), "rev-parse", "HEAD"], capture_output=True, timeout=10, check=True)  # noqa: S603 -- operator-selected local repository, no global Git configuration changes
     return result.stdout.decode("ascii").strip()
 
 
-def verify_environment(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+def verify_environment(root: Path, manifest: dict[str, Any], git_executable: Path | None = None) -> dict[str, Any]:
     validate_manifest(manifest, manifest["task_type"])
     lock = manifest["dependency_lock"]
-    if commit(root) != lock["comfy_commit"]:
+    if commit(root, git_executable) != lock["comfy_commit"]:
         raise DomainError("comfy_version_mismatch", "本机 ComfyUI 提交与发布包不一致")
     checked = []
     for model in lock["models"]:
@@ -50,6 +50,6 @@ def verify_environment(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
             raise DomainError("model_digest_mismatch", "模型文件大小或摘要不符")
         checked.append({"path": model["path"], "sha256": digest, "bytes": size})
     for node in lock["custom_nodes"]:
-        if commit(safe_path(root / "custom_nodes", node["directory"])) != node["commit"]:
+        if commit(safe_path(root / "custom_nodes", node["directory"]), git_executable) != node["commit"]:
             raise DomainError("custom_node_mismatch", "自定义节点提交与发布包不一致")
     return {"environment_verified": True, "environment_digest": fingerprint({"dependency_lock": lock, "models": checked})}
