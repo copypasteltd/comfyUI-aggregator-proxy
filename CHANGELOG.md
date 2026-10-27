@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-28 · 120 · Reference capabilities and exact output sizes
+
+- 恢复带既有 HTTP UUID 兼容入口的 Admin 静态发布 `admin-20261028.120.1`，修复 119 部署带入旧资产导致普通 HTTP 登录失败的回归；45 文件核对、2 个既有 UUID 测试及真实 HTTP 浏览器复验单独记录，后端和 Worker 包不变。
+- 发布单图重绘、双图参考生图、首帧视频、双图参考视频四个模型；原文字生图/视频发布 V2，增加 720×1080，保留 1024×1024 / 864×480 默认规格。H3 和 Krea2 使用受控边缘裁切，按实际下载尺寸验收。
+- 六个 Workflow 的真实验证和六次独立业务调用通过，覆盖幂等、内容 SHA-256、真实媒体探测、HEAD、Range、八小时期限；九项非法输入/身份隔离检查无新增任务。保留容量保护与暂停期间三个未提交即过期任务的记录，恢复后经 Admin 重新探测、同步、批准和接单。
+- Publish four reference aliases and two compatible V2 releases. Add a resumable native verification CLI, bilingual usage/catalog documentation, actual Lime Admin screenshots/recording/GIF and metadata-stripped generation samples. Disable temporary Keys and preserve seven published aliases with both channels enabled. Video-file inputs, arbitrary presets, 10–20 physical-device capacity, custom Sub2API runtime integration and full acceptance remain pending; cloud/Worker binaries are unchanged.
+
 ## 2026-10-27 · 119 · Eight-hour cloud output retention
 
 - 按用户要求，云端图片、视频和音频从成功任务终态起保留八小时；统一 expires_at，完成重放不延长。增加默认预览、有界批次与同事务审计的历史产物缩期入口，保护输入对象、未发布上传和已有更早期限。

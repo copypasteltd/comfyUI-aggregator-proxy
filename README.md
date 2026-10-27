@@ -1,20 +1,32 @@
 # ComfyUI Aggregator Proxy
 
-[119 · 云端产物八小时保留](docs/119-云端产物八小时保留.md)：图片、视频和音频的云端正式产物统一在任务成功完成后保留 **8 小时**，到期禁止新下载并由 GC 删除精确对象版本。客户端应在 expires_at 前保存所需文件；历史产物按同一规则缩短，完成重放不续期。Worker 暂存仍为云端确认后一小时；ComfyUI 原始输出与客户端本地下载分别保留。验证与服务器生效结果见专题。
+[120 · 参考能力发布与精确尺寸验证](docs/120-参考能力发布与精确尺寸验证.md) 已完成：新增单图生图、双图参考生图、首帧生视频、双图参考生视频四个公开模型；现有文字生图/视频增加受控 `720x1080`，保留原默认规格。六个 Workflow 各完成一次真实验证和一次独立业务 API 调用，下载文件均完成真实尺寸、SHA-256、HEAD、Range 与幂等重放检查；九项非法参数/身份隔离检查通过。当前后台有 7 个已发布别名，业务 Key 仅能发现获准且可运行的子集。
 
-[118 · 双 GPU 真实接入](docs/118-双GPU真实ComfyUI接入.md) 已完成两台 Windows 的 ComfyUI / Worker 接入：2 条启用渠道、241 个候选 Workflow 草稿、51 个模型文件登记，3 个模型经实际生成、S3 回传和鉴权下载后批准发布。588 项相关回归、8 个后台页面/尺寸检查通过；第三台设备仍连接超时。图生图、参考生成、专用 Workflow、10～20 台容量与完整首版验收继续开放。
+![实际参考能力 Admin：模型、渠道与任务](docs/media/reference-capabilities-120/admin-reference.gif)
 
-![实际接入后的 Admin：双 GPU 渠道、模型、Workflow 和任务](docs/media/comfy-onboarding-118/admin-onboarding.gif)
-
-管理入口使用已部署的普通 HTTP 高位端口，后续域名反代由部署者配置。Admin 可编辑渠道、浏览 Windows 导出目录、维护草稿/冻结版本/模型路由、观察排队并管理多个业务 API Key。业务流程为：选择下表模型 → 给 Key 授权模型/发布版本/渠道与额度 → 异步提交 → 查询任务 → 带同一 Key 下载。具体请求和启动配置见 [118 使用说明](docs/118-双GPU真实ComfyUI接入.md)，[真实截图、录屏与生成样本](docs/media/comfy-onboarding-118/README.md) 与历史合成演示分别标记。
-
-| 已发布模型 | 实际设备 | 验证规格 | API |
+| 已发布模型 | 能力 / 输入 | 本轮已验证规格 | 提交入口 |
 | --- | --- | --- | --- |
-| `comfy-3080-image-lustify-krea2` | RTX 3080 | 1024×1024 PNG | `/v1/images/generations/async` 或 `/v1/jobs` |
-| `comfy-4090-video-h3` | RTX 4090 | 864×480、约 5.167 秒 MP4 | `/v1/videos` 或 `/v1/jobs` |
-| `comfy-3080-music-yue2` | RTX 3080 | 最长 30 秒、48 kHz 双声道 FLAC | `/v1/jobs`，`text_to_audio` |
+| `comfy-3080-image-lustify-krea2` | 文生图 | 720×1080；原默认 1024×1024 | `/v1/images/generations/async` |
+| `comfy-3080-image-edit-wai` | 单图重绘，1 张图片 | 720×1080 PNG | `/v1/images/edits/async` |
+| `comfy-3080-image-refs-wai` | 2 张图片共同参考 | 720×1080 PNG | `/v1/images/edits/async` |
+| `comfy-4090-video-h3` | 文生视频 | 720×1080；原默认 864×480，约 5.167 秒 | `/v1/videos` |
+| `comfy-4090-video-h3-i2v` | 1 张首帧图片 | 720×1080，约 5.167 秒 | `/v1/videos` |
+| `comfy-4090-video-h3-refs` | 2 张参考图片 | 720×1080，约 5.167 秒 | `/v1/videos` |
+| `comfy-3080-music-yue2` | 文生音频；沿用 118 的实测 | 最长 30 秒，48 kHz 双声道 FLAC | `/v1/jobs`，`text_to_audio` |
 
-以上是三个规格的真实链路样本，不是全部 Workflow、所有质量规格或完整产品验收。295 个既有文件已导出 API 图；241 个可整理为候选草稿，54 个仍缺模型、专用输入/绑定或属于未支持的 3D 输出。除三个已验证冻结版本外，其余 238 个候选不对外发布。
+使用逻辑：Admin 授权 Key 的模型、发布版本、渠道和额度 → 上传参考图片到 `/v1/assets` → 带 `asset_id` 异步提交 → 查询 `/v1/jobs/{id}` → 用同一 Key 下载内容。新版本不会自动扩大已有 Key 的权限。图像编辑使用 `source_image`，首帧视频使用 `input_reference`，双图参考使用按顺序排列的两项 `references`。完整 JSON、原生验证工具及重试逻辑见 [120 调用说明](docs/120-参考能力发布与精确尺寸验证.md)。
+
+H3 和 Krea2 的 720×1080 路径从 736×1088 固定裁切边缘，保留构图余量。规格取自冻结预设；视频文件参考、任意尺寸/时长/参考数量及全部候选不在本轮支持承诺中。241 个候选中有 7 个不同 Workflow 对应当前公开模型，另 234 个仍待整理和验收；10～20 台实机容量、完整 Sub2API 运行接入及完整首版签收继续开放。
+
+![双图参考视频的真实样本](docs/media/reference-capabilities-120/sample-video-refs.gif)
+
+[实际截图、原速录屏、GIF 和样本](docs/media/reference-capabilities-120/README.md) 来自已部署平台与自制输入；公开媒体移除了内嵌生成元数据，保留原始交付摘要与公开副本摘要。测试 Key 已禁用，两个渠道保持启用且无未完成测试任务。
+
+[119 · 八小时保留](docs/119-云端产物八小时保留.md)：云端图片、视频、音频在成功完成后八小时到期，按 `expires_at` 保存所需文件。Worker 暂存、ComfyUI 原始输出和客户端副本采用各自保留规则。服务继续使用普通 HTTP 高位端口 39443、任意来源 CORS；管理会话、业务 Key 与 CSRF 隔离保持。
+
+## 历史发布记录
+
+以下状态和数量按对应增量时点阅读；当前发布能力以本文上表和文档 120 为准。
 
 [117 · ZeroTier 私网接入](docs/117-ZeroTier原生客户端与私网接入.md)：服务器已原生安装 ZeroTier 1.16.2 并设为开机启动；用户授权后，指定网络状态 `OK`、已分配地址。已从同网 Windows 实测私网 HTTP 39443 与 SSH，默认路由和 DNS 保持，安装前 64 个运行服务均 active。节点与地址单独交付，不公开网络拓扑；真实 ComfyUI / Worker 接入仍待后续配置。
 

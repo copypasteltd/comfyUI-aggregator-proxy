@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "complete_graphs_published": false,
+  "proofs": [
+    {
+      "mode": "image-refs",
+      "comfy_status": "success",
+      "reference_count": 2,
+      "conditioner": "IPAdapterAdvanced",
+      "conditioner_edges": {
+        "IPAdapterAdvanced.image": [
+          "8",
+          0
+        ],
+        "ImageBatch.input_nodes": [
+          "4",
+          "7"
+        ]
+      },
+      "distinct_uploaded_filenames": true,
+      "reference_image_sha256": [
+        "71ad70c0779ab201c3983b8d4fd08bdf879375dedba9b0ceb9caea4f31afa20e",
+        "fed910c19384c2aa9f38edf93b4d01de90d05b092ad06ccea500593fa25157d9"
+      ]
+    },
+    {
+      "mode": "video-refs",
+      "comfy_status": "success",
+      "reference_count": 2,
+      "conditioner": "MiniMaxH3ReferenceToVideo",
+      "conditioner_edges": {
+        "ref_images.ref_image_0": [
+          "30",
+          0
+        ],
+        "ref_images.ref_image_1": [
+          "31",
+          0
+        ]
+      },
+      "distinct_uploaded_filenames": true,
+      "reference_image_sha256": [
+        "71ad70c0779ab201c3983b8d4fd08bdf879375dedba9b0ceb9caea4f31afa20e",
+        "fed910c19384c2aa9f38edf93b4d01de90d05b092ad06ccea500593fa25157d9"
+      ]
+    }
+  ]
+}

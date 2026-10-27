@@ -1,0 +1,518 @@
+{
+  "format_version": 1,
+  "at": "2026-10-27T16:42:59.452895+00:00",
+  "kind": "actual_physical_comfyui_reference_generation",
+  "passed": true,
+  "fixture_data": false,
+  "real_gpu_generation": true,
+  "full_acceptance": "pending",
+  "cloud_release": "linux-20261027.119.1",
+  "worker_release": "rc-20261027.118.3",
+  "published_alias_count": 7,
+  "validation_jobs": 6,
+  "business_jobs": 6,
+  "records": [
+    {
+      "identity": "image-edit",
+      "alias": "comfy-3080-image-edit-wai",
+      "task_type": "image_to_image",
+      "release_id": "wfr_d646551303654a518310df7930546102",
+      "release_version": 1,
+      "release_digest": "e77f480b18480a7deddd0bc3f0e04ddd48de21fbbed67220271854b1aad12149",
+      "validation": {
+        "job_id": "job_d7b8d04e79954edda7e1d05a04a79d7d",
+        "status": "succeeded",
+        "content_id": "content_25ff701aae3d4476805db90e107a0667",
+        "bytes": 586675,
+        "sha256": "23978ce53325d84931de094f74785bee72c6996d79882c8d63c56ea77811b1ef",
+        "physical_media_probe": {
+          "width": 720,
+          "height": 1080,
+          "format": "PNG"
+        },
+        "completed_at": 1793102368,
+        "expires_at": 1793131168
+      },
+      "business": {
+        "model": "comfy-3080-image-edit-wai",
+        "mode": "image-edit",
+        "job_id": "job_a542f1c24f6949ee9eb278c16c4cf5af",
+        "status": "succeeded",
+        "replay_same_job": true,
+        "content_id": "content_8fc8f14d73d546dc9a8269577c841997",
+        "bytes": 705276,
+        "sha256": "ad969c154bd35924aff3707b35b28f241ef0185b4ca677e9fd7d79dde1193394",
+        "metadata": {
+          "width": 720,
+          "height": 1080
+        },
+        "expires_at": 1793131481,
+        "completed_at": 1793102681,
+        "head_200": true,
+        "range_206": true,
+        "physical_media_probe": {
+          "width": 720,
+          "height": 1080,
+          "format": "PNG"
+        }
+      }
+    },
+    {
+      "identity": "image-refs",
+      "alias": "comfy-3080-image-refs-wai",
+      "task_type": "references_to_image",
+      "release_id": "wfr_e07baab991d74de99828e4cdba715ac5",
+      "release_version": 1,
+      "release_digest": "7a45238eeb7c56dd18b91fe7d9803c194a17fcbaa404fb440de60474585bc10e",
+      "validation": {
+        "job_id": "job_8a7be7b8a65040248dcd4c2a67cf3127",
+        "status": "succeeded",
+        "content_id": "content_f5533572311f45ccbe7f3fa68eb06caa",
+        "bytes": 502723,
+        "sha256": "d4dacb126495b5dafe6dff78907098695551680a1aa463ccd126e199e05c34db",
+        "physical_media_probe": {
+          "width": 720,
+          "height": 1080,
+          "format": "PNG"
+        },
+        "completed_at": 1793102437,
+        "expires_at": 1793131237
+      },
+      "business": {
+        "model": "comfy-3080-image-refs-wai",
+        "mode": "image-refs",
+        "job_id": "job_f96d072adcda425c8a9f0a98bff832cf",
+        "status": "succeeded",
+        "replay_same_job": true,
+        "content_id": "content_fb4fe4d70bbe40c1b58aa087aa78157f",
+        "bytes": 527184,
+        "sha256": "4121aa15bb9c7bbb1406b7102051540bfc16b5b35c88bac5924e5e984386c988",
+        "metadata": {
+          "width": 720,
+          "height": 1080
+        },
+        "expires_at": 1793131564,
+        "completed_at": 1793102764,
+        "head_200": true,
+        "range_206": true,
+        "physical_media_probe": {
+          "width": 720,
+          "height": 1080,
+          "format": "PNG"
+        }
+      }
+    },
+    {
+      "identity": "video-i2v",
+      "alias": "comfy-4090-video-h3-i2v",
+      "task_type": "references_to_video",
+      "release_id": "wfr_81503486068145c5addc3b465e3a75e6",
+      "release_version": 1,
+      "release_digest": "882e9c6a22fa67829817931fcdcbf719665002162fe90fbc4fdb4402a4fbab78",
+      "validation": {
+        "job_id": "job_2c471d870a564b87a58f2e4ee7d545e6",
+        "status": "succeeded",
+        "content_id": "content_95813217e2534e68acc49954ef5dc21d",
+        "bytes": 1073529,
+        "sha256": "cc496d8193cbb76c45ea101680791e6724e7b0340cecc309f2e852fc7bf7ec23",
+        "physical_media_probe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 720,
+              "height": 1080,
+              "r_frame_rate": "24/1",
+              "nb_frames": "124"
+            },
+            {
+              "codec_type": "audio",
+              "r_frame_rate": "0/0",
+              "nb_frames": "163"
+            }
+          ],
+          "format": {
+            "duration": "5.166688"
+          }
+        },
+        "completed_at": 1793103018,
+        "expires_at": 1793131818
+      },
+      "business": {
+        "model": "comfy-4090-video-h3-i2v",
+        "mode": "video-first-frame",
+        "job_id": "job_28e70f77fd894f3bb754979b1ce8d25c",
+        "status": "succeeded",
+        "replay_same_job": true,
+        "content_id": "content_fd9745adfbc4409fa3a9d7ec756e91c4",
+        "bytes": 1023953,
+        "sha256": "7b1f78709601d437847c200e196661051a5a51fbd848736f734097024e61a7d7",
+        "metadata": {
+          "width": 720,
+          "height": 1080,
+          "duration_milliseconds": 5166
+        },
+        "expires_at": 1793146961,
+        "completed_at": 1793118161,
+        "head_200": true,
+        "range_206": true,
+        "physical_media_probe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 720,
+              "height": 1080,
+              "r_frame_rate": "24/1",
+              "nb_frames": "124"
+            },
+            {
+              "codec_type": "audio",
+              "r_frame_rate": "0/0",
+              "nb_frames": "163"
+            }
+          ],
+          "format": {
+            "duration": "5.166688"
+          }
+        }
+      }
+    },
+    {
+      "identity": "video-refs",
+      "alias": "comfy-4090-video-h3-refs",
+      "task_type": "references_to_video",
+      "release_id": "wfr_deccc88fba6547368a240ee21cda6f49",
+      "release_version": 1,
+      "release_digest": "cf3ad7afe7646555af0cca00aa32f1cd8fcbe46f8824ba9ac48ae78a2c3194e1",
+      "validation": {
+        "job_id": "job_a4fd47d2ec0a4298ac28b46c2086a349",
+        "status": "succeeded",
+        "content_id": "content_9d852e96a05a42f6a0ea4f50fe0482b9",
+        "bytes": 841808,
+        "sha256": "466454a44ad4ee12c6654a987d53c9eae9b2ff5c35a9d72106cfdff0d7e4fb7c",
+        "physical_media_probe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 720,
+              "height": 1080,
+              "r_frame_rate": "24/1",
+              "nb_frames": "124"
+            },
+            {
+              "codec_type": "audio",
+              "r_frame_rate": "0/0",
+              "nb_frames": "163"
+            }
+          ],
+          "format": {
+            "duration": "5.166688"
+          }
+        },
+        "completed_at": 1793117443,
+        "expires_at": 1793146243
+      },
+      "business": {
+        "model": "comfy-4090-video-h3-refs",
+        "mode": "video-refs",
+        "job_id": "job_3819437f99f340e0976ed7d3e20b2575",
+        "status": "succeeded",
+        "replay_same_job": true,
+        "content_id": "content_f5191b818ed44fd1b59d287de00382a8",
+        "bytes": 1005954,
+        "sha256": "2d609692deeb88ed9e37435673b18a3dd6957b61dc6cb42db424e360dda03fdd",
+        "metadata": {
+          "width": 720,
+          "height": 1080,
+          "duration_milliseconds": 5166
+        },
+        "expires_at": 1793147239,
+        "completed_at": 1793118439,
+        "head_200": true,
+        "range_206": true,
+        "physical_media_probe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 720,
+              "height": 1080,
+              "r_frame_rate": "24/1",
+              "nb_frames": "124"
+            },
+            {
+              "codec_type": "audio",
+              "r_frame_rate": "0/0",
+              "nb_frames": "163"
+            }
+          ],
+          "format": {
+            "duration": "5.166688"
+          }
+        }
+      }
+    },
+    {
+      "identity": "video-base",
+      "alias": "comfy-4090-video-h3",
+      "task_type": "text_to_video",
+      "release_id": "wfr_59e1af9a71e44ad9af7dd367c0729dc4",
+      "release_version": 2,
+      "release_digest": "8bd2e14c3ab95625158853aecc2318a578f82428fc35eb7b903af92724f89348",
+      "validation": {
+        "job_id": "job_3328b1770a514e66a7078a3f9743b14e",
+        "status": "succeeded",
+        "content_id": "content_3adeff9a745f45478e445d1c6375de20",
+        "bytes": 891079,
+        "sha256": "134920a53e64efbe8b05e2b18cdb196b7eb8a8ccb4df4db441e85111f0b8eb65",
+        "physical_media_probe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 720,
+              "height": 1080,
+              "r_frame_rate": "24/1",
+              "nb_frames": "124"
+            },
+            {
+              "codec_type": "audio",
+              "r_frame_rate": "0/0",
+              "nb_frames": "163"
+            }
+          ],
+          "format": {
+            "duration": "5.166688"
+          }
+        },
+        "completed_at": 1793117829,
+        "expires_at": 1793146629
+      },
+      "business": {
+        "model": "comfy-4090-video-h3",
+        "mode": "text-video",
+        "job_id": "job_e4069e4b3d9442f984d28b1db3a51671",
+        "status": "succeeded",
+        "replay_same_job": true,
+        "content_id": "content_83e1b46f6b5043308754ef109308db95",
+        "bytes": 434540,
+        "sha256": "50509adee36eb2c889c7883ac72d910cb4e6e2bcc6afdb06de5c76f154bcb418",
+        "metadata": {
+          "width": 864,
+          "height": 480,
+          "duration_milliseconds": 5166
+        },
+        "expires_at": 1793147471,
+        "completed_at": 1793118671,
+        "head_200": true,
+        "range_206": true,
+        "physical_media_probe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_type": "video",
+              "width": 864,
+              "height": 480,
+              "r_frame_rate": "24/1",
+              "nb_frames": "124"
+            },
+            {
+              "codec_type": "audio",
+              "r_frame_rate": "0/0",
+              "nb_frames": "163"
+            }
+          ],
+          "format": {
+            "duration": "5.166688"
+          }
+        }
+      }
+    },
+    {
+      "identity": "image-base",
+      "alias": "comfy-3080-image-lustify-krea2",
+      "task_type": "text_to_image",
+      "release_id": "wfr_81748eea50b84b6191a7bb4b5ab1bdd8",
+      "release_version": 2,
+      "release_digest": "37af9154a015bfe0c4e22bafb11f8c30cb6a7d89ec36d5f7d55f0e8b0fba7c01",
+      "validation": {
+        "job_id": "job_5cc37c71f71c4f51b430c6495c2c8416",
+        "status": "succeeded",
+        "content_id": "content_d6deeb34c550494b91db210046a33798",
+        "bytes": 779418,
+        "sha256": "d5be36118ae28c72d21f7375137dd800ab6a08e3975e6ab89f742a98c68144be",
+        "physical_media_probe": {
+          "width": 720,
+          "height": 1080,
+          "format": "PNG"
+        },
+        "completed_at": 1793102623,
+        "expires_at": 1793131423
+      },
+      "business": {
+        "model": "comfy-3080-image-lustify-krea2",
+        "mode": "text-image",
+        "job_id": "job_f03217904cfa483cb18e2e2d983a50b3",
+        "status": "succeeded",
+        "replay_same_job": true,
+        "content_id": "content_16901fa394754bc6bcb6177a3acf3a21",
+        "bytes": 1004645,
+        "sha256": "6fae92bb70e4ade9629ed2591296dbe0282515440eec359eba5a94adf8b1c080",
+        "metadata": {
+          "width": 1024,
+          "height": 1024
+        },
+        "expires_at": 1793131804,
+        "completed_at": 1793103004,
+        "head_200": true,
+        "range_206": true,
+        "physical_media_probe": {
+          "width": 1024,
+          "height": 1024,
+          "format": "PNG"
+        }
+      }
+    }
+  ],
+  "negative_checks": {
+    "at": 1793116485,
+    "passed": true,
+    "checks": [
+      {
+        "name": "wrong-reference-count",
+        "status": 422,
+        "code": "invalid_parameters"
+      },
+      {
+        "name": "missing-reference-input",
+        "status": 422,
+        "code": "invalid_parameters"
+      },
+      {
+        "name": "unfrozen-size",
+        "status": 422,
+        "code": "unsupported_specification"
+      },
+      {
+        "name": "single-video-image-wrong-role",
+        "status": 422,
+        "code": "invalid_parameters"
+      },
+      {
+        "name": "business-key-cannot-use-admin",
+        "status": 401
+      },
+      {
+        "name": "anonymous-get-download",
+        "status": 401
+      },
+      {
+        "name": "different-logical-key-get-download",
+        "status": 404
+      },
+      {
+        "name": "anonymous-head-download",
+        "status": 401
+      },
+      {
+        "name": "different-logical-key-head-download",
+        "status": 404
+      }
+    ],
+    "job_count_before": 18,
+    "job_count_after": 18,
+    "negative_calls_created_no_jobs": true
+  },
+  "expired_unsubmitted_jobs_preserved": [
+    {
+      "job_id": "job_7cd0c9e523e446d58bca2fb8ab4dd03a",
+      "status": "expired",
+      "attempt_count": 0,
+      "identity": "video-refs"
+    },
+    {
+      "job_id": "job_d8fa55a8c5be4cbbbc45a85eaa42e3d1",
+      "status": "expired",
+      "attempt_count": 0,
+      "identity": "video-base"
+    },
+    {
+      "job_id": "job_62eef8190d124d2d9680c4150396caf5",
+      "status": "expired",
+      "attempt_count": 0,
+      "identity": "business-video-i2v"
+    }
+  ],
+  "channels": [
+    {
+      "device": "3080",
+      "enabled": true,
+      "draining": false,
+      "config_revision": 1,
+      "observation_status": "fresh"
+    },
+    {
+      "device": "4090",
+      "enabled": true,
+      "draining": false,
+      "config_revision": 1,
+      "observation_status": "fresh"
+    }
+  ],
+  "unfinished_jobs": 0,
+  "occupied_physical_gpus": 0,
+  "temporary_key_revocation": [
+    {
+      "key_role": "main",
+      "disabled": true,
+      "discovery_after_disable_status": 401
+    },
+    {
+      "key_role": "peer",
+      "disabled": true,
+      "discovery_after_disable_status": 401
+    }
+  ],
+  "admin_static_recovery": {
+    "promoted": true,
+    "admin_release": "admin-20261028.120.1",
+    "admin_files_verified": 45,
+    "plain_http_index_matches": true,
+    "only_api_restarted": true,
+    "application_binary_release": "linux-20261027.119.1",
+    "old_index": "index-DYp3z3x3.js",
+    "restored_index": "index-DUaHG6Qb.js",
+    "automatic_rollback_prepared": true
+  },
+  "existing_http_uuid_regression": {
+    "passed": true,
+    "passed_tests": 2,
+    "tests": [
+      "HTTP-compatible request identifiers preserves the browser implementation when available",
+      "HTTP-compatible request identifiers uses secure random bytes for version 4 identifiers when HTTP hides randomUUID"
+    ],
+    "source_sha256": {
+      "app/apps/admin_web/src/main.ts": "e414e910a9059a7fffa509065ae98951f4691ed7d8f5454ad8fc8cc06b89db43",
+      "app/apps/admin_web/src/randomUuid.ts": "d42bb6c0c5393725aeaaf1c510ff4cb135b4d171cbd0f9a9c2b7dcfb1014782b",
+      "app/apps/admin_web/src/randomUuid.test.ts": "dd0a16af3a7a0d9621c73def482e85eadf5f9d1111906fb12f612e2dc00aa8f5"
+    }
+  },
+  "helper_source": {
+    "path": "app/scripts/verify_reference_api.py",
+    "sha256": "5f575b41c7f042f01dad8ede4d589ecdb3f756e3719fbc0ba47d9ba074ecf959"
+  },
+  "limits": [
+    "One controlled sample per tested specification; not a quality benchmark.",
+    "Only two reference images for the selected multi-reference models.",
+    "No video-file inputs, no 10–20 physical-device capacity acceptance, no full Sub2API runtime acceptance.",
+    "Cloud and Worker binaries unchanged; historical component suites are reused within their documented source scope."
+  ]
+}

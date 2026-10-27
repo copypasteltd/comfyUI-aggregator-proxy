@@ -1,5 +1,7 @@
 # Documentation index
 
+[120 · Reference generation and exact dimensions](120-参考能力发布与精确尺寸验证.md): four reference modes are published; existing text image/video aliases gain 720×1080. Seven aliases, six real validations, six business calls and nine negative checks are recorded with [actual media](media/reference-capabilities-120/README.md). Crop semantics, restart recovery, eight-hour retention and remaining acceptance boundaries are explicit.
+
 [119 · Eight-hour cloud media retention](119-云端产物八小时保留.md): published image, video and audio outputs expire **8 hours after successful job completion**. New downloads are denied at expiry and GC deletes the exact object version. Save required files before expires_at. Existing outputs are shortened to the same deadline; completion replay never renews it. Worker spool retention remains one hour after cloud acknowledgement; ComfyUI originals and client downloads are managed separately. See the linked deployment and validation record.
 
 [118 · Actual dual-GPU onboarding](118-双GPU真实ComfyUI接入.md): two native Windows GPUs, two channels, 241 candidate drafts, 51 model-file registrations and three published models verified through actual image/video/audio generation. All 588 related regression cases and eight Admin page/viewport checks pass. [Actual media](media/comfy-onboarding-118/README.md) is available. The third endpoint, reference modes, specialized Workflows, fleet capacity, gateway runtime and full acceptance remain pending.

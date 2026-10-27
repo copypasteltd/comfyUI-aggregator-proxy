@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "path": "/health/live",
+      "status": 200
+    },
+    {
+      "path": "/health/ready",
+      "status": 200
+    },
+    {
+      "path": "/v1/models",
+      "status": 401
+    },
+    {
+      "path": "/admin/",
+      "status": 200
+    },
+    {
+      "path": "/v1/videos",
+      "arbitrary_origin_preflight": true,
+      "status": 200
+    },
+    {
+      "device": "3080",
+      "comfy_running": 0,
+      "comfy_pending": 0
+    },
+    {
+      "device": "4090",
+      "comfy_running": 0,
+      "comfy_pending": 0
+    },
+    {
+      "unfinished": 0,
+      "occupied_physical_gpus": 0,
+      "channels_enabled": 2
+    }
+  ],
+  "https_validation_performed": false,
+  "virtualization_used": false
+}

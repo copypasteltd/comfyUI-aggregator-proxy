@@ -1,20 +1,32 @@
 # ComfyUI Aggregator Proxy
 
-[119 · Eight-hour cloud media retention](docs/119-云端产物八小时保留.md): published image, video and audio outputs expire **8 hours after successful job completion**. New downloads are denied at expiry and GC deletes the exact object version. Save required files before expires_at. Existing outputs are shortened to the same deadline; completion replay never renews it. Worker spool retention remains one hour after cloud acknowledgement; ComfyUI originals and client downloads are managed separately. See the linked deployment and validation record.
+[120 · Reference generation and exact dimensions](docs/120-参考能力发布与精确尺寸验证.md) is complete: publish four new aliases for image editing, two-image generation, first-frame video and two-image video. Add controlled `720x1080` presets to existing text image/video aliases while preserving their defaults. Six Workflows each pass one real validation and one separate business API call, including physical media probes, SHA-256, HEAD, Range and idempotent replay. Nine invalid-input/access-isolation checks pass. The Admin has seven published aliases; each business Key discovers only its authorized, runnable subset.
 
-[118 · Two real Windows GPUs](docs/118-双GPU真实ComfyUI接入.md) are connected: two enabled ComfyUI channels, 241 candidate Workflow drafts, 51 model-file registrations, and three published models approved after actual generation, S3 delivery and authenticated downloads. All 588 related regression cases and eight Admin page/viewport checks pass. The third requested endpoint still times out. Reference generation, specialized Workflows, 10–20 physical machines and complete-product acceptance remain pending.
+![Actual reference-generation Admin](docs/media/reference-capabilities-120/admin-reference.gif)
 
-![Actual Admin after GPU onboarding: channels, models, Workflows and jobs](docs/media/comfy-onboarding-118/admin-onboarding.gif)
-
-The deployed entry remains plain HTTP on a high port; the operator can add a domain reverse proxy. Admin manages channel addresses, Windows export catalogs, drafts/releases, model routes, queues and multiple business API Keys. Select a model below, authorize its alias/release/channel and quotas for a Key, submit asynchronously, poll the job and download using the same Key. See [configuration and request examples](docs/118-双GPU真实ComfyUI接入.md) and [actual screenshots, recording and generated samples](docs/media/comfy-onboarding-118/README.md), distinguished from historical synthetic demos.
-
-| Published model | Actual GPU | Verified specification | API |
+| Published alias | Capability / input | Verified specification | Submit endpoint |
 | --- | --- | --- | --- |
-| `comfy-3080-image-lustify-krea2` | RTX 3080 | 1024×1024 PNG | `/v1/images/generations/async` or `/v1/jobs` |
-| `comfy-4090-video-h3` | RTX 4090 | 864×480, about 5.167 seconds MP4 | `/v1/videos` or `/v1/jobs` |
-| `comfy-3080-music-yue2` | RTX 3080 | Up to 30 seconds, 48 kHz stereo FLAC | `/v1/jobs`, `text_to_audio` |
+| `comfy-3080-image-lustify-krea2` | Text image | 720×1080; original default 1024×1024 | `/v1/images/generations/async` |
+| `comfy-3080-image-edit-wai` | Image editing, one image | 720×1080 PNG | `/v1/images/edits/async` |
+| `comfy-3080-image-refs-wai` | Two reference images | 720×1080 PNG | `/v1/images/edits/async` |
+| `comfy-4090-video-h3` | Text video | 720×1080; original default 864×480, about 5.167 s | `/v1/videos` |
+| `comfy-4090-video-h3-i2v` | One first-frame image | 720×1080, about 5.167 s | `/v1/videos` |
+| `comfy-4090-video-h3-refs` | Two reference images | 720×1080, about 5.167 s | `/v1/videos` |
+| `comfy-3080-music-yue2` | Text audio; verified in 118, not rerun here | Up to 30 s, 48 kHz stereo FLAC | `/v1/jobs`, `text_to_audio` |
 
-These are three verified specifications, not approval of every Workflow or quality preset. All 295 existing files were exported as API graphs: 241 candidate drafts were registered and 54 need missing models, specialized inputs/bindings or unsupported 3D outputs. The other 238 candidates remain unpublished.
+Usage: grant the Key access to aliases, release IDs, channels and quotas in Admin; upload reference images to `/v1/assets`; submit with the resulting `asset_id`; poll `/v1/jobs/{id}`; download with the same Key. New releases do not automatically expand an existing Key's permissions. Use `source_image` for image editing, `input_reference` for first-frame video, and an ordered two-item `references` array for the selected multi-reference models. See [120](docs/120-参考能力发布与精确尺寸验证.md) for complete JSON and the resumable native [verification CLI](app/scripts/verify_reference_api.py).
+
+The H3/Krea2 720×1080 paths crop fixed edges from 736×1088, so allow composition margins. Dimensions come from frozen presets. Video-file references, arbitrary dimensions/durations/reference counts and every candidate Workflow remain outside this acceptance. Seven distinct Workflows supply the published aliases; 234 of 241 candidates still await preparation/acceptance. Physical 10–20-device capacity, full Sub2API runtime integration and complete-product acceptance remain open.
+
+![Real two-image video sample](docs/media/reference-capabilities-120/sample-video-refs.gif)
+
+[Actual screenshots, original-speed recording, GIFs and samples](docs/media/reference-capabilities-120/README.md) use the deployed platform and original project-owned inputs. Public copies remove embedded generation metadata and retain separate original-delivery/copy digests. Temporary Keys are disabled; both channels remain enabled with no unfinished test jobs.
+
+[119 · Eight-hour retention](docs/119-云端产物八小时保留.md): cloud image/video/audio outputs expire eight hours after successful completion; save files before `expires_at`. Worker spool, raw ComfyUI outputs and client copies follow their separate retention rules. Plain HTTP port 39443 and unrestricted-origin CORS remain deployed, with business Key authorization, independent Admin sessions and CSRF checks.
+
+## Historical release notes
+
+Read the following counts/statuses at their original increment date. The table above and document 120 describe the current published capabilities.
 
 [117 · ZeroTier private-network access](docs/117-ZeroTier原生客户端与私网接入.md): native ZeroTier 1.16.2 is running with startup enabled. After the user's controller authorization, the requested network reports `OK` and assigns an address. Actual HTTP on port 39443 and SSH pass from another Windows member; default routes and DNS remain intact, and all 64 services running before installation remain active. Node/address details are delivered privately; actual ComfyUI and Worker registration remain pending.
 

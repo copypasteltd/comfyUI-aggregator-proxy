@@ -1,5 +1,7 @@
 # 演示素材 / Demonstration media
 
+[120 · 实际参考生成 / Actual reference generation](reference-capabilities-120/README.md)：七个公开模型的真实 Admin、录屏/GIF、自制参考图及实际单图/双图生图和视频样本。历史合成和空后台演示仍按各自时点阅读。
+
 [118 · 实际双 GPU 接入 / Actual two-GPU onboarding](comfy-onboarding-118/README.md)：当前两台 Windows、正式渠道与已发布生图/视频/音频模型的截图、原速录屏、GIF 和真实生成样本；后续各历史素材保持其原合成或空后台边界。
 
 [中文项目入口](../../README.md) · [English project entry](../../README.en.md)
