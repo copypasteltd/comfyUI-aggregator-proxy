@@ -64,3 +64,26 @@ async def test_mismatched_existing_output_is_preserved_for_reconciliation(tmp_pa
         assert failure.value.code == "local_output_mismatch"
         assert destination.read_bytes() == previous and source.read_bytes() == payload
         assert execution.worker.journal.outputs(execution.aid) is None
+
+
+@pytest.mark.parametrize("task_type", sorted(TASK_TYPES))
+async def test_native_windows_history_folder_collects_original_output(tmp_path: Path, task_type: str) -> None:
+    async with collector(tmp_path, task_type) as (execution, source, destination, history, payload):
+        nested = source.parent / "render-control" / execution.aid
+        nested.mkdir(parents=True)
+        source.rename(nested / source.name)
+        entry = history["outputs"]["2"][execution.claim["workflow"]["output"]["history_field"]][0]
+        entry["subfolder"] = "render-control\\" + execution.aid
+        paths, specs = await execution.collect(history, execution.worker.settings.channels[0])
+        assert paths == [destination] and destination.read_bytes() == payload
+        assert specs[0]["sha256"] == hashlib.sha256(payload).hexdigest()
+
+
+@pytest.mark.parametrize("folder", [r"..\outside", r"C:\Windows", r"\\server\share", r"\rooted", r"safe\..\outside", r"safe\\nested"])
+async def test_windows_folder_normalization_preserves_path_rejection(tmp_path: Path, folder: str) -> None:
+    async with collector(tmp_path, "text_to_image") as (execution, source, destination, history, payload):
+        history["outputs"]["2"]["images"][0]["subfolder"] = folder
+        with pytest.raises(DomainError) as rejected:
+            await execution.collect(history, execution.worker.settings.channels[0])
+        assert rejected.value.code == "unsafe_path"
+        assert source.read_bytes() == payload and not destination.exists()

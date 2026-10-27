@@ -131,7 +131,10 @@ class Execution:
             if item.get("type") not in (("output",) if adapter["adapter"] == "audio-files-v1" else ("output", "temp")):
                 raise DomainError("invalid_output_path", "不支持的 ComfyUI 输出目录")
             directory = local.comfy_root / item["type"]
-            relative = "/".join(part for part in (item.get("subfolder", ""), item["filename"]) if part)
+            # ComfyUI returns native Windows separators in its relative folder.
+            # Filename and the normalized path still pass the same containment checks.
+            folder = item.get("subfolder", "").replace("\\", "/")
+            relative = "/".join(part for part in (folder, item["filename"]) if part)
             source = safe_path(directory, relative)
             before = source.stat()
             await asyncio.sleep(1)
