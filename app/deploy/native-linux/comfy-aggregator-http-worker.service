@@ -1,0 +1,27 @@
+[Unit]
+Description=ComfyUI Aggregator HTTP Worker
+After=network-online.target comfy-aggregator-api.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=comfy-http-worker
+Group=comfy-http-worker
+WorkingDirectory=/var/lib/comfyui-aggregator/http-worker
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/comfyui-aggregator/current/venv/bin/python -m windows_worker.main --config /etc/comfyui-aggregator/http-worker.json
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=45
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/comfyui-aggregator/http-worker
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryHigh=192M
+MemoryMax=384M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

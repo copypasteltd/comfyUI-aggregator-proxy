@@ -40,6 +40,8 @@ def commit(root: Path, git_executable: Path | None = None) -> str:
 def verify_environment(root: Path, manifest: dict[str, Any], git_executable: Path | None = None) -> dict[str, Any]:
     validate_manifest(manifest, manifest["task_type"])
     lock = manifest["dependency_lock"]
+    if lock.get("mode") == "comfy-api-only-v1":
+        raise DomainError("dependency_mode_mismatch", "API 模式发布包必须由显式启用的 HTTP Worker 执行")
     if commit(root, git_executable) != lock["comfy_commit"]:
         raise DomainError("comfy_version_mismatch", "本机 ComfyUI 提交与发布包不一致")
     checked = []

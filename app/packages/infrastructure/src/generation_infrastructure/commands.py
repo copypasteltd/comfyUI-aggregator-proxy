@@ -52,6 +52,13 @@ def command_transaction(sessions: sessionmaker[Session]) -> Iterator[Session]:
         raise DomainError("command_reconciliation_unavailable", "管理指令暂不可用，请稍后核对", 503) from None
 
 
+def environment_receipt_valid(payload: dict[str, Any], result: dict[str, Any]) -> bool:
+    lock = payload.get("manifest", {}).get("dependency_lock", {})
+    if lock.get("mode") == "comfy-api-only-v1":
+        return result.get("environment_verified") is False and result.get("api_profile_verified") is True and result.get("environment_digest") == fingerprint({"mode": "comfy-api-only-v1", "dependency_lock": lock})
+    return result.get("environment_verified") is True
+
+
 def checked_completed_result(command: WorkerCommand, result: dict[str, Any]) -> None:
     """Validate durable evidence against the issued snapshot without applying it."""
     try:
@@ -66,7 +73,7 @@ def checked_completed_result(command: WorkerCommand, result: dict[str, Any]) -> 
             raise ValueError("revision mismatch")
         if command.command == "probe_channel" and result.get("comfy_reachable") is not True:
             raise ValueError("probe evidence missing")
-        if command.command == "apply_workflow_release" and (result.get("environment_verified") is not True or result.get("release_digest") != payload["release_digest"]):
+        if command.command == "apply_workflow_release" and (not environment_receipt_valid(payload, result) or result.get("release_digest") != payload["release_digest"]):
             raise ValueError("workflow evidence mismatch")
         if command.command == "scan_inventory":
             if not isinstance(result.get("inventory"), dict):
@@ -257,7 +264,7 @@ class CommandRepository:
                             raise DomainError("workflow_export_changed", "读取内容与所选目录条目不一致，请刷新目录", 409)
                 elif command.command == "apply_workflow_release":
                     binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == channel.id, WorkflowBinding.release_id == parse_id("wfr", payload["release_id"])).with_for_update())
-                    if not binding or result.get("release_digest") != payload["release_digest"] or not result.get("environment_verified") or channel.desired_revision != payload["revision"]:
+                    if not binding or result.get("release_digest") != payload["release_digest"] or not environment_receipt_valid(payload, result) or channel.desired_revision != payload["revision"]:
                         raise DomainError("workflow_not_verified", "Workflow 环境验证结果无效或配置已变化")
                     binding.applied_digest = payload["release_digest"]
                     binding.verified_digest = payload["release_digest"]

@@ -18,7 +18,14 @@ class GpuInventory(StrictDTO):
 
 class Inventory(StrictDTO):
     gpus: list[GpuInventory] = Field(max_length=32)
-    features: list[Literal["audio-output-v1"]] = Field(default_factory=list, max_length=1)
+    features: list[Literal["audio-output-v1", "remote-http-v1"]] = Field(default_factory=list, max_length=2)
+
+    @field_validator("features")
+    @classmethod
+    def distinct_features(cls, value: list[Literal["audio-output-v1", "remote-http-v1"]]) -> list[Literal["audio-output-v1", "remote-http-v1"]]:
+        if len(value) != len(set(value)):
+            raise ValueError("duplicate Worker features")
+        return value
 
 
 class BootIdentity(StrictDTO):

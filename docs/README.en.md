@@ -1,5 +1,7 @@
 # Documentation index
 
+[122 · RTX 5070 HTTP onboarding](122-RTX5070纯HTTP接入与调用验证.md): explicit API declarations, a native Linux Worker and selected complete workflow graphs. Publication requires real generation verification.
+
 [121 · ComfyUI source cleanup after durable handoff](121-ComfyUI原始产物移交即清理设计.md): immediately request original-file cleanup after the complete verified spool package and recovery intent commit, independently of cloud upload. Specify the restricted extension, spool-first recovery, bounded retries, eight pending development items and ten acceptance groups. Design only; production originals are still retained and Worker/cloud retention stays as documented.
 
 [120 · Reference generation and exact dimensions](120-参考能力发布与精确尺寸验证.md): four reference modes are published; existing text image/video aliases gain 720×1080. Seven aliases, six real validations, six business calls and nine negative checks are recorded with [actual media](media/reference-capabilities-120/README.md). Crop semantics, restart recovery, eight-hour retention and remaining acceptance boundaries are explicit.

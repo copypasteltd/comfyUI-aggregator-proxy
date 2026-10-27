@@ -137,9 +137,16 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
         for target, value in preset["values"].items():
             _preset_target(graph, target, value)
     lock = manifest["dependency_lock"]
-    if not isinstance(lock, dict) or not isinstance(lock.get("comfy_commit"), str) or len(lock["comfy_commit"]) != 40 or not isinstance(lock.get("models"), list) or not isinstance(lock.get("custom_nodes"), list):
+    if isinstance(lock, dict) and lock.get("mode") == "comfy-api-only-v1":
+        classes, model_inputs = lock.get("node_classes"), lock.get("model_inputs")
+        if set(lock) != {"mode", "comfy_version", "node_classes", "model_inputs"} or not isinstance(lock.get("comfy_version"), str) or not 1 <= len(lock["comfy_version"]) <= 128 or not isinstance(classes, list) or not all(isinstance(c, str) and 1 <= len(c) <= 256 for c in classes) or len(classes) != len(set(classes)) or set(classes) != {n["class_type"] for n in graph.values()} or not isinstance(model_inputs, list) or len(model_inputs) > 2000:
+            raise DomainError("api_dependency_invalid", "API 模式必须明确记录实际节点与模型选项，不得混用本地依赖锁", 422)
+        for entry in model_inputs:
+            if not isinstance(entry, dict) or set(entry) != {"class_type", "input_name", "value"} or not all(isinstance(v, str) and 1 <= len(v) <= (1024 if k == "value" else 256) for k, v in entry.items()) or not any(n["class_type"] == entry["class_type"] and n["inputs"].get(entry["input_name"]) == entry["value"] for n in graph.values()):
+                raise DomainError("api_dependency_invalid", "API 模型选项必须对应冻结图中的实际输入", 422)
+    elif not isinstance(lock, dict) or not isinstance(lock.get("comfy_commit"), str) or len(lock["comfy_commit"]) != 40 or not isinstance(lock.get("models"), list) or not isinstance(lock.get("custom_nodes"), list):
         raise DomainError("dependency_lock_required", "必须固定 ComfyUI 提交、模型和自定义节点依赖", 422)
-    for model in lock["models"]:
+    for model in lock.get("models", []):
         relative_file(model["path"])
         if len(model.get("sha256", "")) != 64:
             raise DomainError("model_hash_required", "模型依赖必须包含 SHA-256", 422)

@@ -19,6 +19,15 @@ def is_pointer(info: os.stat_result) -> bool:
 
 
 def available_memory() -> int:
+    if sys.platform == "linux":
+        with Path("/proc/meminfo").open("rb") as stream:
+            data = stream.read(65537)
+        if len(data) > 65536:
+            raise OSError("native memory observation exceeded budget")
+        for line in data.splitlines():
+            if line.startswith(b"MemAvailable:"):
+                return int(line.split()[1]) * 1024
+        raise OSError("native memory observation unavailable")
     if sys.platform != "win32":
         raise OSError("native Windows memory observation required")
 
@@ -77,10 +86,12 @@ def observe_capacity(settings: WorkerSettings, sequence: int, reserved: int, upl
     started = time.monotonic()
     disk = memory = spool = None
     try:
-        roots = {settings.state_root, *(c.comfy_root for c in settings.channels)}
+        roots = {settings.state_root, *(c.local_root for c in settings.channels if c.connection_mode == "local")}
         for channel in settings.channels:
+            if channel.connection_mode != "local":
+                continue
             for name in ("input", "output", "temp"):
-                path = channel.comfy_root / name
+                path = channel.local_root / name
                 if path.exists():
                     roots.add(path)
         disk = min(shutil.disk_usage(root).free for root in roots)
@@ -89,7 +100,7 @@ def observe_capacity(settings: WorkerSettings, sequence: int, reserved: int, upl
     except (OSError, ValueError):
         # Raw OS errors and paths never leave the Worker.
         disk = memory = spool = None
-    value: dict[str, Any] = {"protocol": "native-capacity-v1", "sequence": sequence, "observed_ago_ms": min(60000, int((time.monotonic() - started) * 1000)),
+    value: dict[str, Any] = {"protocol": "native-capacity-v1", "scope": "worker_spool" if any(c.connection_mode == "remote_http" for c in settings.channels) else "local_worker", "sequence": sequence, "observed_ago_ms": min(60000, int((time.monotonic() - started) * 1000)),
         "status": "unavailable", "reasons": [], "free_disk_bytes": disk, "available_memory_bytes": memory,
         "spool_bytes": spool, "reserved_bytes": reserved, "pending_uploads": uploads,
         **{name: getattr(settings, name) for name in ("minimum_free_disk_bytes", "minimum_available_memory_bytes", "maximum_spool_bytes", "generation_reserve_bytes", "maximum_uploads")}}

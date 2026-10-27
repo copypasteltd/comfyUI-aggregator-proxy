@@ -66,7 +66,8 @@ def test_capacity_probes_comfy_data_volumes_and_hides_os_errors(tmp_path: Path, 
     from windows_worker import capacity
     for name in ("input", "output", "temp"):
         (tmp_path / name).mkdir()
-    values = settings(tmp_path).model_copy(update={"channels": [SimpleNamespace(comfy_root=tmp_path)]})
+    from windows_worker.configuration import LocalChannel
+    values = settings(tmp_path).model_copy(update={"channels": [LocalChannel(base_url="http://127.0.0.1:8188", hardware_id="synthetic", comfy_root=tmp_path)]})
     visited: set[Path] = set()
     def usage(path: Path) -> Any:
         visited.add(path)

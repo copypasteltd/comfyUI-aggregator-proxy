@@ -29,6 +29,8 @@ targets["service-deployment.schema.json"] = app / "packages/contracts/src/genera
 
 targets["monitoring-configuration.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/monitoring-configuration.schema.json"
 targets["monitoring-metrics.json"] = app / "packages/contracts/src/generation_contracts/schemas/monitoring-metrics.json"
+targets["comfy-api-dependency.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/comfy-api-dependency.schema.json"
+
 drift = []
 for name in ("gateway-catalog-publication", "gateway-catalog-replay", "gateway-catalog-receipt", "gateway-catalog-stamp", "gateway-catalog-configuration"):
     targets[name + ".schema.json"] = app / "packages/contracts/src/generation_contracts/schemas" / (name + ".schema.json")

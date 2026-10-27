@@ -193,3 +193,8 @@ GET /v1/jobs/{job_id} 及网关同源详情的状态、updated_revision、comple
 ## Workflow 标量写入与连线保护（104）
 
 绑定和预设仅能覆盖原始 workflow_api 中已存在的 JSON 标量输入，null 可作原占位；原连线、数组及对象均不能作为写入目标。冻结与 Worker 编译共用目标检查，编译先检查原图再应用任何覆盖，未提供值的可选绑定同样检查。非法绑定/预设沿用 invalid_binding / invalid_preset_target、422 和固定说明。导入未完成草稿继续可编辑，但预览 publishable=false，禁止冻结；旧包在新的 submit_intent/begin_post/POST 前拒绝，已经提交或未知的执行仍按原 journal 恢复。DTO/JSON 结构和协议版本不变，具体规则与回归见 [104](104-Workflow标量绑定与连线保护.md)。
+
+
+## 122 · 显式 HTTP 渠道例外
+
+按用户明确指令，无主机管理端的 ComfyUI 可使用独立 Linux 原生 Worker，显式开启 allow_api_only 与 remote_http。采用 comfy-api-only-v1 声明 API 版本/节点/模型选项，回执 environment_verified=false、api_profile_verified=true，不能替代本地 Git/权重摘要核验。仅发布真实调用通过的受控 Workflow；云端 GPU 槽、journal 与未知提交核对规则继续适用。容量 scope=worker_spool 只代表 Worker 本机，02 位于其 Linux spool；01 原文件尚不自动删除，03 仍保留八小时。部署示例与完整约束见 [122](122-RTX5070纯HTTP接入与调用验证.md)。

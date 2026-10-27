@@ -1,0 +1,14 @@
+{
+  "control_origin": "http://127.0.0.1:39446",
+  "allow_http": true,
+  "allow_api_only": true,
+  "credential_file": "/etc/comfyui-aggregator/http-worker.secret",
+  "state_root": "/var/lib/comfyui-aggregator/http-worker",
+  "gpus": [{"hardware_id": "comfy-http-5070-slot-0", "name": "NVIDIA GeForce RTX 5070", "memory_bytes": 12820480000}],
+  "channels": [{"base_url": "http://192.0.2.50:8188", "hardware_id": "comfy-http-5070-slot-0", "connection_mode": "remote_http"}],
+  "minimum_free_disk_bytes": 2147483648,
+  "minimum_available_memory_bytes": 268435456,
+  "maximum_spool_bytes": 2147483648,
+  "generation_reserve_bytes": 268435456,
+  "output_retention_seconds": 3600
+}

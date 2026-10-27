@@ -9,6 +9,7 @@ from generation_domain.errors import DomainError
 from generation_domain.values import fingerprint
 from generation_domain.workflows import relative_file
 
+from windows_worker.api_environment import observe_api_environment
 from windows_worker.comfy import ComfyClient
 from windows_worker.comfy_json import (
     MAX_INVENTORY_BYTES,
@@ -40,7 +41,7 @@ class CommandExecutor:
         if kind == "inspect_model_file":
             if local is None or self.settings is None:
                 raise DomainError("channel_not_allowlisted", "渠道尚未在 Worker 本地配置登记", 422)
-            return {**base, "inspection": inspect_model(local.comfy_root, payload, maximum_bytes=self.settings.model_hash_maximum_bytes, seconds=self.settings.model_hash_timeout_seconds)}
+            return {**base, "inspection": inspect_model(local.local_root, payload, maximum_bytes=self.settings.model_hash_maximum_bytes, seconds=self.settings.model_hash_timeout_seconds)}
         if kind == "pull_workflow":
             if local is None:
                 raise DomainError("channel_not_allowlisted", "渠道尚未在 Worker 本地配置登记", 422)
@@ -55,7 +56,7 @@ class CommandExecutor:
         if kind == "apply_workflow_release":
             if not local or fingerprint(payload["manifest"]) != payload["release_digest"]:
                 raise DomainError("workflow_not_verified", "工作流摘要或本地渠道配置不符")
-            checked = verify_environment(local.comfy_root, payload["manifest"], self.settings.git_executable if self.settings else None)
+            checked = observe_api_environment(local.base_url, command.get("authorization"), payload["manifest"]) if local.connection_mode == "remote_http" else verify_environment(local.local_root, payload["manifest"], self.settings.git_executable if self.settings else None)
             target = self.root / (relative_file(payload["release_id"]) + ".json")
             temporary = target.with_suffix(".staged")
             with temporary.open("w", encoding="utf-8") as file:
@@ -92,8 +93,8 @@ class CommandExecutor:
                 if len(data) > 10000 or any(not key or len(key) > 256 or not isinstance(value, dict) for key, value in data.items()):
                     raise invalid_response()
                 result = {**base, "inventory": {"node_classes": sorted(data), "node_schema_digest": fingerprint(data)}}
-                if local is not None:
-                    result["model_catalog"] = discover_models(local.comfy_root)
+                if local is not None and local.connection_mode == "local":
+                    result["model_catalog"] = discover_models(local.local_root)
                 return result
             if kind == "collect_diagnostics":
                 data = checked_queue(request_json(client.http, "GET", "/queue", maximum=MAX_QUEUE_BYTES))

@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "ApiModelInput": {
+      "additionalProperties": false,
+      "properties": {
+        "class_type": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Class Type",
+          "type": "string"
+        },
+        "input_name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Input Name",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "class_type",
+        "input_name",
+        "value"
+      ],
+      "title": "ApiModelInput",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "mode": {
+      "const": "comfy-api-only-v1",
+      "title": "Mode",
+      "type": "string"
+    },
+    "comfy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Comfy Version",
+      "type": "string"
+    },
+    "node_classes": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2000,
+      "minItems": 1,
+      "title": "Node Classes",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "model_inputs": {
+      "items": {
+        "$ref": "#/$defs/ApiModelInput"
+      },
+      "maxItems": 2000,
+      "title": "Model Inputs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "mode",
+    "comfy_version",
+    "node_classes",
+    "model_inputs"
+  ],
+  "title": "ApiOnlyDependencyLock",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://comfy-aggregator.local/contracts/0.5.0/comfy-api-dependency.schema.json",
+  "description": "API directory declaration only; no host-file digest verification."
+}

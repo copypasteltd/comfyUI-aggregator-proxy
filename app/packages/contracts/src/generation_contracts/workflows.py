@@ -49,6 +49,19 @@ class DependencyLock(StrictDTO):
     custom_nodes: list[LockedNode]
 
 
+class ApiModelInput(StrictDTO):
+    class_type: str = Field(min_length=1, max_length=256)
+    input_name: str = Field(min_length=1, max_length=256)
+    value: str = Field(min_length=1, max_length=1024)
+
+
+class ApiOnlyDependencyLock(StrictDTO):
+    mode: Literal["comfy-api-only-v1"]
+    comfy_version: str = Field(min_length=1, max_length=128)
+    node_classes: list[str] = Field(min_length=1, max_length=2000)
+    model_inputs: list[ApiModelInput] = Field(max_length=2000)
+
+
 class RuntimeProfile(StrictDTO):
     id: str
     gpu_hardware_id: str
@@ -66,6 +79,6 @@ class WorkflowManifest(StrictDTO):
     bindings: list[Binding]
     output: OutputAdapter
     presets: list[Preset]
-    dependency_lock: DependencyLock
+    dependency_lock: DependencyLock | ApiOnlyDependencyLock
     runtime_profiles: list[RuntimeProfile]
     supported_parameters: list[str]

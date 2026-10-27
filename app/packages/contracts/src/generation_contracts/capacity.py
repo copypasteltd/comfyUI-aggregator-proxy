@@ -12,6 +12,7 @@ CapacityReason = Literal["disk_space", "memory", "spool_limit", "upload_backlog"
 
 class WorkerCapacity(StrictDTO):
     protocol: Literal["native-capacity-v1"]
+    scope: Literal["local_worker", "worker_spool"] = "local_worker"
     sequence: int = Field(ge=1, le=2**53 - 1)
     observed_ago_ms: int = Field(ge=0, le=60000)
     status: Literal["ready", "blocked", "unavailable"]

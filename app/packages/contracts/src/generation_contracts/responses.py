@@ -313,6 +313,7 @@ class OperationReceipt(BaseModel):
     success: bool | None = None
     applied_revision: int | None = None
     environment_verified: bool | None = None
+    api_profile_verified: bool | None = None
     release_digest: str | None = None
     error_code: str | None = None
     source_digest: str | None = None

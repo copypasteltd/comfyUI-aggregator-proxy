@@ -4284,7 +4284,7 @@ export interface components {
             /** Gpus */
             gpus: components["schemas"]["GpuInventory"][];
             /** Features */
-            features?: "audio-output-v1"[];
+            features?: ("audio-output-v1" | "remote-http-v1")[];
         };
         /** InventoryView */
         InventoryView: {
@@ -5297,6 +5297,8 @@ export interface components {
             applied_revision?: number | null;
             /** Environment Verified */
             environment_verified?: boolean | null;
+            /** Api Profile Verified */
+            api_profile_verified?: boolean | null;
             /** Release Digest */
             release_digest?: string | null;
             /** Error Code */
@@ -6324,6 +6326,12 @@ export interface components {
              * @constant
              */
             protocol: "native-capacity-v1";
+            /**
+             * Scope
+             * @default local_worker
+             * @enum {string}
+             */
+            scope: "local_worker" | "worker_spool";
             /** Sequence */
             sequence: number;
             /** Observed Ago Ms */

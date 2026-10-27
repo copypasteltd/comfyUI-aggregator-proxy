@@ -7,7 +7,7 @@ import ssl
 import stat
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 from urllib.parse import urlparse
 
 from generation_domain.errors import DomainError
@@ -105,14 +105,22 @@ class LocalChannel(BaseModel):
     model_config = ConfigDict(extra="forbid")
     base_url: str
     hardware_id: str
-    comfy_root: Path
+    connection_mode: Literal["local", "remote_http"] = "local"
+    comfy_root: Path | None = None
     workflow_export_root: Path | None = None
+
+    @property
+    def local_root(self) -> Path:
+        if self.connection_mode != "local" or self.comfy_root is None:
+            raise DomainError("local_files_unavailable", "HTTP 渠道不提供主机文件访问")
+        return self.comfy_root
 
 
 class WorkerSettings(BaseModel):
     model_config = ConfigDict(extra="forbid")
     control_origin: str
     allow_http: bool = Field(default=False, strict=True)
+    allow_api_only: bool = Field(default=False, strict=True)
     credential_file: Path
     state_root: Path
     ca_file: Path | None = None
@@ -145,7 +153,13 @@ class WorkerSettings(BaseModel):
             if parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment or parsed.path not in ("", "/") or channel.hardware_id not in ids:
                 raise ValueError("invalid local ComfyUI channel")
             channel.base_url = channel.base_url.rstrip("/")
-            channel.comfy_root = channel.comfy_root.resolve(strict=True)
+            if channel.connection_mode == "remote_http":
+                if not self.allow_api_only or channel.comfy_root is not None:
+                    raise ValueError("remote_http requires explicit allow_api_only and no local ComfyUI root")
+            elif channel.comfy_root is None:
+                raise ValueError("local ComfyUI requires comfy_root")
+            else:
+                channel.comfy_root = channel.comfy_root.resolve(strict=True)
             if channel.workflow_export_root is not None:
                 from windows_worker.workflow_exports import configured_export_root
                 channel.workflow_export_root = configured_export_root(channel.workflow_export_root)

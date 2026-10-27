@@ -46283,6 +46283,33 @@
         "queued_jobs": 5,
         "physical_gpus": 2
       }
+    },
+    {
+      "id": "explicit-api-declaration",
+      "schema": "comfy-api-dependency.schema.json",
+      "valid": true,
+      "data": {
+        "mode": "comfy-api-only-v1",
+        "comfy_version": "synthetic-1",
+        "node_classes": [
+          "SyntheticSave"
+        ],
+        "model_inputs": []
+      }
+    },
+    {
+      "id": "api-declaration-not-native-file-verification",
+      "schema": "comfy-api-dependency.schema.json",
+      "valid": false,
+      "data": {
+        "mode": "comfy-api-only-v1",
+        "comfy_version": "synthetic-1",
+        "node_classes": [
+          "SyntheticSave"
+        ],
+        "model_inputs": [],
+        "comfy_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
     }
   ]
 }

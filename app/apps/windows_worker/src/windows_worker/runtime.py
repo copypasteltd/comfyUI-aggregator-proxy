@@ -21,6 +21,7 @@ from generation_domain.retries import RETRY_POLICY
 from generation_domain.values import fingerprint
 from generation_domain.workflows import compile_graph
 
+from windows_worker.api_environment import observe_api_environment
 from windows_worker.comfy import ComfyClient
 from windows_worker.comfy_json import (
     MAX_HISTORY_BYTES,
@@ -44,6 +45,7 @@ from windows_worker.failure_causes import (
     rejected_media,
     require_prompt_absent,
 )
+from windows_worker.http_output import download_output, output_locator
 from windows_worker.journal import Journal
 from windows_worker.observations import observe_queue
 from windows_worker.output_copy import copy_output
@@ -121,7 +123,7 @@ class Execution:
                 target.unlink(missing_ok=True)
         return result
 
-    async def collect(self, history: dict[str, Any], local: LocalChannel) -> tuple[list[Path], list[dict[str, Any]]]:
+    async def collect(self, history: dict[str, Any], local: LocalChannel, comfy: httpx.AsyncClient | None = None) -> tuple[list[Path], list[dict[str, Any]]]:
         adapter = self.claim["workflow"]["output"]
         files = output_files(history, adapter["final_node_ids"], adapter["history_field"])
         if len(files) != adapter["expected_count"]:
@@ -130,7 +132,24 @@ class Execution:
         for i, item in enumerate(files):
             if item.get("type") not in (("output",) if adapter["adapter"] == "audio-files-v1" else ("output", "temp")):
                 raise DomainError("invalid_output_path", "不支持的 ComfyUI 输出目录")
-            directory = local.comfy_root / item["type"]
+            if local.connection_mode == "remote_http":
+                if comfy is None:
+                    raise DomainError("http_client_required", "HTTP 产物收集缺少受控连接")
+                locator = output_locator(item)
+                maximum = min(adapter["max_bytes"], 32 * 1024 * 1024 if adapter["adapter"] == "save-image-v1" else 2147483648)
+                target = self.worker.settings.state_root / "outputs" / self.aid / f"{i}{Path(locator['filename']).suffix}"
+
+                async def verify(path: Path, limit: int) -> tuple[str, int]:
+                    return await self.worker.blocking(file_digest, path, limit)
+
+                digest, size = await download_output(comfy, item, target, maximum, self.worker.settings.state_root, verify)
+                media = output_mime(target.suffix) or mimetypes.guess_type(target.name)[0]
+                if media not in adapter["mime_types"]:
+                    raise DomainError("output_media_mismatch", "输出格式未在发布包登记")
+                outputs.append(target)
+                specs.append({"position": i, "bytes": size, "sha256": digest, "media_type": media})
+                continue
+            directory = local.local_root / item["type"]
             # ComfyUI returns native Windows separators in its relative folder.
             # Filename and the normalized path still pass the same containment checks.
             folder = item.get("subfolder", "").replace("\\", "/")
@@ -188,7 +207,10 @@ class Execution:
             local = self.worker.settings.channel(self.claim["channel"]["base_url"])
             if not self.claim.get("resume_state"):
                 await self.emit("preparing", {"execution_digest": self.claim["execution_digest"]})
-                await self.worker.blocking(verify_environment, local.comfy_root, self.claim["workflow"], self.worker.settings.git_executable)
+                if local.connection_mode == "remote_http":
+                    await self.worker.blocking(observe_api_environment, local.base_url, self.claim["channel"].get("authorization"), self.claim["workflow"])
+                else:
+                    await self.worker.blocking(verify_environment, local.local_root, self.claim["workflow"], self.worker.settings.git_executable)
             profile = next((p for p in self.claim["workflow"]["runtime_profiles"] if p["gpu_hardware_id"] == local.hardware_id), None)
             if not profile:
                 raise DomainError("profile_not_available", "发布包没有此物理 GPU 的执行画像")
@@ -241,7 +263,7 @@ class Execution:
                     self.worker.journal.finish(self.aid)
                     return
                 try:
-                    files, specs = await self.collect(history, local)
+                    files, specs = await self.collect(history, local, comfy) if local.connection_mode == "remote_http" else await self.collect(history, local)
                 except DomainError as exc:
                     if exc.code not in COLLECTION_REJECTIONS:
                         raise
@@ -526,7 +548,8 @@ class Worker:
     async def run(self) -> None:
         background: list[asyncio.Task[None]] = []
         try:
-            registration = await self.post("/internal/v1/register", {"protocol_version": "0.4.0", "boot_id": self.boot, "inventory": {"gpus": [gpu.model_dump() for gpu in self.settings.gpus], "features": ["audio-output-v1"]}})
+            features = ["audio-output-v1"] + (["remote-http-v1"] if any(c.connection_mode == "remote_http" for c in self.settings.channels) else [])
+            registration = await self.post("/internal/v1/register", {"protocol_version": "0.4.0", "boot_id": self.boot, "inventory": {"gpus": [gpu.model_dump() for gpu in self.settings.gpus], "features": features}})
             if registration.get("node_id") != self.node_id or registration.get("boot_id") != self.boot:
                 raise DomainError("worker_registration_identity_mismatch", "Worker 注册回执身份不匹配")
             self.quarantined |= bool(registration.get("reconciliation_required"))

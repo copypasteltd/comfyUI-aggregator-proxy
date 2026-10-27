@@ -123,6 +123,15 @@
       "minimum": 1,
       "title": "Maximum Uploads",
       "type": "integer"
+    },
+    "scope": {
+      "default": "local_worker",
+      "enum": [
+        "local_worker",
+        "worker_spool"
+      ],
+      "title": "Scope",
+      "type": "string"
     }
   },
   "required": [

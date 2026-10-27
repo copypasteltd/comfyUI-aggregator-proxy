@@ -46,7 +46,7 @@ def operation_receipt(receipt: dict[str, Any] | None) -> dict[str, Any] | None:
     if receipt is None:
         return None
     safe: dict[str, Any] = {}
-    for name in ("success", "environment_verified"):
+    for name in ("success", "environment_verified", "api_profile_verified"):
         if type(receipt.get(name)) is bool:
             safe[name] = receipt[name]
     revision = receipt.get("applied_revision")

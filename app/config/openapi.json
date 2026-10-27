@@ -15866,10 +15866,13 @@
           "features": {
             "items": {
               "type": "string",
-              "const": "audio-output-v1"
+              "enum": [
+                "audio-output-v1",
+                "remote-http-v1"
+              ]
             },
             "type": "array",
-            "maxItems": 1,
+            "maxItems": 2,
             "title": "Features"
           }
         },
@@ -18797,6 +18800,17 @@
               }
             ],
             "title": "Environment Verified"
+          },
+          "api_profile_verified": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Profile Verified"
           },
           "release_digest": {
             "anyOf": [
@@ -21860,6 +21874,15 @@
             "type": "string",
             "const": "native-capacity-v1",
             "title": "Protocol"
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "local_worker",
+              "worker_spool"
+            ],
+            "title": "Scope",
+            "default": "local_worker"
           },
           "sequence": {
             "type": "integer",
