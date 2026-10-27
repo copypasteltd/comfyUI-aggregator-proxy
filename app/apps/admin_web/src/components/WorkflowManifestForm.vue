@@ -17,6 +17,7 @@ const audio = computed(() => props.taskType === 'text_to_audio'), video = comput
 const stale = computed(() => !!doc.value && (props.modelValue !== loadedText.value || props.taskType !== loadedType.value))
 const packaged = computed(() => !!doc.value && (Object.hasOwn(doc.value, 'format_version') || Object.hasOwn(doc.value, 'workflow_api')))
 const lock = computed(() => doc.value && isRecord(doc.value.dependency_lock) ? doc.value.dependency_lock : null)
+const apiOnly = computed(() => lock.value?.mode === 'comfy-api-only-v1')
 const output = computed(() => doc.value && isRecord(doc.value.output) ? doc.value.output : null)
 const graph = computed(() => doc.value && isRecord(doc.value.workflow_api) ? doc.value.workflow_api : null)
 const nodeOptions = computed(() => Object.entries(graph.value ?? {}).map(([id, node]) => ({ value: id, label: `${id} · ${isRecord(node) && typeof node.class_type === 'string' ? node.class_type : '未知节点'}` })))
@@ -30,7 +31,7 @@ function csv(row: JsonObject, key: string) { const value = row[key]; return Arra
 function put(row: JsonObject, key: string, value: JsonValue) { if (!writable()) return; row[key] = value; changed() }
 function unset(row: JsonObject, key: string) { if (!writable()) return; delete row[key]; changed() }
 function numeric(row: JsonObject, key: string, value: string, optional = false) { if (!writable()) return; if (!value.trim() && optional) { unset(row, key); return }; try { const next = parseExactJson(value, 8192); if (!(next instanceof ExactNumber)) throw new Error(); put(row, key, next) } catch { put(row, key, new UnfinishedNumber(value)) } }
-function list(kind: List): JsonObject[] | null { const value = kind === 'models' || kind === 'custom_nodes' ? lock.value?.[kind] : doc.value?.[kind]; return Array.isArray(value) && value.every(isRecord) ? value : null }
+function list(kind: List): JsonObject[] | null { const value = kind === 'models' && apiOnly.value ? lock.value?.model_inputs : kind === 'models' || kind === 'custom_nodes' ? lock.value?.[kind] : doc.value?.[kind]; return Array.isArray(value) && value.every(isRecord) ? value : null }
 const items = computed(() => listTab.value ? list(listTab.value) : null)
 const shown = computed(() => !items.value || !listTab.value ? [] : items.value.slice((pages[listTab.value] - 1) * 50, pages[listTab.value] * 50).map((value, index) => ({ value, index: (pages[listTab.value!] - 1) * 50 + index })))
 function inputOptions(row: JsonObject) { const node = graph.value?.[text(row, 'node_id')]; return isRecord(node) && isRecord(node.inputs) ? Object.keys(node.inputs).map(name => ({ label: name, value: name })) : [] }
@@ -45,16 +46,16 @@ function update(row: JsonObject, field: Field, value: string) {
 const fields = computed<Field[]>(() => {
   if (activeTab.value === 'bindings') return [{ key: 'source', label: '来源', kind: 'select', choices: ['prompt', 'negative_prompt', 'seed', 'output_prefix', 'seconds', ...(!audio.value ? ['width', 'height', 'fps', 'strength', 'source_image', 'mask', ...Array.from({ length: 4 }, (_, i) => `reference_${i}`), ...Array.from({ length: 4 }, (_, i) => `reference_weight_${i}`)] : [])] }, { key: 'node_id', label: '节点', kind: 'node' }, { key: 'input_name', label: '输入', kind: 'input' }]
   if (activeTab.value === 'presets') return [{ key: 'quality', label: '质量', kind: 'select', choices: ['draft', 'standard', 'high'] }, ...(!audio.value ? [{ key: 'size', label: '尺寸' }] : []), ...(audio.value || video.value ? [{ key: 'seconds', label: '时长秒', kind: 'numeric' as const }] : []), ...(audio.value ? [{ key: 'audio_format', label: '音频格式', kind: 'select' as const, choices: ['wav', 'flac', 'mp3', 'opus'] }, { key: 'sample_rate', label: '采样率', kind: 'numeric' as const }, { key: 'channels', label: '声道', kind: 'select' as const, choices: ['1', '2'], numeric: true }] : [])]
-  if (activeTab.value === 'models') return [{ key: 'path', label: '相对路径' }, { key: 'sha256', label: 'SHA-256' }, { key: 'bytes', label: '文件字节数', kind: 'numeric' }]
+  if (activeTab.value === 'models') return apiOnly.value ? [{ key: 'class_type', label: '节点类' }, { key: 'input_name', label: '模型输入名' }, { key: 'value', label: '模型选项' }] : [{ key: 'path', label: '相对路径' }, { key: 'sha256', label: 'SHA-256' }, { key: 'bytes', label: '文件字节数', kind: 'numeric' }]
   if (activeTab.value === 'custom_nodes') return [{ key: 'directory', label: '目录' }, { key: 'commit', label: '提交哈希' }]
-  if (activeTab.value === 'runtime_profiles') return [{ key: 'id', label: '画像标识' }, { key: 'gpu_hardware_id', label: '物理 GPU 标识' }, { key: 'execution_timeout_seconds', label: '执行超时秒', kind: 'numeric' }]
+  if (activeTab.value === 'runtime_profiles') return [{ key: 'id', label: '画像标识' }, { key: 'gpu_hardware_id', label: apiOnly.value ? 'GPU 资源键' : '物理 GPU 标识' }, { key: 'execution_timeout_seconds', label: '执行超时秒', kind: 'numeric' }]
   return []
 })
 const outputFields: Field[] = [{ key: 'adapter', label: '适配器', kind: 'select', choices: ['save-image-v1', 'video-files-v1', 'audio-files-v1'] }, { key: 'final_node_ids', label: '最终节点（逗号分隔）', kind: 'csv' }, { key: 'history_field', label: 'History 结果字段', kind: 'select', choices: ['images', 'gifs', 'videos', 'audio'] }, { key: 'expected_count', label: '主产物数量（冻结仅允许 1）', kind: 'select', choices: ['1'], numeric: true }, { key: 'max_bytes', label: '单产物最大字节数', kind: 'numeric' }, { key: 'mime_types', label: 'MIME（逗号分隔）', kind: 'csv' }]
 function defaultEntry(kind: List): JsonObject {
   if (kind === 'bindings') return { source: 'prompt', node_id: '', input_name: '' }
   if (kind === 'presets') return { quality: 'standard', ...(!audio.value ? { size: '' } : {}), ...(audio.value || video.value ? { seconds: new ExactNumber('2') } : {}), ...(audio.value ? { audio_format: 'wav', sample_rate: new ExactNumber('24000'), channels: new ExactNumber('1') } : {}), values: {} }
-  if (kind === 'models') return { path: '', sha256: '' }
+  if (kind === 'models') return apiOnly.value ? { class_type: '', input_name: '', value: '' } : { path: '', sha256: '' }
   if (kind === 'custom_nodes') return { directory: '', commit: '' }
   return { id: '', gpu_hardware_id: '', execution_timeout_seconds: new ExactNumber('300'), approved: false }
 }
@@ -98,12 +99,14 @@ onBeforeUnmount(() => { disposed = true; if (confirming) ElMessageBox.close(); d
       <el-button v-if="canInitialize && !readonly" :disabled="!available || stale" @click="initialize">{{ Object.keys(doc).length ? '将 API 图包装为发布包' : '初始化空白发布包' }}</el-button>
       <el-alert v-else-if="!packaged" title="当前 JSON 不是发布包或可识别的 API 图，请在完整 JSON 中修正。" type="warning" :closable="false"/>
       <template v-if="packaged">
-        <el-tabs v-model="activeTab"><el-tab-pane v-for="(label, key) in labels" :key="key" :name="key" :label="label"/></el-tabs>
+        <el-tabs v-model="activeTab"><el-tab-pane v-for="(label, key) in labels" :key="key" :name="key" :label="key === 'custom_nodes' && apiOnly ? '节点目录' : label"/></el-tabs>
         <el-form label-position="top">
           <template v-if="listTab">
-            <el-alert v-if="!items" title="本节 JSON 结构不支持表单编辑，原数据已保留，请在完整 JSON 中修正。" type="warning" :closable="false"/>
+            <template v-if="apiOnly && lock && (listTab === 'models' || listTab === 'custom_nodes')"><p class="form-help">此渠道按 ComfyUI API 目录接入，尚未核验主机文件。配置实际版本、节点类和模型选项后，仍须完成真实生成验证。</p><el-form-item label="ComfyUI API 版本"><el-input :disabled="readonly || !available" :model-value="text(lock, 'comfy_version')" aria-label="ComfyUI API 版本" @update:model-value="put(lock, 'comfy_version', $event)"/></el-form-item></template>
+            <el-form-item v-if="apiOnly && lock && listTab === 'custom_nodes'" label="API 节点类（逗号分隔）"><el-input :disabled="readonly || !available" :model-value="csv(lock, 'node_classes')" aria-label="API 节点类" type="textarea" :rows="5" @update:model-value="setCsv(lock, 'node_classes', $event)"/></el-form-item>
+            <el-alert v-else-if="!items" title="本节 JSON 结构不支持表单编辑，原数据已保留，请在完整 JSON 中修正。" type="warning" :closable="false"/>
             <template v-else>
-              <template v-if="listTab === 'models' || listTab === 'custom_nodes'"><el-form-item v-if="lock" label="ComfyUI 提交哈希"><el-input :disabled="readonly || !available" :model-value="text(lock, 'comfy_commit')" aria-label="ComfyUI 提交哈希" @update:model-value="put(lock, 'comfy_commit', $event)"/></el-form-item><p class="form-help">填入已核对的版本和文件信息；此处不会下载模型或安装节点。</p></template>
+              <template v-if="!apiOnly && (listTab === 'models' || listTab === 'custom_nodes')"><el-form-item v-if="lock" label="ComfyUI 提交哈希"><el-input :disabled="readonly || !available" :model-value="text(lock, 'comfy_commit')" aria-label="ComfyUI 提交哈希" @update:model-value="put(lock, 'comfy_commit', $event)"/></el-form-item><p class="form-help">填入已核对的版本和文件信息；此处不会下载模型或安装节点。</p></template>
               <p v-if="listTab === 'bindings'" class="form-help">参数 → 节点输入。必需绑定及图连通性由冻结校验核对。</p>
               <p v-if="listTab === 'runtime_profiles'" class="form-help">修改画像标识、GPU 或预算会清除该条草稿的测量/批准引用。运行批准需在渠道验证中另行完成。</p>
               <article v-for="entry in shown" :key="entry.index" class="manifest-entry" :data-entry="listTab" :data-index="entry.index">

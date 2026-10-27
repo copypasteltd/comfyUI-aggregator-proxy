@@ -3,6 +3,7 @@
 ## 2026-10-28 · 122 · Explicit HTTP Worker and selected workflow packaging
 
 - 增加纯 HTTP 渠道、原生 Linux Worker、明确 API 依赖声明与回执模式隔离、稳定下载及前缀恢复，不要求 5070 安装 Windows-MCP，不批量发布不完整工作流。
+- Admin 模型依赖、API 版本和节点目录支持明确的 API-only 表单；保留本地主机依赖字段并复用青柠组件。
 - Add opt-in HTTP execution, Linux resource observation and process locking, bounded durable output collection, contract/client updates and deployment examples. Real publication and generation outcomes are recorded in [122](docs/122-RTX5070纯HTTP接入与调用验证.md); original source-file cleanup remains a design.
 
 ## 2026-10-28 · 121 · Source cleanup after durable Worker handoff — design
