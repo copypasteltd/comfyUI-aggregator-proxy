@@ -1,0 +1,143 @@
+{
+  "format_version": 1,
+  "increment": 121,
+  "at": "2026-10-27T18:54:10.619723+00:00",
+  "scope": "Design and offline documentation checks only; source cleanup is neither implemented nor deployed.",
+  "passed_offline_checks": true,
+  "documentation_checks": {
+    "markdown": {
+      "documents": 127,
+      "instruction_files": 1,
+      "fenced_blocks": 67,
+      "json_examples": 21,
+      "yaml_examples": 1,
+      "local_links_checked": 2616
+    },
+    "contracts": {
+      "json_files": 71,
+      "schemas": 63,
+      "fixtures": 1037,
+      "positive_fixtures": 248,
+      "negative_fixtures": 789,
+      "capabilities_covered": [
+        "image_to_image",
+        "references_to_image",
+        "references_to_video",
+        "text_to_audio",
+        "text_to_image",
+        "text_to_video"
+      ]
+    },
+    "state_machine": {
+      "states": 16,
+      "terminal_states": 4,
+      "transitions": 64,
+      "guards": 24
+    },
+    "endpoints": {
+      "total": 191,
+      "by_identity": {
+        "service": 27,
+        "admin_login": 1,
+        "admin": 121,
+        "worker": 12,
+        "gateway": 28,
+        "monitoring": 2
+      },
+      "admin_permissions": 25
+    },
+    "traceability": {
+      "rules": 32,
+      "quality_scenarios": 18,
+      "work_packages": 15,
+      "requirements": 73,
+      "work_package_statuses": {
+        "in_progress": 15
+      },
+      "admin_acceptance_mapped": 16,
+      "key_acceptance_mapped": 12
+    },
+    "development_evidence": {
+      "passed": true,
+      "requirements": 73,
+      "acceptance_gates": 98,
+      "local_statuses": {
+        "framework": 6,
+        "implemented": 67
+      },
+      "named_test_references": 159,
+      "baseline_python_cases": 3593,
+      "reports": 25,
+      "current_source_files": 177,
+      "full_acceptance": "pending"
+    },
+    "topic_presence": {
+      "checks": 14,
+      "scope": "Text presence only, not proof of correctness"
+    }
+  },
+  "readme_checks": {
+    "passed": true,
+    "entry_documents": 7,
+    "local_links_checked": 585,
+    "full_python_suite_rerun": false,
+    "runtime_protocol_changed": false
+  },
+  "initial_documentation_failure": "Missing required 0.4.0 contract version; initial report and initial policy/source review preserved. Corrected metadata only.",
+  "artifacts": [
+    {
+      "path": "docs/121-ComfyUI原始产物移交即清理设计.md",
+      "sha256": "d7c22dee1f200a5f5e0c244b2964527a00a44c725c559a00e727d654bfeda02f"
+    },
+    {
+      "path": "docs/contracts/comfy-source-cleanup-policy.json",
+      "sha256": "2a38138b254127e454f96b96cdd0ebfbb04151091faac780ff5ef02f7109946f"
+    },
+    {
+      "path": "README.md",
+      "sha256": "7fb268b626d09ab72e9ab4c002ef18d8a6fa29c26a0373853b768d23bd14da18"
+    },
+    {
+      "path": "README.en.md",
+      "sha256": "7aa6fa612876a3a27c37d024822a03625a2a1992a5ba60868ea7824bdd907277"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "21cc8cd9b829a6426ec35e66249e3460ebb64f8d89e151dc73486c23b355dfa9"
+    },
+    {
+      "path": "docs/contracts/development-evidence.json",
+      "sha256": "dd541c729012a8f280c8189cb9d171b62f3fb452c20c9a866cbd07ae566afb62"
+    },
+    {
+      "path": "docs/evidence/2026-10-28/comfy-source-cleanup-design-121.json",
+      "sha256": "3699999a73f1951d4e8cd7dbb78f6c6e6ae543f3ab5bf433b46c6941a9df919c"
+    },
+    {
+      "path": "docs/evidence/2026-10-28/source-cleanup-docs-initial-121.json",
+      "sha256": "0f612d9c20d72bf5a5714ee76fc45884a96396d4355b52c739317304aa66b793"
+    },
+    {
+      "path": "docs/evidence/2026-10-28/source-cleanup-docs-final-121.json",
+      "sha256": "777fd4b6dcce451ed79a91b09f82140cf8cb31a6f4dd49d7e506fc0257df2915"
+    },
+    {
+      "path": "docs/evidence/2026-10-28/source-cleanup-trace-final-121.json",
+      "sha256": "94c8c9b7b19a6141d46085d83454f57f0378db8676edc2bb5854425f9a9a6b2c"
+    },
+    {
+      "path": "docs/evidence/2026-10-28/readme-source-cleanup-design-121.json",
+      "sha256": "e065fd7ad5748d20f32b8023d3c33424f64d0030a1102f399cdc4c9bf638ab70"
+    }
+  ],
+  "application_changes": false,
+  "runtime_protocol_registered": false,
+  "runtime_tests_run": false,
+  "production_changed": false,
+  "source_files_deleted": 0,
+  "browser_resources_created": 0,
+  "virtualization_used": false,
+  "new_development_items": 8,
+  "runtime_acceptance_groups_pending": 10,
+  "full_acceptance": "pending"
+}

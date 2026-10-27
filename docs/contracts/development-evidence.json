@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 120,
+  "increment": 121,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-28/development-trace-baselines-120.json",
-    "sha256": "8de3e582af019953e8f5bcddb65a6a4bbd25fd14b5afdc1ef75ec9286fc98ea6"
+    "path": "docs/evidence/2026-10-28/development-trace-baselines-121.json",
+    "sha256": "8b4c7aa0da2f26535f2ae9277f4454d0f6bd36ee705fdcb58e40d12a6a6db118"
   },
   "requirements": [
     {
@@ -2544,7 +2544,7 @@
         "42",
         "69"
       ],
-      "limitation": "清理与保护已有测试；实际保留值、容量预算及备份未落实。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。 112 已以真实 PG 未决输入发布锁等待、回滚、失败查询和重复清理验证精确版本保护；外部删除不持有数据库连接，真实 S3/设备故障出口仍开放。 119 已验证八小时云端输出保留、受控时钟到期回收及历史回填；实际服务器运行观察另记，完整目标不提升。"
+      "limitation": "清理与保护已有测试；实际保留值、容量预算及备份未落实。 110 已以真实 PG 提交后故障和未提交事务锁等待验证输出版本保护、原错误保留及唯一恢复；对象存储为原生文件夹具，真实 S3/物理故障出口仍开放。 112 已以真实 PG 未决输入发布锁等待、回滚、失败查询和重复清理验证精确版本保护；外部删除不持有数据库连接，真实 S3/设备故障出口仍开放。 119 已验证八小时云端输出保留、受控时钟到期回收及历史回填；实际服务器运行观察另记，完整目标不提升。 121 新增 ComfyUI 原文件移交到 Worker 后立即请求清理的设计，SRC-01～08 与 SC-01～10 均待实现/实测；现有 implemented 状态不覆盖本次新增源清理，线上尚未启用。"
     },
     {
       "id": "DATA-09",

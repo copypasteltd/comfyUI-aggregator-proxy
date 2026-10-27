@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[121 · Delete ComfyUI originals after durable handoff](docs/121-ComfyUI原始产物移交即清理设计.md): once copy 01 reaches Worker spool 02 with complete size/SHA-256 verification, fsync and a committed recovery package, request deletion through a dedicated ComfyUI endpoint immediately, without waiting for cloud copy 03. Restrict deletion to the owning task and retry independently. Keep existing spool retention of one hour after cloud acknowledgement and cloud retention of eight hours after success. **Design only: the extension, Worker recovery changes and production activation remain pending; originals are still retained online.** The specification includes eight development items, ten acceptance groups and a machine-readable policy.
+
 [120 · Reference generation and exact dimensions](docs/120-参考能力发布与精确尺寸验证.md) is complete: publish four new aliases for image editing, two-image generation, first-frame video and two-image video. Add controlled `720x1080` presets to existing text image/video aliases while preserving their defaults. Six Workflows each pass one real validation and one separate business API call, including physical media probes, SHA-256, HEAD, Range and idempotent replay. Nine invalid-input/access-isolation checks pass. The Admin has seven published aliases; each business Key discovers only its authorized, runnable subset.
 
 ![Actual reference-generation Admin](docs/media/reference-capabilities-120/admin-reference.gif)

@@ -4,6 +4,7 @@
 
 | 文件 | 作用与边界 |
 | --- | --- |
+| [comfy-source-cleanup-policy.json](./comfy-source-cleanup-policy.json) | 121 的设计决策：01→02 持久移交后立即清理、内部拟定端点、许可条件、预算和待开发/验收编号；design_only，尚无运行 DTO、已实现接口或生产启用，不纳入现行 Worker 事件协议 |
 | [job-create.schema.json](./job-create.schema.json) | 原生 `/v1/jobs` 请求的封闭字段、五类输入和参数形状；具体模型规格仍由发布包限制 |
 | [job-retry.schema.json](./job-retry.schema.json) | 同任务内部重试的次数、固定上限、可空下次时间和受控原因；不代替提交/停止证据与事务检查 |
 | [dispatch-policy.schema.json](./dispatch-policy.schema.json) | 租户预计服务成本与等待老化的固定调度规则，Admin 只读公开；不代表客户收费、真实 GPU 时间或精确排队位置 |

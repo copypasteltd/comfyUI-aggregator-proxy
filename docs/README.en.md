@@ -1,5 +1,7 @@
 # Documentation index
 
+[121 · ComfyUI source cleanup after durable handoff](121-ComfyUI原始产物移交即清理设计.md): immediately request original-file cleanup after the complete verified spool package and recovery intent commit, independently of cloud upload. Specify the restricted extension, spool-first recovery, bounded retries, eight pending development items and ten acceptance groups. Design only; production originals are still retained and Worker/cloud retention stays as documented.
+
 [120 · Reference generation and exact dimensions](120-参考能力发布与精确尺寸验证.md): four reference modes are published; existing text image/video aliases gain 720×1080. Seven aliases, six real validations, six business calls and nine negative checks are recorded with [actual media](media/reference-capabilities-120/README.md). Crop semantics, restart recovery, eight-hour retention and remaining acceptance boundaries are explicit.
 
 [119 · Eight-hour cloud media retention](119-云端产物八小时保留.md): published image, video and audio outputs expire **8 hours after successful job completion**. New downloads are denied at expiry and GC deletes the exact object version. Save required files before expires_at. Existing outputs are shortened to the same deadline; completion replay never renews it. Worker spool retention remains one hour after cloud acknowledgement; ComfyUI originals and client downloads are managed separately. See the linked deployment and validation record.

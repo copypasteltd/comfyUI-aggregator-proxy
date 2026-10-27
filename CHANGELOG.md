@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 2026-10-28 · 121 · Source cleanup after durable Worker handoff — design
+
+- 固定 01→02 完整校验、fsync、产物包与删除意图同事务提交后立即请求清理的方案，不等待云端上传或 complete。记录现有非 uploading 恢复分支仍依赖原文件的缺口，要求先补齐 02 优先恢复再启用删除。
+- Define a bounded, authenticated ComfyUI extension, exact task/file ownership, restart-safe intents, independent retries and safe filesystem deletion. Preserve Worker/cloud retention, document cache coverage, and add eight pending development items plus ten acceptance groups in [121](docs/121-ComfyUI原始产物移交即清理设计.md). Documentation/design only: no cleanup implementation, production deletion, deployment or new runtime acceptance is claimed.
+
 ## 2026-10-28 · 120 · Reference capabilities and exact output sizes
 
 - 恢复带既有 HTTP UUID 兼容入口的 Admin 静态发布 `admin-20261028.120.1`，修复 119 部署带入旧资产导致普通 HTTP 登录失败的回归；45 文件核对、2 个既有 UUID 测试及真实 HTTP 浏览器复验单独记录，后端和 Worker 包不变。

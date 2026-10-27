@@ -1,0 +1,147 @@
+{
+  "format_version": 1,
+  "increment": 121,
+  "at": "2026-10-27T18:52:25.118807+00:00",
+  "scope": "Design/source review only; no runtime feature tests, filesystem deletions or production changes.",
+  "base_git_commit": "10facf3c4378c615c3bd47c753cdc0c93939baae",
+  "tracked_application_changes": [],
+  "status": "design_only",
+  "implemented": false,
+  "deployed": false,
+  "audited_local_sources": [
+    {
+      "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
+      "sha256": "789596006fc99d837f111ac23ff61821e431209d3a65f08f8a7baab158a86ab3",
+      "anchors": [
+        {
+          "marker": "os.fsync(outgoing.fileno())",
+          "line": 91
+        },
+        {
+          "marker": "confirmed.digest() != digest.digest()",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "path": "app/apps/windows_worker/src/windows_worker/journal.py",
+      "sha256": "09d93f6481e46b43139f53770474b09650150a2ef17b7416fe58ff9fa0a59428",
+      "anchors": [
+        {
+          "marker": "PRAGMA synchronous=FULL",
+          "line": 56
+        },
+        {
+          "marker": "def save_outputs(",
+          "line": 256
+        },
+        {
+          "marker": "def cleanup_outputs(",
+          "line": 279
+        }
+      ]
+    },
+    {
+      "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
+      "sha256": "fa2366f8a096ba7a00d5e2e4a9e54bef62935236511caafa07299ae21f2f517d",
+      "anchors": [
+        {
+          "marker": "if self.claim.get(\"resume_state\") == \"uploading\":",
+          "line": 176
+        },
+        {
+          "marker": "self.worker.journal.save_outputs(self.aid,",
+          "line": 251
+        },
+        {
+          "marker": "await self.emit(\"outputs_collected\",",
+          "line": 252
+        },
+        {
+          "marker": "self.worker.journal.stage(self.aid, \"uploading\")",
+          "line": 255
+        },
+        {
+          "marker": "files, specs = await self.collect(history, local)",
+          "line": 244
+        }
+      ]
+    }
+  ],
+  "upstream_tag": "v0.42.1",
+  "upstream_sources": [
+    {
+      "url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/v0.42.1/server.py",
+      "review_method": "official pinned source retrieved and read through web tool",
+      "reviewed_markers": [
+        "@routes.post(\"/history\")",
+        "@routes.post(\"/free\")"
+      ],
+      "native_download_sha256": null
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/v0.42.1/app/assets/api/routes.py",
+      "review_method": "official pinned source retrieved and read through web tool",
+      "reviewed_markers": [
+        "async def delete_asset_route("
+      ],
+      "native_download_sha256": null
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/v0.42.1/app/assets/services/asset_management.py",
+      "review_method": "official pinned source retrieved and read through web tool",
+      "reviewed_markers": [
+        "def delete_asset_reference(",
+        "if is_core_preview:"
+      ],
+      "native_download_sha256": null
+    }
+  ],
+  "official_custom_routes": "https://docs.comfy.org/development/comfyui-server/comms_routes",
+  "reviewed_facts": [
+    "Existing copy_output flushes and fsyncs the spool file, rereads its hash and checks source stability.",
+    "Existing journal uses SQLite WAL and synchronous FULL.",
+    "Only the uploading resume branch directly uses the durable output package; other resume stages can still collect source files.",
+    "save_outputs precedes cloud outputs_collected acknowledgement and the local uploading stage transition.",
+    "Pinned ComfyUI history/free operations do not delete generated original media bytes.",
+    "Pinned Assets ordinary-reference deletion does not guarantee ordinary output-file removal."
+  ],
+  "policy": {
+    "path": "docs/contracts/comfy-source-cleanup-policy.json",
+    "sha256": "2a38138b254127e454f96b96cdd0ebfbb04151091faac780ff5ef02f7109946f"
+  },
+  "pending_development_items": [
+    "SRC-01",
+    "SRC-02",
+    "SRC-03",
+    "SRC-04",
+    "SRC-05",
+    "SRC-06",
+    "SRC-07",
+    "SRC-08"
+  ],
+  "pending_acceptance_groups": [
+    "SC-01",
+    "SC-02",
+    "SC-03",
+    "SC-04",
+    "SC-05",
+    "SC-06",
+    "SC-07",
+    "SC-08",
+    "SC-09",
+    "SC-10"
+  ],
+  "runtime_acceptance": "not_run",
+  "production_deletion_performed": false,
+  "production_runtime_changed": false,
+  "source_fetch_note": "Two native source-download attempts (direct and configured environment) encountered connection resets before any report was written. Use the already successful web-tool review of pinned official sources; do not claim downloaded source hashes or runtime tests.",
+  "browser_opened": false,
+  "virtualization_used": false,
+  "previous_source_review": {
+    "path": "docs/evidence/2026-10-28/source-cleanup-review-initial-121.json",
+    "sha256": "cfba02e199bf89849b83a641f98c8a7adf1e719c39da1d4e08b229c685c51a71"
+  },
+  "documentation_failure_preserved": "docs/evidence/2026-10-28/source-cleanup-docs-initial-121.json",
+  "documentation_correction": "Add the required 0.4.0 design contract version; no runtime protocol registered or changed."
+}
