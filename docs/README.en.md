@@ -1,5 +1,7 @@
 # Documentation index
 
+[118 · Actual dual-GPU onboarding](118-双GPU真实ComfyUI接入.md): two native Windows GPUs, two channels, 241 candidate drafts, 51 model-file registrations and three published models verified through actual image/video/audio generation. All 588 related regression cases and eight Admin page/viewport checks pass. [Actual media](media/comfy-onboarding-118/README.md) is available. The third endpoint, reference modes, specialized Workflows, fleet capacity, gateway runtime and full acceptance remain pending.
+
 [117 · Native ZeroTier and private-network access](117-ZeroTier原生客户端与私网接入.md): installation, startup, controller authorization and address assignment are complete. Actual cross-machine HTTP/SSH pass, existing routes/DNS and services remain intact. Public evidence excludes full network topology and secret files.
 
 [115 · Native Linux deployment and disk cleanup](115-Linux服务器部署与磁盘清理.md) / [116 · HTTP entry and unrestricted origins](116-HTTP高位入口与任意来源访问.md): native PostgreSQL 18, private S3 and systemd services are deployed on plain HTTP port 39443 with unrestricted origins. All 309 related Python tests, two UUID tests, 55 final public checks and six browser page/viewport checks pass. [Actual deployment media](media/linux-deployment-116/README.md) is available. Cleanup reclaims about 3.43 GiB across two passes; actual generation and complete-product acceptance remain pending.

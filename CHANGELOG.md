@@ -2,8 +2,9 @@
 
 ## 2026-10-27 · 118 · Real ComfyUI onboarding
 
-- 按用户授权核对并接入两台现有原生 Windows / ComfyUI；沿用 ZeroTier 和普通 HTTP 部署。
-- Add explicit Worker HTTP opt-in, disabled by default. Keep canonical origin identity, native process exclusion and journal binding; 52 startup protocol cases pass. Real registration, Workflow and generation evidence is tracked in document 118 as onboarding proceeds.
+- 已接入两台原生 Windows ComfyUI / 独立自动启动 Worker，2 条正式渠道、241 个候选草稿和 51 个模型文件登记；文生图、文生视频、音乐三个模型经真实任务与内容交付批准发布，另验证实际业务 Key 异步生图、幂等、下载与撤销。第三台指定设备仍超时待接入。
+- Worker 增加显式 HTTP opt-in、固定本地 Git 和 Windows history 相对目录兼容；默认权限、身份互斥、journal 与路径边界保留。588 项相关回归和 17 个 Worker 源文件 Mypy 通过，实际后台 8 个页面/尺寸检查通过。清理本轮分发缓存约 700 MB，双语说明、截图、原速 MP4、GIF 及去除内嵌元数据的真实样本已同步。
+- Connect two physical native Windows GPUs and publish three verified image/video/audio aliases. Keep 238 other candidates unpublished and 54 exports blocked pending their requirements; do not promote complete-product acceptance. Document actual generation/download evidence separately from component tests and historical fixtures, stop temporary distribution services and disable the temporary business Key. Reference modes, the third device, model quality, 10–20 machines, custom Sub2API integration and full recovery remain pending.
 
 ## 2026-10-27 · 117 · ZeroTier private-network access
 

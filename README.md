@@ -1,6 +1,18 @@
 # ComfyUI Aggregator Proxy
 
-[118 · 双 GPU ComfyUI 接入](docs/118-双GPU真实ComfyUI接入.md) 正在执行：已核对两台真实设备、现有 ComfyUI 进程与空闲队列，服务器已能通过私网访问。Worker 新增默认关闭的 `allow_http`，仅显式开启后允许 HTTP 控制源，仍保留节点互斥、journal 身份和凭据校验；52 项启动协议检查通过。实际节点、Workflow 发布和生成验证结果在接入完成后单独记录。
+[118 · 双 GPU 真实接入](docs/118-双GPU真实ComfyUI接入.md) 已完成两台 Windows 的 ComfyUI / Worker 接入：2 条启用渠道、241 个候选 Workflow 草稿、51 个模型文件登记，3 个模型经实际生成、S3 回传和鉴权下载后批准发布。588 项相关回归、8 个后台页面/尺寸检查通过；第三台设备仍连接超时。图生图、参考生成、专用 Workflow、10～20 台容量与完整首版验收继续开放。
+
+![实际接入后的 Admin：双 GPU 渠道、模型、Workflow 和任务](docs/media/comfy-onboarding-118/admin-onboarding.gif)
+
+管理入口使用已部署的普通 HTTP 高位端口，后续域名反代由部署者配置。Admin 可编辑渠道、浏览 Windows 导出目录、维护草稿/冻结版本/模型路由、观察排队并管理多个业务 API Key。业务流程为：选择下表模型 → 给 Key 授权模型/发布版本/渠道与额度 → 异步提交 → 查询任务 → 带同一 Key 下载。具体请求和启动配置见 [118 使用说明](docs/118-双GPU真实ComfyUI接入.md)，[真实截图、录屏与生成样本](docs/media/comfy-onboarding-118/README.md) 与历史合成演示分别标记。
+
+| 已发布模型 | 实际设备 | 验证规格 | API |
+| --- | --- | --- | --- |
+| `comfy-3080-image-lustify-krea2` | RTX 3080 | 1024×1024 PNG | `/v1/images/generations/async` 或 `/v1/jobs` |
+| `comfy-4090-video-h3` | RTX 4090 | 864×480、约 5.167 秒 MP4 | `/v1/videos` 或 `/v1/jobs` |
+| `comfy-3080-music-yue2` | RTX 3080 | 最长 30 秒、48 kHz 双声道 FLAC | `/v1/jobs`，`text_to_audio` |
+
+以上是三个规格的真实链路样本，不是全部 Workflow、所有质量规格或完整产品验收。295 个既有文件已导出 API 图；241 个可整理为候选草稿，54 个仍缺模型、专用输入/绑定或属于未支持的 3D 输出。除三个已验证冻结版本外，其余 238 个候选不对外发布。
 
 [117 · ZeroTier 私网接入](docs/117-ZeroTier原生客户端与私网接入.md)：服务器已原生安装 ZeroTier 1.16.2 并设为开机启动；用户授权后，指定网络状态 `OK`、已分配地址。已从同网 Windows 实测私网 HTTP 39443 与 SSH，默认路由和 DNS 保持，安装前 64 个运行服务均 active。节点与地址单独交付，不公开网络拓扑；真实 ComfyUI / Worker 接入仍待后续配置。
 
@@ -32,7 +44,7 @@
 
 本项目内部服务名为 **Render Control**。它由可视化 Admin、持久化任务控制面、Windows Worker 和 Sub2API 集成组成。图像、视频、音频均来自 ComfyUI Workflow；音频不另接一套外部生成服务。
 
-**当前状态：开发中，Linux 管理面已部署。** 原生 Windows 本地实现、协议测试和隔离候选安装已有记录；Linux 的真实 PostgreSQL、私有 S3、systemd 服务和数据库归档已分别验证。真实 Workflow、模型质量、Windows 服务与 10～20 台实机容量、定制网关联合运行和完整灾备尚未完成验收。素材分别标记实际部署空后台与本地合成演示，不代表真实 GPU 生成或生产压测结果。
+**当前状态：持续开发，Linux 服务及两台 Windows GPU 已部署。** 三类文生图/视频/音频真实链路已通过；多参考与图生图的真实验收、全部专用 Workflow、模型质量、10～20 台容量、定制 Sub2API 联合运行及完整灾备继续开放。历史记录按其时点阅读，当前结果以上方 118 为准。
 
 [107 · 最终产物结构与 Worker 隔离](docs/107-ComfyUI最终产物结构与Worker隔离.md) 已完成错误 history 的受控拒绝及恢复隔离竞争修复，包含失败任务仍在清理的时序窗口。248 加强专项、完整 16 门禁/4265 Python、30 原生场景及 rc-20261026.107.1 的 29 安装/10 浏览器检查通过；647 CI/275 原生/525 候选来源匹配 75db9a0，实际 Worker 元数据/运行时 wheel 字节一致。90/12/1 原失败保留，所属临时资源已清理；17/23/43/55/60 的真实环境出口、69 待办及完整生产验收保持开放。
 

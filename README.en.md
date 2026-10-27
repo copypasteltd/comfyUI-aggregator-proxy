@@ -1,6 +1,18 @@
 # ComfyUI Aggregator Proxy
 
-[118 · Two real GPU ComfyUI nodes](docs/118-双GPU真实ComfyUI接入.md) is in progress. Both existing native ComfyUI processes and idle queues have been checked, and the server can reach them over the private network. Worker `allow_http` defaults to false; explicit opt-in permits an HTTP control origin while preserving node exclusion, journal identity and credentials. All 52 startup protocol checks pass. Node registration, Workflow publication and generation results will be recorded separately after onboarding.
+[118 · Two real Windows GPUs](docs/118-双GPU真实ComfyUI接入.md) are connected: two enabled ComfyUI channels, 241 candidate Workflow drafts, 51 model-file registrations, and three published models approved after actual generation, S3 delivery and authenticated downloads. All 588 related regression cases and eight Admin page/viewport checks pass. The third requested endpoint still times out. Reference generation, specialized Workflows, 10–20 physical machines and complete-product acceptance remain pending.
+
+![Actual Admin after GPU onboarding: channels, models, Workflows and jobs](docs/media/comfy-onboarding-118/admin-onboarding.gif)
+
+The deployed entry remains plain HTTP on a high port; the operator can add a domain reverse proxy. Admin manages channel addresses, Windows export catalogs, drafts/releases, model routes, queues and multiple business API Keys. Select a model below, authorize its alias/release/channel and quotas for a Key, submit asynchronously, poll the job and download using the same Key. See [configuration and request examples](docs/118-双GPU真实ComfyUI接入.md) and [actual screenshots, recording and generated samples](docs/media/comfy-onboarding-118/README.md), distinguished from historical synthetic demos.
+
+| Published model | Actual GPU | Verified specification | API |
+| --- | --- | --- | --- |
+| `comfy-3080-image-lustify-krea2` | RTX 3080 | 1024×1024 PNG | `/v1/images/generations/async` or `/v1/jobs` |
+| `comfy-4090-video-h3` | RTX 4090 | 864×480, about 5.167 seconds MP4 | `/v1/videos` or `/v1/jobs` |
+| `comfy-3080-music-yue2` | RTX 3080 | Up to 30 seconds, 48 kHz stereo FLAC | `/v1/jobs`, `text_to_audio` |
+
+These are three verified specifications, not approval of every Workflow or quality preset. All 295 existing files were exported as API graphs: 241 candidate drafts were registered and 54 need missing models, specialized inputs/bindings or unsupported 3D outputs. The other 238 candidates remain unpublished.
 
 [117 · ZeroTier private-network access](docs/117-ZeroTier原生客户端与私网接入.md): native ZeroTier 1.16.2 is running with startup enabled. After the user's controller authorization, the requested network reports `OK` and assigns an address. Actual HTTP on port 39443 and SSH pass from another Windows member; default routes and DNS remain intact, and all 64 services running before installation remain active. Node/address details are delivered privately; actual ComfyUI and Worker registration remain pending.
 
@@ -8,7 +20,7 @@
 
 ![Actual Linux HTTP Admin without registered channels or generation jobs](docs/media/linux-deployment-116/admin-http.gif)
 
-The [live deployment screenshots, original-speed MP4 and GIF](docs/media/linux-deployment-116/README.md) use the deployed database; earlier demonstrations below retain their synthetic-data labels. Start at `/admin/`, manage tenant/project scopes and multiple API Keys, then register Windows Workers, GPUs and ComfyUI channels when available. Import and synchronize image/video/audio Workflows, verify and publish model aliases, and use a Key to submit asynchronous jobs, poll status and download content. The management and content/authentication surfaces are available now; actual generation requires the pending nodes and Workflows. The initial administrator password is delivered privately and excluded from Git.
+The [live deployment screenshots, original-speed MP4 and GIF](docs/media/linux-deployment-116/README.md) use the deployed database; earlier demonstrations below retain their synthetic-data labels. Start at `/admin/`, manage tenant/project scopes and multiple API Keys, then register Windows Workers, GPUs and ComfyUI channels when available. Import and synchronize image/video/audio Workflows, verify and publish model aliases, and use a Key to submit asynchronous jobs, poll status and download content. Actual text-to-image, text-to-video and text-to-audio models are now available through the two onboarded Windows GPUs; remaining candidates and fleet acceptance are still pending. The initial administrator password is delivered privately and excluded from Git.
 
 [113 · Provider status and candidate closeout](docs/113-Provider实现状态与真实运行验收边界.md) Corrected Provider implementation status and scope while retaining runtime_integration_verified=false for unaccepted real dependencies. Source 7935b7d passes all 16 gates/4280 Python tests and 29 installation/10 browser checks of rc-20261026.113.1. All 649/525 inputs and embedded metadata match; actual Provider sources, patches and binary pass provenance guards. Reuse 30 native scenarios from 112 after all 275 inputs match; no new native execution is claimed. Local V01/V02/R05 exits from audit 114 are closed; real capabilities remain accepted at 0/6, with 69 stable exits, 98 complete gates and historical root causes open.
 
@@ -32,7 +44,7 @@ The [live deployment screenshots, original-speed MP4 and GIF](docs/media/linux-d
 
 The internal service name is **Render Control**. The system combines a visual Admin, a durable generation control plane, Windows Workers and a Sub2API integration. Images, videos and audio all come from ComfyUI Workflows; audio uses the same execution and management system.
 
-**Status: in development; the Linux management plane is deployed.** Native Windows implementation, protocol tests and isolated candidate installation have recorded verification. Actual PostgreSQL, private S3, Linux systemd services and database archives now have separate deployment evidence. Real Workflows, model quality, Windows service operation, capacity on 10–20 physical machines, joint custom-gateway operation and complete disaster recovery still require acceptance. Media explicitly distinguishes the actual empty deployment from local synthetic demonstrations; neither establishes GPU generation or production throughput.
+**Status: in development; Linux services and two native Windows GPUs are deployed.** Actual text-to-image, text-to-video and text-to-audio generation and content delivery pass. Reference modes, specialized Workflows, model quality, 10–20 physical machines, custom Sub2API integration and complete disaster recovery still require acceptance. Historical records retain their original scope; increment 118 above describes the current deployment and actual generated samples.
 
 [107 · Final output metadata and Worker isolation](docs/107-ComfyUI最终产物结构与Worker隔离.md) fixes controlled rejection of malformed history and recovery quarantine races, including failed tasks still cleaning up. All 248 strengthened focused cases, 16 gates/4265 Python tests, 30 native scenarios and 29 installation/10 browser checks of rc-20261026.107.1 pass. All 647 CI/275 native/525 candidate inputs and actual Worker metadata/runtime wheel bytes match 75db9a0. Preserve the 90/12/1 failed reproductions and clean up owned temporary resources. Real-resource exits 17/23/43/55/60, all 69 remaining items and full production acceptance stay open.
 

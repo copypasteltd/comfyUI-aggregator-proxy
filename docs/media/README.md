@@ -1,5 +1,7 @@
 # 演示素材 / Demonstration media
 
+[118 · 实际双 GPU 接入 / Actual two-GPU onboarding](comfy-onboarding-118/README.md)：当前两台 Windows、正式渠道与已发布生图/视频/音频模型的截图、原速录屏、GIF 和真实生成样本；后续各历史素材保持其原合成或空后台边界。
+
 [中文项目入口](../../README.md) · [English project entry](../../README.en.md)
 
 新增 [116 · 实际 Linux HTTP 后台](linux-deployment-116/README.md)：6 张截图、13.84 秒原速 MP4 和 GIF，来自已部署服务的空业务数据库，未注入 fixture，未进行真实 ComfyUI / GPU 生成。下面各节及原根目录 manifest 继续描述历史本地合成演示数据，不能把两组数据状态混用。

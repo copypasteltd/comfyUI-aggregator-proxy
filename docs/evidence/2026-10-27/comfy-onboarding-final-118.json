@@ -1,0 +1,102 @@
+{
+  "format_version": 1,
+  "at": "2026-10-27T01:53:37.640300+00:00",
+  "passed": true,
+  "kind": "actual_two_gpu_onboarding_closeout",
+  "worker_source_revision": "4a5dfcef573095ce63ba8b970b9a0c774e6e79f1",
+  "worker_release": "rc-20261027.118.3",
+  "worker_archive_sha256": "cc6c1d7ea3ac994ec350ebc3eee93fd6dcc06821128a535c1e8e171cad84a109",
+  "online_physical_windows": 2,
+  "enabled_verified_channels": 2,
+  "source_workflows": 295,
+  "candidate_workflow_drafts": 241,
+  "drafts_without_runtime_approval": 238,
+  "blocked_workflow_exports": 54,
+  "registered_model_files": 51,
+  "published_models": [
+    "comfy-4090-video-h3",
+    "comfy-3080-music-yue2",
+    "comfy-3080-image-lustify-krea2"
+  ],
+  "real_capability_types": [
+    "text_to_image",
+    "text_to_video",
+    "text_to_audio"
+  ],
+  "catalogs": [
+    {
+      "device": "3080",
+      "directory": "api",
+      "status": "succeeded",
+      "entries": 8
+    },
+    {
+      "device": "3080",
+      "directory": "manifests",
+      "status": "succeeded",
+      "entries": 5
+    },
+    {
+      "device": "4090",
+      "directory": "api",
+      "status": "succeeded",
+      "entries": 3
+    },
+    {
+      "device": "4090",
+      "directory": "manifests",
+      "status": "succeeded",
+      "entries": 3
+    }
+  ],
+  "business_image_job": {
+    "id": "job_240f2e0ed8e944269f06f971ae57486f",
+    "status": "succeeded",
+    "bytes": 1105196,
+    "sha256": "688213967df8d178ec0b19381d1287b478582cbc87fa3e10373d966ea394ad7a"
+  },
+  "checks": [
+    {
+      "name": "Business OpenAI-style async image job completes with exact downloaded digest",
+      "passed": true
+    },
+    {
+      "name": "Business output HEAD",
+      "passed": true
+    },
+    {
+      "name": "Business output Range",
+      "passed": true
+    },
+    {
+      "name": "Temporary verification Key disabled and rejected immediately",
+      "passed": true
+    },
+    {
+      "name": "Generated business content rejects anonymous download",
+      "passed": true
+    }
+  ],
+  "temporary_business_key_disabled": true,
+  "temporary_upload_deletion_requested": true,
+  "full_goal_accepted": false,
+  "remaining": [
+    "Third requested endpoint is unreachable from both network locations; device management access is pending.",
+    "Reference image/video modes and specialised candidate Workflows still need inputs, dependency and runtime validation.",
+    "Model quality, fleet capacity of 10-20 physical machines, gateway integration and full disaster recovery remain pending."
+  ],
+  "reports": {
+    "components": {
+      "path": "docs/evidence/2026-10-27/worker-onboarding-component-118-final.json",
+      "sha256": "f0511d9b128e91f9c1bada1b6e7aa5f62c52ab952e6820968f181ba624d00f1b"
+    },
+    "real_generation": {
+      "path": "docs/evidence/2026-10-27/comfy-real-delivery-118.json",
+      "sha256": "7a547f14740afa4aebfc94962855ae97cd647a7d4eb1bc5fc029fbee3117bf45"
+    },
+    "browser": {
+      "path": "docs/evidence/2026-10-27/comfy-admin-browser-118.json",
+      "sha256": "97131d72de914c6bd75c8b4dcf1482c6f5be201c02e78890afefc56124b2bb74"
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "format_version": 1,
+  "at": "2026-10-27T01:44:47.011827+00:00",
+  "passed": true,
+  "kind": "actual_dual_windows_comfyui_generation_delivery",
+  "application_source": "4a5dfcef573095ce63ba8b970b9a0c774e6e79f1",
+  "worker_release": "rc-20261027.118.3",
+  "cloud_release": "linux-20261027.116.2",
+  "approved_capability_samples": 3,
+  "full_goal_accepted": false,
+  "capability_boundary": "Text-to-image, text-to-video and text-to-audio complete real samples only; reference modes, output quality, 10-20 physical machines, gateway runtime and full disaster recovery remain unaccepted.",
+  "checks": [
+    {
+      "name": "image complete artifact download",
+      "passed": true
+    },
+    {
+      "name": "image authenticated HEAD",
+      "passed": true
+    },
+    {
+      "name": "image exact byte Range",
+      "passed": true
+    },
+    {
+      "name": "audio complete artifact download",
+      "passed": true
+    },
+    {
+      "name": "audio authenticated HEAD",
+      "passed": true
+    },
+    {
+      "name": "audio exact byte Range",
+      "passed": true
+    },
+    {
+      "name": "video complete artifact download",
+      "passed": true
+    },
+    {
+      "name": "video authenticated HEAD",
+      "passed": true
+    },
+    {
+      "name": "video exact byte Range",
+      "passed": true
+    },
+    {
+      "name": "Business API Key discovers only its three approved model aliases",
+      "passed": true
+    },
+    {
+      "name": "Authenticated capability discovery",
+      "passed": true
+    },
+    {
+      "name": "Business API Key cannot access Admin",
+      "passed": true
+    },
+    {
+      "name": "Owner-only Key cannot download another validation identity output",
+      "passed": true
+    },
+    {
+      "name": "Actual S3-backed image asset upload using business Key",
+      "passed": true
+    },
+    {
+      "name": "Input image body requires explicit content:sensitive permission",
+      "passed": true
+    },
+    {
+      "name": "Business asset authenticated content HEAD",
+      "passed": true
+    },
+    {
+      "name": "OpenAI-style async image request replay returns the same real job",
+      "passed": true
+    },
+    {
+      "name": "Missing API Key rejected",
+      "passed": true
+    },
+    {
+      "name": "Arbitrary-origin CORS preflight",
+      "passed": true
+    }
+  ],
+  "results": [
+    {
+      "alias": "comfy-3080-image-lustify-krea2",
+      "task_type": "text_to_image",
+      "job_id": "job_2956727b48554a2183702518692abaa9",
+      "release_id": "wfr_8a7078cee49b4b458be489db13b60d68",
+      "status": "succeeded",
+      "artifact_sha256": "113d714184ec8c04cdce2a5fa99e810b34576bab940eb7a67d152d8022e2bf9f",
+      "bytes": 1021719,
+      "metadata": {
+        "width": 1024,
+        "height": 1024
+      },
+      "media_file": "docs/media/comfy-onboarding-118/verification-image.png",
+      "download_200": true,
+      "head_200": true,
+      "range_206": true,
+      "public_media_sha256": "c4d2be3d7f2a914d6856cd4249e6c96e69aff6c771af340d09292d8142ef6012",
+      "public_media_bytes": 989369,
+      "public_media_metadata_removed": true
+    },
+    {
+      "alias": "comfy-3080-music-yue2",
+      "task_type": "text_to_audio",
+      "job_id": "job_b7a061671c8b4f8faf0c1c984a19a0e9",
+      "release_id": "wfr_4455b320d0f8402caf282d533e938f55",
+      "status": "succeeded",
+      "artifact_sha256": "898b7fe7ddfa544408b99f4208e49cd40b88855829de778d8bb2c2bda2f96bc5",
+      "bytes": 2422941,
+      "metadata": {
+        "codec": "flac",
+        "channels": 2,
+        "container": "flac",
+        "sample_rate": 48000,
+        "duration_milliseconds": 29952
+      },
+      "media_file": "docs/media/comfy-onboarding-118/verification-audio.flac",
+      "download_200": true,
+      "head_200": true,
+      "range_206": true,
+      "public_media_sha256": "2b558e339847e5c9b77649e01a65b10304b0194886556a341401906cdd4b6aef",
+      "public_media_bytes": 2421111,
+      "public_media_metadata_removed": true
+    },
+    {
+      "alias": "comfy-4090-video-h3",
+      "task_type": "text_to_video",
+      "job_id": "job_648a1a05ea134ea7ad91871ea821a579",
+      "release_id": "wfr_213c48aefed54e70a70d3ce0ba75aa41",
+      "status": "succeeded",
+      "artifact_sha256": "553af203697531b8645da10df0f103ef6fcbc4bbbff268cd88310e697fe96b05",
+      "bytes": 423786,
+      "metadata": {
+        "width": 864,
+        "height": 480,
+        "duration_milliseconds": 5166
+      },
+      "media_file": "docs/media/comfy-onboarding-118/verification-video.mp4",
+      "download_200": true,
+      "head_200": true,
+      "range_206": true,
+      "public_media_sha256": "514981e2b727fd1a91e3053717eb0b2d504985b03ab209b550e05b4cee8076f0",
+      "public_media_bytes": 420511,
+      "public_media_metadata_removed": true
+    }
+  ],
+  "business_image_job_pending": "job_240f2e0ed8e944269f06f971ae57486f",
+  "public_media_boundary": "Public sample media has embedded generation metadata removed. artifact_sha256 and bytes describe the exact authenticated download, retained privately; public_media_* describe the metadata-free copy."
+}
