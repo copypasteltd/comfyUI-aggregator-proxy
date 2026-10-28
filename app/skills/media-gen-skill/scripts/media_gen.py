@@ -74,7 +74,7 @@ class Api:
     def open(self, method, path, body=None, headers=None):
         if not path.startswith("/v1/") or path.startswith("//"):
             raise ClientError("Only the configured origin's /v1/ API is allowed")
-        req = urllib.request.Request(self.base + path, data=body, method=method,
+        req = urllib.request.Request(self.base + path, data=body, method=method,  # noqa: S310 -- constructor validates HTTP(S) origin; path is restricted above.
                                      headers={"Authorization": "Bearer " + self.key, "Accept": "application/json", "User-Agent": "media-gen-skill/1.0.0", **(headers or {})})
         try:
             return self.opener.open(req, timeout=25)
@@ -214,9 +214,9 @@ def wait_job(api, job_id, timeout, output=None):
     deadline = time.monotonic() + timeout
     while True:
         job = api.request("GET", "/v1/jobs/" + job_id)
-        if job.get("state") in TERMINAL:
-            if job["state"] != "succeeded":
-                raise ClientError("Job finished with state " + job["state"] + "; inspect status")
+        if job.get("status") in TERMINAL:
+            if job["status"] != "succeeded":
+                raise ClientError("Job finished with status " + job["status"] + "; inspect status")
             if output is not None:
                 saved = []
                 for entry in job.get("artifacts", []):
@@ -258,7 +258,7 @@ def generation_request(api, args):
     paths = args.reference or []
     if len(paths) != references.get("exact_reference_count", 0):
         raise ClientError("Model requires exactly " + str(references.get("exact_reference_count", 0)) + " --reference files in slot order")
-    for slot, file in zip(body["input"].get("references", []), paths):
+    for slot, file in zip(body["input"].get("references", []), paths, strict=True):
         slot["asset_id"] = api.upload(file)["id"]
     parameters = body.setdefault("parameters", {})
     declared = properties["parameters"]["properties"]

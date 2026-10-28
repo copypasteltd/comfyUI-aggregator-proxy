@@ -41,7 +41,7 @@ def server() -> Iterator[tuple[str, dict[str, Any]]]:
                 return
             self.send_response(202)
             self.end_headers()
-            self.wfile.write(json.dumps({"id": JOB, "state": "queued"}).encode())
+            self.wfile.write(json.dumps({"id": JOB, "status": "queued"}).encode())
 
         def do_GET(self) -> None:
             state["user_agent"] = self.headers.get("User-Agent")
@@ -57,7 +57,7 @@ def server() -> Iterator[tuple[str, dict[str, Any]]]:
             elif self.path.startswith("/v1/content/"):
                 self.wfile.write(json.dumps({"id": CONTENT, "bytes": len(PAYLOAD), "sha256": hashlib.sha256(PAYLOAD).hexdigest(), "media_type": "image/png"}).encode())
             else:
-                self.wfile.write(json.dumps({"id": JOB, "state": "succeeded", "artifacts": [{"id": CONTENT}], "note": "中文元数据"}).encode())
+                self.wfile.write(json.dumps({"id": JOB, "status": state.get("job_status", "succeeded"), "artifacts": [{"id": CONTENT}], "note": "中文元数据"}).encode())
 
     http = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
     thread = threading.Thread(target=http.serve_forever, daemon=True)
@@ -84,7 +84,7 @@ def test_lost_submission_reuses_exact_identity_and_body_then_only_polls(server: 
     result = client.resume(api, path)
     assert result["id"] == JOB
     assert state["posts"][0] == state["posts"][1]
-    assert client.resume(api, path)["state"] == "succeeded" and len(state["posts"]) == 2
+    assert client.resume(api, path)["status"] == "succeeded" and len(state["posts"]) == 2
     saved = json.loads(path.read_text("utf-8"))
     saved["request"]["model"] = "changed"
     path.write_text(json.dumps(saved), encoding="utf-8")
@@ -106,6 +106,25 @@ def test_download_verifies_and_never_overwrites_or_leaves_partial(server: Any, t
     assert target.read_bytes() == PAYLOAD
     with pytest.raises(client.ClientError, match="already exists"):
         api.download(CONTENT, target)
+
+
+def test_wait_uses_native_job_status_and_downloads_completed_artifacts(server: Any, tmp_path: Path) -> None:
+    base, state = server
+    api = client.Api(base, "synthetic-key")
+    result = client.wait_job(api, JOB, 1, tmp_path)
+    assert result["status"] == "succeeded"
+    assert len(result["downloads"]) == 1
+    assert Path(result["downloads"][0]["path"]).read_bytes() == PAYLOAD
+    assert not state["posts"]
+
+
+@pytest.mark.parametrize("status", ["failed", "cancelled", "expired"])
+def test_wait_stops_on_native_unsuccessful_terminal_status(server: Any, tmp_path: Path, status: str) -> None:
+    base, state = server
+    state["job_status"] = status
+    with pytest.raises(client.ClientError, match="status " + status):
+        client.wait_job(client.Api(base, "synthetic-key"), JOB, 1, tmp_path)
+    assert not list(tmp_path.iterdir()) and not state["posts"]
 
 
 def test_redirect_refused_and_origin_locked(server: Any, tmp_path: Path) -> None:
@@ -136,5 +155,5 @@ def test_audio_presets_fixed_encoding_does_not_require_unexposed_parameters() ->
 
 def test_cli_outputs_utf8_when_windows_redirect_encoding_is_ascii(server: Any) -> None:
     base, _ = server
-    result = subprocess.run([sys.executable, str(PATH), "--base-url", base, "models"], env=dict(os.environ, MEDIA_GEN_API_KEY="synthetic-key", PYTHONIOENCODING="ascii"), capture_output=True, timeout=10, check=True)
+    result = subprocess.run([sys.executable, str(PATH), "--base-url", base, "models"], env=dict(os.environ, MEDIA_GEN_API_KEY="synthetic-key", PYTHONIOENCODING="ascii"), capture_output=True, timeout=10, check=True)  # noqa: S603 -- checked-in client and an owned loopback fixture.
     assert json.loads(result.stdout.decode("utf-8"))["note"] == "中文元数据"

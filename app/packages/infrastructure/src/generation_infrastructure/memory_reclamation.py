@@ -200,19 +200,19 @@ class MemoryReclaimer:
         return list(session.scalars(select(Gpu).where(Gpu.id.in_({row.gpu_id for row in members})).order_by(Gpu.id).with_for_update()))
 
     @staticmethod
-    def _activity(session: Session, members: list[Channel], now: datetime, *, owned: UUID | None = None) -> tuple[bool, str]:
+    def _activity(session: Session, members: list[Channel], now: datetime, *, owned: UUID | None = None) -> tuple[bool, str, bool]:
         gpus = list(session.scalars(select(Gpu).where(Gpu.id.in_({row.gpu_id for row in members}))))
         nodes = list(session.scalars(select(Node).where(Node.id.in_({row.node_id for row in members}))))
         blocked = not gpus or not nodes or any(not node.enabled or not node.current_boot_id or not node.observed_at or node.observed_at < now - timedelta(seconds=15) for node in nodes)
-        blocked = blocked or any(row.management_hold not in (None, owned) for row in gpus)
-        blocked = blocked or bool(session.scalar(select(GpuOccupancy.gpu_id).where(GpuOccupancy.gpu_id.in_([row.id for row in gpus])).limit(1)))
+        busy = any(row.management_hold not in (None, owned) for row in gpus)
+        busy = busy or bool(session.scalar(select(GpuOccupancy.gpu_id).where(GpuOccupancy.gpu_id.in_([row.id for row in gpus])).limit(1)))
         channel_ids = [public_id("ch", row.id) for row in members]
         related = or_(*(Job.eligible_channels.contains([key]) for key in channel_ids))
-        blocked = blocked or bool(session.scalar(select(Job.id).where(related, Job.state.not_in(TERMINAL)).limit(1)))
-        blocked = blocked or bool(session.scalar(select(Attempt.id).where(Attempt.gpu_id.in_([row.id for row in gpus]), Attempt.generation_released_at.is_(None)).limit(1)))
+        busy = busy or bool(session.scalar(select(Job.id).where(related, Job.state.not_in(TERMINAL)).limit(1)))
+        busy = busy or bool(session.scalar(select(Attempt.id).where(Attempt.gpu_id.in_([row.id for row in gpus]), Attempt.generation_released_at.is_(None)).limit(1)))
         latest = session.scalar(select(func.max(Attempt.created_at)).where(Attempt.gpu_id.in_([row.id for row in gpus])))
         boots = sorted(str(node.current_boot_id) for node in nodes)
-        return blocked, fingerprint({"latest_attempt": latest.isoformat() if latest else None, "boots": boots})
+        return blocked or busy, fingerprint({"latest_attempt": latest.isoformat() if latest else None, "boots": boots}), busy
 
     def tick(self, now: datetime | None = None) -> dict[str, int]:
         now = now or utcnow()
@@ -231,9 +231,11 @@ class MemoryReclaimer:
                 policy.status, policy.idle_since = "channel_changed", None
                 return {"memory_operation_steps": 0}
             members = group(session, channel)
-            blocked, activity = self._activity(session, members, now)
+            blocked, activity, busy = self._activity(session, members, now)
             if blocked:
-                policy.idle_since, policy.released, policy.status = None, False, "busy_or_unknown"
+                if busy or policy.activity_marker != activity:
+                    policy.idle_since, policy.released = None, False
+                policy.status = "busy_or_unknown"
                 policy.activity_marker = activity
                 return {"memory_operation_steps": 0}
             base, auth = channel.base_url, self.vault.decrypt(channel.encrypted_auth) if channel.encrypted_auth else None
@@ -249,7 +251,7 @@ class MemoryReclaimer:
             with self.sessions.begin() as session:
                 policy = session.get(MemoryPolicy, identifier, with_for_update=True)
                 if policy and policy.revision == revision and not policy.active_operation_id:
-                    policy.status, policy.idle_since = "observation_unknown", None
+                    policy.status = "observation_unknown"
             return {"memory_operation_steps": 0}
         with self.sessions.begin() as session:
             self._lock_dispatch(session)
@@ -262,12 +264,13 @@ class MemoryReclaimer:
                 return {"memory_operation_steps": 0}
             members = group(session, channel)
             gpus = self._gpus(session, members)
-            blocked, activity = self._activity(session, members, now)
+            blocked, activity, database_busy = self._activity(session, members, now)
             changed = activity != policy.activity_marker or history_marker != policy.history_marker
             policy.observed_at, policy.activity_marker, policy.history_marker = now, activity, history_marker
             if blocked or busy or not supported:
                 policy.status = "busy_or_unknown" if blocked or busy else "unsupported_comfy_version"
-                policy.idle_since, policy.released = None, False
+                if database_busy or busy or not supported or changed:
+                    policy.idle_since, policy.released = None, False
             elif changed or policy.idle_since is None:
                 policy.idle_since, policy.released, policy.status = now, False, "idle_countdown"
             elif not policy.released and (now - policy.idle_since).total_seconds() >= policy.idle_seconds:
@@ -330,7 +333,7 @@ class MemoryReclaimer:
                     policy = required(session.get(MemoryPolicy, op.policy_id))
                     members = group(session, required(session.get(Channel, policy.channel_id)))
                     gpus = self._gpus(session, members)
-                    blocked, _ = self._activity(session, members, now, owned=identifier)
+                    blocked, _, _ = self._activity(session, members, now, owned=identifier)
                     safe = all(row.management_hold == identifier for row in gpus) and not blocked and policy.enabled
                     if safe:
                         op.stage, op.updated_at = "free_intent", now

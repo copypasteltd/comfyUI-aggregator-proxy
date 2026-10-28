@@ -230,3 +230,18 @@ def test_changed_origin_requires_explicit_policy_update_without_unique_conflict(
     actor, _, _ = admin_context(pg, test_settings, name="origin-editor")
     result = admin.patch(actor, catalog["channel_ids"][0], MemoryPolicyPatch(expected_revision=view["revision"], enabled=True), str(uuid4()), "changed-origin")
     assert result["enabled"] and admin.get(catalog["channel_ids"][0])["status"] == "observing"
+
+
+def test_transient_stale_heartbeat_blocks_release_without_erasing_verified_idle_baseline(pg: sessionmaker[Session], catalog: dict[str, Any], test_settings: Settings) -> None:
+    _, runner, stock, start = setup(pg, catalog, test_settings)
+    step(pg, catalog, runner, start)
+    runner.tick(start + timedelta(seconds=610))
+    with pg() as session:
+        assert session.scalar(select(MemoryPolicy)).idle_since == start
+        assert session.scalar(select(MemoryOperation)) is None
+    assert not any(path == "/free" for _, path, _ in stock.calls)
+    step(pg, catalog, runner, start + timedelta(seconds=621))
+    with pg() as session:
+        assert session.scalar(select(MemoryOperation)).stage == "preflight"
+    step(pg, catalog, runner, start + timedelta(seconds=623))
+    assert len([path for _, path, _ in stock.calls if path == "/free"]) == 1
