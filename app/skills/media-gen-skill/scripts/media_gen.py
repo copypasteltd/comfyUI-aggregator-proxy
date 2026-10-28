@@ -75,7 +75,7 @@ class Api:
         if not path.startswith("/v1/") or path.startswith("//"):
             raise ClientError("Only the configured origin's /v1/ API is allowed")
         req = urllib.request.Request(self.base + path, data=body, method=method,
-                                     headers={"Authorization": "Bearer " + self.key, "Accept": "application/json", **(headers or {})})
+                                     headers={"Authorization": "Bearer " + self.key, "Accept": "application/json", "User-Agent": "media-gen-skill/1.0.0", **(headers or {})})
         try:
             return self.opener.open(req, timeout=25)
         except urllib.error.HTTPError as exc:

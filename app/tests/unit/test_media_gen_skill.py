@@ -41,6 +41,7 @@ def server() -> Iterator[tuple[str, dict[str, Any]]]:
             self.wfile.write(json.dumps({"id": JOB, "state": "queued"}).encode())
 
         def do_GET(self) -> None:
+            state["user_agent"] = self.headers.get("User-Agent")
             if state["redirect"]:
                 self.send_response(302)
                 self.send_header("Location", "http://127.0.0.1:1/steal")
@@ -98,6 +99,7 @@ def test_download_verifies_and_never_overwrites_or_leaves_partial(server: Any, t
     assert not target.exists() and not list(tmp_path.glob("*.part"))
     state["corrupt"] = False
     assert api.download(CONTENT, target)["sha256"] == hashlib.sha256(PAYLOAD).hexdigest()
+    assert state["user_agent"] == "media-gen-skill/1.0.0"
     assert target.read_bytes() == PAYLOAD
     with pytest.raises(client.ClientError, match="already exists"):
         api.download(CONTENT, target)
