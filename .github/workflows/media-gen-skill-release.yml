@@ -1,0 +1,65 @@
+name: Media Gen Skill Release
+
+on:
+  push:
+    tags: ['media-gen-skill-v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: media-gen-skill-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'copypasteltd/comfyUI-aggregator-proxy'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout the pushed release tag
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Check version and build reproducible archives
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          version=$(tr -d '\r\n' < app/skills/media-gen-skill/VERSION)
+          test "$RELEASE_TAG" = "media-gen-skill-v$version"
+          python3 app/scripts/build-media-gen-skill.py --output app/.local/skill-release
+          python3 app/scripts/build-media-gen-skill.py --output app/.local/skill-rebuild
+          cmp "app/.local/skill-release/media-gen-skill-$version.zip" "app/.local/skill-rebuild/media-gen-skill-$version.zip"
+          (cd app/.local/skill-release && sha256sum --check SHA256SUMS.txt)
+      - name: Publish and verify the three release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          version=$(tr -d '\r\n' < app/skills/media-gen-skill/VERSION)
+          mkdir -p app/.local/skill-download
+          if gh release view "$RELEASE_TAG" --json isDraft > app/.local/skill-existing-release.json 2> app/.local/skill-release-view.stderr; then
+            draft=$(python3 -c 'import json; print(str(json.load(open("app/.local/skill-existing-release.json"))["isDraft"]).lower())')
+            if test "$draft" = true; then
+              gh release upload "$RELEASE_TAG" app/.local/skill-release/* --clobber
+            fi
+          else
+            gh release create "$RELEASE_TAG" app/.local/skill-release/* \
+              --verify-tag --draft --title "Media Gen Skill $version" \
+              --notes-file docs/127-MediaGenSkill-Release说明.md
+          fi
+          gh release download "$RELEASE_TAG" --dir app/.local/skill-download
+          (cd app/.local/skill-download && sha256sum --check SHA256SUMS.txt)
+          for asset in "media-gen-skill-$version.zip" SHA256SUMS.txt release.json; do
+            cmp "app/.local/skill-release/$asset" "app/.local/skill-download/$asset"
+          done
+          gh release edit "$RELEASE_TAG" --draft=false --latest=false
+          gh release view "$RELEASE_TAG" --json url,tagName,isDraft,assets
