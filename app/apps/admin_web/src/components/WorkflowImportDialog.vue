@@ -20,7 +20,7 @@ const rules: FormRules = {
   relative_path: [{ required: true, message: '请输入相对 JSON 文件路径', trigger: 'blur' }, { max: 512, message: '路径最多 512 个字符', trigger: 'blur' }],
   name: [{ required: true, whitespace: true, message: '请输入 Workflow 名称', trigger: 'blur' }, { max: 128, message: '名称最多 128 个字符', trigger: 'blur' }],
 }
-const taskNames: Record<TaskType, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考文图生图', text_to_video: '文生视频', references_to_video: '多参考文图生视频', text_to_audio: '音频生成' }
+const taskNames: Record<TaskType, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考文图生图', text_to_video: '文生视频', references_to_video: '多参考文图生视频', text_to_audio: '音频生成', image_to_3d: '单图生成 3D' }
 const sourceErrors: Record<string, string> = {
   workflow_export_not_configured: '此渠道未配置 Workflow 导出目录，请先在该 Windows Worker 中登记目录。',
   workflow_export_not_allowed: '文件不存在、不可读或不在渠道允许的导出目录内。',

@@ -47,7 +47,7 @@ class WorkflowCatalogEntry(StrictDTO):
     source_digest: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     export_format: Literal["comfy-api", "manifest-v1"] | None = None
     node_count: int | None = Field(default=None, ge=1, le=2000)
-    task_type: Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio"] | None = None
+    task_type: Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"] | None = None
     error_code: Literal["invalid_workflow_source", "ui_workflow_not_supported", "workflow_source_too_large", "workflow_export_not_allowed", "workflow_export_changed"] | None = None
 
     @model_validator(mode="after")

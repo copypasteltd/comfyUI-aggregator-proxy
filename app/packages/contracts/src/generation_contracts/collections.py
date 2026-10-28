@@ -8,7 +8,7 @@ from generation_contracts.retries import RetryInfo
 from generation_contracts.validation import StrictDTO
 
 JobStatus = Literal["admission_pending", "queued", "leased", "preparing", "submitting", "running", "collecting", "uploading", "verifying", "reconciling", "retry_wait", "cancel_requested", "succeeded", "failed", "cancelled", "expired"]
-TaskType = Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio"]
+TaskType = Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"]
 
 
 class CollectionQuery(StrictDTO):
@@ -35,7 +35,7 @@ class ContentSummary(StrictDTO):
     id: str = Field(pattern=r"^content_[a-f0-9]{32}$")
     job_id: str = Field(pattern=r"^job_[a-f0-9]{32}$")
     bytes: int = Field(ge=1, le=2147483648)
-    media_type: Literal["image/png", "image/jpeg", "image/webp", "video/mp4", "video/webm", "audio/wav", "audio/flac", "audio/mpeg", "audio/ogg"]
+    media_type: Literal["image/png", "image/jpeg", "image/webp", "video/mp4", "video/webm", "audio/wav", "audio/flac", "audio/mpeg", "audio/ogg", "model/gltf-binary"]
     sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     created_at: int = Field(ge=1)
     expires_at: int = Field(ge=1)

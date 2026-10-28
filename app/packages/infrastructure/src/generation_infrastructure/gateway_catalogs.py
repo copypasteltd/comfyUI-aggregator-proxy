@@ -60,6 +60,8 @@ def snapshots(session: Session, identifiers: set[UUID], *, lock: bool) -> dict[s
     bindings = {(row.channel_id, row.release_id): row for row in session.scalars(select(WorkflowBinding).where(WorkflowBinding.channel_id.in_(channel_ids), WorkflowBinding.release_id.in_(releases)))}
     result: dict[str, dict[str, Any]] = {}
     for model in models:
+        if model.task_type == "image_to_3d":
+            raise DomainError("catalog_model_unsupported", "3D 使用原生任务 API；网关尚未定义独立结算", 422)
         release = releases.get(model.release_id)
         if not release or not release.validated or release.manifest.get("task_type") != model.task_type or not model.channel_ids:
             raise DomainError("catalog_binding_changed", "目录模型的 Workflow 发布版本不可用", 409)

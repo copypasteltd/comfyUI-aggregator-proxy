@@ -10,7 +10,7 @@ class OutputSpec(StrictDTO):
     position: int = Field(ge=0, le=99)
     bytes: int = Field(ge=1, le=2147483648)
     sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
-    media_type: str = Field(pattern=r"^(image/(png|jpeg|webp)|video/(mp4|webm)|audio/(wav|flac|mpeg|ogg))$")
+    media_type: str = Field(pattern=r"^(image/(png|jpeg|webp)|video/(mp4|webm)|audio/(wav|flac|mpeg|ogg)|model/gltf-binary)$")
 
 
 class UploadAuthorization(Renew):

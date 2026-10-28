@@ -64,7 +64,8 @@ def test_empty_statistics_have_fixed_bounds_and_unknown_rates(pg: sessionmaker[S
     assert result.snapshot_at == int(NOW.timestamp()) and result.window_end == result.snapshot_at
     assert result.totals.completed == result.totals.accepted == 0
     assert result.success_rate_bps is None and result.successful_duration.p50_ms is None and result.successful_duration.p95_ms is None
-    assert result.filters == {} and len(result.task_types) == 7 and len(result.failure_classes) == 6
+    assert result.filters == {} and len(result.task_types) == 8 and len(result.failure_classes) == 6
+    assert any(item.task_type == "image_to_3d" for item in result.task_types)
 
 
 def test_half_open_windows_and_different_accepted_terminal_cohorts(pg: sessionmaker[Session], catalog: dict[str, Any], test_settings: Settings, clock: None) -> None:
@@ -84,7 +85,7 @@ def test_half_open_windows_and_different_accepted_terminal_cohorts(pg: sessionma
     included = QueueStatistics.model_validate(service.statistics(QueueStatisticsQuery(window="1h", include_validation=True)))
     assert included.totals.succeeded == included.totals.accepted == 2 and included.buckets[-1].succeeded == 1
     audio = service.statistics(QueueStatisticsQuery(window="1h", include_validation=True, task_type="text_to_audio"))
-    assert audio["totals"]["succeeded"] == 1 and audio["task_types"][-2]["task_type"] == "text_to_audio"
+    assert audio["totals"]["succeeded"] == 1 and next(item for item in audio["task_types"] if item["task_type"] == "text_to_audio")["succeeded"] == 1
 
 
 def test_failure_categories_types_and_discrete_duration_percentiles(pg: sessionmaker[Session], catalog: dict[str, Any], test_settings: Settings, clock: None) -> None:
@@ -103,7 +104,8 @@ def test_failure_categories_types_and_discrete_duration_percentiles(pg: sessionm
     assert result.success_rate_bps == 5000 and result.successful_duration.samples == 5 and result.successful_duration.missing_samples == 2
     assert result.successful_duration.p50_ms == 2000 and result.successful_duration.p95_ms == 100000
     assert {item.category: item.count for item in result.failure_classes} == {"out_of_memory": 1, "invalid_output": 1, "preparation": 2, "execution": 1, "other": 1, "unclassified": 1}
-    assert result.task_types[-1].failed == 7 and result.task_types[-2].succeeded == 5
+    assert next(item for item in result.task_types if item.task_type == "other").failed == 7
+    assert next(item for item in result.task_types if item.task_type == "text_to_audio").succeeded == 5
     assert "PRIVATE STATISTICS PROMPT" not in str(value) and "private-unknown-code" not in str(value)
 
 

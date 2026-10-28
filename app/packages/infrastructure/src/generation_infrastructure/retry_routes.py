@@ -71,6 +71,8 @@ def has_oom_alternative(session: Session, job: Job, source_gpu: UUID, *, allow_s
             continue
         if not retry_route_approved(binding, release, gpu, allow_synthetic_catalog=allow_synthetic_catalog) or blocks_claim(session, job, gpu):
             continue
+        if job.task_type == "image_to_3d" and "model3d-output-v1" not in node.inventory.get("features", []):
+            continue
         if job.task_type == "text_to_audio" and "audio-output-v1" not in node.inventory.get("features", []):
             continue
         if capacity_ready(node.inventory, node.current_boot_id, now, next_reserve=output_reservation(release.manifest, 2 * 1024**3)):

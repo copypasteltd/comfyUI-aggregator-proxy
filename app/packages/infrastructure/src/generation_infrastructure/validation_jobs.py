@@ -78,6 +78,14 @@ class ValidationJobs(AdminBase):
                 if policy != key.policy:
                     key.policy = policy
                     key.revision += 1
+            if model.task_type == "image_to_3d":
+                policy = deepcopy(key.policy)
+                if "meshes:create" not in policy["scopes"]:
+                    policy["scopes"].append("meshes:create")
+                policy["limits"]["daily_mesh_count"] = {"mode": "unlimited", "value": None}
+                if policy != key.policy:
+                    key.policy = policy
+                    key.revision += 1
             identity = BusinessIdentity(key.tenant_id, key.project_id, key.id, key.policy)
             assets = list(session.scalars(select(Asset).where(Asset.id.in_([parse_id("asset", identifier) for identifier in identifiers]), Asset.tenant_id == key.tenant_id, Asset.project_id == key.project_id).order_by(Asset.id).with_for_update()))
             if len(assets) != len(identifiers) or any(asset.deleted_at for asset in assets):

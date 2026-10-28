@@ -11,6 +11,7 @@ const rows: { key: Name; label: string; maximum: number }[] = [
   { key: 'generating_jobs', label: '生成并发数', maximum: Number.MAX_SAFE_INTEGER }, { key: 'daily_image_count', label: '每日图片额度', maximum: Number.MAX_SAFE_INTEGER },
   { key: 'daily_video_milliseconds', label: '每日视频额度（毫秒）', maximum: Number.MAX_SAFE_INTEGER },
   { key: 'daily_audio_milliseconds', label: '每日音频额度（毫秒）', maximum: Number.MAX_SAFE_INTEGER },
+  { key: 'daily_mesh_count', label: '每日 3D 模型额度', maximum: Number.MAX_SAFE_INTEGER },
 ]
 function currentLimit(key: Name) { return props.modelValue[key] ?? { mode: 'bounded' as const, value: 0 } }
 function update(key: Name, mode: 'bounded' | 'unlimited', value?: number) {
@@ -18,7 +19,7 @@ function update(key: Name, mode: 'bounded' | 'unlimited', value?: number) {
   limits[key] = { mode, value: mode === 'unlimited' ? null : value ?? limits[key]?.value ?? 0 }
   emit('update:modelValue', limits)
 }
-function parentValue(key: Name) { const value = props.parent?.[key] ?? (key === 'daily_audio_milliseconds' ? { mode: 'bounded', value: 0 } : undefined); return value?.mode === 'bounded' ? value.value?.toLocaleString() : '无限制' }
+function parentValue(key: Name) { const value = props.parent?.[key] ?? (['daily_audio_milliseconds', 'daily_mesh_count'].includes(key) ? { mode: 'bounded', value: 0 } : undefined); return value?.mode === 'bounded' ? value.value?.toLocaleString() : '无限制' }
 function used(key: Name) { return props.usage && key in props.usage ? Number(props.usage[key as keyof typeof props.usage]).toLocaleString() : '—' }
 </script>
 

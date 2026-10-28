@@ -31,6 +31,7 @@ class ModelAction(ExpectedRevision):
 
 class BindRelease(ExpectedRevision):
     release_id: str
+    verify_only: bool = False
 
 
 class ApproveRuntime(ExpectedRevision):

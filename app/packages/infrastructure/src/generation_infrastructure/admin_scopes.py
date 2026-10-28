@@ -38,7 +38,7 @@ def projections(session: Session, rows: Sequence[Tenant | Project], *, projects:
     result = []
     for row in rows:
         active, daily = buckets.get((row.id, "active")), buckets.get((row.id, period))
-        usage = {"period": period, **{name: getattr(active if name in ("unfinished_jobs", "generating_jobs") else daily, name, 0) for name in ("daily_jobs", "unfinished_jobs", "generating_jobs", "daily_image_count", "daily_video_milliseconds", "daily_audio_milliseconds")}}
+        usage = {"period": period, **{name: getattr(active if name in ("unfinished_jobs", "generating_jobs") else daily, name, 0) for name in ("daily_jobs", "unfinished_jobs", "generating_jobs", "daily_image_count", "daily_video_milliseconds", "daily_audio_milliseconds", "daily_mesh_count")}}
         record = {"id": public_id("prj" if projects else "ten", row.id), "name": row.name, "enabled": row.enabled, "revision": row.revision, "limits": row.limits, "created_at": timestamp(row.created_at), "observed_at": int(now.timestamp()), "usage": usage}
         if isinstance(row, Project):
             tenant = parents[row.tenant_id]

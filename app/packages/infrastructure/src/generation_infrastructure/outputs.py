@@ -9,7 +9,12 @@ from uuid import UUID, uuid4
 from generation_application.storage import ObjectStore, StoredObject
 from generation_contracts.outputs import Complete, UploadAuthorization
 from generation_domain.errors import DomainError
-from generation_domain.media_types import MAX_AUDIO_BYTES, task_media_kind
+from generation_domain.media_types import (
+    MAX_AUDIO_BYTES,
+    MAX_MODEL3D_BYTES,
+    MODEL3D_MIME,
+    task_media_kind,
+)
 from generation_domain.state import transition
 from generation_domain.values import fingerprint, parse_id, public_id, utcnow
 from sqlalchemy import select
@@ -56,8 +61,8 @@ class OutputRepository:
             if attempt.generation_evidence.get("manifest_digest") != fingerprint(specs) or attempt.generation_evidence.get("output_count") != len(specs) or len(specs) != job.execution["parameters"].get("n", 1):
                 raise DomainError("manifest_mismatch", "上传清单与稳定输出证据或购买数量不符", 422)
             kind = task_media_kind(job.task_type)
-            maximum = {"image": 32 * 1024 * 1024, "video": 2147483648, "audio": MAX_AUDIO_BYTES}[kind]
-            if any(item["bytes"] > maximum or not item["media_type"].startswith(kind + "/") for item in specs):
+            maximum = {"image": 32 * 1024 * 1024, "video": 2147483648, "audio": MAX_AUDIO_BYTES, "model": MAX_MODEL3D_BYTES}[kind]
+            if any(kind == "model" and item["media_type"] != MODEL3D_MIME or item["bytes"] > maximum or not item["media_type"].startswith(kind + "/") for item in specs):
                 raise DomainError("invalid_output", "输出文件类型或大小不符合任务", 422)
             rows = list(session.scalars(select(OutputUpload).where(OutputUpload.attempt_id == attempt.id).order_by(OutputUpload.position)))
             if rows and [r.specification for r in rows] != specs:

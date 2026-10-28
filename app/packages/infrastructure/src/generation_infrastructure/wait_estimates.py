@@ -187,6 +187,8 @@ class WaitEstimates(AdminBase):
                 if not job.is_validation and ((row.gpu_id, job.release_id, job.specification) in isolated or (not row.runtime_approval and not synthetic)):
                     continue
                 inventory = {"capacity": row.capacity, "features": row.features or []}
+                if job.task_type == "image_to_3d" and "model3d-output-v1" not in inventory["features"]:
+                    continue
                 if job.task_type == "text_to_audio" and "audio-output-v1" not in inventory["features"]:
                     continue
                 if row.gpu_id not in blocked and not capacity_ready(inventory, row.current_boot_id, now, next_reserve=output_reservation({"output": release.output}, 2 * 1024**3)):

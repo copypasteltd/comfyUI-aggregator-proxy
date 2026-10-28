@@ -10,6 +10,14 @@ from generation_domain.workflows import TASK_TYPES, compile_graph, validate_mani
 
 
 def scalar_manifest(task_type: str) -> dict[str, Any]:
+    if task_type == "image_to_3d":
+        return {
+            "format_version": "1.2", "task_type": task_type,
+            "workflow_api": {"1": {"class_type": "SyntheticGenerator", "inputs": {"source_image": "", "seed": None}}, "2": {"class_type": "SyntheticSave", "inputs": {"result": ["1", 0], "filename_prefix": ""}}},
+            "bindings": [{"source": source, "node_id": "2" if source == "output_prefix" else "1", "input_name": "filename_prefix" if source == "output_prefix" else source} for source in ("source_image", "seed", "output_prefix")],
+            "output": {"adapter": "model3d-glb-v1", "final_node_ids": ["2"], "history_field": "3d", "expected_count": 1, "max_bytes": 1048576, "mime_types": ["model/gltf-binary"]},
+            "presets": [{"quality": "standard", "values": {}}], "dependency_lock": {"comfy_commit": "a" * 40, "models": [], "custom_nodes": []}, "runtime_profiles": [], "supported_parameters": ["quality", "seed"],
+        }
     audio, video = task_type == "text_to_audio", task_type.endswith("video")
     sources = ["prompt", "seed", "output_prefix"]
     if task_type == "image_to_image":
@@ -31,6 +39,8 @@ def scalar_manifest(task_type: str) -> dict[str, Any]:
 
 
 def scalar_execution(task_type: str) -> tuple[dict[str, Any], dict[str, str]]:
+    if task_type == "image_to_3d":
+        return {"input": {"source_image": {"asset_id": "synthetic-source"}}, "parameters": {"quality": "standard", "seed": 17}}, {"source_image": "inputs/source.png"}
     audio, video = task_type == "text_to_audio", task_type.endswith("video")
     supplied: dict[str, Any] = {"prompt": "Synthetic scalar-target regression"}
     paths: dict[str, str] = {}
@@ -108,7 +118,7 @@ def test_optional_binding_cannot_target_edge_even_when_request_has_no_value() ->
 def test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable(task_type: str) -> None:
     manifest = scalar_manifest(task_type)
     manifest["workflow_api"]["1"]["inputs"]["untouched"] = {"array": [1, 2]}
-    manifest["presets"][0]["values"] = {"1.seed": 3, "1.prompt": "Synthetic preset default"}
+    manifest["presets"][0]["values"] = {"1.seed": 3, "1.source_image" if task_type == "image_to_3d" else "1.prompt": "Synthetic preset default"}
     snapshot = deepcopy(manifest)
     WorkflowManifest.model_validate(manifest)
     assert validate_manifest(manifest, task_type)["valid"]
@@ -116,7 +126,10 @@ def test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immut
     assert graph["2"]["inputs"]["result"] == ["1", 0]
     assert graph["2"]["inputs"]["filename_prefix"] == "outputs/synthetic"
     assert graph["1"]["inputs"]["seed"] == 17
-    assert graph["1"]["inputs"]["prompt"] == "Synthetic scalar-target regression"
+    if task_type == "image_to_3d":
+        assert graph["1"]["inputs"]["source_image"] == "inputs/source.png"
+    else:
+        assert graph["1"]["inputs"]["prompt"] == "Synthetic scalar-target regression"
     assert graph["1"]["inputs"]["untouched"] == {"array": [1, 2]}
     if task_type.startswith("references_"):
         assert [graph["1"]["inputs"][f"reference_{i}"] for i in range(2)] == ["inputs/first.png", "inputs/second.png"]

@@ -59,6 +59,7 @@ class ResourceLimits(StrictDTO):
     daily_image_count: ResourceLimit
     daily_video_milliseconds: ResourceLimit
     daily_audio_milliseconds: ResourceLimit = Field(default_factory=lambda: ResourceLimit(mode="bounded", value=0))
+    daily_mesh_count: ResourceLimit = Field(default_factory=lambda: ResourceLimit(mode="bounded", value=0))
 
 
 class SpecificationLimits(StrictDTO):

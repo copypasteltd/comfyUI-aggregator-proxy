@@ -11,7 +11,7 @@ from control_api.main import create_app
 from fastapi.testclient import TestClient
 from generation_application.ports import AdminIdentity
 from generation_contracts.admin import ChannelPatch
-from generation_contracts.catalog import ApproveRuntime, ValidationJob, WorkflowSync
+from generation_contracts.catalog import ApproveRuntime, BindRelease, ValidationJob, WorkflowSync
 from generation_domain.errors import DomainError
 from generation_domain.values import fingerprint, parse_id, public_id, utcnow
 from generation_infrastructure.admin_catalog import CatalogAdministration
@@ -57,6 +57,56 @@ def actor(pg: sessionmaker[Session]) -> AdminIdentity:
 
 def batch(catalog: dict[str, Any], **overrides: Any) -> WorkflowSync:
     return WorkflowSync.model_validate({"direction": "push", "release_id": public_id("wfr", catalog["release_id"]), "release_digest": catalog["release_digest"], "targets": [{"channel_id": public_id("ch", identifier), "expected_revision": 1} for identifier in catalog["channel_ids"]], **overrides})
+
+
+@pytest.mark.parametrize("receipt_success", [True, False])
+def test_same_release_reverification_preserves_approval_but_requires_fresh_environment(pg: sessionmaker[Session], catalog: dict[str, Any], actor: AdminIdentity, test_settings: Settings, receipt_success: bool) -> None:
+    identifier = catalog["channel_ids"][0]
+    approval = {"profile_id": "synthetic-existing-profile", "evidence_id": "synthetic-historical-evidence"}
+    with pg.begin() as session:
+        binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == identifier))
+        binding.applied_digest = binding.desired_digest = catalog["release_digest"]
+        binding.runtime_approval = approval
+        binding.verified_digest = None
+    data = BindRelease(expected_revision=1, release_id=public_id("wfr", catalog["release_id"]), verify_only=True)
+    service = CatalogAdministration(pg, test_settings)
+    result = service.bind(actor, identifier, data, "reverify-same-release", "synthetic-test")
+    assert service.bind(actor, identifier, data, "reverify-same-release", "replay") == result
+    with pg() as session:
+        binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == identifier))
+        assert binding.runtime_approval == approval and binding.verified_digest is None
+        assert session.get(Channel, identifier).draining
+    commands = CommandRepository(pg, SecretVault(test_settings.encryption_key.get_secret_value()))
+    issued = commands.claim(catalog["node_id"], catalog["boot_id"])
+    assert issued and issued["payload"]["release_digest"] == catalog["release_digest"]
+    receipt = {"success": True, "applied_revision": 1, "environment_verified": True, "release_digest": catalog["release_digest"]} if receipt_success else {"success": False, "error_code": "model_digest_mismatch"}
+    commands.receipt(catalog["node_id"], parse_id("cmd", issued["command_id"]), catalog["boot_id"], issued["command_digest"], receipt)
+    with pg() as session:
+        binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == identifier))
+        assert binding.runtime_approval == approval
+        assert binding.verified_digest == (catalog["release_digest"] if receipt_success else None)
+
+
+@pytest.mark.parametrize("drift", ["no_approval", "no_applied_digest", "different_desired", "channel_changed"])
+def test_reverification_cannot_approve_new_or_changed_environment(pg: sessionmaker[Session], catalog: dict[str, Any], actor: AdminIdentity, test_settings: Settings, drift: str) -> None:
+    identifier = catalog["channel_ids"][0]
+    with pg.begin() as session:
+        binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == identifier))
+        binding.applied_digest = binding.desired_digest = catalog["release_digest"]
+        binding.runtime_approval = {"synthetic_existing_approval": True}
+        if drift == "no_approval":
+            binding.runtime_approval = None
+        elif drift == "no_applied_digest":
+            binding.applied_digest = None
+        elif drift == "different_desired":
+            binding.desired_digest = "0" * 64
+        else:
+            session.get(Channel, identifier).desired_revision += 1
+    with pytest.raises(DomainError) as failure:
+        CatalogAdministration(pg, test_settings).bind(actor, identifier, BindRelease(expected_revision=1, release_id=public_id("wfr", catalog["release_id"]), verify_only=True), "synthetic-reverify-rejected", "synthetic-test")
+    assert failure.value.code == "workflow_reverification_required"
+    with pg() as session:
+        assert session.scalar(select(func.count()).select_from(WorkerCommand)) == 0
 
 
 def test_bulk_sync_idempotency_draining_and_parallel_receipts(pg: sessionmaker[Session], catalog: dict[str, Any], actor: AdminIdentity, test_settings: Settings) -> None:

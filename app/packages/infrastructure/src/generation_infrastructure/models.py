@@ -414,10 +414,11 @@ class QuotaBucket(Base):
     daily_image_count: Mapped[int] = mapped_column(BigInteger, default=0)
     daily_video_milliseconds: Mapped[int] = mapped_column(BigInteger, default=0)
     daily_audio_milliseconds: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
+    daily_mesh_count: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
     dispatch_virtual_milliseconds: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
     dispatch_sequence: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
     __table_args__ = (
-        CheckConstraint("daily_jobs>=0 AND unfinished_jobs>=0 AND generating_jobs>=0 AND daily_image_count>=0 AND daily_video_milliseconds>=0 AND daily_audio_milliseconds>=0", name="nonnegative"),
+        CheckConstraint("daily_jobs>=0 AND unfinished_jobs>=0 AND generating_jobs>=0 AND daily_image_count>=0 AND daily_video_milliseconds>=0 AND daily_audio_milliseconds>=0 AND daily_mesh_count>=0", name="nonnegative"),
         CheckConstraint("dispatch_virtual_milliseconds >= 0 AND dispatch_sequence >= 0", name="dispatch_nonnegative"),
         CheckConstraint("(dispatch_virtual_milliseconds = 0 AND dispatch_sequence = 0) OR (period = 'active' AND (scope_kind = '1_tenant' OR (scope_kind = '0_global' AND scope_id = '00000000-0000-0000-0000-000000000000')))", name="dispatch_scope"),
     )
@@ -578,8 +579,9 @@ class UsageLedger(Entity, Base):
     image_count: Mapped[int] = mapped_column(default=0)
     video_milliseconds: Mapped[int] = mapped_column(BigInteger, default=0)
     audio_milliseconds: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
+    mesh_count: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
     outcome: Mapped[str] = mapped_column(String(32))
-    __table_args__ = (CheckConstraint("image_count>=0 AND video_milliseconds>=0 AND audio_milliseconds>=0", name="nonnegative"),)
+    __table_args__ = (CheckConstraint("image_count>=0 AND video_milliseconds>=0 AND audio_milliseconds>=0 AND mesh_count>=0", name="nonnegative"),)
 
 
 class RateState(Base):

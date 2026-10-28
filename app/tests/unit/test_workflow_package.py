@@ -20,21 +20,21 @@ import workflow_package as package  # noqa: E402 -- repository preparation comma
 
 
 def draft(task_type: str) -> dict:
-    audio, video = task_type == "text_to_audio", task_type.endswith("video")
-    sources = ["prompt", "seed", "output_prefix"]
-    if task_type == "image_to_image":
+    audio, video, model3d = task_type == "text_to_audio", task_type.endswith("video"), task_type == "image_to_3d"
+    sources = ["seed", "output_prefix"] if model3d else ["prompt", "seed", "output_prefix"]
+    if task_type in ("image_to_image", "image_to_3d"):
         sources += ["source_image"]
     if task_type.startswith("references_"):
         sources += ["reference_0", "reference_1"]
     return {
-        "format_version": "1.1" if audio else "1.0", "task_type": task_type,
+        "format_version": "1.2" if model3d else "1.1" if audio else "1.0", "task_type": task_type,
         "workflow_api": {"1": {"class_type": "SyntheticGenerator", "inputs": {s: "" for s in sources if s != "output_prefix"}}, "2": {"class_type": "SyntheticSave", "inputs": {"result": ["1", 0], "filename_prefix": ""}}},
         "bindings": [{"source": s, "node_id": "2" if s == "output_prefix" else "1", "input_name": "filename_prefix" if s == "output_prefix" else s} for s in sources],
-        "output": {"adapter": "audio-files-v1" if audio else "video-files-v1" if video else "save-image-v1", "final_node_ids": ["2"], "history_field": "audio" if audio else "videos" if video else "images", "expected_count": 1, "max_bytes": 1048576, "mime_types": ["audio/wav" if audio else "video/mp4" if video else "image/png"]},
-        "presets": [{"quality": "standard", **({"seconds": 2, "audio_format": "wav", "sample_rate": 24000, "channels": 1} if audio else {"size": "1024x1024", **({"seconds": 2} if video else {})}), "values": {}}],
+        "output": {"adapter": "model3d-glb-v1" if model3d else "audio-files-v1" if audio else "video-files-v1" if video else "save-image-v1", "final_node_ids": ["2"], "history_field": "3d" if model3d else "audio" if audio else "videos" if video else "images", "expected_count": 1, "max_bytes": 1048576, "mime_types": ["model/gltf-binary" if model3d else "audio/wav" if audio else "video/mp4" if video else "image/png"]},
+        "presets": [{"quality": "standard", **({} if model3d else {"seconds": 2, "audio_format": "wav", "sample_rate": 24000, "channels": 1} if audio else {"size": "1024x1024", **({"seconds": 2} if video else {})}), "values": {}}],
         "dependency_lock": {"models": [{"path": "checkpoints/model.bin"}], "custom_nodes": [{"directory": "synthetic-node"}]},
         "runtime_profiles": [{"id": "draft-gpu", "gpu_hardware_id": "synthetic-gpu", "execution_timeout_seconds": 300, "approved": True, "evidence_id": "old-evidence", "peak_vram_bytes": 1024, "warm_p95_milliseconds": 1}],
-        "supported_parameters": ["quality", "seed", "n", "seconds" if audio else "size"],
+        "supported_parameters": ["quality", "seed", "n"] + ([] if model3d else ["seconds" if audio else "size"]),
     }
 
 
@@ -51,7 +51,7 @@ def inputs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, Path,
 
 
 @pytest.mark.parametrize("task_type", sorted(TASK_TYPES))
-def test_six_packages_round_trip_through_existing_import_and_execution_compiler(inputs, task_type: str) -> None:
+def test_packages_round_trip_through_existing_import_and_execution_compiler(inputs, task_type: str) -> None:
     source, root, output = inputs
     document = draft(task_type)
     source.write_text(json.dumps(document), encoding="utf-8")
@@ -66,7 +66,7 @@ def test_six_packages_round_trip_through_existing_import_and_execution_compiler(
     assert all(built["runtime_profiles"][0][key] is None for key in ("evidence_id", "peak_vram_bytes", "warm_p95_milliseconds"))
     parameters = {k: v for k, v in built["presets"][0].items() if k not in ("values", "audio_format", "sample_rate", "channels")}
     parameters["seed"] = 2**53 + 7
-    supplied = {"prompt": "synthetic controlled prompt"}
+    supplied = {"source_image": {"asset_id": "source"}} if task_type == "image_to_3d" else {"prompt": "synthetic controlled prompt"}
     if task_type.startswith("references_"):
         supplied["references"] = [{"asset_id": "one", "role": "character"}, {"asset_id": "two", "role": "scene"}]
     execution = {"parameters": parameters, "input": supplied}
@@ -74,7 +74,7 @@ def test_six_packages_round_trip_through_existing_import_and_execution_compiler(
     assert graph["1"]["inputs"]["seed"] == 2**53 + 7
     if task_type.startswith("references_"):
         assert graph["1"]["inputs"]["reference_1"] == "inputs/two.png"
-    if task_type == "image_to_image":
+    if task_type in ("image_to_image", "image_to_3d"):
         assert graph["1"]["inputs"]["source_image"] == "inputs/source.png"
     assert package.verify(output)["local_dependencies_checked"] is False
     assert package.verify(output, root)["local_dependencies_checked"] is True

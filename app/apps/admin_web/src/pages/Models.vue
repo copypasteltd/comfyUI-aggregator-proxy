@@ -31,7 +31,7 @@ const presetChoice = ref<Preset | null>(null), valid = reactive({ workflow: fals
 const currentPreset = computed<Preset | undefined>(() => editing.value && form.releases[0] === editing.value.release_id ? { kind: 'preset', id: 'current', release_id: editing.value.release_id, task_type: editing.value.task_type as Preset['task_type'], defaults: { ...editing.value.defaults, n: 1 } as Preset['defaults'], usable: true } : undefined)
 const pending = ref<Action | null>(null), uncertain = ref(false), writing = ref(false), blocked = computed(() => writing.value || !!pending.value)
 const canSave = computed(() => !!scope.value && scope.value.project_id === form.project_id && !!form.alias && valid.workflow && valid.release && valid.preset && valid.channel && !!presetChoice.value && !mappingLoading.value && !blocked.value && visible.value)
-const taskNames: Record<string, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考图生图', text_to_video: '文生视频', references_to_video: '多参考图生视频', text_to_audio: 'Workflow 音频' }
+const taskNames: Record<string, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考图生图', text_to_video: '文生视频', references_to_video: '多参考图生视频', text_to_audio: 'Workflow 音频', image_to_3d: '单图生成 3D' }
 const page = computed(() => applied.value.page ?? 1)
 const validationDialog = ref(false), validationModel = ref<Model | null>(null), validationChannels = ref<string[]>([]), validationChannel = ref<Channel | null>(null), sample = ref(''), validationError = ref(''), accepted = ref<components['schemas']['ValidationAccepted'] | null>(null)
 let validationKey = '', disposed = false, mappingEpoch = 0, confirmationEpoch = 0, confirming = false
@@ -128,7 +128,7 @@ async function publish(row: Model) {
 function openValidation(row: Model) {
   if (blocked.value || !active() || !visible.value) return
   validationModel.value = row; validationChannels.value = []; validationChannel.value = null; validationError.value = ''; accepted.value = null; writeError.value = ''; validationKey = crypto.randomUUID()
-  const input = { prompt: 'Describe your validation sample', ...(row.task_type === 'image_to_image' ? { source_image: { asset_id: '' } } : {}), ...(['references_to_image', 'references_to_video'].includes(row.task_type) ? { references: [] } : {}) }
+  const input = { ...(row.task_type === 'image_to_3d' ? {} : { prompt: 'Describe your validation sample' }), ...(['image_to_image', 'image_to_3d'].includes(row.task_type) ? { source_image: { asset_id: '' } } : {}), ...(['references_to_image', 'references_to_video'].includes(row.task_type) ? { references: [] } : {}) }
   sample.value = JSON.stringify({ model: row.alias, task_type: row.task_type, input, parameters: { ...row.defaults, n: 1 } }, null, 2); validationDialog.value = true
 }
 function validateSample() {

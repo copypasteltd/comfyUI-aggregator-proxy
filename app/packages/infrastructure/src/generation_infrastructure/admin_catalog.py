@@ -88,6 +88,8 @@ class CatalogAdministration(AdminBase):
             channel = session.get(Channel, parse_id("ch", identifier))
             if not channel or channel.deleted_at or channel.tenant_id != tenant or channel.project_id != project:
                 raise DomainError("channel_not_available", "请选择同项目的有效渠道", 422)
+        if release.manifest["task_type"] == "image_to_3d" and set(defaults) - {"quality", "n"}:
+            raise DomainError("invalid_defaults", "3D 默认值只允许冻结质量和 n=1", 422)
         if set(defaults) - {"size", "quality", "seconds", "n"} or defaults.get("n", 1) != 1:
             raise DomainError("invalid_defaults", "模型默认值仅允许受控 size、quality、seconds、n=1", 422)
         if len(matching_presets(release.manifest, defaults)) != 1:
@@ -254,7 +256,19 @@ class CatalogAdministration(AdminBase):
             if not channel or channel.deleted_at or not release or not release.validated or (channel.tenant_id, channel.project_id) != (release.tenant_id, release.project_id):
                 raise DomainError("not_found", "渠道或同项目发布版本不存在", 404)
             require_revision(channel.revision, data.expected_revision)
+            approval = None
+            if data.verify_only:
+                existing = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == channel.id, WorkflowBinding.release_id == release.id).with_for_update())
+                if not existing or existing.desired_digest != release.digest or existing.applied_digest != release.digest or not existing.runtime_approval or channel.desired_revision != channel.applied_revision:
+                    raise DomainError("workflow_reverification_required", "仅允许重新核验相同已应用且取得运行批准的发布；新绑定或配置变更必须重新验证", 422)
+                approval = dict(existing.runtime_approval)
             payload = self._prepare_binding(session, channel, release)
+            if approval is not None:
+                # A boot change invalidates environment observation, not historical
+                # runtime approval. Dispatch remains fenced by verified_digest until
+                # this immutable package passes a fresh environment command.
+                assert existing is not None
+                existing.runtime_approval = approval
             idem.result = enqueue_command(session, actor, channel, "apply_workflow_release", payload, request_id)
             record_change(session, public_id("usr", actor.user_id), "workflow.channel_bound", channel.id, request_id, {"release_id": data.release_id}, revision_before=data.expected_revision, revision_after=channel.revision, operation_id=parse_id("op", idem.result["operation_id"]))
             return idem.result

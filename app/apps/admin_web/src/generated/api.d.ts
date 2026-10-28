@@ -3052,7 +3052,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /** Model */
             model: string;
             /** Release Id */
@@ -3281,6 +3281,11 @@ export interface components {
             expected_revision: number;
             /** Release Id */
             release_id: string;
+            /**
+             * Verify Only
+             * @default false
+             */
+            verify_only: boolean;
         };
         /** BindingCreate */
         BindingCreate: {
@@ -3888,7 +3893,7 @@ export interface components {
              * Media Type
              * @enum {string}
              */
-            media_type: "image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg";
+            media_type: "image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg" | "model/gltf-binary";
             /** Sha256 */
             sha256: string;
             /** Created At */
@@ -4125,7 +4130,7 @@ export interface components {
              * Media Type
              * @enum {string}
              */
-            media_type: "image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg";
+            media_type: "image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg" | "model/gltf-binary";
             /** Sha256 */
             sha256: string;
             /** Created At */
@@ -4140,7 +4145,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
         };
         /** GatewayCreate */
         GatewayCreate: {
@@ -4336,7 +4341,7 @@ export interface components {
             /** Gpus */
             gpus: components["schemas"]["GpuInventory"][];
             /** Features */
-            features?: ("audio-output-v1" | "remote-http-v1")[];
+            features?: ("audio-output-v1" | "remote-http-v1" | "model3d-output-v1")[];
         };
         /** InventoryView */
         InventoryView: {
@@ -4425,7 +4430,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /**
              * Status
              * @enum {string}
@@ -4532,7 +4537,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /** Published */
             published: boolean;
         };
@@ -4607,7 +4612,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /** Version */
             version: number;
             /** Validated */
@@ -4780,7 +4785,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /** Revision */
             revision: number;
             /** Archived */
@@ -4847,7 +4852,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             defaults: components["schemas"]["MappingDefaults"];
             /** Usable */
             usable: boolean;
@@ -4868,7 +4873,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /** Version */
             version: number;
             /** Validated */
@@ -4889,7 +4894,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /** Archived */
             archived: boolean;
         };
@@ -5263,7 +5268,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /**
              * Asynchronous
              * @default true
@@ -5431,7 +5436,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
         };
         /** NodeDetail */
         NodeDetail: {
@@ -5726,7 +5731,7 @@ export interface components {
         /** PublicOutput */
         PublicOutput: {
             /** Media Types */
-            media_types: ("image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg")[];
+            media_types: ("image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg" | "model/gltf-binary")[];
             /**
              * Expected Count
              * @constant
@@ -5784,7 +5789,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /**
              * Asynchronous
              * @constant
@@ -5870,7 +5875,7 @@ export interface components {
             /** Include Validation */
             include_validation: boolean;
             /** Task Type */
-            task_type: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio") | null;
+            task_type: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d") | null;
             /** Filters */
             filters: {
                 [key: string]: string | number;
@@ -6066,6 +6071,7 @@ export interface components {
             daily_image_count: components["schemas"]["ResourceLimit"];
             daily_video_milliseconds: components["schemas"]["ResourceLimit"];
             daily_audio_milliseconds?: components["schemas"]["ResourceLimit"];
+            daily_mesh_count?: components["schemas"]["ResourceLimit"];
         };
         /** RetryInfo */
         RetryInfo: {
@@ -6101,6 +6107,7 @@ export interface components {
             daily_image_count: components["schemas"]["ResourceLimit"];
             daily_video_milliseconds: components["schemas"]["ResourceLimit"];
             daily_audio_milliseconds?: components["schemas"]["ResourceLimit"];
+            daily_mesh_count?: components["schemas"]["ResourceLimit"];
         };
         /** ScopeOption */
         ScopeOption: {
@@ -6170,6 +6177,11 @@ export interface components {
              * @default 0
              */
             daily_audio_milliseconds: number;
+            /**
+             * Daily Mesh Count
+             * @default 0
+             */
+            daily_mesh_count: number;
         };
         /** ScopeView */
         ScopeView: {
@@ -6414,7 +6426,7 @@ export interface components {
             /** Completed */
             completed: number;
             /** Task Type */
-            task_type: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio") | "other";
+            task_type: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d") | "other";
         };
         /** TenantCreate */
         TenantCreate: {
@@ -6506,7 +6518,7 @@ export interface components {
         /** UsageOutput */
         UsageOutput: {
             /** Media Types */
-            media_types: ("image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg")[];
+            media_types: ("image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg" | "model/gltf-binary")[];
             /**
              * Expected Count
              * @constant
@@ -6867,7 +6879,7 @@ export interface components {
             /** Node Count */
             node_count?: number | null;
             /** Task Type */
-            task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio") | null;
+            task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d") | null;
             /** Error Code */
             error_code?: ("invalid_workflow_source" | "ui_workflow_not_supported" | "workflow_source_too_large" | "workflow_export_not_allowed" | "workflow_export_changed") | null;
         };
@@ -6931,7 +6943,7 @@ export interface components {
              * Task Type
              * @enum {string}
              */
-            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
             /** Draft */
             draft: {
                 [key: string]: unknown;
@@ -8747,7 +8759,7 @@ export interface operations {
                 created_from?: number | null;
                 created_before?: number | null;
                 window?: "1h" | "24h" | "7d";
-                task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio") | null;
+                task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d") | null;
                 include_validation?: boolean;
             };
             header?: never;
@@ -8859,7 +8871,7 @@ export interface operations {
                 workflow_id?: string | null;
                 release_id?: string | null;
                 tag?: string | null;
-                media_kind?: ("image" | "video" | "audio") | null;
+                media_kind?: ("image" | "video" | "audio" | "model") | null;
                 state?: ("available" | "unverified" | "expired" | "pending_reclaim" | "reclaimed") | null;
                 created_from?: number | null;
                 created_before?: number | null;
@@ -10253,7 +10265,7 @@ export interface operations {
                 page?: number;
                 q?: string | null;
                 project_id?: string | null;
-                task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio") | null;
+                task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d") | null;
                 status?: ("active" | "archived") | null;
                 workflow_id?: string | null;
             };
@@ -10786,7 +10798,7 @@ export interface operations {
                 page?: number;
                 q?: string | null;
                 project_id?: string | null;
-                task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio") | null;
+                task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d") | null;
                 status?: ("published" | "unpublished") | null;
                 model_id?: string | null;
             };
@@ -10860,7 +10872,7 @@ export interface operations {
                 workflow_id?: string | null;
                 release_id?: string | null;
                 model_id?: string | null;
-                task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio") | null;
+                task_type?: ("text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d") | null;
             };
             header?: never;
             path?: never;

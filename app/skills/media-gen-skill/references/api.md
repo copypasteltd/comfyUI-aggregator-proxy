@@ -11,9 +11,11 @@ Example origin: `https://gen.sub2share.xyz`. All paths below are relative to the
 | GET /v1/capabilities | capabilities:read | Task type, release, specifications, output and usage |
 | GET /v1/access-policy | Authenticated business Key | The current Key's access policy |
 
-Use `usage.required_scopes` to identify missing workflow permissions. Image creation uses `images:create`, video uses `videos:create`, and audio uses `audio:create`, in addition to `jobs:create`. Reading jobs uses `jobs:read`; listing artifact IDs uses `artifacts:read`; metadata uses `content:read`; download uses `content:download`; references additionally require `assets:upload`.
+Use `usage.required_scopes` to identify missing workflow permissions. Image creation uses `images:create`, video uses `videos:create`, audio uses `audio:create`, and 3D uses `meshes:create`, in addition to `jobs:create`. Reading jobs uses `jobs:read`; listing artifact IDs uses `artifacts:read`; metadata uses `content:read`; download uses `content:download`; references and image-to-3D additionally require `assets:upload`.
 
 `usage.request_schema` is a model-specific JSON Schema. `usage.presets` lists complete combinations; defaults apply when fields are omitted. Do not mix the quality of one preset with another preset's size/duration. `fps` and `strength` are optional only on models that advertise them. `negative_prompt` belongs to `input`, not `parameters`. `n` is always 1. Output audio format/sample rate/channels are preset properties, not arbitrary caller options.
+
+For `image_to_3d`, use `input.source_image.asset_id` without prompt, negative_prompt, mask or references. Only advertised quality, seed and n=1 are accepted; size/seconds/fps/strength are rejected. The output is a static, self-contained GLB 2.0 with MIME `model/gltf-binary`, up to 512 MiB. Read the returned mesh/vertex/triangle/material/texture counts in content metadata. The profile excludes external files, compressed geometry, animation and skinning. It uses its own `daily_mesh_count` quota and is currently available through native jobs, without Sub2API 3D settlement.
 
 ## Native asynchronous submission
 

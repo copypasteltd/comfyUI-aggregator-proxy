@@ -14,10 +14,10 @@ class Binding(StrictDTO):
 
 
 class OutputAdapter(StrictDTO):
-    adapter: Literal["save-image-v1", "video-files-v1", "audio-files-v1"]
+    adapter: Literal["save-image-v1", "video-files-v1", "audio-files-v1", "model3d-glb-v1"]
     final_node_ids: list[str] = Field(min_length=1, max_length=20)
     expected_count: Literal[1]
-    history_field: Literal["images", "gifs", "videos", "audio"]
+    history_field: Literal["images", "gifs", "videos", "audio", "3d"]
     max_bytes: int = Field(gt=0, le=2147483648)
     mime_types: list[str] = Field(min_length=1)
 
@@ -73,8 +73,8 @@ class RuntimeProfile(StrictDTO):
 
 
 class WorkflowManifest(StrictDTO):
-    format_version: Literal["1.0", "1.1"]
-    task_type: Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio"]
+    format_version: Literal["1.0", "1.1", "1.2"]
+    task_type: Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"]
     workflow_api: dict[str, dict[str, Any]]
     bindings: list[Binding]
     output: OutputAdapter

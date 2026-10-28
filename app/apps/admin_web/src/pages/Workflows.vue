@@ -26,7 +26,7 @@ type Action = { key: string; description: string } & (
 const session = useSession(), snapshot = ref<components['schemas']['WorkflowDirectoryPage'] | null>(null), loading = ref(false), error = ref(''), page = ref(1)
 const rows = computed(() => snapshot.value?.data ?? []), visible = ref(!document.hidden), loadedAt = ref(0)
 const filters = reactive({ q: '', project_id: '', task_type: '' as Task | '', status: '' as 'active' | 'archived' | '' }), applied = ref({ ...filters })
-const taskNames: Record<Task, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考文图生图', text_to_video: '文生视频', references_to_video: '多参考文图生视频', text_to_audio: '音频生成' }
+const taskNames: Record<Task, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考文图生图', text_to_video: '文生视频', references_to_video: '多参考文图生视频', text_to_audio: '音频生成', image_to_3d: '单图生成 3D' }
 const metadataDirty = ref(false), restoreStatus = ref(false)
 const drawer = ref(false), editing = ref<Workflow | null>(null), detailLoading = ref(false), jsonText = ref('{}'), formError = ref(''), readonlyDraft = ref(false)
 const form = ref({ name: '', project_id: '', task_type: 'text_to_image' as Task }), scope = ref<ScopeOption | null>(null), fileInput = ref<HTMLInputElement | null>(null), fileLoading = ref(false)

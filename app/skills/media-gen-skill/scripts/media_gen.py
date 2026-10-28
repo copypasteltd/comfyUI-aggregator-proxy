@@ -75,7 +75,7 @@ class Api:
         if not path.startswith("/v1/") or path.startswith("//"):
             raise ClientError("Only the configured origin's /v1/ API is allowed")
         req = urllib.request.Request(self.base + path, data=body, method=method,  # noqa: S310 -- constructor validates HTTP(S) origin; path is restricted above.
-                                     headers={"Authorization": "Bearer " + self.key, "Accept": "application/json", "User-Agent": "media-gen-skill/1.0.0", **(headers or {})})
+                                     headers={"Authorization": "Bearer " + self.key, "Accept": "application/json", "User-Agent": "media-gen-skill/1.1.0", **(headers or {})})
         try:
             return self.opener.open(req, timeout=25)
         except urllib.error.HTTPError as exc:
@@ -222,7 +222,7 @@ def wait_job(api, job_id, timeout, output=None):
                 for entry in job.get("artifacts", []):
                     content = identifier(entry.get("id"), "content")
                     meta = api.request("GET", "/v1/content/" + content)
-                    ext = mimetypes.guess_extension(meta.get("media_type", "")) or ".bin"
+                    ext = ".glb" if meta.get("media_type") == "model/gltf-binary" else mimetypes.guess_extension(meta.get("media_type", "")) or ".bin"
                     saved.append(api.download(content, Path(output) / (content + ext)))
                 if not saved:
                     raise ClientError("Succeeded without visible artifacts; check artifacts:read scope")
@@ -241,9 +241,13 @@ def generation_request(api, args):
         raise ClientError("Model has no complete usage contract; choose another model")
     body = json.loads(json.dumps(usage["example_request"]))
     prompt = Path(args.prompt_file).read_text("utf-8") if args.prompt_file else args.prompt
-    if not prompt or len(prompt) > 8000:
-        raise ClientError("Provide a prompt of 1–8000 characters, or a structured prompt file")
-    body["input"]["prompt"] = prompt
+    if body["task_type"] == "image_to_3d":
+        if prompt is not None or args.negative_prompt is not None:
+            raise ClientError("This image-to-3D workflow accepts an image only; omit text prompts")
+    else:
+        if not prompt or len(prompt) > 8000:
+            raise ClientError("Provide a prompt of 1–8000 characters, or a structured prompt file")
+        body["input"]["prompt"] = prompt
     if args.negative_prompt is not None:
         body["input"]["negative_prompt"] = args.negative_prompt
     properties = usage["request_schema"]["properties"]
@@ -289,7 +293,7 @@ def parser():
     sub.add_parser("upload").add_argument("file")
     generate = sub.add_parser("generate")
     generate.add_argument("--model", required=True)
-    prompt = generate.add_mutually_exclusive_group(required=True)
+    prompt = generate.add_mutually_exclusive_group(required=False)
     prompt.add_argument("--prompt")
     prompt.add_argument("--prompt-file")
     generate.add_argument("--source-image")

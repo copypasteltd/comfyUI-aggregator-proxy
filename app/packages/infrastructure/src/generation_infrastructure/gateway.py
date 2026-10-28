@@ -78,6 +78,8 @@ class GatewayRepository:
 
     def create(self, gateway: GatewayIdentity, identity: BusinessIdentity, data: AdmissionCreate, request_id: str) -> dict[str, Any]:
         identity.require("jobs:create")
+        if data.request.task_type == "image_to_3d":
+            raise DomainError("gateway_capability_not_supported", "3D 使用原生任务 API；网关尚未定义独立结算", 422)
         identity.require("audio:create" if data.request.task_type == "text_to_audio" else "videos:create" if data.request.task_type.endswith("video") else "images:create")
         with self.sessions() as session:
             binding = session.scalar(select(ExternalIdentityBinding).where(ExternalIdentityBinding.gateway_id == gateway.gateway_id, ExternalIdentityBinding.key_id == identity.key_id, ExternalIdentityBinding.enabled.is_(True)))

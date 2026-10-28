@@ -63,7 +63,7 @@ class WorkflowCreate(StrictDTO):
     tenant_id: str
     project_id: str
     name: str = Field(min_length=1, max_length=128)
-    task_type: Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio"]
+    task_type: Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"]
     draft: dict[str, Any]
 
 

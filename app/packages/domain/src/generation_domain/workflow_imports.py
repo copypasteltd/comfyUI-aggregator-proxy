@@ -68,7 +68,7 @@ def source_format(value: Any) -> str:
     document = bounded_document(value)
     if "nodes" in document or "links" in document:
         raise DomainError("ui_workflow_not_supported", "请在 ComfyUI 导出 API 格式；当前不转换 UI 格式", 422)
-    manifest = document.get("format_version") in ("1.0", "1.1")
+    manifest = document.get("format_version") in ("1.0", "1.1", "1.2")
     graph = document.get("workflow_api") if manifest else document
     if not isinstance(graph, dict) or not 1 <= len(graph) <= 2000:
         raise invalid_source()

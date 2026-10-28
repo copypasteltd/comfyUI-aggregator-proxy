@@ -23,7 +23,7 @@ if gh release view "$RELEASE_TAG" --json isDraft > app/.local/skill-existing-rel
 else
   gh release create "$RELEASE_TAG" app/.local/skill-release/* \
     --verify-tag --draft --title "Media Gen Skill $version" \
-    --notes-file docs/127-MediaGenSkill-Release说明.md
+    --notes-file "docs/releases/media-gen-skill/$version.md"
 fi
 gh release download "$RELEASE_TAG" --dir app/.local/skill-download
 (cd app/.local/skill-download && sha256sum --check SHA256SUMS.txt)

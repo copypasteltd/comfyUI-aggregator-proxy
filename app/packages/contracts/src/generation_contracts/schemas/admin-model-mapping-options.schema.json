@@ -88,7 +88,8 @@
                     "references_to_image",
                     "text_to_video",
                     "references_to_video",
-                    "text_to_audio"
+                    "text_to_audio",
+                    "image_to_3d"
                   ]
                 },
                 "archived": {
@@ -200,7 +201,8 @@
                     "references_to_image",
                     "text_to_video",
                     "references_to_video",
-                    "text_to_audio"
+                    "text_to_audio",
+                    "image_to_3d"
                   ]
                 },
                 "version": {
@@ -263,7 +265,8 @@
                     "references_to_image",
                     "text_to_video",
                     "references_to_video",
-                    "text_to_audio"
+                    "text_to_audio",
+                    "image_to_3d"
                   ]
                 },
                 "defaults": {
@@ -406,13 +409,48 @@
                     "properties": {
                       "audio": {
                         "type": "null"
-                      },
-                      "defaults": {
-                        "required": [
-                          "size"
-                        ]
                       }
-                    }
+                    },
+                    "allOf": [
+                      {
+                        "if": {
+                          "properties": {
+                            "task_type": {
+                              "const": "image_to_3d"
+                            }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "defaults": {
+                              "not": {
+                                "anyOf": [
+                                  {
+                                    "required": [
+                                      "size"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "seconds"
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        "else": {
+                          "properties": {
+                            "defaults": {
+                              "required": [
+                                "size"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    ]
                   }
                 },
                 {

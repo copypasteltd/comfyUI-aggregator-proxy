@@ -10,7 +10,7 @@ def selected(selection: dict[str, Any], identifier: str) -> bool:
 
 
 def limit_value(limits: dict[str, Any], name: str) -> int | None:
-    item = limits.get(name, {"mode": "bounded", "value": 0}) if name == "daily_audio_milliseconds" else limits[name]
+    item = limits.get(name, {"mode": "bounded", "value": 0}) if name in ("daily_audio_milliseconds", "daily_mesh_count") else limits[name]
     return None if item["mode"] == "unlimited" else int(item["value"])
 
 

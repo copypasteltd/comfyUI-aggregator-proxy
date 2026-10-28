@@ -12,7 +12,7 @@ from sqlalchemy.engine import RowMapping
 from generation_infrastructure.settings import Settings
 from generation_infrastructure.worker_capacity import capacity_snapshot
 
-TASKS = ("text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "other")
+TASKS = ("text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d", "other")
 ACTIVE_STATES = ("admission_pending", "queued", "leased", "preparing", "submitting", "running", "collecting", "uploading", "verifying", "reconciling", "retry_wait", "cancel_requested")
 KINDS = ("customer", "validation")
 ERROR_CLASSES = ("oom", "output_invalid", "preparation", "storage", "timeout", "other")
@@ -94,7 +94,7 @@ class SnapshotReader:
 
     @staticmethod
     def _jobs(result: Snapshot, query: Query) -> None:
-        task_case = "CASE WHEN task_type IN ('text_to_image','image_to_image','references_to_image','text_to_video','references_to_video','text_to_audio') THEN task_type ELSE 'other' END"
+        task_case = "CASE WHEN task_type IN ('text_to_image','image_to_image','references_to_image','text_to_video','references_to_video','text_to_audio','image_to_3d') THEN task_type ELSE 'other' END"
         for kind in KINDS:
             for state in ACTIVE_STATES:
                 result.set("jobs_oldest_seconds", 0, state, kind)

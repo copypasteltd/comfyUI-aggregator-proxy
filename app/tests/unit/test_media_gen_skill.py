@@ -55,7 +55,7 @@ def server() -> Iterator[tuple[str, dict[str, Any]]]:
             if self.path.endswith("/download"):
                 self.wfile.write(PAYLOAD + (b"unexpected" if state["corrupt"] else b""))
             elif self.path.startswith("/v1/content/"):
-                self.wfile.write(json.dumps({"id": CONTENT, "bytes": len(PAYLOAD), "sha256": hashlib.sha256(PAYLOAD).hexdigest(), "media_type": "image/png"}).encode())
+                self.wfile.write(json.dumps({"id": CONTENT, "bytes": len(PAYLOAD), "sha256": hashlib.sha256(PAYLOAD).hexdigest(), "media_type": state.get("media_type", "image/png")}).encode())
             else:
                 self.wfile.write(json.dumps({"id": JOB, "status": state.get("job_status", "succeeded"), "artifacts": [{"id": CONTENT}], "note": "中文元数据"}).encode())
 
@@ -102,7 +102,7 @@ def test_download_verifies_and_never_overwrites_or_leaves_partial(server: Any, t
     assert not target.exists() and not list(tmp_path.glob("*.part"))
     state["corrupt"] = False
     assert api.download(CONTENT, target)["sha256"] == hashlib.sha256(PAYLOAD).hexdigest()
-    assert state["user_agent"] == "media-gen-skill/1.0.0"
+    assert state["user_agent"] == "media-gen-skill/" + (PATH.parents[1] / "VERSION").read_text("utf-8").strip()
     assert target.read_bytes() == PAYLOAD
     with pytest.raises(client.ClientError, match="already exists"):
         api.download(CONTENT, target)
@@ -157,3 +157,40 @@ def test_cli_outputs_utf8_when_windows_redirect_encoding_is_ascii(server: Any) -
     base, _ = server
     result = subprocess.run([sys.executable, str(PATH), "--base-url", base, "models"], env=dict(os.environ, MEDIA_GEN_API_KEY="synthetic-key", PYTHONIOENCODING="ascii"), capture_output=True, timeout=10, check=True)  # noqa: S603 -- checked-in client and an owned loopback fixture.
     assert json.loads(result.stdout.decode("utf-8"))["note"] == "中文元数据"
+
+
+def test_model3d_client_uses_image_only_and_declared_parameters() -> None:
+    class Fake:
+        uploads: list[str] = []
+
+        def describe(self, alias: str) -> dict[str, Any]:
+            return {"usage": {"example_request": {"model": alias, "task_type": "image_to_3d", "input": {"source_image": {"asset_id": "example"}}, "parameters": {"quality": "standard"}}, "request_schema": {"properties": {"input": {"properties": {"source_image": {}}}, "parameters": {"properties": {"quality": {"enum": ["standard"]}, "seed": {"minimum": 0, "maximum": 2147483647}}}}}, "references": {"exact_reference_count": 0}, "presets": [{"quality": "standard"}], "defaults": {"quality": "standard"}}}
+
+        def upload(self, path: str) -> dict[str, str]:
+            self.uploads.append(path)
+            return {"id": "asset_synthetic"}
+
+    args = client.parser().parse_args(["generate", "--model", "mesh", "--source-image", "toy.png", "--seed", "17"])
+    fake = Fake()
+    request = client.generation_request(fake, args)
+    assert request["input"] == {"source_image": {"asset_id": "asset_synthetic"}}
+    assert request["parameters"] == {"quality": "standard", "seed": 17}
+    args.prompt = "silently ignored text must be rejected"
+    with pytest.raises(client.ClientError, match="image only"):
+        client.generation_request(fake, args)
+    args.prompt = None
+    args.source_image = None
+    with pytest.raises(client.ClientError, match="requires --source-image"):
+        client.generation_request(fake, args)
+    args.source_image = "toy.png"
+    args.size = "720x1080"
+    with pytest.raises(client.ClientError, match="does not expose parameter size"):
+        client.generation_request(fake, args)
+
+
+def test_model3d_download_uses_canonical_extension(server: Any, tmp_path: Path) -> None:
+    base, state = server
+    state["media_type"] = "model/gltf-binary"
+    result = client.wait_job(client.Api(base, "synthetic-key"), JOB, 1, tmp_path)
+    target = Path(result["downloads"][0]["path"])
+    assert target.suffix == ".glb" and target.read_bytes() == PAYLOAD

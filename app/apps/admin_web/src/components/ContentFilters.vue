@@ -73,7 +73,7 @@ onUnmounted(() => { alive = false; stop(); document.removeEventListener('visibil
             <template #footer><el-button v-if="more[field.kind]" text :loading="loading[field.kind]" @click.stop="load(field.kind, '', true)">加载更多选项</el-button><span v-else class="muted">可输入名称搜索</span></template>
           </el-select>
         </el-form-item>
-        <el-form-item label="文件类型"><el-select v-model="draft.media_kind" clearable placeholder="全部类型"><el-option label="图片" value="image"/><el-option label="视频" value="video"/><el-option label="音频" value="audio"/></el-select></el-form-item>
+        <el-form-item label="文件类型"><el-select v-model="draft.media_kind" clearable placeholder="全部类型"><el-option label="图片" value="image"/><el-option label="视频" value="video"/><el-option label="音频" value="audio"/><el-option label="3D 模型" value="model"/></el-select></el-form-item>
         <el-form-item label="内容状态"><el-select v-model="draft.state" clearable placeholder="全部状态"><el-option v-for="(label, state) in contentStates" :key="state" :label="label" :value="state"/></el-select></el-form-item>
         <el-form-item label="关联任务"><el-input v-model="draft.job_id" clearable placeholder="job_…" :maxlength="36"/></el-form-item>
         <el-form-item label="标签"><el-input v-model="draft.tag" clearable placeholder="单个完整标签"/></el-form-item>

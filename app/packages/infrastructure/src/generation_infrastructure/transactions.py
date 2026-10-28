@@ -23,7 +23,7 @@ def lock_bucket_periods(session: Session, tenant: UUID, project: UUID, key: UUID
     # Both statements visit the same global -> tenant -> project -> key order.
     # Batch round trips without weakening row locks or the fresh-counter read.
     session.execute(insert(QuotaBucket).values([
-        {"scope_kind": kind, "scope_id": identifier, "period": day, "daily_jobs": 0, "unfinished_jobs": 0, "generating_jobs": 0, "daily_image_count": 0, "daily_video_milliseconds": 0, "daily_audio_milliseconds": 0}
+        {"scope_kind": kind, "scope_id": identifier, "period": day, "daily_jobs": 0, "unfinished_jobs": 0, "generating_jobs": 0, "daily_image_count": 0, "daily_video_milliseconds": 0, "daily_audio_milliseconds": 0, "daily_mesh_count": 0}
         for kind, identifier in scopes for day in days
     ]).on_conflict_do_nothing())
     buckets = list(session.scalars(select(QuotaBucket)

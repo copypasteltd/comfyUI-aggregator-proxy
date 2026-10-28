@@ -16,6 +16,7 @@ TASK_DESCRIPTIONS = {
     "references_to_image": "根据有序参考图片和文字生成图片 / Generate an image using ordered reference images and text.",
     "text_to_video": "根据文字提示生成视频 / Generate a video from text.",
     "references_to_video": "根据有序参考图片和文字生成视频 / Generate a video using ordered reference images and text.",
+    "image_to_3d": "根据一张物体图片生成自包含 GLB 三维网格 / Generate a self-contained GLB mesh from one image.",
     "text_to_audio": "通过 ComfyUI Workflow 生成音频 / Generate audio through a ComfyUI Workflow.",
 }
 PARAMETER_DESCRIPTIONS = {
@@ -52,17 +53,20 @@ def model_usage(alias: str, task_type: str, manifest: dict[str, Any], defaults: 
     properties["model"] = {"const": alias}
     properties["task_type"] = {"const": task_type}
     inputs = properties["input"]
-    input_names = {"prompt"}
+    input_names = set() if task_type == "image_to_3d" else {"prompt"}
+    inputs["required"] = [] if task_type == "image_to_3d" else ["prompt"]
     if "negative_prompt" in supported:
         input_names.add("negative_prompt")
     example_input: dict[str, Any] = {"prompt": text.example_prompt.strip() or ("A quiet garden in soft morning light" if task_type != "text_to_audio" else "An original gentle instrumental melody")}
+    if task_type == "image_to_3d":
+        example_input = {}
     slots = []
     reference_count = sum(f"reference_{i}" in sources for i in range(4))
-    if task_type == "image_to_image":
+    if task_type in ("image_to_image", "image_to_3d"):
         input_names.add("source_image")
         inputs["required"].append("source_image")
         example_input["source_image"] = {"asset_id": "asset_REPLACE_WITH_UPLOADED_ID"}
-        slots.append({"path": "input.source_image", "required": True, "description": "待重绘的源图片；先上传并使用返回的 asset_id。"})
+        slots.append({"path": "input.source_image", "required": True, "description": "生成依据的源图片；先上传并使用返回的 asset_id。"})
         if "mask" in supported and "mask" in sources:
             input_names.add("mask")
             slots.append({"path": "input.mask", "required": False, "description": "可选遮罩图片；仅此模型的绑定支持时传入。"})
@@ -117,7 +121,7 @@ def model_usage(alias: str, task_type: str, manifest: dict[str, Any], defaults: 
         JobCreate.model_validate(sample)
     detail = [{"path": "input." + name, "required": name in inputs["required"], "description": PARAMETER_DESCRIPTIONS[name], "rules": deepcopy(rules)} for name, rules in inputs["properties"].items() if name in PARAMETER_DESCRIPTIONS]
     detail += [{"path": "parameters." + name, "required": False, "description": PARAMETER_DESCRIPTIONS[name], "rules": deepcopy(rules)} for name, rules in parameters["properties"].items()]
-    scopes = ["models:read", "capabilities:read", "jobs:create", {"image": "images:create", "video": "videos:create", "audio": "audio:create"}[task_media_kind(task_type)], "jobs:read", "artifacts:read", "content:read", "content:download"]
+    scopes = ["models:read", "capabilities:read", "jobs:create", {"image": "images:create", "video": "videos:create", "audio": "audio:create", "model": "meshes:create"}[task_media_kind(task_type)], "jobs:read", "artifacts:read", "content:read", "content:download"]
     if slots:
         scopes.append("assets:upload")
     return ModelUsage.model_validate({

@@ -118,7 +118,7 @@ class QueueStatistics(OperationalView):
     success_rate_bps: Annotated[int, Field(ge=0, le=10000)] | None
     successful_duration: SuccessfulDuration
     buckets: list[StatisticsBucket] = Field(min_length=12, max_length=28)
-    task_types: list[TaskStatistics] = Field(min_length=7, max_length=7)
+    task_types: list[TaskStatistics] = Field(min_length=8, max_length=8)
     failure_classes: list[FailureStatistics] = Field(min_length=6, max_length=6)
 
     @model_validator(mode="after")

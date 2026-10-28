@@ -212,6 +212,8 @@ class LeaseRepository:
         preview = session.get(Job, job_id)
         if preview is None:
             return None
+        if preview.task_type == "image_to_3d" and "model3d-output-v1" not in node_guard.inventory.get("features", []):
+            return None
         if preview.task_type == "text_to_audio" and "audio-output-v1" not in node_guard.inventory.get("features", []):
             return None
         buckets = lock_buckets(session, preview.tenant_id, preview.project_id, preview.key_id, preview.accepted_period)

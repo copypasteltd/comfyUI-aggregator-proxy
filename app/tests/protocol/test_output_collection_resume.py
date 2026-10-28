@@ -20,7 +20,7 @@ from tests.unit.test_workflow_scalar_targets import scalar_manifest
 async def collector(tmp_path: Path, task_type: str) -> AsyncIterator[tuple[Execution, Path, Path, dict[str, Any], bytes]]:
     root = tmp_path / "comfy"
     (root / "output").mkdir(parents=True)
-    suffix = ".wav" if task_type == "text_to_audio" else ".mp4" if task_type.endswith("video") else ".png"
+    suffix = ".glb" if task_type == "image_to_3d" else ".wav" if task_type == "text_to_audio" else ".mp4" if task_type.endswith("video") else ".png"
     payload = b"Synthetic original completed output\x00" * 33000
     source = root / "output" / ("original" + suffix)
     source.write_bytes(payload)
@@ -48,7 +48,7 @@ async def test_six_capabilities_resume_only_identical_output_copies(tmp_path: Pa
             destination.write_bytes(payload if state == "complete" else payload[:1024 * 1024 + 7] if state == "partial" else b"")
         paths, specs = await execution.collect(history, execution.worker.settings.channels[0])
         assert paths == [destination] and destination.read_bytes() == source.read_bytes() == payload
-        assert specs == [{"position": 0, "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest(), "media_type": "audio/wav" if task_type == "text_to_audio" else "video/mp4" if task_type.endswith("video") else "image/png"}]
+        assert specs == [{"position": 0, "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest(), "media_type": "model/gltf-binary" if task_type == "image_to_3d" else "audio/wav" if task_type == "text_to_audio" else "video/mp4" if task_type.endswith("video") else "image/png"}]
         assert execution.worker.journal.outputs(execution.aid) is None
         assert not execution.worker.journal.pending()
 

@@ -82,6 +82,7 @@ class ScopeUsage(BaseModel):
     daily_image_count: int
     daily_video_milliseconds: int
     daily_audio_milliseconds: int = 0
+    daily_mesh_count: int = 0
 
 
 class TenantView(BaseModel):

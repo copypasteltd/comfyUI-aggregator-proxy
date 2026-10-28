@@ -8,7 +8,7 @@ const props = defineProps<{ filters: QueueFilters }>()
 type TaskType = NonNullable<components['schemas']['QueueStatistics']['task_type']>
 type Bucket = components['schemas']['StatisticsBucket']
 const window = ref<'1h' | '24h' | '7d'>('24h'), taskType = ref<TaskType | ''>(''), includeValidation = ref(false)
-const taskNames: Record<string, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考文图生图', text_to_video: '文生视频', references_to_video: '多参考文图生视频', text_to_audio: '音频生成', other: '其他历史类型' }
+const taskNames: Record<string, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考文图生图', text_to_video: '文生视频', references_to_video: '多参考文图生视频', text_to_audio: '音频生成', image_to_3d: '单图生成 3D', other: '其他历史类型' }
 const taskOptions = Object.entries(taskNames).filter(([key]) => key !== 'other')
 const failureNames: Record<string, string> = { out_of_memory: '显存不足', invalid_output: '产物不符合要求', preparation: '准备失败', execution: '执行失败', other: '其他失败', unclassified: '未分类' }
 const outcomes = [{ key: 'succeeded', label: '成功' }, { key: 'failed', label: '失败' }, { key: 'cancelled', label: '取消' }, { key: 'expired', label: '过期' }] as const

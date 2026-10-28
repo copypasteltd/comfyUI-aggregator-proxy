@@ -130,7 +130,7 @@ class Execution:
             raise DomainError("output_count_mismatch", "最终节点没有提供预期数量的产物")
         outputs, specs = [], []
         for i, item in enumerate(files):
-            if item.get("type") not in (("output",) if adapter["adapter"] == "audio-files-v1" else ("output", "temp")):
+            if item.get("type") not in (("output",) if adapter["adapter"] in ("audio-files-v1", "model3d-glb-v1") else ("output", "temp")):
                 raise DomainError("invalid_output_path", "不支持的 ComfyUI 输出目录")
             if local.connection_mode == "remote_http":
                 if comfy is None:
@@ -548,7 +548,7 @@ class Worker:
     async def run(self) -> None:
         background: list[asyncio.Task[None]] = []
         try:
-            features = ["audio-output-v1"] + (["remote-http-v1"] if any(c.connection_mode == "remote_http" for c in self.settings.channels) else [])
+            features = ["audio-output-v1", "model3d-output-v1"] + (["remote-http-v1"] if any(c.connection_mode == "remote_http" for c in self.settings.channels) else [])
             registration = await self.post("/internal/v1/register", {"protocol_version": "0.4.0", "boot_id": self.boot, "inventory": {"gpus": [gpu.model_dump() for gpu in self.settings.gpus], "features": features}})
             if registration.get("node_id") != self.node_id or registration.get("boot_id") != self.boot:
                 raise DomainError("worker_registration_identity_mismatch", "Worker 注册回执身份不匹配")

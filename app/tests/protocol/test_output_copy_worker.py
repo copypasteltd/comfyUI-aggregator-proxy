@@ -23,7 +23,7 @@ async def test_restarted_worker_reuses_original_output_without_generation(tmp_pa
     manifest = scalar_manifest(task_type)
     manifest["output"]["max_bytes"] = 2 * 1024 * 1024
     manifest["runtime_profiles"] = [{"gpu_hardware_id": "GPU-SYNTHETIC", "execution_timeout_seconds": 60}]
-    extension = ".wav" if task_type == "text_to_audio" else ".mp4" if task_type.endswith("video") else ".png"
+    extension = ".glb" if task_type == "image_to_3d" else ".wav" if task_type == "text_to_audio" else ".mp4" if task_type.endswith("video") else ".png"
     output = tmp_path / "comfy/output"
     output.mkdir(parents=True)
     source = output / ("original" + extension)

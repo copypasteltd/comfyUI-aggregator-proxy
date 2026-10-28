@@ -16,7 +16,7 @@ let alive = true, read: AbortController | null = null, write: AbortController | 
 const eligible = computed(() => options.value?.targets.filter(t => t.eligible) ?? [])
 const reasons: Record<string, string> = { operation_incomplete: '等待原操作全部结束', not_failed: '此目标没有失败，无需重试', failure_evidence_required: '缺少确定失败证据，请核对原操作', revalidation_required: '旧完成结果需重新应用配置并验证', already_retried: '已创建后续操作，请查看其结果', channel_unavailable: '渠道已删除或接入节点变化', configuration_changed: '渠道运行配置已变化，请重新同步当前版本', superseded: '已有更新的 Workflow 同步，请查看后续操作', management_busy: '渠道仍有管理指令，请等待或核对', release_unavailable: '原发布版本或绑定已不可用' }
 const states: Record<string, string> = { pending: '待执行', running: '执行中', succeeded: '已完成', failed: '失败', partial_failed: '部分失败' }
-const taskNames: Record<string, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '参考图生图', text_to_video: '文生视频', references_to_video: '参考图生视频', text_to_audio: '音频生成' }
+const taskNames: Record<string, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '参考图生图', text_to_video: '文生视频', references_to_video: '参考图生视频', text_to_audio: '音频生成', image_to_3d: '单图生成 3D' }
 function visible(id: string) { return alive && props.modelValue && props.operationId === id && props.active && !document.hidden && !!session.info && !session.ending && session.allows('workflows:publish') }
 function stopRead() { read?.abort(); read = null; if (readTimer) clearTimeout(readTimer); readTimer = null; reading.value = false }
 function suspend() { stopRead(); if (write) { uncertain.value = true; write.abort(); write = null; writing.value = false }; if (props.modelValue) emit('update:modelValue', false) }

@@ -8,7 +8,7 @@ from generation_domain.errors import DomainError
 from windows_worker.comfy_json import output_files
 
 
-@pytest.mark.parametrize("field", ["images", "gifs", "videos", "audio"])
+@pytest.mark.parametrize("field", ["images", "gifs", "videos", "audio", "3d"])
 @pytest.mark.parametrize("subfolder", ["omitted", "", "nested/folder"])
 def test_declared_fields_keep_standard_files_and_custom_extras(field: str, subfolder: str) -> None:
     entry: dict[str, Any] = {"filename": "synthetic.bin", "type": "output", "format": "custom-node-metadata"}

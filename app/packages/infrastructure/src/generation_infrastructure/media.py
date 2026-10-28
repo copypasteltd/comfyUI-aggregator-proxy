@@ -12,9 +12,12 @@ from generation_domain.media_types import AUDIO_MIME_TYPES
 
 from generation_infrastructure.audio_media import inspect_audio
 from generation_infrastructure.content import validate_image
+from generation_infrastructure.model3d_media import inspect_glb
 
 
 def inspect_media(path: Path, media_type: str) -> dict[str, Any]:
+    if media_type == "model/gltf-binary":
+        return inspect_glb(path)
     if media_type.startswith("audio/"):
         return inspect_audio(path, media_type)
     if media_type.startswith("image/"):
@@ -46,6 +49,10 @@ def inspect_media(path: Path, media_type: str) -> dict[str, Any]:
 
 
 def check_specification(metadata: dict[str, Any], execution: dict[str, Any], *, audio_spec: dict[str, Any] | None = None) -> None:
+    if metadata["media_type"] == "model/gltf-binary":
+        if any(name in execution for name in ("size", "seconds", "fps", "strength")):
+            raise DomainError("output_spec_mismatch", "3D 输出不能套用图像或音视频规格", 422)
+        return
     if metadata["media_type"].startswith("audio/"):
         if not audio_spec or metadata["media_type"] != AUDIO_MIME_TYPES[audio_spec["audio_format"]] or any(metadata[name] != audio_spec[name] for name in ("sample_rate", "channels")) or not 0 < metadata["duration_milliseconds"] <= int(Decimal(str(execution["seconds"])) * 1000):
             raise DomainError("output_spec_mismatch", "输出音频与冻结格式、采样率、声道或时长上限不符", 422)

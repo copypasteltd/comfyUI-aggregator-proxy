@@ -136,6 +136,7 @@ onBeforeUnmount(() => { alive = false; ++visibilityEpoch; stop(); document.remov
         <section class="content-preview" aria-label="文件预览">
           <div class="content-detail-actions"><strong>文件预览</strong><el-button v-if="canDownload && selected.preview_supported" :disabled="detailBusy || previewActive" @click="preview">预览文件</el-button><el-button v-if="previewActive" @click="clearPreview">关闭预览</el-button></div>
           <p class="muted">{{ selected.preview_supported && canDownload ? '点击后读取文件；离开页面将释放预览。' : '当前文件或权限不支持预览。' }}</p>
+          <p v-if="selected.media_type === 'model/gltf-binary'" class="muted">已验证的 GLB 三维模型，可通过授权下载后在 Blender 或兼容工具中打开。网格、顶点和三角面计数见上方规格。</p>
           <el-alert v-if="previewError" :title="previewError" type="warning" :closable="false"/>
           <img v-if="previewActive && selected.media_type.startsWith('image/')" :src="previewUrl" alt="所选内容预览" @error="previewFailed"/>
           <audio v-if="previewActive && selected.media_type.startsWith('audio/')" ref="audio" :src="previewUrl" controls preload="none" @error="previewFailed"/>

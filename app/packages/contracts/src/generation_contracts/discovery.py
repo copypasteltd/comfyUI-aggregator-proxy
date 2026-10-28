@@ -36,13 +36,13 @@ class PublicPreset(StrictDTO):
 
 
 class PublicOutput(StrictDTO):
-    media_types: list[Literal["image/png", "image/jpeg", "image/webp", "video/mp4", "video/webm", "audio/wav", "audio/flac", "audio/mpeg", "audio/ogg"]] = Field(min_length=1, max_length=9)
+    media_types: list[Literal["image/png", "image/jpeg", "image/webp", "video/mp4", "video/webm", "audio/wav", "audio/flac", "audio/mpeg", "audio/ogg", "model/gltf-binary"]] = Field(min_length=1, max_length=10)
     expected_count: Literal[1]
     max_bytes: int = Field(ge=1, le=2147483648)
 
 
 class PublishedCapability(PublishedModel):
-    task_type: Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio"]
+    task_type: Literal["text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"]
     asynchronous: Literal[True]
     release: ReleaseIdentity
     supported_parameters: list[Literal["size", "quality", "seed", "n", "seconds", "fps", "strength", "negative_prompt"]] = Field(max_length=8)

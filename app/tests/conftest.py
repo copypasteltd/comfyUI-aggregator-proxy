@@ -39,6 +39,25 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 @pytest.fixture
+def model3d_manifest() -> dict[str, Any]:
+    return {"format_version": "1.2", "task_type": "image_to_3d", "workflow_api": {"1": {"class_type": "LoadImage", "inputs": {"image": "source.png"}}, "2": {"class_type": "SyntheticMesh", "inputs": {"image": ["1", 0], "seed": 0}}, "3": {"class_type": "Save3DAdvanced", "inputs": {"model_3d": ["2", 0], "filename_prefix": ""}}}, "bindings": [{"source": "source_image", "node_id": "1", "input_name": "image"}, {"source": "seed", "node_id": "2", "input_name": "seed"}, {"source": "output_prefix", "node_id": "3", "input_name": "filename_prefix"}], "output": {"adapter": "model3d-glb-v1", "final_node_ids": ["3"], "history_field": "3d", "expected_count": 1, "max_bytes": 1048576, "mime_types": ["model/gltf-binary"]}, "presets": [{"quality": "standard", "values": {}}], "dependency_lock": {"comfy_commit": "a" * 40, "models": [], "custom_nodes": []}, "runtime_profiles": [], "supported_parameters": ["quality", "seed", "n"]}
+
+
+@pytest.fixture
+def model3d_glb(tmp_path: Path) -> Path:
+    import json
+    binary = struct.pack("<9f", 0, 0, 0, 1, 0, 0, 0, 1, 0) + struct.pack("<3H", 0, 1, 2)
+    document = {"asset": {"version": "2.0"}, "scene": 0, "scenes": [{"nodes": [0]}], "nodes": [{"mesh": 0}], "meshes": [{"primitives": [{"attributes": {"POSITION": 0}, "indices": 1}]}], "buffers": [{"byteLength": len(binary)}], "bufferViews": [{"buffer": 0, "byteOffset": 0, "byteLength": 36}, {"buffer": 0, "byteOffset": 36, "byteLength": 6}], "accessors": [{"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3", "min": [0, 0, 0], "max": [1, 1, 0]}, {"bufferView": 1, "componentType": 5123, "count": 3, "type": "SCALAR"}]}
+    json_bytes = json.dumps(document).encode()
+    json_bytes += b" " * (-len(json_bytes) % 4)
+    binary += b"\0" * (-len(binary) % 4)
+    data = struct.pack("<4sII", b"glTF", 2, 28 + len(json_bytes) + len(binary)) + struct.pack("<II", len(json_bytes), 0x4E4F534A) + json_bytes + struct.pack("<II", len(binary), 0x004E4942) + binary
+    path = tmp_path / "synthetic-triangle.glb"
+    path.write_bytes(data)
+    return path
+
+
+@pytest.fixture
 def audio_manifest() -> dict[str, Any]:
     return {"format_version": "1.1", "task_type": "text_to_audio", "workflow_api": {"1": {"class_type": "SyntheticAudio", "inputs": {"text": "", "seed": 0}}, "2": {"class_type": "SaveAudio", "inputs": {"audio": ["1", 0], "filename_prefix": ""}}}, "bindings": [{"source": "prompt", "node_id": "1", "input_name": "text"}, {"source": "seed", "node_id": "1", "input_name": "seed"}, {"source": "output_prefix", "node_id": "2", "input_name": "filename_prefix"}], "output": {"adapter": "audio-files-v1", "final_node_ids": ["2"], "history_field": "audio", "expected_count": 1, "max_bytes": 1048576, "mime_types": ["audio/wav"]}, "presets": [{"quality": "standard", "seconds": 2, "audio_format": "wav", "sample_rate": 24000, "channels": 1, "values": {}}], "dependency_lock": {"comfy_commit": "a" * 40, "models": [], "custom_nodes": []}, "runtime_profiles": [], "supported_parameters": ["quality", "seconds", "seed", "n"]}
 

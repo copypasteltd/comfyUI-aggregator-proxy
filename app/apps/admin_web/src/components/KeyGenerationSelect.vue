@@ -15,7 +15,7 @@ const context = computed(() => JSON.stringify([props.kind, props.projectId]))
 const available = computed(() => new Map([...Object.values(selected.value), ...rows.value].filter(item => !unresolved.value.includes(item.value)).map(item => [item.value, item])))
 const valid = computed(() => props.modelValue.length <= 1000 && !resolving.value && !resolveError.value && props.modelValue.every(value => available.value.has(value)))
 const options = computed(() => [...new Set([...props.modelValue, ...rows.value.map(item => item.value)])].map(value => ({ value, option: available.value.get(value) })))
-const taskNames: Record<string, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考图生图', text_to_video: '文生视频', references_to_video: '多参考图生视频', text_to_audio: 'Workflow 音频' }
+const taskNames: Record<string, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考图生图', text_to_video: '文生视频', references_to_video: '多参考图生视频', text_to_audio: 'Workflow 音频', image_to_3d: '单图生成 3D' }
 function label(option: Option | undefined, value: string) {
   if (!option) return value + (resolving.value ? ' · 核对中' : ' · 不可用，请移除')
   if (option.kind === 'models') return [option.value, taskNames[option.task_type], option.published ? '' : '未发布'].filter(Boolean).join(' · ')

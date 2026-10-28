@@ -10,11 +10,13 @@ from generation_domain.media_types import (
     AUDIO_MIME_TYPES,
     MAX_AUDIO_BYTES,
     MAX_AUDIO_MILLISECONDS,
+    MAX_MODEL3D_BYTES,
+    MODEL3D_MIME,
     task_media_kind,
 )
 from generation_domain.values import fingerprint
 
-TASK_TYPES = frozenset({"text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio"})
+TASK_TYPES = frozenset({"text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"})
 
 
 def matching_presets(manifest: dict[str, Any], parameters: dict[str, Any]) -> list[dict[str, Any]]:
@@ -62,7 +64,8 @@ def _preset_target(graph: dict[str, Any], target: str, value: Any) -> tuple[str,
 def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any]:
     required = {"format_version", "task_type", "workflow_api", "bindings", "output", "presets", "dependency_lock", "runtime_profiles", "supported_parameters"}
     audio = task_type == "text_to_audio"
-    if not required <= manifest.keys() or manifest["format_version"] != ("1.1" if audio else "1.0") or manifest["task_type"] != task_type or task_type not in TASK_TYPES:
+    model3d = task_type == "image_to_3d"
+    if not required <= manifest.keys() or manifest["format_version"] != ("1.2" if model3d else "1.1" if audio else "1.0") or manifest["task_type"] != task_type or task_type not in TASK_TYPES:
         raise DomainError("invalid_manifest", "发布包缺少必要字段或能力类型不匹配", 422)
     graph = manifest["workflow_api"]
     if not isinstance(graph, dict) or not graph or "nodes" in graph or "links" in graph or len(graph) > 2000:
@@ -89,7 +92,7 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
             raise DomainError("invalid_binding", "绑定来源不受支持或重复写同一输入", 422)
         targets.add((binding["node_id"], binding["input_name"]))
         sources.add(source)
-    needed = {"prompt", "seed", "output_prefix"}
+    needed = {"seed", "output_prefix", "source_image"} if model3d else {"prompt", "seed", "output_prefix"}
     if task_type == "image_to_image":
         needed.add("source_image")
     if task_type.startswith("references_"):
@@ -102,12 +105,14 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
     if slots and slots != set(range(len(slots))):
         raise DomainError("invalid_reference_slots", "参考槽位必须从 reference_0 开始连续绑定", 422)
     output = manifest["output"]
-    if not isinstance(output, dict) or output.get("adapter") not in ("save-image-v1", "video-files-v1", "audio-files-v1") or output.get("expected_count") != 1 or not output.get("final_node_ids") or not all(n in graph for n in output["final_node_ids"]):
+    if not isinstance(output, dict) or output.get("adapter") not in ("save-image-v1", "video-files-v1", "audio-files-v1", "model3d-glb-v1") or output.get("expected_count") != 1 or not output.get("final_node_ids") or not all(n in graph for n in output["final_node_ids"]):
         raise DomainError("invalid_output_adapter", "输出适配必须选择真实的最终节点，主产物数量为 1", 422)
-    if output["adapter"] != {"image": "save-image-v1", "video": "video-files-v1", "audio": "audio-files-v1"}[task_media_kind(task_type)]:
+    if output["adapter"] != {"image": "save-image-v1", "video": "video-files-v1", "audio": "audio-files-v1", "model": "model3d-glb-v1"}[task_media_kind(task_type)]:
         raise DomainError("output_type_mismatch", "输出适配器与能力类型不匹配", 422)
     if audio and (output.get("history_field") != "audio" or not 0 < output.get("max_bytes", 0) <= MAX_AUDIO_BYTES or not output.get("mime_types") or not set(output["mime_types"]) <= set(AUDIO_MIME_TYPES.values()) or sources & {"width", "height", "fps", "strength", "source_image", "mask"} or any(source.startswith("reference_") for source in sources)):
         raise DomainError("invalid_audio_adapter", "音频必须声明受控 audio 文件输出，不接受图像参数绑定", 422)
+    if model3d and (output.get("history_field") != "3d" or not 0 < output.get("max_bytes", 0) <= MAX_MODEL3D_BYTES or output.get("mime_types") != [MODEL3D_MIME] or sources - {"seed", "source_image", "output_prefix"} or set(manifest["supported_parameters"]) - {"quality", "seed", "n"}):
+        raise DomainError("invalid_model3d_adapter", "3D 仅支持自包含 GLB、单张源图和受控质量预设", 422)
     reachable: set[str] = set()
     pending = list(output["final_node_ids"])
     while pending:
@@ -123,8 +128,10 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
     if not isinstance(manifest["presets"], list) or not manifest["presets"]:
         raise DomainError("presets_required", "至少配置一个受控规格预设", 422)
     for preset in manifest["presets"]:
-        if not all(name in preset for name in (("quality", "seconds", "audio_format", "sample_rate", "channels", "values") if audio else ("quality", "size", "values"))) or not isinstance(preset["values"], dict):
+        if not all(name in preset for name in (("quality", "seconds", "audio_format", "sample_rate", "channels", "values") if audio else ("quality", "values") if model3d else ("quality", "size", "values"))) or not isinstance(preset["values"], dict):
             raise DomainError("invalid_preset", "预设缺少 quality、size 或固定节点参数", 422)
+        if model3d and any(preset.get(name) is not None for name in ("size", "seconds", "audio_format", "sample_rate", "channels")):
+            raise DomainError("invalid_model3d_preset", "3D 预设不能声明图像、视频或音频规格", 422)
         if audio:
             try:
                 duration = Decimal(str(preset["seconds"]))
@@ -183,10 +190,10 @@ def compile_graph(manifest: dict[str, Any], execution: dict[str, Any], inputs: d
     for (node_id, input_name), value in preset_writes:
         graph[node_id]["inputs"][input_name] = value
     dimensions = {}
-    if manifest.get("task_type") != "text_to_audio":
+    if task_media_kind(manifest.get("task_type", "")) in ("image", "video"):
         width, height = (int(v) for v in parameters["size"].split("x"))
         dimensions = {"width": width, "height": height}
-    values = {**parameters, **inputs, **dimensions, "prompt": execution["input"]["prompt"], "negative_prompt": execution["input"].get("negative_prompt", ""), "output_prefix": relative_file(output_prefix)}
+    values = {**parameters, **inputs, **dimensions, "prompt": execution["input"].get("prompt", ""), "negative_prompt": execution["input"].get("negative_prompt", ""), "output_prefix": relative_file(output_prefix)}
     for i, reference in enumerate(execution["input"].get("references", [])):
         if "weight" in reference:
             values[f"reference_weight_{i}"] = reference["weight"]

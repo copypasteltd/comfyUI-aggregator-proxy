@@ -89,6 +89,7 @@ def owned_job(session: Session, identity: BusinessIdentity, identifier: UUID, *,
 def terminal_accounting(session: Session, job: Job, buckets: dict[Any, Any], target: str, *, audio_milliseconds: int | None = None) -> None:
     video = job.task_type.endswith("video")
     audio = job.task_type == "text_to_audio"
+    model3d = job.task_type == "image_to_3d"
     milliseconds = int(Decimal(str(job.execution["parameters"].get("seconds", 0))) * 1000)
     actual_audio = audio_milliseconds if audio and target == "succeeded" else 0
     if audio and target == "succeeded" and (type(actual_audio) is not int or not 0 < actual_audio <= milliseconds):
@@ -98,8 +99,9 @@ def terminal_accounting(session: Session, job: Job, buckets: dict[Any, Any], tar
         if period == "active":
             bucket.unfinished_jobs -= 1
         elif target != "succeeded":
-            bucket.daily_image_count -= 0 if video or audio else 1
+            bucket.daily_image_count -= 0 if video or audio or model3d else 1
             bucket.daily_video_milliseconds -= milliseconds if video else 0
+            bucket.daily_mesh_count -= 1 if model3d else 0
         if period != "active" and audio:
             bucket.daily_audio_milliseconds -= milliseconds - actual_audio
     job.terminal_at = utcnow()
@@ -109,10 +111,10 @@ def terminal_accounting(session: Session, job: Job, buckets: dict[Any, Any], tar
     input_objects = select(Asset.object_id).join(JobAssetReference, JobAssetReference.asset_id == Asset.id).where(JobAssetReference.job_id == job.id)
     for obj in session.scalars(select(ObjectRecord).where(ObjectRecord.id.in_(input_objects)).order_by(ObjectRecord.id).with_for_update()):
         obj.expires_at = max(obj.expires_at, job.terminal_at + timedelta(hours=24))
-    session.add(UsageLedger(job_id=job.id, key_id=job.key_id, image_count=1 if target == "succeeded" and not video and not audio else 0, video_milliseconds=milliseconds if target == "succeeded" and video else 0, audio_milliseconds=actual_audio, outcome=target))
+    session.add(UsageLedger(job_id=job.id, key_id=job.key_id, image_count=1 if target == "succeeded" and not video and not audio and not model3d else 0, video_milliseconds=milliseconds if target == "succeeded" and video else 0, audio_milliseconds=actual_audio, mesh_count=1 if target == "succeeded" and model3d else 0, outcome=target))
     admission = session.scalar(select(GatewayAdmission).where(GatewayAdmission.job_id == job.id))
     if admission:
-        session.add(OutboxEvent(kind="gateway.settlement", aggregate_id=job.id, payload={"gateway_id": str(admission.gateway_id), "job_id": public_id("job", job.id), "external_task_ref": admission.external_task_ref, "authorization_ref": admission.authorization_ref, "price_version": admission.price_version, "outcome": target, "image_count": 1 if target == "succeeded" and not video and not audio else 0, "video_milliseconds": milliseconds if target == "succeeded" and video else 0, **({"audio_milliseconds": actual_audio} if audio else {})}))
+        session.add(OutboxEvent(kind="gateway.settlement", aggregate_id=job.id, payload={"gateway_id": str(admission.gateway_id), "job_id": public_id("job", job.id), "external_task_ref": admission.external_task_ref, "authorization_ref": admission.authorization_ref, "price_version": admission.price_version, "outcome": target, "image_count": 1 if target == "succeeded" and not video and not audio and not model3d else 0, "video_milliseconds": milliseconds if target == "succeeded" and video else 0, **({"audio_milliseconds": actual_audio} if audio else {})}))
 
 
 class JobRepository:
@@ -179,7 +181,7 @@ class JobRepository:
                     raise DomainError("retry_requires_origin", "网关任务须重新预授权；验证任务须使用 Workflow 验证入口", 409)
             BusinessIdentity(key.tenant_id, key.project_id, key.id, policy).require("jobs:create")
             kind = task_media_kind(request["task_type"])
-            BusinessIdentity(key.tenant_id, key.project_id, key.id, policy).require({"image": "images:create", "video": "videos:create", "audio": "audio:create"}[kind])
+            BusinessIdentity(key.tenant_id, key.project_id, key.id, policy).require({"image": "images:create", "video": "videos:create", "audio": "audio:create", "model": "meshes:create"}[kind])
             self._asset_hashes(session, identity, request, require_ready=True)
             if not selected(policy["models"], request["model"]):
                 raise DomainError("model_denied", "模型未授权", 403)
@@ -212,30 +214,33 @@ class JobRepository:
                 raise DomainError("no_authorized_channel", "没有授权渠道", 422)
             parameters = {**model.defaults, **request.get("parameters", {})}
             parameters.setdefault("seed", secrets.randbelow(2147483648))
-            if kind != "audio":
+            if kind in ("image", "video"):
                 parameters.setdefault("size", "1024x1024")
             parameters.setdefault("quality", "standard")
             parameters.setdefault("n", 1)
             if release.manifest.get("presets") and len(matching_presets(release.manifest, parameters)) != 1:
                 raise DomainError("unsupported_specification", "规格必须对应唯一冻结预设", 422)
+            if kind == "model" and set(parameters) - {"quality", "seed", "n"}:
+                raise DomainError("unsupported_specification", "3D 仅接受冻结质量、seed 和 n=1", 422)
             video = request["task_type"].endswith("video")
             audio = kind == "audio"
-            width, height = (0, 0) if audio else (int(x) for x in parameters["size"].split("x"))
+            model3d = kind == "model"
+            width, height = (0, 0) if audio or model3d else (int(x) for x in parameters["size"].split("x"))
             duration = int(Decimal(str(parameters.get("seconds", 0))) * 1000)
             if (video or audio) and duration <= 0:
                 raise DomainError("duration_required", "视频/音频模型必须配置有效时长", 422)
             spec = policy["spec_limits"]
-            if (not audio and width * height > spec["video_max_pixels" if video else "image_max_pixels"]) or duration > (spec.get("audio_max_milliseconds", 0) if audio else spec["video_max_milliseconds"]) or len(request["input"].get("references", [])) > spec["max_references"] or parameters["quality"] not in spec["allowed_qualities"]:
+            if (not audio and not model3d and width * height > spec["video_max_pixels" if video else "image_max_pixels"]) or duration > (spec.get("audio_max_milliseconds", 0) if audio else spec["video_max_milliseconds"]) or len(request["input"].get("references", [])) > spec["max_references"] or parameters["quality"] not in spec["allowed_qualities"]:
                 raise DomainError("spec_denied", "生成规格超过授权限制", 403)
             enforce_limit({"unfinished_jobs": {"mode": "bounded", "value": GLOBAL_UNFINISHED_JOBS}}, "unfinished_jobs", buckets["0_global", "active"].unfinished_jobs, 1)
             for kind, limits in [("1_tenant", tenant.limits), ("2_project", project.limits), ("3_key", policy["limits"])]:
-                for name, addition in [("daily_jobs", 1), ("daily_image_count", 0 if video or audio else 1), ("daily_video_milliseconds", duration if video else 0), ("daily_audio_milliseconds", duration if audio else 0)]:
+                for name, addition in [("daily_jobs", 1), ("daily_image_count", 0 if video or audio or model3d else 1), ("daily_video_milliseconds", duration if video else 0), ("daily_audio_milliseconds", duration if audio else 0), ("daily_mesh_count", 1 if model3d else 0)]:
                     enforce_limit(limits, name, getattr(buckets[kind, period], name), addition)
                 enforce_limit(limits, "unfinished_jobs", buckets[kind, "active"].unfinished_jobs, 1)
             execution = {"release_id": public_id("wfr", release.id), "release_digest": release.digest, "parameters": parameters, "input": request["input"], "asset_hashes": asset_hashes}
             if audio:
                 execution["audio_spec"] = audio_specification(release.manifest, parameters)
-            job = Job(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, model_alias=model.alias, task_type=model.task_type, state="admission_pending" if pending_gateway else "queued", release_id=release.id, request=request, execution=execution, request_fingerprint=digest, execution_fingerprint=fingerprint(execution), eligible_channels=eligible, deadline=now + timedelta(seconds=3600 if video or audio else 900), accepted_period=period)
+            job = Job(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, model_alias=model.alias, task_type=model.task_type, state="admission_pending" if pending_gateway else "queued", release_id=release.id, request=request, execution=execution, request_fingerprint=digest, execution_fingerprint=fingerprint(execution), eligible_channels=eligible, deadline=now + timedelta(seconds=3600 if video or audio or model3d else 900), accepted_period=period)
             job.is_validation = validation_channel is not None
             job.retry_of = retry_of
             job.accepted_at = None if pending_gateway else now
@@ -253,9 +258,10 @@ class JobRepository:
                     bucket.unfinished_jobs += 1
                 else:
                     bucket.daily_jobs += 0 if pending_gateway else 1
-                    bucket.daily_image_count += 0 if video or audio else 1
+                    bucket.daily_image_count += 0 if video or audio or model3d else 1
                     bucket.daily_video_milliseconds += duration if video else 0
                     bucket.daily_audio_milliseconds += duration if audio else 0
+                    bucket.daily_mesh_count += 1 if model3d else 0
             record_change(session, audit_actor or public_id("key", key.id), "job.accepted", job.id, request_id, {"retry_of": public_id("job", retry_of)} if retry_of else None)
             return job_projection(job, sensitive="content:sensitive" in policy["scopes"], include_video_specification=True)
 

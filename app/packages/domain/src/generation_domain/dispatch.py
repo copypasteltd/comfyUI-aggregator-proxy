@@ -41,11 +41,13 @@ def effective_priority(priority: int, created_at: datetime, now: datetime) -> in
 
 
 def estimated_service(task_type: str, approved_profile: Mapping[str, Any] | None) -> tuple[int, str]:
-    if task_type not in {"text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio"}:
+    if task_type not in {"text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"}:
         raise ValueError("Unknown generation task type")
     observed = approved_profile.get("warm_p95_milliseconds") if approved_profile else None
     if type(observed) is int and observed > 0:
         return min(MAXIMUM_SERVICE_MILLISECONDS, max(MINIMUM_SERVICE_MILLISECONDS, observed)), "approved_profile"
+    if task_type == "image_to_3d":
+        return 300_000, "model3d_baseline"
     if task_type.endswith("video"):
         return VIDEO_BASELINE_MILLISECONDS, "video_baseline"
     if task_type == "text_to_audio":

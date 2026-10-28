@@ -30,7 +30,7 @@ class ContentQuery(BaseModel):
     workflow_id: WorkflowId | None = None
     release_id: str | None = Field(None, pattern=r"^wfr_[a-f0-9]{32}$")
     tag: Tag | None = None
-    media_kind: Literal["image", "video", "audio"] | None = None
+    media_kind: Literal["image", "video", "audio", "model"] | None = None
     state: ContentState | None = None
     created_from: int | None = Field(None, ge=0, le=4102444800)
     created_before: int | None = Field(None, ge=0, le=4102444800)

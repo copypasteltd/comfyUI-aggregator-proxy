@@ -1,6 +1,6 @@
 ---
 name: media-gen-skill
-description: Discover available models and generate images, videos or audio through the ComfyUI Aggregator at gen.sub2share.xyz or another configured deployment. Use when the user wants to call this media generation API, including reference image uploads and asynchronous result downloads.
+description: Discover available models and generate images, videos, audio or GLB 3D models through the ComfyUI Aggregator at gen.sub2share.xyz or another configured deployment. Use when the user wants to call this media generation API, including reference image uploads and asynchronous result downloads.
 ---
 
 # Media Gen
@@ -42,6 +42,14 @@ Supply only the number of references required by this model. Do not assume a tex
 python scripts/media_gen.py submit request.json --wait --output-dir ./media-output
 ```
 
+For an advertised `image_to_3d` model, pass one source image and omit text prompts. The current static-mesh profile returns one self-contained GLB 2.0; it accepts an advertised quality and seed, without image size, video duration or arbitrary geometry settings. Discover the actual alias before generating:
+
+```bash
+python scripts/media_gen.py generate --model MODEL_ALIAS --source-image robot.png --seed 17 --wait --timeout 1800 --output-dir ./model-output
+```
+
+This requires `meshes:create` and an explicitly enabled 3D quota at Tenant, Project and Key levels. The helper saves GLB with the canonical `.glb` extension and verifies its bytes and hash. The current native 3D endpoint does not imply Sub2API 3D billing support.
+
 Every submit saves a request state file **before POST**, including the exact body and Idempotency-Key, but no API key. The client prints its path. If a response is lost, resume that file with the same Key; do not create a fresh request or change its body merely because a local wait timed out.
 
 ```bash
@@ -51,6 +59,6 @@ python scripts/media_gen.py wait JOB_ID --timeout 900 --download --output-dir ./
 python scripts/media_gen.py download CONTENT_ID --output ./result.mp4
 ```
 
-The native flow is `POST /v1/jobs` → `GET /v1/jobs/{id}` → `artifacts[].id` → content metadata and authenticated download. It is asynchronous for all three media kinds. A wait timeout leaves the server task intact. `failed`, `cancelled` and `expired` are terminal; `reconciling` means execution is uncertain and is not permission to resubmit. Download successful artifacts before `expires_at` (normally eight hours after success). The client verifies byte count and SHA-256 and never sends the Key to another origin.
+The native flow is `POST /v1/jobs` → `GET /v1/jobs/{id}` → `artifacts[].id` → content metadata and authenticated download. It is asynchronous for every media kind. A wait timeout leaves the server task intact. `failed`, `cancelled` and `expired` are terminal; `reconciling` means execution is uncertain and is not permission to resubmit. Download successful artifacts before `expires_at` (normally eight hours after success). The client verifies byte count and SHA-256 and never sends the Key to another origin.
 
 Read [references/api.md](references/api.md) for native JSON, reference roles/weights, scopes, errors and recovery. Run `python scripts/media_gen.py --help` and the subcommand's `--help` for options. Generating or uploading uses the user's authorized service resources; this skill does not authorize publishing content, contacting others, or managing ComfyUI/servers.

@@ -122,7 +122,8 @@ class MappingPreset(StrictDTO):
     def media(self) -> Self:
         audio = self.task_type == "text_to_audio"
         video = self.task_type in ("text_to_video", "references_to_video")
-        if (audio and (not self.audio or self.defaults.size is not None)) or (not audio and (self.audio is not None or self.defaults.size is None)):
+        model3d = self.task_type == "image_to_3d"
+        if (audio and (not self.audio or self.defaults.size is not None)) or (not audio and (self.audio is not None or (self.defaults.size is None) != model3d)):
             raise ValueError("Preset metadata must match the media type")
         if (audio or video) != (self.defaults.seconds is not None):
             raise ValueError("Preset duration must match the media type")

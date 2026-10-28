@@ -80,6 +80,17 @@ def admission_body() -> dict[str, Any]:
     return {"provider_request_id": str(uuid4()), "external_task_ref": "synthetic-public-task-" + uuid4().hex, "price_version": "synthetic-price-v1", "authorization_ref": "synthetic-reservation-" + uuid4().hex, "request": {"model": "synthetic-image", "task_type": "text_to_image", "input": {"prompt": "Synthetic gateway protocol request"}}}
 
 
+def test_gateway_rejects_model3d_without_creating_image_billing(gateway_client: tuple[TestClient, dict[str, str], dict[str, Any]], pg: sessionmaker[Session]) -> None:
+    client, headers, _ = gateway_client
+    body = admission_body()
+    body["request"] = {"model": "synthetic-mesh", "task_type": "image_to_3d", "input": {"source_image": {"asset_id": "asset_" + "a" * 32}}}
+    response = client.post("/gateway/v1/admissions", json=body, headers=headers)
+    assert response.status_code == 422 and response.json()["error"]["code"] == "gateway_capability_not_supported"
+    with pg() as session:
+        assert session.scalar(select(func.count()).select_from(GatewayAdmission)) == 0
+        assert session.scalar(select(func.count()).select_from(UsageLedger)) == 0
+
+
 def test_gateway_cursor_collections_scope_and_shared_read_revoke(gateway_client: tuple[TestClient, dict[str, str], dict[str, Any]], pg: sessionmaker[Session], catalog: dict[str, Any]) -> None:
     from generation_infrastructure.jobs import JobRepository
     client, headers, info = gateway_client
