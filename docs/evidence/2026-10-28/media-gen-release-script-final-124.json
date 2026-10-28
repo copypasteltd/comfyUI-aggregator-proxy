@@ -1,0 +1,24 @@
+{
+  "format_version": 1,
+  "at": "2026-10-28T03:02:21.795881+00:00",
+  "passed": true,
+  "scope": "Extracted release script uses LF bytes; native Git Bash syntax and reject-before-network guards pass. Equivalent publication body ran successfully in the tagged GitHub workflow; no second publication is claimed.",
+  "local_virtualization_used": false,
+  "guards": [
+    {
+      "guard": "Actions-only",
+      "exit_code": 1,
+      "no_output": true
+    },
+    {
+      "guard": "exact-version-tag",
+      "exit_code": 1,
+      "no_output": true
+    }
+  ],
+  "files_sha256": {
+    "app/scripts/publish-media-gen-skill.sh": "9d937077052ba26213034cfa282f2b273fe4a25d288f9a6b81a3dc50d858e7ac",
+    ".github/workflows/media-gen-skill-release.yml": "e1532efd2a96ea5f92f5c0a3c233ec21c05ea3116981eb8601f11488cfc1c5d6"
+  },
+  "actual_published_release_workflow": "https://github.com/copypasteltd/comfyUI-aggregator-proxy/actions/runs/40618820986"
+}

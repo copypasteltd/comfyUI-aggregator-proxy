@@ -1,5 +1,7 @@
 # Documentation index
 
+[124 · Deployed delivery](124-模型使用说明与公开Skill交付.md): ten model usage contracts, a published [Skill Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0), 10-minute reclamation on three devices and four actual media jobs. [Installation](126-MediaGenSkill安装与调用.md) · [Release notes](127-MediaGenSkill-Release说明.md) · [Actual media](media/media-gen-124/README.en.md).
+
 [123 · Idle resource release and multi-device model pools](./123-空闲资源释放与多设备模型池调度设计.md): distinguish GPU slot release from model/RAM/VRAM cleanup. No 600-second idle policy exists, and none of the ten published aliases has multiple channels. Specify instance-wide maintenance, durable idle epochs, conditional execution/completion acknowledgement, shared-instance races and global fair pool offers. Ten development items and fourteen acceptance groups remain pending; the [decision policy](contracts/comfy-idle-and-pool-policy.json) and [read-only audit](evidence/2026-10-28/runtime-idle-and-pool-audit-123.json) are design evidence, not runtime acceptance.
 
 [122 · RTX 5070 HTTP onboarding](122-RTX5070纯HTTP接入与调用验证.md): select and publish only three complete Workflows out of 78. Six actual generation/download runs and 617 related regressions pass. A native Linux HTTP Worker requires no Windows-MCP; the platform now has three channels and ten published aliases. [Selected packages and English usage](examples/5070/README.en.md), [actual screenshots, recording and GIFs](media/5070-workflows-122/README.en.md) are included.

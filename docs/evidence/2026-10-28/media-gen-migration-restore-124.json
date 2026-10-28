@@ -1,0 +1,28 @@
+{
+  "format_version": 1,
+  "at": "2026-10-28T01:09:05.197964+00:00",
+  "passed": true,
+  "scope": "Native PostgreSQL 18 restore of the pre-deployment production archive into an owned local temporary database, forward/backward/forward migration preserving core row counts. Does not restore object storage or accept full disaster recovery.",
+  "backup_sha256": "bd1195975aed4bd9716da36f4b230f33593ca5fd574d68789be105566839b250",
+  "backup_bytes": 5457405,
+  "archive_list_verified": true,
+  "restored_core_rows": {
+    "jobs": 26,
+    "artifacts": 23,
+    "public_models": 12,
+    "channels": 3,
+    "workflow_releases": 12
+  },
+  "migrated_core_rows": {
+    "jobs": 26,
+    "artifacts": 23,
+    "public_models": 12,
+    "channels": 3,
+    "workflow_releases": 12
+  },
+  "migration_head": "02d124a00002",
+  "downgrade_and_reupgrade_verified": true,
+  "owned_temporary_database_dropped": true,
+  "full_disaster_recovery_verified": false,
+  "virtualization_used": false
+}

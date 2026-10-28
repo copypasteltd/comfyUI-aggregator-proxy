@@ -2,6 +2,11 @@
 
 ## 2026-10-28 · 124 · Model usage, MediaGen Skill and HTTP idle reclamation
 
+- 已上线 `linux-20261028.124.2`，迁移头 `02d124a00002`；10 个公开模型说明、三台 600 秒自动回收和四条图片/视频/参考视频/音频调用已通过实际域名验证，临时 Key 已撤销。
+- Publish [Media Gen Skill 1.0.0](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0), then independently download and verify all assets. Version-tag automation uses repository credentials; its implementation stays under app/scripts.
+- 修复未知观测清空空闲基线、客户端误读 state、Windows UTF-8 和默认 User-Agent 的域名兼容问题。未知结果继续阻止回收；原生成任务 ID 恢复查询，不重复提交。
+- Add actual screenshots, original-speed MP4/GIF, redacted API responses and metadata-stripped samples. Initial sources passed 16 gates/4391 Python cases; final fixes passed 1761 scoped cases. Scope and evidence are recorded separately in document 124.
+
 - Add public model documentation with Admin editing, revision/idempotency checks and audit; derive safe usage schemas, reference slots, presets and native asynchronous examples from frozen releases.
 - 新增 `media-gen-skill`，默认服务 `https://gen.sub2share.xyz`，包含 Python 标准库客户端、同源鉴权下载、摘要校验与未知提交的持久幂等恢复；提供可复现打包脚本和双语安装指南。GitHub Release 状态见文档 124。
 - Implement durable, instance-wide 600-second idle policies in the platform Runner. POST ComfyUI `/free`, then confirm two ordered CPU barriers before releasing shared GPU holds; uncertain execution remains protected. Admin exposes settings, observations and operation evidence. No GPU host shell, extensions or process restart is used.

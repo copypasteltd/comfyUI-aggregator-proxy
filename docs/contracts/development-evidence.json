@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-28/development-trace-baselines-124.json",
-    "sha256": "adb31aa5a9092ef80c4438177445ee34af51ccff59d540726804467c6fe41d41"
+    "path": "docs/evidence/2026-10-28/development-trace-baselines-124-final.json",
+    "sha256": "a4bfec20b41ff108a7a78f53c984220a9f1cc3b6f949fc58a67870845b2b6163"
   },
   "requirements": [
     {
@@ -781,6 +781,14 @@
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/discovery.go",
           "baseline": "go80"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/model_usage.py",
+          "baseline": "media124final"
+        },
+        {
+          "path": "app/skills/media-gen-skill/scripts/media_gen.py",
+          "baseline": "media124final"
         }
       ],
       "tests": [
@@ -800,6 +808,12 @@
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/discovery_test.go",
           "symbol": "TestStockCatalogCompletesAbsentMetadataAndPreservesExtensions",
           "language": "go"
+        },
+        {
+          "path": "app/tests/unit/test_media_gen_skill.py",
+          "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
+          "baseline": "media124final",
+          "language": "python"
         }
       ],
       "evidence": [
@@ -809,7 +823,8 @@
         "wait94",
         "dependency101",
         "cors116",
-        "media124"
+        "media124",
+        "media124final"
       ],
       "remaining_backlog": [
         "30",
@@ -2043,6 +2058,10 @@
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
           "baseline": "media124"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/memory_reclamation.py",
+          "baseline": "media124final"
         }
       ],
       "tests": [
@@ -2059,7 +2078,8 @@
         "visual87",
         "worker118",
         "http122",
-        "media124"
+        "media124",
+        "media124final"
       ],
       "remaining_backlog": [
         "15",
@@ -3256,7 +3276,8 @@
         "installed87",
         "native86",
         "visual87",
-        "media124"
+        "media124",
+        "browser124"
       ],
       "remaining_backlog": [
         "24",

@@ -1,0 +1,149 @@
+{
+  "format_version": 1,
+  "at": "2026-10-28T02:34:37.144957+00:00",
+  "passed": true,
+  "scope": "Three actual ComfyUI devices, automatic 600-second idle policies, platform-owned HTTP free command and two ordered CPU barrier proofs. No GPU host control. Metrics are whole-host/device, not process RSS; no fleet fairness or zero-memory claim.",
+  "platform_source_revision": "414f50dc45dae509207b8e6c9c5079f8188f96cd",
+  "virtualization_used": false,
+  "remote_gpu_shell_or_mcp_used": false,
+  "policies": [
+    {
+      "device": "5070",
+      "idle_seconds": 600,
+      "policy_enabled": true,
+      "idle_baseline_witness": {
+        "source": "Admin policy snapshots observed before this operation during this run",
+        "idle_since": 1793149977
+      },
+      "seconds_before_release_started": 607,
+      "operation": {
+        "id": "mmo_f37169440d9448ce940b0b124080f767",
+        "stage": "completed",
+        "created_at": 1793150584,
+        "completed_at": 1793150596,
+        "error_code": null,
+        "proof": "free_ack_then_two_ordered_cpu_barriers",
+        "comfyui_version": "0.33.1",
+        "memory_result": "increase_observed",
+        "before": {
+          "scope": "whole_host_and_device_not_process_rss",
+          "devices": [
+            {
+              "vram_free": 496215240,
+              "vram_total": 12820480000,
+              "torch_vram_free": 5481672,
+              "torch_vram_total": 536870912
+            }
+          ],
+          "ram_free": 1798975488,
+          "ram_total": 34182275072
+        },
+        "after": {
+          "scope": "whole_host_and_device_not_process_rss",
+          "devices": [
+            {
+              "vram_free": 11463032832,
+              "vram_total": 12820480000,
+              "torch_vram_free": 33554432,
+              "torch_vram_total": 67108864
+            }
+          ],
+          "ram_free": 24671428608,
+          "ram_total": 34182275072
+        }
+      }
+    },
+    {
+      "device": "4090",
+      "idle_seconds": 600,
+      "policy_enabled": true,
+      "idle_baseline_witness": {
+        "source": "Admin policy snapshots observed before this operation during this run",
+        "idle_since": 1793152852
+      },
+      "seconds_before_release_started": 606,
+      "operation": {
+        "id": "mmo_66d9cb6f5094454cba2b882c798ef17d",
+        "stage": "completed",
+        "created_at": 1793153458,
+        "completed_at": 1793153476,
+        "error_code": null,
+        "proof": "free_ack_then_two_ordered_cpu_barriers",
+        "comfyui_version": "0.42.1",
+        "memory_result": "increase_observed",
+        "before": {
+          "scope": "whole_host_and_device_not_process_rss",
+          "devices": [
+            {
+              "vram_free": 240029332,
+              "vram_total": 51526369280,
+              "torch_vram_free": 84754888,
+              "torch_vram_total": 100663296
+            }
+          ],
+          "ram_free": 6112968704,
+          "ram_total": 68612378624
+        },
+        "after": {
+          "scope": "whole_host_and_device_not_process_rss",
+          "devices": [
+            {
+              "vram_free": 42853544755,
+              "vram_total": 51526369280,
+              "torch_vram_free": 58327040,
+              "torch_vram_total": 67108864
+            }
+          ],
+          "ram_free": 54024019968,
+          "ram_total": 68612378624
+        }
+      }
+    },
+    {
+      "device": "3080",
+      "idle_seconds": 600,
+      "policy_enabled": true,
+      "idle_baseline_witness": {
+        "source": "Admin policy snapshots observed before this operation during this run",
+        "idle_since": 1793152881
+      },
+      "seconds_before_release_started": 601,
+      "operation": {
+        "id": "mmo_f5f5d49e64e048b38486d5d2c4239998",
+        "stage": "completed",
+        "created_at": 1793153482,
+        "completed_at": 1793153502,
+        "error_code": null,
+        "proof": "free_ack_then_two_ordered_cpu_barriers",
+        "comfyui_version": "0.42.1",
+        "memory_result": "increase_observed",
+        "before": {
+          "scope": "whole_host_and_device_not_process_rss",
+          "devices": [
+            {
+              "vram_free": 5960433868,
+              "vram_total": 10736762880,
+              "torch_vram_free": 43267072,
+              "torch_vram_total": 2772434944
+            }
+          ],
+          "ram_free": 37973139456,
+          "ram_total": 68603527168
+        },
+        "after": {
+          "scope": "whole_host_and_device_not_process_rss",
+          "devices": [
+            {
+              "vram_free": 8681082060,
+              "vram_total": 10736762880,
+              "torch_vram_free": 12451840,
+              "torch_vram_total": 20971520
+            }
+          ],
+          "ram_free": 60861112320,
+          "ram_total": 68603527168
+        }
+      }
+    }
+  ]
+}

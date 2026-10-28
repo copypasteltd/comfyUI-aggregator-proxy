@@ -4,7 +4,7 @@
 
 ## 安装 / Install
 
-从本仓库 Releases 获取 `media-gen-skill-1.0.0.zip` 和 `SHA256SUMS.txt`，先校验摘要，再解压为 `media-gen-skill/`。Codex 用户可把该目录放到自己的 `$CODEX_HOME/skills/` 或用户 skills 目录后重新打开会话。其他支持 SKILL.md 的 Agent 使用其对应的 Skill 安装目录；也可直接运行脚本。
+从正式 [Media Gen Skill 1.0.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0) 获取 `media-gen-skill-1.0.0.zip` 和 `SHA256SUMS.txt`，先校验摘要，再解压为 `media-gen-skill/`。Codex 用户可把该目录放到自己的 `$CODEX_HOME/skills/` 或用户 skills 目录后重新打开会话。其他支持 SKILL.md 的 Agent 使用其对应的 Skill 安装目录；也可直接运行脚本。
 
 Download the archive and checksum from this repository's Releases, verify SHA-256, and extract the single `media-gen-skill` directory. Install that directory in your agent's skills folder, or run the client directly. A `release.json` inside the archive binds every file to its source commit. **A local archive is not proof of a published GitHub Release**; publication status is recorded in document 124.
 

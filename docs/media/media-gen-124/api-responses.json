@@ -1,0 +1,246 @@
+{
+  "format_version": 1,
+  "at": "2026-10-28T02:34:42.184426+00:00",
+  "passed": true,
+  "actual_domain": "https://gen.sub2share.xyz",
+  "synthetic_data": false,
+  "authentication_headers_and_cookies_omitted": true,
+  "records": [
+    {
+      "mode": "image",
+      "request": {
+        "method": "POST",
+        "path": "/v1/jobs",
+        "body": {
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft window light, detailed still life photograph, no text."
+          },
+          "model": "comfy-3080-image-lustify-krea2",
+          "parameters": {
+            "n": 1,
+            "quality": "standard",
+            "seed": 42,
+            "size": "720x1080"
+          },
+          "task_type": "text_to_image"
+        }
+      },
+      "poll": {
+        "method": "GET",
+        "http_status": 200,
+        "path": "/v1/jobs/job_488ce0c0434741f98a255f01bc144513",
+        "body": {
+          "id": "job_488ce0c0434741f98a255f01bc144513",
+          "object": "generation.job",
+          "model": "comfy-3080-image-lustify-krea2",
+          "task_type": "text_to_image",
+          "status": "succeeded",
+          "created_at": 1793153598,
+          "updated_revision": 8,
+          "error": null,
+          "retry": {
+            "count": 0,
+            "limit": 2,
+            "next_at": null,
+            "last_error": null
+          },
+          "completed_at": 1793153781,
+          "artifacts": [
+            {
+              "id": "content_74d5b2e0b1924886b19ca979a746e3c4",
+              "position": 0
+            }
+          ]
+        }
+      },
+      "content_metadata": {
+        "id": "content_74d5b2e0b1924886b19ca979a746e3c4",
+        "media_type": "image/png",
+        "bytes": 770007,
+        "sha256": "8e34a1d307dd786a93321761f477ce816b6f6fadc0840fa5cfc9a5018d0424c4",
+        "expires_at": 1793182581
+      },
+      "retention_seconds": 28800
+    },
+    {
+      "mode": "4090",
+      "request": {
+        "method": "POST",
+        "path": "/v1/jobs",
+        "body": {
+          "input": {
+            "prompt": "A green lime beside a ceramic cup, subtle natural movement, fixed camera, soft daylight. No text."
+          },
+          "model": "comfy-4090-video-h3",
+          "parameters": {
+            "n": 1,
+            "quality": "standard",
+            "seconds": 5.167,
+            "seed": 42,
+            "size": "864x480"
+          },
+          "task_type": "text_to_video"
+        }
+      },
+      "poll": {
+        "method": "GET",
+        "http_status": 200,
+        "path": "/v1/jobs/job_33b1c381e56e444d8055a306758d8e66",
+        "body": {
+          "id": "job_33b1c381e56e444d8055a306758d8e66",
+          "object": "generation.job",
+          "model": "comfy-4090-video-h3",
+          "task_type": "text_to_video",
+          "status": "succeeded",
+          "created_at": 1793150934,
+          "updated_revision": 8,
+          "error": null,
+          "retry": {
+            "count": 0,
+            "limit": 2,
+            "next_at": null,
+            "last_error": null
+          },
+          "completed_at": 1793151216,
+          "seconds": "5.167",
+          "size": "864x480",
+          "artifacts": [
+            {
+              "id": "content_b77f8ed820eb41bfb0001aee791d7726",
+              "position": 0
+            }
+          ]
+        }
+      },
+      "content_metadata": {
+        "id": "content_b77f8ed820eb41bfb0001aee791d7726",
+        "media_type": "video/mp4",
+        "bytes": 539797,
+        "sha256": "bdd47792a9ce5f83916d07ac85ce28dd61f1a1914f09485b0a02665d406215c3",
+        "expires_at": 1793180016
+      },
+      "retention_seconds": 28800
+    },
+    {
+      "mode": "5070",
+      "request": {
+        "method": "POST",
+        "path": "/v1/jobs",
+        "body": {
+          "input": {
+            "prompt": "A green lime beside a ceramic cup, subtle natural movement, fixed camera, soft daylight. No text.",
+            "references": [
+              {
+                "asset_id": "asset_70e1bd00b62c48e5b3d48b9ec5ba8377",
+                "role": "first_frame"
+              }
+            ]
+          },
+          "model": "comfy-5070-video-h3-i2v",
+          "parameters": {
+            "n": 1,
+            "quality": "standard",
+            "seconds": 1.625,
+            "seed": 42,
+            "size": "512x288"
+          },
+          "task_type": "references_to_video"
+        }
+      },
+      "poll": {
+        "method": "GET",
+        "http_status": 200,
+        "path": "/v1/jobs/job_77416368681b4986bddc9ddb3c4eeb31",
+        "body": {
+          "id": "job_77416368681b4986bddc9ddb3c4eeb31",
+          "object": "generation.job",
+          "model": "comfy-5070-video-h3-i2v",
+          "task_type": "references_to_video",
+          "status": "succeeded",
+          "created_at": 1793150926,
+          "updated_revision": 8,
+          "error": null,
+          "retry": {
+            "count": 0,
+            "limit": 2,
+            "next_at": null,
+            "last_error": null
+          },
+          "completed_at": 1793153349,
+          "seconds": "1.625",
+          "size": "512x288",
+          "artifacts": [
+            {
+              "id": "content_f9bd166274d747f69402ada6b82c684c",
+              "position": 0
+            }
+          ]
+        }
+      },
+      "content_metadata": {
+        "id": "content_f9bd166274d747f69402ada6b82c684c",
+        "media_type": "video/mp4",
+        "bytes": 44841,
+        "sha256": "5f208e81d743595b17ec4b15265f9174936a0421913299c7be58e88b8bd6aa9f",
+        "expires_at": 1793182149
+      },
+      "retention_seconds": 28800
+    },
+    {
+      "mode": "audio",
+      "request": {
+        "method": "POST",
+        "path": "/v1/jobs",
+        "body": {
+          "input": {
+            "prompt": "Warm acoustic strings and a soft piano melody, gentle chamber music, calm atmosphere, natural dynamics."
+          },
+          "model": "comfy-3080-music-yue2",
+          "parameters": {
+            "n": 1,
+            "quality": "draft",
+            "seconds": 15.0,
+            "seed": 42
+          },
+          "task_type": "text_to_audio"
+        }
+      },
+      "poll": {
+        "method": "GET",
+        "http_status": 200,
+        "path": "/v1/jobs/job_4d6306a63309472d9daa448e962a1fb7",
+        "body": {
+          "id": "job_4d6306a63309472d9daa448e962a1fb7",
+          "object": "generation.job",
+          "model": "comfy-3080-music-yue2",
+          "task_type": "text_to_audio",
+          "status": "succeeded",
+          "created_at": 1793153599,
+          "updated_revision": 8,
+          "error": null,
+          "retry": {
+            "count": 0,
+            "limit": 2,
+            "next_at": null,
+            "last_error": null
+          },
+          "completed_at": 1793153854,
+          "artifacts": [
+            {
+              "id": "content_4a40f1e82cde42d0a00eb5ec34249ef2",
+              "position": 0
+            }
+          ]
+        }
+      },
+      "content_metadata": {
+        "id": "content_4a40f1e82cde42d0a00eb5ec34249ef2",
+        "media_type": "audio/flac",
+        "bytes": 971944,
+        "sha256": "a7de6777f525f7fbe4d1b51245fd873e414a98db3c8a3b03c4826aa469768fa5",
+        "expires_at": 1793182654
+      },
+      "retention_seconds": 28800
+    }
+  ]
+}

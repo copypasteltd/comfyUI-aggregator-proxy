@@ -1,6 +1,6 @@
 # 124 · 模型使用说明与公开 Skill 交付
 
-2026-10-28。本增量实施用户要求的模型自描述、可分发 media-gen-skill 和平台调用 ComfyUI 的空闲回收，并部署到 https://gen.sub2share.xyz 。本文先登记变更约束；实现、测试、部署和 Release 证据完成后另行补充结果，不以方案代替交付。
+2026-10-28。本增量的模型自描述、可分发 media-gen-skill 和平台调用 ComfyUI 的空闲回收已部署到 https://gen.sub2share.xyz 。已验证 10 个发布模型、三台设备的 600 秒自动回收，以及回收后的图片、视频、参考图视频和音频调用。下文保留开发约束，并列出本次交付证据；不将本增量签收扩大为整个项目或 10～20 台设备的验收。
 
 ## 1. 模型发现与管理
 
@@ -38,4 +38,37 @@
 | U04 | 平台调用 ComfyUI 实现空闲释放 | 持久操作和真实 /free/屏障/内存观测，600 秒门槛及新任务竞争、未知结果测试 |
 | U05 | 部署和可恢复更新 | 迁移备份、版本/载荷、常驻服务、域名调用、回收后生成、双语 README/更新日志/推送 |
 
-当前状态：开发中，U01～U05 尚未签收。
+## 5. 实际交付结果
+
+| 编号 | 本次结果 | 运行证据 |
+| --- | --- | --- |
+| U01 | 10 个线上发布模型均有人工说明、参数 Schema、实际规格、参考槽位、权限和合法示例；列表、详情、capabilities 一致 | [实际目录](evidence/2026-10-28/media-gen-live-catalog-final-124.json) |
+| U02 | 实际青柠 Admin 查看、编辑已发布模型说明并回读；保持发布状态，另测 390px 与键盘焦点 | [五项 UI 检查](evidence/2026-10-28/media-gen-ui-final-124/verification.json)、[回收记录和移动端](evidence/2026-10-28/media-gen-memory-ui-124/verification.json) |
+| U03 | Skill 1.0.0 正式 Release 已发布；重新下载三个资产并核验摘要。解压该 Release 的客户端完成四条真实调用及校验下载 | [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0)、[发布与下载证据](evidence/2026-10-28/media-gen-github-release-124.json) |
+| U04 | 3080、4090、5070 均已启用 600 秒策略；分别在本轮已观察空闲起点后 601、606、607 秒发起释放，均完成双屏障确认 | [三台实际回收](evidence/2026-10-28/media-gen-idle-live-124.json) |
+| U05 | 新版本 linux-20261028.124.2、迁移头 02d124a00002，安装模块摘要一致；四个常驻服务正常，域名健康和任意源 CORS 通过，临时业务 Key 已停用并返回 401 | [部署核对](evidence/2026-10-28/media-gen-deployment-124.json)、[真实备份恢复演练](evidence/2026-10-28/media-gen-migration-restore-124.json) |
+
+本次要求 U01～U05 已完成。Skill 下载包的 SHA-256 为 `78b850fd62c94dfeebd790b517011b04dc061717bbc3df5bd9eb6512dd9d03c5`，来源提交 `bbcb66464f20430237358ef6758e583b2569b831`；线上应用来源为 `414f50dc45dae509207b8e6c9c5079f8188f96cd`。应用与 Skill 分别版本化，仓库后续说明和发布入口整理不代表重新部署运行模块。
+
+| 真实调用 | 结果 | 证据 |
+| --- | --- | --- |
+| 3080 文生图 | 720×1080 PNG | [调用与媒体探测](evidence/2026-10-28/media-gen-actual-image-124.json) |
+| 4090 文生视频 | 864×480、24 fps、约 5.167 秒、H.264/AAC | [调用与媒体探测](evidence/2026-10-28/media-gen-actual-4090-124.json) |
+| 5070 首帧视频 | 自制参考图上传，512×288、24 fps、1.625 秒 | [调用与媒体探测](evidence/2026-10-28/media-gen-actual-5070-124.json) |
+| 3080 音乐 | 15 秒 FLAC、48 kHz、双声道 | [调用与媒体探测](evidence/2026-10-28/media-gen-actual-audio-124.json) |
+
+四条结果均校验长度及 SHA-256，云端过期时间均为任务成功后八小时。当前 YuE2 的 prompt 是音乐风格，歌词来自冻结 Workflow，不宣称支持客户改词、TTS 或音色克隆。5070 曾因升级后的新 Worker boot 使验证失效而排队；通过正常探测、目录扫描、同摘要流程验证及引用原真实验证产物重新批准恢复，原任务 ID 继续执行，没有重提生成或直接改生产表。
+
+真实空闲回收的设备 VRAM 可用量：3080 约 5.55→8.09 GiB，4090 约 0.22→39.91 GiB，5070 约 0.46→10.68 GiB；RAM 约 35.37→56.68、5.69→50.31、1.68→22.98 GiB。指标为整个主机/设备的同期观测，不是进程 RSS，也不是其他进程均静止时的净释放量。原始字节值、双屏障和时间在证据中保留。
+
+## 6. 验证范围与维护
+
+初始功能版本通过完整 [16 门禁 / 4391 Python 测试](evidence/native-ci/media-gen-idle-124/summary.json)。实际联调后修正了暂时失联清空空闲起点、原生任务 `status` 轮询、Windows 重定向 UTF-8 和服务域名 User-Agent 兼容问题，最终相关 [1761 项回归](evidence/2026-10-28/media-gen-followup-final-124.json) 全通过；完整 4391 项并未在这些后续修正后再次运行，范围不能混写。
+
+[实际截图、13.56 秒原速录屏、GIF、原生 API 响应和去除嵌入元数据后的生成样本](media/media-gen-124/README.md) 已整理，附 [14 个媒体文件完整校验](evidence/2026-10-28/media-gen-public-media-124.json)。精确 API 下载摘要与公开素材的去元数据摘要分开记录。初次截图误选了同名前缀的未发布验证别名，该轮在其报告中标注局限；最终轮使用精确已发布别名重新执行。
+
+本机 GitHub API 凭证曾返回账号停用；最终使用仓库授权的 Actions `GITHUB_TOKEN` 完成正式发布，并从公开 Release 重新下载核验，阻塞已解除。后续推送 `media-gen-skill-vVERSION` 标签触发入口，实际发布实现位于 `app/scripts/publish-media-gen-skill.sh`，默认只给发布作业 contents:write；先验证草稿资产，再公开 Release。已经公开的资产不会被覆盖。
+
+三台策略保持启用。新增渠道须在 Admin 的“空闲回收”启用策略，初始未配置状态不会发送 `/free`。现支持验证过的原生 ComfyUI 0.33.1/0.42.1；未知版本或未知执行保留保护，参见 [125](125-ComfyUI空闲内存回收与双屏障.md)。内存回收不删除磁盘产物，01 副本移交即删除仍是 [121](121-ComfyUI原始产物移交即清理设计.md) 的独立待开发项。
+
+多设备模型池的现有能力不变：一个相同冻结发布可映射多个已验证渠道，按可用 GPU 槽位抢领，不能承诺严格轮询或任务数相等。当前 10 个别名均为单渠道，成对 H3 摘要不同，没有为了本次交付静默合并。严格公平设备选择和 10～20 台容量验收继续按 123 与完整待办推进。

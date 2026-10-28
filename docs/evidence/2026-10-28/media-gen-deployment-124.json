@@ -1,0 +1,59 @@
+{
+  "format_version": 1,
+  "at": "2026-10-28T02:42:51.498433+00:00",
+  "passed": true,
+  "scope": "Deployed model usage and automatic idle reclamation: installed module bytes, services, migration, actual domain health, arbitrary-origin CORS, four successful distributable-Skill jobs and temporary Key revocation. Fleet capacity and fair dispatch remain separate.",
+  "application_source_revision": "414f50dc45dae509207b8e6c9c5079f8188f96cd",
+  "native_candidate": {
+    "id": "rc-20261028.124.4",
+    "sha256": "0f58e4d6026310f1a2b7d3eb9359b2762d76d11572d6a80900cc08e7998111ee",
+    "payload_files": 171,
+    "wheels": 58
+  },
+  "linux_bundle": {
+    "file": "linux-20261028.124.2.tar.gz",
+    "sha256": "93aefa0829bd0ddb91f3d9d5e0d1e1110fa84f173a34dbf5a608b5af229b10e0",
+    "archive_entries": 96,
+    "payload_files": 95
+  },
+  "backup_before_followup": {
+    "file": "control-20261028T020124994249Z.dump",
+    "bytes": 5784320,
+    "sha256": "7a4bff06cc1329de2a0de8abc9f74d4fda42af6ab52164e14ca3729ad623625b",
+    "archive_list_verified": true
+  },
+  "runtime": {
+    "release": "/opt/comfyui-aggregator/releases/linux-20261028.124.2",
+    "services": {
+      "comfy-aggregator-api": "active",
+      "comfy-aggregator-runner": "active",
+      "comfy-aggregator-gc": "active",
+      "comfy-aggregator-http-worker": "active"
+    },
+    "database": {
+      "head": "02d124a00002",
+      "unfinished_jobs": 0,
+      "gpu_occupancies": 0,
+      "management_holds": 0
+    },
+    "installed_source_sha256": {
+      "memory_reclamation": "471d6f529de5ecdf34dfc988679b236b23d639a4b0e05b271b1081b6aaac4208",
+      "model_usage": "6ab9fa6a850cc2e0639d0ca4c781731fa3c8c16082ff7e88c37db7d8eefcb73f"
+    },
+    "disk_free_bytes": 9122226176
+  },
+  "health": {
+    "/health/live": 200,
+    "/health/ready": 200
+  },
+  "cors_any_origin": true,
+  "cors_mode": "Reflected arbitrary request origin with credentials allowed",
+  "temporary_business_key_disabled": true,
+  "disabled_key_http_status": 401,
+  "real_jobs_verified": 4,
+  "real_devices_released": 3,
+  "base_url": "https://gen.sub2share.xyz",
+  "http_port": 39443,
+  "virtualization_used": false,
+  "remote_gpu_host_control_used": false
+}

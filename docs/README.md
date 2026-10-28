@@ -1,5 +1,7 @@
 # 生图生视 API 封装：开发文档入口
 
+[124 · 已上线交付](124-模型使用说明与公开Skill交付.md)：10 个模型说明、正式 [Skill Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0)、三台十分钟自动回收和四条真实多模态调用均已验证。[安装调用](126-MediaGenSkill安装与调用.md) · [发布说明](127-MediaGenSkill-Release说明.md) · [实际媒体](media/media-gen-124/README.md)。
+
 当前增量：[124 · 模型使用说明与公开 Skill](./124-模型使用说明与公开Skill交付.md)、[125 · 空闲回收与双屏障](./125-ComfyUI空闲内存回收与双屏障.md)、[126 · Skill 安装与调用](./126-MediaGenSkill安装与调用.md)。交付状态与验证证据在 124 记录。
 
 [123 · 空闲资源释放与多设备模型池调度](./123-空闲资源释放与多设备模型池调度设计.md)：核对当前 GPU 槽位释放与 Worker 抢领，确认没有 600 秒自动模型卸载、线上没有多渠道发布别名。给出实例级维护/空闲代数、受控释放回执、共享实例竞争保护和设备公平预留的设计；10 项开发/14 组验收均待完成。[机器决策](contracts/comfy-idle-and-pool-policy.json)与[只读证据](evidence/2026-10-28/runtime-idle-and-pool-audit-123.json)区分现状与计划，不代表线上启用。

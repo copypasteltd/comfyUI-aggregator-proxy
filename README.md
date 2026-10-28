@@ -1,8 +1,23 @@
 # ComfyUI Aggregator Proxy
 
-[124 · 模型使用说明与公开 Skill](docs/124-模型使用说明与公开Skill交付.md) 增加公开 `usage`：模型能力、参数 Schema、参考内容及数量/顺序、尺寸/时长组合、权限、示例和下载流程。Admin 的模型列表可查看并编辑公开说明，结构化参数由冻结 Workflow 派生。`/v1/models`、`/v1/models/{alias}` 与 `/v1/capabilities` 保留业务 Key 的可见范围。
+已部署到 **https://gen.sub2share.xyz**：10 个发布模型现在提供完整 `usage`，三台设备已启用连续空闲 10 分钟自动释放可回收内存/显存；平台仅调用 ComfyUI API。Admin 的“模型与路由 → 使用说明”可查看能力并编辑说明，“Windows 渠道 → 空闲回收”可配置策略并查看执行证明。新增渠道需单独启用策略。
 
-[MediaGen Skill 安装与调用](docs/126-MediaGenSkill安装与调用.md) 提供 Python 3.10+ 独立客户端，默认连接 `https://gen.sub2share.xyz`，支持模型发现、参考图上传、异步生成、持久幂等恢复和校验下载。[125 · 空闲回收](docs/125-ComfyUI空闲内存回收与双屏障.md) 由平台通过 ComfyUI `/free` 与两个有序 CPU 屏障确认执行，默认连续空闲 600 秒，Admin 渠道内可设置和查看操作；未知结果保留 GPU 互斥保护。具体部署、设备验证及 Release 状态见文档 124。
+正式 [Media Gen Skill 1.0.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0) 包含独立 Python 3.10+ 客户端、来源清单和 SHA-256。解压后设置业务 API Key，先查模型和实时参数，再异步生成；模型可见范围和限额由 Key 决定。
+
+```powershell
+$env:MEDIA_GEN_API_KEY = 'YOUR_BUSINESS_API_KEY'
+python scripts/media_gen.py models
+python scripts/media_gen.py describe comfy-3080-image-lustify-krea2
+python scripts/media_gen.py generate --model comfy-3080-image-lustify-krea2 --prompt "A green lime beside a ceramic cup" --size 720x1080 --wait --output-dir output
+```
+
+[安装、参考素材、多模态调用与断线恢复](docs/126-MediaGenSkill安装与调用.md) 说明参数、上传和下载逻辑。原生接口为 `GET /v1/models`、`GET /v1/models/{alias}`、`GET /v1/capabilities`、`POST /v1/jobs`、按 `status` 查询任务，再读取/下载 `artifacts[].id`。仅使用公布的 preset 组合；当前音乐 prompt 控制风格，歌词仍由冻结 Workflow 提供。输出成功后保留八小时。
+
+[124 · 完整交付与验收](docs/124-模型使用说明与公开Skill交付.md) 记录四条真实 Skill 调用、三台自动回收、部署备份恢复及测试范围。[125 · 回收方案](docs/125-ComfyUI空闲内存回收与双屏障.md) 使用持久互斥、`/free` 和两个有序 CPU 屏障确认完成；暂时失联阻止释放，未知执行保留保护，指标不承诺归零。原始功能版本通过 16 门禁/4391 Python，后续修正通过 1761 项相关回归；两组验证范围分别记录。
+
+[实际截图、原速录屏、GIF、API 响应与生成样本](docs/media/media-gen-124/README.md) 来自线上平台和正式 Skill Release，发布样本已去除嵌入 Workflow 元数据。本次临时测试 Key 已停用。多设备池可把同一冻结发布绑定到多个已验证渠道，现有抢领按可用槽位分配；当前 10 个别名仍各为单渠道，不保证严格轮询或设备任务数相等。
+
+![实际模型说明与自动回收](docs/media/media-gen-124/model-usage-and-idle-policy.gif)
 
 [123 · 空闲资源释放与多设备模型池](docs/123-空闲资源释放与多设备模型池调度设计.md)在 123 时点完成只读检查和设计：当时任务后会释放 GPU **调度槽位**，没有空闲 600 秒自动卸载模型/缓存。已有一个公开别名绑定同一冻结 Workflow 的多个渠道的结构，但线上 10 个别名均为单渠道，现有 Worker 抢领不保证设备等量分配。方案规定实例级空闲计时、全实例维护互斥、条件式释放及实际完成回执，并补充全池公平目标预留、10 项待开发和 14 组待验收。**本增量为设计，未启用释放、合并线上模型或签收多机均衡。**
 
