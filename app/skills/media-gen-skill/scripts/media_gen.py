@@ -323,6 +323,10 @@ def parser():
 
 
 def main(argv=None):
+    # Machine-readable JSON remains UTF-8 when Windows redirects stdout.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     args = parser().parse_args(argv)
     if hasattr(args, "timeout") and not 1 <= args.timeout <= 86400:
         raise ClientError("Timeout must be 1–86400 seconds")

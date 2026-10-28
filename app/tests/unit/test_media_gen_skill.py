@@ -3,6 +3,9 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
+import subprocess
+import sys
 import threading
 from collections.abc import Iterator
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -54,7 +57,7 @@ def server() -> Iterator[tuple[str, dict[str, Any]]]:
             elif self.path.startswith("/v1/content/"):
                 self.wfile.write(json.dumps({"id": CONTENT, "bytes": len(PAYLOAD), "sha256": hashlib.sha256(PAYLOAD).hexdigest(), "media_type": "image/png"}).encode())
             else:
-                self.wfile.write(json.dumps({"id": JOB, "state": "succeeded", "artifacts": [{"id": CONTENT}]}).encode())
+                self.wfile.write(json.dumps({"id": JOB, "state": "succeeded", "artifacts": [{"id": CONTENT}], "note": "中文元数据"}).encode())
 
     http = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
     thread = threading.Thread(target=http.serve_forever, daemon=True)
@@ -129,3 +132,9 @@ def test_audio_presets_fixed_encoding_does_not_require_unexposed_parameters() ->
     args.seconds = 11
     with pytest.raises(client.ClientError, match="Unsupported seconds"):
         client.generation_request(Fake(), args)
+
+
+def test_cli_outputs_utf8_when_windows_redirect_encoding_is_ascii(server: Any) -> None:
+    base, _ = server
+    result = subprocess.run([sys.executable, str(PATH), "--base-url", base, "models"], env=dict(os.environ, MEDIA_GEN_API_KEY="synthetic-key", PYTHONIOENCODING="ascii"), capture_output=True, timeout=10, check=True)
+    assert json.loads(result.stdout.decode("utf-8"))["note"] == "中文元数据"
