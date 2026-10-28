@@ -8,6 +8,7 @@ import threading
 
 from generation_infrastructure.database import make_sessions
 from generation_infrastructure.maintenance import Maintenance
+from generation_infrastructure.memory_reclamation import MemoryReclaimer
 from generation_infrastructure.settings import Settings
 
 
@@ -19,6 +20,7 @@ def main(settings: Settings | None = None) -> None:
     settings = settings or Settings()
     sessions = make_sessions(settings)
     maintenance = Maintenance(sessions, settings.access_log_retention_days, settings.audit_retention_days)
+    memory = MemoryReclaimer(sessions, settings)
     stopped = threading.Event()
 
     def shutdown(signum: int, frame: object) -> None:
@@ -30,6 +32,7 @@ def main(settings: Settings | None = None) -> None:
         while not stopped.is_set():
             try:
                 result = maintenance.tick()
+                result.update(memory.tick())
                 if any(result.values()):
                     logging.info(json.dumps({"event": "maintenance", **result}))
             except Exception as exc:

@@ -6,6 +6,7 @@ Linux dependency installation still requires the exported hashes and native chec
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import io
 import json
@@ -19,6 +20,35 @@ from pathlib import Path, PurePosixPath
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def current_runtime_payload(root: Path) -> tuple[dict[str, bytes], str]:
+    files = {path.relative_to(root).as_posix(): path.read_bytes() for path in (root / "migrations").rglob("*") if path.is_file() and path.suffix in {".py", ".mako"} and "__pycache__" not in path.parts}
+    versions, parents = set(), set()
+    for name, data in files.items():
+        if not name.startswith("migrations/versions/"):
+            continue
+        for node in ast.parse(data).body:
+            target = node.targets[0] if isinstance(node, ast.Assign) and len(node.targets) == 1 else node.target if isinstance(node, ast.AnnAssign) else None
+            if isinstance(target, ast.Name) and isinstance(node, (ast.Assign, ast.AnnAssign)) and node.value is not None:
+                key = target.id
+                if key not in {"revision", "down_revision"}:
+                    continue
+                value = ast.literal_eval(node.value)
+                if key == "revision":
+                    versions.add(value)
+                elif value is not None:
+                    parents.update(value if isinstance(value, tuple) else [value])
+    heads = versions - parents
+    if len(heads) != 1 or not parents <= versions:
+        raise ValueError("Current migrations must have one complete revision chain")
+    files["alembic.ini"] = (root / "alembic.ini").read_bytes()
+    files["scripts/migrate.py"] = (root / "scripts/migrate.py").read_bytes()
+    files["config/contract-hashes.json"] = (root / "config/contract-hashes.json").read_bytes()
+    for path in (root / "packages/contracts/src/generation_contracts/schemas").glob("*.json"):
+        files["contracts/" + path.name] = path.read_bytes()
+    files["contracts/endpoint-catalog.json"] = (root / "packages/contracts/src/generation_contracts/endpoint-catalog.json").read_bytes()
+    return files, heads.pop()
 
 
 def main() -> None:
@@ -124,6 +154,12 @@ def main() -> None:
         for path in sorted(Path(admin_root.name).rglob("*")):
             if path.is_file():
                 payload["admin/" + path.relative_to(admin_root.name).as_posix()] = path.read_bytes()
+    database_head = manifest["database"]["head"]
+    if args.rebuild_wheels:
+        # Rebuilt code must ship its own migrations/contracts, not the seed's.
+        payload = {name: data for name, data in payload.items() if not name.startswith(("migrations/", "contracts/"))}
+        current_runtime, database_head = current_runtime_payload(root)
+        payload.update(current_runtime)
     payload["provenance/uv.lock"] = lock
     payload["provenance/seed-release-manifest.json"] = manifest_bytes
     if current_sources:
@@ -137,7 +173,7 @@ def main() -> None:
         "format_version": 1, "platform": "linux-amd64-cp313", "created_at": datetime.now(UTC).isoformat(),
         "application_source_revision": revision or manifest["source_revision"],
         "seed_release_id": manifest["release_id"], "seed_archive_sha256": args.candidate_sha256,
-        "seed_source_files_checked": len(sources), "unchanged_seed_source_files": len(sources) - len(changed_sources), "current_source_files_recorded": len(current_sources), "database_head": manifest["database"]["head"],
+        "seed_source_files_checked": len(sources), "unchanged_seed_source_files": len(sources) - len(changed_sources), "current_source_files_recorded": len(current_sources), "database_head": database_head,
         "project_wheels_rebuilt": args.rebuild_wheels, "changed_seed_sources": changed_sources,
         "admin_rebuilt": args.rebuild_admin, "admin_node": "24.22.1" if args.rebuild_admin else None,
         "uv": "0.13.5", "python": "3.13.1", "auto_migrate": False,

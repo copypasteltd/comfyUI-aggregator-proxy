@@ -166,6 +166,9 @@
               "max_bytes"
             ],
             "additionalProperties": false
+          },
+          "usage": {
+            "$ref": "#/$defs/ModelUsage"
           }
         },
         "required": [
@@ -330,5 +333,398 @@
     "data"
   ],
   "additionalProperties": false,
-  "contract_version": "0.5.0"
+  "contract_version": "0.5.0",
+  "$defs": {
+    "ParameterUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 80,
+          "title": "Path",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "description": {
+          "maxLength": 500,
+          "title": "Description",
+          "type": "string"
+        },
+        "rules": {
+          "additionalProperties": true,
+          "title": "Rules",
+          "type": "object"
+        }
+      },
+      "required": [
+        "path",
+        "required",
+        "description",
+        "rules"
+      ],
+      "title": "ParameterUsage",
+      "type": "object"
+    },
+    "ReferenceSlot": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 80,
+          "title": "Path",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "description": {
+          "maxLength": 500,
+          "title": "Description",
+          "type": "string"
+        },
+        "weight_supported": {
+          "default": false,
+          "title": "Weight Supported",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "path",
+        "required",
+        "description"
+      ],
+      "title": "ReferenceSlot",
+      "type": "object"
+    },
+    "ReferenceUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "supported": {
+          "title": "Supported",
+          "type": "boolean"
+        },
+        "exact_reference_count": {
+          "maximum": 4,
+          "minimum": 0,
+          "title": "Exact Reference Count",
+          "type": "integer"
+        },
+        "slots": {
+          "items": {
+            "$ref": "#/$defs/ReferenceSlot"
+          },
+          "maxItems": 6,
+          "title": "Slots",
+          "type": "array"
+        },
+        "media_types": {
+          "items": {
+            "enum": [
+              "image/png",
+              "image/jpeg",
+              "image/webp"
+            ],
+            "type": "string"
+          },
+          "maxItems": 3,
+          "title": "Media Types",
+          "type": "array"
+        },
+        "max_upload_bytes": {
+          "maximum": 20971520,
+          "minimum": 1,
+          "title": "Max Upload Bytes",
+          "type": "integer"
+        },
+        "max_image_pixels": {
+          "const": 25000000,
+          "default": 25000000,
+          "title": "Max Image Pixels",
+          "type": "integer"
+        },
+        "upload_field": {
+          "const": "file",
+          "default": "file",
+          "title": "Upload Field",
+          "type": "string"
+        },
+        "asset_scope": {
+          "const": "same_api_key",
+          "default": "same_api_key",
+          "title": "Asset Scope",
+          "type": "string"
+        },
+        "note": {
+          "maxLength": 1000,
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "supported",
+        "exact_reference_count",
+        "slots",
+        "media_types",
+        "max_upload_bytes",
+        "note"
+      ],
+      "title": "ReferenceUsage",
+      "type": "object"
+    },
+    "UsageEndpoints": {
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "const": "/v1/jobs",
+          "default": "/v1/jobs",
+          "title": "Create",
+          "type": "string"
+        },
+        "poll": {
+          "const": "/v1/jobs/{job_id}",
+          "default": "/v1/jobs/{job_id}",
+          "title": "Poll",
+          "type": "string"
+        },
+        "upload": {
+          "const": "/v1/assets",
+          "default": "/v1/assets",
+          "title": "Upload",
+          "type": "string"
+        },
+        "content": {
+          "const": "/v1/content/{content_id}",
+          "default": "/v1/content/{content_id}",
+          "title": "Content",
+          "type": "string"
+        },
+        "download": {
+          "const": "/v1/content/{content_id}/download",
+          "default": "/v1/content/{content_id}/download",
+          "title": "Download",
+          "type": "string"
+        }
+      },
+      "title": "UsageEndpoints",
+      "type": "object"
+    },
+    "ModelUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "display_name": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Display Name",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 12,
+          "title": "Notes",
+          "type": "array"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 12,
+          "title": "Tags",
+          "type": "array"
+        },
+        "task_type": {
+          "enum": [
+            "text_to_image",
+            "image_to_image",
+            "references_to_image",
+            "text_to_video",
+            "references_to_video",
+            "text_to_audio"
+          ],
+          "title": "Task Type",
+          "type": "string"
+        },
+        "asynchronous": {
+          "const": true,
+          "default": true,
+          "title": "Asynchronous",
+          "type": "boolean"
+        },
+        "endpoints": {
+          "$ref": "#/$defs/UsageEndpoints"
+        },
+        "request_content_type": {
+          "const": "application/json",
+          "default": "application/json",
+          "title": "Request Content Type",
+          "type": "string"
+        },
+        "required_scopes": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 12,
+          "title": "Required Scopes",
+          "type": "array"
+        },
+        "defaults": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "title": "Defaults",
+          "type": "object"
+        },
+        "parameter_details": {
+          "items": {
+            "$ref": "#/$defs/ParameterUsage"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "title": "Parameter Details",
+          "type": "array"
+        },
+        "references": {
+          "$ref": "#/$defs/ReferenceUsage"
+        },
+        "presets": {
+          "items": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "title": "Presets",
+          "type": "array"
+        },
+        "output": {
+          "$ref": "#/$defs/UsageOutput"
+        },
+        "request_schema": {
+          "additionalProperties": true,
+          "title": "Request Schema",
+          "type": "object"
+        },
+        "example_request": {
+          "additionalProperties": true,
+          "title": "Example Request",
+          "type": "object"
+        },
+        "output_retention_seconds": {
+          "const": 28800,
+          "default": 28800,
+          "title": "Output Retention Seconds",
+          "type": "integer"
+        },
+        "availability_note": {
+          "maxLength": 1000,
+          "title": "Availability Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "display_name",
+        "description",
+        "notes",
+        "tags",
+        "task_type",
+        "required_scopes",
+        "defaults",
+        "parameter_details",
+        "references",
+        "presets",
+        "output",
+        "request_schema",
+        "example_request",
+        "availability_note"
+      ],
+      "title": "ModelUsage",
+      "type": "object"
+    },
+    "UsageOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "media_types": {
+          "items": {
+            "enum": [
+              "image/png",
+              "image/jpeg",
+              "image/webp",
+              "video/mp4",
+              "video/webm",
+              "audio/wav",
+              "audio/flac",
+              "audio/mpeg",
+              "audio/ogg"
+            ],
+            "type": "string"
+          },
+          "maxItems": 9,
+          "minItems": 1,
+          "title": "Media Types",
+          "type": "array"
+        },
+        "expected_count": {
+          "const": 1,
+          "title": "Expected Count",
+          "type": "integer"
+        },
+        "max_bytes": {
+          "maximum": 2147483648,
+          "minimum": 1,
+          "title": "Max Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "media_types",
+        "expected_count",
+        "max_bytes"
+      ],
+      "title": "UsageOutput",
+      "type": "object"
+    }
+  }
 }

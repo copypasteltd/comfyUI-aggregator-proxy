@@ -215,6 +215,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/admin/api/v1/channels/{identifier}/memory": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Channel Memory */
+        get: operations["channel_memory_admin_api_v1_channels__identifier__memory_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Channel Memory Patch */
+        patch: operations["channel_memory_patch_admin_api_v1_channels__identifier__memory_patch"];
+        trace?: never;
+    };
     "/admin/api/v1/channels/{identifier}/actions": {
         parameters: {
             query?: never;
@@ -1456,6 +1474,40 @@ export interface paths {
         head?: never;
         /** Model Patch */
         patch: operations["model_patch_admin_api_v1_public_models__identifier__patch"];
+        trace?: never;
+    };
+    "/admin/api/v1/public-models/{identifier}/usage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Model Usage Detail */
+        get: operations["model_usage_detail_admin_api_v1_public_models__identifier__usage_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/api/v1/public-models/{identifier}/documentation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Model Documentation */
+        patch: operations["model_documentation_admin_api_v1_public_models__identifier__documentation_patch"];
         trace?: never;
     };
     "/admin/api/v1/public-models/{identifier}/actions": {
@@ -4841,6 +4893,64 @@ export interface components {
             /** Archived */
             archived: boolean;
         };
+        /** MemoryOperationView */
+        MemoryOperationView: {
+            /** Id */
+            id: string;
+            /** Stage */
+            stage: string;
+            /** Created At */
+            created_at: number;
+            /** Updated At */
+            updated_at: number;
+            /** Completed At */
+            completed_at: number | null;
+            /** Error Code */
+            error_code: string | null;
+            /** Evidence */
+            evidence: {
+                [key: string]: unknown;
+            };
+        };
+        /** MemoryPolicyPatch */
+        MemoryPolicyPatch: {
+            /** Expected Revision */
+            expected_revision: number;
+            /** Enabled */
+            enabled: boolean;
+            /**
+             * Idle Seconds
+             * @default 600
+             */
+            idle_seconds: number;
+        };
+        /** MemoryPolicyView */
+        MemoryPolicyView: {
+            /** Id */
+            id: string | null;
+            /** Channel Id */
+            channel_id: string;
+            /** Channel Ids */
+            channel_ids: string[];
+            /** Enabled */
+            enabled: boolean;
+            /** Idle Seconds */
+            idle_seconds: number;
+            /** Revision */
+            revision: number;
+            /** Status */
+            status: string;
+            /** Idle Since */
+            idle_since: number | null;
+            /** Observed At */
+            observed_at: number | null;
+            /** Released */
+            released: boolean;
+            /** Active Operation Id */
+            active_operation_id: string | null;
+            /** Operations */
+            operations: components["schemas"]["MemoryOperationView"][];
+        };
         /** ModelAction */
         ModelAction: {
             /** Expected Revision */
@@ -4948,6 +5058,35 @@ export interface components {
             defaults?: {
                 [key: string]: string | number | boolean;
             };
+            documentation?: components["schemas"]["ModelDocumentation"];
+        };
+        /** ModelDocumentation */
+        ModelDocumentation: {
+            /**
+             * Display Name
+             * @default
+             */
+            display_name: string;
+            /**
+             * Description
+             * @default
+             */
+            description: string;
+            /**
+             * Example Prompt
+             * @default
+             */
+            example_prompt: string;
+            /** Notes */
+            notes?: string[];
+            /** Tags */
+            tags?: string[];
+        };
+        /** ModelDocumentationPatch */
+        ModelDocumentationPatch: {
+            /** Expected Revision */
+            expected_revision: number;
+            documentation: components["schemas"]["ModelDocumentation"];
         };
         /** ModelFileInspection */
         ModelFileInspection: {
@@ -5104,6 +5243,71 @@ export interface components {
                 [key: string]: string | number | boolean;
             };
         };
+        /** ModelUsage */
+        ModelUsage: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Display Name */
+            display_name: string;
+            /** Description */
+            description: string;
+            /** Notes */
+            notes: string[];
+            /** Tags */
+            tags: string[];
+            /**
+             * Task Type
+             * @enum {string}
+             */
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio";
+            /**
+             * Asynchronous
+             * @default true
+             * @constant
+             */
+            asynchronous: true;
+            endpoints?: components["schemas"]["UsageEndpoints"];
+            /**
+             * Request Content Type
+             * @default application/json
+             * @constant
+             */
+            request_content_type: "application/json";
+            /** Required Scopes */
+            required_scopes: string[];
+            /** Defaults */
+            defaults: {
+                [key: string]: string | number | boolean;
+            };
+            /** Parameter Details */
+            parameter_details: components["schemas"]["ParameterUsage"][];
+            references: components["schemas"]["ReferenceUsage"];
+            /** Presets */
+            presets: {
+                [key: string]: string | number | boolean;
+            }[];
+            output: components["schemas"]["UsageOutput"];
+            /** Request Schema */
+            request_schema: {
+                [key: string]: unknown;
+            };
+            /** Example Request */
+            example_request: {
+                [key: string]: unknown;
+            };
+            /**
+             * Output Retention Seconds
+             * @default 28800
+             * @constant
+             */
+            output_retention_seconds: 28800;
+            /** Availability Note */
+            availability_note: string;
+        };
         /** ModelView */
         ModelView: {
             /** Id */
@@ -5128,6 +5332,7 @@ export interface components {
             revision: number;
             /** Published */
             published: boolean;
+            documentation?: components["schemas"]["ModelDocumentation"];
         };
         /** MonitoringConfiguration */
         MonitoringConfiguration: {
@@ -5468,6 +5673,19 @@ export interface components {
             /** Has More */
             has_more: boolean;
         };
+        /** ParameterUsage */
+        ParameterUsage: {
+            /** Path */
+            path: string;
+            /** Required */
+            required: boolean;
+            /** Description */
+            description: string;
+            /** Rules */
+            rules: {
+                [key: string]: unknown;
+            };
+        };
         /** ProjectCreate */
         ProjectCreate: {
             /** Name */
@@ -5561,6 +5779,7 @@ export interface components {
              * @constant
              */
             owned_by: "render-control";
+            usage?: components["schemas"]["ModelUsage"] | null;
             /**
              * Task Type
              * @enum {string}
@@ -5594,6 +5813,7 @@ export interface components {
              * @constant
              */
             owned_by: "render-control";
+            usage?: components["schemas"]["ModelUsage"] | null;
         };
         /** PublishedModels */
         PublishedModels: {
@@ -5730,6 +5950,53 @@ export interface components {
             evidence_digest: string;
             /** Manifest Digest */
             manifest_digest?: string | null;
+        };
+        /** ReferenceSlot */
+        ReferenceSlot: {
+            /** Path */
+            path: string;
+            /** Required */
+            required: boolean;
+            /** Description */
+            description: string;
+            /**
+             * Weight Supported
+             * @default false
+             */
+            weight_supported: boolean;
+        };
+        /** ReferenceUsage */
+        ReferenceUsage: {
+            /** Supported */
+            supported: boolean;
+            /** Exact Reference Count */
+            exact_reference_count: number;
+            /** Slots */
+            slots: components["schemas"]["ReferenceSlot"][];
+            /** Media Types */
+            media_types: ("image/png" | "image/jpeg" | "image/webp")[];
+            /** Max Upload Bytes */
+            max_upload_bytes: number;
+            /**
+             * Max Image Pixels
+             * @default 25000000
+             * @constant
+             */
+            max_image_pixels: 25000000;
+            /**
+             * Upload Field
+             * @default file
+             * @constant
+             */
+            upload_field: "file";
+            /**
+             * Asset Scope
+             * @default same_api_key
+             * @constant
+             */
+            asset_scope: "same_api_key";
+            /** Note */
+            note: string;
         };
         /** Register */
         Register: {
@@ -6202,6 +6469,51 @@ export interface components {
             fencing_token: number;
             /** Outputs */
             outputs: components["schemas"]["OutputSpec"][];
+        };
+        /** UsageEndpoints */
+        UsageEndpoints: {
+            /**
+             * Create
+             * @default /v1/jobs
+             * @constant
+             */
+            create: "/v1/jobs";
+            /**
+             * Poll
+             * @default /v1/jobs/{job_id}
+             * @constant
+             */
+            poll: "/v1/jobs/{job_id}";
+            /**
+             * Upload
+             * @default /v1/assets
+             * @constant
+             */
+            upload: "/v1/assets";
+            /**
+             * Content
+             * @default /v1/content/{content_id}
+             * @constant
+             */
+            content: "/v1/content/{content_id}";
+            /**
+             * Download
+             * @default /v1/content/{content_id}/download
+             * @constant
+             */
+            download: "/v1/content/{content_id}/download";
+        };
+        /** UsageOutput */
+        UsageOutput: {
+            /** Media Types */
+            media_types: ("image/png" | "image/jpeg" | "image/webp" | "video/mp4" | "video/webm" | "audio/wav" | "audio/flac" | "audio/mpeg" | "audio/ogg")[];
+            /**
+             * Expected Count
+             * @constant
+             */
+            expected_count: 1;
+            /** Max Bytes */
+            max_bytes: number;
         };
         /** UserView */
         UserView: {
@@ -7626,6 +7938,74 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ChannelDeletionCheck"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    channel_memory_admin_api_v1_channels__identifier__memory_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MemoryPolicyView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    channel_memory_patch_admin_api_v1_channels__identifier__memory_patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MemoryPolicyPatch"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
             /** @description Validation Error */
@@ -10653,6 +11033,72 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["ModelPatch"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModelView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    model_usage_detail_admin_api_v1_public_models__identifier__usage_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModelUsage"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    model_documentation_admin_api_v1_public_models__identifier__documentation_patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ModelDocumentationPatch"];
             };
         };
         responses: {

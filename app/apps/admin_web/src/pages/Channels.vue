@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ChannelMemoryDialog from '../components/ChannelMemoryDialog.vue'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
@@ -15,6 +16,7 @@ type Filter = Omit<NonNullable<paths['/admin/api/v1/channels']['get']['parameter
 type Status = NonNullable<Filter['status']>
 type Detail = components['schemas']['ChannelDetailView']
 const route = useRoute(), router = useRouter(), session = useSession()
+const memoryOpen = ref(false), memoryChannel = ref('')
 const rows = ref<Channel[]>([]), nodes = ref<Node[]>([]), error = ref(''), nodeError = ref(''), loading = ref(false), saving = ref(false), drawer = ref(false), editing = ref<Channel | null>(null), page = ref(1), hasMore = ref(false), readAt = ref<number | null>(null), visible = ref(!document.hidden)
 const emptyDraft = () => ({ q: '', channel_id: '', project_id: '', node_id: '', status: '' as Status | '' })
 const draft = ref(emptyDraft()), applied = ref<Filter>({})
@@ -150,6 +152,7 @@ onUnmounted(() => { disposed = true; visibilityEpoch++; stopReads(); form.value.
 </script>
 
 <template>
+  <ChannelMemoryDialog v-model="memoryOpen" :channel-id="memoryChannel" :active="visible"/>
   <ChannelDeletionDialog v-model="deletionOpen" :target="deletionTarget" :active="visible" @deleted="refresh"/>
   <ChannelReapplyDialog v-model="reapplyOpen" :target="inspecting" :active="visible && detailOpen" @applied="refresh"/>
   <div class="page-heading"><div><p class="eyebrow li-lab">INFRASTRUCTURE / CHANNELS</p><h1>Windows 渠道</h1><p class="muted">管理 ComfyUI 接入地址、凭据与运行环境版本。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" @click="refresh(); loadNodes()">刷新</el-button><el-button v-if="session.allows('channels:write')" type="primary" :icon="Plus" @click="open()">添加渠道</el-button></div></div>
@@ -166,7 +169,7 @@ onUnmounted(() => { disposed = true; visibilityEpoch++; stopReads(); form.value.
   <div class="snapshot-line"><span>上次读取 {{ time(readAt) }}</span><span>第 {{ page }} 页 · 每页 50 条</span></div>
   <section class="panel li-card"><el-table :data="rows" v-loading="loading" :empty-text="loading ? '正在读取渠道…' : error && !readAt ? '渠道读取失败' : '当前条件没有渠道登记'" table-layout="auto">
     <el-table-column label="渠道 / 地址" min-width="250"><template #default="{ row }"><router-link :to="{ path: '/channels', query: { channel: row.id } }"><strong>{{ row.name }}</strong></router-link><span class="id-line">{{ row.base_url }}</span><span class="id-line mono">{{ row.id }}</span></template></el-table-column>
-    <el-table-column label="详情" width="80"><template #default="{ row }"><el-button text size="small" @click="openDetails(row)">查看</el-button></template></el-table-column>
+    <el-table-column label="详情" width="160"><template #default="{ row }"><el-button text size="small" @click="openDetails(row)">查看</el-button><el-button v-if="!row.deleted_at" text size="small" @click="memoryChannel = row.id; memoryOpen = true">空闲回收</el-button></template></el-table-column>
     <el-table-column label="配置版本" min-width="165"><template #default="{ row }"><span class="mono">{{ row.desired_revision }} / {{ row.applied_revision ?? '—' }} / {{ row.verified_revision ?? '—' }}</span><span class="id-line">期望 / 已应用 / 已验证</span></template></el-table-column>
     <el-table-column label="状态" min-width="90"><template #default="{ row }"><el-tag :type="row.deleted_at ? 'info' : row.draining ? 'warning' : row.enabled ? 'success' : 'info'" size="small">{{ row.deleted_at ? '已删除' : row.draining ? '排空中' : row.enabled ? '已启用' : '已停用' }}</el-tag></template></el-table-column>
     <el-table-column label="最近观测" min-width="175"><template #default="{ row }">{{ time(row.observed_at) }}</template></el-table-column>

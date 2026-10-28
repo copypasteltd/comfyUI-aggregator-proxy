@@ -1,0 +1,29 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "expected_revision": {
+      "minimum": 1,
+      "title": "Expected Revision",
+      "type": "integer"
+    },
+    "enabled": {
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "idle_seconds": {
+      "default": 600,
+      "maximum": 86400,
+      "minimum": 600,
+      "title": "Idle Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "expected_revision",
+    "enabled"
+  ],
+  "title": "MemoryPolicyPatch",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.invalid/contracts/admin-memory-policy.schema.json"
+}

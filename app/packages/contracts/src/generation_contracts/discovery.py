@@ -4,6 +4,7 @@ from typing import Literal
 
 from pydantic import Field, model_validator
 
+from generation_contracts.model_usage import ModelUsage
 from generation_contracts.validation import StrictDTO, validate
 
 
@@ -12,6 +13,7 @@ class PublishedModel(StrictDTO):
     object: Literal["model"]
     created: int = Field(ge=1, le=253402300799)
     owned_by: Literal["render-control"]
+    usage: ModelUsage | None = None
 
 
 class PublishedModels(StrictDTO):

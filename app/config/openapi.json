@@ -809,6 +809,94 @@
         }
       }
     },
+    "/admin/api/v1/channels/{identifier}/memory": {
+      "get": {
+        "summary": "Channel Memory",
+        "operationId": "channel_memory_admin_api_v1_channels__identifier__memory_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryPolicyView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Channel Memory Patch",
+        "operationId": "channel_memory_patch_admin_api_v1_channels__identifier__memory_patch",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemoryPolicyPatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Channel Memory Patch Admin Api V1 Channels  Identifier  Memory Patch"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/api/v1/channels/{identifier}/actions": {
       "post": {
         "summary": "Channel Action",
@@ -6461,6 +6549,94 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ModelPatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/api/v1/public-models/{identifier}/usage": {
+      "get": {
+        "summary": "Model Usage Detail",
+        "operationId": "model_usage_detail_admin_api_v1_public_models__identifier__usage_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelUsage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/api/v1/public-models/{identifier}/documentation": {
+      "patch": {
+        "summary": "Model Documentation",
+        "operationId": "model_documentation_admin_api_v1_public_models__identifier__documentation_patch",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelDocumentationPatch"
               }
             }
           }
@@ -17503,6 +17679,195 @@
         ],
         "title": "MappingWorkflow"
       },
+      "MemoryOperationView": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "stage": {
+            "type": "string",
+            "title": "Stage"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          },
+          "evidence": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Evidence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "stage",
+          "created_at",
+          "updated_at",
+          "completed_at",
+          "error_code",
+          "evidence"
+        ],
+        "title": "MemoryOperationView"
+      },
+      "MemoryPolicyPatch": {
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "idle_seconds": {
+            "type": "integer",
+            "maximum": 86400.0,
+            "minimum": 600.0,
+            "title": "Idle Seconds",
+            "default": 600
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_revision",
+          "enabled"
+        ],
+        "title": "MemoryPolicyPatch"
+      },
+      "MemoryPolicyView": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "channel_id": {
+            "type": "string",
+            "title": "Channel Id"
+          },
+          "channel_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Channel Ids"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "idle_seconds": {
+            "type": "integer",
+            "title": "Idle Seconds"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "idle_since": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idle Since"
+          },
+          "observed_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed At"
+          },
+          "released": {
+            "type": "boolean",
+            "title": "Released"
+          },
+          "active_operation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Operation Id"
+          },
+          "operations": {
+            "items": {
+              "$ref": "#/components/schemas/MemoryOperationView"
+            },
+            "type": "array",
+            "title": "Operations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "channel_id",
+          "channel_ids",
+          "enabled",
+          "idle_seconds",
+          "revision",
+          "status",
+          "idle_since",
+          "observed_at",
+          "released",
+          "active_operation_id",
+          "operations"
+        ],
+        "title": "MemoryPolicyView"
+      },
       "ModelAction": {
         "properties": {
           "expected_revision": {
@@ -17828,6 +18193,9 @@
             },
             "type": "object",
             "title": "Defaults"
+          },
+          "documentation": {
+            "$ref": "#/components/schemas/ModelDocumentation"
           }
         },
         "additionalProperties": false,
@@ -17840,6 +18208,66 @@
           "channel_ids"
         ],
         "title": "ModelCreate"
+      },
+      "ModelDocumentation": {
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "maxLength": 160,
+            "title": "Display Name",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Description",
+            "default": ""
+          },
+          "example_prompt": {
+            "type": "string",
+            "maxLength": 8000,
+            "title": "Example Prompt",
+            "default": ""
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Notes"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Tags"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ModelDocumentation"
+      },
+      "ModelDocumentationPatch": {
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "documentation": {
+            "$ref": "#/components/schemas/ModelDocumentation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_revision",
+          "documentation"
+        ],
+        "title": "ModelDocumentationPatch"
       },
       "ModelFileInspection": {
         "properties": {
@@ -18349,6 +18777,179 @@
         ],
         "title": "ModelPatch"
       },
+      "ModelUsage": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "display_name": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Display Name"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Description"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Notes"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Tags"
+          },
+          "task_type": {
+            "type": "string",
+            "enum": [
+              "text_to_image",
+              "image_to_image",
+              "references_to_image",
+              "text_to_video",
+              "references_to_video",
+              "text_to_audio"
+            ],
+            "title": "Task Type"
+          },
+          "asynchronous": {
+            "type": "boolean",
+            "const": true,
+            "title": "Asynchronous",
+            "default": true
+          },
+          "endpoints": {
+            "$ref": "#/components/schemas/UsageEndpoints"
+          },
+          "request_content_type": {
+            "type": "string",
+            "const": "application/json",
+            "title": "Request Content Type",
+            "default": "application/json"
+          },
+          "required_scopes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Required Scopes"
+          },
+          "defaults": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Defaults"
+          },
+          "parameter_details": {
+            "items": {
+              "$ref": "#/components/schemas/ParameterUsage"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "minItems": 1,
+            "title": "Parameter Details"
+          },
+          "references": {
+            "$ref": "#/components/schemas/ReferenceUsage"
+          },
+          "presets": {
+            "items": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "maxItems": 128,
+            "minItems": 1,
+            "title": "Presets"
+          },
+          "output": {
+            "$ref": "#/components/schemas/UsageOutput"
+          },
+          "request_schema": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Request Schema"
+          },
+          "example_request": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Example Request"
+          },
+          "output_retention_seconds": {
+            "type": "integer",
+            "const": 28800,
+            "title": "Output Retention Seconds",
+            "default": 28800
+          },
+          "availability_note": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Availability Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "display_name",
+          "description",
+          "notes",
+          "tags",
+          "task_type",
+          "required_scopes",
+          "defaults",
+          "parameter_details",
+          "references",
+          "presets",
+          "output",
+          "request_schema",
+          "example_request",
+          "availability_note"
+        ],
+        "title": "ModelUsage"
+      },
       "ModelView": {
         "properties": {
           "id": {
@@ -18394,6 +18995,9 @@
           "published": {
             "type": "boolean",
             "title": "Published"
+          },
+          "documentation": {
+            "$ref": "#/components/schemas/ModelDocumentation"
           }
         },
         "type": "object",
@@ -19341,6 +19945,38 @@
         ],
         "title": "Page[ScopeOption]"
       },
+      "ParameterUsage": {
+        "properties": {
+          "path": {
+            "type": "string",
+            "maxLength": 80,
+            "title": "Path"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Description"
+          },
+          "rules": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Rules"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "path",
+          "required",
+          "description",
+          "rules"
+        ],
+        "title": "ParameterUsage"
+      },
       "ProjectCreate": {
         "properties": {
           "name": {
@@ -19623,6 +20259,16 @@
             "const": "render-control",
             "title": "Owned By"
           },
+          "usage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ModelUsage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "task_type": {
             "type": "string",
             "enum": [
@@ -19712,6 +20358,16 @@
             "type": "string",
             "const": "render-control",
             "title": "Owned By"
+          },
+          "usage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ModelUsage"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -20173,6 +20829,112 @@
           "evidence_digest"
         ],
         "title": "Reconciliation"
+      },
+      "ReferenceSlot": {
+        "properties": {
+          "path": {
+            "type": "string",
+            "maxLength": 80,
+            "title": "Path"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Description"
+          },
+          "weight_supported": {
+            "type": "boolean",
+            "title": "Weight Supported",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "path",
+          "required",
+          "description"
+        ],
+        "title": "ReferenceSlot"
+      },
+      "ReferenceUsage": {
+        "properties": {
+          "supported": {
+            "type": "boolean",
+            "title": "Supported"
+          },
+          "exact_reference_count": {
+            "type": "integer",
+            "maximum": 4.0,
+            "minimum": 0.0,
+            "title": "Exact Reference Count"
+          },
+          "slots": {
+            "items": {
+              "$ref": "#/components/schemas/ReferenceSlot"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "title": "Slots"
+          },
+          "media_types": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "image/png",
+                "image/jpeg",
+                "image/webp"
+              ]
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Media Types"
+          },
+          "max_upload_bytes": {
+            "type": "integer",
+            "maximum": 20971520.0,
+            "minimum": 1.0,
+            "title": "Max Upload Bytes"
+          },
+          "max_image_pixels": {
+            "type": "integer",
+            "const": 25000000,
+            "title": "Max Image Pixels",
+            "default": 25000000
+          },
+          "upload_field": {
+            "type": "string",
+            "const": "file",
+            "title": "Upload Field",
+            "default": "file"
+          },
+          "asset_scope": {
+            "type": "string",
+            "const": "same_api_key",
+            "title": "Asset Scope",
+            "default": "same_api_key"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "supported",
+          "exact_reference_count",
+          "slots",
+          "media_types",
+          "max_upload_bytes",
+          "note"
+        ],
+        "title": "ReferenceUsage"
       },
       "Register": {
         "properties": {
@@ -21559,6 +22321,86 @@
           "outputs"
         ],
         "title": "UploadAuthorization"
+      },
+      "UsageEndpoints": {
+        "properties": {
+          "create": {
+            "type": "string",
+            "const": "/v1/jobs",
+            "title": "Create",
+            "default": "/v1/jobs"
+          },
+          "poll": {
+            "type": "string",
+            "const": "/v1/jobs/{job_id}",
+            "title": "Poll",
+            "default": "/v1/jobs/{job_id}"
+          },
+          "upload": {
+            "type": "string",
+            "const": "/v1/assets",
+            "title": "Upload",
+            "default": "/v1/assets"
+          },
+          "content": {
+            "type": "string",
+            "const": "/v1/content/{content_id}",
+            "title": "Content",
+            "default": "/v1/content/{content_id}"
+          },
+          "download": {
+            "type": "string",
+            "const": "/v1/content/{content_id}/download",
+            "title": "Download",
+            "default": "/v1/content/{content_id}/download"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "UsageEndpoints"
+      },
+      "UsageOutput": {
+        "properties": {
+          "media_types": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "image/png",
+                "image/jpeg",
+                "image/webp",
+                "video/mp4",
+                "video/webm",
+                "audio/wav",
+                "audio/flac",
+                "audio/mpeg",
+                "audio/ogg"
+              ]
+            },
+            "type": "array",
+            "maxItems": 9,
+            "minItems": 1,
+            "title": "Media Types"
+          },
+          "expected_count": {
+            "type": "integer",
+            "const": 1,
+            "title": "Expected Count"
+          },
+          "max_bytes": {
+            "type": "integer",
+            "maximum": 2147483648.0,
+            "minimum": 1.0,
+            "title": "Max Bytes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "media_types",
+          "expected_count",
+          "max_bytes"
+        ],
+        "title": "UsageOutput"
       },
       "UserView": {
         "properties": {

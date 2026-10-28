@@ -197,6 +197,37 @@ class ChannelRevision(Entity, Base):
     __table_args__ = (UniqueConstraint("channel_id", "revision"),)
 
 
+class MemoryPolicy(Entity, Base):
+    __tablename__ = "memory_policies"
+    channel_id: Mapped[UUID] = mapped_column(ForeignKey("channels.id"), unique=True)
+    origin_digest: Mapped[str] = mapped_column(String(64), unique=True)
+    enabled: Mapped[bool] = mapped_column(default=False)
+    idle_seconds: Mapped[int] = mapped_column(default=600)
+    revision: Mapped[int] = mapped_column(default=1)
+    idle_since: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    observed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    next_check_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    released: Mapped[bool] = mapped_column(default=False)
+    activity_marker: Mapped[str] = mapped_column(String(256), default="")
+    history_marker: Mapped[str] = mapped_column(String(256), default="")
+    status: Mapped[str] = mapped_column(String(64), default="disabled")
+    active_operation_id: Mapped[UUID | None] = mapped_column()
+    __table_args__ = (CheckConstraint("idle_seconds BETWEEN 600 AND 86400 AND revision >= 1", name="bounds"),)
+
+
+class MemoryOperation(Entity, Base):
+    __tablename__ = "memory_operations"
+    policy_id: Mapped[UUID] = mapped_column(ForeignKey("memory_policies.id"), index=True)
+    stage: Mapped[str] = mapped_column(String(32))
+    owner: Mapped[UUID | None] = mapped_column()
+    lease_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    evidence: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
+    error_code: Mapped[str | None] = mapped_column(String(64))
+    __table_args__ = (CheckConstraint("stage IN ('preflight','free_intent','free_accepted','barrier1_intent','barrier1_wait','barrier2_intent','barrier2_wait','completed','skipped','unknown','failed')", name="stage"), Index("ix_memory_operations_stage_updated", "stage", "updated_at"))
+
+
 class Workflow(Entity, Scoped, Base):
     __tablename__ = "workflows"
     name: Mapped[str] = mapped_column(String(128))
@@ -253,9 +284,10 @@ class PublicModel(Entity, Scoped, Base):
     release_id: Mapped[UUID] = mapped_column(ForeignKey("workflow_releases.id"))
     channel_ids: Mapped[list[str]] = mapped_column(JSONB)
     defaults: Mapped[dict[str, Any]] = mapped_column(JSONB)
+    documentation: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
     revision: Mapped[int] = mapped_column(default=1)
     published: Mapped[bool] = mapped_column(default=False)
-    __table_args__ = scope_constraints(UniqueConstraint("tenant_id", "project_id", "alias"), ForeignKeyConstraint(["tenant_id", "project_id", "release_id"], ["workflow_releases.tenant_id", "workflow_releases.project_id", "workflow_releases.id"]))
+    __table_args__ = scope_constraints(UniqueConstraint("tenant_id", "project_id", "alias"), CheckConstraint("jsonb_typeof(documentation) = 'object'", name="documentation_object"), ForeignKeyConstraint(["tenant_id", "project_id", "release_id"], ["workflow_releases.tenant_id", "workflow_releases.project_id", "workflow_releases.id"]))
 
 
 class Idempotency(Entity, Scoped, Base):

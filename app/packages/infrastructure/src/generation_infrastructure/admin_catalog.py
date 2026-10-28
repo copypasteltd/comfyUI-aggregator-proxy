@@ -13,13 +13,16 @@ from generation_contracts.catalog import (
 )
 from generation_contracts.discovery import PublishedCapability
 from generation_contracts.model_catalog import ModelCatalogQuery
+from generation_contracts.model_usage import ModelDocumentationPatch
 from generation_domain.errors import DomainError
 from generation_domain.values import canonical_json, fingerprint, parse_id, public_id, utcnow
 from generation_domain.workflows import matching_presets
+from jsonschema.exceptions import SchemaError
+from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
 from pydantic import ValidationError
 from sqlalchemy import func, or_, select
 from sqlalchemy.exc import DBAPIError
-from sqlalchemy.orm import Session, defer
+from sqlalchemy.orm import Session
 
 from generation_infrastructure.admin_base import (
     AdminBase,
@@ -29,6 +32,7 @@ from generation_infrastructure.admin_base import (
     timestamp,
 )
 from generation_infrastructure.admin_channels import begin_channel_read, enqueue_command
+from generation_infrastructure.model_usage import model_usage
 from generation_infrastructure.models import (
     Artifact,
     Attempt,
@@ -47,7 +51,7 @@ from generation_infrastructure.workflow_lifecycle import require_active_workflow
 
 
 def model_view(row: PublicModel) -> dict[str, Any]:
-    return {"id": public_id("mdl", row.id), "tenant_id": public_id("ten", row.tenant_id), "project_id": public_id("prj", row.project_id), "alias": row.alias, "task_type": row.task_type, "release_id": public_id("wfr", row.release_id), "channel_ids": row.channel_ids, "defaults": row.defaults, "revision": row.revision, "published": row.published}
+    return {"id": public_id("mdl", row.id), "tenant_id": public_id("ten", row.tenant_id), "project_id": public_id("prj", row.project_id), "alias": row.alias, "task_type": row.task_type, "release_id": public_id("wfr", row.release_id), "channel_ids": row.channel_ids, "defaults": row.defaults, "revision": row.revision, "published": row.published, "documentation": row.documentation or {}}
 
 
 class CatalogAdministration(AdminBase):
@@ -97,12 +101,40 @@ class CatalogAdministration(AdminBase):
                 return idem.result
             tenant, project = scope_ids(session, data.tenant_id, data.project_id)
             release = self._validate(session, tenant, project, data.release_id, data.channel_ids, data.defaults)
-            row = PublicModel(tenant_id=tenant, project_id=project, alias=data.alias, task_type=release.manifest["task_type"], release_id=release.id, channel_ids=data.channel_ids, defaults=data.defaults)
+            row = PublicModel(tenant_id=tenant, project_id=project, alias=data.alias, task_type=release.manifest["task_type"], release_id=release.id, channel_ids=data.channel_ids, defaults=data.defaults, documentation=data.documentation.model_dump())
             session.add(row)
             session.flush()
             record_change(session, public_id("usr", actor.user_id), "model.created", row.id, request_id, revision_before=None, revision_after=row.revision)
             idem.result = model_view(row)
             return idem.result
+
+    def patch_documentation(self, actor: AdminIdentity, identifier: UUID, data: ModelDocumentationPatch, token: str, request_id: str) -> dict[str, Any]:
+        with self.sessions.begin() as session:
+            idem = mutation(session, actor, "model.documentation:" + str(identifier), token, data.model_dump())
+            if idem.result is not None:
+                return idem.result
+            row = session.execute(select(PublicModel).where(PublicModel.id == identifier).with_for_update()).scalar_one_or_none()
+            if row is None:
+                raise DomainError("not_found", "模型不存在", 404)
+            require_revision(row.revision, data.expected_revision)
+            row.documentation = data.documentation.model_dump()
+            row.revision += 1
+            record_change(session, public_id("usr", actor.user_id), "model.documentation_updated", row.id, request_id, revision_before=data.expected_revision, revision_after=row.revision)
+            idem.result = model_view(row)
+            return idem.result
+
+    def usage(self, identifier: UUID) -> dict[str, Any]:
+        with self.sessions() as session:
+            row = session.get(PublicModel, identifier)
+            if row is None:
+                raise DomainError("not_found", "模型不存在", 404)
+            release = session.get(WorkflowRelease, row.release_id)
+            if release is None or fingerprint(release.manifest) != release.digest:
+                raise DomainError("release_not_available", "冻结发布版本不可用", 409)
+            try:
+                return model_usage(row.alias, row.task_type, release.manifest, row.defaults, row.documentation or {})
+            except (DomainError, KeyError, TypeError, ValueError, JsonSchemaValidationError, SchemaError):
+                raise DomainError("usage_not_available", "发布版本尚无完整可用的调用说明", 409) from None
 
     def patch_model(self, actor: AdminIdentity, identifier: UUID, data: ModelPatch, request_id: str) -> dict[str, Any]:
         with self.sessions.begin() as session:
@@ -231,8 +263,6 @@ class CatalogAdministration(AdminBase):
         identity.require("capabilities:read" if capabilities else "models:read")
         with self.sessions() as session:
             query = select(PublicModel, WorkflowRelease).join(WorkflowRelease, PublicModel.release_id == WorkflowRelease.id).join(Workflow, Workflow.id == WorkflowRelease.workflow_id).where(Workflow.archived.is_(False), PublicModel.tenant_id == identity.tenant_id, PublicModel.project_id == identity.project_id, PublicModel.published.is_(True), WorkflowRelease.validated.is_(True), WorkflowRelease.manifest["task_type"].astext == PublicModel.task_type)
-            if not capabilities:
-                query = query.options(defer(WorkflowRelease.manifest))
             if model is not None:
                 query = query.where(PublicModel.alias == model)
             selection = identity.policy["models"]
@@ -248,8 +278,17 @@ class CatalogAdministration(AdminBase):
             if len(rows) > 4096:
                 raise DomainError("catalog_too_large", "模型目录超过发现接口限额", 503)
             result = []
+            response_bytes = 0
             for row, release in rows:
                 item = {"id": row.alias, "object": "model", "created": int(row.created_at.timestamp()), "owned_by": "render-control"}
+                manifest = release.manifest
+                if fingerprint(manifest) != release.digest:
+                    continue
+                if {"bindings", "presets", "supported_parameters"} <= manifest.keys():
+                    try:
+                        item["usage"] = model_usage(row.alias, row.task_type, manifest, row.defaults, row.documentation or {})
+                    except (DomainError, KeyError, TypeError, ValueError, JsonSchemaValidationError, SchemaError):
+                        continue
                 if capabilities:
                     try:
                         manifest = release.manifest
@@ -259,6 +298,9 @@ class CatalogAdministration(AdminBase):
                         item = PublishedCapability.model_validate(item).model_dump(exclude_none=True)
                     except (ValidationError, KeyError, TypeError):
                         continue
+                response_bytes += len(canonical_json(item).encode("utf-8"))
+                if response_bytes > 8 * 1024**2:
+                    raise DomainError("catalog_too_large", "模型目录说明超过响应限额，请缩小 Key 的授权模型范围", 503)
                 result.append(item)
             return {"object": "list", "data": result}
 

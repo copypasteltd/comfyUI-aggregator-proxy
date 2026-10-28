@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "MemoryOperationView": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "stage": {
+          "title": "Stage",
+          "type": "string"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "integer"
+        },
+        "updated_at": {
+          "title": "Updated At",
+          "type": "integer"
+        },
+        "completed_at": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Completed At"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Error Code"
+        },
+        "evidence": {
+          "additionalProperties": true,
+          "title": "Evidence",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "stage",
+        "created_at",
+        "updated_at",
+        "completed_at",
+        "error_code",
+        "evidence"
+      ],
+      "title": "MemoryOperationView",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Id"
+    },
+    "channel_id": {
+      "title": "Channel Id",
+      "type": "string"
+    },
+    "channel_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Channel Ids",
+      "type": "array"
+    },
+    "enabled": {
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "idle_seconds": {
+      "title": "Idle Seconds",
+      "type": "integer"
+    },
+    "revision": {
+      "title": "Revision",
+      "type": "integer"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "idle_since": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Idle Since"
+    },
+    "observed_at": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Observed At"
+    },
+    "released": {
+      "title": "Released",
+      "type": "boolean"
+    },
+    "active_operation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Active Operation Id"
+    },
+    "operations": {
+      "items": {
+        "$ref": "#/$defs/MemoryOperationView"
+      },
+      "title": "Operations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "channel_id",
+    "channel_ids",
+    "enabled",
+    "idle_seconds",
+    "revision",
+    "status",
+    "idle_since",
+    "observed_at",
+    "released",
+    "active_operation_id",
+    "operations"
+  ],
+  "title": "MemoryPolicyView",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render-control.invalid/contracts/admin-memory-view.schema.json"
+}

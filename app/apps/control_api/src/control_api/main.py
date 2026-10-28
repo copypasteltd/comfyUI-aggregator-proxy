@@ -67,6 +67,7 @@ from generation_contracts.discovery import PublishedCapabilities, PublishedModel
 from generation_contracts.job_cancellations import JobCancellationBatch, JobCancellationView
 from generation_contracts.key_generation_options import KeyGenerationOptions, KeyGenerationQuery
 from generation_contracts.key_policy_options import KeyPolicyOptionQuery, KeyPolicyOptions
+from generation_contracts.memory import MemoryPolicyPatch, MemoryPolicyView
 from generation_contracts.model_artifacts import (
     ModelArtifactCreate,
     ModelArtifactDeletion,
@@ -84,6 +85,7 @@ from generation_contracts.model_files import (
     ModelFileReadView,
     ModelFileRegistration,
 )
+from generation_contracts.model_usage import ModelDocumentationPatch, ModelUsage
 from generation_contracts.monitoring import MonitoringConfiguration
 from generation_contracts.operational import QueueStatistics, QueueStatisticsQuery
 from generation_contracts.outputs import Complete, UploadAuthorization
@@ -212,6 +214,7 @@ from generation_infrastructure.jobs import JobRepository
 from generation_infrastructure.key_generation_options import KeyGenerationDirectory
 from generation_infrastructure.key_policy_options import KeyPolicyDirectory
 from generation_infrastructure.leases import LeaseRepository
+from generation_infrastructure.memory_reclamation import MemoryAdministration
 from generation_infrastructure.model_mapping_options import ModelMappingReads
 from generation_infrastructure.monitoring import (
     MonitoringService,
@@ -300,6 +303,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     workflow_imports = WorkflowImportAdministration(sessions, settings)
     workflow_catalogs = WorkflowCatalogAdministration(sessions, settings)
     catalog = CatalogAdministration(sessions, settings)
+    memory = MemoryAdministration(sessions, settings)
     model_mapping_reads = ModelMappingReads(sessions, settings)
     workflow_retries = WorkflowSyncRetries(sessions, settings)
     validation_jobs = ValidationJobs(sessions, settings)
@@ -514,6 +518,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         result = channels.deletion_check(parse_id("ch", identifier))
         etag(response, result["revision"])
         return result
+
+    @app.get("/admin/api/v1/channels/{identifier}/memory", response_model=MemoryPolicyView)
+    def channel_memory(identifier: str, response: Response, identity: Annotated[AdminIdentity, Depends(permission("channels:read"))]) -> dict[str, Any]:
+        response.headers["Cache-Control"] = "no-store"
+        return memory.get(parse_id("ch", identifier))
+
+    @app.patch("/admin/api/v1/channels/{identifier}/memory")
+    def channel_memory_patch(identifier: str, data: MemoryPolicyPatch, request: Request, identity: Annotated[AdminIdentity, Depends(permission("channels:write"))]) -> dict[str, Any]:
+        expected_revision(request, data.expected_revision)
+        return memory.patch(identity, parse_id("ch", identifier), data, admin_token(request), request.state.request_id)
 
     @app.post("/admin/api/v1/channels", status_code=201, response_model=ChannelMutation)
     def channel_create(data: ChannelCreate, request: Request, identity: Annotated[AdminIdentity, Depends(permission("channels:write"))]) -> dict[str, Any]:
@@ -948,6 +962,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         expected_revision(request, data.expected_revision)
         return catalog.patch_model(identity, parse_id("mdl", identifier), data, request.state.request_id)
 
+    @app.get("/admin/api/v1/public-models/{identifier}/usage", response_model=ModelUsage)
+    def model_usage_detail(identifier: str, identity: Annotated[AdminIdentity, Depends(permission("models:read"))]) -> dict[str, Any]:
+        return catalog.usage(parse_id("mdl", identifier))
+
+    @app.patch("/admin/api/v1/public-models/{identifier}/documentation", response_model=ModelView)
+    def model_documentation(identifier: str, data: ModelDocumentationPatch, request: Request, identity: Annotated[AdminIdentity, Depends(permission("models:write"))]) -> dict[str, Any]:
+        expected_revision(request, data.expected_revision)
+        return catalog.patch_documentation(identity, parse_id("mdl", identifier), data, admin_token(request), request.state.request_id)
+
     @app.post("/admin/api/v1/public-models/{identifier}/actions", response_model=ModelView)
     def model_action(identifier: str, data: ModelAction, request: Request, identity: Annotated[AdminIdentity, Depends(permission("models:publish"))]) -> dict[str, Any]:
         admin_token(request)
@@ -973,11 +996,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         expected_revision(request, data.expected_revision)
         return catalog.approve_runtime(identity, parse_id("ch", identifier), data, request.state.request_id, admin_token(request))
 
-    @app.get("/v1/models", response_model=PublishedModels)
+    @app.get("/v1/models", response_model=PublishedModels, response_model_exclude_none=True)
     def public_models(identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:
         return catalog.public_models(identity)
 
-    @app.get("/v1/models/{model}", response_model=PublishedModel)
+    @app.get("/v1/models/{model}", response_model=PublishedModel, response_model_exclude_none=True)
     def public_model(model: str, identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:
         return catalog.public_model(identity, model)
 

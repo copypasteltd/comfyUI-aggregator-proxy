@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-28 · 124 · Model usage, MediaGen Skill and HTTP idle reclamation
+
+- Add public model documentation with Admin editing, revision/idempotency checks and audit; derive safe usage schemas, reference slots, presets and native asynchronous examples from frozen releases.
+- 新增 `media-gen-skill`，默认服务 `https://gen.sub2share.xyz`，包含 Python 标准库客户端、同源鉴权下载、摘要校验与未知提交的持久幂等恢复；提供可复现打包脚本和双语安装指南。GitHub Release 状态见文档 124。
+- Implement durable, instance-wide 600-second idle policies in the platform Runner. POST ComfyUI `/free`, then confirm two ordered CPU barriers before releasing shared GPU holds; uncertain execution remains protected. Admin exposes settings, observations and operation evidence. No GPU host shell, extensions or process restart is used.
+- 相同冻结发布可绑定多渠道，但现有 Worker 领取不保证设备等量分配；不同摘要的线上 H3 流程不静默合并。本次实现、验证及部署范围见文档 124～126。
+
 ## 2026-10-28 · 123 · Idle memory and multi-device pool audit — design
 
 - 只读核对 Worker、PostgreSQL 领取/发布逻辑、线上 10 个别名及三设备系统/队列：当前释放的是 GPU 槽位，没有 600 秒空闲卸载，所有已发布别名仍为单渠道；同名 4090/5070 H3 三对执行图均不同。

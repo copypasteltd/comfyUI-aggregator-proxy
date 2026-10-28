@@ -3598,6 +3598,77 @@
       "if_match_required": false,
       "work_package": "WP-09",
       "response_schema": "admin-wait-estimate.schema.json"
+    },
+    {
+      "operation_id": "get_admin_api_v1_public_models_id_usage",
+      "method": "GET",
+      "path": "/admin/api/v1/public-models/{id}/usage",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "response_schemas": [
+        "model-usage.schema.json"
+      ]
+    },
+    {
+      "operation_id": "patch_admin_api_v1_public_models_id_documentation",
+      "method": "PATCH",
+      "path": "/admin/api/v1/public-models/{id}/documentation",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-08"
+    },
+    {
+      "operation_id": "get_admin_api_v1_channels_id_memory",
+      "method": "GET",
+      "path": "/admin/api/v1/channels/{id}/memory",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-05",
+      "response_schemas": [
+        "admin-memory-view.schema.json"
+      ],
+      "request_schemas": []
+    },
+    {
+      "operation_id": "patch_admin_api_v1_channels_id_memory",
+      "method": "PATCH",
+      "path": "/admin/api/v1/channels/{id}/memory",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "channels:write"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-05",
+      "response_schemas": [],
+      "request_schemas": [
+        "admin-memory-policy.schema.json"
+      ]
     }
   ],
   "inventory_revision": "2026-10-25-increment-81"
