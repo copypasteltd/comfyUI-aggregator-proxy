@@ -1,6 +1,6 @@
 # ComfyUI Aggregator Proxy
 
-[129 · 3D compatibility review](docs/129-三维兼容复查与GLB边界修复.md) reproduces and fixes missed POSITION accessor counting and invalid node hierarchies outside the default scene. All 319 scoped compatibility checks pass, and the previous real GLB passes reinspection. Image, video, audio and 3D request formats stay compatible; deployment and fresh generation results are recorded separately in the review.
+[129 · 3D compatibility review](docs/129-三维兼容复查与GLB边界修复.md) fixes missed POSITION accessor counts, invalid node hierarchies outside the default scene, and an incorrect image-permission requirement for 3D-only Keys. All 339 final scoped checks pass, including least privilege across seven task types and HTTP admission; the previous real GLB also passes reinspection. See the review for deployment and fresh generation evidence.
 
 [128 · 3D model support](docs/128-ComfyUI三维模型产物与3080适配.md) adds `image_to_3d`, self-contained GLB 2.0 validation, separate `meshes:create` permission and Tenant/Project/Key `daily_mesh_count` quotas. The RTX 3080 TRELLIS2 example uses the same asynchronous queue, exclusive physical GPU ownership, authenticated content download and eight-hour retention after success. See the increment for actual verification status; only Workflows with real runtime approval are published.
 

@@ -1,0 +1,31 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T02:39:16.242185+00:00",
+  "passed": true,
+  "scope": "F03 actual least-privilege defect reproduced before repair; fixed source is covered by the separate 339-case final report. This does not assert a fresh GPU result.",
+  "before": {
+    "source_revision": "99a94ea18971e553b7d1be4e214f5cbf8ebfce26",
+    "application_ports_sha256": "4fc72af616cfa39ba4dd1a7ee8c8dc437469d4e624368e5a6530a2dfd7d6cef8",
+    "tests": 20,
+    "failed": 5,
+    "passed": 15,
+    "failure_cases": [
+      "test_generation_accepts_only_the_requested_media_permission[image_to_3d-meshes:create-preflight_inputs]",
+      "test_generation_accepts_only_the_requested_media_permission[image_to_3d-meshes:create-create]",
+      "test_mesh_permission_never_substitutes_for_jobs_or_images[scopes0-preflight_inputs]",
+      "test_mesh_permission_never_substitutes_for_jobs_or_images[scopes0-create]",
+      "test_mesh_http_requires_mesh_scope_without_image_permission[True]"
+    ],
+    "junit_sha256": "2efcd76b8ea70a49bb1b79f01aae742c4a941f0116f82a4c60773ae9a9c15c1c",
+    "log_sha256": "8924f77d04e499fbd21e7a8bb8242c0e7309937d512f8e8f923497acc952a674"
+  },
+  "after": {
+    "application_ports_sha256": "2e854064736de2ae9664ea32d010533387a3004dac7962c27c362f48538788ed",
+    "ruff_passed": true,
+    "mypy_passed": true,
+    "final_compatibility_report": "docs/evidence/2026-10-29/model3d-compatibility-129-permissions.json",
+    "report_sha256": "610e0f095509646b6a1bcdcd30681efaaeac602ea1af00910984ea00d226f003"
+  },
+  "public_contract_changed": false,
+  "worker_protocol_changed": false
+}

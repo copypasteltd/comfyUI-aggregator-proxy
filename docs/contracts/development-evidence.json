@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-29/development-trace-baselines-129-final.json",
-    "sha256": "a589d55cf6f8b81506f7b771bd76e80db29eeae3163f8dae5fb615c61ba8462f"
+    "path": "docs/evidence/2026-10-29/development-trace-baselines-129-permissions.json",
+    "sha256": "75e926ac2522ec174d8d6b0d6babc6b4f08b880eb7e7cd45e48350aeb9afa61b"
   },
   "requirements": [
     {
@@ -785,6 +785,10 @@
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
           "baseline": "meshui128"
+        },
+        {
+          "path": "app/packages/application/src/generation_application/ports.py",
+          "baseline": "mesh129permissions"
         }
       ],
       "tests": [
@@ -792,25 +796,25 @@
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_legacy_worker_and_legacy_key_cannot_run_mesh",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129permissions"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_concurrent_admission_honors_last_slot_and_cancel_refunds",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129permissions"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_delivery_is_once_isolated_downloadable_and_expires_after_eight_hours",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129permissions"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_quota_missing_or_zero_rejects_every_parent",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129permissions"
         },
         {
           "path": "app/tests/protocol/test_model3d_worker.py",
@@ -883,19 +887,38 @@
           "symbol": "test_glb_accepts_a_valid_unselected_scene",
           "language": "python",
           "baseline": "mesh129"
+        },
+        {
+          "path": "app/tests/integration/test_model3d_pipeline.py",
+          "symbol": "test_mesh_http_requires_mesh_scope_without_image_permission",
+          "language": "python",
+          "baseline": "mesh129permissions"
+        },
+        {
+          "path": "app/tests/unit/test_generation_permissions.py",
+          "symbol": "test_generation_accepts_only_the_requested_media_permission",
+          "language": "python",
+          "baseline": "mesh129permissions"
+        },
+        {
+          "path": "app/tests/unit/test_generation_permissions.py",
+          "symbol": "test_mesh_permission_never_substitutes_for_jobs_or_images",
+          "language": "python",
+          "baseline": "mesh129permissions"
         }
       ],
       "evidence": [
         "mesh128",
         "meshui128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "20",
         "23",
         "26"
       ],
-      "limitation": "128 implements bounded single-image static self-contained triangle GLB 2.0 with independent permission/quota and native 3080 TRELLIS2 delivery. Review 129 fixes POSITION accessor counting and whole-document node hierarchy validation; local compatibility evidence does not establish fleet/product acceptance. Other formats, interactive preview, texture/topology quality and separate gateway billing remain open. Real-resource evidence is linked in documents 128 and 129."
+      "limitation": "Bounded static self-contained triangle GLB with independent mesh permission/quota and native 3080 TRELLIS2 delivery. Review 129 repairs POSITION counting, global node hierarchy checks and the application-service mesh permission mapping, with 339 final scoped compatibility checks and separately recorded live evidence. Other formats, interactive preview, texture/topology quality, separate gateway billing and fleet/product acceptance remain open."
     },
     {
       "id": "API-01",
@@ -4416,7 +4439,8 @@
       "local_evidence": [
         "ci86",
         "mesh128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "25",
@@ -4439,7 +4463,8 @@
         "ci86",
         "native86",
         "mesh128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "29",
@@ -6040,7 +6065,8 @@
         "ci86",
         "go80",
         "mesh128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "28",
@@ -6079,7 +6105,8 @@
       "local_evidence": [
         "ci86",
         "mesh128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "34",
@@ -6117,7 +6144,8 @@
         "ci86",
         "go80",
         "mesh128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "37",
@@ -6181,7 +6209,8 @@
       "local_evidence": [
         "ci86",
         "mesh128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "17",
@@ -6202,7 +6231,8 @@
       "local_evidence": [
         "ci86",
         "mesh128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "17",
@@ -6270,7 +6300,8 @@
         "native86",
         "release92",
         "mesh128",
-        "mesh129"
+        "mesh129",
+        "mesh129permissions"
       ],
       "remaining_backlog": [
         "69",

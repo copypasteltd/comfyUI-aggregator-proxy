@@ -10,6 +10,7 @@ from typing import Any
 from uuid import uuid4
 
 import pytest
+from fastapi.testclient import TestClient
 from generation_application.ports import BusinessIdentity
 from generation_contracts.outputs import Complete, UploadAuthorization
 from generation_contracts.validation import WorkerEvent
@@ -40,6 +41,8 @@ from generation_infrastructure.storage import LocalDevelopmentStore
 from PIL import Image
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session, sessionmaker
+from test_http_auth import client as client
+from test_http_auth import key_body, login
 
 pytestmark = pytest.mark.integration
 
@@ -129,6 +132,38 @@ def request(catalog: dict[str, Any]) -> dict[str, Any]:
         "task_type": "image_to_3d",
         "input": {"source_image": {"asset_id": catalog["asset_id"]}},
     }
+
+
+@pytest.mark.parametrize("mesh_permission", [True, False])
+def test_mesh_http_requires_mesh_scope_without_image_permission(
+    client: TestClient, pg: sessionmaker[Session], mesh_catalog: dict[str, Any], mesh_permission: bool
+) -> None:
+    login(client)
+    body = key_body(mesh_catalog)
+    body["policy"]["scopes"] = [
+        "jobs:create", "jobs:read", "models:read", "assets:upload", "assets:read",
+        "meshes:create" if mesh_permission else "images:create",
+    ]
+    body["policy"]["limits"]["daily_mesh_count"] = {"mode": "bounded", "value": 5}
+    created = client.post("/admin/api/v1/api-keys", json=body, headers={"Idempotency-Key": str(uuid4())})
+    assert created.status_code == 201, created.text
+    headers = {"Authorization": "Bearer " + created.json()["secret"], "Idempotency-Key": str(uuid4())}
+    image = BytesIO()
+    Image.new("RGB", (64, 64), "white").save(image, "PNG")
+    uploaded = client.post("/v1/assets", files={"file": ("synthetic.png", image.getvalue(), "image/png")}, headers=headers)
+    assert uploaded.status_code == 201, uploaded.text
+    job_request = request({"asset_id": uploaded.json()["id"]})
+    headers["Idempotency-Key"] = str(uuid4())
+    response = client.post("/v1/jobs", json=job_request, headers=headers)
+    key_id = parse_id("key", created.json()["key"]["id"])
+    if mesh_permission:
+        assert response.status_code == 202, response.text
+        replay = client.post("/v1/jobs", json=job_request, headers=headers)
+        assert replay.status_code == 202 and replay.json()["id"] == response.json()["id"]
+    else:
+        assert response.status_code == 403 and response.json()["error"]["code"] == "scope_denied"
+    with pg() as session:
+        assert session.scalar(select(func.count()).select_from(Job).where(Job.key_id == key_id)) == int(mesh_permission)
 
 
 def collect(

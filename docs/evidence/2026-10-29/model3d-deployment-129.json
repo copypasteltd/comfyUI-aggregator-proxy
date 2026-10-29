@@ -1,0 +1,54 @@
+{
+  "format_version": 1,
+  "passed": true,
+  "scope": "Immutable native Linux cloud-only validator update; schema, Worker protocol, Admin payload and Windows Worker installation unchanged. Installed Python bytes and source revision verified. This report does not assert a fresh GPU job result.",
+  "virtualization_used": false,
+  "build": {
+    "passed": true,
+    "archive_sha256": "52bd69e52d8e379575e9542ddf447cfd704449347109d0bc6ca6fb460cafe2c2",
+    "archive_bytes": 1163748,
+    "source_revision": "99a94ea18971e553b7d1be4e214f5cbf8ebfce26",
+    "changed_runtime_sources": [
+      "packages/infrastructure/src/generation_infrastructure/model3d_media.py"
+    ],
+    "wheel_sha256": "cbcbe7181251b863d631c1ceb6ec03bf7020ffa65dd3c101c975c4df7d1d2b7b",
+    "source_files": 553,
+    "schema_changed": false,
+    "worker_protocol_changed": false,
+    "windows_worker_rebuild_required": false,
+    "scope": "Cloud-only geometry-validator repair. All seven wheel payloads are bound to the source snapshot; six unchanged wheels, Admin and runtime dependencies are reused from verified immutable release 128.1."
+  },
+  "production": {
+    "at": "2026-10-29T02:28:05.297612+00:00",
+    "release": "linux-20261029.129.1",
+    "source_revision": "99a94ea18971e553b7d1be4e214f5cbf8ebfce26",
+    "installed_validator_sha256": "6d232afe54e4138891735d95d0547e5e6cd050ca28bed5d78f27abb8287d89dd",
+    "database_head": "03d128a00001",
+    "services": {
+      "api": "active",
+      "runner": "active",
+      "gc": "active",
+      "http-worker": "active"
+    },
+    "http_worker_pid_unchanged": true,
+    "pending_jobs_at_snapshot": 0,
+    "wheel_sha256": "cbcbe7181251b863d631c1ceb6ec03bf7020ffa65dd3c101c975c4df7d1d2b7b"
+  },
+  "first_switch": {
+    "passed": false,
+    "failure": "HTTP readiness returned 502 before the first process completed startup; eight bounded checks triggered automatic rollback to 128.1. Old service health was subsequently verified.",
+    "error_log_sha256": "73b630ff2042234b42f489c01968604b818ce09a585bd76c88c7c7bc07ad96a2",
+    "source_install_import_verified": true,
+    "independent_import_seconds": 4.326
+  },
+  "second_switch": {
+    "passed": true,
+    "readiness_checks_maximum": 20,
+    "readiness_pause_seconds": 1,
+    "rollback_retained": true,
+    "status_log_sha256": "008419dac1a87c237a92af31db955f126c7959ca974115108e0c07875f65cb68"
+  },
+  "schema_changed": false,
+  "browser_used": false,
+  "complete_goal_achieved": false
+}

@@ -1,0 +1,26 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T02:33:40.688013+00:00",
+  "defect_reproduced": true,
+  "scope": "Actual HTTP POST /v1/jobs rejected a 3D-only business key before admission. This records the failure before the application-service permission fix.",
+  "cloud_release": "linux-20261029.129.1",
+  "task_type": "image_to_3d",
+  "key_scopes": [
+    "models:read",
+    "capabilities:read",
+    "jobs:create",
+    "jobs:read",
+    "meshes:create",
+    "assets:upload",
+    "assets:read",
+    "artifacts:read",
+    "content:read",
+    "content:download"
+  ],
+  "key_daily_mesh_count": 1,
+  "http_status": 403,
+  "error_code": "scope_denied",
+  "unexpected_required_scope": "images:create",
+  "generated_job_created": false,
+  "raw_credentials_published": false
+}

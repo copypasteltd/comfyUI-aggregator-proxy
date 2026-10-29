@@ -5,6 +5,9 @@ from typing import Any, Protocol
 from uuid import UUID
 
 from generation_domain.errors import DomainError
+from generation_domain.media_types import task_media_kind
+
+_CREATE_SCOPES = {"image": "images:create", "video": "videos:create", "audio": "audio:create", "model": "meshes:create"}
 
 
 @dataclass(frozen=True)
@@ -46,12 +49,12 @@ class GenerationService:
 
     def preflight_inputs(self, identity: BusinessIdentity, request: dict[str, Any]) -> None:
         identity.require("jobs:create")
-        identity.require("audio:create" if request["task_type"] == "text_to_audio" else "videos:create" if request["task_type"].endswith("video") else "images:create")
+        identity.require(_CREATE_SCOPES[task_media_kind(request["task_type"])])
         self.repository.preflight_inputs(identity, request)
 
     def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str) -> dict[str, Any]:
         identity.require("jobs:create")
-        identity.require("audio:create" if request["task_type"] == "text_to_audio" else "videos:create" if request["task_type"].endswith("video") else "images:create")
+        identity.require(_CREATE_SCOPES[task_media_kind(request["task_type"])])
         if not 16 <= len(token) <= 128 or not token.isascii() or any(ord(c) < 33 or ord(c) > 126 for c in token):
             raise DomainError("invalid_idempotency_key", "Idempotency-Key 要求 16～128 位 ASCII 字符", 400)
         return self.repository.create(identity, request, token, request_id)
