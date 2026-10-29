@@ -136,7 +136,7 @@ def test_usage_snapshot_timezone_and_limits_edits_preserve_buckets(pg: sessionma
         session.add_all([QuotaBucket(scope_kind="1_tenant", scope_id=identity.tenant_id, period="active", unfinished_jobs=4, generating_jobs=1, dispatch_virtual_milliseconds=12345, dispatch_sequence=7), QuotaBucket(scope_kind="1_tenant", scope_id=identity.tenant_id, period="2026-10-24", daily_jobs=11, daily_image_count=12, daily_video_milliseconds=13000), QuotaBucket(scope_kind="1_tenant", scope_id=identity.tenant_id, period="2026-10-23", daily_jobs=99)])
     admin, who = ScopeAdministration(pg, test_settings), actor(pg)
     snapshot = admin.get(identity.tenant_id, project=False)
-    assert snapshot["usage"] == {"period": "2026-10-24", "unfinished_jobs": 4, "generating_jobs": 1, "daily_jobs": 11, "daily_image_count": 12, "daily_video_milliseconds": 13000, "daily_audio_milliseconds": 0}
+    assert snapshot["usage"] == {"period": "2026-10-24", "unfinished_jobs": 4, "generating_jobs": 1, "daily_jobs": 11, "daily_image_count": 12, "daily_video_milliseconds": 13000, "daily_audio_milliseconds": 0, "daily_mesh_count": 0}
     limits = deepcopy(snapshot["limits"])
     limits["unfinished_jobs"]["value"] = 0
     for revision, enabled in [(1, False), (2, True)]:
