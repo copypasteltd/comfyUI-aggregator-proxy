@@ -6,6 +6,8 @@ import i18n from "@/i18n";
 import { localForageStorage } from "@/lib/localforage-storage";
 import type { CanvasBackgroundMode } from "@/lib/canvas-theme";
 import type { CanvasAssistantSession, CanvasConnection, CanvasNodeData, ViewportTransform } from "@/types/canvas";
+import { MANAGED_STUDIO } from "@/constant/studio";
+import { studioDocumentReadFailed } from "@/services/studio-persistence";
 
 export type CanvasProject = {
     id: string;
@@ -57,6 +59,7 @@ const canvasStorage: PersistStorage<CanvasStore> = {
         const nextState = value.state as PersistedCanvasState;
         if (queuedPersistState && queuedPersistState.projects === nextState.projects && queuedPersistState.deletedProjects === nextState.deletedProjects) return;
         queuedPersistState = nextState;
+        if (MANAGED_STUDIO) { void localForageStorage.setItem(name, JSON.stringify(value)); return; }
         if (saveTimer) clearTimeout(saveTimer);
         saveTimer = setTimeout(() => {
             saveTimer = null;
@@ -138,7 +141,8 @@ export const useCanvasStore = create<CanvasStore>()(
                     projects: state.projects,
                     deletedProjects: state.deletedProjects,
                 }) as StorageValue<CanvasStore>["state"],
-            onRehydrateStorage: () => () => {
+            onRehydrateStorage: () => (_state, error) => {
+                if (error) studioDocumentReadFailed(CANVAS_STORE_KEY, error);
                 useCanvasStore.setState({ hydrated: true });
             },
         },

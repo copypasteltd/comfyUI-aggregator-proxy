@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 import { Alert, App, Button, Drawer, Empty, Popconfirm, Tag } from "antd";
 import { Box, Download, Image, Music2, RefreshCw, Trash2, Video } from "lucide-react";
 import { saveAs } from "file-saver";
-import { localResultIndex, journalDelete, type LocalResult } from "@/services/aggregator-journal";
+import { localResultIndex, type LocalResult } from "@/services/aggregator-journal";
+import { deleteUnreferencedResult } from "@/services/studio-documents";
+import { flushStudioDocuments } from "@/services/studio-persistence";
 import { getStudioResult, mediaExtension, releaseStudioMedia, studioMediaUrl } from "@/services/studio-media";
 import { subscribeStudioTasks } from "@/services/aggregator-engine";
 import { collectMediaStorageKeys } from "@/services/file-storage";
@@ -35,9 +37,11 @@ export default function StudioAssetsPage() {
                     {metadata.media_type !== "model/gltf-binary" && <Button onClick={() => void action(async () => { const url = await studioMediaUrl(entry.id); if (!url) throw new Error("本机原件无法读取"); setPreview({ entry, url }); })}>预览</Button>}
                     <Button icon={<Download size={14} />} onClick={() => void action(async () => { const result = await getStudioResult(entry.id); if (!result) throw new Error("请使用原连接读取本机原件"); saveAs(result.blob, `${metadata.id}.${mediaExtension(metadata.media_type)}`); })}>另存原件</Button>
                     <Popconfirm title="删除此浏览器的原件？" description="不会取消远端任务或延长云端期限。仍被画布或素材引用的原件会保留。" onConfirm={() => action(async () => {
+                        await flushStudioDocuments();
                         const used = collectMediaStorageKeys({ projects: useCanvasStore.getState().projects, assets: useAssetStore.getState().assets });
                         if (used.has(entry.id)) throw new Error("该原件仍被画布或素材引用，请先移除引用");
-                        await journalDelete("results", entry.id); releaseStudioMedia(entry.id); await load();
+                        if (!client || useStudioStore.getState().client !== client) throw new Error("连接已变化，请重新载入素材目录");
+                        await deleteUnreferencedResult(entry.id, { profileId: useStudioStore.getState().activeProfileId!, origin: client.origin, fingerprint: client.fingerprint }); releaseStudioMedia(entry.id); await load();
                     })}><Button aria-label="删除本机原件" icon={<Trash2 size={14} />} /></Popconfirm>
                 </div></article>;
             })}</div>{!entries.length && <Empty description="在任务卡中载入产物后，会在这里保留本机原件" />}

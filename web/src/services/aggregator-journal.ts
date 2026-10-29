@@ -20,7 +20,8 @@ export type InputUpload = {
 export type LocalResult = { version: 1; id: string; identity: IdentityRef; intentId: string; jobId?: string; metadata: ContentMetadata; blob: Blob; savedAt: number };
 type Records = { intents: Intent; uploads: InputUpload; results: LocalResult };
 export type RequestBudget = { id: string; nextAt: number; pausedUntil: number };
-type JournalRecords = Records & { budgets: RequestBudget };
+export type LocalDocument = { version: 1; id: string; revision: number; value: string; storageKeys: string[]; legacyValue: string | null };
+type JournalRecords = Records & { budgets: RequestBudget; documents: LocalDocument };
 const databaseName = "comfy-aggregator-studio:journal";
 const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.version, id: intent.id, identity: intent.identity, projectId: intent.projectId, nodeId: intent.nodeId, body: intent.body, idempotencyKey: intent.idempotencyKey, releaseDigest: intent.releaseDigest, createdAt: intent.createdAt, output: intent.output, canvas: intent.canvas && { node: intent.canvas.node, sourceIds: intent.canvas.sourceIds } });
 
@@ -28,12 +29,17 @@ const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.
 function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
         if (!globalThis.indexedDB) { reject(new Error("当前浏览器无法保存任务日志，已阻止提交；请启用浏览器存储")); return; }
-        const request = indexedDB.open(databaseName, 1);
+        const request = indexedDB.open(databaseName, 2);
         let abandoned = false;
-        request.onupgradeneeded = () => {
-            const intents = request.result.createObjectStore("intents", { keyPath: "id" });
-            intents.createIndex("active_node", "activeNodeKey", { unique: true });
-            for (const name of ["uploads", "results", "budgets"]) request.result.createObjectStore(name, { keyPath: "id" });
+        request.onupgradeneeded = (event) => {
+            if (event.oldVersion === 0) {
+                const intents = request.result.createObjectStore("intents", { keyPath: "id" });
+                intents.createIndex("active_node", "activeNodeKey", { unique: true });
+                for (const name of ["uploads", "results", "budgets"]) request.result.createObjectStore(name, { keyPath: "id" });
+            } else if (event.oldVersion !== 1 || ["intents", "uploads", "results", "budgets"].some((name) => !request.result.objectStoreNames.contains(name))) {
+                request.transaction!.abort(); return;
+            }
+            request.result.createObjectStore("documents", { keyPath: "id" });
         };
         request.onblocked = () => { abandoned = true; reject(new Error("任务日志升级被其他页面阻塞，请关闭旧版本画布页面")); };
         request.onerror = () => reject(request.error || new Error("无法打开任务日志"));
@@ -45,20 +51,24 @@ function openDatabase(): Promise<IDBDatabase> {
     });
 }
 
-async function transaction<T>(name: keyof JournalRecords, mode: IDBTransactionMode, run: (store: IDBObjectStore, setResult: (value: T) => void) => void): Promise<T> {
+export async function journalTransaction<T>(names: (keyof JournalRecords)[], mode: IDBTransactionMode, run: (tx: IDBTransaction, setResult: (value: T) => void, abort: (error: unknown) => void) => void): Promise<T> {
     const database = await openDatabase();
     try {
         return await new Promise<T>((resolve, reject) => {
-            const tx = database.transaction(name, mode, { durability: "strict" });
+            const tx = database.transaction(names, mode, { durability: "strict" });
             let result: T;
             let failure: unknown;
             tx.oncomplete = () => resolve(result);
             tx.onabort = () => reject(failure || tx.error || new Error("任务日志事务未提交，已阻止后续操作"));
             tx.onerror = () => { failure ||= tx.error; };
-            try { run(tx.objectStore(name), (value) => { result = value; }); }
+            try { run(tx, (value) => { result = value; }, (error) => { if (failure) return; failure = error; tx.abort(); }); }
             catch (error) { failure = error; tx.abort(); }
         });
     } finally { database.close(); }
+}
+
+function transaction<T>(name: keyof JournalRecords, mode: IDBTransactionMode, run: (store: IDBObjectStore, setResult: (value: T) => void) => void): Promise<T> {
+    return journalTransaction([name], mode, (tx, result) => run(tx.objectStore(name), result));
 }
 
 export function journalList<N extends keyof JournalRecords>(name: N): Promise<JournalRecords[N][]> {

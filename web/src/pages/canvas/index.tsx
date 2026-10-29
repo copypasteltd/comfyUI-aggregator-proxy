@@ -18,6 +18,7 @@ import { nanoid } from "nanoid";
 import { MANAGED_STUDIO } from "@/constant/studio";
 import { importedCanvasSnapshot, validateCanvasArchive } from "@/lib/canvas/canvas-transfer";
 import { blobHash } from "@/services/api/aggregator/client";
+import { flushStudioDocuments } from "@/services/studio-persistence";
 
 export default function CanvasPage() {
     const { message } = App.useApp();
@@ -68,6 +69,7 @@ export default function CanvasPage() {
                     for (const file of item.files) await (file.key.startsWith("image:") ? setImageBlob(file.key, file.blob) : setMediaBlob(file.key, file.blob));
                     importProject(item.project);
                 }
+                await flushStudioDocuments();
                 message.success("已导入离线画布和本机原件，任务不会因导入而重新提交");
                 return;
             }
