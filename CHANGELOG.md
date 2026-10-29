@@ -6,6 +6,7 @@
 - All 319 scoped native compatibility checks pass, including previous image/video/audio behavior, mesh quotas, Worker collection, isolated downloads and retention. Reinspect the previous 100,424,732-byte real GLB with matching SHA and geometry counts; no public contract or Worker protocol change.
 - 真实最小权限 Key 复核再发现应用层仍要求 images:create；保留线上 403 和本地修复前 5 失败/15 通过。修正 preflight/create，最终 339 项回归通过，新增七类最小权限及 HTTP 上传/3D 提交/幂等/缺少 meshes:create 拒绝。
 - Fix canonical .glb attachment filenames after the fresh real generation exposed an extensionless browser download. Preserve the pre-fix failure; repeat all 339 scoped checks successfully with full/HEAD/Range filename, MIME, status and length assertions.
+- 已原生部署最终 129.3，并核对三个安装模块及 553 项来源。最小权限 Key 的新真实 3080 任务成功，100,424,732 字节 GLB、完整摘要、.glb 文件名、HEAD/Range、幂等及四项跨 Key 拒绝通过；只读核对单任务/单计量、仅 mesh_count=1、GPU 槽位及活动计数释放。验证 Key 停用、会话退出、原生测试数据库停止；真实调用与修复记录同步中英入口。
 - 验证、线上安装和实际调用范围见 [129](docs/129-三维兼容复查与GLB边界修复.md)；其他 3D 格式、交互预览和完整容量验收继续开放。
 
 ## 2026-10-29 · 128 · Native GLB 3D tasks

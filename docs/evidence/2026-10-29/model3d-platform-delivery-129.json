@@ -1,0 +1,65 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T03:18:18.709839+00:00",
+  "passed": true,
+  "scope": "Fresh native 3080 TRELLIS2 generation through public API 129.2, with final authenticated download verification on 129.3 using jobs:create/meshes:create and no image/video/audio generation scopes. Full authenticated GLB download, fixed geometry inspection, exact SHA/bytes/metadata, HEAD/Range, idempotent replay, independent cross-Key denial and temporary-Key disable are verified.",
+  "virtualization_used": false,
+  "browser_used": false,
+  "cloud_release": "linux-20261029.129.3",
+  "generation_cloud_release": "linux-20261029.129.2",
+  "worker_release": "rc-20261029.128.1",
+  "alias": "comfy-3080-3d-trellis2",
+  "job_id": "job_0a77f0f12cdb452d890c641636418cd1",
+  "content_id": "content_67d23733ccdf42ecabb7b8e682d572cf",
+  "key_scopes": [
+    "models:read",
+    "capabilities:read",
+    "jobs:create",
+    "jobs:read",
+    "meshes:create",
+    "assets:upload",
+    "assets:read",
+    "artifacts:read",
+    "content:read",
+    "content:download"
+  ],
+  "key_daily_mesh_count": 1,
+  "invalid_prompt_and_size_statuses": [
+    422,
+    422
+  ],
+  "usage_request_schema_validated": true,
+  "final_node_present": true,
+  "verification": {
+    "head": 200,
+    "range": 206,
+    "range_header": "bytes 0-31/100424732",
+    "content_disposition": "attachment; filename=\"content_67d23733ccdf42ecabb7b8e682d572cf.glb\"",
+    "bytes": 100424732,
+    "sha256": "a7e1b5b6af2ef03f69f18c7a6f453d8e886811bae35ecb637a5b1a66df08a1f7",
+    "metadata": {
+      "media_type": "model/gltf-binary",
+      "format": "glb",
+      "mesh_count": 1,
+      "vertex_count": 2092758,
+      "triangle_count": 4183116,
+      "material_count": 1,
+      "texture_count": 0,
+      "has_textures": false
+    },
+    "idempotent_replay_same_job": true,
+    "expiry_seconds_after_success": 28800,
+    "cross_key_denials": [
+      404,
+      404,
+      404,
+      404
+    ]
+  },
+  "content_expires_at": 1793271042,
+  "temporary_keys_disabled": true,
+  "owned_admin_sessions_logged_out": true,
+  "wall_clock_eight_hour_gc_waited": false,
+  "complete_goal_achieved": false,
+  "raw_credentials_published": false
+}

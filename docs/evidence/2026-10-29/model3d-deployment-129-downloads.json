@@ -1,0 +1,48 @@
+{
+  "format_version": 1,
+  "passed": true,
+  "scope": "Final native 129.3 installation. Verify immutable source, F01/F02 geometry module, F03 application permissions and F04 GLB attachment filename code. Worker protocol, schema, UI and Skill remain unchanged. GPU generation was completed under 129.2; final download proof is separate.",
+  "build": {
+    "passed": true,
+    "archive_sha256": "757743ae8395001a289bbc324f5b53a1a440317430b03e5745c162504db5701e",
+    "archive_bytes": 1163908,
+    "source_revision": "38b0a45d1ccd511afc0a43efbe065f71c152a188",
+    "changed_runtime_sources": [
+      "packages/infrastructure/src/generation_infrastructure/content.py"
+    ],
+    "wheel_sha256": "8850e729c791764709d0cb506064089e564bf26f82cd7b80f755c67030ed7a93",
+    "source_files": 553,
+    "schema_changed": false,
+    "worker_protocol_changed": false,
+    "windows_worker_rebuild_required": false,
+    "scope": "Cloud-only authenticated GLB download filename repair. All seven wheel payloads are bound to the source snapshot; six unchanged wheels, Admin and runtime dependencies are reused from verified immutable release 129.2."
+  },
+  "production": {
+    "at": "2026-10-29T03:15:39.130111+00:00",
+    "release": "linux-20261029.129.3",
+    "source_revision": "38b0a45d1ccd511afc0a43efbe065f71c152a188",
+    "installed_module_sha256": {
+      "ports": "2e854064736de2ae9664ea32d010533387a3004dac7962c27c362f48538788ed",
+      "model3d_media": "6d232afe54e4138891735d95d0547e5e6cd050ca28bed5d78f27abb8287d89dd",
+      "content": "95effae0922a34d45bd954fe90450ef7a043c0c20366c6c5c91f1954933560c9"
+    },
+    "database_head": "03d128a00001",
+    "services": {
+      "api": "active",
+      "runner": "active",
+      "gc": "active",
+      "http-worker": "active"
+    },
+    "http_worker_pid_unchanged": true,
+    "infrastructure_wheel_sha256": "8850e729c791764709d0cb506064089e564bf26f82cd7b80f755c67030ed7a93"
+  },
+  "promotion_log_sha256": "928ee790472c8977a317c635d2a4541720d27373ec290cfc5c279c459020470b",
+  "previous_cloud_release_retained": "linux-20261029.129.2",
+  "database_schema_changed": false,
+  "worker_protocol_changed": false,
+  "windows_worker_reinstalled": false,
+  "admin_rebuilt": false,
+  "virtualization_used": false,
+  "browser_used": false,
+  "complete_goal_achieved": false
+}

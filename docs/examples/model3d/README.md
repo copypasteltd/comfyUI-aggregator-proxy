@@ -1,5 +1,7 @@
 # TRELLIS2 单图生成 3D / Image-to-3D
 
+后续最小权限 Key、规范 .glb 下载名及完整计量复核见 [129 真实调用样例](recheck-129/README.md) / [latest verified call](recheck-129/README.md)。
+
 此目录包含实际 3080 ComfyUI 图转换的 [Workflow 1.2 发布包](trellis2.workflow.json) 和本地绘制的 [中性机器人输入](neutral-robot.png)。不包含模型权重、API Key 或客户素材。实际验证、批准、部署版本和限制见 [128](../../128-ComfyUI三维模型产物与3080适配.md)。发布包中的 runtime_profiles 不伪造 approved；运行批准记录由平台在真实验证成功后另行维护。
 
 The package contains 26 API nodes, one final Save3DAdvanced node and five locked model files. It preserves the existing TRELLIS2 structure, shape and color stages, while removing the unrelated input-preview SaveImage. All three sampler seeds bind to the caller's seed. Model file paths, bytes, SHA-256 and ComfyUI commit are frozen; weights are not downloaded or bundled. Color is carried by mesh vertex attributes, without a promise of UV/PBR textures.

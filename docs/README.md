@@ -2,6 +2,8 @@
 
 [129 · 三维兼容复查与 GLB 边界修复](129-三维兼容复查与GLB边界修复.md)：修复 accessor 计数、全节点层级、最小权限 Key 的 3D 权限映射及下载文件扩展名，最终 339 项兼容回归通过；线上生效、新生成和完整下载/计量独立记录。
 
+最终云端 **129.3** 已生效；最小权限 Key 的真实 3080 任务成功，100,424,732 字节 GLB 完整下载/几何/隔离通过，只计一次 3D 用量并释放 GPU 槽位，验证 Key 已停用。[本次实际请求和响应](examples/model3d/recheck-129/README.md)。
+
 [128 · ComfyUI 三维模型产物与 3080 适配](128-ComfyUI三维模型产物与3080适配.md)：已原生部署并实际调用 3080 TRELLIS2，新增单图生成 GLB、独立权限/额度、文件验证和 Admin 管理。当前 3 渠道、11 个发布模型；平台验证与独立业务调用、完整下载/SHA 和隔离通过。[工作流与调用](examples/model3d/README.md) · [实际截图、原速录屏与 GIF](media/model3d-128/README.md)。
 
 [124 · 已上线交付](124-模型使用说明与公开Skill交付.md)：10 个模型说明、正式 [Skill Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0)、三台十分钟自动回收和四条真实多模态调用均已验证。[安装调用](126-MediaGenSkill安装与调用.md) · [发布说明](127-MediaGenSkill-Release说明.md) · [实际媒体](media/media-gen-124/README.md)。
