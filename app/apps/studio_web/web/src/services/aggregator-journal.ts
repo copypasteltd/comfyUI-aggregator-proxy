@@ -10,6 +10,8 @@ export type Intent = {
     retryAt?: number; cancelRequested?: boolean;
     pollIntervalMs?: number; activeNodeKey?: string;
     pollPaused?: boolean;
+    recovered?: { version: 1; archiveSha256: string; importedAt: number };
+    recoveryVerified?: boolean;
     output: { mediaTypes: string[]; maxBytes: number };
     canvas?: { node: CanvasNodeData; sourceIds: string[]; detached?: boolean };
 };
@@ -23,23 +25,23 @@ export type RequestBudget = { id: string; nextAt: number; pausedUntil: number };
 export type LocalDocument = { version: 1; id: string; revision: number; value: string; storageKeys: string[]; legacyValue: string | null };
 type JournalRecords = Records & { budgets: RequestBudget; documents: LocalDocument };
 const databaseName = "comfy-aggregator-studio:journal";
-const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.version, id: intent.id, identity: intent.identity, projectId: intent.projectId, nodeId: intent.nodeId, body: intent.body, idempotencyKey: intent.idempotencyKey, releaseDigest: intent.releaseDigest, createdAt: intent.createdAt, output: intent.output, canvas: intent.canvas && { node: intent.canvas.node, sourceIds: intent.canvas.sourceIds } });
+const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.version, id: intent.id, identity: intent.identity, projectId: intent.projectId, nodeId: intent.nodeId, body: intent.body, idempotencyKey: intent.idempotencyKey, releaseDigest: intent.releaseDigest, createdAt: intent.createdAt, output: intent.output, canvas: intent.canvas && { node: intent.canvas.node, sourceIds: intent.canvas.sourceIds }, recovered: intent.recovered });
 
 // Native transactions deliberately have no localStorage fallback. Completion is the commit signal.
 function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
         if (!globalThis.indexedDB) { reject(new Error("当前浏览器无法保存任务日志，已阻止提交；请启用浏览器存储")); return; }
-        const request = indexedDB.open(databaseName, 2);
+        const request = indexedDB.open(databaseName, 3);
         let abandoned = false;
         request.onupgradeneeded = (event) => {
             if (event.oldVersion === 0) {
                 const intents = request.result.createObjectStore("intents", { keyPath: "id" });
                 intents.createIndex("active_node", "activeNodeKey", { unique: true });
                 for (const name of ["uploads", "results", "budgets"]) request.result.createObjectStore(name, { keyPath: "id" });
-            } else if (event.oldVersion !== 1 || ["intents", "uploads", "results", "budgets"].some((name) => !request.result.objectStoreNames.contains(name))) {
+            } else if (![1, 2].includes(event.oldVersion) || ["intents", "uploads", "results", "budgets", ...(event.oldVersion === 2 ? ["documents"] : [])].some((name) => !request.result.objectStoreNames.contains(name))) {
                 request.transaction!.abort(); return;
             }
-            request.result.createObjectStore("documents", { keyPath: "id" });
+            if (event.oldVersion < 2) request.result.createObjectStore("documents", { keyPath: "id" });
         };
         request.onblocked = () => { abandoned = true; reject(new Error("任务日志升级被其他页面阻塞，请关闭旧版本画布页面")); };
         request.onerror = () => reject(request.error || new Error("无法打开任务日志"));

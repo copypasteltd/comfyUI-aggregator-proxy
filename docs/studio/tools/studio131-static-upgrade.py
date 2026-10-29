@@ -25,7 +25,7 @@ old = link.resolve()
 assert old.name == args.previous and old.name != target.name
 manifest = tools["unpack"](target.name + ".tar.gz", target, "studio-deployment.json", build["archive_sha256"])
 assert manifest["release_id"] == target.name
-assert manifest.get("browser_storage_version") != 2 or args.promote_only, "Forward browser storage cannot rehearse an old UI rollback"
+assert manifest.get("browser_storage_version", 1) < 2 or args.promote_only, "Forward browser storage cannot rehearse an old UI rollback"
 steps = []
 try:
     for value in ((target,) if args.promote_only else (target, old, target)):

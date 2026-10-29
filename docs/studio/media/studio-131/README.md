@@ -2,7 +2,9 @@
 
 [English](README.en.md) · [公网画布](http://43.165.167.179:39443/studio/) · [完整46项进度](../../10-开发进度与交付记录.md) · [使用与运维](../../11-线上使用与原生发布运维.md)
 
-当前静态131.7、后端131.1。下表的GPU任务与原画布演示在131.6完成：文生图由线上画布提交，其他七项由原生客户端按已发布用法调用同一API。随后用真实浏览器从服务端历史载入素材库，验证图片解码、音视频播放以及全部八份原件下载的字节数和SHA。GLB只有下载卡，没有交互式三维预览。
+当前静态131.9、后端131.1。下表的GPU任务与原画布演示在131.6完成：文生图由线上画布提交，其他七项由原生客户端按已发布用法调用同一API。随后用真实浏览器从服务端历史载入素材库，验证图片解码、音视频播放以及全部八份原件下载的字节数和SHA。GLB只有下载卡，没有交互式三维预览。
+
+131.9补[任务清单恢复MP4](studio-task-backup-verified.mp4)、[GIF](studio-task-backup-verified.gif)及[来源/摘要](studio-task-backup-verified-manifest.json)：实际生产构建UI导出、预览/确认、主动查询原任务、损坏文件/配额失败和离线导出；25组检查通过，业务写请求为零。使用合成API和390px模拟视口，不计为GPU或物理手机。截图：[导入预览](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/desktop-import-preview.png)、[手机预览](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/mobile-import-preview.png)、[手机待核对](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/mobile-restored-records.png)、[原任务确认](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/desktop-known-job-queried.png)、[损坏文件](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/desktop-invalid-backup.png)、[配额失败](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/desktop-import-quota-failure.png)。任务清单与作品ZIP分别备份；[机制和限制](../../13-任务清单备份与只读恢复.md)。早期studio-task-backup文件为131.8中间证据，当前演示使用verified版本。
 
 131.7另补[保存失败与重试MP4](studio-storage-recovery-verified.mp4)、[GIF](studio-storage-recovery-verified.gif)及[来源/摘要](studio-storage-recovery-verified-manifest.json)。这是本机生产构建配合合成API、配额故障注入的真实界面录制，包含手机视口与跨页冲突；不是真实磁盘耗尽、GPU生成或物理手机。截图见[390px未保存提示](../../assets/studio/storage-2026-10-29T23-00-07-628Z/mobile-save-failed.png)、[重试后](../../assets/studio/storage-2026-10-29T23-00-07-628Z/mobile-saved-after-retry.png)、[跨页冲突](../../assets/studio/storage-2026-10-29T23-00-07-628Z/desktop-cross-tab-conflict.png)。
 

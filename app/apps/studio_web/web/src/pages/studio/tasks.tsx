@@ -8,6 +8,7 @@ import { cancelIntent, jobStatusLabels, localTasks, refreshIntent, saveRemoteRes
 import type { Intent } from "@/services/aggregator-journal";
 import { terminalStatuses, type ContentMetadata, type RemoteJob } from "@/services/api/aggregator/types";
 import { taskLabels } from "@/services/api/aggregator/capabilities";
+import TaskBackup from "./task-backup";
 
 export default function TasksPage() {
     const { message } = App.useApp();
@@ -28,18 +29,21 @@ export default function TasksPage() {
         finally { setBusy((ids) => ids.filter((item) => item !== id)); await load(); }
     };
     return <main className="studio-page"><div className="studio-page-heading"><span className="li-lab">YOUR TASKS</span><h1>创作继续，任务也在继续</h1><p>这里保留当前服务与 API Key 的本机提交记录。刷新或重新打开页面后，使用原连接核对任务；浏览器查询中止不代表设备停止。</p></div>
+        <TaskBackup />
         {!client ? <section className="studio-card studio-empty"><Empty description="连接原服务和 API Key，查看此浏览器的任务" /><NavLink to="/config" className="studio-primary-link">连接服务</NavLink></section> : <>
             <div className="studio-actions"><Button icon={<RefreshCw size={16} />} onClick={() => void load()}>刷新本机记录</Button></div>
             {error && <Alert title={error} type="error" showIcon />}
             <div className="studio-task-list">{tasks.map((intent) => {
                 const request = JSON.parse(intent.body);
+                const confirmed = !intent.recovered || intent.recoveryVerified === true;
                 const terminal = intent.job && terminalStatuses.has(intent.job.status);
-                return <article key={intent.id} className="studio-card studio-task-card"><div className="studio-task-heading"><div><span className="li-lab">{taskLabels[request.task_type] || request.task_type}</span><h2>{request.model}</h2></div><Tag>{intent.job ? jobStatusLabels[intent.job.status] || intent.job.status : intent.stage === "prepared" ? "已保存，待提交" : "提交结果待核对"}</Tag></div><code>{intent.job?.id || intent.id}</code><p>{String(request.input?.prompt || "图片生 3D")}</p>
+                return <article key={intent.id} className="studio-card studio-task-card"><div className="studio-task-heading"><div><span className="li-lab">{taskLabels[request.task_type] || request.task_type}</span><h2>{request.model}</h2></div><Tag>{!confirmed ? "备份记录待核对" : intent.job ? jobStatusLabels[intent.job.status] || intent.job.status : intent.stage === "prepared" ? "已保存，待提交" : "提交结果待核对"}</Tag></div><code>{intent.job?.id || intent.id}</code><p>{String(request.input?.prompt || "图片生 3D")}</p>
+                    {intent.recovered && <p className="studio-note">来自任务清单。{intent.job ? confirmed ? "已核对原任务，云端文件仍按原到期时间保留。" : "请先查询原任务，再读取产物或请求取消；备份中的状态尚未确认。" : "尚无任务ID，已阻止补发生成；请在下方读取原服务历史核对。"}</p>}
                     {intent.error && <Alert title="操作未确认" description={intent.error} type="warning" showIcon />}
-                    <div className="studio-actions">{intent.job ? <Button loading={busy.includes(intent.id)} icon={<RefreshCw size={15} />} onClick={() => void action(intent.id, () => refreshIntent(intent.id))}>查询原任务</Button> : <Button loading={busy.includes(intent.id)} onClick={() => void action(intent.id, () => submitIntent(intent.id))}>核对原提交</Button>}
-                        {intent.projectId && <NavLink className="studio-inline-link" to={`/canvas/${intent.projectId}`}><ExternalLink size={14} /> 返回画布</NavLink>}
-                        {intent.job && !terminal && <Popconfirm title="请求取消这项远端任务？" description="以服务端确认的终态为准。" onConfirm={() => action(intent.id, () => cancelIntent(intent.id))}><Button icon={<Square size={13} />} loading={busy.includes(intent.id)}>请求取消</Button></Popconfirm>}
-                        {intent.job?.status === "succeeded" && intent.job.artifacts?.map((artifact) => <Button key={artifact.id} icon={<Download size={15} />} loading={busy.includes(intent.id)} onClick={() => void action(intent.id, async () => {
+                    <div className="studio-actions">{intent.job ? <Button loading={busy.includes(intent.id)} icon={<RefreshCw size={15} />} onClick={() => void action(intent.id, () => refreshIntent(intent.id))}>查询原任务</Button> : !intent.recovered && <Button loading={busy.includes(intent.id)} onClick={() => void action(intent.id, () => submitIntent(intent.id))}>核对原提交</Button>}
+                        {intent.projectId && !intent.recovered && <NavLink className="studio-inline-link" to={`/canvas/${intent.projectId}`}><ExternalLink size={14} /> 返回画布</NavLink>}
+                        {confirmed && intent.job && !terminal && <Popconfirm title="请求取消这项远端任务？" description="以服务端确认的终态为准。" onConfirm={() => action(intent.id, () => cancelIntent(intent.id))}><Button icon={<Square size={13} />} loading={busy.includes(intent.id)}>请求取消</Button></Popconfirm>}
+                        {confirmed && intent.job?.status === "succeeded" && intent.job.artifacts?.map((artifact) => <Button key={artifact.id} icon={<Download size={15} />} loading={busy.includes(intent.id)} onClick={() => void action(intent.id, async () => {
                             const result = await saveResult(intent.id, artifact.id);
                             const extensions: Record<string, string> = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "video/mp4": "mp4", "video/webm": "webm", "audio/wav": "wav", "audio/flac": "flac", "audio/mpeg": "mp3", "audio/ogg": "ogg", "model/gltf-binary": "glb" };
                             saveAs(result.blob, `${artifact.id}.${extensions[result.metadata.media_type] || "bin"}`);

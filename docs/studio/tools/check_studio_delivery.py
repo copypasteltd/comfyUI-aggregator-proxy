@@ -90,12 +90,64 @@ def main():
         assert item["fully_decoded"] and sha(MEDIA / item["file"]) == item["sha256"] and (MEDIA / item["file"]).stat().st_size == item["bytes"]
         assert sha(MEDIA / item["file"]) == sha(REPOSITORY / "docs/studio/media/studio-131" / item["file"])
     assert all(not read(evidence / name)["passed"] for name in notes["failed_reports_preserved"])
+    # Keep the 131.7 evidence above as history; verify the final 131.9 package separately.
+    current = read(evidence / "task-backup-validation-notes-1319.json")
+    final = current["passing_package_evidence"]
+    web = ROOT / "infinite-canvas/web"
+    inputs = ["package.json", "package-lock.json", "tsconfig.json", "vite.config.ts", "index.html", "../VERSION", "../CHANGELOG.md"]
+    inputs.extend(file.relative_to(web).as_posix() for folder in ("src", "tests", "public") for file in (web / folder).rglob("*") if file.is_file())
+    frozen = hashlib.sha256()
+    for name in sorted(inputs):
+        frozen.update(name.encode()); frozen.update(b"\0"); frozen.update((web / name).read_bytes())
+    assert frozen.hexdigest() == current["source_sha256"]
+    for name in ("units", "types", "build"):
+        result = read(evidence / final[name])
+        assert result["passed"] and result["source_unchanged"] and result["source_after"] == current["source_sha256"]
+    unit_log = (evidence / read(evidence / final["units"])["log"]).read_text(encoding="utf-8")
+    assert re.search(r"^# tests 126$", unit_log, re.M) and re.search(r"^# fail 0$", unit_log, re.M)
+    current_ui = read(evidence / final["browser"])
+    current_storage = read(evidence / final["storage"])
+    journal = read(evidence / final["task_backup"])
+    for result, count in ((current_ui, 18), (current_storage, 22), (journal, 25)):
+        assert result["passed"] and len(result["checks"]) == count and all(result["cleanup"].values())
+        assert result.get("static_artifact_unchanged", True) and result["static_artifact_sha256"] == current_ui["static_artifact_sha256"]
+        assert not result.get("page_errors")
+        for screenshot in result["screenshots"]:
+            assert sha(ROOT / screenshot["file"]) == screenshot["sha256"]
+    dist = ROOT / "infinite-canvas/web/dist"
+    assert {file.relative_to(dist).as_posix(): sha(file) for file in dist.rglob("*") if file.is_file()} == current_ui["static_artifact_sha256"]
+    assert journal["browser_storage_version"] == 3 and all(item["method"] == "GET" for item in journal["business_requests"])
+    for name, version, release in (("public_v2_v3_upgrade", 2, "studio-20261030.131.8"), ("public_current_restart", 3, "studio-20261030.131.9")):
+        result = read(evidence / final[name])
+        assert result["passed"] and len(result["checks"]) == 3 and all(result["cleanup"].values())
+        assert result["preexisting_database_version"] == version and not result["blocked_mutations"] and not result["page_errors"]
+        assert result["checks"][0]["detail"]["after_version"] == 3 and result["checks"][0]["detail"]["static_release"] == release
+        for screenshot in result["screenshots"]:
+            assert sha(ROOT / screenshot["file"]) == screenshot["sha256"]
+    current_health = read(evidence / final["health"])
+    assert current_health["passed"] and current_health["studio"] == "studio-20261030.131.9" and current_health["original_worker_pid_unchanged"]
+    assert all(status == "active" for status in current_health["services"].values())
+    assert len(current_health["cors"]) == 2 and all(item["status"] == 200 and item["allow_origin"] in ("*", item["requested_origin"]) for item in current_health["cors"])
+    package = read(evidence / final["static_build"])
+    promotion = read(evidence / final["static_promotion"])
+    assert package["passed"] and package["file_count"] == len(current_ui["static_artifact_sha256"]) == 96
+    assert package["source_sha256"] == promotion["source_sha256"] == current["source_sha256"]
+    assert package["archive_sha256"] == promotion["archive_sha256"] and not promotion["backend_restarted"] and not promotion["old_ui_roundtrip_performed"]
+    backup_tour = read(MEDIA / "studio-task-backup-verified-manifest.json")
+    assert backup_tour["passed"] and backup_tour["source_report"].endswith(final["task_backup"]) and sha(ROOT / backup_tour["source_report"]) == backup_tour["source_report_sha256"]
+    for item in backup_tour["files"]:
+        file = MEDIA / item["file"]
+        assert item["fully_decoded"] and file.stat().st_size == item["bytes"] and sha(file) == item["sha256"]
+        assert sha(file) == sha(REPOSITORY / "docs/studio/media/studio-131" / item["file"])
+    assert all(not read(evidence / name)["passed"] for name in current["failed_reports_preserved"])
+    assert current["full_acceptance"] == "HOLD" and current["no_new_gpu_submission"] and current["no_disabled_key_reenabled"]
     print(json.dumps({"passed": True, "at": datetime.now(UTC).isoformat(),
                       "scope": "Read-only source-mirror, public media/report/screenshot hashes, eight call receipts, all46 IDs and temporary Key revocation; not full runtime/phone/fleet acceptance",
                       "source_files_verified": len(source["source_files"]), "actual_gpu_modes": 8,
                       "browser_checks": 9, "public_samples": published, "large_glb_metadata_only": True,
                       "requirements_retained": 46, "temporary_keys_disabled": 2, "storage_checks": 22,
-                      "current_ui_checks": 18, "public_storage_upgrade_checks": 3, "browser_storage_version": 2,
+                      "current_ui_checks": 18, "task_backup_checks": 25, "current_unit_tests": 126,
+                      "public_storage_upgrade_checks": 3, "current_static_release": "studio-20261030.131.9", "browser_storage_version": 3,
                       "browser_storage_downgrade_supported": False, "virtualization_used": False}, ensure_ascii=False))
 
 

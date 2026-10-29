@@ -85,12 +85,20 @@ PY
     elif action == "static-upgrade":
         sources = {TOOLS / "studio131-static-upgrade.py": "studio131-static-upgrade.py", BUILD / "static-build.json": "static-build-1312.json", BUILD / "studio-20261030.131.2.tar.gz": "studio-20261030.131.2.tar.gz"}
         script = transfer(sources) + f"\npython3 '{PROTECTED}/studio131-static-upgrade.py'\n"
-    elif action in {"static-upgrade-1313", "static-upgrade-1314", "static-upgrade-1315", "static-upgrade-1316", "static-upgrade-1317"}:
-        release, previous, number = {"static-upgrade-1313": ("studio-20261030.131.3", "studio-20261030.131.2", "1313"), "static-upgrade-1314": ("studio-20261030.131.4", "studio-20261030.131.3", "1314"), "static-upgrade-1315": ("studio-20261030.131.5", "studio-20261030.131.4", "1315"), "static-upgrade-1316": ("studio-20261030.131.6", "studio-20261030.131.5", "1316"), "static-upgrade-1317": ("studio-20261030.131.7", "studio-20261030.131.6", "1317")}[action]
+    elif action in {"static-upgrade-1313", "static-upgrade-1314", "static-upgrade-1315", "static-upgrade-1316", "static-upgrade-1317", "static-upgrade-1318", "static-upgrade-1319"}:
+        release, previous, number = {
+            "static-upgrade-1313": ("studio-20261030.131.3", "studio-20261030.131.2", "1313"),
+            "static-upgrade-1314": ("studio-20261030.131.4", "studio-20261030.131.3", "1314"),
+            "static-upgrade-1315": ("studio-20261030.131.5", "studio-20261030.131.4", "1315"),
+            "static-upgrade-1316": ("studio-20261030.131.6", "studio-20261030.131.5", "1316"),
+            "static-upgrade-1317": ("studio-20261030.131.7", "studio-20261030.131.6", "1317"),
+            "static-upgrade-1318": ("studio-20261030.131.8", "studio-20261030.131.7", "1318"),
+            "static-upgrade-1319": ("studio-20261030.131.9", "studio-20261030.131.8", "1319"),
+        }[action]
         assert json.loads((BUILD / "static-build.json").read_text())["release_id"] == release
         name = "static-build-" + number + ".json"
         sources = {TOOLS / "studio131-static-upgrade.py": "studio131-static-upgrade.py", BUILD / "static-build.json": name, BUILD / (release + ".tar.gz"): release + ".tar.gz"}
-        forward = " --promote-only" if number == "1317" else ""
+        forward = " --promote-only" if number in {"1317", "1318", "1319"} else ""
         script = transfer(sources) + f"\npython3 '{PROTECTED}/studio131-static-upgrade.py' --build {name} --previous {previous}{forward}\n"
     elif action == "failure-log":
         script = f"for task in prepare promote rehearse; do test ! -f '{PROTECTED}/'$task'.log' || tail -n 30 '{PROTECTED}/'$task'.log'; done"

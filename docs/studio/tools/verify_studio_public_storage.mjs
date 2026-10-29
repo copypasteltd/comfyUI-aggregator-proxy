@@ -8,6 +8,8 @@ import assert from "node:assert/strict";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const mode = process.argv[2];
+const release = process.argv[3] || "studio-20261030.131.7";
+if (!/^studio-20261030\.131\.\d+$/.test(release)) throw new Error("Invalid owned static release");
 if (!["before", "snapshot", "after"].includes(mode)) throw new Error("Choose before, snapshot or after");
 const require = createRequire(path.join(root, "infinite-canvas/web/package.json"));
 const { chromium } = require("C:/Users/carzy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
@@ -28,6 +30,10 @@ try {
     for (const existing of context.pages()) { pages.push(existing); await existing.close(); }
     await context.route("**/v1/**", (route) => { if (route.request().method() !== "GET" && route.request().method() !== "HEAD") { report.blocked_mutations.push(route.request().method()); return route.abort(); } return route.continue(); });
     const page = await context.newPage(); pages.push(page); page.on("pageerror", (error) => report.page_errors.push(error.message));
+    if (mode === "after" && release !== "studio-20261030.131.7") {
+        await page.goto(origin + "/ready");
+        report.preexisting_database_version = await page.evaluate(async () => { const db = await new Promise((resolve, reject) => { const r = indexedDB.open("comfy-aggregator-studio:journal"); r.onsuccess = () => resolve(r.result); r.onerror = () => reject(r.error); }); const version = db.version; db.close(); return version; });
+    }
     await page.goto(origin + (mode === "snapshot" ? "/ready" : "/studio/canvas"));
     if (mode !== "snapshot") await page.getByRole("button", { name: "新建画布", exact: true }).first().waitFor();
     if (mode === "snapshot") {
@@ -74,17 +80,17 @@ try {
         check("v1 task stores and byte-preservation fixture committed before browser shutdown");
     } else {
         const seed = JSON.parse(await readFile(committedFile, "utf8"));
-        const manifest = JSON.parse(await readFile(path.join(root, ".local/studio-cloud-build/studio-20261030.131.7.json"), "utf8"));
+        const manifest = JSON.parse(await readFile(path.join(root, `.local/studio-cloud-build/${release}.json`), "utf8"));
         const index = await (await page.request.get(origin + "/studio/")).body();
         assert.equal(createHash("sha256").update(index).digest("hex"), manifest.files.find((file) => file.path === "studio/index.html").sha256);
         const read = await page.evaluate(async ({ key }) => {
             const db = await new Promise((resolve, reject) => { const r = indexedDB.open("comfy-aggregator-studio:journal"); r.onsuccess = () => resolve(r.result); r.onerror = () => reject(r.error); });
             try { return await new Promise((resolve, reject) => { const tx = db.transaction(["documents", "results", "budgets"], "readonly"); const output = { version: db.version }; const docs = tx.objectStore("documents").getAll(); docs.onsuccess = () => output.documents = docs.result; const original = tx.objectStore("results").get("synthetic-preserved-record"); original.onsuccess = () => output.blob = original.result?.blob; const budget = tx.objectStore("budgets").get("synthetic-preserved-budget"); budget.onsuccess = () => output.budget = budget.result; tx.oncomplete = async () => resolve({ ...output, blob: [...new Uint8Array(await output.blob.arrayBuffer())] }); tx.onabort = () => reject(tx.error); }); } finally { db.close(); }
         }, { key: seed.key });
-        assert.equal(read.version, 2); assert.equal(read.budget.nextAt, 42);
+        assert.equal(read.version, manifest.browser_storage_version); assert.equal(read.budget.nextAt, 42);
         for (const [name, legacyValue] of [["infinite-canvas:canvas_store", seed.canvas], ["infinite-canvas:asset_store", seed.assets]]) assert.equal(read.documents.find((d) => d.id === name).legacyValue, legacyValue);
         assert.equal(createHash("sha256").update(Buffer.from(read.blob)).digest("hex"), seed.sha256);
-        check("actual deployed v2 upgrade preserves legacy JSON, task-store original SHA and request budget");
+        check(`actual deployed v${read.version} retains legacy JSON, task-store original SHA and request budget`, { before_version: report.preexisting_database_version ?? 1, after_version: read.version, static_release: release });
         await page.goto(origin + "/studio/canvas/" + seed.id);
         const image = page.locator('[data-node-id="source"] img[src^="blob:"]'); await image.waitFor();
         await page.waitForFunction(() => { const img = document.querySelector('[data-node-id="source"] img'); return img?.complete && img.naturalWidth > 0 && img.naturalHeight > 0; });

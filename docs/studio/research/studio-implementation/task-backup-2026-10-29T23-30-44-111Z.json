@@ -1,0 +1,82 @@
+{
+  "scope": "native Chromium IndexedDB and production dist with synthetic HTTP; injected quota failure, desktop/390px emulation, not GPU/physical phone/live business authorization",
+  "started_at": "2026-10-29T23:30:44.213Z",
+  "checks": [
+    {
+      "name": "v2 to v3 upgrade preserves exact intent/document/blob/upload/budget without rebuilding stores",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "older v2 client cannot open imported records and bypass recovery-only behavior",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "atomic import preserves original request bytes, identities, active node and paused recovery marker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "repeat import keeps existing newer terminal state and never downgrades it",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "ordinary state update cannot strip immutable recovery marker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "engine refuses no-job backup resubmission before changing stage or sending POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "later original-body conflict rolls back earlier add in the same transaction",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "existing active node blocks a different restored intent atomically",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "wrong identity and connection switch refuse all writes",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "unknown local task version is preserved and blocks import",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "second-write QuotaExceeded abort preserves first-write absence and old document",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "backup hashing and recovery work on plain HTTP without WebCrypto",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "native restore and blocked resubmission issued no business request",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   revision: 999999,\n+   verified: undefined\n-   revision: 9,\n-   verified: true\n  }\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_task_backup.mjs:126:12",
+  "completed_at": "2026-10-29T23:30:52.535Z"
+}

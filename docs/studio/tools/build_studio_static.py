@@ -37,7 +37,7 @@ if __name__ == "__main__":
         assert storage_path.is_relative_to(ROOT)
         storage = json.loads(storage_path.read_text(encoding="utf-8"))
         assert storage["passed"] and all(storage["cleanup"].values()) and files == storage["static_artifact_sha256"]
-        manifest.update({"browser_storage_version": 2, "browser_storage_downgrade_supported": False, "storage_report": storage_path.relative_to(ROOT).as_posix(), "storage_report_sha256": hashlib.sha256(storage_path.read_bytes()).hexdigest()})
+        manifest.update({"browser_storage_version": storage.get("browser_storage_version", 2), "browser_storage_downgrade_supported": False, "storage_report": storage_path.relative_to(ROOT).as_posix(), "storage_report_sha256": hashlib.sha256(storage_path.read_bytes()).hexdigest()})
     PRIVATE.mkdir(parents=True, exist_ok=True)
     target = PRIVATE / (RELEASE + ".tar.gz")
     assert not target.exists()

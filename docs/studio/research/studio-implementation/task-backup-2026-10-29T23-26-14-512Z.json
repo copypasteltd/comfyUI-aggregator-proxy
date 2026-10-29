@@ -1,0 +1,149 @@
+{
+  "scope": "native Chromium IndexedDB and production dist with synthetic HTTP; injected quota failure, desktop/390px emulation, not GPU/physical phone/live business authorization",
+  "started_at": "2026-10-29T23:26:14.725Z",
+  "checks": [
+    {
+      "name": "v2 to v3 upgrade preserves exact intent/document/blob/upload/budget without rebuilding stores",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "older v2 client cannot open imported records and bypass recovery-only behavior",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "atomic import preserves original request bytes, identities, active node and paused recovery marker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "repeat import keeps existing newer terminal state and never downgrades it",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "ordinary state update cannot strip immutable recovery marker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "engine refuses no-job backup resubmission before changing stage or sending POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "later original-body conflict rolls back earlier add in the same transaction",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "existing active node blocks a different restored intent atomically",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "wrong identity and connection switch refuse all writes",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "unknown local task version is preserved and blocks import",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "second-write QuotaExceeded abort preserves first-write absence and old document",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "backup hashing and recovery work on plain HTTP without WebCrypto",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "native restore and blocked resubmission issued no business request",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two actual pages serialize concurrent import: one add and one existing record",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual task-page export downloads exact original body and omits saved connection Key",
+      "passed": true,
+      "detail": {
+        "bytes": 2218,
+        "sha256": "74005e5d16910e7e802598ac4c56a991bcb376a05d9603bc4186d07f67719fb4"
+      }
+    },
+    {
+      "name": "Lime import explanation has readable text contrast in the actual modal",
+      "passed": true,
+      "detail": {
+        "background": "rgb(242, 241, 236)",
+        "foreground": "rgb(12, 12, 12)",
+        "ratio": 17.296946616860396
+      }
+    },
+    {
+      "name": "real file selection previews both records before any database write or business request",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "390px confirmed import restores two records without query/POST, no-job submit control or script execution",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "browser refresh retains recovery state; one explicit query reads only the original job ID",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual malformed-file UI reports checksum failure and keeps both stored records",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/task-backup-2026-10-29T23-26-14-512Z/desktop-import-preview.png",
+      "sha256": "b0e19ad3ad67256d0c42cd3f7c049e90b0f664ffed26ecafee121816ef4b0609"
+    },
+    {
+      "file": "docs/assets/studio/task-backup-2026-10-29T23-26-14-512Z/mobile-import-preview.png",
+      "sha256": "e69758eb59acee2b992f978d83ad24e9da1a964351ea45af03165132fea568bc"
+    },
+    {
+      "file": "docs/assets/studio/task-backup-2026-10-29T23-26-14-512Z/mobile-restored-records.png",
+      "sha256": "c679f6834884484efdf3a951ac4c64b57331a23d527e979f192c332f957747a1"
+    },
+    {
+      "file": "docs/assets/studio/task-backup-2026-10-29T23-26-14-512Z/desktop-known-job-queried.png",
+      "sha256": "57a3a68d56a62c201dd09040f3d6bb51daee52d19440e04f4ec24286ec483a70"
+    },
+    {
+      "file": "docs/assets/studio/task-backup-2026-10-29T23-26-14-512Z/desktop-invalid-backup.png",
+      "sha256": "790fe5079bd426b9065cdba004e4f8f0f5034958444a44b302705ecb3f7d9758"
+    },
+    {
+      "file": "docs/assets/studio/task-backup-2026-10-29T23-26-14-512Z/desktop-import-quota-failure.png",
+      "sha256": "871fb3ae0fe7c0ec869ea3dcab14fe666b322ca350a451732946df56e082b402"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "passed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog').getByRole('button', { name: '取消', exact: true })\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_task_backup.mjs:199:67",
+  "completed_at": "2026-10-29T23:26:57.376Z"
+}

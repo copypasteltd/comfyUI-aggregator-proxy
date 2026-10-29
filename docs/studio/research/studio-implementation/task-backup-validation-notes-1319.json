@@ -1,0 +1,50 @@
+{
+  "scope": "131.9 task-journal validation and corrections; intermediate/failed reports preserved unchanged",
+  "source_sha256": "1c8af168b0735296b210faf3b927357dbc7522b2fc8f9c5daec8d73c1c7ae39d",
+  "failed_reports_preserved": [
+    "unit-2026-10-29T23-17-46-966Z.json",
+    "typecheck-2026-10-29T23-17-47-310Z.json",
+    "task-backup-2026-10-29T23-26-14-512Z.json",
+    "task-backup-2026-10-29T23-30-44-111Z.json"
+  ],
+  "corrections": [
+    "Unit fixture addressed a nonexistent capabilities.usage property; corrected to the existing models fixture, without changing the protocol.",
+    "TypeScript fail helper became an explicit never-returning function so validated fields narrow correctly; URL variable is explicitly typed.",
+    "AntD inserts whitespace into two-character Chinese accessible button names; the QA locator follows the actual Cancel name rather than increasing waits or changing product text.",
+    "A native fault test reproduced revision=999999 from an untrusted backup blocking the first real server snapshot. Imported records now establish trust on the first authenticated original-job query, then retain existing monotonic/terminal guards. Cancellation and artifact reads are blocked until verified; no-job backup resubmission stays blocked.",
+    "Actual Info Alert had poor text/background contrast. Shared Lime info aliases now use original canvas/ink/lime tokens; final native UI computes contrast 17.296946616860396:1."
+  ],
+  "passing_package_evidence": {
+    "units": "unit-2026-10-29T23-32-29-895Z.json",
+    "types": "typecheck-2026-10-29T23-32-29-893Z.json",
+    "build": "build-2026-10-29T23-32-29-919Z.json",
+    "browser": "browser-2026-10-29T23-35-14-392Z.json",
+    "storage": "storage-2026-10-29T23-35-14-283Z.json",
+    "task_backup": "task-backup-2026-10-29T23-35-14-126Z.json",
+    "public_v2_v3_upgrade": "public-storage-after-2026-10-29T23-28-48-778Z.json",
+    "public_current_restart": "public-storage-after-2026-10-29T23-39-33-122Z.json",
+    "health": "live-final-health-1319.json",
+    "static_build": "static-build-studio-20261030.131.9.json",
+    "static_promotion": "production-static-1319.json"
+  },
+  "units": 126,
+  "ui_groups": 18,
+  "storage_groups": 22,
+  "task_backup_groups": 25,
+  "browser_storage_version": 3,
+  "browser_storage_downgrade_supported": false,
+  "recording_manifest": "docs/media/studio-131/studio-task-backup-verified-manifest.json",
+  "no_new_gpu_submission": true,
+  "no_disabled_key_reenabled": true,
+  "server_database_unchanged": true,
+  "full_acceptance": "HOLD",
+  "delivery_gate_history": {
+    "failed_report": "docs/evidence/studio-release-131/docs-1319-final-check.json",
+    "reason": "Documentation validation began before the delivery mirror finished its link-rewrite phase and read four transient sibling-workspace links. The immutable failed report is retained. Validation was repeated only after mirror completion, without weakening checks or rewriting the failed evidence.",
+    "passing_report": "docs/evidence/studio-release-131/docs-1319-final-2-check.json",
+    "delivery_report": "docs/evidence/studio-release-131/delivery-1319-final-check.json",
+    "readme_report": "docs/evidence/studio-release-131/readme-1319-final-check.json",
+    "source_files_verified": 250,
+    "canonical_frontend_commit": "62476c5b30f88be16f86478d17641319aca10505"
+  }
+}
