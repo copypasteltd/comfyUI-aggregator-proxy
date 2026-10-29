@@ -73,6 +73,7 @@ body[data-c="lime"] { --background: #f2f1ec; --foreground: #0c0c0c; --primary: #
 .studio-canvas-topbar { gap: 6px; }
 .studio-canvas-project { position: relative; }
 .studio-canvas-zoom { bottom: 84px; }
+.studio-canvas-project [data-canvas-bottom-toolbar], .studio-canvas-project .studio-canvas-zoom { z-index: 80; }
 .studio-canvas-topbar > div:first-child { flex: 1; overflow: hidden; }
 .studio-canvas-topbar > div:last-child { flex-shrink: 0; }
 .studio-canvas-topbar button { max-width: 100%; }
