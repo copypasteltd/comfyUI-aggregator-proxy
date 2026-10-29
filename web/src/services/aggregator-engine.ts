@@ -12,6 +12,7 @@ const controllers = new Map<string, AbortController>();
 const listeners = new Set<() => void>();
 let channel: BroadcastChannel | undefined;
 const changed = () => { listeners.forEach((listener) => listener()); channel?.postMessage("changed"); };
+export const notifyStudioTasksChanged = changed;
 
 export function subscribeStudioTasks(listener: () => void) {
     listeners.add(listener);
@@ -80,10 +81,11 @@ async function applyJob(id: string, result: ApiResult<RemoteJob>): Promise<Inten
     const updated = await updateIntent(id, (intent) => {
         const request = JSON.parse(intent.body) as JobRequest;
         if (result.data.model !== request.model || result.data.task_type !== request.task_type || intent.job && intent.job.id !== result.data.id) throw new Error("任务归属与原提交不符");
-        if (intent.job && intent.job.updated_revision > result.data.updated_revision) return intent;
-        if (intent.job && (intent.job.updated_revision === result.data.updated_revision && intent.job.status !== result.data.status || terminalStatuses.has(intent.job.status) && intent.job.status !== result.data.status)) throw new Error("任务状态与已确认终态或版本冲突，原记录已保留");
+        const confirmed = !intent.recovered || intent.recoveryVerified === true;
+        if (confirmed && intent.job && intent.job.updated_revision > result.data.updated_revision) return intent;
+        if (confirmed && intent.job && (intent.job.updated_revision === result.data.updated_revision && intent.job.status !== result.data.status || terminalStatuses.has(intent.job.status) && intent.job.status !== result.data.status)) throw new Error("任务状态与已确认终态或版本冲突，原记录已保留");
         const pollIntervalMs = result.retryAt ? Math.max(0, result.retryAt - Date.now()) : intent.pollIntervalMs;
-        return { ...intent, job: result.data, stage: terminalStatuses.has(result.data.status) ? "terminal" : "accepted", updatedAt: Date.now(), error: undefined, pollPaused: false, pollIntervalMs, retryAt: result.retryAt || (pollIntervalMs ? Date.now() + pollIntervalMs : undefined) };
+        return { ...intent, job: result.data, ...(intent.recovered ? { recoveryVerified: true } : {}), stage: terminalStatuses.has(result.data.status) ? "terminal" : "accepted", updatedAt: Date.now(), error: undefined, pollPaused: false, pollIntervalMs, retryAt: result.retryAt || (pollIntervalMs ? Date.now() + pollIntervalMs : undefined) };
     });
     changed(); return updated;
 }
@@ -107,6 +109,7 @@ export function submitIntent(id: string, signal?: AbortSignal): Promise<Intent> 
         if (!existing) throw new Error("任务日志未持久化，已阻止提交");
         const { client } = connection(existing.identity);
         if (existing.job) return existing;
+        if (existing.recovered) throw new Error("此记录来自备份且尚无任务ID；已阻止补发生成，请读取原服务历史核对");
         // The immutable body and key were committed before this state and before POST.
         const intent = await updateIntent(id, (value) => ({ ...value, stage: "submitting", updatedAt: Date.now(), error: undefined }));
         changed();
@@ -139,6 +142,7 @@ export const jobStatusLabels: Record<string, string> = {
 
 export async function cancelIntent(id: string, signal?: AbortSignal): Promise<Intent> {
     const intent = await journalGet("intents", id);
+    if (intent?.recovered && !intent.recoveryVerified) throw new Error("请先查询原任务，确认备份中的状态和产物");
     if (!intent?.job) throw new Error("提交归属尚未确认，不能将浏览器中止当成远端取消；请先核对原提交");
     const { client } = connection(intent.identity);
     await updateIntent(id, (value) => ({ ...value, cancelRequested: true, updatedAt: Date.now() }));
@@ -148,6 +152,7 @@ export async function cancelIntent(id: string, signal?: AbortSignal): Promise<In
 
 export async function saveResult(intentId: string, contentId: string, signal?: AbortSignal): Promise<LocalResult> {
     const intent = await journalGet("intents", intentId);
+    if (intent?.recovered && !intent.recoveryVerified) throw new Error("请先查询原任务，确认备份中的状态和产物");
     if (!intent?.job?.artifacts?.some((artifact) => artifact.id === contentId)) throw new Error("产物不属于这项任务，请先刷新任务详情");
     const { client, identity } = connection(intent.identity);
     const id = `studio:${identity.fingerprint}:${contentId}`;
