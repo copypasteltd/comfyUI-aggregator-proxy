@@ -1,0 +1,231 @@
+{
+  "started_at": "2026-10-29T22:14:15.660Z",
+  "scope": "actual public HTTP and original generated files through browser history/library/player/download; desktop Chromium and emulated mobile, not physical-phone acceptance",
+  "checks": [
+    {
+      "name": "actual history/library/preview and original download: image",
+      "passed": true,
+      "detail": {
+        "bytes": 965536
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "mode": "image",
+      "job_id": "job_99fffafd6e8a4af49ea3088784c82cbe",
+      "content_id": "content_19aec8535b8444e38f98ba008460c90c",
+      "media_type": "image/png",
+      "bytes": 965536,
+      "sha256": "f554fa6b2d39dd9384bddf9689ce1c352a3b30d6f8619cb0b19c014129ab181c",
+      "browser_playback": {
+        "width": 1024,
+        "height": 1024
+      },
+      "download_verified": true,
+      "download_name": "content_19aec8535b8444e38f98ba008460c90c.png",
+      "process_memory_after_download": {
+        "processes": [
+          {
+            "Id": 1408,
+            "WorkingSet64": 43659264,
+            "PrivateMemorySize64": 18857984
+          },
+          {
+            "Id": 17076,
+            "WorkingSet64": 152293376,
+            "PrivateMemorySize64": 56205312
+          },
+          {
+            "Id": 20688,
+            "WorkingSet64": 20717568,
+            "PrivateMemorySize64": 9887744
+          },
+          {
+            "Id": 28516,
+            "WorkingSet64": 201392128,
+            "PrivateMemorySize64": 189280256
+          },
+          {
+            "Id": 29556,
+            "WorkingSet64": 36179968,
+            "PrivateMemorySize64": 19615744
+          },
+          {
+            "Id": 33496,
+            "WorkingSet64": 91131904,
+            "PrivateMemorySize64": 48099328
+          },
+          {
+            "Id": 35464,
+            "WorkingSet64": 219398144,
+            "PrivateMemorySize64": 142016512
+          }
+        ],
+        "summed_working_set_bytes": 764772352,
+        "summed_private_bytes": 483962880
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "image-preview",
+      "file": "docs/assets/studio/library-2026-10-29T22-14-15-659Z/image-preview.png",
+      "sha256": "0ea9bb115ac2c05e5130e26d74466573bace498925d8f409dfd1f232b5e4fdaf"
+    },
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/library-2026-10-29T22-14-15-659Z/failure.png",
+      "sha256": "b0f9a6f455a97a8caaf120917562e30e57ec6b4fdc77756e8957b75ccee3ac71"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c/download",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_5e3dba0b756444acaea1e873ce3ae35d",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_4e790dc582274aa4928fc4f201e62b55",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_5e3dba0b756444acaea1e873ce3ae35d",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_4e790dc582274aa4928fc4f201e62b55",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_4e790dc582274aa4928fc4f201e62b55/download",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "heap_before": {
+    "usedSize": 9061660,
+    "totalSize": 12640256,
+    "embedderHeapUsedSize": 6012248,
+    "backingStorageSize": 1235784
+  },
+  "process_memory_before": {
+    "processes": [
+      {
+        "Id": 1408,
+        "WorkingSet64": 41603072,
+        "PrivateMemorySize64": 17833984
+      },
+      {
+        "Id": 17076,
+        "WorkingSet64": 137433088,
+        "PrivateMemorySize64": 45219840
+      },
+      {
+        "Id": 20688,
+        "WorkingSet64": 20709376,
+        "PrivateMemorySize64": 9887744
+      },
+      {
+        "Id": 28516,
+        "WorkingSet64": 145485824,
+        "PrivateMemorySize64": 149204992
+      },
+      {
+        "Id": 29556,
+        "WorkingSet64": 36442112,
+        "PrivateMemorySize64": 19914752
+      },
+      {
+        "Id": 33496,
+        "WorkingSet64": 92557312,
+        "PrivateMemorySize64": 49819648
+      },
+      {
+        "Id": 35464,
+        "WorkingSet64": 137043968,
+        "PrivateMemorySize64": 76709888
+      }
+    ],
+    "summed_working_set_bytes": 611274752,
+    "summed_private_bytes": 368590848
+  },
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(observed.current_time > 0)\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_live_library.mjs:89:60",
+  "private_recording": ".local/studio-library/2026-10-29T22-14-15-659Z/page@d049153b573df26ad33d586613290c29.webm",
+  "finished_at": "2026-10-29T22:14:32.219Z"
+}

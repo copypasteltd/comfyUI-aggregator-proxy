@@ -1,0 +1,91 @@
+{
+  "started_at": "2026-10-29T21:58:25.104Z",
+  "scope": "actual final public HTTP UI, real generated image and own persistent browser profile; desktop/mobile/landscape emulation, no additional generation or physical-phone acceptance",
+  "checks": [
+    {
+      "name": "final static package restores the existing local canvas",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "mobile reset/zoom and creation tools are independently clickable",
+      "passed": true,
+      "detail": {
+        "zoom": {
+          "x": 20,
+          "y": 704,
+          "width": 266,
+          "height": 56
+        },
+        "tools": {
+          "x": 16,
+          "y": 768,
+          "width": 358,
+          "height": 56
+        },
+        "focused_image": {
+          "x": 78.73124694824219,
+          "y": 368.7359313964844,
+          "width": 232.53749084472656,
+          "height": 232.53750610351562
+        }
+      }
+    },
+    {
+      "name": "mobile multi-reference form exposes two distinct required reference slots",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-canvas",
+      "file": "docs/assets/studio/controls-2026-10-29T21-58-25-070Z/desktop-canvas.png",
+      "sha256": "9356e960e30dd90b83707e84619b5f16e9800c474eccdbd5bd93094391881554"
+    },
+    {
+      "name": "mobile-canvas",
+      "file": "docs/assets/studio/controls-2026-10-29T21-58-25-070Z/mobile-canvas.png",
+      "sha256": "566c32b27498b232ba45f0efc2fc90249556ad7f18bfc7ec8022ceaac7aa1da1"
+    },
+    {
+      "name": "mobile-multi-reference-composer",
+      "file": "docs/assets/studio/controls-2026-10-29T21-58-25-070Z/mobile-multi-reference-composer.png",
+      "sha256": "83f801706784c6301ef749c582cc78221e8cb6c04511a446c9a21f43525785aa"
+    },
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/controls-2026-10-29T21-58-25-070Z/failure.png",
+      "sha256": "1c199ad582a020eecd7f8d9d5cf61a5a688434e37b9405e8555267849a5e5240"
+    }
+  ],
+  "page_errors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "cleanup": {
+    "page_closed": true,
+    "context_and_browser_closed": true
+  },
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(box.y >= 64 && box.y + box.height <= viewport.height - 80)\n\n    at focusImage (file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_live_controls.mjs:50:12)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_live_controls.mjs:80:84",
+  "private_recording": ".local/studio-controls/2026-10-29T21-58-25-070Z/page@420f68670854e675f4e7e9feb898be40.webm",
+  "finished_at": "2026-10-29T21:58:50.366Z"
+}

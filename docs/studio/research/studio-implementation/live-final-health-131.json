@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "at": "2026-10-29T22:25:32.685331+00:00",
+  "scope": "Final read-only public HTTP and native service/pointer check; no service restart or GPU task",
+  "backend": "linux-20261030.131.1",
+  "studio": "studio-20261030.131.6",
+  "services": {
+    "comfy-aggregator-api.service": "active",
+    "comfy-aggregator-runner.service": "active",
+    "comfy-aggregator-http-worker.service": "active",
+    "comfy-aggregator-edge.service": "active"
+  },
+  "original_worker_pid_unchanged": true,
+  "responses": [
+    {
+      "path": "/studio/",
+      "status": 200,
+      "content_type": "text/html",
+      "body_sha256": "33f510c8e9c4ca94b49814075f5b2109d53bc2f6a31354c5519f3636c340673c"
+    },
+    {
+      "path": "/studio/models",
+      "status": 200,
+      "content_type": "text/html",
+      "body_sha256": "33f510c8e9c4ca94b49814075f5b2109d53bc2f6a31354c5519f3636c340673c"
+    },
+    {
+      "path": "/admin/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "body_sha256": "d0216b8dbefd89e023c05d06305261d293b197136654fba183b7e5d5916aaf50"
+    },
+    {
+      "path": "/health/ready",
+      "status": 200,
+      "content_type": "application/json",
+      "body_sha256": "a29ee2b15c494311c52521766e44af56a3ad2248e7a8ab465e5206463c13d288"
+    }
+  ],
+  "virtualization_used": false
+}

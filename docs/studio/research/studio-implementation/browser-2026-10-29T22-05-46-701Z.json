@@ -1,0 +1,544 @@
+{
+  "started_at": "2026-10-29T22:05:47.156Z",
+  "scope": "active managed UI with synthetic API; plain non-localhost HTTP; desktop/mobile Chromium emulation, not a real phone or GPU",
+  "checks": [
+    {
+      "name": "connection/catalog/Schema Worker succeed on plain HTTP",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "main document CSP blocks arbitrary function compilation; Ajv stays in isolated Worker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all 11 historical model descriptors accepted through actual Worker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "uncertain-submit notification leaves primary navigation accessible",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "POST is preceded by committed durable intent; lost response stays unknown",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "reconcile uses original body/key/digest and receives exactly the same job",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "verified result survives page reload and returns to original canvas",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "server history queries original scoped jobs and metadata without creating tasks",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual canvas ZIP exports verified bytes without credentials and imports without generation",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "history-first original reattaches to the original canvas without a second job",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all business requests omit same-origin Admin cookie",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two pages cannot commit competing intents for the same active node",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "committed original request body cannot be changed",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "in-place mutations of frozen body/output are rejected atomically",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "390px viewport: no document overflow, canvas toolbar remains accessible",
+      "passed": true,
+      "detail": {
+        "documentWidth": 390,
+        "width": 390,
+        "height": 844,
+        "toolbar": {
+          "left": 16,
+          "right": 374,
+          "top": 768,
+          "bottom": 824,
+          "width": 358
+        },
+        "header": {
+          "left": 0,
+          "right": 390,
+          "top": 0,
+          "bottom": 64,
+          "width": 390
+        },
+        "title": {
+          "left": 76,
+          "right": 149.71875,
+          "top": 83.71875,
+          "bottom": 108.28125,
+          "width": 73.71875
+        }
+      }
+    },
+    {
+      "name": "mobile side panel opens and closes without covering global navigation or canvas controls",
+      "passed": true,
+      "detail": {
+        "panelBounds": {
+          "x": 0,
+          "y": 128,
+          "width": 175.6875,
+          "height": 716
+        },
+        "topbarBounds": {
+          "x": 0,
+          "y": 64,
+          "width": 390,
+          "height": 64
+        }
+      }
+    },
+    {
+      "name": "zoom and creation controls remain independently clickable on a narrow canvas",
+      "passed": true,
+      "detail": {
+        "zoomBounds": {
+          "x": 20,
+          "y": 704,
+          "width": 266,
+          "height": 56
+        },
+        "toolsBounds": {
+          "x": 16,
+          "y": 768,
+          "width": 358,
+          "height": 56
+        }
+      }
+    },
+    {
+      "name": "selected node toolbar cannot intercept fixed controls after portrait-to-landscape resizing",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001/download",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001/download",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-connection",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/desktop-connection.png",
+      "sha256": "225e5b2afcfd841e0b7602b77cdc0be57b91bb6d986f78ca4c452caf960a60ba"
+    },
+    {
+      "name": "desktop-models",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/desktop-models.png",
+      "sha256": "c32b50e9d57a3a498b63e316001681bbddcf3145a7e086de84ae71bee6beb655"
+    },
+    {
+      "name": "desktop-canvas",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/desktop-canvas.png",
+      "sha256": "7f27426e3a31b67c1997484c0458e301870c9b5f30c18fdce5d7e1aeac94614f"
+    },
+    {
+      "name": "desktop-composer",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/desktop-composer.png",
+      "sha256": "485bd69558d420ac30755c8d22c17f152d1043d8c99f60c3898536ba58b12b33"
+    },
+    {
+      "name": "desktop-unknown-submit",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/desktop-unknown-submit.png",
+      "sha256": "b3e63f3f55e1c48273b2c51c5deac89ca6adec0bb8428d80f6950b967eda0cb0"
+    },
+    {
+      "name": "desktop-result",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/desktop-result.png",
+      "sha256": "4c7f4f00b8867b9bca7330d7afaa12e35c772ffaa5c1a152ead16532146c3da8"
+    },
+    {
+      "name": "mobile-canvas",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/mobile-canvas.png",
+      "sha256": "776ac7deb29e5aae28828083ab825a47dbccd291d4b62d3859cf80bfac78060a"
+    },
+    {
+      "name": "mobile-panel-closed",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/mobile-panel-closed.png",
+      "sha256": "392a2b72c206b8c5383cd9f7b21dd1502fe87a286d1279ba582919e714d7d28d"
+    },
+    {
+      "name": "selected-node-landscape-controls",
+      "file": "docs/assets/studio/2026-10-29T22-05-46-701Z/selected-node-landscape-controls.png",
+      "sha256": "59328a5a57551fcf078bacb0576cf3f003670522c7357c6aebd8751003d2698e"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "origin_kind": "non-localhost plain HTTP",
+  "mobile_bounds": {
+    "documentWidth": 390,
+    "width": 390,
+    "height": 844,
+    "toolbar": {
+      "left": 16,
+      "right": 374,
+      "top": 768,
+      "bottom": 824,
+      "width": 358
+    },
+    "header": {
+      "left": 0,
+      "right": 390,
+      "top": 0,
+      "bottom": 64,
+      "width": 390
+    },
+    "title": {
+      "left": 76,
+      "right": 149.71875,
+      "top": 83.71875,
+      "bottom": 108.28125,
+      "width": 73.71875
+    }
+  },
+  "selected_landscape_bounds": {
+    "focusedImage": {
+      "x": 373.3431091308594,
+      "y": 209.34312438964844,
+      "width": 97.31375122070312,
+      "height": 97.31373596191406
+    },
+    "fixedDock": {
+      "x": 16,
+      "y": 314,
+      "width": 812,
+      "height": 56
+    },
+    "fixedTop": {
+      "x": 0,
+      "y": 76,
+      "width": 844,
+      "height": 64
+    },
+    "nodeActions": {
+      "x": 135,
+      "y": 146.953125,
+      "width": 574,
+      "height": 48
+    }
+  },
+  "passed": true,
+  "finished_at": "2026-10-29T22:06:50.393Z",
+  "static_artifact_sha256": {
+    "assets/agent-url-bootstrap-DcZRvpiD.js": "2280ba8bc379fc6e8df6369caaeae893ce6cf2779c08a59cb344682813af9ef8",
+    "assets/app-config-modal-DzQmIUck.js": "958783bb86369006ff80e7b5f61d1482228cbd1a4101d0cc51b1b90ba5edcbee",
+    "assets/arrow-right-DGqRl0GS.js": "e4650e4f2d8c2aa6037753a609eb5d6d4b80b18bb88180b196aa146760b0bcdb",
+    "assets/asset-picker-modal-DRq_1fMg.js": "686b90fcb6f129b458f13b8607d9e6223db433352eba002b6c4930fcc8adf40e",
+    "assets/assets-Bc0r8XYt.js": "616cba91b94065ca290bc98c1f978406208eeee92b56f38294a3076a0b7b782d",
+    "assets/audio-generation-DUE3ZdVa.js": "7558ece39369a8868704ad0ae03b2f22ce0dadd30422b1cd8047fcacaa351551",
+    "assets/box-D_uyZsSw.js": "aa833ab0d712a413757a5f3b1543e246ccc6c1f98be60be1e0c0033469a970ed",
+    "assets/canvas-CFypNJp9.js": "d0a863710d373be64daf0ecbdb12962fc96ab73cf7b139e4045b3b0961651210",
+    "assets/canvas-export-BFgDO51O.js": "cd7ce5ef1db4cda1d5e24ce3e14f1c940d79ede3357e84befae762ebad99fcff",
+    "assets/canvas-theme-B_ASeCnc.js": "71bb4e21634370dd35da4d2fe9115622272e33cf91e1896fc556f8f621eb29ce",
+    "assets/connection-CzFW-rXQ.js": "00e6bfda437bcf8ac8a5d199eb3d80dc24969fe911ff3a26d57043ce3d0de0cd",
+    "assets/Drawer-DBCSXhu3.js": "0dad315ad0ed8588767c9d3d559e4a91fac32911c392c0bfadd8661ea200acc2",
+    "assets/env-Drs41_Uz.js": "f98e2a018d40658373cea4278c3c12e74d41350bba52523fcf631315f7e31c14",
+    "assets/external-link-3y4XUggT.js": "5ea971a99efc8a717cae5dd5e4306d04b2a6f5ac61d4df3c47756c76f7222ff5",
+    "assets/file-text-DzAUSV8y.js": "5013b11b575348fe49428f7bee5229ee748522bdb622161c9cdf371760ac045b",
+    "assets/FileSaver.min-DSjCwo6d.js": "afab1a1a75d858287edc8de6416e780fd37b0e48201a9009b237b9665c49e78a",
+    "assets/folder-plus-DlFp2BZO.js": "3ce343e00e49724667e6c381d030e28c03e0b63be0427de8e920adf54adde8ce",
+    "assets/highlighted-body-OFNGDK62-sh6gGFfW.js": "18e88db9b049f82ba932c65439ff6bb1bb92c5befe68b56e9ca0efe073b0cfbc",
+    "assets/house-CkasX4UX.js": "c04c67e924d46e86a697fd162a561b8329c4904664a359e095c0000855014220",
+    "assets/image-GMSQzfOk.js": "898749d0a403f4ea04071fccca6cf00135873810373b297bbdf29fe656e87105",
+    "assets/image-plus-BfRE_Eez.js": "aa6786bd86a2dff663cd616cfb3dda9db087effeacbb0546cc040101a453f90f",
+    "assets/image-utils-CrDHvIZq.js": "b9d532ae4064f98f93b8064ac576846ed380b2f87283908b9939cc0d4eba666d",
+    "assets/index-2xvNqgt2.js": "3b07f586c3a197176b7c9308e7556e606d72a2f85a06b5be5ca3f902dabaaf58",
+    "assets/index-6VWJeqfS.js": "97eb8298c565a83335462c26df3437e1a3b51c41f93464167229e37a95deab0a",
+    "assets/index-BDYlX4Qe.js": "c0419f5b87841f0f656f68acd0c797614cb38bafa174a207cd0ebbc31cdae413",
+    "assets/index-BSxo7j0s.js": "0c9fc374367cd9f5842544745ac1152bd57f9715064c86e82d58af0193411c0c",
+    "assets/index-B_sAroIE.js": "5bee75b822d39f3e86bb6c485121dba98253114045ae01d7da85f1122f0736e8",
+    "assets/index-CBqj45dc.js": "ad0622849d5d3cc2664943f42926e909073e44ace4b9c8474d111b976aa7fccd",
+    "assets/index-CGcPuaWw.js": "37fda6b4612de7f20bef6d61f1b51bff8378aa12e0ced856145590b13469ef73",
+    "assets/index-CHVgES94.js": "6e73c2567a7e7122834bd59bbfb9546de9461b351ea9bb5693a5bf24b7ca86c7",
+    "assets/index-CK56bOZV.js": "b82b492b838fd5dc3d0d94d02890dd385a1d89a997fb2abf64e56de1c8e480d7",
+    "assets/index-CLLKMXyT.js": "796d001721b08377cc4e790112efd8b6d85698fa3ef4f7ba280a3ff430bf6d4c",
+    "assets/index-CUZ_UZph.js": "4b8d8946bb0a67ebdda53b8cb5d32abb6fcdd7c98d55de254c6badb10794f3a7",
+    "assets/index-D-MZqADM.js": "ed6bac72822869036ca15208e02d40080eee5d2ddf60c2a39085f3c4cdd0e8de",
+    "assets/index-DaTN9H1_.js": "15543cf249fc2ac6e6fc204baa80fbecc38ff8b383a80e7302cdf525832ea779",
+    "assets/index-DcPD7law.js": "85988caf3b8fe3a6870dfb25258b8c316519a194482b6bb2b29d89255cf26834",
+    "assets/index-DhbGy6GE.js": "2b6a41c00121bf2a425e3f801b3ecfd1c076db24c26e1b5bd1cc602d28aff0a5",
+    "assets/index-DOzjFdK0.js": "fcea502783024b8192d482f7238ea8a5ed68ecdc8cb1408cdbcfac620589618b",
+    "assets/index-Dq58uMl0.js": "3ac570ddafccdac354f2a71fc6a77fc1094ce65c4930d09a19ab33f74ab8b03e",
+    "assets/index-Drp3bEeB.js": "c9b1739c22383f0eaa2e24c8fb3b0640183e263beba2ebd502681fbbba62cea8",
+    "assets/index-DvcKzFt8.css": "8891ebb386595b74b0350680affd47a1065e9a1461fb55f480517f0a3e492586",
+    "assets/index-DwHgNEzI.js": "2970ecb3e0c2ac35fa9c1054bd67a9e997d4a81f4a1b855f63f429c0790fda2b",
+    "assets/index-Js9EpxHU.js": "3679b41aa9882083bedc15fca5c521d091074b1a007b9e1bf3e5e83c35a1e448",
+    "assets/index-kJsKJzrS.js": "66488ca8e6769f1b4ccf591f7b53c6ecf5fe1a43c8614cf3832306b2f2bb9488",
+    "assets/index-WcqRCpSg.js": "c5eb63b0696fd83c75d3687558dadcc377e65fdc9ba3d786234c5bf2d4e7e5ad",
+    "assets/KeyCode-C3ZfcqzQ.js": "3e07de442a67b8aebd99fbf2172603cd885bd014ad710c864563178ec3e5029b",
+    "assets/LeftOutlined-muUu1unq.js": "a3edbd7b9c4553c05d62db6d48f050a6d8e7dd78842a4529141353754b4bb9cb",
+    "assets/link-2-DH6nCdUe.js": "f289429f3f0fc28a63f53f2e26b909a5ebfa0949d2bf7f4323fec263d134fca1",
+    "assets/localforage-storage-CC4NWtfN.js": "868c665bfb8e697fca7865a5a2155d325d8c4ff0e43c9a2e6098275f8c5bfb74",
+    "assets/mermaid-GHXKKRXX-B1hoQfFP.js": "460c6f3236308789d1ed78ec4ca6b2994ea605f2216cd14563b0b9eb29c942f1",
+    "assets/model-plugin-DWjABh48.js": "d3a5c3d760ad46c3947c7923111b697d8a9516ce93f8faea4489e58b59bff3a4",
+    "assets/models-CrTj2X9Z.js": "32060ff357ac7b7a571f45310807f2c53048050aabe554c4dbd490cfe5c5f214",
+    "assets/music-2-70fgx1n9.js": "6a4386929070c10cae8139afbb5ac4a21ff11a2113ef9c22ec05705e702e0e2a",
+    "assets/navigation-tools-COkS8Cm_.js": "98945c16044150acd366e38bf2459f606ad218a4003b4d492773c60c9b39ae04",
+    "assets/Overflow-z-OS_ysn.js": "83b1be636074d040bed5dc4fc37f2ebf99f932a6dac3aaf17c5c706d5593c44f",
+    "assets/pencil-CvMtnkjB.js": "cfe87286aebe685317cea3c4fc53b1d58140c855f8fa428a347843baa27a8839",
+    "assets/plus-DuJFgzTx.js": "f7fb547b9c28bae63fa1758ea7078069b07e027d6981bf3d25de76d112290bd3",
+    "assets/project-Kg4W69cC.js": "df4223fab8b92644747ee21a0b0ffeaa60786396a003bf68797e29e5129e4ec5",
+    "assets/prompt-detail-dialog-DGWte-v2.js": "800ffcb0f63f7b751108a4fe27d8d21cff97bd1397296724e5a02c7ce70ef83a",
+    "assets/refresh-cw-D4YShvGZ.js": "49b3c0bbaf2fc4fa38bcddef91e5a7a3f4439a093d79f996a9ed099608b66b87",
+    "assets/schema-validator-ByxALy6O.js": "5de073952686783a84c8cf311e8843f1bc4fafdd104a22375a296b4a00e2a214",
+    "assets/schema-worker-BELMOVc3.js": "7a62cfd491975e88ffc049fea3ee69e21930393e9bd24f12220e2c63d27c58cb",
+    "assets/search-D7bs_txi.js": "bcb7e488dc7aa6aea464d2875ecfb3b49694fe55cea932c32579b3d49d4fc9c0",
+    "assets/settings-2-XdTELeeH.js": "c51748d6540cf1d38679cf286bcb6e1615126cb21ce89a2f6374c25fe1b65acd",
+    "assets/square-check-big-BL-WWtBC.js": "5f5769d5f893edfd661bf6e458aa3cc24de3488f2d0bfcf960ae0af5b33e155a",
+    "assets/square-DX2O2Anb.js": "bc5ceae1da41ac1d5c46a7449df175747d2171776fc560e5571db5d627e9e800",
+    "assets/tasks-1XPCBxNb.js": "65d426bb184ee9a536d0ceea0799b695c8d4210e75628c3e5e93c766e674622b",
+    "assets/trash-2-DULpfARb.js": "e0ace466141afced616e2348369018f9bff1182f4c8614bab63443d406169a5e",
+    "assets/use-asset-store-pfDY7VuS.js": "293b41fa6c0c30a31ad4709f1a96df27594072a09b37439ac0f496c9c177d71b",
+    "assets/use-canvas-store-Dr4amFe8.js": "94549b727aa0f115b09b419337da5704e2b68241846571315037498c75a8aab3",
+    "assets/use-copy-text-BrcEbx_J.js": "0b3e7cdd6767b06cf9d2433dc6efca6aa39c64d42934d99767bafccdbe1a4697",
+    "assets/use-prompt-list-bs28-SF5.js": "b136abadf2260fa55c4eaf6ae1ab38a506f1386739c0ad60cab4042aa387def2",
+    "assets/use-workbench-agent-store-B8C_5HvY.js": "ca243722eb8005dd9e5cec5fbdd1f994b21e84da76d2ce03707471d0efce21b4",
+    "assets/useControlledState-B8e6kXJm.js": "fe37664ffa210e11657ec211f99f2037ee3da6dc6553b31b299b7ce5bf0507f3",
+    "assets/utils-vj4hFCJ5.js": "500cf1a9b2f2cda5706f0fe66bc4a622b075cf26b38a5d05a47de09694fd9e48",
+    "assets/video-C1zM_H6e.js": "96612db4b33293ffc2f5e8bbbb5d7015394c450e0f6ef208ab7a20f14ca7923b",
+    "assets/video-Dms25S3R.js": "b3648ab02dd5f2ab00bf978a5a2b66d39a36599317eaf454b12909cf10435141",
+    "assets/video-settings-panel-BGwNT0V_.js": "61c27f99b40b09ea8d0a4268b7725bd7921f13d4a1dcbd50bbe54d1ba840ad86",
+    "assets/zip-vQtl9jF_.js": "ad1801c25d96b5c5b3efd9778f827b7e79e1fbbaf57d8fe58e64958aaea078be",
+    "config.js": "33c15a252c60b6103ad20c773e1ec662c1aaa636277aa24698274a7d2a743038",
+    "fonts/Anton-OFL.txt": "ee67e6ee22790b7929f1a3769ca2801d565c64b5a9096942c1adf5596de9c9e4",
+    "fonts/Anton-Reference.woff": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a",
+    "fonts/Manrope-OFL.txt": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+    "fonts/Manrope-Reference.woff": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd",
+    "icons/claude.svg": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364",
+    "icons/deepseek.svg": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439",
+    "icons/gemini.svg": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602",
+    "icons/glm.svg": "8174e65ff71647d5c705c920c953a82bd723d9e3e42887bdd4ffc9dfe51207a0",
+    "icons/grok.svg": "9175fc90c22655160231976c849f25a03b888d7cc0e04c5f1b987b659bb07c95",
+    "icons/linuxdo.svg": "dc7fe55ca4dc1062611111df4208da9d44655c36f85ad52727facd4bba2b4d60",
+    "icons/openai.svg": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186",
+    "index.html": "33f510c8e9c4ca94b49814075f5b2109d53bc2f6a31354c5519f3636c340673c",
+    "logo.svg": "76e174b82af0dfac35c55ba086d4e9781aa1d2ade984b50ddb6489b408efd831",
+    "plugins/index.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "static_artifact_unchanged": true
+}

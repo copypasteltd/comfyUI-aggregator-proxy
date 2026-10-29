@@ -23,7 +23,7 @@ def transfer(sources):
 def main():
     action = sys.argv[1] if len(sys.argv) == 2 else ""
     if action == "prepare":
-        sources = {TOOLS / "studio131-prepare.sh": "prepare.sh", TOOLS / "studio131-host.py": "studio131-host.py", BUILD / "cloud-build.json": "cloud-build.json", BUILD / "static-build.json": "static-build.json", BUILD / "linux-20261030.131.1.tar.gz": "linux-20261030.131.1.tar.gz", BUILD / "studio-20261030.131.1.tar.gz": "studio-20261030.131.1.tar.gz"}
+        sources = {TOOLS / "studio131-prepare.sh": "prepare.sh", TOOLS / "studio131-host.py": "studio131-host.py", BUILD / "build.json": "cloud-build.json", BUILD / "static-build.json": "static-build.json", BUILD / "linux-20261030.131.1.tar.gz": "linux-20261030.131.1.tar.gz", BUILD / "studio-20261030.131.1.tar.gz": "studio-20261030.131.1.tar.gz"}
         script = transfer(sources) + f"\ntest ! -e '{PROTECTED}/prepare.state'\nnohup bash '{PROTECTED}/prepare.sh' > '{PROTECTED}/prepare.log' 2>&1 < /dev/null &\necho prepare_started\n"
     elif action == "status":
         script = f"""test ! -f '{PROTECTED}/prepare.state' || cat '{PROTECTED}/prepare.state'
@@ -82,6 +82,15 @@ finally:
 print(json.dumps({{'passed':True,'atomic_pointer_roundtrip':True,'same_byte_seed':True,'older_ui_compatibility_tested':False,'browser_storage_modified':False}}))
 PY
 """
+    elif action == "static-upgrade":
+        sources = {TOOLS / "studio131-static-upgrade.py": "studio131-static-upgrade.py", BUILD / "static-build.json": "static-build-1312.json", BUILD / "studio-20261030.131.2.tar.gz": "studio-20261030.131.2.tar.gz"}
+        script = transfer(sources) + f"\npython3 '{PROTECTED}/studio131-static-upgrade.py'\n"
+    elif action in {"static-upgrade-1313", "static-upgrade-1314", "static-upgrade-1315", "static-upgrade-1316"}:
+        release, previous, number = {"static-upgrade-1313": ("studio-20261030.131.3", "studio-20261030.131.2", "1313"), "static-upgrade-1314": ("studio-20261030.131.4", "studio-20261030.131.3", "1314"), "static-upgrade-1315": ("studio-20261030.131.5", "studio-20261030.131.4", "1315"), "static-upgrade-1316": ("studio-20261030.131.6", "studio-20261030.131.5", "1316")}[action]
+        assert json.loads((BUILD / "static-build.json").read_text())["release_id"] == release
+        name = "static-build-" + number + ".json"
+        sources = {TOOLS / "studio131-static-upgrade.py": "studio131-static-upgrade.py", BUILD / "static-build.json": name, BUILD / (release + ".tar.gz"): release + ".tar.gz"}
+        script = transfer(sources) + f"\npython3 '{PROTECTED}/studio131-static-upgrade.py' --build {name} --previous {previous}\n"
     elif action == "failure-log":
         script = f"for task in prepare promote rehearse; do test ! -f '{PROTECTED}/'$task'.log' || tail -n 30 '{PROTECTED}/'$task'.log'; done"
     else:

@@ -1,12 +1,18 @@
 # ComfyUI Aggregator Proxy
 
-[131 · 无限画布融合](docs/131-画布提交发布校验与异步查询契约.md)：React 创作前端复用现有七类媒体异步 API、Key、Workflow 和 GPU 调度；提交前持久日志、原幂等核对、发布摘要前置校验和受鉴权文件校验统一处理。修正 GLB 能力发现遗漏，原生范围回归 82/82 通过。当前发布/真实 GPU 与移动验收状态以专题及 [画布进度](docs/studio/10-开发进度与交付记录.md) 为准，不能用代码通过替代完整签收。
+[131 · 无限画布融合](docs/131-画布提交发布校验与异步查询契约.md)：React 创作前端复用现有七类媒体异步API、Key、Workflow和GPU调度；提交前持久日志、原幂等核对、发布摘要前置校验和受鉴权文件校验统一处理。修正GLB能力发现遗漏，原生专项82/82、兼容1,456/1,456，前端120单元/类型/构建/18组合成浏览器通过。[公网画布](http://43.165.167.179:39443/studio/)已部署后端131.1/静态131.6，实际后端与静态新旧回滚保留原任务/内容；八种真实GPU模式在3080/5070完成，包含30秒FLAC和76.94MB GLB。完整故障矩阵、手机真机和容量仍以[46项进度](docs/studio/10-开发进度与交付记录.md)分层验收。
 
-画布入口采用现有高位 HTTP 的 `/studio/`，Admin 为 `/admin/`，业务 API 为 `/v1/`；无新增生成后端，不需要本地 Docker、WSL 或 Agent。源码与锁同步于 `app/apps/studio_web/`，青柠样式沿用既有系统；图片、视频、Workflow 音频与 GLB 分别呈现。云端完成八小时清理与本机离线副本独立管理。
+画布入口采用现有高位 HTTP 的 `/studio/`，Admin 为 `/admin/`，业务 API 为 `/v1/`；无新增生成后端，不需要本地 Docker、WSL 或 Agent。源码与锁同步于 `app/apps/studio_web/`，青柠样式沿用既有系统；图片、视频、Workflow 音频与 GLB 分别呈现。云端完成八小时清理与本机离线副本独立管理。 [完整使用与恢复](docs/studio/USAGE.md)、[原生发布运维](docs/studio/11-线上使用与原生发布运维.md)。
+
+![实际公网青柠画布与生成原图](docs/studio/assets/studio/controls-2026-10-29T22-08-02-756Z/desktop-canvas.png)
+
+[真实样片与八种调用回执](docs/studio/media/studio-131/README.md) · [原速演示MP4](docs/studio/media/studio-131/studio-focused-tour.mp4) · [手机画布](docs/studio/assets/studio/controls-2026-10-29T22-08-02-756Z/mobile-canvas.png)
+
+![实际公网画布操作](docs/studio/media/studio-131/studio-focused-tour.gif)
 
 [129 · 3D 兼容复查](docs/129-三维兼容复查与GLB边界修复.md)：修复 GLB 位置 accessor 漏计、默认场景外节点层级漏检、3D 专用 Key 被额外要求图片权限，以及下载文件名缺少 .glb 的问题。最终 339 项范围回归通过，覆盖七类任务最小权限、HTTP 提交及完整/HEAD/Range 下载。线上安装与新调用结果见专题记录。
 
-当前云端 **129.3** 已验证：仅有 3D 生成权限的 Key 成功调度 3080 TRELLIS2，回传 100,424,732 字节 GLB；完整摘要、下载文件名、跨 Key 隔离和只计一次 3D 用量均通过。验证 Key 已停用。[本次真实请求与响应](docs/examples/model3d/recheck-129/README.md)。
+历史云端 **129.3** 验证：仅有 3D 生成权限的 Key 成功调度 3080 TRELLIS2，回传 100,424,732 字节 GLB；完整摘要、下载文件名、跨 Key 隔离和只计一次 3D 用量均通过。验证 Key 已停用。[本次真实请求与响应](docs/examples/model3d/recheck-129/README.md)。
 
 [128 · 3D 模型适配](docs/128-ComfyUI三维模型产物与3080适配.md) 新增 `image_to_3d`、单文件 GLB 2.0 校验、独立 `meshes:create` 权限与三级 `daily_mesh_count` 额度。以 3080 的 TRELLIS2 为接入例子，使用同一套异步队列、物理 GPU 排他、内容下载及成功后八小时保留。实现和真实验证进度以专题记录为准；只有通过实际运行批准的工作流才发布。
 

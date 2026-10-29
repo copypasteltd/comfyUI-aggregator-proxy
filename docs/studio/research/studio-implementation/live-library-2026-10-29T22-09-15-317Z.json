@@ -1,0 +1,108 @@
+{
+  "started_at": "2026-10-29T22:09:15.343Z",
+  "scope": "actual public HTTP and original generated files through browser history/library/player/download; desktop Chromium and emulated mobile, not physical-phone acceptance",
+  "checks": [],
+  "artifacts": [],
+  "screenshots": [
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/library-2026-10-29T22-09-15-317Z/failure.png",
+      "sha256": "0f1fb8128c4c8742fed4d0d3261f9614b0bb5f4312942e1856d75b3a2be2dc16"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "heap_before": {
+    "usedSize": 9163076,
+    "totalSize": 12640256,
+    "embedderHeapUsedSize": 6202920,
+    "backingStorageSize": 1235788
+  },
+  "process_memory_before": {
+    "processes": [
+      {
+        "Id": 384,
+        "WorkingSet64": 140062720,
+        "PrivateMemorySize64": 80617472
+      },
+      {
+        "Id": 5876,
+        "WorkingSet64": 33619968,
+        "PrivateMemorySize64": 17125376
+      },
+      {
+        "Id": 10572,
+        "WorkingSet64": 20721664,
+        "PrivateMemorySize64": 9887744
+      },
+      {
+        "Id": 12944,
+        "WorkingSet64": 67608576,
+        "PrivateMemorySize64": 40857600
+      },
+      {
+        "Id": 18832,
+        "WorkingSet64": 137003008,
+        "PrivateMemorySize64": 46084096
+      },
+      {
+        "Id": 31696,
+        "WorkingSet64": 153108480,
+        "PrivateMemorySize64": 143863808
+      },
+      {
+        "Id": 38016,
+        "WorkingSet64": 42901504,
+        "PrivateMemorySize64": 18214912
+      }
+    ],
+    "summed_working_set_bytes": 595025920,
+    "summed_private_bytes": 356651008
+  },
+  "passed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.ant-popconfirm').getByRole('button', { name: '确定', exact: true })\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_live_library.mjs:58:96",
+  "private_recording": ".local/studio-library/2026-10-29T22-09-15-317Z/page@ab183a8860e02cfdc576fbcedfc4be84.webm",
+  "finished_at": "2026-10-29T22:10:03.968Z"
+}

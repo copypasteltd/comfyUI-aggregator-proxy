@@ -1,0 +1,126 @@
+{
+  "started_at": "2026-10-29T22:13:10.600Z",
+  "scope": "actual public HTTP and original generated files through browser history/library/player/download; desktop Chromium and emulated mobile, not physical-phone acceptance",
+  "checks": [],
+  "artifacts": [],
+  "screenshots": [
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/library-2026-10-29T22-13-10-552Z/failure.png",
+      "sha256": "a7a8563da96e677ef10ea890d5eacc79d4e9607aa125859874ff7a8bcc0f26da"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c/download",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "heap_before": {
+    "usedSize": 9031840,
+    "totalSize": 13164544,
+    "embedderHeapUsedSize": 6005648,
+    "backingStorageSize": 1235789
+  },
+  "process_memory_before": {
+    "processes": [
+      {
+        "Id": 6248,
+        "WorkingSet64": 157679616,
+        "PrivateMemorySize64": 157085696
+      },
+      {
+        "Id": 6424,
+        "WorkingSet64": 33587200,
+        "PrivateMemorySize64": 17051648
+      },
+      {
+        "Id": 18760,
+        "WorkingSet64": 135892992,
+        "PrivateMemorySize64": 46485504
+      },
+      {
+        "Id": 24680,
+        "WorkingSet64": 20713472,
+        "PrivateMemorySize64": 9883648
+      },
+      {
+        "Id": 26392,
+        "WorkingSet64": 139247616,
+        "PrivateMemorySize64": 80064512
+      },
+      {
+        "Id": 28540,
+        "WorkingSet64": 89776128,
+        "PrivateMemorySize64": 46702592
+      },
+      {
+        "Id": 28848,
+        "WorkingSet64": 41598976,
+        "PrivateMemorySize64": 18202624
+      }
+    ],
+    "summed_working_set_bytes": 618496000,
+    "summed_private_bytes": 375476224
+  },
+  "passed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.studio-model-card').filter({ has: getByRole('heading', { name: 'content_19aec8535b8444e38f98ba008460c90c', exact: true }) }).getByRole('button', { name: '预览', exact: true })\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_live_library.mjs:71:73",
+  "private_recording": ".local/studio-library/2026-10-29T22-13-10-552Z/page@aea52b4442ab3b5f691f23a8b2417957.webm",
+  "finished_at": "2026-10-29T22:13:55.094Z"
+}

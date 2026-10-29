@@ -1,0 +1,119 @@
+{
+  "started_at": "2026-10-29T22:08:02.775Z",
+  "scope": "actual final public HTTP UI, real generated image and own persistent browser profile; desktop/mobile/landscape emulation, no additional generation or physical-phone acceptance",
+  "checks": [
+    {
+      "name": "final static package restores the existing local canvas",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "mobile reset/zoom and creation tools are independently clickable",
+      "passed": true,
+      "detail": {
+        "zoom": {
+          "x": 20,
+          "y": 704,
+          "width": 266,
+          "height": 56
+        },
+        "tools": {
+          "x": 16,
+          "y": 768,
+          "width": 358,
+          "height": 56
+        },
+        "focused_image": {
+          "x": 78.73124694824219,
+          "y": 362.7359313964844,
+          "width": 232.53749084472656,
+          "height": 232.53750610351562
+        }
+      }
+    },
+    {
+      "name": "mobile multi-reference form exposes two distinct required reference slots",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "landscape reset/zoom and tools remain independently clickable",
+      "passed": true,
+      "detail": {
+        "zoom": {
+          "x": 20,
+          "y": 250,
+          "width": 266,
+          "height": 56
+        },
+        "tools": {
+          "x": 16,
+          "y": 314,
+          "width": 812,
+          "height": 56
+        },
+        "focused_image": {
+          "x": 373.2711486816406,
+          "y": 209.27584838867188,
+          "width": 97.45770263671875,
+          "height": 97.45767211914062
+        }
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-canvas",
+      "file": "docs/assets/studio/controls-2026-10-29T22-08-02-756Z/desktop-canvas.png",
+      "sha256": "883542836405c5c26a52eb39c0de775417ad3b59b30bb5a378f3f271f00b3ad9"
+    },
+    {
+      "name": "mobile-canvas",
+      "file": "docs/assets/studio/controls-2026-10-29T22-08-02-756Z/mobile-canvas.png",
+      "sha256": "937c693b7bf68b72fff79d404d329cb29f75e0c58df71e6a6ffeb52aebdd5bc0"
+    },
+    {
+      "name": "mobile-multi-reference-composer",
+      "file": "docs/assets/studio/controls-2026-10-29T22-08-02-756Z/mobile-multi-reference-composer.png",
+      "sha256": "83f801706784c6301ef749c582cc78221e8cb6c04511a446c9a21f43525785aa"
+    },
+    {
+      "name": "landscape-canvas",
+      "file": "docs/assets/studio/controls-2026-10-29T22-08-02-756Z/landscape-canvas.png",
+      "sha256": "04c4e0a23ed32773ec383b5cb635f832a50a1bf214a057548a5b3963a1a14e30"
+    },
+    {
+      "name": "models",
+      "file": "docs/assets/studio/controls-2026-10-29T22-08-02-756Z/models.png",
+      "sha256": "7dee5c86cc6f03c1d51749e0145ca6658d756bea52f4ef3040d06562738a2882"
+    }
+  ],
+  "page_errors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "cleanup": {
+    "page_closed": true,
+    "context_and_browser_closed": true
+  },
+  "passed": true,
+  "private_recording": ".local/studio-controls/2026-10-29T22-08-02-756Z/page@e0097bf93cbf5dd54e5c97041931ee33.webm",
+  "finished_at": "2026-10-29T22:08:27.570Z"
+}

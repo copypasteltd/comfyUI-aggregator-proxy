@@ -1,0 +1,91 @@
+{
+  "started_at": "2026-10-29T21:51:46.846Z",
+  "scope": "actual final public HTTP UI, real generated image and own persistent browser profile; desktop/mobile/landscape emulation, no additional generation or physical-phone acceptance",
+  "checks": [
+    {
+      "name": "final static package restores the existing local canvas",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "mobile reset/zoom and creation tools are independently clickable",
+      "passed": true,
+      "detail": {
+        "zoom": {
+          "x": 20,
+          "y": 704,
+          "width": 266,
+          "height": 56
+        },
+        "tools": {
+          "x": 16,
+          "y": 768,
+          "width": 358,
+          "height": 56
+        },
+        "focused_image": {
+          "x": 78.73124694824219,
+          "y": 368.7359313964844,
+          "width": 232.53749084472656,
+          "height": 232.53750610351562
+        }
+      }
+    },
+    {
+      "name": "mobile multi-reference form exposes two distinct required reference slots",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-canvas",
+      "file": "docs/assets/studio/controls-2026-10-29T21-51-46-844Z/desktop-canvas.png",
+      "sha256": "9356e960e30dd90b83707e84619b5f16e9800c474eccdbd5bd93094391881554"
+    },
+    {
+      "name": "mobile-canvas",
+      "file": "docs/assets/studio/controls-2026-10-29T21-51-46-844Z/mobile-canvas.png",
+      "sha256": "566c32b27498b232ba45f0efc2fc90249556ad7f18bfc7ec8022ceaac7aa1da1"
+    },
+    {
+      "name": "mobile-multi-reference-composer",
+      "file": "docs/assets/studio/controls-2026-10-29T21-51-46-844Z/mobile-multi-reference-composer.png",
+      "sha256": "83f801706784c6301ef749c582cc78221e8cb6c04511a446c9a21f43525785aa"
+    },
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/controls-2026-10-29T21-51-46-844Z/failure.png",
+      "sha256": "09fd05fe93425cc6f2be03e819277a8bb245e749a1a171e5408a04c17aa093e9"
+    }
+  ],
+  "page_errors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "cleanup": {
+    "page_closed": true,
+    "context_and_browser_closed": true
+  },
+  "passed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-canvas-bottom-toolbar] button').first()\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-label=\"移动\" class=\"ant-btn css-1tzwyuk comfy-studio-lime ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only !h-8 !w-8 !min-w-8 !p-0\">…</button>\u001b[22m\n\u001b[2m  - attempting click action (trial run)\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"flex h-9 items-center justify-center px-2 rounded-lg transition group-hover:bg-[#f0f0f1] \">…</span> from <div data-node-toolbar=\"image-1793309432730-fxw7t\" class=\"absolute z-[70] flex h-12 -translate-x-1/2 -translate-y-full items-center overflow-visible rounded-[18px] border border-black/10 bg-white text-[15px] text-[#242529] shadow-[0_8px_28px_rgba(15,23,42,.12)]\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span class=\"flex h-9 items-center justify-center px-2 rounded-lg transition group-hover:bg-[#f0f0f1] \">…</span> from <div data-node-toolbar=\"image-1793309432730-fxw7t\" class=\"absolute z-[70] flex h-12 -translate-x-1/2 -translate-y-full items-center overflow-visible rounded-[18px] border border-black/10 bg-white text-[15px] text-[#242529] shadow-[0_8px_28px_rgba(15,23,42,.12)]\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span class=\"flex h-9 items-center justify-center px-2 rounded-lg transition group-hover:bg-[#f0f0f1] \">…</span> from <div data-node-toolbar=\"image-1793309432730-fxw7t\" class=\"absolute z-[70] flex h-12 -translate-x-1/2 -translate-y-full items-center overflow-visible rounded-[18px] border border-black/10 bg-white text-[15px] text-[#242529] shadow-[0_8px_28px_rgba(15,23,42,.12)]\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action (trial run)\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at controls (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_live_controls.mjs:31:71)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_live_controls.mjs:80:23",
+  "private_recording": ".local/studio-controls/2026-10-29T21-51-46-844Z/page@37443301651d5c7c24843e3aec1c6241.webm",
+  "finished_at": "2026-10-29T21:52:38.522Z"
+}

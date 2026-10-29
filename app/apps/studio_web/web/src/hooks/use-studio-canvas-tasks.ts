@@ -31,7 +31,7 @@ export function useStudioCanvasTasks(projectId: string, ready: boolean, nodes: C
                     const width = typeof dimensions?.width === "number" ? dimensions.width : undefined;
                     const height = typeof dimensions?.height === "number" ? dimensions.height : undefined;
                     const metadata = { ...intent.canvas!.node.metadata, studioIntentId: intent.id, studioJobId: intent.job?.id, studioStatus: intent.job?.status || intent.stage, status, errorDetails: intent.error,
-                        ...(saved ? { content: await studioMediaUrl(saved.id), storageKey: saved.id, studioContentId: saved.metadata.id, studioExpiresAt: saved.metadata.expires_at, bytes: saved.metadata.bytes, mimeType: saved.metadata.media_type, naturalWidth: width, naturalHeight: height, durationMs: typeof dimensions?.duration_ms === "number" ? dimensions.duration_ms : undefined } : {}) };
+                        ...(saved ? { content: await studioMediaUrl(saved.id), storageKey: saved.id, studioContentId: saved.metadata.id, studioExpiresAt: saved.metadata.expires_at, bytes: saved.metadata.bytes, mimeType: saved.metadata.media_type, naturalWidth: width, naturalHeight: height, durationMs: typeof dimensions?.duration_milliseconds === "number" ? dimensions.duration_milliseconds : undefined } : {}) };
                     return { intent, type, metadata, size: width && height ? fitNodeSize(width, height) : undefined };
                 }));
                 if (!active || useStudioStore.getState().client !== client) return;

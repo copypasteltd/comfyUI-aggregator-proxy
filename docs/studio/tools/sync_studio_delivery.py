@@ -11,6 +11,7 @@ import shutil
 import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "infinite-canvas"
@@ -52,12 +53,15 @@ if __name__ == "__main__":
         (DOCS / f"USAGE{language}.md").write_text(text, encoding="utf-8")
     # Source links in archived research now point at the public delivery tree.
     for document in DOCS.glob("*.md"):
+        original_bytes = document.read_bytes()
         text = document.read_text(encoding="utf-8")
         text = text.replace("](../infinite-canvas/", "](../../app/apps/studio_web/")
         text = text.replace("](../../生图生视API封装/docs/", "](../")
+        text = text.replace("](../../" + quote("生图生视API封装") + "/docs/", "](../")
         if document.name == "README.md":
             text = text.replace("](../README.md)", "](USAGE.md)").replace("](../README.en.md)", "](USAGE.en.md)")
-        document.write_text(text, encoding="utf-8")
+        newline = "\r\n" if b"\r\n" in original_bytes else "\n"
+        document.write_bytes(text.replace("\n", newline).encode("utf-8"))
     (DESTINATION / "README.md").write_text("""# Managed ComfyUI Studio / 托管创作画布
 
 [中文完整说明](../../../docs/studio/USAGE.md) · [English guide](../../../docs/studio/USAGE.en.md) · [All 46 requirements and progress](../../../docs/studio/10-开发进度与交付记录.md)

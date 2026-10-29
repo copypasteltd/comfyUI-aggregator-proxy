@@ -1,0 +1,96 @@
+{
+  "started_at": "2026-10-29T22:08:02.741Z",
+  "scope": "actual public HTTP and original generated files through browser history/library/player/download; desktop Chromium and emulated mobile, not physical-phone acceptance",
+  "checks": [],
+  "artifacts": [],
+  "screenshots": [
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/library-2026-10-29T22-08-02-727Z/failure.png",
+      "sha256": "e28b788ba5de9a882e0b2c47a5680b92bcd70e7e2da7c71e7f5fc5206d260430"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "heap_before": {
+    "usedSize": 9240520,
+    "totalSize": 12640256,
+    "embedderHeapUsedSize": 6311888,
+    "backingStorageSize": 1235791
+  },
+  "process_memory_before": {
+    "processes": [
+      {
+        "Id": 12052,
+        "WorkingSet64": 42725376,
+        "PrivateMemorySize64": 18554880
+      },
+      {
+        "Id": 21332,
+        "WorkingSet64": 11755520,
+        "PrivateMemorySize64": 7745536
+      },
+      {
+        "Id": 25244,
+        "WorkingSet64": 160071680,
+        "PrivateMemorySize64": 138596352
+      },
+      {
+        "Id": 26728,
+        "WorkingSet64": 11079680,
+        "PrivateMemorySize64": 7737344
+      },
+      {
+        "Id": 30612,
+        "WorkingSet64": 20766720,
+        "PrivateMemorySize64": 9850880
+      },
+      {
+        "Id": 32368,
+        "WorkingSet64": 137818112,
+        "PrivateMemorySize64": 77361152
+      },
+      {
+        "Id": 33504,
+        "WorkingSet64": 138207232,
+        "PrivateMemorySize64": 47538176
+      }
+    ],
+    "summed_working_set_bytes": 522424320,
+    "summed_private_bytes": 307384320
+  },
+  "passed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.studio-task-card').filter({ has: getByText('job_99fffafd6e8a4af49ea3088784c82cbe', { exact: true }) }).getByRole('button', { name: '查看产物信息', exact: true })\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_live_library.mjs:55:73",
+  "private_recording": ".local/studio-library/2026-10-29T22-08-02-727Z/page@aef2bfe5621c61570d1a21e4f7baa614.webm",
+  "finished_at": "2026-10-29T22:08:50.055Z"
+}

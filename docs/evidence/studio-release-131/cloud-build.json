@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "release_id": "linux-20261030.131.1",
+  "archive_sha256": "491961c332da0479a0b60719981ec6ae6b0783f2eab66ae58111f2602a3b2982",
+  "archive_bytes": 1164782,
+  "application_source_revision": "d001c753bba7b2d8cef646714dcb3220787beccb",
+  "changed_sources": [
+    "apps/admin_web/src/generated/api.d.ts",
+    "apps/control_api/src/control_api/main.py",
+    "apps/control_api/src/control_api/monitoring.py",
+    "config/contract-hashes.json",
+    "config/openapi.json",
+    "deploy/native-linux/backup-db.py",
+    "packages/application/src/generation_application/ports.py",
+    "packages/contracts/src/generation_contracts/schemas/model-discovery.schema.json",
+    "packages/domain/src/generation_domain/values.py",
+    "packages/infrastructure/src/generation_infrastructure/jobs.py",
+    "scripts/native_ci.py",
+    "scripts/studio_checks.py"
+  ],
+  "wheel_sha256": {
+    "generation_application-0.1.0-py3-none-any.whl": "c22da62d53938fd199b7d8e9c36c896670747f426dd8839fb4d98ab91011578b",
+    "generation_contracts-0.1.0-py3-none-any.whl": "fb5caaca243668f284fcfebb876c320f19d1940cca078ed3890c79cf9037c47e",
+    "generation_domain-0.1.0-py3-none-any.whl": "8f8f787fd2336d45ec3f662c1c7f44d8542d50814ce3dc358fc15e8db94ab9b6",
+    "generation_infrastructure-0.1.0-py3-none-any.whl": "772095f67c8a36d6bf3a654e488b202f16a25fa45bb762bbc2b3e34a5614ed60",
+    "render_control_api-0.1.0-py3-none-any.whl": "b12eb37967d8200456d53db4963100065ec770e2c9cc5dc9cbc93081864a98a6",
+    "render_control_runner-0.1.0-py3-none-any.whl": "7bc70424a9fbd446cd751c7b59e2cae3a83ac43c62ca968f2c30f1801e786af1",
+    "render_windows_worker-0.1.0-py3-none-any.whl": "7284d97ab9ce6eb3cfebb7ee24fa2602326801b318a73b00eacd3f3f1189604a"
+  },
+  "source_files": 554,
+  "new_database_migration": false,
+  "worker_protocol_changed": false,
+  "admin_rebuilt": false,
+  "scope": "committed pure cloud wheel update from verified Linux 129.3 seed; frontend static artifact and ops backup repair tracked separately"
+}

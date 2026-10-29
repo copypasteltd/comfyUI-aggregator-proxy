@@ -1,0 +1,193 @@
+{
+  "started_at": "2026-10-29T21:04:52.958Z",
+  "scope": "active managed UI with synthetic API; plain non-localhost HTTP; desktop/mobile Chromium emulation, not a real phone or GPU",
+  "checks": [
+    {
+      "name": "connection/catalog/Schema Worker succeed on plain HTTP",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "main document CSP blocks arbitrary function compilation; Ajv stays in isolated Worker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all 11 historical model descriptors accepted through actual Worker",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-connection",
+      "file": "docs/assets/studio/2026-10-29T21-04-52-829Z/desktop-connection.png",
+      "sha256": "4edcc13e7aff69afd4e6b6a20f709ff1e40dbff48e05a8245fac1c0a161007b5"
+    },
+    {
+      "name": "desktop-models",
+      "file": "docs/assets/studio/2026-10-29T21-04-52-829Z/desktop-models.png",
+      "sha256": "b6b695f65d714476a4bdd07bed104c0c59acf42193b69de30f591006b8782cea"
+    },
+    {
+      "name": "desktop-canvas",
+      "file": "docs/assets/studio/2026-10-29T21-04-52-829Z/desktop-canvas.png",
+      "sha256": "6faaea347c2eee9c5d4d59e5d27c8b8353a078ee67803bf7903575a4a550c3d4"
+    },
+    {
+      "name": "desktop-composer",
+      "file": "docs/assets/studio/2026-10-29T21-04-52-829Z/desktop-composer.png",
+      "sha256": "61fff4e37f93866818d11de6d3b624f7e9925f39ac00909f3284e863f4d78358"
+    },
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/2026-10-29T21-04-52-829Z/failure.png",
+      "sha256": "3e87a72dcb5f650b03b0fc4b3309c614b717c804b047823cb6692fe61bdffaec"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "origin_kind": "non-localhost plain HTTP",
+  "passed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: '任务', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <a class=\"\" aria-label=\"任务\" href=\"/studio/tasks\" data-discover=\"true\">…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"ant-drawer-mask ant-drawer-mask-motion-leave ant-drawer-mask-motion-leave-active ant-drawer-mask-motion\"></div> from <div>…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - performing click action\u001b[22m\n\u001b[2m    - <div role=\"alert\" data-notification-index=\"0\" class=\"ant-message-notice ant-message-notice-warning ant-message-fade-appear ant-message-fade-appear-active ant-message-fade\">…</div> from <div class=\"ant-message ant-message-list ant-message-top css-1tzwyuk comfy-studio-lime ant-message-css-var\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div role=\"alert\" data-notification-index=\"0\" class=\"ant-message-notice ant-message-notice-warning\">…</div> from <div class=\"ant-message ant-message-list ant-message-top css-1tzwyuk comfy-studio-lime ant-message-css-var ant-message-list-hovered\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  54 × retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div role=\"alert\" data-notification-index=\"0\" class=\"ant-message-notice ant-message-notice-warning\">…</div> from <div class=\"ant-message ant-message-list ant-message-top css-1tzwyuk comfy-studio-lime ant-message-css-var ant-message-list-hovered\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n",
+  "finished_at": "2026-10-29T21:05:30.908Z",
+  "static_artifact_sha256": {
+    "assets/agent-url-bootstrap-DcZRvpiD.js": "2280ba8bc379fc6e8df6369caaeae893ce6cf2779c08a59cb344682813af9ef8",
+    "assets/app-config-modal-CaoeyN3z.js": "c3c07c9be4a907be76ab38af85591510130298c9d4b09dcf9bde918a1d863aad",
+    "assets/arrow-right-ClMr86v3.js": "18cdef799dfc0b0d456df6179918ffe1f939e75091e305e83eb749bf02d05a0f",
+    "assets/asset-picker-modal-CuS_X9dW.js": "07113a31a8343fc778414a6044bb3e0a13a40ccb13ff1c71e1dd5c09ae8a24fb",
+    "assets/assets-2RED4Ns_.js": "25127566e74dc10de739b70bcbc23d77497bd570702d50c064803c757c706ee0",
+    "assets/audio-generation-Dle6D0WK.js": "6cdc63896bc5d4541645ab8b5d6078358002a7537eeb56a36fc37d2c8189434d",
+    "assets/box-BK4M_sgb.js": "16f94df78a1f149fb394fb5137a3c4117ffc365965294171ecd5fcb5c79924c2",
+    "assets/canvas-BfAQvyii.js": "c44d9eabf7c3dcdbea602d1e9320a2e3e52478958d48ba1ba63f7cba786cc212",
+    "assets/canvas-export-QLNyjBYG.js": "3d95e735046f9f921112c85a6dd39211e5c9ece4ab17d049973a94bac3c80258",
+    "assets/canvas-theme-DufheFmK.js": "c7e2b1309e02446dcf09d61c63db5a307e832ab1672201283f6b7c3e3ff668d2",
+    "assets/connection-tSSeHu47.js": "54f5b5b3dea2c7392d94926dca37ae181858d9ad0d83827b811d890b3b34adc8",
+    "assets/Drawer-BPKq8xk2.js": "353a78a11fbbda19988ac865ae46766bbd97ac6c074bb5bcd89bffbdd43ce502",
+    "assets/env-CH-aV7yG.js": "c89f104a8e792577215167c1af7fdf0e140c33f12bd5cf356916f12fa2fbf88c",
+    "assets/external-link-zEwONzL-.js": "a949ad5a7607fa7f92ff14543900efc83955ec8758c55bdc680498cb43b89785",
+    "assets/file-text-cszlj_HJ.js": "78626f3b4c48c4c770ab61fda180fa4065e5e161e9b1ee3a6dacca4bff0dbf61",
+    "assets/FileSaver.min-D0Ah3xx2.js": "8e0f618ea641246ff4db28b0949a99273cc5163458ff4438f6bb9f916741ac2c",
+    "assets/folder-plus-BJvLUTHz.js": "60cc1a091bdf26a89df0ab529d1bb583f9fafed1ef0cb181932c289e3b6a01e6",
+    "assets/highlighted-body-OFNGDK62-hZeS0MuO.js": "642ae4133ae377fae9b903b2f79155c99a8c73b0c4e83f21603665b850970ee7",
+    "assets/house-mgizgz07.js": "4da7dec21baed2a66eae0ebef54a7ba45b460a5190e08ed2367ca7eeb5fdd13e",
+    "assets/image-BDmZvzv-.js": "b32b180a74315a32338f82073ddeed321dc7baaf331d51ac05dde5e311935945",
+    "assets/image-plus-CrdJ6U87.js": "64acfbd722f496c2e1d90fb34fd8e8cd8f1b615bd4cd0f3c9015c508495eff7e",
+    "assets/image-utils-BsYI64Fc.js": "1f0f979354e0e7c5a9e1fb2fe042eab3926e71cb9e1f99d8f5450cbc538eb311",
+    "assets/index-59OrEDT3.js": "a1751ffb017621d96f826dcffb438448a88eccaca1183d534c3d1af31525b6a1",
+    "assets/index-9FApdZty.js": "bc3a61187b210caee8c5b457c9149b5d5986bd20f56b42090ea3904f3c22b882",
+    "assets/index-B0JWlnBK.js": "95bf0a0a0495d6a412f9c2fd678324054cffb3d3a6aa12fcb4bfd9d7377530d2",
+    "assets/index-B2GzeV-b.js": "ea19057236de8c10cb4147cf7ec91e9443597f1a6d2708474f69c5fb7a4956fc",
+    "assets/index-Bj0lqDKL.js": "cb42458d6c45aca651b878456c98c79499f01333cadece61fe2a85a500bf7a0f",
+    "assets/index-BpYHeSJk.js": "dd18b3fb52880ae334b498423a53e1f0b6ffb069f323392ac4ab038190f9a250",
+    "assets/index-BqO5RP04.js": "cc7a6842d8de368f011b1f96f0e8af8774f9cadb205cf5dc0ea2864321e148db",
+    "assets/index-BVgO08uR.js": "00824f090fa5631294131402976a8cb43b6fc6c80f58f850fd7ad7b8a987b8c5",
+    "assets/index-BvMgpDYR.js": "b4c5faf1fed1205e56b3b1bac0f00e676aa38d938c4dcc4d3bb22c8120c86820",
+    "assets/index-C5nz50hR.js": "38226ff353e2261a027b2c74d5744b2a3d886a2424387dbc0c0acfa2c6722a13",
+    "assets/index-C7QNa1cR.js": "15340c48b05be41b70372d6d67e1e87c0b8288dbe08dbd060afdd695ba3567d1",
+    "assets/index-C8oeVQTA.js": "1b104276af0769ad0a19105e2d6eb9649310a75accb98a35ee5e4490ffbd3807",
+    "assets/index-CjjHgh15.js": "dc8f8655afb2ea9f555a3ed4c6a7f8adc872eb783047b993db9d2b909e4d53bf",
+    "assets/index-CxWQFV3v.js": "3676212eeb21afef171d03d2800d306b21d40244488805f137a51d880bfa64b4",
+    "assets/index-DBQzHJ9s.js": "6c232a9b2e3251e1b9543647596fd2417af6b48ff2253f549376d9695007b273",
+    "assets/index-DhKMo-oQ.js": "aafb7f7104f51a033b20a67a9eaaf71cdf8ce277d9bace62f0c2d9119587a7b3",
+    "assets/index-djzhU8fW.css": "cd8d58ef15757bb2025ddd25335da1d3e34449e0defbfb8cf2f646e2b0b0274c",
+    "assets/index-DPtW7b7v.js": "b7fdab3d67e0533b40cb84110600e7948aa3f1f70e5341760563b86bf6e81090",
+    "assets/index-DRxrLzOi.js": "dded43a02dbf8880f9ff24916dfa111cf115ef4f750872521de8a679bfa91730",
+    "assets/index-Dwir6XWT.js": "d109d536a7ca9eb28347ab9ce4b7e0bb511803750a235b10e611c2831f3eb09e",
+    "assets/index-EmEhfpC4.js": "a684c40add135860730ebb851654787ae5b36942dc6fc55ae5663aeb4a627bae",
+    "assets/index-IHndWqHE.js": "df25d32b88f241c87b3503bd9cd738bb165b0b008ba33e95ad5c94815263f178",
+    "assets/index-KoS36Lx5.js": "25f4ffab530957917c06d93c6152552943cfc2b35aa296a6172d8eff6d2e92a9",
+    "assets/KeyCode-C3ZfcqzQ.js": "3e07de442a67b8aebd99fbf2172603cd885bd014ad710c864563178ec3e5029b",
+    "assets/LeftOutlined-Bg4mJyOU.js": "db88b1253c82abe128f875527edccedd1b22e720f51882d8e2a8ccf1aa1876d3",
+    "assets/link-2-CiXZy4fZ.js": "134294a774977994bb480e1e903885eb2ad86665a5e644c947abc51e0fc4402e",
+    "assets/localforage-storage-CeJDDeFH.js": "9e956a2406b85f48b7d912a217d4d0e74998799bcb9135cbcd94727306577152",
+    "assets/mermaid-GHXKKRXX-lx2H-f0D.js": "3edc8fb43b2d1e21eb5254d6d56e9e6d1c1ffb0771049f4745f790af298d31e3",
+    "assets/model-plugin-CvT00DP9.js": "cab81e3cf34041b257b93719fd79e30e1e96a46a3a717efb313efe1655fddc9a",
+    "assets/models-DBKnBA-F.js": "a9b891405ade1f474c13d56b48e47a6ed37d2a59f47c9fc702490c604dbb1cb5",
+    "assets/music-2-D8AsTGLK.js": "c0095d1072af8afeaf75e0743f771a3fb5c1caba0b6628dedd3d50d2552874ff",
+    "assets/navigation-tools-D2tuWXBS.js": "26c15e8d1552530d44ea0aae9016409e2f6d8c6479dab072d0164eea3b038f8c",
+    "assets/Overflow-B69inLzg.js": "aadabeb436862850696727a5d4ca78f6c7a8a2114883fc9bb5613dbf3a785f7b",
+    "assets/pencil-Co9eXA2w.js": "ad2ab2dee2fdf674b158d463ec937c95c04f572dc5bfe9d589df013e189516f5",
+    "assets/plus-DhKnlpYw.js": "d6f8c60b0c261047164d733bb62f4b1ebbb937580bae0f96350efa52a99a9762",
+    "assets/project-DaQPht4y.js": "3a4f3e8e54802e97bfbd2e347e0581e447b10d592af2dfcfbb6898ab168cd0d9",
+    "assets/prompt-detail-dialog-DUnW42s1.js": "3cd9e42444e1de9ea9c8f4d0f3c58f5010834d53f75583f2d4a478d53bc4ccac",
+    "assets/refresh-cw-CIpLBoqE.js": "b8e06f36f2e81a5ac7dce5a83c8e89223052a6c96abfdf4dfebcdef043895e31",
+    "assets/schema-validator-BDdqQcQm.js": "a390ac8e517aa3f6ba442a83c305c3abe1854048143996609110edb7aa66df91",
+    "assets/schema-worker-BELMOVc3.js": "7a62cfd491975e88ffc049fea3ee69e21930393e9bd24f12220e2c63d27c58cb",
+    "assets/search-XM3m5fTh.js": "4adba8f23a89338d6bb823f8d5e3804df478d44eb2148658ab3bea137f8a5f00",
+    "assets/settings-2-CQzBC769.js": "8fa5efcd4dd19e5ef61410b01d78ccca67078e3e809dd1aa3cf4bfb53e113d3c",
+    "assets/square-C1dxofsV.js": "5b3399b308521f2acc090e022e2439c290690470fe7ed9712326b7e49667a757",
+    "assets/square-check-big-H89YZzsm.js": "f262eff2266d1725bb7f1820c89a3c08a31ea38a227e9b420f1048c61a26faa0",
+    "assets/tasks-BT6FxVGD.js": "2c2478c7e478cf8153eab35ba07eecef7446ef50d672080d97b16fd6fb1923d3",
+    "assets/trash-2-DJ9T3Jh5.js": "285ef862729211dabf47ffce1271999ea2b10aa52b553f5c6c713588eec23fcc",
+    "assets/use-asset-store-BUa6HuD4.js": "56b103ab73f5eb4ed63fcb1970200aca28fa3ccb4d4819d2b9c80b88015fc489",
+    "assets/use-canvas-store-BZNWdfNK.js": "6cb482fe61cea71f144a08dad30b7520638b0fbef940eb400a497276d49afc1b",
+    "assets/use-copy-text-B3E1TiGl.js": "da8e015593edb39156a7f5f1ff492b7215e09bf3470ac78fb6ee26944f521a4d",
+    "assets/use-prompt-list-CYhX9pVn.js": "83378d1ee4788347ea99fbe671b81d049e02fe75077a391aae34c9f9f05454d5",
+    "assets/use-workbench-agent-store-BQrFDASR.js": "24571e2e6d7e3aaa3b599067f1e8f7cfacce539ddc0b4d8844c9c77887e561fd",
+    "assets/useControlledState-7Vre38r5.js": "2835a7faa680c5ef96a2d086c21f4833b8e2b52babfab4ea0f5b8fe589611460",
+    "assets/utils-Cvdj848U.js": "3f9ebdb6786c76b6920de563af09883e9a388aabf03b2fa8eee44f3f2b5695fa",
+    "assets/video-C5U84_pl.js": "12d23eb6f4a68eebf36e7e6f81a6a4575d6a7ac779bb7d58954ab669aec49904",
+    "assets/video-CGzOTvNE.js": "9f88c3b580509ff7aa2c1827fb56ee2e441f1be5526db1dc10b784818c3d776f",
+    "assets/video-settings-panel-D_h9EOhr.js": "e5b75109698c2330f003964a7f4cf199f82e4fa89765aace32134e47df01daaa",
+    "assets/zip-vQtl9jF_.js": "ad1801c25d96b5c5b3efd9778f827b7e79e1fbbaf57d8fe58e64958aaea078be",
+    "config.js": "33c15a252c60b6103ad20c773e1ec662c1aaa636277aa24698274a7d2a743038",
+    "fonts/Anton-OFL.txt": "ee67e6ee22790b7929f1a3769ca2801d565c64b5a9096942c1adf5596de9c9e4",
+    "fonts/Anton-Reference.woff": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a",
+    "fonts/Manrope-OFL.txt": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+    "fonts/Manrope-Reference.woff": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd",
+    "icons/claude.svg": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364",
+    "icons/deepseek.svg": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439",
+    "icons/gemini.svg": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602",
+    "icons/glm.svg": "8174e65ff71647d5c705c920c953a82bd723d9e3e42887bdd4ffc9dfe51207a0",
+    "icons/grok.svg": "9175fc90c22655160231976c849f25a03b888d7cc0e04c5f1b987b659bb07c95",
+    "icons/linuxdo.svg": "dc7fe55ca4dc1062611111df4208da9d44655c36f85ad52727facd4bba2b4d60",
+    "icons/openai.svg": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186",
+    "index.html": "10367a8adaa228a5dc4a71dc083d721193ea7a80ff154cdc0751bac766e09a7f",
+    "logo.svg": "76e174b82af0dfac35c55ba086d4e9781aa1d2ade984b50ddb6489b408efd831",
+    "plugins/index.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "static_artifact_unchanged": true
+}

@@ -1,0 +1,148 @@
+{
+  "started_at": "2026-10-29T21:30:26.236Z",
+  "scope": "actual public HTTP and generated image imported through normal file input, persistent browser profile across actual static upgrade and browser restart; no additional generation or physical phone",
+  "source_job": "job_99fffafd6e8a4af49ea3088784c82cbe",
+  "original_sha256": "f554fa6b2d39dd9384bddf9689ce1c352a3b30d6f8619cb0b19c014129ab181c",
+  "checks": [
+    {
+      "name": "existing public UI imports independently verified generated original into a real local canvas",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual 1312-to-1313 upgrade preserves canvas and original without resetting storage",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "restarting the owned persistent browser preserves canvas, connection and image",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "390px panel and navigation remain usable after real upgrade and browser restart",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "landscape creation controls are reachable with no document overflow",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "fresh profile reads original server history without resubmitting generation",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "before-upgrade",
+      "file": "docs/assets/studio/upgrade-2026-10-29T21-30-26-230Z/before-upgrade.png",
+      "sha256": "c1b2174cccaf529811f0475bbe76a3f97e316057357cbecb4e739e723f41f16f"
+    },
+    {
+      "name": "desktop-after-upgrade",
+      "file": "docs/assets/studio/upgrade-2026-10-29T21-30-26-230Z/desktop-after-upgrade.png",
+      "sha256": "3e6fca3573080cab652fc048e046aa1c32fe0377552eed8f9c2426ac05758b5a"
+    },
+    {
+      "name": "mobile-panel-open",
+      "file": "docs/assets/studio/upgrade-2026-10-29T21-30-26-230Z/mobile-panel-open.png",
+      "sha256": "a94c8c68b2b02c44bfb75beab168cb694570c4b654e36163beaf0bab591a402c"
+    },
+    {
+      "name": "mobile-panel-closed",
+      "file": "docs/assets/studio/upgrade-2026-10-29T21-30-26-230Z/mobile-panel-closed.png",
+      "sha256": "fffe8b6f0c38411ae4cfdc273a880ca255bae84c50c838a7bf6f8a73528f55c2"
+    },
+    {
+      "name": "landscape-canvas",
+      "file": "docs/assets/studio/upgrade-2026-10-29T21-30-26-230Z/landscape-canvas.png",
+      "sha256": "d5868ac19a3cdb609227102c2d2af4df2e591db2094038213441c19ab5ea8d5a"
+    },
+    {
+      "name": "models",
+      "file": "docs/assets/studio/upgrade-2026-10-29T21-30-26-230Z/models.png",
+      "sha256": "7dee5c86cc6f03c1d51749e0145ca6658d756bea52f4ef3040d06562738a2882"
+    },
+    {
+      "name": "server-history",
+      "file": "docs/assets/studio/upgrade-2026-10-29T21-30-26-230Z/server-history.png",
+      "sha256": "8edd779cc433a63f394ca969e07fa8984226954ee8f67b1f5da171ab58aa0e91"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "page_errors": [],
+  "private_recordings": [
+    ".local/studio-upgrade/2026-10-29T21-30-26-230Z/page@5025ceecd0aea3bc87beaffe5409bb5c.webm",
+    ".local/studio-upgrade/2026-10-29T21-30-26-230Z/page@cf8b5feb3541449be4f8a31439f35689.webm"
+  ],
+  "cleanup": {
+    "own_page_closed": true,
+    "own_context_and_browser_closed": true
+  },
+  "passed": true,
+  "finished_at": "2026-10-29T21:31:21.385Z"
+}

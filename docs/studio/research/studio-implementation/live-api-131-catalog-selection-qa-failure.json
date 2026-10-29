@@ -1,0 +1,237 @@
+{
+  "scope": "actual public HTTP identity, release, CORS and reference validation; not full fault matrix",
+  "checks": [
+    {
+      "name": "business/Admin identity realms remain independent",
+      "passed": true,
+      "detail": {
+        "missing_or_invalid_business_key": 401,
+        "admin_cookie_only_for_business": 401,
+        "business_key_for_admin": 401
+      }
+    },
+    {
+      "name": "second Key cannot read first Key task or history",
+      "passed": true,
+      "detail": {
+        "key_a": "key_302583db16c34e498e6acb18ce7a56d6",
+        "key_b": "key_1fd3c8ebf1db41318649de370f628a89",
+        "cross_task": 404
+      }
+    },
+    {
+      "name": "business/Admin identity realms remain independent",
+      "passed": true,
+      "detail": {
+        "missing_or_invalid_business_key": 401,
+        "admin_cookie_only_for_business": 401,
+        "business_key_for_admin": 401
+      }
+    },
+    {
+      "name": "second Key cannot read first Key task or history",
+      "passed": true,
+      "detail": {
+        "key_a": "key_302583db16c34e498e6acb18ce7a56d6",
+        "key_b": "key_1fd3c8ebf1db41318649de370f628a89",
+        "cross_task": 404
+      }
+    },
+    {
+      "name": "arbitrary Origin and Studio release header work through public edge",
+      "passed": true,
+      "detail": {
+        "allow_origin": "http://studio-origin-test.invalid",
+        "studio_contract": "1",
+        "preflight": 200,
+        "origin_reflection_permits_arbitrary_origins": true
+      }
+    },
+    {
+      "name": "release mismatch",
+      "passed": true,
+      "detail": {
+        "status": 409,
+        "code": "model_release_changed"
+      }
+    },
+    {
+      "name": "undeclared size",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "unsupported_specification"
+      }
+    },
+    {
+      "name": "missing edit source",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "one image cannot substitute for multi-reference workflow",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "business/Admin identity realms remain independent",
+      "passed": true,
+      "detail": {
+        "missing_or_invalid_business_key": 401,
+        "admin_cookie_only_for_business": 401,
+        "business_key_for_admin": 401
+      }
+    },
+    {
+      "name": "second Key cannot read first Key task or history",
+      "passed": true,
+      "detail": {
+        "key_a": "key_302583db16c34e498e6acb18ce7a56d6",
+        "key_b": "key_1fd3c8ebf1db41318649de370f628a89",
+        "cross_task": 404
+      }
+    },
+    {
+      "name": "arbitrary Origin and Studio release header work through public edge",
+      "passed": true,
+      "detail": {
+        "allow_origin": "http://studio-origin-test.invalid",
+        "studio_contract": "1",
+        "preflight": 200,
+        "origin_reflection_permits_arbitrary_origins": true
+      }
+    },
+    {
+      "name": "release mismatch",
+      "passed": true,
+      "detail": {
+        "status": 409,
+        "code": "model_release_changed"
+      }
+    },
+    {
+      "name": "undeclared size",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "unsupported_specification"
+      }
+    },
+    {
+      "name": "missing edit source",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "one image cannot substitute for multi-reference workflow",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "negative requests create no additional task",
+      "passed": true,
+      "detail": {
+        "task_ids_unchanged": true,
+        "read_only_key_generation": 403
+      }
+    },
+    {
+      "name": "second Key cannot read or download first Key original",
+      "passed": true,
+      "detail": {
+        "cross_metadata": 404,
+        "cross_download": 404
+      }
+    },
+    {
+      "name": "second Key cannot read or download first Key original",
+      "passed": true,
+      "detail": {
+        "cross_metadata": 404,
+        "cross_download": 404,
+        "cross_head": 404,
+        "cross_range": 404
+      }
+    },
+    {
+      "name": "authorized HEAD and byte Range match the actual original",
+      "passed": true,
+      "detail": {
+        "head": 200,
+        "range": 206,
+        "bytes": 965536
+      }
+    },
+    {
+      "name": "references-image: invalid role",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "references-image: undeclared weight",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "reference_weight_not_supported"
+      }
+    },
+    {
+      "name": "first-frame-video: invalid role",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "first-frame-video: undeclared weight",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "reference_weight_not_supported"
+      }
+    },
+    {
+      "name": "references-video: invalid role",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "invalid_request"
+      }
+    },
+    {
+      "name": "references-video: undeclared weight",
+      "passed": true,
+      "detail": {
+        "status": 422,
+        "code": "reference_weight_not_supported"
+      }
+    },
+    {
+      "name": "reference role/weight guards create no GPU task",
+      "passed": true,
+      "detail": {
+        "task_ids_unchanged": true,
+        "rejections": 6,
+        "multi_reference_role_is_semantic_label_order_is_array_position": true
+      }
+    }
+  ],
+  "passed": false,
+  "at": "2026-10-29T22:07:50.178156+00:00"
+}

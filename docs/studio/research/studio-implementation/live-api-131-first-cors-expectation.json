@@ -1,0 +1,25 @@
+{
+  "scope": "actual public HTTP identity, release, CORS and reference validation; not full fault matrix",
+  "checks": [
+    {
+      "name": "business/Admin identity realms remain independent",
+      "passed": true,
+      "detail": {
+        "missing_or_invalid_business_key": 401,
+        "admin_cookie_only_for_business": 401,
+        "business_key_for_admin": 401
+      }
+    },
+    {
+      "name": "second Key cannot read first Key task or history",
+      "passed": true,
+      "detail": {
+        "key_a": "key_302583db16c34e498e6acb18ce7a56d6",
+        "key_b": "key_1fd3c8ebf1db41318649de370f628a89",
+        "cross_task": 404
+      }
+    }
+  ],
+  "passed": false,
+  "at": "2026-10-29T20:58:27.390627+00:00"
+}

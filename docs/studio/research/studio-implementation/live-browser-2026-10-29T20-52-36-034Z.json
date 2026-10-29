@@ -1,0 +1,4928 @@
+{
+  "started_at": "2026-10-29T20:52:36.035Z",
+  "scope": "deployed native public HTTP, actual browser and actual GPU image; mobile viewport is emulation",
+  "checks": [
+    {
+      "name": "real public HTTP connects to guarded production catalog",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all 11 actual model descriptors, including GLB, validate in the isolated Worker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual POST follows committed immutable browser intent",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual GPU original validates and attaches as 1024x1024 native canvas image",
+      "passed": true,
+      "detail": {
+        "job_id": "job_99fffafd6e8a4af49ea3088784c82cbe",
+        "dimensions": {
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "name": "deployed /studio/canvas deep refresh restores verified local original",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "deployed mobile viewport has no horizontal document overflow",
+      "passed": true,
+      "detail": {
+        "width": 390,
+        "documentWidth": 390
+      }
+    },
+    {
+      "name": "actual business traffic contains Bearer without Admin cookies",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_99fffafd6e8a4af49ea3088784c82cbe",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_19aec8535b8444e38f98ba008460c90c/download",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "connection",
+      "file": "docs/assets/studio/live-2026-10-29T20-52-36-034Z/connection.png",
+      "sha256": "6b6bac9b7c1b30191eba82f5b1bd868708f5eb2bc524ba2050816165f195a86a"
+    },
+    {
+      "name": "models",
+      "file": "docs/assets/studio/live-2026-10-29T20-52-36-034Z/models.png",
+      "sha256": "f1663f33f91bec2a037b436fad8de5e3bee5348efade47df61dc0f5d21a9b497"
+    },
+    {
+      "name": "composer",
+      "file": "docs/assets/studio/live-2026-10-29T20-52-36-034Z/composer.png",
+      "sha256": "20494ac75defbd646b6dbce7faa3fd03d6764642835476da7650bc506c8f3eb0"
+    },
+    {
+      "name": "completed-task",
+      "file": "docs/assets/studio/live-2026-10-29T20-52-36-034Z/completed-task.png",
+      "sha256": "b1bcb814cd477a93745f373a8ee375afae72b4a0fb3c4836923de88290700486"
+    },
+    {
+      "name": "result",
+      "file": "docs/assets/studio/live-2026-10-29T20-52-36-034Z/result.png",
+      "sha256": "a0895debbc193bf9b6527b602513fcd6f0c0722aa7d68240feb097ac2439d96a"
+    },
+    {
+      "name": "result-after-refresh",
+      "file": "docs/assets/studio/live-2026-10-29T20-52-36-034Z/result-after-refresh.png",
+      "sha256": "d429df47cee8984e9d52c0833d0ff09704e090a30ebf2d38b2e4dd68b7732934"
+    },
+    {
+      "name": "mobile-result",
+      "file": "docs/assets/studio/live-2026-10-29T20-52-36-034Z/mobile-result.png",
+      "sha256": "44738bb23943d1e9cf7e76fe5a9328cb22177045900b5da27fc0702d78dcf506"
+    }
+  ],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "page_errors": [],
+  "passed": true,
+  "private_original_recording": ".local/studio-live-browser/2026-10-29T20-52-36-034Z/page@163bf7b44dfd11712f862406e0796968.webm",
+  "finished_at": "2026-10-29T21:21:22.773Z"
+}

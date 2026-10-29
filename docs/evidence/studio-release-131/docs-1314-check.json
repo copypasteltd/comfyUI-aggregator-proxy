@@ -1,0 +1,79 @@
+{
+  "baseline": "v0.4",
+  "passed": true,
+  "checks": {
+    "markdown": {
+      "documents": 162,
+      "instruction_files": 1,
+      "fenced_blocks": 91,
+      "json_examples": 29,
+      "yaml_examples": 1,
+      "local_links_checked": 3036
+    },
+    "contracts": {
+      "json_files": 77,
+      "schemas": 67,
+      "fixtures": 1045,
+      "positive_fixtures": 250,
+      "negative_fixtures": 795,
+      "capabilities_covered": [
+        "image_to_3d",
+        "image_to_image",
+        "references_to_image",
+        "references_to_video",
+        "text_to_audio",
+        "text_to_image",
+        "text_to_video"
+      ]
+    },
+    "state_machine": {
+      "states": 16,
+      "terminal_states": 4,
+      "transitions": 64,
+      "guards": 24
+    },
+    "endpoints": {
+      "total": 195,
+      "by_identity": {
+        "service": 27,
+        "admin_login": 1,
+        "admin": 125,
+        "worker": 12,
+        "gateway": 28,
+        "monitoring": 2
+      },
+      "admin_permissions": 25
+    },
+    "traceability": {
+      "rules": 32,
+      "quality_scenarios": 18,
+      "work_packages": 15,
+      "requirements": 74,
+      "work_package_statuses": {
+        "in_progress": 15
+      },
+      "admin_acceptance_mapped": 16,
+      "key_acceptance_mapped": 12
+    },
+    "development_evidence": {
+      "passed": true,
+      "requirements": 74,
+      "acceptance_gates": 98,
+      "local_statuses": {
+        "framework": 7,
+        "implemented": 67
+      },
+      "named_test_references": 184,
+      "baseline_python_cases": 3593,
+      "reports": 39,
+      "current_source_files": 194,
+      "full_acceptance": "pending"
+    },
+    "topic_presence": {
+      "checks": 14,
+      "scope": "Text presence only, not proof of correctness"
+    }
+  },
+  "errors": [],
+  "report_written": false
+}

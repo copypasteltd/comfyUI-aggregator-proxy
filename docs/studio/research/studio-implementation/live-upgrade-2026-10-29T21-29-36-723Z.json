@@ -1,0 +1,45 @@
+{
+  "started_at": "2026-10-29T21:29:36.730Z",
+  "scope": "actual public HTTP and generated image imported through normal file input, persistent browser profile across actual static upgrade and browser restart; no additional generation or physical phone",
+  "source_job": "job_99fffafd6e8a4af49ea3088784c82cbe",
+  "original_sha256": "f554fa6b2d39dd9384bddf9689ce1c352a3b30d6f8619cb0b19c014129ab181c",
+  "checks": [],
+  "screenshots": [
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/upgrade-2026-10-29T21-29-36-723Z/failure.png",
+      "sha256": "486bb3e13237012cd3adb3042ecd5bb8c6c3080f78b38c57eea34764122e2b26"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "page_errors": [],
+  "private_recordings": [
+    ".local/studio-upgrade/2026-10-29T21-29-36-723Z/page@3f3030501b424076773cffe621416e39.webm"
+  ],
+  "cleanup": {
+    "own_page_closed": true,
+    "own_context_and_browser_closed": true
+  },
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   height: 768,\n+   width: 768\n-   height: 1024,\n-   width: 1024\n  }\n\n    at verifyImage (file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_live_upgrade.mjs:61:12)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_live_upgrade.mjs:75:5",
+  "finished_at": "2026-10-29T21:29:45.752Z"
+}

@@ -1,0 +1,519 @@
+{
+  "scope": "Sanitized actual request/response receipts; authentication omitted and idempotency tokens hashed. IDs refer to temporary, isolated QA resources.",
+  "calls": [
+    {
+      "mode": "image",
+      "submission_source": "actual deployed browser UI",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "authentication": "Bearer <business-key: omitted>",
+      "idempotency_key_sha256": "41b2bd8e3a31d3a22d6a75ac43b95886cdb5d946ccd54d4910f56c1dccdd9146",
+      "expected_release_digest": "37af9154a015bfe0c4e22bafb11f8c30cb6a7d89ec36d5f7d55f0e8b0fba7c01",
+      "exact_body_sha256": "00ca784ce55553fc4a6949355c1b5220aaf01888030c333327fbdaeddbb56989",
+      "body": {
+        "model": "comfy-3080-image-lustify-krea2",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "A single friendly small ivory ceramic toy robot with orange circular ears, full body centered, isolated on a plain pale gray background, studio product photograph, simple geometric shape, clean soft lighting, no text, no logo"
+        },
+        "parameters": {
+          "n": 1,
+          "size": "1024x1024",
+          "quality": "standard"
+        },
+        "client_request_id": "pLpO0Ukf22_xjINODiEqy"
+      },
+      "accepted_status": 202,
+      "terminal_job": {
+        "id": "job_99fffafd6e8a4af49ea3088784c82cbe",
+        "object": "generation.job",
+        "model": "comfy-3080-image-lustify-krea2",
+        "task_type": "text_to_image",
+        "status": "succeeded",
+        "created_at": 1793307164,
+        "updated_revision": 9,
+        "error": null,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "completed_at": 1793308870,
+        "artifacts": [
+          {
+            "id": "content_19aec8535b8444e38f98ba008460c90c",
+            "position": 0
+          }
+        ]
+      },
+      "content_metadata": {
+        "id": "content_19aec8535b8444e38f98ba008460c90c",
+        "bytes": 965536,
+        "media_type": "image/png",
+        "sha256": "f554fa6b2d39dd9384bddf9689ce1c352a3b30d6f8619cb0b19c014129ab181c",
+        "expires_at": 1793337670,
+        "metadata": {
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "mode": "text-video",
+      "submission_source": "native QA client using actual published usage/presets",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "authentication": "Bearer <business-key: omitted>",
+      "idempotency_key_sha256": "901e31f377e2fafb025a3a86d624d708a0878960b02e3835b72e94af4b343c6f",
+      "expected_release_digest": "ebe5081d98eb68930cfcaab6dd04d3118e695d0e3b019c128252b613f66bb6e4",
+      "exact_body_sha256": "ece27fed01a39eb5ba6f318c3518a3fe5923e70bc10bef6e3560a861a0fb0dfe",
+      "body": {
+        "model": "comfy-5070-video-h3",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "A friendly ivory ceramic toy robot with orange ears on a plain studio background, gentle natural motion, fixed camera, soft light, no text, no logo."
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "512x288",
+          "seconds": 1.625,
+          "n": 1,
+          "seed": 7313101
+        }
+      },
+      "accepted_status": 202,
+      "terminal_job": {
+        "id": "job_5e3dba0b756444acaea1e873ce3ae35d",
+        "object": "generation.job",
+        "model": "comfy-5070-video-h3",
+        "task_type": "text_to_video",
+        "status": "succeeded",
+        "created_at": 1793308497,
+        "updated_revision": 8,
+        "error": null,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "completed_at": 1793308766,
+        "seconds": "1.625",
+        "size": "512x288",
+        "artifacts": [
+          {
+            "id": "content_4e790dc582274aa4928fc4f201e62b55",
+            "position": 0
+          }
+        ]
+      },
+      "content_metadata": {
+        "id": "content_4e790dc582274aa4928fc4f201e62b55",
+        "bytes": 59009,
+        "media_type": "video/mp4",
+        "sha256": "48125306dc14b0c0d02be43861753c2dc2a73f39dc42d00fd8a071213615b02b",
+        "expires_at": 1793337566,
+        "metadata": {
+          "width": 512,
+          "height": 288,
+          "duration_milliseconds": 1625
+        }
+      }
+    },
+    {
+      "mode": "first-frame-video",
+      "submission_source": "native QA client using actual published usage/presets",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "authentication": "Bearer <business-key: omitted>",
+      "idempotency_key_sha256": "22b954fd4088559bb8ba3d79a253f233c0f86ef48ee39b1a524d2b1d229b3fb8",
+      "expected_release_digest": "88b5e214e66cc1de2ad0b252371c1cfbdd12f7a719b1fd19e97f9397a47edb43",
+      "exact_body_sha256": "28f15204852dc7b1fe9d71bdf21426823421521ff02b496d3c4cfd468fb8f193",
+      "body": {
+        "model": "comfy-5070-video-h3-i2v",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "A friendly ivory ceramic toy robot with orange ears on a plain studio background, gentle natural motion, fixed camera, soft light, no text, no logo.",
+          "references": [
+            {
+              "asset_id": "asset_ee3e4749c0ab49e5824b4cd8cd46bb44",
+              "role": "first_frame"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "512x288",
+          "seconds": 1.625,
+          "n": 1,
+          "seed": 7313101
+        }
+      },
+      "accepted_status": 202,
+      "terminal_job": {
+        "id": "job_55ece151ebe547c696d01a66a4738225",
+        "object": "generation.job",
+        "model": "comfy-5070-video-h3-i2v",
+        "task_type": "references_to_video",
+        "status": "succeeded",
+        "created_at": 1793308883,
+        "updated_revision": 8,
+        "error": null,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "completed_at": 1793308943,
+        "seconds": "1.625",
+        "size": "512x288",
+        "artifacts": [
+          {
+            "id": "content_2109ce83f7534369ac098b28be3d3188",
+            "position": 0
+          }
+        ]
+      },
+      "content_metadata": {
+        "id": "content_2109ce83f7534369ac098b28be3d3188",
+        "bytes": 60266,
+        "media_type": "video/mp4",
+        "sha256": "1afa7c2ddd1ca033da5f8122ec0f7ab76bed94459087db2d58365ca1d0e3fbc1",
+        "expires_at": 1793337743,
+        "metadata": {
+          "width": 512,
+          "height": 288,
+          "duration_milliseconds": 1625
+        }
+      }
+    },
+    {
+      "mode": "edit",
+      "submission_source": "native QA client using actual published usage/presets",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "authentication": "Bearer <business-key: omitted>",
+      "idempotency_key_sha256": "89637fa6a9db689a25291f545f91d53f36c4634e14083648016eaef3f96288c2",
+      "expected_release_digest": "e77f480b18480a7deddd0bc3f0e04ddd48de21fbbed67220271854b1aad12149",
+      "exact_body_sha256": "fcebf6b1c23323cf858b692d1562a7531907d75440cc8cafd7933b4215655fd4",
+      "body": {
+        "model": "comfy-3080-image-edit-wai",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "The same friendly ivory ceramic toy robot with orange circular ears, wearing a small blue scarf, full body, clean studio photograph, plain pale background, no text.",
+          "source_image": {
+            "asset_id": "asset_ee3e4749c0ab49e5824b4cd8cd46bb44"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "720x1080",
+          "n": 1,
+          "seed": 7313101
+        }
+      },
+      "accepted_status": 202,
+      "terminal_job": {
+        "id": "job_171c724ae69644e5af8382711664da07",
+        "object": "generation.job",
+        "model": "comfy-3080-image-edit-wai",
+        "task_type": "image_to_image",
+        "status": "succeeded",
+        "created_at": 1793308885,
+        "updated_revision": 8,
+        "error": null,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "completed_at": 1793309425,
+        "artifacts": [
+          {
+            "id": "content_a470f6a88ba7400fa1ba42af209d2a82",
+            "position": 0
+          }
+        ]
+      },
+      "content_metadata": {
+        "id": "content_a470f6a88ba7400fa1ba42af209d2a82",
+        "bytes": 722985,
+        "media_type": "image/png",
+        "sha256": "f3e0ebb8828894d7c2df5c6b50401ba268a4c79bb30edd5b84281075439c6a0f",
+        "expires_at": 1793338225,
+        "metadata": {
+          "width": 720,
+          "height": 1080
+        }
+      }
+    },
+    {
+      "mode": "references-video",
+      "submission_source": "native QA client using actual published usage/presets",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "authentication": "Bearer <business-key: omitted>",
+      "idempotency_key_sha256": "0764a4a63ce6959f8d24ce3a3d55add00b9186bee876d0d4b573d3b5cb5d55e8",
+      "expected_release_digest": "37d2e3147f6f1f26a7555a4a1feb1ba2cb379036b21644f5ee3725eb52479322",
+      "exact_body_sha256": "6d03e1c950d8ebcd239002a533bd69a7e5cde9c0626b7b46629a0796d77d6b65",
+      "body": {
+        "model": "comfy-5070-video-h3-refs",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "A friendly ivory ceramic toy robot with orange ears on a plain studio background, gentle natural motion, fixed camera, soft light, no text, no logo.",
+          "references": [
+            {
+              "asset_id": "asset_ee3e4749c0ab49e5824b4cd8cd46bb44",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_aa77626b3d11417fa183af0879dcd666",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "512x288",
+          "seconds": 1.625,
+          "n": 1,
+          "seed": 7313101
+        }
+      },
+      "accepted_status": 202,
+      "terminal_job": {
+        "id": "job_891ffc19bc194ee7856aac9888b2b810",
+        "object": "generation.job",
+        "model": "comfy-5070-video-h3-refs",
+        "task_type": "references_to_video",
+        "status": "succeeded",
+        "created_at": 1793309428,
+        "updated_revision": 8,
+        "error": null,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "completed_at": 1793309722,
+        "seconds": "1.625",
+        "size": "512x288",
+        "artifacts": [
+          {
+            "id": "content_31f76e64e1e34a10b37701dfb2cedb53",
+            "position": 0
+          }
+        ]
+      },
+      "content_metadata": {
+        "id": "content_31f76e64e1e34a10b37701dfb2cedb53",
+        "bytes": 66156,
+        "media_type": "video/mp4",
+        "sha256": "b8f61d1afd65cd2207b2db9a208194f9641db57e010d6bc61274fe3f048feaa0",
+        "expires_at": 1793338522,
+        "metadata": {
+          "width": 512,
+          "height": 288,
+          "duration_milliseconds": 1625
+        }
+      }
+    },
+    {
+      "mode": "references-image",
+      "submission_source": "native QA client using actual published usage/presets",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "authentication": "Bearer <business-key: omitted>",
+      "idempotency_key_sha256": "11b6d1ae858bafe50c2ff40aedd91b91b8607405e75949a0489ded64d3c3dfc6",
+      "expected_release_digest": "7a45238eeb7c56dd18b91fe7d9803c194a17fcbaa404fb440de60474585bc10e",
+      "exact_body_sha256": "a85da299bc8e5abc180962c625acd38ae994badf202c5b42113059313be99908",
+      "body": {
+        "model": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "A friendly ivory ceramic toy robot with orange ears on a plain studio background, gentle natural motion, fixed camera, soft light, no text, no logo.",
+          "references": [
+            {
+              "asset_id": "asset_ee3e4749c0ab49e5824b4cd8cd46bb44",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_aa77626b3d11417fa183af0879dcd666",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "720x1080",
+          "n": 1,
+          "seed": 7313101
+        }
+      },
+      "accepted_status": 202,
+      "terminal_job": {
+        "id": "job_a507ce4179984afea0dd6c110cfca918",
+        "object": "generation.job",
+        "model": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "status": "succeeded",
+        "created_at": 1793309430,
+        "updated_revision": 8,
+        "error": null,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "completed_at": 1793310026,
+        "artifacts": [
+          {
+            "id": "content_8a24b393ceee4a33948a3cd5e392a5dc",
+            "position": 0
+          }
+        ]
+      },
+      "content_metadata": {
+        "id": "content_8a24b393ceee4a33948a3cd5e392a5dc",
+        "bytes": 1001038,
+        "media_type": "image/png",
+        "sha256": "ebc2cf3d61499bd5e2811d91bd6e439bec9d75424a1530b29ca9c7376c20c1d5",
+        "expires_at": 1793338826,
+        "metadata": {
+          "width": 720,
+          "height": 1080
+        }
+      }
+    },
+    {
+      "mode": "model3d",
+      "submission_source": "native QA client using actual published usage/presets",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "authentication": "Bearer <business-key: omitted>",
+      "idempotency_key_sha256": "d35a39f86363d4a8c06c798bdf3d721285be5a594da2b359f3cf62f5f4036108",
+      "expected_release_digest": "37a107c919b4eb9c68989e4ddbd22693a24775f67a66527181f9064055da9773",
+      "exact_body_sha256": "12dec87b561a5dfec9342df17d2e35f6fae7ad48f287b67ae286b63831f35c41",
+      "body": {
+        "model": "comfy-3080-3d-trellis2",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_ee3e4749c0ab49e5824b4cd8cd46bb44"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 7313101
+        }
+      },
+      "accepted_status": 202,
+      "terminal_job": {
+        "id": "job_12bd7d884af84d6fa3cb6d4653dc8d34",
+        "object": "generation.job",
+        "model": "comfy-3080-3d-trellis2",
+        "task_type": "image_to_3d",
+        "status": "succeeded",
+        "created_at": 1793310031,
+        "updated_revision": 8,
+        "error": null,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "completed_at": 1793311013,
+        "artifacts": [
+          {
+            "id": "content_dcaaef1767034cd2815f0ac220469e89",
+            "position": 0
+          }
+        ]
+      },
+      "content_metadata": {
+        "id": "content_dcaaef1767034cd2815f0ac220469e89",
+        "bytes": 76942864,
+        "media_type": "model/gltf-binary",
+        "sha256": "bd9deb3277ad6b83f2d19d07df73510d8b9998b4ac88733dd8483a07163f5db2",
+        "expires_at": 1793339813,
+        "metadata": {
+          "format": "glb",
+          "mesh_count": 1,
+          "has_textures": false,
+          "vertex_count": 1597077,
+          "texture_count": 0,
+          "material_count": 1,
+          "triangle_count": 3217656
+        }
+      }
+    },
+    {
+      "mode": "audio",
+      "submission_source": "native QA client using actual published usage/presets",
+      "method": "POST",
+      "path": "/v1/jobs",
+      "authentication": "Bearer <business-key: omitted>",
+      "idempotency_key_sha256": "d8fc7b3cfda7c7efbd032118fb317ed559fa385bf1879fb49f3d3bdedc604219",
+      "expected_release_digest": "c6ef5a078de1fa207441ca4bed549ddfbe89a1bf0f7cb8dd446a140ad52183bc",
+      "exact_body_sha256": "13be1fa39cfce97b30eb7aedc8329e794e47b203efd98fde3f727e354d3a567c",
+      "body": {
+        "model": "comfy-3080-music-yue2",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "Instrumental gentle ambient chamber music, warm acoustic strings and soft piano melody, calm welcoming studio atmosphere, natural dynamics, no vocals."
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30.0,
+          "n": 1,
+          "seed": 7313101
+        }
+      },
+      "accepted_status": 202,
+      "terminal_job": {
+        "id": "job_813ab73471d4415fb1bb521e1f48879c",
+        "object": "generation.job",
+        "model": "comfy-3080-music-yue2",
+        "task_type": "text_to_audio",
+        "status": "succeeded",
+        "created_at": 1793311033,
+        "updated_revision": 8,
+        "error": null,
+        "retry": {
+          "count": 0,
+          "limit": 2,
+          "next_at": null,
+          "last_error": null
+        },
+        "completed_at": 1793311141,
+        "artifacts": [
+          {
+            "id": "content_cf454c9025c042e48e7f25aaa3c28eb7",
+            "position": 0
+          }
+        ]
+      },
+      "content_metadata": {
+        "id": "content_cf454c9025c042e48e7f25aaa3c28eb7",
+        "bytes": 2233080,
+        "media_type": "audio/flac",
+        "sha256": "caf2aa62e1903d7b5c4b068253f0b764536e5a19acd014b66b44d809e89d3a84",
+        "expires_at": 1793339941,
+        "metadata": {
+          "codec": "flac",
+          "channels": 2,
+          "container": "flac",
+          "sample_rate": 48000,
+          "duration_milliseconds": 29952
+        }
+      }
+    }
+  ]
+}

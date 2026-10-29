@@ -1,0 +1,186 @@
+{
+  "scope": "Actual authorised native host deployment and pointer rollback; no VM/Docker/WSL, no physical-phone or fleet acceptance",
+  "passed": true,
+  "backend_receipts": [
+    {
+      "passed": true,
+      "release_id": "linux-20261030.131.1",
+      "wheel_payload_files_verified": 248,
+      "source_revision": "d001c753bba7b2d8cef646714dcb3220787beccb",
+      "at": "2026-10-29T20:50:18.394812+00:00"
+    },
+    {
+      "passed": true,
+      "action": "promote",
+      "at": "2026-10-29T20:50:46.988683+00:00",
+      "backup": {
+        "manifest": "control-20261029T201612242461Z.json",
+        "sha256": "5d158feff950e5f20eedea2ca582b6c43f26a315e290d368a3ead5a7fa1b1c9a",
+        "bytes": 17102318
+      },
+      "steps": [
+        {
+          "old": "/opt/comfyui-aggregator/releases/linux-20261029.129.3",
+          "new": "/opt/comfyui-aggregator/releases/linux-20261030.131.1",
+          "before": {
+            "database_head": "03d128a00001",
+            "fsync": "on",
+            "synchronous_commit": "on",
+            "unfinished_jobs": 0,
+            "gpu_occupancies": 0,
+            "management_holds": 0,
+            "jobs": 33,
+            "content": 57
+          },
+          "after": {
+            "database_head": "03d128a00001",
+            "fsync": "on",
+            "synchronous_commit": "on",
+            "unfinished_jobs": 0,
+            "gpu_occupancies": 0,
+            "management_holds": 0,
+            "jobs": 33,
+            "content": 57
+          },
+          "http_worker_pid_unchanged": true
+        }
+      ],
+      "database_migration_executed": false,
+      "worker_restarted": false
+    },
+    {
+      "passed": true,
+      "action": "rehearse",
+      "at": "2026-10-29T20:51:14.894769+00:00",
+      "backup": {
+        "manifest": "control-20261029T201612242461Z.json",
+        "sha256": "5d158feff950e5f20eedea2ca582b6c43f26a315e290d368a3ead5a7fa1b1c9a",
+        "bytes": 17102318
+      },
+      "steps": [
+        {
+          "old": "/opt/comfyui-aggregator/releases/linux-20261030.131.1",
+          "new": "/opt/comfyui-aggregator/releases/linux-20261029.129.3",
+          "before": {
+            "database_head": "03d128a00001",
+            "fsync": "on",
+            "synchronous_commit": "on",
+            "unfinished_jobs": 0,
+            "gpu_occupancies": 0,
+            "management_holds": 0,
+            "jobs": 33,
+            "content": 57
+          },
+          "after": {
+            "database_head": "03d128a00001",
+            "fsync": "on",
+            "synchronous_commit": "on",
+            "unfinished_jobs": 0,
+            "gpu_occupancies": 0,
+            "management_holds": 0,
+            "jobs": 33,
+            "content": 57
+          },
+          "http_worker_pid_unchanged": true
+        },
+        {
+          "old": "/opt/comfyui-aggregator/releases/linux-20261029.129.3",
+          "new": "/opt/comfyui-aggregator/releases/linux-20261030.131.1",
+          "before": {
+            "database_head": "03d128a00001",
+            "fsync": "on",
+            "synchronous_commit": "on",
+            "unfinished_jobs": 0,
+            "gpu_occupancies": 0,
+            "management_holds": 0,
+            "jobs": 33,
+            "content": 57
+          },
+          "after": {
+            "database_head": "03d128a00001",
+            "fsync": "on",
+            "synchronous_commit": "on",
+            "unfinished_jobs": 0,
+            "gpu_occupancies": 0,
+            "management_holds": 0,
+            "jobs": 33,
+            "content": 57
+          },
+          "http_worker_pid_unchanged": true
+        }
+      ],
+      "database_migration_executed": false,
+      "worker_restarted": false
+    }
+  ],
+  "static_upgrade": {
+    "passed": true,
+    "steps": [
+      "studio-20261030.131.2",
+      "studio-20261030.131.1",
+      "studio-20261030.131.2"
+    ],
+    "actual_old_and_new_static_packages": true,
+    "browser_storage_modified": false,
+    "backend_restarted": false,
+    "source_sha256": "006ad5daa9ce8dced08969c17baaa395e7062c0404695d1973c513f2e0593d3e",
+    "archive_sha256": "bb6861f2d0d8aa0eca5e9028f48fc2e885e37130497bdb35cf4d9e9d0653ef05"
+  },
+  "public_studio_url": "http://43.165.167.179:39443/studio/",
+  "admin_path": "/admin/",
+  "api_path": "/v1/",
+  "other_app_port_39001_modified": false,
+  "worker_process_restarted": false,
+  "static_upgrade_1313": {
+    "passed": true,
+    "steps": [
+      "studio-20261030.131.3",
+      "studio-20261030.131.2",
+      "studio-20261030.131.3"
+    ],
+    "actual_old_and_new_static_packages": true,
+    "browser_storage_modified": false,
+    "backend_restarted": false,
+    "source_sha256": "4821006df246eb5da45a40cde1582b9379da22bd19b44e396359f9917ca86a63",
+    "archive_sha256": "cb37a37c71295170e0ac154e5c3220128376167804831f7ed921002eee0f83cc"
+  },
+  "static_upgrade_1314": {
+    "passed": true,
+    "steps": [
+      "studio-20261030.131.4",
+      "studio-20261030.131.3",
+      "studio-20261030.131.4"
+    ],
+    "actual_old_and_new_static_packages": true,
+    "browser_storage_modified": false,
+    "backend_restarted": false,
+    "source_sha256": "7292a00696ae43e33709175b8b2906cef3f5b15115d2bfc37b0cf5565480e09b",
+    "archive_sha256": "3d46b4b7a7fd04eaa7d66aec0634588dd955f95e4a7cdeb3c05ad8e208c91262"
+  },
+  "static_upgrade_1315": {
+    "passed": true,
+    "steps": [
+      "studio-20261030.131.5",
+      "studio-20261030.131.4",
+      "studio-20261030.131.5"
+    ],
+    "actual_old_and_new_static_packages": true,
+    "browser_storage_modified": false,
+    "backend_restarted": false,
+    "source_sha256": "e228abf86df4a566b795b5f3a5774e74d4abe971b7747a88d571418287e4569d",
+    "archive_sha256": "38620bd34d84351f522b6546af84849925c80f91aaff3ef0735cf32c7c51e66d"
+  },
+  "static_upgrade_1316": {
+    "passed": true,
+    "steps": [
+      "studio-20261030.131.6",
+      "studio-20261030.131.5",
+      "studio-20261030.131.6"
+    ],
+    "actual_old_and_new_static_packages": true,
+    "browser_storage_modified": false,
+    "backend_restarted": false,
+    "source_sha256": "0d1503cc13dc1a5878adf8b759462d55eb34b6528e437e6ab7af49cc7bd19371",
+    "archive_sha256": "29bd1bda4297d16baa57421429b97d5d70ade8c0c109092b3dcee4bcd012635d"
+  }
+}
