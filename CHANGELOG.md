@@ -6,6 +6,7 @@
 - Document image-only mesh requests, actual content metadata fields, canonical GLB filenames, authenticated GET/HEAD/Range and automatic versus explicit output paths. State static self-contained GLB limits and unsupported formats/quality/billing boundaries.
 - VERSION / User-Agent 同步 1.1.1，Agent 展示补全 3D；保留既有多模态、同源鉴权下载、大小/摘要校验与未知 POST 的持久幂等恢复。双语入口、安装升级和独立公开发行验证见 [130](docs/130-MediaGenSkill兼容同步与发布.md)。
 - Server/Worker protocols, runtime deployment and generated content are outside this Skill-only increment; historical GPU evidence remains separately scoped.
+- 正式发布 1.1.1，11 项客户端回归及 Skill/Ruff/文档/证据检查通过；两次原生构建一致，匿名独立下载公开资产并核对摘要、来源标签、六成员及客户端一致性。Windows/Linux ZIP 的六个创建平台字节差异单独记录，公开包采用自身摘要核对；未改写既有 Release。
 
 ## 2026-10-29 · 129 · GLB compatibility review
 

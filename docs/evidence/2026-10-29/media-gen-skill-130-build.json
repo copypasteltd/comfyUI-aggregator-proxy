@@ -1,0 +1,28 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T08:30:25.589526+00:00",
+  "passed": true,
+  "scope": "Two deterministic native local builds from committed Skill sources, exact ZIP members, manifest and checksum. Public release download is verified separately.",
+  "version": "1.1.1",
+  "source_revision": "bb518a7bfddaf32f410e5cbf4ea0f0081370d88f",
+  "archive": {
+    "name": "media-gen-skill-1.1.1.zip",
+    "bytes": 14279,
+    "sha256": "0373aae4eb63202f12afd493ef85677b666c38d296ef894a6cede0aa63cdfe44"
+  },
+  "source_sha256": {
+    "app/skills/media-gen-skill/SKILL.md": "fc7188427e8054ffeb6156d00980051e0768f4ae0a6751102adc94011d8ffc3c",
+    "app/skills/media-gen-skill/VERSION": "cc52f678848b814373757b460383bf61960e4943c203735adde0a350b3e50989",
+    "app/skills/media-gen-skill/agents/openai.yaml": "3226beacd9026da82591b836d05f48dcb7a5dc7d9d167e8cdf16aa258f3914c4",
+    "app/skills/media-gen-skill/references/api.md": "118767918273bd05a3fa467bc792de6a1510d92c891f7b0af778b63eca15e7b9",
+    "app/skills/media-gen-skill/scripts/media_gen.py": "1c04c966967ecfe6bfbc765a6905af42b26ffd43051c5fb9f81d1cbeed79f5bd"
+  },
+  "checks": [
+    "Committed five-file Skill payload",
+    "Two builds identical for all three release assets",
+    "ZIP CRC and exact safe member set",
+    "Every source and manifest digest matches"
+  ],
+  "credentials_included": false,
+  "full_acceptance": "pending"
+}

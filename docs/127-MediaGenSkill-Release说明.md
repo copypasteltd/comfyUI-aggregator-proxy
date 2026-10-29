@@ -6,6 +6,10 @@
 
 Version 1.1.1 aligns with cloud 129.3 mesh-only permissions, exact image-to-3D inputs, geometry metadata and canonical GLB downloads. It preserves previous media calls and request recovery. A mesh caller does not need images:create. Current validation and public asset provenance are recorded in [130](130-MediaGenSkill兼容同步与发布.md); previous live GPU/client evidence remains in [128](128-ComfyUI三维模型产物与3080适配.md) and [129](129-三维兼容复查与GLB边界修复.md).
 
+正式发行的三项资产已匿名重新下载，公开摘要、标签提交、清单、全部文件和独立 CLI help 核对通过；本轮 11 项客户端回归通过。[公开验证证据 / public verification](evidence/2026-10-29/media-gen-skill-130-public-release.json)。Windows 与 Linux ZIP 仅 creator-platform 头字段有差异，内容相同；使用公开 Release 的摘要核验下载文件。
+
+All three public assets were independently downloaded and checked against the public checksum, source tag, manifest and exact file payloads; isolated CLI help and 11 local client regressions pass. Windows/Linux ZIP creator-platform fields differ, so verify a downloaded archive against the checksum from its own Release.
+
 通过 `https://gen.sub2share.xyz` 或自定义部署发现并调用图片、视频和 ComfyUI Workflow 音频模型。纯 Python 3.10+ 标准库客户端，包含模型说明查询、参考图上传、异步生成、原请求恢复、结果下载及 SHA-256 校验。默认服务地址不包含凭证，使用者自行设置 `MEDIA_GEN_API_KEY`。
 
 Discover image, video and ComfyUI Workflow audio models at `https://gen.sub2share.xyz` or another configured deployment. The Python 3.10+ standard-library client supports model usage discovery, reference uploads, asynchronous jobs, exact-request recovery, authenticated downloads and SHA-256 verification. Supply your own business API Key through `MEDIA_GEN_API_KEY`.

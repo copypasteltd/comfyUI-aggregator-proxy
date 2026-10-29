@@ -1,0 +1,58 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T08:33:18.116536+00:00",
+  "passed": true,
+  "version": "1.1.1",
+  "release_url": "https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.1",
+  "published_at": "2026-10-29T08:30:58Z",
+  "tag": "media-gen-skill-v1.1.1",
+  "source_revision": "bb518a7bfddaf32f410e5cbf4ea0f0081370d88f",
+  "workflow_run": {
+    "id": 40842651773,
+    "conclusion": "success",
+    "html_url": "https://github.com/copypasteltd/comfyUI-aggregator-proxy/actions/runs/40842651773"
+  },
+  "assets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 92,
+      "sha256": "b45b0de949ca471415f05e112963a5a46ff9d21b48d2e0317ed251e2cf6db12f"
+    },
+    {
+      "name": "media-gen-skill-1.1.1.zip",
+      "bytes": 14279,
+      "sha256": "acc9faf1a3c096339f7ba2450dcee53d16caf77fc36210dcf29e1bdac6f6ffc7"
+    },
+    {
+      "name": "release.json",
+      "bytes": 719,
+      "sha256": "40e677b6e368caa9f03de00be03039c88a750fdbf21efb007c51e7807a24cc8d"
+    }
+  ],
+  "file_sha256": {
+    "SKILL.md": "fc7188427e8054ffeb6156d00980051e0768f4ae0a6751102adc94011d8ffc3c",
+    "VERSION": "cc52f678848b814373757b460383bf61960e4943c203735adde0a350b3e50989",
+    "agents/openai.yaml": "3226beacd9026da82591b836d05f48dcb7a5dc7d9d167e8cdf16aa258f3914c4",
+    "references/api.md": "118767918273bd05a3fa467bc792de6a1510d92c891f7b0af778b63eca15e7b9",
+    "scripts/media_gen.py": "1c04c966967ecfe6bfbc765a6905af42b26ffd43051c5fb9f81d1cbeed79f5bd"
+  },
+  "checks": [
+    "Successful repository tag workflow",
+    "Anonymous independent public asset downloads and public checksum verification",
+    "All six ZIP payloads and the release manifest equal both native local builds",
+    "Release tag resolves to manifest source commit",
+    "ZIP CRC, exact safe member set and five source hashes",
+    "Published client equals locally regression-tested client",
+    "Python 3.10 syntax and isolated packaged CLI help"
+  ],
+  "archive_platform_note": {
+    "local_zip_sha256": "0373aae4eb63202f12afd493ef85677b666c38d296ef894a6cede0aa63cdfe44",
+    "public_zip_sha256": "acc9faf1a3c096339f7ba2450dcee53d16caf77fc36210dcf29e1bdac6f6ffc7",
+    "different_bytes": 6,
+    "cause": "Only the six central-directory ZIP creator-platform bytes differ: Windows=0, Linux=3. All payload bytes, headers and remaining archive bytes are identical. Verify a downloaded archive against its own published SHA256SUMS.txt.",
+    "first_probe": "The initial private verification probe required cross-platform ZIP byte equality and stopped. That overly strict assertion was replaced with public-checksum validation, exact payload/manifest equality and a byte-level audit of the creator-platform difference; the published release was not modified."
+  },
+  "scope": "Skill distribution, version/provenance and equivalence with locally tested client. No new GPU generation, server deployment, browser, local database or virtualization.",
+  "full_acceptance": "pending",
+  "credentials_published": false
+}
