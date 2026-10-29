@@ -4,13 +4,17 @@
 
 ## 安装 / Install
 
-从正式 [Media Gen Skill 1.1.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.0) 获取 `media-gen-skill-1.1.0.zip` 和 `SHA256SUMS.txt`，先校验摘要，再解压为 `media-gen-skill/`。Codex 用户可把该目录放到自己的 `$CODEX_HOME/skills/` 或用户 skills 目录后重新打开会话。其他支持 SKILL.md 的 Agent 使用其对应的 Skill 安装目录；也可直接运行脚本。
+从正式 [Media Gen Skill 1.1.1 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.1) 获取 `media-gen-skill-1.1.1.zip` 和 `SHA256SUMS.txt`，先校验摘要，再解压为 `media-gen-skill/`。Codex 用户可把该目录放到自己的 `$CODEX_HOME/skills/` 或用户 skills 目录后重新打开会话。其他支持 SKILL.md 的 Agent 使用其对应的 Skill 安装目录；也可直接运行脚本。
 
-Download the archive and checksum from this repository's Releases, verify SHA-256, and extract the single `media-gen-skill` directory. Install that directory in your agent's skills folder, or run the client directly. A `release.json` inside the archive binds every file to its source commit. **A local archive is not proof of a published GitHub Release**; publication and independent asset verification are recorded in document 128.
+Download the archive and checksum from this repository's Releases, verify SHA-256, and extract the single `media-gen-skill` directory. Install that directory in your agent's skills folder, or run the client directly. A `release.json` inside the archive binds every file to its source commit. **A local archive is not proof of a published GitHub Release**; current publication and independent asset verification are recorded in [130](130-MediaGenSkill兼容同步与发布.md).
+
+从旧版升级时，先保留自己修改过的源文件和私有状态，解压到独立目录完成校验，再更新已安装 Skill 的发行文件并重新打开会话。不要删除或覆盖原来的请求状态、API Key 配置和已下载内容；建议从一开始就把这些私有数据放到 Skill 安装目录之外。更新此包不升级另一个部署的服务端或 Worker。
+
+To upgrade, preserve local customizations and private state, verify the new archive in a separate directory, then update the installed Skill's distributed files and open a new session. Keep request-state files, credentials and downloaded outputs outside the installation directory. Updating this package does not upgrade another deployment's server or Worker.
 
 从 Admin 创建业务 API Key。根据实际使用赋予 `models:read`、`capabilities:read`、`jobs:create`、`jobs:read`、`artifacts:read`、`content:read`、`content:download`；生成对应 `images:create`、`videos:create`、`audio:create` 或 `meshes:create`，参考图另需 `assets:upload`。3D 还需显式开启 Tenant/Project/Key 的 `daily_mesh_count`；旧策略默认 0。模型、任务类型、项目、配额限制仍由该 Key 决定。不要使用 Admin 密码、Worker token 或网关凭证代替。
 
-Create a business API Key in Admin. Grant the read/job/content scopes above, the appropriate image/video/audio/3D generation scope, and `assets:upload` when references are needed. 3D requires explicit nonzero Tenant/Project/Key daily_mesh_count quotas; existing policies default to zero. Model visibility and limits remain scoped to that Key. Never embed real credentials in distributed archives.
+Create a business API Key in Admin. Grant the read/job/content scopes above, the appropriate image/video/audio/3D generation scope, and `assets:upload` when references are needed. 3D requires explicit nonzero Tenant/Project/Key daily_mesh_count quotas; existing policies default to zero. **Mesh-only generation does not require images:create**; asset upload permission is separate. Also permit the selected alias/release/channel/task. Model visibility and limits remain scoped to that Key. Never embed real credentials in distributed archives.
 
 PowerShell:
 
@@ -47,6 +51,10 @@ python3 scripts/media_gen.py describe MODEL_ALIAS_FROM_LIST
 | 恢复 / Resume | `resume request-state.json --wait` | 已知 job_id 只查询；未知提交沿用原 Key、原请求和幂等键，避免重复生成 |
 | 单项下载 / Download | `download CONTENT_ID --output output/result.png` | 仅同源鉴权下载，拒绝跳转及覆盖已有文件，失败清理本次临时文件 |
 
+3D 的完整最小 scope 为 `models:read`、`assets:upload`、`jobs:create`、`jobs:read`、`meshes:create`、`artifacts:read`、`content:read`、`content:download`；调用 capabilities 另加 `capabilities:read`。`wait --download` 自动按 MIME 保存 `.glb`；手动下载时用 `download CONTENT_ID --output output/model.glb`，显式路径不改名。当前只支持静态自包含三角网格 GLB 2.0（512 MiB、500 万顶点、1000 万三角面），不承诺材质/打印质量；其他格式和交互预览未支持。几何结构由服务端验证，客户端核对文件长度和 SHA-256。完整 JSON、字段与服务端最低兼容说明见 Skill 的 [API 参考](../app/skills/media-gen-skill/references/api.md#image-to-3d-compatibility)。
+
+For 3D, use the scope set above without images:create. Automatic downloads derive `.glb` from MIME; manual downloads keep your explicit path. The profile supports static, self-contained triangle GLB 2.0 within the documented size/geometry limits. Geometry validation is performed by the server; the client checks byte count and SHA-256. Material/print quality, other formats and interactive previews are outside this profile.
+
 尺寸等覆盖使用 `--size`、`--quality`、`--seconds`、`--seed`，部分模型还支持 `--fps`、`--strength`；只允许该模型公布的参数和 preset 组合。客户端支持非整数秒数，以覆盖实际 1.625 秒的 5070 视频规格。图片参考仅静态 PNG/JPEG/WebP，单文件最多 20 MiB、2500 万像素，服务端负责最终验证。
 
 Use only advertised parameter combinations. References are uploaded under the same API Key; ordering is meaningful. The client saves an exact request and stable Idempotency-Key before submitting. The saved state contains prompts and asset IDs: treat it as private even though it contains no API Key. Unknown POST outcomes must be resumed, not submitted with a new identity. No `/result` endpoint is assumed.
@@ -62,9 +70,9 @@ Outputs expire eight hours after successful completion. Download promptly. Trans
 ## 维护与发布 / Maintainer release
 
 ```powershell
-python app/scripts/build-media-gen-skill.py --output app/.local/media-gen-skill-1.1.0
+python app/scripts/build-media-gen-skill.py --output app/.local/media-gen-skill-1.1.1
 ```
 
-打包要求 Skill 源码已提交，产物包含单一根目录、文件清单、来源提交和外部 SHA256SUMS。发布标签约定 `media-gen-skill-v1.1.0`，上传 ZIP、SHA256SUMS 和 release.json，并在 Release 说明中链接本安装文档与更新日志。版本升级同步 VERSION、文档、脚本兼容行为、验证和 GitHub Release。
+打包要求 Skill 源码已提交，产物包含单一根目录、文件清单、来源提交和外部 SHA256SUMS。发布标签约定 `media-gen-skill-v1.1.1`，上传 ZIP、SHA256SUMS 和 release.json，并在 Release 说明中链接本安装文档与更新日志。版本升级同步 VERSION、文档、脚本兼容行为、验证和 GitHub Release。
 
 Packaging requires committed Skill sources and never includes `.local`、`__pycache__`、真实素材或凭证。仓库应用部署与 Skill 分发版本分别记录；无需给客户分发整个平台。

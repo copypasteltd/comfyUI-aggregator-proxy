@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-10-29 · 130 · Media Gen Skill 1.1.1
+
+- 同步调用 Skill 与云端 129.3：明确 3D 独立 meshes:create、完整上传/任务/内容最小权限及三级 daily_mesh_count，遇到旧服务权限缺陷不通过自动扩权绕行。
+- Document image-only mesh requests, actual content metadata fields, canonical GLB filenames, authenticated GET/HEAD/Range and automatic versus explicit output paths. State static self-contained GLB limits and unsupported formats/quality/billing boundaries.
+- VERSION / User-Agent 同步 1.1.1，Agent 展示补全 3D；保留既有多模态、同源鉴权下载、大小/摘要校验与未知 POST 的持久幂等恢复。双语入口、安装升级和独立公开发行验证见 [130](docs/130-MediaGenSkill兼容同步与发布.md)。
+- Server/Worker protocols, runtime deployment and generated content are outside this Skill-only increment; historical GPU evidence remains separately scoped.
+
 ## 2026-10-29 · 129 · GLB compatibility review
 
 - 复现并修复通用属性缓存导致 POSITION 漏计、默认场景外循环节点及错误场景根漏检；保留修复前 4 项失败，补充 6 个边界场景。

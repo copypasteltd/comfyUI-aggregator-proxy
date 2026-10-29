@@ -14,7 +14,7 @@ Deployed at **https://gen.sub2share.xyz**: **11 published models across 3 enable
 
 Three devices have a 10-minute idle policy that releases reclaimable RAM/VRAM through ComfyUI HTTP APIs. In Admin, open a model's usage dialog to view capabilities or edit its public description; open a channel's idle-reclamation dialog to configure and inspect execution proof. New channels need explicit policy activation.
 
-The published [Media Gen Skill 1.1.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.0) includes a standalone Python 3.10+ client, source manifest and SHA-256 checksum. After extracting it, configure a business Key, discover models and parameters, then submit an asynchronous job. Visibility and quotas remain controlled by the Key.
+The published [Media Gen Skill 1.1.1 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.1) includes a standalone Python 3.10+ client, source manifest and SHA-256 checksum. It aligns with cloud 129.3 mesh-only permissions, GLB downloads and supported boundaries: 3D uses `meshes:create` without requiring `images:create`. Configure a business Key, discover models and parameters, then submit an asynchronous job. Visibility and quotas remain controlled by the Key. [Update and verification](docs/130-MediaGenSkill兼容同步与发布.md).
 
 ```sh
 export MEDIA_GEN_API_KEY='YOUR_BUSINESS_API_KEY'

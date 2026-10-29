@@ -1,5 +1,7 @@
 # Documentation index
 
+[130 · Media Gen Skill 1.1.1](130-MediaGenSkill兼容同步与发布.md) aligns client guidance with cloud 129.3: mesh-only permissions, exact image-to-3D inputs, actual geometry fields, GLB downloads and recovery. [Install/upgrade](126-MediaGenSkill安装与调用.md) · [Release](127-MediaGenSkill-Release说明.md). Server fixes and independent GPU evidence remain in [129](129-三维兼容复查与GLB边界修复.md).
+
 [128 · ComfyUI 3D models and RTX 3080](128-ComfyUI三维模型产物与3080适配.md) is deployed and verified with actual TRELLIS2 generation, independent permissions/quotas, binary validation and Admin controls. The three channels now expose eleven published models. Both platform validation and a separate business job pass complete download/SHA and isolation checks. [Workflow and examples](examples/model3d/README.md) · [Actual screenshots, original-speed recording and GIFs](media/model3d-128/README.md).
 
 [124 · Deployed delivery](124-模型使用说明与公开Skill交付.md): ten model usage contracts, a published [Skill Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0), 10-minute reclamation on three devices and four actual media jobs. [Installation](126-MediaGenSkill安装与调用.md) · [Release notes](127-MediaGenSkill-Release说明.md) · [Actual media](media/media-gen-124/README.en.md).

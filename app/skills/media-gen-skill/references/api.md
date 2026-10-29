@@ -15,7 +15,30 @@ Use `usage.required_scopes` to identify missing workflow permissions. Image crea
 
 `usage.request_schema` is a model-specific JSON Schema. `usage.presets` lists complete combinations; defaults apply when fields are omitted. Do not mix the quality of one preset with another preset's size/duration. `fps` and `strength` are optional only on models that advertise them. `negative_prompt` belongs to `input`, not `parameters`. `n` is always 1. Output audio format/sample rate/channels are preset properties, not arbitrary caller options.
 
-For `image_to_3d`, use `input.source_image.asset_id` without prompt, negative_prompt, mask or references. Only advertised quality, seed and n=1 are accepted; size/seconds/fps/strength are rejected. The output is a static, self-contained GLB 2.0 with MIME `model/gltf-binary`, up to 512 MiB. Read the returned mesh/vertex/triangle/material/texture counts in content metadata. The profile excludes external files, compressed geometry, animation and skinning. It uses its own `daily_mesh_count` quota and is currently available through native jobs, without Sub2API 3D settlement.
+For `image_to_3d`, use the dedicated request, quota and download guidance below. Image upload permission and image generation permission are separate; a mesh-only caller does not need `images:create`.
+
+## Image-to-3D compatibility
+
+The example deployment's cloud release 129.3 corrects mesh-only admission and canonical GLB attachment filenames, and validates POSITION counts and hierarchies outside the default scene. Skill version 1.1.1 documents those verified server behaviors; installing a Skill archive does not upgrade another deployment's server or Worker. Discover that deployment's approved model first.
+
+For a complete source-image upload, job and result flow, the minimal scope set is `models:read`, `assets:upload`, `jobs:create`, `jobs:read`, `meshes:create`, `artifacts:read`, `content:read` and `content:download`. The `capabilities` command additionally uses `capabilities:read`. Enable the selected alias/release/channel/task in the Key's policy. Set a nonzero `daily_mesh_count` at Tenant, Project and Key levels; old policies default to zero. Do not add `images:create` to work around an outdated server's mesh-scope defect. Visibility alone is not admission or quota approval.
+
+Upload one static image with the same Key, then use its returned asset ID in the model's example. The following illustrates the currently approved TRELLIS2 request; discover the alias and its current preset before use:
+
+```json
+{
+  "model": "comfy-3080-3d-trellis2",
+  "task_type": "image_to_3d",
+  "input": {"source_image": {"asset_id": "REPLACE_WITH_UPLOADED_ASSET_ID"}},
+  "parameters": {"quality": "standard", "seed": 17, "n": 1}
+}
+```
+
+Omit prompt, negative_prompt, mask and references. Only advertised quality, seed and n=1 are accepted; size, seconds, fps and strength are rejected. No alternate `/meshes`, `/3d` or `/result` endpoint is assumed: submit `/v1/jobs`, poll the same job ID, then read and download its `artifacts[].id`.
+
+The approved profile is static, self-contained triangle GLB 2.0 with MIME `model/gltf-binary`, up to 512 MiB, 5 million vertices and 10 million triangles. The server validates the file structure, POSITION accessors and all node hierarchies. `GET /v1/content/{id}` returns the top-level `media_type`, `bytes`, `sha256` and `expires_at`; its `metadata` object contains `format`, `mesh_count`, `vertex_count`, `triangle_count`, `material_count`, `texture_count` and `has_textures`. The helper also accepts `size_bytes` from compatible deployments. It verifies download length and SHA-256; it does not independently validate geometry. A texture, UV/PBR quality or printable topology is not guaranteed. OBJ, FBX, external buffers/textures, multi-file glTF, compressed geometry, animation, skinning and interactive Admin previews are outside this profile. Native 3D does not add Sub2API 3D settlement.
+
+The authenticated `/v1/content/{id}/download` endpoint supports full GET, HEAD and a byte Range with the same Key's content authorization; GET/HEAD/Range carry `Content-Disposition: attachment; filename="content_….glb"`. The helper downloads the complete file and derives its automatic `.glb` extension from MIME. For a manual path use `download CONTENT_ID --output ./model.glb`; an explicit `--output` is preserved. Download before `expires_at` (eight hours after success); resuming a completed job does not renew retention or consume another generation.
 
 ## Native asynchronous submission
 

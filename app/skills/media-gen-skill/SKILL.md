@@ -48,7 +48,9 @@ For an advertised `image_to_3d` model, pass one source image and omit text promp
 python scripts/media_gen.py generate --model MODEL_ALIAS --source-image robot.png --seed 17 --wait --timeout 1800 --output-dir ./model-output
 ```
 
-This requires `meshes:create` and an explicitly enabled 3D quota at Tenant, Project and Key levels. The helper saves GLB with the canonical `.glb` extension and verifies its bytes and hash. The current native 3D endpoint does not imply Sub2API 3D billing support.
+For this complete upload/generate/download flow, grant the business Key `models:read`, `jobs:create`, `jobs:read`, `assets:upload`, `artifacts:read`, `content:read`, `content:download` and `meshes:create`; add `capabilities:read` when using that discovery command. Enable nonzero `daily_mesh_count` at Tenant, Project and Key levels and allow the selected alias, release, channel and `image_to_3d` task type. Image, video and audio creation permissions are independent: **3D does not require `images:create`**. If a deployment still demands that scope for a mesh request, report the server compatibility issue rather than broaden the Key's permissions.
+
+The helper chooses `.glb` from the content MIME `model/gltf-binary`, verifies exact byte count and SHA-256, and keeps existing files. The supported profile is a static, self-contained triangle GLB 2.0, up to 512 MiB, 5 million vertices and 10 million triangles. Inspect content metadata for actual geometry counts and texture presence; a textured or printable model is not guaranteed. OBJ, FBX, multi-file glTF, animation, skinning, compressed geometry and interactive Admin previews are outside this profile. Native 3D does not imply Sub2API 3D billing support. Read [the 3D request and download details](references/api.md#image-to-3d-compatibility) when invoking this mode.
 
 Every submit saves a request state file **before POST**, including the exact body and Idempotency-Key, but no API key. The client prints its path. If a response is lost, resume that file with the same Key; do not create a fresh request or change its body merely because a local wait timed out.
 
@@ -59,6 +61,8 @@ python scripts/media_gen.py wait JOB_ID --timeout 900 --download --output-dir ./
 python scripts/media_gen.py download CONTENT_ID --output ./result.mp4
 ```
 
-The native flow is `POST /v1/jobs` → `GET /v1/jobs/{id}` → `artifacts[].id` → content metadata and authenticated download. It is asynchronous for every media kind. A wait timeout leaves the server task intact. `failed`, `cancelled` and `expired` are terminal; `reconciling` means execution is uncertain and is not permission to resubmit. Download successful artifacts before `expires_at` (normally eight hours after success). The client verifies byte count and SHA-256 and never sends the Key to another origin.
+For a manual 3D download, use `download CONTENT_ID --output ./model.glb`. `wait --download` chooses the extension automatically; the explicit `--output` command uses the path you supply. The server's authenticated GLB GET/HEAD/Range responses use an attachment filename ending in `.glb`; the helper's automatic naming uses trusted content metadata instead of a server-supplied path.
+
+The native flow is `POST /v1/jobs` → `GET /v1/jobs/{id}` → `artifacts[].id` → content metadata and authenticated download. It is asynchronous for every media kind. A wait timeout leaves the server task intact. `failed`, `cancelled` and `expired` are terminal; `reconciling` means execution is uncertain and is not permission to resubmit. Download successful artifacts before `expires_at` (normally eight hours after success); resuming a completed job does not extend expiry or create another generation. The client verifies byte count and SHA-256 and never sends the Key to another origin.
 
 Read [references/api.md](references/api.md) for native JSON, reference roles/weights, scopes, errors and recovery. Run `python scripts/media_gen.py --help` and the subcommand's `--help` for options. Generating or uploading uses the user's authorized service resources; this skill does not authorize publishing content, contacting others, or managing ComfyUI/servers.

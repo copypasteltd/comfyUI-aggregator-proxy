@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 129,
+  "increment": 130,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-29/development-trace-baselines-129-downloads.json",
-    "sha256": "15b6464e99cfee3728f75655a7d9587f9b44b8bb507dffeb0867ad0bd3acd0eb"
+    "path": "docs/evidence/2026-10-29/development-trace-baselines-130-skill.json",
+    "sha256": "61430c46ca50c9c2aa61b62ddd7b3733f8d2035dd312ba34bc6df49cada8bd2a"
   },
   "requirements": [
     {
@@ -793,6 +793,10 @@
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
           "baseline": "mesh129downloads"
+        },
+        {
+          "path": "app/skills/media-gen-skill/scripts/media_gen.py",
+          "baseline": "skill130"
         }
       ],
       "tests": [
@@ -909,6 +913,18 @@
           "symbol": "test_mesh_permission_never_substitutes_for_jobs_or_images",
           "language": "python",
           "baseline": "mesh129permissions"
+        },
+        {
+          "path": "app/tests/unit/test_media_gen_skill.py",
+          "symbol": "test_model3d_client_uses_image_only_and_declared_parameters",
+          "language": "python",
+          "baseline": "skill130"
+        },
+        {
+          "path": "app/tests/unit/test_media_gen_skill.py",
+          "symbol": "test_model3d_download_uses_canonical_extension",
+          "language": "python",
+          "baseline": "skill130"
         }
       ],
       "evidence": [
@@ -916,7 +932,8 @@
         "meshui128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "20",
@@ -978,7 +995,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "mesh128"
+          "baseline": "skill130"
         }
       ],
       "tests": [
@@ -1002,7 +1019,7 @@
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
-          "baseline": "mesh128",
+          "baseline": "skill130",
           "language": "python"
         }
       ],
@@ -1015,7 +1032,8 @@
         "cors116",
         "media124",
         "media124final",
-        "mesh128"
+        "mesh128",
+        "skill130"
       ],
       "remaining_backlog": [
         "30",
@@ -4454,7 +4472,8 @@
         "mesh128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "25",
@@ -4479,7 +4498,8 @@
         "mesh128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "29",
@@ -6082,7 +6102,8 @@
         "mesh128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "28",
@@ -6123,7 +6144,8 @@
         "mesh128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "34",
@@ -6163,7 +6185,8 @@
         "mesh128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "37",
@@ -6229,7 +6252,8 @@
         "mesh128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "17",
@@ -6252,7 +6276,8 @@
         "mesh128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "17",
@@ -6322,7 +6347,8 @@
         "mesh128",
         "mesh129",
         "mesh129permissions",
-        "mesh129downloads"
+        "mesh129downloads",
+        "skill130"
       ],
       "remaining_backlog": [
         "69",
