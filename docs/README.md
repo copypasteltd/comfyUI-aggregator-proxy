@@ -1,10 +1,12 @@
 # 生图生视 API 封装：开发文档入口
 
+[129 · 三维兼容复查与 GLB 边界修复](129-三维兼容复查与GLB边界修复.md)：修复 accessor 计数及全节点层级边界，319 项兼容回归通过，旧真实产物摘要与几何计数一致；线上生效和新生成独立记录。
+
 [128 · ComfyUI 三维模型产物与 3080 适配](128-ComfyUI三维模型产物与3080适配.md)：已原生部署并实际调用 3080 TRELLIS2，新增单图生成 GLB、独立权限/额度、文件验证和 Admin 管理。当前 3 渠道、11 个发布模型；平台验证与独立业务调用、完整下载/SHA 和隔离通过。[工作流与调用](examples/model3d/README.md) · [实际截图、原速录屏与 GIF](media/model3d-128/README.md)。
 
 [124 · 已上线交付](124-模型使用说明与公开Skill交付.md)：10 个模型说明、正式 [Skill Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0)、三台十分钟自动回收和四条真实多模态调用均已验证。[安装调用](126-MediaGenSkill安装与调用.md) · [发布说明](127-MediaGenSkill-Release说明.md) · [实际媒体](media/media-gen-124/README.md)。
 
-当前增量：[128 · 三维模型产物与 3080 适配](128-ComfyUI三维模型产物与3080适配.md)。既有能力与历史交付见 [124 · 模型说明与公开 Skill](124-模型使用说明与公开Skill交付.md)、[125 · 空闲回收与双屏障](125-ComfyUI空闲内存回收与双屏障.md)；客户端安装见 [126](126-MediaGenSkill安装与调用.md)。
+当前增量：[129 · 三维兼容复查](129-三维兼容复查与GLB边界修复.md)。3D 接入见 [128](128-ComfyUI三维模型产物与3080适配.md)，既有能力与历史交付见 [124 · 模型说明与公开 Skill](124-模型使用说明与公开Skill交付.md)、[125 · 空闲回收与双屏障](125-ComfyUI空闲内存回收与双屏障.md)；客户端安装见 [126](126-MediaGenSkill安装与调用.md)。
 
 [123 · 空闲资源释放与多设备模型池调度](./123-空闲资源释放与多设备模型池调度设计.md)：核对当前 GPU 槽位释放与 Worker 抢领，确认没有 600 秒自动模型卸载、线上没有多渠道发布别名。给出实例级维护/空闲代数、受控释放回执、共享实例竞争保护和设备公平预留的设计；10 项开发/14 组验收均待完成。[机器决策](contracts/comfy-idle-and-pool-policy.json)与[只读证据](evidence/2026-10-28/runtime-idle-and-pool-audit-123.json)区分现状与计划，不代表线上启用。
 

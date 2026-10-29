@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 128,
+  "increment": 129,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-29/development-trace-baselines-128-final.json",
-    "sha256": "01f4b0ccac91bf688a14b324ee2fd0a2573aa20f0a18dc7948f00ac1335a5c41"
+    "path": "docs/evidence/2026-10-29/development-trace-baselines-129-final.json",
+    "sha256": "a589d55cf6f8b81506f7b771bd76e80db29eeae3163f8dae5fb615c61ba8462f"
   },
   "requirements": [
     {
@@ -752,7 +752,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/model3d_media.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -822,61 +822,80 @@
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_glb_is_validated_as_geometry_not_video",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_glb_rejects_corruption_and_invalid_geometry",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_glb_rejects_unsupported_or_unbounded_references",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_model3d_rejects_missing_image_and_ignored_prompt",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_model3d_rejects_nonmesh_parameters",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_old_policies_never_inherit_mesh_permission_or_quota",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_release_cannot_claim_unimplemented_mesh_capabilities",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_single_image_glb_contract_and_usage_match",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "mesh129"
+        },
+        {
+          "path": "app/tests/unit/test_model3d.py",
+          "symbol": "test_position_accessor_used_as_custom_attribute_is_still_counted_and_bounded",
+          "language": "python",
+          "baseline": "mesh129"
+        },
+        {
+          "path": "app/tests/unit/test_model3d.py",
+          "symbol": "test_glb_rejects_invalid_hierarchy_outside_the_default_scene",
+          "language": "python",
+          "baseline": "mesh129"
+        },
+        {
+          "path": "app/tests/unit/test_model3d.py",
+          "symbol": "test_glb_accepts_a_valid_unselected_scene",
+          "language": "python",
+          "baseline": "mesh129"
         }
       ],
       "evidence": [
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "20",
         "23",
         "26"
       ],
-      "limitation": "128 covers single-image static self-contained triangle GLB 2.0 with bounded validation, independent permission/quota, isolated asynchronous delivery and the native 3080 TRELLIS2 package. Other 3D formats, interactive web preview, texture/topology quality, independent gateway billing and fleet capacity remain unaccepted. Actual real-resource reports are linked in document 128."
+      "limitation": "128 implements bounded single-image static self-contained triangle GLB 2.0 with independent permission/quota and native 3080 TRELLIS2 delivery. Review 129 fixes POSITION accessor counting and whole-document node hierarchy validation; local compatibility evidence does not establish fleet/product acceptance. Other formats, interactive preview, texture/topology quality and separate gateway billing remain open. Real-resource evidence is linked in documents 128 and 129."
     },
     {
       "id": "API-01",
@@ -4396,7 +4415,8 @@
       ],
       "local_evidence": [
         "ci86",
-        "mesh128"
+        "mesh128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "25",
@@ -4418,7 +4438,8 @@
       "local_evidence": [
         "ci86",
         "native86",
-        "mesh128"
+        "mesh128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "29",
@@ -6018,7 +6039,8 @@
       "local_evidence": [
         "ci86",
         "go80",
-        "mesh128"
+        "mesh128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "28",
@@ -6056,7 +6078,8 @@
       ],
       "local_evidence": [
         "ci86",
-        "mesh128"
+        "mesh128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "34",
@@ -6093,7 +6116,8 @@
       "local_evidence": [
         "ci86",
         "go80",
-        "mesh128"
+        "mesh128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "37",
@@ -6156,7 +6180,8 @@
       ],
       "local_evidence": [
         "ci86",
-        "mesh128"
+        "mesh128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "17",
@@ -6176,7 +6201,8 @@
       ],
       "local_evidence": [
         "ci86",
-        "mesh128"
+        "mesh128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "17",
@@ -6243,7 +6269,8 @@
         "ci86",
         "native86",
         "release92",
-        "mesh128"
+        "mesh128",
+        "mesh129"
       ],
       "remaining_backlog": [
         "69",

@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[129 · 3D compatibility review](docs/129-三维兼容复查与GLB边界修复.md) reproduces and fixes missed POSITION accessor counting and invalid node hierarchies outside the default scene. All 319 scoped compatibility checks pass, and the previous real GLB passes reinspection. Image, video, audio and 3D request formats stay compatible; deployment and fresh generation results are recorded separately in the review.
+
 [128 · 3D model support](docs/128-ComfyUI三维模型产物与3080适配.md) adds `image_to_3d`, self-contained GLB 2.0 validation, separate `meshes:create` permission and Tenant/Project/Key `daily_mesh_count` quotas. The RTX 3080 TRELLIS2 example uses the same asynchronous queue, exclusive physical GPU ownership, authenticated content download and eight-hour retention after success. See the increment for actual verification status; only Workflows with real runtime approval are published.
 
 Discover usage at `/v1/models/{alias}`, upload one source image to `/v1/assets` with the same business Key, then submit `task_type=image_to_3d`, `input.source_image.asset_id` and advertised quality/seed to `/v1/jobs`. This workflow accepts neither text prompts nor image dimensions. Download GLB using the completed job's `artifacts[].id`. Admin manages releases/permissions, filters 3D content, displays geometry counts and downloads artifacts. Interactive mesh previews, OBJ/multi-file glTF and Sub2API 3D billing remain outside this increment. [Frozen Workflow, original input and examples](docs/examples/model3d/README.md).

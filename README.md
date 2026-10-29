@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[129 · 3D 兼容复查](docs/129-三维兼容复查与GLB边界修复.md)：复现并修复 GLB 位置 accessor 漏计和默认场景外节点层级漏检；319 项兼容回归通过，旧真实 GLB 重检通过。图片、视频、音频及 3D 请求格式保持兼容；线上安装与新调用结果见专题记录。
+
 [128 · 3D 模型适配](docs/128-ComfyUI三维模型产物与3080适配.md) 新增 `image_to_3d`、单文件 GLB 2.0 校验、独立 `meshes:create` 权限与三级 `daily_mesh_count` 额度。以 3080 的 TRELLIS2 为接入例子，使用同一套异步队列、物理 GPU 排他、内容下载及成功后八小时保留。实现和真实验证进度以专题记录为准；只有通过实际运行批准的工作流才发布。
 
 外部用户先查 `/v1/models/{alias}` 的 usage，使用同一业务 Key 向 `/v1/assets` 上传源图，再向 `/v1/jobs` 提交 `task_type=image_to_3d`、`input.source_image.asset_id` 和公布的质量/seed。该流程不接收文字提示或图像尺寸。成功后读取 `artifacts[].id` 并下载 GLB；Admin 可管理发布与权限、筛选 3D 内容、查看几何计数并下载。首批不提供网页旋转预览、OBJ/多文件 glTF 或 Sub2API 3D 计价。[冻结工作流和自制输入](docs/examples/model3d/README.md) 提供具体调用示例。

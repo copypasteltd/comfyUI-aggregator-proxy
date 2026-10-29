@@ -1,0 +1,59 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T02:14:08.695597+00:00",
+  "passed": true,
+  "scope": "Four observed pre-fix boundary failures, 52 post-fix unit/Worker protocol cases and unchanged real TRELLIS2 business-file validation. Database compatibility and new production generation are separate evidence.",
+  "old_source_revision": "f43e5ce9fba58067d75117effbabc756695a14e5",
+  "old_source_sha256": "dedb8a7afe3cc3dea20e9499c2c1174ff33da785592d708590d983cacd9e3863",
+  "source_sha256": {
+    "app/packages/infrastructure/src/generation_infrastructure/model3d_media.py": "6d232afe54e4138891735d95d0547e5e6cd050ca28bed5d78f27abb8287d89dd",
+    "app/tests/unit/test_model3d.py": "7452e86f49aa51bd5812aab1a9bd17b47e483da6d9241983116eabc8b9325287"
+  },
+  "reproduction": {
+    "tests": 4,
+    "expected_failures_observed": 4,
+    "junit_sha256": "adccb096e93afe01bb5dc52c59e102365b1b361c3a8049def212e536b3277516",
+    "log_sha256": "19c7ceaaf6623e54b5211c93970a9c9c0a138004f155b41fc5f4fc71b5b2b75a",
+    "cases": [
+      "test_position_accessor_used_as_custom_attribute_is_still_counted_and_bounded[False]",
+      "test_position_accessor_used_as_custom_attribute_is_still_counted_and_bounded[True]",
+      "test_glb_rejects_invalid_hierarchy_outside_the_default_scene[disconnected_cycle]",
+      "test_glb_rejects_invalid_hierarchy_outside_the_default_scene[scene_root_has_parent]"
+    ]
+  },
+  "fixed": {
+    "tests": 52,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_sha256": "3cb2c732a2ddd79ce9441efbbfefccfefae21194a20dd27dbdf021b02461f8d1",
+    "log_sha256": "25226ab6b4957a4d03734ebdb388a030338fc805dc9db23b769ee8f4836e8360"
+  },
+  "real_prior_business_glb": {
+    "passed": true,
+    "scope": "Revalidate the actual prior business GLB with the fixed validator; no new generation implied",
+    "bytes": 100424732,
+    "sha256": "a7e1b5b6af2ef03f69f18c7a6f453d8e886811bae35ecb637a5b1a66df08a1f7",
+    "metadata": {
+      "media_type": "model/gltf-binary",
+      "format": "glb",
+      "mesh_count": 1,
+      "vertex_count": 2092758,
+      "triangle_count": 4183116,
+      "material_count": 1,
+      "texture_count": 0,
+      "has_textures": false
+    },
+    "seconds": 7.285
+  },
+  "static_checks": {
+    "ruff": "passed for changed implementation and test",
+    "mypy": "passed for changed implementation"
+  },
+  "first_collection_attempt": {
+    "status": "cancelled without a completed test result",
+    "scope": "Initial slow collection was stopped; accepted reproduction uses the later bounded stack-observed run. No application test budget was increased."
+  },
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending"
+}

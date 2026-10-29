@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-29 · 129 · GLB compatibility review
+
+- 复现并修复通用属性缓存导致 POSITION 漏计、默认场景外循环节点及错误场景根漏检；保留修复前 4 项失败，补充 6 个边界场景。
+- All 319 scoped native compatibility checks pass, including previous image/video/audio behavior, mesh quotas, Worker collection, isolated downloads and retention. Reinspect the previous 100,424,732-byte real GLB with matching SHA and geometry counts; no public contract or Worker protocol change.
+- 验证、线上安装和实际调用范围见 [129](docs/129-三维兼容复查与GLB边界修复.md)；其他 3D 格式、交互预览和完整容量验收继续开放。
+
 ## 2026-10-29 · 128 · Native GLB 3D tasks
 
 - Publish [Media Gen Skill 1.1.0](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.0), then independently verify all public assets, the source tag and equivalence with the live-tested 3D client. Keep the 1.0.0 release intact.

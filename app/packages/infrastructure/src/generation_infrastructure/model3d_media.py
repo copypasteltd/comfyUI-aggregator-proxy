@@ -170,6 +170,7 @@ class _GLB:
             self.accessor(index)
         vertices = triangles = primitives = 0
         checked: set[int] = set()
+        checked_positions: set[int] = set()
         for mesh in meshes:
             for primitive in _list(_object(mesh).get("primitives"), 10000, minimum=1):
                 self.deadline()
@@ -185,7 +186,7 @@ class _GLB:
                 if description["type"] != "VEC3" or description["componentType"] != 5126 or description.get("normalized"):
                     raise _invalid()
                 count = description["count"]
-                if identifier not in checked:
+                if identifier not in checked_positions:
                     vertices += count
                     if vertices > MAX_MODEL3D_VERTICES:
                         raise _invalid()
@@ -197,6 +198,7 @@ class _GLB:
                             lower[axis], upper[axis] = min(lower[axis], value), max(upper[axis], value)
                     if sum(upper[axis] > lower[axis] for axis in range(3)) < 2:
                         raise _invalid()
+                    checked_positions.add(identifier)
                     checked.add(identifier)
                 for attribute in attributes.values():
                     current = self.accessor(attribute)
@@ -248,7 +250,6 @@ class _GLB:
         nodes = _list(self.document.get("nodes"), 10000, minimum=1)
         scenes = _list(self.document.get("scenes"), 1000, minimum=1)
         selected = _integer(self.document.get("scene", 0), 0, len(scenes) - 1)
-        roots = _list(_object(scenes[selected]).get("nodes"), 10000, minimum=1)
         children: list[list[int]] = []
         for node in nodes:
             node = _object(node)
@@ -267,12 +268,22 @@ class _GLB:
                 if child in parents:
                     raise _invalid()
                 parents.add(child)
+        roots: set[int] = set()
+        for scene_index, scene in enumerate(scenes):
+            indices = [
+                _integer(index, 0, len(nodes) - 1)
+                for index in _list(_object(scene).get("nodes", []), 10000, minimum=int(scene_index == selected))
+            ]
+            if len(set(indices)) != len(indices) or any(index in parents for index in indices):
+                raise _invalid()
+            if scene_index == selected:
+                roots.update(indices)
         visited: set[int] = set()
         active: set[int] = set()
         visible = False
-        pending = [(_integer(index, 0, len(nodes) - 1), False, 0) for index in roots]
+        pending = [(index, False, 0, index in roots) for index in range(len(nodes)) if index not in parents]
         while pending:
-            index, leaving, depth = pending.pop()
+            index, leaving, depth, in_default_scene = pending.pop()
             if leaving:
                 active.remove(index)
                 continue
@@ -282,10 +293,10 @@ class _GLB:
                 continue
             visited.add(index)
             active.add(index)
-            visible |= "mesh" in nodes[index]
-            pending.append((index, True, depth))
-            pending.extend((child, False, depth + 1) for child in children[index])
-        if not visible:
+            visible |= in_default_scene and "mesh" in nodes[index]
+            pending.append((index, True, depth, in_default_scene))
+            pending.extend((child, False, depth + 1, in_default_scene) for child in children[index])
+        if not visible or len(visited) != len(nodes):
             raise _invalid()
 
 

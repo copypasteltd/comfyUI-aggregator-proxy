@@ -138,6 +138,58 @@ def test_glb_is_validated_as_geometry_not_video(model3d_glb: Path) -> None:
     assert output_mime(".GLB") == MODEL3D_MIME and task_media_kind("image_to_3d") == "model"
 
 
+@pytest.mark.parametrize("limited", [False, True])
+def test_position_accessor_used_as_custom_attribute_is_still_counted_and_bounded(
+    model3d_glb: Path, monkeypatch: pytest.MonkeyPatch, limited: bool
+) -> None:
+    def mutate(document: dict[str, Any]) -> None:
+        document["accessors"].append(deepcopy(document["accessors"][0]))
+        document["bufferViews"][0]["byteStride"] = 12
+        document["meshes"][0]["primitives"][0]["attributes"]["_SECOND_SHAPE"] = 2
+        document["meshes"].append({"primitives": [{"attributes": {"POSITION": 2}, "indices": 1}]})
+        document["nodes"].append({"mesh": 1})
+        document["scenes"][0]["nodes"].append(1)
+
+    rewrite(model3d_glb, mutate)
+    if limited:
+        monkeypatch.setattr("generation_infrastructure.model3d_media.MAX_MODEL3D_VERTICES", 5)
+        with pytest.raises(DomainError) as failure:
+            inspect_media(model3d_glb, MODEL3D_MIME)
+        assert failure.value.code == "invalid_model3d"
+    else:
+        metadata = inspect_media(model3d_glb, MODEL3D_MIME)
+        assert metadata["vertex_count"] == 6
+        assert metadata["mesh_count"] == metadata["triangle_count"] == 2
+
+
+@pytest.mark.parametrize("variant", ["disconnected_cycle", "scene_root_has_parent", "other_scene_root_has_parent"])
+def test_glb_rejects_invalid_hierarchy_outside_the_default_scene(
+    model3d_glb: Path, variant: str
+) -> None:
+    def mutate(document: dict[str, Any]) -> None:
+        if variant == "disconnected_cycle":
+            document["nodes"].extend([{"children": [2]}, {"children": [1]}])
+        elif variant == "scene_root_has_parent":
+            document["nodes"].append({"children": [0]})
+        else:
+            document["nodes"].extend([{"children": [2]}, {"mesh": 0}])
+            document["scenes"].append({"nodes": [2]})
+
+    rewrite(model3d_glb, mutate)
+    with pytest.raises(DomainError) as failure:
+        inspect_media(model3d_glb, MODEL3D_MIME)
+    assert failure.value.code == "invalid_model3d"
+
+
+def test_glb_accepts_a_valid_unselected_scene(model3d_glb: Path) -> None:
+    def mutate(document: dict[str, Any]) -> None:
+        document["nodes"].append({"mesh": 0})
+        document["scenes"].append({"nodes": [1]})
+
+    rewrite(model3d_glb, mutate)
+    assert inspect_media(model3d_glb, MODEL3D_MIME)["vertex_count"] == 3
+
+
 @pytest.mark.parametrize(
     "kind", ["empty", "header", "version", "truncated", "extra", "nan", "index"]
 )
