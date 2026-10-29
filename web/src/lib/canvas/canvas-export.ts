@@ -7,6 +7,9 @@ import { getImageBlob } from "@/services/image-storage";
 import type { CanvasExportAsset, CanvasExportFile } from "@/types/canvas-export";
 import type { CanvasProject } from "@/stores/canvas/use-canvas-store";
 import { CanvasNodeType, type CanvasNodeData } from "@/types/canvas";
+import { MANAGED_STUDIO } from "@/constant/studio";
+import { blobHash } from "@/services/api/aggregator/client";
+import { withoutCredentials } from "./canvas-transfer";
 
 export async function exportCanvasProjects(projects: CanvasProject[], fileName = i18n.t("canvas.export.defaultProjectName")) {
     const zipFiles: { name: string; data: BlobPart }[] = [];
@@ -16,17 +19,21 @@ export async function exportCanvasProjects(projects: CanvasProject[], fileName =
             await Promise.all(
                 collectStorageKeys(project).map(async (storageKey) => {
                     const blob = storageKey.startsWith("image:") ? await getImageBlob(storageKey) : await getMediaBlob(storageKey);
-                    if (!blob) return;
+                    if (!blob) {
+                        if (MANAGED_STUDIO) throw new Error("备份未完成：部分原件不可读，请使用原服务和 Key，先载入需要保存的产物");
+                        return;
+                    }
                     const path = `projects/${project.id}/files/${safeFileName(storageKey)}.${fileExtension(blob.type, storageKey)}`;
-                    files.push({ storageKey, path, mimeType: blob.type || "application/octet-stream", bytes: blob.size });
+                    files.push({ storageKey, path, mimeType: blob.type || "application/octet-stream", bytes: blob.size, ...(MANAGED_STUDIO ? { sha256: await blobHash(blob) } : {}) });
                     zipFiles.push({ name: path, data: blob });
                 }),
             );
-            return { project, files };
+            return { project: MANAGED_STUDIO ? withoutCredentials(project) : project, files };
         }),
     );
 
     const data: CanvasExportFile = { app: "infinite-canvas", version: 3, exportedAt: new Date().toISOString(), projects: exportedProjects };
+    if (MANAGED_STUDIO) data.studio = { format_version: 1, semantics: "local-media-snapshot" };
     const zip = await createZip([{ name: "projects.json", data: JSON.stringify(data, null, 2) }, ...zipFiles]);
     saveAs(zip, `${safeFileName(fileName)}.zip`);
 }
@@ -56,7 +63,7 @@ export async function exportCanvasNodes(nodes: CanvasNodeData[], fileName = i18n
                 const blob = await (await fetch(content)).blob();
                 return void zipFiles.push({ name: uniqueName(title, fileExtension(blob.type, storageKey)), data: blob });
             }
-            zipFiles.push({ name: uniqueName(title, "json"), data: JSON.stringify(node, null, 2) });
+            zipFiles.push({ name: uniqueName(title, "json"), data: JSON.stringify(MANAGED_STUDIO ? withoutCredentials(node) : node, null, 2) });
         }),
     );
 
@@ -85,5 +92,8 @@ function fileExtension(mimeType: string, storageKey: string) {
     if (mimeType.includes("mpeg") || mimeType.includes("mp3")) return "mp3";
     if (mimeType.includes("wav")) return "wav";
     if (mimeType.includes("ogg")) return "ogg";
+    if (mimeType === "audio/flac") return "flac";
+    if (mimeType === "audio/opus") return "opus";
+    if (mimeType === "model/gltf-binary") return "glb";
     return storageKey.startsWith("image:") ? "png" : "bin";
 }

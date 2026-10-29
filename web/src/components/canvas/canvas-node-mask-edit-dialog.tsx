@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 
 import { readImageMeta } from "@/lib/image-utils";
 import { useImageEditorViewport } from "@/components/canvas/use-image-editor-viewport";
+import { MANAGED_STUDIO } from "@/constant/studio";
+import { lime } from "@/lib/lime-theme";
 
 export type CanvasImageMaskEditPayload = {
     prompt: string;
@@ -19,7 +21,7 @@ type MaskStroke = { mode: DrawMode; size: number; points: Point[] };
 type BrushPreview = { x: number; y: number; size: number; adjusting: boolean };
 
 const defaultBrushSize = 100;
-const maskOverlayColor = "#2563eb";
+const maskOverlayColor = MANAGED_STUDIO ? lime.primary : "#2563eb";
 const maskOverlayAlpha = 0.4;
 
 export function CanvasNodeMaskEditDialog({ dataUrl, open, onClose, onConfirm }: { dataUrl: string; open: boolean; onClose: () => void; onConfirm: (payload: CanvasImageMaskEditPayload) => void }) {

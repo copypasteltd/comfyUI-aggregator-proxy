@@ -1,0 +1,6704 @@
+{
+  "scope": "Saved public usage only; capability release identity is synthetic; no live availability assertion",
+  "sources": [
+    {
+      "path": "docs/evidence/2026-10-28/media-gen-live-catalog-final-124.json",
+      "sha256": "be8dd56cb8ad6fb097966339b58ac517f1ad5180a66183ede28f7b4b18b8d022"
+    },
+    {
+      "path": "docs/examples/model3d/recheck-129/model-usage.json",
+      "sha256": "839f3398b7965c9f344e52d812a31adc3a26020d1960ff4c6aa0868e48a055ce"
+    }
+  ],
+  "models": [
+    {
+      "id": "comfy-3080-image-edit-wai",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "WAI · 图像编辑 · RTX 3080",
+        "description": "通过已验证 ComfyUI Workflow 生成图像编辑产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "参考图按声明的位置和数量传入，须先通过 /v1/assets 上传。"
+        ],
+        "tags": [
+          "image_to_image",
+          "WAI",
+          "asynchronous"
+        ],
+        "task_type": "image_to_image",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "images:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download",
+          "assets:upload"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "input.negative_prompt",
+            "required": false,
+            "description": "反向提示词；仅在本模型声明支持时传入 input。",
+            "rules": {
+              "type": "string",
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "720x1080",
+              "enum": [
+                "720x1080"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "references": {
+          "supported": true,
+          "exact_reference_count": 0,
+          "slots": [
+            {
+              "path": "input.source_image",
+              "required": true,
+              "description": "待重绘的源图片；先上传并使用返回的 asset_id。",
+              "weight_supported": false
+            }
+          ],
+          "media_types": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "720x1080"
+          }
+        ],
+        "output": {
+          "media_types": [
+            "image/png"
+          ],
+          "expected_count": 1,
+          "max_bytes": 33554432
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-3080-image-edit-wai generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-3080-image-edit-wai"
+            },
+            "task_type": {
+              "const": "image_to_image"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt",
+                "source_image"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                },
+                "negative_prompt": {
+                  "type": "string",
+                  "maxLength": 8000
+                },
+                "source_image": {
+                  "$ref": "#/$defs/asset"
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "720x1080",
+                  "enum": [
+                    "720x1080"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "720x1080"
+                    }
+                  }
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-3080-image-edit-wai",
+          "task_type": "image_to_image",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text.",
+            "source_image": {
+              "asset_id": "asset_REPLACE_WITH_UPLOADED_ID"
+            }
+          },
+          "parameters": {
+            "n": 1,
+            "size": "720x1080",
+            "quality": "standard",
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "Lustify / Krea2 · 文生图 · RTX 3080",
+        "description": "通过已验证 ComfyUI Workflow 生成文生图产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。 本说明中的可选参数以实时 Schema 为准。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "此模型不接受参考图输入。"
+        ],
+        "tags": [
+          "text_to_image",
+          "Lustify / Krea2",
+          "asynchronous"
+        ],
+        "task_type": "text_to_image",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "images:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "1024x1024",
+          "quality": "standard"
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "1024x1024",
+              "enum": [
+                "720x1080",
+                "1024x1024",
+                "512x512"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard",
+                "draft"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "references": {
+          "supported": false,
+          "exact_reference_count": 0,
+          "slots": [],
+          "media_types": [],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "720x1080"
+          },
+          {
+            "quality": "standard",
+            "size": "1024x1024"
+          },
+          {
+            "quality": "draft",
+            "size": "512x512"
+          }
+        ],
+        "output": {
+          "media_types": [
+            "image/png"
+          ],
+          "expected_count": 1,
+          "max_bytes": 33554432
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-3080-image-lustify-krea2 generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-3080-image-lustify-krea2"
+            },
+            "task_type": {
+              "const": "text_to_image"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "1024x1024",
+                  "enum": [
+                    "720x1080",
+                    "1024x1024",
+                    "512x512"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard",
+                    "draft"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "720x1080"
+                    }
+                  },
+                  "required": [
+                    "size"
+                  ]
+                },
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "1024x1024"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "draft"
+                    },
+                    "size": {
+                      "const": "512x512"
+                    }
+                  },
+                  "required": [
+                    "quality",
+                    "size"
+                  ]
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-3080-image-lustify-krea2",
+          "task_type": "text_to_image",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text."
+          },
+          "parameters": {
+            "n": 1,
+            "size": "1024x1024",
+            "quality": "standard",
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-3080-image-refs-wai",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "WAI · 双参考图生图 · RTX 3080",
+        "description": "通过已验证 ComfyUI Workflow 生成双参考图生图产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "参考图按声明的位置和数量传入，须先通过 /v1/assets 上传。"
+        ],
+        "tags": [
+          "references_to_image",
+          "WAI",
+          "asynchronous"
+        ],
+        "task_type": "references_to_image",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "images:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download",
+          "assets:upload"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "input.negative_prompt",
+            "required": false,
+            "description": "反向提示词；仅在本模型声明支持时传入 input。",
+            "rules": {
+              "type": "string",
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "720x1080",
+              "enum": [
+                "720x1080"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "references": {
+          "supported": true,
+          "exact_reference_count": 2,
+          "slots": [
+            {
+              "path": "input.references[0]",
+              "required": true,
+              "description": "第 1 张参考图，数组顺序与 Workflow 槽位一致；role 为语义标签，不改变槽位顺序。",
+              "weight_supported": false
+            },
+            {
+              "path": "input.references[1]",
+              "required": true,
+              "description": "第 2 张参考图，数组顺序与 Workflow 槽位一致；role 为语义标签，不改变槽位顺序。",
+              "weight_supported": false
+            }
+          ],
+          "media_types": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "720x1080"
+          }
+        ],
+        "output": {
+          "media_types": [
+            "image/png"
+          ],
+          "expected_count": 1,
+          "max_bytes": 33554432
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-3080-image-refs-wai generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-3080-image-refs-wai"
+            },
+            "task_type": {
+              "const": "references_to_image"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt",
+                "references"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                },
+                "negative_prompt": {
+                  "type": "string",
+                  "maxLength": 8000
+                },
+                "references": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "asset_id",
+                        "role"
+                      ],
+                      "properties": {
+                        "asset_id": {
+                          "$ref": "#/$defs/assetId"
+                        },
+                        "role": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "asset_id",
+                        "role"
+                      ],
+                      "properties": {
+                        "asset_id": {
+                          "$ref": "#/$defs/assetId"
+                        },
+                        "role": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                        }
+                      }
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "720x1080",
+                  "enum": [
+                    "720x1080"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "720x1080"
+                    }
+                  }
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-3080-image-refs-wai",
+          "task_type": "references_to_image",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text.",
+            "references": [
+              {
+                "asset_id": "asset_REPLACE_WITH_UPLOADED_ID_1",
+                "role": "reference_0"
+              },
+              {
+                "asset_id": "asset_REPLACE_WITH_UPLOADED_ID_2",
+                "role": "reference_1"
+              }
+            ]
+          },
+          "parameters": {
+            "n": 1,
+            "size": "720x1080",
+            "quality": "standard",
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-3080-music-yue2",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "YuE2 · 音乐生成 · RTX 3080",
+        "description": "通过已验证 ComfyUI Workflow 生成音乐生成产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "此模型不接受参考图输入。",
+          "prompt 对应音乐风格 style。歌词和其他乐谱输入来自冻结工作流，本模型尚未公开歌词编辑、TTS 或音色克隆参数。"
+        ],
+        "tags": [
+          "text_to_audio",
+          "YuE2",
+          "asynchronous"
+        ],
+        "task_type": "text_to_audio",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "audio:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download"
+        ],
+        "defaults": {
+          "n": 1,
+          "quality": "standard",
+          "seconds": 30.0
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard",
+                "draft"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          },
+          {
+            "path": "parameters.seconds",
+            "required": false,
+            "description": "预设的生成时长，单位秒；不能指定 presets 以外的时长。",
+            "rules": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 600,
+              "multipleOf": 0.001,
+              "default": 30.0,
+              "enum": [
+                30.0,
+                15.0
+              ]
+            }
+          }
+        ],
+        "references": {
+          "supported": false,
+          "exact_reference_count": 0,
+          "slots": [],
+          "media_types": [],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "seconds": 30.0,
+            "audio_format": "flac",
+            "sample_rate": 48000,
+            "channels": 2
+          },
+          {
+            "quality": "draft",
+            "seconds": 15.0,
+            "audio_format": "flac",
+            "sample_rate": 48000,
+            "channels": 2
+          }
+        ],
+        "output": {
+          "media_types": [
+            "audio/flac"
+          ],
+          "expected_count": 1,
+          "max_bytes": 134217728
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-3080-music-yue2 generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-3080-music-yue2"
+            },
+            "task_type": {
+              "const": "text_to_audio"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quality": {
+                  "enum": [
+                    "standard",
+                    "draft"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                },
+                "seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 600,
+                  "multipleOf": 0.001,
+                  "default": 30.0,
+                  "enum": [
+                    30.0,
+                    15.0
+                  ]
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "seconds": {
+                      "const": 30.0
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "draft"
+                    },
+                    "seconds": {
+                      "const": 15.0
+                    }
+                  },
+                  "required": [
+                    "quality",
+                    "seconds"
+                  ]
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-3080-music-yue2",
+          "task_type": "text_to_audio",
+          "input": {
+            "prompt": "Gentle chamber music with warm acoustic strings and a soft piano melody, calm atmosphere, natural dynamics."
+          },
+          "parameters": {
+            "n": 1,
+            "quality": "standard",
+            "seconds": 30.0,
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-4090-video-h3",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "H3 · 文生视频 · RTX 4090",
+        "description": "通过已验证 ComfyUI Workflow 生成文生视频产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "此模型不接受参考图输入。"
+        ],
+        "tags": [
+          "text_to_video",
+          "H3",
+          "asynchronous"
+        ],
+        "task_type": "text_to_video",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "videos:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "864x480",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "864x480",
+              "enum": [
+                "720x1080",
+                "864x480",
+                "512x288"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard",
+                "draft"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          },
+          {
+            "path": "parameters.seconds",
+            "required": false,
+            "description": "预设的生成时长，单位秒；不能指定 presets 以外的时长。",
+            "rules": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 600,
+              "multipleOf": 0.001,
+              "default": 5.167,
+              "enum": [
+                5.167
+              ]
+            }
+          }
+        ],
+        "references": {
+          "supported": false,
+          "exact_reference_count": 0,
+          "slots": [],
+          "media_types": [],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "720x1080",
+            "seconds": 5.167
+          },
+          {
+            "quality": "standard",
+            "size": "864x480",
+            "seconds": 5.167
+          },
+          {
+            "quality": "draft",
+            "size": "512x288",
+            "seconds": 5.167
+          }
+        ],
+        "output": {
+          "media_types": [
+            "video/mp4"
+          ],
+          "expected_count": 1,
+          "max_bytes": 2147483648
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-4090-video-h3 generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-4090-video-h3"
+            },
+            "task_type": {
+              "const": "text_to_video"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "864x480",
+                  "enum": [
+                    "720x1080",
+                    "864x480",
+                    "512x288"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard",
+                    "draft"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                },
+                "seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 600,
+                  "multipleOf": 0.001,
+                  "default": 5.167,
+                  "enum": [
+                    5.167
+                  ]
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "720x1080"
+                    },
+                    "seconds": {
+                      "const": 5.167
+                    }
+                  },
+                  "required": [
+                    "size"
+                  ]
+                },
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "864x480"
+                    },
+                    "seconds": {
+                      "const": 5.167
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "draft"
+                    },
+                    "size": {
+                      "const": "512x288"
+                    },
+                    "seconds": {
+                      "const": 5.167
+                    }
+                  },
+                  "required": [
+                    "quality",
+                    "size"
+                  ]
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-4090-video-h3",
+          "task_type": "text_to_video",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text."
+          },
+          "parameters": {
+            "n": 1,
+            "size": "864x480",
+            "quality": "standard",
+            "seconds": 5.167,
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "H3 · 首帧生视频 · RTX 4090",
+        "description": "通过已验证 ComfyUI Workflow 生成首帧生视频产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "参考图按声明的位置和数量传入，须先通过 /v1/assets 上传。",
+          "单张参考图作为 first_frame 首帧输入。"
+        ],
+        "tags": [
+          "references_to_video",
+          "H3",
+          "asynchronous"
+        ],
+        "task_type": "references_to_video",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "videos:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download",
+          "assets:upload"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "720x1080",
+              "enum": [
+                "720x1080"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          },
+          {
+            "path": "parameters.seconds",
+            "required": false,
+            "description": "预设的生成时长，单位秒；不能指定 presets 以外的时长。",
+            "rules": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 600,
+              "multipleOf": 0.001,
+              "default": 5.167,
+              "enum": [
+                5.167
+              ]
+            }
+          }
+        ],
+        "references": {
+          "supported": true,
+          "exact_reference_count": 1,
+          "slots": [
+            {
+              "path": "input.references[0]",
+              "required": true,
+              "description": "视频首帧图片，role 必须为 first_frame。",
+              "weight_supported": false
+            }
+          ],
+          "media_types": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "720x1080",
+            "seconds": 5.167
+          }
+        ],
+        "output": {
+          "media_types": [
+            "video/mp4"
+          ],
+          "expected_count": 1,
+          "max_bytes": 2147483648
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-4090-video-h3-i2v generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-4090-video-h3-i2v"
+            },
+            "task_type": {
+              "const": "references_to_video"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt",
+                "references"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                },
+                "references": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "prefixItems": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "asset_id",
+                        "role"
+                      ],
+                      "properties": {
+                        "asset_id": {
+                          "$ref": "#/$defs/assetId"
+                        },
+                        "role": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{0,31}$",
+                          "const": "first_frame"
+                        }
+                      }
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "720x1080",
+                  "enum": [
+                    "720x1080"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                },
+                "seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 600,
+                  "multipleOf": 0.001,
+                  "default": 5.167,
+                  "enum": [
+                    5.167
+                  ]
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "720x1080"
+                    },
+                    "seconds": {
+                      "const": 5.167
+                    }
+                  }
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-4090-video-h3-i2v",
+          "task_type": "references_to_video",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text.",
+            "references": [
+              {
+                "asset_id": "asset_REPLACE_WITH_UPLOADED_ID_1",
+                "role": "first_frame"
+              }
+            ]
+          },
+          "parameters": {
+            "n": 1,
+            "size": "720x1080",
+            "quality": "standard",
+            "seconds": 5.167,
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-4090-video-h3-refs",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "H3 · 双参考图生视频 · RTX 4090",
+        "description": "通过已验证 ComfyUI Workflow 生成双参考图生视频产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "参考图按声明的位置和数量传入，须先通过 /v1/assets 上传。"
+        ],
+        "tags": [
+          "references_to_video",
+          "H3",
+          "asynchronous"
+        ],
+        "task_type": "references_to_video",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "videos:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download",
+          "assets:upload"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "720x1080",
+              "enum": [
+                "720x1080"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          },
+          {
+            "path": "parameters.seconds",
+            "required": false,
+            "description": "预设的生成时长，单位秒；不能指定 presets 以外的时长。",
+            "rules": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 600,
+              "multipleOf": 0.001,
+              "default": 5.167,
+              "enum": [
+                5.167
+              ]
+            }
+          }
+        ],
+        "references": {
+          "supported": true,
+          "exact_reference_count": 2,
+          "slots": [
+            {
+              "path": "input.references[0]",
+              "required": true,
+              "description": "第 1 张参考图，数组顺序与 Workflow 槽位一致；role 为语义标签，不改变槽位顺序。",
+              "weight_supported": false
+            },
+            {
+              "path": "input.references[1]",
+              "required": true,
+              "description": "第 2 张参考图，数组顺序与 Workflow 槽位一致；role 为语义标签，不改变槽位顺序。",
+              "weight_supported": false
+            }
+          ],
+          "media_types": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "720x1080",
+            "seconds": 5.167
+          }
+        ],
+        "output": {
+          "media_types": [
+            "video/mp4"
+          ],
+          "expected_count": 1,
+          "max_bytes": 2147483648
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-4090-video-h3-refs generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-4090-video-h3-refs"
+            },
+            "task_type": {
+              "const": "references_to_video"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt",
+                "references"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                },
+                "references": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "asset_id",
+                        "role"
+                      ],
+                      "properties": {
+                        "asset_id": {
+                          "$ref": "#/$defs/assetId"
+                        },
+                        "role": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "asset_id",
+                        "role"
+                      ],
+                      "properties": {
+                        "asset_id": {
+                          "$ref": "#/$defs/assetId"
+                        },
+                        "role": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                        }
+                      }
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "720x1080",
+                  "enum": [
+                    "720x1080"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                },
+                "seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 600,
+                  "multipleOf": 0.001,
+                  "default": 5.167,
+                  "enum": [
+                    5.167
+                  ]
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "720x1080"
+                    },
+                    "seconds": {
+                      "const": 5.167
+                    }
+                  }
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-4090-video-h3-refs",
+          "task_type": "references_to_video",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text.",
+            "references": [
+              {
+                "asset_id": "asset_REPLACE_WITH_UPLOADED_ID_1",
+                "role": "reference_0"
+              },
+              {
+                "asset_id": "asset_REPLACE_WITH_UPLOADED_ID_2",
+                "role": "reference_1"
+              }
+            ]
+          },
+          "parameters": {
+            "n": 1,
+            "size": "720x1080",
+            "quality": "standard",
+            "seconds": 5.167,
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-5070-video-h3",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "H3 · 文生视频 · RTX 5070",
+        "description": "通过已验证 ComfyUI Workflow 生成文生视频产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "此模型不接受参考图输入。"
+        ],
+        "tags": [
+          "text_to_video",
+          "H3",
+          "asynchronous"
+        ],
+        "task_type": "text_to_video",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "videos:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "512x288",
+          "quality": "standard",
+          "seconds": 1.625
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "512x288",
+              "enum": [
+                "512x288"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          },
+          {
+            "path": "parameters.seconds",
+            "required": false,
+            "description": "预设的生成时长，单位秒；不能指定 presets 以外的时长。",
+            "rules": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 600,
+              "multipleOf": 0.001,
+              "default": 1.625,
+              "enum": [
+                1.625
+              ]
+            }
+          }
+        ],
+        "references": {
+          "supported": false,
+          "exact_reference_count": 0,
+          "slots": [],
+          "media_types": [],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "512x288",
+            "seconds": 1.625
+          }
+        ],
+        "output": {
+          "media_types": [
+            "video/mp4"
+          ],
+          "expected_count": 1,
+          "max_bytes": 134217728
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-5070-video-h3 generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-5070-video-h3"
+            },
+            "task_type": {
+              "const": "text_to_video"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "512x288",
+                  "enum": [
+                    "512x288"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                },
+                "seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 600,
+                  "multipleOf": 0.001,
+                  "default": 1.625,
+                  "enum": [
+                    1.625
+                  ]
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "512x288"
+                    },
+                    "seconds": {
+                      "const": 1.625
+                    }
+                  }
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-5070-video-h3",
+          "task_type": "text_to_video",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text."
+          },
+          "parameters": {
+            "n": 1,
+            "size": "512x288",
+            "quality": "standard",
+            "seconds": 1.625,
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "H3 · 首帧生视频 · RTX 5070",
+        "description": "通过已验证 ComfyUI Workflow 生成首帧生视频产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "参考图按声明的位置和数量传入，须先通过 /v1/assets 上传。",
+          "单张参考图作为 first_frame 首帧输入。"
+        ],
+        "tags": [
+          "references_to_video",
+          "H3",
+          "asynchronous"
+        ],
+        "task_type": "references_to_video",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "videos:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download",
+          "assets:upload"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "512x288",
+          "quality": "standard",
+          "seconds": 1.625
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "512x288",
+              "enum": [
+                "512x288"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          },
+          {
+            "path": "parameters.seconds",
+            "required": false,
+            "description": "预设的生成时长，单位秒；不能指定 presets 以外的时长。",
+            "rules": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 600,
+              "multipleOf": 0.001,
+              "default": 1.625,
+              "enum": [
+                1.625
+              ]
+            }
+          }
+        ],
+        "references": {
+          "supported": true,
+          "exact_reference_count": 1,
+          "slots": [
+            {
+              "path": "input.references[0]",
+              "required": true,
+              "description": "视频首帧图片，role 必须为 first_frame。",
+              "weight_supported": false
+            }
+          ],
+          "media_types": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "512x288",
+            "seconds": 1.625
+          }
+        ],
+        "output": {
+          "media_types": [
+            "video/mp4"
+          ],
+          "expected_count": 1,
+          "max_bytes": 134217728
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-5070-video-h3-i2v generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-5070-video-h3-i2v"
+            },
+            "task_type": {
+              "const": "references_to_video"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt",
+                "references"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                },
+                "references": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "prefixItems": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "asset_id",
+                        "role"
+                      ],
+                      "properties": {
+                        "asset_id": {
+                          "$ref": "#/$defs/assetId"
+                        },
+                        "role": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{0,31}$",
+                          "const": "first_frame"
+                        }
+                      }
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "512x288",
+                  "enum": [
+                    "512x288"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                },
+                "seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 600,
+                  "multipleOf": 0.001,
+                  "default": 1.625,
+                  "enum": [
+                    1.625
+                  ]
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "512x288"
+                    },
+                    "seconds": {
+                      "const": 1.625
+                    }
+                  }
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-5070-video-h3-i2v",
+          "task_type": "references_to_video",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text.",
+            "references": [
+              {
+                "asset_id": "asset_REPLACE_WITH_UPLOADED_ID_1",
+                "role": "first_frame"
+              }
+            ]
+          },
+          "parameters": {
+            "n": 1,
+            "size": "512x288",
+            "quality": "standard",
+            "seconds": 1.625,
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-5070-video-h3-refs",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "H3 · 双参考图生视频 · RTX 5070",
+        "description": "通过已验证 ComfyUI Workflow 生成双参考图生视频产物。输入和输出规格以本模型 usage 中冻结的参数、参考槽位与 preset 组合为准；提交后返回任务 ID，可异步查询并下载。",
+        "notes": [
+          "仅接受公布的 preset 组合，不支持任意指定分辨率或时长。",
+          "生成结果从成功开始保留 8 小时；请使用同一业务 Key 查询和下载。",
+          "参考图按声明的位置和数量传入，须先通过 /v1/assets 上传。"
+        ],
+        "tags": [
+          "references_to_video",
+          "H3",
+          "asynchronous"
+        ],
+        "task_type": "references_to_video",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "videos:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download",
+          "assets:upload"
+        ],
+        "defaults": {
+          "n": 1,
+          "size": "512x288",
+          "quality": "standard",
+          "seconds": 1.625
+        },
+        "parameter_details": [
+          {
+            "path": "input.prompt",
+            "required": true,
+            "description": "必填文字提示；音乐/音频使用该模型说明约定的文本格式。",
+            "rules": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8000
+            }
+          },
+          {
+            "path": "parameters.size",
+            "required": false,
+            "description": "宽x高，例如 720x1080；只能选择 presets 中完整的规格组合。",
+            "rules": {
+              "type": "string",
+              "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+              "default": "512x288",
+              "enum": [
+                "512x288"
+              ]
+            }
+          },
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          },
+          {
+            "path": "parameters.seconds",
+            "required": false,
+            "description": "预设的生成时长，单位秒；不能指定 presets 以外的时长。",
+            "rules": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 600,
+              "multipleOf": 0.001,
+              "default": 1.625,
+              "enum": [
+                1.625
+              ]
+            }
+          }
+        ],
+        "references": {
+          "supported": true,
+          "exact_reference_count": 2,
+          "slots": [
+            {
+              "path": "input.references[0]",
+              "required": true,
+              "description": "第 1 张参考图，数组顺序与 Workflow 槽位一致；role 为语义标签，不改变槽位顺序。",
+              "weight_supported": false
+            },
+            {
+              "path": "input.references[1]",
+              "required": true,
+              "description": "第 2 张参考图，数组顺序与 Workflow 槽位一致；role 为语义标签，不改变槽位顺序。",
+              "weight_supported": false
+            }
+          ],
+          "media_types": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard",
+            "size": "512x288",
+            "seconds": 1.625
+          }
+        ],
+        "output": {
+          "media_types": [
+            "video/mp4"
+          ],
+          "expected_count": 1,
+          "max_bytes": 134217728
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-5070-video-h3-refs generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-5070-video-h3-refs"
+            },
+            "task_type": {
+              "const": "references_to_video"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "prompt",
+                "references"
+              ],
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8000
+                },
+                "references": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "prefixItems": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "asset_id",
+                        "role"
+                      ],
+                      "properties": {
+                        "asset_id": {
+                          "$ref": "#/$defs/assetId"
+                        },
+                        "role": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "asset_id",
+                        "role"
+                      ],
+                      "properties": {
+                        "asset_id": {
+                          "$ref": "#/$defs/assetId"
+                        },
+                        "role": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                        }
+                      }
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$",
+                  "default": "512x288",
+                  "enum": [
+                    "512x288"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "standard"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                },
+                "seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 600,
+                  "multipleOf": 0.001,
+                  "default": 1.625,
+                  "enum": [
+                    1.625
+                  ]
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    },
+                    "size": {
+                      "const": "512x288"
+                    },
+                    "seconds": {
+                      "const": 1.625
+                    }
+                  }
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-5070-video-h3-refs",
+          "task_type": "references_to_video",
+          "input": {
+            "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text.",
+            "references": [
+              {
+                "asset_id": "asset_REPLACE_WITH_UPLOADED_ID_1",
+                "role": "reference_0"
+              },
+              {
+                "asset_id": "asset_REPLACE_WITH_UPLOADED_ID_2",
+                "role": "reference_1"
+              }
+            ]
+          },
+          "parameters": {
+            "n": 1,
+            "size": "512x288",
+            "quality": "standard",
+            "seconds": 1.625,
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    },
+    {
+      "id": "comfy-3080-3d-trellis2",
+      "object": "model",
+      "created": 1793233088,
+      "owned_by": "render-control",
+      "usage": {
+        "schema_version": "1.0",
+        "display_name": "TRELLIS2 · 单图生成 3D · RTX 3080",
+        "description": "使用同一 API Key 上传的主体图片，经 TRELLIS2 生成一个自包含静态三角网格 GLB 2.0。异步提交、查询并下载；不接受文字提示或输出尺寸参数。",
+        "notes": [
+          "仅支持冻结的 standard 预设，seed 可传；n 固定为 1。",
+          "实际文件元数据提供网格、顶点、三角面及材质计数；这些计数不代表拓扑或打印质量验收。",
+          "GLB 可能包含顶点颜色；不承诺 UV/PBR 贴图、动画、骨骼或可打印性。",
+          "需要 meshes:create 以及 Tenant、Project、Key 三层 3D 配额。",
+          "云端结果成功后保留 8 小时，请及时鉴权下载。"
+        ],
+        "tags": [
+          "image_to_3d",
+          "TRELLIS2",
+          "GLB",
+          "asynchronous"
+        ],
+        "task_type": "image_to_3d",
+        "asynchronous": true,
+        "endpoints": {
+          "create": "/v1/jobs",
+          "poll": "/v1/jobs/{job_id}",
+          "upload": "/v1/assets",
+          "content": "/v1/content/{content_id}",
+          "download": "/v1/content/{content_id}/download"
+        },
+        "request_content_type": "application/json",
+        "required_scopes": [
+          "models:read",
+          "capabilities:read",
+          "jobs:create",
+          "meshes:create",
+          "jobs:read",
+          "artifacts:read",
+          "content:read",
+          "content:download",
+          "assets:upload"
+        ],
+        "defaults": {
+          "n": 1,
+          "quality": "standard"
+        },
+        "parameter_details": [
+          {
+            "path": "parameters.quality",
+            "required": false,
+            "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+            "rules": {
+              "enum": [
+                "standard"
+              ],
+              "default": "standard"
+            }
+          },
+          {
+            "path": "parameters.seed",
+            "required": false,
+            "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+            "rules": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "path": "parameters.n",
+            "required": false,
+            "description": "每次任务的主产物数量，目前固定为 1。",
+            "rules": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "references": {
+          "supported": true,
+          "exact_reference_count": 0,
+          "slots": [
+            {
+              "path": "input.source_image",
+              "required": true,
+              "description": "生成依据的源图片；先上传并使用返回的 asset_id。",
+              "weight_supported": false
+            }
+          ],
+          "media_types": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "max_upload_bytes": 20971520,
+          "max_image_pixels": 25000000,
+          "upload_field": "file",
+          "asset_scope": "same_api_key",
+          "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+        },
+        "presets": [
+          {
+            "quality": "standard"
+          }
+        ],
+        "output": {
+          "media_types": [
+            "model/gltf-binary"
+          ],
+          "expected_count": 1,
+          "max_bytes": 536870912
+        },
+        "request_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "comfy-3080-3d-trellis2 generation request",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "task_type",
+            "input"
+          ],
+          "properties": {
+            "model": {
+              "const": "comfy-3080-3d-trellis2"
+            },
+            "task_type": {
+              "const": "image_to_3d"
+            },
+            "input": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source_image"
+              ],
+              "properties": {
+                "source_image": {
+                  "$ref": "#/$defs/asset"
+                }
+              }
+            },
+            "parameters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "quality": {
+                  "enum": [
+                    "standard"
+                  ],
+                  "default": "standard"
+                },
+                "seed": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1,
+                  "default": 1
+                }
+              },
+              "anyOf": [
+                {
+                  "properties": {
+                    "quality": {
+                      "const": "standard"
+                    }
+                  }
+                }
+              ]
+            },
+            "client_request_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_3d"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "prompt"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "negative_prompt"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "strength"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "prompt"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "text_to_video",
+                      "text_to_audio"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "references"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "image_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "source_image"
+                    ],
+                    "not": {
+                      "required": [
+                        "references"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "references_to_image",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "required": [
+                      "references"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "source_image"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "mask"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_image",
+                      "image_to_image",
+                      "references_to_image"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "enum": [
+                      "text_to_video",
+                      "references_to_video"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "n": {
+                        "const": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "not": {
+                      "const": "image_to_image"
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "required": [
+                        "strength"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_image"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "minItems": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "references_to_video"
+                  },
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "maxItems": 1
+                      }
+                    },
+                    "required": [
+                      "references"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "input": {
+                    "properties": {
+                      "references": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "const": "first_frame"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "task_type": {
+                    "const": "text_to_audio"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "parameters": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "fps"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "parameters": {
+                    "properties": {
+                      "seconds": {
+                        "maximum": 120
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "$defs": {
+            "assetId": {
+              "type": "string",
+              "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+            },
+            "asset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "asset_id"
+              ],
+              "properties": {
+                "asset_id": {
+                  "$ref": "#/$defs/assetId"
+                }
+              }
+            }
+          }
+        },
+        "example_request": {
+          "model": "comfy-3080-3d-trellis2",
+          "task_type": "image_to_3d",
+          "input": {
+            "source_image": {
+              "asset_id": "asset_REPLACE_WITH_UPLOADED_ID"
+            }
+          },
+          "parameters": {
+            "n": 1,
+            "quality": "standard",
+            "seed": 42
+          }
+        },
+        "output_retention_seconds": 28800,
+        "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+      }
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "comfy-3080-image-edit-wai",
+      "task_type": "image_to_image",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "720x1080"
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n"
+      ],
+      "output": {
+        "media_types": [
+          "image/png"
+        ],
+        "expected_count": 1,
+        "max_bytes": 33554432
+      }
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2",
+      "task_type": "text_to_image",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "720x1080"
+        },
+        {
+          "quality": "standard",
+          "size": "1024x1024"
+        },
+        {
+          "quality": "draft",
+          "size": "512x512"
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n"
+      ],
+      "output": {
+        "media_types": [
+          "image/png"
+        ],
+        "expected_count": 1,
+        "max_bytes": 33554432
+      }
+    },
+    {
+      "id": "comfy-3080-image-refs-wai",
+      "task_type": "references_to_image",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "720x1080"
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n"
+      ],
+      "output": {
+        "media_types": [
+          "image/png"
+        ],
+        "expected_count": 1,
+        "max_bytes": 33554432
+      }
+    },
+    {
+      "id": "comfy-3080-music-yue2",
+      "task_type": "text_to_audio",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "seconds": 30.0,
+          "audio_format": "flac",
+          "sample_rate": 48000,
+          "channels": 2
+        },
+        {
+          "quality": "draft",
+          "seconds": 15.0,
+          "audio_format": "flac",
+          "sample_rate": 48000,
+          "channels": 2
+        }
+      ],
+      "supported_parameters": [
+        "quality",
+        "seed",
+        "n",
+        "seconds"
+      ],
+      "output": {
+        "media_types": [
+          "audio/flac"
+        ],
+        "expected_count": 1,
+        "max_bytes": 134217728
+      }
+    },
+    {
+      "id": "comfy-4090-video-h3",
+      "task_type": "text_to_video",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "720x1080",
+          "seconds": 5.167
+        },
+        {
+          "quality": "standard",
+          "size": "864x480",
+          "seconds": 5.167
+        },
+        {
+          "quality": "draft",
+          "size": "512x288",
+          "seconds": 5.167
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n",
+        "seconds"
+      ],
+      "output": {
+        "media_types": [
+          "video/mp4"
+        ],
+        "expected_count": 1,
+        "max_bytes": 2147483648
+      }
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v",
+      "task_type": "references_to_video",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "720x1080",
+          "seconds": 5.167
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n",
+        "seconds"
+      ],
+      "output": {
+        "media_types": [
+          "video/mp4"
+        ],
+        "expected_count": 1,
+        "max_bytes": 2147483648
+      }
+    },
+    {
+      "id": "comfy-4090-video-h3-refs",
+      "task_type": "references_to_video",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "720x1080",
+          "seconds": 5.167
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n",
+        "seconds"
+      ],
+      "output": {
+        "media_types": [
+          "video/mp4"
+        ],
+        "expected_count": 1,
+        "max_bytes": 2147483648
+      }
+    },
+    {
+      "id": "comfy-5070-video-h3",
+      "task_type": "text_to_video",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "512x288",
+          "seconds": 1.625
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n",
+        "seconds"
+      ],
+      "output": {
+        "media_types": [
+          "video/mp4"
+        ],
+        "expected_count": 1,
+        "max_bytes": 134217728
+      }
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v",
+      "task_type": "references_to_video",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "512x288",
+          "seconds": 1.625
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n",
+        "seconds"
+      ],
+      "output": {
+        "media_types": [
+          "video/mp4"
+        ],
+        "expected_count": 1,
+        "max_bytes": 134217728
+      }
+    },
+    {
+      "id": "comfy-5070-video-h3-refs",
+      "task_type": "references_to_video",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard",
+          "size": "512x288",
+          "seconds": 1.625
+        }
+      ],
+      "supported_parameters": [
+        "size",
+        "quality",
+        "seed",
+        "n",
+        "seconds"
+      ],
+      "output": {
+        "media_types": [
+          "video/mp4"
+        ],
+        "expected_count": 1,
+        "max_bytes": 134217728
+      }
+    },
+    {
+      "id": "comfy-3080-3d-trellis2",
+      "task_type": "image_to_3d",
+      "asynchronous": true,
+      "release": {
+        "version": 1,
+        "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "presets": [
+        {
+          "quality": "standard"
+        }
+      ],
+      "supported_parameters": [
+        "quality",
+        "seed",
+        "n"
+      ],
+      "output": {
+        "media_types": [
+          "model/gltf-binary"
+        ],
+        "expected_count": 1,
+        "max_bytes": 536870912
+      }
+    }
+  ],
+  "scopes": [
+    "artifacts:read",
+    "assets:upload",
+    "audio:create",
+    "capabilities:read",
+    "content:download",
+    "content:read",
+    "images:create",
+    "jobs:create",
+    "jobs:read",
+    "meshes:create",
+    "models:read",
+    "videos:create"
+  ]
+}

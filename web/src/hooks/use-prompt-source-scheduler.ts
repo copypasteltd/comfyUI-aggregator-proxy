@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { MANAGED_STUDIO } from "@/constant/studio";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { refreshDueSources } from "@/services/api/prompts";
@@ -12,7 +13,7 @@ export function usePromptSourceScheduler() {
     const intervalMinutes = usePromptSourceStore((state) => state.schedule.intervalMinutes);
 
     useEffect(() => {
-        if (!intervalMinutes) return;
+        if (MANAGED_STUDIO || !intervalMinutes) return;
         let running = false;
         const tick = async () => {
             if (running) return;

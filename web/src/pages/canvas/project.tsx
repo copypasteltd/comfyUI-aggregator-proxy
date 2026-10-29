@@ -4,6 +4,13 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Group, Video } from "lucide-react";
 import { saveAs } from "file-saver";
 import { useTranslation } from "react-i18next";
+import { MANAGED_STUDIO } from "@/constant/studio";
+import StudioComposer from "@/components/canvas/studio-composer";
+import "@/components/canvas/studio-result-node";
+import { useStudioComposerStore } from "@/stores/use-studio-composer-store";
+import { useStudioCanvasTasks } from "@/hooks/use-studio-canvas-tasks";
+import { updateIntent } from "@/services/aggregator-journal";
+import { getStudioResult, isStudioKey, mediaExtension } from "@/services/studio-media";
 
 import { requestEdit, requestGeneration, requestImageQuestion } from "@/services/api/image";
 import { requestAudioGeneration, storeGeneratedAudio } from "@/services/api/audio";
@@ -249,6 +256,7 @@ function InfiniteCanvasPage() {
     const [clearConfirmOpen, setClearConfirmOpen] = useState(false);
     const [assetPickerOpen, setAssetPickerOpen] = useState(false);
     const [projectLoaded, setProjectLoaded] = useState(false);
+    useStudioCanvasTasks(projectId, MANAGED_STUDIO && projectLoaded, nodes, setNodes, setConnections);
     const [toolbarNodeId, setToolbarNodeId] = useState<string | null>(null);
     const [nodeImageSettingsOpen, setNodeImageSettingsOpen] = useState(false);
     const [dialogNodeId, setDialogNodeId] = useState<string | null>(null);
@@ -588,6 +596,14 @@ function InfiniteCanvasPage() {
         const rect = containerRef.current?.getBoundingClientRect();
         return screenToCanvas((rect?.left || 0) + (rect?.width || size.width) / 2, (rect?.top || 0) + (rect?.height || size.height) / 2);
     }, [screenToCanvas, size.height, size.width]);
+    const openedStudioModel = useRef("");
+    useEffect(() => {
+        const model = searchParams.get("model");
+        if (!MANAGED_STUDIO || !projectLoaded || !model || openedStudioModel.current === `${projectId}:${model}`) return;
+        openedStudioModel.current = `${projectId}:${model}`;
+        const center = getCanvasCenter();
+        useStudioComposerStore.getState().open({ position: { x: center.x - 170, y: center.y - 130 }, preferredModel: model });
+    }, [getCanvasCenter, projectId, projectLoaded, searchParams]);
 
     const setConnecting = useCallback((next: ConnectionHandle | null) => {
         connectingParamsRef.current = next;
@@ -832,6 +848,10 @@ function InfiniteCanvasPage() {
     const createNode = useCallback(
         (type: CanvasNodeTypeId, position?: Position) => {
             const targetPosition = position || getCanvasCenter();
+            if (MANAGED_STUDIO && [CanvasNodeType.Image, CanvasNodeType.Video, CanvasNodeType.Audio, CanvasNodeType.Config].some((item) => item === type)) {
+                useStudioComposerStore.getState().open({ position: targetPosition, media: type === CanvasNodeType.Video ? "video" : type === CanvasNodeType.Audio ? "audio" : type === CanvasNodeType.Image ? "image" : undefined });
+                return;
+            }
             const configMetadata =
                 type === CanvasNodeType.Config
                     ? {
@@ -862,9 +882,13 @@ function InfiniteCanvasPage() {
     );
 
     const deleteNodes = useCallback(
-        (ids: Set<string>) => {
+        async (ids: Set<string>) => {
             if (!ids.size) return;
             const allIds = new Set(ids);
+            if (MANAGED_STUDIO) {
+                try { await Promise.all(nodesRef.current.filter((node) => allIds.has(node.id) && node.metadata?.studioIntentId).map((node) => updateIntent(node.metadata!.studioIntentId!, (intent) => ({ ...intent, canvas: intent.canvas ? { ...intent.canvas, detached: true } : undefined })))); }
+                catch { message.error("任务日志未能保存，已保留节点；删除节点不会取消远端任务"); return; }
+            }
             setNodes((prev) => {
                 const next = prev.filter((node) => !allIds.has(node.id));
                 return next.map((node) => {
@@ -1798,7 +1822,12 @@ function InfiniteCanvasPage() {
         setNodes((prev) => prev.map((node) => (node.id === nodeId ? applyNodeConfigPatch(node, patch) : node)));
     }, []);
 
-    const downloadNodeImage = useCallback((node: CanvasNodeData) => {
+    const downloadNodeImage = useCallback(async (node: CanvasNodeData) => {
+        if (isStudioKey(node.metadata?.storageKey)) {
+            const result = await getStudioResult(node.metadata.storageKey);
+            if (!result) { message.error("请使用原连接读取本机素材"); return; }
+            saveAs(result.blob, `${result.metadata.id}.${mediaExtension(result.metadata.media_type)}`); return;
+        }
         if ((node.type !== CanvasNodeType.Image && node.type !== CanvasNodeType.Video && node.type !== CanvasNodeType.Audio) || !node.metadata?.content) return;
         saveAs(node.metadata.content, `canvas-${node.type}-${node.id}.${node.type === CanvasNodeType.Video ? "mp4" : node.type === CanvasNodeType.Audio ? audioExtension(node.metadata.mimeType) : imageExtension(node.metadata.content)}`);
     }, []);
@@ -2326,6 +2355,11 @@ function InfiniteCanvasPage() {
     const handleGenerateNode = useCallback(
         async (nodeId: string, mode: CanvasNodeGenerationMode, prompt: string) => {
             const sourceNode = nodesRef.current.find((node) => node.id === nodeId);
+            if (MANAGED_STUDIO) {
+                const sources = [sourceNode, ...connectionsRef.current.filter((item) => item.toNodeId === nodeId).map((item) => nodesRef.current.find((node) => node.id === item.fromNodeId))].filter((node): node is CanvasNodeData => Boolean(node));
+                useStudioComposerStore.getState().open({ position: sourceNode ? { x: sourceNode.position.x + sourceNode.width + 60, y: sourceNode.position.y } : { x: 0, y: 0 }, sources, prompt: prompt || (sourceNode?.type === CanvasNodeType.Text ? sourceNode.metadata?.content : ""), media: mode === "text" ? "image" : mode });
+                setDialogNodeId(null); return;
+            }
             const generationConfig = buildGenerationConfig(effectiveConfig, sourceNode, mode);
             if (!isAiConfigReady(generationConfig, generationConfig.model)) {
                 openConfigDialog(true);
@@ -2767,6 +2801,7 @@ function InfiniteCanvasPage() {
 
     const handleRetryNode = useCallback(
         async (node: CanvasNodeData, imageId?: string) => {
+            if (MANAGED_STUDIO) { await handleGenerateNode(node.id, node.type === CanvasNodeType.Video ? "video" : node.type === CanvasNodeType.Audio ? "audio" : "image", node.metadata?.prompt || ""); return; }
             if (hasResumableVideoTask(node)) {
                 await pollVideoNodeTask(node);
                 return;
@@ -3155,6 +3190,7 @@ function InfiniteCanvasPage() {
 
     return (
         <main className="flex h-full min-h-0 overflow-hidden" style={{ background: theme.canvas.background, color: theme.node.text }}>
+            {MANAGED_STUDIO && <StudioComposer projectId={projectId} nodes={nodes} />}
             <CanvasSidePanel nodes={nodes} selectedNodeIds={selectedNodeIds} onFocusNode={focusNode} onPreviewNode={setPreviewNodeId} onHoverNode={setHoverPreviewNodeId} onInsertAsset={handleAssetInsert} />
             <section className="relative min-w-0 flex-1 overflow-hidden">
                 <CanvasTopBar
@@ -3170,6 +3206,7 @@ function InfiniteCanvasPage() {
                     onHome={() => navigate("/")}
                     onProjects={() => navigate("/canvas")}
                     onCreateProject={createAndOpenProject}
+                    onCreateGeneration={MANAGED_STUDIO ? () => { const center = getCanvasCenter(); useStudioComposerStore.getState().open({ position: { x: center.x - 170, y: center.y - 130 }, sources: nodesRef.current.filter((node) => selectedNodeIdsRef.current.has(node.id)) }); } : undefined}
                     onDeleteProject={deleteCurrentProject}
                     onExportProject={exportCurrentProject}
                     onImportImage={() => handleUploadRequest()}

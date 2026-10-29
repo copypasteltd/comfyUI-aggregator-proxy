@@ -145,6 +145,7 @@ export const useAgentStore = create<AgentStore>((set, get) => ({
     togglePanel: () => (get().panelOpen ? get().closePanel() : get().openPanel()),
     setCanvasContext: (canvasContext) => set({ canvasContext }),
     connectAgent: (options) => {
+        if (MANAGED_STUDIO) return set({ connectError: "托管画布不连接本地 Agent" });
         const silent = options?.silent ?? false;
         const endpoint = get().url.trim().replace(/\/$/, "");
         const token = get().token.trim();
@@ -171,3 +172,4 @@ export const useAgentStore = create<AgentStore>((set, get) => ({
     addEventLog: (item) => set((state) => ({ eventLogs: [...state.eventLogs.slice(-160), item] })),
     clearEventLogs: () => set({ eventLogs: [] }),
 }));
+import { MANAGED_STUDIO } from "@/constant/studio";

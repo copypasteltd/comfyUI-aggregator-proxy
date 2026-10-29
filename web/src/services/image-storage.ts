@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import i18n from "@/i18n";
 import { withLocalProxy } from "@/stores/use-config-store";
 import { createImageThumbnail } from "@/lib/image-thumbnail";
+import { getStudioResult, isStudioKey, studioMediaUrl } from "./studio-media";
 
 export type UploadedImage = {
     url: string;
@@ -142,6 +143,7 @@ function throwIfAborted(signal?: AbortSignal) {
 
 export async function resolveImageUrl(storageKey?: string, fallback = "") {
     if (!storageKey) return fallback;
+    if (isStudioKey(storageKey)) return studioMediaUrl(storageKey);
     const cached = objectUrls.get(storageKey);
     if (cached) return cached;
     const blob = await store.getItem<Blob>(storageKey);
@@ -152,6 +154,7 @@ export async function resolveImageUrl(storageKey?: string, fallback = "") {
 }
 
 export async function getImageBlob(storageKey: string) {
+    if (isStudioKey(storageKey)) return (await getStudioResult(storageKey))?.blob || null;
     return store.getItem<Blob>(storageKey);
 }
 

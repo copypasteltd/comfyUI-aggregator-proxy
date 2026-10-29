@@ -8,6 +8,7 @@ import { canvasThemes } from "@/lib/canvas-theme";
 import { useCanvasSidePanelStore } from "@/stores/use-canvas-side-panel-store";
 import { useThemeStore } from "@/stores/use-theme-store";
 import { DOCS_URL } from "@/constant/env";
+import { MANAGED_STUDIO } from "@/constant/studio";
 
 export function CanvasTopBar({
     title,
@@ -22,6 +23,7 @@ export function CanvasTopBar({
     onHome,
     onProjects,
     onCreateProject,
+    onCreateGeneration,
     onDeleteProject,
     onExportProject,
     onImportImage,
@@ -44,6 +46,7 @@ export function CanvasTopBar({
     onHome: () => void;
     onProjects: () => void;
     onCreateProject: () => void;
+    onCreateGeneration?: () => void;
     onDeleteProject: () => void;
     onExportProject: () => void;
     onImportImage: () => void;
@@ -73,7 +76,7 @@ export function CanvasTopBar({
 
     return (
         <>
-            <div className="pointer-events-none absolute left-0 right-0 top-0 z-50 flex h-16 items-center justify-between pl-1 pr-4">
+            <div className="studio-canvas-topbar pointer-events-none absolute left-0 right-0 top-0 z-50 flex h-16 items-center justify-between pl-1 pr-4">
                 <div className="pointer-events-auto flex min-w-0 items-center gap-2">
                     <Tooltip title={sidePanelOpen ? t("canvas.collapsePanel") : t("canvas.expandPanel")}>
                         <button
@@ -110,7 +113,7 @@ export function CanvasTopBar({
                         </button>
                     </Dropdown>
 
-                    <div ref={titleRef} className="flex min-w-0 items-center gap-2">
+                    <div ref={titleRef} className="flex min-w-0 items-center gap-2" data-canvas-title>
                         {isTitleEditing ? (
                             <input
                                 autoFocus
@@ -135,13 +138,14 @@ export function CanvasTopBar({
                             </button>
                         )}
                     </div>
-                    <CompactAgentStatus status={compactAgentStatus} onClick={onToggleAgent} />
+                    {!MANAGED_STUDIO && <CompactAgentStatus status={compactAgentStatus} onClick={onToggleAgent} />}
                 </div>
 
                 <div className="pointer-events-auto flex items-center gap-1.5">
-                    <UserStatusActions variant="canvas" onOpenShortcuts={() => setShortcutsOpen(true)} onOpenPlugins={onOpenPlugins} />
-                    <span className="h-6 w-px" style={{ background: theme.toolbar.border }} />
-                    <Button
+                    {onCreateGeneration && <Button type="primary" onClick={onCreateGeneration}>新建创作</Button>}
+                    {MANAGED_STUDIO ? <Button type="text" onClick={() => setShortcutsOpen(true)}>快捷键</Button> : <UserStatusActions variant="canvas" onOpenShortcuts={() => setShortcutsOpen(true)} onOpenPlugins={onOpenPlugins} />}
+                    {!MANAGED_STUDIO && <span className="h-6 w-px" style={{ background: theme.toolbar.border }} />}
+                    {!MANAGED_STUDIO && <Button
                         type="text"
                         className="!h-10 !rounded-xl !px-3 !font-medium"
                         style={{ background: agentOpen ? theme.toolbar.activeBg : theme.toolbar.panel, color: theme.node.text, boxShadow: "0 10px 30px rgba(28,25,23,.10)" }}
@@ -149,7 +153,7 @@ export function CanvasTopBar({
                         onClick={onToggleAgent}
                     >
                         Agent
-                    </Button>
+                    </Button>}
                 </div>
             </div>
             <Modal title={t("canvas.shortcuts")} open={shortcutsOpen} onCancel={() => setShortcutsOpen(false)} footer={null} centered>

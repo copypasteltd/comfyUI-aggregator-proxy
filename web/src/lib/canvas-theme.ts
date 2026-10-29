@@ -1,7 +1,7 @@
 export type CanvasColorTheme = "light" | "dark";
 export type CanvasBackgroundMode = "dots" | "lines" | "blank";
 
-export const canvasThemes = {
+const upstreamThemes = {
     light: {
         canvas: {
             background: "#f4f2ed",
@@ -60,4 +60,8 @@ export const canvasThemes = {
     },
 } as const;
 
+export const canvasThemes = { ...upstreamThemes, light: MANAGED_STUDIO ? limeCanvasTheme : upstreamThemes.light };
+
 export type CanvasTheme = (typeof canvasThemes)[CanvasColorTheme];
+import { MANAGED_STUDIO } from "@/constant/studio";
+import { limeCanvasTheme } from "@/lib/lime-theme";

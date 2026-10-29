@@ -14,6 +14,10 @@ import { useCanvasStore } from "@/stores/canvas/use-canvas-store";
 import { useCanvasUiStore } from "@/stores/canvas/use-canvas-ui-store";
 import { exportCanvasProjects } from "@/lib/canvas/canvas-export";
 import { hasAgentUrlBootstrap } from "@/lib/agent/agent-url-bootstrap";
+import { nanoid } from "nanoid";
+import { MANAGED_STUDIO } from "@/constant/studio";
+import { importedCanvasSnapshot, validateCanvasArchive } from "@/lib/canvas/canvas-transfer";
+import { blobHash } from "@/services/api/aggregator/client";
 
 export default function CanvasPage() {
     const { message } = App.useApp();
@@ -44,6 +48,29 @@ export default function CanvasPage() {
             const projectFile = zip.get("projects.json");
             if (!projectFile) throw new Error("missing projects.json");
             const data = JSON.parse(await projectFile.text()) as CanvasExportFile;
+            if (MANAGED_STUDIO) {
+                validateCanvasArchive(data);
+                // Check all archive bytes before writing any project or replacing a storage key.
+                const prepared = await Promise.all(data.projects.map(async (item) => {
+                    const keys = new Map<string, string>();
+                    const files = await Promise.all(item.files.map(async (file) => {
+                        const blob = zip.get(file.path);
+                        if (!blob || blob.size !== file.bytes) throw new Error("备份文件缺失或长度不符");
+                        const typed = blob.slice(0, blob.size, file.mimeType);
+                        if (file.sha256 && await blobHash(typed) !== file.sha256) throw new Error("备份文件摘要不符，尚未导入项目");
+                        const key = `${file.mimeType.startsWith("image/") ? "image" : "file"}:import-${nanoid()}`;
+                        keys.set(file.storageKey, key);
+                        return { key, blob: typed };
+                    }));
+                    return { project: importedCanvasSnapshot(item.project, keys), files };
+                }));
+                for (const item of prepared) {
+                    for (const file of item.files) await (file.key.startsWith("image:") ? setImageBlob(file.key, file.blob) : setMediaBlob(file.key, file.blob));
+                    importProject(item.project);
+                }
+                message.success("已导入离线画布和本机原件，任务不会因导入而重新提交");
+                return;
+            }
             await Promise.all(
                 data.projects.flatMap((project) =>
                     project.files.map(async (item) => {
@@ -56,8 +83,8 @@ export default function CanvasPage() {
             );
             data.projects.forEach((item) => importProject(item.project));
             message.success(t("canvas.imported", { count: data.projects.length }));
-        } catch {
-            message.error(t("canvas.importFailed"));
+        } catch (error) {
+            message.error(error instanceof Error ? error.message : t("canvas.importFailed"));
         } finally {
             if (inputRef.current) inputRef.current.value = "";
         }
@@ -82,7 +109,7 @@ export default function CanvasPage() {
                     <div className="flex items-center gap-2">
                         {selectedIds.length ? (
                             <>
-                                <Button disabled={!hydrated} icon={<Download className="size-4" />} onClick={() => void exportCanvasProjects(projects.filter((project) => selectedIds.includes(project.id)), `${t("canvas.title")}-${selectedIds.length}`)}>
+                                <Button disabled={!hydrated} icon={<Download className="size-4" />} onClick={() => void exportCanvasProjects(projects.filter((project) => selectedIds.includes(project.id)), `${t("canvas.title")}-${selectedIds.length}`).catch((error) => message.error(error instanceof Error ? error.message : "备份未完成"))}>
                                     {t("canvas.exportSelected")}
                                 </Button>
                                 <Button disabled={!hydrated} onClick={() => setDeleteIds(selectedIds)}>

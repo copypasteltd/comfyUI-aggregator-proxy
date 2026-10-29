@@ -2,6 +2,7 @@ import { defaultConfig, resolveModelForCapability, type AiConfig } from "@/store
 import i18n from "@/i18n";
 import { ensureImagePreview, resolveImageUrl, uploadImage } from "@/services/image-storage";
 import { resolveMediaUrl } from "@/services/file-storage";
+import { isStudioKey, studioMediaUrl } from "@/services/studio-media";
 import { imageMetadata, referenceUrl } from "@/lib/canvas/canvas-node-factory";
 import type { NodeGenerationInput } from "@/components/canvas/canvas-node-generation";
 import type { CanvasNodeGenerationMode } from "@/components/canvas/canvas-node-prompt-panel";
@@ -47,6 +48,7 @@ export async function hydrateCanvasImages(nodes: CanvasNodeData[]) {
         nodes.map(async (node) => {
             const metadata = node.metadata;
             const content = metadata?.content;
+            if (isStudioKey(metadata?.storageKey)) return { ...node, metadata: { ...metadata, content: await studioMediaUrl(metadata.storageKey) } };
             if ((node.type === CanvasNodeType.Video || node.type === CanvasNodeType.Audio) && metadata?.storageKey) return { ...node, metadata: { ...metadata, content: await resolveMediaUrl(metadata.storageKey, content) } };
             if (node.type !== CanvasNodeType.Image || !metadata || !content) return node;
             const images = await Promise.all(
@@ -129,7 +131,7 @@ export function hasResumableVideoTask(node: CanvasNodeData) {
 
 export function resetInterruptedGeneration(nodes: CanvasNodeData[]) {
     return nodes.map((node) =>
-        node.metadata?.status === "loading"
+        node.metadata?.status === "loading" && !node.metadata.studioIntentId
             ? hasResumableVideoTask(node)
                 ? node
                 : {

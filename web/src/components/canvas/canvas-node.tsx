@@ -14,9 +14,11 @@ import { CanvasNodeType, type CanvasNodeData, type CanvasNodeImage, type CanvasN
 import type { CanvasNodeContext, CanvasPluginHost } from "@/types/canvas-plugin";
 import type { CanvasResourceReference } from "@/lib/canvas/canvas-resource-references";
 import { useTranslation } from "react-i18next";
+import { MANAGED_STUDIO } from "@/constant/studio";
+import { lime } from "@/lib/lime-theme";
 
 type ResizeCorner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
-const selectionBlue = "#2f80ff";
+const selectionBlue = MANAGED_STUDIO ? lime.ink : "#2f80ff";
 
 type CanvasNodeProps = {
     data: CanvasNodeData;

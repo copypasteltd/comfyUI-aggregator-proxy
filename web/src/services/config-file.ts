@@ -1,4 +1,5 @@
 import { saveAs } from "file-saver";
+import { MANAGED_STUDIO, requireStandalone } from "@/constant/studio";
 
 import i18n from "@/i18n";
 import { useConfigStore, type AiConfig, type WebdavSyncConfig } from "@/stores/use-config-store";
@@ -18,6 +19,7 @@ type AppConfigFile = {
 };
 
 export function exportAppConfig() {
+    if (MANAGED_STUDIO) throw new Error("请使用托管画布的无凭证导出功能");
     const { config, webdav } = useConfigStore.getState();
     const { sources, schedule } = usePromptSourceStore.getState();
     const data: AppConfigFile = { app: "infinite-canvas", version: 1, exportedAt: new Date().toISOString(), config, webdav, promptSources: { sources, schedule } };
@@ -25,6 +27,7 @@ export function exportAppConfig() {
 }
 
 export async function importAppConfig(file: File) {
+    requireStandalone();
     let data: AppConfigFile;
     try {
         data = JSON.parse(await file.text()) as AppConfigFile;

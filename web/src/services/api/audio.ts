@@ -1,3 +1,4 @@
+import { requireUpstreamGeneration } from "@/constant/studio";
 import axios from "axios";
 
 import i18n from "@/i18n";
@@ -21,6 +22,7 @@ function aiHeaders(config: AiConfig) {
 }
 
 export async function requestAudioGeneration(config: AiConfig, prompt: string, options?: RequestOptions): Promise<Blob> {
+    requireUpstreamGeneration();
     const requestConfig = resolveModelRequestConfig(config, config.model || config.audioModel);
     const model = requestConfig.model.trim();
     const format = normalizeAudioFormatValue(config.audioFormat);

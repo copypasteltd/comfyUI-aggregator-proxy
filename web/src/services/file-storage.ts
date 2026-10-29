@@ -2,6 +2,7 @@ import localforage from "localforage";
 import { nanoid } from "nanoid";
 
 import { withLocalProxy } from "@/stores/use-config-store";
+import { getStudioResult, isStudioKey, studioMediaUrl } from "./studio-media";
 
 export type UploadedFile = { url: string; storageKey: string; bytes: number; mimeType: string; width?: number; height?: number; durationMs?: number };
 
@@ -20,6 +21,7 @@ export async function uploadMediaFile(input: string | Blob, prefix = "file"): Pr
 
 export async function resolveMediaUrl(storageKey?: string, fallback = "") {
     if (!storageKey) return fallback;
+    if (isStudioKey(storageKey)) return studioMediaUrl(storageKey);
     const cached = objectUrls.get(storageKey);
     if (cached) return cached;
     const blob = await store.getItem<Blob>(storageKey);
@@ -30,6 +32,7 @@ export async function resolveMediaUrl(storageKey?: string, fallback = "") {
 }
 
 export async function getMediaBlob(storageKey: string) {
+    if (isStudioKey(storageKey)) return (await getStudioResult(storageKey))?.blob || null;
     return store.getItem<Blob>(storageKey);
 }
 
