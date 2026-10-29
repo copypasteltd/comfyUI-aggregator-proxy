@@ -156,6 +156,7 @@ export type FocusFrame = {
     below?: number;
     // Fixed chrome covering the bottom edge of the canvas (dock), excluded from the usable area.
     bottomInset?: number;
+    topInset?: number;
 };
 
 // Viewport that centers the node (plus any open overlay above/below) in the usable canvas area, zoomed so the
@@ -164,13 +165,14 @@ export type FocusFrame = {
 export function focusViewportForNode(node: Pick<CanvasNodeData, "position" | "width" | "height">, size: { width: number; height: number }, frame: FocusFrame = {}): ViewportTransform {
     const above = frame.above ?? 0;
     const below = frame.below ?? 0;
-    const usableBottom = Math.max(0, size.height - (frame.bottomInset ?? 0));
+    const usableTop = Math.max(0, frame.topInset ?? 0);
+    const usableHeight = Math.max(0, size.height - (frame.bottomInset ?? 0) - usableTop);
     const nodeCenterX = node.position.x + node.width / 2;
     const nodeCenterY = node.position.y + node.height / 2;
-    const verticalRoom = usableBottom * 0.92 - above - below;
+    const verticalRoom = usableHeight * 0.92 - above - below;
     const k = Math.min(Math.max(Math.min((size.width * 0.6) / node.width, (size.height * 0.6) / node.height, verticalRoom / node.height), 0.05), 1);
     const groupHeight = above + node.height * k + below;
-    const slack = usableBottom - groupHeight;
-    const groupTop = slack * (below > 0 && slack > 0 ? 0.75 : 0.5);
+    const slack = usableHeight - groupHeight;
+    const groupTop = usableTop + slack * (below > 0 && slack > 0 ? 0.75 : 0.5);
     return { x: size.width / 2 - nodeCenterX * k, y: groupTop + groupHeight / 2 - nodeCenterY * k - (below - above) / 2, k };
 }

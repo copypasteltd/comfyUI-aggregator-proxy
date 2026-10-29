@@ -1,6 +1,7 @@
 import test from "node:test";
 import "./canvas-transfer.test";
 import "./studio-result-ownership.test";
+import "./studio-focus.test";
 import "./aggregator-composer.test";
 import assert from "node:assert/strict";
 import fixture from "./fixtures/catalog.json";

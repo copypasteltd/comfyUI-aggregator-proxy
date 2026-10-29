@@ -168,9 +168,11 @@ function measureFocusFrame(container: HTMLDivElement | null, nodeId: string) {
     const panelRect = container.querySelector<HTMLElement>(`[data-node-id="${nodeId}"] [data-node-panel]`)?.getBoundingClientRect();
     const toolbarRect = document.querySelector<HTMLElement>(`[data-node-toolbar="${nodeId}"]`)?.getBoundingClientRect();
     const dockRect = document.querySelector<HTMLElement>("[data-canvas-bottom-toolbar]")?.getBoundingClientRect();
+    const topbarRect = MANAGED_STUDIO ? document.querySelector<HTMLElement>(".studio-canvas-topbar")?.getBoundingClientRect() : undefined;
     const below = nodeRect && panelRect ? panelRect.bottom - nodeRect.bottom : 0;
     const above = nodeRect && toolbarRect ? nodeRect.top - toolbarRect.top : 0;
-    return { above, below, bottomInset: dockRect && below > 0 ? Math.max(0, container.getBoundingClientRect().bottom - dockRect.top) : 0 };
+    const canvasRect = container.getBoundingClientRect();
+    return { above, below, topInset: topbarRect ? Math.max(0, topbarRect.bottom - canvasRect.top) : 0, bottomInset: dockRect && (MANAGED_STUDIO || below > 0) ? Math.max(0, canvasRect.bottom - dockRect.top) : 0 };
 }
 
 function InfiniteCanvasPage() {
@@ -1124,7 +1126,9 @@ function InfiniteCanvasPage() {
             const node = nodesRef.current.find((item) => item.id === nodeId);
             if (!node) return;
             setHoverPreviewNodeId(null);
-            const target = focusViewportForNode(node, size, measureFocusFrame(containerRef.current, nodeId));
+            // Orientation/side-panel changes can reach this click before ResizeObserver updates state.
+            const bounds = containerRef.current?.getBoundingClientRect();
+            const target = focusViewportForNode(node, bounds || size, measureFocusFrame(containerRef.current, nodeId));
             setSelectedNodeIds(new Set([nodeId]));
             setSelectedConnectionId(null);
             setContextMenu(null);
