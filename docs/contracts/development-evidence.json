@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-29/development-trace-baselines-129-permissions.json",
-    "sha256": "75e926ac2522ec174d8d6b0d6babc6b4f08b880eb7e7cd45e48350aeb9afa61b"
+    "path": "docs/evidence/2026-10-29/development-trace-baselines-129-downloads.json",
+    "sha256": "15b6464e99cfee3728f75655a7d9587f9b44b8bb507dffeb0867ad0bd3acd0eb"
   },
   "requirements": [
     {
@@ -789,6 +789,10 @@
         {
           "path": "app/packages/application/src/generation_application/ports.py",
           "baseline": "mesh129permissions"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
+          "baseline": "mesh129downloads"
         }
       ],
       "tests": [
@@ -796,25 +800,25 @@
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_legacy_worker_and_legacy_key_cannot_run_mesh",
           "language": "python",
-          "baseline": "mesh129permissions"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_concurrent_admission_honors_last_slot_and_cancel_refunds",
           "language": "python",
-          "baseline": "mesh129permissions"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_delivery_is_once_isolated_downloadable_and_expires_after_eight_hours",
           "language": "python",
-          "baseline": "mesh129permissions"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_quota_missing_or_zero_rejects_every_parent",
           "language": "python",
-          "baseline": "mesh129permissions"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/tests/protocol/test_model3d_worker.py",
@@ -892,7 +896,7 @@
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_http_requires_mesh_scope_without_image_permission",
           "language": "python",
-          "baseline": "mesh129permissions"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/tests/unit/test_generation_permissions.py",
@@ -911,14 +915,15 @@
         "mesh128",
         "meshui128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "20",
         "23",
         "26"
       ],
-      "limitation": "Bounded static self-contained triangle GLB with independent mesh permission/quota and native 3080 TRELLIS2 delivery. Review 129 repairs POSITION counting, global node hierarchy checks and the application-service mesh permission mapping, with 339 final scoped compatibility checks and separately recorded live evidence. Other formats, interactive preview, texture/topology quality, separate gateway billing and fleet/product acceptance remain open."
+      "limitation": "Bounded static self-contained triangle GLB with independent mesh permission/quota and native 3080 TRELLIS2 delivery. Review 129 repairs POSITION counting, global node hierarchy checks, application-service mesh permission mapping and canonical GLB download filenames, with 339 final scoped compatibility checks and separately recorded live evidence. Other formats, interactive preview, texture/topology quality, separate gateway billing and fleet/product acceptance remain open."
     },
     {
       "id": "API-01",
@@ -2297,7 +2302,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/apps/control_api/src/control_api/uploads.py",
@@ -2337,7 +2342,8 @@
       "evidence": [
         "ci86",
         "asset112",
-        "mesh128"
+        "mesh128",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "29",
@@ -2506,7 +2512,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
@@ -2528,7 +2534,8 @@
         "ci86",
         "go80",
         "asset112",
-        "mesh128"
+        "mesh128",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "37",
@@ -2544,7 +2551,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/apps/control_api/src/control_api/collections.py",
@@ -2571,7 +2578,8 @@
         "ci86",
         "go80",
         "asset112",
-        "mesh128"
+        "mesh128",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "32",
@@ -2607,7 +2615,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/http_output.py",
@@ -2703,7 +2711,8 @@
         "worker118",
         "retention119",
         "http122",
-        "mesh128"
+        "mesh128",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "43",
@@ -2733,7 +2742,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/output_retention.py",
@@ -2819,7 +2828,8 @@
         "asset112",
         "retention119",
         "http122",
-        "mesh128"
+        "mesh128",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "40",
@@ -2874,7 +2884,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content_routes.go",
@@ -2898,7 +2908,8 @@
         "go80",
         "video92",
         "asset112",
-        "mesh128"
+        "mesh128",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "30",
@@ -3975,7 +3986,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
@@ -4010,7 +4021,8 @@
         "visual87",
         "asset112",
         "cors116",
-        "mesh128"
+        "mesh128",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "51",
@@ -4202,7 +4214,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh128"
+          "baseline": "mesh129downloads"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content.go",
@@ -4237,7 +4249,8 @@
         "video92",
         "asset112",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "30",
@@ -4440,7 +4453,8 @@
         "ci86",
         "mesh128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "25",
@@ -4464,7 +4478,8 @@
         "native86",
         "mesh128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "29",
@@ -6066,7 +6081,8 @@
         "go80",
         "mesh128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "28",
@@ -6106,7 +6122,8 @@
         "ci86",
         "mesh128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "34",
@@ -6145,7 +6162,8 @@
         "go80",
         "mesh128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "37",
@@ -6210,7 +6228,8 @@
         "ci86",
         "mesh128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "17",
@@ -6232,7 +6251,8 @@
         "ci86",
         "mesh128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "17",
@@ -6301,7 +6321,8 @@
         "release92",
         "mesh128",
         "mesh129",
-        "mesh129permissions"
+        "mesh129permissions",
+        "mesh129downloads"
       ],
       "remaining_backlog": [
         "69",

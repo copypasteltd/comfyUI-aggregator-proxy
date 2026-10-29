@@ -1,0 +1,32 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T03:11:21.678919+00:00",
+  "passed": true,
+  "scope": "F04 preserves the completed GPU body and repairs the canonical GLB attachment filename; complete GET/HEAD and Range GET/HEAD share authenticated delivery. This records the expected pre-fix failure and current 339-case compatibility regression.",
+  "before": {
+    "source_revision": "b0f873bc4759a1144a158108f1b8948ffee48304",
+    "content_source_sha256": "fac7c0e77f88675c451f8cc797de04a5910cc8c966b2e10376b2ae066b99b32d",
+    "tests": 1,
+    "failed": 1,
+    "junit_sha256": "2b49123d1a55b4c3646641032ceb358b7f97d69394b04d03cb71c9734a06ea93",
+    "log_sha256": "319651e78317747ae7a32ab65fb115e5140ff27e7e40cc7ec82bf2dff8a32282"
+  },
+  "after": {
+    "content_source_sha256": "95effae0922a34d45bd954fe90450ef7a043c0c20366c6c5c91f1954933560c9",
+    "full_head_range_combinations": 4,
+    "final_report_path": "docs/evidence/2026-10-29/model3d-compatibility-129-downloads.json",
+    "final_report_sha256": "10cab6c4041cc37064202d5499dc7644f2836e7aa1847abd8ae44161c9049998",
+    "ruff_passed": true,
+    "mypy_passed": true
+  },
+  "native_database": {
+    "first_start_command_timed_out": true,
+    "same_server_later_confirmed_ready": true,
+    "timeout_increased": false,
+    "database_reset": false
+  },
+  "validator_probe_correction": "An optional local probe compared the entire inspector dictionary with nested API metadata, which excludes media_type because that field is at the API top level. The final download verification compares the MIME and the seven geometry fields at their declared locations. No geometry validation exception was raised by that probe.",
+  "schema_changed": false,
+  "worker_protocol_changed": false,
+  "full_acceptance": "pending"
+}

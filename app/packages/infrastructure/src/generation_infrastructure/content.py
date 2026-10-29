@@ -14,6 +14,7 @@ from generation_application.storage import ObjectStore
 from generation_contracts.collections import CollectionQuery
 from generation_contracts.content_management import ContentOptionQuery, ContentQuery, ContentTags
 from generation_domain.errors import DomainError
+from generation_domain.media_types import MODEL3D_MIME
 from generation_domain.state import TERMINAL
 from generation_domain.values import fingerprint, parse_id, public_id, utcnow
 from PIL import Image, UnidentifiedImageError
@@ -266,7 +267,8 @@ class ContentRepository:
 
     def _download(self, row: Asset | Artifact, obj: ObjectRecord, range_header: str | None, head: bool) -> AuthorizedDownload:
         start, end, status = requested_range(range_header, obj.bytes)
-        headers = {"Accept-Ranges": "bytes", "Content-Length": str(end - start + 1), "Content-Disposition": f'attachment; filename="{public_id("asset" if isinstance(row, Asset) else "content", row.id)}"', "Cache-Control": "private, no-store", "ETag": '"' + obj.sha256 + '"'}
+        filename = public_id("asset" if isinstance(row, Asset) else "content", row.id) + (".glb" if obj.media_type == MODEL3D_MIME else "")
+        headers = {"Accept-Ranges": "bytes", "Content-Length": str(end - start + 1), "Content-Disposition": f'attachment; filename="{filename}"', "Cache-Control": "private, no-store", "ETag": '"' + obj.sha256 + '"'}
         if status == 206:
             headers["Content-Range"] = f"bytes {start}-{end}/{obj.bytes}"
         assert obj.version_id

@@ -5,6 +5,7 @@
 - 复现并修复通用属性缓存导致 POSITION 漏计、默认场景外循环节点及错误场景根漏检；保留修复前 4 项失败，补充 6 个边界场景。
 - All 319 scoped native compatibility checks pass, including previous image/video/audio behavior, mesh quotas, Worker collection, isolated downloads and retention. Reinspect the previous 100,424,732-byte real GLB with matching SHA and geometry counts; no public contract or Worker protocol change.
 - 真实最小权限 Key 复核再发现应用层仍要求 images:create；保留线上 403 和本地修复前 5 失败/15 通过。修正 preflight/create，最终 339 项回归通过，新增七类最小权限及 HTTP 上传/3D 提交/幂等/缺少 meshes:create 拒绝。
+- Fix canonical .glb attachment filenames after the fresh real generation exposed an extensionless browser download. Preserve the pre-fix failure; repeat all 339 scoped checks successfully with full/HEAD/Range filename, MIME, status and length assertions.
 - 验证、线上安装和实际调用范围见 [129](docs/129-三维兼容复查与GLB边界修复.md)；其他 3D 格式、交互预览和完整容量验收继续开放。
 
 ## 2026-10-29 · 128 · Native GLB 3D tasks

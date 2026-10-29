@@ -1,0 +1,46 @@
+{
+  "format_version": 1,
+  "passed": true,
+  "scope": "Final native 129.2 cloud release with F01/F02 geometry repairs and F03 least-privilege preflight/create. Installed application and infrastructure module bytes and immutable source revision are verified. Actual GPU job is separate evidence.",
+  "build": {
+    "passed": true,
+    "archive_sha256": "69507c8279e4e59120b70ddf0de52f151794596e9979e2217bea94ee87e52ea3",
+    "archive_bytes": 1163865,
+    "source_revision": "b0f873bc4759a1144a158108f1b8948ffee48304",
+    "changed_runtime_sources": [
+      "packages/application/src/generation_application/ports.py"
+    ],
+    "wheel_sha256": "dc015b150bedcc0c04f3570fefb2a02bbef99e3c15bfd98fc1f0b2004c36d213",
+    "source_files": 553,
+    "schema_changed": false,
+    "worker_protocol_changed": false,
+    "windows_worker_rebuild_required": false,
+    "scope": "Cloud-only least-privilege generation-service authorization repair. All seven wheel payloads are bound to the source snapshot; six unchanged wheels, Admin and runtime dependencies are reused from verified immutable release 129.1.",
+    "base_cloud_release": "linux-20261029.129.1"
+  },
+  "production": {
+    "at": "2026-10-29T02:42:47.412057+00:00",
+    "release": "linux-20261029.129.2",
+    "source_revision": "b0f873bc4759a1144a158108f1b8948ffee48304",
+    "installed_ports_sha256": "2e854064736de2ae9664ea32d010533387a3004dac7962c27c362f48538788ed",
+    "installed_validator_sha256": "6d232afe54e4138891735d95d0547e5e6cd050ca28bed5d78f27abb8287d89dd",
+    "database_head": "03d128a00001",
+    "services": {
+      "api": "active",
+      "runner": "active",
+      "gc": "active",
+      "http-worker": "active"
+    },
+    "http_worker_pid_unchanged": true,
+    "application_wheel_sha256": "dc015b150bedcc0c04f3570fefb2a02bbef99e3c15bfd98fc1f0b2004c36d213"
+  },
+  "promotion_log_sha256": "528714a3e9a1abb34f1ac15702a76e48ebe5d1aa0618c58c617a3049cc85e48f",
+  "previous_cloud_release_retained": "linux-20261029.129.1",
+  "database_schema_changed": false,
+  "worker_protocol_changed": false,
+  "windows_worker_reinstalled": false,
+  "admin_rebuilt": false,
+  "virtualization_used": false,
+  "browser_used": false,
+  "complete_goal_achieved": false
+}

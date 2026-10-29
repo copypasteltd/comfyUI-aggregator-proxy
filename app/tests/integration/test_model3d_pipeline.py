@@ -267,6 +267,13 @@ def test_mesh_delivery_is_once_isolated_downloadable_and_expires_after_eight_hou
     assert metadata["metadata"]["triangle_count"] == 1
     assert b"".join(content.download(identity, cid, "bytes=0-3").data) == b"glTF"
     assert b"".join(content.download(identity, cid, None, head=True).data) == b""
+    for range_header in (None, "bytes=0-3"):
+        for head in (False, True):
+            download = content.download(identity, cid, range_header, head=head)
+            assert download.headers["Content-Disposition"] == f'attachment; filename="{public_id("content", cid)}.glb"'
+            assert download.media_type == "model/gltf-binary"
+            assert download.status == (206 if range_header else 200)
+            assert len(b"".join(download.data)) == (0 if head else 4 if range_header else spec["bytes"])
     stranger = BusinessIdentity(identity.tenant_id, identity.project_id, uuid4(), identity.policy)
     with pytest.raises(DomainError):
         content.metadata(stranger, cid)
