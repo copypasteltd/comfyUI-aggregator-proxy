@@ -1,0 +1,109 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T00:36:11.710200+00:00",
+  "passed": true,
+  "scope": "Native cloud service promotion, isolated migration rehearsal, native Windows 3080 Worker installation, fresh binding verification and restoration of the three existing channels. Actual generation/download is a separate report.",
+  "virtualization_used": false,
+  "full_acceptance": "pending",
+  "cloud_release": "linux-20261029.128.1",
+  "worker_release": "rc-20261029.128.1",
+  "application_source_revision": "182a3e1035e0eca7a777a17443aade0febbce591",
+  "local_validation_revision": "7754660c00c0ae8608165de059df45ae6ca066d2",
+  "database_head": "03d128a00001",
+  "cloud_services": {
+    "api": "active",
+    "runner": "active",
+    "gc": "active",
+    "http-worker": "active"
+  },
+  "health_ready": true,
+  "http_port": 39443,
+  "cloud_archive_sha256": "b45b105f005319dbd3d618d6304db81596e5d285c377baf1a967c3c0e2c3b217",
+  "worker_archive_sha256": "af38c08a9bf35bc652180703c5e4be96247a987d37a44ff08fec8fff06bec797",
+  "worker_install_phase": "complete",
+  "worker_install_seconds": 168.934,
+  "staging_cleanup": {
+    "passed": true,
+    "at": 1793233844.6083372,
+    "removed_owned_staging_files": [
+      "release.zip",
+      "install-access.json"
+    ],
+    "comfyui_and_runtime_releases_preserved": true
+  },
+  "old_bindings_reverified": [
+    {
+      "id": "op_75a92d41fa024fde91a105a3a6f9ab7b",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_f55ce59785ef418f9504e24646ef7ebf",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_c460758b20424953bf1ae2e5c8a61570",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_33845a20a8bf444c8b01952cc41fa4d2",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_335e786fb11b4f479abcfcf732a28f27",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_fa3908b08dbe4fc4b6c36b1553eaf77c",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_7b98ac23c6274a0182005ba14b42a5b8",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_47125a4fc1314e2eae04f9695e7da424",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_30717b37dd9a411faf22fe910f00f453",
+      "status": "succeeded"
+    },
+    {
+      "id": "op_8cbccff0cb494939a0a412f45629e700",
+      "status": "succeeded"
+    }
+  ],
+  "channels": [
+    {
+      "name": "RTX 5070 / ComfyUI HTTP",
+      "enabled": true,
+      "draining": false,
+      "verified_revision": 1
+    },
+    {
+      "name": "Windows RTX 4090 / ComfyUI",
+      "enabled": true,
+      "draining": false,
+      "verified_revision": 1
+    },
+    {
+      "name": "Windows RTX 3080 / ComfyUI",
+      "enabled": true,
+      "draining": false,
+      "verified_revision": 1
+    }
+  ],
+  "published_model_count": 11,
+  "new_alias": "comfy-3080-3d-trellis2",
+  "new_binding": {
+    "release_id": "wfr_3066c5565b224fb4adcf5dd49f51bb1b",
+    "desired_digest": "37a107c919b4eb9c68989e4ddbd22693a24775f67a66527181f9064055da9773",
+    "applied_digest": "37a107c919b4eb9c68989e4ddbd22693a24775f67a66527181f9064055da9773",
+    "verified_digest": "37a107c919b4eb9c68989e4ddbd22693a24775f67a66527181f9064055da9773",
+    "observed_at": 1793233123
+  },
+  "migration_rehearsal_report": "model3d-migration-restore-128.json",
+  "old_releases_retained_for_rollback": true,
+  "comfyui_models_or_dependencies_modified": false,
+  "credentials_published": false
+}

@@ -92,7 +92,7 @@ def repository(tmp_path: Path) -> Path:
 def test_repository_mapping_checks_actual_current_inputs_without_private_artifacts() -> None:
     result = evidence.audit(ROOT)
     assert result["passed"], result["errors"]
-    assert result["counts"]["requirements"] == 73
+    assert result["counts"]["requirements"] == 74
     assert result["counts"]["acceptance_gates"] == 98
     assert result["full_acceptance"] == "pending" and result["real_resource_acceptance"] is False
 

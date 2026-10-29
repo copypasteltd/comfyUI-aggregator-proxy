@@ -1,5 +1,16 @@
 # 更新日志 / Changelog
 
+## 2026-10-29 · 128 · Native GLB 3D tasks
+
+- 新增单图生成 3D、Workflow 1.2、GLB 最终产物适配与 Worker 显式能力门槛；保持现有六类任务协议兼容。
+- Add independent meshes:create permission, default-zero Tenant/Project/Key mesh quotas, immutable mesh usage accounting and guarded schema migration.
+- 校验 GLB 2.0 完整结构、自包含 buffer、accessor、有限坐标和三角索引；复用云端回读、Key 隔离、HEAD/Range 和八小时到期。
+- Add Admin 3D workflow/model selection, quota controls, content filters, geometry metadata and download, plus Media Gen Skill 1.1.0 image-only generation and canonical GLB downloads.
+- 实际 TRELLIS2 包、调用、部署及验证范围见文档 128；外置 TripoSG/PartCrafter 环境、其他 3D 格式、交互预览及 Sub2API 3D 结算仍待独立实现/验收。
+- Deploy native cloud/3080 releases 128.1 after backup and isolated upgrade/downgrade rehearsal. Reverify the ten existing bindings, restore all three channels and publish the eleventh alias, comfy-3080-3d-trellis2.
+- 真实验证与独立业务 API 调用均成功：业务 GLB 100,424,732 字节；完整下载/SHA、HEAD/Range、幂等及同项目另一 Key 的隔离通过。2,162 项相关回归、3 项现有网关复核、40 项前端 JSON/目录检查通过；9 张实际 Admin 截图和客户端 GLB 下载另附证据。完整项目验收不因此提升。
+- Complete all seven task types in the frozen API fixture set; 1,693 contract/documentation follow-up cases pass within their own overlapping scope. Retain historical failures and unchanged subprocess budgets.
+
 ## 2026-10-28 · 124 · Model usage, MediaGen Skill and HTTP idle reclamation
 
 - 已上线 `linux-20261028.124.2`，迁移头 `02d124a00002`；10 个公开模型说明、三台 600 秒自动回收和四条图片/视频/参考视频/音频调用已通过实际域名验证，临时 Key 已撤销。

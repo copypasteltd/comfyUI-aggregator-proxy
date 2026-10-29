@@ -1,6 +1,14 @@
 # ComfyUI Aggregator Proxy
 
-已部署到 **https://gen.sub2share.xyz**：10 个发布模型现在提供完整 `usage`，三台设备已启用连续空闲 10 分钟自动释放可回收内存/显存；平台仅调用 ComfyUI API。Admin 的“模型与路由 → 使用说明”可查看能力并编辑说明，“Windows 渠道 → 空闲回收”可配置策略并查看执行证明。新增渠道需单独启用策略。
+[128 · 3D 模型适配](docs/128-ComfyUI三维模型产物与3080适配.md) 新增 `image_to_3d`、单文件 GLB 2.0 校验、独立 `meshes:create` 权限与三级 `daily_mesh_count` 额度。以 3080 的 TRELLIS2 为接入例子，使用同一套异步队列、物理 GPU 排他、内容下载及成功后八小时保留。实现和真实验证进度以专题记录为准；只有通过实际运行批准的工作流才发布。
+
+外部用户先查 `/v1/models/{alias}` 的 usage，使用同一业务 Key 向 `/v1/assets` 上传源图，再向 `/v1/jobs` 提交 `task_type=image_to_3d`、`input.source_image.asset_id` 和公布的质量/seed。该流程不接收文字提示或图像尺寸。成功后读取 `artifacts[].id` 并下载 GLB；Admin 可管理发布与权限、筛选 3D 内容、查看几何计数并下载。首批不提供网页旋转预览、OBJ/多文件 glTF 或 Sub2API 3D 计价。[冻结工作流和自制输入](docs/examples/model3d/README.md) 提供具体调用示例。
+
+已部署到 **https://gen.sub2share.xyz**：当前 **11 个发布模型、3 条启用渠道**，包括实际验证并发布的 `comfy-3080-3d-trellis2`。3D 平台验证和独立业务调用均成功；业务 GLB 为 100,424,732 字节，完整下载、摘要、HEAD/Range、幂等和跨 Key 隔离通过。[实际请求/响应](docs/examples/model3d/README.md)、[验收与部署记录](docs/128-ComfyUI三维模型产物与3080适配.md) 和 [Admin 实测截图、原速录屏与 GIF](docs/media/model3d-128/README.md) 可核对。
+
+![实际 3080 直接调用产物的几何展示，使用标明的实色材质](docs/media/model3d-128/trellis2-orbit.gif)
+
+三台设备已启用连续空闲 10 分钟自动释放可回收内存/显存；平台仅调用 ComfyUI API。Admin 的“模型与路由 → 使用说明”可查看能力并编辑说明，“Windows 渠道 → 空闲回收”可配置策略并查看执行证明。新增渠道需单独启用策略。
 
 正式 [Media Gen Skill 1.0.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0) 包含独立 Python 3.10+ 客户端、来源清单和 SHA-256。解压后设置业务 API Key，先查模型和实时参数，再异步生成；模型可见范围和限额由 Key 决定。
 
@@ -15,13 +23,13 @@ python scripts/media_gen.py generate --model comfy-3080-image-lustify-krea2 --pr
 
 [124 · 完整交付与验收](docs/124-模型使用说明与公开Skill交付.md) 记录四条真实 Skill 调用、三台自动回收、部署备份恢复及测试范围。[125 · 回收方案](docs/125-ComfyUI空闲内存回收与双屏障.md) 使用持久互斥、`/free` 和两个有序 CPU 屏障确认完成；暂时失联阻止释放，未知执行保留保护，指标不承诺归零。原始功能版本通过 16 门禁/4391 Python，后续修正通过 1761 项相关回归；两组验证范围分别记录。
 
-[实际截图、原速录屏、GIF、API 响应与生成样本](docs/media/media-gen-124/README.md) 来自线上平台和正式 Skill Release，发布样本已去除嵌入 Workflow 元数据。本次临时测试 Key 已停用。多设备池可把同一冻结发布绑定到多个已验证渠道，现有抢领按可用槽位分配；当前 10 个别名仍各为单渠道，不保证严格轮询或设备任务数相等。
+[实际截图、原速录屏、GIF、API 响应与生成样本](docs/media/media-gen-124/README.md) 来自线上平台和正式 Skill Release，发布样本已去除嵌入 Workflow 元数据。本次临时测试 Key 已停用。多设备池可把同一冻结发布绑定到多个已验证渠道，现有抢领按可用槽位分配；当前 11 个别名仍各为单渠道，不保证严格轮询或设备任务数相等。
 
 ![实际模型说明与自动回收](docs/media/media-gen-124/model-usage-and-idle-policy.gif)
 
 [123 · 空闲资源释放与多设备模型池](docs/123-空闲资源释放与多设备模型池调度设计.md)在 123 时点完成只读检查和设计：当时任务后会释放 GPU **调度槽位**，没有空闲 600 秒自动卸载模型/缓存。已有一个公开别名绑定同一冻结 Workflow 的多个渠道的结构，但线上 10 个别名均为单渠道，现有 Worker 抢领不保证设备等量分配。方案规定实例级空闲计时、全实例维护互斥、条件式释放及实际完成回执，并补充全池公平目标预留、10 项待开发和 14 组待验收。**本增量为设计，未启用释放、合并线上模型或签收多机均衡。**
 
-[122 · 5070 HTTP 接入与精选打包](docs/122-RTX5070纯HTTP接入与调用验证.md) 已部署：从 78 个 Workflow 中仅整理并发布 3 个完整流程：文生视频、首帧生视频、双参考图生视频。每个流程完成一次真实验证和一次独立业务 API 调用，共 6 次生成，下载摘要、实际规格、幂等、HEAD/Range 和八小时期限均通过。线上当前为 **3 条启用渠道、10 个已发布模型别名**。617 项相关回归通过；未通过的候选未批量导入或发布。
+[122 · 5070 HTTP 接入与精选打包](docs/122-RTX5070纯HTTP接入与调用验证.md) 已部署：从 78 个 Workflow 中仅整理并发布 3 个完整流程：文生视频、首帧生视频、双参考图生视频。每个流程完成一次真实验证和一次独立业务 API 调用，共 6 次生成，下载摘要、实际规格、幂等、HEAD/Range 和八小时期限均通过。该增量上线时为 **3 条启用渠道、10 个已发布模型别名**。617 项相关回归通过；未通过的候选未批量导入或发布。
 
 [精选流程包与双语调用说明](docs/examples/5070/README.md) 提供完整发布 JSON、实际模型选项及自制参考图片；[实际截图、原速录屏、GIF 与生成样本](docs/media/5070-workflows-122/README.md) 对应本次部署。独立原生 Linux HTTP Worker 无需远端 Windows-MCP；API-only 依赖声明及 Admin 表单明确区分 API 目录观察和主机文件校验。
 
@@ -45,6 +53,7 @@ python scripts/media_gen.py generate --model comfy-3080-image-lustify-krea2 --pr
 | `comfy-5070-video-h3-i2v` | 1 张首帧图片 | 512×288、1.625 秒、24 fps | `/v1/videos` |
 | `comfy-5070-video-h3-refs` | 2 张参考图片 | 512×288、1.625 秒、24 fps | `/v1/videos` |
 | `comfy-3080-music-yue2` | 文生音频；沿用 118 的实测 | 最长 30 秒，48 kHz 双声道 FLAC | `/v1/jobs`，`text_to_audio` |
+| `comfy-3080-3d-trellis2` | 1 张源图生成 3D | standard、n=1；静态三角网格 GLB 2.0 | `/v1/jobs`，`image_to_3d` |
 
 使用逻辑：Admin 授权 Key 的模型、发布版本、渠道和额度 → 上传参考图片到 `/v1/assets` → 带 `asset_id` 异步提交 → 查询 `/v1/jobs/{id}` → 用同一 Key 下载内容。新版本不会自动扩大已有 Key 的权限。图像编辑使用 `source_image`，首帧视频使用 `input_reference`，双图参考使用按顺序排列的两项 `references`。完整 JSON、原生验证工具及重试逻辑见 [120 调用说明](docs/120-参考能力发布与精确尺寸验证.md)。
 

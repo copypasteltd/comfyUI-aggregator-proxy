@@ -1,0 +1,61 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T00:38:35.259230+00:00",
+  "passed": true,
+  "scope": "Actual cloud business API submission, native RTX 3080 TRELLIS2 execution, Worker upload, cloud GLB validation, authenticated controller download and local geometry validation. One real workflow; no fleet-capacity or texture-quality acceptance.",
+  "virtualization_used": false,
+  "synthetic_data": false,
+  "alias": "comfy-3080-3d-trellis2",
+  "task_type": "image_to_3d",
+  "validation_job_id": "job_1a91ea2db14345058f5b901a36ca7e54",
+  "business_job_id": "job_28e58bd8b5c34dd281702a1cc9300d30",
+  "content_id": "content_7c40ff80f0d24e99bc1eb7d19bd7ac70",
+  "output": {
+    "job_id": "job_28e58bd8b5c34dd281702a1cc9300d30",
+    "content_id": "content_7c40ff80f0d24e99bc1eb7d19bd7ac70",
+    "sha256": "a7e1b5b6af2ef03f69f18c7a6f453d8e886811bae35ecb637a5b1a66df08a1f7",
+    "bytes": 100424732,
+    "metadata": {
+      "media_type": "model/gltf-binary",
+      "format": "glb",
+      "mesh_count": 1,
+      "vertex_count": 2092758,
+      "triangle_count": 4183116,
+      "material_count": 1,
+      "texture_count": 0,
+      "has_textures": false
+    }
+  },
+  "head_verified": true,
+  "range_verified": true,
+  "idempotency_replay_same_job": true,
+  "same_project_other_key_rejected": [
+    {
+      "method": "GET",
+      "path": "/v1/content/content_7c40ff80f0d24e99bc1eb7d19bd7ac70",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_7c40ff80f0d24e99bc1eb7d19bd7ac70/download",
+      "status": 404
+    },
+    {
+      "method": "HEAD",
+      "path": "/v1/content/content_7c40ff80f0d24e99bc1eb7d19bd7ac70/download",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_28e58bd8b5c34dd281702a1cc9300d30",
+      "status": 404
+    }
+  ],
+  "isolation_key_disabled": true,
+  "declared_output_retention_seconds": 28800,
+  "wall_clock_eight_hour_gc_waited": false,
+  "local_expiry_test_reference": "test_mesh_delivery_is_once_isolated_downloadable_and_expires_after_eight_hours",
+  "cloud_release": "linux-20261029.128.1",
+  "worker_release": "rc-20261029.128.1",
+  "raw_credentials_published": false
+}

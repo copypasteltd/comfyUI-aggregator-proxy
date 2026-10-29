@@ -1,0 +1,160 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T01:06:36.391095+00:00",
+  "passed": true,
+  "sources_unchanged": true,
+  "real_resource_acceptance": false,
+  "scope": "Final frozen-contract fixtures including six added 3D examples, read-only OpenAPI/contract generator checks and the updated 74-requirement evidence mapping. The 2162-case runtime implementation report is recorded separately.",
+  "python": {
+    "tests": 1693,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/tests/contract/test_frozen_contracts.py": "3f12935c96a17eba4e28db1daf176fb06c1d074028c91d35f89b592d0c494c1f",
+    "app/tests/unit/test_development_evidence.py": "ddf8851fd0eb298366da828765f2c9725d8a34db76e2519643034574a1f40517",
+    "app/tests/unit/test_native_ci.py": "2da62c74f0d0bb5882c47c7327faa207c5225a36cef5b1e66bf2030b64477c5e",
+    "app/scripts/sync-contracts.py": "bc13e44d86f9781ec5582636ecee6c0bd3c0e8b0c6b4381f704fc613ed117a80",
+    "app/scripts/export-openapi.py": "ce29484794df62184978c291dbe57d3573e0cbdca75c8894cd90fb377753b390",
+    "docs/tools/verify_docs.py": "68217cc96405428395e8fc0ecc1b005bdd30a94454715cff35f22fb96d4a07fc",
+    "docs/contracts/fixtures.json": "e7b093e8bb53103b038dc43c9a0ed085175951297284738e56fa04e8c8cfd228",
+    "app/config/contract-hashes.json": "2db65969fcad78d9b63a7bf2441dc50902efd5d4b41531f7de1f319a7ee36fbb"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_alert_dtos_match_frozen_fixture",
+      "passed_cases": 40
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_audit_query_dto_matches_frozen_fixture",
+      "passed_cases": 16
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_audit_retention_dto_matches_frozen_fixture",
+      "passed_cases": 16
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_cancellation_batch_dto_matches_frozen_fixture",
+      "passed_cases": 16
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_capacity_dto_matches_frozen_fixture",
+      "passed_cases": 11
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_channel_deletion_dto_matches_frozen_fixture",
+      "passed_cases": 30
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_channel_query_dto_matches_frozen_fixture",
+      "passed_cases": 24
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_checkpoint_dto_matches_frozen_fixture",
+      "passed_cases": 12
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_command_reconciliation_dto_matches_frozen_fixture",
+      "passed_cases": 28
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_frozen_fixture",
+      "passed_cases": 1045
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_gateway_catalog_dto_matches_frozen_fixture",
+      "passed_cases": 20
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_gateway_recovery_dto_matches_frozen_fixture",
+      "passed_cases": 6
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_isolation_dto_matches_frozen_mutation_fixture",
+      "passed_cases": 10
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_key_generation_dtos_match_frozen_fixture",
+      "passed_cases": 68
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_model_catalog_dtos_match_frozen_fixture",
+      "passed_cases": 65
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_packaged_contracts_match_frozen_source",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_session_dto_matches_frozen_fixture",
+      "passed_cases": 16
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_workflow_directory_dtos_match_frozen_fixture",
+      "passed_cases": 85
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_workflow_history_dtos_match_frozen_fixture",
+      "passed_cases": 75
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_workflow_lifecycle_dto_matches_frozen_fixture",
+      "passed_cases": 42
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_workflow_lifecycle_result_increases_revision_once",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_workflow_restoration_dto_matches_frozen_fixture",
+      "passed_cases": 44
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_workflow_restoration_result_requires_a_single_revision_increment",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/contract/test_frozen_contracts.py",
+      "symbol": "test_workflow_retry_dto_matches_frozen_fixture",
+      "passed_cases": 16
+    },
+    {
+      "path": "app/tests/unit/test_development_evidence.py",
+      "symbol": "test_repository_mapping_checks_actual_current_inputs_without_private_artifacts",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_native_ci.py",
+      "symbol": "test_generated_check_is_read_only_and_rejects_stale_files",
+      "passed_cases": 4
+    }
+  ],
+  "junit_sha256": "3ac9a5cf880bb1510b99a0a74c83cdf55a5e5ebeb1d05f2f492623772dbc1c8c",
+  "python_log_sha256": "fc43f4d8f247bd0e2dfc2b6ab62d898431663f7df419a03f0cf2f7b5f242679b",
+  "seconds": 49.202,
+  "full_acceptance": "pending"
+}

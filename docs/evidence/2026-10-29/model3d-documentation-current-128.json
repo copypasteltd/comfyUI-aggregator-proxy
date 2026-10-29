@@ -1,0 +1,54 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T01:00:17.055616+00:00",
+  "passed": true,
+  "scope": "Five current documentation mapping and read-only generator scenarios; native processes only. This does not rerun the complete application suite.",
+  "python": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/tests/unit/test_development_evidence.py": "ddf8851fd0eb298366da828765f2c9725d8a34db76e2519643034574a1f40517",
+    "app/tests/unit/test_native_ci.py": "2da62c74f0d0bb5882c47c7327faa207c5225a36cef5b1e66bf2030b64477c5e",
+    "app/scripts/sync-contracts.py": "bc13e44d86f9781ec5582636ecee6c0bd3c0e8b0c6b4381f704fc613ed117a80",
+    "app/scripts/export-openapi.py": "ce29484794df62184978c291dbe57d3573e0cbdca75c8894cd90fb377753b390",
+    "docs/tools/verify_docs.py": "68217cc96405428395e8fc0ecc1b005bdd30a94454715cff35f22fb96d4a07fc"
+  },
+  "junit_sha256": "8a843f571585f062c4346cce65e988bf270c3322fab5de73339b75a11ee405ca",
+  "python_log_sha256": "699c1107bf1ed8bb1c1c2ac88cef049725bd8b2b5c194708f820f218c60da189",
+  "python_tests": [
+    {
+      "path": "app/tests/unit/test_development_evidence.py",
+      "symbol": "test_repository_mapping_checks_actual_current_inputs_without_private_artifacts"
+    },
+    {
+      "path": "app/tests/unit/test_native_ci.py",
+      "symbol": "test_generated_check_is_read_only_and_rejects_stale_files"
+    },
+    {
+      "path": "app/tests/unit/test_native_ci.py",
+      "symbol": "test_generated_check_is_read_only_and_rejects_stale_files"
+    },
+    {
+      "path": "app/tests/unit/test_native_ci.py",
+      "symbol": "test_generated_check_is_read_only_and_rejects_stale_files"
+    },
+    {
+      "path": "app/tests/unit/test_native_ci.py",
+      "symbol": "test_generated_check_is_read_only_and_rejects_stale_files"
+    }
+  ],
+  "previous_attempt": {
+    "passed": false,
+    "tests": 5,
+    "failures": 2,
+    "reasons": [
+      "The requirement-count fixture still expected 73 before CAP-07; corrected to 74.",
+      "An OpenAPI generator child exceeded its unchanged 30-second budget. The same scenarios passed on the subsequent run without extending the budget."
+    ],
+    "raw_log_sha256": "9d95d43c43969b2c195440d5ac760b6cb93d91e737982e1c3d8bd97ac299d09b"
+  },
+  "full_acceptance": "pending"
+}

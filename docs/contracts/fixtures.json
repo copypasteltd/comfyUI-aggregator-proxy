@@ -46359,6 +46359,128 @@
         "model_inputs": [],
         "comfy_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       }
+    },
+    {
+      "id": "model3d_image_job",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_prompt",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          },
+          "prompt": "Synthetic ignored prompt"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_references",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          },
+          "references": [
+            {
+              "asset_id": "asset_reference1"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_image_size",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1,
+          "size": "720x1080"
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_video_seconds",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1,
+          "seconds": 5
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_multiple_outputs",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 2
+        }
+      }
     }
   ]
 }

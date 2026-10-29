@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-28T10:54:59+08:00",
+  "checked_at": "2026-10-29T09:09:10+08:00",
   "baseline": "v0.4",
   "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
   "project": "E:\\dev\\sandbox\\生图生视API封装",
@@ -10,20 +10,21 @@
   },
   "checks": {
     "markdown": {
-      "documents": 139,
+      "documents": 143,
       "instruction_files": 1,
-      "fenced_blocks": 75,
-      "json_examples": 23,
+      "fenced_blocks": 78,
+      "json_examples": 25,
       "yaml_examples": 1,
-      "local_links_checked": 2788
+      "local_links_checked": 2844
     },
     "contracts": {
       "json_files": 76,
       "schemas": 67,
-      "fixtures": 1039,
-      "positive_fixtures": 249,
-      "negative_fixtures": 790,
+      "fixtures": 1045,
+      "positive_fixtures": 250,
+      "negative_fixtures": 795,
       "capabilities_covered": [
+        "image_to_3d",
         "image_to_image",
         "references_to_image",
         "references_to_video",
@@ -54,7 +55,7 @@
       "rules": 32,
       "quality_scenarios": 18,
       "work_packages": 15,
-      "requirements": 73,
+      "requirements": 74,
       "work_package_statuses": {
         "in_progress": 15
       },
@@ -63,16 +64,16 @@
     },
     "development_evidence": {
       "passed": true,
-      "requirements": 73,
+      "requirements": 74,
       "acceptance_gates": 98,
       "local_statuses": {
-        "framework": 6,
+        "framework": 7,
         "implemented": 67
       },
-      "named_test_references": 163,
+      "named_test_references": 176,
       "baseline_python_cases": 3593,
-      "reports": 30,
-      "current_source_files": 187,
+      "reports": 34,
+      "current_source_files": 192,
       "full_acceptance": "pending"
     },
     "topic_presence": {
@@ -89,9 +90,9 @@
     },
     {
       "file": "docs/01-需求规格与约束.md",
-      "bytes": 24094,
-      "lines": 242,
-      "sha256": "0e395240617959eb98c7d9933e8d6f575f3314f7457797fc37120a05edf4570f"
+      "bytes": 24607,
+      "lines": 243,
+      "sha256": "47b2e0754ab7cb92b67e33839f8cca8319d8bad1f9536e50055c7cf1155c0d6e"
     },
     {
       "file": "docs/02-系统架构与任务机制.md",
@@ -328,6 +329,12 @@
       "sha256": "803e0989c0d0db371918a2da09948b03f75dc6bb9c59f302609369c23a9a2bde"
     },
     {
+      "file": "docs/128-ComfyUI三维模型产物与3080适配.md",
+      "bytes": 13221,
+      "lines": 84,
+      "sha256": "bb1ef7c651bb758ff09aa0e79dd5b708e2af2006b15f7cea13e701886c6b54c5"
+    },
+    {
       "file": "docs/13-Admin前端开发规范.md",
       "bytes": 17241,
       "lines": 145,
@@ -353,9 +360,9 @@
     },
     {
       "file": "docs/17-开发记录与运行说明.md",
-      "bytes": 173941,
-      "lines": 778,
-      "sha256": "e3cd4fc6ad9f470cd11fdcfef24b19417549470c570ad1f7f90b74208601cece"
+      "bytes": 174807,
+      "lines": 780,
+      "sha256": "0efb7183fdfb91a16e8aab055059e90b11c56cb0c0cb81470af04b3abbf45ec3"
     },
     {
       "file": "docs/18-Admin界面实现约定.md",
@@ -779,9 +786,9 @@
     },
     {
       "file": "docs/88-需求实现与分层证据追踪.md",
-      "bytes": 73550,
-      "lines": 266,
-      "sha256": "e57392260669e5363f54906fd342ca5d305d0fb73c1295cd445411ac134c8ff6"
+      "bytes": 75980,
+      "lines": 267,
+      "sha256": "be48447561358d9fcd07346c6c5d0ad89d06f6f7dbbfe273846976c5faef6767"
     },
     {
       "file": "docs/89-审计分页投影上限与版本化复验.md",
@@ -845,9 +852,9 @@
     },
     {
       "file": "docs/contracts/admin-alert-failure.schema.json",
-      "bytes": 1021,
-      "lines": 49,
-      "sha256": "b4add8904b9596d6056f4271c981a7cc54146b5d497d7ee403ee5495b568139a"
+      "bytes": 1045,
+      "lines": 50,
+      "sha256": "7b483bfd81993e785a19af743f3ae6e62a5b993a1041341e6e888222f750a2ec"
     },
     {
       "file": "docs/contracts/admin-alert-query.schema.json",
@@ -881,9 +888,9 @@
     },
     {
       "file": "docs/contracts/admin-content-query.schema.json",
-      "bytes": 1989,
-      "lines": 87,
-      "sha256": "e61353e9e29e252f375bcc06f6dd007ca7d27e562635412292046acfd58b3cb0"
+      "bytes": 2007,
+      "lines": 88,
+      "sha256": "facfac6abe1fe68f488f50a995abea7da85f452c6f6cb4dcb22d1b9416e2f65d"
     },
     {
       "file": "docs/contracts/admin-job-cancellations.schema.json",
@@ -911,21 +918,21 @@
     },
     {
       "file": "docs/contracts/admin-model-catalog-query.schema.json",
-      "bytes": 1878,
-      "lines": 89,
-      "sha256": "d1c6d6118c5f33c0fa1e3a18c1c15238d81c1359fd108c7eb0c5a354c2013fbc"
+      "bytes": 1906,
+      "lines": 90,
+      "sha256": "9d90956d8ad1d269d934e829df64a6545c27a7cc589b7451e765a50aac45542f"
     },
     {
       "file": "docs/contracts/admin-model-mapping-options.schema.json",
-      "bytes": 13272,
-      "lines": 470,
-      "sha256": "fdb5c79def9839eb1bf55db35f698dc4422ff89b6e113de86bacc4d4ecd1e402"
+      "bytes": 14696,
+      "lines": 508,
+      "sha256": "b097e897356246b71f1d7e9d93adfbcc372a5dc20a3c3a9bfe214b83faa62cb3"
     },
     {
       "file": "docs/contracts/admin-model-mapping-query.schema.json",
-      "bytes": 6367,
-      "lines": 304,
-      "sha256": "b467e69baeb070ed23df1d365723677412f9046c9091194f6cf104a0868ffc57"
+      "bytes": 6395,
+      "lines": 305,
+      "sha256": "dbc30aa5ddcbb56085438b6fdaa28097cb50fe983077aa4b1e29c442f86bd769"
     },
     {
       "file": "docs/contracts/admin-queue-query.schema.json",
@@ -941,15 +948,15 @@
     },
     {
       "file": "docs/contracts/admin-statistics-query.schema.json",
-      "bytes": 2235,
-      "lines": 95,
-      "sha256": "d1110163d1ca38272200601b54929c0668a834fe25e170d8635d8eb4741c6d14"
+      "bytes": 2259,
+      "lines": 96,
+      "sha256": "b7303e375eef7628ece7ea7fd1699a1e283fc04ff21d48bdacda6997955945bd"
     },
     {
       "file": "docs/contracts/admin-statistics.schema.json",
-      "bytes": 6519,
-      "lines": 296,
-      "sha256": "bafe2159422f62a7f6051d2f7fcc7af4502fb45285b31d47a6847edb9f3e4c08"
+      "bytes": 6577,
+      "lines": 298,
+      "sha256": "6fee659de9a736cb5f8dd649e71c9f5a44a3c2ccdd56b487814d17152ad7d4a6"
     },
     {
       "file": "docs/contracts/admin-wait-estimate.schema.json",
@@ -959,15 +966,15 @@
     },
     {
       "file": "docs/contracts/admin-workflow-catalog-page.schema.json",
-      "bytes": 4253,
-      "lines": 181,
-      "sha256": "830d432049f3c5edc02aff21407fef8df907b754bbc6a3641767ace2dd9eff0d"
+      "bytes": 4315,
+      "lines": 183,
+      "sha256": "a283d444bfb366df860aef1764c792ca90bfd816043f2b1044a368ea8242ece6"
     },
     {
       "file": "docs/contracts/admin-workflow-catalog-query.schema.json",
-      "bytes": 1876,
-      "lines": 89,
-      "sha256": "153af245c88fd0425b7d6fa9994d2369fc5ef8d27864ba67a4195a9fcc35766f"
+      "bytes": 1904,
+      "lines": 90,
+      "sha256": "d613f76cb3553061fa7211eb10f166d15073521a37470c737f094301dfe1c987"
     },
     {
       "file": "docs/contracts/admin-workflow-diff-query.schema.json",
@@ -1031,9 +1038,9 @@
     },
     {
       "file": "docs/contracts/collection-page.schema.json",
-      "bytes": 11136,
-      "lines": 495,
-      "sha256": "47f30268955524a1100c4a830f74fa7766442678e5b59e832e903ca8a2c98458"
+      "bytes": 11260,
+      "lines": 499,
+      "sha256": "e2a2f71f8341077809b5f16402e55fda6b89bc4efb42b4b8ffa2c54ca42c36b6"
     },
     {
       "file": "docs/contracts/comfy-api-dependency.schema.json",
@@ -1079,15 +1086,15 @@
     },
     {
       "file": "docs/contracts/development-evidence.json",
-      "bytes": 183860,
-      "lines": 6088,
-      "sha256": "479c21bedfe37d03c933f6f67615a580a10ad7d36e814c3766a94d9bfd8dfc10"
+      "bytes": 190791,
+      "lines": 6312,
+      "sha256": "5e315ce75b44cd0d4510eed6b281ccd4554444e6b9d036768c516e287a618adb"
     },
     {
       "file": "docs/contracts/development-traceability.json",
-      "bytes": 43533,
-      "lines": 1743,
-      "sha256": "a06e90f26752d5547169e69ef0933c371d721e611e6c5a0ec0e8a5118ffa4cf9"
+      "bytes": 44060,
+      "lines": 1770,
+      "sha256": "8b0bdda1020ba8ff21accbfde65bdf697446c0b34aa02c808ea2b551eed3ed1d"
     },
     {
       "file": "docs/contracts/dispatch-policy.schema.json",
@@ -1103,9 +1110,9 @@
     },
     {
       "file": "docs/contracts/fixtures.json",
-      "bytes": 1515007,
-      "lines": 46319,
-      "sha256": "2d74aab0bf49506ae893a435c615d354a331d1f276f874ec97af2e1999b3a8bf"
+      "bytes": 1519130,
+      "lines": 46486,
+      "sha256": "e7b093e8bb53103b038dc43c9a0ed085175951297284738e56fa04e8c8cfd228"
     },
     {
       "file": "docs/contracts/gateway-catalog-configuration.schema.json",
@@ -1145,9 +1152,9 @@
     },
     {
       "file": "docs/contracts/job-create.schema.json",
-      "bytes": 8873,
-      "lines": 423,
-      "sha256": "6d048c17bdff215c5cc3fade8ab3529e2b728d19fb768e8dc893081fb0b6679c"
+      "bytes": 10548,
+      "lines": 499,
+      "sha256": "c66b3c310de2452052f5a3bb5802b4870c20881ab4ce99a5846764c544fa14b5"
     },
     {
       "file": "docs/contracts/job-retry.schema.json",
@@ -1169,9 +1176,9 @@
     },
     {
       "file": "docs/contracts/key-generation-options.schema.json",
-      "bytes": 7835,
-      "lines": 326,
-      "sha256": "dd310114eebf2dbff4d3e60955ab9773d5eed215f412eb077d010eb78cdd727a"
+      "bytes": 7907,
+      "lines": 328,
+      "sha256": "3cea63fb21dc9931b5ab94d28a906c63349d23c638cdf4026e58cb92a9814a3d"
     },
     {
       "file": "docs/contracts/key-policy-options-query.schema.json",
@@ -1181,15 +1188,15 @@
     },
     {
       "file": "docs/contracts/key-policy.schema.json",
-      "bytes": 8574,
-      "lines": 395,
-      "sha256": "781c2f5050384e443066b2d7b4ced2d04577219a727e9acd056263cf7186cb97"
+      "bytes": 8680,
+      "lines": 399,
+      "sha256": "eb6d466b02b148696540e32a364821d50658ee8da0a63a1477d1f9e9cea45577"
     },
     {
       "file": "docs/contracts/model-discovery.schema.json",
-      "bytes": 19343,
-      "lines": 730,
-      "sha256": "280b1807671a988457690baa1aea38e99e1286a2b797a639cbea6626fc0acdb0"
+      "bytes": 19479,
+      "lines": 734,
+      "sha256": "4b88813a4d8524e8b57acb83b423611e1dd421806f027389960234aee6672682"
     },
     {
       "file": "docs/contracts/model-file-receipt.schema.json",
@@ -1199,9 +1206,9 @@
     },
     {
       "file": "docs/contracts/model-usage.schema.json",
-      "bytes": 9291,
-      "lines": 394,
-      "sha256": "d4a2e93edb419114c68956efdc6a6595b98d74e1fcff1ce81416e0065de1f80c"
+      "bytes": 9351,
+      "lines": 396,
+      "sha256": "d4c7f15bf4d83300fb76abce53088f30569cf4f5c42cd73536fd91f6a2be25f5"
     },
     {
       "file": "docs/contracts/monitoring-configuration.schema.json",
@@ -1235,9 +1242,9 @@
     },
     {
       "file": "docs/contracts/resource-limits.schema.json",
-      "bytes": 2242,
-      "lines": 112,
-      "sha256": "079ef8cbdfa4637265116e816d5af089a4df7a83669f53bf125fbe01686c30ae"
+      "bytes": 2308,
+      "lines": 115,
+      "sha256": "88304603bb44fd9189290ffbb68b8c21a5281eeca7eb5bcb2f7f80bb63661575"
     },
     {
       "file": "docs/contracts/sdk-model-list.schema.json",
@@ -1289,9 +1296,9 @@
     },
     {
       "file": "docs/contracts/workflow-catalog-receipt.schema.json",
-      "bytes": 6000,
-      "lines": 241,
-      "sha256": "804480f0a6420766adabd25e62ef82c07b5a913e879dfbaf9e6198ab3edc8c52"
+      "bytes": 6032,
+      "lines": 242,
+      "sha256": "af138f206dd6cabb91dc884fd3c8e9a272fca320f3ab14aef490859bd3a23c66"
     },
     {
       "file": "docs/contracts/workflow-source-receipt.schema.json",
@@ -1316,6 +1323,12 @@
       "bytes": 4041,
       "lines": 40,
       "sha256": "743314306097ab21ac09fac0d89ac84aa4d03b1002568651a937c9ba8bd658ef"
+    },
+    {
+      "file": "docs/examples/model3d/README.md",
+      "bytes": 2857,
+      "lines": 32,
+      "sha256": "6f7a8fec42c61c0d2acb483e6066e1fddcfd0793fa941dfa4d1d53be9fbf4f48"
     },
     {
       "file": "docs/media/5070-workflows-122/README.en.md",
@@ -1354,6 +1367,12 @@
       "sha256": "6847ff4b979e5bed6bf39490e6bddb0ba7c90eb0e59feb35fac7c5c7b1329da1"
     },
     {
+      "file": "docs/media/model3d-128/README.md",
+      "bytes": 3641,
+      "lines": 33,
+      "sha256": "64df2de8a898e2657fbef73247d00eb12ec9acc8cca13241dce47a2159b9a03d"
+    },
+    {
       "file": "docs/media/README.md",
       "bytes": 15504,
       "lines": 131,
@@ -1367,15 +1386,21 @@
     },
     {
       "file": "docs/README.en.md",
-      "bytes": 37352,
-      "lines": 223,
-      "sha256": "e3578caf275d941f6731743397b7d55b90bfdb246e31991f20c13906c617157c"
+      "bytes": 37868,
+      "lines": 225,
+      "sha256": "8abef27c219bb66499f5bdf71138d05eeff58291f39f84e1991d93ec8e155870"
     },
     {
       "file": "docs/README.md",
-      "bytes": 48027,
-      "lines": 259,
-      "sha256": "c7bb9b7f61d6d4573cb31220d77773b8540b210d96db07a534445964e36561c9"
+      "bytes": 48547,
+      "lines": 261,
+      "sha256": "5b59243cfaec2ff95c2a44faf34aaf0c7a7b69746a0acd1a86fa74534a7ea0fb"
+    },
+    {
+      "file": "docs/releases/media-gen-skill/1.1.0.md",
+      "bytes": 1465,
+      "lines": 9,
+      "sha256": "9b6ee21255dc97525066c5e4683cc878eea499ca4e91d0f55b2007908036e4bd"
     },
     {
       "file": "docs/tools/development_evidence.py",
@@ -1385,9 +1410,9 @@
     },
     {
       "file": "docs/tools/verify_docs.py",
-      "bytes": 26537,
+      "bytes": 26556,
       "lines": 405,
-      "sha256": "b617ab2d69154250f505f8eed32ea6650fd3c597bd2259552b797c3c47af2686"
+      "sha256": "68217cc96405428395e8fc0ecc1b005bdd30a94454715cff35f22fb96d4a07fc"
     }
   ],
   "errors": [],

@@ -6,16 +6,16 @@
   "full_acceptance": "pending",
   "virtualization_used": false,
   "counts": {
-    "requirements": 73,
+    "requirements": 74,
     "acceptance_gates": 98,
     "local_statuses": {
-      "framework": 6,
+      "framework": 7,
       "implemented": 67
     },
-    "named_test_references": 163,
+    "named_test_references": 176,
     "baseline_python_cases": 3593,
-    "reports": 30,
-    "current_source_files": 187
+    "reports": 34,
+    "current_source_files": 192
   },
   "errors": [],
   "checked_files": [
@@ -25,6 +25,7 @@
     "app/apps/admin_web/src/components/KeyGenerationSelect.vue",
     "app/apps/admin_web/src/components/PolicyDirectorySelect.vue",
     "app/apps/admin_web/src/components/QueueFilters.vue",
+    "app/apps/admin_web/src/components/ResourceLimitsEditor.vue",
     "app/apps/admin_web/src/components/WorkflowImportDialog.vue",
     "app/apps/admin_web/src/components/WorkflowManifestForm.vue",
     "app/apps/admin_web/src/pages/Audit.vue",
@@ -124,6 +125,7 @@
     "app/packages/infrastructure/src/generation_infrastructure/maintenance.py",
     "app/packages/infrastructure/src/generation_infrastructure/media.py",
     "app/packages/infrastructure/src/generation_infrastructure/memory_reclamation.py",
+    "app/packages/infrastructure/src/generation_infrastructure/model3d_media.py",
     "app/packages/infrastructure/src/generation_infrastructure/model_usage.py",
     "app/packages/infrastructure/src/generation_infrastructure/models.py",
     "app/packages/infrastructure/src/generation_infrastructure/operational.py",
@@ -166,6 +168,7 @@
     "app/tests/integration/test_job_cancellations.py",
     "app/tests/integration/test_key_generation_options.py",
     "app/tests/integration/test_key_policy_options.py",
+    "app/tests/integration/test_model3d_pipeline.py",
     "app/tests/integration/test_model_catalog.py",
     "app/tests/integration/test_operational_statistics.py",
     "app/tests/integration/test_output_publication_cleanup.py",
@@ -192,6 +195,7 @@
     "app/tests/protocol/test_final_output_shapes.py",
     "app/tests/protocol/test_history_shapes_worker.py",
     "app/tests/protocol/test_journal.py",
+    "app/tests/protocol/test_model3d_worker.py",
     "app/tests/protocol/test_output_collection_resume.py",
     "app/tests/protocol/test_output_copy_worker.py",
     "app/tests/protocol/test_worker_startup.py",
@@ -201,6 +205,7 @@
     "app/tests/unit/test_history_output_files.py",
     "app/tests/unit/test_http_worker.py",
     "app/tests/unit/test_media_gen_skill.py",
+    "app/tests/unit/test_model3d.py",
     "app/tests/unit/test_output_copy_recovery.py",
     "app/tests/unit/test_wait_estimates.py",
     "app/tests/unit/test_workflow_package.py",
@@ -243,7 +248,6 @@
     "docs/evidence/2026-10-28/5070-admin-component-122/api-model-form.png",
     "docs/evidence/2026-10-28/5070-admin-component-122/api-node-form.png",
     "docs/evidence/2026-10-28/5070-admin-component-122/summary.json",
-    "docs/evidence/2026-10-28/development-trace-baselines-124-final.json",
     "docs/evidence/2026-10-28/http-worker-component-122.json",
     "docs/evidence/2026-10-28/media-gen-components-124.json",
     "docs/evidence/2026-10-28/media-gen-followup-final-124.json",
@@ -253,7 +257,21 @@
     "docs/evidence/2026-10-28/media-gen-ui-final-124/screenshots/model-usage-mobile.png",
     "docs/evidence/2026-10-28/media-gen-ui-final-124/screenshots/model-usage.png",
     "docs/evidence/2026-10-28/media-gen-ui-final-124/verification.json",
+    "docs/evidence/2026-10-29/development-trace-baselines-128-final.json",
+    "docs/evidence/2026-10-29/model3d-contracts-final-128.json",
+    "docs/evidence/2026-10-29/model3d-gateway-current-128.json",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/content-filter.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/content-geometry.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/key-mesh-permission.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/key-mesh-quota.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/mesh-quota.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/model-request.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/model-usage-mobile.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/model-usage.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/screenshots/workflow-output.png",
+    "docs/evidence/2026-10-29/model3d-ui-128/verification.json",
+    "docs/evidence/2026-10-29/model3d-verified-final-128.json",
     "docs/evidence/native-ci/ci86-20261025-maintained-database/summary.json"
   ],
-  "checked_at": "2026-10-28T02:55:03.348532+00:00"
+  "checked_at": "2026-10-29T01:08:25.105847+00:00"
 }

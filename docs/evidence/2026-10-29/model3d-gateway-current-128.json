@@ -1,0 +1,38 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T00:33:37.857069+00:00",
+  "scope": "Three named existing gateway authorization/ledger regressions on native PostgreSQL after the affected file gained its separate 3D rejection test. No real-resource or full-release acceptance.",
+  "passed": true,
+  "sources_unchanged": true,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "python": {
+    "tests": 3,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/tests/integration/test_gateway.py": "5b722e4fae95f144e411e30444582146d37a43f999c03fd6acf6b71672476b46"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/integration/test_gateway.py",
+      "symbol": "test_gateway_realms_and_explicit_customer_mapping",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_gateway.py",
+      "symbol": "test_pending_cannot_dispatch_and_concurrent_confirmation_accounts_once",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_gateway.py",
+      "symbol": "test_request_fences_are_isolated_between_gateway_services",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "b5e8c8dd303c4663ef4cc19e4034b6ce9b55828b2bc1e0258a3d864db3dadde5",
+  "python_log_sha256": "7cce336ffe47c2989b27aa1e0bbc2dd13efcc83d819b17e48194aa9fbd080e67",
+  "seconds": 20.761
+}

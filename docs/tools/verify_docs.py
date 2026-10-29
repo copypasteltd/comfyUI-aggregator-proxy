@@ -175,7 +175,7 @@ def run() -> int:
         if name == "job-create.schema.json" and item["valid"]:
             positive_types.add(item["data"]["task_type"])
     expected_types = set(data.get("job-create.schema.json", {}).get("properties", {}).get("task_type", {}).get("enum", []))
-    require(expected_types == {"text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio"} and positive_types == expected_types, "Native image, video and audio capability fixtures are not covered")
+    require(expected_types == {"text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"} and positive_types == expected_types, "Native image, video, audio and 3D capability fixtures are not covered")
     worker_positive_types = {item["data"]["type"] for item in fixtures if item["valid"] and item["schema"] == "worker-event.schema.json"}
     declared_worker_types = set(data.get("worker-event.schema.json", {}).get("properties", {}).get("type", {}).get("enum", []))
     require(worker_positive_types == declared_worker_types, "Worker event type fixtures incomplete")
