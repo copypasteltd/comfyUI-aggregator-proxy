@@ -1,0 +1,37 @@
+{
+  "format_version": 1,
+  "at": "2026-10-29T01:14:23.315350+00:00",
+  "passed": true,
+  "release_url": "https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.0",
+  "published_at": "2026-10-29T01:12:10Z",
+  "tag": "media-gen-skill-v1.1.0",
+  "source_revision": "5fca1a9d8f41f0f23ea4f44c8602947a6d85aeae",
+  "assets": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 92,
+      "sha256": "2a9e193b315c918f14424f6e98dca9abe6e9cb992656a487e103fb96986cb88c"
+    },
+    {
+      "name": "media-gen-skill-1.1.0.zip",
+      "bytes": 12593,
+      "sha256": "d55e8f3975d926a86624b718ad91b7d1fd6c8567d09aaa050b61570c87df2fc9"
+    },
+    {
+      "name": "release.json",
+      "bytes": 719,
+      "sha256": "ec00d9a8e525924f07e52839fe47a8bbf77b5aa845e99bca74fbba72fd02a306"
+    }
+  ],
+  "checks": [
+    "Anonymous public Release and asset download",
+    "Published checksum matches every asset",
+    "ZIP CRC, exact file set and safe member paths",
+    "Manifest matches source tag and all five current Skill files",
+    "Published client bytes equal the independently live-tested GLB client"
+  ],
+  "full_acceptance": "pending",
+  "credentials_published": false,
+  "download_route": "Independent native cloud HTTPS download, bytes returned over the pinned SSH connection for local verification; no cloud files are created.",
+  "scope": "Public Skill 1.1.0 delivery and equivalence to the separately verified live 3D client; no additional GPU job is submitted."
+}

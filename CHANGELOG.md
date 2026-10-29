@@ -2,6 +2,8 @@
 
 ## 2026-10-29 · 128 · Native GLB 3D tasks
 
+- Publish [Media Gen Skill 1.1.0](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.0), then independently verify all public assets, the source tag and equivalence with the live-tested 3D client. Keep the 1.0.0 release intact.
+
 - 新增单图生成 3D、Workflow 1.2、GLB 最终产物适配与 Worker 显式能力门槛；保持现有六类任务协议兼容。
 - Add independent meshes:create permission, default-zero Tenant/Project/Key mesh quotas, immutable mesh usage accounting and guarded schema migration.
 - 校验 GLB 2.0 完整结构、自包含 buffer、accessor、有限坐标和三角索引；复用云端回读、Key 隔离、HEAD/Range 和八小时到期。

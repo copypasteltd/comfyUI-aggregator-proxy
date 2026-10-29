@@ -10,7 +10,7 @@
 
 三台设备已启用连续空闲 10 分钟自动释放可回收内存/显存；平台仅调用 ComfyUI API。Admin 的“模型与路由 → 使用说明”可查看能力并编辑说明，“Windows 渠道 → 空闲回收”可配置策略并查看执行证明。新增渠道需单独启用策略。
 
-正式 [Media Gen Skill 1.0.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0) 包含独立 Python 3.10+ 客户端、来源清单和 SHA-256。解压后设置业务 API Key，先查模型和实时参数，再异步生成；模型可见范围和限额由 Key 决定。
+正式 [Media Gen Skill 1.1.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.0) 包含独立 Python 3.10+ 客户端、来源清单和 SHA-256。解压后设置业务 API Key，先查模型和实时参数，再异步生成；模型可见范围和限额由 Key 决定。
 
 ```powershell
 $env:MEDIA_GEN_API_KEY = 'YOUR_BUSINESS_API_KEY'

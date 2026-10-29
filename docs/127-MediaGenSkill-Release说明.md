@@ -1,4 +1,10 @@
-# Media Gen Skill 1.0.0
+# Media Gen Skill 1.1.0
+
+[当前正式发布 / Current release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.0) · [历史 1.0.0 / Previous release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0)
+
+1.1.0 新增单图生成 3D：查询 `comfy-3080-3d-trellis2`，传入 `--source-image`，不传文字提示或图片尺寸。需要独立 `meshes:create` 和三级 3D 额度；成功返回自包含静态 GLB。原有图片、视频和音频保持支持。
+
+Version 1.1.0 adds image-to-3D: discover the approved model, supply `--source-image`, omit prompts and image dimensions, then retrieve a verified static GLB. Independent mesh permissions and quotas apply. The public archive was independently downloaded, checked against its SHA-256 manifest and compared with the live-tested client. [Evidence](evidence/2026-10-29/model3d-skill-public-release-128.json).
 
 通过 `https://gen.sub2share.xyz` 或自定义部署发现并调用图片、视频和 ComfyUI Workflow 音频模型。纯 Python 3.10+ 标准库客户端，包含模型说明查询、参考图上传、异步生成、原请求恢复、结果下载及 SHA-256 校验。默认服务地址不包含凭证，使用者自行设置 `MEDIA_GEN_API_KEY`。
 
