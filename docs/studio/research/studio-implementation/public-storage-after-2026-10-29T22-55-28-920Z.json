@@ -1,0 +1,21 @@
+{
+  "scope": "actual public HTTP and owned persistent Chromium profile; synthetic preexisting documents/local media, no API Key, generation or physical phone",
+  "phase": "after",
+  "checks": [
+    {
+      "name": "actual deployed v2 upgrade preserves legacy JSON, task-store original SHA and request budget",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [],
+  "page_errors": [],
+  "blocked_mutations": [],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true
+  },
+  "passed": false,
+  "failure": "locator.evaluate: TypeError: Failed to fetch\n    at eval (eval at evaluate (:311:30), <anonymous>:1:49)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_public_storage.mjs:87:35",
+  "completed_at": "2026-10-29T22:55:39.983Z"
+}

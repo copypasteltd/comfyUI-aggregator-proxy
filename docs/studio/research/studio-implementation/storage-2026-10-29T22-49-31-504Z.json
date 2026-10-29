@@ -1,0 +1,140 @@
+{
+  "scope": "production dist with native Chromium IndexedDB; synthetic records and injected quota failure, not actual disk exhaustion, GPU, physical phone or multi-device capacity",
+  "started_at": "2026-10-29T22:49:32.084Z",
+  "checks": [
+    {
+      "name": "v1 upgrade preserves exact legacy JSON, original blob, uploads and budgets",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "v1 client is refused after v2 upgrade instead of downgrading data",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "unopened project protects its original without Zustand hydration",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "saved asset protects original while canvas has no media reference",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "reconstructable task protects original before node reference save",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "unknown task version refuses result deletion and preserves record",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "wrong identity rejected; explicitly detached and unreferenced original deletable",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "reference-first native transactions reject concurrent deletion",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "delete-first native transactions reject new dangling reference and retain prior document",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "malformed or unknown document versions preserve exact previous record",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "deleted whole project does not permanently pin detached canvas history",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two actual pages reject stale revision without overwriting committed page-A document",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual UI displays injected quota failure and keeps old committed project document",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "failed canvas save blocks new generation before intent creation and HTTP POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "save error and retry remain visible below navigation at 390px emulation",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "explicit retry commits retained in-memory edit; actual canvas survives reload",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual two-tab UI exposes revision conflict, retains page-A commit and avoids blind retry",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "malformed legacy copy refuses overwrite and retains original bytes",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "conflicting-copies legacy copy refuses overwrite and retains original bytes",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "changed-legacy legacy copy refuses overwrite and retains original bytes",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "production dist unchanged and all owned pages free of uncaught errors",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/storage-2026-10-29T22-49-31-504Z/desktop-save-failed.png",
+      "sha256": "7b5aadc8a9d042c223b1d06a7a19e20a37e4058324252bdc95ea921a1119ebc6"
+    },
+    {
+      "file": "docs/assets/studio/storage-2026-10-29T22-49-31-504Z/mobile-save-failed.png",
+      "sha256": "e72f24bd7d251c4f4c17f774c15622357b2246acc3547e309294e34b40d4b9a8"
+    },
+    {
+      "file": "docs/assets/studio/storage-2026-10-29T22-49-31-504Z/mobile-saved-after-retry.png",
+      "sha256": "776ac7deb29e5aae28828083ab825a47dbccd291d4b62d3859cf80bfac78060a"
+    },
+    {
+      "file": "docs/assets/studio/storage-2026-10-29T22-49-31-504Z/desktop-cross-tab-conflict.png",
+      "sha256": "dd8c9606bf91fb3db3bebbb6293891afb0bbbe290d7ac17e351dd852748d1d90"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "dist_files": 94,
+  "dist_sha256": "7c9519e96b360391b600c01a03aaf6f1aae20ac9c05039687b7f2d7f806b6909",
+  "passed": true,
+  "completed_at": "2026-10-29T22:50:25.691Z"
+}

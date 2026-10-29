@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-30 · Studio 131.7 · 本机保存与引用事务
+
+- 托管画布/素材文档迁入已有日志库的documents仓库，删除Studio原件时原子校验已保存引用、可重建任务与业务身份；跨页旧revision拒绝覆盖，普通image/file旧自动回收暂停以保护原件。
+- Show failed saves and explicit retry, retain the old committed document, and block new generation before intent/POST when document persistence fails. Import success waits for commit. Preserve legacy JSON, task records, blobs, budgets and the active-node index during the v1→v2 browser upgrade; static rollback cannot downgrade this data.
+- 同一冻结源码120单元、类型/构建、18组界面和22组原生存储通过；公网131.6→131.7保留升级、重启与原件SHA通过，未新建GPU任务、未启用已停用Key、未重启原Worker或迁移服务端数据库。同步双语说明、截图、MP4/GIF及全部46项剩余范围。
+
 ## 2026-10-30 · 131 · Managed Studio integration
 
 - 新增专用画布适配、完整规格/输入槽位、七种异步任务、事务提交日志与原请求恢复；公开记录以实际发布和验收为准。

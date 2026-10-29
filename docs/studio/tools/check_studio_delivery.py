@@ -64,11 +64,39 @@ def main():
     assert api["passed"] and len(revoked) == 2 and all(item["detail"]["revoked_access"] == 401 for item in revoked)
     for name in ("README.md", "README.en.md", "media-manifest.json", "api-calls.json"):
         assert sha(MEDIA / name) == sha(REPOSITORY / "docs/studio/media/studio-131" / name)
+    evidence = ROOT / "docs/research/studio-implementation"
+    notes = read(evidence / "storage-validation-notes-1317.json")
+    receipts = notes["passing_package_evidence"]
+    for name in ("units", "types", "build"):
+        result = read(evidence / receipts[name])
+        assert result["passed"] and result["source_unchanged"] and result["source_after"] == notes["source_sha256"]
+    ui = read(evidence / receipts["browser"])
+    storage = read(evidence / receipts["storage"])
+    recording = read(evidence / receipts["final_recording"])
+    assert ui["passed"] and len(ui["checks"]) == 18 and ui["static_artifact_unchanged"]
+    for result in (storage, recording):
+        assert result["passed"] and len(result["checks"]) == 22 and all(result["cleanup"].values())
+        assert result["static_artifact_sha256"] == ui["static_artifact_sha256"]
+        for screenshot in result["screenshots"]:
+            assert sha(ROOT / screenshot["file"]) == screenshot["sha256"]
+    upgraded = read(evidence / receipts["public_upgrade"])
+    assert upgraded["passed"] and len(upgraded["checks"]) == 3 and all(upgraded["cleanup"].values()) and not upgraded["blocked_mutations"]
+    health = read(evidence / receipts["health"])
+    assert health["passed"] and health["studio"] == "studio-20261030.131.7" and health["original_worker_pid_unchanged"]
+    assert len(health["cors"]) == 2 and all(item["status"] == 200 and item["allow_origin"] in ("*", item["requested_origin"]) for item in health["cors"])
+    recovery = read(MEDIA / "studio-storage-recovery-verified-manifest.json")
+    assert recovery["passed"] and sha(ROOT / recovery["source_report"]) == recovery["source_report_sha256"]
+    for item in recovery["files"]:
+        assert item["fully_decoded"] and sha(MEDIA / item["file"]) == item["sha256"] and (MEDIA / item["file"]).stat().st_size == item["bytes"]
+        assert sha(MEDIA / item["file"]) == sha(REPOSITORY / "docs/studio/media/studio-131" / item["file"])
+    assert all(not read(evidence / name)["passed"] for name in notes["failed_reports_preserved"])
     print(json.dumps({"passed": True, "at": datetime.now(UTC).isoformat(),
                       "scope": "Read-only source-mirror, public media/report/screenshot hashes, eight call receipts, all46 IDs and temporary Key revocation; not full runtime/phone/fleet acceptance",
                       "source_files_verified": len(source["source_files"]), "actual_gpu_modes": 8,
                       "browser_checks": 9, "public_samples": published, "large_glb_metadata_only": True,
-                      "requirements_retained": 46, "temporary_keys_disabled": 2, "virtualization_used": False}, ensure_ascii=False))
+                      "requirements_retained": 46, "temporary_keys_disabled": 2, "storage_checks": 22,
+                      "current_ui_checks": 18, "public_storage_upgrade_checks": 3, "browser_storage_version": 2,
+                      "browser_storage_downgrade_supported": False, "virtualization_used": False}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

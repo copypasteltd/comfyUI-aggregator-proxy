@@ -1,0 +1,30 @@
+{
+  "scope": "actual public HTTP and owned persistent Chromium profile; synthetic preexisting documents/local media, no API Key, generation or physical phone",
+  "phase": "before",
+  "checks": [
+    {
+      "name": "actual 131.6 UI renders preexisting synthetic canvas and local PNG before upgrade",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "v1 task stores and byte-preservation fixture committed before browser shutdown",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/public-storage-2026-10-29T22-52-50-752Z/before.png",
+      "sha256": "1b05b0f5e459c99dd153d14af9749888377642f951be54ebec9f306130fba536"
+    }
+  ],
+  "page_errors": [],
+  "blocked_mutations": [],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true
+  },
+  "passed": true,
+  "completed_at": "2026-10-29T22:53:05.470Z"
+}

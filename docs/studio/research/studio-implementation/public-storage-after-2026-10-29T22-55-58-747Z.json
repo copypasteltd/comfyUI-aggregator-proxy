@@ -1,0 +1,21 @@
+{
+  "scope": "actual public HTTP and owned persistent Chromium profile; synthetic preexisting documents/local media, no API Key, generation or physical phone",
+  "phase": "after",
+  "checks": [
+    {
+      "name": "actual deployed v2 upgrade preserves legacy JSON, task-store original SHA and request budget",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [],
+  "page_errors": [],
+  "blocked_mutations": [],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true
+  },
+  "passed": false,
+  "failure": "page.waitForFunction: Timeout 30000ms exceeded.\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_public_storage.mjs:90:20",
+  "completed_at": "2026-10-29T22:56:37.749Z"
+}

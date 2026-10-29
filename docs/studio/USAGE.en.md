@@ -2,7 +2,7 @@
 
 [中文](USAGE.md) · [Assessment and all 46 requirements](06-融合可行性评估与上线约束.md) · [Current progress](10-开发进度与交付记录.md)
 
-A managed React canvas built from basketikun/infinite-canvas v0.20.0, using the existing ComfyUI Aggregator Proxy. [Studio is live](http://43.165.167.179:39443/studio/) with backend 131.1/static 131.6. Eight actual GPU modes have completed on 3080/5070. The full fault matrix, physical phones and 10–20-node capacity remain separately tracked in [all 46 requirements](10-开发进度与交付记录.md).
+A managed React canvas built from basketikun/infinite-canvas v0.20.0, using the existing ComfyUI Aggregator Proxy. [Studio is live](http://43.165.167.179:39443/studio/) with backend 131.1/static 131.7. Eight actual GPU modes have completed on 3080/5070. The full fault matrix, physical phones and 10–20-node capacity remain separately tracked in [all 46 requirements](10-开发进度与交付记录.md).
 
 ![Actual public Lime canvas with a generated image](assets/studio/controls-2026-10-29T22-08-02-756Z/desktop-canvas.png)
 
@@ -27,6 +27,8 @@ The seven task types cover text-to-image, image editing, multi-reference images,
 ## Retention and identity
 
 ComfyUI output (01), Worker spool (02), cloud artifacts (03) and browser copies (04) are independent. Cloud artifacts expire eight hours after completion. Browser storage is subject to quota and browser/user cleanup; saved originals and exported ZIPs are separate offline copies. Transfer-triggered deletion of 01 is still an upstream service task: deleting ComfyUI history is not proof that files were deleted.
+
+131.7 stores managed canvas/asset documents and Studio result references within the same transaction boundary, including unopened projects and recoverable tasks. Failed saves retain the previous document and show an error; new generation and successful import wait for commits. Export current edits before reloading after a cross-tab conflict. Existing browser data upgrades to v2 with legacy copies retained; static rollback cannot downgrade it. Ordinary image/file garbage collection is paused pending safe ownership checks; upload-cache cleanup and full quota UI remain pending. [Storage design](12-本机引用事务与保存失败恢复.md) · [Recovery MP4](media/studio-131/studio-storage-recovery-verified.mp4) · [GIF](media/studio-131/studio-storage-recovery-verified.gif), recorded with a local synthetic API and injected quota failure, not actual disk exhaustion or GPU execution.
 
 Business fetch uses a fixed origin, Bearer authorization, credentials: omit and rejected redirects. Admin sessions and Worker credentials remain separate. Managed mode rejects arbitrary scripts, plugins and automatic Agent execution. Exports remove credentials by default. Client-side partitioning is not a multi-user security sandbox on a shared computer. Corrupt/unknown journal versions are preserved instead of silently erased.
 

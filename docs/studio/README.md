@@ -12,6 +12,7 @@
 - [实现契约：模型参数、可靠提交、恢复、鉴权和文件交付](07-融合实现契约与故障恢复.md)
 - [可用性验证、原生结果与 27 项发布门禁](08-可用性验证与发布验收.md)
 - [11 个模型适配样本、完整用户流程与调用结构](09-模型适配样本与用户流程.md)
+- [本机引用事务、旧数据保留升级与保存失败恢复](12-本机引用事务与保存失败恢复.md)
 - [46 项开发差距 CSV](research/fusion-assessment-2026-10-30/development-gaps.csv)
 - [评估汇总、来源摘要和证据索引 JSON](research/fusion-assessment-2026-10-30/assessment-summary.json)
 - [本地下载与静态接口核对记录](research/aggregator-integration-audit-2026-10-30.json)

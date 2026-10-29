@@ -158,7 +158,7 @@ try {
         if (route.request().method() !== "POST") return route.continue();
         const frozen = route.request().postData();
         const committed = await page.evaluate(async (body) => {
-            const db = await new Promise((resolve, reject) => { const req = indexedDB.open("comfy-aggregator-studio:journal", 1); req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); });
+            const db = await new Promise((resolve, reject) => { const req = indexedDB.open("comfy-aggregator-studio:journal"); req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); });
             try { return await new Promise((resolve, reject) => { const tx = db.transaction("intents", "readonly"); const req = tx.objectStore("intents").getAll(); let records; req.onsuccess = () => { records = req.result; }; tx.oncomplete = () => resolve(records.some((record) => record.body === body)); tx.onabort = () => reject(tx.error); }); } finally { db.close(); }
         }, frozen);
         assert.equal(committed, true);
@@ -276,10 +276,11 @@ try {
     await phone.getByRole("button", { name: "重置视图", exact: true }).click({ trial: true });
     check("zoom and creation controls remain independently clickable on a narrow canvas", { zoomBounds, toolsBounds });
     activePage = page;
+    await page.bringToFront();
     await page.setViewportSize({ width: 390, height: 844 });
     const selectedToggle = page.locator(".studio-canvas-topbar button").first();
     if (await selectedToggle.getAttribute("aria-label") !== "收起面板") await selectedToggle.click();
-    await page.locator(".studio-canvas-sidepanel").getByTitle("定位到节点", { exact: true }).first().click();
+    await page.locator(".studio-canvas-sidepanel").getByTitle("定位到节点", { exact: true }).filter({ has: page.locator("img") }).first().click();
     await page.waitForTimeout(700);
     await selectedToggle.click();
     await page.locator(".studio-canvas-sidepanel").waitFor({ state: "detached" });
@@ -291,7 +292,9 @@ try {
     await page.getByRole("button", { name: "重置视图", exact: true }).click({ trial: true });
     await page.getByRole("button", { name: "居中聚焦", exact: true }).click();
     await page.waitForTimeout(700);
-    const focusedImage = await page.locator('[data-node-id] img[src^="blob:"]').first().boundingBox();
+    const focusedNodeId = await page.locator("[data-node-toolbar]").first().getAttribute("data-node-toolbar");
+    report.focus_diagnostics = await page.evaluate((id) => { const node = document.querySelector(`[data-node-id="${id}"]`); const area = node?.parentElement; return { visibility: document.visibilityState, id, node: node?.getBoundingClientRect().toJSON(), transform: area?.style.transform, parents: [area?.parentElement, area?.parentElement?.parentElement, document.querySelector(".studio-content")].map((item) => ({ rect: item?.getBoundingClientRect().toJSON(), scrollTop: item?.scrollTop, scrollLeft: item?.scrollLeft })) }; }, focusedNodeId);
+    const focusedImage = await page.locator(`[data-node-id="${focusedNodeId}"] img[src^="blob:"]`).first().boundingBox();
     const fixedDock = await page.locator("[data-canvas-bottom-toolbar]").boundingBox();
     const fixedTop = await page.locator(".studio-canvas-topbar").boundingBox();
     const nodeActions = await page.locator("[data-node-toolbar]").first().boundingBox();

@@ -2,7 +2,9 @@
 
 [中文](README.md) · [Public Studio](http://43.165.167.179:39443/studio/) · [All 46 requirements](../../10-开发进度与交付记录.md) · [Usage and deployment](../../11-线上使用与原生发布运维.md)
 
-Current deployment: static 131.6/backend 131.1. Eight actual modes completed on 3080/5070. Text-to-image was submitted through the deployed canvas; seven other jobs used the same published API through a native client. A real browser then loaded each original from server history into its library, decoded images, played video/audio, and downloaded all eight originals with matching byte counts and SHA. GLB has a download card, not an interactive viewer.
+Current deployment: static 131.7/backend 131.1. The eight GPU modes and original tour were recorded on 131.6. Text-to-image was submitted through the deployed canvas; seven other jobs used the same published API through a native client. A real browser then loaded each original from server history into its library, decoded images, played video/audio, and downloaded all eight originals with matching byte counts and SHA. GLB has a download card, not an interactive viewer.
+
+131.7 adds a [save-failure/retry MP4](studio-storage-recovery-verified.mp4), [GIF](studio-storage-recovery-verified.gif) and [source/hash manifest](studio-storage-recovery-verified-manifest.json). This records the local production UI with a synthetic API, injected quota failure, phone viewport and two-tab conflict; it is not actual disk exhaustion, GPU execution or a physical phone. Screenshots: [390px unsaved warning](../../assets/studio/storage-2026-10-29T23-00-07-628Z/mobile-save-failed.png), [after retry](../../assets/studio/storage-2026-10-29T23-00-07-628Z/mobile-saved-after-retry.png), [cross-tab conflict](../../assets/studio/storage-2026-10-29T23-00-07-628Z/desktop-cross-tab-conflict.png).
 
 | ID | Mode / public model | Actual original | Published sample |
 | --- | --- | --- | --- |

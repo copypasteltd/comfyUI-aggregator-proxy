@@ -1,0 +1,36 @@
+{
+  "scope": "131.7 validation corrections; old reports remain unchanged",
+  "source_sha256": "b7c9a0aa78374642c07b1add099dabbd3a8486385506253244876be0822ae5d7",
+  "failed_reports_preserved": [
+    "browser-2026-10-29T22-46-19-072Z.json",
+    "browser-2026-10-29T22-49-31-790Z.json",
+    "storage-2026-10-29T22-47-01-900Z.json",
+    "storage-2026-10-29T22-48-25-800Z.json",
+    "public-storage-before-2026-10-29T22-51-03-389Z.json",
+    "public-storage-after-2026-10-29T22-55-28-920Z.json",
+    "public-storage-after-2026-10-29T22-55-58-747Z.json"
+  ],
+  "corrections": [
+    "Focus acceptance now selects an actual image and activates the owned desktop page before animation checks; a background tab can throttle requestAnimationFrame.",
+    "The composer reports validation/persistence failure in its own Alert, not an error toast. AntD retains a closed Drawer root; acceptance waits for its content to hide and checks overflow after resize.",
+    "The pre-upgrade local-image fixture requires a nonempty legacy content field to enter the existing image hydration path. Failed fixture data is retained in its own private profile.",
+    "The deployed CSP intentionally denies fetch of blob URLs. Original SHA is checked directly in IndexedDB while image preview decoding is checked independently.",
+    "Canvas previews may be thumbnails; expecting an original 1024-pixel naturalWidth on a preview is incorrect. Original bytes and preview decoding have separate checks.",
+    "The first health assertion expected a literal wildcard CORS header. The existing service correctly reflects either arbitrary tested Origin with credentials allowed; both preflights return 200. Business fetch continues to omit cookies."
+  ],
+  "passing_package_evidence": {
+    "units": "unit-2026-10-29T22-46-17-957Z.json",
+    "types": "typecheck-2026-10-29T22-45-08-889Z.json",
+    "build": "build-2026-10-29T22-44-31-014Z.json",
+    "browser": "browser-2026-10-29T22-52-50-785Z.json",
+    "storage": "storage-2026-10-29T22-53-35-552Z.json",
+    "final_recording": "storage-2026-10-29T23-00-07-628Z.json",
+    "public_upgrade": "public-storage-after-2026-10-29T22-57-08-113Z.json",
+    "health": "live-final-health-1317.json"
+  },
+  "no_new_gpu_submission": true,
+  "no_disabled_key_reenabled": true,
+  "server_database_unchanged": true,
+  "browser_storage_downgrade_supported": false,
+  "full_acceptance": "HOLD"
+}

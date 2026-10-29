@@ -19,9 +19,9 @@ def sha(path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name", choices=("studio-tour", "studio-focused-tour"), default="studio-tour")
+    parser.add_argument("--name", choices=("studio-tour", "studio-focused-tour", "studio-storage-recovery", "studio-storage-recovery-verified"), default="studio-tour")
     args = parser.parse_args()
-    reports = sorted((ROOT / "docs/research/studio-implementation").glob("live-controls-*.json"))
+    reports = sorted((ROOT / "docs/research/studio-implementation").glob("storage-*.json" if args.name.startswith("studio-storage-recovery") else "live-controls-*.json"))
     report_path = reports[-1]
     report = json.loads(report_path.read_text(encoding="utf-8"))
     assert report["passed"] and all(report["cleanup"].values())
@@ -42,6 +42,7 @@ if __name__ == "__main__":
         subprocess.run(command + [str(target)], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
         subprocess.run([str(FFMPEG), "-hide_banner", "-loglevel", "error", "-nostdin", "-i", str(target), "-map", "0:v:0", "-threads", "1", "-f", "null", "-"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
         results.append({"file": target.name, "bytes": target.stat().st_size, "sha256": sha(target), "fully_decoded": True})
-    result = {"passed": True, "scope": "actual public Studio UI tour at original speed; desktop/mobile emulation, not a full-duration GPU generation recording or physical phone", "source_report": report_path.relative_to(ROOT).as_posix(), "source_report_sha256": sha(report_path), "private_source_sha256": sha(original), "files": results, "virtualization_used": False}
+    scope = "local production Studio UI with synthetic API and injected quota failure, explicit retry and two-tab conflict at original speed; desktop/mobile emulation, not real disk exhaustion or GPU" if args.name.startswith("studio-storage-recovery") else "actual public Studio UI tour at original speed; desktop/mobile emulation, not a full-duration GPU generation recording or physical phone"
+    result = {"passed": True, "scope": scope, "source_report": report_path.relative_to(ROOT).as_posix(), "source_report_sha256": sha(report_path), "private_source_sha256": sha(original), "files": results, "virtualization_used": False}
     evidence.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))

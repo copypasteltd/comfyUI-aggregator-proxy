@@ -18,6 +18,7 @@ if __name__ == "__main__":
     parser.add_argument("--release", required=True)
     parser.add_argument("--browser-report", type=Path, required=True)
     parser.add_argument("--build-report", type=Path, required=True)
+    parser.add_argument("--storage-report", type=Path)
     args = parser.parse_args()
     RELEASE = args.release
     assert RELEASE.startswith("studio-") and "/" not in RELEASE and "\\" not in RELEASE and ".." not in RELEASE
@@ -31,6 +32,12 @@ if __name__ == "__main__":
     files = {path.relative_to(DIST).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(DIST.rglob("*")) if path.is_file()}
     assert files == report["static_artifact_sha256"]
     manifest = {"format_version": 1, "release_id": RELEASE, "at": datetime.now(UTC).isoformat(), "browser_report": report_path.relative_to(ROOT).as_posix(), "browser_report_sha256": hashlib.sha256(report_path.read_bytes()).hexdigest(), "source_sha256": build["source_after"], "build_report": build_path.relative_to(ROOT).as_posix(), "build_report_sha256": hashlib.sha256(build_path.read_bytes()).hexdigest(), "files": [{"path": "studio/" + name, "sha256": digest, "bytes": (DIST / name).stat().st_size} for name, digest in files.items()], "native_only": True, "live_gpu_acceptance": False}
+    if args.storage_report:
+        storage_path = (ROOT / args.storage_report).resolve()
+        assert storage_path.is_relative_to(ROOT)
+        storage = json.loads(storage_path.read_text(encoding="utf-8"))
+        assert storage["passed"] and all(storage["cleanup"].values()) and files == storage["static_artifact_sha256"]
+        manifest.update({"browser_storage_version": 2, "browser_storage_downgrade_supported": False, "storage_report": storage_path.relative_to(ROOT).as_posix(), "storage_report_sha256": hashlib.sha256(storage_path.read_bytes()).hexdigest()})
     PRIVATE.mkdir(parents=True, exist_ok=True)
     target = PRIVATE / (RELEASE + ".tar.gz")
     assert not target.exists()

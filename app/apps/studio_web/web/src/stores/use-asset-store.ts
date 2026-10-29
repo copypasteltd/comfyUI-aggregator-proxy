@@ -5,6 +5,8 @@ import { nanoid } from "nanoid";
 import { localForageStorage } from "@/lib/localforage-storage";
 import { cleanupUnusedImages, ensureImagePreview, previewUrlFor, resolveImageUrl, uploadImage } from "@/services/image-storage";
 import { cleanupUnusedMedia, resolveMediaUrl } from "@/services/file-storage";
+import { studioDocumentReadFailed } from "@/services/studio-persistence";
+import { MANAGED_STUDIO } from "@/constant/studio";
 
 export type AssetKind = "text" | "image" | "video";
 export type TextAsset = AssetBase<"text"> & { data: { content: string } };
@@ -95,6 +97,9 @@ export const useAssetStore = create<AssetStore>()(
                 }),
             replaceAssets: (assets) => set({ assets }),
             cleanupImages: (extra) => {
+                // Upstream garbage collection only knows this tab's memory and can
+                // remove originals still referenced by another saved project.
+                if (MANAGED_STUDIO) return;
                 window.setTimeout(async () => {
                     const { useCanvasStore } = await import("@/stores/canvas/use-canvas-store");
                     await cleanupUnusedImages({ assets: get().assets, projects: useCanvasStore.getState().projects, extra });
@@ -106,7 +111,8 @@ export const useAssetStore = create<AssetStore>()(
             name: ASSET_STORE_KEY,
             storage: assetStorage,
             partialize: (state) => ({ assets: state.assets }) as StorageValue<AssetStore>["state"],
-            onRehydrateStorage: () => () => {
+            onRehydrateStorage: () => (_state, error) => {
+                if (error) studioDocumentReadFailed(ASSET_STORE_KEY, error);
                 useAssetStore.setState({ hydrated: true });
             },
         },

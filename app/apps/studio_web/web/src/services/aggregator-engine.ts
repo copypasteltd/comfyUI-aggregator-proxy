@@ -4,6 +4,7 @@ import { presetPolicyReason, validateJob } from "./api/aggregator/capabilities";
 import { terminalStatuses, type ApiResult, type CatalogModel, type JobRequest, type RemoteJob } from "./api/aggregator/types";
 import { journalGet, journalList, journalPut, prepareIntent, updateIntent, type IdentityRef, type InputUpload, type Intent, type LocalResult } from "./aggregator-journal";
 import { assertLocalResult } from "./studio-result-ownership";
+import { flushStudioDocuments } from "./studio-persistence";
 import { useStudioStore } from "@/stores/use-studio-store";
 
 const inFlight = new Map<string, Promise<Intent>>();
@@ -68,6 +69,7 @@ export async function createIntent(projectId: string, nodeId: string, model: Cat
     if (errors.length) throw new Error(errors.join("；"));
     const restricted = presetPolicyReason(model, request.parameters as Record<string, string | number | boolean>, catalog.policy);
     if (restricted) throw new Error(restricted);
+    await flushStudioDocuments();
     const id = nanoid();
     const intent: Intent = { version: 1, id, identity, projectId, nodeId, body: freezeRequest({ ...request, client_request_id: id }), idempotencyKey: `studio-job-${id}`, releaseDigest: model.release.digest, stage: "prepared", activeNodeKey: `${identity.fingerprint}:${projectId}:${nodeId}`, output: { mediaTypes: model.usage.output.media_types, maxBytes: model.usage.output.max_bytes }, createdAt: Date.now(), updatedAt: Date.now() };
     const saved = await prepareIntent({ ...intent, canvas });

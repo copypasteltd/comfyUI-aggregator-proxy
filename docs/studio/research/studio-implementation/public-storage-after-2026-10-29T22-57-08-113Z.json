@@ -1,0 +1,41 @@
+{
+  "scope": "actual public HTTP and owned persistent Chromium profile; synthetic preexisting documents/local media, no API Key, generation or physical phone",
+  "phase": "after",
+  "checks": [
+    {
+      "name": "actual deployed v2 upgrade preserves legacy JSON, task-store original SHA and request budget",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "deployed upgraded canvas decodes its preview and retains exact local PNG after owned browser restart",
+      "passed": true,
+      "detail": {
+        "preview_dimensions": {
+          "width": 768,
+          "height": 768
+        },
+        "original_sha256": "8db0e1fa7d3b76a20cca863c927981deb0b08e0c550b747ebada8555f3b9f687"
+      }
+    },
+    {
+      "name": "upgraded public project deep link survives another reload",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/public-storage-2026-10-29T22-57-08-113Z/after.png",
+      "sha256": "afd83b6ee8fce36ce779136ccbc2fcf75968c4a98e11f0ed2e57ab6420576696"
+    }
+  ],
+  "page_errors": [],
+  "blocked_mutations": [],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true
+  },
+  "passed": true,
+  "completed_at": "2026-10-29T22:57:22.516Z"
+}
