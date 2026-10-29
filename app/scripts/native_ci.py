@@ -120,7 +120,8 @@ def database_lock():
     import psycopg
 
     url = test_url()
-    with psycopg.connect(host=url.host, port=url.port, user=url.username, password=url.password, dbname="render_control_test", connect_timeout=5, autocommit=True) as conn:
+    # Exact loopback-only native test database: avoid Windows SSPI/GSS discovery.
+    with psycopg.connect(host=url.host, port=url.port, user=url.username, password=url.password, dbname="render_control_test", connect_timeout=5, sslmode="disable", gssencmode="disable", autocommit=True) as conn:
         identity = conn.execute("SELECT current_database(),host(inet_server_addr()),current_setting('port')").fetchone()
         if identity != ("render_control_test", "127.0.0.1", "55438") or not 180000 <= conn.info.server_version < 190000:
             raise CIError("unsafe_ci_database")

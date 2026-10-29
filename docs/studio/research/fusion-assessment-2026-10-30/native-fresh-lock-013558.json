@@ -1,0 +1,31 @@
+{
+  "started_at": "2026-10-30T01:35:58.680240+08:00",
+  "duration_seconds": 285.35,
+  "scope": "patched isolated frontend, not original upstream or integrated product",
+  "stage": "fresh-lock",
+  "ci_check_is_clean_install": null,
+  "working_directory": "E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\lock-resolver",
+  "command": [
+    "D:\\Program Files\\nodejs\\node.EXE",
+    "D:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "install",
+    "--package-lock-only",
+    "--ignore-scripts",
+    "--include=optional",
+    "--cache",
+    "E:\\dev\\sandbox\\无限画布\\.local\\npm-cache",
+    "--no-audit",
+    "--no-fund"
+  ],
+  "exit_code": 4294967295,
+  "passed": false,
+  "local_log": "E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\fresh-lock-013558.log",
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "output_tail": "",
+  "inputs": {
+    "package.json": "08f9f325a644ec94e918a6381d0881bb7df7fe73842663c7cff9a7f7bd1ebdb9"
+  },
+  "interrupted_by_assessment": true,
+  "reason": "Exploratory full resolution selected newer framework versions (for example Tailwind 4.3.3 versus installed 4.2.4); stopped before promotion. Use exact Windows native bindings matching installed parents instead.",
+  "adopted": false
+}

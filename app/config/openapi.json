@@ -7421,6 +7421,23 @@
               ],
               "title": "Idempotency-Key"
             }
+          },
+          {
+            "name": "x-expected-release-digest",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Expected-Release-Digest"
+            }
           }
         ],
         "requestBody": {

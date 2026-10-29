@@ -134,7 +134,7 @@ class JobRepository:
             require_active_workflow(session, release.workflow_id)
             check_input_contract(release.manifest, request)
 
-    def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str, *, validation_channel: UUID | None = None, pending_gateway: PendingGateway | None = None, _session: Session | None = None, retry_of: UUID | None = None, audit_actor: str | None = None, validation_model: tuple[UUID, UUID, int] | None = None, validation_revision: int | None = None) -> dict[str, Any]:
+    def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str, *, expected_release_digest: str | None = None, validation_channel: UUID | None = None, pending_gateway: PendingGateway | None = None, _session: Session | None = None, retry_of: UUID | None = None, audit_actor: str | None = None, validation_model: tuple[UUID, UUID, int] | None = None, validation_revision: int | None = None) -> dict[str, Any]:
         now = utcnow()
         period = now.astimezone(ZoneInfo("Asia/Taipei")).date().isoformat()
         with self.sessions.begin() if _session is None else nullcontext(_session) as session:
@@ -143,7 +143,7 @@ class JobRepository:
                 if fence.closed_at is not None:
                     raise DomainError("gateway_request_closed", "网关请求已经持久关闭", 409)
             asset_hashes = self._asset_hashes(session, identity, request, require_ready=False)
-            digest = request_fingerprint(request, asset_hashes)
+            digest = request_fingerprint(request, asset_hashes, expected_release_digest=expected_release_digest)
             token_digest = hashlib.sha256(token.encode()).hexdigest()
             session.execute(insert(Idempotency).values(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, operation="create_job", token_digest=token_digest, request_fingerprint=digest).on_conflict_do_nothing())
             idem = session.execute(select(Idempotency).where(Idempotency.key_id == identity.key_id, Idempotency.operation == "create_job", Idempotency.token_digest == token_digest).with_for_update()).scalar_one()
@@ -189,7 +189,7 @@ class JobRepository:
             model_query = select(PublicModel).where(PublicModel.tenant_id == identity.tenant_id, PublicModel.project_id == identity.project_id, PublicModel.alias == request["model"])
             if validation_channel is None:
                 model_query = model_query.where(PublicModel.published.is_(True))
-            if validation_channel is not None or pending_gateway is not None:
+            if validation_channel is not None or pending_gateway is not None or expected_release_digest is not None:
                 model_query = model_query.with_for_update(read=True)
             model = session.execute(model_query).scalar_one_or_none()
             if model is None or model.task_type != request["task_type"]:
@@ -199,6 +199,8 @@ class JobRepository:
             release = session.get(WorkflowRelease, model.release_id)
             if not release or not release.validated or not selected(policy["workflow_releases"], public_id("wfr", release.id)):
                 raise DomainError("workflow_denied", "工作流不可用或未授权", 403)
+            if expected_release_digest is not None and release.digest != expected_release_digest:
+                raise DomainError("model_release_changed", "模型发布已变化，请刷新模型说明并明确选择后再创建任务", 409)
             if gateway_configuration is not None and pending_gateway is not None:
                 check_admission_model(session, gateway_configuration, model, release, pending_gateway.price_version)
             require_active_workflow(session, release.workflow_id)

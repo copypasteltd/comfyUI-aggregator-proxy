@@ -58,7 +58,7 @@ def fingerprint(value: Any) -> str:
     return hashlib.sha256(("canonical-v1\n" + canonical_json(value)).encode("utf-8")).hexdigest()
 
 
-def request_fingerprint(request: dict[str, Any], asset_hashes: dict[str, str]) -> str:
+def request_fingerprint(request: dict[str, Any], asset_hashes: dict[str, str], *, expected_release_digest: str | None = None) -> str:
     """Called before resolving mutable aliases or allocating execution defaults."""
     def normalize(value: Any) -> Any:
         if isinstance(value, list):
@@ -67,4 +67,7 @@ def request_fingerprint(request: dict[str, Any], asset_hashes: dict[str, str]) -
             return {("asset_sha256" if key == "asset_id" and isinstance(item, str) and item in asset_hashes else key): (asset_hashes[item] if key == "asset_id" and isinstance(item, str) and item in asset_hashes else normalize(item)) for key, item in value.items()}
         return value
     semantic = normalize({k: v for k, v in request.items() if k != "client_request_id"})
-    return fingerprint({"schema_revision": "0.4.0", "request": semantic})
+    source = {"schema_revision": "0.4.0", "request": semantic}
+    if expected_release_digest is not None:
+        source["expected_release_digest"] = expected_release_digest
+    return fingerprint(source)

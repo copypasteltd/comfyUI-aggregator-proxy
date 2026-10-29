@@ -11737,6 +11737,7 @@ export interface operations {
             query?: never;
             header?: {
                 "idempotency-key"?: string | null;
+                "x-expected-release-digest"?: string | null;
             };
             path?: never;
             cookie?: never;

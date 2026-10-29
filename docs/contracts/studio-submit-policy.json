@@ -1,0 +1,18 @@
+{
+  "contract_version": "0.4.0",
+  "version": "1.0",
+  "contract_header": { "name": "X-Studio-Contract", "value": "1", "endpoint": "GET /v1/access-policy" },
+  "expected_release_header": "X-Expected-Release-Digest",
+  "digest_pattern": "^[a-f0-9]{64}$",
+  "optional_for_existing_clients": true,
+  "missing_header_preserves_fingerprint": true,
+  "present_header_binds_idempotency": true,
+  "replay_before_mutable_alias_lookup": true,
+  "model_row_lock": "FOR SHARE until admission transaction commits",
+  "changed_release": { "status": 409, "code": "model_release_changed", "creates_job": false },
+  "poll_hint": { "header": "Retry-After", "seconds": 2, "source": "existing POST /v1/jobs policy" },
+  "new_database_migration": false,
+  "worker_protocol_changed": false,
+  "cors": "any origin; expose X-Studio-Contract",
+  "validation": "implemented; native scoped regression 82/82 passed, non-crash test cluster; deployment and full acceptance tracked separately"
+}

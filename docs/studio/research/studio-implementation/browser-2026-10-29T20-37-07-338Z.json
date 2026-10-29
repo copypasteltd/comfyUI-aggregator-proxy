@@ -1,0 +1,462 @@
+{
+  "started_at": "2026-10-29T20:37:07.500Z",
+  "scope": "active managed UI with synthetic API; plain non-localhost HTTP; desktop/mobile Chromium emulation, not a real phone or GPU",
+  "checks": [
+    {
+      "name": "connection/catalog/Schema Worker succeed on plain HTTP",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "main document CSP blocks arbitrary function compilation; Ajv stays in isolated Worker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all 11 historical model descriptors accepted through actual Worker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "POST is preceded by committed durable intent; lost response stays unknown",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "reconcile uses original body/key/digest and receives exactly the same job",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "verified result survives page reload and returns to original canvas",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "server history queries original scoped jobs and metadata without creating tasks",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual canvas ZIP exports verified bytes without credentials and imports without generation",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "history-first original reattaches to the original canvas without a second job",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all business requests omit same-origin Admin cookie",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two pages cannot commit competing intents for the same active node",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "committed original request body cannot be changed",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "in-place mutations of frozen body/output are rejected atomically",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "390px viewport: no document overflow, canvas toolbar remains accessible",
+      "passed": true,
+      "detail": {
+        "documentWidth": 390,
+        "width": 390,
+        "height": 844,
+        "toolbar": {
+          "left": 16,
+          "right": 374,
+          "top": 768,
+          "bottom": 824,
+          "width": 358
+        },
+        "header": {
+          "left": 0,
+          "right": 390,
+          "top": 0,
+          "bottom": 64,
+          "width": 390
+        },
+        "title": {
+          "left": 76,
+          "right": 149.71875,
+          "top": 83.71875,
+          "bottom": 108.28125,
+          "width": 73.71875
+        }
+      }
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001/download",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001/download",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-connection",
+      "file": "docs/assets/studio/2026-10-29T20-37-07-338Z/desktop-connection.png",
+      "sha256": "9ded46d39580936b945e2ece7900c5b5f6bd8ebf996747132564635bfae63822"
+    },
+    {
+      "name": "desktop-models",
+      "file": "docs/assets/studio/2026-10-29T20-37-07-338Z/desktop-models.png",
+      "sha256": "16f583c943de3ad4797ce05deb0a7b9a2a6fb44da3ef0617e2a919bf76d3f255"
+    },
+    {
+      "name": "desktop-canvas",
+      "file": "docs/assets/studio/2026-10-29T20-37-07-338Z/desktop-canvas.png",
+      "sha256": "6faaea347c2eee9c5d4d59e5d27c8b8353a078ee67803bf7903575a4a550c3d4"
+    },
+    {
+      "name": "desktop-composer",
+      "file": "docs/assets/studio/2026-10-29T20-37-07-338Z/desktop-composer.png",
+      "sha256": "b69d7ae4883246dd9a7c956cad1708be8543ae4ee27ad943e37396aa591444e5"
+    },
+    {
+      "name": "desktop-unknown-submit",
+      "file": "docs/assets/studio/2026-10-29T20-37-07-338Z/desktop-unknown-submit.png",
+      "sha256": "9863321e03a2e82c40df6532db76ae7364b86b1fb59af3fcf4409b585d34d689"
+    },
+    {
+      "name": "desktop-result",
+      "file": "docs/assets/studio/2026-10-29T20-37-07-338Z/desktop-result.png",
+      "sha256": "dd1768c2bfa043cef52bcf46724c2b953d5c1a023a9ab7c8c4996d3fa00d15d4"
+    },
+    {
+      "name": "mobile-canvas",
+      "file": "docs/assets/studio/2026-10-29T20-37-07-338Z/mobile-canvas.png",
+      "sha256": "d48bb5d399e56c5da578c7501d7963d3ecc41d91ba45b2bd7d7287975af64d57"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "origin_kind": "non-localhost plain HTTP",
+  "mobile_bounds": {
+    "documentWidth": 390,
+    "width": 390,
+    "height": 844,
+    "toolbar": {
+      "left": 16,
+      "right": 374,
+      "top": 768,
+      "bottom": 824,
+      "width": 358
+    },
+    "header": {
+      "left": 0,
+      "right": 390,
+      "top": 0,
+      "bottom": 64,
+      "width": 390
+    },
+    "title": {
+      "left": 76,
+      "right": 149.71875,
+      "top": 83.71875,
+      "bottom": 108.28125,
+      "width": 73.71875
+    }
+  },
+  "passed": true,
+  "finished_at": "2026-10-29T20:37:28.339Z",
+  "static_artifact_sha256": {
+    "assets/agent-url-bootstrap-DcZRvpiD.js": "2280ba8bc379fc6e8df6369caaeae893ce6cf2779c08a59cb344682813af9ef8",
+    "assets/app-config-modal-DGP6YTcK.js": "975a58261572621ef141eeda7c5919bbccd3fa6f802e45dd7cf24622292287f8",
+    "assets/arrow-right-Ce_581IE.js": "4f4ce812e8f7f77bfd1bcd160c49b8aac7d3e966e3057450d47a38251fc9b431",
+    "assets/asset-picker-modal-upN7Xq0n.js": "1168291b3845304216b04a33a1fd6c50f3fced739c353abad2b786a2f3d2ffc0",
+    "assets/assets-BBFa2oNp.js": "1c1a833453d9aadbd05571c435e1fc4fc9236809f74074a27a62d2309e593883",
+    "assets/audio-generation-_vBKEhjI.js": "31fc5dd20018bff5556b9ba236b951e08f6eb52f10fe6e98f75b7cdf755b7390",
+    "assets/box-bQnOArfH.js": "e304002d24cc22d4e1cc3d241fe51beaf2c3a3bca7ddd046938000b2233f6dcb",
+    "assets/canvas-export-yoJAoSDR.js": "c1bd8c4df6919cfeff2193f857a987550b438f0748bcb03cf6f1cadf93052eee",
+    "assets/canvas-QdME9-GE.js": "c22e7ae173cdcf898a31321663550267e8828c6e7a900b25b2b11a7a9c09aa76",
+    "assets/canvas-theme-dYcMVoPE.js": "8c5f2cfca4d20b6f66b0a998e231cfc1d31566ccc835f0da962d3fa01fc054a9",
+    "assets/connection-s4fdhoNa.js": "517f1722da42f7335057b708532c53bc312c45ca362eb637e3b11bc26dce4832",
+    "assets/Drawer-C_Qv-iJ2.js": "32968150b1c59bfa392f5f1640bc82dbb943e82f3ccf13340790b1841eebaff6",
+    "assets/env-Dvz4fdfN.js": "4aaef1f492c9d71964cc396f43a8641fb82d7a368b7872cb2e9c8a5f6ff31e90",
+    "assets/external-link-C-UNH04G.js": "fac775b67324086ab1593ca7142b775c366360c1218cded9c355317a112b0505",
+    "assets/file-text-DccdKgLU.js": "19716aabe029011b98524a81581fb1bc67c2dbaaf7467805e07382f1b8408edf",
+    "assets/FileSaver.min-B0gOv0Fx.js": "001ff541e8d85b9d11afc2f929fca8b70d26e0ebe15b609d056dbdece9471108",
+    "assets/folder-plus-CmV-51-8.js": "612958a37361dc408997258bae1bc2362ccfb8c02825b5439b6f9a3c5834c193",
+    "assets/highlighted-body-OFNGDK62-Bi1PetOY.js": "d04779ffcc1419c9739b289c8041968ebdda6b4bb42a56d47fd978b968ff125b",
+    "assets/house-j7lnoOnM.js": "20a2c131ab4ac78ebab57ef94726e0edaaff1598df31f570495cb104bf553ebe",
+    "assets/image-Dc8_ibyd.js": "1ecd95adc5ef7fe435d184f8a32f4a18e8323b712e770055bf4f7ea7272e86c0",
+    "assets/image-plus-DTkZ_vTi.js": "1862695c85c000e8c883e62118ef5db7be4f88ae9c43d532d899699b1083dc12",
+    "assets/image-utils-6PYGfQaZ.js": "fd65456b79a90164ef69a6b45a88f6a94ca878b3d7b21b5290f8312fe25ab5e4",
+    "assets/index-4e0LTbTF.js": "f94c05633a3c7471fbc4614224afac02b90259b6ee3fb96a3ced0b1fbb9853d8",
+    "assets/index-8k0W7FI1.js": "b6aecdcbe629f23e524f5c585a74b971b860a596d8522343bce64d1f5c11179c",
+    "assets/index-B72qC7jP.js": "1996f0222eb476fb3733e66581c1dac711ea49892518fab647cf39eb325ff7a0",
+    "assets/index-BbCpsf8n.js": "7d10bb93f64a7c0edbcbd6d1e0711c4b354e271a6ad646c4079ef28dd85f045b",
+    "assets/index-BEr3hXhj.js": "8124dbd5b3abf4c0d3051a52fb20686de1d9c9be8f97492ce724f49efab33b03",
+    "assets/index-Bnk1SC-I.js": "ef6ae5bc62cd67c264a715e1b4b2eb38986b8df853523f1c16d72ea2e86441a5",
+    "assets/index-C6NlX0uA.js": "e8741fae597dd434cd7f7ef39d9246c2845b0575736cce4302e34ae3f217b064",
+    "assets/index-Cro6JO-i.js": "ac4f5784e5b7558c52bdf404a9e978f65ef3ffac045fd7eeb4b23d6e6c7b3c52",
+    "assets/index-DFdpU0Ht.js": "71f1f37765a1fa7af1c156204cbebebd940087e76c44c3c6fd05f731fa0d5371",
+    "assets/index-DFE6o7h-.js": "c161140008ddc5b789f99a2b2f0b8eb97baf1e98026b6e4ff657d5f1747c37dd",
+    "assets/index-Di-JFCUe.js": "042bb6783f6887eb70894cec06782fbf62631d09e4cfc0af02aa2b7594f123b8",
+    "assets/index-djzhU8fW.css": "cd8d58ef15757bb2025ddd25335da1d3e34449e0defbfb8cf2f646e2b0b0274c",
+    "assets/index-DnJkzChK.js": "caf6648e6f2778dcb73fbf37e8017f479d84936d96dcc4ec136ddf6415c9db07",
+    "assets/index-DOMZEYxY.js": "ac4486fd0237033d76413cbc840c51580d60f5f3cb9975514c9204dd0308f96f",
+    "assets/index-DXOMYDOw.js": "af39e15bb8ef3876d68161fc5f34d5faedd62c13dcc526f360c45744c1d21e26",
+    "assets/index-DXYJ31Ac.js": "c787135ab3dad656abc0602859ac1add40247eadbc37179779e0b5ef097791e9",
+    "assets/index-EETbKPOQ.js": "d763d42f1bee0f5301a2356b26c0ff496cb867f825427f6484b2b06e022585d1",
+    "assets/index-N1WTdoqf.js": "790c151cedc26e320be891a6a56d1b8fe3585cd1701afe6d026c11666ced8fda",
+    "assets/index-nAPs4zh9.js": "9ea6166305dac43db9fadf08ac6262873c8c5d0465dd878f6aca9c5dca49a938",
+    "assets/index-tsM-zd-z.js": "30dd7e58a15d80e896eaaac1e846bc68e5aa59f7d43c633a5a154e5f9174aac9",
+    "assets/index-WL4WKtE4.js": "1f0e97ab01a1c61af6af23fcac554c9bc6c480c466977cba5203f0bb6a51b00b",
+    "assets/index-xSDFHbcW.js": "9633b3dbe4b409300cc55f9ad4d708494a9e2f08a82c17a51883bb4408ffff91",
+    "assets/index-YTHCkxoA.js": "98a0fd055fdaf9a6b22d32f5a2e4cab6478cb974ed09127506acde72d5e4df02",
+    "assets/KeyCode-C3ZfcqzQ.js": "3e07de442a67b8aebd99fbf2172603cd885bd014ad710c864563178ec3e5029b",
+    "assets/LeftOutlined-BBg3AcV0.js": "1e2a1f24e00683cdcdb5db673d311bdeb934503a09c7ed7daf3378066e837ff3",
+    "assets/link-2-BlsQXNMX.js": "b9446749eb1a43938b4f34f85f1d3e5fef6a603ed30d4626c300b6e3df6b7a2a",
+    "assets/localforage-storage-BVVw5WxY.js": "4e5ad494c0b3f879422463b8c9429e2e18b009cefa2ee97fa02e3730b26a3a79",
+    "assets/mermaid-GHXKKRXX-CzrTieaT.js": "579ce57a484bf5f70be733069c5bdc6338fbb7b6d19f907d1cdc96661e0d7ab2",
+    "assets/model-plugin-BKqqP_6f.js": "c48ce4200411ba4d7badf56aefc0fef56e13200bc239d7b7c4c6487dbdf9219f",
+    "assets/models-Dpy3pIPT.js": "7795c8fd3afc4fea6d92f36277f603f2150da0526f7c695dca46d9faa8fe5b6e",
+    "assets/music-2-C0EJKSjN.js": "b524e3b5b2b4b78fc9bddcaef088ddc8eabfdb7720e43bbe7939d576f6b1c743",
+    "assets/navigation-tools-Duv73fUK.js": "fb1eff94e45d4a80e0cc5d1e06d1b8f1df28c43ae9a2d3840e68ec2434601409",
+    "assets/Overflow-BOlZmvEt.js": "b1f79e0389c98814853414bbe301ff0fbcc5a922220c7f0d79844203af0bcbe3",
+    "assets/pencil-DqWvPoWW.js": "240654bc668472a3016c4312639d33668ee0496cf55a7ed590be76690bf8c351",
+    "assets/plus-CgAdmsTd.js": "d872eed23769a9e3f1da837401d69a94caba60e5a541b1854ff27b6833faf9e2",
+    "assets/project-1uKxGzMc.js": "3d15982032bfc7da8afa5242634d1bd5fa4a47c1786d432c0837d3c3150b61f3",
+    "assets/prompt-detail-dialog-Cr3l4V0Q.js": "9891211c8123ec0c2dc512c9d5644cfaa525b00ad21f0ca1718f6f78351cc8ae",
+    "assets/refresh-cw-DqWhHEnI.js": "eb83e8a3c438b72f5ce144a48690e2e5ea4dab14efa536a76cac5612a8749cc8",
+    "assets/schema-validator-DcE54TGP.js": "57110384942911ec2365595522b3d7d741fb9528464699bd6acd2e071266e10e",
+    "assets/schema-worker-BELMOVc3.js": "7a62cfd491975e88ffc049fea3ee69e21930393e9bd24f12220e2c63d27c58cb",
+    "assets/search-BL8DNGjD.js": "4e254f4e7797612a7a04f930e69459ca3051064d0cd13c40f0fc999f1b860b42",
+    "assets/settings-2-ye5J81R7.js": "2c18bde36342a13e1f63cc9772d4167d7f022e35dfe62503853df4a6bc5893dc",
+    "assets/square-check-big-BJRqejuJ.js": "26f2f3e30b69efad24eed6b7f86dc7bde2db3b9b1f36c960aca0effe7b58b083",
+    "assets/square-WSd1UY1F.js": "d7711f9beefb7e60de0a9b23fb23f66d46a420a6eecd1386fb0f83edae9a0ce3",
+    "assets/tasks-BVuBJ6dG.js": "ccf5aa76a66e24cfd46aa882f4a1f4ff9ff86d3ddca64c58cc7586007e41ca1f",
+    "assets/trash-2-St6je3OI.js": "6b55a25dd2fa3ee33d3f756d95e392ffd20b0f158f92fddf624c5268ce5b8bcf",
+    "assets/use-asset-store-DyzGNh6U.js": "529f4926a889a24f88dcf103459fc61ade713455e3c22df1164bd193ed4f6653",
+    "assets/use-canvas-store-DVL8HTHI.js": "af89508717237c67bcce0c66c955d85226ccf838272dd893c4739829712af53a",
+    "assets/use-copy-text-CpNC__dQ.js": "7d14c8fb0b3cd4e0fbe798a3668fa1e4cabc1b625b100b8e71d3646d91dbb5d0",
+    "assets/use-prompt-list-Bugi99HN.js": "76c7cf897ee64278e0d5f9be7f3dc80bd8dbfbea79b106a6a262389ea55b3c30",
+    "assets/use-workbench-agent-store-Bo6xhkki.js": "4a970dc4bf9fc0a58c98607cfd117c564791c153df82a91975e7e5aa6edc94cf",
+    "assets/useControlledState-7fKbr_lb.js": "59cefd70dc6d7cc8cdd2a4d48111cfab3dcfa16b47b3c15d3c5fed65fa887f7b",
+    "assets/utils-Bf1RXs24.js": "f60e51f9a0c2acede7dca8efea7daa722699c3f8f4453719ec8c72a4ee89f287",
+    "assets/video-BESdAekQ.js": "9be59b10c1181deddfc611bfd6d763cb189f2922da24a686be10f756b58beebc",
+    "assets/video-BpoYVvXx.js": "4b3d4a147ab459a8046969b61acd8d0f11abc54f1deccbbdd544b5ca28e66518",
+    "assets/video-settings-panel-B5M7edwx.js": "101577d987446f8bdf7ff9e9600fc28666244933eb92be2eb83c8beed51d5bcc",
+    "assets/zip-vQtl9jF_.js": "ad1801c25d96b5c5b3efd9778f827b7e79e1fbbaf57d8fe58e64958aaea078be",
+    "config.js": "33c15a252c60b6103ad20c773e1ec662c1aaa636277aa24698274a7d2a743038",
+    "fonts/Anton-OFL.txt": "ee67e6ee22790b7929f1a3769ca2801d565c64b5a9096942c1adf5596de9c9e4",
+    "fonts/Anton-Reference.woff": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a",
+    "fonts/Manrope-OFL.txt": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+    "fonts/Manrope-Reference.woff": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd",
+    "icons/claude.svg": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364",
+    "icons/deepseek.svg": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439",
+    "icons/gemini.svg": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602",
+    "icons/glm.svg": "8174e65ff71647d5c705c920c953a82bd723d9e3e42887bdd4ffc9dfe51207a0",
+    "icons/grok.svg": "9175fc90c22655160231976c849f25a03b888d7cc0e04c5f1b987b659bb07c95",
+    "icons/linuxdo.svg": "dc7fe55ca4dc1062611111df4208da9d44655c36f85ad52727facd4bba2b4d60",
+    "icons/openai.svg": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186",
+    "index.html": "21ec670f307533a74d2d528da3d8df4f82b9fded6bf9f934dcf8487a651be580",
+    "logo.svg": "76e174b82af0dfac35c55ba086d4e9781aa1d2ade984b50ddb6489b408efd831",
+    "plugins/index.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "static_artifact_unchanged": true
+}

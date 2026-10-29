@@ -16,10 +16,10 @@ from sqlalchemy.engine import make_url
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=Path, required=True)
+    parser.add_argument("--config", type=Path, help="Explicit operator configuration; otherwise use the service environment only")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
-    settings = Settings(_env_file=args.config)
+    settings = Settings(_env_file=args.config if args.config else None)
     if settings.environment != "production":
         raise SystemExit("Requires explicit production configuration")
     url = make_url(settings.database_url.get_secret_value())

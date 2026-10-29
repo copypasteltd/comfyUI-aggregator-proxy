@@ -7,8 +7,9 @@ Requires=comfy-aggregator-postgres.service
 Type=oneshot
 User=comfy-control
 Group=comfy-control
+EnvironmentFile=/etc/comfyui-aggregator/cloud.env
 Environment=PYTHONDONTWRITEBYTECODE=1
-ExecStart=/opt/comfyui-aggregator/current/venv/bin/python /opt/comfyui-aggregator/ops/backup-db.py --config /etc/comfyui-aggregator/cloud.env --output-dir /var/lib/comfyui-aggregator/backups
+ExecStart=/opt/comfyui-aggregator/current/venv/bin/python /opt/comfyui-aggregator/ops/backup-db.py --output-dir /var/lib/comfyui-aggregator/backups
 UMask=0077
 NoNewPrivileges=true
 PrivateTmp=true

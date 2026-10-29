@@ -18,6 +18,16 @@ def test_canonical_preserves_providedness_order_and_unicode() -> None:
     assert request_fingerprint(request, {}) == request_fingerprint({**request, "client_request_id": "different"}, {})
 
 
+def test_expected_release_binds_only_opt_in_request_fingerprints() -> None:
+    request = {"model": "m", "input": {"prompt": "p"}}
+    legacy = fingerprint({"schema_revision": "0.4.0", "request": request})
+    assert request_fingerprint(request, {}) == legacy
+    assert request_fingerprint(request, {}, expected_release_digest=None) == legacy
+    guarded = request_fingerprint(request, {}, expected_release_digest="a" * 64)
+    assert guarded != legacy
+    assert guarded != request_fingerprint(request, {}, expected_release_digest="b" * 64)
+
+
 def test_transition_requires_evidence_and_terminal_is_immutable() -> None:
     with pytest.raises(DomainError, match="缺少证据"):
         transition("submitting", "running", "submitted", set())

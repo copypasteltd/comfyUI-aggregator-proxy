@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-10-30 · 131 · Managed Studio integration
+
+- 新增专用画布适配、完整规格/输入槽位、七种异步任务、事务提交日志与原请求恢复；公开记录以实际发布和验收为准。
+- Add optional expected-release admission, legacy-compatible idempotency fingerprints, row-lock protection and poll hints; fix GLB discovery without changing Worker protocol or database schema.
+- 原生 82 项范围回归通过（非崩溃持久性测试）；备份服务改为 systemd 注入受保护环境，保持原用户、权限与超时。保留历史失败及未验收项。
+
 ## 2026-10-29 · 130 · Media Gen Skill 1.1.1
 
 - 同步调用 Skill 与云端 129.3：明确 3D 独立 meshes:create、完整上传/任务/内容最小权限及三级 daily_mesh_count，遇到旧服务权限缺陷不通过自动扩权绕行。

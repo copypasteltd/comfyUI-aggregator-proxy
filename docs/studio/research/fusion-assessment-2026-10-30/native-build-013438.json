@@ -1,0 +1,24 @@
+{
+  "started_at": "2026-10-30T01:34:38.912195+08:00",
+  "duration_seconds": 4.441,
+  "scope": "patched isolated frontend, not original upstream or integrated product",
+  "stage": "build",
+  "ci_check_is_clean_install": null,
+  "working_directory": "E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe\\web",
+  "command": [
+    "D:\\Program Files\\nodejs\\node.EXE",
+    "D:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "run",
+    "build"
+  ],
+  "exit_code": 1,
+  "passed": false,
+  "local_log": "E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\build-013438.log",
+  "log_sha256": "08c0a7b65d1392916b123375563f1844927ec22884acb06b1bf7a5e76d513741",
+  "output_tail": "\n> infinite-canvas@0.1.0 build\n> vite build\n\nE:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe\\web\\node_modules\\rollup\\dist\\native.js:121\n\t\tthrow new Error(\n\t\t      ^\n\nError: Cannot find module @rollup/rollup-win32-x64-msvc. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.\n    at requireWithFriendlyError (E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe\\web\\node_modules\\rollup\\dist\\native.js:121:9)\n    at Object.<anonymous> (E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe\\web\\node_modules\\rollup\\dist\\native.js:130:76)\n    at Module._compile (node:internal/modules/cjs/loader:1554:14)\n    at Object..js (node:internal/modules/cjs/loader:1706:10)\n    at Module.load (node:internal/modules/cjs/loader:1289:32)\n    at Function._load (node:internal/modules/cjs/loader:1108:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)\n    at cjsLoader (node:internal/modules/esm/translators:262:5)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:196:7) {\n  [cause]: Error: Cannot find module '@rollup/rollup-win32-x64-msvc'\n  Require stack:\n  - E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe\\web\\node_modules\\rollup\\dist\\native.js\n      at Function._resolveFilename (node:internal/modules/cjs/loader:1225:15)\n      at Function._load (node:internal/modules/cjs/loader:1055:27)\n      at TracingChannel.traceSync (node:diagnostics_channel:322:14)\n      at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)\n      at Module.require (node:internal/modules/cjs/loader:1311:12)\n      at require (node:internal/modules/helpers:136:16)\n      at requireWithFriendlyError (E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe\\web\\node_modules\\rollup\\dist\\native.js:103:10)\n      at Object.<anonymous> (E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe\\web\\node_modules\\rollup\\dist\\native.js:130:76)\n      at Module._compile (node:internal/modules/cjs/loader:1554:14)\n      at Object..js (node:internal/modules/cjs/loader:1706:10) {\n    code: 'MODULE_NOT_FOUND',\n    requireStack: [\n      'E:\\\\dev\\\\sandbox\\\\无限画布\\\\.local\\\\assessment-native\\\\probe\\\\web\\\\node_modules\\\\rollup\\\\dist\\\\native.js'\n    ]\n  }\n}\n\nNode.js v22.14.0\n",
+  "inputs": {
+    "package.json": "08f9f325a644ec94e918a6381d0881bb7df7fe73842663c7cff9a7f7bd1ebdb9",
+    "package-lock.json": "fc9768348f0e57d27fe6d3317a90f70072e88eb1c982954393bc8fa0e2a8e501",
+    "src/components/layout/app-providers.tsx": "b53816798a0cb237adf892dbc2255585fd8ae3a3004fb78f27054e19d336aeb6"
+  }
+}

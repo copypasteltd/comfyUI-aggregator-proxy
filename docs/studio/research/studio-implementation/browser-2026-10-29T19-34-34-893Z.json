@@ -1,0 +1,52 @@
+{
+  "started_at": "2026-10-29T19:34:35.047Z",
+  "scope": "active managed UI with synthetic API; plain non-localhost HTTP; desktop/mobile Chromium emulation, not a real phone or GPU",
+  "checks": [
+    {
+      "name": "connection/catalog/Schema Worker succeed on plain HTTP",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "failure",
+      "file": "docs/assets/studio/2026-10-29T19-34-34-893Z/failure.png",
+      "sha256": "afd592dee95e1b48a57fffeb7d03fbdca703452f2d6260fa0f62e56b7c1f5689"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "origin_kind": "non-localhost plain HTTP",
+  "passed": false,
+  "failure": "Expected values to be strictly equal:\n\nfalse !== true\n",
+  "finished_at": "2026-10-29T19:34:38.318Z"
+}

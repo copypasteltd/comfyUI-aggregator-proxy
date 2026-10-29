@@ -1,0 +1,837 @@
+{
+  "checked_at": "2026-10-30T02:18:25.377453+08:00",
+  "assessment_complete": true,
+  "integration_implemented": false,
+  "release_ready": false,
+  "release_decision": "HOLD: adapter implementation and all applicable live release gates remain unsigned",
+  "scope": "local assessment evidence index; native baseline and offline contracts are not integrated acceptance",
+  "gap_count": 46,
+  "gap_priority_counts": {
+    "P0": 33,
+    "P1": 13
+  },
+  "release_gate_count": 27,
+  "signed_off_release_gate_count": 0,
+  "verification": {
+    "unmodified_upstream_ci_passed": false,
+    "patched_native_install_passed": true,
+    "patched_native_typecheck_passed": true,
+    "patched_native_build_passed": true,
+    "formal_clean_ci_executed": false,
+    "normal_http_project_routes_and_reload_passed": true,
+    "mobile_controls_passed": false,
+    "offline_contracts_passed": true,
+    "offline_contract_count": 101,
+    "documented_request_examples_passed": 4,
+    "browser_runs_closed": 5,
+    "screenshot_hashes_verified": 25,
+    "live_generation_executed": false,
+    "real_phones_tested": false
+  },
+  "development_gaps": [
+    {
+      "id": "F-01",
+      "scope": "工程安装",
+      "current_evidence_or_gap": "原版 ci 失败；锁缺业务依赖及当前 Windows 原生包，隔离候选已补",
+      "completion_condition": "正式分支修复依赖/锁；干净环境按锁安装成功，其他构建平台单验",
+      "priority": "P0"
+    },
+    {
+      "id": "F-02",
+      "scope": "类型与构建",
+      "current_evidence_or_gap": "实测旧 Modal content 字段报错；隔离改用 container 后类型通过",
+      "completion_condition": "正式融合分支原生类型、生产构建和深链页面分别通过",
+      "priority": "P0"
+    },
+    {
+      "id": "F-03",
+      "scope": "原生与轻量部署",
+      "current_evidence_or_gap": "前端可静态部署；开发工具依赖不等于线上体积，首屏路由目前集中导入",
+      "completion_condition": "固定 Node/npm/锁和静态包，记录初始 JS/加载；编辑器、媒体及 3D 按需，部署不增加生成后端",
+      "priority": "P1"
+    },
+    {
+      "id": "F-04",
+      "scope": "渠道配置",
+      "current_evidence_or_gap": "目前仅 OpenAI/Gemini 类型",
+      "completion_condition": "明确中转服务类型、连接检测和源站规范化",
+      "priority": "P0"
+    },
+    {
+      "id": "F-05",
+      "scope": "模型发现",
+      "current_evidence_or_gap": "原版仅提取 id，名称猜能力不适用于全部别名",
+      "completion_condition": "使用 usage.task_type、说明、Schema 和权限，未知版本拒绝误调度",
+      "priority": "P0"
+    },
+    {
+      "id": "F-06",
+      "scope": "合法规格",
+      "current_evidence_or_gap": "原版独立尺寸/质量控件可能组合出非法值",
+      "completion_condition": "使用完整 preset、模型 Schema 和服务端最终校验",
+      "priority": "P0"
+    },
+    {
+      "id": "F-07",
+      "scope": "文生图",
+      "current_evidence_or_gap": "有双方接口，但原版发多余字段且同步等待",
+      "completion_condition": "异步真实生成、实际尺寸、下载完整性通过",
+      "priority": "P0"
+    },
+    {
+      "id": "F-08",
+      "scope": "单图编辑",
+      "current_evidence_or_gap": "源图/可选 mask 需按模型绑定",
+      "completion_condition": "同 Key 上传、源图必填、实际流程通过",
+      "priority": "P0"
+    },
+    {
+      "id": "F-09",
+      "scope": "多参考生图",
+      "current_evidence_or_gap": "文件数组缺角色约束",
+      "completion_condition": "数量/顺序/权重/角色匹配，缺图错图拒绝",
+      "priority": "P0"
+    },
+    {
+      "id": "F-10",
+      "scope": "文生视频",
+      "current_evidence_or_gap": "原版 FormData 多字段与兼容接口冲突",
+      "completion_condition": "统一 JSON 任务，保留真实时长和尺寸",
+      "priority": "P0"
+    },
+    {
+      "id": "F-11",
+      "scope": "首帧视频",
+      "current_evidence_or_gap": "单参考必须 first_frame",
+      "completion_condition": "源图上传、角色校验与首帧流程独立验证",
+      "priority": "P0"
+    },
+    {
+      "id": "F-12",
+      "scope": "多参考视频",
+      "current_evidence_or_gap": "与首帧并非同一模式",
+      "completion_condition": "按真实发布槽位验证，不能静默降为一张图",
+      "priority": "P0"
+    },
+    {
+      "id": "F-13",
+      "scope": "Workflow 音频",
+      "current_evidence_or_gap": "原版默认 speech，服务没有该入口",
+      "completion_condition": "text_to_audio、真实 preset/MIME、播放或明确格式提示与下载",
+      "priority": "P0"
+    },
+    {
+      "id": "F-14",
+      "scope": "3D GLB",
+      "current_evidence_or_gap": "服务已支持，画布核心类型缺少",
+      "completion_condition": "image_to_3d 源图/参数/结果卡/完整下载；预览另验",
+      "priority": "P0"
+    },
+    {
+      "id": "F-15",
+      "scope": "提交日志",
+      "current_evidence_or_gap": "无七类通用可靠记录，画布是延迟保存",
+      "completion_condition": "独立事务持久意图，写失败绝不提交",
+      "priority": "P0"
+    },
+    {
+      "id": "F-16",
+      "scope": "多标签/双击",
+      "current_evidence_or_gap": "localforage get 后 set 不是跨页 CAS",
+      "completion_condition": "原子唯一意图，已知 job 只读；协调失效仍依赖服务端幂等",
+      "priority": "P0"
+    },
+    {
+      "id": "F-17",
+      "scope": "提交结果未知",
+      "current_evidence_or_gap": "默认随机幂等键不能恢复原意图",
+      "completion_condition": "同一 Key/正文/引用/幂等键核对，不换模型/设备重提",
+      "priority": "P0"
+    },
+    {
+      "id": "F-18",
+      "scope": "刷新/后台恢复",
+      "current_evidence_or_gap": "原版主要保留内置视频 ID，脚本结果为 Map",
+      "completion_condition": "所有媒体同一恢复引擎，后台回来读原 ID",
+      "priority": "P0"
+    },
+    {
+      "id": "F-19",
+      "scope": "发布变更",
+      "current_evidence_or_gap": "别名在发现和提交之间可能指向另一发布",
+      "completion_condition": "现有 create 加可选 expected digest 前置校验；重放先取已创建任务",
+      "priority": "P0"
+    },
+    {
+      "id": "F-20",
+      "scope": "参考上传恢复",
+      "current_evidence_or_gap": "输入需同 Key、到期和不可变字节",
+      "completion_condition": "每个上传也保留 Idempotency-Key、hash 与 asset ID；生成意图冻结后不换素材",
+      "priority": "P0"
+    },
+    {
+      "id": "F-21",
+      "scope": "轮询与频控",
+      "current_evidence_or_gap": "每个查询消耗业务频率预算",
+      "completion_condition": "同任务去重、共享调度、Retry-After、暂停/继续和配额提示",
+      "priority": "P0"
+    },
+    {
+      "id": "F-22",
+      "scope": "取消",
+      "current_evidence_or_gap": "AbortSignal 仅影响浏览器请求",
+      "completion_condition": "明确远程取消，核对服务端终态，不自动释放 GPU",
+      "priority": "P0"
+    },
+    {
+      "id": "F-23",
+      "scope": "批量/分支",
+      "current_evidence_or_gap": "后端单任务单产物，UI 有 count 和多节点",
+      "completion_condition": "用户明确的批次拆任务，部分失败可见；恢复不重跑成功分支",
+      "priority": "P1"
+    },
+    {
+      "id": "F-24",
+      "scope": "鉴权下载",
+      "current_evidence_or_gap": "原版裸 URL 普通 fetch 不含业务授权",
+      "completion_condition": "固定源站下载、拒绝未授权重定向、长度/hash/MIME 校验",
+      "priority": "P0"
+    },
+    {
+      "id": "F-25",
+      "scope": "大文件",
+      "current_evidence_or_gap": "服务 GLB 上限不等于每台手机可处理上限",
+      "completion_condition": "已验证文件范围内通过；按需加载、避免 base64，多端降级可解释",
+      "priority": "P1"
+    },
+    {
+      "id": "F-26",
+      "scope": "浏览器媒体兼容",
+      "current_evidence_or_gap": "FLAC/WebM 等支持受浏览器影响",
+      "completion_condition": "检测实际播放能力；不能改扩展名冒充转码，允许保存原件",
+      "priority": "P1"
+    },
+    {
+      "id": "F-27",
+      "scope": "本地素材与引用",
+      "current_evidence_or_gap": "图像/媒体/预览/日志分多个 store",
+      "completion_condition": "统一 content/local 关联，保存失败不显示已保存，清理不删活动引用",
+      "priority": "P0"
+    },
+    {
+      "id": "F-28",
+      "scope": "八小时到期",
+      "current_evidence_or_gap": "仅远端 URL 会失效",
+      "completion_condition": "显示 expires_at，本地副本与云端期限分开，过期不触发重新生成",
+      "priority": "P0"
+    },
+    {
+      "id": "F-29",
+      "scope": "上游副本清理",
+      "current_evidence_or_gap": "ComfyUI 原输出移交即删仍是原项目待开发",
+      "completion_condition": "保留原待办和证据；画布不伪造已完成或绕过原清理约束",
+      "priority": "P1"
+    },
+    {
+      "id": "F-30",
+      "scope": "业务/管理身份",
+      "current_evidence_or_gap": "Key、cookie 和 Worker 身份独立",
+      "completion_condition": "业务请求不带管理 cookie；管理动作独立会话/CSRF，不借业务 Key 提权",
+      "priority": "P0"
+    },
+    {
+      "id": "F-31",
+      "scope": "任意代码入口",
+      "current_evidence_or_gap": "模型脚本/插件在页面权限执行，发现也可能执行",
+      "completion_condition": "托管模式入口强制拒绝，包括配置导入、持久插件和开发入口",
+      "priority": "P0"
+    },
+    {
+      "id": "F-32",
+      "scope": "本机身份分区",
+      "current_evidence_or_gap": "同源路径不是浏览器数据隔离边界",
+      "completion_condition": "连接/凭证指纹分区；轮换显式核对，不宣称客户端分区是多人安全沙箱",
+      "priority": "P0"
+    },
+    {
+      "id": "F-33",
+      "scope": "Key 导入导出",
+      "current_evidence_or_gap": "原版配置导出含 Key，URL 可导入 Key",
+      "completion_condition": "托管模式不通过 URL 传 Key；默认去凭证导出，明确本机保存选择",
+      "priority": "P0"
+    },
+    {
+      "id": "F-34",
+      "scope": "WebDAV/导入",
+      "current_evidence_or_gap": "会复制本地内容，非实时协作；3D key 前缀未纳入",
+      "completion_condition": "明确副本、Schema 版本、3D 文件、冲突/未知版本处置；导入不执行脚本",
+      "priority": "P1"
+    },
+    {
+      "id": "F-35",
+      "scope": "青柠视觉",
+      "current_evidence_or_gap": "原版主题尚未接入已锁定青柠",
+      "completion_condition": "AntD/Tailwind/Canvas/浮层完整映射、原样源文件/字体许可和截图",
+      "priority": "P1"
+    },
+    {
+      "id": "F-36",
+      "scope": "手机布局",
+      "current_evidence_or_gap": "本机普通 HTTP 常规入口已复现：390px 侧栏挤占、标题重叠、底栏不可见/越界",
+      "completion_condition": "抽屉/可收起栏、底栏相对实际画布定位，390px 与横屏不遮挡关键动作",
+      "priority": "P1"
+    },
+    {
+      "id": "F-37",
+      "scope": "触控与键盘",
+      "current_evidence_or_gap": "页面截图不能证明拖动、连线、键盘和后台行为",
+      "completion_condition": "Android/iOS 真机触控、软键盘、前后台、保存分别验收",
+      "priority": "P1"
+    },
+    {
+      "id": "F-38",
+      "scope": "HTTP 浏览器能力",
+      "current_evidence_or_gap": "localhost 不能代表远端 HTTP",
+      "completion_condition": "用非 localhost HTTP origin 验证 ID、哈希、IDB、下载；不新增 HTTPS 门槛",
+      "priority": "P0"
+    },
+    {
+      "id": "F-39",
+      "scope": "助手/Agent/Sub2API",
+      "current_evidence_or_gap": "中转没有通用 chat/Responses；原版 Agent 安装/连接说明会增加使用负担",
+      "completion_condition": "托管版生成不依赖或自动打开本地 Agent，移除其默认安装引导；可选文本助手另配 Sub2API，媒体网关独立验证",
+      "priority": "P1"
+    },
+    {
+      "id": "F-40",
+      "scope": "个人任务/全局队列",
+      "current_evidence_or_gap": "业务任务列表与 Admin 设备队列权限不同",
+      "completion_condition": "用户只看允许内容；管理面板显示真实全局/分渠道队列",
+      "priority": "P0"
+    },
+    {
+      "id": "F-41",
+      "scope": "多设备模型池",
+      "current_evidence_or_gap": "后端可复用合规多绑定；原项目 balanced_ready 全局均衡仍待实现",
+      "completion_condition": "同一发布逐卡批准、全局预留/持久公平、等权与故障下验证；10～20 节点容量单列测试",
+      "priority": "P1"
+    },
+    {
+      "id": "F-42",
+      "scope": "路由与插件路径",
+      "current_evidence_or_gap": "VITE_BASE 有，router 无 basename，插件有绝对 /plugins",
+      "completion_condition": "同时修复 assets/router/插件/下载 Worker URL 与 Nginx 回退",
+      "priority": "P0"
+    },
+    {
+      "id": "F-43",
+      "scope": "版本与升级",
+      "current_evidence_or_gap": "上游不保证旧数据兼容",
+      "completion_condition": "固定源码/锁/包摘要；自有任务日志版本化，未知结构不覆盖",
+      "priority": "P1"
+    },
+    {
+      "id": "F-44",
+      "scope": "发布回滚",
+      "current_evidence_or_gap": "前端回滚不应丢已有任务和素材",
+      "completion_condition": "静态包原子切换、保留旧包；兼容日志与 API，先演练恢复",
+      "priority": "P0"
+    },
+    {
+      "id": "F-45",
+      "scope": "验收声明",
+      "current_evidence_or_gap": "基线运行、离线契约和真实 GPU 是不同证据",
+      "completion_condition": "每种任务端到端 + 故障验证 + 页面/真机/部署证据后再标可用",
+      "priority": "P0"
+    },
+    {
+      "id": "F-46",
+      "scope": "十分钟空闲释放",
+      "current_evidence_or_gap": "原项目仅有设计，GPU 槽位释放不等于模型/显存/RAM 已卸载",
+      "completion_condition": "复用原设计的实例协调、活动代数、条件式释放及回执；Admin 显示实际/partial，生成不受干扰",
+      "priority": "P1"
+    }
+  ],
+  "release_gate_ids": [
+    "G-01",
+    "G-02",
+    "G-03",
+    "G-04",
+    "G-05",
+    "G-06",
+    "G-07",
+    "G-08",
+    "G-09",
+    "G-10",
+    "G-11",
+    "G-12",
+    "G-13",
+    "G-14",
+    "G-15",
+    "G-16",
+    "G-17",
+    "G-18",
+    "G-19",
+    "G-20",
+    "G-21",
+    "G-22",
+    "G-23",
+    "G-24",
+    "G-25",
+    "G-26",
+    "G-27"
+  ],
+  "checked_local_file_links": 82,
+  "canvas": {
+    "commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+    "working_tree_clean": true,
+    "sources": [
+      {
+        "path": "web/package.json",
+        "bytes": 1916,
+        "sha256": "029f5dc8aa0c03f440701cc876afe32643c8b5e7e152fa828638fa5197e6bce4"
+      },
+      {
+        "path": "web/package-lock.json",
+        "bytes": 729745,
+        "sha256": "cc4de9adcfcb6f2d27ae1106a8d68622c7ce1c72047b41e9dfdaf1984b5e701f"
+      },
+      {
+        "path": "web/src/components/layout/app-providers.tsx",
+        "bytes": 2099,
+        "sha256": "17e2a8bec89c50599ffb9bdb33e2db23b0e627dd50b16567b7f863ed9b7b7957",
+        "anchor": "ProConfigProvider",
+        "lines": [
+          3,
+          47,
+          53
+        ]
+      },
+      {
+        "path": "web/src/components/layout/model-script-editor.tsx",
+        "bytes": 12445,
+        "sha256": "a5fea548092936933a08a0607ce58a4ca7f0095558fd7b69c9ac853c932e160a",
+        "anchor": "content: { height: \"100dvh\",",
+        "lines": [
+          58
+        ]
+      },
+      {
+        "path": "web/src/stores/canvas/use-canvas-store.ts",
+        "bytes": 6540,
+        "sha256": "e5bfd53d2241d35a68deef816d48b58c365b71309cd83cd70123dba25fea28c7",
+        "anchor": "void localForageStorage.setItem",
+        "lines": [
+          63
+        ]
+      },
+      {
+        "path": "web/src/lib/localforage-storage.ts",
+        "bytes": 1002,
+        "sha256": "de7a48aaa083d9acbc579b52dfa9af46d827917479850bc65b046876f31ab1d5",
+        "anchor": "window.localStorage.setItem",
+        "lines": [
+          23
+        ]
+      },
+      {
+        "path": "web/src/lib/canvas/plugin-loader.ts",
+        "bytes": 7944,
+        "sha256": "6e17bf04abe6433428101305a335715d96d5dbfa2db35a5361cb10f0a324efa2",
+        "anchor": "async function loadLocalPlugins()",
+        "lines": [
+          117
+        ]
+      },
+      {
+        "path": "web/src/services/api/model-plugin.ts",
+        "bytes": 30705,
+        "sha256": "d5ce345b32b4c30986c1bfc9b5d8ea50cffba5ecac51a23be4179d425dde1dfd",
+        "anchor": "new Function(",
+        "lines": [
+          118
+        ]
+      },
+      {
+        "path": "web/src/components/layout/client-root-init.tsx",
+        "bytes": 2093,
+        "sha256": "16e8e76bfd453800f21b76994e2b523923203eb87f7233d5c0b8d52330740846",
+        "anchor": "apiKey",
+        "lines": [
+          22,
+          23,
+          27,
+          30
+        ]
+      },
+      {
+        "path": "web/src/services/config-file.ts",
+        "bytes": 1606,
+        "sha256": "edae9e8de6207b2a02d9462dc82c554b72fa6f4adb74bae4a8d18bb19298e320",
+        "anchor": "config, webdav, promptSources",
+        "lines": [
+          23
+        ]
+      },
+      {
+        "path": "web/src/components/canvas/canvas-toolbar.tsx",
+        "bytes": 20879,
+        "sha256": "6cd41376921f1145edb4d294c7b9fae2a1d323af0284671d1d2ed74db9b722fd",
+        "anchor": "left: 300",
+        "lines": [
+          94
+        ]
+      },
+      {
+        "path": "web/src/lib/utils.ts",
+        "bytes": 496,
+        "sha256": "b7c296ba58b577dca148e5947c639a841724737fbe4c96b9d5e79c27492a642c",
+        "anchor": "nanoid",
+        "lines": [
+          3,
+          13,
+          17
+        ]
+      },
+      {
+        "path": "web/vite.config.ts",
+        "bytes": 2009,
+        "sha256": "013b9f4d5d8d4397c2c802d4e781b7f01f475081a72b42eecc1f2ff75e89974d",
+        "anchor": "base: process.env.VITE_BASE || \"/\"",
+        "lines": [
+          42
+        ]
+      },
+      {
+        "path": "web/src/router.tsx",
+        "bytes": 1346,
+        "sha256": "723f3e612a25769be3a83690a2b31affc25d012d66360f0f25b26ec925c9ac12",
+        "anchor": "createBrowserRouter([",
+        "lines": [
+          15
+        ]
+      }
+    ]
+  },
+  "aggregator": {
+    "commit": "f522ee0d70b74db137c9f858446ba58c2f508a50",
+    "working_tree_clean": true,
+    "sources": [
+      {
+        "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
+        "bytes": 11310,
+        "sha256": "4c107a38040d2fb826276ce07695d701a34870564d989b591658f6ca8a942434",
+        "anchor": "consume_business_rates(session, tenant, project, key)",
+        "lines": [
+          176
+        ]
+      },
+      {
+        "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
+        "bytes": 27466,
+        "sha256": "cc1945b5484b5b79d087130cd07894676fdf78674e7bffeeac0b1059da56da31",
+        "anchor": "digest = request_fingerprint(request, asset_hashes)",
+        "lines": [
+          146
+        ]
+      },
+      {
+        "path": "app/apps/control_api/src/control_api/uploads.py",
+        "bytes": 606,
+        "sha256": "ccef199f17cb55a83a24536fb0fdcf982d59ff3f3d8b21f01a992bfadd65de57",
+        "anchor": "Idempotency-Key",
+        "lines": [
+          9
+        ]
+      },
+      {
+        "path": "app/apps/control_api/src/control_api/main.py",
+        "bytes": 79354,
+        "sha256": "045daebcf5df5b807fa8e8f332c541d3905f5c1a896ce90a83437a6588ad9d8c",
+        "anchor": "path=\"/admin\"",
+        "lines": [
+          447,
+          462
+        ]
+      },
+      {
+        "path": "app/packages/contracts/src/generation_contracts/validation.py",
+        "bytes": 3644,
+        "sha256": "91f8ac907609f7287a5c205c6a73a6550f3e0e9d2831f583a404e6432dc41b24",
+        "anchor": "class JobCreate",
+        "lines": [
+          30
+        ]
+      },
+      {
+        "path": "app/apps/control_api/src/control_api/monitoring.py",
+        "bytes": 9097,
+        "sha256": "7c2435d198117a56c1a196009e18dea4351671d3d54a50e3d503de464d31686c",
+        "anchor": "allow_origin_regex=\".*\"",
+        "lines": [
+          185
+        ]
+      },
+      {
+        "path": "app/config/openapi.json",
+        "bytes": 648554,
+        "sha256": "e27789cf1c19b2e940a5346ee0ce61794b1cdde1fc821e12e4e44b7efa00a796"
+      },
+      {
+        "path": "app/config/lime-reference.lock.json",
+        "bytes": 2836,
+        "sha256": "3bedc3c163ed111bdb41c8245067864cbd91049925d49ec541507c671465284a"
+      },
+      {
+        "path": "docs/121-ComfyUI原始产物移交即清理设计.md",
+        "bytes": 18386,
+        "sha256": "ff594e21b411cefd781764aaa54765f9c6a5be925ab2254a4f12a80f1f739a32",
+        "anchor": "当前两项自动化均尚未实现",
+        "lines": [
+          3
+        ]
+      },
+      {
+        "path": "docs/123-空闲资源释放与多设备模型池调度设计.md",
+        "bytes": 22528,
+        "sha256": "ba836a15321fcf5ba9d5699eba3266c54fb57e6ee473a7f49316d4f126cd1c61",
+        "anchor": "balanced_ready",
+        "lines": [
+          134,
+          149
+        ]
+      }
+    ]
+  },
+  "documents": [
+    {
+      "path": "README.md",
+      "bytes": 7041,
+      "sha256": "f498ff5428493c8b7ba2e541f6aebd884472f979890942c5463200d2dc54031b"
+    },
+    {
+      "path": "docs/README.md",
+      "bytes": 2413,
+      "sha256": "6bfe15619bc872d438c0099c821c81993d011f9c7e67937891fc179d10db8dd4"
+    },
+    {
+      "path": "docs/04-本地源码与中转服务融合方案.md",
+      "bytes": 15138,
+      "sha256": "c48158d9af8c023471f149607c7ba603f99a068870a48d4490b7a5cdc378ac14"
+    },
+    {
+      "path": "docs/05-中转服务接口映射与开发验收清单.md",
+      "bytes": 14837,
+      "sha256": "13147816426c18a80fef81b3d235effd8cdb671da2f8987bcba7c43d45c9d707"
+    },
+    {
+      "path": "docs/06-融合可行性评估与上线约束.md",
+      "bytes": 18582,
+      "sha256": "3715b218c2cee5c2575b152cc7b472b6a0739bc989251335a70e69e546a31b76"
+    },
+    {
+      "path": "docs/07-融合实现契约与故障恢复.md",
+      "bytes": 15603,
+      "sha256": "8aabaa7908fcaab0f1c347885093796a2ae7d2cc3bb3ded98ec014f3070f6385"
+    },
+    {
+      "path": "docs/08-可用性验证与发布验收.md",
+      "bytes": 19533,
+      "sha256": "2f1e2e6d273198fc9f28b3726f70ae2b149450403aa890f67481af0ff46fccb2"
+    },
+    {
+      "path": "docs/09-模型适配样本与用户流程.md",
+      "bytes": 8261,
+      "sha256": "7aed956d28f11c870fbc71f569f37959f1ea27aa8cf14a760fe9a5bf1764a44d"
+    }
+  ],
+  "reports": [
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/documented-requests.json",
+      "bytes": 532,
+      "sha256": "bfa7ac29c83d254aee4f3139cc3499f02155b15e4e6c002521cff9dc0c7f20a2",
+      "scope": "offline validation of four documented request examples, replacing placeholder asset IDs; no API/GPU",
+      "passed": true
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-browser-normal-diagnostic-closed-idb.json",
+      "bytes": 58668,
+      "sha256": "f148f6ba98d9af2dcc471974e473846754dd80141094e08c95b004dfa3059458",
+      "scope": "isolated patched upstream baseline on plain HTTP; no integration, real phone, production API or GPU execution",
+      "baseline_routes_and_reload_passed": true,
+      "all_viewport_controls_passed": false,
+      "creation_entry": "library create button, without Agent mode query",
+      "cleanup": {
+        "contexts_closed": true,
+        "browser_closed": true,
+        "server_closed": true
+      }
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-browser-normal-diagnostic.json",
+      "bytes": 67071,
+      "sha256": "16163916176a9121f842d97bee0c7e7da020e7ab9649d95055990124e0417ba5",
+      "scope": "isolated patched upstream baseline on plain HTTP; no integration, real phone, production API or GPU execution",
+      "baseline_routes_and_reload_passed": false,
+      "all_viewport_controls_passed": false,
+      "creation_entry": "library create button, without Agent mode query",
+      "verification_note": "Earlier instrumentation resolved its IndexedDB read before transaction completion and connection close. Reload judgement is superseded by native-browser-normal-diagnostic-closed-idb.json. Do not attribute these reload failures to a confirmed upstream defect; mobile layout observations remain independently supported.",
+      "cleanup": {
+        "contexts_closed": true,
+        "browser_closed": true,
+        "server_closed": true
+      }
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-browser-normal.json",
+      "bytes": 22535,
+      "sha256": "a50404ad0223446b59e603901f0d48a5438c4f05a4dda7a8adfa9b3f7b931c91",
+      "scope": "isolated patched upstream baseline on plain HTTP; no integration, real phone, production API or GPU execution",
+      "baseline_routes_and_reload_passed": false,
+      "creation_entry": "library create button, without Agent mode query",
+      "verification_note": "Earlier instrumentation resolved its IndexedDB read before transaction completion and connection close. Reload judgement is superseded by native-browser-normal-diagnostic-closed-idb.json. Do not attribute these reload failures to a confirmed upstream defect; mobile layout observations remain independently supported.",
+      "cleanup": {
+        "contexts_closed": true,
+        "browser_closed": true,
+        "server_closed": true
+      }
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-browser-observation.json",
+      "bytes": 59764,
+      "sha256": "8e6bbc26db57e21547226446d7241e5510c61b180b0f534faf2bbb6aa58394d3",
+      "scope": "isolated patched upstream baseline on plain HTTP; no integration, real phone, production API or GPU execution",
+      "baseline_routes_and_reload_passed": true,
+      "all_viewport_controls_passed": false,
+      "cleanup": {
+        "contexts_closed": true,
+        "browser_closed": true,
+        "server_closed": true
+      }
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-browser.json",
+      "bytes": 39623,
+      "sha256": "e6704bf8d0241231f8587a36092315397f8d55ba9ca7ed88595eaf317755c962",
+      "scope": "isolated patched upstream baseline on plain HTTP; no integration, real phone, production API or GPU execution",
+      "baseline_routes_and_reload_passed": false,
+      "cleanup": {
+        "contexts_closed": true,
+        "browser_closed": true,
+        "server_closed": true
+      }
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-build-013438.json",
+      "bytes": 3589,
+      "sha256": "2b2d2c9142e747cf890f92eb1962729211d89c472b13db31986769af3cf49c8f",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "stage": "build",
+      "passed": false,
+      "exit_code": 1
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-build-014155.json",
+      "bytes": 5434,
+      "sha256": "c95b81f660c6a4abea206ab1767fa143e167995994faf1247c3c947cf24dc5ae",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "stage": "build",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-bundle.json",
+      "bytes": 1045,
+      "sha256": "7597d0c1508bd50aeb45ba5be765f66528cc2617097d2c86daa7c8314c672250",
+      "scope": "unmodified feature set of patched baseline build; no integrated studio"
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-candidate-fixups.json",
+      "bytes": 1823,
+      "sha256": "b074f2f21b14ef66f2276b2827810292181bb470b5bc5dc4f72865fabcd4740d",
+      "scope": "final native baseline candidate only, not original checkout or integration"
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-ci-check-014155.json",
+      "bytes": 1519,
+      "sha256": "0af24324e0739a50304799c0667e82ec8430a333f1d3ed7f7be92f2f47493793",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "stage": "ci-check",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-fresh-lock-013558.json",
+      "bytes": 1331,
+      "sha256": "31efa2cfbc52159353d9708838331f41e646fa96682fa7b9453d4b71003922ec",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "stage": "fresh-lock",
+      "passed": false,
+      "exit_code": 4294967295,
+      "interrupted_by_assessment": true,
+      "adopted": false
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-install-005103.json",
+      "bytes": 1127,
+      "sha256": "9555d54453273fe830824ebf0c6ee0f8044dd1a16190b489d5f16f55142864c6",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-native-bindings-014101.json",
+      "bytes": 1563,
+      "sha256": "61b6176c2226e0c536f1b32a247d7fdf9226032bd037afabba5d51d10fcfc89b",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "stage": "native-bindings",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-probe-preparation.json",
+      "bytes": 1371,
+      "sha256": "447115d207a65c06ede11ef964c4921108595e9e9bda8c668124d7c50844b35c",
+      "scope": "isolated build probe, not the downloaded upstream or an integrated release"
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-typecheck-013438.json",
+      "bytes": 1524,
+      "sha256": "b30df71dfde9d4f298a1df047ec1161111610dcc67bfc1dab0ae6aa38bd7bc89",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "stage": "typecheck",
+      "passed": false,
+      "exit_code": 2
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-typecheck-013908.json",
+      "bytes": 1118,
+      "sha256": "08d0af66723d95258fda2445798f0dc5d0576dc3b31f2e0aec7c86101463f3bf",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "stage": "typecheck",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/native-typecheck-021113.json",
+      "bytes": 1241,
+      "sha256": "52cdce448157be87a0f40c8b1091de54d7be55997983126ee4062bf8478d67d9",
+      "scope": "patched isolated frontend, not original upstream or integrated product",
+      "stage": "typecheck",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "path": "docs/research/fusion-assessment-2026-10-30/offline-contracts.json",
+      "bytes": 41133,
+      "sha256": "99bd6e95b1bcb4b385d0b5be916ce0bc39269cc58b13db6c07632f30d61c9189",
+      "scope": "offline current DTOs + historical public catalog schemas; no API, database, upload or GPU execution",
+      "passed": true,
+      "case_count": 101,
+      "passed_count": 101
+    }
+  ],
+  "production_modified": false,
+  "live_generation_called": false,
+  "local_virtualization_used": false
+}

@@ -1,0 +1,2391 @@
+{
+  "schema_version": 1,
+  "title": "开源无限画布相关方案调研",
+  "snapshot_date": "2026-10-29",
+  "timezone": "Asia/Taipei",
+  "built_at": "2026-10-29T22:07:14.174629+08:00",
+  "metadata_fetch_window": {
+    "first": "2026-10-29T21:46:09.745694+08:00",
+    "last": "2026-10-29T21:58:39.410443+08:00"
+  },
+  "scope": "从本次筛选的 GitHub 开源仓库中按 Star 排序；包含成品、SDK、桌面组件及无限视口，不代表全球完整榜单。",
+  "candidate_count": 341,
+  "project_count": 60,
+  "projects": [
+    {
+      "name": "Langflow",
+      "repository": "langflow-ai/langflow",
+      "url": "https://github.com/langflow-ai/langflow",
+      "stars": 156136,
+      "type": "成品·AI 工作流",
+      "capability": "拖拽节点编排 AI 应用、Agent 和 API",
+      "license": "MIT",
+      "note": "工作流平台，适合参考节点配置与执行逻辑；不是自由绘图白板。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T13:12:45Z",
+      "language": "Python",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/langflow-ai/langflow",
+        "fetched_at": "2026-10-29T21:46:13.777299+08:00",
+        "snapshot": "research/github-2026-10-29/repo-langflow-ai--langflow.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/langflow-ai/langflow/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/langflow-ai--langflow/readme.txt",
+        "commit": "aeb10d96bb2ea797696613af931e91ddf51f3320",
+        "fetched_at": "2026-10-29T21:52:30.261804+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/langflow-ai/langflow/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/langflow-ai--langflow/license.txt",
+        "commit": "aeb10d96bb2ea797696613af931e91ddf51f3320",
+        "fetched_at": "2026-10-29T21:52:31.221792+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 1
+    },
+    {
+      "name": "ComfyUI",
+      "repository": "Comfy-Org/ComfyUI",
+      "url": "https://github.com/Comfy-Org/ComfyUI",
+      "stars": 143918,
+      "type": "成品·生成工作流",
+      "capability": "图像、视频、音频等生成的节点画布与执行后端",
+      "license": "GPL-3.0",
+      "note": "适合复用工作流生态；素材管理、多人协作和统一平台权限需要另建。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T13:03:57Z",
+      "language": "Python",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/Comfy-Org/ComfyUI",
+        "fetched_at": "2026-10-29T21:46:13.800789+08:00",
+        "snapshot": "research/github-2026-10-29/repo-Comfy-Org--ComfyUI.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/Comfy-Org/ComfyUI/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/Comfy-Org--ComfyUI/readme.txt",
+        "commit": "fd7639f477050e5c25b68fc38a9c2a6b6d988211",
+        "fetched_at": "2026-10-29T21:52:30.200339+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/Comfy-Org/ComfyUI/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/Comfy-Org--ComfyUI/license.txt",
+        "commit": "fd7639f477050e5c25b68fc38a9c2a6b6d988211",
+        "fetched_at": "2026-10-29T21:52:31.457949+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 2
+    },
+    {
+      "name": "Excalidraw",
+      "repository": "excalidraw/excalidraw",
+      "url": "https://github.com/excalidraw/excalidraw",
+      "stars": 134782,
+      "type": "成品 / 白板 SDK",
+      "capability": "手绘风无限白板、图形、连线、图片与导出",
+      "license": "MIT",
+      "note": "适合快速构建可嵌入白板；媒体任务节点、后端持久化和鉴权需要接入。",
+      "archived": false,
+      "last_push_utc": "2026-10-28T16:29:41Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/excalidraw/excalidraw/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/excalidraw--excalidraw/readme.txt",
+        "commit": "e7b534668a60add7f725531f3c9abf32508c7b4e",
+        "fetched_at": "2026-10-29T21:52:30.088619+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/excalidraw/excalidraw/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/excalidraw--excalidraw/license.txt",
+        "commit": "e7b534668a60add7f725531f3c9abf32508c7b4e",
+        "fetched_at": "2026-10-29T21:52:31.039641+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 3
+    },
+    {
+      "name": "Penpot",
+      "repository": "penpot/penpot",
+      "url": "https://github.com/penpot/penpot",
+      "stars": 61824,
+      "type": "成品·设计协作",
+      "capability": "设计画布、组件、布局与交互原型",
+      "license": "MPL-2.0",
+      "note": "面向设计协作；若只需要素材节点画布，整个平台的改造范围较大。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T13:41:14Z",
+      "language": "Clojure",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/penpot/penpot",
+        "fetched_at": "2026-10-29T21:46:13.782331+08:00",
+        "snapshot": "research/github-2026-10-29/repo-penpot--penpot.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/penpot/penpot/blob/develop/README.md",
+        "snapshot": "research/github-2026-10-29/sources/penpot--penpot/readme.txt",
+        "commit": "c373e8da8839caa21c8b9cf9161047c9e0c3ab80",
+        "fetched_at": "2026-10-29T21:52:32.586758+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/penpot/penpot/blob/develop/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/penpot--penpot/license.txt",
+        "commit": "c373e8da8839caa21c8b9cf9161047c9e0c3ab80",
+        "fetched_at": "2026-10-29T21:52:33.842798+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 4
+    },
+    {
+      "name": "Logseq",
+      "repository": "logseq/logseq",
+      "url": "https://github.com/logseq/logseq",
+      "stars": 45413,
+      "type": "成品·知识白板",
+      "capability": "将笔记、知识块和白板空间结合",
+      "license": "AGPL-3.0",
+      "note": "白板有历史文件图谱版本依据；不据此承诺新 DB 分支具备同等白板能力。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T13:36:01Z",
+      "language": "Clojure",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/logseq/logseq",
+        "fetched_at": "2026-10-29T21:46:14.328314+08:00",
+        "snapshot": "research/github-2026-10-29/repo-logseq--logseq.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/logseq/logseq/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/logseq--logseq/readme.txt",
+        "commit": "0232648eb481f4bbf34e9b00eda65265f22ff906",
+        "fetched_at": "2026-10-29T21:52:34.722857+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/logseq/logseq/blob/master/LICENSE.md",
+        "snapshot": "research/github-2026-10-29/sources/logseq--logseq/license.txt",
+        "commit": "0232648eb481f4bbf34e9b00eda65265f22ff906",
+        "fetched_at": "2026-10-29T21:52:36.544024+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 5
+    },
+    {
+      "name": "drawDB",
+      "repository": "drawdb-io/drawdb",
+      "url": "https://github.com/drawdb-io/drawdb",
+      "stars": 40173,
+      "type": "成品·数据库画布",
+      "capability": "数据库实体节点、关系连线与 SQL 导出",
+      "license": "AGPL-3.0",
+      "note": "适合参考实体关系与属性面板；用途是数据库建模。",
+      "archived": false,
+      "last_push_utc": "2026-10-27T19:43:59Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/drawdb-io/drawdb",
+        "fetched_at": "2026-10-29T21:46:17.406555+08:00",
+        "snapshot": "research/github-2026-10-29/repo-drawdb-io--drawdb.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/drawdb-io/drawdb/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/drawdb-io--drawdb/readme.txt",
+        "commit": "f47a5b2500c4448cfc34b5ce7023caf215dbcf94",
+        "fetched_at": "2026-10-29T21:52:34.949144+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/drawdb-io/drawdb/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/drawdb-io--drawdb/license.txt",
+        "commit": "f47a5b2500c4448cfc34b5ce7023caf215dbcf94",
+        "fetched_at": "2026-10-29T21:52:36.110393+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 6
+    },
+    {
+      "name": "React Flow / Svelte Flow",
+      "repository": "xyflow/xyflow",
+      "url": "https://github.com/xyflow/xyflow",
+      "stars": 38819,
+      "type": "SDK·节点编辑",
+      "capability": "自定义节点、连线、平移缩放和交互状态",
+      "license": "MIT",
+      "note": "同一仓库中的 React 与 Svelte 两套库只计一次；执行引擎与素材业务需要自建。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T12:39:31Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/xyflow/xyflow/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/xyflow--xyflow/readme.txt",
+        "commit": "d4bc936edad07aba995dbdb8e2c63af8cdd631c9",
+        "fetched_at": "2026-10-29T21:52:35.571364+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/xyflow/xyflow/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/xyflow--xyflow/license.txt",
+        "commit": "d4bc936edad07aba995dbdb8e2c63af8cdd631c9",
+        "fetched_at": "2026-10-29T21:52:36.543703+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 7
+    },
+    {
+      "name": "Fabric.js",
+      "repository": "fabricjs/fabric.js",
+      "url": "https://github.com/fabricjs/fabric.js",
+      "stars": 31529,
+      "type": "SDK·图形引擎",
+      "capability": "对象选择、变换、图片、文本与 SVG 处理",
+      "license": "MIT",
+      "note": "提供图形编辑底层；无限视口、协同、业务节点和服务端存储需要组合实现。",
+      "archived": false,
+      "last_push_utc": "2026-10-28T20:55:56Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/fabricjs/fabric.js",
+        "fetched_at": "2026-10-29T21:46:14.354831+08:00",
+        "snapshot": "research/github-2026-10-29/repo-fabricjs--fabric.js.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/fabricjs/fabric.js/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/fabricjs--fabric.js/readme.txt",
+        "commit": "b6d3ea022c9da5930b8471a4bf5e61b11ec2bfb9",
+        "fetched_at": "2026-10-29T21:52:35.740628+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/fabricjs/fabric.js/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/fabricjs--fabric.js/license.txt",
+        "commit": "b6d3ea022c9da5930b8471a4bf5e61b11ec2bfb9",
+        "fetched_at": "2026-10-29T21:52:36.797601+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 8
+    },
+    {
+      "name": "InvokeAI",
+      "repository": "invoke-ai/InvokeAI",
+      "url": "https://github.com/invoke-ai/InvokeAI",
+      "stars": 28911,
+      "type": "成品·AI 图像画布",
+      "capability": "统一画布、局部重绘、扩图和节点工作流",
+      "license": "Apache-2.0",
+      "note": "主要适合图像创作；不将其直接视为完整的图视频音频聚合平台。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T03:54:34Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/invoke-ai/InvokeAI",
+        "fetched_at": "2026-10-29T21:46:17.400702+08:00",
+        "snapshot": "research/github-2026-10-29/repo-invoke-ai--InvokeAI.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/invoke-ai/InvokeAI/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/invoke-ai--InvokeAI/readme.txt",
+        "commit": "0e6733855f618e75525795979d0be5069114490c",
+        "fetched_at": "2026-10-29T21:52:37.663741+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/invoke-ai/InvokeAI/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/invoke-ai--InvokeAI/license.txt",
+        "commit": "0e6733855f618e75525795979d0be5069114490c",
+        "fetched_at": "2026-10-29T21:52:39.085965+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 9
+    },
+    {
+      "name": "Toonflow",
+      "repository": "HBAI-Ltd/Toonflow-app",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app",
+      "stars": 19867,
+      "type": "成品·AI 创作画布",
+      "capability": "无限画布、分镜、资产、图像与视频创作",
+      "license": "MIT",
+      "note": "贴近 AI 素材创作产品；实际模型渠道与已有 API 的兼容性尚未联调。",
+      "archived": false,
+      "last_push_utc": "2026-10-27T10:29:17Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/HBAI-Ltd--Toonflow-app/readme.txt",
+        "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+        "fetched_at": "2026-10-29T21:52:37.817645+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/HBAI-Ltd--Toonflow-app/license.txt",
+        "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+        "fetched_at": "2026-10-29T21:52:38.816747+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 10
+    },
+    {
+      "name": "Drawnix",
+      "repository": "plait-board/drawnix",
+      "url": "https://github.com/plait-board/drawnix",
+      "stars": 14996,
+      "type": "成品·综合白板",
+      "capability": "无限白板、思维导图、流程图和自由绘画",
+      "license": "MIT",
+      "note": "基于 Plait，可参考成熟工具交互；生成任务和素材节点需要扩展。",
+      "archived": false,
+      "last_push_utc": "2026-09-08T03:15:08Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/plait-board/drawnix/blob/develop/README.md",
+        "snapshot": "research/github-2026-10-29/sources/plait-board--drawnix/readme.txt",
+        "commit": "b138ff867943ddff6c4c79560e10ab6ee3b5600e",
+        "fetched_at": "2026-10-29T21:52:38.124728+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/plait-board/drawnix/blob/develop/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/plait-board--drawnix/license.txt",
+        "commit": "b138ff867943ddff6c4c79560e10ab6ee3b5600e",
+        "fetched_at": "2026-10-29T21:52:39.110675+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 11
+    },
+    {
+      "name": "Konva",
+      "repository": "konvajs/konva",
+      "url": "https://github.com/konvajs/konva",
+      "stars": 14911,
+      "type": "SDK·图形引擎",
+      "capability": "场景图、拖拽、变换、图层、图片与事件",
+      "license": "MIT",
+      "note": "GitHub 自动许可识别为 NOASSERTION，但已核对 LICENSE 正文为 MIT。",
+      "archived": false,
+      "last_push_utc": "2026-10-23T22:37:15Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/konvajs/konva/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/konvajs--konva/readme.txt",
+        "commit": "57be2e3ab299cdb006e1723abe1703b855e26c22",
+        "fetched_at": "2026-10-29T21:52:39.901824+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/konvajs/konva/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/konvajs--konva/license.txt",
+        "commit": "57be2e3ab299cdb006e1723abe1703b855e26c22",
+        "fetched_at": "2026-10-29T21:52:40.846925+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 12
+    },
+    {
+      "name": "SimpleMindMap",
+      "repository": "wanglin2/mind-map",
+      "url": "https://github.com/wanglin2/mind-map",
+      "stars": 12886,
+      "type": "成品 / 脑图 SDK",
+      "capability": "思维导图编辑、布局和扩展插件",
+      "license": "MIT",
+      "note": "侧重树形信息结构，任意连线工作流不是其主要模型。",
+      "archived": false,
+      "last_push_utc": "2026-08-02T07:54:19Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/wanglin2/mind-map",
+        "fetched_at": "2026-10-29T21:46:19.192431+08:00",
+        "snapshot": "research/github-2026-10-29/repo-wanglin2--mind-map.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/wanglin2/mind-map/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/wanglin2--mind-map/readme.txt",
+        "commit": "e8e5ef9c41bc13ca7b13084e078123adff002242",
+        "fetched_at": "2026-10-29T21:52:40.074996+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/wanglin2/mind-map/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/wanglin2--mind-map/license.txt",
+        "commit": "e8e5ef9c41bc13ca7b13084e078123adff002242",
+        "fetched_at": "2026-10-29T21:52:41.063313+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 13
+    },
+    {
+      "name": "AntV G6",
+      "repository": "antvis/G6",
+      "url": "https://github.com/antvis/G6",
+      "stars": 12363,
+      "type": "SDK·关系图",
+      "capability": "大规模关系图、布局、节点交互与视口",
+      "license": "MIT",
+      "note": "面向图可视化；完整创作编辑器的工具栏、历史记录和业务层需另建。",
+      "archived": false,
+      "last_push_utc": "2026-10-27T11:58:25Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/antvis/G6",
+        "fetched_at": "2026-10-29T21:46:15.004302+08:00",
+        "snapshot": "research/github-2026-10-29/repo-antvis--G6.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/antvis/G6/blob/v5/README.md",
+        "snapshot": "research/github-2026-10-29/sources/antvis--G6/readme.txt",
+        "commit": "55a74698a9b432df993daae744c4c5526ab097b0",
+        "fetched_at": "2026-10-29T21:52:40.287986+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/antvis/G6/blob/v5/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/antvis--G6/license.txt",
+        "commit": "55a74698a9b432df993daae744c4c5526ab097b0",
+        "fetched_at": "2026-10-29T21:52:42.006426+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 14
+    },
+    {
+      "name": "Rete.js",
+      "repository": "retejs/rete",
+      "url": "https://github.com/retejs/rete",
+      "stars": 12297,
+      "type": "SDK·节点编辑",
+      "capability": "可视化编程、自定义节点与插件体系",
+      "license": "MIT",
+      "note": "适合将节点编辑与计算处理组合；需要设计业务节点和服务端执行协议。",
+      "archived": false,
+      "last_push_utc": "2026-10-25T01:49:44Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/retejs/rete",
+        "fetched_at": "2026-10-29T21:46:18.190647+08:00",
+        "snapshot": "research/github-2026-10-29/repo-retejs--rete.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/retejs/rete/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/retejs--rete/readme.txt",
+        "commit": "2aae19950180dc12725306f06c0440f64473bd21",
+        "fetched_at": "2026-10-29T21:52:40.192474+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/retejs/rete/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/retejs--rete/license.txt",
+        "commit": "2aae19950180dc12725306f06c0440f64473bd21",
+        "fetched_at": "2026-10-29T21:52:41.234168+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 15
+    },
+    {
+      "name": "Flowy",
+      "repository": "alyssaxuu/flowy",
+      "url": "https://github.com/alyssaxuu/flowy",
+      "stars": 12147,
+      "type": "SDK·流程编辑",
+      "capability": "轻量拖拽流程块、吸附与节点重排",
+      "license": "MIT",
+      "note": "偏简单流程编辑；完整无限视口、复杂连线及协作能力需额外实现。",
+      "archived": false,
+      "last_push_utc": "2024-07-13T17:01:28Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/alyssaxuu/flowy/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/alyssaxuu--flowy/readme.txt",
+        "commit": "e977380e3a84043aabb32cfd25b813455df5ec6f",
+        "fetched_at": "2026-10-29T21:52:42.263497+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/alyssaxuu/flowy/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/alyssaxuu--flowy/license.txt",
+        "commit": "e977380e3a84043aabb32cfd25b813455df5ec6f",
+        "fetched_at": "2026-10-29T21:52:43.366738+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 16
+    },
+    {
+      "name": "Rnote",
+      "repository": "flxzt/rnote",
+      "url": "https://github.com/flxzt/rnote",
+      "stars": 11814,
+      "type": "桌面·手写画布",
+      "capability": "无限画布、矢量笔迹、手写和图像导入",
+      "license": "GPL-3.0",
+      "note": "原生桌面应用，可参考笔触与文档体验；不是 Web 嵌入式 SDK。",
+      "archived": false,
+      "last_push_utc": "2026-10-26T17:42:48Z",
+      "language": "Rust",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/flxzt/rnote/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/flxzt--rnote/readme.txt",
+        "commit": "6bbc9b201adb0ab264f20dcdf6f23a18908eedfe",
+        "fetched_at": "2026-10-29T21:52:42.085893+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/flxzt/rnote/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/flxzt--rnote/license.txt",
+        "commit": "6bbc9b201adb0ab264f20dcdf6f23a18908eedfe",
+        "fetched_at": "2026-10-29T21:52:43.339422+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 17
+    },
+    {
+      "name": "LogicFlow",
+      "repository": "didi/LogicFlow",
+      "url": "https://github.com/didi/LogicFlow",
+      "stars": 11756,
+      "type": "SDK·流程编辑",
+      "capability": "业务节点、边、流程模型和插件扩展",
+      "license": "Apache-2.0",
+      "note": "适合后台业务编排；需要自行连接生成任务执行与状态回传。",
+      "archived": false,
+      "last_push_utc": "2026-10-24T01:23:33Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/didi/LogicFlow/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/didi--LogicFlow/readme.txt",
+        "commit": "d60a2161cdbe6a4e6ea6e77e146b4d328d9c7560",
+        "fetched_at": "2026-10-29T21:52:42.390252+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/didi/LogicFlow/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/didi--LogicFlow/license.txt",
+        "commit": "d60a2161cdbe6a4e6ea6e77e146b4d328d9c7560",
+        "fetched_at": "2026-10-29T21:52:43.382272+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 18
+    },
+    {
+      "name": "React Diagrams",
+      "repository": "projectstorm/react-diagrams",
+      "url": "https://github.com/projectstorm/react-diagrams",
+      "stars": 9434,
+      "type": "SDK·节点编辑",
+      "capability": "React 节点、端口、连线与画布交互",
+      "license": "MIT",
+      "note": "可作节点编辑基础；核心业务、运行时和协作需要实现。",
+      "archived": false,
+      "last_push_utc": "2025-04-03T17:33:25Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/projectstorm/react-diagrams/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/projectstorm--react-diagrams/readme.txt",
+        "commit": "cd3bdd119376836a0c675be5e3e58ee807cfd0c1",
+        "fetched_at": "2026-10-29T21:52:44.471084+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/projectstorm/react-diagrams/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/projectstorm--react-diagrams/license.txt",
+        "commit": "cd3bdd119376836a0c675be5e3e58ee807cfd0c1",
+        "fetched_at": "2026-10-29T21:52:45.518465+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 19
+    },
+    {
+      "name": "FlowGram",
+      "repository": "bytedance/flowgram.ai",
+      "url": "https://github.com/bytedance/flowgram.ai",
+      "stars": 8534,
+      "type": "SDK·工作流框架",
+      "capability": "流程画布、节点表单、变量和物料体系",
+      "license": "MIT",
+      "note": "比纯图形库更接近 AI 工作流平台；仍需适配现有生成 API 与任务系统。",
+      "archived": false,
+      "last_push_utc": "2026-10-23T06:46:50Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/bytedance/flowgram.ai/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/bytedance--flowgram.ai/readme.txt",
+        "commit": "02a01680b53facd3287ba693b588a41527c520a3",
+        "fetched_at": "2026-10-29T21:52:44.486757+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/bytedance/flowgram.ai/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/bytedance--flowgram.ai/license.txt",
+        "commit": "02a01680b53facd3287ba693b588a41527c520a3",
+        "fetched_at": "2026-10-29T21:52:45.493342+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 20
+    },
+    {
+      "name": "LiteGraph.js",
+      "repository": "jagenjo/litegraph.js",
+      "url": "https://github.com/jagenjo/litegraph.js",
+      "stars": 8176,
+      "type": "SDK·节点编辑",
+      "capability": "Canvas2D 节点图、平移缩放和 JSON 序列化",
+      "license": "MIT",
+      "note": "适合参考 ComfyUI 类交互；原仓库较久未推送，需评估维护分支。",
+      "archived": false,
+      "last_push_utc": "2024-08-01T08:49:24Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/jagenjo/litegraph.js/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/jagenjo--litegraph.js/readme.txt",
+        "commit": "0555a2f2a3df5d4657593c6d45eb192359888195",
+        "fetched_at": "2026-10-29T21:52:46.475175+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/jagenjo/litegraph.js/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/jagenjo--litegraph.js/license.txt",
+        "commit": "0555a2f2a3df5d4657593c6d45eb192359888195",
+        "fetched_at": "2026-10-29T21:52:47.546886+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 21
+    },
+    {
+      "name": "Obsidian Excalidraw",
+      "repository": "zsviczian/obsidian-excalidraw-plugin",
+      "url": "https://github.com/zsviczian/obsidian-excalidraw-plugin",
+      "stars": 7802,
+      "type": "插件·知识白板",
+      "capability": "Excalidraw 与笔记、嵌入、链接结合",
+      "license": "AGPL-3.0",
+      "note": "本项是开源插件；Obsidian 宿主不因此成为开源软件。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T13:37:02Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/zsviczian/obsidian-excalidraw-plugin",
+        "fetched_at": "2026-10-29T21:46:20.367874+08:00",
+        "snapshot": "research/github-2026-10-29/repo-zsviczian--obsidian-excalidraw-plugin.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/zsviczian/obsidian-excalidraw-plugin/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/zsviczian--obsidian-excalidraw-plugin/readme.txt",
+        "commit": "48e70b73cd885b5e66ffecbd1e32d4d98a18cbbd",
+        "fetched_at": "2026-10-29T21:52:47.004364+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/zsviczian/obsidian-excalidraw-plugin/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/zsviczian--obsidian-excalidraw-plugin/license.txt",
+        "commit": "48e70b73cd885b5e66ffecbd1e32d4d98a18cbbd",
+        "fetched_at": "2026-10-29T21:52:48.258373+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 22
+    },
+    {
+      "name": "Vue Flow",
+      "repository": "bcakmakoglu/vue-flow",
+      "url": "https://github.com/bcakmakoglu/vue-flow",
+      "stars": 6923,
+      "type": "SDK·节点编辑",
+      "capability": "Vue 3 自定义节点、连线、平移缩放和小地图",
+      "license": "MIT",
+      "note": "适合 Vue 技术栈；生成执行、权限、存储和协作需要后端配合。",
+      "archived": false,
+      "last_push_utc": "2026-07-14T08:09:05Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/bcakmakoglu/vue-flow/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/bcakmakoglu--vue-flow/readme.txt",
+        "commit": "17953c329db2d5dc5f5097370cbf5e1173bab520",
+        "fetched_at": "2026-10-29T21:52:46.603066+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/bcakmakoglu/vue-flow/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/bcakmakoglu--vue-flow/license.txt",
+        "commit": "17953c329db2d5dc5f5097370cbf5e1173bab520",
+        "fetched_at": "2026-10-29T21:52:47.920882+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 23
+    },
+    {
+      "name": "Lorien",
+      "repository": "mbrlabs/Lorien",
+      "url": "https://github.com/mbrlabs/Lorien",
+      "stars": 6865,
+      "type": "桌面·无限白板",
+      "capability": "无限画布、笔迹、撤销重做和简洁绘图",
+      "license": "MIT",
+      "note": "Godot 桌面应用；可参考轻量白板体验，不是网页画布组件。",
+      "archived": false,
+      "last_push_utc": "2025-09-22T21:29:46Z",
+      "language": "GDScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/mbrlabs/Lorien/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/mbrlabs--Lorien/readme.txt",
+        "commit": "17e32227dfce5477292d9f0a55d6cb07d37a2bb1",
+        "fetched_at": "2026-10-29T21:52:48.766625+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/mbrlabs/Lorien/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/mbrlabs--Lorien/license.txt",
+        "commit": "17e32227dfce5477292d9f0a55d6cb07d37a2bb1",
+        "fetched_at": "2026-10-29T21:52:49.849162+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 24
+    },
+    {
+      "name": "AntV X6",
+      "repository": "antvis/X6",
+      "url": "https://github.com/antvis/X6",
+      "stars": 6742,
+      "type": "SDK·图编辑",
+      "capability": "SVG / HTML 节点、端口、连线与图编辑",
+      "license": "MIT",
+      "note": "适合复杂流程与自定义业务节点；媒体生成任务逻辑需接入。",
+      "archived": false,
+      "last_push_utc": "2026-10-23T03:11:37Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/antvis/X6/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/antvis--X6/readme.txt",
+        "commit": "dcce23f5eb50f387db78fd5e2921b181b523ae5c",
+        "fetched_at": "2026-10-29T21:52:49.107625+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/antvis/X6/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/antvis--X6/license.txt",
+        "commit": "dcce23f5eb50f387db78fd5e2921b181b523ae5c",
+        "fetched_at": "2026-10-29T21:52:50.046803+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 25
+    },
+    {
+      "name": "Drawflow",
+      "repository": "jerosoler/Drawflow",
+      "url": "https://github.com/jerosoler/Drawflow",
+      "stars": 6164,
+      "type": "SDK·节点编辑",
+      "capability": "轻量节点端口、连线和流程 JSON",
+      "license": "MIT",
+      "note": "适合小型原型；复杂执行状态、协同与大型图性能需验证。",
+      "archived": false,
+      "last_push_utc": "2024-10-19T21:55:00Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/jerosoler/Drawflow/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/jerosoler--Drawflow/readme.txt",
+        "commit": "ef8a88cdfbf2010cc0b641b94278be6db413938b",
+        "fetched_at": "2026-10-29T21:52:51.050885+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/jerosoler/Drawflow/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/jerosoler--Drawflow/license.txt",
+        "commit": "ef8a88cdfbf2010cc0b641b94278be6db413938b",
+        "fetched_at": "2026-10-29T21:52:52.159813+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 26
+    },
+    {
+      "name": "BlockSuite",
+      "repository": "toeverything/blocksuite",
+      "url": "https://github.com/toeverything/blocksuite",
+      "stars": 6079,
+      "type": "SDK·文档与白板",
+      "capability": "可复用无边界编辑器、富文本块与 CRDT 协作",
+      "license": "MPL-2.0",
+      "note": "与 AFFiNE 平台分开计；当前仓库主许可证为 MPL-2.0。",
+      "archived": false,
+      "last_push_utc": "2026-10-22T10:14:33Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/toeverything/blocksuite",
+        "fetched_at": "2026-10-29T21:58:39.410443+08:00",
+        "snapshot": "research/github-2026-10-29/repo-toeverything--blocksuite.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/toeverything/blocksuite",
+        "method": "Public GitHub repository README reviewed through web reader; no local README text snapshot",
+        "snapshot": null
+      },
+      "license_evidence": {
+        "url": "https://github.com/toeverything/blocksuite/blob/main/LICENSE",
+        "method": "GitHub REST license metadata; public GitHub primary page also reviewed",
+        "snapshot": null
+      },
+      "rank": 27
+    },
+    {
+      "name": "JointJS",
+      "repository": "clientIO/joint",
+      "url": "https://github.com/clientIO/joint",
+      "stars": 5395,
+      "type": "SDK·图编辑",
+      "capability": "SVG 节点、端口、连线与图模型",
+      "license": "MPL-2.0",
+      "note": "主表仅指 MPL-2.0 的 JointJS 核心；JointJS+ 及其附加能力属于商业产品。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T13:25:14Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/clientIO/joint",
+        "fetched_at": "2026-10-29T21:46:18.452796+08:00",
+        "snapshot": "research/github-2026-10-29/repo-clientIO--joint.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/clientIO/joint",
+        "method": "Public GitHub repository README reviewed through web reader; no local README text snapshot",
+        "snapshot": null
+      },
+      "license_evidence": {
+        "url": "https://github.com/clientIO/joint/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/clientIO--joint/license.txt",
+        "commit": "efaadcb05bb57f4204615b913a68ac33ac30e99a",
+        "fetched_at": "2026-10-29T21:52:55.059245+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 28
+    },
+    {
+      "name": "Butterfly",
+      "repository": "alibaba/butterfly",
+      "url": "https://github.com/alibaba/butterfly",
+      "stars": 4642,
+      "type": "SDK·流程编辑",
+      "capability": "节点、分组、连线与布局交互",
+      "license": "MIT",
+      "note": "可参考复杂图编辑；原仓库推送较早，需评估维护成本。",
+      "archived": false,
+      "last_push_utc": "2024-05-20T07:24:26Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/alibaba/butterfly/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/alibaba--butterfly/readme.txt",
+        "commit": "a44f36a23a81aa513579e35a007f309ba8f5e0d7",
+        "fetched_at": "2026-10-29T21:52:51.753036+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/alibaba/butterfly/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/alibaba--butterfly/license.txt",
+        "commit": "a44f36a23a81aa513579e35a007f309ba8f5e0d7",
+        "fetched_at": "2026-10-29T21:52:52.773136+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 29
+    },
+    {
+      "name": "ImGui Node Editor",
+      "repository": "thedmd/imgui-node-editor",
+      "url": "https://github.com/thedmd/imgui-node-editor",
+      "stars": 4540,
+      "type": "桌面 SDK·节点",
+      "capability": "C++ / Dear ImGui 蓝图节点、连线和缩放",
+      "license": "MIT",
+      "note": "原生应用组件，不是 Web 前端方案。",
+      "archived": false,
+      "last_push_utc": "2026-10-26T11:02:31Z",
+      "language": "C++",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/thedmd/imgui-node-editor",
+        "method": "Public GitHub repository README reviewed through web reader; no local README text snapshot",
+        "snapshot": null
+      },
+      "license_evidence": {
+        "url": "https://github.com/thedmd/imgui-node-editor/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/thedmd--imgui-node-editor/license.txt",
+        "commit": "1e0e494f1a86885eb332ca518543108ccd88d13e",
+        "fetched_at": "2026-10-29T21:52:56.674547+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 30
+    },
+    {
+      "name": "LeaferJS",
+      "repository": "leaferjs/leafer-ui",
+      "url": "https://github.com/leaferjs/leafer-ui",
+      "stars": 4469,
+      "type": "SDK·图形引擎",
+      "capability": "可交互可编辑图形、图层与无限画布内核",
+      "license": "MIT",
+      "note": "MIT 指主仓库；选择生态插件时须分别核对对应许可和能力。",
+      "archived": false,
+      "last_push_utc": "2026-10-27T07:57:26Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/leaferjs/leafer-ui/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/leaferjs--leafer-ui/readme.txt",
+        "commit": "927827f942fafece3c2771a162dd817e97f14a94",
+        "fetched_at": "2026-10-29T21:52:53.591743+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/leaferjs/leafer-ui/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/leaferjs--leafer-ui/license.txt",
+        "commit": "927827f942fafece3c2771a162dd817e97f14a94",
+        "fetched_at": "2026-10-29T21:52:54.617121+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 31
+    },
+    {
+      "name": "pad.ws",
+      "repository": "coderamp-labs/pad.ws",
+      "url": "https://github.com/coderamp-labs/pad.ws",
+      "stars": 4202,
+      "type": "成品·白板 IDE",
+      "capability": "Excalidraw 白板与开发环境融合",
+      "license": "MIT",
+      "note": "是基于 Excalidraw 的复合应用，不算新的独立渲染引擎。",
+      "archived": false,
+      "last_push_utc": "2025-08-06T07:53:52Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/coderamp-labs/pad.ws/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/coderamp-labs--pad.ws/readme.txt",
+        "commit": "eac61edab04e56567fd454e47f71ee0603e3e141",
+        "fetched_at": "2026-10-29T21:52:54.569530+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/coderamp-labs/pad.ws/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/coderamp-labs--pad.ws/license.txt",
+        "commit": "eac61edab04e56567fd454e47f71ee0603e3e141",
+        "fetched_at": "2026-10-29T21:52:56.410198+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 32
+    },
+    {
+      "name": "Wireflow",
+      "repository": "vanila-io/wireflow",
+      "url": "https://github.com/vanila-io/wireflow",
+      "stars": 4170,
+      "type": "成品·原型流程",
+      "capability": "将界面线框、图片和连线组合成用户流程",
+      "license": "MIT",
+      "note": "适合参考素材卡片与流程连接体验；不是生成执行平台。",
+      "archived": false,
+      "last_push_utc": "2026-10-27T10:26:18Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/vanila-io/wireflow/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/vanila-io--wireflow/readme.txt",
+        "commit": "edd39711677175daf200c8ff279b33e480df49ea",
+        "fetched_at": "2026-10-29T21:52:56.813893+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/vanila-io/wireflow/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/vanila-io--wireflow/license.txt",
+        "commit": "edd39711677175daf200c8ff279b33e480df49ea",
+        "fetched_at": "2026-10-29T21:52:57.790625+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 33
+    },
+    {
+      "name": "Stable Diffusion Infinity",
+      "repository": "lkwq007/stablediffusion-infinity",
+      "url": "https://github.com/lkwq007/stablediffusion-infinity",
+      "stars": 3889,
+      "type": "成品·AI 扩图",
+      "capability": "在无限画布上进行 Stable Diffusion 扩图",
+      "license": "Apache-2.0",
+      "note": "原仓库较久未推送，可参考交互；当前依赖与模型兼容性未运行验证。",
+      "archived": false,
+      "last_push_utc": "2023-05-16T12:20:16Z",
+      "language": "Python",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22infinite+canvas%22+in%3Adescription+fork%3Afalse+stars%3A%3E50&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:09.745694+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-description.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/lkwq007/stablediffusion-infinity/blob/master/readme.md",
+        "snapshot": "research/github-2026-10-29/sources/lkwq007--stablediffusion-infinity/readme.txt",
+        "commit": "2e53d77819eb0b14538aa8975220259f034b9c04",
+        "fetched_at": "2026-10-29T21:52:57.790831+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/lkwq007/stablediffusion-infinity/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/lkwq007--stablediffusion-infinity/license.txt",
+        "commit": "2e53d77819eb0b14538aa8975220259f034b9c04",
+        "fetched_at": "2026-10-29T21:52:59.058610+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 34
+    },
+    {
+      "name": "jsMind",
+      "repository": "hizzgdev/jsmind",
+      "url": "https://github.com/hizzgdev/jsmind",
+      "stars": 3792,
+      "type": "SDK·思维导图",
+      "capability": "Canvas / SVG 思维导图显示与编辑",
+      "license": "BSD-3-Clause",
+      "note": "GitHub 自动许可识别为 NOASSERTION，已按 LICENSE 正文核对为 BSD-3-Clause。",
+      "archived": false,
+      "last_push_utc": "2026-05-18T15:55:29Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/hizzgdev/jsmind",
+        "fetched_at": "2026-10-29T21:46:19.661055+08:00",
+        "snapshot": "research/github-2026-10-29/repo-hizzgdev--jsmind.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/hizzgdev/jsmind/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/hizzgdev--jsmind/readme.txt",
+        "commit": "2aeca49716c549e4957535632602bf0cece198b8",
+        "fetched_at": "2026-10-29T21:52:57.724311+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/hizzgdev/jsmind/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/hizzgdev--jsmind/license.txt",
+        "commit": "2aeca49716c549e4957535632602bf0cece198b8",
+        "fetched_at": "2026-10-29T21:52:59.058667+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 35
+    },
+    {
+      "name": "xNode",
+      "repository": "Siccity/xNode",
+      "url": "https://github.com/Siccity/xNode",
+      "stars": 3748,
+      "type": "桌面 SDK·节点",
+      "capability": "Unity 内的节点图编辑与端口连接",
+      "license": "MIT",
+      "note": "Unity 工具扩展，不是浏览器组件。",
+      "archived": false,
+      "last_push_utc": "2024-08-26T13:00:57Z",
+      "language": "C#",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/Siccity/xNode/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/Siccity--xNode/readme.txt",
+        "commit": "d6effd70f5574369e3415c423ef3e621ea309564",
+        "fetched_at": "2026-10-29T21:52:57.790946+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/Siccity/xNode/blob/master/LICENSE.md",
+        "snapshot": "research/github-2026-10-29/sources/Siccity--xNode/license.txt",
+        "commit": "d6effd70f5574369e3415c423ef3e621ea309564",
+        "fetched_at": "2026-10-29T21:52:59.707787+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 36
+    },
+    {
+      "name": "QtNodes",
+      "repository": "paceholder/nodeeditor",
+      "url": "https://github.com/paceholder/nodeeditor",
+      "stars": 3722,
+      "type": "桌面 SDK·节点",
+      "capability": "Qt 节点图与数据流编程框架",
+      "license": "BSD-3-Clause",
+      "note": "C++ / Qt 桌面方案；许可证文件名是 LICENSE.rst。",
+      "archived": false,
+      "last_push_utc": "2026-07-31T16:56:51Z",
+      "language": "C++",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/paceholder/nodeeditor/blob/master/README.rst",
+        "snapshot": "research/github-2026-10-29/sources/paceholder--nodeeditor/readme.txt",
+        "commit": "7bbcd3e08c8330e9a5b47dbb730955849b8f547c",
+        "fetched_at": "2026-10-29T21:53:03.795475+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/paceholder/nodeeditor/blob/master/LICENSE.rst",
+        "method": "GitHub REST license metadata; public GitHub primary page also reviewed",
+        "snapshot": null
+      },
+      "rank": 37
+    },
+    {
+      "name": "Mind Elixir",
+      "repository": "SSShooter/mind-elixir-core",
+      "url": "https://github.com/SSShooter/mind-elixir-core",
+      "stars": 3191,
+      "type": "SDK·思维导图",
+      "capability": "框架无关的脑图编辑、节点组织和扩展",
+      "license": "MIT",
+      "note": "适合知识结构画布，不以任意有向工作流为主要用途。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T12:42:54Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/SSShooter/mind-elixir-core",
+        "fetched_at": "2026-10-29T21:46:20.439974+08:00",
+        "snapshot": "research/github-2026-10-29/repo-SSShooter--mind-elixir-core.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/SSShooter/mind-elixir-core/blob/master/readme.md",
+        "snapshot": "research/github-2026-10-29/sources/SSShooter--mind-elixir-core/readme.txt",
+        "commit": "8410d837ee361f5f6c392fd56da1be571f798114",
+        "fetched_at": "2026-10-29T21:53:02.245227+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/SSShooter/mind-elixir-core/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/SSShooter--mind-elixir-core/license.txt",
+        "commit": "8410d837ee361f5f6c392fd56da1be571f798114",
+        "fetched_at": "2026-10-29T21:53:03.235964+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 38
+    },
+    {
+      "name": "Nodezator",
+      "repository": "IndieSmiths/nodezator",
+      "url": "https://github.com/IndieSmiths/nodezator",
+      "stars": 2793,
+      "type": "桌面·可视化编程",
+      "capability": "将 Python 函数连接为节点并导出 Python 代码",
+      "license": "Unlicense",
+      "note": "它是现成 Python 节点应用；项目明确说明不是用于创建编辑器的框架。",
+      "archived": false,
+      "last_push_utc": "2026-10-28T18:39:20Z",
+      "language": "Python",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/IndieSmiths/nodezator/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/IndieSmiths--nodezator/readme.txt",
+        "commit": "852f0a4cfdc5022dd4044e703db94bde1acbcef5",
+        "fetched_at": "2026-10-29T21:53:00.989216+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/IndieSmiths/nodezator/blob/main/UNLICENSE",
+        "method": "GitHub REST license metadata; public GitHub primary page also reviewed",
+        "snapshot": null
+      },
+      "rank": 39
+    },
+    {
+      "name": "WBO / Whitebophir",
+      "repository": "lovasoa/whitebophir",
+      "url": "https://github.com/lovasoa/whitebophir",
+      "stars": 2675,
+      "type": "成品·协作白板",
+      "capability": "多人实时绘画与大范围共享白板",
+      "license": "AGPL-3.0",
+      "note": "适合自托管协作白板；生成节点与媒体资产工作流需要添加。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T12:13:31Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/lovasoa/whitebophir/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/lovasoa--whitebophir/readme.txt",
+        "commit": "919d782a40e7cbdb62dff6f9445da93ff3b45d5e",
+        "fetched_at": "2026-10-29T21:53:02.458052+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/lovasoa/whitebophir/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/lovasoa--whitebophir/license.txt",
+        "commit": "919d782a40e7cbdb62dff6f9445da93ff3b45d5e",
+        "fetched_at": "2026-10-29T21:53:03.744135+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 40
+    },
+    {
+      "name": "imnodes",
+      "repository": "Nelarius/imnodes",
+      "url": "https://github.com/Nelarius/imnodes",
+      "stars": 2499,
+      "type": "桌面 SDK·节点",
+      "capability": "Dear ImGui 的轻量节点编辑组件",
+      "license": "MIT",
+      "note": "原生 C++ 工具基础，不是 Web SDK。",
+      "archived": false,
+      "last_push_utc": "2026-10-17T23:21:32Z",
+      "language": "C++",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/Nelarius/imnodes/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/Nelarius--imnodes/readme.txt",
+        "commit": "2d0c280b07b2f62b120034811cc6e41251673961",
+        "fetched_at": "2026-10-29T21:53:05.015675+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/Nelarius/imnodes/blob/master/LICENSE.md",
+        "snapshot": "research/github-2026-10-29/sources/Nelarius--imnodes/license.txt",
+        "commit": "2d0c280b07b2f62b120034811cc6e41251673961",
+        "fetched_at": "2026-10-29T21:53:07.154774+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 41
+    },
+    {
+      "name": "Reaflow",
+      "repository": "reaviz/reaflow",
+      "url": "https://github.com/reaviz/reaflow",
+      "stars": 2495,
+      "type": "SDK·工作流图",
+      "capability": "React 节点工作流、流程图与布局",
+      "license": "Apache-2.0",
+      "note": "可参考自动布局与连接交互；业务执行引擎需要外接。",
+      "archived": false,
+      "last_push_utc": "2025-06-04T09:08:50Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/reaviz/reaflow/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/reaviz--reaflow/readme.txt",
+        "commit": "ccfb3374d35c2c8585a327bbab3c6f7088e8bc42",
+        "fetched_at": "2026-10-29T21:53:07.727736+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/reaviz/reaflow/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/reaviz--reaflow/license.txt",
+        "commit": "ccfb3374d35c2c8585a327bbab3c6f7088e8bc42",
+        "fetched_at": "2026-10-29T21:53:08.960509+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 42
+    },
+    {
+      "name": "Diagram Maker",
+      "repository": "awslabs/diagram-maker",
+      "url": "https://github.com/awslabs/diagram-maker",
+      "stars": 2421,
+      "type": "SDK·图编辑（已归档）",
+      "capability": "交互式图形数据编辑器与节点连线",
+      "license": "Apache-2.0",
+      "note": "GitHub 已归档；可参考实现，首选生产底座需考虑接管维护。",
+      "archived": true,
+      "last_push_utc": "2023-04-26T19:24:44Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/awslabs/diagram-maker/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/awslabs--diagram-maker/readme.txt",
+        "commit": "b0971917b36000f9a38cac3e782d50263d48c1fd",
+        "fetched_at": "2026-10-29T21:53:08.483964+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/awslabs/diagram-maker/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/awslabs--diagram-maker/license.txt",
+        "commit": "b0971917b36000f9a38cac3e782d50263d48c1fd",
+        "fetched_at": "2026-10-29T21:53:09.951081+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 43
+    },
+    {
+      "name": "BaklavaJS",
+      "repository": "newcat/baklavajs",
+      "url": "https://github.com/newcat/baklavajs",
+      "stars": 2099,
+      "type": "SDK·节点编辑",
+      "capability": "Vue 节点编辑、自定义节点和插件系统",
+      "license": "MIT",
+      "note": "适合可视化计算与处理流程；需要实现服务端执行适配。",
+      "archived": false,
+      "last_push_utc": "2026-10-23T22:22:38Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/newcat/baklavajs/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/newcat--baklavajs/readme.txt",
+        "commit": "c7aad5893b0009dc25cbae16061b0f1a4dd4a617",
+        "fetched_at": "2026-10-29T21:53:10.026962+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/newcat/baklavajs/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/newcat--baklavajs/license.txt",
+        "commit": "c7aad5893b0009dc25cbae16061b0f1a4dd4a617",
+        "fetched_at": "2026-10-29T21:53:11.148123+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 44
+    },
+    {
+      "name": "Nodify",
+      "repository": "miroiu/nodify",
+      "url": "https://github.com/miroiu/nodify",
+      "stars": 2015,
+      "type": "桌面 SDK·节点",
+      "capability": "WPF / MVVM 节点编辑、连接与画布",
+      "license": "MIT",
+      "note": "适合 Windows 桌面产品，不适合直接作为网页组件嵌入。",
+      "archived": false,
+      "last_push_utc": "2026-10-22T19:12:13Z",
+      "language": "C#",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/miroiu/nodify/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/miroiu--nodify/readme.txt",
+        "commit": "8e7c93b4a11d3b06e257938ae0f06bd09e427c78",
+        "fetched_at": "2026-10-29T21:53:11.438541+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/miroiu/nodify/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/miroiu--nodify/license.txt",
+        "commit": "8e7c93b4a11d3b06e257938ae0f06bd09e427c78",
+        "fetched_at": "2026-10-29T21:53:12.856431+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 45
+    },
+    {
+      "name": "Milton",
+      "repository": "serge-rgb/milton",
+      "url": "https://github.com/serge-rgb/milton",
+      "stars": 1893,
+      "type": "桌面·无限绘画",
+      "capability": "无限画布与接近矢量方式的绘画体验",
+      "license": "GPL-3.0",
+      "note": "可参考绘画和缩放交互；原仓库较久未推送。",
+      "archived": false,
+      "last_push_utc": "2023-06-04T06:10:30Z",
+      "language": "C++",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/serge-rgb/milton/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/serge-rgb--milton/readme.txt",
+        "commit": "768c0351fd7a221ec047fe91c85830f544a76661",
+        "fetched_at": "2026-10-29T21:53:11.808873+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/serge-rgb/milton/blob/master/LICENSE.txt",
+        "snapshot": "research/github-2026-10-29/sources/serge-rgb--milton/license.txt",
+        "commit": "768c0351fd7a221ec047fe91c85830f544a76661",
+        "fetched_at": "2026-10-29T21:53:14.442361+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 46
+    },
+    {
+      "name": "DGM.js",
+      "repository": "dgmjs/dgmjs",
+      "url": "https://github.com/dgmjs/dgmjs",
+      "stars": 1678,
+      "type": "SDK·智能白板",
+      "capability": "无限画布、智能图形与连接关系",
+      "license": "GPL-3.0",
+      "note": "开源版本按 GPL-3.0 使用；项目另有非 GPL 商业许可选项。",
+      "archived": false,
+      "last_push_utc": "2026-09-14T22:31:55Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/dgmjs/dgmjs/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/dgmjs--dgmjs/readme.txt",
+        "commit": "db15635fc9832ef3b516fdc1b9e22f8b776c56fe",
+        "fetched_at": "2026-10-29T21:53:12.403151+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/dgmjs/dgmjs/blob/main/LICENSE.md",
+        "snapshot": "research/github-2026-10-29/sources/dgmjs--dgmjs/license.txt",
+        "commit": "db15635fc9832ef3b516fdc1b9e22f8b776c56fe",
+        "fetched_at": "2026-10-29T21:53:14.316503+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 47
+    },
+    {
+      "name": "AICON / AI Movie Studio",
+      "repository": "869413421/ai-moive-studio",
+      "url": "https://github.com/869413421/ai-moive-studio",
+      "stars": 1645,
+      "type": "成品·AI 创作画布",
+      "capability": "文本、图片、视频节点与自然语言工作流",
+      "license": "Apache-2.0",
+      "note": "贴近 AI 视频创作；API、模型和执行链路需与现有平台实际联调。",
+      "archived": false,
+      "last_push_utc": "2026-09-16T03:10:04Z",
+      "language": "Python",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/869413421/ai-moive-studio/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/869413421--ai-moive-studio/readme.txt",
+        "commit": "4e0810eab1d84ed1424883b88f6b4cd232b74724",
+        "fetched_at": "2026-10-29T21:53:13.752874+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/869413421/ai-moive-studio/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/869413421--ai-moive-studio/license.txt",
+        "commit": "4e0810eab1d84ed1424883b88f6b4cd232b74724",
+        "fetched_at": "2026-10-29T21:53:14.774071+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 48
+    },
+    {
+      "name": "OpenCove",
+      "repository": "DeadWaveWave/opencove",
+      "url": "https://github.com/DeadWaveWave/opencove",
+      "stars": 1643,
+      "type": "成品·空间工作台",
+      "capability": "将 Agent、终端、任务和笔记放入无限画布",
+      "license": "MIT",
+      "note": "Electron / React Flow 应用，当前为 Alpha；适合参考空间式工作台。",
+      "archived": false,
+      "last_push_utc": "2026-10-17T22:15:39Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/DeadWaveWave/opencove/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/DeadWaveWave--opencove/readme.txt",
+        "commit": "e10604b9d940ed7752c6fe931e23024d6003aa55",
+        "fetched_at": "2026-10-29T21:53:14.082943+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/DeadWaveWave/opencove/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/DeadWaveWave--opencove/license.txt",
+        "commit": "e10604b9d940ed7752c6fe931e23024d6003aa55",
+        "fetched_at": "2026-10-29T21:53:15.038831+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 49
+    },
+    {
+      "name": "Flume",
+      "repository": "chrisjpatty/flume",
+      "url": "https://github.com/chrisjpatty/flume",
+      "stars": 1628,
+      "type": "SDK·逻辑节点",
+      "capability": "React 节点、端口与可配置逻辑编辑",
+      "license": "MIT",
+      "note": "适合业务规则与表达式；媒体素材面板和任务运行层需自行实现。",
+      "archived": false,
+      "last_push_utc": "2026-04-12T05:59:49Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22node%22+%22editor%22+in%3Adescription+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:11.714849+08:00",
+        "snapshot": "research/github-2026-10-29/search-node-editor.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/chrisjpatty/flume/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/chrisjpatty--flume/readme.txt",
+        "commit": "1492441006fee38da25e90957f0c9b1cf0cfad7b",
+        "fetched_at": "2026-10-29T21:53:15.514773+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/chrisjpatty/flume/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/chrisjpatty--flume/license.txt",
+        "commit": "1492441006fee38da25e90957f0c9b1cf0cfad7b",
+        "fetched_at": "2026-10-29T21:53:16.887643+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 50
+    },
+    {
+      "name": "Spacedeck Open",
+      "repository": "spacedeck/spacedeck-open",
+      "url": "https://github.com/spacedeck/spacedeck-open",
+      "stars": 1140,
+      "type": "成品·媒体白板",
+      "capability": "大范围协作白板和富媒体内容摆放",
+      "license": "AGPL-3.0",
+      "note": "适合参考图片、文本及媒体在空间中的组织；不带现有生成平台适配。",
+      "archived": false,
+      "last_push_utc": "2026-10-21T00:40:06Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=whiteboard+in%3Adescription+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:09.857038+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/spacedeck/spacedeck-open/blob/mnt/README.md",
+        "snapshot": "research/github-2026-10-29/sources/spacedeck--spacedeck-open/readme.txt",
+        "commit": "a5914ab600e9f4ae3f42d9361195a3696843903e",
+        "fetched_at": "2026-10-29T21:53:15.577931+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/spacedeck/spacedeck-open/blob/mnt/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/spacedeck--spacedeck-open/license.txt",
+        "commit": "a5914ab600e9f4ae3f42d9361195a3696843903e",
+        "fetched_at": "2026-10-29T21:53:16.926568+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 51
+    },
+    {
+      "name": "Heimer",
+      "repository": "juzzlin/Heimer",
+      "url": "https://github.com/juzzlin/Heimer",
+      "stars": 984,
+      "type": "桌面·脑图白板",
+      "capability": "跨平台思维导图、图示与笔记",
+      "license": "GPL-3.0",
+      "note": "原生 Qt 应用；代码主许可 GPL-3.0，部分图像另有素材许可。",
+      "archived": false,
+      "last_push_utc": "2026-02-10T06:02:15Z",
+      "language": "C++",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/juzzlin/Heimer/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/juzzlin--Heimer/readme.txt",
+        "commit": "38133143bd6c5f2308f4eff6cf68feeb4296e051",
+        "fetched_at": "2026-10-29T21:53:16.298547+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/juzzlin/Heimer/blob/master/COPYING",
+        "snapshot": "research/github-2026-10-29/sources/juzzlin--Heimer/license.txt",
+        "commit": "38133143bd6c5f2308f4eff6cf68feeb4296e051",
+        "fetched_at": "2026-10-29T21:53:26.598380+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 52
+    },
+    {
+      "name": "OpenFlowKit",
+      "repository": "openflowkit/openflowkit",
+      "url": "https://github.com/openflowkit/openflowkit",
+      "stars": 917,
+      "type": "成品·图示画布",
+      "capability": "可视化图示、文本与画布联动、AI / MCP",
+      "license": "MIT",
+      "note": "适合架构图与 Agent 辅助绘图；不是图视频音频的生成后端。",
+      "archived": false,
+      "last_push_utc": "2026-10-22T08:39:49Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/openflowkit/openflowkit/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/openflowkit--openflowkit/readme.txt",
+        "commit": "a252135b7ace600df15cc9fe9d66961828118e47",
+        "fetched_at": "2026-10-29T21:53:21.247498+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/openflowkit/openflowkit/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/openflowkit--openflowkit/license.txt",
+        "commit": "a252135b7ace600df15cc9fe9d66961828118e47",
+        "fetched_at": "2026-10-29T21:53:22.231552+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 53
+    },
+    {
+      "name": "Collaborative Whiteboard",
+      "repository": "cracker0dks/whiteboard",
+      "url": "https://github.com/cracker0dks/whiteboard",
+      "stars": 845,
+      "type": "成品·协作白板",
+      "capability": "Node.js 协作绘画、图片变换与 JSON 保存",
+      "license": "MIT",
+      "note": "适合参考轻量协作和导入导出；不能等同于完整无限画布内核。",
+      "archived": false,
+      "last_push_utc": "2026-10-26T00:17:58Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/cracker0dks/whiteboard/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/cracker0dks--whiteboard/readme.txt",
+        "commit": "c380e10785d85fc7aae6f1a02c0bcfce6f191cad",
+        "fetched_at": "2026-10-29T21:53:21.247539+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/cracker0dks/whiteboard/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/cracker0dks--whiteboard/license.txt",
+        "commit": "c380e10785d85fc7aae6f1a02c0bcfce6f191cad",
+        "fetched_at": "2026-10-29T21:53:22.735859+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 54
+    },
+    {
+      "name": "Plait",
+      "repository": "worktile/plait",
+      "url": "https://github.com/worktile/plait",
+      "stars": 699,
+      "type": "SDK·综合白板",
+      "capability": "插件化画板、图形、脑图与 React / Angular 视图",
+      "license": "MIT",
+      "note": "Drawnix 的基础框架；成品应用和底层框架分别列出并说明关系。",
+      "archived": false,
+      "last_push_utc": "2026-09-23T09:50:06Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/worktile/plait/blob/develop/README.md",
+        "snapshot": "research/github-2026-10-29/sources/worktile--plait/readme.txt",
+        "commit": "e0d76b0942c5c1e2f62af6ca8098ea7e86bdc841",
+        "fetched_at": "2026-10-29T21:53:21.247430+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/worktile/plait/blob/develop/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/worktile--plait/license.txt",
+        "commit": "e0d76b0942c5c1e2f62af6ca8098ea7e86bdc841",
+        "fetched_at": "2026-10-29T21:53:22.444451+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 55
+    },
+    {
+      "name": "AntV XFlow",
+      "repository": "antvis/XFlow",
+      "url": "https://github.com/antvis/XFlow",
+      "stars": 647,
+      "type": "SDK·图编辑封装",
+      "capability": "React 交互图编辑组件",
+      "license": "MIT",
+      "note": "基于 X6 生态的封装，可减少部分编辑器界面搭建工作。",
+      "archived": false,
+      "last_push_utc": "2026-01-04T03:27:31Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/antvis/XFlow/blob/2.0/README.md",
+        "snapshot": "research/github-2026-10-29/sources/antvis--XFlow/readme.txt",
+        "commit": "faa44bf048c92ac14108f10c0a9a3bffb5e4cd2f",
+        "fetched_at": "2026-10-29T21:53:23.608000+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/antvis/XFlow/blob/2.0/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/antvis--XFlow/license.txt",
+        "commit": "faa44bf048c92ac14108f10c0a9a3bffb5e4cd2f",
+        "fetched_at": "2026-10-29T21:53:24.625818+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 56
+    },
+    {
+      "name": "Quickdraw",
+      "repository": "quickdrawjs/quickdraw",
+      "url": "https://github.com/quickdrawjs/quickdraw",
+      "stars": 580,
+      "type": "SDK·无限白板",
+      "capability": "React / React Native / JS 无限白板组件",
+      "license": "MIT",
+      "note": "项目规模较小，功能与性能需实测；主仓库为 MIT。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T10:54:54Z",
+      "language": "JavaScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/quickdrawjs/quickdraw/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/quickdrawjs--quickdraw/readme.txt",
+        "commit": "c2817907f10a5ee2369f3535bbad29eea33f933e",
+        "fetched_at": "2026-10-29T21:53:23.767758+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/quickdrawjs/quickdraw/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/quickdrawjs--quickdraw/license.txt",
+        "commit": "c2817907f10a5ee2369f3535bbad29eea33f933e",
+        "fetched_at": "2026-10-29T21:53:25.023207+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 57
+    },
+    {
+      "name": "NovaNova Studio",
+      "repository": "Swayingleaves/novanova-studio",
+      "url": "https://github.com/Swayingleaves/novanova-studio",
+      "stars": 497,
+      "type": "成品·AI 创作画布",
+      "capability": "图像、视频、无限画布和自定义模型 API",
+      "license": "GPL-3.0",
+      "note": "贴近内容创作业务；生成渠道、权限及与现有后端的兼容性未联调。",
+      "archived": false,
+      "last_push_utc": "2026-10-29T10:48:51Z",
+      "language": "Java",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/Swayingleaves/novanova-studio/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/Swayingleaves--novanova-studio/readme.txt",
+        "commit": "a94bfab53d21d267560ea668665a91692f9879fa",
+        "fetched_at": "2026-10-29T21:53:24.076258+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/Swayingleaves/novanova-studio/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/Swayingleaves--novanova-studio/license.txt",
+        "commit": "a94bfab53d21d267560ea668665a91692f9879fa",
+        "fetched_at": "2026-10-29T21:53:25.380858+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 58
+    },
+    {
+      "name": "Director’s Console",
+      "repository": "NickPittas/DirectorsConsole",
+      "url": "https://github.com/NickPittas/DirectorsConsole",
+      "stars": 364,
+      "type": "成品·ComfyUI 创作",
+      "capability": "分镜画布、参考素材、ComfyUI 工作流与多节点生成",
+      "license": "MIT",
+      "note": "与当前 ComfyUI 方向相关；项目不是已完成统一鉴权的公网聚合平台。",
+      "archived": false,
+      "last_push_utc": "2026-10-02T15:23:27Z",
+      "language": "Python",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22infinite+canvas%22+in%3Adescription+fork%3Afalse+stars%3A%3E50&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:09.745694+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-description.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/NickPittas/DirectorsConsole/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/NickPittas--DirectorsConsole/readme.txt",
+        "commit": "65715944fef507b517d65fd18ce74ce0f60fce61",
+        "fetched_at": "2026-10-29T21:53:26.094383+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/NickPittas/DirectorsConsole/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/NickPittas--DirectorsConsole/license.txt",
+        "commit": "65715944fef507b517d65fd18ce74ce0f60fce61",
+        "fetched_at": "2026-10-29T21:53:27.123513+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 59
+    },
+    {
+      "name": "Infinite Viewer",
+      "repository": "daybrush/infinite-viewer",
+      "url": "https://github.com/daybrush/infinite-viewer",
+      "stars": 349,
+      "type": "组件·无限视口",
+      "capability": "无限滚动、平移和缩放视口",
+      "license": "MIT",
+      "note": "仅为视口组件，需搭配编辑对象、图形引擎、序列化与业务后端。",
+      "archived": false,
+      "last_push_utc": "2023-10-31T17:55:52Z",
+      "language": "TypeScript",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/daybrush/infinite-viewer",
+        "fetched_at": "2026-10-29T21:46:17.985096+08:00",
+        "snapshot": "research/github-2026-10-29/repo-daybrush--infinite-viewer.json"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/daybrush/infinite-viewer/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/daybrush--infinite-viewer/readme.txt",
+        "commit": "0ca810efc5167a4d8e350752a34e8028c4f3519d",
+        "fetched_at": "2026-10-29T21:53:26.527506+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "license_evidence": {
+        "url": "https://github.com/daybrush/infinite-viewer/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/daybrush--infinite-viewer/license.txt",
+        "commit": "0ca810efc5167a4d8e350752a34e8028c4f3519d",
+        "fetched_at": "2026-10-29T21:53:27.552012+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "rank": 60
+    }
+  ],
+  "additional_references_not_counted": [
+    {
+      "name": "toeverything/AFFiNE",
+      "url": "https://github.com/toeverything/AFFiNE",
+      "stars": 73954,
+      "type": "混合许可应用",
+      "note": "文档与无边界画布值得参考；根许可证明确前端等范围为 MIT，backend / native 另有许可证，不能把整个平台标成纯 MIT。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/toeverything/AFFiNE/blob/canary/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/toeverything--AFFiNE/license.txt",
+        "commit": "8cef09e1dd62b47a3cbc9f352aa10b3a90c75d34",
+        "fetched_at": "2026-10-29T21:52:31.394771+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/toeverything/AFFiNE/blob/canary/README.md",
+        "snapshot": "research/github-2026-10-29/sources/toeverything--AFFiNE/readme.txt",
+        "commit": "8cef09e1dd62b47a3cbc9f352aa10b3a90c75d34",
+        "fetched_at": "2026-10-29T21:52:30.066431+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "jgraph/drawio-desktop",
+      "url": "https://github.com/jgraph/drawio-desktop",
+      "stars": 63712,
+      "type": "发行壳 / 许可边界",
+      "note": "Electron 桌面壳，与 draw.io Web 编辑器属于同一产品生态，不重复计算成另一套画布内核。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/jgraph/drawio-desktop",
+        "fetched_at": "2026-10-29T21:46:16.152850+08:00",
+        "snapshot": "research/github-2026-10-29/repo-jgraph--drawio-desktop.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/jgraph/drawio-desktop/blob/dev/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/jgraph--drawio-desktop/license.txt",
+        "commit": "e56f6f3f8689503b328456081186de0ab5594a11",
+        "fetched_at": "2026-10-29T21:52:33.514183+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/jgraph/drawio-desktop/blob/dev/README.md",
+        "snapshot": "research/github-2026-10-29/sources/jgraph--drawio-desktop/readme.txt",
+        "commit": "e56f6f3f8689503b328456081186de0ab5594a11",
+        "fetched_at": "2026-10-29T21:52:32.187170+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "FlowiseAI/Flowise",
+      "url": "https://github.com/FlowiseAI/Flowise",
+      "stars": 55533,
+      "type": "开源核心与商业扩展；已归档",
+      "note": "Apache-2.0 范围排除了 enterprise 目录及有明确商业版权声明的文件；当前仓库已归档。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/FlowiseAI/Flowise",
+        "fetched_at": "2026-10-29T21:46:14.331085+08:00",
+        "snapshot": "research/github-2026-10-29/repo-FlowiseAI--Flowise.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/FlowiseAI/Flowise/blob/main/LICENSE.md",
+        "snapshot": "research/github-2026-10-29/sources/FlowiseAI--Flowise/license.txt",
+        "commit": "9291856d1ea4a4ceea9f8fef8ce14f4f6c81e8eb",
+        "fetched_at": "2026-10-29T21:52:34.621851+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/FlowiseAI/Flowise/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/FlowiseAI--Flowise/readme.txt",
+        "commit": "9291856d1ea4a4ceea9f8fef8ce14f4f6c81e8eb",
+        "fetched_at": "2026-10-29T21:52:32.852993+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "tldraw/tldraw",
+      "url": "https://github.com/tldraw/tldraw",
+      "stars": 51140,
+      "type": "源码可见；生产许可受限",
+      "note": "当前默认许可仅允许开发；生产需要有效试用、商业或非商业许可密钥，不计入主表开源数量。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/tldraw/tldraw/blob/main/LICENSE.md",
+        "snapshot": "research/github-2026-10-29/sources/tldraw--tldraw/license.txt",
+        "commit": "11f8fb637d2961ba16b390f83696a79799ebf9c0",
+        "fetched_at": "2026-10-29T21:52:34.526235+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/tldraw/tldraw/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/tldraw--tldraw/readme.txt",
+        "commit": "11f8fb637d2961ba16b390f83696a79799ebf9c0",
+        "fetched_at": "2026-10-29T21:52:32.722120+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "labring/FastGPT",
+      "url": "https://github.com/labring/FastGPT",
+      "stars": 29942,
+      "type": "带额外限制的许可",
+      "note": "Apache-2.0 之外还有特定多租户 SaaS 与标识限制，不按标准 Apache-2.0 项目计入。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/labring/FastGPT",
+        "fetched_at": "2026-10-29T21:46:17.423553+08:00",
+        "snapshot": "research/github-2026-10-29/repo-labring--FastGPT.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/labring/FastGPT/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/labring--FastGPT/license.txt",
+        "commit": "0f8590935561e8e8618d26d3eab5adbebc6429fe",
+        "fetched_at": "2026-10-29T21:52:38.923855+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/labring/FastGPT/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/labring--FastGPT/readme.txt",
+        "commit": "0f8590935561e8e8618d26d3eab5adbebc6429fe",
+        "fetched_at": "2026-10-29T21:52:37.726190+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "daybrush/moveable",
+      "url": "https://github.com/daybrush/moveable",
+      "stars": 10764,
+      "type": "对象交互辅助组件",
+      "note": "MIT 的拖拽、旋转、缩放和吸附组件，可配合自建画布；自身不是无限画布。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/daybrush/moveable",
+        "fetched_at": "2026-10-29T21:46:17.927084+08:00",
+        "snapshot": "research/github-2026-10-29/repo-daybrush--moveable.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/daybrush/moveable/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/daybrush--moveable/license.txt",
+        "commit": "75069102f30c88cd89ecaaa8ca7e5f7434e54807",
+        "fetched_at": "2026-10-29T21:52:44.433086+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/daybrush/moveable/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/daybrush--moveable/readme.txt",
+        "commit": "75069102f30c88cd89ecaaa8ca7e5f7434e54807",
+        "fetched_at": "2026-10-29T21:52:43.329549+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "jgraph/drawio",
+      "url": "https://github.com/jgraph/drawio",
+      "stars": 9059,
+      "type": "代码与素材许可不同",
+      "note": "代码声明 Apache-2.0；根 README 对图标、图形库及模板用于 Atlassian 生态另有约束，适合按范围进一步核对。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/jgraph/drawio/blob/dev/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/jgraph--drawio/license.txt",
+        "commit": "84487b4891cbc0f32d7e30f34cf878c87cb1f414",
+        "fetched_at": "2026-10-29T21:52:45.364129+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/jgraph/drawio/blob/dev/README.md",
+        "snapshot": "research/github-2026-10-29/sources/jgraph--drawio/readme.txt",
+        "commit": "84487b4891cbc0f32d7e30f34cf878c87cb1f414",
+        "fetched_at": "2026-10-29T21:52:44.361884+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "NorthwoodsSoftware/GoJS",
+      "url": "https://github.com/NorthwoodsSoftware/GoJS",
+      "stars": 8498,
+      "type": "商业图库",
+      "note": "公开仓库不代表可按标准开源许可使用；官方产品采用商业许可，不计入主表。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Aflowchart+fork%3Afalse+stars%3A%3E500&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:12.597331+08:00",
+        "snapshot": "research/github-2026-10-29/search-flowchart.json"
+      },
+      "license_evidence": {
+        "url": "https://gojs.net/latest/license",
+        "method": "Official commercial license and repository README reviewed",
+        "snapshot": null
+      },
+      "readme_evidence": {
+        "url": "https://github.com/NorthwoodsSoftware/GoJS/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/NorthwoodsSoftware--GoJS/readme.txt",
+        "commit": "6a372b22e0f11b6292e6f9ed1766cbadf870f605",
+        "fetched_at": "2026-10-29T21:52:45.596574+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "konvajs/react-konva",
+      "url": "https://github.com/konvajs/react-konva",
+      "stars": 6444,
+      "type": "框架绑定；不重复计内核",
+      "note": "MIT 的 React 绑定，使用 React + Konva 时仍值得直接考虑；主表已列 Konva。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/konvajs/react-konva/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/konvajs--react-konva/license.txt",
+        "commit": "be9feb46cacfdff6c4c3bb0277b222448c7c94f7",
+        "fetched_at": "2026-10-29T21:52:50.573309+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/konvajs/react-konva/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/konvajs--react-konva/readme.txt",
+        "commit": "be9feb46cacfdff6c4c3bb0277b222448c7c94f7",
+        "fetched_at": "2026-10-29T21:52:49.471090+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "obsidianmd/jsoncanvas",
+      "url": "https://github.com/obsidianmd/jsoncanvas",
+      "stars": 3746,
+      "type": "数据格式规范",
+      "note": "MIT 的无限画布数据交换格式，不是编辑器或开源 Obsidian 应用，可作为后续导入导出设计参考。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=%22infinite+canvas%22+in%3Adescription+fork%3Afalse+stars%3A%3E50&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:09.745694+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-description.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/obsidianmd/jsoncanvas/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/obsidianmd--jsoncanvas/license.txt",
+        "commit": "456f843cb293df4f4ab1763e22ccb46a80b307c8",
+        "fetched_at": "2026-10-29T21:53:01.177068+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/obsidianmd/jsoncanvas/blob/main/readme.md",
+        "snapshot": "research/github-2026-10-29/sources/obsidianmd--jsoncanvas/readme.txt",
+        "commit": "456f843cb293df4f4ab1763e22ccb46a80b307c8",
+        "fetched_at": "2026-10-29T21:53:00.170954+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "revezone/revezone",
+      "url": "https://github.com/revezone/revezone",
+      "stars": 2655,
+      "type": "复合应用；历史依赖边界",
+      "note": "AGPL-3.0 应用，组合 Excalidraw / tldraw 白板；历史 tldraw 依赖版本与当前 SDK 许可不能混为一谈。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Awhiteboard+fork%3Afalse+stars%3A%3E100&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:13.195704+08:00",
+        "snapshot": "research/github-2026-10-29/search-whiteboard-topic.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/revezone/revezone/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/revezone--revezone/license.txt",
+        "commit": "4722971b78bde308847949c809c27196ec7c6373",
+        "fetched_at": "2026-10-29T21:53:06.384506+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/revezone/revezone/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/revezone--revezone/readme.txt",
+        "commit": "4722971b78bde308847949c809c27196ec7c6373",
+        "fetched_at": "2026-10-29T21:53:04.982486+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "Comfy-Org/ComfyUI_frontend",
+      "url": "https://github.com/Comfy-Org/ComfyUI_frontend",
+      "stars": 2103,
+      "type": "同一产品的前端仓库",
+      "note": "GPL-3.0 的官方独立前端，研究 ComfyUI UI 时很有价值；主表不重复算另一套成品。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/repos/Comfy-Org/ComfyUI_frontend",
+        "fetched_at": "2026-10-29T21:46:16.175419+08:00",
+        "snapshot": "research/github-2026-10-29/repo-Comfy-Org--ComfyUI_frontend.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/Comfy-Org/ComfyUI_frontend/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/Comfy-Org--ComfyUI_frontend/license.txt",
+        "commit": "6650986befb64720f2361cdfd5ac2a83e1a92920",
+        "fetched_at": "2026-10-29T21:53:10.570182+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/Comfy-Org/ComfyUI_frontend/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/Comfy-Org--ComfyUI_frontend/readme.txt",
+        "commit": "6650986befb64720f2361cdfd5ac2a83e1a92920",
+        "fetched_at": "2026-10-29T21:53:09.311709+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "glanderness/BeefTV",
+      "url": "https://github.com/glanderness/BeefTV",
+      "stars": 1945,
+      "type": "源码可见；对外服务受限",
+      "note": "当前许可证对收费交付、软件销售及对外服务等设有额外授权要求，不按标准开源项目计入。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/glanderness/BeefTV/blob/main/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/glanderness--BeefTV/license.txt",
+        "commit": "4b4ca0626dca478b7ba1aead89fb81f8cc462161",
+        "fetched_at": "2026-10-29T21:53:12.571192+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/glanderness/BeefTV/blob/main/README.md",
+        "snapshot": "research/github-2026-10-29/sources/glanderness--BeefTV/readme.txt",
+        "commit": "4b4ca0626dca478b7ba1aead89fb81f8cc462161",
+        "fetched_at": "2026-10-29T21:53:11.394738+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    },
+    {
+      "name": "xiaoiver/infinite-canvas-tutorial",
+      "url": "https://github.com/xiaoiver/infinite-canvas-tutorial",
+      "stars": 1113,
+      "type": "教程与示例实现",
+      "note": "MIT 的无限画布教程，适合研究渲染、坐标、交互等原理；不作为完整成品数量。",
+      "metadata_evidence": {
+        "url": "https://api.github.com/search/repositories?q=topic%3Ainfinite-canvas+fork%3Afalse&sort=stars&order=desc&per_page=100",
+        "fetched_at": "2026-10-29T21:46:10.523044+08:00",
+        "snapshot": "research/github-2026-10-29/search-infinite-topic.json"
+      },
+      "license_evidence": {
+        "url": "https://github.com/xiaoiver/infinite-canvas-tutorial/blob/master/LICENSE",
+        "snapshot": "research/github-2026-10-29/sources/xiaoiver--infinite-canvas-tutorial/license.txt",
+        "commit": "aafefcee1de41651aafcb6f6bdd05a7c896617e8",
+        "fetched_at": "2026-10-29T21:53:17.245624+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      },
+      "readme_evidence": {
+        "url": "https://github.com/xiaoiver/infinite-canvas-tutorial/blob/master/README.md",
+        "snapshot": "research/github-2026-10-29/sources/xiaoiver--infinite-canvas-tutorial/readme.txt",
+        "commit": "aafefcee1de41651aafcb6f6bdd05a7c896617e8",
+        "fetched_at": "2026-10-29T21:53:16.165509+08:00",
+        "method": "Public GitHub blob page embedded rawLines; LF-normalized text, no repository code executed"
+      }
+    }
+  ],
+  "supporting_primary_reviews": [
+    {
+      "url": "https://gojs.net/latest/license",
+      "finding": "Proprietary commercial software agreement, distinct from an open-source license.",
+      "reviewed_on": "2026-10-29"
+    },
+    {
+      "url": "https://tldraw.dev/community/license",
+      "finding": "Default SDK license permits development; production requires a valid license key.",
+      "reviewed_on": "2026-10-29"
+    },
+    {
+      "url": "https://github.com/toeverything/blocksuite",
+      "finding": "EdgelessEditor, Web Components, Yjs/CRDT and MPL-2.0 declared by the repository.",
+      "reviewed_on": "2026-10-29"
+    },
+    {
+      "url": "https://github.com/clientIO/joint",
+      "finding": "Core SVG graph library under MPL-2.0; JointJS+ is a separate commercial product.",
+      "reviewed_on": "2026-10-29"
+    },
+    {
+      "url": "https://github.com/thedmd/imgui-node-editor",
+      "finding": "Dear ImGui node editor with zoom, scrolling and customizable nodes/links.",
+      "reviewed_on": "2026-10-29"
+    },
+    {
+      "url": "https://github.com/paceholder/nodeeditor/blob/master/LICENSE.rst",
+      "finding": "BSD-3-Clause license header verified in the primary page.",
+      "reviewed_on": "2026-10-29"
+    },
+    {
+      "url": "https://github.com/IndieSmiths/nodezator/blob/main/UNLICENSE",
+      "finding": "License path verified from repository root listing; GitHub REST detects Unlicense.",
+      "reviewed_on": "2026-10-29"
+    },
+    {
+      "url": "https://blog.logseq.com/whiteboards-and-queries-for-everybody/",
+      "finding": "Historical 0.9.1 whiteboard capability verified; does not establish DB-branch parity.",
+      "reviewed_on": "2026-10-29"
+    }
+  ],
+  "validation_scope": "GitHub 元数据、README、LICENSE 和官方说明静态调研；未安装或运行候选项目，未测试 API 接入。"
+}

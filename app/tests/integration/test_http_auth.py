@@ -51,6 +51,29 @@ def key_body(catalog: dict[str, Any]) -> dict[str, Any]:
     return {"name": "Synthetic HTTP key", "tenant_id": public_id("ten", catalog["identity"].tenant_id), "project_id": public_id("prj", catalog["identity"].project_id), "policy": policy}
 
 
+def test_studio_release_header_validation_poll_hint_and_cors(client: TestClient, catalog: dict[str, Any], test_settings: Settings) -> None:
+    login(client)
+    body = key_body(catalog)
+    body["policy"]["limits"]["burst"]["value"] = 100
+    issued = client.post("/admin/api/v1/api-keys", json=body, headers={"Idempotency-Key": str(uuid4())}).json()
+    headers = {"Authorization": "Bearer " + issued["secret"], "Idempotency-Key": "studio-http-guard-0001", "X-Expected-Release-Digest": "0" * 64}
+    request = {"model": "synthetic-image", "task_type": "text_to_image", "input": {"prompt": "synthetic studio http"}}
+    response = client.post("/v1/jobs", headers=headers, json=request)
+    assert response.status_code == 409 and response.json()["error"]["code"] == "model_release_changed"
+    headers["X-Expected-Release-Digest"] = "invalid"
+    assert client.post("/v1/jobs", headers=headers, json=request).status_code == 422
+    headers["X-Expected-Release-Digest"] = catalog["release_digest"]
+    created = client.post("/v1/jobs", headers=headers, json=request)
+    assert created.status_code == 202 and created.headers["Retry-After"] == "2"
+    queried = client.get("/v1/jobs/" + created.json()["id"], headers={"Authorization": headers["Authorization"]})
+    assert queried.status_code == 200 and queried.headers["Retry-After"] == "2"
+    with TestClient(create_app(test_settings.model_copy(update={"allow_any_origin": True})), base_url=test_settings.public_origin, client=("127.0.0.1", 50001)) as external:
+        policy = external.get("/v1/access-policy", headers={"Authorization": headers["Authorization"], "Origin": "http://external-canvas.invalid:8111"})
+        assert policy.status_code == 200 and policy.headers["X-Studio-Contract"] == "1"
+        assert policy.headers["Access-Control-Allow-Origin"] == "http://external-canvas.invalid:8111"
+        assert "X-Studio-Contract" in policy.headers["Access-Control-Expose-Headers"]
+
+
 def test_public_job_cursor_http_rotation_revocation_and_query_validation(client: TestClient, catalog: dict[str, Any], pg: sessionmaker[Session]) -> None:
     login(client)
     body = key_body(catalog)

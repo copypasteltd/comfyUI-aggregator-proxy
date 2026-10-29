@@ -1,0 +1,1643 @@
+{
+  "snapshot_date": "2026-10-29",
+  "timezone": "Asia/Taipei",
+  "built_at": "2026-10-29T23:43:28.509254+08:00",
+  "commits": {
+    "toon": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+    "canvas": "9cd3deacbcc598361807afc16c059a80dd18b6f9"
+  },
+  "dimension_count": 48,
+  "group_counts": {
+    "产品与创作": 10,
+    "移动端": 10,
+    "接口适配": 14,
+    "部署与运维": 14
+  },
+  "dimensions": [
+    {
+      "id": "P01",
+      "group": "产品与创作",
+      "dimension": "产品定位",
+      "toonflow": "侧重短剧、漫剧、分镜和项目资产创作",
+      "infinite_canvas": "侧重图片方案探索、参考图迭代，扩展到视频与音频",
+      "implication": "先明确是做叙事项目，还是提供通用生成入口",
+      "sources": [
+        "T1",
+        "B1"
+      ]
+    },
+    {
+      "id": "P02",
+      "group": "产品与创作",
+      "dimension": "画布自由度",
+      "toonflow": "自由节点、连线、分组及 AI 助手；当前版本也有无限画布",
+      "infinite_canvas": "自由节点、连线、分组、撤销重做与画布助手",
+      "implication": "两者都有自由编排，不能把 Toonflow 当成固定流水线",
+      "sources": [
+        "T1",
+        "T10",
+        "B2",
+        "B3"
+      ]
+    },
+    {
+      "id": "P03",
+      "group": "产品与创作",
+      "dimension": "文档与项目组织",
+      "toonflow": "服务端工作区、文件与画布／文档视图结合",
+      "infinite_canvas": "多画布项目、文本节点、提示词库和素材库",
+      "implication": "复杂剧本与项目文件更偏向 Toonflow 的组织方式",
+      "sources": [
+        "T1",
+        "T12",
+        "B2",
+        "V1"
+      ]
+    },
+    {
+      "id": "P04",
+      "group": "产品与创作",
+      "dimension": "图片与参考图",
+      "toonflow": "独立图片生成节点；参考图片、文本及模型参数",
+      "infinite_canvas": "文生图、图生图、参考图编辑；另有独立生图工作台",
+      "implication": "两者都可出图；简单生成的操作入口不同",
+      "sources": [
+        "T8",
+        "B3",
+        "B4",
+        "V1"
+      ]
+    },
+    {
+      "id": "P05",
+      "group": "产品与创作",
+      "dimension": "视频与混合参考",
+      "toonflow": "节点支持文生、单图、首尾帧、图片／视频／音频混合参考；按模型开放",
+      "infinite_canvas": "节点及独立视频工作台，含首尾帧与全能参考模式",
+      "implication": "两者都有参考视频创作，具体数量与模式仍由后端模型决定",
+      "sources": [
+        "T7",
+        "T3",
+        "B3",
+        "B5",
+        "V1"
+      ]
+    },
+    {
+      "id": "P06",
+      "group": "产品与创作",
+      "dimension": "音频能力",
+      "toonflow": "已存在音频生成节点，支持模型、参考素材与生成后播放、截取、变速等",
+      "infinite_canvas": "已有音频生成和音频节点；默认请求为 OpenAI 风格 TTS，自定义脚本可扩展",
+      "implication": "上一版主表低估了 Toonflow 音频；ComfyUI 音乐异步任务仍需适配",
+      "sources": [
+        "T5",
+        "T3",
+        "B6"
+      ]
+    },
+    {
+      "id": "P07",
+      "group": "产品与创作",
+      "dimension": "3D 的实际含义",
+      "toonflow": "内置 3D 导演台，用低多边形人偶等预演动作与镜头，导出 PNG／MP4",
+      "infinite_canvas": "已核对的默认生成类型为文本、图片、视频、音频，可通过节点插件扩展",
+      "implication": "两者均未验证直接展示聚合服务返回的 GLB／OBJ；导演台不等于 3D 模型生成接口",
+      "sources": [
+        "T6",
+        "T3",
+        "B2",
+        "V1"
+      ]
+    },
+    {
+      "id": "P08",
+      "group": "产品与创作",
+      "dimension": "结果再处理",
+      "toonflow": "有视频截帧、音频截取／变速及导演台预演等节点能力",
+      "infinite_canvas": "参考素材编辑、生成重试、画布与资产管理",
+      "implication": "Toonflow 的创作工具更成体系；不能据此假定完整剪辑成片已自动完成",
+      "sources": [
+        "T5",
+        "T6",
+        "T7",
+        "B2",
+        "B3"
+      ]
+    },
+    {
+      "id": "P09",
+      "group": "产品与创作",
+      "dimension": "Agent 与 MCP",
+      "toonflow": "开放 Agent、工具、MCP 与插件，结合后端工作区",
+      "infinite_canvas": "画布助手，以及可选的本地 Canvas Agent／Codex／Claude Code 桥接",
+      "implication": "基础生成均无需先装本地 Agent；自动操作能力需分别配置",
+      "sources": [
+        "T1",
+        "T12",
+        "B1",
+        "B2"
+      ]
+    },
+    {
+      "id": "P10",
+      "group": "产品与创作",
+      "dimension": "插件与自定义能力",
+      "toonflow": "节点、工具、扩展及供应商适配，含 Bun／服务端能力",
+      "infinite_canvas": "动态节点插件、TypeScript SDK、模型调用脚本",
+      "implication": "需要文件处理与服务端工具时 Toonflow 更自然；浏览器扩展保持部署简单",
+      "sources": [
+        "T1",
+        "T3",
+        "B1",
+        "B2",
+        "B7"
+      ]
+    },
+    {
+      "id": "M01",
+      "group": "移动端",
+      "dimension": "Android 客户端",
+      "toonflow": "官方提供 ARM64 APK，内置 Bun 与 WebView／备用 GeckoView",
+      "infinite_canvas": "当前已核对的主仓库以 Web 为主，未核实官方独立 APK",
+      "implication": "Android 应用形态上 Toonflow 有明显优势，但真机体验未实测",
+      "sources": [
+        "T1",
+        "T2",
+        "B1"
+      ]
+    },
+    {
+      "id": "M02",
+      "group": "移动端",
+      "dimension": "iPhone／iPad",
+      "toonflow": "本轮未核实官方 iOS／iPadOS 客户端；不能把 Android 结论外推",
+      "infinite_canvas": "浏览器路线可作为入口；Safari 的生成、下载、存储需单测",
+      "implication": "两者均未完成 iOS 真机兼容验证",
+      "sources": [
+        "T1",
+        "T2",
+        "B1"
+      ]
+    },
+    {
+      "id": "M03",
+      "group": "移动端",
+      "dimension": "横竖屏策略",
+      "toonflow": "Android 默认横屏，默认 75% 界面缩放，可调 50%–100%；复用完整 Web 布局",
+      "infinite_canvas": "390px 竖屏下生图、视频参数有抽屉布局，渠道编辑为整屏面板",
+      "implication": "Toonflow 的移动路线偏横屏工作台；basketikun 有部分竖屏表单适配",
+      "sources": [
+        "T2",
+        "V1"
+      ]
+    },
+    {
+      "id": "M04",
+      "group": "移动端",
+      "dimension": "画布在窄屏的布局",
+      "toonflow": "源码针对移动设备启用拖动画布和双指缩放；完整布局的实际表现待真机测试",
+      "infinite_canvas": "本轮 390px 默认画布视口中，左侧栏占约 280px，顶部工具有挤压",
+      "implication": "不能用首页或表单页适配推定整个创作画布适配完成",
+      "sources": [
+        "T10",
+        "V1"
+      ]
+    },
+    {
+      "id": "M05",
+      "group": "移动端",
+      "dimension": "触摸编辑完整度",
+      "toonflow": "Vue Flow 中有移动拖动和 pinch 配置；节点连线、长按与键盘输入未真机测",
+      "infinite_canvas": "存在 Pointer 交互；本轮只验证视口布局，未完成真机连线／双指缩放测试",
+      "implication": "触摸完成一条创作流程仍是共同验收项",
+      "sources": [
+        "T10",
+        "B3",
+        "V1"
+      ]
+    },
+    {
+      "id": "M06",
+      "group": "移动端",
+      "dimension": "文件、扫码与导出",
+      "toonflow": "Android 文档说明了扫码、系统文件导入导出和设备互联",
+      "infinite_canvas": "使用浏览器文件选择、Blob 下载与本地存储",
+      "implication": "移动下载目录、大文件和权限交互需按 Android／iOS 分开验证",
+      "sources": [
+        "T2",
+        "B2",
+        "V1"
+      ]
+    },
+    {
+      "id": "M07",
+      "group": "移动端",
+      "dimension": "后台与退出行为",
+      "toonflow": "Android Activity 退出会停止本地 Bun，当前没有后台长任务或前台服务",
+      "infinite_canvas": "任务查询依赖浏览器运行；手机后台挂起后的行为尚未验证",
+      "implication": "手机退后台不能被承诺为持续跑批；生成应由现有聚合后端负责",
+      "sources": [
+        "T2",
+        "T4",
+        "B3"
+      ]
+    },
+    {
+      "id": "M08",
+      "group": "移动端",
+      "dimension": "手机连接电脑",
+      "toonflow": "可扫码或手动配对远程后端，含设备令牌、撤销和在线检查",
+      "infinite_canvas": "可选 WebDAV 同步数据；未核实同类原生设备配对通道",
+      "implication": "Toonflow 的设备互联更直接；它不提供同画布冲突合并",
+      "sources": [
+        "T2",
+        "T11",
+        "B8"
+      ]
+    },
+    {
+      "id": "M09",
+      "group": "移动端",
+      "dimension": "移动媒体处理边界",
+      "toonflow": "Android 版当前没有 FFmpeg，相关转码和抽帧功能受限；远程模式另行评估",
+      "infinite_canvas": "浏览器编解码、Blob 存储和内存受终端限制，未测大型素材",
+      "implication": "移动端不应承担视频合成等重处理",
+      "sources": [
+        "T2",
+        "B5",
+        "V1"
+      ]
+    },
+    {
+      "id": "M10",
+      "group": "移动端",
+      "dimension": "安装与操作成本",
+      "toonflow": "需安装 APK 或配置远程后端，获得较完整的工作区能力",
+      "infinite_canvas": "打开 Web 链接即可；复杂画布仍需要专门移动布局改造",
+      "implication": "轻量分发偏向 basketikun；Android 横屏应用可优先评估 Toonflow",
+      "sources": [
+        "T2",
+        "B1",
+        "V1"
+      ]
+    },
+    {
+      "id": "A01",
+      "group": "接口适配",
+      "dimension": "请求实际从哪里发出",
+      "toonflow": "媒体供应商请求主要由 Bun 后端处理",
+      "infinite_canvas": "基础生成从浏览器直连配置的 API；本地代理为可选能力",
+      "implication": "浏览器和服务器的网络可达范围不同；统一走现有聚合服务最一致",
+      "sources": [
+        "T3",
+        "T9",
+        "B1",
+        "B4",
+        "B5"
+      ]
+    },
+    {
+      "id": "A02",
+      "group": "接口适配",
+      "dimension": "模型目录与能力声明",
+      "toonflow": "Provider 含模型 id、type、参考模式、尺寸／时长等能力；支持 modelsUrl",
+      "infinite_canvas": "渠道可拉取／填写模型，并为模型指定生图／视频／文本／音频及脚本",
+      "implication": "现有模型说明和参数范围仍须映射，不能只同步名称",
+      "sources": [
+        "T3",
+        "B2",
+        "V1"
+      ]
+    },
+    {
+      "id": "A03",
+      "group": "接口适配",
+      "dimension": "语言模型协议",
+      "toonflow": "供应商类型允许 OpenAI Chat、Responses、Anthropic 等协议；按实现配置",
+      "infinite_canvas": "渠道有 OpenAI／Gemini 路线，文本及 Responses 调用按所选能力处理",
+      "implication": "文本协议兼容不能代替媒体协议兼容",
+      "sources": [
+        "T3",
+        "B2",
+        "B4",
+        "V1"
+      ]
+    },
+    {
+      "id": "A04",
+      "group": "接口适配",
+      "dimension": "生图协议",
+      "toonflow": "通过 Provider 的 generateImage 转换请求；内置供应商各自实现",
+      "infinite_canvas": "原生含 images/generations、images/edits、Responses 与 Gemini 路线",
+      "implication": "已有 OpenAI 风格生图接口更容易先在 basketikun 验证",
+      "sources": [
+        "T3",
+        "T13",
+        "B4"
+      ]
+    },
+    {
+      "id": "A05",
+      "group": "接口适配",
+      "dimension": "视频异步协议",
+      "toonflow": "Provider 内部轮询／读取流，最终必须返回 MediaAsset 数组",
+      "infinite_canvas": "原生含 POST /v1/videos、GET /v1/videos/{id}、GET /v1/videos/{id}/content；另有 Gemini 长任务",
+      "implication": "两者的适配层位置不同；异步视频通常需要核对字段和状态",
+      "sources": [
+        "T3",
+        "T13",
+        "B3",
+        "B5"
+      ]
+    },
+    {
+      "id": "A06",
+      "group": "接口适配",
+      "dimension": "音频协议",
+      "toonflow": "generateAudio 接口含文本、创作提示、参考音频／图片、音色与采样率等",
+      "infinite_canvas": "默认 /v1/audio/speech 返回音频 Blob；脚本可返回音频结果",
+      "implication": "你的 ComfyUI 音乐工作流不能直接按同步 TTS 协议假定兼容",
+      "sources": [
+        "T3",
+        "T5",
+        "B6",
+        "B7"
+      ]
+    },
+    {
+      "id": "A07",
+      "group": "接口适配",
+      "dimension": "直接接 ComfyUI",
+      "toonflow": "官方说明可经自定义供应商接工作流；本轮未完成直连验证",
+      "infinite_canvas": "自定义调用脚本或节点插件提供适配入口；未验证原生全量工作流导入",
+      "implication": "两者均未证实填入 8188 地址就可调用全部 workflow",
+      "sources": [
+        "T1",
+        "T3",
+        "B1",
+        "B7"
+      ]
+    },
+    {
+      "id": "A08",
+      "group": "接口适配",
+      "dimension": "尺寸与生成参数",
+      "toonflow": "图片 size／ratio，视频 duration／resolution／ratio，支持模型专属表单规则",
+      "infinite_canvas": "工作台支持 W／H、分辨率、比例、质量、数量、秒数等；生图有可切换的 16 倍数对齐",
+      "implication": "720×1080 等精确尺寸需连同对齐、模型限制和输出元数据一起验证",
+      "sources": [
+        "T3",
+        "T8",
+        "T7",
+        "V1"
+      ]
+    },
+    {
+      "id": "A09",
+      "group": "接口适配",
+      "dimension": "参考素材数量",
+      "toonflow": "Provider 模型声明各媒体的参考模式和数量约束",
+      "infinite_canvas": "节点读上游素材；视频工作台提示最多 9 张参考图，最终仍需接口校验",
+      "implication": "多参考图／视频／音频需要按具体 workflow 做能力表",
+      "sources": [
+        "T3",
+        "T7",
+        "B3",
+        "V1"
+      ]
+    },
+    {
+      "id": "A10",
+      "group": "接口适配",
+      "dimension": "任务恢复与页面关闭",
+      "toonflow": "媒体任务在单进程内存中；约 2 分钟无查询会停止包装任务，结果缓存 5 分钟，重启不恢复",
+      "infinite_canvas": "原生视频路径保存远程任务 ID，刷新后可继续查询；自定义脚本的恢复需另适配",
+      "implication": "Toonflow 当前也不是持久队列；长任务可靠性必须接现有聚合任务系统",
+      "sources": [
+        "T4",
+        "B3",
+        "B5"
+      ]
+    },
+    {
+      "id": "A11",
+      "group": "接口适配",
+      "dimension": "取消与错误处理",
+      "toonflow": "使用 AbortController；Provider 决定上游请求如何取消",
+      "infinite_canvas": "支持 AbortSignal、失败状态和脚本错误；停止请求不自动证明上游已停算",
+      "implication": "必须验证取消是否传到 ComfyUI，避免重复提交或误判已取消",
+      "sources": [
+        "T4",
+        "T3",
+        "B5",
+        "B6",
+        "B7"
+      ]
+    },
+    {
+      "id": "A12",
+      "group": "接口适配",
+      "dimension": "结果文件与鉴权下载",
+      "toonflow": "服务端下载媒体后写入工作区；URL 结果的下载需核对可访问性",
+      "infinite_canvas": "浏览器取得 Blob 后保存；视频支持带 Key 的 content 路径，也有 URL 结果回退",
+      "implication": "返回需鉴权或短时有效的 URL 时，适配器要负责正确取文件",
+      "sources": [
+        "T9",
+        "B5",
+        "B6"
+      ]
+    },
+    {
+      "id": "A13",
+      "group": "接口适配",
+      "dimension": "渠道队列与多机调度",
+      "toonflow": "创作供应商配置不等于多 GPU 渠道管理和负载均衡",
+      "infinite_canvas": "渠道配置也不等于完整生成集群调度器",
+      "implication": "继续复用现有聚合服务的设备、队列、API Key 和负载均衡",
+      "sources": [
+        "T1",
+        "T3",
+        "B1",
+        "B2"
+      ]
+    },
+    {
+      "id": "A14",
+      "group": "接口适配",
+      "dimension": "接入现有平台的工作量",
+      "toonflow": "增加聚合服务 Provider，映射模型能力、上传、轮询、下载及取消；处理页面离线租约",
+      "infinite_canvas": "配置渠道后验证图片；扩展视频／音频脚本、任务恢复及 3D 节点",
+      "implication": "两者都未完成当前线上平台联调；不能承诺仅填 Base URL 全模态即用",
+      "sources": [
+        "T3",
+        "T4",
+        "B4",
+        "B5",
+        "B6",
+        "B7"
+      ]
+    },
+    {
+      "id": "O01",
+      "group": "部署与运维",
+      "dimension": "最小部署组件",
+      "toonflow": "Bun Web／Server＋本地 data 工作区，安装说明含 FFmpeg；未要求独立数据库／Redis",
+      "infinite_canvas": "Vite 构建为静态资源，基础使用只需 Web 静态服务＋已有生成 API",
+      "implication": "basketikun 的服务器部署组件更少；Toonflow 也不应被夸大为必须多服务集群",
+      "sources": [
+        "T1",
+        "T12",
+        "B9",
+        "B10"
+      ]
+    },
+    {
+      "id": "O02",
+      "group": "部署与运维",
+      "dimension": "是否需要本地 GPU",
+      "toonflow": "调用远程生成 API 时无需本地加载生成模型；3D 预演使用客户端图形能力",
+      "infinite_canvas": "调用已有 API 时无需在画布服务器加载模型",
+      "implication": "两者的界面部署都可复用你已有 GPU 设备与聚合服务",
+      "sources": [
+        "T1",
+        "T6",
+        "B1"
+      ]
+    },
+    {
+      "id": "O03",
+      "group": "部署与运维",
+      "dimension": "数据默认保存位置",
+      "toonflow": "服务器安装默认保存到 data 配置、插件及工作区；Android 独立模式保存在手机应用数据目录",
+      "infinite_canvas": "浏览器 IndexedDB／本地存储；可选 WebDAV",
+      "implication": "服务端统一项目与浏览器个人项目是主要架构差异",
+      "sources": [
+        "T1",
+        "T2",
+        "B1",
+        "B2",
+        "B8"
+      ]
+    },
+    {
+      "id": "O04",
+      "group": "部署与运维",
+      "dimension": "Key 与配置管理",
+      "toonflow": "媒体供应商配置由所选后端使用；设备配对凭据与普通 API Key 用途不同",
+      "infinite_canvas": "API Key 保存在浏览器；配置导出文件包含 Key 和 WebDAV 凭据",
+      "implication": "现有聚合 API Key 可以继续控制生成权限，但不能替代画布项目权限",
+      "sources": [
+        "T2",
+        "T3",
+        "B1",
+        "B2",
+        "V1"
+      ]
+    },
+    {
+      "id": "O05",
+      "group": "部署与运维",
+      "dimension": "平台登录与权限",
+      "toonflow": "standalone 主页面／API 当前无独立登录；设备互联另有配对令牌",
+      "infinite_canvas": "没有内置云账号和云存储，浏览器各自保存配置",
+      "implication": "两者都不能直接视为具备多租户 Admin／项目隔离的平台",
+      "sources": [
+        "T1",
+        "T11",
+        "B2"
+      ]
+    },
+    {
+      "id": "O06",
+      "group": "部署与运维",
+      "dimension": "多人实时协作",
+      "toonflow": "设备互联文档明确不提供同画布实时协作或冲突合并",
+      "infinite_canvas": "WebDAV 为同步能力，未核实实时多人协作",
+      "implication": "跨设备访问、文件同步和实时协作需要分别验收",
+      "sources": [
+        "T2",
+        "B2",
+        "B8"
+      ]
+    },
+    {
+      "id": "O07",
+      "group": "部署与运维",
+      "dimension": "备份与迁移",
+      "toonflow": "备份完整 data／工作区；Android 卸载前需导出素材",
+      "infinite_canvas": "画布／配置导出、可选 WebDAV 同步；不同浏览器数据不自动共享",
+      "implication": "需要明确谁负责保存最终素材及恢复项目",
+      "sources": [
+        "T1",
+        "T2",
+        "B1",
+        "B2"
+      ]
+    },
+    {
+      "id": "O08",
+      "group": "部署与运维",
+      "dimension": "素材副本与清理",
+      "toonflow": "成功后工作区通常增加一份素材；任务缓存 5 分钟不等于素材删除",
+      "infinite_canvas": "成功保存 Blob 时浏览器增加副本，WebDAV 可再有同步副本；URL 回退可能仍依赖上游",
+      "implication": "现有“中转副本 8 小时清理”不会自动清理画布里的新增副本",
+      "sources": [
+        "T9",
+        "T4",
+        "B2",
+        "B5",
+        "B8"
+      ]
+    },
+    {
+      "id": "O09",
+      "group": "部署与运维",
+      "dimension": "资源占用证据",
+      "toonflow": "比静态前端多维护 Bun、插件及文件处理；未测常驻内存／并发",
+      "infinite_canvas": "服务器可只发静态文件，但浏览器仍承担画布、媒体和存储占用",
+      "implication": "轻量是组件判断，不能给出未实测的 RAM 或容量数字",
+      "sources": [
+        "T1",
+        "T12",
+        "B9",
+        "B10",
+        "V1"
+      ]
+    },
+    {
+      "id": "O10",
+      "group": "部署与运维",
+      "dimension": "前端与二开栈",
+      "toonflow": "Vue 3、Element Plus／TDesign、Vue Flow；Bun／Express 后端",
+      "infinite_canvas": "React 19、Ant Design、Tailwind、Zustand、Vite",
+      "implication": "二开需按现有团队技术栈选择，两个项目并非可互换的组件库",
+      "sources": [
+        "T12",
+        "B9"
+      ]
+    },
+    {
+      "id": "O11",
+      "group": "部署与运维",
+      "dimension": "视觉定制",
+      "toonflow": "完整工作区与多类插件界面需统一主题",
+      "infinite_canvas": "多个工作台、画布节点及配置抽屉需统一主题",
+      "implication": "两者都需要改造才能全面采用你要求的青柠风格",
+      "sources": [
+        "T12",
+        "B9",
+        "V1"
+      ]
+    },
+    {
+      "id": "O12",
+      "group": "部署与运维",
+      "dimension": "升级与版本锁定",
+      "toonflow": "应固定发布版／提交并保留工作区备份，不能凭 Star 保证升级兼容",
+      "infinite_canvas": "README 明确提示开发阶段可能调整历史存储格式",
+      "implication": "选定后应维护固定版本和数据迁移策略",
+      "sources": [
+        "T1",
+        "B1"
+      ]
+    },
+    {
+      "id": "O13",
+      "group": "部署与运维",
+      "dimension": "开源许可",
+      "toonflow": "主仓库 MIT",
+      "infinite_canvas": "主仓库 MIT",
+      "implication": "主仓库许可允许二开；后续引入插件和模型需逐项核对实际依赖",
+      "sources": [
+        "T1",
+        "B1"
+      ]
+    },
+    {
+      "id": "O14",
+      "group": "部署与运维",
+      "dimension": "社区规模与成熟度",
+      "toonflow": "上一轮同日快照 19,873 Star",
+      "infinite_canvas": "上一轮同日快照 9,378 Star",
+      "implication": "Star 用于社区规模参考，不代替移动、接口和稳定性验收",
+      "sources": [
+        "T1",
+        "B1"
+      ]
+    }
+  ],
+  "sources": {
+    "T1": {
+      "title": "Toonflow 定位、安装与访问说明",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/README.md"
+    },
+    "T2": {
+      "title": "Android 运行范围与限制",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/mobile/readme.md"
+    },
+    "T3": {
+      "title": "供应商与媒体协议类型",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/providers/types.d.ts"
+    },
+    "T4": {
+      "title": "媒体任务内存登记与超时",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/server/src/utils/media/tasks.ts"
+    },
+    "T5": {
+      "title": "音频生成节点说明",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/nodes/audioGenerationNode/readme.md"
+    },
+    "T6": {
+      "title": "3D 导演台输入输出",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/nodes/director3dNode/readme.md"
+    },
+    "T7": {
+      "title": "视频生成节点说明",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/nodes/videoGenerationNode/readme.md"
+    },
+    "T8": {
+      "title": "图片生成节点说明",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/nodes/imageGenerationNode/readme.md"
+    },
+    "T9": {
+      "title": "媒体下载与工作区保存",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/server/src/utils/media/generation.ts"
+    },
+    "T10": {
+      "title": "Vue Flow 画布交互",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/web/src/pages/workspace/panels/canvas/index.vue"
+    },
+    "T11": {
+      "title": "设备配对与令牌管理",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/server/src/utils/mobileLink/index.ts"
+    },
+    "T12": {
+      "title": "Toonflow 前端依赖",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/web/package.json"
+    },
+    "T13": {
+      "title": "供应商适配示例",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/providers/src/media/apiMart.ts"
+    },
+    "B1": {
+      "title": "无限画布定位与使用说明",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/README.md"
+    },
+    "B2": {
+      "title": "功能、同步与账号边界",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/docs/content/docs/overview/features.mdx"
+    },
+    "B3": {
+      "title": "节点、参考素材与视频任务恢复",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/docs/content/docs/canvas/canvas-node-manual.mdx"
+    },
+    "B4": {
+      "title": "图片请求实现",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/web/src/services/api/image.ts"
+    },
+    "B5": {
+      "title": "视频异步请求实现",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/web/src/services/api/video.ts"
+    },
+    "B6": {
+      "title": "音频请求实现",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/web/src/services/api/audio.ts"
+    },
+    "B7": {
+      "title": "模型调用脚本运行器",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/web/src/services/api/model-plugin.ts"
+    },
+    "B8": {
+      "title": "WebDAV 同步实现",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/web/src/services/webdav-sync.ts"
+    },
+    "B9": {
+      "title": "Vite 构建及前端依赖",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/web/package.json"
+    },
+    "B10": {
+      "title": "静态发布构建入口",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/Dockerfile"
+    },
+    "V1": {
+      "title": "官方演示页面的本轮视口截图",
+      "url": "https://canvas.best/"
+    }
+  },
+  "screenshots": [
+    {
+      "file": "assets/comparison-01-02/toon-projectHome.png",
+      "caption": "Toonflow：项目首页与灵感创作",
+      "kind": "official",
+      "width": 1264,
+      "height": 921,
+      "sha256": "5714a9765fd92ca5e5ad2c1aaac59dbd89121a68b080f8fe3f5857e21cd53010",
+      "source": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/README.md",
+      "observed_at": "2026-10-29T23:09:29.001232+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/toon-canvasDark.png",
+      "caption": "Toonflow：画布与 AI 助手",
+      "kind": "official",
+      "width": 1912,
+      "height": 966,
+      "sha256": "ccd896db3d5c82c6a56b2ac6038b8dacfb10436141a2cb909697cd121e825682",
+      "source": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/README.md",
+      "observed_at": "2026-10-29T23:09:29.343359+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/toon-characterImageGeneration.png",
+      "caption": "Toonflow：角色三视图生图节点",
+      "kind": "official",
+      "width": 1920,
+      "height": 1027,
+      "sha256": "b04a633a79777b15148992ab344cb392d5ad53d6c421500ebbf5884491f56ddc",
+      "source": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/nodes/imageGenerationNode/readme.md",
+      "observed_at": "2026-10-29T23:20:04.255037+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/toon-videoGeneration.png",
+      "caption": "Toonflow：多参考视频节点",
+      "kind": "official",
+      "width": 956,
+      "height": 750,
+      "sha256": "495dcab5bb76392bd6ce99352e9c5a6b06ce983582bd6eccfd9617d8df2834a1",
+      "source": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/nodes/videoGenerationNode/readme.md",
+      "observed_at": "2026-10-29T23:09:29.248623+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/toon-quickStart.png",
+      "caption": "Toonflow：首次配置入口",
+      "kind": "official",
+      "width": 1264,
+      "height": 921,
+      "sha256": "8a84eb3df9226dd94bf487949596228515ccc33aed17bb86783a6e5fdef28713",
+      "source": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/README.md",
+      "observed_at": "2026-10-29T23:14:22.163947+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/toon-directorStudio.png",
+      "caption": "Toonflow：3D 导演台预演",
+      "kind": "official",
+      "width": 1920,
+      "height": 1027,
+      "sha256": "96d3d991f062882dcbce469540fccf7f601ca8a65518b797a9d1d5c0cf8e23f3",
+      "source": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/packages/nodes/director3dNode/readme.md",
+      "observed_at": "2026-10-29T23:20:04.140999+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-canvas-desktop.png",
+      "caption": "无限画布：画布项目库",
+      "kind": "browser-desktop",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "5560e272ea95532b22073e94312c81339f621396eec15bf75cf76e1ab0b40406",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:12:28.640420+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-workspace-desktop.png",
+      "caption": "无限画布：新建画布工作区",
+      "kind": "browser-desktop",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "972d4abc1c85352840708c1b7f0842487e47c784cd53277df7884c6f2008995f",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:07.689903+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-image-desktop.png",
+      "caption": "无限画布：生图工作台",
+      "kind": "browser-desktop",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "89cb82879d65b049b6d0bace653ede9641c684a40cd1ae89a217f79c89c69a6f",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:13.017922+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-video-desktop.png",
+      "caption": "无限画布：视频工作台",
+      "kind": "browser-desktop",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "02fde6728d6a736a7a4b4259fee56c2aefe538dd08346b5db4cb238a4b75f162",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:17.205281+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-config-desktop.png",
+      "caption": "无限画布：渠道配置入口",
+      "kind": "browser-desktop",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "04805be02ed038959158fd029c3f6e1bb1d915fc1d814c4f8cdb6272bc57f2c8",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:21.092794+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-channel-desktop.png",
+      "caption": "无限画布：渠道编辑面板",
+      "kind": "browser-desktop",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "ef7a310e6b326cda55fd25cc1e868e807ac332159bc74d392aa5813445623ff2",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:24.384291+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-workspace-mobile.png",
+      "caption": "无限画布：390px 默认画布视口",
+      "kind": "browser-mobile",
+      "width": 390,
+      "height": 844,
+      "sha256": "5cc2624443fa72666f970379f031e3de62962e7eec820bbfd23d6521a43f63c1",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:08.489997+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-image-params-mobile.png",
+      "caption": "无限画布：390px 生图参数抽屉",
+      "kind": "browser-mobile",
+      "width": 390,
+      "height": 844,
+      "sha256": "f26ddbdf597398ba34b81b0de8038965fce7a3d6b2232fc47984a9ec911173ad",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:14.996737+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-video-params-mobile.png",
+      "caption": "无限画布：390px 视频参数抽屉",
+      "kind": "browser-mobile",
+      "width": 390,
+      "height": 844,
+      "sha256": "7432a44d186faac6e582f1fb71cb16b154f0c3ae6f33c78e9eb03e46aac84b61",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:18.844621+08:00",
+      "real_mobile_device_tested": false
+    },
+    {
+      "file": "assets/comparison-01-02/canvas-channel-mobile.png",
+      "caption": "无限画布：390px 渠道编辑面板",
+      "kind": "browser-mobile",
+      "width": 390,
+      "height": 844,
+      "sha256": "944a1ee38d822984dc120d31f1c7d7b35adae7511bc2fd60e2a5d68778323788",
+      "source": "https://canvas.best/",
+      "observed_at": "2026-10-29T23:23:25.365280+08:00",
+      "real_mobile_device_tested": false
+    }
+  ],
+  "source_evidence": [
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/git/trees/master?recursive=1",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 345345,
+      "sha256": "4543d1312aa06dd19b6766aa1313164ab3d15535e325f06ad8dbdc30b8ee40dc",
+      "fetched_at": "2026-10-29T15:14:22.162Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/recursive.tree.json",
+      "kind": "api-tree",
+      "method": "Official GitHub API; repository code not executed"
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/mobile/readme.md",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/apps/mobile/readme.md?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "b62fbc2f05681422ee5470433b9285d5493c2604",
+      "bytes": 12028,
+      "sha256": "53d759808dee07d5659e16a9dae05c554a2ec69705cd88424cb91cb23c7bcb06",
+      "fetched_at": "2026-10-29T15:17:57.692Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--mobile--readme.md.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/server/src/app.ts",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/server/src/app.ts",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 6381,
+      "sha256": "97c3af3e720fd708eb00f2b30c4c54a3800ce75ae1a0216510af431e77590331",
+      "fetched_at": "2026-10-29T15:09:26.576Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--server--src--app.ts.source.txt",
+      "kind": "blob",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/server/src/utils/media/generation.ts",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/apps/server/src/utils/media/generation.ts?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "14a238e14f6c5c6af5b8d480a7d2136b379a58eb",
+      "bytes": 14028,
+      "sha256": "861abf8f857ea856ced440c65fb3f2efd9964d7b231bf7e8a752c2f4eec56474",
+      "fetched_at": "2026-10-29T15:20:03.052Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--server--src--utils--media--generation.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/server/src/utils/media/tasks.ts",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/apps/server/src/utils/media/tasks.ts?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "9407f449ff97e6f1b5784e39f15e9ab55a0f9b15",
+      "bytes": 2566,
+      "sha256": "168939a6aabb99bf03c4b85561a74427b604966987a7350840be4918eb52d25f",
+      "fetched_at": "2026-10-29T15:20:02.976Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--server--src--utils--media--tasks.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/server/src/utils/mobileLink/index.ts",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/server/src/utils/mobileLink/index.ts",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 12923,
+      "sha256": "826a262bc36c49e80166a2d381c9a40f34a7f39cd021657c3939cd6716f50b19",
+      "fetched_at": "2026-10-29T15:09:27.391Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--server--src--utils--mobileLink--index.ts.source.txt",
+      "kind": "blob",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/web/package.json",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/web/package.json",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 2606,
+      "sha256": "8b7dc3698113f452be1378d9c299a861457f4f1fc249956370039a11732407bc",
+      "fetched_at": "2026-10-29T15:09:26.936Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--web--package.json.source.txt",
+      "kind": "blob",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/web/src/lib/browserCapabilities.ts",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/apps/web/src/lib/browserCapabilities.ts",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 1170,
+      "sha256": "6f4da1363cee26c70e4b8fa0dde889097cdb394744acfa75c10080c79a46db2e",
+      "fetched_at": "2026-10-29T15:09:27.055Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--web--src--lib--browserCapabilities.ts.source.txt",
+      "kind": "blob",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/web/src/lib/mobile.ts",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/apps/web/src/lib/mobile.ts?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "2cc5a8586172587108eaabdaf59ba3e1cf1dfc42",
+      "bytes": 5438,
+      "sha256": "c7bb74e8b86427c40168ba0640b94cecc441eea5167ac228e735b819fdfd261a",
+      "fetched_at": "2026-10-29T15:17:57.692Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--web--src--lib--mobile.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/web/src/lib/workspaceFiles.ts",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/apps/web/src/lib/workspaceFiles.ts?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "004c3151b69a3dc37b16807da1f8cb8d337125ef",
+      "bytes": 7919,
+      "sha256": "d2fcb7fadfde4ae1110ead726a03807c1d21e785d9f57fa8c040e5cf99794958",
+      "fetched_at": "2026-10-29T15:18:00.268Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--web--src--lib--workspaceFiles.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/web/src/pages/workspace/index.vue",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/apps/web/src/pages/workspace/index.vue?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "cc47297c2ea8b230f50d9410535088c99ee5af04",
+      "bytes": 25487,
+      "sha256": "3f781ca51a20eab2f7409d1ca7964daaf37f862013b842dc2189052349571640",
+      "fetched_at": "2026-10-29T15:20:03.080Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--web--src--pages--workspace--index.vue.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/web/src/pages/workspace/panels/canvas/index.vue",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/apps/web/src/pages/workspace/panels/canvas/index.vue?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "7c86f12aff42eb7fe99e4de7b0f31d44c91519b5",
+      "bytes": 65295,
+      "sha256": "1f97844278f395489b47c05fef7324767c9221259bc4df73f0034fda548babb5",
+      "fetched_at": "2026-10-29T15:20:03.467Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--web--src--pages--workspace--panels--canvas--index.vue.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "apps/web/src",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/tree/master/apps/web/src",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 868,
+      "sha256": "a0d96db79ab8d967d9c3cf56a70612dfa613419520b3182430570424b9a99ab5",
+      "fetched_at": "2026-10-29T15:09:25.937Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/apps--web--src.tree.json",
+      "kind": "tree",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "docs/images/screenshots/canvasDark.png",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/docs/images/screenshots/canvasDark.png?ref=master",
+      "ref": "master",
+      "commit": "89461d52b081eb098a78dad07138ac399c557785",
+      "bytes": 1037440,
+      "sha256": "ccd896db3d5c82c6a56b2ac6038b8dacfb10436141a2cb909697cd121e825682",
+      "fetched_at": "2026-10-29T15:09:29.346Z",
+      "target": "docs/assets/comparison-01-02/toon-canvasDark.png",
+      "kind": "image",
+      "method": "Official GitHub contents API base64",
+      "git_blob_sha": "89461d52b081eb098a78dad07138ac399c557785",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "docs/images/screenshots/characterImageGeneration.png",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/docs/images/screenshots/characterImageGeneration.png?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "8dc533e6738192864e40486d2ce70f03e4b633e2",
+      "bytes": 803479,
+      "sha256": "b04a633a79777b15148992ab344cb392d5ad53d6c421500ebbf5884491f56ddc",
+      "fetched_at": "2026-10-29T15:20:04.258Z",
+      "target": "docs/assets/comparison-01-02/toon-characterImageGeneration.png",
+      "kind": "image",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "docs/images/screenshots/directorStudio.png",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/docs/images/screenshots/directorStudio.png?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "2c244812b503f41d7a998b83476bb4372b471d43",
+      "bytes": 500801,
+      "sha256": "96d3d991f062882dcbce469540fccf7f601ca8a65518b797a9d1d5c0cf8e23f3",
+      "fetched_at": "2026-10-29T15:20:04.143Z",
+      "target": "docs/assets/comparison-01-02/toon-directorStudio.png",
+      "kind": "image",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "docs/images/screenshots/projectHome.png",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/docs/images/screenshots/projectHome.png?ref=master",
+      "ref": "master",
+      "commit": "1b6e26ab1856aa0c74205bb8082c96f6598bf2e5",
+      "bytes": 699314,
+      "sha256": "5714a9765fd92ca5e5ad2c1aaac59dbd89121a68b080f8fe3f5857e21cd53010",
+      "fetched_at": "2026-10-29T15:09:29.003Z",
+      "target": "docs/assets/comparison-01-02/toon-projectHome.png",
+      "kind": "image",
+      "method": "Official GitHub contents API base64",
+      "git_blob_sha": "1b6e26ab1856aa0c74205bb8082c96f6598bf2e5",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "docs/images/screenshots/quickStart.png",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/docs/images/screenshots/quickStart.png?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "d003a62cde95ee303a613e29e3e701a3cda50b5f",
+      "bytes": 1499755,
+      "sha256": "8a84eb3df9226dd94bf487949596228515ccc33aed17bb86783a6e5fdef28713",
+      "fetched_at": "2026-10-29T15:14:22.170Z",
+      "target": "docs/assets/comparison-01-02/toon-quickStart.png",
+      "kind": "image",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "docs/images/screenshots/videoGeneration.png",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/docs/images/screenshots/videoGeneration.png?ref=master",
+      "ref": "master",
+      "commit": "abad751db7f202ff1caf2c592d0c0fffbfc32874",
+      "bytes": 370612,
+      "sha256": "495dcab5bb76392bd6ce99352e9c5a6b06ce983582bd6eccfd9617d8df2834a1",
+      "fetched_at": "2026-10-29T15:09:29.250Z",
+      "target": "docs/assets/comparison-01-02/toon-videoGeneration.png",
+      "kind": "image",
+      "method": "Official GitHub contents API base64",
+      "git_blob_sha": "abad751db7f202ff1caf2c592d0c0fffbfc32874",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "docs/images/screenshots",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/tree/master/docs/images/screenshots",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 1245,
+      "sha256": "d8acb0aa1e269d6b3dde8872f899f6cf4a4aa4f0c9dcade3050b87fe48c7ff0f",
+      "fetched_at": "2026-10-29T15:09:26.509Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/docs--images--screenshots.tree.json",
+      "kind": "tree",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "packages/nodes/audioGenerationNode/readme.md",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/packages/nodes/audioGenerationNode/readme.md?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "35816f0e723f1f4f4d258674fded87c5b00021ee",
+      "bytes": 811,
+      "sha256": "8c1c04fa16680e01a60f789fe5289e903ddaa60c3ea2cd678a3cfcea8696be54",
+      "fetched_at": "2026-10-29T15:17:59.841Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/packages--nodes--audioGenerationNode--readme.md.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "packages/nodes/director3dNode/readme.md",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/packages/nodes/director3dNode/readme.md?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "4ff48b3a2cb0ab0bc93aaf8015cdce4275cbc461",
+      "bytes": 4813,
+      "sha256": "46635476a85ec82f32e948e511df270cf5aa62804eb44856ea84ccf5489e4995",
+      "fetched_at": "2026-10-29T15:17:59.840Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/packages--nodes--director3dNode--readme.md.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "packages/nodes/imageGenerationNode/readme.md",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/packages/nodes/imageGenerationNode/readme.md?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "7acf6ab1c49c2c60459239116ebdd311588e5e22",
+      "bytes": 930,
+      "sha256": "7f757ffa27e0fc578f8a094813fe73dfe40697e7e970afebb1afafcc3dd2420d",
+      "fetched_at": "2026-10-29T15:20:03.439Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/packages--nodes--imageGenerationNode--readme.md.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "packages/nodes/videoGenerationNode/readme.md",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/packages/nodes/videoGenerationNode/readme.md?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "2feb0fc33f1665452167b983df60101c1b4bbe89",
+      "bytes": 1135,
+      "sha256": "71f4b2be784527ef5f4ff9c006944e7eea55f7cd6701f95ba3d4612cec0d1b2a",
+      "fetched_at": "2026-10-29T15:20:03.439Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/packages--nodes--videoGenerationNode--readme.md.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "packages/nodes",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/tree/master/packages/nodes",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 1032,
+      "sha256": "faabd21ec89bfeba1c2dd301b8595d61a0382ddfc499696ababcc3645435e0e8",
+      "fetched_at": "2026-10-29T15:09:25.724Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/packages--nodes.tree.json",
+      "kind": "tree",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "packages/providers/src/media/apiMart.ts",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/packages/providers/src/media/apiMart.ts?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "8116cba0731af9bd408529d83036845ab10bee1d",
+      "bytes": 25365,
+      "sha256": "2bdb85ecf57abbfdf21e97945ddd76607108b4cd80be86b97ab85c96809f60b0",
+      "fetched_at": "2026-10-29T15:17:59.841Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/packages--providers--src--media--apiMart.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "packages/providers/types.d.ts",
+      "url": "https://api.github.com/repos/HBAI-Ltd/Toonflow-app/contents/packages/providers/types.d.ts?ref=master",
+      "ref": "master",
+      "commit": "master",
+      "git_blob_sha": "7793cdbb674b2a28c8bd8cc1ca91964c83d39033",
+      "bytes": 12261,
+      "sha256": "2ca044d1c9c730c99749badeeba460a576fc2a98ecb6c53401e1ac065200da04",
+      "fetched_at": "2026-10-29T15:17:57.692Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/packages--providers--types.d.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "git_object_verified": true
+    },
+    {
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "path": "packages/providers",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app/tree/master/packages/providers",
+      "ref": "master",
+      "commit": "af6e884c3d8cda353acaf8ef13aea8ea754a4afd",
+      "bytes": 530,
+      "sha256": "ac8f312f5e45169a368c494ea823976c9ca11643cf6203ca55fc907b586b780c",
+      "fetched_at": "2026-10-29T15:09:25.937Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/toon/packages--providers.tree.json",
+      "kind": "tree",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/git/trees/main?recursive=1",
+      "ref": "main",
+      "commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "bytes": 180320,
+      "sha256": "46a0d0a37c2524570ea0c456f8940d3ce8e03c5044df2131e84f84787070a75c",
+      "fetched_at": "2026-10-29T15:14:22.163Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/recursive.tree.json",
+      "kind": "api-tree",
+      "method": "Official GitHub API; repository code not executed"
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "docs/content/docs/canvas/canvas-node-manual.mdx",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/docs/content/docs/canvas/canvas-node-manual.mdx",
+      "ref": "main",
+      "commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "bytes": 4340,
+      "sha256": "35bcdea03dd622634287331d9bd093108de9ca88ee0bf3ce2269038806fac1a3",
+      "fetched_at": "2026-10-29T15:09:28.138Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/docs--content--docs--canvas--canvas-node-manual.mdx.source.txt",
+      "kind": "blob",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "docs/content/docs/overview/features.mdx",
+      "url": "https://github.com/basketikun/infinite-canvas/blob/main/docs/content/docs/overview/features.mdx",
+      "ref": "main",
+      "commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "bytes": 3322,
+      "sha256": "da31ba2df04d64b9379a5026044e7d98a23afae6d0e016991fdb330ebe7a84c5",
+      "fetched_at": "2026-10-29T15:09:27.983Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/docs--content--docs--overview--features.mdx.source.txt",
+      "kind": "blob",
+      "method": "GitHub embedded source; repository code not executed"
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src/layouts/user-layout.tsx",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/contents/web/src/layouts/user-layout.tsx?ref=main",
+      "ref": "main",
+      "commit": "main",
+      "git_blob_sha": "45c748697c9b5c35de99c9f88dd1740263bd764b",
+      "bytes": 592,
+      "sha256": "642e7c9201a9da51935a4202d994185e8aff586dbbcd34cf72a8d96cd01154a3",
+      "fetched_at": "2026-10-29T15:18:01.024Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src--layouts--user-layout.tsx.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "git_object_verified": true
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src/pages/canvas/project.tsx",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/contents/web/src/pages/canvas/project.tsx?ref=main",
+      "ref": "main",
+      "commit": "main",
+      "git_blob_sha": "d1fedd9d5aba5dc6a7a6218b676d699bc06ca931",
+      "bytes": 194903,
+      "sha256": "ecb88fa8b6b89128c1406d4ef6b584fde9ab64a35846d86a86aa16ddd27da534",
+      "fetched_at": "2026-10-29T15:18:02.707Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src--pages--canvas--project.tsx.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "git_object_verified": true
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src/services/api/audio.ts",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/contents/web/src/services/api/audio.ts?ref=main",
+      "ref": "main",
+      "commit": "main",
+      "git_blob_sha": "7b6eaad0e9790585b338a21b74a452380519d09b",
+      "bytes": 7483,
+      "sha256": "1602ee7ffe30ba7ed8e6a3ddb63af46aa101857e9be2fc772e9e3f27541b0ac7",
+      "fetched_at": "2026-10-29T15:18:00.616Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src--services--api--audio.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "git_object_verified": true
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src/services/api/image.ts",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/contents/web/src/services/api/image.ts?ref=main",
+      "ref": "main",
+      "commit": "main",
+      "git_blob_sha": "421666a38490ef58f4a0c9266293852dfc10fb08",
+      "bytes": 39959,
+      "sha256": "6237369a72fa0397855752bed58a774ffa7102ead4c70bff9661b50c73932a22",
+      "fetched_at": "2026-10-29T15:18:00.383Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src--services--api--image.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "git_object_verified": true
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src/services/api/model-plugin.ts",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/contents/web/src/services/api/model-plugin.ts?ref=main",
+      "ref": "main",
+      "commit": "main",
+      "git_blob_sha": "f8998c8899911e01e4e16ee9b5a19c268ecb0944",
+      "bytes": 29714,
+      "sha256": "cbc54810ea7222569dcd366b7b948b2b57acbcf1a50c42e9c41475b7ebb2f16a",
+      "fetched_at": "2026-10-29T15:18:00.809Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src--services--api--model-plugin.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "git_object_verified": true
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src/services/api/request.ts",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/contents/web/src/services/api/request.ts?ref=main",
+      "ref": "main",
+      "commit": "main",
+      "git_blob_sha": "9375bfe1816f4ffbcd389e34ff532cd75ba233a3",
+      "bytes": 713,
+      "sha256": "9412751804ef1ff025710a432ad73f43a9859ad6ffcd87ba50ee261fd0751126",
+      "fetched_at": "2026-10-29T15:18:00.807Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src--services--api--request.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "git_object_verified": true
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src/services/api/video.ts",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/contents/web/src/services/api/video.ts?ref=main",
+      "ref": "main",
+      "commit": "main",
+      "git_blob_sha": "5408972e1c5ff32726373d7785fbd1b2ea0855fd",
+      "bytes": 23088,
+      "sha256": "1782529d629c5f6c0b023358a923711fd3ca3bd89c4d906565230624779eeba1",
+      "fetched_at": "2026-10-29T15:18:00.379Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src--services--api--video.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "git_object_verified": true
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src/services/webdav-sync.ts",
+      "url": "https://api.github.com/repos/basketikun/infinite-canvas/contents/web/src/services/webdav-sync.ts?ref=main",
+      "ref": "main",
+      "commit": "main",
+      "git_blob_sha": "2887ba703ad4e0fdd270bac835adce0244d8ae0e",
+      "bytes": 5921,
+      "sha256": "4facffcfbfe8406ccea59b0d66912f943413e4c4a7c2c0e9d8710e0be11634af",
+      "fetched_at": "2026-10-29T15:18:01.186Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src--services--webdav-sync.ts.source.txt",
+      "kind": "api",
+      "method": "Official GitHub API; repository code not executed",
+      "verified_at_commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "git_object_verified": true
+    },
+    {
+      "repo": "basketikun/infinite-canvas",
+      "path": "web/src",
+      "url": "https://github.com/basketikun/infinite-canvas/tree/main/web/src",
+      "ref": "main",
+      "commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+      "bytes": 1304,
+      "sha256": "646670fec98df5969d64d0354adcc80c37deff483c1ef655f676d940a48866e9",
+      "fetched_at": "2026-10-29T15:09:27.483Z",
+      "target": "docs/research/toonflow-vs-infinite-canvas-2026-10-29/canvas/web--src.tree.json",
+      "kind": "tree",
+      "method": "GitHub embedded source; repository code not executed"
+    }
+  ],
+  "selection_by_goal": [
+    [
+      "最快获得轻量 Web 生成入口",
+      "basketikun 优先",
+      "静态发布、现有 API 复用方便；要补移动画布布局和异步多模态适配。"
+    ],
+    [
+      "短剧／漫剧项目、工作区与创作工具",
+      "Toonflow 优先",
+      "文档、资产、音频节点与导演台更集中；接入长任务需要改任务租约与持久化。"
+    ],
+    [
+      "Android 横屏客户端与电脑互联",
+      "Toonflow 优先试验",
+      "已有 APK 和配对方案；ARM64 真机、后台及无 FFmpeg 功能边界需要验证。"
+    ],
+    [
+      "手机竖屏为主要创作方式",
+      "两者都需专项验收",
+      "basketikun 的生成表单已适配，完整画布仍拥挤；Toonflow 当前 Android 设计偏横屏。"
+    ],
+    [
+      "多用户平台、权限、计费、可靠队列",
+      "继续用现有聚合后端并补项目权限",
+      "两者的创作页面都不能替代已有管理后台与多机调度。"
+    ],
+    [
+      "ComfyUI 音乐和通用 3D 文件",
+      "两者均需适配",
+      "音频默认协议、任务生命周期、GLB／OBJ 预览和多文件下载需明确实现。"
+    ]
+  ],
+  "integration_acceptance": [
+    [
+      "I01",
+      "模型与注释",
+      "从现有模型目录映射媒体类型、用法、参数范围与参考素材数量；展示模型说明。"
+    ],
+    [
+      "I02",
+      "图像与参考图",
+      "验证文生图、多参考图编辑、数量、精确尺寸和错误提示；检查返回真实尺寸。"
+    ],
+    [
+      "I03",
+      "异步视频",
+      "验证提交、排队、查询、失败、结果下载；刷新／短暂断网后继续跟踪同一个任务。"
+    ],
+    [
+      "I04",
+      "异步音频",
+      "通过 ComfyUI 音频 workflow 走真实异步链路；不能只用同步 TTS 样例代替。"
+    ],
+    [
+      "I05",
+      "长任务离线",
+      "关闭页面、手机后台超过 2 分钟、重启前端或服务；确认不重复提交，并明确是否继续执行。"
+    ],
+    [
+      "I06",
+      "3D 与附件",
+      "验证 GLB／OBJ 等文件、纹理／多文件打包、下载与预览；区分导演预演和模型生成。"
+    ],
+    [
+      "I07",
+      "素材生命周期",
+      "聚合层过期前完成需要保留素材的转存；定义工作区、IndexedDB、WebDAV 副本的清理责任。"
+    ],
+    [
+      "I08",
+      "权限和取消",
+      "不同 API Key 的模型／内容权限、私有结果下载、任务取消传递和重复请求处理。"
+    ],
+    [
+      "I09",
+      "移动完整流程",
+      "Android／iOS 真机分别完成选模型、传参考图、输入参数、提交、后台恢复、预览与下载。"
+    ],
+    [
+      "I10",
+      "多机调度复用",
+      "前端统一调用聚合模型；设备选择、负载均衡和渠道队列仍由已有服务管理。"
+    ]
+  ],
+  "limitations": {
+    "toonflow_runtime_tested": false,
+    "android_real_device_tested": false,
+    "ios_real_device_tested": false,
+    "infinite_canvas_public_demo_viewports_checked": true,
+    "generation_api_tested": false,
+    "memory_benchmarked": false,
+    "local_docker_or_wsl_used": false,
+    "all_browser_contexts_closed": true
+  }
+}

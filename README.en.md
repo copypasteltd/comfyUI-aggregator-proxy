@@ -1,5 +1,9 @@
 # ComfyUI Aggregator Proxy
 
+[131 · Managed creative canvas](docs/131-画布提交发布校验与异步查询契约.md) reuses the existing seven media task types, business Keys, Workflows and durable GPU scheduling. The adapter commits a local submission journal before POST, reconciles the original idempotent request, checks the expected release and verifies authenticated artifact downloads. It also fixes missing GLB capability discovery. All 82 scoped native checks pass; deployment, real GPU and mobile acceptance remain separately recorded in the increment and [Studio progress](docs/studio/10-开发进度与交付记录.md).
+
+Studio uses `/studio/` on the existing high HTTP port, alongside `/admin/` and `/v1/`. It adds no generation backend and needs no local Docker, WSL or Agent. Reviewed source and lockfiles are mirrored under `app/apps/studio_web/`; all managed pages use the Lime visual system. Images, video, Workflow audio and GLB have distinct handling. Eight-hour cloud retention and offline browser copies are independent.
+
 [129 · 3D compatibility review](docs/129-三维兼容复查与GLB边界修复.md) fixes POSITION accessor counts, invalid node hierarchies outside the default scene, an incorrect image-permission requirement for 3D-only Keys, and missing .glb download filename extensions. All 339 final scoped checks pass, including least privilege across seven task types, HTTP admission and full/HEAD/Range downloads. See the review for deployment and fresh generation evidence.
 
 Cloud **129.3** is verified: a Key with only the mesh generation scope successfully ran RTX 3080 TRELLIS2 and returned a 100,424,732-byte GLB. Full SHA, canonical filename, cross-Key isolation and once-only mesh usage pass. Both temporary Keys are disabled. [Fresh real requests and responses](docs/examples/model3d/recheck-129/README.md).

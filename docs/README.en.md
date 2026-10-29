@@ -1,5 +1,7 @@
 # Documentation index
 
+[131 · Managed Studio release contract](131-画布提交发布校验与异步查询契约.md) adds optional expected-release validation, unchanged legacy idempotency, atomic model admission, polling hints and the missing GLB discovery projection. [Bilingual Studio guide](studio/USAGE.en.md) · [All 46 integration requirements](studio/10-开发进度与交付记录.md). Frontend source and locks are included at app/apps/studio_web. Current local checks and deployment/GPU acceptance are recorded separately; this entry does not promote historical test reports into current production acceptance.
+
 [130 · Media Gen Skill 1.1.1](130-MediaGenSkill兼容同步与发布.md) aligns client guidance with cloud 129.3: mesh-only permissions, exact image-to-3D inputs, actual geometry fields, GLB downloads and recovery. [Install/upgrade](126-MediaGenSkill安装与调用.md) · [Release](127-MediaGenSkill-Release说明.md). Server fixes and independent GPU evidence remain in [129](129-三维兼容复查与GLB边界修复.md).
 
 [128 · ComfyUI 3D models and RTX 3080](128-ComfyUI三维模型产物与3080适配.md) is deployed and verified with actual TRELLIS2 generation, independent permissions/quotas, binary validation and Admin controls. The three channels now expose eleven published models. Both platform validation and a separate business job pass complete download/SHA and isolation checks. [Workflow and examples](examples/model3d/README.md) · [Actual screenshots, original-speed recording and GIFs](media/model3d-128/README.md).

@@ -182,5 +182,5 @@ class ObservedAPI(FastAPI):
         routes = frozenset(context.path for context in contexts if context.path is not None)
         stack = super().build_middleware_stack()
         if self._allow_any_origin:
-            stack = CORSMiddleware(stack, allow_origin_regex=".*", allow_credentials=True, allow_methods=["*"], allow_headers=["*"], expose_headers=["X-Request-ID", "ETag", "Retry-After", "Content-Range", "Accept-Ranges", "Content-Disposition", "Content-Length"])
+            stack = CORSMiddleware(stack, allow_origin_regex=".*", allow_credentials=True, allow_methods=["*"], allow_headers=["*"], expose_headers=["X-Request-ID", "X-Studio-Contract", "ETag", "Retry-After", "Content-Range", "Accept-Ranges", "Content-Disposition", "Content-Length"])
         return MonitoringMiddleware(stack, self._http_metrics, self._http_request_log, routes, contexts)

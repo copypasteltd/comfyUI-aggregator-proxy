@@ -1,0 +1,24 @@
+{
+  "name": "flyreq-image-studio-backend",
+  "version": "1.5.1",
+  "private": true,
+  "description": "FlyReq Image 后端 - 任务队列和 API 服务器",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.5.0",
+    "busboy": "^1.6.0",
+    "sharp": "^0.34.5",
+    "undici": "^8.2.0",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0",
+    "next": "^16.2.4"
+  }
+}

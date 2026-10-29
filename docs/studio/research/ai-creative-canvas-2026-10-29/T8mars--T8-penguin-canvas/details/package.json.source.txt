@@ -1,0 +1,438 @@
+{
+  "name": "t8-penguin-canvas",
+  "private": false,
+  "version": "3.4.5",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "description": "T8-penguin-canvas — AI 节点画布工作流工具（Web + Electron 桌面端）",
+  "author": "T8mars",
+  "license": "MIT",
+  "homepage": "https://github.com/T8mars/T8-penguin-canvas",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/T8mars/T8-penguin-canvas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/T8mars/T8-penguin-canvas/issues"
+  },
+  "keywords": [
+    "ai",
+    "canvas",
+    "node-editor",
+    "workflow",
+    "runninghub",
+    "electron",
+    "react",
+    "xyflow"
+  ],
+  "scripts": {
+    "predev": "node scripts/worktree-role.cjs development",
+    "dev": "concurrently \"cross-env ELECTRON_RUN_AS_NODE=1 electron backend/src/server.js\" \"vite --config vite.config.ts\"",
+    "predev:vite": "node scripts/worktree-role.cjs development",
+    "dev:vite": "vite --config vite.config.ts",
+    "prestart:backend": "node scripts/worktree-role.cjs development",
+    "start:backend": "cross-env ELECTRON_RUN_AS_NODE=1 electron backend/src/server.js",
+    "predev:backend": "node scripts/worktree-role.cjs development",
+    "dev:backend": "cross-env ELECTRON_RUN_AS_NODE=1 electron --watch --watch-path=backend/src --watch-preserve-output backend/src/server.js",
+    "figma:bridge": "node tools/figma-bridge/server.cjs",
+    "prebuild": "npm run feature-sync:check && npm run i18n:check",
+    "build": "tsc -b && vite build --config vite.config.ts",
+    "preview": "vite preview --config vite.config.ts",
+    "type-check": "tsc --noEmit",
+    "test:electron:ts": "cross-env ELECTRON_RUN_AS_NODE=1 electron --loader ./scripts/electron-typescript-loader.mjs --test",
+    "audit:project-db-writers": "node scripts/audit-project-database-writers.cjs",
+    "audit:project-db-writers:check": "node scripts/audit-project-database-writers.cjs --compact --check",
+    "feature-sync:generate": "node tools/zcanvas-cli/scripts/generateCreativeCapabilityArtifacts.cjs",
+    "feature-sync:check": "node tools/zcanvas-cli/scripts/generateCreativeCapabilityArtifacts.cjs --check",
+    "i18n:check": "tsx scripts/check-i18n.ts",
+    "i18n:baseline": "tsx scripts/check-i18n.ts --write-baseline",
+    "performance:fixture:check": "tsx --test tests/canvasPerformance.test.ts",
+    "music3-resources:generate": "node scripts/generate-minimax-music3-resource-manifest.cjs",
+    "music3-resources:check": "node scripts/generate-minimax-music3-resource-manifest.cjs --check",
+    "verify:seedance25:live": "node scripts/verify-seedance25-live.cjs",
+    "verify:flux3-hailuo:live": "node scripts/verify-flux3-hailuo-live.cjs",
+    "verify:hailuo-refresh:live": "cross-env FLUX3_HAILUO_VERIFY_MODELS=hailuo-h3-t2v,hailuo-h3-i2v,hailuo-h3-multi,minimax-h3-ow-i2v-fast,minimax-h3-ow-r2v-fast FLUX3_HAILUO_LIVE_RUN=hailuo-refresh-live-20260809 node scripts/verify-flux3-hailuo-live.cjs",
+    "verify:minimax-h3-ow-fast-refresh:live": "cross-env FLUX3_HAILUO_VERIFY_MODELS=minimax-h3-ow-ref2va-audio-drive-fast,minimax-h3-ow-fl2va-audio-drive-fast,minimax-h3-ow-t2v-fast FLUX3_HAILUO_LIVE_RUN=minimax-h3-ow-fast-refresh-live-20260814 node scripts/verify-flux3-hailuo-live.cjs",
+    "verify:hailuo-h3-max:live": "cross-env FLUX3_HAILUO_VERIFY_MODELS=hailuo-h3-max-t2v,hailuo-h3-max-i2v FLUX3_HAILUO_LIVE_RUN=hailuo-h3-max-live-20260901 node scripts/verify-flux3-hailuo-live.cjs",
+    "verify:hailuo-h3-max-turbo:live": "cross-env FLUX3_HAILUO_VERIFY_MODELS=hailuo-h3-max-turbo-t2v,hailuo-h3-max-turbo-i2v FLUX3_HAILUO_LIVE_RUN=hailuo-h3-max-turbo-live-20260904 node scripts/verify-flux3-hailuo-live.cjs",
+    "verify:minimax-h3-v2:live": "node scripts/verify-minimax-h3-v2-live.cjs",
+    "verify:gpt-image-25:live": "node scripts/verify-gpt-image-25-live.cjs",
+    "verify:vosr2:live": "node scripts/verify-vosr2-live.cjs",
+    "preverify:topaz:live": "node scripts/worktree-role.cjs development",
+    "verify:topaz:live": "node scripts/verify-topaz-live.cjs --launch",
+    "workflows:topaz": "node scripts/generate-topaz-workflows.cjs",
+    "preverify:mai:live": "node scripts/worktree-role.cjs development",
+    "verify:mai:live": "node scripts/verify-mai-live.cjs --launch",
+    "workflows:mai": "node scripts/generate-mai-workflows.cjs",
+    "preverify:moss:live": "node scripts/worktree-role.cjs development",
+    "verify:moss:live": "node scripts/verify-moss-live.cjs --launch",
+    "workflows:moss": "node scripts/generate-moss-workflows.cjs",
+    "preverify:moss:ui": "node scripts/worktree-role.cjs development",
+    "verify:moss:ui": "node scripts/verify-moss-ui.cjs --launch",
+    "preverify:nb-lowprice-doubao:live": "node scripts/worktree-role.cjs development",
+    "verify:nb-lowprice-doubao:live": "node scripts/verify-nb-lowprice-doubao-live.cjs --launch",
+    "workflows:nb-lowprice-doubao": "node scripts/generate-nb-lowprice-doubao-workflows.cjs",
+    "preverify:node-crisp-doubao:ui": "node scripts/worktree-role.cjs development",
+    "verify:node-crisp-doubao:ui": "node scripts/verify-node-crisp-doubao-ui.cjs --launch",
+    "verify:qwen21-animate:live": "node scripts/verify-qwen21-animate-live.cjs",
+    "preverify:nb21-flux-viduq4:live": "node scripts/worktree-role.cjs development",
+    "verify:nb21-flux-viduq4:live": "node scripts/verify-nb21-flux-viduq4-live.cjs --launch",
+    "verify:minimax-h3-context-ir:live": "node scripts/verify-minimax-h3-context-ir-live.cjs",
+    "workflows:hailuo-refresh": "node scripts/generate-hailuo-refresh-workflows.cjs",
+    "workflows:hailuo-h3-max": "node scripts/generate-hailuo-h3-max-workflows.cjs",
+    "workflows:minimax-h3-v2": "node scripts/generate-minimax-h3-v2-workflows.cjs",
+    "workflows:suno-v6": "node scripts/generate-suno-v6-workflows.cjs",
+    "workflows:nb21-flux-viduq4": "node scripts/generate-nb21-flux-viduq4-workflows.cjs",
+    "workflows:wan30": "node scripts/generate-wan30-workflows.cjs",
+    "verify:wan30:live": "node scripts/verify-wan30-live.cjs",
+    "verify:veo-omni11:live": "node scripts/verify-veo-omni11-live.cjs",
+    "verify:seedream-layer:live": "node scripts/verify-seedream-layer-live.cjs",
+    "verify:latest-image-audio:live": "node scripts/verify-latest-image-audio-live.cjs",
+    "verify:suno-v6-actions:live": "node scripts/verify-suno-v6-actions-live.cjs",
+    "verify:mv-music-master:live": "tsx scripts/verify-mv-music-master-live.ts",
+    "verify:localization-indextts:preflight": "node scripts/verify-localization-indextts-live.cjs --preflight",
+    "verify:localization-indextts:live": "node scripts/verify-localization-indextts-live.cjs",
+    "verify:localization-line-retry:live": "node scripts/verify-localization-line-retry-live.cjs",
+    "collaboration:evidence:attest": "node scripts/collaboration-evidence-attestation.cjs",
+    "preelectron:dev": "node scripts/worktree-role.cjs development",
+    "electron:dev": "cross-env T8PC_PACKAGED=0 electron electron/main.cjs",
+    "encrypt": "cross-env ELECTRON_RUN_AS_NODE=1 node node_modules/electron/cli.js electron/encrypt.cjs",
+    "prepack:enc": "npm run rh-toolbox:check && npm run build && npm run encrypt",
+    "prepack:runtimes": "node scripts/prepare-runtime-archives.cjs",
+    "prepack:mac-runtime": "node scripts/prepare-macos-runtime.cjs",
+    "rebuild:electron": "electron-rebuild -f -w better-sqlite3 --arch x64",
+    "rebuild:electron:mac": "electron-rebuild -f -w better-sqlite3 --arch arm64",
+    "dist:dir": "npm run prepack:enc && npm run prepack:runtimes && npm run rebuild:electron && electron-builder --win --x64 --dir --config.npmRebuild=false && cross-env T8_DIRECTORY_BUILD=1 node electron/_post_build.cjs",
+    "dist": "npm run prepack:enc && npm run prepack:runtimes && npm run rebuild:electron && electron-builder --win --x64 --config.npmRebuild=false && node electron/_post_build.cjs",
+    "dist:release": "node scripts/dist-release.cjs",
+    "dist:mac": "node scripts/dist-macos.cjs",
+    "release:github": "node scripts/release-github.cjs",
+    "release:verify": "node scripts/verify-github-release.cjs",
+    "release:mac": "node scripts/release-macos-github.cjs",
+    "release:mac:verify": "node scripts/verify-macos-release.cjs",
+    "worktree:check": "node scripts/worktree-role.cjs inspect",
+    "worktree:development": "node scripts/worktree-role.cjs development",
+    "worktree:core": "node scripts/worktree-role.cjs core",
+    "worktree:release": "node scripts/worktree-role.cjs release",
+    "worktree:integration-audit": "node scripts/audit-worktree-integration.cjs",
+    "rh-toolbox:check": "node scripts/check-rh-toolbox-release.cjs",
+    "public:check": "node scripts/check-public-clean.cjs",
+    "postinstall": "electron-builder install-app-deps",
+    "face-model:build": "node scripts/build-ict-face-glb.cjs"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "@mediapipe/tasks-vision": "^0.10.35",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.7.0",
+    "@sparkjsdev/spark": "2.3.1",
+    "@xyflow/react": "^12.10.0",
+    "better-sqlite3": "^12.11.1",
+    "bytenode": "^1.5.7",
+    "cors": "^2.8.5",
+    "electron-log": "^5.4.4",
+    "electron-updater": "^6.8.3",
+    "express": "^4.21.0",
+    "extract-zip": "^2.0.1",
+    "ffmpeg-static": "5.3.0",
+    "i18next": "^25.10.10",
+    "js-yaml": "^4.1.0",
+    "lucide-react": "^0.468.0",
+    "mediabunny": "^1.52.2",
+    "multer": "^2.0.2",
+    "pdfjs-dist": "^5.4.624",
+    "phaser": "^3.90.0",
+    "qrcode": "1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-i18next": "^16.6.6",
+    "sharp": "^0.34.5",
+    "three": "^0.184.0",
+    "undici": "^6.27.0",
+    "ws": "^8.21.0",
+    "yauzl": "^2.10.0",
+    "yazl": "^3.3.1",
+    "yjs": "^13.6.27",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.29.3",
+    "@electron/notarize": "^2.5.0",
+    "@types/qrcode": "1.5.6",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.184.1",
+    "@vitejs/plugin-react": "^4.3.0",
+    "autoprefixer": "^10.4.0",
+    "concurrently": "^9.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
+  },
+  "build": {
+    "appId": "cn.t8star.penguin-canvas",
+    "productName": "T8-PenguinCanvas",
+    "directories": {
+      "output": "dist_electron",
+      "buildResources": "electron/build-resources"
+    },
+    "compression": "normal",
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/sharp/**/*",
+      "node_modules/@img/**/*",
+      "node_modules/better-sqlite3/**/*",
+      "node_modules/bindings/**/*",
+      "node_modules/file-uri-to-path/**/*"
+    ],
+    "files": [
+      "electron/main.cjs",
+      "electron/dataStorage.cjs",
+      "electron/startupDiagnostics.cjs",
+      "electron/agentTools.cjs",
+      "electron/agentContext.cjs",
+      "electron/i18n.cjs",
+      "electron/i18n-catalog.json",
+      "electron/preload.cjs",
+      "electron/loader.cjs",
+      "electron/systemFetchBridge.cjs",
+      "package.json",
+      "node_modules/**/*",
+      "!node_modules/electron/**/*",
+      "!node_modules/electron-builder/**/*",
+      "!node_modules/@ffmpeg-installer/**/*",
+      "!node_modules/@ffprobe-installer/**/*",
+      "!node_modules/ffmpeg-static/**/*",
+      "!node_modules/app-builder-bin/**/*",
+      "!node_modules/7zip-bin/**/*",
+      "!node_modules/typescript/**/*",
+      "!node_modules/vite/**/*",
+      "!node_modules/@vitejs/**/*",
+      "!node_modules/rollup/**/*",
+      "!node_modules/@rollup/**/*",
+      "!node_modules/esbuild/**/*",
+      "!node_modules/@esbuild/**/*",
+      "!node_modules/tailwindcss/**/*",
+      "!node_modules/autoprefixer/**/*",
+      "!node_modules/concurrently/**/*",
+      "!node_modules/@types/**/*",
+      "!node_modules/**/*.{md,markdown,ts,map,d.ts}",
+      "!node_modules/**/{test,tests,__tests__,docs,examples,example,sample,benchmark}/**",
+      "!**/*.{ipynb,log}",
+      "!**/.DS_Store",
+      "!backend/**/*",
+      "!src/**/*",
+      "!data/**/*",
+      "!input/**/*",
+      "!output/**/*",
+      "!thumbnails/**/*",
+      "!dist_electron/**/*",
+      "!build/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": ".agents/skills/zhenzhen-canvas",
+        "to": "agent/skills/zhenzhen-canvas",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "tools/zcanvas-cli",
+        "to": "tools/zcanvas-cli",
+        "filter": [
+          "bin/**/*",
+          "src/**/*",
+          "commandCatalog.json",
+          "creativeCapabilityManifest.json",
+          "generated/**/*",
+          "manifest.json",
+          "package.json"
+        ]
+      },
+      {
+        "from": "build/backend-enc",
+        "to": "backend-enc",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "backend/src/tools/localizationRuntime",
+        "to": "backend-enc/tools/localizationRuntime",
+        "filter": [
+          "worker.py",
+          "download_auxiliary.py"
+        ]
+      },
+      {
+        "from": "dist",
+        "to": "frontend",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "extension",
+        "to": "extension/web-image-reverse",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "shared",
+        "to": "shared",
+        "filter": [
+          "achievementManifest.json",
+          "videoTransitions.json"
+        ]
+      },
+      {
+        "from": "resources/achievement-media",
+        "to": "resources/achievement-media",
+        "filter": [
+          "*.t8media"
+        ]
+      },
+      {
+        "from": "tools/asset-semantic",
+        "to": "tools/asset-semantic",
+        "filter": [
+          "semantic_runner.py"
+        ]
+      },
+      {
+        "from": "tools/parsehub-bridge",
+        "to": "tools/parsehub-bridge",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "tools/figma-bridge",
+        "to": "tools/figma-bridge",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "tools/photoshop-bridge/plugin",
+        "to": "tools/photoshop-bridge/plugin",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "T8mars",
+        "repo": "T8-penguin-canvas",
+        "releaseType": "release"
+      }
+    ],
+    "afterSign": "scripts/notarize-macos.cjs",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "extraResources": [
+        {
+          "from": "tools/runtime-archives",
+          "to": "tools/runtime-archives",
+          "filter": [
+            "remove-ai-watermarks-runtime.zip",
+            "parsehub-pythonlibs.zip",
+            "runtime-archives-manifest.json"
+          ]
+        },
+        {
+          "from": "tools/ffmpeg-runtime",
+          "to": "tools/ffmpeg",
+          "filter": [
+            "ffmpeg.exe",
+            "ffprobe.exe",
+            "README.md"
+          ]
+        },
+        {
+          "from": "node_modules/ffmpeg-static/ffmpeg.exe",
+          "to": "tools/ffmpeg-compat/ffmpeg.exe"
+        }
+      ]
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-mac-${arch}.${ext}",
+      "category": "public.app-category.graphics-design",
+      "minimumSystemVersion": "12.0",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "electron/build-resources/entitlements.mac.plist",
+      "entitlementsInherit": "electron/build-resources/entitlements.mac.plist",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "贞贞的无限画布仅在您选择录音或音频输入时访问麦克风。",
+        "NSCameraUsageDescription": "贞贞的无限画布仅在您选择摄像头素材时访问摄像头。",
+        "NSScreenCaptureUsageDescription": "贞贞的无限画布仅在您主动选择屏幕采集能力时请求录屏权限。",
+        "NSDocumentsFolderUsageDescription": "用于读取和保存您明确选择的画布项目与素材。",
+        "NSDownloadsFolderUsageDescription": "用于导入和导出您明确选择的生成素材。"
+      },
+      "extraResources": [
+        {
+          "from": "build/mac-runtime",
+          "to": "tools/ffmpeg",
+          "filter": [
+            "ffmpeg",
+            "ffprobe",
+            "runtime-manifest.json"
+          ]
+        },
+        {
+          "from": "build/mac-runtime/indextts25-python",
+          "to": "tools/indextts25-python",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "shortcutName": "贞贞的无限画布",
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true
+    }
+  }
+}

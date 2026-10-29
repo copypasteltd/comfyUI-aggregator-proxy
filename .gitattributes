@@ -4,9 +4,14 @@
 app/apps/admin_web/src/theme/reference/lime.css -whitespace
 app/apps/admin_web/src/assets/fonts/Anton-OFL.txt -whitespace
 app/apps/admin_web/src/assets/fonts/Manrope-OFL.txt -whitespace
+app/apps/studio_web/web/src/styles/reference/* -whitespace
+app/apps/studio_web/web/public/fonts/*-OFL.txt -whitespace
 # Captured logs and test reports retain the original diagnostic whitespace.
 docs/evidence/**/*.log -whitespace
 docs/evidence/**/*.xml -whitespace
+docs/studio/research/** -whitespace
+# Archived upstream README heading underlines include exactly seven '=' characters.
+docs/studio/research/**/readme.txt conflict-marker-size=32
 *.png binary
 *.gif binary
 *.mp4 binary

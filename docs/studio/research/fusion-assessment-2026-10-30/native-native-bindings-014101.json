@@ -1,0 +1,35 @@
+{
+  "started_at": "2026-10-30T01:41:01.967338+08:00",
+  "duration_seconds": 21.919,
+  "scope": "patched isolated frontend, not original upstream or integrated product",
+  "stage": "native-bindings",
+  "ci_check_is_clean_install": null,
+  "working_directory": "E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe\\web",
+  "command": [
+    "D:\\Program Files\\nodejs\\node.EXE",
+    "D:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "install",
+    "--save-optional",
+    "--save-exact",
+    "--include=optional",
+    "@rollup/rollup-win32-x64-msvc@4.62.2",
+    "@tailwindcss/oxide-win32-x64-msvc@4.2.4",
+    "lightningcss-win32-x64-msvc@1.32.0",
+    "@esbuild/win32-x64@0.28.1",
+    "--cache",
+    "E:\\dev\\sandbox\\无限画布\\.local\\npm-cache",
+    "--no-audit",
+    "--no-fund"
+  ],
+  "exit_code": 0,
+  "passed": true,
+  "local_log": "E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\native-bindings-014101.log",
+  "log_sha256": "d82a92790329c4ffc92aa7fef818185c235533660f4a055a5e2f02b08a83c7da",
+  "output_tail": "\nadded 4 packages in 22s\n",
+  "inputs": {
+    "package.json": "31dcc9a6377d740f223028f98ddfd5949a81ca1218252ac75c0a980c9008d071",
+    "package-lock.json": "70d9745ce246a5fa02b49b98754f4ec2cdbe8ee817659d62285c0d44ad196bd2",
+    "src/components/layout/app-providers.tsx": "b53816798a0cb237adf892dbc2255585fd8ae3a3004fb78f27054e19d336aeb6",
+    "src/components/layout/model-script-editor.tsx": "80531773f91508feb142fb49cd8789def45103cb98b38b2b483416b3b2a66042"
+  }
+}

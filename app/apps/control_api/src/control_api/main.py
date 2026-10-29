@@ -923,7 +923,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return workflow_retries.retry(identity, parse_id("op", identifier), data, admin_token(request), request.state.request_id)
 
     @app.get("/v1/access-policy")
-    def access_policy(identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:
+    def access_policy(response: Response, identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:
+        response.headers["X-Studio-Contract"] = "1"
         return identity.policy
 
     @app.get("/admin/api/v1/public-models", response_model=ModelCatalogPage)
@@ -1048,15 +1049,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return StreamingResponse(result.data, status_code=result.status, media_type=result.media_type, headers=result.headers)
 
     @app.post("/v1/jobs", status_code=202)
-    def job_create(data: JobCreate, request: Request, response: Response, identity: Annotated[BusinessIdentity, Depends(business)], idempotency_key: Annotated[str | None, Header()] = None) -> dict[str, Any]:
-        result = jobs.create(identity, data.model_dump(exclude_unset=True), idempotency_key or str(uuid4()), request.state.request_id)
+    def job_create(data: JobCreate, request: Request, response: Response, identity: Annotated[BusinessIdentity, Depends(business)], idempotency_key: Annotated[str | None, Header()] = None, x_expected_release_digest: Annotated[str | None, Header(pattern="^[a-f0-9]{64}$")] = None) -> dict[str, Any]:
+        result = jobs.create(identity, data.model_dump(exclude_unset=True), idempotency_key or str(uuid4()), request.state.request_id, expected_release_digest=x_expected_release_digest)
         response.headers["Location"] = "/v1/jobs/" + result["id"]
         response.headers["Retry-After"] = "2"
         return result
 
     @app.get("/v1/jobs/{identifier}")
-    def job_detail(identifier: str, identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:
-        return jobs.get(identity, parse_id("job", identifier))
+    def job_detail(identifier: str, response: Response, identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:
+        result = jobs.get(identity, parse_id("job", identifier))
+        if result["status"] not in {"succeeded", "failed", "cancelled", "expired"}:
+            response.headers["Retry-After"] = "2"
+        return result
 
     @app.get("/v1/jobs", response_model=CursorPage[JobSummary], response_model_exclude_unset=True)
     def job_list(identity: Annotated[BusinessIdentity, Depends(business)], query: Annotated[CollectionQuery, Depends(job_query)]) -> dict[str, Any]:

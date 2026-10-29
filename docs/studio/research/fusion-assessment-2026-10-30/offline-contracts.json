@@ -1,0 +1,737 @@
+{
+  "checked_at": "2026-10-30T00:56:40.804387+08:00",
+  "scope": "offline current DTOs + historical public catalog schemas; no API, database, upload or GPU execution",
+  "model_count": 11,
+  "task_types": [
+    "image_to_3d",
+    "image_to_image",
+    "references_to_image",
+    "references_to_video",
+    "text_to_audio",
+    "text_to_image",
+    "text_to_video"
+  ],
+  "case_count": 101,
+  "passed_count": 101,
+  "passed": true,
+  "catalog_is_live": false,
+  "inputs": [
+    {
+      "path": "docs/evidence/2026-10-28/media-gen-live-catalog-final-124.json",
+      "sha256": "be8dd56cb8ad6fb097966339b58ac517f1ad5180a66183ede28f7b4b18b8d022"
+    },
+    {
+      "path": "docs/examples/model3d/recheck-129/model-usage.json",
+      "sha256": "839f3398b7965c9f344e52d812a31adc3a26020d1960ff4c6aa0868e48a055ce"
+    }
+  ],
+  "cases": [
+    {
+      "id": "comfy-3080-image-edit-wai:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-image-edit-wai:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-image-edit-wai:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-3080-image-edit-wai:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-3080-ima...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-image-edit-wai:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-3080-ima...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-image-edit-wai:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-3080-image-edit-wai' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-3080-image-edit-wai'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-3080-image-edit-wai:missing-source-image",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: 'source_image' is a required property [type=value_error, input_value={'model': 'comfy-3080-ima...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:preset-1",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:preset-2",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-3080-ima...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-3080-ima...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-3080-image-lustify-krea2' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-3080-image-lustify-krea2'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:mixed-preset-15",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "{'n': 1, 'size': '512x512', 'quality': 'standard', 'seed': 42} is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['parameters']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'properties': {'size': {'type': 'string',\n                             'pattern': '^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$',\n                             'default': '1024x1024',\n                             'enum': ['720x1080', '1024x1024', '512x512']},\n               "
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:mixed-preset-16",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "{'n': 1, 'size': '720x1080', 'quality': 'draft', 'seed': 42} is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['parameters']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'properties': {'size': {'type': 'string',\n                             'pattern': '^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$',\n                             'default': '1024x1024',\n                             'enum': ['720x1080', '1024x1024', '512x512']},\n                 "
+    },
+    {
+      "id": "comfy-3080-image-lustify-krea2:mixed-preset-17",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "{'n': 1, 'size': '1024x1024', 'quality': 'draft', 'seed': 42} is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['parameters']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'properties': {'size': {'type': 'string',\n                             'pattern': '^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$',\n                             'default': '1024x1024',\n                             'enum': ['720x1080', '1024x1024', '512x512']},\n                "
+    },
+    {
+      "id": "comfy-3080-image-refs-wai:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-image-refs-wai:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-image-refs-wai:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-3080-image-refs-wai:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-3080-ima...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-image-refs-wai:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-3080-ima...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-image-refs-wai:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-3080-image-refs-wai' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-3080-image-refs-wai'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-3080-image-refs-wai:reference-count-minus-one",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input/references: [{'asset_id': 'asset_00000000000000000000000000000003', 'role': 'reference_0'}] is too short [type=value_error, input_value={'model': 'comfy-3080-ima...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-image-refs-wai:unbound-reference-weight",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Additional properties are not allowed ('weight' was unexpected)\n\nFailed validating 'additionalProperties' in schema['properties']['input']['properties']['references']['prefixItems'][0]:\n    {'type': 'object',\n     'additionalProperties': False,\n     'required': ['asset_id', 'role'],\n     'properties': {'asset_id': {'$ref': '#/$defs/assetId'},\n                    'role': {'type': 'string',\n                             'pattern': '^[a-z][a-z0-9_]{0,31}$'}}}\n\nOn instance['input']['references'][0]:\n"
+    },
+    {
+      "id": "comfy-3080-music-yue2:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-music-yue2:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-music-yue2:preset-1",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-music-yue2:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-3080-music-yue2:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-3080-mus...nds': 30.0, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-music-yue2:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-3080-mus...nds': 30.0, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-music-yue2:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-3080-music-yue2' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-3080-music-yue2'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-3080-music-yue2:tts-voice-not-workflow-input",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters: Additional properties are not allowed ('voice' was unexpected) [type=value_error, input_value={'model': 'comfy-3080-mus...: 42, 'voice': 'alloy'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-music-yue2:output-codec-not-request-param",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters: Additional properties are not allowed ('audio_format' was unexpected) [type=value_error, input_value={'model': 'comfy-3080-mus... 'audio_format': 'mp3'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-music-yue2:mixed-preset-35",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "{'n': 1, 'quality': 'standard', 'seconds': 15.0, 'seed': 42} is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['parameters']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'properties': {'quality': {'enum': ['standard', 'draft'],\n                                'default': 'standard'},\n                    'seed': {'type': 'integer',\n                             'minimum': 0,\n                             'maximum': 2147483647},\n       "
+    },
+    {
+      "id": "comfy-3080-music-yue2:mixed-preset-36",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "{'n': 1, 'quality': 'draft', 'seconds': 30.0, 'seed': 42} is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['parameters']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'properties': {'quality': {'enum': ['standard', 'draft'],\n                                'default': 'standard'},\n                    'seed': {'type': 'integer',\n                             'minimum': 0,\n                             'maximum': 2147483647},\n          "
+    },
+    {
+      "id": "comfy-4090-video-h3:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-4090-video-h3:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-4090-video-h3:preset-1",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-4090-video-h3:preset-2",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-4090-video-h3:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-4090-video-h3:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-4090-video-h3' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-4090-video-h3'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-4090-video-h3:mixed-preset-45",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "{'n': 1, 'size': '512x288', 'quality': 'standard', 'seconds': 5.167, 'seed': 42} is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['parameters']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'properties': {'size': {'type': 'string',\n                             'pattern': '^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$',\n                             'default': '864x480',\n                             'enum': ['720x1080', '864x480', '512x288']},\n "
+    },
+    {
+      "id": "comfy-4090-video-h3:mixed-preset-46",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "{'n': 1, 'size': '720x1080', 'quality': 'draft', 'seconds': 5.167, 'seed': 42} is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['parameters']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'properties': {'size': {'type': 'string',\n                             'pattern': '^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$',\n                             'default': '864x480',\n                             'enum': ['720x1080', '864x480', '512x288']},\n   "
+    },
+    {
+      "id": "comfy-4090-video-h3:mixed-preset-47",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "{'n': 1, 'size': '864x480', 'quality': 'draft', 'seconds': 5.167, 'seed': 42} is not valid under any of the given schemas\n\nFailed validating 'anyOf' in schema['properties']['parameters']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'properties': {'size': {'type': 'string',\n                             'pattern': '^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$',\n                             'default': '864x480',\n                             'enum': ['720x1080', '864x480', '512x288']},\n    "
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-4090-video-h3-i2v' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-4090-video-h3-i2v'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:reference-count-minus-one",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input/references: [] should be non-empty [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:unbound-reference-weight",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Additional properties are not allowed ('weight' was unexpected)\n\nFailed validating 'additionalProperties' in schema['properties']['input']['properties']['references']['prefixItems'][0]:\n    {'type': 'object',\n     'additionalProperties': False,\n     'required': ['asset_id', 'role'],\n     'properties': {'asset_id': {'$ref': '#/$defs/assetId'},\n                    'role': {'type': 'string',\n                             'pattern': '^[a-z][a-z0-9_]{0,31}$',\n                             'const': 'fir"
+    },
+    {
+      "id": "comfy-4090-video-h3-i2v:first-frame-role-mismatch",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input/references/0/role: 'first_frame' was expected [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3-refs:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-4090-video-h3-refs:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-4090-video-h3-refs:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-4090-video-h3-refs:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3-refs:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3-refs:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-4090-video-h3-refs' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-4090-video-h3-refs'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-4090-video-h3-refs:reference-count-minus-one",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input/references/0/role: 'first_frame' was expected [type=value_error, input_value={'model': 'comfy-4090-vid...ds': 5.167, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-4090-video-h3-refs:unbound-reference-weight",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Additional properties are not allowed ('weight' was unexpected)\n\nFailed validating 'additionalProperties' in schema['properties']['input']['properties']['references']['prefixItems'][0]:\n    {'type': 'object',\n     'additionalProperties': False,\n     'required': ['asset_id', 'role'],\n     'properties': {'asset_id': {'$ref': '#/$defs/assetId'},\n                    'role': {'type': 'string',\n                             'pattern': '^[a-z][a-z0-9_]{0,31}$'}}}\n\nOn instance['input']['references'][0]:\n"
+    },
+    {
+      "id": "comfy-5070-video-h3:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-5070-video-h3:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-5070-video-h3:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-5070-video-h3:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-5070-video-h3' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-5070-video-h3'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-5070-video-h3-i2v' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-5070-video-h3-i2v'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:reference-count-minus-one",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input/references: [] should be non-empty [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:unbound-reference-weight",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Additional properties are not allowed ('weight' was unexpected)\n\nFailed validating 'additionalProperties' in schema['properties']['input']['properties']['references']['prefixItems'][0]:\n    {'type': 'object',\n     'additionalProperties': False,\n     'required': ['asset_id', 'role'],\n     'properties': {'asset_id': {'$ref': '#/$defs/assetId'},\n                    'role': {'type': 'string',\n                             'pattern': '^[a-z][a-z0-9_]{0,31}$',\n                             'const': 'fir"
+    },
+    {
+      "id": "comfy-5070-video-h3-i2v:first-frame-role-mismatch",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input/references/0/role: 'first_frame' was expected [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3-refs:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-5070-video-h3-refs:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-5070-video-h3-refs:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-5070-video-h3-refs:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3-refs:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3-refs:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-5070-video-h3-refs' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-5070-video-h3-refs'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-5070-video-h3-refs:reference-count-minus-one",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input/references/0/role: 'first_frame' was expected [type=value_error, input_value={'model': 'comfy-5070-vid...ds': 1.625, 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-5070-video-h3-refs:unbound-reference-weight",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Additional properties are not allowed ('weight' was unexpected)\n\nFailed validating 'additionalProperties' in schema['properties']['input']['properties']['references']['prefixItems'][0]:\n    {'type': 'object',\n     'additionalProperties': False,\n     'required': ['asset_id', 'role'],\n     'properties': {'asset_id': {'$ref': '#/$defs/assetId'},\n                    'role': {'type': 'string',\n                             'pattern': '^[a-z][a-z0-9_]{0,31}$'}}}\n\nOn instance['input']['references'][0]:\n"
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:example",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:preset-0",
+      "expected_valid": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:unknown-top-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:batch-n-two",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters/n: 2 is greater than the maximum of 1 [type=value_error, input_value={'model': 'comfy-3080-3d-...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:unknown-input-field",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: Additional properties are not allowed ('unbound_option' was unexpected) [type=value_error, input_value={'model': 'comfy-3080-3d-...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:wrong-model-alias",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "'comfy-3080-3d-trellis2' was expected\n\nFailed validating 'const' in schema['properties']['model']:\n    {'const': 'comfy-3080-3d-trellis2'}\n\nOn instance['model']:\n    'other-model'"
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:missing-source-image",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: 'source_image' is a required property [type=value_error, input_value={'model': 'comfy-3080-3d-...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:3d-rejects-prompt",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, input: {'source_image': {'asset_id': 'asset_00000000000000000000000000000001'}, 'prompt': 'ignored text'} should not be valid under {'anyOf': [{'required': ['prompt']}, {'required': ['negative_prompt']}, {'required': ['mask']}, {'required': ['references']}]} [type=value_error, input_value={'model': 'comfy-3080-3d-...'standard', 'seed': 42}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "comfy-3080-3d-trellis2:3d-rejects-size",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for JobCreate\n  Value error, parameters: {'n': 1, 'quality': 'standard', 'seed': 42, 'size': '720x1080'} should not be valid under {'anyOf': [{'required': ['size']}, {'required': ['seconds']}, {'required': ['fps']}, {'required': ['strength']}]} [type=value_error, input_value={'model': 'comfy-3080-3d-...42, 'size': '720x1080'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+    },
+    {
+      "id": "upstream-image-output-format-rejected",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for ImageGeneration\noutput_format\n  Extra inputs are not permitted [type=extra_forbidden, input_value='png', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden"
+    },
+    {
+      "id": "upstream-image-n-three-rejected",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for ImageGeneration\nn\n  Input should be 1 [type=literal_error, input_value=3, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.14/v/literal_error"
+    },
+    {
+      "id": "upstream-image-medium-quality-rejected",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "1 validation error for ImageGeneration\nquality\n  Input should be 'draft', 'standard' or 'high' [type=literal_error, input_value='medium', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/literal_error"
+    },
+    {
+      "id": "upstream-video-extra-fields-rejected",
+      "expected_valid": false,
+      "accepted": false,
+      "passed": true,
+      "error": "3 validation errors for VideoGeneration\nmode\n  Extra inputs are not permitted [type=extra_forbidden, input_value='frames', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nwatermark\n  Extra inputs are not permitted [type=extra_forbidden, input_value='false', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nresolution_name\n  Extra inputs are not permitted [type=extra_forbidden, input_value='720"
+    }
+  ]
+}

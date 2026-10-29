@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-29T17:46:29.609846+00:00",
+  "scope": "final native baseline candidate only, not original checkout or integration",
+  "changed_tracked_files": [
+    {
+      "path": "web/package-lock.json",
+      "original_sha256": "cc4de9adcfcb6f2d27ae1106a8d68622c7ce1c72047b41e9dfdaf1984b5e701f",
+      "probe_sha256": "70d9745ce246a5fa02b49b98754f4ec2cdbe8ee817659d62285c0d44ad196bd2"
+    },
+    {
+      "path": "web/package.json",
+      "original_sha256": "029f5dc8aa0c03f440701cc876afe32643c8b5e7e152fa828638fa5197e6bce4",
+      "probe_sha256": "31dcc9a6377d740f223028f98ddfd5949a81ca1218252ac75c0a980c9008d071"
+    },
+    {
+      "path": "web/src/components/layout/app-providers.tsx",
+      "original_sha256": "17e2a8bec89c50599ffb9bdb33e2db23b0e627dd50b16567b7f863ed9b7b7957",
+      "probe_sha256": "b53816798a0cb237adf892dbc2255585fd8ae3a3004fb78f27054e19d336aeb6"
+    },
+    {
+      "path": "web/src/components/layout/model-script-editor.tsx",
+      "original_sha256": "a5fea548092936933a08a0607ce58a4ca7f0095558fd7b69c9ac853c932e160a",
+      "probe_sha256": "80531773f91508feb142fb49cd8789def45103cb98b38b2b483416b3b2a66042"
+    }
+  ],
+  "optional_windows_dependencies": {
+    "@esbuild/win32-x64": "0.28.1",
+    "@rollup/rollup-win32-x64-msvc": "4.62.2",
+    "@tailwindcss/oxide-win32-x64-msvc": "4.2.4",
+    "lightningcss-win32-x64-msvc": "1.32.0"
+  },
+  "native_bindings_are_version_matched": true,
+  "changes": [
+    "remove unused ProConfigProvider wrapper and conflicting dependency",
+    "Modal styles.content becomes Ant Design 6 styles.container",
+    "update lock and add exact optional Windows bindings for installed Rollup/Tailwind/LightningCSS/esbuild parents"
+  ],
+  "original_checkout_modified": false,
+  "other_build_platforms_verified": false
+}

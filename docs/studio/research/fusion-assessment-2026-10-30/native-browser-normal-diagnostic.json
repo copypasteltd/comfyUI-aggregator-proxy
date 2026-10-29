@@ -1,0 +1,2361 @@
+{
+  "started_at": "2026-10-29T18:07:33.755Z",
+  "scope": "isolated patched upstream baseline on plain HTTP; no integration, real phone, production API or GPU execution",
+  "browser": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+  "observation_mode": true,
+  "creation_entry": "library create button, without Agent mode query",
+  "viewport_problems": [
+    {
+      "label": "mobile",
+      "reason": "bottom toolbar is present but not visible"
+    },
+    {
+      "label": "mobile-canvas",
+      "reason": "canvas toolbar has zero width or child controls extend outside the viewport",
+      "toolbar": {
+        "x": 416.421875,
+        "y": 768,
+        "width": 0,
+        "height": 56,
+        "right": 416.421875,
+        "bottom": 824
+      },
+      "children": [
+        {
+          "x": 407.421875,
+          "y": 768,
+          "width": 18,
+          "height": 56,
+          "right": 425.421875,
+          "bottom": 824
+        }
+      ]
+    }
+  ],
+  "reload_failures": [
+    {
+      "label": "mobile",
+      "url": "http://canvas-probe.test:8163/canvas",
+      "expected_url": "http://canvas-probe.test:8163/canvas/CdTZWMC2uEjXxm8SgkdFf",
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-canvas-bottom-toolbar]')\u001b[22m\n"
+    }
+  ],
+  "pages": [
+    {
+      "label": "desktop-library",
+      "url": "http://canvas-probe.test:8163/canvas",
+      "title": "无限画布",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "is_secure_context": false,
+      "features": {
+        "getRandomValues": true,
+        "subtle": false,
+        "randomUUID": false,
+        "storagePersist": false,
+        "indexedDB": true
+      },
+      "document_scroll_width": 1440,
+      "body_scroll_width": 1440,
+      "page_horizontal_overflow": false,
+      "toolbar": null,
+      "toolbar_children": [],
+      "laid_out_buttons": [
+        {
+          "text": "打开 Agent",
+          "x": 1091.046875,
+          "y": 11.5,
+          "width": 32,
+          "height": 32,
+          "right": 1123.046875,
+          "bottom": 43.5
+        },
+        {
+          "text": "配置",
+          "x": 1163.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 1191.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "中",
+          "x": 1195.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 1223.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "切换到浅色主题",
+          "x": 1227.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 1255.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "v0.20.0",
+          "x": 1259.046875,
+          "y": 16.5,
+          "width": 44.953125,
+          "height": 22,
+          "right": 1304,
+          "bottom": 38.5
+        },
+        {
+          "text": "导入画布",
+          "x": 1040,
+          "y": 143,
+          "width": 112,
+          "height": 32,
+          "right": 1152,
+          "bottom": 175
+        },
+        {
+          "text": "新建画布",
+          "x": 1160,
+          "y": 143,
+          "width": 112,
+          "height": 32,
+          "right": 1272,
+          "bottom": 175
+        },
+        {
+          "text": "新建画布",
+          "x": 664,
+          "y": 432,
+          "width": 112,
+          "height": 32,
+          "right": 776,
+          "bottom": 464
+        },
+        {
+          "text": "调整右侧面板宽度",
+          "x": 1433,
+          "y": 0,
+          "width": 16,
+          "height": 1000,
+          "right": 1449,
+          "bottom": 1000
+        },
+        {
+          "text": "连接设置，当前未连接",
+          "x": 1485,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1517,
+          "bottom": 40
+        },
+        {
+          "text": "对话",
+          "x": 1593.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1625.5,
+          "bottom": 48
+        },
+        {
+          "text": "历史",
+          "x": 1627.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1659.5,
+          "bottom": 48
+        },
+        {
+          "text": "技能",
+          "x": 1661.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1693.5,
+          "bottom": 48
+        },
+        {
+          "text": "日志",
+          "x": 1695.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1727.5,
+          "bottom": 48
+        },
+        {
+          "text": "新对话",
+          "x": 1804,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1836,
+          "bottom": 40
+        },
+        {
+          "text": "收起 Agent 面板",
+          "x": 1840,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1872,
+          "bottom": 40
+        },
+        {
+          "text": "",
+          "x": 1818,
+          "y": 331,
+          "width": 24,
+          "height": 24,
+          "right": 1842,
+          "bottom": 355
+        },
+        {
+          "text": "",
+          "x": 1818,
+          "y": 375,
+          "width": 24,
+          "height": 24,
+          "right": 1842,
+          "bottom": 399
+        },
+        {
+          "text": "",
+          "x": 1819,
+          "y": 514,
+          "width": 24,
+          "height": 24,
+          "right": 1843,
+          "bottom": 538
+        },
+        {
+          "text": "连接",
+          "x": 1773,
+          "y": 584,
+          "width": 78,
+          "height": 32,
+          "right": 1851,
+          "bottom": 616
+        }
+      ],
+      "body_text": "无限画布\n我的画布\n生图工作台\n视频创作台\n提示词库\n我的资产\n配置\n中\n切换到浅色主题\nv0.20.0\n\n画布库\n\n无限画布\n导入画布\n新建画布\n还没有画布\n\n新建一个画布后，就可以独立保存节点、连线和画布外观。\n\n新建画布\n连接本地 Agent\n按使用场景选择一种连接方式。\n方式一：在 Codex 中使用插件\n在 Codex app 安装 Infinite Canvas 插件后，通过插件启动画布，插件会自动启动本地 Agent 并带上连接信息。\nCodex 插件提醒\n只有安装 Codex 插件或手动添加 MCP 后，工具列表才会进入 Codex 上下文并增加 token 消耗；仅运行 npx -y @basketikun/canvas-agent@latest 启动本地 Agent 不会安装 MCP。\n移除插件\ncodex plugin remove infinite-canvas\n移除手动 MCP\ncodex mcp remove infinite-canvas\n方式二：直接运行 Agent\n不使用 Codex 插件时，在终端运行下面命令，再回到网页里连接或手动填入 Local URL 和 Connect token。\nnpx -y @basketikun/canvas-agent@latest\n网页连接\n未连接\n默认自动读取 Local URL 和 Connect token，失败时再手动填写。\n连接\n本地地址\nLocal URL\n连接 Token\nConnect token",
+      "screenshot": "docs/assets/fusion-assessment/desktop-library-normal-diagnostic.png",
+      "screenshot_sha256": "5560e272ea95532b22073e94312c81339f621396eec15bf75cf76e1ab0b40406"
+    },
+    {
+      "label": "desktop-canvas",
+      "url": "http://canvas-probe.test:8163/canvas/ibQKP2yynhpeLcPvqayvu",
+      "title": "无限画布",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "is_secure_context": false,
+      "features": {
+        "getRandomValues": true,
+        "subtle": false,
+        "randomUUID": false,
+        "storagePersist": false,
+        "indexedDB": true
+      },
+      "document_scroll_width": 1440,
+      "body_scroll_width": 1440,
+      "page_horizontal_overflow": false,
+      "toolbar": {
+        "x": 300,
+        "y": 924,
+        "width": 1124,
+        "height": 56,
+        "right": 1424,
+        "bottom": 980
+      },
+      "toolbar_children": [
+        {
+          "x": 601.5,
+          "y": 924,
+          "width": 521,
+          "height": 56,
+          "right": 1122.5,
+          "bottom": 980
+        }
+      ],
+      "laid_out_buttons": [
+        {
+          "text": "画布",
+          "x": -32,
+          "y": 14,
+          "width": 28,
+          "height": 28,
+          "right": -4,
+          "bottom": 42
+        },
+        {
+          "text": "资产",
+          "x": 16,
+          "y": 14,
+          "width": 28,
+          "height": 28,
+          "right": 44,
+          "bottom": 42
+        },
+        {
+          "text": "提示词库",
+          "x": 64,
+          "y": 14,
+          "width": 56,
+          "height": 28,
+          "right": 120,
+          "bottom": 42
+        },
+        {
+          "text": "选择",
+          "x": 20,
+          "y": 54,
+          "width": 58,
+          "height": 30,
+          "right": 78,
+          "bottom": 84
+        },
+        {
+          "text": "切换为缩略图",
+          "x": 174,
+          "y": 58,
+          "width": 26,
+          "height": 22,
+          "right": 200,
+          "bottom": 80
+        },
+        {
+          "text": "",
+          "x": 199,
+          "y": 100,
+          "width": 12,
+          "height": 12,
+          "right": 211,
+          "bottom": 112
+        },
+        {
+          "text": "调整左侧面板宽度",
+          "x": 223,
+          "y": 0,
+          "width": 16,
+          "height": 1000,
+          "right": 239,
+          "bottom": 1000
+        },
+        {
+          "text": "收起面板",
+          "x": 4,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 32,
+          "bottom": 46
+        },
+        {
+          "text": "打开画布菜单",
+          "x": 40,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 68,
+          "bottom": 46
+        },
+        {
+          "text": "无限画布 1",
+          "x": 76,
+          "y": 20.5,
+          "width": 65.484375,
+          "height": 23,
+          "right": 141.484375,
+          "bottom": 43.5
+        },
+        {
+          "text": "Codex 未连接",
+          "x": 149.484375,
+          "y": 16,
+          "width": 98.703125,
+          "height": 32,
+          "right": 248.1875,
+          "bottom": 48
+        },
+        {
+          "text": "节点插件",
+          "x": 1053.546875,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 1081.546875,
+          "bottom": 46
+        },
+        {
+          "text": "配置",
+          "x": 1117.546875,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 1145.546875,
+          "bottom": 46
+        },
+        {
+          "text": "中",
+          "x": 1149.546875,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 1177.546875,
+          "bottom": 46
+        },
+        {
+          "text": "切换到浅色主题",
+          "x": 1181.546875,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 1209.546875,
+          "bottom": 46
+        },
+        {
+          "text": "v0.20.0",
+          "x": 1213.546875,
+          "y": 21,
+          "width": 44.953125,
+          "height": 22,
+          "right": 1258.5,
+          "bottom": 43
+        },
+        {
+          "text": "快捷键",
+          "x": 1294.5,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 1322.5,
+          "bottom": 46
+        },
+        {
+          "text": "Agent",
+          "x": 1335.5,
+          "y": 12,
+          "width": 88.5,
+          "height": 40,
+          "right": 1424,
+          "bottom": 52
+        },
+        {
+          "text": "移动",
+          "x": 610.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 642.5,
+          "bottom": 968
+        },
+        {
+          "text": "撤销",
+          "x": 646.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 678.5,
+          "bottom": 968
+        },
+        {
+          "text": "重做",
+          "x": 682.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 714.5,
+          "bottom": 968
+        },
+        {
+          "text": "居中聚焦",
+          "x": 718.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 750.5,
+          "bottom": 968
+        },
+        {
+          "text": "文本",
+          "x": 767.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 799.5,
+          "bottom": 968
+        },
+        {
+          "text": "图片",
+          "x": 803.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 835.5,
+          "bottom": 968
+        },
+        {
+          "text": "视频",
+          "x": 839.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 871.5,
+          "bottom": 968
+        },
+        {
+          "text": "音频",
+          "x": 875.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 907.5,
+          "bottom": 968
+        },
+        {
+          "text": "生成配置",
+          "x": 911.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 943.5,
+          "bottom": 968
+        },
+        {
+          "text": "组",
+          "x": 947.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 979.5,
+          "bottom": 968
+        },
+        {
+          "text": "上传资产",
+          "x": 983.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 1015.5,
+          "bottom": 968
+        },
+        {
+          "text": "画布外观",
+          "x": 1032.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 1064.5,
+          "bottom": 968
+        },
+        {
+          "text": "清空画布",
+          "x": 1081.5,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 1113.5,
+          "bottom": 968
+        },
+        {
+          "text": "打开小地图",
+          "x": 29,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 61,
+          "bottom": 968
+        },
+        {
+          "text": "重置视图",
+          "x": 65,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 97,
+          "bottom": 968
+        },
+        {
+          "text": "快捷键",
+          "x": 245,
+          "y": 936,
+          "width": 32,
+          "height": 32,
+          "right": 277,
+          "bottom": 968
+        },
+        {
+          "text": "调整右侧面板宽度",
+          "x": 1433,
+          "y": 0,
+          "width": 16,
+          "height": 1000,
+          "right": 1449,
+          "bottom": 1000
+        },
+        {
+          "text": "连接设置，当前未连接",
+          "x": 1485,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1517,
+          "bottom": 40
+        },
+        {
+          "text": "对话",
+          "x": 1593.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1625.5,
+          "bottom": 48
+        },
+        {
+          "text": "历史",
+          "x": 1627.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1659.5,
+          "bottom": 48
+        },
+        {
+          "text": "技能",
+          "x": 1661.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1693.5,
+          "bottom": 48
+        },
+        {
+          "text": "日志",
+          "x": 1695.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1727.5,
+          "bottom": 48
+        },
+        {
+          "text": "新对话",
+          "x": 1804,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1836,
+          "bottom": 40
+        },
+        {
+          "text": "收起 Agent 面板",
+          "x": 1840,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1872,
+          "bottom": 40
+        },
+        {
+          "text": "",
+          "x": 1818,
+          "y": 331,
+          "width": 24,
+          "height": 24,
+          "right": 1842,
+          "bottom": 355
+        },
+        {
+          "text": "",
+          "x": 1818,
+          "y": 375,
+          "width": 24,
+          "height": 24,
+          "right": 1842,
+          "bottom": 399
+        },
+        {
+          "text": "",
+          "x": 1819,
+          "y": 514,
+          "width": 24,
+          "height": 24,
+          "right": 1843,
+          "bottom": 538
+        },
+        {
+          "text": "连接",
+          "x": 1773,
+          "y": 584,
+          "width": 78,
+          "height": 32,
+          "right": 1851,
+          "bottom": 616
+        }
+      ],
+      "body_text": "画布\n资产\n提示词库\n画布元素\n选择\n全部\n画布暂无节点\n无限画布 1\nCodex 未连接\n中\n切换到浅色主题\nv0.20.0\nAgent\n100%\n连接本地 Agent\n按使用场景选择一种连接方式。\n方式一：在 Codex 中使用插件\n在 Codex app 安装 Infinite Canvas 插件后，通过插件启动画布，插件会自动启动本地 Agent 并带上连接信息。\nCodex 插件提醒\n只有安装 Codex 插件或手动添加 MCP 后，工具列表才会进入 Codex 上下文并增加 token 消耗；仅运行 npx -y @basketikun/canvas-agent@latest 启动本地 Agent 不会安装 MCP。\n移除插件\ncodex plugin remove infinite-canvas\n移除手动 MCP\ncodex mcp remove infinite-canvas\n方式二：直接运行 Agent\n不使用 Codex 插件时，在终端运行下面命令，再回到网页里连接或手动填入 Local URL 和 Connect token。\nnpx -y @basketikun/canvas-agent@latest\n网页连接\n未连接\n默认自动读取 Local URL 和 Connect token，失败时再手动填写。\n连接\n本地地址\nLocal URL\n连接 Token\nConnect token",
+      "screenshot": "docs/assets/fusion-assessment/desktop-canvas-normal-diagnostic.png",
+      "screenshot_sha256": "746426da5b3e06c3cb22989947f326fcc9fba90f0c531fe11cd8cbd6c7883ecd"
+    },
+    {
+      "label": "desktop-reload",
+      "url": "http://canvas-probe.test:8163/canvas/ibQKP2yynhpeLcPvqayvu",
+      "same_project": true,
+      "indexeddb_saved_project_found_before_reload": true,
+      "toolbar_restored": true
+    },
+    {
+      "label": "desktop-config",
+      "url": "http://canvas-probe.test:8163/config",
+      "title": "无限画布",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "is_secure_context": false,
+      "features": {
+        "getRandomValues": true,
+        "subtle": false,
+        "randomUUID": false,
+        "storagePersist": false,
+        "indexedDB": true
+      },
+      "document_scroll_width": 1440,
+      "body_scroll_width": 1440,
+      "page_horizontal_overflow": false,
+      "toolbar": null,
+      "toolbar_children": [],
+      "laid_out_buttons": [
+        {
+          "text": "打开 Agent",
+          "x": 1091.046875,
+          "y": 11.5,
+          "width": 32,
+          "height": 32,
+          "right": 1123.046875,
+          "bottom": 43.5
+        },
+        {
+          "text": "配置",
+          "x": 1163.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 1191.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "中",
+          "x": 1195.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 1223.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "切换到浅色主题",
+          "x": 1227.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 1255.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "v0.20.0",
+          "x": 1259.046875,
+          "y": 16.5,
+          "width": 44.953125,
+          "height": 22,
+          "right": 1304,
+          "bottom": 38.5
+        },
+        {
+          "text": "导入配置",
+          "x": 1040,
+          "y": 158,
+          "width": 112,
+          "height": 32,
+          "right": 1152,
+          "bottom": 190
+        },
+        {
+          "text": "导出配置",
+          "x": 1160,
+          "y": 158,
+          "width": 112,
+          "height": 32,
+          "right": 1272,
+          "bottom": 190
+        },
+        {
+          "text": "",
+          "x": 168,
+          "y": 203,
+          "width": 46,
+          "height": 38,
+          "right": 214,
+          "bottom": 241
+        },
+        {
+          "text": "新增渠道",
+          "x": 1160,
+          "y": 265,
+          "width": 112,
+          "height": 32,
+          "right": 1272,
+          "bottom": 297
+        },
+        {
+          "text": "编辑",
+          "x": 1157,
+          "y": 334,
+          "width": 66,
+          "height": 24,
+          "right": 1223,
+          "bottom": 358
+        },
+        {
+          "text": "",
+          "x": 1231,
+          "y": 334,
+          "width": 24,
+          "height": 24,
+          "right": 1255,
+          "bottom": 358
+        },
+        {
+          "text": "调整右侧面板宽度",
+          "x": 1433,
+          "y": 0,
+          "width": 16,
+          "height": 1000,
+          "right": 1449,
+          "bottom": 1000
+        },
+        {
+          "text": "连接设置，当前未连接",
+          "x": 1485,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1517,
+          "bottom": 40
+        },
+        {
+          "text": "对话",
+          "x": 1593.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1625.5,
+          "bottom": 48
+        },
+        {
+          "text": "历史",
+          "x": 1627.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1659.5,
+          "bottom": 48
+        },
+        {
+          "text": "技能",
+          "x": 1661.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1693.5,
+          "bottom": 48
+        },
+        {
+          "text": "日志",
+          "x": 1695.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 1727.5,
+          "bottom": 48
+        },
+        {
+          "text": "新对话",
+          "x": 1804,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1836,
+          "bottom": 40
+        },
+        {
+          "text": "收起 Agent 面板",
+          "x": 1840,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 1872,
+          "bottom": 40
+        },
+        {
+          "text": "",
+          "x": 1818,
+          "y": 331,
+          "width": 24,
+          "height": 24,
+          "right": 1842,
+          "bottom": 355
+        },
+        {
+          "text": "",
+          "x": 1818,
+          "y": 375,
+          "width": 24,
+          "height": 24,
+          "right": 1842,
+          "bottom": 399
+        },
+        {
+          "text": "",
+          "x": 1819,
+          "y": 514,
+          "width": 24,
+          "height": 24,
+          "right": 1843,
+          "bottom": 538
+        },
+        {
+          "text": "连接",
+          "x": 1773,
+          "y": 584,
+          "width": 78,
+          "height": 32,
+          "right": 1851,
+          "bottom": 616
+        }
+      ],
+      "body_text": "无限画布\n我的画布\n生图工作台\n视频创作台\n提示词库\n我的资产\n配置\n中\n切换到浅色主题\nv0.20.0\n配置与用户偏好\n\n渠道聚合、模型选择、同步与本地存储\n\nJSON 文件包含 API Key 和 WebDAV 凭据，请妥善保管。\n导入配置\n导出配置\n渠道\n本地代理\n偏好设置\n提示词来源\nWebDAV\n本地存储\n每个渠道选择一个协议并拉取模型，为每个模型指定能力（生图/视频/文本/音频），并可自定义调用脚本。\n新增渠道\n默认渠道\nOpenAI · 4 个模型 · https://api.openai.com\n编辑\n连接本地 Agent\n按使用场景选择一种连接方式。\n方式一：在 Codex 中使用插件\n在 Codex app 安装 Infinite Canvas 插件后，通过插件启动画布，插件会自动启动本地 Agent 并带上连接信息。\nCodex 插件提醒\n只有安装 Codex 插件或手动添加 MCP 后，工具列表才会进入 Codex 上下文并增加 token 消耗；仅运行 npx -y @basketikun/canvas-agent@latest 启动本地 Agent 不会安装 MCP。\n移除插件\ncodex plugin remove infinite-canvas\n移除手动 MCP\ncodex mcp remove infinite-canvas\n方式二：直接运行 Agent\n不使用 Codex 插件时，在终端运行下面命令，再回到网页里连接或手动填入 Local URL 和 Connect token。\nnpx -y @basketikun/canvas-agent@latest\n网页连接\n未连接\n默认自动读取 Local URL 和 Connect token，失败时再手动填写。\n连接\n本地地址\nLocal URL\n连接 Token\nConnect token",
+      "screenshot": "docs/assets/fusion-assessment/desktop-config-normal-diagnostic.png",
+      "screenshot_sha256": "04805be02ed038959158fd029c3f6e1bb1d915fc1d814c4f8cdb6272bc57f2c8"
+    },
+    {
+      "label": "mobile-library",
+      "url": "http://canvas-probe.test:8163/canvas",
+      "title": "无限画布",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "is_secure_context": false,
+      "features": {
+        "getRandomValues": true,
+        "subtle": false,
+        "randomUUID": false,
+        "storagePersist": false,
+        "indexedDB": true
+      },
+      "document_scroll_width": 390,
+      "body_scroll_width": 390,
+      "page_horizontal_overflow": false,
+      "toolbar": null,
+      "toolbar_children": [],
+      "laid_out_buttons": [
+        {
+          "text": "打开导航菜单",
+          "x": 114.609375,
+          "y": 11.5,
+          "width": 32,
+          "height": 32,
+          "right": 146.609375,
+          "bottom": 43.5
+        },
+        {
+          "text": "打开 Agent",
+          "x": 121.046875,
+          "y": 11.5,
+          "width": 32,
+          "height": 32,
+          "right": 153.046875,
+          "bottom": 43.5
+        },
+        {
+          "text": "配置",
+          "x": 193.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 221.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "中",
+          "x": 225.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 253.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "切换到浅色主题",
+          "x": 257.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 285.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "v0.20.0",
+          "x": 289.046875,
+          "y": 16.5,
+          "width": 44.953125,
+          "height": 22,
+          "right": 334,
+          "bottom": 38.5
+        },
+        {
+          "text": "导入画布",
+          "x": 24,
+          "y": 191,
+          "width": 112,
+          "height": 32,
+          "right": 136,
+          "bottom": 223
+        },
+        {
+          "text": "新建画布",
+          "x": 144,
+          "y": 191,
+          "width": 112,
+          "height": 32,
+          "right": 256,
+          "bottom": 223
+        },
+        {
+          "text": "新建画布",
+          "x": 139,
+          "y": 490,
+          "width": 112,
+          "height": 32,
+          "right": 251,
+          "bottom": 522
+        },
+        {
+          "text": "调整右侧面板宽度",
+          "x": 383,
+          "y": 0,
+          "width": 16,
+          "height": 844,
+          "right": 399,
+          "bottom": 844
+        },
+        {
+          "text": "连接设置，当前未连接",
+          "x": 435,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 467,
+          "bottom": 40
+        },
+        {
+          "text": "对话",
+          "x": 543.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 575.5,
+          "bottom": 48
+        },
+        {
+          "text": "历史",
+          "x": 577.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 609.5,
+          "bottom": 48
+        },
+        {
+          "text": "技能",
+          "x": 611.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 643.5,
+          "bottom": 48
+        },
+        {
+          "text": "日志",
+          "x": 645.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 677.5,
+          "bottom": 48
+        },
+        {
+          "text": "新对话",
+          "x": 754,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 786,
+          "bottom": 40
+        },
+        {
+          "text": "收起 Agent 面板",
+          "x": 790,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 822,
+          "bottom": 40
+        },
+        {
+          "text": "",
+          "x": 768,
+          "y": 331,
+          "width": 24,
+          "height": 24,
+          "right": 792,
+          "bottom": 355
+        },
+        {
+          "text": "",
+          "x": 768,
+          "y": 375,
+          "width": 24,
+          "height": 24,
+          "right": 792,
+          "bottom": 399
+        },
+        {
+          "text": "",
+          "x": 769,
+          "y": 514,
+          "width": 24,
+          "height": 24,
+          "right": 793,
+          "bottom": 538
+        },
+        {
+          "text": "连接",
+          "x": 723,
+          "y": 584,
+          "width": 78,
+          "height": 32,
+          "right": 801,
+          "bottom": 616
+        }
+      ],
+      "body_text": "无限画布\n中\n切换到浅色主题\nv0.20.0\n\n画布库\n\n无限画布\n导入画布\n新建画布\n还没有画布\n\n新建一个画布后，就可以独立保存节点、连线和画布外观。\n\n新建画布\n连接本地 Agent\n按使用场景选择一种连接方式。\n方式一：在 Codex 中使用插件\n在 Codex app 安装 Infinite Canvas 插件后，通过插件启动画布，插件会自动启动本地 Agent 并带上连接信息。\nCodex 插件提醒\n只有安装 Codex 插件或手动添加 MCP 后，工具列表才会进入 Codex 上下文并增加 token 消耗；仅运行 npx -y @basketikun/canvas-agent@latest 启动本地 Agent 不会安装 MCP。\n移除插件\ncodex plugin remove infinite-canvas\n移除手动 MCP\ncodex mcp remove infinite-canvas\n方式二：直接运行 Agent\n不使用 Codex 插件时，在终端运行下面命令，再回到网页里连接或手动填入 Local URL 和 Connect token。\nnpx -y @basketikun/canvas-agent@latest\n网页连接\n未连接\n默认自动读取 Local URL 和 Connect token，失败时再手动填写。\n连接\n本地地址\nLocal URL\n连接 Token\nConnect token",
+      "screenshot": "docs/assets/fusion-assessment/mobile-library-normal-diagnostic.png",
+      "screenshot_sha256": "a93cc4a9dd6e0df9ee2905a3eb7902107e50cdd93772caeda10becddd23f75c9"
+    },
+    {
+      "label": "mobile-canvas",
+      "url": "http://canvas-probe.test:8163/canvas/CdTZWMC2uEjXxm8SgkdFf",
+      "title": "无限画布",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "is_secure_context": false,
+      "features": {
+        "getRandomValues": true,
+        "subtle": false,
+        "randomUUID": false,
+        "storagePersist": false,
+        "indexedDB": true
+      },
+      "document_scroll_width": 390,
+      "body_scroll_width": 390,
+      "page_horizontal_overflow": false,
+      "toolbar": {
+        "x": 416.421875,
+        "y": 768,
+        "width": 0,
+        "height": 56,
+        "right": 416.421875,
+        "bottom": 824
+      },
+      "toolbar_children": [
+        {
+          "x": 407.421875,
+          "y": 768,
+          "width": 18,
+          "height": 56,
+          "right": 425.421875,
+          "bottom": 824
+        }
+      ],
+      "laid_out_buttons": [
+        {
+          "text": "画布",
+          "x": -12.112773895263672,
+          "y": 14,
+          "width": 28,
+          "height": 28,
+          "right": 15.887226104736328,
+          "bottom": 42
+        },
+        {
+          "text": "资产",
+          "x": 35.88722610473633,
+          "y": 14,
+          "width": 28,
+          "height": 28,
+          "right": 63.88722610473633,
+          "bottom": 42
+        },
+        {
+          "text": "提示词库",
+          "x": 83.88722229003906,
+          "y": 14,
+          "width": 56,
+          "height": 28,
+          "right": 139.88722229003906,
+          "bottom": 42
+        },
+        {
+          "text": "选择",
+          "x": 39.88722610473633,
+          "y": 54,
+          "width": 57.999996185302734,
+          "height": 30,
+          "right": 97.88722229003906,
+          "bottom": 84
+        },
+        {
+          "text": "切换为缩略图",
+          "x": 193.88722229003906,
+          "y": 58,
+          "width": 26,
+          "height": 22,
+          "right": 219.88722229003906,
+          "bottom": 80
+        },
+        {
+          "text": "",
+          "x": 218.88722229003906,
+          "y": 100,
+          "width": 12,
+          "height": 12,
+          "right": 230.88722229003906,
+          "bottom": 112
+        },
+        {
+          "text": "调整左侧面板宽度",
+          "x": 242.88722229003906,
+          "y": 0,
+          "width": 16.000015258789062,
+          "height": 844,
+          "right": 258.8872375488281,
+          "bottom": 844
+        },
+        {
+          "text": "收起面板",
+          "x": 120.421875,
+          "y": 18,
+          "width": 16,
+          "height": 28,
+          "right": 136.421875,
+          "bottom": 46
+        },
+        {
+          "text": "打开画布菜单",
+          "x": 144.421875,
+          "y": 18,
+          "width": 16,
+          "height": 28,
+          "right": 160.421875,
+          "bottom": 46
+        },
+        {
+          "text": "无限画布 1",
+          "x": 168.421875,
+          "y": 20.5,
+          "width": 65.484375,
+          "height": 23,
+          "right": 233.90625,
+          "bottom": 43.5
+        },
+        {
+          "text": "Codex 未连接",
+          "x": 176.421875,
+          "y": 16,
+          "width": 98.703125,
+          "height": 32,
+          "right": 275.125,
+          "bottom": 48
+        },
+        {
+          "text": "节点插件",
+          "x": 120.421875,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 148.421875,
+          "bottom": 46
+        },
+        {
+          "text": "配置",
+          "x": 184.421875,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 212.421875,
+          "bottom": 46
+        },
+        {
+          "text": "中",
+          "x": 216.421875,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 244.421875,
+          "bottom": 46
+        },
+        {
+          "text": "切换到浅色主题",
+          "x": 248.421875,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 276.421875,
+          "bottom": 46
+        },
+        {
+          "text": "v0.20.0",
+          "x": 280.421875,
+          "y": 21,
+          "width": 44.953125,
+          "height": 22,
+          "right": 325.375,
+          "bottom": 43
+        },
+        {
+          "text": "快捷键",
+          "x": 361.375,
+          "y": 18,
+          "width": 28,
+          "height": 28,
+          "right": 389.375,
+          "bottom": 46
+        },
+        {
+          "text": "Agent",
+          "x": 402.375,
+          "y": 12,
+          "width": 88.5,
+          "height": 40,
+          "right": 490.875,
+          "bottom": 52
+        },
+        {
+          "text": "移动",
+          "x": 416.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 448.421875,
+          "bottom": 812
+        },
+        {
+          "text": "撤销",
+          "x": 452.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 484.421875,
+          "bottom": 812
+        },
+        {
+          "text": "重做",
+          "x": 488.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 520.421875,
+          "bottom": 812
+        },
+        {
+          "text": "居中聚焦",
+          "x": 524.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 556.421875,
+          "bottom": 812
+        },
+        {
+          "text": "文本",
+          "x": 573.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 605.421875,
+          "bottom": 812
+        },
+        {
+          "text": "图片",
+          "x": 609.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 641.421875,
+          "bottom": 812
+        },
+        {
+          "text": "视频",
+          "x": 645.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 677.421875,
+          "bottom": 812
+        },
+        {
+          "text": "音频",
+          "x": 681.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 713.421875,
+          "bottom": 812
+        },
+        {
+          "text": "生成配置",
+          "x": 717.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 749.421875,
+          "bottom": 812
+        },
+        {
+          "text": "组",
+          "x": 753.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 785.421875,
+          "bottom": 812
+        },
+        {
+          "text": "上传资产",
+          "x": 789.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 821.421875,
+          "bottom": 812
+        },
+        {
+          "text": "画布外观",
+          "x": 838.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 870.421875,
+          "bottom": 812
+        },
+        {
+          "text": "清空画布",
+          "x": 887.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 919.421875,
+          "bottom": 812
+        },
+        {
+          "text": "打开小地图",
+          "x": 145.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 177.421875,
+          "bottom": 812
+        },
+        {
+          "text": "重置视图",
+          "x": 181.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 213.421875,
+          "bottom": 812
+        },
+        {
+          "text": "快捷键",
+          "x": 361.421875,
+          "y": 780,
+          "width": 32,
+          "height": 32,
+          "right": 393.421875,
+          "bottom": 812
+        },
+        {
+          "text": "调整右侧面板宽度",
+          "x": 383,
+          "y": 0,
+          "width": 16,
+          "height": 844,
+          "right": 399,
+          "bottom": 844
+        },
+        {
+          "text": "连接设置，当前未连接",
+          "x": 435,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 467,
+          "bottom": 40
+        },
+        {
+          "text": "对话",
+          "x": 543.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 575.5,
+          "bottom": 48
+        },
+        {
+          "text": "历史",
+          "x": 577.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 609.5,
+          "bottom": 48
+        },
+        {
+          "text": "技能",
+          "x": 611.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 643.5,
+          "bottom": 48
+        },
+        {
+          "text": "日志",
+          "x": 645.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 677.5,
+          "bottom": 48
+        },
+        {
+          "text": "新对话",
+          "x": 754,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 786,
+          "bottom": 40
+        },
+        {
+          "text": "收起 Agent 面板",
+          "x": 790,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 822,
+          "bottom": 40
+        },
+        {
+          "text": "",
+          "x": 768,
+          "y": 331,
+          "width": 24,
+          "height": 24,
+          "right": 792,
+          "bottom": 355
+        },
+        {
+          "text": "",
+          "x": 768,
+          "y": 375,
+          "width": 24,
+          "height": 24,
+          "right": 792,
+          "bottom": 399
+        },
+        {
+          "text": "",
+          "x": 769,
+          "y": 514,
+          "width": 24,
+          "height": 24,
+          "right": 793,
+          "bottom": 538
+        },
+        {
+          "text": "连接",
+          "x": 723,
+          "y": 584,
+          "width": 78,
+          "height": 32,
+          "right": 801,
+          "bottom": 616
+        }
+      ],
+      "body_text": "画布\n资产\n提示词库\n画布元素\n选择\n全部\n画布暂无节点\n无限画布 1\nCodex 未连接\n中\n切换到浅色主题\nv0.20.0\nAgent\n100%\n连接本地 Agent\n按使用场景选择一种连接方式。\n方式一：在 Codex 中使用插件\n在 Codex app 安装 Infinite Canvas 插件后，通过插件启动画布，插件会自动启动本地 Agent 并带上连接信息。\nCodex 插件提醒\n只有安装 Codex 插件或手动添加 MCP 后，工具列表才会进入 Codex 上下文并增加 token 消耗；仅运行 npx -y @basketikun/canvas-agent@latest 启动本地 Agent 不会安装 MCP。\n移除插件\ncodex plugin remove infinite-canvas\n移除手动 MCP\ncodex mcp remove infinite-canvas\n方式二：直接运行 Agent\n不使用 Codex 插件时，在终端运行下面命令，再回到网页里连接或手动填入 Local URL 和 Connect token。\nnpx -y @basketikun/canvas-agent@latest\n网页连接\n未连接\n默认自动读取 Local URL 和 Connect token，失败时再手动填写。\n连接\n本地地址\nLocal URL\n连接 Token\nConnect token",
+      "screenshot": "docs/assets/fusion-assessment/mobile-canvas-normal-diagnostic.png",
+      "screenshot_sha256": "59ef05cbd4a47af49a525da9ada9ec1bfa4e4eda7e070450f5a06fc30248e353"
+    },
+    {
+      "label": "mobile-reload-failure",
+      "url": "http://canvas-probe.test:8163/canvas",
+      "title": "无限画布",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "is_secure_context": false,
+      "features": {
+        "getRandomValues": true,
+        "subtle": false,
+        "randomUUID": false,
+        "storagePersist": false,
+        "indexedDB": true
+      },
+      "document_scroll_width": 390,
+      "body_scroll_width": 390,
+      "page_horizontal_overflow": false,
+      "toolbar": null,
+      "toolbar_children": [],
+      "laid_out_buttons": [
+        {
+          "text": "打开导航菜单",
+          "x": 114.609375,
+          "y": 11.5,
+          "width": 32,
+          "height": 32,
+          "right": 146.609375,
+          "bottom": 43.5
+        },
+        {
+          "text": "打开 Agent",
+          "x": 121.046875,
+          "y": 11.5,
+          "width": 32,
+          "height": 32,
+          "right": 153.046875,
+          "bottom": 43.5
+        },
+        {
+          "text": "配置",
+          "x": 193.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 221.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "中",
+          "x": 225.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 253.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "切换到浅色主题",
+          "x": 257.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 285.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "v0.20.0",
+          "x": 289.046875,
+          "y": 16.5,
+          "width": 44.953125,
+          "height": 22,
+          "right": 334,
+          "bottom": 38.5
+        },
+        {
+          "text": "导入画布",
+          "x": 24,
+          "y": 191,
+          "width": 112,
+          "height": 32,
+          "right": 136,
+          "bottom": 223
+        },
+        {
+          "text": "新建画布",
+          "x": 144,
+          "y": 191,
+          "width": 112,
+          "height": 32,
+          "right": 256,
+          "bottom": 223
+        },
+        {
+          "text": "新建画布",
+          "x": 139,
+          "y": 490,
+          "width": 112,
+          "height": 32,
+          "right": 251,
+          "bottom": 522
+        },
+        {
+          "text": "调整右侧面板宽度",
+          "x": 383,
+          "y": 0,
+          "width": 16,
+          "height": 844,
+          "right": 399,
+          "bottom": 844
+        },
+        {
+          "text": "连接设置，当前未连接",
+          "x": 435,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 467,
+          "bottom": 40
+        },
+        {
+          "text": "对话",
+          "x": 543.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 575.5,
+          "bottom": 48
+        },
+        {
+          "text": "历史",
+          "x": 577.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 609.5,
+          "bottom": 48
+        },
+        {
+          "text": "技能",
+          "x": 611.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 643.5,
+          "bottom": 48
+        },
+        {
+          "text": "日志",
+          "x": 645.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 677.5,
+          "bottom": 48
+        },
+        {
+          "text": "新对话",
+          "x": 754,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 786,
+          "bottom": 40
+        },
+        {
+          "text": "收起 Agent 面板",
+          "x": 790,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 822,
+          "bottom": 40
+        },
+        {
+          "text": "",
+          "x": 768,
+          "y": 331,
+          "width": 24,
+          "height": 24,
+          "right": 792,
+          "bottom": 355
+        },
+        {
+          "text": "",
+          "x": 768,
+          "y": 375,
+          "width": 24,
+          "height": 24,
+          "right": 792,
+          "bottom": 399
+        },
+        {
+          "text": "",
+          "x": 769,
+          "y": 514,
+          "width": 24,
+          "height": 24,
+          "right": 793,
+          "bottom": 538
+        },
+        {
+          "text": "连接",
+          "x": 723,
+          "y": 584,
+          "width": 78,
+          "height": 32,
+          "right": 801,
+          "bottom": 616
+        }
+      ],
+      "body_text": "无限画布\n中\n切换到浅色主题\nv0.20.0\n\n画布库\n\n无限画布\n导入画布\n新建画布\n还没有画布\n\n新建一个画布后，就可以独立保存节点、连线和画布外观。\n\n新建画布\n连接本地 Agent\n按使用场景选择一种连接方式。\n方式一：在 Codex 中使用插件\n在 Codex app 安装 Infinite Canvas 插件后，通过插件启动画布，插件会自动启动本地 Agent 并带上连接信息。\nCodex 插件提醒\n只有安装 Codex 插件或手动添加 MCP 后，工具列表才会进入 Codex 上下文并增加 token 消耗；仅运行 npx -y @basketikun/canvas-agent@latest 启动本地 Agent 不会安装 MCP。\n移除插件\ncodex plugin remove infinite-canvas\n移除手动 MCP\ncodex mcp remove infinite-canvas\n方式二：直接运行 Agent\n不使用 Codex 插件时，在终端运行下面命令，再回到网页里连接或手动填入 Local URL 和 Connect token。\nnpx -y @basketikun/canvas-agent@latest\n网页连接\n未连接\n默认自动读取 Local URL 和 Connect token，失败时再手动填写。\n连接\n本地地址\nLocal URL\n连接 Token\nConnect token",
+      "screenshot": "docs/assets/fusion-assessment/mobile-reload-failure-normal-diagnostic.png",
+      "screenshot_sha256": "a93cc4a9dd6e0df9ee2905a3eb7902107e50cdd93772caeda10becddd23f75c9"
+    },
+    {
+      "label": "mobile-reload",
+      "url": "http://canvas-probe.test:8163/canvas",
+      "same_project": false,
+      "indexeddb_saved_project_found_before_reload": true,
+      "toolbar_restored": false
+    },
+    {
+      "label": "mobile-config",
+      "url": "http://canvas-probe.test:8163/config",
+      "title": "无限画布",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "is_secure_context": false,
+      "features": {
+        "getRandomValues": true,
+        "subtle": false,
+        "randomUUID": false,
+        "storagePersist": false,
+        "indexedDB": true
+      },
+      "document_scroll_width": 390,
+      "body_scroll_width": 390,
+      "page_horizontal_overflow": false,
+      "toolbar": null,
+      "toolbar_children": [],
+      "laid_out_buttons": [
+        {
+          "text": "打开导航菜单",
+          "x": 114.609375,
+          "y": 11.5,
+          "width": 32,
+          "height": 32,
+          "right": 146.609375,
+          "bottom": 43.5
+        },
+        {
+          "text": "打开 Agent",
+          "x": 121.046875,
+          "y": 11.5,
+          "width": 32,
+          "height": 32,
+          "right": 153.046875,
+          "bottom": 43.5
+        },
+        {
+          "text": "配置",
+          "x": 193.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 221.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "中",
+          "x": 225.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 253.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "切换到浅色主题",
+          "x": 257.046875,
+          "y": 13.5,
+          "width": 28,
+          "height": 28,
+          "right": 285.046875,
+          "bottom": 41.5
+        },
+        {
+          "text": "v0.20.0",
+          "x": 289.046875,
+          "y": 16.5,
+          "width": 44.953125,
+          "height": 22,
+          "right": 334,
+          "bottom": 38.5
+        },
+        {
+          "text": "导入配置",
+          "x": 24,
+          "y": 186,
+          "width": 112,
+          "height": 32,
+          "right": 136,
+          "bottom": 218
+        },
+        {
+          "text": "导出配置",
+          "x": 144,
+          "y": 186,
+          "width": 112,
+          "height": 32,
+          "right": 256,
+          "bottom": 218
+        },
+        {
+          "text": "",
+          "x": 320,
+          "y": 231,
+          "width": 46,
+          "height": 46,
+          "right": 366,
+          "bottom": 277
+        },
+        {
+          "text": "新增渠道",
+          "x": 24,
+          "y": 337,
+          "width": 112,
+          "height": 32,
+          "right": 136,
+          "bottom": 369
+        },
+        {
+          "text": "编辑",
+          "x": 251,
+          "y": 406,
+          "width": 66,
+          "height": 24,
+          "right": 317,
+          "bottom": 430
+        },
+        {
+          "text": "",
+          "x": 325,
+          "y": 406,
+          "width": 24,
+          "height": 24,
+          "right": 349,
+          "bottom": 430
+        },
+        {
+          "text": "调整右侧面板宽度",
+          "x": 383,
+          "y": 0,
+          "width": 16,
+          "height": 844,
+          "right": 399,
+          "bottom": 844
+        },
+        {
+          "text": "连接设置，当前未连接",
+          "x": 435,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 467,
+          "bottom": 40
+        },
+        {
+          "text": "对话",
+          "x": 543.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 575.5,
+          "bottom": 48
+        },
+        {
+          "text": "历史",
+          "x": 577.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 609.5,
+          "bottom": 48
+        },
+        {
+          "text": "技能",
+          "x": 611.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 643.5,
+          "bottom": 48
+        },
+        {
+          "text": "日志",
+          "x": 645.5,
+          "y": 0,
+          "width": 32,
+          "height": 48,
+          "right": 677.5,
+          "bottom": 48
+        },
+        {
+          "text": "新对话",
+          "x": 754,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 786,
+          "bottom": 40
+        },
+        {
+          "text": "收起 Agent 面板",
+          "x": 790,
+          "y": 8,
+          "width": 32,
+          "height": 32,
+          "right": 822,
+          "bottom": 40
+        },
+        {
+          "text": "",
+          "x": 768,
+          "y": 331,
+          "width": 24,
+          "height": 24,
+          "right": 792,
+          "bottom": 355
+        },
+        {
+          "text": "",
+          "x": 768,
+          "y": 375,
+          "width": 24,
+          "height": 24,
+          "right": 792,
+          "bottom": 399
+        },
+        {
+          "text": "",
+          "x": 769,
+          "y": 514,
+          "width": 24,
+          "height": 24,
+          "right": 793,
+          "bottom": 538
+        },
+        {
+          "text": "连接",
+          "x": 723,
+          "y": 584,
+          "width": 78,
+          "height": 32,
+          "right": 801,
+          "bottom": 616
+        }
+      ],
+      "body_text": "无限画布\n中\n切换到浅色主题\nv0.20.0\n配置与用户偏好\n\n渠道聚合、模型选择、同步与本地存储\n\nJSON 文件包含 API Key 和 WebDAV 凭据，请妥善保管。\n导入配置\n导出配置\n渠道\n本地代理\n偏好设置\n提示词来源\nWebDAV\n本地存储\n每个渠道选择一个协议并拉取模型，为每个模型指定能力（生图/视频/文本/音频），并可自定义调用脚本。\n新增渠道\n默认渠道\nOpenAI · 4 个模型 · https://api.openai.com\n编辑\n连接本地 Agent\n按使用场景选择一种连接方式。\n方式一：在 Codex 中使用插件\n在 Codex app 安装 Infinite Canvas 插件后，通过插件启动画布，插件会自动启动本地 Agent 并带上连接信息。\nCodex 插件提醒\n只有安装 Codex 插件或手动添加 MCP 后，工具列表才会进入 Codex 上下文并增加 token 消耗；仅运行 npx -y @basketikun/canvas-agent@latest 启动本地 Agent 不会安装 MCP。\n移除插件\ncodex plugin remove infinite-canvas\n移除手动 MCP\ncodex mcp remove infinite-canvas\n方式二：直接运行 Agent\n不使用 Codex 插件时，在终端运行下面命令，再回到网页里连接或手动填入 Local URL 和 Connect token。\nnpx -y @basketikun/canvas-agent@latest\n网页连接\n未连接\n默认自动读取 Local URL 和 Connect token，失败时再手动填写。\n连接\n本地地址\nLocal URL\n连接 Token\nConnect token",
+      "screenshot": "docs/assets/fusion-assessment/mobile-config-normal-diagnostic.png",
+      "screenshot_sha256": "a019935644c79f4c6feab2301a867b4d9821fd0036d459f535a8bb0788f5c245"
+    }
+  ],
+  "errors": [
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "desktop",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    },
+    {
+      "label": "mobile",
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    }
+  ],
+  "blocked_external_urls": [
+    "https://raw.githubusercontent.com/basketikun/infinite-canvas/main/VERSION",
+    "https://raw.githubusercontent.com/yukkcat/image-prompts/main/dist/sources/banana-prompt-quicker.json",
+    "https://raw.githubusercontent.com/yukkcat/image-prompts/main/dist/sources/davidwu-gpt-image2-prompts.json",
+    "https://raw.githubusercontent.com/yukkcat/image-prompts/main/dist/sources/freestylefly-gpt-image-2.json",
+    "https://raw.githubusercontent.com/yukkcat/image-prompts/main/dist/sources/awesome-gpt-image.json",
+    "https://raw.githubusercontent.com/yukkcat/image-prompts/main/dist/sources/awesome-gpt4o-image-prompts.json",
+    "https://raw.githubusercontent.com/yukkcat/image-prompts/main/dist/sources/youmind-gpt-image-2.json",
+    "https://raw.githubusercontent.com/yukkcat/image-prompts/main/dist/sources/youmind-nano-banana-pro.json"
+  ],
+  "cleanup": {
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "origin": "http://canvas-probe.test:8163",
+  "baseline_routes_and_reload_passed": false,
+  "all_viewport_controls_passed": false,
+  "finished_at": "2026-10-29T18:08:15.553Z",
+  "verification_note": "Earlier instrumentation resolved its IndexedDB read before transaction completion and connection close. Reload judgement is superseded by native-browser-normal-diagnostic-closed-idb.json. Do not attribute these reload failures to a confirmed upstream defect; mobile layout observations remain independently supported."
+}

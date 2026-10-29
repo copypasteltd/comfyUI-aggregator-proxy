@@ -1,0 +1,350 @@
+{
+  "snapshot_date": "2026-10-29",
+  "built_at": "2026-10-29T23:47:08.421618+08:00",
+  "timezone": "Asia/Taipei",
+  "scope": "按用户确认收敛到约 10–15 个 AI 图片 / 视频等创作画布，优先易用与轻量部署；精选后按 Star 降序。",
+  "assessment_basis": "12 项基础选型依据 README、LICENSE、仓库元数据与构建入口。01 / 02 已补充源码和页面核对，见 03 对比文档；未进行内存、并发或生成接口实测。",
+  "candidate_count": 28,
+  "projects": [
+    {
+      "repository": "HBAI-Ltd/Toonflow-app",
+      "name": "Toonflow",
+      "url": "https://github.com/HBAI-Ltd/Toonflow-app",
+      "stars": 19873,
+      "license": "MIT",
+      "capabilities": "图片、视频、音频、分镜、角色资产与 3D 镜头预演",
+      "usability_assessment": "较易",
+      "deployment": "Bun 服务 + 本地工作区；安装说明含 FFmpeg",
+      "deployment_lightness_assessment": "轻至中",
+      "fit_assessment": "项目工作区、叙事创作工具和 Android 横屏应用优先比较",
+      "boundary": "已有音频节点、Android ARM64 客户端和 3D 预演；长任务可靠性、平台权限和聚合接口仍需适配。",
+      "metadata_fetched_at": "2026-10-29T22:31:34.116762+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/README.md",
+      "license_url": "https://github.com/HBAI-Ltd/Toonflow-app/blob/master/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/HBAI-Ltd--Toonflow-app",
+      "rank": 1
+    },
+    {
+      "repository": "basketikun/infinite-canvas",
+      "name": "无限画布（basketikun）",
+      "url": "https://github.com/basketikun/infinite-canvas",
+      "stars": 9378,
+      "license": "MIT",
+      "capabilities": "图片、参考图编辑、视频、音频与画布助手",
+      "usability_assessment": "较易",
+      "deployment": "Vite 构建的静态前端；基础使用无需独立业务后端",
+      "deployment_lightness_assessment": "极轻",
+      "fit_assessment": "最符合轻量 Web 画布和现有 API 复用方向",
+      "boundary": "默认 IndexedDB，已有可选 WebDAV 和内置视频任务 ID 恢复；窄屏画布和自定义异步接口仍需适配。",
+      "metadata_fetched_at": "2026-10-29T22:33:39.987784+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/basketikun/infinite-canvas/blob/main/README.md",
+      "license_url": "https://github.com/basketikun/infinite-canvas/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/basketikun--infinite-canvas",
+      "rank": 2
+    },
+    {
+      "repository": "shrimbly/node-banana",
+      "name": "Node Banana",
+      "url": "https://github.com/shrimbly/node-banana",
+      "stars": 1654,
+      "license": "MIT",
+      "capabilities": "图片、视频、音频、3D 与 ComfyUI 工作流",
+      "usability_assessment": "中等",
+      "deployment": "Node.js / Next.js 单服务；工作流与媒体存本地文件",
+      "deployment_lightness_assessment": "轻",
+      "fit_assessment": "多模态 + 现有远程 ComfyUI 最值得比较",
+      "boundary": "节点式操作需要少量学习；支持本机 / 远程 ComfyUI不等于已兼容聚合代理的任务协议。",
+      "metadata_fetched_at": "2026-10-29T22:31:34.418802+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/shrimbly/node-banana/blob/master/README.md",
+      "license_url": "https://github.com/shrimbly/node-banana/blob/master/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/shrimbly--node-banana",
+      "rank": 3
+    },
+    {
+      "repository": "tigerowo/infinite-canvas",
+      "name": "无限画布（tigerowo）",
+      "url": "https://github.com/tigerowo/infinite-canvas",
+      "stars": 1436,
+      "license": "AGPL-3.0",
+      "capabilities": "图片、视频、音频与后端同步",
+      "usability_assessment": "中等",
+      "deployment": "前端 + Go / Gin 后端 + SQLite；含 S3 / R2 存储配置",
+      "deployment_lightness_assessment": "中",
+      "fit_assessment": "需要服务器端保存与同步时再考虑",
+      "boundary": "在 basketikun / HuFakai 生态基础上增加后端，组件与配置多于纯前端版。",
+      "metadata_fetched_at": "2026-10-29T22:33:43.492490+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/tigerowo/infinite-canvas/blob/main/README.md",
+      "license_url": "https://github.com/tigerowo/infinite-canvas/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/tigerowo--infinite-canvas",
+      "rank": 4
+    },
+    {
+      "repository": "T8mars/T8-penguin-canvas",
+      "name": "T8 Penguin Canvas",
+      "url": "https://github.com/T8mars/T8-penguin-canvas",
+      "stars": 638,
+      "license": "MIT",
+      "capabilities": "图片、视频、音频、素材工具与 ComfyUI",
+      "usability_assessment": "中等",
+      "deployment": "Web + Express 后端；桌面版及源码开发涉及 Electron",
+      "deployment_lightness_assessment": "中",
+      "fit_assessment": "偏好丰富节点或现成桌面客户端时考虑",
+      "boundary": "功能和配置项较多；当前源码开发脚本通过 Electron 启动后端，不能只按旧说明推定任意 Node 环境即用。",
+      "metadata_fetched_at": "2026-10-29T22:33:47.778938+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/T8mars/T8-penguin-canvas/blob/main/README.md",
+      "license_url": "https://github.com/T8mars/T8-penguin-canvas/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/T8mars--T8-penguin-canvas",
+      "rank": 5
+    },
+    {
+      "repository": "NickPittas/DirectorsConsole",
+      "name": "Director’s Console",
+      "url": "https://github.com/NickPittas/DirectorsConsole",
+      "stars": 364,
+      "license": "MIT",
+      "capabilities": "分镜、图片 / 视频、参考素材与多 ComfyUI 节点",
+      "usability_assessment": "中等",
+      "deployment": "Python + Node.js 前端 / 编排；连接已有 ComfyUI",
+      "deployment_lightness_assessment": "轻至中",
+      "fit_assessment": "直接调多台 ComfyUI 的分镜创作很相关",
+      "boundary": "需配置项目目录、工作流与渲染节点；聚合 API 和独立音频 / 3D 节点不能直接假定已适配。",
+      "metadata_fetched_at": "2026-10-29T22:31:36.005447+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/NickPittas/DirectorsConsole/blob/main/README.md",
+      "license_url": "https://github.com/NickPittas/DirectorsConsole/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/NickPittas--DirectorsConsole",
+      "rank": 6
+    },
+    {
+      "repository": "SankaiAI/TwitCanva-Video-Workflow",
+      "name": "TwitCanva",
+      "url": "https://github.com/SankaiAI/TwitCanva-Video-Workflow",
+      "stars": 292,
+      "license": "Apache-2.0",
+      "capabilities": "图片、视频、参考素材和多模型节点编排",
+      "usability_assessment": "中等",
+      "deployment": "Vite 前端 + Node.js API 服务；本地 GPU 路线可选",
+      "deployment_lightness_assessment": "轻至中",
+      "fit_assessment": "适合借鉴可视化视频创作",
+      "boundary": "不同模型供应商的密钥 / 字段需要分别配置；复用现有代理通常需要整理接口适配。",
+      "metadata_fetched_at": "2026-10-29T22:31:42.000940+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/SankaiAI/TwitCanva-Video-Workflow/blob/main/README.md",
+      "license_url": "https://github.com/SankaiAI/TwitCanva-Video-Workflow/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/SankaiAI--TwitCanva-Video-Workflow",
+      "rank": 7
+    },
+    {
+      "repository": "doudou770/flyreq-image-studio",
+      "name": "FlyReq Image Studio",
+      "url": "https://github.com/doudou770/flyreq-image-studio",
+      "stars": 165,
+      "license": "AGPL-3.0",
+      "capabilities": "图片、视频、无限画布、素材与任务管理",
+      "usability_assessment": "较易",
+      "deployment": "静态前端 + Node.js 单后端 + SQLite / WebSocket",
+      "deployment_lightness_assessment": "轻",
+      "fit_assessment": "想要轻后端、持久任务与素材管理时优先",
+      "boundary": "better-sqlite3 有原生模块安装要求；已有代理的异步响应仍需逐项验证。",
+      "metadata_fetched_at": "2026-10-29T22:31:37.510699+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/doudou770/flyreq-image-studio/blob/master/README.md",
+      "license_url": "https://github.com/doudou770/flyreq-image-studio/blob/master/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/doudou770--flyreq-image-studio",
+      "rank": 8
+    },
+    {
+      "repository": "saihhold-zhao/polox_ai",
+      "name": "PoloX AI",
+      "url": "https://github.com/saihhold-zhao/polox_ai",
+      "stars": 91,
+      "license": "MIT",
+      "capabilities": "对话式图片 / 视频创作、标注改图与素材库",
+      "usability_assessment": "较易",
+      "deployment": "Nuxt / Node.js + SQLite；部分技能使用 Chromium / FFmpeg",
+      "deployment_lightness_assessment": "轻至中",
+      "fit_assessment": "适合偏好自然语言创作的人",
+      "boundary": "当前主要走 WaveSpeed，接自有代理需改适配；网页检查、拼接等功能会增加浏览器 / 媒体处理负担。",
+      "metadata_fetched_at": "2026-10-29T22:31:40.520527+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/saihhold-zhao/polox_ai/blob/main/README.md",
+      "license_url": "https://github.com/saihhold-zhao/polox_ai/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/saihhold-zhao--polox_ai",
+      "rank": 9
+    },
+    {
+      "repository": "SparkSylva/Infinite-Canvas-AI-Omnigen",
+      "name": "AI Omnigen Canvas",
+      "url": "https://github.com/SparkSylva/Infinite-Canvas-AI-Omnigen",
+      "stars": 31,
+      "license": "MIT",
+      "capabilities": "图片、视频生成与浏览器内素材编辑",
+      "usability_assessment": "较易",
+      "deployment": "Next.js 应用；生成直连 fal.ai；浏览器 IndexedDB",
+      "deployment_lightness_assessment": "轻",
+      "fit_assessment": "个人 BYOK 试用的轻量备选",
+      "boundary": "没有独立数据库 / 代理配置不代表已经提供静态导出；浏览器 ffmpeg.wasm 视频处理内存未实测。",
+      "metadata_fetched_at": "2026-10-29T22:31:48.432819+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/SparkSylva/Infinite-Canvas-AI-Omnigen/blob/main/README.md",
+      "license_url": "https://github.com/SparkSylva/Infinite-Canvas-AI-Omnigen/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/SparkSylva--Infinite-Canvas-AI-Omnigen",
+      "rank": 10
+    },
+    {
+      "repository": "luanluan-l/StoryFlow-AI-Canvas",
+      "name": "StoryFlow AI Canvas",
+      "url": "https://github.com/luanluan-l/StoryFlow-AI-Canvas",
+      "stars": 9,
+      "license": "MIT",
+      "capabilities": "图片生成、参考图片与节点式迭代",
+      "usability_assessment": "较易",
+      "deployment": "React / Vite 纯前端 + 浏览器本地数据",
+      "deployment_lightness_assessment": "极轻",
+      "fit_assessment": "只先验证图片创作界面时可考虑",
+      "boundary": "规模小，偏早期；以 Gemini 图像路径为主，完整视频 / 音频创作和代理接入需要扩展。",
+      "metadata_fetched_at": "2026-10-29T22:33:44.014956+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/luanluan-l/StoryFlow-AI-Canvas/blob/main/README.md",
+      "license_url": "https://github.com/luanluan-l/StoryFlow-AI-Canvas/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/luanluan-l--StoryFlow-AI-Canvas",
+      "rank": 11
+    },
+    {
+      "repository": "CPloscaru/caraca",
+      "name": "Caraca",
+      "url": "https://github.com/CPloscaru/caraca",
+      "stars": 3,
+      "license": "MIT",
+      "capabilities": "图片 / 视频节点、提示词与工作流执行",
+      "usability_assessment": "中等",
+      "deployment": "Next.js 单服务 + SQLite",
+      "deployment_lightness_assessment": "轻",
+      "fit_assessment": "轻后端节点画布的早期备选",
+      "boundary": "Star 和社区体量很小；当前依赖 fal.ai / OpenRouter，成熟度与自有 API 兼容性尚未实测。",
+      "metadata_fetched_at": "2026-10-29T22:33:44.895042+08:00",
+      "metadata_source": "Public GitHub repository page embedded stargazerCount and codeViewLayoutRoute.repo",
+      "readme_url": "https://github.com/CPloscaru/caraca/blob/main/README.md",
+      "license_url": "https://github.com/CPloscaru/caraca/blob/main/LICENSE",
+      "evidence_folder": "research/ai-creative-canvas-2026-10-29/CPloscaru--caraca",
+      "rank": 12
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": 1,
+      "repository": "basketikun/infinite-canvas",
+      "reason": "基础画布为静态前端，OpenAI 兼容与自定义图片 / 视频脚本能复用现有后端；适合先做简单、轻量 Web 创作入口。"
+    },
+    {
+      "priority": 2,
+      "repository": "shrimbly/node-banana",
+      "reason": "已有图片、视频、音频、3D 和本机 / 远程 ComfyUI；以单 Node 服务和文件保存为基础，适合多模态节点创作。"
+    },
+    {
+      "priority": 3,
+      "repository": "HBAI-Ltd/Toonflow-app",
+      "reason": "想少做产品开发、直接开始项目 / 分镜 / 资产创作时值得优先试用；服务器模式有 Bun 原生安装路径。"
+    },
+    {
+      "priority": 4,
+      "repository": "doudou770/flyreq-image-studio",
+      "reason": "若需要服务端保存素材和任务，Node + SQLite 的结构比多服务运营平台简单。"
+    }
+  ],
+  "other_candidates": [
+    {
+      "repository": "11cafe/jaaz",
+      "url": "https://github.com/11cafe/jaaz",
+      "reason": "当前 Jaaz 社区许可限制修改、团队部署等，不能按普通开源二开底座推荐。"
+    },
+    {
+      "repository": "Tenney95/AI-Canvas-tauri",
+      "url": "https://github.com/Tenney95/AI-Canvas-tauri",
+      "reason": "当前为 Source-Available License；未来达到指定 Star 后转 MIT 的计划不等于当前已是 MIT。"
+    },
+    {
+      "repository": "GML-MMGroup/AdCraft",
+      "url": "https://github.com/GML-MMGroup/AdCraft",
+      "reason": "当前 LICENSE 为个人与非商业用途许可。"
+    },
+    {
+      "repository": "WingkySky/Agnes-AI-Platform",
+      "url": "https://github.com/WingkySky/Agnes-AI-Platform",
+      "reason": "Apache 文本后附 Commons Clause，包含商业用途限制；不是纯 Apache-2.0。"
+    },
+    {
+      "repository": "YusufAlper17/Nexa-Canvas",
+      "url": "https://github.com/YusufAlper17/Nexa-Canvas",
+      "reason": "形态非常轻，但 README 的 License 段仍写待添加许可证，不能依据项目描述认定允许开源二次开发。"
+    },
+    {
+      "repository": "fal-ai-community/infinite-kanvas",
+      "url": "https://github.com/fal-ai-community/infinite-kanvas",
+      "reason": "已读取 README；未定位到明确的根 LICENSE 文件，保留核实状态。"
+    },
+    {
+      "repository": "869413421/ai-moive-studio",
+      "url": "https://github.com/869413421/ai-moive-studio",
+      "reason": "Apache-2.0；真实 AI 创作画布，但部署配置涉及数据库、Redis、MinIO，轻量优先时下调。"
+    },
+    {
+      "repository": "Swayingleaves/novanova-studio",
+      "url": "https://github.com/Swayingleaves/novanova-studio",
+      "reason": "GPL-3.0；需要 Java / Next.js、PostgreSQL、Redis 等，适合运营平台而非本轮最小部署。"
+    },
+    {
+      "repository": "fancyboi999/Loomic",
+      "url": "https://github.com/fancyboi999/Loomic",
+      "reason": "MIT；前端、API、Worker、Supabase / PostgreSQL 与队列组成更复杂。"
+    },
+    {
+      "repository": "HuFakai/infinite-canvas",
+      "url": "https://github.com/HuFakai/infinite-canvas",
+      "reason": "AGPL-3.0；主分支侧重图片，加入账号 / 对象存储等；视频音频在独立保留分支，不作为本轮首选。"
+    },
+    {
+      "repository": "Valiera00/SPITE",
+      "url": "https://github.com/Valiera00/SPITE",
+      "reason": "AGPL-3.0；需要 PostgreSQL、R2 与 fal.ai，云端一键按钮不能代替依赖复杂度。"
+    },
+    {
+      "repository": "BlockRunAI/franklin-canvas",
+      "url": "https://github.com/BlockRunAI/franklin-canvas",
+      "reason": "Apache-2.0；部署组件少，但与 BlockRun / x402 支付和模型生态绑定，复用已有代理需要更多改造。"
+    },
+    {
+      "repository": "retake-tools/whiteboard",
+      "url": "https://github.com/retake-tools/whiteboard",
+      "reason": "Apache-2.0；本地 Node 服务较轻，但偏 Codex / MCP 创作路径，当前默认离线包主要为图片，对普通用户的独立视频工作台不优先。"
+    },
+    {
+      "repository": "avabbbb/Flovart",
+      "url": "https://github.com/avabbbb/Flovart",
+      "reason": "MIT；当前 README 已侧重专业剪辑器与 Agent 的创作层，轻量通用 Web 画布优先级较低。"
+    },
+    {
+      "repository": "WanInter/canvas",
+      "url": "https://github.com/WanInter/canvas",
+      "reason": "AGPL-3.0；与 tigerowo 方案近似的分支，避免重复推荐同一生态的相近变体。"
+    },
+    {
+      "repository": "Asai2080/asui-canvas",
+      "url": "https://github.com/Asai2080/asui-canvas",
+      "reason": "本次源码抓取未成功；官方页面说明依赖 tldraw，生产许可需要另核对，不纳入已核实主表。"
+    }
+  ],
+  "validation": {
+    "project_count": 12,
+    "unique_repositories": 12,
+    "stars_descending": true,
+    "source_files_present_and_sha256_valid": true,
+    "runtime_tested": false,
+    "generation_api_tested": false
+  }
+}

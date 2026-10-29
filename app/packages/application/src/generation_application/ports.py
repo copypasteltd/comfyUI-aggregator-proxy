@@ -38,7 +38,7 @@ class GatewayIdentity:
 
 class GenerationPort(Protocol):
     def preflight_inputs(self, identity: BusinessIdentity, request: dict[str, Any]) -> None: ...
-    def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str) -> dict[str, Any]: ...
+    def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str, *, expected_release_digest: str | None = None) -> dict[str, Any]: ...
     def get(self, identity: BusinessIdentity, job_id: UUID) -> dict[str, Any]: ...
     def cancel(self, identity: BusinessIdentity, job_id: UUID, request_id: str) -> dict[str, Any]: ...
 
@@ -52,11 +52,13 @@ class GenerationService:
         identity.require(_CREATE_SCOPES[task_media_kind(request["task_type"])])
         self.repository.preflight_inputs(identity, request)
 
-    def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str) -> dict[str, Any]:
+    def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str, *, expected_release_digest: str | None = None) -> dict[str, Any]:
         identity.require("jobs:create")
         identity.require(_CREATE_SCOPES[task_media_kind(request["task_type"])])
         if not 16 <= len(token) <= 128 or not token.isascii() or any(ord(c) < 33 or ord(c) > 126 for c in token):
             raise DomainError("invalid_idempotency_key", "Idempotency-Key 要求 16～128 位 ASCII 字符", 400)
+        if expected_release_digest is not None:
+            return self.repository.create(identity, request, token, request_id, expected_release_digest=expected_release_digest)
         return self.repository.create(identity, request, token, request_id)
 
     def get(self, identity: BusinessIdentity, job_id: UUID) -> dict[str, Any]:

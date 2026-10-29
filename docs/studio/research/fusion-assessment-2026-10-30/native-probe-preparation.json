@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-30T00:50:05.129739+08:00",
+  "scope": "isolated build probe, not the downloaded upstream or an integrated release",
+  "path": "E:\\dev\\sandbox\\无限画布\\.local\\assessment-native\\probe",
+  "copied_files": 205,
+  "removed_dependency": {
+    "@ant-design/pro-components": "3.0.0-beta.3"
+  },
+  "reason": "Only ProConfigProvider is imported; retain existing antd ConfigProvider and theme. Pro components require antd 5, while this frontend uses antd 6.",
+  "lock_file_status": "Copied original; npm installation must regenerate and verify it.",
+  "changes": [
+    {
+      "path": "web/package.json",
+      "before_sha256": "029f5dc8aa0c03f440701cc876afe32643c8b5e7e152fa828638fa5197e6bce4",
+      "after_sha256": "08f9f325a644ec94e918a6381d0881bb7df7fe73842663c7cff9a7f7bd1ebdb9"
+    },
+    {
+      "path": "web/src/components/layout/app-providers.tsx",
+      "before_sha256": "17e2a8bec89c50599ffb9bdb33e2db23b0e627dd50b16567b7f863ed9b7b7957",
+      "after_sha256": "b53816798a0cb237adf892dbc2255585fd8ae3a3004fb78f27054e19d336aeb6"
+    }
+  ],
+  "original_install": {
+    "command": "npm ci --no-audit --no-fund",
+    "exit_code": 1,
+    "error": "ERESOLVE: pro-components peer antd ^5.11.2 conflicts with antd ^6.4.2"
+  },
+  "original_lock_missing_dependencies": [
+    "i18next",
+    "react-i18next"
+  ]
+}

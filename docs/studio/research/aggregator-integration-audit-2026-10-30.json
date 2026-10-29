@@ -1,0 +1,419 @@
+{
+  "checked_at": "2026-10-30T00:23:27.424912+08:00",
+  "evidence_level": "local_source_and_frozen_openapi_only",
+  "purpose": "source download and integration preparation; no adapter implementation",
+  "canvas": {
+    "repository": "https://github.com/basketikun/infinite-canvas.git",
+    "path": "E:\\dev\\sandbox\\无限画布\\infinite-canvas",
+    "commit": "9cd3deacbcc598361807afc16c059a80dd18b6f9",
+    "version": "v0.20.0",
+    "shallow": true,
+    "working_tree_clean": true,
+    "tracked_file_count": 507,
+    "tracked_file_bytes": 7789155,
+    "git_fsck_passed": true,
+    "license": "MIT",
+    "sources": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 11422,
+        "sha256": "94c6695d605e4b51eea082143e272f20ca686e662be5dd1136cad0fd03e9741e"
+      },
+      {
+        "path": "LICENSE",
+        "bytes": 1088,
+        "sha256": "44e52203e61565877cc4685791343679f19c49f7b28288a2d0b9f7b9aced8009"
+      },
+      {
+        "path": "VERSION",
+        "bytes": 7,
+        "sha256": "f8385526da05bdcc76869d8c973d0903aa37865660439f9dd95d9dfc95e48c96"
+      },
+      {
+        "path": "web/package.json",
+        "bytes": 1916,
+        "sha256": "029f5dc8aa0c03f440701cc876afe32643c8b5e7e152fa828638fa5197e6bce4"
+      },
+      {
+        "path": "web/package-lock.json",
+        "bytes": 729745,
+        "sha256": "cc4de9adcfcb6f2d27ae1106a8d68622c7ce1c72047b41e9dfdaf1984b5e701f"
+      },
+      {
+        "path": "web/vite.config.ts",
+        "bytes": 2009,
+        "sha256": "013b9f4d5d8d4397c2c802d4e781b7f01f475081a72b42eecc1f2ff75e89974d",
+        "anchor": "base: process.env.VITE_BASE || \"/\"",
+        "lines": [
+          42
+        ]
+      },
+      {
+        "path": "web/src/router.tsx",
+        "bytes": 1346,
+        "sha256": "723f3e612a25769be3a83690a2b31affc25d012d66360f0f25b26ec925c9ac12",
+        "anchor": "createBrowserRouter([",
+        "lines": [
+          15
+        ]
+      },
+      {
+        "path": "web/src/stores/use-config-store.ts",
+        "bytes": 22132,
+        "sha256": "f04407dc878899003676bb04656353294c14fbaedcc6e84f9ac10533d1794e9d",
+        "anchor": "export type ApiCallFormat = \"openai\" | \"gemini\"",
+        "lines": [
+          8
+        ]
+      },
+      {
+        "path": "web/src/services/api/image.ts",
+        "bytes": 40852,
+        "sha256": "7e836c116bb004ca544eb0ad2d50c5691ed3ac402b7b83949eecd326324a8446",
+        "anchor": "output_format: IMAGE_OUTPUT_FORMAT",
+        "lines": [
+          739
+        ]
+      },
+      {
+        "path": "web/src/services/api/video.ts",
+        "bytes": 23529,
+        "sha256": "6e1754b186a4b5e6fb4fb0bbec19753bb33fcc2956c182ee87fa2009e5df9d04",
+        "anchor": "const pluginVideoResults = new Map",
+        "lines": [
+          33
+        ]
+      },
+      {
+        "path": "web/src/services/api/audio.ts",
+        "bytes": 7640,
+        "sha256": "f23e7989573f294025babae0df99826876d380fb68d876deb0cd1dd132d2af9b",
+        "anchor": "aiApiUrl(requestConfig, \"/audio/speech\")",
+        "lines": [
+          51
+        ]
+      },
+      {
+        "path": "web/src/services/api/model-plugin.ts",
+        "bytes": 30705,
+        "sha256": "d5ce345b32b4c30986c1bfc9b5d8ea50cffba5ecac51a23be4179d425dde1dfd",
+        "anchor": "options?.timeoutMs ?? 300000",
+        "lines": [
+          97
+        ]
+      },
+      {
+        "path": "web/src/types/canvas.ts",
+        "bytes": 4003,
+        "sha256": "ed25cbea0efaa334ffecda82e295e1fce70a00dc9c6bbe20897c3fadf13f1805",
+        "anchor": "videoTaskId?: string",
+        "lines": [
+          84
+        ]
+      },
+      {
+        "path": "web/src/lib/canvas/canvas-generation-helpers.ts",
+        "bytes": 10931,
+        "sha256": "620357c838e682f6de66592cf12e752d2a9c7886ee88c82665bcd09e9380f5de",
+        "anchor": "hasResumableVideoTask",
+        "lines": [
+          126,
+          133
+        ]
+      },
+      {
+        "path": "web/src/services/file-storage.ts",
+        "bytes": 3849,
+        "sha256": "2ea80828e935c25f74eb97766fbca644e01f32bcdb1ac8bc5538ed43c917eec4",
+        "anchor": "storeName: \"media_files\"",
+        "lines": [
+          8
+        ]
+      },
+      {
+        "path": "web/src/services/image-storage.ts",
+        "bytes": 11406,
+        "sha256": "c34ac1ddeede53f1f4c80701f901351a5f8fc622dbe44bcdcf9b38c6210137d8",
+        "anchor": "storeName: \"image_files\"",
+        "lines": [
+          17
+        ]
+      },
+      {
+        "path": "web/src/services/config-file.ts",
+        "bytes": 1606,
+        "sha256": "edae9e8de6207b2a02d9462dc82c554b72fa6f4adb74bae4a8d18bb19298e320",
+        "anchor": "config, webdav, promptSources",
+        "lines": [
+          23
+        ]
+      },
+      {
+        "path": "web/src/components/canvas/canvas-toolbar.tsx",
+        "bytes": 20879,
+        "sha256": "6cd41376921f1145edb4d294c7b9fae2a1d323af0284671d1d2ed74db9b722fd",
+        "anchor": "left: 300",
+        "lines": [
+          94
+        ]
+      },
+      {
+        "path": "web/src/components/canvas/canvas-side-panel.tsx",
+        "bytes": 43588,
+        "sha256": "63b11b53b92afb9f2bfbd7fc3a91d0bb95121a68c05e814f063c67f0df80285f"
+      },
+      {
+        "path": "web/src/lib/app-theme.ts",
+        "bytes": 3176,
+        "sha256": "8712435291480e37fcd9c26e8e2b631b008620a831ff55003b9928c7b93308c2",
+        "anchor": "getAntThemeConfig",
+        "lines": [
+          31
+        ]
+      },
+      {
+        "path": "web/src/lib/canvas-theme.ts",
+        "bytes": 1885,
+        "sha256": "a6efd163590bf93ef8fdd150f93b3ec2f5b45fd2d9accaedacfac9882ec8b248",
+        "anchor": "export const canvasThemes",
+        "lines": [
+          4
+        ]
+      }
+    ]
+  },
+  "aggregator": {
+    "repository": "git@github.com:copypasteltd/comfyUI-aggregator-proxy.git",
+    "path": "E:\\dev\\sandbox\\生图生视API封装",
+    "commit": "f522ee0d70b74db137c9f858446ba58c2f508a50",
+    "working_tree_clean": true,
+    "sources": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 5671,
+        "sha256": "cb036066595348e801a20e36de9b4b92778616d3fdae5265eb792a39d0a40af4"
+      },
+      {
+        "path": "app/config/openapi.json",
+        "bytes": 648554,
+        "sha256": "e27789cf1c19b2e940a5346ee0ce61794b1cdde1fc821e12e4e44b7efa00a796"
+      },
+      {
+        "path": "app/apps/control_api/src/control_api/main.py",
+        "bytes": 79354,
+        "sha256": "045daebcf5df5b807fa8e8f332c541d3905f5c1a896ce90a83437a6588ad9d8c",
+        "anchor": "@app.post(\"/v1/jobs\", status_code=202)",
+        "lines": [
+          1050
+        ]
+      },
+      {
+        "path": "app/apps/control_api/src/control_api/compatibility.py",
+        "bytes": 10921,
+        "sha256": "59bd3b819e78b35922a257e93c2747084fd1826863f762d9e41f46ae0ced92af",
+        "anchor": "deadline = time.monotonic() + 60",
+        "lines": [
+          74
+        ]
+      },
+      {
+        "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
+        "bytes": 13252,
+        "sha256": "1e217a7578c021585fcecbdd438d15f24b3c0f9cc271498a79af45b87537b97f",
+        "anchor": "name != \"input_reference\"",
+        "lines": [
+          137
+        ]
+      },
+      {
+        "path": "app/apps/control_api/src/control_api/monitoring.py",
+        "bytes": 9097,
+        "sha256": "7c2435d198117a56c1a196009e18dea4351671d3d54a50e3d503de464d31686c",
+        "anchor": "allow_origin_regex=\".*\"",
+        "lines": [
+          185
+        ]
+      },
+      {
+        "path": "app/packages/contracts/src/generation_contracts/validation.py",
+        "bytes": 3644,
+        "sha256": "91f8ac907609f7287a5c205c6a73a6550f3e0e9d2831f583a404e6432dc41b24",
+        "anchor": "extra=\"forbid\"",
+        "lines": [
+          27
+        ]
+      },
+      {
+        "path": "app/packages/contracts/src/generation_contracts/compatibility.py",
+        "bytes": 5976,
+        "sha256": "52c20dcdd201a5e8e99e692dcfa67d591f85a4a8a5306e412ea28d6defb02a12",
+        "anchor": "n: Literal[1] = 1",
+        "lines": [
+          33
+        ]
+      },
+      {
+        "path": "app/packages/contracts/src/generation_contracts/model_usage.py",
+        "bytes": 3617,
+        "sha256": "56daca2475bd66a978d1f5d44c0d27cabdf6b96e5e0938040be64298c1697d53",
+        "anchor": "output_retention_seconds: Literal[28800]",
+        "lines": [
+          88
+        ]
+      },
+      {
+        "path": "app/packages/contracts/src/generation_contracts/discovery.py",
+        "bytes": 2367,
+        "sha256": "6257715a5dded4688f6a78f36c9615135819058681e99f929e15a6117b8b44ff",
+        "anchor": "class PublishedCapability",
+        "lines": [
+          44
+        ]
+      },
+      {
+        "path": "app/packages/domain/src/generation_domain/job-state-machine.json",
+        "bytes": 18544,
+        "sha256": "0005d676a022f5cb5da96162ae24c1aba73392e5c8fe3b643d6dd519b3737882",
+        "anchor": "\"terminal_states\"",
+        "lines": [
+          25
+        ]
+      },
+      {
+        "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
+        "bytes": 27466,
+        "sha256": "cc1945b5484b5b79d087130cd07894676fdf78674e7bffeeac0b1059da56da31",
+        "anchor": "result[\"artifacts\"]",
+        "lines": [
+          290
+        ]
+      },
+      {
+        "path": "app/deploy/native-linux/nginx.conf.example",
+        "bytes": 1430,
+        "sha256": "7892be10eff7211cb31dd0f236aceca8332fc06d06c485cd9994b745db7c9014",
+        "anchor": "listen 39443",
+        "lines": [
+          19
+        ]
+      },
+      {
+        "path": "app/config/lime-reference.lock.json",
+        "bytes": 2836,
+        "sha256": "3bedc3c163ed111bdb41c8245067864cbd91049925d49ec541507c671465284a"
+      },
+      {
+        "path": "app/apps/admin_web/src/theme/reference/lime.css",
+        "bytes": 21092,
+        "sha256": "f593ce1d5446edf2d883ab177ed3b40b6230f5ce01acdee1269f7c5fc24d24fb"
+      },
+      {
+        "path": "app/apps/admin_web/src/theme/tokens.css",
+        "bytes": 4905,
+        "sha256": "52596127205d1d535e957d16b24b05a462ed1c2ee8997fa6a029c1730d9d7633"
+      }
+    ]
+  },
+  "required_endpoints_present": {
+    "/v1/access-policy": [
+      "get"
+    ],
+    "/v1/models": [
+      "get"
+    ],
+    "/v1/models/{model}": [
+      "get"
+    ],
+    "/v1/capabilities": [
+      "get"
+    ],
+    "/v1/assets": [
+      "post"
+    ],
+    "/v1/jobs": [
+      "post",
+      "get"
+    ],
+    "/v1/jobs/{identifier}": [
+      "get"
+    ],
+    "/v1/jobs/{identifier}/cancel": [
+      "post"
+    ],
+    "/v1/content/{identifier}": [
+      "get"
+    ],
+    "/v1/content/{identifier}/download": [
+      "get",
+      "head"
+    ],
+    "/v1/images/generations": [
+      "post"
+    ],
+    "/v1/images/generations/async": [
+      "post"
+    ],
+    "/v1/images/edits": [
+      "post"
+    ],
+    "/v1/images/edits/async": [
+      "post"
+    ],
+    "/v1/images/tasks/{identifier}": [
+      "get"
+    ],
+    "/v1/videos": [
+      "post"
+    ],
+    "/v1/videos/{identifier}": [
+      "get"
+    ],
+    "/v1/videos/{identifier}/content": [
+      "get",
+      "head"
+    ]
+  },
+  "audio_speech_endpoint_present": false,
+  "chat_completions_endpoint_present": false,
+  "responses_endpoint_present": false,
+  "task_types": [
+    "text_to_image",
+    "image_to_image",
+    "references_to_image",
+    "text_to_video",
+    "references_to_video",
+    "text_to_audio",
+    "image_to_3d"
+  ],
+  "job_states": [
+    "admission_pending",
+    "queued",
+    "leased",
+    "preparing",
+    "submitting",
+    "running",
+    "collecting",
+    "uploading",
+    "verifying",
+    "reconciling",
+    "retry_wait",
+    "cancel_requested",
+    "succeeded",
+    "failed",
+    "cancelled",
+    "expired"
+  ],
+  "terminal_states": [
+    "succeeded",
+    "failed",
+    "cancelled",
+    "expired"
+  ],
+  "integration_code_implemented": false,
+  "node_dependencies_installed_by_this_task": false,
+  "application_built_or_started_by_this_task": false,
+  "browser_used_by_this_task": false,
+  "live_api_called_by_this_task": false,
+  "production_modified_by_this_task": false,
+  "virtualization_used": false
+}
