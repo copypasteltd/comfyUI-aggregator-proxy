@@ -1,0 +1,848 @@
+{
+  "passed": true,
+  "scope": "Read-only public Web startup plus synthetic native IndexedDB fixture; bounded diagnostic observation only, no generated task, product setting or API change.",
+  "browser_engine": "webkit",
+  "ascii_runtime_path": true,
+  "persistent_owned_profile": true,
+  "playwright_version": "1.63.0",
+  "steps": [
+    {
+      "name": "launch owned persistent native browser",
+      "passed": true,
+      "milliseconds": 4452
+    },
+    {
+      "name": "load owned blank page",
+      "passed": true,
+      "milliseconds": 955
+    },
+    {
+      "name": "read browser Web features",
+      "passed": true,
+      "milliseconds": 216,
+      "value": {
+        "secure": false,
+        "indexedDB": "object",
+        "uuid": "undefined",
+        "random": "function",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+      }
+    },
+    {
+      "name": "import exact journal helper bundle",
+      "passed": true,
+      "milliseconds": 53,
+      "value": [
+        "journalDatabaseName",
+        "journalDatabaseVersion",
+        "rawJournalTransaction"
+      ]
+    },
+    {
+      "name": "commit native fixture documents and original",
+      "passed": true,
+      "milliseconds": 369,
+      "value": true
+    },
+    {
+      "name": "load actual first Web library",
+      "passed": true,
+      "milliseconds": 2381
+    },
+    {
+      "name": "first Web navigation rendered",
+      "passed": true,
+      "milliseconds": 1497
+    },
+    {
+      "name": "load actual second Web library",
+      "passed": true,
+      "milliseconds": 2618
+    },
+    {
+      "name": "second Web navigation rendered",
+      "passed": true,
+      "milliseconds": 318
+    },
+    {
+      "name": "read actual native editor and document rows",
+      "passed": true,
+      "milliseconds": 86,
+      "value": {
+        "editors": [
+          {
+            "version": 1,
+            "id": "editor-v1:BQVnK984kK6L1BtRQFPLU",
+            "markerDatabase": "comfy-studio-editor:editor-v1:BQVnK984kK6L1BtRQFPLU",
+            "startedAt": 1793372535694
+          }
+        ],
+        "documents": [
+          {
+            "version": 1,
+            "id": "infinite-canvas:asset_store",
+            "revision": 2,
+            "value": "{\"state\":{\"assets\":[]},\"version\":0}",
+            "storageKeys": [],
+            "legacyValue": null
+          },
+          {
+            "version": 1,
+            "id": "infinite-canvas:canvas_store",
+            "revision": 1,
+            "value": "{\"version\":0,\"state\":{\"projects\":[],\"deletedProjects\":[]}}",
+            "storageKeys": [],
+            "legacyValue": null
+          }
+        ],
+        "local_media": [
+          {
+            "version": 1,
+            "id": "file:managed-v1:engine-fixture",
+            "kind": "media",
+            "blob": {
+              "bytes": 29
+            },
+            "bytes": 29,
+            "mimeType": "",
+            "createdAt": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "capture diagnostic page state",
+      "passed": true,
+      "milliseconds": 45,
+      "value": {
+        "url": "/native-blank",
+        "title": "Owned Web browser diagnostic",
+        "text": "",
+        "events": [
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "phase": "open-request"
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "phase": "upgradeneeded"
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "phase": "success"
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-open",
+            "mode": "readonly",
+            "stores": [
+              "budgets",
+              "documents",
+              "editors",
+              "intents",
+              "local_media",
+              "results",
+              "uploads"
+            ]
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-open",
+            "mode": "readwrite",
+            "stores": [
+              "documents",
+              "local_media"
+            ]
+          },
+          {
+            "store": "documents",
+            "phase": "add-request"
+          },
+          {
+            "store": "documents",
+            "phase": "add-request"
+          },
+          {
+            "store": "local_media",
+            "phase": "add-request"
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-complete",
+            "mode": "readonly",
+            "stores": [
+              "budgets",
+              "documents",
+              "editors",
+              "intents",
+              "local_media",
+              "results",
+              "uploads"
+            ]
+          },
+          {
+            "store": "documents",
+            "phase": "add-success"
+          },
+          {
+            "store": "documents",
+            "phase": "add-success"
+          },
+          {
+            "store": "local_media",
+            "phase": "add-success"
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-complete",
+            "mode": "readwrite",
+            "stores": [
+              "documents",
+              "local_media"
+            ]
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "phase": "open-request"
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "phase": "success"
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-open",
+            "mode": "readonly",
+            "stores": [
+              "budgets",
+              "documents",
+              "editors",
+              "intents",
+              "local_media",
+              "results",
+              "uploads"
+            ]
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-open",
+            "mode": "readonly",
+            "stores": [
+              "documents",
+              "editors",
+              "local_media"
+            ]
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-complete",
+            "mode": "readonly",
+            "stores": [
+              "budgets",
+              "documents",
+              "editors",
+              "intents",
+              "local_media",
+              "results",
+              "uploads"
+            ]
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-complete",
+            "mode": "readonly",
+            "stores": [
+              "documents",
+              "editors",
+              "local_media"
+            ]
+          }
+        ],
+        "databases": [
+          {
+            "name": "comfy-studio-editor:editor-v1:BQVnK984kK6L1BtRQFPLU",
+            "version": 1
+          },
+          {
+            "name": "comfy-aggregator-studio",
+            "version": 2
+          },
+          {
+            "name": "infinite-canvas",
+            "version": 2
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "version": 5
+          }
+        ],
+        "screenshot": {
+          "file": "docs/media/studio-147/webkit-ascii-persistent-82c62edd-df67-4bcd-be84-18fee73eae1c/page-0.png",
+          "bytes": 8269,
+          "sha256": "4668a72664d371587c3e5c47788966cb9ac3b92458dbef132199a371da540379"
+        }
+      }
+    },
+    {
+      "name": "capture diagnostic page state",
+      "passed": true,
+      "milliseconds": 42,
+      "value": {
+        "url": "/studio/canvas",
+        "title": "青柠画布 · Comfy Studio",
+        "text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n连接服务\n\n画布库\n\n无限画布\n导入画布\n新建画布\n还没有画布\n\n新建一个画布后，就可以独立保存节点、连线和画布外观。\n\n新建画布\n基于 basketikun / infinite-canvas · MIT\n画布和已保存素材存于当前浏览器",
+        "events": [],
+        "databases": [
+          {
+            "name": "comfy-studio-editor:editor-v1:BQVnK984kK6L1BtRQFPLU",
+            "version": 1
+          },
+          {
+            "name": "comfy-aggregator-studio",
+            "version": 2
+          },
+          {
+            "name": "infinite-canvas",
+            "version": 2
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "version": 5
+          }
+        ],
+        "screenshot": {
+          "file": "docs/media/studio-147/webkit-ascii-persistent-82c62edd-df67-4bcd-be84-18fee73eae1c/page-1.png",
+          "bytes": 35153,
+          "sha256": "0cfd6cf9aaeecc04e5905aba65fdd3990d8f01e5304973007ee043bc4a5ef226"
+        }
+      }
+    },
+    {
+      "name": "capture diagnostic page state",
+      "passed": true,
+      "milliseconds": 149,
+      "value": {
+        "url": "/studio/canvas",
+        "title": "青柠画布 · Comfy Studio",
+        "text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n连接服务\n基于 basketikun / infinite-canvas · MIT\n画布和已保存素材存于当前浏览器",
+        "events": [],
+        "databases": [
+          {
+            "name": "comfy-studio-editor:editor-v1:BQVnK984kK6L1BtRQFPLU",
+            "version": 1
+          },
+          {
+            "name": "comfy-aggregator-studio",
+            "version": 2
+          },
+          {
+            "name": "infinite-canvas",
+            "version": 2
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "version": 5
+          }
+        ],
+        "screenshot": {
+          "file": "docs/media/studio-147/webkit-ascii-persistent-82c62edd-df67-4bcd-be84-18fee73eae1c/page-2.png",
+          "bytes": 23868,
+          "sha256": "2a1cc7e8d131cd80f37d76f0ec33c8ea75821f49e7d6bd5bd8376916d1cb18aa"
+        }
+      }
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [
+    "Refused to execute a script because its hash, its nonce, or 'unsafe-inline' does not appear in the script-src directive of the Content Security Policy.",
+    "Refused to execute a script because its hash, its nonce, or 'unsafe-inline' does not appear in the script-src directive of the Content Security Policy."
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/native-blank"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/native-probe.mjs"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-ZxRxLoFd.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/studio-documents-DRynVzfg.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/studio-documents-DcJWFhwo.css"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-Yd9OhMyU.css"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/config.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/fonts/Manrope-Reference.woff"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-Dviq02yT.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/use-asset-store-DkGKvYfN.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/localforage-storage-DaUfpgc4.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/zip-vQtl9jF_.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/use-canvas-store-CrR3XcEJ.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-DKk0D6CY.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/PurePanel-uIlF0SlP.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/useControlledState-DMsne1PG.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/canvas-export-DGlMCj8B.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/FileSaver.min-rScd3vqu.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/agent-url-bootstrap-DcZRvpiD.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-CvCHogNE.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/SearchOutlined-Bl7_yDrU.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/plus-DZw-iGvw.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/x-DtrLJ2Ta.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/pencil-DxVxx8O-.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/trash-2-CRYMleNV.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-ZxRxLoFd.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/studio-documents-DRynVzfg.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/studio-documents-DcJWFhwo.css"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-Yd9OhMyU.css"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/config.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/fonts/Manrope-Reference.woff"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-Dviq02yT.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/use-asset-store-DkGKvYfN.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/localforage-storage-DaUfpgc4.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/zip-vQtl9jF_.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/use-canvas-store-CrR3XcEJ.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-DKk0D6CY.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/PurePanel-uIlF0SlP.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/useControlledState-DMsne1PG.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/canvas-export-DGlMCj8B.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/FileSaver.min-rScd3vqu.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/agent-url-bootstrap-DcZRvpiD.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/index-CvCHogNE.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/SearchOutlined-Bl7_yDrU.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/plus-DZw-iGvw.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/x-DtrLJ2Ta.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/pencil-DxVxx8O-.js"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/studio/assets/trash-2-CRYMleNV.js"
+    }
+  ],
+  "snapshots": [
+    {
+      "url": "/native-blank",
+      "title": "Owned Web browser diagnostic",
+      "text": "",
+      "events": [
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "phase": "open-request"
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "phase": "upgradeneeded"
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "phase": "success"
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-open",
+          "mode": "readonly",
+          "stores": [
+            "budgets",
+            "documents",
+            "editors",
+            "intents",
+            "local_media",
+            "results",
+            "uploads"
+          ]
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-open",
+          "mode": "readwrite",
+          "stores": [
+            "documents",
+            "local_media"
+          ]
+        },
+        {
+          "store": "documents",
+          "phase": "add-request"
+        },
+        {
+          "store": "documents",
+          "phase": "add-request"
+        },
+        {
+          "store": "local_media",
+          "phase": "add-request"
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-complete",
+          "mode": "readonly",
+          "stores": [
+            "budgets",
+            "documents",
+            "editors",
+            "intents",
+            "local_media",
+            "results",
+            "uploads"
+          ]
+        },
+        {
+          "store": "documents",
+          "phase": "add-success"
+        },
+        {
+          "store": "documents",
+          "phase": "add-success"
+        },
+        {
+          "store": "local_media",
+          "phase": "add-success"
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-complete",
+          "mode": "readwrite",
+          "stores": [
+            "documents",
+            "local_media"
+          ]
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "phase": "open-request"
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "phase": "success"
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-open",
+          "mode": "readonly",
+          "stores": [
+            "budgets",
+            "documents",
+            "editors",
+            "intents",
+            "local_media",
+            "results",
+            "uploads"
+          ]
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-open",
+          "mode": "readonly",
+          "stores": [
+            "documents",
+            "editors",
+            "local_media"
+          ]
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-complete",
+          "mode": "readonly",
+          "stores": [
+            "budgets",
+            "documents",
+            "editors",
+            "intents",
+            "local_media",
+            "results",
+            "uploads"
+          ]
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-complete",
+          "mode": "readonly",
+          "stores": [
+            "documents",
+            "editors",
+            "local_media"
+          ]
+        }
+      ],
+      "databases": [
+        {
+          "name": "comfy-studio-editor:editor-v1:BQVnK984kK6L1BtRQFPLU",
+          "version": 1
+        },
+        {
+          "name": "comfy-aggregator-studio",
+          "version": 2
+        },
+        {
+          "name": "infinite-canvas",
+          "version": 2
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "version": 5
+        }
+      ],
+      "screenshot": {
+        "file": "docs/media/studio-147/webkit-ascii-persistent-82c62edd-df67-4bcd-be84-18fee73eae1c/page-0.png",
+        "bytes": 8269,
+        "sha256": "4668a72664d371587c3e5c47788966cb9ac3b92458dbef132199a371da540379"
+      }
+    },
+    {
+      "url": "/studio/canvas",
+      "title": "青柠画布 · Comfy Studio",
+      "text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n连接服务\n\n画布库\n\n无限画布\n导入画布\n新建画布\n还没有画布\n\n新建一个画布后，就可以独立保存节点、连线和画布外观。\n\n新建画布\n基于 basketikun / infinite-canvas · MIT\n画布和已保存素材存于当前浏览器",
+      "events": [],
+      "databases": [
+        {
+          "name": "comfy-studio-editor:editor-v1:BQVnK984kK6L1BtRQFPLU",
+          "version": 1
+        },
+        {
+          "name": "comfy-aggregator-studio",
+          "version": 2
+        },
+        {
+          "name": "infinite-canvas",
+          "version": 2
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "version": 5
+        }
+      ],
+      "screenshot": {
+        "file": "docs/media/studio-147/webkit-ascii-persistent-82c62edd-df67-4bcd-be84-18fee73eae1c/page-1.png",
+        "bytes": 35153,
+        "sha256": "0cfd6cf9aaeecc04e5905aba65fdd3990d8f01e5304973007ee043bc4a5ef226"
+      }
+    },
+    {
+      "url": "/studio/canvas",
+      "title": "青柠画布 · Comfy Studio",
+      "text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n连接服务\n基于 basketikun / infinite-canvas · MIT\n画布和已保存素材存于当前浏览器",
+      "events": [],
+      "databases": [
+        {
+          "name": "comfy-studio-editor:editor-v1:BQVnK984kK6L1BtRQFPLU",
+          "version": 1
+        },
+        {
+          "name": "comfy-aggregator-studio",
+          "version": 2
+        },
+        {
+          "name": "infinite-canvas",
+          "version": 2
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "version": 5
+        }
+      ],
+      "screenshot": {
+        "file": "docs/media/studio-147/webkit-ascii-persistent-82c62edd-df67-4bcd-be84-18fee73eae1c/page-2.png",
+        "bytes": 23868,
+        "sha256": "2a1cc7e8d131cd80f37d76f0ec33c8ea75821f49e7d6bd5bd8376916d1cb18aa"
+      }
+    }
+  ],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "executable": "C:/Users/carzy/AppData/Local/ms-playwright/webkit-2359/Playwright.exe",
+  "browser_version": "26.6",
+  "close_errors": []
+}

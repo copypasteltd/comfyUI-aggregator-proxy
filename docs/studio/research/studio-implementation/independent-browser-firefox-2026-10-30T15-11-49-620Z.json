@@ -1,0 +1,150 @@
+{
+  "passed": true,
+  "at": "2026-10-30T15:11:50.032Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "scope": "Two native HTTP origins on one Windows host and synthetic existing-API protocol; not a production API/GPU, cross-machine or physical touch test",
+  "checks": [
+    "desktop:explicit-api-default-no-eager-api-call",
+    "desktop:cross-origin-catalog-business-key-only-admin-is-link",
+    "desktop:new-connection-does-not-inherit-static-origin",
+    "desktop:published-models-and-real-schema-worker",
+    "desktop:no-admin-worker-comfy-agent-requests-no-page-errors",
+    "390:explicit-api-default-no-eager-api-call",
+    "390:cross-origin-catalog-business-key-only-admin-is-link",
+    "390:new-connection-does-not-inherit-static-origin",
+    "390:published-models-and-real-schema-worker",
+    "390:no-admin-worker-comfy-agent-requests-no-page-errors",
+    "all-business-requests-go-directly-to-configured-api-without-cookies"
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-147/catalog-firefox-2026-10-30T15-11-49-620Z/independent-connection-desktop.png",
+      "sha256": "8e140f76ea065767775a5287fc82dbba4cc9bb81a7e86c450404767e5ec18a15"
+    },
+    {
+      "file": "docs/media/studio-147/catalog-firefox-2026-10-30T15-11-49-620Z/independent-models-desktop.png",
+      "sha256": "7b848de9581955cb0a1ec39b01885dd59c5f744a368724b22bc755761bb6af66"
+    },
+    {
+      "file": "docs/media/studio-147/catalog-firefox-2026-10-30T15-11-49-620Z/independent-connection-390.png",
+      "sha256": "ac640511718791b75bc6e8297ddd14e871be46c69e041728716833610f92fe2b"
+    },
+    {
+      "file": "docs/media/studio-147/catalog-firefox-2026-10-30T15-11-49-620Z/independent-models-390.png",
+      "sha256": "a015135b61249c07743c39b20c97ef5f72dbf64c73c55a6d177cc32b3a715c69"
+    }
+  ],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "static_and_fixture_servers_closed": true
+  },
+  "origins": {
+    "canvas": "http://192.168.31.95:8729",
+    "synthetic_existing_api": "http://192.168.31.95:8728",
+    "native_non_loopback": true
+  },
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 2,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "resource_close_errors": [],
+  "static_bytes_unchanged": true
+}

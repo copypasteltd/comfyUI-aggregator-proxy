@@ -6,18 +6,19 @@ import { createRequire } from 'node:module';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { launchStudioWebBrowser, webEngine as browserName } from './studio_web_browser.mjs';
 const root = fileURLToPath(new URL('../../', import.meta.url)), web = path.join(root, 'infinite-canvas/web');
 const require = createRequire(path.join(web, 'package.json'));
-const { chromium, firefox, webkit } = require('C:/Users/carzy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const buildPath = path.resolve(root, process.argv[2] || ''), publicMode = process.argv.includes('--public'), baseline = process.argv.includes('--baseline');
-const browserName = process.argv.find((value) => value.startsWith('--browser='))?.split('=')[1] || 'chromium';
+const evidenceVersion = process.argv.find((value) => value.startsWith('--evidence-version='))?.split('=')[1] || '146';
+assert(/^\d+$/.test(evidenceVersion));
 assert(['chromium', 'firefox', 'webkit'].includes(browserName));
 if (browserName !== 'chromium') assert(publicMode, 'Cross-engine checks use the actual public ordinary HTTP site');
 assert(buildPath.startsWith(path.join(root, 'docs/research/studio-implementation') + path.sep));
 const build = JSON.parse(await readFile(buildPath, 'utf8')), clean = JSON.parse(await readFile(path.join(root, build.clean_install_reused.file), 'utf8'));
 assert(build.passed); if (baseline) assert(publicMode);
 const dist = path.join(root, clean.private_logs, 'repository/web/dist'), stamp = browserName + '-' + new Date().toISOString().replaceAll(/[:.]/g, '-');
-const privateDir = path.join(root, '.local/studio146/refresh-' + stamp), media = path.join(root, 'docs/media/studio-146/refresh-' + stamp);
+const privateDir = path.join(root, '.local/studio' + evidenceVersion + '/refresh-' + stamp), media = path.join(root, 'docs/media/studio-' + evidenceVersion + '/refresh-' + stamp);
 await mkdir(privateDir, { recursive: true }); await mkdir(media, { recursive: true });
 await require('esbuild').build({ stdin: { contents: 'export * from "./src/services/studio-journal-db";', resolveDir: web }, platform: 'browser', format: 'esm', bundle: true, outfile: path.join(privateDir, 'probe.mjs'), logLevel: 'warning' });
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -41,11 +42,7 @@ try {
     }); await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
     origin = publicMode ? 'http://43.165.167.179:39445' : 'http://canvas-refresh.test:' + server.address().port;
     if (publicMode) { const response = await fetch(origin + '/studio/maintenance.html'); assert(response.ok); assert.equal(sha(Buffer.from(await response.arrayBuffer())), build.static_artifact_sha256['maintenance.html']); }
-    process.env.TEMP = privateDir; process.env.TMP = privateDir;
-    const browserType = { chromium, firefox, webkit }[browserName];
-    const executablePath = { chromium: 'C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe', firefox: 'C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe', webkit: 'C:/Users/carzy/AppData/Local/ms-playwright/webkit-2359/Playwright.exe' }[browserName];
-    browser = await browserType.launch({ executablePath, headless: true, ...(browserName === 'chromium' ? { args: ['--host-resolver-rules=MAP canvas-refresh.test 127.0.0.1', '--no-proxy-server'] } : {}) });
-    report.browser_version = browser.version();
+    browser = await launchStudioWebBrowser({ root, temporary: privateDir, report, args: ['--host-resolver-rules=MAP canvas-refresh.test 127.0.0.1', '--no-proxy-server'] });
     const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, locale: 'zh-CN', recordVideo: { dir: privateDir } }); contexts.push(context);
     await context.route('**/*', async (route) => {
         const url = new URL(route.request().url());

@@ -1,5 +1,14 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## 证据147 · Web浏览器验收补充，产品仍146.1 / pending-test
+
+- [验证] Firefox新增38组、Windows WebKit本机功能27组通过；包括真实文件输入/下载、ZIP原件/引用/刷新、双页保护及390px视口。
+- [修正] 测试样片IDAT CRC损坏已替换为校验通过的RGB PNG；原生SDK/revision匹配、持久测试profile和无用启动页生命周期整理，产品源码不改。
+- [待验] Windows WebKit携带Cookie的问题由不加载产品代码的最小fetch复现；Chromium/Firefox omit与include正对照正常。WebKit目录总回执失败并保留，不宣称实际Safari支持。
+- [文档] 文档32、双语README、全部46项、截图及完整所选页两MP4/两GIF同步。原API与静态服务/指针/配置不变，无部署、重启、业务Key或生成请求。
+
+Evidence147 keeps the frozen146.1 application. Firefox adds38 passed groups, Windows WebKit27 local-original/project groups; WebKit Cookie isolation remains unaccepted and reproduces without product code. Matching native browsers, valid PNG fixtures, screenshots and two complete selected page MP4/GIF recordings are documented. No new product release, rebuild, deployment, API/config/service change or GPU work. Full Web acceptance remains HOLD.
+
 ## canvas-20261030.146.1 · Web端独立交付 / pending-test
 
 - [调整] 需求、开发约束和全部46项仅按Web应用执行；原生客户端与应用商店不在范围，原API仍只读。

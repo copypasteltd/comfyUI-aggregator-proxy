@@ -1,0 +1,39 @@
+{
+  "passed": false,
+  "at": "2026-10-30T15:07:58.786Z",
+  "browser_engine": "firefox",
+  "baseline_1451": false,
+  "public_static_site": true,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "scope": "Frozen Web UI; actual native transactions and editor connections, with delayed completion of one committed readonly snapshot. Synthetic local data; no business API/GPU requests.",
+  "checks": [],
+  "screenshots": [],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "error": {
+    "name": "Error",
+    "message": "browserContext.newPage: Protocol error (Browser.newPage): can't access property \"delayedStartupPromise\", window is null",
+    "stack": "browserContext.newPage: Protocol error (Browser.newPage): can't access property \"delayedStartupPromise\", window is null\n    at pageIn (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_cleanup_refresh_race.mjs:31:66)\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_cleanup_refresh_race.mjs:54:24"
+  },
+  "resource_close_errors": [],
+  "private_recordings": []
+}

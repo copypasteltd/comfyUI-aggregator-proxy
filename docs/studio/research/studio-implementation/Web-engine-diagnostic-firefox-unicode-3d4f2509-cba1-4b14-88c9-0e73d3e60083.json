@@ -1,0 +1,82 @@
+{
+  "passed": false,
+  "scope": "Read-only public Web startup plus synthetic native IndexedDB fixture; bounded diagnostic observation only, no generated task, product setting or API change.",
+  "browser_engine": "firefox",
+  "ascii_runtime_path": false,
+  "playwright_version": "1.62.1",
+  "steps": [
+    {
+      "name": "launch owned native browser",
+      "passed": true,
+      "milliseconds": 1647
+    },
+    {
+      "name": "load owned blank page",
+      "passed": true,
+      "milliseconds": 5313
+    },
+    {
+      "name": "read browser Web features",
+      "passed": true,
+      "milliseconds": 18,
+      "value": {
+        "secure": false,
+        "indexedDB": "object",
+        "uuid": "undefined",
+        "random": "function",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+      }
+    },
+    {
+      "name": "import exact journal helper bundle",
+      "passed": true,
+      "milliseconds": 34,
+      "value": [
+        "journalDatabaseName",
+        "journalDatabaseVersion",
+        "rawJournalTransaction"
+      ]
+    },
+    {
+      "name": "commit native fixture documents and original",
+      "passed": false,
+      "milliseconds": 20007,
+      "error": "Diagnostic observation window ended: commit native fixture documents and original"
+    },
+    {
+      "name": "capture diagnostic page state",
+      "passed": false,
+      "milliseconds": 20010,
+      "error": "Diagnostic observation window ended: capture diagnostic page state"
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/native-blank"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/native-probe.mjs"
+    }
+  ],
+  "snapshots": [],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+  "browser_version": "155.0",
+  "error": {
+    "name": "Error",
+    "message": "Diagnostic observation window ended: commit native fixture documents and original"
+  },
+  "close_errors": [
+    "browserContext.close: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe -no-remote -headless -profile E:\\dev\\sandbox\\无限画布\\.local\\studio147\\firefox-unicode-3d4f2509-cba1-4b14-88c9-0e73d3e60083\\playwright_firefoxdev_profile-xE92vh -juggler-pipe -silent\n<launched> pid=7932\n[pid=7932][err] *** You are running in headless mode.\n[pid=7932][err] JavaScript warning: resource://services-settings/Utils.sys.mjs, line 125: unreachable code after return statement\n[pid=7932][out] \n[pid=7932][out] Juggler listening to the pipe\n[pid=7932][err] [WARN  rkv::backend::impl_safe::environment] `load_ratio()` is irrelevant for this storage backend.\n[pid=7932][out] Crash Annotation GraphicsCriticalError: |[0][GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt (t=3.64572) [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt\n[pid=7932][err] JavaScript error: chrome://juggler/content/Helper.js, line 82: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]\n[pid=7932][out] console.error: (new TypeError(\"can't access property \\\"find\\\", this._searchProviderInfo is null\", \"moz-src:///browser/components/search/SearchSERPTelemetry.sys.mjs\", 1222))\n[pid=7932][out] console.error: [Exception... \"Favicon at \"http://43.165.167.179:39445/favicon.ico\" failed to load.\"  nsresult: \"0x80004004 (NS_ERROR_ABORT)\"  location: \"JS frame :: resource:///modules/FaviconLoader.sys.mjs :: onStopRequest :: line 279\"  data: no]\n[pid=7932][err] [ERROR shell_windows::taskbar::shortcut] Error matching shortcut: Error { code: HRESULT(0x80004005), message: \"未指定的错误\" }\n[pid=7932][err] [ERROR shell_windows::taskbar::shortcut] Error matching shortcut: Error { code: HRESULT(0x80004005), message: \"未指定的错误\" }\n[pid=7932][out] console.error: [Exception... \"Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIWinTaskbar.getTaskbarProgress]\"  nsresult: \"0x80070057 (NS_ERROR_ILLEGAL_VALUE)\"  location: \"JS frame :: moz-src:///browser/components/downloads/DownloadsTaskbar.sys.mjs :: #windowsAttachIndicator :: line 181\"  data: no]"
+  ]
+}

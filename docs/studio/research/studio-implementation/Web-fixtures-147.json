@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "scope": "Independent PNG integrity/decode and exact owned-profile process inspection, not a product source/build/API change.",
+  "pillow_version": "12.3.0",
+  "old_fixture": {
+    "bytes": 68,
+    "sha256": "1f3b40322c29a8108ead1415f2aae739495eaee8b1952323ffcdc1a4258ea186",
+    "verification_passed": false,
+    "error": "broken PNG file (bad header checksum in b'IDAT')"
+  },
+  "fixtures": [
+    {
+      "file": "docs/media/studio-147/fixtures/web-original.png",
+      "bytes": 69,
+      "sha256": "6d8a138844c3f3e4d69d522fd0b8e3d1cac0414ffc63bfeda43e9e3d860266f2",
+      "mode": "RGB",
+      "size": [
+        1,
+        1
+      ],
+      "crc_verified": true,
+      "full_decode_passed": true
+    },
+    {
+      "file": "docs/media/studio-147/fixtures/web-reference.png",
+      "bytes": 69,
+      "sha256": "659bfb16b7df25318d4c9e9cc86227a01b716b3791b6a59ded2f4338d542d631",
+      "mode": "RGB",
+      "size": [
+        1,
+        1
+      ],
+      "crc_verified": true,
+      "full_decode_passed": true
+    }
+  ],
+  "owned_Web_test_browser_processes_remaining": [],
+  "user_browsers_closed": false,
+  "virtualization_used": false
+}

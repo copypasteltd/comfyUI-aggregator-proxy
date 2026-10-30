@@ -1,0 +1,150 @@
+{
+  "passed": false,
+  "at": "2026-10-30T15:11:50.031Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "scope": "Two native HTTP origins on one Windows host and synthetic existing-API protocol; not a production API/GPU, cross-machine or physical touch test",
+  "checks": [
+    "desktop:explicit-api-default-no-eager-api-call",
+    "desktop:cross-origin-catalog-business-key-only-admin-is-link",
+    "desktop:new-connection-does-not-inherit-static-origin",
+    "desktop:published-models-and-real-schema-worker",
+    "desktop:no-admin-worker-comfy-agent-requests-no-page-errors",
+    "390:explicit-api-default-no-eager-api-call",
+    "390:cross-origin-catalog-business-key-only-admin-is-link",
+    "390:new-connection-does-not-inherit-static-origin",
+    "390:published-models-and-real-schema-worker",
+    "390:no-admin-worker-comfy-agent-requests-no-page-errors"
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": true
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": true
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": true
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": true
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": true
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-147/catalog-webkit-2026-10-30T15-11-49-620Z/independent-connection-desktop.png",
+      "sha256": "eaee9c5cc34076deb7dc30ee5e98ad8cfd813d81f48bbbaed834f5ae3f99962d"
+    },
+    {
+      "file": "docs/media/studio-147/catalog-webkit-2026-10-30T15-11-49-620Z/independent-models-desktop.png",
+      "sha256": "9b0aa30dd1dd2216022461d415c5ba95ed29544e8dd2d978dfffe8699be75cf1"
+    },
+    {
+      "file": "docs/media/studio-147/catalog-webkit-2026-10-30T15-11-49-620Z/independent-connection-390.png",
+      "sha256": "573e20a984a88ebe60cc2f8c8bbcb7caa3167915bf649e187d9213512e9b1059"
+    },
+    {
+      "file": "docs/media/studio-147/catalog-webkit-2026-10-30T15-11-49-620Z/independent-models-390.png",
+      "sha256": "140f59b419fa53abef12d0c0092eb88dfeaa54b81b24f998336c1669f4e67a1a"
+    }
+  ],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "static_and_fixture_servers_closed": true
+  },
+  "origins": {
+    "canvas": "http://192.168.31.95:8727",
+    "synthetic_existing_api": "http://192.168.31.95:8726",
+    "native_non_loopback": true
+  },
+  "browser_engine": "webkit",
+  "native_browser": {
+    "engine": "webkit",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "2359",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/webkit-2359/Playwright.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 2,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "26.6",
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(gets.length >= 6 && gets.every((request) => request.bearer_present && !request.cookie_present && request.origin_matches_canvas))\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_independent_canvas.mjs:125:5",
+  "resource_close_errors": [],
+  "static_bytes_unchanged": true
+}

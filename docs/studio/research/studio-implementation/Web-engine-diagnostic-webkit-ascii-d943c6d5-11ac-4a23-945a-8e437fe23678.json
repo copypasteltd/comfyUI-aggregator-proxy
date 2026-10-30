@@ -1,0 +1,274 @@
+{
+  "passed": false,
+  "scope": "Read-only public Web startup plus synthetic native IndexedDB fixture; bounded diagnostic observation only, no generated task, product setting or API change.",
+  "browser_engine": "webkit",
+  "ascii_runtime_path": true,
+  "playwright_version": "1.63.0",
+  "steps": [
+    {
+      "name": "launch owned native browser",
+      "passed": true,
+      "milliseconds": 127
+    },
+    {
+      "name": "load owned blank page",
+      "passed": true,
+      "milliseconds": 250
+    },
+    {
+      "name": "read browser Web features",
+      "passed": true,
+      "milliseconds": 8,
+      "value": {
+        "secure": false,
+        "indexedDB": "object",
+        "uuid": "undefined",
+        "random": "function",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+      }
+    },
+    {
+      "name": "import exact journal helper bundle",
+      "passed": true,
+      "milliseconds": 13,
+      "value": [
+        "journalDatabaseName",
+        "journalDatabaseVersion",
+        "rawJournalTransaction"
+      ]
+    },
+    {
+      "name": "commit native fixture documents and original",
+      "passed": false,
+      "milliseconds": 20015,
+      "error": "Diagnostic observation window ended: commit native fixture documents and original"
+    },
+    {
+      "name": "capture diagnostic page state",
+      "passed": true,
+      "milliseconds": 12,
+      "value": {
+        "url": "/native-blank",
+        "title": "Owned Web browser diagnostic",
+        "text": "",
+        "events": [
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "phase": "open-request"
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "phase": "upgradeneeded"
+          },
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "phase": "success"
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-open",
+            "mode": "readonly",
+            "stores": [
+              "budgets",
+              "documents",
+              "editors",
+              "intents",
+              "local_media",
+              "results",
+              "uploads"
+            ]
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-open",
+            "mode": "readwrite",
+            "stores": [
+              "documents",
+              "local_media"
+            ]
+          },
+          {
+            "store": "documents",
+            "phase": "add-request"
+          },
+          {
+            "store": "documents",
+            "phase": "add-request"
+          },
+          {
+            "store": "local_media",
+            "phase": "add-request"
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-complete",
+            "mode": "readonly",
+            "stores": [
+              "budgets",
+              "documents",
+              "editors",
+              "intents",
+              "local_media",
+              "results",
+              "uploads"
+            ]
+          },
+          {
+            "store": "local_media",
+            "phase": "add-error",
+            "error": "UnknownError"
+          },
+          {
+            "database": "comfy-aggregator-studio:journal",
+            "phase": "transaction-error",
+            "mode": "readwrite",
+            "stores": [
+              "documents",
+              "local_media"
+            ]
+          },
+          {
+            "store": "documents",
+            "phase": "add-success"
+          }
+        ],
+        "databases": [
+          {
+            "name": "comfy-aggregator-studio:journal",
+            "version": 5
+          }
+        ],
+        "screenshot": {
+          "file": "docs/media/studio-147/webkit-ascii-d943c6d5-11ac-4a23-945a-8e437fe23678/page-0.png",
+          "bytes": 8269,
+          "sha256": "4668a72664d371587c3e5c47788966cb9ac3b92458dbef132199a371da540379"
+        }
+      }
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/native-blank"
+    },
+    {
+      "method": "GET",
+      "origin": "http://43.165.167.179:39445",
+      "path": "/native-probe.mjs"
+    }
+  ],
+  "snapshots": [
+    {
+      "url": "/native-blank",
+      "title": "Owned Web browser diagnostic",
+      "text": "",
+      "events": [
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "phase": "open-request"
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "phase": "upgradeneeded"
+        },
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "phase": "success"
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-open",
+          "mode": "readonly",
+          "stores": [
+            "budgets",
+            "documents",
+            "editors",
+            "intents",
+            "local_media",
+            "results",
+            "uploads"
+          ]
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-open",
+          "mode": "readwrite",
+          "stores": [
+            "documents",
+            "local_media"
+          ]
+        },
+        {
+          "store": "documents",
+          "phase": "add-request"
+        },
+        {
+          "store": "documents",
+          "phase": "add-request"
+        },
+        {
+          "store": "local_media",
+          "phase": "add-request"
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-complete",
+          "mode": "readonly",
+          "stores": [
+            "budgets",
+            "documents",
+            "editors",
+            "intents",
+            "local_media",
+            "results",
+            "uploads"
+          ]
+        },
+        {
+          "store": "local_media",
+          "phase": "add-error",
+          "error": "UnknownError"
+        },
+        {
+          "database": "comfy-aggregator-studio:journal",
+          "phase": "transaction-error",
+          "mode": "readwrite",
+          "stores": [
+            "documents",
+            "local_media"
+          ]
+        },
+        {
+          "store": "documents",
+          "phase": "add-success"
+        }
+      ],
+      "databases": [
+        {
+          "name": "comfy-aggregator-studio:journal",
+          "version": 5
+        }
+      ],
+      "screenshot": {
+        "file": "docs/media/studio-147/webkit-ascii-d943c6d5-11ac-4a23-945a-8e437fe23678/page-0.png",
+        "bytes": 8269,
+        "sha256": "4668a72664d371587c3e5c47788966cb9ac3b92458dbef132199a371da540379"
+      }
+    }
+  ],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "executable": "C:/Users/carzy/AppData/Local/ms-playwright/webkit-2359/Playwright.exe",
+  "browser_version": "26.6",
+  "error": {
+    "name": "Error",
+    "message": "Diagnostic observation window ended: commit native fixture documents and original"
+  },
+  "close_errors": []
+}

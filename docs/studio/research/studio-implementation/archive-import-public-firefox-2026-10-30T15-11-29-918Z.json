@@ -1,0 +1,141 @@
+{
+  "passed": false,
+  "at": "2026-10-30T15:11:30.355Z",
+  "scope": "Frozen production Web UI on native Windows browser/plain non-localhost HTTP; synthetic ZIPs and injected native transaction faults, not actual disk exhaustion, API/GPU or physical touch hardware verification",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "checks": [
+    {
+      "name": "all malformed or corrupt archives rejected before any file/project writes; original DB records unchanged",
+      "detail": {
+        "rejected_archives": 12
+      }
+    },
+    {
+      "name": "actual project ZIP export omits header/cookie/fragment credentials, preserves source document and original SHA",
+      "detail": true
+    },
+    {
+      "name": "UI ZIP includes reference-only originals once, retains ordered duplicate references and leaves prompt literals unchanged",
+      "detail": true
+    },
+    {
+      "name": "missing reference-only original refuses UI ZIP download without changing project documents; owned original restored after injection",
+      "detail": true
+    },
+    {
+      "name": "second native original write quota fault leaves all projects unimported and originals intact; one new unreferenced blob retained",
+      "detail": {
+        "newly_staged_blobs_retained": 1,
+        "actual_disk_exhaustion": false
+      }
+    },
+    {
+      "name": "successful two-project import publishes one atomic document revision with fresh keys, original bytes and offline-only task notes",
+      "detail": true
+    }
+  ],
+  "rejected_archives": [
+    {
+      "name": "unknown-version",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "invalid-title",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "zero-zoom",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "malformed-images",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "duplicate-project",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "duplicate-file-path",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "prototype-field",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "wrong-length",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "wrong-sha",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "missing-file",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "undeclared-reference-original",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "missing-reference-original",
+      "no_original_or_document_writes": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-147/archive-firefox-2026-10-30T15-11-29-918Z/public-archive-invalid-desktop.png",
+      "sha256": "9eabf0351b86d6053a80ed8898865dba1d489c4e85e69ed128f463e81d134168",
+      "first_page_elapsed_seconds": 4.593
+    },
+    {
+      "file": "docs/media/studio-147/archive-firefox-2026-10-30T15-11-29-918Z/public-archive-second-file-failed.png",
+      "sha256": "f037e7ead995eafa67eb48e974176b1e9275528bc9b783794ab261c155e910a2",
+      "first_page_elapsed_seconds": 5.694
+    },
+    {
+      "file": "docs/media/studio-147/archive-firefox-2026-10-30T15-11-29-918Z/public-archive-imported-library-desktop.png",
+      "sha256": "d5fff7ef4579ee2281dcb66c77f8f4c84b4babc862e045d7689388dee1ec1459",
+      "first_page_elapsed_seconds": 6.301
+    },
+    {
+      "file": "docs/media/studio-147/archive-firefox-2026-10-30T15-11-29-918Z/public-archive-failure-firefox-2026-10-30T15-11-29-918Z.png",
+      "sha256": "cefa6af08e68c1955537d565514494044a0d8edd034e0232495a9f07586f5b0a",
+      "first_page_elapsed_seconds": 29.217
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "public_static_site": true,
+  "suite": "147",
+  "origin": "http://43.165.167.179:39445",
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "first_page_started_at": 1793373096286,
+  "failure": "page.waitForFunction: Timeout 20000ms exceeded.\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_archive_import.mjs:233:16",
+  "resource_close_errors": [],
+  "private_videos": [
+    ".local/studio147/archive-firefox-2026-10-30T15-11-29-918Z/page@8f72748857a7d8ac23398c27747e0a24.webm"
+  ],
+  "static_bytes_unchanged": true
+}
