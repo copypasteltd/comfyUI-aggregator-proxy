@@ -31,9 +31,12 @@ def main():
     elif action == 'promote':
         script = f"test ! -e '{PROTECTED}/promote.state'\nprintf 'running\\n' > '{PROTECTED}/promote.state'\nnohup bash -c '/opt/comfyui-aggregator/current/venv/bin/python -B {PROTECTED}/studio137-host.py promote && echo passed > {PROTECTED}/promote.state || echo failed > {PROTECTED}/promote.state' > '{PROTECTED}/promote.log' 2>&1 < /dev/null &\necho promotion_started\n"
     elif action == 'status':
-        script = '\n'.join(f"test ! -f '{PROTECTED}/{name}' || cat '{PROTECTED}/{name}'" for name in ('prepare.state', 'prepared.json', 'promote.state', 'promote.json'))
+        script = '\n'.join(f"test ! -f '{PROTECTED}/{name}' || cat '{PROTECTED}/{name}'" for name in ('prepare.state', 'prepared.json', 'promote.state', 'promote.json', 'admin-binding.json'))
+    elif action == 'admin-binding':
+        script = transfer({TOOLS / 'studio137-host.py': 'studio137-host.py'})
+        script += f"/opt/comfyui-aggregator/current/venv/bin/python -B '{PROTECTED}/studio137-host.py' admin-binding\n"
     else:
-        raise SystemExit('Choose probe, prepare, promote or status')
+        raise SystemExit('Choose probe, prepare, promote, admin-binding or status')
     value = deploy.run(script)
     result = {'action': action, 'at': datetime.now(UTC).isoformat(), **value}
     label = datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')

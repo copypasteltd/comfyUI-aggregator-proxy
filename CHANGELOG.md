@@ -4,7 +4,8 @@
 
 - 新增按模型显式启用的持久加权设备公平；同物理GPU去重、任务冻结池版本，只有成功领取才原子计数，旧任务/模型默认原策略。
 - Adds graphical policy/weights and read-only pool statistics to the existing Lime Admin. No second generation queue or Worker protocol change; original quotas, unknown execution protection and runtime approvals remain enforced.
-- 38 native PostgreSQL focused cases, 1,695 compatibility cases, Admin type/build and five Chromium groups pass, including four independent processes. Live deployment awaits its final receipt; failed runs remain preserved. Physical fleet capacity and full acceptance remain HOLD/pending-test. See [137](docs/137-持久模型池与全局设备均衡.md).
+- 38 native PostgreSQL focused cases, 1,695 compatibility cases, Admin type/build, five synthetic Chromium groups and three real Admin groups pass, including four independent processes. Native 137.1 migration is deployed after a verified 19,935,256-byte backup; 564 source inputs, six public HTTP checks and all 13 existing model/pool projections pass. The original Worker and static136.1 remain active.
+- 修复生产Admin目录仍固定128.1的问题，改为跟随current/admin并保持配置0600；失败探针、修复回执、实际页面截图和演示MP4/GIF均保留。未新增真实生成或修改生产模型/业务Key；物理多卡、10～20台容量和完整签收仍为HOLD/pending-test。见[137](docs/137-持久模型池与全局设备均衡.md)。
 
 ## 136 · 已知任务Key轮换接管 / Known-task access after rotation
 

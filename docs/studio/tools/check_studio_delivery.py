@@ -53,6 +53,71 @@ def frozen_sha(revision, name):
     return frozen_sources(revision)[name]
 
 
+def check_device_pool_delivery():
+    folder = REPOSITORY / 'docs/evidence/studio-release-137'
+    focused = read(folder / 'device-pool-1c1057f48daa49689f24a09a0dea7505.json')
+    compatibility = read(folder / 'device-pool-ed2043ab0dd24f0eb08d87ea86b52f2f.json')
+    for result, count in ((focused, 38), (compatibility, 1695)):
+        assert result['passed'] and result['sources_unchanged'] and result['test_database_backup_verified']
+        assert result['counts'] == {'tests': count, 'failures': 0, 'errors': 0, 'skipped': 0}
+        assert not result['database_durability']['crash_durability_tested'] and not result['real_resource_acceptance']
+        for name, digest in result['source_sha256'].items():
+            assert sha(REPOSITORY / name) == digest
+    live = read(folder / 'live-delivery-1371.json')
+    build = read(folder / 'build-1371.json')
+    assert live['passed'] and live['git_inputs_rechecked'] and live['source_revision'] == build['application_source_revision']
+    assert len(live['runtime_source_files']) == live['runtime_source_files_count'] == build['source_files'] == 564
+    for name, digest in live['runtime_source_files'].items():
+        assert sha(REPOSITORY / 'app' / name) == digest == frozen_sha(live['source_revision'], 'app/' + name)
+    assert live['backend'] == build['release_id'] == 'linux-20261030.137.1' and live['studio'] == 'studio-20261030.136.1'
+    assert all(state == 'active' for state in live['services'].values()) and live['original_worker_pid_unchanged']
+    assert live['database']['database_head'] == '04d137a00001'
+    assert live['database']['fsync'] == live['database']['synchronous_commit'] == 'on'
+    assert live['database']['balanced_models'] == live['database']['balanced_jobs'] == 0
+    assert len(live['responses']) == 6 and len(live['cors']) == 2 and len(live['admin_model_checks']) == 13
+    assert all(value['status'] == 200 and value['allow_origin'] in ('*', value['requested_origin']) for value in live['cors'])
+    assert all(value['policy'] == 'first_ready' and value['empty_legacy_pool'] for value in live['admin_model_checks'])
+    assert live['generation_posts'] == live['production_model_or_key_mutations'] == 0 and live['admin_session_closed']
+    assert live['full_acceptance'] == 'HOLD' and live['new_feature_acceptance'] == 'pending-test'
+    prepared = read(folder / 'prepared-1371.json')
+    promotion = read(folder / 'promotion-1371.json')
+    binding = read(folder / 'admin-binding-1371.json')
+    assert prepared['passed'] and promotion['passed'] and binding['passed']
+    assert prepared['source_revision'] == live['source_revision'] and prepared['wheel_payload_files_verified'] == live['wheel_payload_files_verified'] == 254
+    assert promotion['database_migration_executed'] and not promotion['worker_restarted'] and not promotion['schema_downgraded']
+    assert promotion['worker_pid_unchanged'] and not promotion['studio_static_pointer_changed']
+    assert promotion['backup']['bytes'] > 0 and re.fullmatch('[a-f0-9]{64}', promotion['backup']['sha256'])
+    for name in ('jobs', 'content', 'models'):
+        assert promotion['before'][name] == promotion['stopped'][name] == promotion['after'][name] == live['database'][name]
+    assert binding['configuration_fields_changed'] == ['admin_dist'] and binding['configuration_mode'] == '0600' and binding['protected_original_saved']
+    assert binding['admin_path'] == '/opt/comfyui-aggregator/current/admin' and not binding['worker_restarted']
+    assert not read(folder / 'live-admin-prebinding-1371.json')['passed']
+    admin_build = read(folder / 'admin-build-20261030T050527743988Z.json')
+    browser = read(folder / 'admin-browser-1371.json')
+    public = read(folder / 'public-admin-1372.json')
+    assert admin_build['passed'] and browser['passed'] and public['passed']
+    assert admin_build['openapi_sha256'] == sha(REPOSITORY / 'app/config/openapi.json')
+    for name, digest in admin_build['source_sha256'].items():
+        assert sha(REPOSITORY / 'app/apps/admin_web' / name) == digest
+    assert browser['generated_dist_verified'] and len(browser['checks']) == 5 and browser['owned_browser_closed'] and browser['owned_server_closed']
+    assert len(public['checks']) == 3 and all(public['cleanup'].values()) and not public['page_errors'] and not public['blocked_mutations']
+    assert not read(folder / 'public-admin-1371.json')['passed']
+    assert public['generation_posts'] == public['production_model_or_key_mutations'] == 0
+    for item in public['screenshots']:
+        original = ROOT / item['file']
+        assert original.stat().st_size == item['bytes'] and sha(original) == item['sha256'] == sha(REPOSITORY / 'docs/studio' / original.relative_to(ROOT / 'docs'))
+    media = read(ROOT / 'docs/media/studio-137/media-manifest.json')
+    assert media['passed'] and len(media['files']) == 5 and sha(ROOT / media['source_report']) == media['source_report_sha256']
+    for item in media['files']:
+        original = ROOT / 'docs/media/studio-137' / item['file']
+        assert original.stat().st_size == item['bytes'] and sha(original) == item['sha256'] == sha(REPOSITORY / 'docs/studio/media/studio-137' / item['file'])
+        if original.suffix in ('.mp4', '.gif'):
+            assert item['fully_decoded']
+    return {'current_backend_release': live['backend'], 'current_backend_compatibility_cases': 1695, 'device_pool_focused_cases': 38,
+            'device_pool_synthetic_browser_groups': 5, 'device_pool_public_browser_groups': 3, 'current_backend_source_files': 564,
+            'device_pool_physical_fleet_accepted': False, 'full_acceptance': 'HOLD'}
+
+
 def main():
     source = read(DEST / "delivery-source.json")
     for name, digest in source["source_files"].items():
@@ -501,13 +566,14 @@ def main():
         assert item["fully_decoded"] and file.stat().st_size == item["bytes"] and sha(file) == item["sha256"] == sha(REPOSITORY / "docs/studio/media/studio-131" / item["file"])
     assert all(not read(evidence / name)["passed"] for name in access_notes["failed_reports_preserved"])
     assert access_notes["full_acceptance"] == "HOLD" and access_notes["no_preexisting_key_rotated_or_reenabled"] and access_notes["no_backend_migration"]
-    print(json.dumps({"passed": True, "at": datetime.now(UTC).isoformat(),
+    device_pool = check_device_pool_delivery()
+    print(json.dumps({"passed": True, "at": datetime.now(UTC).isoformat(), **device_pool,
                       "scope": "Read-only source-mirror, public media/report/screenshot hashes, eight call receipts, all46 IDs and temporary Key revocation; not full runtime/phone/fleet acceptance",
                       "source_files_verified": len(source["source_files"]), "actual_gpu_modes": 8,
                       "browser_checks": 9, "public_samples": published, "large_glb_raw_published": False, "interactive_glb_verified": True,
                       "requirements_retained": 46, "temporary_keys_disabled": 5, "rejected_validation_credentials": 6, "actual_image_end_to_end_seconds": 1483, "storage_checks": 22,
                       "current_ui_checks": 18, "task_backup_checks": 25, "submission_lookup_checks": 15, "batch_checks": 15, "model3d_checks": 17, "historical_public_model3d_checks": 4, "current_unit_tests": 179, "upload_cache_checks": 28, "task_access_checks": 31, "native_browser_checks": 171, "public_storage_space_checks": 6, "live_key_rotation_checks": 5, "clean_install_and_isolated_final_build_verified": True,
-                      "backend_compatibility_cases": 1486, "live_lookup_checks": 5,
+                      "historical_backend_compatibility_cases": 1486, "live_lookup_checks": 5,
                       "public_storage_upgrade_checks": 3, "current_static_release": "studio-20261030.136.1", "browser_storage_version": 4,
                       "browser_storage_downgrade_supported": False, "virtualization_used": False}, ensure_ascii=False))
 

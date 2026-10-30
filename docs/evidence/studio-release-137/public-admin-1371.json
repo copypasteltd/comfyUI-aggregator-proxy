@@ -1,0 +1,54 @@
+{
+  "passed": false,
+  "at": "2026-10-30T05:45:27.289Z",
+  "scope": "real HTTP/Admin read-only pages; native desktop Chromium with 390px viewport, not physical GPU balancing or phone acceptance",
+  "checks": [
+    "real deployed desktop Admin reads legacy pool and refreshes with HTTP 200",
+    "real model mapping loads graphical routing editor without saving or changing the model",
+    "390px deployed Admin opens and closes real pool statistics; physical phone not tested"
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-137/live-device-pool-desktop.png",
+      "bytes": 158736,
+      "sha256": "61d1916bccfb10e5affab0002237dae90ac4cd9769620e6629d4dcb3cea9183e"
+    },
+    {
+      "file": "docs/media/studio-137/live-device-routing-desktop.png",
+      "bytes": 164689,
+      "sha256": "6744365ebc9f1e1bd7ab312ef6a578b60c109f1033bc45ae5acb56d7c39e0463"
+    },
+    {
+      "file": "docs/media/studio-137/live-device-pool-390.png",
+      "bytes": 41396,
+      "sha256": "88742be7260038d3d8c5f057ca52c59e7ed4776a5193de81739efd1f9f4dea83"
+    }
+  ],
+  "pool_reads": [
+    {
+      "status": 200
+    },
+    {
+      "status": 200
+    },
+    {
+      "status": 200
+    }
+  ],
+  "page_errors": [],
+  "blocked_mutations": [
+    {
+      "path": "/admin/api/v1/session/activity",
+      "method": "POST"
+    }
+  ],
+  "generation_posts": 0,
+  "production_model_or_key_mutations": 0,
+  "cleanup": {
+    "admin_session_closed": true,
+    "owned_context_closed": true,
+    "owned_browser_closed": true
+  },
+  "virtualization_used": false,
+  "new_feature_acceptance": "pending-test"
+}

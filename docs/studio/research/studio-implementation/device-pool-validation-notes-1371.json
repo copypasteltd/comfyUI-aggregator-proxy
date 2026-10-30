@@ -1,0 +1,229 @@
+{
+  "passed": true,
+  "at": "2026-10-30T05:59:36.022314+00:00",
+  "backend": "linux-20261030.137.1",
+  "studio": "studio-20261030.136.1",
+  "scope": "137 native code/database, synthetic and real Admin pages, HTTP/CORS, current Git/runtime and historical Studio evidence; no physical multi-GPU or phone acceptance",
+  "gates": {
+    "documentation": {
+      "exit_code": 0,
+      "result": {
+        "baseline": "v0.4",
+        "passed": true,
+        "checks": {
+          "markdown": {
+            "documents": 178,
+            "instruction_files": 1,
+            "fenced_blocks": 92,
+            "json_examples": 29,
+            "yaml_examples": 1,
+            "local_links_checked": 3443
+          },
+          "contracts": {
+            "json_files": 80,
+            "schemas": 69,
+            "fixtures": 1045,
+            "positive_fixtures": 250,
+            "negative_fixtures": 795,
+            "capabilities_covered": [
+              "image_to_3d",
+              "image_to_image",
+              "references_to_image",
+              "references_to_video",
+              "text_to_audio",
+              "text_to_image",
+              "text_to_video"
+            ]
+          },
+          "state_machine": {
+            "states": 16,
+            "terminal_states": 4,
+            "transitions": 64,
+            "guards": 24
+          },
+          "endpoints": {
+            "total": 197,
+            "by_identity": {
+              "service": 28,
+              "admin_login": 1,
+              "admin": 126,
+              "worker": 12,
+              "gateway": 28,
+              "monitoring": 2
+            },
+            "admin_permissions": 25
+          },
+          "traceability": {
+            "rules": 32,
+            "quality_scenarios": 18,
+            "work_packages": 15,
+            "requirements": 74,
+            "work_package_statuses": {
+              "in_progress": 15
+            },
+            "admin_acceptance_mapped": 16,
+            "key_acceptance_mapped": 12
+          },
+          "development_evidence": {
+            "passed": true,
+            "requirements": 74,
+            "acceptance_gates": 98,
+            "local_statuses": {
+              "framework": 7,
+              "implemented": 67
+            },
+            "named_test_references": 198,
+            "baseline_python_cases": 3593,
+            "reports": 41,
+            "current_source_files": 200,
+            "full_acceptance": "pending"
+          },
+          "topic_presence": {
+            "checks": 14,
+            "scope": "Text presence only, not proof of correctness"
+          }
+        },
+        "errors": [],
+        "report_written": false
+      },
+      "stdout_sha256": "9a1bbf4102f3bea65480712c5e2dd8b55d60f73d7a64c998aac37ac33179d870",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readme": {
+      "exit_code": 0,
+      "result": {
+        "at": "2026-10-30T05:57:50.365981+00:00",
+        "passed": true,
+        "entry_documents": 7,
+        "local_links_checked": 760,
+        "request_examples_validated": 3,
+        "screenshots_verified": 30,
+        "media_manifests_verified": 5,
+        "video_and_gif_fully_decoded": [
+          "admin-tour.mp4",
+          "admin-tour.gif",
+          "workflow-lifecycle.mp4",
+          "workflow-lifecycle.gif",
+          "gateway-catalog/gateway-catalog.mp4",
+          "gateway-catalog/gateway-catalog.gif",
+          "confirmed-retry/confirmed-retry.mp4",
+          "confirmed-retry/confirmed-retry.gif",
+          "wait-estimates/wait-estimates.gif",
+          "wait-estimates/wait-estimates.mp4",
+          "audit-retention/audit-retention.gif",
+          "audit-retention/audit-retention.mp4"
+        ],
+        "bilingual_capability_topics_present": true,
+        "actual_lifecycle_responses_verified": 2,
+        "catalog_responses_verified": 5,
+        "catalog_provider_receipts_are_protocol_fixtures": true,
+        "confirmed_retry_responses_verified": 3,
+        "wait_estimate_responses_verified": 3,
+        "synthetic_capture_and_cleanup_passed": true,
+        "errors": [],
+        "full_python_suite_rerun": false,
+        "runtime_protocol_changed": false
+      },
+      "stdout_sha256": "d82a382558523277064406165cf7b8c78d6ae608c4ab10e8d5c7114b4f0eecfb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "delivery": {
+      "exit_code": 0,
+      "result": {
+        "passed": true,
+        "at": "2026-10-30T05:59:35.029984+00:00",
+        "current_backend_release": "linux-20261030.137.1",
+        "current_backend_compatibility_cases": 1695,
+        "device_pool_focused_cases": 38,
+        "device_pool_synthetic_browser_groups": 5,
+        "device_pool_public_browser_groups": 3,
+        "current_backend_source_files": 564,
+        "device_pool_physical_fleet_accepted": false,
+        "full_acceptance": "HOLD",
+        "scope": "Read-only source-mirror, public media/report/screenshot hashes, eight call receipts, all46 IDs and temporary Key revocation; not full runtime/phone/fleet acceptance",
+        "source_files_verified": 265,
+        "actual_gpu_modes": 8,
+        "browser_checks": 9,
+        "public_samples": 7,
+        "large_glb_raw_published": false,
+        "interactive_glb_verified": true,
+        "requirements_retained": 46,
+        "temporary_keys_disabled": 5,
+        "rejected_validation_credentials": 6,
+        "actual_image_end_to_end_seconds": 1483,
+        "storage_checks": 22,
+        "current_ui_checks": 18,
+        "task_backup_checks": 25,
+        "submission_lookup_checks": 15,
+        "batch_checks": 15,
+        "model3d_checks": 17,
+        "historical_public_model3d_checks": 4,
+        "current_unit_tests": 179,
+        "upload_cache_checks": 28,
+        "task_access_checks": 31,
+        "native_browser_checks": 171,
+        "public_storage_space_checks": 6,
+        "live_key_rotation_checks": 5,
+        "clean_install_and_isolated_final_build_verified": true,
+        "historical_backend_compatibility_cases": 1486,
+        "live_lookup_checks": 5,
+        "public_storage_upgrade_checks": 3,
+        "current_static_release": "studio-20261030.136.1",
+        "browser_storage_version": 4,
+        "browser_storage_downgrade_supported": false,
+        "virtualization_used": false
+      },
+      "stdout_sha256": "4cc7a2f0bb21cd7c5f6c9fb152bd9382d18f85356ac14b19a82193df4245eb8b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "report_sha256": {
+    "aggregator-service/docs/evidence/studio-release-137/admin-binding-1371.json": "b9547ea6ef834a175a02cc224d36bc544cd4d5f01e2e0e38bd83e70fe4382ae9",
+    "aggregator-service/docs/evidence/studio-release-137/admin-browser-1371.json": "21fc747cdb4b52de47adeafd8d5747082119ddc2ee12ea92ca84d2914360394f",
+    "aggregator-service/docs/evidence/studio-release-137/admin-build-20261030T050527743988Z.json": "f1ddc95a15a04c97c317c5e4098456f4afadd036021073b7a14f961e805f9801",
+    "aggregator-service/docs/evidence/studio-release-137/build-1371.json": "995da50bf36ac8accdec171b5f02cccca3a67660ca2edce87f5ed9f34428cc56",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-1c1057f48daa49689f24a09a0dea7505.json": "4a64ae9857fc2b8628f5b361d82fb1328caff429e58a727f4bd18f78ea577016",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-1fb5004dc92b4f339f25fe2b9377a53e.json": "ceda7a433d49d82a30becfd4dd6b76af83e67ddc3ee5707b34cd5a5f43b24341",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-4ced917ed1ce4282a6d0e0196bf8211f.json": "fdfd0151951b9527a5171dec387fb3ffe977df148c5e50a55a65feb4addd014e",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-5174ce67f818492497deed799e23ac72.json": "525927f87ad97ee826a70c00f33a148d0e3482eec4a66a57994039a557b663a5",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-56299902ca23420395cf9e97d18794e3.json": "4235a2f27dce0069d148e543a97c33a64ededaaff16ea98068befc2a4f9810f3",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-68f167eaf4ef4c2682df240facbe7e47.json": "e31d391cb6cc1d8df936ed3d8179d4c7a509fc5206e22eba2ad84839a2b551ec",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-a2a86e11df4f4a6e92fe86085fb4dbe5.json": "862c1ca56dd99068b0bf8eaf7398817c1e16c926b58c6cb988559b6e73ec8921",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-a6a20ec0df5346abbf4f30c4f1b86a2c.json": "343d5aa2b2d88bce4be45142d37efca8dd7f9dcbd5b3b9d07337d173175e1266",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-bbe74f26c32c4068a73470b270af1ee0.json": "dc5523f2404fdad4f4c07d7e839663a9bc27605a556340184c22ae75811e1e25",
+    "aggregator-service/docs/evidence/studio-release-137/device-pool-ed2043ab0dd24f0eb08d87ea86b52f2f.json": "e374404d8f6e787cc2c995ea714561e4831ff7a115fcee11ca1daf08ffb3664e",
+    "aggregator-service/docs/evidence/studio-release-137/live-admin-prebinding-1371.json": "bad8cbe46338cc564d5d66bbea2028fc2bbdbc74d209bd41d91d98ff06487795",
+    "aggregator-service/docs/evidence/studio-release-137/live-delivery-1371.json": "6b98fd110cdb4b61d31d9265254b93783128a4844eb51b003f462482abe64e24",
+    "aggregator-service/docs/evidence/studio-release-137/native-component-1371.json": "e117ae1830935151ddf46e4593dd1953eab54a08168b4e9f2550d3bae8fa584a",
+    "aggregator-service/docs/evidence/studio-release-137/native-wheels-20261030T053055381476Z.json": "3e5fe4cf38200a3d5897d8d4d7f6f5713977a2f9b204c374961a891c93015ca7",
+    "aggregator-service/docs/evidence/studio-release-137/prepared-1371.json": "2ba75ad75bfbcfb8e0c47067c50eff87ab2fb7ce4e5c2d885e2c11a1b8ee7f4e",
+    "aggregator-service/docs/evidence/studio-release-137/promotion-1371.json": "f7feb4a9f89e5eb5c657380dbc2723ab50e4c3ba592c299c839695458527a785",
+    "aggregator-service/docs/evidence/studio-release-137/public-admin-1371.json": "68d33b6acf93083bd40548f340bd91fd007c9244231aa98ccc2f6e3bcfcc168c",
+    "aggregator-service/docs/evidence/studio-release-137/public-admin-1372.json": "1038e4549ce777a255467a9590b1c2d6239f9d70dd0ab30bce63adb364990d85",
+    "docs/media/studio-137/media-manifest.json": "64f1c0e317798b8e662b350ec1282cf87920e81ebf05e24490383d901483d150"
+  },
+  "failed_reports_preserved": [
+    "device-pool-1fb5004dc92b4f339f25fe2b9377a53e.json",
+    "device-pool-4ced917ed1ce4282a6d0e0196bf8211f.json",
+    "device-pool-5174ce67f818492497deed799e23ac72.json",
+    "device-pool-56299902ca23420395cf9e97d18794e3.json",
+    "device-pool-68f167eaf4ef4c2682df240facbe7e47.json",
+    "device-pool-a2a86e11df4f4a6e92fe86085fb4dbe5.json",
+    "device-pool-bbe74f26c32c4068a73470b270af1ee0.json",
+    "live-admin-prebinding-1371.json",
+    "public-admin-1371.json"
+  ],
+  "native_focused_cases": 38,
+  "native_compatibility_cases": 1695,
+  "synthetic_admin_groups": 5,
+  "real_admin_groups": 3,
+  "existing_models_checked": 13,
+  "new_real_generation_posts": 0,
+  "production_models_or_keys_modified": false,
+  "local_test_postgres_stopped": true,
+  "owned_browsers_closed": true,
+  "virtualization_used": false,
+  "manual_acceptance": "pending-test",
+  "physical_fleet_acceptance": "pending",
+  "full_acceptance": "HOLD"
+}

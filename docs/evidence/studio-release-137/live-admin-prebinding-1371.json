@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "recorded_at": "2026-10-30T05:44:49.894586+00:00",
+  "check": "public Admin index equals new Admin build",
+  "failure": "configured Admin directory remained pinned to the old 128.1 release",
+  "observed_configured_directory": "/opt/comfyui-aggregator/releases/linux-20261029.128.1/admin",
+  "observed_configured_index_sha256": "d0216b8dbefd89e023c05d06305261d293b197136654fba183b7e5d5916aaf50",
+  "expected_index_sha256": "6aa7a6889780517d8d1ab175a398b5cd4403bd5373b0ea63ecad43e1f4990898",
+  "resolution_receipt": "admin-binding-1371.json",
+  "scope": "failed deployment read check before static-directory binding repair; retained without rewriting"
+}

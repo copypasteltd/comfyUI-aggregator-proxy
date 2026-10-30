@@ -4,6 +4,8 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import re
+import shutil
 import subprocess
 import sys
 from datetime import UTC, datetime
@@ -60,6 +62,55 @@ config.set_main_option('script_location',str(Path.cwd()/'migrations'))
 command.upgrade(config,'head')
 """
     subprocess.run([str(core.RELEASE / 'venv/bin/python'), '-B', '-c', source], cwd=core.RELEASE, check=True, env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})
+
+
+def repair_admin_binding():
+    """Replace only the verified old static-directory pin; keep protected config private."""
+    assert (core.BASE / 'current').resolve() == core.RELEASE
+    from generation_infrastructure.settings import Settings
+    path = Path('/etc/comfyui-aggregator/cloud.env')
+    original = path.read_bytes()
+    before = Settings(_env_file=path)
+    old = core.BASE / 'releases/linux-20261029.128.1/admin'
+    assert before.admin_dist == old and old.is_dir()
+    assert path.stat().st_uid == 0 and path.stat().st_mode & 0o777 == 0o600
+    assert (core.RELEASE / 'admin/index.html').is_file()
+    replacement, count = re.subn(rb'(?m)^GEN_ADMIN_DIST=[^\r\n]*', b'GEN_ADMIN_DIST=/opt/comfyui-aggregator/current/admin', original)
+    assert count == 1 and replacement != original
+    backup = TASK / 'cloud-before-admin-binding.env'
+    assert not backup.exists()
+    shutil.copy2(path, backup)
+    assert backup.read_bytes() == original and backup.stat().st_mode & 0o777 == 0o600
+    temporary = path.with_name('cloud.env.studio137-pending')
+    before_probe = probe()
+    core.command('systemctl', 'stop', 'comfy-aggregator-api.service')
+    changed = False
+    try:
+        stopped = probe()
+        assert all(stopped[key] == before_probe[key] for key in ('jobs', 'content', 'models'))
+        fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(fd, 'wb') as output:
+            output.write(replacement); output.flush(); os.fsync(output.fileno())
+        after = Settings(_env_file=temporary)
+        expected = before.model_dump(); expected['admin_dist'] = core.BASE / 'current/admin'
+        assert after.model_dump() == expected and after.admin_dist.resolve() == core.RELEASE / 'admin'
+        temporary.replace(path); changed = True
+        core.command('systemctl', 'start', 'comfy-aggregator-api.service')
+        core.command('curl', '--fail', '--silent', '--retry', '20', '--retry-delay', '1', '--retry-connrefused', '--max-time', '5', '-H', 'Host: 43.165.167.179', 'http://127.0.0.1:32880/health/ready')
+        result = {'passed': True, 'at': datetime.now(UTC).isoformat(), 'configuration_fields_changed': ['admin_dist'],
+                  'previous_admin_release': old.parent.name, 'admin_path': str(after.admin_dist), 'admin_release': core.RELEASE_ID,
+                  'configuration_mode': '0600', 'protected_original_saved': True, 'database_migration_executed': False,
+                  'worker_restarted': False, 'studio_static_pointer_changed': False}
+        with (TASK / 'admin-binding.json').open('x') as output:
+            output.write(json.dumps(result, indent=2) + '\n')
+        print(json.dumps(result))
+    except BaseException:
+        if changed:
+            with temporary.open('xb') as output:
+                os.chmod(temporary, 0o600); output.write(original); output.flush(); os.fsync(output.fileno())
+            temporary.replace(path)
+        core.command('systemctl', 'start', 'comfy-aggregator-api.service')
+        raise
 
 
 def promote():
@@ -125,5 +176,7 @@ if __name__ == '__main__':
         core.verify_installed()
     elif action == 'promote':
         promote()
+    elif action == 'admin-binding':
+        repair_admin_binding()
     else:
         raise SystemExit('Unknown fixed 137 action')
