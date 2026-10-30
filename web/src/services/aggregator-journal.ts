@@ -1,6 +1,8 @@
 import type { ContentMetadata, RemoteJob, UploadedAsset } from "./api/aggregator/types";
 import type { CanvasNodeData } from "@/types/canvas";
 import { assertBatchMembers, batchKey, type BatchRef } from "./aggregator-batch";
+import { editorTransaction, type EditorClaim } from "./studio-editor-session";
+import type { ManagedLocalMedia } from "./studio-local-media-types";
 
 export type IdentityRef = { profileId: string; origin: string; fingerprint: string };
 export type TaskReadAccess = { version: 1; identity: IdentityRef; jobId: string; submissionSha256: string; verifiedAt: number };
@@ -27,55 +29,13 @@ export type LocalResult = { version: 1; id: string; identity: IdentityRef; inten
 type Records = { intents: Intent; uploads: InputUpload; results: LocalResult };
 export type RequestBudget = { id: string; nextAt: number; pausedUntil: number };
 export type LocalDocument = { version: 1; id: string; revision: number; value: string; storageKeys: string[]; legacyValue: string | null };
-type JournalRecords = Records & { budgets: RequestBudget; documents: LocalDocument };
-const databaseName = "comfy-aggregator-studio:journal";
+type JournalRecords = Records & { budgets: RequestBudget; documents: LocalDocument; local_media: ManagedLocalMedia; editors: EditorClaim };
 export const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.version, id: intent.id, identity: intent.identity, projectId: intent.projectId, nodeId: intent.nodeId, body: intent.body, idempotencyKey: intent.idempotencyKey, releaseDigest: intent.releaseDigest, createdAt: intent.createdAt, output: intent.output, canvas: intent.canvas && { node: intent.canvas.node, sourceIds: intent.canvas.sourceIds }, recovered: intent.recovered, batch: intent.batch });
 
-// Native transactions deliberately have no localStorage fallback. Completion is the commit signal.
-function openDatabase(): Promise<IDBDatabase> {
-    return new Promise((resolve, reject) => {
-        if (!globalThis.indexedDB) { reject(new Error("当前浏览器无法保存任务日志，已阻止提交；请启用浏览器存储")); return; }
-        const request = indexedDB.open(databaseName, 4);
-        let abandoned = false;
-        request.onupgradeneeded = (event) => {
-            if (event.oldVersion === 0) {
-                const intents = request.result.createObjectStore("intents", { keyPath: "id" });
-                intents.createIndex("active_node", "activeNodeKey", { unique: true });
-                for (const name of ["uploads", "results", "budgets"]) request.result.createObjectStore(name, { keyPath: "id" });
-            } else if (![1, 2, 3].includes(event.oldVersion) || ["intents", "uploads", "results", "budgets", ...(event.oldVersion >= 2 ? ["documents"] : [])].some((name) => !request.result.objectStoreNames.contains(name))) {
-                request.transaction!.abort(); return;
-            }
-            if (event.oldVersion < 2) request.result.createObjectStore("documents", { keyPath: "id" });
-        };
-        request.onblocked = () => { abandoned = true; reject(new Error("任务日志升级被其他页面阻塞，请关闭旧版本画布页面")); };
-        request.onerror = () => reject(request.error || new Error("无法打开任务日志"));
-        request.onsuccess = () => {
-            if (abandoned) { request.result.close(); return; }
-            request.result.onversionchange = () => request.result.close();
-            resolve(request.result);
-        };
-    });
-}
-
-export async function journalTransaction<T>(names: (keyof JournalRecords)[], mode: IDBTransactionMode, run: (tx: IDBTransaction, setResult: (value: T) => void, abort: (error: unknown) => void) => void): Promise<T> {
-    const database = await openDatabase();
-    try {
-        return await new Promise<T>((resolve, reject) => {
-            const tx = database.transaction(names, mode, { durability: "strict" });
-            let result: T;
-            let failure: unknown;
-            tx.oncomplete = () => resolve(result);
-            tx.onabort = () => reject(failure || tx.error || new Error("任务日志事务未提交，已阻止后续操作"));
-            tx.onerror = () => { failure ||= tx.error; };
-            const abort = (error: unknown) => {
-                if (failure) return;
-                failure = error;
-                try { tx.abort(); } catch { reject(failure); }
-            };
-            try { run(tx, (value) => { result = value; }, abort); }
-            catch (error) { abort(error); }
-        });
-    } finally { database.close(); }
+// Registration and the business operation share the editors-store lock. A
+// maintenance transaction cannot delete files beneath an editing page.
+export function journalTransaction<T>(names: (keyof JournalRecords)[], mode: IDBTransactionMode, run: (tx: IDBTransaction, setResult: (value: T) => void, abort: (error: unknown) => void) => void): Promise<T> {
+    return editorTransaction(names, mode, run);
 }
 
 function transaction<T>(name: keyof JournalRecords, mode: IDBTransactionMode, run: (store: IDBObjectStore, setResult: (value: T) => void) => void): Promise<T> {

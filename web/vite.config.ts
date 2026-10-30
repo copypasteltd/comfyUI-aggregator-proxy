@@ -41,6 +41,7 @@ function localPluginsManifest(): Plugin {
 export default defineConfig({
     base: process.env.VITE_BASE || "/",
     plugins: [react(), localPluginsManifest()],
+    build: { rollupOptions: { input: { index: resolve(webDir, "index.html"), maintenance: resolve(webDir, "maintenance.html") } } },
     resolve: {
         alias: {
             "@": resolve(webDir, "src"),

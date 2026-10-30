@@ -1,3 +1,7 @@
+import { MANAGED_STUDIO } from "@/constant/studio";
+import { ensureStudioEditor } from "./studio-editor-session";
+import { isManagedMediaKey } from "./studio-local-media-types";
+import { addManagedMedia, getManagedMediaBlob, newManagedMediaKey, trackLocalMediaWrite } from "./studio-local-media";
 import localforage from "localforage";
 
 import { nanoid } from "nanoid";
@@ -35,7 +39,12 @@ type StoredImagePreview = { version: number; blob?: Blob };
 
 type ImageReadOptions = { signal?: AbortSignal };
 
-export async function uploadImage(input: string | Blob, options?: ImageReadOptions): Promise<UploadedImage> {
+export function uploadImage(input: string | Blob, options?: ImageReadOptions): Promise<UploadedImage> {
+    return trackLocalMediaWrite(() => readUploadedImage(input, options));
+}
+
+async function readUploadedImage(input: string | Blob, options?: ImageReadOptions): Promise<UploadedImage> {
+    if (MANAGED_STUDIO) await ensureStudioEditor();
     if (typeof input !== "string") return storeImage(input, options);
 
     let blob: Blob;
@@ -51,20 +60,21 @@ export async function uploadImage(input: string | Blob, options?: ImageReadOptio
 }
 
 async function storeImage(blob: Blob, options?: ImageReadOptions): Promise<UploadedImage> {
-    const storageKey = `image:${nanoid()}`;
+    const storageKey = MANAGED_STUDIO ? newManagedMediaKey("image") : `image:${nanoid()}`;
     const url = URL.createObjectURL(blob);
     try {
         const meta = await loadImageMeta(url, options);
         if (!meta) throw new Error(i18n.t("common.imageReadFailed"));
         throwIfAborted(options?.signal);
-        await store.setItem(storageKey, blob);
+        await (isManagedMediaKey(storageKey) ? addManagedMedia(storageKey, blob) : store.setItem(storageKey, blob));
         throwIfAborted(options?.signal);
         objectUrls.set(storageKey, url);
         await storeImagePreview(storageKey, blob);
         return { url, storageKey, width: meta.width, height: meta.height, bytes: blob.size, mimeType: blob.type.startsWith("image/") ? blob.type : "" };
     } catch (error) {
         URL.revokeObjectURL(url);
-        await store.removeItem(storageKey).catch(() => undefined);
+        objectUrls.delete(storageKey);
+        if (!isManagedMediaKey(storageKey)) await store.removeItem(storageKey).catch(() => undefined);
         throw error;
     }
 }
@@ -143,10 +153,11 @@ function throwIfAborted(signal?: AbortSignal) {
 
 export async function resolveImageUrl(storageKey?: string, fallback = "") {
     if (!storageKey) return fallback;
+    if (MANAGED_STUDIO) await ensureStudioEditor();
     if (isStudioKey(storageKey)) return studioMediaUrl(storageKey);
     const cached = objectUrls.get(storageKey);
     if (cached) return cached;
-    const blob = await store.getItem<Blob>(storageKey);
+    const blob = await (isManagedMediaKey(storageKey) ? getManagedMediaBlob(storageKey) : store.getItem<Blob>(storageKey));
     if (!blob) return fallback;
     const url = URL.createObjectURL(blob);
     objectUrls.set(storageKey, url);
@@ -154,8 +165,9 @@ export async function resolveImageUrl(storageKey?: string, fallback = "") {
 }
 
 export async function getImageBlob(storageKey: string) {
+    if (MANAGED_STUDIO) await ensureStudioEditor();
     if (isStudioKey(storageKey)) return (await getStudioResult(storageKey))?.blob || null;
-    return store.getItem<Blob>(storageKey);
+    return isManagedMediaKey(storageKey) ? getManagedMediaBlob(storageKey) : store.getItem<Blob>(storageKey);
 }
 
 // 缩略图按图片的 storageKey 另存一份 WebP，只放在本地 IndexedDB 里，不写进节点数据，也不参与导出和 WebDAV 同步。
@@ -216,8 +228,13 @@ async function deleteImagePreview(storageKey: string) {
     await previewStore.removeItem(storageKey).catch(() => undefined);
 }
 
-export async function setImageBlob(storageKey: string, blob: Blob) {
-    await store.setItem(storageKey, blob);
+export function setImageBlob(storageKey: string, blob: Blob) {
+    return trackLocalMediaWrite(() => storeImportedImage(storageKey, blob));
+}
+
+async function storeImportedImage(storageKey: string, blob: Blob) {
+    if (MANAGED_STUDIO && !isManagedMediaKey(storageKey)) throw new Error("导入必须使用新版独立原件键，未覆盖已有文件");
+    await (isManagedMediaKey(storageKey) ? addManagedMedia(storageKey, blob) : store.setItem(storageKey, blob));
     await deleteImagePreview(storageKey);
     await storeImagePreview(storageKey, blob);
     const url = URL.createObjectURL(blob);
@@ -232,6 +249,7 @@ export async function imageToDataUrl(image: { url?: string; dataUrl?: string; st
 }
 
 export async function deleteStoredImages(keys: Iterable<string>) {
+    if (MANAGED_STUDIO) throw new Error("请保存并进入本机安全清理页面，原件未删除");
     await Promise.all(
         Array.from(new Set(keys)).map(async (key) => {
             const url = objectUrls.get(key);
@@ -244,6 +262,7 @@ export async function deleteStoredImages(keys: Iterable<string>) {
 }
 
 export async function cleanupUnusedImages(usedData: unknown) {
+    if (MANAGED_STUDIO) return;
     const usedKeys = collectImageStorageKeys(usedData);
     await Promise.all([
         imageLogStore.iterate((value) => {

@@ -1,3 +1,4 @@
+import { newManagedMediaKey } from "@/services/studio-local-media";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { App, Button } from "antd";
@@ -65,7 +66,7 @@ export default function CanvasPage() {
                         if (!blob || blob.size !== file.bytes) throw new Error("备份文件缺失或长度不符");
                         const typed = blob.slice(0, blob.size, file.mimeType);
                         if (file.sha256 && await blobHash(typed) !== file.sha256) throw new Error("备份文件摘要不符，尚未导入项目");
-                        const key = `${file.mimeType.startsWith("image/") ? "image" : "file"}:import-${nanoid()}`;
+                        const key = newManagedMediaKey(file.mimeType.startsWith("image/") ? "image" : "media");
                         keys.set(file.storageKey, key);
                         return { key, blob: typed };
                     }));

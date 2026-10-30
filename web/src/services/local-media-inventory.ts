@@ -1,7 +1,7 @@
 import { canvasStorageKeys } from "@/lib/canvas/canvas-transfer";
 import { documentNames, documentReferences } from "./studio-documents";
 
-type MediaStore = "image_files" | "media_files" | "image_previews";
+type MediaStore = "image_files" | "media_files" | "image_previews" | "local_media";
 export type LocalMediaRecord = { key: string; store: MediaStore; bytes: number | null; mediaType: string };
 type ReferenceSource = { label: string; keys: string[] };
 export type LocalMediaInventory = ReturnType<typeof buildLocalMediaInventory>;
@@ -43,7 +43,11 @@ export async function readLocalMediaInventory(current: unknown): Promise<LocalMe
                 if (documentNames.includes(key as typeof documentNames[number])) parse("迁移前保留文档", value);
             } else parse(store === "image_generation_logs" ? "图片历史记录" : "视频历史记录", value);
         }),
-        readStores("comfy-aggregator-studio:journal", ["documents", "intents"], (store, _key, value) => {
+        readStores("comfy-aggregator-studio:journal", ["documents", "intents", "local_media"], (store, key, value) => {
+            if (store === "local_media") {
+                if (typeof key !== "string" || value?.version !== 1 || !(value.blob instanceof Blob)) { warnings.push("新版原件含无法核对的记录，文件保持原样。"); return; }
+                records.push({ key, store: "local_media", bytes: value.blob.size, mediaType: value.blob.type }); return;
+            }
             if (store === "intents") { if (value?.version !== 1) warnings.push("存在未知版本任务，引用检查不完整，文件保持原样。"); else source("本机任务记录", value); return; }
             const name = value?.id;
             if (!documentNames.includes(name)) { warnings.push("发现未知本机文档，引用检查不完整，文件保持原样。"); return; }

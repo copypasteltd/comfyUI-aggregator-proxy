@@ -1,3 +1,4 @@
+import { isManagedMediaKey, validManagedMedia } from "./studio-local-media-types";
 import { journalTransaction, type IdentityRef, type Intent, type LocalDocument, type LocalResult } from "./aggregator-journal";
 import { assertLocalResult } from "./studio-result-ownership";
 import { canReadTask, validTaskAccess } from "./studio-task-access";
@@ -11,10 +12,10 @@ export function documentReferences(name: DocumentName, value: string): string[] 
     let parsed;
     try { parsed = JSON.parse(value); } catch { throw new Error("本机文档无法解析，原记录已保留"); }
     if (!parsed || typeof parsed !== "object" || parsed.version !== undefined && parsed.version !== 0 || !Array.isArray(parsed.state?.[name === documentNames[0] ? "projects" : "assets"])) throw new Error("本机文档结构或版本不受支持，原记录已保留");
-    return [...canvasStorageKeys(parsed.state)].filter((key) => key.startsWith("studio:")).sort();
+    return [...canvasStorageKeys(parsed.state)].filter((key) => key.startsWith("studio:") || isManagedMediaKey(key)).sort();
 }
 
-function readDocument(value: LocalDocument | undefined, name: DocumentName): LocalDocument {
+export function readDocument(value: LocalDocument | undefined, name: DocumentName): LocalDocument {
     if (!value || value.id !== name || value.version !== 1 || !Number.isSafeInteger(value.revision) || value.revision < 1 || !Array.isArray(value.storageKeys)) throw new DocumentReloadRequired("本机文档或引用记录损坏，原记录已保留");
     const storageKeys = documentReferences(name, value.value);
     if (JSON.stringify(storageKeys) === JSON.stringify(value.storageKeys)) return value;
@@ -26,12 +27,12 @@ function readDocument(value: LocalDocument | undefined, name: DocumentName): Loc
         Object.values(entry).forEach(visit);
     };
     visit(JSON.parse(value.value).state);
-    if (JSON.stringify([...legacy].sort()) !== JSON.stringify(value.storageKeys)) throw new DocumentReloadRequired("本机文档或引用记录损坏，原记录已保留");
+    if (JSON.stringify(storageKeys.filter((key) => key.startsWith("studio:"))) !== JSON.stringify(value.storageKeys) && JSON.stringify([...legacy].sort()) !== JSON.stringify(value.storageKeys)) throw new DocumentReloadRequired("本机文档或引用记录损坏，原记录已保留");
     return { ...value, storageKeys };
 }
 
 export function initializeDocuments(legacy: Record<DocumentName, string | null>): Promise<LocalDocument[]> {
-    return journalTransaction(["documents", "results"], "readwrite", (tx, result, abort) => {
+    return journalTransaction(["documents", "results", "local_media"], "readwrite", (tx, result, abort) => {
         const documents = tx.objectStore("documents");
         const values: LocalDocument[] = [];
         for (const name of documentNames) {
@@ -58,7 +59,7 @@ export function initializeDocuments(legacy: Record<DocumentName, string | null>)
 
 export function saveDocument(name: DocumentName, value: string, expectedRevision: number): Promise<LocalDocument> {
     const storageKeys = documentReferences(name, value);
-    return journalTransaction(["documents", "results"], "readwrite", (tx, result, abort) => {
+    return journalTransaction(["documents", "results", "local_media"], "readwrite", (tx, result, abort) => {
         const documents = tx.objectStore("documents");
         const request = documents.get(name);
         request.onsuccess = () => {
@@ -73,9 +74,9 @@ export function saveDocument(name: DocumentName, value: string, expectedRevision
                 };
                 if (!remaining) { commit(); return; }
                 for (const key of additions) {
-                    const item = tx.objectStore("results").getKey(key);
+                    const item = tx.objectStore(isManagedMediaKey(key) ? "local_media" : "results").get(key);
                     item.onsuccess = () => {
-                        if (item.result === undefined) { abort(new Error("引用的本机原件已不存在，本次画布未保存；请重新载入原件或移除该引用")); return; }
+                        if (item.result === undefined || isManagedMediaKey(key) && !validManagedMedia(item.result)) { abort(new Error("引用的本机原件已不存在，本次画布未保存；请重新载入原件或移除该引用")); return; }
                         if (--remaining === 0) commit();
                     };
                 }

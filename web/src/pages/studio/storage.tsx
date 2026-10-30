@@ -7,9 +7,12 @@ import { deleteCachedUpload, readUploadCache, type CachedUpload } from "@/servic
 import { notifyStudioTasksChanged } from "@/services/aggregator-engine";
 import { useStudioStore } from "@/stores/use-studio-store";
 import { LocalMediaInspector } from "./local-media-inspector";
+import { flushStudioDocuments } from "@/services/studio-persistence";
+import { leaveStudioEditor } from "@/services/studio-editor-session";
+import { localMediaWritePending } from "@/services/studio-local-media";
 
 const bytes = (value: number) => value < 1024 ? `${value} B` : value < 1024 ** 2 ? `${(value / 1024).toFixed(1)} KiB` : value < 1024 ** 3 ? `${(value / 1024 ** 2).toFixed(2)} MiB` : `${(value / 1024 ** 3).toFixed(2)} GiB`;
-const labels: Record<string, string> = { documents: "画布与素材文档", intents: "原任务日志", uploads: "参考图缓存", results: "已保存的生成原件", budgets: "查询预算", profiles: "连接配置", app_state: "旧文档与应用状态", image_files: "图片原件", image_previews: "图片缩略图", media_files: "媒体及离线副本" };
+const labels: Record<string, string> = { documents: "画布与素材文档", intents: "原任务日志", uploads: "参考图缓存", results: "已保存的生成原件", budgets: "查询预算", profiles: "连接配置", app_state: "旧文档与应用状态", image_files: "旧图片原件", image_previews: "图片缩略图", media_files: "旧媒体及离线副本", local_media: "新版上传与导入原件", editors: "页面占用保护" };
 
 export default function StudioStoragePage() {
     const client = useStudioStore((state) => state.client);
@@ -43,6 +46,17 @@ export default function StudioStoragePage() {
         finally { setBusy(false); setSelected(undefined); }
     };
     const entries = cache && cache.client === client ? cache.values : [];
+    const enterCleanup = async () => {
+        if (busy) return;
+        setBusy(true); setError("");
+        try {
+            if (localMediaWritePending()) throw new Error("正在保存上传或导入的原件，请等待完成后再进入清理");
+            await flushStudioDocuments();
+            if (localMediaWritePending()) throw new Error("原件处理尚未结束，请等待完成后再进入清理");
+            await leaveStudioEditor();
+            window.location.assign(`${import.meta.env.BASE_URL}maintenance.html`);
+        } catch (reason) { setError(reason instanceof Error ? reason.message : "文档尚未保存，未进入清理"); setBusy(false); }
+    };
     const percent = usage?.siteEstimateAvailable && usage.quota ? Math.min(100, usage.usage / usage.quota * 100) : undefined;
     return <main className="studio-page">
         <div className="studio-page-heading"><span className="li-lab">YOUR LOCAL STORAGE</span><h1>给创作留出空间</h1><p>查看当前浏览器的画布、原件和参考缓存。重要作品请另存到设备；云端完成后八小时的保留期限与本机副本分开计算。</p></div>
@@ -60,6 +74,7 @@ export default function StudioStoragePage() {
             {!client ? <Empty description={<NavLink to="/config">连接原服务与 API Key 后管理对应缓存</NavLink>} /> : !entries.length ? <Empty description={loading ? "正在读取参考缓存…" : "当前连接没有参考图缓存"} /> : entries.map((item) => <article key={item.id} style={{ borderTop: "1px solid var(--line)", padding: "18px 0" }}><div className="studio-actions" style={{ justifyContent: "space-between" }}><strong style={{ overflowWrap: "anywhere" }}>{item.name}</strong><Tag>{bytes(item.bytes)}</Tag></div><p className="studio-note">{item.blockedReason || "上传已确认，尚无原任务引用；可清理本机缓存。"}</p><Popconfirm open={selected === item.id && cache?.client === client} onOpenChange={(open) => setSelected(open ? item.id : undefined)} title="清理这份本机参考缓存？" description="清理后需要重新选图才能再次使用；云端源图和任务不变。" okText="清理缓存" cancelText="保留" onConfirm={() => remove(item)} okButtonProps={{ loading: busy }} disabled={Boolean(item.blockedReason) || loading || busy}><Button icon={<Trash2 size={14} />} disabled={Boolean(item.blockedReason) || loading || busy}>清理缓存</Button></Popconfirm></article>)}
         </section>
         <LocalMediaInspector />
-        <p className="studio-note" style={{ marginTop: 20 }}>普通图片、媒体及离线副本暂不自动回收，避免误删其他画布引用。删除生成原件请使用素材库，仍被画布或任务引用的原件会受到保护。</p>
+        <section className="studio-card" style={{ marginTop: 20 }}><h2>手动回收未引用的新版原件</h2><p>保存当前画布与素材后，进入清理页检查新版上传、ZIP 导入等原件。其他页面仍在编辑、引用不完整或文件仍被使用时会保留。旧版原件继续保留，重要作品请先备份。</p><Button disabled={busy || loading} loading={busy} icon={<Trash2 size={16} />} onClick={() => void enterCleanup()}>保存并进入安全清理</Button></section>
+        <p className="studio-note" style={{ marginTop: 20 }}>本机原件不会按时间自动删除。删除生成原件请使用素材库，仍被画布或任务引用的原件会受到保护。</p>
     </main>;
 }
