@@ -77,6 +77,8 @@ html.dark [data-c="lime"] { --cv: #171914; --ink: #f2f1ec; --ink2: #b9bdb2; --in
 .studio-task-card > code { font-size: 11px; overflow-wrap: anywhere; color: var(--ink2); }
 .studio-task-card > p { margin: 18px 0; font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
 .studio-inline-link { display: inline-flex; align-items: center; gap: 7px; color: var(--ink); font-size: 13px; padding: 0 8px; }
+.studio-connection-summary .studio-inline-link, .studio-connection-summary .studio-inline-link:hover { color: var(--studio-on-lime); }
+.studio-connection-summary :focus-visible { outline-color: var(--studio-on-lime); }
 .studio-canvas-topbar { gap: 6px; z-index: 80; }
 .studio-canvas-project { position: relative; }
 .studio-canvas-zoom { bottom: 84px; }
