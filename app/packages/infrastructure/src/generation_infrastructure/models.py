@@ -285,9 +285,36 @@ class PublicModel(Entity, Scoped, Base):
     channel_ids: Mapped[list[str]] = mapped_column(JSONB)
     defaults: Mapped[dict[str, Any]] = mapped_column(JSONB)
     documentation: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
+    routing: Mapped[dict[str, Any]] = mapped_column(JSONB, default=lambda: {"policy": "first_ready", "weights": {}}, server_default='{"policy":"first_ready","weights":{}}')
     revision: Mapped[int] = mapped_column(default=1)
     published: Mapped[bool] = mapped_column(default=False)
-    __table_args__ = scope_constraints(UniqueConstraint("tenant_id", "project_id", "alias"), CheckConstraint("jsonb_typeof(documentation) = 'object'", name="documentation_object"), ForeignKeyConstraint(["tenant_id", "project_id", "release_id"], ["workflow_releases.tenant_id", "workflow_releases.project_id", "workflow_releases.id"]))
+    __table_args__ = scope_constraints(UniqueConstraint("tenant_id", "project_id", "alias"), CheckConstraint("jsonb_typeof(documentation) = 'object'", name="documentation_object"), CheckConstraint("jsonb_typeof(routing) = 'object' AND routing->>'policy' IN ('first_ready','balanced_ready') AND jsonb_typeof(routing->'weights') = 'object' AND (routing->>'policy' <> 'first_ready' OR routing->'weights' = '{}'::jsonb)", name="routing_object"), ForeignKeyConstraint(["tenant_id", "project_id", "release_id"], ["workflow_releases.tenant_id", "workflow_releases.project_id", "workflow_releases.id"]))
+
+
+class DevicePool(Scoped, Base):
+    __tablename__ = "device_pools"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    model_id: Mapped[UUID] = mapped_column(ForeignKey("public_models.id"))
+    release_id: Mapped[UUID] = mapped_column(ForeignKey("workflow_releases.id"))
+    configuration: Mapped[dict[str, Any]] = mapped_column(JSONB)
+    sequence: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    __table_args__ = scope_constraints(
+        ForeignKeyConstraint(["tenant_id", "project_id", "model_id"], ["public_models.tenant_id", "public_models.project_id", "public_models.id"]),
+        ForeignKeyConstraint(["tenant_id", "project_id", "release_id"], ["workflow_releases.tenant_id", "workflow_releases.project_id", "workflow_releases.id"]),
+        CheckConstraint("sequence >= 0 AND jsonb_typeof(configuration) = 'object'", name="configuration"),
+    )
+
+
+class DevicePoolMember(Base):
+    __tablename__ = "device_pool_members"
+    pool_id: Mapped[str] = mapped_column(ForeignKey("device_pools.id"), primary_key=True)
+    gpu_id: Mapped[UUID] = mapped_column(ForeignKey("gpu_resources.id"), primary_key=True)
+    weight: Mapped[int] = mapped_column()
+    credit: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
+    assigned_count: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
+    last_sequence: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0")
+    __table_args__ = (CheckConstraint("weight BETWEEN 1 AND 1000 AND assigned_count >= 0 AND last_sequence >= 0", name="accounting"),)
 
 
 class Idempotency(Entity, Scoped, Base):
@@ -313,6 +340,7 @@ class Job(Entity, Scoped, Base):
     request_fingerprint: Mapped[str] = mapped_column(String(64))
     execution_fingerprint: Mapped[str] = mapped_column(String(64))
     eligible_channels: Mapped[list[str]] = mapped_column(JSONB)
+    device_pool_id: Mapped[str | None] = mapped_column(String(64), index=True)
     current_attempt_id: Mapped[UUID | None] = mapped_column()
     retry_of: Mapped[UUID | None] = mapped_column(index=True)
     retry_count: Mapped[int] = mapped_column(default=0, server_default=text("0"))
@@ -333,6 +361,7 @@ class Job(Entity, Scoped, Base):
 
 
     __table_args__ += (
+        ForeignKeyConstraint(["tenant_id", "project_id", "device_pool_id"], ["device_pools.tenant_id", "device_pools.project_id", "device_pools.id"]),
         ForeignKeyConstraint(["id", "retry_source_attempt_id"], ["attempts.job_id", "attempts.id"], use_alter=True, name="fk_jobs_retry_source_owner"),
         CheckConstraint("retry_count BETWEEN 0 AND 2", name="retry_count"),
         CheckConstraint("(retry_count = 0 AND retry_error_code IS NULL AND retry_source_attempt_id IS NULL) OR (retry_count > 0 AND retry_error_code IS NOT NULL AND retry_error_code IN ('preparation_transport_failure','comfy_oom') AND retry_source_attempt_id IS NOT NULL)", name="retry_metadata"),

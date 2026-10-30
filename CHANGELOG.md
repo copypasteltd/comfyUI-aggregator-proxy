@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 137 · 持久设备池与图形均衡 / Persistent device pools
+
+- 新增按模型显式启用的持久加权设备公平；同物理GPU去重、任务冻结池版本，只有成功领取才原子计数，旧任务/模型默认原策略。
+- Adds graphical policy/weights and read-only pool statistics to the existing Lime Admin. No second generation queue or Worker protocol change; original quotas, unknown execution protection and runtime approvals remain enforced.
+- 38 native PostgreSQL focused cases, 1,695 compatibility cases, Admin type/build and five Chromium groups pass, including four independent processes. Live deployment awaits its final receipt; failed runs remain preserved. Physical fleet capacity and full acceptance remain HOLD/pending-test. See [137](docs/137-持久模型池与全局设备均衡.md).
+
 ## 136 · 已知任务Key轮换接管 / Known-task access after rotation
 
 - 原逻辑Key轮换后逐项GET核对已知任务，在严格事务中建立新身份关联；原请求/身份/Idem/画布不改，无ID记录不补发。新Key结果引用与旧身份备份保护同步，浏览器v4保留v1/v2/v3数据并拒绝旧v3客户端。

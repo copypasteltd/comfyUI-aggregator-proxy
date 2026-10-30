@@ -33,6 +33,8 @@ targets["comfy-api-dependency.schema.json"] = app / "packages/contracts/src/gene
 targets["model-usage.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/model-usage.schema.json"
 for name in ("admin-memory-policy", "admin-memory-view"):
     targets[name + ".schema.json"] = app / "packages/contracts/src/generation_contracts/schemas" / (name + ".schema.json")
+for name in ("admin-device-routing", "admin-device-pool"):
+    targets[name + ".schema.json"] = app / "packages/contracts/src/generation_contracts/schemas" / (name + ".schema.json")
 
 drift = []
 for name in ("gateway-catalog-publication", "gateway-catalog-replay", "gateway-catalog-receipt", "gateway-catalog-stamp", "gateway-catalog-configuration"):

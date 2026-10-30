@@ -1493,6 +1493,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/admin/api/v1/public-models/{identifier}/device-pool": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Model Device Pool */
+        get: operations["model_device_pool_admin_api_v1_public_models__identifier__device_pool_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/admin/api/v1/public-models/{identifier}/documentation": {
         parameters: {
             query?: never;
@@ -4019,6 +4036,48 @@ export interface components {
             /** Next Cursor */
             next_cursor: string | null;
         };
+        /** DevicePoolMemberView */
+        DevicePoolMemberView: {
+            /** Gpu Id */
+            gpu_id: string;
+            /** Weight */
+            weight: number;
+            /** Assigned Count */
+            assigned_count: number;
+            /** Last Sequence */
+            last_sequence: number;
+        };
+        /** DevicePoolView */
+        DevicePoolView: {
+            /** Model Id */
+            model_id: string;
+            /** Model Revision */
+            model_revision: number;
+            /**
+             * Policy
+             * @enum {string}
+             */
+            policy: "first_ready" | "balanced_ready";
+            /** Pool Id */
+            pool_id: string | null;
+            /** Sequence */
+            sequence: number;
+            /** Members */
+            members: components["schemas"]["DevicePoolMemberView"][];
+        };
+        /** DeviceRouting */
+        DeviceRouting: {
+            /**
+             * Policy
+             * @default first_ready
+             * @enum {string}
+             */
+            policy: "first_ready" | "balanced_ready";
+            /** Weights */
+            weights?: {
+                [key: string]: number;
+            };
+        };
         /** DispatchPolicy */
         DispatchPolicy: {
             /**
@@ -4885,6 +4944,8 @@ export interface components {
             draining: boolean;
             /** Revision */
             revision: number;
+            /** Gpu Id */
+            gpu_id: string;
         };
         /** MappingDefaults */
         MappingDefaults: {
@@ -5127,6 +5188,7 @@ export interface components {
                 [key: string]: string | number | boolean;
             };
             documentation?: components["schemas"]["ModelDocumentation"];
+            routing?: components["schemas"]["DeviceRouting"];
         };
         /** ModelDocumentation */
         ModelDocumentation: {
@@ -5310,6 +5372,7 @@ export interface components {
             defaults: {
                 [key: string]: string | number | boolean;
             };
+            routing?: components["schemas"]["DeviceRouting"] | null;
         };
         /** ModelUsage */
         ModelUsage: {
@@ -5401,6 +5464,7 @@ export interface components {
             /** Published */
             published: boolean;
             documentation?: components["schemas"]["ModelDocumentation"];
+            routing?: components["schemas"]["DeviceRouting"];
         };
         /** MonitoringConfiguration */
         MonitoringConfiguration: {
@@ -11163,6 +11227,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ModelUsage"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    model_device_pool_admin_api_v1_public_models__identifier__device_pool_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DevicePoolView"];
                 };
             };
             /** @description Validation Error */

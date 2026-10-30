@@ -3689,6 +3689,24 @@
       "request_schemas": [
         "admin-memory-policy.schema.json"
       ]
+    },
+    {
+      "operation_id": "get_admin_api_v1_public_models_id_device_pool",
+      "method": "GET",
+      "path": "/admin/api/v1/public-models/{id}/device-pool",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "models:read"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-08",
+      "response_schemas": [
+        "admin-device-pool.schema.json"
+      ]
     }
   ],
   "inventory_revision": "2026-10-25-increment-81"

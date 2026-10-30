@@ -1,5 +1,7 @@
 # ComfyUI Creative Canvas
 
+Candidate 137 adds persistent device pools and graphical Admin weights/allocation statistics. Existing models keep first-ready routing; explicit balancing deduplicates physical GPUs and freezes each accepted route. All 38 native focused cases, 1,695 compatibility cases and five browser groups pass; live migration awaits its final receipt. Physical multi-GPU/10–20-device capacity and manual acceptance remain pending-test. [Design and usage](19-持久设备池与融合可用性评估.md).
+
 [中文](USAGE.md) · [Assessment and all 46 requirements](06-融合可行性评估与上线约束.md) · [Current progress](10-开发进度与交付记录.md)
 
 A managed React canvas built from basketikun/infinite-canvas v0.20.0, using the existing ComfyUI Aggregator Proxy. [Studio is live](http://43.165.167.179:39443/studio/) with backend 132.2/static 136.1. Eight actual GPU modes have completed on 3080/5070. The full fault matrix, physical phones and 10–20-node capacity remain separately tracked in [all 46 requirements](10-开发进度与交付记录.md).

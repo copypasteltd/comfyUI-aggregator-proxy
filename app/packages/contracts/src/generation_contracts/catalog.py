@@ -5,6 +5,7 @@ from typing import Any, Literal
 from pydantic import BaseModel, Field, model_validator
 
 from generation_contracts.admin import ExpectedRevision
+from generation_contracts.device_pool import DeviceRouting
 from generation_contracts.model_usage import ModelDocumentation
 from generation_contracts.validation import JobCreate, StrictDTO
 
@@ -17,12 +18,14 @@ class ModelCreate(StrictDTO):
     channel_ids: list[str] = Field(min_length=1, max_length=100)
     defaults: dict[str, str | int | float | bool] = Field(default_factory=dict)
     documentation: ModelDocumentation = Field(default_factory=ModelDocumentation)
+    routing: DeviceRouting = Field(default_factory=DeviceRouting)
 
 
 class ModelPatch(ExpectedRevision):
     release_id: str
     channel_ids: list[str] = Field(min_length=1, max_length=100)
     defaults: dict[str, str | int | float | bool]
+    routing: DeviceRouting | None = None
 
 
 class ModelAction(ExpectedRevision):
@@ -114,6 +117,7 @@ class ModelView(BaseModel):
     revision: int
     published: bool
     documentation: ModelDocumentation = Field(default_factory=ModelDocumentation)
+    routing: DeviceRouting = Field(default_factory=DeviceRouting)
 
 
 class BindingView(BaseModel):

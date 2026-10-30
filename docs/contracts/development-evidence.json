@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 132,
+  "increment": 137,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-30/development-trace-baselines-132-studio-lookup.json",
-    "sha256": "4e8fda223632647a468d645bcc32d49f5ea46639158013839102d83e0ef9c27b"
+    "path": "docs/evidence/2026-10-30/development-trace-baselines-137-device-pool.json",
+    "sha256": "e6b956140b7d92c4ff3c98308aff8a4d6f557bbec01b1145b2ab71d61fce9cbd"
   },
   "requirements": [
     {
@@ -19,7 +19,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -118,7 +118,8 @@
         "http122",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "18",
@@ -732,7 +733,8 @@
         "worker118",
         "http122",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "studio137"
       ],
       "remaining_backlog": [
         "23",
@@ -758,7 +760,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
@@ -937,7 +939,8 @@
         "mesh129downloads",
         "skill130",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "20",
@@ -985,11 +988,11 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
-          "baseline": "mesh128"
+          "baseline": "studio137"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/discovery.go",
@@ -1041,7 +1044,8 @@
         "mesh128",
         "skill130",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "30",
@@ -1098,7 +1102,8 @@
         "video92",
         "sdk92",
         "dependency101",
-        "go80"
+        "go80",
+        "studio137"
       ],
       "remaining_backlog": [
         "30",
@@ -1112,11 +1117,11 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
@@ -1221,7 +1226,8 @@
         "media124",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "29",
@@ -1272,7 +1278,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         }
       ],
       "tests": [
@@ -1373,7 +1379,8 @@
         "mesh128",
         "meshgateway128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "28",
@@ -1391,7 +1398,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -1423,7 +1430,8 @@
         "http122",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "30",
@@ -1438,7 +1446,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
@@ -1469,7 +1477,8 @@
         "dependency101",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "29",
@@ -1484,11 +1493,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "mesh128"
+          "baseline": "studio137"
         }
       ],
       "tests": [
@@ -1504,7 +1513,8 @@
         "media124",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "29",
@@ -1523,6 +1533,10 @@
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/worker_capacity.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/device_pools.py",
+          "baseline": "studio137"
         }
       ],
       "tests": [
@@ -1535,11 +1549,18 @@
           "path": "app/tests/integration/test_worker_capacity.py",
           "symbol": "test_capacity_gate_creates_no_attempt_occupancy_or_generation_charge",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_device_pool_transactions.py",
+          "symbol": "test_global_assignment_persists_despite_wrong_worker_polling",
+          "language": "python",
+          "baseline": "studio137"
         }
       ],
       "evidence": [
         "ci86",
-        "load58"
+        "load58",
+        "studio137"
       ],
       "remaining_backlog": [
         "13",
@@ -1547,7 +1568,7 @@
         "63",
         "64"
       ],
-      "limitation": "调度框架不等于异构设备能力和 10/20 台实机容量。"
+      "limitation": "调度框架不等于异构设备能力和 10/20 台实机容量。；137设备均衡为原生控制层验证，真实同release逐卡批准、10～20台容量及人工验收仍待完成。"
     },
     {
       "id": "JOB-03",
@@ -1559,7 +1580,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
@@ -1580,6 +1601,10 @@
         {
           "path": "app/packages/contracts/src/generation_contracts/wait_estimates.py",
           "baseline": "wait94"
+        },
+        {
+          "path": "app/packages/domain/src/generation_domain/device_pool.py",
+          "baseline": "studio137"
         }
       ],
       "tests": [
@@ -1646,6 +1671,12 @@
           "symbol": "test_actual_claim_freezes_basis_and_replay_preserves_it",
           "language": "python",
           "baseline": "wait94"
+        },
+        {
+          "path": "app/tests/integration/test_device_pool_transactions.py",
+          "symbol": "test_concurrent_claim_replay_and_rollback_charge_once",
+          "language": "python",
+          "baseline": "studio137"
         }
       ],
       "evidence": [
@@ -1656,7 +1687,8 @@
         "browser94",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "06",
@@ -1664,7 +1696,7 @@
         "63",
         "64"
       ],
-      "limitation": "固定公平份额/老化已实现；真实成本、ETA 与长稳待校准；07/08 是独立可选增强。"
+      "limitation": "固定公平份额/老化已实现；真实成本、ETA 与长稳待校准；07/08 是独立可选增强。；137设备均衡为原生控制层验证，真实同release逐卡批准、10～20台容量及人工验收仍待完成。"
     },
     {
       "id": "JOB-04",
@@ -1672,11 +1704,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -1721,7 +1753,8 @@
         "http122",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "25",
@@ -1853,7 +1886,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
@@ -1881,7 +1914,8 @@
       "evidence": [
         "ci86",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "54",
@@ -2136,7 +2170,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/worker_capacity.py",
@@ -2158,7 +2192,8 @@
         "ci86",
         "load58",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "14",
@@ -2178,7 +2213,11 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "studio137"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/device_pools.py",
+          "baseline": "studio137"
         }
       ],
       "tests": [
@@ -2186,12 +2225,19 @@
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_two_channels_share_one_gpu_and_old_upload_keeps_result_lease",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_device_pool_transactions.py",
+          "symbol": "test_native_processes_accept_one_pool_assignment",
+          "language": "python",
+          "baseline": "studio137"
         }
       ],
       "evidence": [
         "ci86",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "15",
@@ -2199,7 +2245,7 @@
         "63",
         "64"
       ],
-      "limitation": "共享物理槽与回传权分离已测；实际设备拓扑未验收。"
+      "limitation": "共享物理槽与回传权分离已测；实际设备拓扑未验收。；137设备均衡为原生控制层验证，真实同release逐卡批准、10～20台容量及人工验收仍待完成。"
     },
     {
       "id": "NODE-05",
@@ -2466,7 +2512,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
@@ -2490,7 +2536,8 @@
         "ci86",
         "wait94",
         "retention119",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "37",
@@ -2643,7 +2690,8 @@
         "go80",
         "asset112",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "studio137"
       ],
       "remaining_backlog": [
         "37",
@@ -2690,7 +2738,8 @@
         "mesh128",
         "mesh129downloads",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "32",
@@ -3020,7 +3069,8 @@
         "video92",
         "asset112",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "studio137"
       ],
       "remaining_backlog": [
         "30",
@@ -3036,7 +3086,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/pricing.go",
@@ -3060,7 +3110,8 @@
         "video92",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "06",
@@ -3075,7 +3126,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
@@ -3116,7 +3167,8 @@
         "mesh128",
         "meshgateway128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "29",
@@ -3168,7 +3220,8 @@
         "sdk92",
         "publication110",
         "retention119",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "28",
@@ -3209,7 +3262,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "studio137"
       ],
       "remaining_backlog": [
         "25",
@@ -3245,7 +3299,8 @@
       "evidence": [
         "ci86",
         "go80",
-        "video92"
+        "video92",
+        "studio137"
       ],
       "remaining_backlog": [
         "30",
@@ -3284,7 +3339,8 @@
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "studio137"
       ],
       "remaining_backlog": [
         "28",
@@ -3325,7 +3381,8 @@
       "evidence": [
         "ci86",
         "go80",
-        "native86"
+        "native86",
+        "studio137"
       ],
       "remaining_backlog": [
         "28",
@@ -3344,7 +3401,7 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/apps/admin_web/src/pages/Users.vue",
@@ -3380,7 +3437,8 @@
         "cors116",
         "media124",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "50",
@@ -3524,7 +3582,8 @@
         "scalar104",
         "browser122",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "studio137"
       ],
       "remaining_backlog": [
         "18",
@@ -3584,7 +3643,8 @@
         "visual87",
         "scalar104",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "studio137"
       ],
       "remaining_backlog": [
         "24",
@@ -3607,11 +3667,15 @@
         },
         {
           "path": "app/apps/admin_web/src/pages/Models.vue",
-          "baseline": "meshui128"
+          "baseline": "studio137"
         },
         {
           "path": "app/apps/admin_web/src/components/GatewayCatalogDrawer.vue",
           "baseline": "admin87"
+        },
+        {
+          "path": "app/packages/contracts/src/generation_contracts/device_pool.py",
+          "baseline": "studio137"
         }
       ],
       "tests": [
@@ -3619,6 +3683,12 @@
           "path": "app/tests/integration/test_model_catalog.py",
           "symbol": "test_all_six_media_types_offer_safe_frozen_presets_that_existing_writes_accept",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_device_pool_transactions.py",
+          "symbol": "test_http_pool_is_read_only_admin_scope",
+          "language": "python",
+          "baseline": "studio137"
         }
       ],
       "evidence": [
@@ -3629,7 +3699,8 @@
         "media124",
         "browser124",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "studio137"
       ],
       "remaining_backlog": [
         "24",
@@ -3637,7 +3708,7 @@
         "47",
         "53"
       ],
-      "limitation": "图形映射/确认已实现；实际文件哈希、网关发现及回退仍待验收。"
+      "limitation": "图形映射/确认已实现；实际文件哈希、网关发现及回退仍待验收。；137设备均衡为原生控制层验证，真实同release逐卡批准、10～20台容量及人工验收仍待完成。"
     },
     {
       "id": "ADMIN-07",
@@ -3704,7 +3775,8 @@
         "visual87",
         "wait94",
         "browser94",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "48",
@@ -3811,7 +3883,8 @@
         "visual87",
         "browser94",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "49",
@@ -3876,7 +3949,8 @@
         "visual87",
         "wait94",
         "browser94",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "09",
@@ -3927,7 +4001,8 @@
         "installed87",
         "visual87",
         "python89",
-        "browser97"
+        "browser97",
+        "studio137"
       ],
       "remaining_backlog": [
         "45",
@@ -4011,7 +4086,8 @@
         "mesh128",
         "meshui128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "50",
@@ -4065,7 +4141,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
@@ -4095,7 +4171,8 @@
         "mesh128",
         "meshui128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "29",
@@ -4161,7 +4238,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
@@ -4192,7 +4269,8 @@
         "cors116",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "34",
@@ -4281,7 +4359,8 @@
         "mesh128",
         "meshui128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "50",
@@ -4328,7 +4407,8 @@
         "installed87",
         "visual87",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "studio137"
       ],
       "remaining_backlog": [
         "40",
@@ -4380,7 +4460,8 @@
         "asset112",
         "mesh128",
         "meshui128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "studio137"
       ],
       "remaining_backlog": [
         "30",
@@ -4434,7 +4515,8 @@
         "native86",
         "visual87",
         "mesh128",
-        "meshgateway128"
+        "meshgateway128",
+        "studio137"
       ],
       "remaining_backlog": [
         "28",
@@ -4450,7 +4532,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio132"
+          "baseline": "studio137"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
@@ -4479,7 +4561,8 @@
         "video92",
         "mesh128",
         "studio131",
-        "studio132"
+        "studio132",
+        "studio137"
       ],
       "remaining_backlog": [
         "49",
@@ -4502,7 +4585,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "mesh128"
+          "baseline": "studio137"
         }
       ],
       "tests": [
@@ -4523,7 +4606,8 @@
         "ci86",
         "cors116",
         "media124",
-        "mesh128"
+        "mesh128",
+        "studio137"
       ],
       "remaining_backlog": [
         "50",

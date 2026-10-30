@@ -4,7 +4,9 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 from datetime import UTC, datetime
+from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -20,6 +22,35 @@ def read(path):
 def sha(path):
     with path.open("rb") as source:
         return hashlib.file_digest(source, "sha256").hexdigest()
+
+
+@lru_cache
+def frozen_sources(revision):
+    """Historical evidence stays bound to its actual Git bytes as current code evolves."""
+    assert re.fullmatch(r"[a-f0-9]{40}", revision)
+    entries = subprocess.check_output(["git", "ls-tree", "-r", "-z", revision, "--", "app"], cwd=REPOSITORY).split(b"\0")
+    result = {}
+    process = subprocess.Popen(["git", "cat-file", "--batch"], cwd=REPOSITORY, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    try:
+        for entry in entries:
+            if not entry:
+                continue
+            metadata, name = entry.split(b"\t", 1)
+            mode, kind, object_id = metadata.split()
+            assert kind == b"blob" and mode in (b"100644", b"100755")
+            process.stdin.write(object_id + b"\n"); process.stdin.flush()
+            header = process.stdout.readline().split()
+            assert header[0] == object_id and header[1] == b"blob"
+            content = process.stdout.read(int(header[2])); assert process.stdout.read(1) == b"\n"
+            result[name.decode("utf-8")] = hashlib.sha256(content).hexdigest()
+    finally:
+        process.stdin.close(); process.stdout.close()
+        assert process.wait(timeout=30) == 0
+    return result
+
+
+def frozen_sha(revision, name):
+    return frozen_sources(revision)[name]
 
 
 def main():
@@ -191,14 +222,14 @@ def main():
     generated = read(REPOSITORY / "docs/evidence/studio-release-132/admin-generated-types-1322.json")
     assert generated["passed"] and generated["typecheck_passed"] and generated["build_passed"] and generated["generated_copy_matches"]
     assert generated["python_sources_unchanged_from_compatibility"] and generated["compatibility_report_sha256"] == sha(REPOSITORY / latest["backend_compatibility"])
-    assert sha(REPOSITORY / "app/config/openapi.json") == generated["openapi_sha256"]
+    assert frozen_sha(latest["runtime_commit"], "app/config/openapi.json") == generated["openapi_sha256"]
     assert set(generated["source_differences_from_compatibility"]) == {"app/apps/admin_web/src/generated/api.d.ts"}
     for name, digest in result["source_sha256"].items():
         if name == "app/apps/admin_web/src/generated/api.d.ts":
             assert digest == generated["source_differences_from_compatibility"][name]["before"]
-            assert sha(REPOSITORY / name) == generated["generated_types_sha256"]
+            assert frozen_sha(latest["runtime_commit"], name) == generated["generated_types_sha256"]
         else:
-            assert sha(REPOSITORY / name) == digest
+            assert frozen_sha(latest["runtime_commit"], name) == digest
     assert sum(item["passed_cases"] for item in result["python_tests"] if item["path"].endswith("/test_studio_submission_lookup.py")) == 30
     live = read(evidence / receipts["live_lookup"])
     assert live["passed"] and len(live["checks"]) == 5 and live["jobs_before"] == live["jobs_after"]
@@ -255,7 +286,7 @@ def main():
     assert sha(evidence / batch_notes["backend_runtime_receipt"]) == batch_notes["backend_runtime_receipt_sha256"]
     assert runtime["passed"] and runtime["runtime_commit"] == latest["runtime_commit"] and len(runtime["source_files"]) == 555
     for name, digest in runtime["source_files"].items():
-        assert sha(REPOSITORY / "app" / name) == digest
+        assert frozen_sha(runtime["runtime_commit"], "app/" + name) == digest
     for name, digest in batch_notes["report_sha256"].items():
         assert sha(evidence / batch_receipts[name]) == digest
     for name, count in (("backend_focused", 112), ("backend_compatibility", 1486)):
@@ -322,7 +353,7 @@ def main():
     runtime = read(evidence / model_notes["backend_runtime_receipt"])
     assert sha(evidence / model_notes["backend_runtime_receipt"]) == model_notes["backend_runtime_receipt_sha256"] and runtime["passed"] and runtime["runtime_commit"] == latest["runtime_commit"] and len(runtime["source_files"]) == 555
     for name, digest in runtime["source_files"].items():
-        assert sha(REPOSITORY / "app" / name) == digest
+        assert frozen_sha(runtime["runtime_commit"], "app/" + name) == digest
     for name, digest in model_notes["report_sha256"].items():
         assert sha(evidence / model_receipts[name]) == digest
     for name, count in (("backend_focused", 112), ("backend_compatibility", 1486)):
@@ -384,7 +415,7 @@ def main():
     runtime = read(evidence / storage_notes["backend_runtime_receipt"])
     assert runtime["passed"] and len(runtime["source_files"]) == 555 and runtime["runtime_commit"] == latest["runtime_commit"] and sha(evidence / storage_notes["backend_runtime_receipt"]) == storage_notes["backend_runtime_receipt_sha256"]
     for name, digest in runtime["source_files"].items():
-        assert sha(REPOSITORY / "app" / name) == digest
+        assert frozen_sha(runtime["runtime_commit"], "app/" + name) == digest
     for name, digest in storage_notes["report_sha256"].items():
         assert sha(evidence / receipts[name]) == digest
     cache_tour = read(MEDIA / "studio-upload-cache-manifest.json")
@@ -460,7 +491,7 @@ def main():
     runtime = read(evidence / access_notes["backend_runtime_receipt"])
     assert runtime["passed"] and runtime["git_inputs_rechecked"] and len(runtime["source_files"]) == 555 and runtime["runtime_commit"] == latest["runtime_commit"] and sha(evidence / access_notes["backend_runtime_receipt"]) == access_notes["backend_runtime_receipt_sha256"]
     for name, digest in runtime["source_files"].items():
-        assert sha(REPOSITORY / "app" / name) == digest
+        assert frozen_sha(runtime["runtime_commit"], "app/" + name) == digest
     for name, digest in access_notes["report_sha256"].items():
         assert sha(evidence / receipts[name]) == digest
     access_tour = read(MEDIA / "studio-task-access-manifest.json")

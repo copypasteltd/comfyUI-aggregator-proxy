@@ -63,6 +63,7 @@ from generation_contracts.command_recovery import (
 )
 from generation_contracts.commands import CommandClaim, CommandReceipt
 from generation_contracts.content_management import ContentOptionQuery, ContentQuery, ContentTags
+from generation_contracts.device_pool import DevicePoolView
 from generation_contracts.discovery import PublishedCapabilities, PublishedModel, PublishedModels
 from generation_contracts.job_cancellations import JobCancellationBatch, JobCancellationView
 from generation_contracts.key_generation_options import KeyGenerationOptions, KeyGenerationQuery
@@ -968,6 +969,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/admin/api/v1/public-models/{identifier}/usage", response_model=ModelUsage)
     def model_usage_detail(identifier: str, identity: Annotated[AdminIdentity, Depends(permission("models:read"))]) -> dict[str, Any]:
         return catalog.usage(parse_id("mdl", identifier))
+
+    @app.get("/admin/api/v1/public-models/{identifier}/device-pool", response_model=DevicePoolView)
+    def model_device_pool(identifier: str, identity: Annotated[AdminIdentity, Depends(permission("models:read"))]) -> dict[str, Any]:
+        return catalog.device_pool(parse_id("mdl", identifier))
 
     @app.patch("/admin/api/v1/public-models/{identifier}/documentation", response_model=ModelView)
     def model_documentation(identifier: str, data: ModelDocumentationPatch, request: Request, identity: Annotated[AdminIdentity, Depends(permission("models:write"))]) -> dict[str, Any]:

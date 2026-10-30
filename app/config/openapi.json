@@ -6621,6 +6621,45 @@
         }
       }
     },
+    "/admin/api/v1/public-models/{identifier}/device-pool": {
+      "get": {
+        "summary": "Model Device Pool",
+        "operationId": "model_device_pool_admin_api_v1_public_models__identifier__device_pool_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DevicePoolView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/api/v1/public-models/{identifier}/documentation": {
       "patch": {
         "summary": "Model Documentation",
@@ -15192,6 +15231,114 @@
         ],
         "title": "CursorPage[JobSummary]"
       },
+      "DevicePoolMemberView": {
+        "properties": {
+          "gpu_id": {
+            "type": "string",
+            "title": "Gpu Id"
+          },
+          "weight": {
+            "type": "integer",
+            "title": "Weight"
+          },
+          "assigned_count": {
+            "type": "integer",
+            "title": "Assigned Count"
+          },
+          "last_sequence": {
+            "type": "integer",
+            "title": "Last Sequence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "gpu_id",
+          "weight",
+          "assigned_count",
+          "last_sequence"
+        ],
+        "title": "DevicePoolMemberView"
+      },
+      "DevicePoolView": {
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "model_revision": {
+            "type": "integer",
+            "title": "Model Revision"
+          },
+          "policy": {
+            "type": "string",
+            "enum": [
+              "first_ready",
+              "balanced_ready"
+            ],
+            "title": "Policy"
+          },
+          "pool_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pool Id"
+          },
+          "sequence": {
+            "type": "integer",
+            "title": "Sequence"
+          },
+          "members": {
+            "items": {
+              "$ref": "#/components/schemas/DevicePoolMemberView"
+            },
+            "type": "array",
+            "title": "Members"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "model_id",
+          "model_revision",
+          "policy",
+          "pool_id",
+          "sequence",
+          "members"
+        ],
+        "title": "DevicePoolView"
+      },
+      "DeviceRouting": {
+        "properties": {
+          "policy": {
+            "type": "string",
+            "enum": [
+              "first_ready",
+              "balanced_ready"
+            ],
+            "title": "Policy",
+            "default": "first_ready"
+          },
+          "weights": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 1000.0,
+              "minimum": 1.0
+            },
+            "type": "object",
+            "maxProperties": 100,
+            "title": "Weights"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "DeviceRouting"
+      },
       "DispatchPolicy": {
         "properties": {
           "policy_id": {
@@ -17721,6 +17868,11 @@
             "type": "integer",
             "minimum": 1.0,
             "title": "Revision"
+          },
+          "gpu_id": {
+            "type": "string",
+            "pattern": "^gpu_[a-f0-9]{32}$",
+            "title": "Gpu Id"
           }
         },
         "additionalProperties": false,
@@ -17731,7 +17883,8 @@
           "name",
           "enabled",
           "draining",
-          "revision"
+          "revision",
+          "gpu_id"
         ],
         "title": "MappingChannel"
       },
@@ -18469,6 +18622,9 @@
           },
           "documentation": {
             "$ref": "#/components/schemas/ModelDocumentation"
+          },
+          "routing": {
+            "$ref": "#/components/schemas/DeviceRouting"
           }
         },
         "additionalProperties": false,
@@ -19038,6 +19194,16 @@
             },
             "type": "object",
             "title": "Defaults"
+          },
+          "routing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DeviceRouting"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -19272,6 +19438,9 @@
           },
           "documentation": {
             "$ref": "#/components/schemas/ModelDocumentation"
+          },
+          "routing": {
+            "$ref": "#/components/schemas/DeviceRouting"
           }
         },
         "type": "object",

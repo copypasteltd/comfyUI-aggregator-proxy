@@ -11,6 +11,7 @@ from generation_contracts.catalog import (
     ModelPatch,
     WorkflowSync,
 )
+from generation_contracts.device_pool import DeviceRouting
 from generation_contracts.discovery import PublishedCapability
 from generation_contracts.model_catalog import ModelCatalogQuery
 from generation_contracts.model_usage import ModelDocumentationPatch
@@ -32,6 +33,7 @@ from generation_infrastructure.admin_base import (
     timestamp,
 )
 from generation_infrastructure.admin_channels import begin_channel_read, enqueue_command
+from generation_infrastructure.device_pools import pool_view, validate_routing
 from generation_infrastructure.model_usage import model_usage
 from generation_infrastructure.models import (
     Artifact,
@@ -51,7 +53,7 @@ from generation_infrastructure.workflow_lifecycle import require_active_workflow
 
 
 def model_view(row: PublicModel) -> dict[str, Any]:
-    return {"id": public_id("mdl", row.id), "tenant_id": public_id("ten", row.tenant_id), "project_id": public_id("prj", row.project_id), "alias": row.alias, "task_type": row.task_type, "release_id": public_id("wfr", row.release_id), "channel_ids": row.channel_ids, "defaults": row.defaults, "revision": row.revision, "published": row.published, "documentation": row.documentation or {}}
+    return {"id": public_id("mdl", row.id), "tenant_id": public_id("ten", row.tenant_id), "project_id": public_id("prj", row.project_id), "alias": row.alias, "task_type": row.task_type, "release_id": public_id("wfr", row.release_id), "channel_ids": row.channel_ids, "defaults": row.defaults, "revision": row.revision, "published": row.published, "documentation": row.documentation or {}, "routing": row.routing}
 
 
 class CatalogAdministration(AdminBase):
@@ -106,6 +108,7 @@ class CatalogAdministration(AdminBase):
             row = PublicModel(tenant_id=tenant, project_id=project, alias=data.alias, task_type=release.manifest["task_type"], release_id=release.id, channel_ids=data.channel_ids, defaults=data.defaults, documentation=data.documentation.model_dump())
             session.add(row)
             session.flush()
+            row.routing = validate_routing(session, row, data.routing)
             record_change(session, public_id("usr", actor.user_id), "model.created", row.id, request_id, revision_before=None, revision_after=row.revision)
             idem.result = model_view(row)
             return idem.result
@@ -146,10 +149,22 @@ class CatalogAdministration(AdminBase):
             require_revision(row.revision, data.expected_revision)
             release = self._validate(session, row.tenant_id, row.project_id, data.release_id, data.channel_ids, data.defaults)
             row.release_id, row.task_type, row.channel_ids, row.defaults = release.id, release.manifest["task_type"], data.channel_ids, data.defaults
+            if data.routing is not None:
+                row.routing = validate_routing(session, row, data.routing)
+            else:
+                row.routing = validate_routing(session, row, DeviceRouting.model_validate(row.routing))
             row.published = False
             row.revision += 1
             record_change(session, public_id("usr", actor.user_id), "model.updated", row.id, request_id, revision_before=data.expected_revision, revision_after=row.revision)
             return model_view(row)
+
+    def device_pool(self, identifier: UUID) -> dict[str, Any]:
+        with self.sessions.begin() as session:
+            begin_channel_read(session)
+            row = session.get(PublicModel, identifier)
+            if row is None:
+                raise DomainError("not_found", "模型不存在", 404)
+            return pool_view(session, row)
 
     def model_action(self, actor: AdminIdentity, identifier: UUID, revision: int, publish: bool, request_id: str) -> dict[str, Any]:
         with self.sessions.begin() as session:

@@ -48,6 +48,17 @@ if sys.argv[1:] == ["start"]:
     environment.write_text("\n".join(lines) + "\n", encoding="utf-8")
     (PRIVATE / "ownership.json").write_text(json.dumps({"port": PORT, "data": str(DATA), "purpose": "isolated Studio regression", "virtualization_used": False}), encoding="utf-8")
     print(json.dumps({"started": True, "port": PORT, "all_writable_paths_in_project": True, "virtualization_used": False}))
+elif sys.argv[1:] == ["resume"]:
+    ownership = json.loads((PRIVATE / "ownership.json").read_text(encoding="utf-8"))
+    if ownership.get("port") != PORT or Path(ownership["data"]).resolve() != DATA.resolve() or not DATA.resolve().is_relative_to(ROOT.resolve()):
+        raise SystemExit("Refusing to resume a cluster without the exact ownership receipt")
+    if (DATA / "postmaster.pid").exists():
+        raise SystemExit("Owned cluster already has a postmaster; inspect instead of starting another")
+    with socket.socket() as probe:
+        probe.bind(("127.0.0.1", PORT))
+    with (PRIVATE / "resume.log").open("w", encoding="utf-8") as output:
+        run([TOOLS / "pg_ctl.exe", "-D", NATIVE_DATA, "-l", ALIAS / "native-postgres/server.log", "-o", f"-h 127.0.0.1 -p {PORT}", "-w", "start"], output)
+    print(json.dumps({"resumed_owned_test_cluster": True, "port": PORT, "virtualization_used": False}))
 elif sys.argv[1:] == ["stop"]:
     ownership = json.loads((PRIVATE / "ownership.json").read_text(encoding="utf-8"))
     if Path(ownership["data"]).resolve() != DATA.resolve() or not DATA.resolve().is_relative_to(ROOT.resolve()):
@@ -56,4 +67,4 @@ elif sys.argv[1:] == ["stop"]:
         run([TOOLS / "pg_ctl.exe", "-D", NATIVE_DATA, "-m", "fast", "-w", "stop"], output)
     print(json.dumps({"stopped_owned_test_cluster": True}))
 else:
-    raise SystemExit("Choose start or stop")
+    raise SystemExit("Choose start, resume or stop")

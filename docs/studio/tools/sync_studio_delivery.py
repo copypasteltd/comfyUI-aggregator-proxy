@@ -56,6 +56,7 @@ if __name__ == "__main__":
         original_bytes = document.read_bytes()
         text = document.read_text(encoding="utf-8")
         text = text.replace("](../infinite-canvas/", "](../../app/apps/studio_web/")
+        text = text.replace("](../aggregator-service/docs/", "](../")
         text = text.replace("](../../生图生视API封装/docs/", "](../")
         text = text.replace("](../../" + quote("生图生视API封装") + "/docs/", "](../")
         if document.name == "README.md":

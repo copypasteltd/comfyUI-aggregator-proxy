@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import os
 import subprocess
@@ -16,6 +17,9 @@ sys.path.insert(0, str(APP / "scripts"))
 from release_source import source_snapshot  # noqa: E402
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--increment', choices=('132', '137'), default='132')
+    arguments = parser.parse_args()
     before = source_snapshot(APP)
     label = datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ")
     private = ROOT / ".local/studio-wheel-build" / label
@@ -35,7 +39,7 @@ if __name__ == "__main__":
             assert "Root-Is-Purelib: true" in archive.read(metadata).decode()
     assert source_snapshot(APP) == before
     result = {"passed": True, "at": datetime.now(UTC).isoformat(), "projects": projects, "offline": True, "virtualization_used": False, "source_unchanged": True, "wheels": {wheel.name: hashlib.sha256(wheel.read_bytes()).hexdigest() for wheel in wheels}, "private_log": (private / "build.log").relative_to(ROOT).as_posix()}
-    target = ROOT / "aggregator-service/docs/evidence/studio-release-132" / ("native-wheels-" + label + ".json")
+    target = ROOT / ("aggregator-service/docs/evidence/studio-release-" + arguments.increment) / ("native-wheels-" + label + ".json")
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result))

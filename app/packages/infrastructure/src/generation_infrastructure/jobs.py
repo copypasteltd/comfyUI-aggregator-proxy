@@ -28,6 +28,7 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, defer, sessionmaker
 
 from generation_infrastructure.cursors import CursorCodec
+from generation_infrastructure.device_pools import freeze_pool
 from generation_infrastructure.gateway_catalogs import (
     check_admission_model,
     lock_catalog_for_admission,
@@ -189,8 +190,7 @@ class JobRepository:
             model_query = select(PublicModel).where(PublicModel.tenant_id == identity.tenant_id, PublicModel.project_id == identity.project_id, PublicModel.alias == request["model"])
             if validation_channel is None:
                 model_query = model_query.where(PublicModel.published.is_(True))
-            if validation_channel is not None or pending_gateway is not None or expected_release_digest is not None:
-                model_query = model_query.with_for_update(read=True)
+            model_query = model_query.with_for_update(read=True)
             model = session.execute(model_query).scalar_one_or_none()
             if model is None or model.task_type != request["task_type"]:
                 raise DomainError("model_not_available", "模型未发布或不支持该任务", 422)
@@ -242,7 +242,7 @@ class JobRepository:
             execution = {"release_id": public_id("wfr", release.id), "release_digest": release.digest, "parameters": parameters, "input": request["input"], "asset_hashes": asset_hashes}
             if audio:
                 execution["audio_spec"] = audio_specification(release.manifest, parameters)
-            job = Job(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, model_alias=model.alias, task_type=model.task_type, state="admission_pending" if pending_gateway else "queued", release_id=release.id, request=request, execution=execution, request_fingerprint=digest, execution_fingerprint=fingerprint(execution), eligible_channels=eligible, deadline=now + timedelta(seconds=3600 if video or audio or model3d else 900), accepted_period=period)
+            job = Job(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, model_alias=model.alias, task_type=model.task_type, state="admission_pending" if pending_gateway else "queued", release_id=release.id, request=request, execution=execution, request_fingerprint=digest, execution_fingerprint=fingerprint(execution), eligible_channels=eligible, device_pool_id=freeze_pool(session, model) if validation_channel is None else None, deadline=now + timedelta(seconds=3600 if video or audio or model3d else 900), accepted_period=period)
             job.is_validation = validation_channel is not None
             job.retry_of = retry_of
             job.accepted_at = None if pending_gateway else now

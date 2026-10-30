@@ -147,6 +147,13 @@
                 "revision": {
                   "type": "integer",
                   "minimum": 1
+                },
+                "gpu_id": {
+                  "type": "string",
+                  "pattern": "^gpu_[a-f0-9]{32}$",
+                  "not": {
+                    "pattern": "[\\r\\n]"
+                  }
                 }
               },
               "required": [
@@ -155,7 +162,8 @@
                 "name",
                 "enabled",
                 "draining",
-                "revision"
+                "revision",
+                "gpu_id"
               ]
             }
           }

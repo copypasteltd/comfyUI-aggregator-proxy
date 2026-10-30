@@ -16,6 +16,7 @@ from sqlalchemy import select, text
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, sessionmaker
 
+from generation_infrastructure.device_pools import charge_pool, target_for_job
 from generation_infrastructure.dispatch import (
     DISPATCH_LOCK,
     charge_dispatch,
@@ -235,7 +236,12 @@ class LeaseRepository:
                 return None
         channels = list(session.scalars(select(Channel).where(Channel.node_id == node_id, Channel.tenant_id == job.tenant_id, Channel.project_id == job.project_id, Channel.enabled.is_(True), Channel.draining.is_(False), Channel.deleted_at.is_(None), Channel.desired_revision == Channel.applied_revision, Channel.desired_revision == Channel.verified_revision).order_by(Channel.gpu_id, Channel.id).execution_options(populate_existing=True)))
         excluded_gpus = failed_oom_gpus(session, [job.id]).get(job.id, set())
+        pool_choice = target_for_job(session, job, allow_synthetic_catalog=self.allow_synthetic_catalog)
+        if job.device_pool_id and (pool_choice is None or pool_choice.node_id != node_id):
+            return None
         for channel in channels:
+            if pool_choice is not None and channel.id != pool_choice.channel_id:
+                continue
             if public_id("ch", channel.id) not in job.eligible_channels or channel.gpu_id in excluded_gpus:
                 continue
             binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == channel.id, WorkflowBinding.release_id == job.release_id, WorkflowBinding.desired_digest == WorkflowBinding.verified_digest, WorkflowBinding.applied_digest == WorkflowBinding.verified_digest).execution_options(populate_existing=True))
@@ -261,6 +267,8 @@ class LeaseRepository:
             session.add(attempt)
             session.flush()
             dispatch = charge_dispatch(buckets, job, release, binding, gpu, utcnow())
+            if pool_choice is not None:
+                dispatch["device_pool"] = charge_pool(pool_choice, gpu.id)
             profile = next((item for item in release.manifest.get("runtime_profiles", []) if binding.runtime_approval and item["id"] == binding.runtime_approval.get("profile_id") and item["gpu_hardware_id"] == gpu.hardware_id), None)
             basis = wait_basis(release_digest=release.digest, specification=spec_digest(job.task_type, job.execution), gpu_id=gpu.id,
                 hardware_id=gpu.hardware_id, channel_id=channel.id, revision=channel.desired_revision, approval=binding.runtime_approval,
