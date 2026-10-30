@@ -5,6 +5,7 @@ import "./studio-focus.test";
 import "./aggregator-composer.test";
 import "./task-journal.test";
 import "./aggregator-batch.test";
+import "./studio-glb.test";
 import assert from "node:assert/strict";
 import fixture from "./fixtures/catalog.json";
 import { assertLocalSchema, joinCatalog, presetParameters, presetPolicyReason, schemaProperties, validateJob } from "../src/services/api/aggregator/capabilities";

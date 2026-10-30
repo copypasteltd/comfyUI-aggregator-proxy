@@ -16,6 +16,7 @@
 - [任务清单备份、原子导入与服务端首次确认](13-任务清单备份与只读恢复.md)
 - [原提交只读核对与无ID恢复](14-原提交只读核对与恢复.md)
 - [批量创作、部分失败及只继续未发送项](15-批量创作与部分失败恢复.md)
+- [GLB 交互预览、原件保存与三维资源释放](16-GLB交互预览与资源释放.md)
 - [46 项开发差距 CSV](research/fusion-assessment-2026-10-30/development-gaps.csv)
 - [评估汇总、来源摘要和证据索引 JSON](research/fusion-assessment-2026-10-30/assessment-summary.json)
 - [本地下载与静态接口核对记录](research/aggregator-integration-audit-2026-10-30.json)

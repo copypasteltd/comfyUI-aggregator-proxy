@@ -1,0 +1,131 @@
+{
+  "started_at": "2026-10-30T02:27:32.473Z",
+  "scope": "Actual public HTTP production assets and CSP, native WebGL, isolated persistent browser with an offline synthetic embedded-texture GLB; no business Key, generation, remote content write, new GPU generation or physical phone",
+  "checks": [
+    {
+      "name": "public HTTP serves the lazy viewer and decodes embedded texture under its actual CSP without a Key",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "public preview saves byte-identical GLB and releases its actual WebGL context on close",
+      "passed": true,
+      "detail": {
+        "bytes": 908,
+        "sha256": "55b01222a33466e504fb092da22fe8e4363e3917cd77f0247e3bfdb1c86febe6",
+        "contexts": [
+          {
+            "lost": true,
+            "draws": 2,
+            "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "actual public page reload preserves local GLB and canvas with version-3 storage and no connection",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all received public static files equal the verified build; zero generation or other business mutation",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/public-model3d-2026-10-30T02-27-32-469Z/public-offline-textured-glb.png",
+      "bytes": 69194,
+      "sha256": "27aa6b6c3e9bf7711554e176b9c1419a6a753581486b747b6f42c7d172b740d1",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    }
+  ],
+  "page_errors": [],
+  "blocked_mutations": [],
+  "received_static_sha256": {
+    "assets/index-npyuX0C8.css": "b7dbce19383f485c47f239b3b793fc98ab090750d27122dfd8f2fe461dd69a60",
+    "assets/index-nN78isYh.js": "44d08cfcf5ce87ed4d828a89366d171b81ee1677c53422ae4a1cafddde362ca3",
+    "assets/FileSaver.min-BszIqW7I.js": "ed4c380275e588dbbdf1b231e70c221ced3b8ba87225efcaca8ce26b31ed3839",
+    "assets/project-BamxY9e8.js": "afab74b3314896c3619c74efdb15ec02070ae3c138121cc3e9f4b3600fbdc201",
+    "assets/plus-n-Vuq8AB.js": "245c2c24650dafc370929f2fc743c3760d62c842b92b4499536fdb88aa91fd67",
+    "assets/canvas-CNBLc6nz.js": "39ae1446a6d344ef03754a4fe7010c515096347f248fc3e289902cdaba58cd8f",
+    "assets/localforage-storage-dp00w5UR.js": "897788ce38487eb4681bc9bcb6d1aeba17ba53f8b49b6f41a2d3499018c9c93f",
+    "assets/use-asset-store-H26H922g.js": "f06a0f29af416aafddaabdd9106c99e5e8b1c29dd6e16789daa3fdd833b8b501",
+    "assets/Drawer-1StoGXil.js": "b97d1ae1da8bbc48eba866a2364d9df980bb473402bc0abd514c2f6cb0168bdd",
+    "assets/index-C3qyX6x3.js": "878f966f0fdd39fecaa70ac661c4c83375b8f0c16bfb509fbe5c3bb4092bf488",
+    "assets/useControlledState-B0aFytmM.js": "841533c9e8f424dbd3071061d8500741db97fc54b6e43985e5156dcc0a280982",
+    "assets/KeyCode-C3ZfcqzQ.js": "3e07de442a67b8aebd99fbf2172603cd885bd014ad710c864563178ec3e5029b",
+    "assets/Overflow-DlQoyQk3.js": "ba8a6e9e837861ab833cff9101ff4b3ef10a95a0fd17a16110beab5e3ec8dd68",
+    "assets/index-qqVGLwe8.js": "902b33fbc754a9c6b5f0244292d4c831dfb7be5fa5ce77d3175138badde0c34e",
+    "assets/PurePanel-Cw_OlGE_.js": "985c8c510e78814c9b44d40888c1fbf983028c72969431a1518370bafacf17cc",
+    "assets/upload-DHv-0zHL.js": "724aa465bf39df1b6cde4f096cb6644e3fe513af1b8bce01461bcd09d984a822",
+    "assets/canvas-theme-C_EWXAaR.js": "7ef5538e8669ae5be9a5eb90c385bcb2c39aea0e89e67f1f91ff612ac0ac40f3",
+    "assets/index-3O2tX36G.js": "bdd300e3ddedc77ab3209635d724232e9c3ec19c957a5523c9a2b7c22dafaa50",
+    "assets/search-8X95g9Dw.js": "a4c57fa34cfff9d91938755103ddd8c4bf399f06d5829a74be1986d6136526aa",
+    "assets/LeftOutlined-Db-nEy1n.js": "c06cb71d838232c75f798b6889ec21c3167d7f285a0f3196bc33debdd1d1bdcb",
+    "assets/image-B39Qbk5I.js": "441ffe8a992c0077cfb575c4e895be8b0e364dd3933a2a781ecdfb30470979d3",
+    "assets/image-utils-Dl6PCzi2.js": "dd925bcd1a778d20e5fb4656b717fbc8e7866924f93c7606d986eaf5c69346d5",
+    "assets/utils-D5Ex1tOo.js": "684a3c7f2d45cf1f67c509e2682c018217f84a8f2c64c5014da7e72436fa504a",
+    "assets/model-plugin-BPQPuK5K.js": "7660b656c657b5ab1191853b35b2b28a06a5cd4ea49bc2f3cf32b706ae7722df",
+    "assets/studio-model3d-preview-fc9IXHo0.js": "cbcea9dd366a90ea6d5ed3b714dba0140d56db8f3cb20e5bf860a5e70903082e",
+    "assets/box-BLZK3bva.js": "50683c6a5d24520495b82a6515fdc45c37020a64bada2eb7e0077038d63226a1",
+    "assets/index-Dynme5Da.js": "972a1ff16c41778cfd08e3250bfb82ee69f1f15f9b77f7143e2bcfb418999294",
+    "assets/refresh-cw-BuX4xspb.js": "efc13324be56761b2d1b8cc511388635761500fa7505c12d8106681381b18273",
+    "assets/index-JF1xHlZs.js": "f4f6baa05db05a342f1e71496e03867ddf21a8285ec074b434075c03f3ecd2b0",
+    "assets/index-B7lVmAXD.js": "50f357a2d28b1579213e88d99930e37b49bca3236f0023f5207ab8434dd48201",
+    "assets/index-BL7Sl2ch.js": "acc1b3470ecc645a43e6022d77e3840e49804873f313d6e398d25fc8e038c051",
+    "assets/video-C_Oa3INN.js": "9690b4435d762e2bbb1826fd8cdd6e2c37cbcf70f52e52d7f90f30d3e3809c93",
+    "assets/env-DLQI4bt1.js": "881dcd8f1412a813267b219c3cdb2389bcab69d05ce73173a42d2c80419c1fa3",
+    "assets/index-BHjlfV4u.js": "7a2837cde198cef1be1080dae13a168e5a1f9a538572ac4d1f4b4806de8e751f",
+    "assets/index-B-GW0dJu.js": "7c1ec5785acd9d77897b83130cd50c881d9fefd95a5371b0271a59b5ff70f3ad",
+    "assets/video-QRzf2unf.js": "08cf6feea7f28cafe24cbbf39599fd5189fa8e68227ce82db1f59031ec8c7222",
+    "assets/music-2-B2EftJST.js": "a2b1133de995b67ab40f22c4acdab96b8cc7b809304d8d838524752e67191902",
+    "assets/file-text-DVaPfz1r.js": "3d5e196967d44c713bcaa8ad5dc12078134aef7f78ac867dac7df540be5cc2f3",
+    "assets/settings-2-DNUeSfRq.js": "9550b7e7c6efcee77ccefe5216a201186c451095558f5e1325bfcd58890fe475",
+    "assets/index-toUFEBKv.js": "6be900809aa23f22d16173ce94d9ba71bd964e5f13519fde7dfef7f776c2d2cd",
+    "assets/audio-generation-DYNDBhzB.js": "0a3a278cc26a5dbd204f384e5a37ee0c3e4a1a5c06816e76c8d99bf3ffe44f59",
+    "assets/video-settings-panel-CpmsDqLU.js": "a39eda9c1f83002026537fda06f2dc2884ac019645e24af9602ee6fd145e562f",
+    "assets/square-DIjyaaPS.js": "44efc678ceb3b8a78dbacea0d7679911af8f2ea02aa3fdcc5148b652600ebfcf",
+    "assets/folder-plus-C2OibF5o.js": "5cf893cf5d150d51856ce7d4154d6602337a42100982eb579e0dbc7ebce26211",
+    "assets/index-B03k-DkD.js": "e7a4ecbe5b2d52eb81839a7ce3f57381c1ee11474aa0fb4c2d242f4e0a67261c",
+    "assets/trash-2-DKWh8GJ0.js": "68835699fd036c3ff6f6fe7bbf5411d2ce2fc08ff81244c02490f470ec8bf7f6",
+    "assets/rotate-ccw-C_TXzmjQ.js": "4cbc7e2fbf1c8377014861a21c465ac2470c001bdbc9c315bddff32aeaf32964",
+    "assets/image-plus-B9Zq6EsP.js": "cdd40d593e64295d2c54d67d8db126e754d9d3382e9df4ad91e6f73e1c5e912f",
+    "assets/use-copy-text-3-d6aWD-.js": "a8294ad99d338dcba942986aa5ef9c51e7d732c90f749f8ec357579edede3821",
+    "assets/index-BGXtmTmh.js": "5e8fdabef2cf808b00b976d856ca58f05eb1d6a387daa9e055032195954e22f8",
+    "assets/index-Bn15H0EP.js": "a36f4e79935aea227633486041257674e1f37f4fb33d307f127730fecf06c721",
+    "assets/index-DKxnsQNk.js": "fd6b7251b4ad9b624d32dad70b4d2e0139f3673ddd18bd61aa766c20ba0c3b64",
+    "assets/asset-picker-modal-B8sbTtrF.js": "52787b649509eebb2084e754aa6e1d41754206b5ff32640f363455d2deae8e20",
+    "assets/use-prompt-list-CKKNSzyb.js": "dbd4fac3b273ea9a9571beedf87117d61b2f46e20380cbdbe2c8e83a8d71bdd7",
+    "assets/prompt-detail-dialog-lJ9YNEZs.js": "d8c5b8bf911003a72bf81025ad53d64809233afd380878c74c7ab70987d3c1a2",
+    "assets/canvas-export-DyRnIh9A.js": "1e56ce1f1c5895bd8559ae0028655f4a75c1005fbf249a60eabfcc1695e15d3b",
+    "assets/use-canvas-store-BB8W9XNL.js": "50f8caaa76cf842660a7d08b101f75b0eaa83ff67996eeb132609a2206b82c73",
+    "assets/house-2GuLNQpp.js": "aeace03ac26cdd5c914810f7a759afdd9cd35bc83c1d034ba321689616049143",
+    "assets/zip-vQtl9jF_.js": "ad1801c25d96b5c5b3efd9778f827b7e79e1fbbaf57d8fe58e64958aaea078be",
+    "assets/studio-model3d-viewer-DBVLiyXo.js": "311d220b6d132e87321b6d4338f5f4d9758c8cbcaaec4987e83d92638afbd4c3"
+  },
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; media-src 'self' blob:; font-src 'self'; worker-src 'self'; connect-src http: https: blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+  "closed_contexts": [
+    {
+      "lost": true,
+      "draws": 2,
+      "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  ],
+  "browser_storage_version": 3,
+  "static_release": "studio-20261030.134.1",
+  "static_artifact_match": true,
+  "generation_posts": 0,
+  "private_recording": ".local/studio-model3d-public/2026-10-30T02-27-32-469Z/page@7507ca22fb5834798af8081c7814b8cb.webm",
+  "passed": true,
+  "finished_at": "2026-10-30T02:27:47.657Z"
+}

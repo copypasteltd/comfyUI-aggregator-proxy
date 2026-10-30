@@ -1,10 +1,10 @@
 # ComfyUI Aggregator Proxy
 
-[131 · 无限画布融合](docs/131-画布提交发布校验与异步查询契约.md)与[132 · 原提交只读核对](docs/132-画布原提交只读核对.md)：React创作前端复用现有七类媒体异步API、Key、Workflow和GPU调度；持久日志、原请求只读恢复、发布摘要及鉴权文件校验统一处理。当前前端147单元/类型/构建、18组界面、22组存储、25组清单、15组恢复和15组批次检查通过；后端112专项、1,486兼容通过，生成Admin类型另验类型/构建。[公网画布](http://43.165.167.179:39443/studio/)当前静态133.1/后端132.2。八种真实GPU模式曾在3080/5070完成，包含30秒FLAC和76.94MB GLB；本轮未重复提交GPU。完整故障矩阵、手机真机和容量仍以[46项进度](docs/studio/10-开发进度与交付记录.md)分层验收。
+[131 · 无限画布融合](docs/131-画布提交发布校验与异步查询契约.md)与[132 · 原提交只读核对](docs/132-画布原提交只读核对.md)：React创作前端复用现有七类媒体异步API、Key、Workflow和GPU调度；持久日志、原请求只读恢复、发布摘要及鉴权文件校验统一处理。当前前端159单元/类型/构建、18组界面、22组存储、25组清单、15组恢复、15组批次和17组三维检查通过；后端112专项、1,486兼容通过，生成Admin类型另验类型/构建。[公网画布](http://43.165.167.179:39443/studio/)当前静态134.1/后端132.2。八种真实GPU模式曾在3080/5070完成，包含30秒FLAC和76.94MB GLB；本轮未重复提交GPU。完整故障矩阵、手机真机和容量仍以[46项进度](docs/studio/10-开发进度与交付记录.md)分层验收。
 
 任务页新增清单JSON导出、预览和原子导入：不含Key或媒体，保留原正文/幂等键/任务ID，不覆盖画布、不自动发起请求。恢复记录先标为待核对，主动查询原任务后才能取消/读取产物；无ID的备份禁止补发生成。作品ZIP与任务清单需分别备份；提示词按原文保留，请妥善保管。[具体机制](docs/studio/13-任务清单备份与只读恢复.md)、[原速MP4](docs/studio/media/studio-131/studio-task-backup-verified.mp4)、[GIF](docs/studio/media/studio-131/studio-task-backup-verified.gif)来自生产构建UI、合成API与配额故障注入，未使用真实GPU或物理手机。
 
-入口为高位HTTP `/studio/`，Admin为`/admin/`，业务API为`/v1/`，任意源CORS保持开放。本机文档/原件事务、保存失败重试与跨页冲突继续保留；历史v2→v3升级及当前133.1数据保留/重启通过，原Worker未重启。v3本机数据不能随静态包降级，普通image/file自动清理暂停；上传缓存和完整配额UI仍待完善。[保存机制](docs/studio/12-本机引用事务与保存失败恢复.md)。
+入口为高位HTTP `/studio/`，Admin为`/admin/`，业务API为`/v1/`，任意源CORS保持开放。本机文档/原件事务、保存失败重试与跨页冲突继续保留；历史v2→v3升级及当前134.1数据保留/重启通过，原Worker未重启。v3本机数据不能随静态包降级，普通image/file自动清理暂停；上传缓存和完整配额UI仍待完善。[保存机制](docs/studio/12-本机引用事务与保存失败恢复.md)。
 
 无新增生成后端，不需要本地Docker、WSL或Agent。源码与锁同步于`app/apps/studio_web/`，青柠样式沿用既有系统；图片、视频、Workflow音频与GLB分别呈现。云端完成八小时清理与本机离线副本独立管理。[完整使用与恢复](docs/studio/USAGE.md)、[原生发布运维](docs/studio/11-线上使用与原生发布运维.md)。
 
@@ -20,7 +20,7 @@
 
 [128 · 3D 模型适配](docs/128-ComfyUI三维模型产物与3080适配.md) 新增 `image_to_3d`、单文件 GLB 2.0 校验、独立 `meshes:create` 权限与三级 `daily_mesh_count` 额度。以 3080 的 TRELLIS2 为接入例子，使用同一套异步队列、物理 GPU 排他、内容下载及成功后八小时保留。实现和真实验证进度以专题记录为准；只有通过实际运行批准的工作流才发布。
 
-外部用户先查 `/v1/models/{alias}` 的 usage，使用同一业务 Key 向 `/v1/assets` 上传源图，再向 `/v1/jobs` 提交 `task_type=image_to_3d`、`input.source_image.asset_id` 和公布的质量/seed。该流程不接收文字提示或图像尺寸。成功后读取 `artifacts[].id` 并下载 GLB；Admin 可管理发布与权限、筛选 3D 内容、查看几何计数并下载。首批不提供网页旋转预览、OBJ/多文件 glTF 或 Sub2API 3D 计价。[冻结工作流和自制输入](docs/examples/model3d/README.md) 提供具体调用示例。
+外部用户先查 `/v1/models/{alias}` 的 usage，使用同一业务 Key 向 `/v1/assets` 上传源图，再向 `/v1/jobs` 提交 `task_type=image_to_3d`、`input.source_image.asset_id` 和公布的质量/seed。该流程不接收文字提示或图像尺寸。成功后读取 `artifacts[].id` 并下载 GLB；Admin 可管理发布与权限、筛选 3D 内容、查看几何计数并下载。Admin的该增量不提供网页旋转预览；Studio的[134交互预览](docs/134-画布GLB交互预览与资源释放.md)已另行实现。OBJ/多文件glTF和Sub2API 3D计价另列。[冻结工作流和自制输入](docs/examples/model3d/README.md) 提供具体调用示例。
 
 已部署到 **https://gen.sub2share.xyz**：当前 **11 个发布模型、3 条启用渠道**，包括实际验证并发布的 `comfy-3080-3d-trellis2`。3D 平台验证和独立业务调用均成功；业务 GLB 为 100,424,732 字节，完整下载、摘要、HEAD/Range、幂等和跨 Key 隔离通过。[实际请求/响应](docs/examples/model3d/README.md)、[验收与部署记录](docs/128-ComfyUI三维模型产物与3080适配.md) 和 [Admin 实测截图、原速录屏与 GIF](docs/media/model3d-128/README.md) 可核对。
 
@@ -579,7 +579,7 @@ Python 集成测试要求本项目的原生 PostgreSQL 与独立 `render_control
 
 ![只读核对原提交](docs/studio/media/studio-131/studio-submission-lookup.gif)
 
-当前前端147单元、类型/构建、18组界面、22组存储、25组任务清单和15组只读恢复通过；后端112专项与1,486兼容回归通过，随后仅刷新生成的Admin类型并另验类型/构建，45个Admin文件与已核对种子一致。公网只读Key五项、数据保留/重启三项和四入口健康通过；[当前证据索引](docs/studio/research/studio-implementation/batch-validation-notes-1331.json)保留失败及修正。
+当前前端159单元、类型/构建及112组原生浏览器检查通过，包含18界面、22存储、25任务清单、15只读恢复、15批次和17三维专项。555个后端运行源码与已发132.2冻结Git相同，沿用原112专项与1,486兼容结果；生成Admin类型另有类型/构建证据。公网三维四项、数据保留/重启三项和四入口健康通过；[当前证据索引](docs/studio/research/studio-implementation/model3d-validation-notes-1341.json)保留旧失败与修正。本轮复用已生成GLB，不新增GPU生成或Key。历史八模式是一项UI加七项API提交，并非十一别名重测。音频文件/浏览器30,000ms与服务解码进度29,952ms差48ms，处于现有100ms容差内，精确计量另行跟踪。
 
 ## 批量创作（静态133.1已部署）
 
@@ -588,3 +588,13 @@ Python 集成测试要求本项目的原生 PostgreSQL 与独立 `render_control
 批次任务清单使用v2，普通清单仍v1；导入包括prepared项均不授权补发生成，浏览器数据库保持v3。任务卡在生成中/失败时也显示原任务查询入口。[具体契约与边界](docs/studio/15-批量创作与部分失败恢复.md) · [原速MP4](docs/studio/media/studio-131/studio-batch.mp4) · [GIF](docs/studio/media/studio-131/studio-batch.gif)。本轮15组批次专项来自生产构建与合成HTTP，真实GPU批次故障、手机和机群容量仍待验收。
 
 ![批次部分提交后的390px界面；合成接口](docs/studio/assets/studio/batch-2026-10-30T01-37-58-914Z/mobile-partial-after-restart.png)
+
+## GLB 交互预览（静态134.1）
+
+在模型卡或本机素材库点击“交互预览”，鼠标拖动旋转、滚轮缩放，触屏使用单指/双指操作；可随时复位、关闭或保存GLB原件。组件按需加载，关闭释放WebGL、贴图/位图及监听。原服务结果继续受原Key隔离；含原件的离线副本可独立预览。
+
+Three.js 0.186.1 / MIT随项目本地打包。预览阻止外链及未支持的必要扩展/压缩解码；文件损坏、组件缺失或浏览器不支持时说明原因并保留原件下载。已有76.94MB真实ComfyUI GLB渲染和摘要通过；公网另外验证内嵌贴图、刷新及释放，无新GPU生成、业务Key或数据库迁移。动画及手机峰值内存仍待验收。
+
+[完整方案与14份回执](docs/studio/16-GLB交互预览与资源释放.md) · [原速MP4](docs/studio/media/studio-131/studio-model3d.mp4) · [GIF](docs/studio/media/studio-131/studio-model3d.gif) · [公网截图](docs/studio/assets/studio/public-model3d-2026-10-30T02-27-32-469Z/public-offline-textured-glb.png)
+
+![已生成的真实ComfyUI GLB在画布素材库预览](docs/studio/assets/studio/model3d-2026-10-30T02-24-32-253Z/desktop-real-comfyui-glb.png)

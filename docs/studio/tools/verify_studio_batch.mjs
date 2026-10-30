@@ -135,7 +135,7 @@ try {
     check("all three reconstructed task cards show real states and the failed card queries its original job without generic retry or new generation");
     await uiPage.goto(origin + "/studio/tasks"); await uiPage.getByRole("button", { name: "导入任务清单", exact: true }).waitFor();
     await uiPage.evaluate(async () => { const j = await import("/probe.mjs"); for (const task of await j.journalList("intents")) await j.journalDelete("intents", task.id); }); await uiPage.reload();
-    const beforeImport = creates(); await uiPage.getByLabel("选择任务清单", { exact: true }).setInputFiles(archivePath); const dialog = uiPage.getByRole("dialog"); await dialog.getByText("确认恢复任务清单", { exact: true }).waitFor(); await dialog.getByRole("button", { name: "仅导入记录", exact: true }).click();
+    const beforeImport = creates(), chooser = uiPage.waitForEvent("filechooser"); await uiPage.getByRole("button", { name: "导入任务清单", exact: true }).click(); await (await chooser).setFiles(archivePath); const dialog = uiPage.getByRole("dialog"); await dialog.getByText("确认恢复任务清单", { exact: true }).waitFor(); await dialog.getByRole("button", { name: "仅导入记录", exact: true }).click();
     await group.getByText("备份待核对 3", { exact: true }).waitFor(); assert.equal(await group.getByRole("button", { name: /继续提交未发送项/ }).count(), 0); assert.equal(creates(), beforeImport); await uiPage.setViewportSize({ width: 390, height: 844 }); await shot(uiPage, "mobile-imported-batch-readonly");
     check("actual v2 backup import reconstructs the batch as read-only recovery, including its prepared member, with zero create POST");
     await ui.close(); report.private_recording = path.relative(root, await uiPage.video().path()).replaceAll("\\", "/");

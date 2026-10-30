@@ -2,7 +2,7 @@
 
 [English](README.en.md) · [公网画布](http://43.165.167.179:39443/studio/) · [完整46项进度](../../10-开发进度与交付记录.md) · [使用与运维](../../11-线上使用与原生发布运维.md)
 
-当前静态131.9、后端131.1。下表的GPU任务与原画布演示在131.6完成：文生图由线上画布提交，其他七项由原生客户端按已发布用法调用同一API。随后用真实浏览器从服务端历史载入素材库，验证图片解码、音视频播放以及全部八份原件下载的字节数和SHA。GLB只有下载卡，没有交互式三维预览。
+当前静态134.1、后端132.2。下表的GPU任务与原画布演示在131.6完成：文生图由线上画布提交，其他七项由原生客户端按已发布用法调用同一API。随后用真实浏览器从服务端历史载入素材库，验证图片解码、音视频播放以及全部八份原件下载的字节数和SHA。历史GLB只有下载卡；134.1已补充静态交互预览、原件保存和关闭释放，详见下方新证据。
 
 131.9补[任务清单恢复MP4](studio-task-backup-verified.mp4)、[GIF](studio-task-backup-verified.gif)及[来源/摘要](studio-task-backup-verified-manifest.json)：实际生产构建UI导出、预览/确认、主动查询原任务、损坏文件/配额失败和离线导出；25组检查通过，业务写请求为零。使用合成API和390px模拟视口，不计为GPU或物理手机。截图：[导入预览](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/desktop-import-preview.png)、[手机预览](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/mobile-import-preview.png)、[手机待核对](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/mobile-restored-records.png)、[原任务确认](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/desktop-known-job-queried.png)、[损坏文件](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/desktop-invalid-backup.png)、[配额失败](../../assets/studio/task-backup-2026-10-29T23-35-14-126Z/desktop-import-quota-failure.png)。任务清单与作品ZIP分别备份；[机制和限制](../../13-任务清单备份与只读恢复.md)。早期studio-task-backup文件为131.8中间证据，当前演示使用verified版本。
 
@@ -52,3 +52,7 @@
 ## 批量创作与部分失败恢复
 
 [原速MP4](studio-batch.mp4)、[GIF](studio-batch.gif)及[摘要/完整解码清单](studio-batch-manifest.json)记录生产构建UI与合成HTTP、原生IndexedDB：三项任务、第二响应中断、重启、只继续未发送项、原任务卡及v2只读导入。桌面/390px模拟，本轮无新GPU或物理手机验收。见[具体契约](../../15-批量创作与部分失败恢复.md)。
+
+## GLB 交互预览与释放
+
+[原速MP4](studio-model3d.mp4)、[GIF](studio-model3d.gif)及[完整解码/摘要](studio-model3d-manifest.json)覆盖真实已保存GLB、合成贴图和异常文件、关闭释放与桌面/390px模拟。静态134.1新增17三维专项，另有4项实际公网HTTP/CSP验证；没有新增GPU生成。截图：[76.94MB真实GLB](../../assets/studio/model3d-2026-10-30T02-24-32-253Z/desktop-real-comfyui-glb.png)、[触屏模拟](../../assets/studio/model3d-2026-10-30T02-24-32-253Z/mobile-touch-glb.png)、[公网贴图样本](../../assets/studio/public-model3d-2026-10-30T02-27-32-469Z/public-offline-textured-glb.png)。[使用、兼容和边界](../../16-GLB交互预览与资源释放.md)。

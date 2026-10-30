@@ -1,0 +1,40 @@
+{
+  "started_at": "2026-10-30T02:09:58.413Z",
+  "scope": "Production UI on plain non-localhost HTTP; native Chromium/WebGL and 390px touch emulation; previously generated real 76.94MB GLB plus synthetic self-contained textures/errors, no new GPU generation, physical phone or fleet acceptance",
+  "checks": [
+    {
+      "name": "library lists every original without loading Three.js or creating a WebGL context",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/model3d-2026-10-30T02-09-58-405Z/failure-state.png",
+      "bytes": 95577,
+      "sha256": "489d7ee2cf31bb7ed4cbd5483d2b3861b3081219cb96f1765afdcfa394d61dea",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "passed": false,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog', { name: '3D 原件预览' }).getByRole('status').filter({ hasText: /3 顶点 · 1 三角面/ }) to be visible\u001b[22m\n\n    at ready (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_model3d.mjs:106:126)\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_model3d.mjs:116:37",
+  "failure_page_text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n已连接\n本机编辑尚未保存\n旧版页面修改了迁移前的副本，已保留两份记录；请先导出旧页面内容，再处理副本冲突\nYOUR LOCAL LIBRARY\n留住每一次创作\n\n这里是已校验并存入当前浏览器的原件。云端到期不会主动删除这些副本；浏览器清理或设备丢失仍可能移除本机数据，请另存重要作品。\n\n刷新目录\n7 个原件 · 73.38 MiB\nmodel/gltf-binary\ncontent_00000000000000000000000000000007\n\n0.00 MiB\n云端保留至 2026/10/30 18:10:04\n本机原件独立保留\n\n交互预览\n另存原件\nmodel/gltf-binary\ncontent_00000000000000000000000000000006\n\n0.00 MiB\n云端保留至 2026/10/30 18:10:04\n本机原件独立保留\n\n交互预览\n另存原件\nmodel/gltf-binary\ncontent_00000000000000000000000000000005\n\n0.00 MiB\n云端保留至 2026/10/30 18:10:04\n本机原件独立保留\n\n交互预览\n另存原件\nmodel/gltf-binary\ncontent_00000000000000000000000000000004\n\n0.00 MiB\n云端保留至 2026/10/30 18:10:04\n本机原件独立保留\n\n交互预览\n另存原件\nmodel/gltf-binary\ncontent_00000000000000000000000000000003\n\n0.00 MiB\n云端保留至 2026/10/30 18:10:04\n本机原件独立保留\n\n交互预览\n另存原件\nmodel/gltf-binary\ncontent_00000000000000000000000000000002\n\n73.38 MiB\n云端保留至 2026/10/30 18:10:04\n本机原件独立保留\n\n交互预览\n另存原件\nmodel/gltf-binary\ncontent_00000000000000000000000000000001\n\n0.00 MiB\n云端保留至 2026/10/30 18:10:03\n本机原件独立保留\n\n交互预览\n另存原件\n基于 basketikun / infinite-canvas · MIT\n画布和已保存素材存于当前浏览器\n3D 原件预览\n\n0.00 MiB · 本机原件 · 关闭预览会释放三维资源\n\n拖动旋转、滚轮缩放；触屏单指旋转、双指缩放或平移。大型模型可能占用较多内存，可随时关闭或另存原件。\n\n暂时无法交互预览\nGLB 内嵌贴图无法读取，请保存原件检查\n\n聚焦模型后可用方向键平移，Ctrl + 方向键旋转。当前展示静态几何与材质；动画、压缩解码和未支持的扩展可另存后查看。\n\n保存 GLB 原件",
+  "failure_resources": {
+    "contexts": [],
+    "active_bitmaps": 0,
+    "closed_bitmaps": 0,
+    "image_blob_urls": 0,
+    "active_viewer_observers": 0
+  },
+  "completed_at": "2026-10-30T02:10:36.076Z"
+}

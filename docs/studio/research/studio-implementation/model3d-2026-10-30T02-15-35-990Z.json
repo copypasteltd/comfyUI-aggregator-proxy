@@ -1,0 +1,629 @@
+{
+  "started_at": "2026-10-30T02:15:36.000Z",
+  "scope": "Production UI on plain non-localhost HTTP; native Chromium/WebGL and 390px touch emulation; previously generated real 76.94MB GLB plus synthetic self-contained textures/errors, no new GPU generation, physical phone or fleet acceptance",
+  "checks": [
+    {
+      "name": "library lists every original without loading Three.js or creating a WebGL context",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "native WebGL renders embedded PNG on plain HTTP; orbit, zoom, reset and focused keyboard pan change actual pixels",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "closing preview loses its actual WebGL context, closes decoded ImageBitmaps and releases texture URLs and ResizeObserver",
+      "passed": true,
+      "detail": {
+        "contexts": [
+          {
+            "lost": true,
+            "draws": 14,
+            "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+          }
+        ],
+        "active_bitmaps": 0,
+        "closed_bitmaps": 1,
+        "image_blob_urls": 0,
+        "active_viewer_observers": 0
+      }
+    },
+    {
+      "name": "previously generated 76,942,864-byte ComfyUI GLB renders with exact geometry counts and saves byte-identical original",
+      "passed": true,
+      "detail": {
+        "bytes": 76942864,
+        "sha256": "bd9deb3277ad6b83f2d19d07df73510d8b9998b4ac88733dd8483a07163f5db2",
+        "vertices": 1597077,
+        "triangles": 3217656,
+        "saved_original_unchanged": true
+      }
+    },
+    {
+      "name": "external original shows explicit fallback while retaining original save",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "compressed original shows explicit fallback while retaining original save",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "corrupt original shows explicit fallback while retaining original save",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "empty original shows explicit fallback while retaining original save",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "badtexture original shows explicit fallback while retaining original save",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "closing during pending bitmap decode disposes late completion without creating a late WebGL context",
+      "passed": true,
+      "detail": {
+        "contexts": [
+          {
+            "lost": true,
+            "draws": 14,
+            "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+          },
+          {
+            "lost": true,
+            "draws": 2,
+            "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+          }
+        ],
+        "active_bitmaps": 0,
+        "closed_bitmaps": 2,
+        "image_blob_urls": 0,
+        "active_viewer_observers": 0
+      }
+    },
+    {
+      "name": "actual WebGL context loss switches to recoverable fallback and preserves original download",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "registered canvas GLB node previews its local offline copy after disconnect, with no API Key or generation",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "disconnect hides identity-owned library originals while offline snapshot copies remain independent",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "390px touch emulation rotates and pinches actual rendered pixels; preview and original-save controls fit the viewport",
+      "passed": true,
+      "detail": {
+        "contexts": [
+          {
+            "lost": true,
+            "draws": 5,
+            "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+          }
+        ],
+        "active_bitmaps": 0,
+        "closed_bitmaps": 1,
+        "image_blob_urls": 0,
+        "active_viewer_observers": 0
+      }
+    },
+    {
+      "name": "browser without WebGL shows original-save fallback and still closes decoded texture resources",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "missing lazy viewer chunk stays inside preview fallback without breaking the page or original save",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all preview cases preserve original files, shipped artifacts, DB v3 and identity boundaries with zero external requests or generation POSTs",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/model3d-2026-10-30T02-15-35-990Z/desktop-textured-glb.png",
+      "bytes": 82445,
+      "sha256": "a32a93de72777bac5c2dcd9deb7c9b4f7e1692294b62eb1c5b65bf0cd54805e9",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/model3d-2026-10-30T02-15-35-990Z/desktop-real-comfyui-glb.png",
+      "bytes": 162645,
+      "sha256": "fdc159ec828ca5be9fe9c473270bc3548e21dd77987cfa4c3aa0e240a3cac4b7",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/model3d-2026-10-30T02-15-35-990Z/desktop-context-loss-fallback.png",
+      "bytes": 124908,
+      "sha256": "a02312ad46538329783b31495771f14f6f26d724e6fd0ca6609f4cb0430657d7",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/model3d-2026-10-30T02-15-35-990Z/desktop-canvas-glb.png",
+      "bytes": 101987,
+      "sha256": "5ccdb7090ef49fb7aacfaf14ecf78571298abdb52a3c6c29b0b0b2fda1c51fca",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/model3d-2026-10-30T02-15-35-990Z/mobile-touch-glb.png",
+      "bytes": 73449,
+      "sha256": "6a7f53af6a1c4283bb3dd2d8381224f8685e38af622aaad86958e51f26790318",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "synthetic_fixture": {
+    "file": "docs/assets/studio/model3d-fixture.glb",
+    "sha256": "55b01222a33466e504fb092da22fe8e4363e3917cd77f0247e3bfdb1c86febe6"
+  },
+  "closed_previews": [
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 14,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 14,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 14,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 14,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 14,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 14,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 14,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 14,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 3,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 2,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [
+        {
+          "lost": true,
+          "draws": 5,
+          "vendor": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 (0x00002504) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        }
+      ],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 1,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    },
+    {
+      "contexts": [],
+      "active_bitmaps": 0,
+      "closed_bitmaps": 0,
+      "image_blob_urls": 0,
+      "active_viewer_observers": 0
+    }
+  ],
+  "real_original": {
+    "bytes": 76942864,
+    "sha256": "bd9deb3277ad6b83f2d19d07df73510d8b9998b4ac88733dd8483a07163f5db2",
+    "vertices": 1597077,
+    "triangles": 3217656,
+    "saved_original_unchanged": true
+  },
+  "desktop_resources": {
+    "contexts": [],
+    "active_bitmaps": 0,
+    "closed_bitmaps": 0,
+    "image_blob_urls": 0,
+    "active_viewer_observers": 0
+  },
+  "private_recording": ".local/studio-model3d/2026-10-30T02-15-35-990Z/page@25d51c73ae907084d12fea0a3f32d201.webm",
+  "generation_posts": 0,
+  "external_requests": [],
+  "business_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    }
+  ],
+  "browser_storage_version": 3,
+  "static_artifact_sha256": {
+    "assets/agent-url-bootstrap-DcZRvpiD.js": "2280ba8bc379fc6e8df6369caaeae893ce6cf2779c08a59cb344682813af9ef8",
+    "assets/app-config-modal-9tA0V4Gh.js": "bfba5fe21bf2cdf6522f69edbb2558252a29d6a9a9843f99f7a70b114f8c4308",
+    "assets/arrow-right-B2P-1IY4.js": "d39bb2b4975b9bdecf3a6d07a7a63897de8f22699aac46416a98157748ad46c0",
+    "assets/asset-picker-modal-B644hlCt.js": "517fd1735ea26b23afbb67b00b99e6f9120e4fbddab11fe204931e20a94af622",
+    "assets/assets-CMr__hXp.js": "4b5b377f0bfaa7ef2a4557ae246f4cabe421719e341f17fcbcddc3341d949176",
+    "assets/audio-generation-D_jmoIOM.js": "9e13b076d98a42798d8b79c7d7a303e36558f04c79a1ca4932bb317b8dadcc77",
+    "assets/box-DZoPHBNB.js": "7424c6ee3dce7096461fe666bae578755cb732ae7ad55404e262c52ab5870ea6",
+    "assets/canvas-export-CJ8gSAYT.js": "378251d340da006a460e63c06508b892f8628396c09f9fcdfbf813e1c486b7f9",
+    "assets/canvas-lQE3uECs.js": "4fe1eba978e635f2fc25cc625fd82a6fd2727e6269ffcabaa9c1571941fe6185",
+    "assets/canvas-theme-_hm1mp5u.js": "8160b87fcd4dcd3640c53c3cb022b68f7350ec6517df50caeb8bcf599a073be3",
+    "assets/connection-Jb7OVhHC.js": "6f0fd892c4f0cf49ed21434c4cc7c98dccde8b1e75593d53467978c0151bc0f4",
+    "assets/Drawer-DcnJZTlf.js": "b19ccd575705a51ee53f40400976af51bcdfca3b1c2b6d84411078e8a56f9b6c",
+    "assets/env-Byze3hOs.js": "7aa51d61a6654ca899d6b8a26d932633e0483b20b0133061182cec3bb50cb931",
+    "assets/external-link-CgubyQQy.js": "a44d25d9af72339288e7d1546cfa539c5db2134215a1178feeb4ec450c454daa",
+    "assets/file-text-ByMLqZbg.js": "811cbfabc1c6af65ca0d5c08fb7372aabf1a7a98cbc06ba04797a348b0a66fb7",
+    "assets/FileSaver.min-DC72zse4.js": "96c55cae4736c81b0113c4277578f9ed967445ec56ced73729f1712e64d1d2b7",
+    "assets/folder-plus-BEoTKXYW.js": "151f497a31c5bcc9b71c03897af582d141b00a71eca938ac35c1767d98145c10",
+    "assets/highlighted-body-OFNGDK62-Tz_LzP1Z.js": "04a1feb6c50a5e947db18ab998b8a6c4d9c597db7309127512dbecb33efbb1b6",
+    "assets/house-BnRP_9Gd.js": "df2ec34529d0e217c50feeefbda7b5e3ccdbe99a839b9b0fff90712ff5891425",
+    "assets/image-DkhJWcYg.js": "651b1d4ef1ba77b9dc8bee78d82fd017bd610c179fba786055a8b596220c9159",
+    "assets/image-plus-AaMGk0C0.js": "daf1b7f555cdd78eb9c85021cf845d4fb0f9d0c7a719cbaa86eb057002c033d6",
+    "assets/image-utils-Be9TdMDL.js": "f022e6ddb02c98383dbc6516c5bef8f0cf18c3534c9ff41984a0ca0417b85917",
+    "assets/index-B0QIFj1l.js": "46b3d736ba99cda3f8c7d951a239bfe63b1eecb72cc87bc9d29a7f443842bbd4",
+    "assets/index-BdqKCTB1.js": "8257aedff2a069f5d91ab20a794084d92305e65bc9bcbbed8007b05da909f7ef",
+    "assets/index-BeNwG6Pf.js": "88634ea24fd16cdfcf39ced8a154249861b8d9ba70fa28c2a24b5d8f7be98f36",
+    "assets/index-BgQuEav6.js": "97d652049cfce3b76ec3087134d2eaf26c2fd64ed1aa41dc3f23e3f32015767a",
+    "assets/index-BNQEiBLT.js": "154e936f63eb957f4e9ef731afe56d986e2312c4fd95b6f8fc203cbb47460a3b",
+    "assets/index-BsOciL5X.js": "fc7306d0632d346dc9a14ecfd5d96a6674b8682c51accb22dc08c9e3d7d123e1",
+    "assets/index-BtyiaCgs.js": "ef5b5c0d28e46cdaf9153090a7a45e687805ece8e56b2fac8dcf69c94381b197",
+    "assets/index-C1R1Ad4w.js": "d23282e65239c77a497193c3df5f3726fd960df77f1be63c09b37748dd5d426c",
+    "assets/index-C3rEGKMW.js": "f78821296cb8d28eac2652825d6d29069795455f17fe4109decdb171cdbdb5ce",
+    "assets/index-CbvQLKF9.js": "194a4d3ca71440f9e2e8d010abe041adb1eb9b5b8f1e89d2d2f4bd1c975c2025",
+    "assets/index-CETFqJIH.js": "7a6020326980fb9b494450d38c5768925c459a4f59917479354576d0a0e47bbb",
+    "assets/index-CIoJKOZv.js": "8d3458e719888e2c504ac574b3552e275a717d23d2653ba8728e42416952f110",
+    "assets/index-CrXIm6yt.js": "c65867eaac1273675117a22617242b1d395eaa006acd7ed41f1b2a736af3d503",
+    "assets/index-CySkJfQ4.js": "900a600deb02d1df0f5fc3b97800a0d210b01cfa974a720e3130828a1b9a885b",
+    "assets/index-D06Wzj-h.js": "f2c1932b796f83a5e0827ecc82231bff4cdf4609365021862b238d7ed893ffdb",
+    "assets/index-D4z2DJUu.js": "0e0bdcdfa4a9f6f48b48c66a8eb64396227027a544366b12e59b8b5afd96fd74",
+    "assets/index-D5V-5wSI.js": "b8a7d6f369d68f2bcec6affe7f57676f9c98129f79e489fb1ad5db6bb24d050b",
+    "assets/index-DP4JG6_b.js": "a5de1e62518573bf3462a9b20309e19de253335c4752bd37a223ce285bcffe1c",
+    "assets/index-DrpsDHds.js": "a20b178c7c62b466e57d315c1bd53f2f2c0ceb4a112fddcffd1a7ced9655f82d",
+    "assets/index-Dx3RzH3g.js": "478d30291c4e8501f744558ea9dd428be9c20d3520715f9d4d6fff6b465552e5",
+    "assets/index-JCdrAZ7p.js": "583d2cf9df539b27a24a220a0c947dfcf797641eceb72a73c4aa03bba5b37b7a",
+    "assets/index-npyuX0C8.css": "b7dbce19383f485c47f239b3b793fc98ab090750d27122dfd8f2fe461dd69a60",
+    "assets/index-qGJxg448.js": "016921c5fa7d5320792ce20d04d68c999c8afa53cafaadbe8232b5f2ffec66c8",
+    "assets/index-S7BH6Kyd.js": "1653e31989393c5f4ad7642ffdf51f648acd28852f24e0738fb63bb9c18ec695",
+    "assets/KeyCode-C3ZfcqzQ.js": "3e07de442a67b8aebd99fbf2172603cd885bd014ad710c864563178ec3e5029b",
+    "assets/LeftOutlined-1XOQuaY3.js": "2334aaa3a1cda46af99a12d403d1688012008b4db183cf039c012bf47df4d9fd",
+    "assets/link-2-Bmghj1nI.js": "3323de2906348b51f0c85b9724fe66f2cac52e083c6f40df3813b6ca9a2f6dcc",
+    "assets/localforage-storage-CU-Ex19c.js": "e2463fb3ae19abc73e15cddd8b819ae60d372d227bf200726071d0f7265ad506",
+    "assets/mermaid-GHXKKRXX-DcuWmaSz.js": "4c1e7e582cf81ad37faa933bc8e9bc26164825fd01dd89f359de62adfe84ebad",
+    "assets/model-plugin-BQKjuub5.js": "aee5d99c9bd49aa55f8c2d8a8f0834d4a8d8d17a186da26240c9b08a27c40525",
+    "assets/models-DZzwhMpU.js": "1cfb80cbf71d73273cdf046e3234ea6621a18fb4ca0db09367bb2f7c494818de",
+    "assets/music-2-DC_x6uJ8.js": "ab6fbab7d9a230ccd833d9f8246e445ada1e133b487247a641e98c12608ccdfe",
+    "assets/navigation-tools-BQJgCtAk.js": "5d4750208b85826f838294271c5eb5693ad080fd276db7b7aa9a1e7883e296a1",
+    "assets/Overflow-C4oi7ehp.js": "c5291cb5312bafe57098d74c25ac73b7dba5d257c438cad6bd7b93c95c67f6fe",
+    "assets/pencil-DRMIxJy4.js": "dccc0e6d10d628a1eaa5b7d0d32ae2cd8c11500b9f9db43fc59dfff7b6cdb9c6",
+    "assets/plus-DUQ3Updv.js": "c80f05c60e12088cff971d3820e8d95a4574ba0fbdddf10c90b19d13e708e9f9",
+    "assets/project-cE-77H6t.js": "85285ec939d7561f51130c37e09a70ee85052c2f17542610c6016c3903ba9989",
+    "assets/prompt-detail-dialog-BKlPKSOF.js": "0dd3f71805583eb944064ad95302c5e2daf334f29cd90521c2cf74716c09ecb7",
+    "assets/PurePanel-BS6oUVF6.js": "c20dc051c9d51209e4e1c7379562100b332613307f5fa1a7e972d7a050a9577b",
+    "assets/refresh-cw--5f_T88O.js": "c60d2ad36ba6b749ac50f86190118494532d86119b5aedf4dd775b77574ba4ed",
+    "assets/rotate-ccw-_gtcvmNq.js": "8507ca8f320b510cc5ba1a2f283ff3869c8fb9bc397a489a0b8528b3cdce35ab",
+    "assets/schema-validator-li6y4Gpj.js": "90e8c31fd663b7ad179e1cbc0dae6366dca00c7cd5ccce671cf6a0d5dc0fa187",
+    "assets/schema-worker-BELMOVc3.js": "7a62cfd491975e88ffc049fea3ee69e21930393e9bd24f12220e2c63d27c58cb",
+    "assets/search-NmbNI97m.js": "bb3f40a6d324dba03e371074e7a3fcc41f14c3cf9ff7f8afd9de56d85ea1565d",
+    "assets/settings-2-9T-8Th-B.js": "ca9413622c60d9c130ac274eedc24b334877c4287587995e0c273c0fd762d464",
+    "assets/square-BgaY7xW3.js": "90bbcd96bfba92669004ddbc4218b0601038d4e826e983aaf22473af1833c254",
+    "assets/square-check-big-DLpeHJMV.js": "768f1f7d10477a735cabfc8658e70c3749067902e923c37f4ffe8d703a584b3e",
+    "assets/studio-model3d-preview-CqUDdWLG.js": "b81f39cd367c3a1ba1556a5b608757d0d743fd5528c171443454180888a915b5",
+    "assets/studio-model3d-viewer-CnfFyAdM.js": "5c88c917ca6d1e42f9783dfe79587d8337f6f4c4e1a23c4029b3c076aa27f31b",
+    "assets/tasks-DEIbmbpB.js": "680a97f392d427bb50542da6b93e8df78417d981883a083f0cdaf3071374d71d",
+    "assets/trash-2-65sG8ttn.js": "bdb2fe7c2da3cd4fb55ebc9e630505a2706f0159a400b4f7b11f877ad0dacd9b",
+    "assets/upload-BkNy4ISJ.js": "d519240976ccca52b2ff8bfec63de6632a037c26f27a6ae583eb3e8e32582eff",
+    "assets/use-asset-store-CpP0dgFq.js": "97030e3f2c3a1763fae9a1a3fcad7ba0d52795f184824af9b39f9dd9b8428340",
+    "assets/use-canvas-store-Cso2yuLi.js": "e88c7148a0baa65721edcbeef0ad0c9d762eaea210a2eae88a08737f4734f9d0",
+    "assets/use-copy-text-U04Qlu3P.js": "47fbfe292c6bb3543547668b8af2c3d65b879cfb584d3de853a0e702b383dfe1",
+    "assets/use-prompt-list-cVPwEyX-.js": "411f993048dd961bdc1fa9cdb3a6bddadde9c8623a8cbe275d3a1af361736e93",
+    "assets/use-workbench-agent-store-CKFwYwaD.js": "d823420aa7f4f2575b83ca6aa83f1caafd3975c34c016a2c1ecdcc42142e752c",
+    "assets/useControlledState-Bke5y03R.js": "24df6eb55a8d8636f0eaaba9f415392142deca6c925af1c6e2d46982cc77a100",
+    "assets/utils-DHNIsBPs.js": "d9a7ffb897a3dc144fa0f7b2141f947f2fe93ce2a709094b1e15fac97c5ff91a",
+    "assets/video-DpyifuuW.js": "e22ed6d4d389999069b73ebac35ef58a64d41524681953c502ba4c8c36566165",
+    "assets/video-JXHpxAK_.js": "25bf29ea3a330b50baf520b99a115eb018b6a72b1a7034418788144c8c7ffacb",
+    "assets/video-settings-panel-v6AgekL_.js": "fe8f7acb67f4ebdce81c7643be9b899bacb745979d1cbb0708aa94f0186ea95e",
+    "assets/zip-vQtl9jF_.js": "ad1801c25d96b5c5b3efd9778f827b7e79e1fbbaf57d8fe58e64958aaea078be",
+    "config.js": "33c15a252c60b6103ad20c773e1ec662c1aaa636277aa24698274a7d2a743038",
+    "fonts/Anton-OFL.txt": "ee67e6ee22790b7929f1a3769ca2801d565c64b5a9096942c1adf5596de9c9e4",
+    "fonts/Anton-Reference.woff": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a",
+    "fonts/Manrope-OFL.txt": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+    "fonts/Manrope-Reference.woff": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd",
+    "icons/claude.svg": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364",
+    "icons/deepseek.svg": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439",
+    "icons/gemini.svg": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602",
+    "icons/glm.svg": "8174e65ff71647d5c705c920c953a82bd723d9e3e42887bdd4ffc9dfe51207a0",
+    "icons/grok.svg": "9175fc90c22655160231976c849f25a03b888d7cc0e04c5f1b987b659bb07c95",
+    "icons/linuxdo.svg": "dc7fe55ca4dc1062611111df4208da9d44655c36f85ad52727facd4bba2b4d60",
+    "icons/openai.svg": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186",
+    "index.html": "931c2dc56e48113aaad2f9bd8a8b2c627ac0bf5fbe110fb33039b34211229996",
+    "licenses/three-MIT.txt": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "logo.svg": "76e174b82af0dfac35c55ba086d4e9781aa1d2ade984b50ddb6489b408efd831",
+    "plugins/index.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "static_artifact_unchanged": true,
+  "passed": true,
+  "completed_at": "2026-10-30T02:16:00.794Z"
+}
