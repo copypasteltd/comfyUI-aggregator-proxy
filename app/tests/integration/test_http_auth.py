@@ -70,8 +70,10 @@ def test_studio_release_header_validation_poll_hint_and_cors(client: TestClient,
     with TestClient(create_app(test_settings.model_copy(update={"allow_any_origin": True})), base_url=test_settings.public_origin, client=("127.0.0.1", 50001)) as external:
         policy = external.get("/v1/access-policy", headers={"Authorization": headers["Authorization"], "Origin": "http://external-canvas.invalid:8111"})
         assert policy.status_code == 200 and policy.headers["X-Studio-Contract"] == "1"
+        assert policy.headers["X-Studio-Submission-Lookup"] == "1"
         assert policy.headers["Access-Control-Allow-Origin"] == "http://external-canvas.invalid:8111"
         assert "X-Studio-Contract" in policy.headers["Access-Control-Expose-Headers"]
+        assert "X-Studio-Submission-Lookup" in policy.headers["Access-Control-Expose-Headers"]
 
 
 def test_public_job_cursor_http_rotation_revocation_and_query_validation(client: TestClient, catalog: dict[str, Any], pg: sessionmaker[Session]) -> None:

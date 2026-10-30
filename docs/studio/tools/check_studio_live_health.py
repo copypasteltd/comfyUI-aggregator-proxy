@@ -27,7 +27,8 @@ PY
     assert output.channel.recv_exit_status() == 0, error.read().decode()
 finally:
     client.close()
-assert host["studio"] == build["release_id"] and host["backend"] == "linux-20261030.131.1"
+backend_build = json.loads((PRIVATE / "build.json").read_text(encoding="utf-8"))
+assert host["studio"] == build["release_id"] and host["backend"] == backend_build["release_id"]
 assert all(value == "active" for value in host["services"].values()) and host["worker_pid"] == 803588
 expected_index = next(item["sha256"] for item in manifest["files"] if item["path"] == "studio/index.html")
 responses = []
@@ -40,7 +41,7 @@ for endpoint in ("/studio/", "/studio/models", "/admin/", "/health/ready"):
         responses.append({"path": endpoint, "status": response.status, "content_type": response.headers.get("Content-Type"), "body_sha256": digest})
 cors = []
 for origin in ("http://storage-validation.invalid", "https://another-source.invalid"):
-    request = Request("http://43.165.167.179:39443/v1/jobs", method="OPTIONS", headers={"Origin": origin, "Access-Control-Request-Method": "POST", "Access-Control-Request-Headers": "authorization,idempotency-key"})
+    request = Request("http://43.165.167.179:39443/v1/jobs/lookup", method="OPTIONS", headers={"Origin": origin, "Access-Control-Request-Method": "POST", "Access-Control-Request-Headers": "authorization,idempotency-key,x-expected-release-digest,content-type"})
     with urlopen(request, timeout=30) as response:
         allowed = response.headers.get("Access-Control-Allow-Origin")
         assert response.status == 200 and allowed in ("*", origin)

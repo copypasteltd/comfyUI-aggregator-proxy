@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 131,
+  "increment": 132,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-10-30/development-trace-baselines-131-studio.json",
-    "sha256": "b76e252cced392ed7117445c8aa9ac3f30670ebeb2047a1f477d31fac6a92b6f"
+    "path": "docs/evidence/2026-10-30/development-trace-baselines-132-studio-lookup.json",
+    "sha256": "4e8fda223632647a468d645bcc32d49f5ea46639158013839102d83e0ef9c27b"
   },
   "requirements": [
     {
@@ -19,7 +19,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -43,7 +43,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
@@ -117,7 +117,8 @@
         "worker118",
         "http122",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "18",
@@ -757,7 +758,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
@@ -789,7 +790,7 @@
         },
         {
           "path": "app/packages/application/src/generation_application/ports.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
@@ -935,7 +936,8 @@
         "mesh129permissions",
         "mesh129downloads",
         "skill130",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "20",
@@ -962,13 +964,14 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         }
       ],
       "evidence": [
         "ci86",
         "cors116",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "51",
@@ -982,7 +985,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
@@ -1037,7 +1040,8 @@
         "media124final",
         "mesh128",
         "skill130",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "30",
@@ -1108,15 +1112,23 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
           "baseline": "ci86"
+        },
+        {
+          "path": "app/packages/application/src/generation_application/ports.py",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/packages/contracts/src/generation_contracts/submission_lookup.py",
+          "baseline": "studio132"
         }
       ],
       "tests": [
@@ -1124,7 +1136,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/tests/integration/test_admin_controls.py",
@@ -1137,6 +1149,66 @@
           "symbol": "test_503_after_actual_commit_does_not_promise_rollback_or_retry",
           "language": "python",
           "baseline": "cors116"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_frozen_history_lookup_survives_removed_input_rows_for_every_media_type",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_http_lookup_is_explicit_scoped_advertised_and_revocable",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_legacy_submission_without_release_digest_stays_queryable",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_lookup_is_read_only_even_when_alias_is_unpublished",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_lookup_requires_jobs_read_even_with_create_permission",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_lookup_uses_existing_token_validation",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_mapping_cannot_be_discovered_outside_original_identity",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_original_submission_must_match_every_frozen_component",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_uncommitted_submission_is_not_observed_and_never_replayed",
+          "language": "python",
+          "baseline": "studio132"
+        },
+        {
+          "path": "app/tests/integration/test_studio_submission_lookup.py",
+          "symbol": "test_unverifiable_or_damaged_history_fails_closed",
+          "language": "python",
+          "baseline": "studio132"
         }
       ],
       "evidence": [
@@ -1148,14 +1220,15 @@
         "cors116",
         "media124",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "29",
         "49",
         "54"
       ],
-      "limitation": "任务独立持久化与取消保护已测；真实断连/在途结果仍需联验。"
+      "limitation": "任务独立持久化与取消保护已测；真实断连/在途结果仍需联验。 原提交只读匹配已完成原生验证；真实断网、后台恢复和物理设备矩阵另验收。"
     },
     {
       "id": "API-05",
@@ -1199,7 +1272,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         }
       ],
       "tests": [
@@ -1299,7 +1372,8 @@
         "sdk92",
         "mesh128",
         "meshgateway128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "28",
@@ -1317,7 +1391,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
@@ -1339,7 +1413,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_request_limits_and_validation_never_echo_secrets",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         }
       ],
       "evidence": [
@@ -1348,7 +1422,8 @@
         "scalar104",
         "http122",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "30",
@@ -1363,7 +1438,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
@@ -1393,7 +1468,8 @@
         "video92",
         "dependency101",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "29",
@@ -1408,7 +1484,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
@@ -1427,7 +1503,8 @@
         "video92",
         "media124",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "29",
@@ -1482,7 +1559,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
@@ -1578,7 +1655,8 @@
         "wait94",
         "browser94",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "06",
@@ -1598,7 +1676,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -1642,7 +1720,8 @@
         "worker118",
         "http122",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "25",
@@ -2601,7 +2680,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_admin_content_metadata_range_delete_and_observer_access",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         }
       ],
       "evidence": [
@@ -2610,7 +2689,8 @@
         "asset112",
         "mesh128",
         "mesh129downloads",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "32",
@@ -2956,7 +3036,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/pricing.go",
@@ -2979,7 +3059,8 @@
         "go80",
         "video92",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "06",
@@ -2994,7 +3075,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
@@ -3034,7 +3115,8 @@
         "video92",
         "mesh128",
         "meshgateway128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "29",
@@ -3262,7 +3344,7 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/apps/admin_web/src/pages/Users.vue",
@@ -3274,7 +3356,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/tests/integration/test_admin_sessions.py",
@@ -3297,7 +3379,8 @@
         "dependency101",
         "cors116",
         "media124",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "50",
@@ -3918,7 +4001,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         }
       ],
       "evidence": [
@@ -3927,7 +4010,8 @@
         "visual87",
         "mesh128",
         "meshui128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "50",
@@ -3953,7 +4037,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
@@ -3966,7 +4050,8 @@
         "ci86",
         "cors116",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "51",
@@ -3980,7 +4065,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
@@ -4009,7 +4094,8 @@
         "video92",
         "mesh128",
         "meshui128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "29",
@@ -4075,7 +4161,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
@@ -4105,7 +4191,8 @@
         "video92",
         "cors116",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "34",
@@ -4132,7 +4219,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/tests/integration/test_key_policy_options.py",
@@ -4144,7 +4231,8 @@
       "evidence": [
         "ci86",
         "cors116",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "51",
@@ -4176,7 +4264,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/tests/integration/test_access_events.py",
@@ -4192,7 +4280,8 @@
         "cors116",
         "mesh128",
         "meshui128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "50",
@@ -4361,7 +4450,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "studio131"
+          "baseline": "studio132"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
@@ -4389,7 +4478,8 @@
         "ci86",
         "video92",
         "mesh128",
-        "studio131"
+        "studio131",
+        "studio132"
       ],
       "remaining_backlog": [
         "49",

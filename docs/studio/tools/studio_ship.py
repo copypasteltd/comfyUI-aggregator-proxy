@@ -85,7 +85,7 @@ PY
     elif action == "static-upgrade":
         sources = {TOOLS / "studio131-static-upgrade.py": "studio131-static-upgrade.py", BUILD / "static-build.json": "static-build-1312.json", BUILD / "studio-20261030.131.2.tar.gz": "studio-20261030.131.2.tar.gz"}
         script = transfer(sources) + f"\npython3 '{PROTECTED}/studio131-static-upgrade.py'\n"
-    elif action in {"static-upgrade-1313", "static-upgrade-1314", "static-upgrade-1315", "static-upgrade-1316", "static-upgrade-1317", "static-upgrade-1318", "static-upgrade-1319"}:
+    elif action in {"static-upgrade-1313", "static-upgrade-1314", "static-upgrade-1315", "static-upgrade-1316", "static-upgrade-1317", "static-upgrade-1318", "static-upgrade-1319", "static-upgrade-1321"}:
         release, previous, number = {
             "static-upgrade-1313": ("studio-20261030.131.3", "studio-20261030.131.2", "1313"),
             "static-upgrade-1314": ("studio-20261030.131.4", "studio-20261030.131.3", "1314"),
@@ -94,12 +94,38 @@ PY
             "static-upgrade-1317": ("studio-20261030.131.7", "studio-20261030.131.6", "1317"),
             "static-upgrade-1318": ("studio-20261030.131.8", "studio-20261030.131.7", "1318"),
             "static-upgrade-1319": ("studio-20261030.131.9", "studio-20261030.131.8", "1319"),
+            "static-upgrade-1321": ("studio-20261030.132.1", "studio-20261030.131.9", "1321"),
         }[action]
         assert json.loads((BUILD / "static-build.json").read_text())["release_id"] == release
         name = "static-build-" + number + ".json"
         sources = {TOOLS / "studio131-static-upgrade.py": "studio131-static-upgrade.py", BUILD / "static-build.json": name, BUILD / (release + ".tar.gz"): release + ".tar.gz"}
-        forward = " --promote-only" if number in {"1317", "1318", "1319"} else ""
+        forward = " --promote-only" if number in {"1317", "1318", "1319", "1321"} else ""
         script = transfer(sources) + f"\npython3 '{PROTECTED}/studio131-static-upgrade.py' --build {name} --previous {previous}{forward}\n"
+    elif action == "backend-prepare-1321":
+        assert json.loads((BUILD / "build.json").read_text())["release_id"] == "linux-20261030.132.1"
+        sources = {TOOLS / "studio131-host.py": "studio131-host.py", TOOLS / "studio132-host.py": "studio132-host.py", TOOLS / "studio132-prepare.sh": "studio132-prepare.sh", BUILD / "build.json": "cloud-build-1321.json", BUILD / "linux-20261030.132.1.tar.gz": "linux-20261030.132.1.tar.gz"}
+        script = transfer(sources) + f"""
+install -d -o root -g root -m 0700 /var/lib/comfyui-aggregator-deploy/studio132
+test ! -e /var/lib/comfyui-aggregator-deploy/studio132/prepare.state
+for item in studio131-host.py studio132-host.py studio132-prepare.sh; do
+    install -o root -g root -m 0600 '{PROTECTED}/'$item /var/lib/comfyui-aggregator-deploy/studio132/$item
+done
+install -o root -g root -m 0600 '{PROTECTED}/cloud-build-1321.json' /var/lib/comfyui-aggregator-deploy/studio132/cloud-build.json
+nohup bash /var/lib/comfyui-aggregator-deploy/studio132/studio132-prepare.sh > /var/lib/comfyui-aggregator-deploy/studio132/prepare.log 2>&1 < /dev/null &
+echo prepare_1321_started
+"""
+    elif action == "backend-promote-1321":
+        script = """test ! -e /var/lib/comfyui-aggregator-deploy/studio132/promote.state
+test "$(cat /var/lib/comfyui-aggregator-deploy/studio132/prepare.state)" = prepared
+printf 'running\\n' > /var/lib/comfyui-aggregator-deploy/studio132/promote.state
+nohup bash -c 'systemctl start comfy-aggregator-backup.service && /opt/comfyui-aggregator/current/venv/bin/python -B /var/lib/comfyui-aggregator-deploy/studio132/studio132-host.py promote && echo passed > /var/lib/comfyui-aggregator-deploy/studio132/promote.state || echo failed > /var/lib/comfyui-aggregator-deploy/studio132/promote.state' > /var/lib/comfyui-aggregator-deploy/studio132/promote.log 2>&1 < /dev/null &
+echo promote_1321_started
+"""
+    elif action == "backend-status-1321":
+        script = """for item in prepare.state prepared.json promote.state promote.json; do
+test ! -f /var/lib/comfyui-aggregator-deploy/studio132/$item || cat /var/lib/comfyui-aggregator-deploy/studio132/$item
+done
+"""
     elif action == "failure-log":
         script = f"for task in prepare promote rehearse; do test ! -f '{PROTECTED}/'$task'.log' || tail -n 30 '{PROTECTED}/'$task'.log'; done"
     else:

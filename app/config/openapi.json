@@ -7585,6 +7585,72 @@
         }
       }
     },
+    "/v1/jobs/lookup": {
+      "post": {
+        "summary": "Submission Lookup",
+        "operationId": "submission_lookup_v1_jobs_lookup_post",
+        "parameters": [
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "x-expected-release-digest",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Expected-Release-Digest"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionLookup"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/jobs/{identifier}": {
       "get": {
         "summary": "Job Detail",
@@ -17358,6 +17424,174 @@
         ],
         "title": "Login"
       },
+      "LookupArtifact": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^content_[a-f0-9]{32}$",
+            "title": "Id"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Position"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "position"
+        ],
+        "title": "LookupArtifact"
+      },
+      "LookupJob": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^job_[a-f0-9]{32}$",
+            "title": "Id"
+          },
+          "object": {
+            "type": "string",
+            "const": "generation.job",
+            "title": "Object"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "task_type": {
+            "type": "string",
+            "enum": [
+              "text_to_image",
+              "image_to_image",
+              "references_to_image",
+              "text_to_video",
+              "references_to_video",
+              "text_to_audio",
+              "image_to_3d"
+            ],
+            "title": "Task Type"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "admission_pending",
+              "queued",
+              "leased",
+              "preparing",
+              "submitting",
+              "running",
+              "collecting",
+              "uploading",
+              "verifying",
+              "reconciling",
+              "retry_wait",
+              "cancel_requested",
+              "succeeded",
+              "failed",
+              "cancelled",
+              "expired"
+            ],
+            "title": "Status"
+          },
+          "created_at": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Created At"
+          },
+          "updated_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Updated Revision"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          },
+          "retry": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RetryInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "artifacts": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/LookupArtifact"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifacts"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "seconds": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seconds"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "model",
+          "task_type",
+          "status",
+          "created_at",
+          "updated_revision"
+        ],
+        "title": "LookupJob"
+      },
       "ManagedWorkflow": {
         "properties": {
           "id": {
@@ -22028,6 +22262,41 @@
           "expired"
         ],
         "title": "StatisticsBucket"
+      },
+      "SubmissionLookup": {
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "generation.submission_lookup",
+            "title": "Object"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "found",
+              "not_observed"
+            ],
+            "title": "Outcome"
+          },
+          "job": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LookupJob"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "object",
+          "outcome",
+          "job"
+        ],
+        "title": "SubmissionLookup"
       },
       "SuccessfulDuration": {
         "properties": {

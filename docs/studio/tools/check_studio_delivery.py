@@ -99,7 +99,8 @@ def main():
     frozen = hashlib.sha256()
     for name in sorted(inputs):
         frozen.update(name.encode()); frozen.update(b"\0"); frozen.update((web / name).read_bytes())
-    assert frozen.hexdigest() == current["source_sha256"]
+    # 131.9 is immutable history; bind its published package receipt, not today's source.
+    assert read(evidence / "static-build-studio-20261030.131.9.json")["source_sha256"] == current["source_sha256"]
     for name in ("units", "types", "build"):
         result = read(evidence / final[name])
         assert result["passed"] and result["source_unchanged"] and result["source_after"] == current["source_sha256"]
@@ -115,7 +116,7 @@ def main():
         for screenshot in result["screenshots"]:
             assert sha(ROOT / screenshot["file"]) == screenshot["sha256"]
     dist = ROOT / "infinite-canvas/web/dist"
-    assert {file.relative_to(dist).as_posix(): sha(file) for file in dist.rglob("*") if file.is_file()} == current_ui["static_artifact_sha256"]
+    assert read(evidence / final["static_build"])["browser_report_sha256"] == sha(evidence / final["browser"])
     assert journal["browser_storage_version"] == 3 and all(item["method"] == "GET" for item in journal["business_requests"])
     for name, version, release in (("public_v2_v3_upgrade", 2, "studio-20261030.131.8"), ("public_current_restart", 3, "studio-20261030.131.9")):
         result = read(evidence / final[name])
@@ -141,13 +142,63 @@ def main():
         assert sha(file) == sha(REPOSITORY / "docs/studio/media/studio-131" / item["file"])
     assert all(not read(evidence / name)["passed"] for name in current["failed_reports_preserved"])
     assert current["full_acceptance"] == "HOLD" and current["no_new_gpu_submission"] and current["no_disabled_key_reenabled"]
+    latest = read(evidence / "submission-lookup-validation-notes-1321.json")
+    receipts = latest["passing_package_evidence"]
+    assert frozen.hexdigest() == latest["source_sha256"]
+    for kind in ("units", "types", "build"):
+        result = read(evidence / receipts[kind])
+        assert result["passed"] and result["source_unchanged"] and result["source_after"] == latest["source_sha256"]
+    unit_log = (evidence / read(evidence / receipts["units"])["log"]).read_text(encoding="utf-8")
+    assert re.search(r"^# tests 136$", unit_log, re.M) and re.search(r"^# fail 0$", unit_log, re.M)
+    final_ui = read(evidence / receipts["browser"])
+    for name, count in (("browser", 18), ("storage", 22), ("task_backup", 25), ("submission_lookup", 15)):
+        result = read(evidence / receipts[name])
+        assert result["passed"] and len(result["checks"]) == count and all(result["cleanup"].values())
+        assert result.get("static_artifact_unchanged", True) and result["static_artifact_sha256"] == final_ui["static_artifact_sha256"]
+        assert not result.get("page_errors")
+        for screenshot in result["screenshots"]:
+            assert sha(ROOT / screenshot["file"]) == screenshot["sha256"]
+    assert {file.relative_to(dist).as_posix(): sha(file) for file in dist.rglob("*") if file.is_file()} == final_ui["static_artifact_sha256"]
+    package = read(evidence / receipts["static_build"])
+    promotion = read(evidence / receipts["static_promotion"])
+    assert package["passed"] and package["file_count"] == len(final_ui["static_artifact_sha256"]) == 96
+    assert package["source_sha256"] == promotion["source_sha256"] == latest["source_sha256"]
+    assert package["archive_sha256"] == promotion["archive_sha256"]
+    assert not promotion["backend_restarted"] and not promotion["old_ui_roundtrip_performed"]
+    health = read(evidence / receipts["health"])
+    assert health["passed"] and health["backend"] == "linux-20261030.132.1" and health["studio"] == "studio-20261030.132.1"
+    assert health["original_worker_pid_unchanged"] and all(value == "active" for value in health["services"].values())
+    assert len(health["responses"]) == 4 and all(item["status"] == 200 for item in health["responses"])
+    assert len(health["cors"]) == 2 and all(item["status"] == 200 and item["allow_origin"] in ("*", item["requested_origin"]) for item in health["cors"])
+    public = read(evidence / receipts["public_current_restart"])
+    assert public["passed"] and len(public["checks"]) == 3 and all(public["cleanup"].values()) and not public["blocked_mutations"]
+    assert public["checks"][0]["detail"] == {"before_version": 3, "after_version": 3, "static_release": "studio-20261030.132.1"}
+    for name, count in (("backend_focused", 112), ("backend_compatibility", 1486)):
+        result = read(REPOSITORY / latest[name])
+        assert result["passed"] and result["sources_unchanged"] and result["python"] == {"tests": count, "failures": 0, "errors": 0, "skipped": 0}
+    for name, digest in result["source_sha256"].items():
+        assert sha(REPOSITORY / name) == digest
+    assert sum(item["passed_cases"] for item in result["python_tests"] if item["path"].endswith("/test_studio_submission_lookup.py")) == 30
+    live = read(evidence / receipts["live_lookup"])
+    assert live["passed"] and len(live["checks"]) == 5 and live["jobs_before"] == live["jobs_after"]
+    assert live["lookup_response"] == {"object": "generation.submission_lookup", "outcome": "not_observed", "job": None}
+    assert live["cleanup"]["temporary_key_disabled"] and live["cleanup"]["revoked_key_returns_401"] and live["cleanup"]["clients_closed"]
+    assert live["cleanup"]["previous_validation_keys_reenabled"] is False
+    tour = read(MEDIA / "studio-submission-lookup-manifest.json")
+    assert tour["passed"] and "synthetic" in tour["scope"].lower() and sha(ROOT / tour["source_report"]) == tour["source_report_sha256"]
+    for item in tour["files"]:
+        assert item["fully_decoded"] and sha(MEDIA / item["file"]) == item["sha256"]
+        assert sha(MEDIA / item["file"]) == sha(REPOSITORY / "docs/studio/media/studio-131" / item["file"])
+    assert all(not read(REPOSITORY / name)["passed"] for name in latest["failed_backend_reports_preserved"])
+    assert latest["full_acceptance"] == "HOLD" and latest["no_new_gpu_submission"] and latest["no_disabled_key_reenabled"]
     print(json.dumps({"passed": True, "at": datetime.now(UTC).isoformat(),
                       "scope": "Read-only source-mirror, public media/report/screenshot hashes, eight call receipts, all46 IDs and temporary Key revocation; not full runtime/phone/fleet acceptance",
                       "source_files_verified": len(source["source_files"]), "actual_gpu_modes": 8,
                       "browser_checks": 9, "public_samples": published, "large_glb_metadata_only": True,
-                      "requirements_retained": 46, "temporary_keys_disabled": 2, "storage_checks": 22,
-                      "current_ui_checks": 18, "task_backup_checks": 25, "current_unit_tests": 126,
-                      "public_storage_upgrade_checks": 3, "current_static_release": "studio-20261030.131.9", "browser_storage_version": 3,
+                      "requirements_retained": 46, "temporary_keys_disabled": 3, "storage_checks": 22,
+                      "current_ui_checks": 18, "task_backup_checks": 25, "submission_lookup_checks": 15, "current_unit_tests": 136,
+                      "backend_compatibility_cases": 1486, "live_lookup_checks": 5,
+                      "public_storage_upgrade_checks": 3, "current_static_release": "studio-20261030.132.1", "browser_storage_version": 3,
                       "browser_storage_downgrade_supported": False, "virtualization_used": False}, ensure_ascii=False))
 
 

@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "at": "2026-10-30T00:41:11.418536+00:00",
+  "scope": "Recorded native backend static checks; full runtime acceptance remains pending",
+  "mypy": {
+    "command": "python -B -m mypy packages apps",
+    "exit_code": 0,
+    "source_files": 178,
+    "private_log_sha256": "19d6d1de8c36d572bc5e367e2e092a4ebafe91d90f042fc522175c160ea922e0"
+  },
+  "ruff": {
+    "command": "python -B -m ruff check packages apps scripts tests migrations --output-format concise",
+    "exit_code": 0,
+    "stdout": "All checks passed!",
+    "recorded_from_completed_tool_output": true
+  },
+  "virtualization_used": false
+}

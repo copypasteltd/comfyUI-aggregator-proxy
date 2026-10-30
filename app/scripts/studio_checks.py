@@ -23,7 +23,7 @@ from native_ci import database_lock, file_lock, test_url  # noqa: E402
 run_id = "studio-" + uuid4().hex
 private = APP / ".local" / run_id
 private.mkdir(parents=True)
-report_dir = APP.parent / "docs" / "evidence" / "studio-release-131"
+report_dir = APP.parent / "docs" / "evidence" / "studio-release-132"
 report_dir.mkdir(parents=True, exist_ok=True)
 started = datetime.now(UTC)
 mode = sys.argv[1] if len(sys.argv) > 1 else "focused"
@@ -69,6 +69,8 @@ try:
                 selected = ["tests/unit/test_domain.py", "tests/unit/test_model3d.py", "tests/integration/test_studio_release_guard.py", "tests/integration/test_http_auth.py", "tests/integration/test_http_cors.py"] if mode == "focused" else ["tests/integration/test_http_auth.py::test_admin_content_metadata_range_delete_and_observer_access"]
                 if mode == "compatibility":
                     selected = ["tests/unit", "tests/integration/test_studio_release_guard.py", "tests/integration/test_http_auth.py", "tests/integration/test_http_cors.py", "tests/integration/test_discovery.py", "tests/integration/test_model_documentation.py", "tests/integration/test_model_catalog.py", "tests/integration/test_model3d_pipeline.py", "tests/integration/test_asset_idempotency.py", "tests/integration/test_gateway_catalogs.py", "tests/integration/test_content.py", "tests/integration/test_content_retention.py", "tests/integration/test_content_management_operations.py", "tests/integration/test_job_cancellations.py"]
+                if mode in ("focused", "compatibility"):
+                    selected.append("tests/integration/test_studio_submission_lookup.py")
                 exit_code = int(pytest.main([*selected, "--basetemp", str(private / "temp"), "--junitxml", str(private / "results.xml"), "-q"]))
             source_after = snapshot()
         else:

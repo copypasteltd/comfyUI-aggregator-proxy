@@ -1,5 +1,14 @@
 # 更新日志 / Changelog
 
+## 2026-10-30 · Studio 132.1（候选） · 原提交只读恢复
+
+- 新增 `POST /v1/jobs/lookup`：原租户/项目/Key、规范原请求及双指纹核对；只读一致性快照，不准入、不重放、不依赖现行模型或素材。`not_observed` 不等于从未执行。
+- 画布显式恢复未知提交和备份无 ID 记录；旧服务和错误身份不回退生成。IDB 事务内占用首次发送，防止双页补发。
+- 136 单元、类型/构建、112 原生专项、18 页面、22 存储、25 清单、15 恢复检查通过。保留首轮失败和原始预算，全兼容回归及部署复验中。新增四张截图、合成 API 录屏与双语用法；全系统验收仍为 HOLD。
+
+- Added exact read-only submission lookup and cross-page first-send claims. No replay, upload or new billing; imported journals retain original identity and bytes. New synthetic UI/IDB evidence and bilingual recovery docs are included; compatibility and live deployment are tracked separately.
+
+
 ## 2026-10-30 · Studio 131.9 · 任务清单备份与安全恢复
 
 - 新增任务清单JSON导出、预览及整批事务导入；保留原正文/身份/幂等键/发布摘要/任务编号，不带Key或媒体，不覆盖画布、不自动请求；离线可导出保存身份的记录，作品ZIP另行备份。

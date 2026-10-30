@@ -42,3 +42,9 @@ The recording shows actual UI activity without the Key configuration screen. It 
 Browser private-byte samples rose from about 347 to 651MiB, and JS heap from 8.2 to 17.1MiB, while loading all originals including the 76.94MB GLB. These are observations, not peak-memory, leak or phone-capacity acceptance; summed working sets may double-count shared pages. All owned browser objects closed in finally. Both temporary business Keys are disabled and return 401.
 
 All eight cloud artifacts expire 28,800s after job completion; local originals and saved files are independent. This evidence does not certify every one of the 11 aliases, all codecs/faults, transfer-triggered ComfyUI cleanup, physical phones, global fair pooling or 10–20-node capacity. The complete backlog retains its F identifiers.
+
+## 132 candidate: read-only submission lookup
+
+Original-speed production UI with synthetic HTTP; not GPU or physical-phone evidence. Covers no-ID recovery, not-observed results and original job restoration without replay.
+
+[MP4](studio-submission-lookup.mp4) · [GIF](studio-submission-lookup.gif) · [SHA/decoder manifest](studio-submission-lookup-manifest.json) · [390px screenshot](../../assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png)

@@ -28,7 +28,7 @@ def secrets(value):
 
 if __name__ == "__main__":
     values = set()
-    inputs = [ROOT / ".local/studio-ops" / name for name in ("connection.json", "admin-access.json", "validation-key.json", "restricted-validation-key.json")]
+    inputs = [ROOT / ".local/studio-ops" / name for name in ("connection.json", "admin-access.json", "validation-key.json", "restricted-validation-key.json", "lookup-validation-key-1321.json")]
     inputs.append(Path("C:/Users/carzy/.codex/skills/remote-3080/device.json"))
     for source in inputs:
         if source.exists():

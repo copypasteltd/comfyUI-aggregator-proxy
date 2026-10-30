@@ -135,6 +135,7 @@ from generation_contracts.spec_isolation import (
     SpecIsolationPage,
     SpecIsolationView,
 )
+from generation_contracts.submission_lookup import SubmissionLookup
 from generation_contracts.validation import JobCreate, WorkerEvent
 from generation_contracts.wait_estimates import WaitEstimate
 from generation_contracts.worker import AttemptStatus, Claim, Heartbeat, Register, Renew
@@ -925,6 +926,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/v1/access-policy")
     def access_policy(response: Response, identity: Annotated[BusinessIdentity, Depends(business)]) -> dict[str, Any]:
         response.headers["X-Studio-Contract"] = "1"
+        response.headers["X-Studio-Submission-Lookup"] = "1"
         return identity.policy
 
     @app.get("/admin/api/v1/public-models", response_model=ModelCatalogPage)
@@ -1053,6 +1055,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         result = jobs.create(identity, data.model_dump(exclude_unset=True), idempotency_key or str(uuid4()), request.state.request_id, expected_release_digest=x_expected_release_digest)
         response.headers["Location"] = "/v1/jobs/" + result["id"]
         response.headers["Retry-After"] = "2"
+        return result
+
+    @app.post("/v1/jobs/lookup", response_model=SubmissionLookup, response_model_exclude_unset=True)
+    def submission_lookup(data: JobCreate, response: Response, identity: Annotated[BusinessIdentity, Depends(business)], idempotency_key: Annotated[str, Header()], x_expected_release_digest: Annotated[str | None, Header(pattern="^[a-f0-9]{64}$")] = None) -> dict[str, Any]:
+        result = jobs.lookup(identity, data.model_dump(exclude_unset=True), idempotency_key, expected_release_digest=x_expected_release_digest)
+        if result["job"] is not None and result["job"]["status"] not in {"succeeded", "failed", "cancelled", "expired"}:
+            response.headers["Retry-After"] = "2"
         return result
 
     @app.get("/v1/jobs/{identifier}")

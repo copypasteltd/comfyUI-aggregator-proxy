@@ -42,3 +42,9 @@
 浏览器读取八份原件后的进程私有字节采样约347→651MiB，JS堆约8.2→17.1MiB；包括76.94MB GLB。该采样不是峰值、泄漏测试或手机容量认证，工作集相加可能重复计算共享页。所有自建浏览器在finally关闭；两把临时业务Key已停用且返回401。
 
 云端八份产物均在任务完成后28,800秒到期，本机原件与另存文件独立保留。本次通过不覆盖全部11别名、全部格式/故障矩阵、01移交即删、物理手机、全局公平池或10～20台容量；完整剩余项保留F编号。
+
+## 132 候选：只读核对原提交
+
+原速界面录制，生产构建配合合成 HTTP；不代表 GPU 或物理手机。覆盖无 ID 恢复、未查到及找回原任务，不补发生成。
+
+[MP4](studio-submission-lookup.mp4) · [GIF](studio-submission-lookup.gif) · [SHA/decoder manifest](studio-submission-lookup-manifest.json) · [390px screenshot](../../assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png)

@@ -37,7 +37,7 @@ export type AccessPolicy = {
     limits: Record<string, { mode: "bounded" | "unlimited"; value: number | null }>;
     [key: string]: unknown;
 };
-export type Catalog = { models: CatalogModel[]; policy: AccessPolicy; releaseGuard: boolean };
+export type Catalog = { models: CatalogModel[]; policy: AccessPolicy; releaseGuard: boolean; submissionLookup?: boolean };
 export type JobRequest = { model: string; task_type: TaskType; input: JsonObject; parameters: JsonObject; client_request_id?: string };
 export type ContentMetadata = {
     id: string;
@@ -63,4 +63,5 @@ export type RemoteJob = {
     [key: string]: unknown;
 };
 export type ListPage<T> = { data: T[]; has_more: boolean; next_cursor: string | null };
-export type ApiResult<T> = { data: T; retryAt?: number; requestId?: string; studioContract?: string };
+export type SubmissionLookup = { object: "generation.submission_lookup"; outcome: "found"; job: RemoteJob } | { object: "generation.submission_lookup"; outcome: "not_observed"; job: null };
+export type ApiResult<T> = { data: T; retryAt?: number; requestId?: string; studioContract?: string; submissionLookup?: string };

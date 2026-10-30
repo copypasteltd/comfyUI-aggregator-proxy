@@ -388,6 +388,26 @@
       }
     },
     {
+      "operation_id": "post_v1_jobs_lookup",
+      "method": "POST",
+      "path": "/v1/jobs/lookup",
+      "identity": "service",
+      "scopes_all": [
+        "jobs:read"
+      ],
+      "permissions_all": [],
+      "resource_guard": "original_tenant_project_key_and_exact_frozen_submission",
+      "csrf_required": false,
+      "idempotency": "required_original_lookup_only",
+      "if_match_required": false,
+      "work_package": "WP-04",
+      "conditional_scopes": {
+        "artifact_metadata": [
+          "artifacts:read"
+        ]
+      }
+    },
+    {
       "operation_id": "get_v1_jobs",
       "method": "GET",
       "path": "/v1/jobs",

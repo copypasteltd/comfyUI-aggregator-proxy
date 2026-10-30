@@ -58,3 +58,11 @@ Actual backend/static rollback preserves existing jobs/content. A new 5070 ten-m
 ## Attribution
 
 Upstream [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas), MIT, commit `9cd3deacbcc598361807afc16c059a80dd18b6f9`. Preserve its license and author attribution. The managed UI uses the user's required [04 · Lime style](https://html.cafe/x5b381ea1); original CSS, font declarations, hashes and font licenses are preserved in web/src/styles/reference/ 和 web/public/fonts/, with separate adaptations.
+
+## Read-only submission recovery (132 candidate)
+
+After a lost response or journal import, `POST /v1/jobs/lookup` matches the original business Key, frozen body, idempotency key and release digest to restore the original job ID. It requires only `jobs:read` and never generates, uploads or charges again. A not-observed result stays unknown; older services fail clearly without falling back to creation. An IDB write transaction also claims the first send across pages.
+
+[Operation and development contract](14-原提交只读核对与恢复.md) · [Original-speed MP4](media/studio-131/studio-submission-lookup.mp4) · [390px view](assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png). This recording uses the production build with synthetic HTTP, not a GPU run or physical phone.
+
+![Read-only original submission recovery](media/studio-131/studio-submission-lookup.gif)

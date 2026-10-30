@@ -55,10 +55,18 @@ async function handler(req, res) {
     if (url.pathname.startsWith("/v1/")) {
         report.requests.push({ method: req.method, path: url.pathname, bearer_present: req.headers.authorization === `Bearer ${key}`, cookie_present: Boolean(req.headers.cookie), release_header_present: Boolean(req.headers["x-expected-release-digest"]) });
         if (req.headers.authorization !== `Bearer ${key}`) return json(res, 401, { error: { code: "invalid_key", message: "Synthetic key required" } });
-        if (url.pathname === "/v1/access-policy") return json(res, 200, { scopes: [...fixture.scopes, "jobs:cancel"], limits: { rpm: { mode: "unlimited", value: null } } }, { "X-Studio-Contract": "1" });
+        if (url.pathname === "/v1/access-policy") return json(res, 200, { scopes: [...fixture.scopes, "jobs:cancel"], limits: { rpm: { mode: "unlimited", value: null } } }, { "X-Studio-Contract": "1", "X-Studio-Submission-Lookup": "1" });
         if (url.pathname === "/v1/models") return json(res, 200, { object: "list", data: fixture.models });
         if (url.pathname === "/v1/capabilities") return json(res, 200, { object: "list", data: fixture.capabilities });
         if (url.pathname === "/v1/jobs" && req.method === "GET") return json(res, 200, { data: [...jobs.values()], has_more: false, next_cursor: null });
+        if (url.pathname === "/v1/jobs/lookup" && req.method === "POST") {
+            const frozen = await body(req);
+            const previous = idempotency.get(req.headers["idempotency-key"]);
+            if (!previous) return json(res, 200, { object: "generation.submission_lookup", outcome: "not_observed", job: null });
+            assert.equal(frozen, previous.body);
+            assert.equal(req.headers["x-expected-release-digest"], "a".repeat(64));
+            return json(res, 200, { object: "generation.submission_lookup", outcome: "found", job: jobs.get(previous.id) }, { "Retry-After": "2" });
+        }
         if (url.pathname === "/v1/jobs" && req.method === "POST") {
             const frozen = await body(req);
             const token = req.headers["idempotency-key"];
@@ -180,15 +188,18 @@ try {
     assert.ok(toastBounds.y >= navigationBounds.y + navigationBounds.height);
     check("uncertain-submit notification leaves primary navigation accessible");
     await page.getByRole("link", { name: "任务", exact: true }).click();
-    await page.getByRole("button", { name: "核对原提交", exact: true }).waitFor();
+    await page.getByRole("button", { name: "只读核对原提交", exact: true }).waitFor();
     assert.equal(jobs.size, 1);
     check("POST is preceded by committed durable intent; lost response stays unknown");
     await shot(page, "desktop-unknown-submit");
     dropSubmitResponse = false;
-    await page.getByRole("button", { name: "核对原提交", exact: true }).click();
+    const submitPosts = report.requests.filter((item) => item.method === "POST" && item.path === "/v1/jobs").length;
+    await page.getByRole("button", { name: "只读核对原提交", exact: true }).click();
     await page.getByText("已完成", { exact: true }).waitFor();
     assert.equal(jobs.size, 1); assert.equal(idempotency.size, 1);
-    check("reconcile uses original body/key/digest and receives exactly the same job");
+    assert.equal(report.requests.filter((item) => item.method === "POST" && item.path === "/v1/jobs").length, submitPosts);
+    assert.equal(report.requests.filter((item) => item.path === "/v1/jobs/lookup").length, 1);
+    check("read-only reconcile uses original body/key/digest, restores the same job and sends no additional create POST");
     await page.goto(projectUrl);
     await page.getByRole("button", { name: "载入产物", exact: true }).click();
     await page.locator('[data-node-id] img[src^="blob:"]').first().waitFor();

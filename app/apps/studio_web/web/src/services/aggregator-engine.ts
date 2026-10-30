@@ -103,15 +103,44 @@ function singleFlight(id: string, run: (signal: AbortSignal) => Promise<Intent>,
 
 export function stopLocalWait(id: string) { controllers.get(id)?.abort(); }
 
+async function reconcileSubmission(id: string, signal: AbortSignal): Promise<Intent> {
+    const intent = await journalGet("intents", id);
+    if (!intent) throw new Error("找不到原提交记录，无法只读核对");
+    const { client, catalog } = connection(intent.identity);
+    if (intent.job) return intent;
+    if (!catalog?.submissionLookup) throw new Error("原服务尚未支持只读核对，请更新服务后重新连接；原记录已保留");
+    try {
+        const result = await client.lookupSubmission(intent.body, intent.idempotencyKey, intent.releaseDigest, signal);
+        if (result.data.outcome === "found") return await applyJob(id, { ...result, data: result.data.job });
+        const unchanged = await updateIntent(id, (value) => value.job ? value : ({ ...value, error: "本次未查到已提交记录；这不能证明任务从未执行，请保留原记录并稍后只读核对。", pollPaused: true, retryAt: undefined, updatedAt: Date.now() }));
+        changed(); return unchanged;
+    } catch (error) {
+        await updateIntent(id, (value) => value.job ? value : ({ ...value, error: error instanceof Error ? error.message : "原提交暂时无法核对", pollPaused: true, retryAt: undefined, updatedAt: Date.now() }));
+        changed(); throw error;
+    }
+}
+
+export function lookupIntent(id: string, signal?: AbortSignal): Promise<Intent> {
+    return singleFlight(id, (activeSignal) => reconcileSubmission(id, activeSignal), signal);
+}
+
 export function submitIntent(id: string, signal?: AbortSignal): Promise<Intent> {
     return singleFlight(id, async (activeSignal) => {
         const existing = await journalGet("intents", id);
         if (!existing) throw new Error("任务日志未持久化，已阻止提交");
         const { client } = connection(existing.identity);
         if (existing.job) return existing;
-        if (existing.recovered) throw new Error("此记录来自备份且尚无任务ID；已阻止补发生成，请读取原服务历史核对");
+        if (existing.recovered) throw new Error("此记录来自备份且尚无任务ID；已阻止补发生成，请选择只读核对原提交");
+        if (existing.stage !== "prepared") return reconcileSubmission(id, activeSignal);
         // The immutable body and key were committed before this state and before POST.
-        const intent = await updateIntent(id, (value) => ({ ...value, stage: "submitting", updatedAt: Date.now(), error: undefined }));
+        // Claim the first send inside the IDB write transaction, including across tabs.
+        let claimed = false;
+        const intent = await updateIntent(id, (value) => {
+            if (value.stage !== "prepared" || value.job || value.recovered) return value;
+            claimed = true;
+            return { ...value, stage: "submitting", updatedAt: Date.now(), error: undefined };
+        });
+        if (!claimed) return reconcileSubmission(id, activeSignal);
         changed();
         try { return await applyJob(id, await client.createJob(intent.body, intent.idempotencyKey, intent.releaseDigest, activeSignal)); }
         catch (error) {

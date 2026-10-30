@@ -90,3 +90,11 @@ npm run build
 ## 来源和许可
 
 上游 [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas) 固定提交 `9cd3deacbcc598361807afc16c059a80dd18b6f9`，MIT 许可与作者标识保留。全面使用 [04·青柠原始样式](https://html.cafe/x5b381ea1)；原始 CSS、字体声明、摘要和字体许可证在 web/src/styles/reference/ 和 web/public/fonts/。适配层独立维护，不能把青柠来源声明替换为自创主题。
+
+## 原提交只读核对（132 候选）
+
+响应丢失或任务清单恢复后，可以通过原业务 Key、原请求、原幂等键和原发布摘要，使用 `POST /v1/jobs/lookup` 找回原任务 ID。只要求 `jobs:read`；不会再次生成、上传或计费。未查到继续保留未知状态，旧服务未声明支持时明确提示，不回退生成。两个页面也通过本机写事务共享首次发送占用。
+
+[完整操作与开发约束](14-原提交只读核对与恢复.md) · [原速 MP4](media/studio-131/studio-submission-lookup.mp4) · [390px 页面](assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png)。以下为生产构建配合合成 API 的恢复演示，无 GPU 或物理手机实测含义。
+
+![只读核对原提交](media/studio-131/studio-submission-lookup.gif)

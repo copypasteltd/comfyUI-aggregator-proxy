@@ -570,3 +570,11 @@ Python 集成测试要求本项目的原生 PostgreSQL 与独立 `render_control
 后续每次完成修改，都要更新对应中英文说明及 `CHANGELOG.md`，界面变化同步截图/演示，运行适用检查后提交并推送同一远端。默认只普通推送，不强推或改写共享历史。步骤见 [CONTRIBUTING](CONTRIBUTING.md)。
 
 本仓库尚未指定项目整体的开源许可证。固定上游 [Sub2API](https://github.com/Wei-Shaw/sub2api) 及其依赖、媒体工具保留各自许可；仓库不包含 ComfyUI 模型权重、第三方完整上游副本或原生二进制。依赖固定信息见 [upstream-lock.json](app/integrations/sub2api/upstream-lock.json) 和工具链锁。
+
+## 原提交只读核对（132 候选）
+
+响应丢失或任务清单恢复后，可以通过原业务 Key、原请求、原幂等键和原发布摘要，使用 `POST /v1/jobs/lookup` 找回原任务 ID。只要求 `jobs:read`；不会再次生成、上传或计费。未查到继续保留未知状态，旧服务未声明支持时明确提示，不回退生成。两个页面也通过本机写事务共享首次发送占用。
+
+[完整操作与开发约束](docs/studio/14-原提交只读核对与恢复.md) · [原速 MP4](docs/studio/media/studio-131/studio-submission-lookup.mp4) · [390px 页面](docs/studio/assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png)。以下为生产构建配合合成 API 的恢复演示，无 GPU 或物理手机实测含义。
+
+![只读核对原提交](docs/studio/media/studio-131/studio-submission-lookup.gif)

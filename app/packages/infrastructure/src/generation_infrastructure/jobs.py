@@ -282,6 +282,31 @@ class JobRepository:
             result[identifier] = asset[1].sha256
         return result
 
+    def lookup(self, identity: BusinessIdentity, request: dict[str, Any], token: str, *, expected_release_digest: str | None = None) -> dict[str, Any]:
+        # No admission, locks, current publication lookup or live input asset lookup.
+        with self.sessions() as session:
+            session.execute(text("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY"))
+            idem = session.scalar(select(Idempotency).where(
+                Idempotency.tenant_id == identity.tenant_id,
+                Idempotency.project_id == identity.project_id,
+                Idempotency.key_id == identity.key_id,
+                Idempotency.operation == "create_job",
+                Idempotency.token_digest == hashlib.sha256(token.encode()).hexdigest(),
+            ))
+            if idem is None or idem.resource_id is None:
+                return {"object": "generation.submission_lookup", "outcome": "not_observed", "job": None}
+            job = owned_job(session, identity, idem.resource_id)
+            hashes = job.execution.get("asset_hashes") if isinstance(job.execution, dict) else None
+            if not isinstance(hashes, dict) or any(not isinstance(key, str) or not isinstance(value, str) or len(value) != 64 or any(c not in "0123456789abcdef" for c in value) for key, value in hashes.items()):
+                raise DomainError("submission_unverifiable", "原提交缺少可核验的冻结信息，原记录已保留", 409)
+            digest = request_fingerprint(request, hashes, expected_release_digest=expected_release_digest)
+            if fingerprint(request) != fingerprint(job.request) or digest != idem.request_fingerprint or digest != job.request_fingerprint:
+                raise DomainError("submission_mismatch", "原提交信息不匹配，原记录已保留", 409)
+            result = job_projection(job, include_video_specification=True)
+            if "artifacts:read" in identity.policy["scopes"]:
+                result["artifacts"] = [{"id": public_id("content", a.id), "position": a.position} for a in session.scalars(select(Artifact).where(Artifact.job_id == job.id, Artifact.deleted_at.is_(None)).order_by(Artifact.position))]
+            return {"object": "generation.submission_lookup", "outcome": "found", "job": result}
+
     def get(self, identity: BusinessIdentity, job_id: UUID) -> dict[str, Any]:
         with self.sessions() as session:
             # Read status, revision and publication from one committed snapshot.

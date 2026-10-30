@@ -570,3 +570,11 @@ Fresh execution and historical evidence reused after hash verification are ident
 Every completed update must include corresponding Chinese/English user-facing changes and a `CHANGELOG.md` entry. Refresh relevant screenshots/demos after UI changes, run applicable checks, commit and push to the same remote. Use ordinary pushes; do not force-push or rewrite shared history. See [CONTRIBUTING](CONTRIBUTING.md).
 
 An overall open-source license has not been selected for this repository. Pinned upstream [Sub2API](https://github.com/Wei-Shaw/sub2api), dependencies and media tools retain their respective licenses. Model weights, full third-party upstream copies and native binaries are not included. See [upstream-lock.json](app/integrations/sub2api/upstream-lock.json) and toolchain locks.
+
+## Read-only submission recovery (132 candidate)
+
+After a lost response or journal import, `POST /v1/jobs/lookup` matches the original business Key, frozen body, idempotency key and release digest to restore the original job ID. It requires only `jobs:read` and never generates, uploads or charges again. A not-observed result stays unknown; older services fail clearly without falling back to creation. An IDB write transaction also claims the first send across pages.
+
+[Operation and development contract](docs/studio/14-原提交只读核对与恢复.md) · [Original-speed MP4](docs/studio/media/studio-131/studio-submission-lookup.mp4) · [390px view](docs/studio/assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png). This recording uses the production build with synthetic HTTP, not a GPU run or physical phone.
+
+![Read-only original submission recovery](docs/studio/media/studio-131/studio-submission-lookup.gif)

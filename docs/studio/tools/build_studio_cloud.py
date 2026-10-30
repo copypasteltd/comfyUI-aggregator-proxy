@@ -6,6 +6,7 @@ migration, GPU Worker protocol change or remote dependency compilation occurs.
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import shutil
 import subprocess
@@ -18,7 +19,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 APP = ROOT / "aggregator-service/app"
 PRIVATE = ROOT / ".local/studio-cloud-build"
-RELEASE = "linux-20261030.131.1"
 SEED = ROOT.parent / "生图生视API封装/app/.local/audit-129/linux-20261029.129.3.tar.gz"
 SEED_SHA = "757743ae8395001a289bbc324f5b53a1a440317430b03e5745c162504db5701e"
 sys.path.insert(0, str(APP / "scripts"))
@@ -30,6 +30,12 @@ def sha(path: Path) -> str:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--release", required=True)
+    args = parser.parse_args()
+    import re
+    RELEASE = args.release
+    assert re.fullmatch(r"linux-\d{8}\.\d+\.\d+", RELEASE)
     snapshot = source_snapshot(APP)
     revision = source_revision(APP, snapshot)
     assert sha(SEED) == SEED_SHA
@@ -107,6 +113,10 @@ if __name__ == "__main__":
     assert source_snapshot(APP) == snapshot
     result = {"passed": True, "release_id": RELEASE, "archive_sha256": sha(target), "archive_bytes": target.stat().st_size, "application_source_revision": revision, "changed_sources": changed, "wheel_sha256": wheel_hashes, "source_files": len(snapshot), "new_database_migration": False, "worker_protocol_changed": False, "admin_rebuilt": False, "scope": "committed pure cloud wheel update from verified Linux 129.3 seed; frontend static artifact and ops backup repair tracked separately"}
     (PRIVATE / "build.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
-    public = APP.parent / "docs/evidence/studio-release-131/cloud-build.json"
+    with (PRIVATE / (RELEASE + "-build.json")).open("x", encoding="utf-8") as receipt:
+        receipt.write(json.dumps(result, indent=2) + "\n")
+    public = APP.parent / "docs/evidence/studio-release-132" / (RELEASE + "-build.json")
+    public.parent.mkdir(parents=True, exist_ok=True)
+    assert not public.exists()
     public.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result))
