@@ -6,9 +6,17 @@
 
 | Entry | Address |
 | --- | --- |
-| Independent canvas139.2 | [Open canvas](http://43.165.167.179:39445/studio/) |
+| Independent canvas141.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
+
+Current141.1 fixes whole-batch project ZIP import, file/document failure recovery, top-level/nested image hydration and credential filtering. All originals are staged before the project batch is added; imported tasks become offline notes without generation. Failed imports may retain newly staged unreferenced files pending safe cleanup. [Usage and failure boundaries](docs/studio/26-画布ZIP整包导入与备份边界.md).
+
+![141.1 actual public UI restores a synthetic archived image](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-restored-canvas-desktop.png)
+
+[Imported projects](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-imported-library-desktop.png) · [Unsaved batch](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-document-aborted.png) · [390px](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-restored-canvas-390.png) · [Synthetic demo MP4](docs/studio/media/studio-141/synthetic-archive-recovery.mp4) · [GIF](docs/studio/media/studio-141/synthetic-archive-recovery.gif). The ZIP demo uses no business Key or API/GPU request. Release verification only reads existing API health/CORS. Native-IDB fault injection and390px emulation do not establish actual disk exhaustion or physical-phone acceptance.
+
+The following actual generation evidence comes from earlier139.2/evidence140, with no new generation this turn:
 
 ![The successful original from the actual two-member batch returns to its canvas](docs/studio/media/studio-140/verified-actual-batch-result-canvas.png)
 
@@ -63,11 +71,11 @@ npm run build
 
 Deploy only `web/dist/` to an independent static host with `/studio/` and SPA fallback. Keep `managed` mode: deployment independence does not mean the upstream `standalone` mode, which enables optional scripts/Agents. The default API address is public; never embed a Key. Without a default API, the connection field stays empty.
 
-Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.139.2/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
+Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.141.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
 
 ## Validation and limits
 
-Frozen139.2 already has179 units/type/build checks,11 cross-origin groups,10 local-identity groups,7 actual saved-image UI checks,107 current/170 retained hashes and14 routes. Product source is unchanged, with no rebuild or deployment. Evidence140 adds14 native fault groups (including36 query-error combinations),6 frozen-UI groups,4 actual backup checks,3 original-batch delivery UI checks and2 single-page load observations. The two actual members succeeded/cancelled independently, with verified original SHA and eight-hour expiry. Two MP4s and two GIFs fully decode; the display PNG omits metadata. Failed Windows native-browser PNG downloads from a Chinese-path persistent profile are preserved with minimal reproductions; the same profile succeeded through a realpath-verified existing ASCII junction. Neither original API nor static service changed/restarted; both API workspaces match their boundary. The temporary Key is disabled with401, all owned browsers/fixtures are closed. Eight media modes remain historical evidence.
+Current141.1 passes182 unit tests, typecheck/build and11 synthetic dual-origin groups, plus10 local and10 actual-public-UI native-IDB groups covering10 malformed archives, whole-batch file failure, document abort/explicit retry and both image forms after refresh. All107 current/255 retained files and14 routes were verified publicly. Both API workspaces, deployed API configuration/pointer/services and the static service/configuration stayed unchanged, with no restarts. The synthetic MP4/GIF fully decode; owned browsers/fixtures are closed. No business Key or GPU job was created. Earlier failures and139.2/evidence140 actual-GPU/offline/batch results remain historical rather than being counted as current retests.
 
 Full acceptance remains **HOLD/pending-test**: the complete fault matrix, physical Android/iOS, large-file peak/leaks and10–20-device capacity are unverified; animation and more3D formats are incomplete. Cloud sync/text assistance may use only existing API capabilities; otherwise they remain external dependencies. ComfyUI-original transfer deletion, heterogeneous pools and GPU optimization also belong to the API. The canvas adds no other backend connection or forwarding changes. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
 

@@ -1,5 +1,16 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## canvas-20261030.141.1 · 已独立部署 / pending-test
+
+- [修复] 作品ZIP先整包预检并写完全部新原件，再一次加入完整项目列表；第二原件配额失败不留下部分项目。
+- [修复] 文档事务失败保留旧已提交文档并显示整批未保存；明确重试后完整保存，不重新导入/生成；暂存孤儿文件保留待安全回收。
+- [修复] 清除旧blob地址后，从新本机键恢复顶层图片和仅有嵌套变体的主图，显示和刷新通过。
+- [修复] 拒绝畸形元数据、重复标识/文件路径与原型字段，核对原件长度/SHA；导出过滤Cookie/鉴权头/会话及URL片段凭证，不改提示词原文。
+- [验证] 182单元/类型/冻结构建、11双源、10本机与10公网原生组通过；107当前/255旧资源、14路由和原API只读边界逐项核对。先前失败回执保留。
+- [交付] 只发布独立画布静态文件，不改API/Worker/调度/数据库/Admin；全部服务与配置不变。双语说明、文档26、截图及完整解码MP4/GIF同步。未创建业务Key或GPU任务；发布仅读健康/CORS，390px非真机，完整签收HOLD。
+
+141.1 validates the entire archive and stages all originals under new local keys before adding the whole project batch. File-write failure adds no project; document abort keeps the whole unsaved batch visible for explicit retry. Imported top-level and nested-primary images now hydrate from local originals after refresh. Malformed archives are rejected and structured cookies, authorization headers, session tokens and URL-fragment credentials are removed from exports without editing prompt text. All182 unit tests, typecheck/build,11 dual-origin groups and10 local plus10 public native-IDB groups passed. The independent static release verifies107 current/255 retained files and14 routes. No API, service configuration, service PID, business Key or GPU request changed. Earlier failures remain visible; physical-phone/full-fault/fleet acceptance remains HOLD.
+
 ## evidence-20261030.140 · 静态版本仍139.2 / pending-test
 
 - [验证] 14组原生HTTP/IndexedDB专项通过，覆盖4状态×9查询故障、取消晚到、终态冲突、停止本页等待和跨页服务端预算；零生成POST。

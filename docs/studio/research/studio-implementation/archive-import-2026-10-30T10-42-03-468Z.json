@@ -1,0 +1,31 @@
+{
+  "passed": false,
+  "at": "2026-10-30T10:42:16.714Z",
+  "scope": "Frozen production UI on native Windows Chromium/plain non-localhost HTTP; synthetic ZIPs and injected native transaction faults, not actual disk exhaustion, API/GPU or physical-phone verification",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T10-37-49-073Z.json",
+  "checks": [],
+  "rejected_archives": [],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-141/archive-failure-2026-10-30T10-42-03-468Z.png",
+      "sha256": "777a9a028c5316d8100f5b0727a0fc5b93e1fb508f66db183c1282fe2cf3e169",
+      "first_page_elapsed_seconds": 32.025
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "public_static_site": false,
+  "origin": "http://canvas-archive.test:2449",
+  "first_page_started_at": 1793356939468,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: '保留的原画布', exact: true }) to be visible\u001b[22m\n\n    at seed (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_archive_import.mjs:94:70)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_archive_import.mjs:116:18",
+  "private_videos": [
+    ".local/studio141/archive-2026-10-30T10-42-03-468Z/page@012398296f3c20ffc02bee5aee850339.webm"
+  ],
+  "static_bytes_unchanged": true
+}

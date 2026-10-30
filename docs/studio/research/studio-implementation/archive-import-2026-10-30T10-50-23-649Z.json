@@ -1,0 +1,116 @@
+{
+  "passed": false,
+  "at": "2026-10-30T10:50:25.362Z",
+  "scope": "Frozen production UI on native Windows Chromium/plain non-localhost HTTP; synthetic ZIPs and injected native transaction faults, not actual disk exhaustion, API/GPU or physical-phone verification",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T10-46-27-970Z.json",
+  "checks": [
+    {
+      "name": "ten malformed or corrupt archives rejected before any file/project writes; original DB records unchanged",
+      "detail": true
+    },
+    {
+      "name": "actual project ZIP export omits header/cookie/fragment credentials, preserves source document and original SHA",
+      "detail": true
+    },
+    {
+      "name": "second native original write quota fault leaves all projects unimported and originals intact; one new unreferenced blob retained",
+      "detail": {
+        "newly_staged_blobs_retained": 1,
+        "actual_disk_exhaustion": false
+      }
+    },
+    {
+      "name": "successful two-project import publishes one atomic document revision with fresh keys, original bytes and offline-only task notes",
+      "detail": true
+    },
+    {
+      "name": "restored image loads after refresh; script-shaped text remains inert and no task is re-created",
+      "detail": true
+    }
+  ],
+  "rejected_archives": [
+    {
+      "name": "unknown-version",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "invalid-title",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "zero-zoom",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "malformed-images",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "duplicate-project",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "duplicate-file-path",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "prototype-field",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "wrong-length",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "wrong-sha",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "missing-file",
+      "no_original_or_document_writes": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-141/archive-2026-10-30T10-50-23-649Z/archive-invalid-desktop.png",
+      "sha256": "a2c4ebac6a6b30fbe8bb126aca4dcdd02a18ae8d44d8ffda82acc98ae8b4f297",
+      "first_page_elapsed_seconds": 4.182
+    },
+    {
+      "file": "docs/media/studio-141/archive-2026-10-30T10-50-23-649Z/archive-second-file-failed.png",
+      "sha256": "d6fd09e16080cec2231c2f0ade12d9da79d8e4481eb09762865fe4e542f58556",
+      "first_page_elapsed_seconds": 5.516
+    },
+    {
+      "file": "docs/media/studio-141/archive-2026-10-30T10-50-23-649Z/archive-imported-library-desktop.png",
+      "sha256": "c01b750d78ee0dee3c3bd5b15e713438fa70662657fb48cffd4eb4b039619c98",
+      "first_page_elapsed_seconds": 6.083
+    },
+    {
+      "file": "docs/media/studio-141/archive-2026-10-30T10-50-23-649Z/archive-restored-canvas-desktop.png",
+      "sha256": "039f244e3cbefc34008a056615baa27c1a58a394a025c3e9ecc39d66de2ad31f",
+      "first_page_elapsed_seconds": 9.146
+    },
+    {
+      "file": "docs/media/studio-141/archive-2026-10-30T10-50-23-649Z/archive-failure-2026-10-30T10-50-23-649Z.png",
+      "sha256": "a2c554ec065e519b572d042c0a467cc4a94cc9384a40316ed3edf2a9efb1aaea",
+      "first_page_elapsed_seconds": 39.564
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "public_static_site": false,
+  "origin": "http://canvas-archive.test:9630",
+  "first_page_started_at": 1793357426818,
+  "failure": "page.waitForFunction: Timeout 30000ms exceeded.\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_archive_import.mjs:185:16",
+  "private_videos": [
+    ".local/studio141/archive-2026-10-30T10-50-23-649Z/page@07480fb2dc7f28871c7f631917968750.webm"
+  ],
+  "static_bytes_unchanged": true
+}

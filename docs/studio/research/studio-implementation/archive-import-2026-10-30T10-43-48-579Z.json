@@ -1,0 +1,107 @@
+{
+  "passed": false,
+  "at": "2026-10-30T10:43:49.909Z",
+  "scope": "Frozen production UI on native Windows Chromium/plain non-localhost HTTP; synthetic ZIPs and injected native transaction faults, not actual disk exhaustion, API/GPU or physical-phone verification",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T10-37-49-073Z.json",
+  "checks": [
+    {
+      "name": "ten malformed or corrupt archives rejected before any file/project writes; original DB records unchanged",
+      "detail": true
+    },
+    {
+      "name": "actual project ZIP export omits header/cookie/fragment credentials, preserves source document and original SHA",
+      "detail": true
+    },
+    {
+      "name": "second native original write quota fault leaves all projects unimported and originals intact; one new unreferenced blob retained",
+      "detail": {
+        "newly_staged_blobs_retained": 1,
+        "actual_disk_exhaustion": false
+      }
+    },
+    {
+      "name": "successful two-project import publishes one atomic document revision with fresh keys, original bytes and offline-only task notes",
+      "detail": true
+    }
+  ],
+  "rejected_archives": [
+    {
+      "name": "unknown-version",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "invalid-title",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "zero-zoom",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "malformed-images",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "duplicate-project",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "duplicate-file-path",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "prototype-field",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "wrong-length",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "wrong-sha",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "missing-file",
+      "no_original_or_document_writes": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-141/archive-invalid-desktop.png",
+      "sha256": "01932bb33df5a4785c375006d9b4b8c86ce6ad9be5ecd2402db9797b2c8c1b59",
+      "first_page_elapsed_seconds": 4.904
+    },
+    {
+      "file": "docs/media/studio-141/archive-second-file-failed.png",
+      "sha256": "dcfb2a9bd6651353304c04318c583df42fb2d27e71cfd0815e9a21192bf4f7d9",
+      "first_page_elapsed_seconds": 8.305
+    },
+    {
+      "file": "docs/media/studio-141/archive-imported-library-desktop.png",
+      "sha256": "50106c2a14b97751dd9f56661ed83c3cd6f5ec31b351f4d9016ebcaa747407d2",
+      "first_page_elapsed_seconds": 8.955
+    },
+    {
+      "file": "docs/media/studio-141/archive-failure-2026-10-30T10-43-48-579Z.png",
+      "sha256": "3ea9149d7660d042a8a254901067257fae81c78eea571fb7c2bc8e842fbc2555",
+      "first_page_elapsed_seconds": 39.383
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "public_static_site": false,
+  "origin": "http://canvas-archive.test:4578",
+  "first_page_started_at": 1793357032304,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-node-id] img[src^=\"blob:\"]').first() to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_archive_import.mjs:173:68",
+  "private_videos": [
+    ".local/studio141/archive-2026-10-30T10-43-48-579Z/page@cfc0e25f02735e449fd8491e709f35cb.webm"
+  ],
+  "static_bytes_unchanged": true
+}
