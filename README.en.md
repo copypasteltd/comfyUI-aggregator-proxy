@@ -6,15 +6,15 @@
 
 | Entry | Address |
 | --- | --- |
-| Independent canvas142.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
+| Independent canvas143.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
 
-Current142.1 preserves originals stored only in historical local-reference lists. Import remaps their keys without changing order, duplicates or prompt literals. Missing reference originals prevent an incomplete ZIP. A stale page preserves the winning document and can export its complete unsaved project before reloading. [Usage and evidence](docs/studio/27-历史素材引用备份与跨页面冲突.md).
+Current143.1 protects originals referenced only by historical lists in canvases, saved assets and recoverable deleted projects. An exact recognized old index is rebuilt atomically with a revision increment while preserving document bytes, originals and tasks. Concurrent save/delete cannot introduce a dangling reference; unknown indices fail closed. [Usage and evidence](docs/studio/28-历史引用原件删除保护与索引升级.md).
 
-![Actual public UI re-exports a complete restored project](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-reference-reexport.png)
+![Public UI preserves a referenced original](docs/studio/media/studio-143/references-2026-10-30T11-55-07-246Z/public-historical-reference-protected-desktop.png)
 
-[Stale-page conflict](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-cross-page-conflict.png) · [390px](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-restored-canvas-390.png) · [Reference recovery MP4](docs/studio/media/studio-142/synthetic-archive-recovery.mp4) · [GIF](docs/studio/media/studio-142/synthetic-archive-recovery.gif) · [Conflict MP4](docs/studio/media/studio-142/synthetic-cross-page-conflict.mp4) · [GIF](docs/studio/media/studio-142/synthetic-cross-page-conflict.gif). Synthetic PNG/native-IDB demos make no business API/GPU request. Release verification only reads API health/CORS; no Key/job was created.390px is emulation.
+[390px](docs/studio/media/studio-143/references-2026-10-30T11-55-07-246Z/public-unreferenced-deleted-protected-remains.png) · [MP4](docs/studio/media/studio-143/synthetic-reference-protection.mp4) · [GIF](docs/studio/media/studio-143/synthetic-reference-protection.gif). Synthetic originals and a browser-contained API fixture; zero actual API/GPU requests.390px is emulation.
 
 The following actual generation evidence comes from earlier139.2/evidence140, with no new generation this turn:
 
@@ -71,11 +71,11 @@ npm run build
 
 Deploy only `web/dist/` to an independent static host with `/studio/` and SPA fallback. Keep `managed` mode: deployment independence does not mean the upstream `standalone` mode, which enables optional scripts/Agents. The default API address is public; never embed a Key. Without a default API, the connection field stays empty.
 
-Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.142.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
+Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.143.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
 
 ## Validation and limits
 
-Current142.1 passes184 units, typecheck/build and11 synthetic dual-origin groups. Fourteen local and14 actual-public-UI native-IDB groups cover12 malformed archives, reference originals, failed export, remapping/re-export, document faults and stale-page conflicts. All107 current/340 retained files and14 routes were checked publicly. Both API workspaces, API configuration/pointer/processes and the static service/config remain unchanged, with no restarts. Two MP4s/two GIFs fully decode and owned browsers/fixtures are closed. The focused regression records2 failures before and0 after the fix. Earlier actual GPU/offline/batch results remain historical rather than current retests.
+Current143.1 passes188 units, typecheck/build,11 dual-origin groups,14 ZIP groups and15 local plus15 public original-protection groups. All107 current/425 retained resources and14 routes are verified. The focused regression goes from3 failures to0. Screenshots and an MP4/GIF fully decode; owned browsers and fixtures are closed. Both API workspaces, configuration/pointer/services and the static service/config remain unchanged, with no restarts. Earlier GPU evidence remains historical.
 
 Full acceptance remains **HOLD/pending-test**: the complete fault matrix, physical Android/iOS, large-file peak/leaks and10–20-device capacity are unverified; animation and more3D formats are incomplete. Cloud sync/text assistance may use only existing API capabilities; otherwise they remain external dependencies. ComfyUI-original transfer deletion, heterogeneous pools and GPU optimization also belong to the API. The canvas adds no other backend connection or forwarding changes. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
 

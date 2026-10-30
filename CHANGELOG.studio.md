@@ -1,5 +1,14 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## canvas-20261030.143.1 · 已独立部署 / pending-test
+
+- [修复] 本机原件删除与保存统一识别历史references，覆盖画布、素材及可恢复回收站；普通提示词不猜作文件。
+- [修复] 精确旧引用索引由完整正文补齐，原生事务递增修订；未知索引拒绝覆盖，正文、原件和任务保留。
+- [验证] 保存/删除双向竞争、升级中止、实际前版函数与双页一次升级通过；有引用删除拒绝，无引用明确删除可用。
+- [交付] 188单元/类型/构建、11双源、14ZIP、15本机+15公网保护、107当前/425旧资源与14路由；文档28、双语README、截图及完整解码MP4/GIF。原API和所有服务/配置不变，无实际Key/GPU任务，完整签收HOLD。
+
+143.1 protects historical reference-only originals during local deletion and document saves, including saved assets and recoverable deleted projects. Only an exact recognized old index is rebuilt from unchanged document bytes, with an atomic revision increment. Save/delete races, transaction abort, actual previous-release functions and two-page initialization are verified.188 units, typecheck/build,11 dual-origin groups,14 ZIP groups and15 local plus15 public reference-protection groups passed. All107 current/425 retained resources and14 routes were verified. Screenshots and a fully decoded MP4/GIF are included. The original API, services and configuration remain unchanged; no actual Key/GPU task was created. Full acceptance remains HOLD.
+
 ## canvas-20261030.142.1 · 已独立部署 / pending-test
 
 - [修复] ZIP统一收集节点原件及references中的明确本机键；仅历史引用的原件不再遗漏，清单去重但引用顺序/重复项保留。

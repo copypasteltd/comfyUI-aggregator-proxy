@@ -5,6 +5,8 @@ description: Implemented changes that still need manual verification
 
 # Pending Tests
 
+- 独立143.1：历史references/回收站原件删除保护、旧索引原子补齐、保存/删除竞态及双页升级已实现并进入人工待测；188单元、11双源、14ZIP、15本机+15公网保护及静态逐文件/14路由通过，见独立文档28。普通image/file跨库安全回收、真磁盘/真机/跨浏览器故障与全部46项完整验收仍保留；原API不改。
+
 - Independent142.1: ZIP includes originals referenced only by local-reference lists, deduplicates files while preserving reference order/duplicates, remaps import keys and retains prompt literals. Missing originals prevent a partial export. A stale page cannot overwrite the committed winner and can export its complete unsaved branch.184 units/typecheck/build,11 dual-origin groups,14 local+14 public native groups and12 malformed archives passed, with static file/14-route verification and two fully decoded MP4s/two GIFs. Original API stays read-only; no service/config changes, restarts, business Keys or GPU jobs. See independent docs27; manual acceptance remains.
 
 - Independent141.1: whole-archive validation and all-original staging under fresh keys precede one project-batch commit. A native quota fault leaves no partial project; document abort shows the complete unsaved batch for explicit retry. Top-level/nested-primary images survive refresh; structured Cookie/header/URL-fragment credentials are excluded from exports.182 units/typecheck/build,11 dual-origin groups,10 local+10 public native groups and all static files/14 routes passed. Bilingual docs26, screenshots and fully decoded MP4/GIF are synchronized. No business Key or GPU job was created; the ZIP demo makes no API call, while release checks only read API health/CORS. No service/config changes or restarts. Original API stays read-only. These changes require manual acceptance; synthetic faults are not actual disk/phone validation.

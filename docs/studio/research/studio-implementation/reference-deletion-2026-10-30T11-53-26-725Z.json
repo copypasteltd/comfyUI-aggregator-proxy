@@ -1,0 +1,199 @@
+{
+  "passed": false,
+  "at": "2026-10-30T11:53:26.882Z",
+  "scope": "Frozen static UI/native Windows Chromium IndexedDB on ordinary HTTP; synthetic records and injected transaction abort, not actual disk exhaustion/GPU/phone/fleet acceptance",
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T11-44-14-789Z.json",
+  "checks": [
+    {
+      "name": "previous exact index cannot hide a historical-only reference from native deletion",
+      "detail": true
+    },
+    {
+      "name": "aborted index upgrade preserves exact prior document and original; no partial publication",
+      "detail": true
+    },
+    {
+      "name": "recognized old index upgrades once with revision increment; document bytes, originals, upload and budget unchanged",
+      "detail": true
+    },
+    {
+      "name": "actual previous-release functions and stale current revision fail closed after reference-index upgrade",
+      "detail": true
+    },
+    {
+      "name": "saved asset historical-only reference protects original without any primary key",
+      "detail": true
+    },
+    {
+      "name": "recoverable deleted project retains historical reference original",
+      "detail": true
+    },
+    {
+      "name": "reference-first transactions prevent concurrent deletion of a historical-only original",
+      "detail": true
+    },
+    {
+      "name": "delete-first transactions reject a new dangling historical reference and preserve old document",
+      "detail": true
+    },
+    {
+      "name": "prompt literals do not pin originals; explicit unreferenced deletion still works",
+      "detail": true
+    },
+    {
+      "name": "unknown damaged index is never silently repaired or used to authorize deletion",
+      "detail": true
+    },
+    {
+      "name": "two actual pages upgrade the same old reference index exactly once with identical committed result",
+      "detail": true
+    },
+    {
+      "name": "actual library deletion refuses a historical-only reference with original and committed document unchanged",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-143/references-2026-10-30T11-53-26-725Z/historical-reference-protected-desktop.png",
+      "sha256": "6d04f1c895adcf073ebe715b955960e592e46c3540544cd7c7bd7f8e8a13bffe"
+    },
+    {
+      "file": "docs/media/studio-143/references-2026-10-30T11-53-26-725Z/failed-historical-reference-390-overflow.png",
+      "sha256": "8fd2dab49c682f626c049191efe4630b1d2cc41785209b3e5f6758a968c3b645"
+    }
+  ],
+  "fixture_api_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://canvas-references.test:2249",
+  "mobile_layout": {
+    "width": 390,
+    "scroll": 411,
+    "overflow": [
+      {
+        "tag": "DIV",
+        "class": "ant-popover ant-zoom-big-leave ant-zoom-big-leave-active ant-zoom-big ant-popover-css-var css-1tzwyuk comfy-studio-lime css-1tzwyuk comfy-studio-lime ant-popconfirm ant-popover-placement-top",
+        "right": 411.17474365234375,
+        "left": 77.97088623046875
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-popover-container",
+        "right": 411.17474365234375,
+        "left": 77.97088623046875
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-popover-content",
+        "right": 400.9222869873047,
+        "left": 88.22331237792969
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-popconfirm-inner-content",
+        "right": 400.9222869873047,
+        "left": 88.22331237792969
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-popconfirm-message",
+        "right": 400.9222869873047,
+        "left": 88.22331237792969
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-popconfirm-message-text",
+        "right": 400.9223175048828,
+        "left": 107.01942443847656
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-popconfirm-title",
+        "right": 400.9223175048828,
+        "left": 107.01942443847656
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-popconfirm-description",
+        "right": 400.9223175048828,
+        "left": 107.01942443847656
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-popconfirm-buttons",
+        "right": 400.9222869873047,
+        "left": 88.22331237792969
+      },
+      {
+        "tag": "BUTTON",
+        "class": "ant-btn css-1tzwyuk comfy-studio-lime ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm",
+        "right": 400.92230224609375,
+        "left": 360.92718505859375
+      },
+      {
+        "tag": "DIV",
+        "class": "ant-wave css-1tzwyuk wave-motion-appear wave-motion-appear-active wave-motion",
+        "right": 401.08251953125,
+        "left": 360.92718505859375
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "right": 394.0873718261719,
+        "left": 367.7621154785156
+      }
+    ]
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: {\"width\":390,\"scroll\":411,\"overflow\":[{\"tag\":\"DIV\",\"class\":\"ant-popover ant-zoom-big-leave ant-zoom-big-leave-active ant-zoom-big ant-popover-css-var css-1tzwyuk comfy-studio-lime css-1tzwyuk comfy-studio-lime ant-popconfirm ant-popover-placement-top\",\"right\":411.17474365234375,\"left\":77.97088623046875},{\"tag\":\"DIV\",\"class\":\"ant-popover-container\",\"right\":411.17474365234375,\"left\":77.97088623046875},{\"tag\":\"DIV\",\"class\":\"ant-popover-content\",\"right\":400.9222869873047,\"left\":88.22331237792969},{\"tag\":\"DIV\",\"class\":\"ant-popconfirm-inner-content\",\"right\":400.9222869873047,\"left\":88.22331237792969},{\"tag\":\"DIV\",\"class\":\"ant-popconfirm-message\",\"right\":400.9222869873047,\"left\":88.22331237792969},{\"tag\":\"DIV\",\"class\":\"ant-popconfirm-message-text\",\"right\":400.9223175048828,\"left\":107.01942443847656},{\"tag\":\"DIV\",\"class\":\"ant-popconfirm-title\",\"right\":400.9223175048828,\"left\":107.01942443847656},{\"tag\":\"DIV\",\"class\":\"ant-popconfirm-description\",\"right\":400.9223175048828,\"left\":107.01942443847656},{\"tag\":\"DIV\",\"class\":\"ant-popconfirm-buttons\",\"right\":400.9222869873047,\"left\":88.22331237792969},{\"tag\":\"BUTTON\",\"class\":\"ant-btn css-1tzwyuk comfy-studio-lime ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm\",\"right\":400.92230224609375,\"left\":360.92718505859375},{\"tag\":\"DIV\",\"class\":\"ant-wave css-1tzwyuk wave-motion-appear wave-motion-appear-active wave-motion\",\"right\":401.08251953125,\"left\":360.92718505859375},{\"tag\":\"SPAN\",\"class\":\"\",\"right\":394.0873718261719,\"left\":367.7621154785156}]}\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_reference_deletion.mjs:189:12",
+  "private_videos": [
+    ".local/studio143/references-2026-10-30T11-53-26-725Z/page@eb0261316f80623dc315d6efd3aca4d0.webm",
+    ".local/studio143/references-2026-10-30T11-53-26-725Z/page@c4b1f907d637fff7fa7249c4922169ce.webm",
+    ".local/studio143/references-2026-10-30T11-53-26-725Z/page@780c707e23955bf8f59d47e9e2181752.webm"
+  ],
+  "static_bytes_unchanged": true
+}

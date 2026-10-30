@@ -1,0 +1,117 @@
+{
+  "passed": false,
+  "at": "2026-10-30T11:52:46.925Z",
+  "scope": "Frozen static UI/native Windows Chromium IndexedDB on ordinary HTTP; synthetic records and injected transaction abort, not actual disk exhaustion/GPU/phone/fleet acceptance",
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T11-44-14-789Z.json",
+  "checks": [
+    {
+      "name": "previous exact index cannot hide a historical-only reference from native deletion",
+      "detail": true
+    },
+    {
+      "name": "aborted index upgrade preserves exact prior document and original; no partial publication",
+      "detail": true
+    },
+    {
+      "name": "recognized old index upgrades once with revision increment; document bytes, originals, upload and budget unchanged",
+      "detail": true
+    },
+    {
+      "name": "actual previous-release functions and stale current revision fail closed after reference-index upgrade",
+      "detail": true
+    },
+    {
+      "name": "saved asset historical-only reference protects original without any primary key",
+      "detail": true
+    },
+    {
+      "name": "recoverable deleted project retains historical reference original",
+      "detail": true
+    },
+    {
+      "name": "reference-first transactions prevent concurrent deletion of a historical-only original",
+      "detail": true
+    },
+    {
+      "name": "delete-first transactions reject a new dangling historical reference and preserve old document",
+      "detail": true
+    },
+    {
+      "name": "prompt literals do not pin originals; explicit unreferenced deletion still works",
+      "detail": true
+    },
+    {
+      "name": "unknown damaged index is never silently repaired or used to authorize deletion",
+      "detail": true
+    },
+    {
+      "name": "two actual pages upgrade the same old reference index exactly once with identical committed result",
+      "detail": true
+    },
+    {
+      "name": "actual library deletion refuses a historical-only reference with original and committed document unchanged",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-143/references-2026-10-30T11-52-46-814Z/historical-reference-protected-desktop.png",
+      "sha256": "918f5ce44e93030c0164e74766cd260ea0aadba165e218c75c624e53376fc983"
+    }
+  ],
+  "fixture_api_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://canvas-references.test:2017",
+  "failure": "AssertionError [ERR_ASSERTION]: false == true\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_reference_deletion.mjs:187:12",
+  "private_videos": [
+    ".local/studio143/references-2026-10-30T11-52-46-814Z/page@69d73b2819cf1d84801974352a198414.webm",
+    ".local/studio143/references-2026-10-30T11-52-46-814Z/page@8bae1a79d5c8a279696ded47d0cba178.webm",
+    ".local/studio143/references-2026-10-30T11-52-46-814Z/page@2d99384ed076ae25141d3c2d6a3788eb.webm"
+  ],
+  "static_bytes_unchanged": true
+}
