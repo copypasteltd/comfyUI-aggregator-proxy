@@ -34,6 +34,7 @@ type CanvasStore = {
     deletedProjects: CanvasDeletedProject[];
     createProject: (title?: string) => string;
     importProject: (project: Partial<CanvasProject>) => string;
+    importProjects: (projects: Partial<CanvasProject>[]) => string[];
     openProject: (id: string) => CanvasProject | null;
     renameProject: (id: string, title: string) => void;
     deleteProjects: (ids: string[]) => void;
@@ -94,9 +95,10 @@ export const useCanvasStore = create<CanvasStore>()(
                 set((state) => ({ projects: [project, ...state.projects] }));
                 return id;
             },
-            importProject: (source) => {
+            importProject: (source) => get().importProjects([source])[0],
+            importProjects: (sources) => {
                 const now = new Date().toISOString();
-                const project: CanvasProject = {
+                const projects: CanvasProject[] = sources.map((source) => ({
                     id: nanoid(),
                     title: source.title || i18n.t("canvas.project.imported"),
                     createdAt: source.createdAt || now,
@@ -108,9 +110,9 @@ export const useCanvasStore = create<CanvasStore>()(
                     backgroundMode: source.backgroundMode || "lines",
                     showImageInfo: source.showImageInfo || false,
                     viewport: source.viewport || initialViewport,
-                };
-                set((state) => ({ projects: [project, ...state.projects] }));
-                return project.id;
+                }));
+                set((state) => ({ projects: [...projects, ...state.projects] }));
+                return projects.map((project) => project.id);
             },
             openProject: (id) => {
                 return get().projects.find((item) => item.id === id) || null;

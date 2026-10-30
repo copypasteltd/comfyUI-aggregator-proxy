@@ -36,3 +36,42 @@ test("import creates an offline copy with remapped bytes and never adopts or res
     assert.match(copied.nodes[1].metadata?.content || "", /不会重新提交/);
     assert.equal(project.nodes[0].metadata?.studioIntentId, "private-intent");
 });
+
+test("archive refuses malformed render state before any media or project is written", () => {
+    const change = (patch: Record<string, unknown>) => ({ ...archive, projects: [{ project: { ...project, ...patch }, files: archive.projects[0].files }] });
+    for (const patch of [
+        { title: { unsafe: "not text" } }, { id: "" }, { nodes: [{ ...project.nodes[0], title: {} }] },
+        { viewport: { x: 0, y: 0, k: 0 } }, { viewport: { x: 0, y: Infinity, k: 1 } },
+        { backgroundMode: "unknown" }, { showImageInfo: "true" },
+        { nodes: [{ ...project.nodes[0], metadata: { images: {}, content: "" } }] },
+        { nodes: [{ ...project.nodes[0], metadata: { content: { html: "not text" } } }] },
+    ]) assert.throws(() => validateCanvasArchive(change(patch)), JSON.stringify(patch));
+});
+
+test("archive refuses duplicate project, edge and file paths and prototype-shaped fields", () => {
+    const item = archive.projects[0];
+    for (const value of [
+        { ...archive, projects: [item, item] },
+        { ...archive, projects: [{ ...item, project: { ...project, connections: [project.connections[0], project.connections[0]] } }] },
+        { ...archive, projects: [{ ...item, files: [item.files[0], { ...item.files[0], storageKey: "image:different" }] }] },
+        JSON.parse(JSON.stringify(archive).replace('"title":"local snapshot"', '"title":"local snapshot","__proto__":{"polluted":true}')),
+    ]) assert.throws(() => validateCanvasArchive(value));
+    assert.equal(({} as Record<string, unknown>).polluted, undefined);
+});
+
+test("credential export covers cookies, header keys and URL fragment credentials while preserving prompt text", () => {
+    const source = {
+        headers: { Cookie: "private-cookie", "X-Api-Key": "private-header", Authorization: "private-bearer", Accept: "image/png" },
+        nested: { sessionToken: "private-session", refreshToken: "private-refresh", prompt: "literal token=art and <script> stay text" },
+        direct: "http://user:pass@example.test/v1?format=png#api_key=private-fragment&view=full",
+        routed: "http://example.test/#/canvas?access_token=private-route&node=first",
+        anchor: "https://example.test/art#section-one",
+    };
+    const result = withoutCredentials(source);
+    assert.deepEqual(result.headers, { Accept: "image/png" });
+    assert.deepEqual(result.nested, { prompt: source.nested.prompt });
+    assert.equal(result.direct, "http://example.test/v1?format=png#view=full");
+    assert.equal(result.routed, "http://example.test/#/canvas?node=first");
+    assert.equal(result.anchor, source.anchor);
+    assert.equal(source.headers.Cookie, "private-cookie");
+});

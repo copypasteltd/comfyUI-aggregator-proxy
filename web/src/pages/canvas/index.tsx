@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { App, Button } from "antd";
 import { Download, FileUp, Plus } from "lucide-react";
@@ -26,11 +26,14 @@ export default function CanvasPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const inputRef = useRef<HTMLInputElement>(null);
+    const importing = useRef(false);
+    const [importBusy, setImportBusy] = useState(false);
     const autoOpenRef = useRef(false);
     const hydrated = useCanvasStore((state) => state.hydrated);
     const projects = useCanvasStore((state) => state.projects);
     const createProject = useCanvasStore((state) => state.createProject);
     const importProject = useCanvasStore((state) => state.importProject);
+    const importProjects = useCanvasStore((state) => state.importProjects);
     const selectedIds = useCanvasUiStore((state) => state.selectedProjectIds);
     const setDeleteIds = useCanvasUiStore((state) => state.setDeleteProjectIds);
 
@@ -43,13 +46,16 @@ export default function CanvasPage() {
     };
     const createAndEnter = () => enterProject(createProject(t("canvas.defaultTitle", { count: projects.length + 1 })));
     const importCanvas = async (file?: File) => {
-        if (!file) return;
+        if (!file || importing.current || !hydrated) return;
+        importing.current = true;
+        setImportBusy(true);
         try {
             const zip = await readZip(file);
             const projectFile = zip.get("projects.json");
             if (!projectFile) throw new Error("missing projects.json");
             const data = JSON.parse(await projectFile.text()) as CanvasExportFile;
             if (MANAGED_STUDIO) {
+                await flushStudioDocuments();
                 validateCanvasArchive(data);
                 // Check all archive bytes before writing any project or replacing a storage key.
                 const prepared = await Promise.all(data.projects.map(async (item) => {
@@ -67,8 +73,10 @@ export default function CanvasPage() {
                 }));
                 for (const item of prepared) {
                     for (const file of item.files) await (file.key.startsWith("image:") ? setImageBlob(file.key, file.blob) : setMediaBlob(file.key, file.blob));
-                    importProject(item.project);
                 }
+                // Publish the entire archive only after every new file has committed.
+                // A later-file failure must not leave earlier projects imported.
+                importProjects(prepared.map((item) => item.project));
                 await flushStudioDocuments();
                 message.success("已导入离线画布和本机原件，任务不会因导入而重新提交");
                 return;
@@ -86,8 +94,10 @@ export default function CanvasPage() {
             data.projects.forEach((item) => importProject(item.project));
             message.success(t("canvas.imported", { count: data.projects.length }));
         } catch (error) {
-            message.error(error instanceof Error ? error.message : t("canvas.importFailed"));
+            message.error(error instanceof DOMException && error.name === "QuotaExceededError" ? "本机存储空间不足，画布未加入项目列表。原有项目已保留，请先备份并释放空间后重试。" : error instanceof Error ? error.message : t("canvas.importFailed"));
         } finally {
+            importing.current = false;
+            setImportBusy(false);
             if (inputRef.current) inputRef.current.value = "";
         }
     };
@@ -124,7 +134,7 @@ export default function CanvasPage() {
                                 {t("canvas.deleteAll")}
                             </Button>
                         ) : null}
-                        <Button disabled={!hydrated} icon={<FileUp className="size-4" />} onClick={() => inputRef.current?.click()}>
+                        <Button disabled={!hydrated || importBusy} loading={importBusy} icon={<FileUp className="size-4" />} onClick={() => inputRef.current?.click()}>
                             {t("canvas.import")}
                         </Button>
                         <Button disabled={!hydrated} type="primary" icon={<Plus className="size-4" />} onClick={createAndEnter}>
