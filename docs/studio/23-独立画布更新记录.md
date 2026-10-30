@@ -1,5 +1,15 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## canvas-20261030.142.1 · 已独立部署 / pending-test
+
+- [修复] ZIP统一收集节点原件及references中的明确本机键；仅历史引用的原件不再遗漏，清单去重但引用顺序/重复项保留。
+- [修复] 导入同步重映射本机参考键，提示词原文不变；参考未声明/缺失/摘要不符时整包拒绝，原件不可读则拒绝导出残缺ZIP。
+- [验证] 既有双页版本冲突不覆盖先保存内容、不盲目重试；未保存分支实际导出后原件/参考/SHA完整。DBv4/ZIPv3不变，不改普通媒体清理。
+- [验证] 184单元/类型/构建、11双源、14本机+14公网原生组及12类坏档通过；107当前/340旧资源、14路由和原API只读边界逐项核对。
+- [交付] 独立静态142.1、文档27、双语README、截图及两MP4两GIF完整解码；无Key/GPU任务，发布仅只读健康/CORS。原API和全部服务/配置不变，无重启，完整签收HOLD。
+
+142.1 includes originals referenced only by explicit local reference lists, validates their completeness, and remaps their keys while preserving reference order, duplicates and prompt literals. Missing originals prevent a partial ZIP download. Actual stale-page import cannot overwrite the winning document; its unsaved project remains exportable with complete originals and references.184 units/typecheck/build,11 dual-origin groups and14 local+14 public native groups passed, including12 malformed archives. All107 current/340 retained files and14 routes were checked. Two MP4s and two GIFs fully decode. No business Key or GPU job was created; original API/services/config remain unchanged. Full acceptance remains HOLD.
+
 ## canvas-20261030.141.1 · 已独立部署 / pending-test
 
 - [修复] 作品ZIP先整包预检并写完全部新原件，再一次加入完整项目列表；第二原件配额失败不留下部分项目。

@@ -6,15 +6,15 @@
 
 | Entry | Address |
 | --- | --- |
-| Independent canvas141.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
+| Independent canvas142.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
 
-Current141.1 fixes whole-batch project ZIP import, file/document failure recovery, top-level/nested image hydration and credential filtering. All originals are staged before the project batch is added; imported tasks become offline notes without generation. Failed imports may retain newly staged unreferenced files pending safe cleanup. [Usage and failure boundaries](docs/studio/26-画布ZIP整包导入与备份边界.md).
+Current142.1 preserves originals stored only in historical local-reference lists. Import remaps their keys without changing order, duplicates or prompt literals. Missing reference originals prevent an incomplete ZIP. A stale page preserves the winning document and can export its complete unsaved project before reloading. [Usage and evidence](docs/studio/27-历史素材引用备份与跨页面冲突.md).
 
-![141.1 actual public UI restores a synthetic archived image](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-restored-canvas-desktop.png)
+![Actual public UI re-exports a complete restored project](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-reference-reexport.png)
 
-[Imported projects](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-imported-library-desktop.png) · [Unsaved batch](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-document-aborted.png) · [390px](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-restored-canvas-390.png) · [Synthetic demo MP4](docs/studio/media/studio-141/synthetic-archive-recovery.mp4) · [GIF](docs/studio/media/studio-141/synthetic-archive-recovery.gif). The ZIP demo uses no business Key or API/GPU request. Release verification only reads existing API health/CORS. Native-IDB fault injection and390px emulation do not establish actual disk exhaustion or physical-phone acceptance.
+[Stale-page conflict](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-cross-page-conflict.png) · [390px](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-restored-canvas-390.png) · [Reference recovery MP4](docs/studio/media/studio-142/synthetic-archive-recovery.mp4) · [GIF](docs/studio/media/studio-142/synthetic-archive-recovery.gif) · [Conflict MP4](docs/studio/media/studio-142/synthetic-cross-page-conflict.mp4) · [GIF](docs/studio/media/studio-142/synthetic-cross-page-conflict.gif). Synthetic PNG/native-IDB demos make no business API/GPU request. Release verification only reads API health/CORS; no Key/job was created.390px is emulation.
 
 The following actual generation evidence comes from earlier139.2/evidence140, with no new generation this turn:
 
@@ -71,11 +71,11 @@ npm run build
 
 Deploy only `web/dist/` to an independent static host with `/studio/` and SPA fallback. Keep `managed` mode: deployment independence does not mean the upstream `standalone` mode, which enables optional scripts/Agents. The default API address is public; never embed a Key. Without a default API, the connection field stays empty.
 
-Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.141.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
+Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.142.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
 
 ## Validation and limits
 
-Current141.1 passes182 unit tests, typecheck/build and11 synthetic dual-origin groups, plus10 local and10 actual-public-UI native-IDB groups covering10 malformed archives, whole-batch file failure, document abort/explicit retry and both image forms after refresh. All107 current/255 retained files and14 routes were verified publicly. Both API workspaces, deployed API configuration/pointer/services and the static service/configuration stayed unchanged, with no restarts. The synthetic MP4/GIF fully decode; owned browsers/fixtures are closed. No business Key or GPU job was created. Earlier failures and139.2/evidence140 actual-GPU/offline/batch results remain historical rather than being counted as current retests.
+Current142.1 passes184 units, typecheck/build and11 synthetic dual-origin groups. Fourteen local and14 actual-public-UI native-IDB groups cover12 malformed archives, reference originals, failed export, remapping/re-export, document faults and stale-page conflicts. All107 current/340 retained files and14 routes were checked publicly. Both API workspaces, API configuration/pointer/processes and the static service/config remain unchanged, with no restarts. Two MP4s/two GIFs fully decode and owned browsers/fixtures are closed. The focused regression records2 failures before and0 after the fix. Earlier actual GPU/offline/batch results remain historical rather than current retests.
 
 Full acceptance remains **HOLD/pending-test**: the complete fault matrix, physical Android/iOS, large-file peak/leaks and10–20-device capacity are unverified; animation and more3D formats are incomplete. Cloud sync/text assistance may use only existing API capabilities; otherwise they remain external dependencies. ComfyUI-original transfer deletion, heterogeneous pools and GPU optimization also belong to the API. The canvas adds no other backend connection or forwarding changes. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
 

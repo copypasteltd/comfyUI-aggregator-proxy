@@ -6,15 +6,15 @@
 
 | 入口 | 地址 |
 | --- | --- |
-| 独立画布141.1 | [打开画布](http://43.165.167.179:39445/studio/) |
+| 独立画布142.1 | [打开画布](http://43.165.167.179:39445/studio/) |
 | 原业务API | `http://43.165.167.179:39443` |
 | 原管理后台 | [Admin](http://43.165.167.179:39443/admin/) |
 
-当前141.1修复作品ZIP的完整批次导入、文件/文档失败保护及重试、顶层/嵌套图片恢复和凭证过滤。先写完全部原件再一次加入项目；导入任务只变为说明，不会重新生成。文件中途失败可能留下已暂存的新文件，安全回收仍待完善。[具体用法与失败边界](docs/studio/26-画布ZIP整包导入与备份边界.md)。
+当前142.1补齐仅存在于历史参考列表的原件备份，导入时同步替换本机键，保持顺序、重复项和提示词原文。缺少参考原件会拒绝残缺ZIP；双页冲突时保留先提交的版本，未保存作品可先完整导出再重新载入。[操作逻辑与全部证据](docs/studio/27-历史素材引用备份与跨页面冲突.md)。
 
-![141.1公网实际UI恢复合成ZIP图片](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-restored-canvas-desktop.png)
+![公网导入后再次导出完整作品](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-reference-reexport.png)
 
-[整包项目](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-imported-library-desktop.png) · [文档未保存提示](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-document-aborted.png) · [390px](docs/studio/media/studio-141/archive-2026-10-30T11-07-33-852Z/public-archive-restored-canvas-390.png) · [合成演示MP4](docs/studio/media/studio-141/synthetic-archive-recovery.mp4) · [GIF](docs/studio/media/studio-141/synthetic-archive-recovery.gif)。本轮导入演示不使用业务Key或API/GPU；发布仅读取原API健康/CORS，原生IndexedDB故障注入和390px模拟不等于真实磁盘耗尽或手机验收。
+[双页冲突提示](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-cross-page-conflict.png) · [390px](docs/studio/media/studio-142/archive-2026-10-30T11-27-51-775Z/public-archive-restored-canvas-390.png) · [引用恢复MP4](docs/studio/media/studio-142/synthetic-archive-recovery.mp4) · [GIF](docs/studio/media/studio-142/synthetic-archive-recovery.gif) · [冲突MP4](docs/studio/media/studio-142/synthetic-cross-page-conflict.mp4) · [GIF](docs/studio/media/studio-142/synthetic-cross-page-conflict.gif)。本轮演示使用合成PNG与原生IndexedDB，不请求业务API/GPU；发布仅读原API健康/CORS，没有创建Key或任务。390px非真机。
 
 下面为先前139.2/证据140的真实生成记录，本轮没有重新生成：
 
@@ -71,11 +71,11 @@ npm run build
 
 仅发布`web/dist/`，由独立静态服务提供`/studio/`和SPA回退。`managed`是功能约束模式，与是否独立部署无关；不要换成启用上游脚本/Agent的`standalone`模式。默认API是公开地址，Key不进入构建。没有默认API时连接页留空。
 
-当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.141.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，并保留旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
+当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.142.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，并保留旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
 
 ## 验证与限制
 
-当前141.1冻结源码通过182单元、类型/生产构建及11组合成双源检查；另有10组本机原生与10组实际公网UI/IndexedDB检查，包括10类非法ZIP拒绝、整包文件失败、文档中止/明确重试和两类图片刷新。107当前文件/255旧哈希资源及14路由逐项公网验证，两个API工作区、线上API配置/指针/服务和静态服务/配置均不变，无重启。当前合成MP4/GIF完整解码，自有浏览器/夹具全部关闭，未创建Key或GPU任务；原始失败保留。139.2及证据140的实际GPU、离线和批次记录作为历史证据保留，不混作本轮实测。
+当前142.1通过184单元、类型/生产构建和11组合成双源检查；14组本机与14组实际公网页面/IndexedDB检查覆盖12类坏档、参考原件、失败导出、重映射/再导出、文档故障及双页冲突。107当前/340旧资源、14路由逐项公网核对。两个API工作区、线上API配置/指针/进程、画布服务/配置均不变，无重启。两MP4两GIF完整解码，自有浏览器/夹具已关闭；回归前2项失败→修复后0失败有具名记录。旧GPU/离线/批次证据保留，不冒充本轮重测。
 
 完整首期仍为**HOLD/pending-test**：完整故障、实际Android/iOS、大文件峰值/泄漏及10～20台容量待验；动画/更多3D格式未完成。云同步/文本助手只可使用原API既有能力，暂无则保留外部依赖；ComfyUI移交即删、异构设备合并及GPU优化也由原API负责，画布不另接后端或修改转发。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
 

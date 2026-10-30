@@ -1,0 +1,130 @@
+{
+  "passed": true,
+  "at": "2026-10-30T11:24:23.465Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T11-20-13-436Z.json",
+  "scope": "Two native HTTP origins and synthetic API protocol; no production API mutation, GPU job or physical phone acceptance",
+  "checks": [
+    "desktop:explicit-api-default-no-eager-api-call",
+    "desktop:cross-origin-catalog-business-key-only-admin-is-link",
+    "desktop:new-connection-does-not-inherit-static-origin",
+    "desktop:published-models-and-real-schema-worker",
+    "desktop:no-admin-worker-comfy-agent-requests-no-page-errors",
+    "390:explicit-api-default-no-eager-api-call",
+    "390:cross-origin-catalog-business-key-only-admin-is-link",
+    "390:new-connection-does-not-inherit-static-origin",
+    "390:published-models-and-real-schema-worker",
+    "390:no-admin-worker-comfy-agent-requests-no-page-errors",
+    "all-business-requests-go-directly-to-configured-api-without-cookies"
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-142/catalog-2026-10-30T11-24-23-006Z/independent-connection-desktop.png",
+      "sha256": "42eb5d0f2f176520824e0b7b6d0bc75a3ebb8768cfeb1472e15e72bfb594e62f"
+    },
+    {
+      "file": "docs/media/studio-142/catalog-2026-10-30T11-24-23-006Z/independent-models-desktop.png",
+      "sha256": "5155223f2b09856b5e37f9bc0cca92d4fd232ccb7116f5d099e3c2eb3cfe45c1"
+    },
+    {
+      "file": "docs/media/studio-142/catalog-2026-10-30T11-24-23-006Z/independent-connection-390.png",
+      "sha256": "4e2fc116c65c08788930923bfbf94a317743e43f26300ff80daa28124a2e081d"
+    },
+    {
+      "file": "docs/media/studio-142/catalog-2026-10-30T11-24-23-006Z/independent-models-390.png",
+      "sha256": "7ab22cfaf6d9547ef1f94f5a28453e6067d3227d021647fe1fa7adffb21e4846"
+    }
+  ],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "static_and_fixture_servers_closed": true
+  },
+  "static_bytes_unchanged": true
+}
