@@ -6,15 +6,15 @@
 
 | 入口 | 地址 |
 | --- | --- |
-| 独立画布145.1 | [打开画布](http://43.165.167.179:39445/studio/) |
+| 独立画布146.1 | [打开画布](http://43.165.167.179:39445/studio/) |
 | 原业务API | `http://43.165.167.179:39443` |
 | 原管理后台 | [Admin](http://43.165.167.179:39443/admin/) |
 
-当前145.1新增本机原件安全清理：新上传/ZIP导入原件与文档同库保存，活动页面受原生占用保护；保存后进入独立维护页，备份并确认回收未引用原件。删除同事务重新核对画布、回收站、素材与原任务，旧原件/缩略图和未知状态保留。日志升级v5，不降级或回退仅支持v4的144.1。[完整使用、方案与证据](docs/studio/30-新版原件安全清理与页面占用保护.md)。
+当前146.1交付 **Web端**：独立网页、浏览器操作与响应式布局。清理页已修复旧快照覆盖新状态；发布清单绑定完整存储契约，兼容恢复包146.0保留新旧页面资源。实际公网回退与恢复8项通过，作品/原件/原任务完整保留；只支持v4的旧版被拒绝切换。原生客户端与应用商店不在范围。[完整方案、操作与证据](docs/studio/31-Web交付范围与兼容静态回退.md)。
 
-![Safe local-original cleanup on the public canvas](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-cleaned-and-retained.png)
+![公网Web本机安全清理](docs/studio/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-desktop-cleaned-and-retained.png)
 
-[页面占用保护](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-other-editor-protected.png) · [390px](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-390-cleaned-and-retained.png) · [保存失败保留](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-save-failure-retained.png) · [MP4](docs/studio/media/studio-145/synthetic-safe-local-cleanup.mp4) · [GIF](docs/studio/media/studio-145/synthetic-safe-local-cleanup.gif)。合成本机文件，零业务API/GPU请求；390px为模拟。
+[最新快照](docs/studio/media/studio-146/refresh-2026-10-30T14-40-06-009Z/latest-snapshot-ready.png) · [兼容恢复的两节点合成作品](docs/studio/media/studio-146/rollback-2026-10-30T14-37-15-637Z/compatible-recovery-renders-saved-Web-project.png) · [390px网页](docs/studio/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-390-bottom-original-controls.png) · [清理MP4](docs/studio/media/studio-146/synthetic-Web-local-cleanup.mp4) / [GIF](docs/studio/media/studio-146/synthetic-Web-local-cleanup.gif) · [恢复页面MP4](docs/studio/media/studio-146/synthetic-Web-compatible-recovery.mp4) / [GIF](docs/studio/media/studio-146/synthetic-Web-compatible-recovery.gif)。合成文件，完整所选页面录像，零业务API/GPU请求。当前验收以Chromium为准；Firefox/WebKit未完成并保留记录，390px仅视口模拟。203单元/类型/构建、12发布守卫、18原生协议及当前114/保留688文件验证通过；完整Web人工/故障签收仍 **HOLD/pending-test**。
 
 下面为先前139.2/证据140的真实生成记录，本轮没有重新生成：
 
@@ -56,7 +56,7 @@ flowchart LR
 
 在“存储空间”主动检查本机引用并导出清单；遇到缺件保留原文档，使用已有完整备份恢复。GLB预览有动画时手动选择片段并播放，隐藏时停止更新，关闭后释放资源；默认不播放。核对清单不含媒体正文，不能替代作品ZIP。
 
-**换端口/域名不会自动迁移本机数据。** 先在旧39443画布导出作品ZIP、必要原件和任务JSON，到新39445入口导入并重新填写业务Key；确认可用前保留旧数据。导入作品不会重新生成；任务清单需主动查询原ID。日志v5不得降级，不能回退仅支持v4的144.1；兼容静态回退包仍待验收。
+**换端口/域名不会自动迁移本机数据。** 先在旧39443画布导出作品ZIP、必要原件和任务JSON，到新39445入口导入并重新填写业务Key；确认可用前保留旧数据。导入作品不会重新生成；任务清单需主动查询原ID。日志v5不得降级，不能回退仅支持v4的144.1；兼容146.0恢复包及实际回退/恢复已验，其他版本须另核对完整契约。
 
 ## 原生开发与部署
 
@@ -73,17 +73,17 @@ npm run build
 
 仅发布`web/dist/`，由独立静态服务提供`/studio/`和SPA回退。`managed`是功能约束模式，与是否独立部署无关；不要换成启用上游脚本/Agent的`standalone`模式。默认API是公开地址，Key不进入构建。没有默认API时连接页留空。
 
-当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.145.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，并保留旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
+当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.146.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，先校验兼容契约并保留新旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
 
 ## 验证与限制
 
-当前145.1通过203单元/类型/构建、18原生协议、10本机+10公网清理、14本机+14公网ZIP、11双源及14媒体回归。114当前/598旧资源和15路由逐项核对，截图/完整MP4/GIF已同步，浏览器/夹具关闭。原API两个工作区、线上指针/配置/服务及独立静态服务/配置不变。完整验收HOLD。
+当前146.1通过203单元/类型/构建、18原生协议、12发布守卫、10本机+10公网清理、14本机+14公网ZIP、11双源、14媒体回归及实际Web回退/恢复8项。114当前/688旧资源和15路由逐项核对，截图及完整所选页面MP4/GIF同步，浏览器/夹具关闭。原API两个工作区、线上指针/配置/服务及独立静态服务/配置不变。完整Web验收HOLD。
 
-完整首期仍为**HOLD/pending-test**：完整故障、实际Android/iOS、大文件峰值/泄漏及10～20台容量待验；更多动画轨道/3D格式、旧原件迁移、缩略图回收与不确定占用恢复待完成。云同步/文本助手只可使用原API既有能力，暂无则保留外部依赖；ComfyUI移交即删、异构设备合并及GPU优化也由原API负责，画布不另接后端或修改转发。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
+完整首期仍为**HOLD/pending-test**：完整Web人工/故障、更多浏览器、大文件峰值/泄漏待验；更多动画轨道/3D格式、旧原件迁移、缩略图回收与不确定占用恢复待完成。原生客户端与应用商店不在范围。云同步/文本助手只可使用原API既有能力，暂无则保留外部依赖；ComfyUI移交即删、异构设备合并、10～20台容量及GPU优化属原API外部事项，画布不另接后端或修改转发。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
 
 ## 文档与许可
 
-源代码在`web/`；独立文档、公开证据和页面资料从[文档索引](docs/studio/README.md)进入。更新说明见[独立画布更新记录](docs/studio/23-独立画布更新记录.md)，旧融合/中转报告保留历史标记；文档20/21为当前架构和部署依据。
+源代码在`web/`；独立文档、公开证据和页面资料从[文档索引](docs/studio/README.md)进入。更新说明见[独立画布更新记录](docs/studio/23-独立画布更新记录.md)，旧融合/中转报告保留历史标记；文档20/21/31为当前Web架构、部署和回退依据。
 
 保留上游[MIT许可](LICENSE)与作者声明，04·青柠源样式/字体说明随项目和静态包保留。功能分支独立维护，不向basketikun上游推送，也不更新原API分支。
 

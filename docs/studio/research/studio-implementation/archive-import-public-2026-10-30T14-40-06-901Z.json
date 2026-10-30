@@ -1,0 +1,180 @@
+{
+  "passed": true,
+  "at": "2026-10-30T14:40:26.334Z",
+  "scope": "Frozen production UI on native Windows Chromium/plain non-localhost HTTP; synthetic ZIPs and injected native transaction faults, not actual disk exhaustion, API/GPU or physical-phone verification",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "checks": [
+    {
+      "name": "all malformed or corrupt archives rejected before any file/project writes; original DB records unchanged",
+      "detail": {
+        "rejected_archives": 12
+      }
+    },
+    {
+      "name": "actual project ZIP export omits header/cookie/fragment credentials, preserves source document and original SHA",
+      "detail": true
+    },
+    {
+      "name": "UI ZIP includes reference-only originals once, retains ordered duplicate references and leaves prompt literals unchanged",
+      "detail": true
+    },
+    {
+      "name": "missing reference-only original refuses UI ZIP download without changing project documents; owned original restored after injection",
+      "detail": true
+    },
+    {
+      "name": "second native original write quota fault leaves all projects unimported and originals intact; one new unreferenced blob retained",
+      "detail": {
+        "newly_staged_blobs_retained": 1,
+        "actual_disk_exhaustion": false
+      }
+    },
+    {
+      "name": "successful two-project import publishes one atomic document revision with fresh keys, original bytes and offline-only task notes",
+      "detail": true
+    },
+    {
+      "name": "restored image loads after refresh; script-shaped text remains inert and no task is re-created",
+      "detail": true
+    },
+    {
+      "name": "nested image variants without parent content/storage key restore from their own new keys and survive refresh",
+      "detail": true
+    },
+    {
+      "name": "imported reference keys, order, duplicates and exact native originals survive refresh and actual project UI re-export",
+      "detail": true
+    },
+    {
+      "name": "390px restored snapshot remains within viewport; emulation only",
+      "detail": true
+    },
+    {
+      "name": "aborted document transaction commits neither imported project; whole unsaved batch remains visible with retry banner",
+      "detail": true
+    },
+    {
+      "name": "explicit save retry commits the retained whole batch once; both projects survive refresh without repeating media import",
+      "detail": true
+    },
+    {
+      "name": "stale second-page import cannot overwrite winner documents or blindly retry; whole unsaved reference project can be exported intact",
+      "detail": true
+    },
+    {
+      "name": "all cases make zero API, generation, plugin, ComfyUI or external requests and no page errors",
+      "detail": true
+    }
+  ],
+  "rejected_archives": [
+    {
+      "name": "unknown-version",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "invalid-title",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "zero-zoom",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "malformed-images",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "duplicate-project",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "duplicate-file-path",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "prototype-field",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "wrong-length",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "wrong-sha",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "missing-file",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "undeclared-reference-original",
+      "no_original_or_document_writes": true
+    },
+    {
+      "name": "missing-reference-original",
+      "no_original_or_document_writes": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-146/archive-2026-10-30T14-40-06-901Z/public-archive-invalid-desktop.png",
+      "sha256": "776e1605a28cfbf748c35ab27369edf8d023400208648fac209ec7fbf69acd2d",
+      "first_page_elapsed_seconds": 4.01
+    },
+    {
+      "file": "docs/media/studio-146/archive-2026-10-30T14-40-06-901Z/public-archive-second-file-failed.png",
+      "sha256": "5949fa5403a58593e07a073aaf8258d886911d8f62ca537456f8765afd580850",
+      "first_page_elapsed_seconds": 8.832
+    },
+    {
+      "file": "docs/media/studio-146/archive-2026-10-30T14-40-06-901Z/public-archive-imported-library-desktop.png",
+      "sha256": "13902c605bf1775a9a0ff2dbf50c59b346c3c11d139cbd7f97405037e284bbb0",
+      "first_page_elapsed_seconds": 9.471
+    },
+    {
+      "file": "docs/media/studio-146/archive-2026-10-30T14-40-06-901Z/public-archive-restored-canvas-desktop.png",
+      "sha256": "039f244e3cbefc34008a056615baa27c1a58a394a025c3e9ecc39d66de2ad31f",
+      "first_page_elapsed_seconds": 13.286
+    },
+    {
+      "file": "docs/media/studio-146/archive-2026-10-30T14-40-06-901Z/public-archive-reference-reexport.png",
+      "sha256": "57403ece001b0529448eb685c6ddf394fd45ca1c5576b7d69f50638e267ae729",
+      "first_page_elapsed_seconds": 18.097
+    },
+    {
+      "file": "docs/media/studio-146/archive-2026-10-30T14-40-06-901Z/public-archive-restored-canvas-390.png",
+      "sha256": "48d07fe385d8be5790815d6a2745bec68c72c9e523dc4298ad80588a9591f97a",
+      "first_page_elapsed_seconds": 20.109
+    },
+    {
+      "file": "docs/media/studio-146/archive-2026-10-30T14-40-06-901Z/public-archive-document-aborted.png",
+      "sha256": "b4f95467c10d40d196b63395796bc6844a7fc01213c33759951adc828c81927a",
+      "first_page_elapsed_seconds": 22.292
+    },
+    {
+      "file": "docs/media/studio-146/archive-2026-10-30T14-40-06-901Z/public-archive-cross-page-conflict.png",
+      "sha256": "21653359f69fd11f03702347d61b7eb7ddf89d9847f3f2bab388fa8ab6ace583",
+      "first_page_elapsed_seconds": 26.608
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "public_static_site": true,
+  "suite": "146",
+  "origin": "http://43.165.167.179:39445",
+  "first_page_started_at": 1793371227591,
+  "private_videos": [
+    ".local/studio146/archive-2026-10-30T14-40-06-901Z/page@fae726c548b326e076d0eaeb11f04260.webm",
+    ".local/studio146/archive-2026-10-30T14-40-06-901Z/page@a8ed342a5175f8d7409c09ce9d4d5233.webm",
+    ".local/studio146/archive-2026-10-30T14-40-06-901Z/page@b417683def9388262d248efa788ad632.webm",
+    ".local/studio146/archive-2026-10-30T14-40-06-901Z/page@1ddcc5a5e4fa8b043c117384c266e362.webm"
+  ],
+  "static_bytes_unchanged": true
+}

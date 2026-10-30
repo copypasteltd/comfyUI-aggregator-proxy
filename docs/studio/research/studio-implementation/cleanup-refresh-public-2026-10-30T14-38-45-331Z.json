@@ -1,0 +1,28 @@
+{
+  "passed": false,
+  "at": "2026-10-30T14:38:50.017Z",
+  "browser_engine": "webkit",
+  "baseline_1451": false,
+  "public_static_site": true,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "scope": "Frozen Web UI; actual native transactions and editor connections, with delayed completion of one committed readonly snapshot. Synthetic local data; no business API/GPU requests.",
+  "checks": [],
+  "screenshots": [],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "browser_version": "26.5",
+  "error": {
+    "name": "Error",
+    "message": "page.evaluate: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:/Users/carzy/AppData/Local/ms-playwright/webkit-2359/Playwright.exe --inspector-pipe --disable-accelerated-compositing --headless --no-startup-window\n<launched> pid=12972",
+    "stack": "page.evaluate: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:/Users/carzy/AppData/Local/ms-playwright/webkit-2359/Playwright.exe --inspector-pipe --disable-accelerated-compositing --headless --no-startup-window\n<launched> pid=12972\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_cleanup_refresh_race.mjs:58:16"
+  },
+  "private_recordings": [
+    ".local/studio146/refresh-2026-10-30T14-38-45-331Z/page@23507f5b52f6aad336665ceedcb69799.webm"
+  ]
+}

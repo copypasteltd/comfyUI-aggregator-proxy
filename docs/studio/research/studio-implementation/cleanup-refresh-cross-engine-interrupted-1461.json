@@ -1,0 +1,21 @@
+{
+  "passed": false,
+  "counted_as_pass": false,
+  "scope": "Incomplete Firefox/WebKit Web automation on this Windows host; no first case completed and no product compatibility acceptance claimed.",
+  "browser_engines": [
+    "firefox",
+    "webkit"
+  ],
+  "completed_checks": 0,
+  "observations": [
+    "Both independent processes generated the same millisecond output label. The WebKit report survives; Firefox exited during context closure after explicit interruption.",
+    "Neither engine reached the first native-editor assertion. Cause was not established; no claim that the product or a particular engine is broken.",
+    "The tool now includes the engine in output labels and preserves cleanup errors. No product code changed for this tooling correction."
+  ],
+  "webkit_original_report": "cleanup-refresh-public-2026-10-30T14-38-45-331Z.json",
+  "webkit_original_report_sha256": "9bd4e73f3e578498f43f8c224aa9f6ce736e6c183270aa629eb5711f06b60245",
+  "owned_main_and_child_processes_checked_absent": true,
+  "owned_fixture_node_processes_checked_absent": true,
+  "api_written": false,
+  "generation_posts": 0
+}

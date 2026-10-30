@@ -1,0 +1,96 @@
+{
+  "source_revision": "db56cae3634da0361074e84024ccd5b428d189fa",
+  "passed": true,
+  "at": "2026-10-30T13:55:44.507Z",
+  "scope": "Native Windows Chromium IndexedDB v4-to-v5, connection liveness, atomic references/deletion and malformed-state refusal; synthetic local data, no actual disk exhaustion/phone/GPU acceptance",
+  "checks": [
+    {
+      "name": "actual previous v4 journal reads the seeded immutable documents",
+      "detail": true
+    },
+    {
+      "name": "native v4-to-v5 retains original document bytes/revisions, frozen task body/idempotency and budget",
+      "detail": true
+    },
+    {
+      "name": "actual previous v4 functions are fenced after v5 without downgrade",
+      "detail": true
+    },
+    {
+      "name": "controlled reference-only originals are protected by recoverable trash in document transaction",
+      "detail": true
+    },
+    {
+      "name": "duplicate controlled key cannot overwrite committed original bytes",
+      "detail": true
+    },
+    {
+      "name": "saving a new missing original reference aborts without changing document",
+      "detail": true
+    },
+    {
+      "name": "live editor prevents deletion of an unreferenced file, including unsaved work",
+      "detail": true
+    },
+    {
+      "name": "native marker upgrade reports occupied and leaves original bytes intact",
+      "detail": true
+    },
+    {
+      "name": "closing actual editor page lets pending native probe confirm connection release without timer",
+      "detail": true
+    },
+    {
+      "name": "mixed referenced/unreferenced deletion aborts entire batch",
+      "detail": true
+    },
+    {
+      "name": "explicit deletion removes only unreferenced controlled original in one transaction",
+      "detail": {
+        "files": 1,
+        "bytes": 15
+      }
+    },
+    {
+      "name": "reload stale claim is reclaimed by native proof; explicit leave fences further old-page writes",
+      "detail": true
+    },
+    {
+      "name": "missing marker stays uncertain and no marker database is created",
+      "detail": true
+    },
+    {
+      "name": "unknown task version conservatively blocks cleanup",
+      "detail": true
+    },
+    {
+      "name": "concurrent cleaners serialize; stale second delete refuses without partial deletion",
+      "detail": true
+    },
+    {
+      "name": "new-editor registration versus deletion race leaves no saved dangling reference",
+      "detail": [
+        "already-deleted",
+        {
+          "files": 1,
+          "bytes": 17
+        }
+      ]
+    },
+    {
+      "name": "unknown v4 store layout aborts upgrade and preserves version",
+      "detail": true
+    },
+    {
+      "name": "blocked journal upgrade reports refusal; abandoned late upgrade does not mutate v4",
+      "detail": true
+    }
+  ],
+  "api_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "all_owned_contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "passed": false,
+  "at": "2026-10-30T13:59:55.028Z",
+  "baseline_1451": false,
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "scope": "Frozen Web UI; actual native transactions and editor connections, with delayed completion of one committed readonly snapshot. Synthetic local data; no business API/GPU requests.",
+  "checks": [],
+  "screenshots": [],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "error": {
+    "name": "Error",
+    "message": "page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://canvas-refresh.test:2125/studio/\nCall log:\n\u001b[2m  - navigating to \"http://canvas-refresh.test:2125/studio/\", waiting until \"load\"\u001b[22m\n",
+    "stack": "page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://canvas-refresh.test:2125/studio/\nCall log:\n\u001b[2m  - navigating to \"http://canvas-refresh.test:2125/studio/\", waiting until \"load\"\u001b[22m\n\n    at pageIn (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_cleanup_refresh_race.mjs:25:206)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_cleanup_refresh_race.mjs:56:19"
+  },
+  "private_recordings": [
+    ".local/studio146/refresh-2026-10-30T13-59-54-916Z/page@55078389528953b385cb9ba54015e031.webm",
+    ".local/studio146/refresh-2026-10-30T13-59-54-916Z/page@5181e6cd4442af7507a37053d9694b65.webm"
+  ]
+}

@@ -1,5 +1,14 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## canvas-20261030.146.1 · Web端独立交付 / pending-test
+
+- [调整] 需求、开发约束和全部46项仅按Web应用执行；原生客户端与应用商店不在范围，原API仍只读。
+- [修复] 本机清理页只接受最新读取结果，两个页面释放后的旧快照不再覆盖新状态；无新增计时器、重试或限制。
+- [新增] 完整存储契约、摘要绑定与兼容恢复146.0，原子切换前拒绝不兼容目标；恢复包精确复用145.1应用并保留新旧资源。
+- [交付] 实际公网Web回退/恢复8项、203单元/类型/构建、18原生、12发布守卫、清理/ZIP回归及114当前/688旧资源、15路由通过。截图、完整所选页面MP4/GIF、双语README和文档31同步；旧失败/跨引擎中止保留，完整Web验收HOLD。
+
+Web-only146.1 keeps the latest cleanup snapshot authoritative and binds the complete storage contract to verified static releases. Compatible recovery146.0 reuses145.1 application bytes and retains new/old lazy assets. Eight actual public rollback/restore checks preserve saved projects, originals and frozen tasks; v4-only targets are refused. Current evidence covers Chromium; interrupted Firefox/WebKit checks are not counted.114 current/688 retained files and15 routes passed, with no original API/config/service changes or new GPU jobs. Bilingual docs31, screenshots and complete selected page MP4/GIF recordings accompany this release. Full Web manual/fault acceptance remains HOLD/pending-test.
+
 ## canvas-20261030.145.1 · 已独立部署 / pending-test
 
 - [新增] 新上传/ZIP导入普通原件与文档同库保存，独立不可覆盖的新键；旧原件保留并可读取。

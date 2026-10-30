@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "at": "2026-10-30T14:02:10.209Z",
+  "baseline_1451": false,
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "scope": "Frozen Web UI; actual native transactions and editor connections, with delayed completion of one committed readonly snapshot. Synthetic local data; no business API/GPU requests.",
+  "checks": [
+    {
+      "name": "two actual Web editor connections protect the same native original",
+      "detail": true
+    },
+    {
+      "name": "newer native snapshot observes both released connections while older committed read is held",
+      "detail": true
+    },
+    {
+      "name": "latest snapshot remains authoritative after older native completion; no stale occupancy",
+      "detail": {
+        "editors": 0,
+        "cleanup_enabled": true,
+        "stale_occupancy": false
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-146/refresh-2026-10-30T14-02-09-820Z/latest-snapshot-ready.png",
+      "bytes": 52534,
+      "sha256": "37e70f0fef902eed85af32e821b7051bb680cbd95646271fb6437b609c9ad6d2"
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "regression_observed": false,
+  "static_bytes_unchanged": true,
+  "actual_api_requests": 0,
+  "generation_posts": 0,
+  "private_recordings": [
+    ".local/studio146/refresh-2026-10-30T14-02-09-820Z/page@cca7b4be834bac2e6f8d0502fc8555ce.webm",
+    ".local/studio146/refresh-2026-10-30T14-02-09-820Z/page@da95098c5de0fa2ceb8784399fe8b456.webm",
+    ".local/studio146/refresh-2026-10-30T14-02-09-820Z/page@c3c4dedd59f3eb6965f4dc8b1192d121.webm"
+  ]
+}

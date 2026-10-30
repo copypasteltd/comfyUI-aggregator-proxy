@@ -1,0 +1,107 @@
+{
+  "passed": true,
+  "at": "2026-10-30T14:38:54.292Z",
+  "scope": "Frozen static production UI on ordinary HTTP; native Chromium upload/download, local originals/refusal/cleanup, 390px emulation; synthetic local data, not real disk exhaustion, phone or GPU acceptance",
+  "public_static_site": true,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "checks": [
+    {
+      "name": "actual canvas image and audio file inputs persist new controlled originals with committed document references",
+      "detail": true
+    },
+    {
+      "name": "real save-and-leave navigates to separate static entry; another live canvas disables deletion",
+      "detail": true
+    },
+    {
+      "name": "closing actual second editor automatically releases native marker and enables eligible cleanup",
+      "detail": true
+    },
+    {
+      "name": "actual original download preserves full byte length and SHA",
+      "detail": {
+        "bytes": 68,
+        "sha256": "1f3b40322c29a8108ead1415f2aae739495eaee8b1952323ffcdc1a4258ea186"
+      }
+    },
+    {
+      "name": "cancelling deletion confirmation preserves original",
+      "detail": true
+    },
+    {
+      "name": "actual delete rechecks latest references and refuses stale UI candidate",
+      "detail": true
+    },
+    {
+      "name": "confirmed cleanup removes only selected controlled file; referenced files and old raw original stay intact",
+      "detail": true
+    },
+    {
+      "name": "390px maintenance layout fits viewport and native scrolling reaches bottom controls and returns to header; emulation only",
+      "detail": true
+    },
+    {
+      "name": "returning from maintenance creates a fresh usable editor page",
+      "detail": true
+    },
+    {
+      "name": "real document quota failure prevents leaving editor for maintenance; unsaved banner remains",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-desktop-other-editor-protected.png",
+      "bytes": 78227,
+      "sha256": "1eaecfec57bc4a33165ecdcae8c5abd9db75113c674cefc8be5ac8feb3f3e6bb",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-desktop-ready-to-clean.png",
+      "bytes": 71844,
+      "sha256": "5c7cd9bce2718236038d6fcd1984530fa82b6bc9ddf8520b0f282c53369f9fba",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-desktop-cleaned-and-retained.png",
+      "bytes": 71279,
+      "sha256": "a18f1a7127c4d9125634f9226d80e352c4841404726ea99db4dcd6db07817007",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-390-cleaned-and-retained.png",
+      "bytes": 52573,
+      "sha256": "7cdb1888f700139c39529027a4359ff00f761f0578b9663758d1795a38735175",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-390-bottom-original-controls.png",
+      "bytes": 49201,
+      "sha256": "45e54415c20d8d43cff5bb8ca55942d6766c9405d3c890f2e8ae166108c34858",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-desktop-save-failure-retained.png",
+      "bytes": 87577,
+      "sha256": "7e2d7364386ad50d59047fe74f98369fe3925531dddae9f1506427a34541818d",
+      "viewport_only": true
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://43.165.167.179:39445",
+  "actual_api_requests": 0,
+  "generation_posts": 0,
+  "static_bytes_unchanged": true,
+  "private_recordings": [
+    ".local/studio146/cleanup-2026-10-30T14-38-50-017Z/page@983150f7e7b07bd7ec8e13eeeb31bbda.webm",
+    ".local/studio146/cleanup-2026-10-30T14-38-50-017Z/page@b646b40914dfa497c2c945f59b6cd4ca.webm",
+    ".local/studio146/cleanup-2026-10-30T14-38-50-017Z/page@053d57cb931c98c478b278dfdd64f2c2.webm"
+  ]
+}
