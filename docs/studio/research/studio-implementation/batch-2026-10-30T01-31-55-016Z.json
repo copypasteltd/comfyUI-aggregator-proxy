@@ -1,0 +1,275 @@
+{
+  "started_at": "2026-10-30T01:31:55.056Z",
+  "scope": "Native Chromium strict IDB transactions and production UI, synthetic HTTP on insecure non-localhost origin; desktop/390px emulation, not real GPU, phone or fleet",
+  "checks": [
+    {
+      "name": "all 15 members reuse the existing range and commit independent keys before any generation request",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "second member QuotaExceeded abort rolls back the entire native transaction and sends nothing",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "active-node collision aborts preceding additions and preserves both original members",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "seven task schemas preserve exact inputs, asset references, presets, seed and release across a batch",
+      "passed": true,
+      "detail": [
+        "text_to_image",
+        "image_to_image",
+        "references_to_image",
+        "text_to_video",
+        "references_to_video",
+        "text_to_audio",
+        "image_to_3d"
+      ]
+    },
+    {
+      "name": "native v2 import preserves grouping but never authorizes prepared backup resubmission",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two actual pages continue one batch without repeating any member generation POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "stale connection identity is rejected before selecting or sending a batch",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "native journal, hashes and schema Worker operate on plain HTTP without WebCrypto",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "real composer defaults to one; all three members commit before first POST and second-response loss stops the third",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual task-page export preserves three original submissions and batch metadata in v2 without the saved API Key",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "restart preserves the pending and unknown members without automatic POST or mobile overflow",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "explicit continue sends only the never-sent member; failed and successful siblings retain original job IDs",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-31-55-016Z/desktop-composer-three.png",
+      "bytes": 96830,
+      "sha256": "22aee52646a0a250b7b7b9ad3e1830737dce7e5a9d1516126cba47ad87f34874",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-31-55-016Z/desktop-partial-batch.png",
+      "bytes": 85948,
+      "sha256": "192e41b433a24153e99a2c6ee545d8d649528f54c2a3a01aa62407a0a24a7e80",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-31-55-016Z/mobile-partial-after-restart.png",
+      "bytes": 52664,
+      "sha256": "583fa62cca6bb08fb9091e83542ef6a507f5bdeb06da8638ac7c91f695a4024f",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-31-55-016Z/mobile-independent-results.png",
+      "bytes": 46416,
+      "sha256": "8cea26c437719e1f0b4b15f7493fb339a5af9691a98b5a7bce5ab3cc954a9089",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "archive": {
+    "version": 2,
+    "tasks": 3,
+    "bytes": 3689,
+    "sha256": "bef333f77c3e73d27812d8063ef199b1dec7b2a01593c7db057077663f0cbedb"
+  },
+  "passed": false,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.studio-node-card').first() to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_batch.mjs:132:146",
+  "business_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/lookup",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    }
+  ],
+  "generation_posts": 5,
+  "completed_at": "2026-10-30T01:32:37.631Z"
+}

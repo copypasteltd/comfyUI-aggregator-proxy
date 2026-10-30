@@ -1,5 +1,6 @@
 import type { ContentMetadata, RemoteJob, UploadedAsset } from "./api/aggregator/types";
 import type { CanvasNodeData } from "@/types/canvas";
+import { assertBatchMembers, batchKey, type BatchRef } from "./aggregator-batch";
 
 export type IdentityRef = { profileId: string; origin: string; fingerprint: string };
 export type Intent = {
@@ -12,6 +13,7 @@ export type Intent = {
     pollPaused?: boolean;
     recovered?: { version: 1; archiveSha256: string; importedAt: number };
     recoveryVerified?: boolean;
+    batch?: BatchRef;
     output: { mediaTypes: string[]; maxBytes: number };
     canvas?: { node: CanvasNodeData; sourceIds: string[]; detached?: boolean };
 };
@@ -25,7 +27,7 @@ export type RequestBudget = { id: string; nextAt: number; pausedUntil: number };
 export type LocalDocument = { version: 1; id: string; revision: number; value: string; storageKeys: string[]; legacyValue: string | null };
 type JournalRecords = Records & { budgets: RequestBudget; documents: LocalDocument };
 const databaseName = "comfy-aggregator-studio:journal";
-const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.version, id: intent.id, identity: intent.identity, projectId: intent.projectId, nodeId: intent.nodeId, body: intent.body, idempotencyKey: intent.idempotencyKey, releaseDigest: intent.releaseDigest, createdAt: intent.createdAt, output: intent.output, canvas: intent.canvas && { node: intent.canvas.node, sourceIds: intent.canvas.sourceIds }, recovered: intent.recovered });
+const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.version, id: intent.id, identity: intent.identity, projectId: intent.projectId, nodeId: intent.nodeId, body: intent.body, idempotencyKey: intent.idempotencyKey, releaseDigest: intent.releaseDigest, createdAt: intent.createdAt, output: intent.output, canvas: intent.canvas && { node: intent.canvas.node, sourceIds: intent.canvas.sourceIds }, recovered: intent.recovered, batch: intent.batch });
 
 // Native transactions deliberately have no localStorage fallback. Completion is the commit signal.
 function openDatabase(): Promise<IDBDatabase> {
@@ -108,23 +110,35 @@ export function journalDelete(name: keyof JournalRecords, id: string): Promise<v
 }
 
 export function prepareIntent(intent: Intent): Promise<Intent> {
-    return transaction("intents", "readwrite", (store, result) => {
-        const request = store.get(intent.id);
+    return prepareIntents([intent]).then((saved) => saved[0]);
+}
+
+export function prepareIntents(intents: Intent[]): Promise<Intent[]> {
+    if (!intents.length || new Set(intents.map((intent) => intent.id)).size !== intents.length) throw new Error("提交记录为空或重复，未创建任务");
+    assertBatchMembers(intents);
+    return journalTransaction(["intents"], "readwrite", (tx, result, abort) => {
+        const store = tx.objectStore("intents");
+        const request = store.getAll();
         request.onsuccess = () => {
-            const existing = request.result as Intent | undefined;
-            if (existing) {
-                if (existing.version !== 1 || submissionSnapshot(existing) !== submissionSnapshot(intent)) {
-                    store.transaction.abort();
-                    return;
+            try {
+                const records = request.result as Intent[];
+                const byId = new Map(records.map((value) => [value.id, value]));
+                const active = new Set(records.flatMap((value) => value.activeNodeKey ? [value.activeNodeKey] : []));
+                const saved: Intent[] = [];
+                for (const intent of intents) {
+                    const existing = byId.get(intent.id);
+                    if (existing) {
+                        if (existing.version !== 1 || submissionSnapshot(existing) !== submissionSnapshot(intent)) throw new Error("同ID提交记录冲突，未创建任务");
+                        saved.push(existing); continue;
+                    }
+                    if (intent.activeNodeKey && active.has(intent.activeNodeKey)) throw new Error("该节点已有活动任务，未创建新任务");
+                    if (intent.activeNodeKey) active.add(intent.activeNodeKey);
+                    store.add(intent); saved.push(intent);
                 }
-                result(existing);
-            } else if (intent.activeNodeKey) {
-                const active = store.index("active_node").getKey(intent.activeNodeKey);
-                active.onsuccess = () => {
-                    if (active.result !== undefined) { store.transaction.abort(); return; }
-                    store.add(intent); result(intent);
-                };
-            } else { store.add(intent); result(intent); }
+                const groups = new Set(intents.filter((intent) => intent.batch).map(batchKey));
+                assertBatchMembers([...records.filter((intent) => intent.batch && groups.has(batchKey(intent))), ...intents.filter((intent) => !byId.has(intent.id))]);
+                result(saved);
+            } catch (error) { abort(error); }
         };
     });
 }

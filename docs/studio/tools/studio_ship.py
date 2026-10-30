@@ -85,7 +85,7 @@ PY
     elif action == "static-upgrade":
         sources = {TOOLS / "studio131-static-upgrade.py": "studio131-static-upgrade.py", BUILD / "static-build.json": "static-build-1312.json", BUILD / "studio-20261030.131.2.tar.gz": "studio-20261030.131.2.tar.gz"}
         script = transfer(sources) + f"\npython3 '{PROTECTED}/studio131-static-upgrade.py'\n"
-    elif action in {"static-upgrade-1313", "static-upgrade-1314", "static-upgrade-1315", "static-upgrade-1316", "static-upgrade-1317", "static-upgrade-1318", "static-upgrade-1319", "static-upgrade-1321", "static-upgrade-1322"}:
+    elif action in {"static-upgrade-1313", "static-upgrade-1314", "static-upgrade-1315", "static-upgrade-1316", "static-upgrade-1317", "static-upgrade-1318", "static-upgrade-1319", "static-upgrade-1321", "static-upgrade-1322", "static-upgrade-1331"}:
         release, previous, number = {
             "static-upgrade-1313": ("studio-20261030.131.3", "studio-20261030.131.2", "1313"),
             "static-upgrade-1314": ("studio-20261030.131.4", "studio-20261030.131.3", "1314"),
@@ -96,11 +96,12 @@ PY
             "static-upgrade-1319": ("studio-20261030.131.9", "studio-20261030.131.8", "1319"),
             "static-upgrade-1321": ("studio-20261030.132.1", "studio-20261030.131.9", "1321"),
             "static-upgrade-1322": ("studio-20261030.132.2", "studio-20261030.132.1", "1322"),
+            "static-upgrade-1331": ("studio-20261030.133.1", "studio-20261030.132.2", "1331"),
         }[action]
         assert json.loads((BUILD / "static-build.json").read_text())["release_id"] == release
         name = "static-build-" + number + ".json"
         sources = {TOOLS / "studio131-static-upgrade.py": "studio131-static-upgrade.py", BUILD / "static-build.json": name, BUILD / (release + ".tar.gz"): release + ".tar.gz"}
-        forward = " --promote-only" if number in {"1317", "1318", "1319", "1321", "1322"} else ""
+        forward = " --promote-only" if number in {"1317", "1318", "1319", "1321", "1322", "1331"} else ""
         script = transfer(sources) + f"\npython3 '{PROTECTED}/studio131-static-upgrade.py' --build {name} --previous {previous}{forward}\n"
     elif action == "backend-prepare-1322":
         assert json.loads((BUILD / "build.json").read_text())["release_id"] == "linux-20261030.132.2"

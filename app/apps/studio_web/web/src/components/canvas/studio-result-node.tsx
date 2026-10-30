@@ -5,7 +5,7 @@ import { saveAs } from "file-saver";
 import { registerNodeDefinitions } from "@/lib/canvas/node-registry";
 import type { CanvasNodeContext } from "@/types/canvas-plugin";
 import { journalGet, type Intent } from "@/services/aggregator-journal";
-import { cancelIntent, jobStatusLabels, refreshIntent, saveResult, stopLocalWait, submitIntent, subscribeStudioTasks } from "@/services/aggregator-engine";
+import { cancelIntent, jobStatusLabels, lookupIntent, refreshIntent, saveResult, stopLocalWait, submitIntent, subscribeStudioTasks } from "@/services/aggregator-engine";
 import { terminalStatuses } from "@/services/api/aggregator/types";
 import { getMediaBlob } from "@/services/file-storage";
 import { useStudioStore } from "@/stores/use-studio-store";
@@ -30,13 +30,14 @@ function TaskContent({ ctx }: { ctx: CanvasNodeContext }) {
         finally { setBusy(false); }
     };
     return <div className="studio-node-card" style={{ color: ctx.theme.node.text }} onPointerDown={(event) => event.stopPropagation()} onWheel={(event) => event.stopPropagation()}>
-        <Sparkles size={26} /><strong>{intent?.job ? jobStatusLabels[intent.job.status] || intent.job.status : "提交记录待核对"}</strong>
+        <Sparkles size={26} /><strong>{intent?.job ? jobStatusLabels[intent.job.status] || intent.job.status : intent?.stage === "prepared" && !intent.recovered ? "已保存，待提交" : "提交记录待核对"}</strong>
+        {intent?.batch && <small>批次第 {intent.batch.index + 1}/{intent.batch.total} 项</small>}
         <small>{intent?.job?.id || "请连接创建此任务的原服务与 Key"}</small>
         {intent?.error && <p role="status">{intent.error}{intent.pollPaused ? "。自动查询已暂停，可手动继续。" : ""}</p>}
         {intent?.job?.error && <p role="status">{intent.job.error.message || intent.job.error.code}</p>}
         {intent && <div className="studio-actions">
             {intent.stage === "submitting" && <Button size="small" onClick={() => { stopLocalWait(intent.id); message.info("已停止本页等待，远端任务状态仍需核对"); }}>停止本页等待</Button>}
-            <Button size="small" loading={busy} icon={<RefreshCw size={13} />} onClick={() => void act(() => intent.job ? refreshIntent(intent.id) : submitIntent(intent.id))}>{intent.job ? "继续查询" : "核对原提交"}</Button>
+            <Button size="small" loading={busy} icon={<RefreshCw size={13} />} onClick={() => void act(() => intent.job ? refreshIntent(intent.id) : intent.stage === "prepared" && !intent.recovered ? submitIntent(intent.id) : lookupIntent(intent.id))}>{intent.job ? "继续查询" : intent.stage === "prepared" && !intent.recovered ? "提交已保存请求" : "只读核对原提交"}</Button>
             {intent.job && !terminalStatuses.has(intent.job.status) && <Popconfirm title="请求取消原任务？" description="等待服务端确认后才显示已取消。" onConfirm={() => act(() => cancelIntent(intent.id))}><Button size="small" loading={busy}>取消</Button></Popconfirm>}
             {intent.job?.status === "succeeded" && intent.job.artifacts?.map((artifact) => <Button size="small" key={artifact.id} type="primary" loading={busy} onClick={() => void act(() => saveResult(intent.id, artifact.id))}>载入产物</Button>)}
         </div>}

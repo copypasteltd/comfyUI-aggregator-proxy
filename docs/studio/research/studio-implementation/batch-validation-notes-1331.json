@@ -1,0 +1,59 @@
+{
+  "contract_version": "0.4.0",
+  "passed": true,
+  "at": "2026-10-30T01:44:50.435208+00:00",
+  "scope": "147 frontend units/type/build; current production dist with synthetic HTTP and native IndexedDB, deployed public HTTP and preservation; no new GPU run, real phone or fleet acceptance",
+  "source_sha256": "56adcf8f4bbc5bc7673cd51211b909f5d041c44934d8e67931bc45b42f56870d",
+  "frontend_commit": "423aa9569eb038b278eec4d87dea4b1393d37d64",
+  "backend_release": "linux-20261030.132.2",
+  "static_release": "studio-20261030.133.1",
+  "runtime_commit": "97459bc3ce83551bfec8c0ee65506a7eb02e60b9",
+  "backend_runtime_receipt": "backend-runtime-unchanged-1331.json",
+  "backend_runtime_receipt_sha256": "6ad555dd7d76ed2686cfe18ec83851d296ca51c57934dcc06a0cd2b715178bab",
+  "passing_package_evidence": {
+    "units": "unit-2026-10-30T01-35-11-303Z.json",
+    "types": "typecheck-2026-10-30T01-35-11-308Z.json",
+    "build": "build-2026-10-30T01-35-11-358Z.json",
+    "browser": "browser-2026-10-30T01-36-18-771Z.json",
+    "storage": "storage-2026-10-30T01-37-04-701Z.json",
+    "task_backup": "task-backup-2026-10-30T01-37-04-548Z.json",
+    "submission_lookup": "submission-lookup-2026-10-30T01-38-49-179Z.json",
+    "batch": "batch-2026-10-30T01-37-58-914Z.json",
+    "static_build": "static-build-studio-20261030.133.1.json",
+    "health": "live-final-health-1331.json",
+    "public_current_restart": "public-storage-after-2026-10-30T01-40-27-775Z.json",
+    "static_promotion": "static-upgrade-1331.json"
+  },
+  "report_sha256": {
+    "units": "21313ff24ea6637a94af8c4636d3f064c486d29b7532c3f80f6a76503dcafac7",
+    "types": "d1843a2b533685f024cacbfebec9d818b11b8c30d39ed22a656584b499aaed73",
+    "build": "d93b9066a6f0cc5666c7bf221585a81704a170282ba86cdffd3cca3df814ff94",
+    "browser": "fd88fd9536c12863f2e9801b731c66cb88f1ea0a47a95dcd10414e1dd5cd64c4",
+    "storage": "fe9c68cf7b6585492cb47f8e1293d8e5a3fc9184d7c33fc23acf8d97e213ee49",
+    "task_backup": "25e27150f205390d798f9845145133a41a5b70973855f575eeb4a2a8244cfae8",
+    "submission_lookup": "3006806c0eb7c6fd9c7c312a9a9f5071dba197313849f2d30facc5e3978b8f36",
+    "batch": "6c679d248995e15ba8b5d70fd45150ceade0401c86fc34d896fca6492da8f194",
+    "static_build": "b7ff75c39f082e44fda4f29e0c038a42194a03ebae003f7cb9c82699d35d983d",
+    "health": "b0422fbf4731f54e4d9affdbf2e6d22ffcb14302eadee53528219ff22a401277",
+    "public_current_restart": "156508eed0a40bd760f4a230d782dc8c9021f1bf847593f5684d13edc94e360b",
+    "static_promotion": "13f153eaf514371ed7cc8ec74d1bcf4145235f02f6f1636f116dac0e2ce61bce"
+  },
+  "backend_tests_reused_from": "submission-lookup-validation-notes-1321.json",
+  "backend_focused": "docs/evidence/studio-release-132/studio-fcd6464d8b7548fabc7126b95e3d5b78.json",
+  "backend_compatibility": "docs/evidence/studio-release-132/studio-8eb8130972b846d6bf39443b4a876a71.json",
+  "failed_reports_preserved": [
+    "batch-2026-10-30T01-30-24-400Z.json",
+    "batch-2026-10-30T01-31-12-870Z.json",
+    "batch-2026-10-30T01-31-55-016Z.json",
+    "batch-2026-10-30T01-33-22-054Z.json"
+  ],
+  "failure_explanations": [
+    "The first fixture closed a reused socket before headers; Chromium retried the same key at transport level. Changed injection to a truncated accepted response body, preserving the original failed report.",
+    "A fixture checked button disappearance before the asynchronous POST completed; replaced it with the existing success completion signal.",
+    "Two runs exposed generic loading/failure placeholders covering managed task cards. Product fix now leaves those cards' query and read-only recovery controls available; the passing test queries the original failed job ID."
+  ],
+  "full_acceptance": "HOLD",
+  "no_new_gpu_submission": true,
+  "no_disabled_key_reenabled": true,
+  "no_local_virtualization": true
+}

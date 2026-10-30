@@ -2,7 +2,9 @@ import { nanoid } from "nanoid";
 import { GatewayError, blobHash, freezeRequest } from "./api/aggregator/client";
 import { presetPolicyReason, validateJob } from "./api/aggregator/capabilities";
 import { terminalStatuses, type ApiResult, type CatalogModel, type JobRequest, type RemoteJob } from "./api/aggregator/types";
-import { journalGet, journalList, journalPut, prepareIntent, updateIntent, type IdentityRef, type InputUpload, type Intent, type LocalResult } from "./aggregator-journal";
+import { journalGet, journalList, journalPut, prepareIntents, updateIntent, type IdentityRef, type InputUpload, type Intent, type LocalResult } from "./aggregator-journal";
+import { MAX_GENERATION_COUNT } from "@/constant/generation";
+import { assertBatchMembers } from "./aggregator-batch";
 import { assertLocalResult } from "./studio-result-ownership";
 import { flushStudioDocuments } from "./studio-persistence";
 import { useStudioStore } from "@/stores/use-studio-store";
@@ -64,6 +66,12 @@ export async function uploadReference(id: string, signal?: AbortSignal): Promise
 }
 
 export async function createIntent(projectId: string, nodeId: string, model: CatalogModel, request: JobRequest, canvas?: Intent["canvas"]): Promise<Intent> {
+    return (await createIntentBatch(projectId, model, request, [{ nodeId, canvas }]))[0];
+}
+
+export async function createIntentBatch(projectId: string, model: CatalogModel, request: JobRequest, nodes: { nodeId: string; canvas?: Intent["canvas"] }[], batchId?: string): Promise<Intent[]> {
+    if (!Number.isSafeInteger(nodes.length) || nodes.length < 1 || nodes.length > MAX_GENERATION_COUNT || new Set(nodes.map((node) => node.nodeId)).size !== nodes.length || nodes.some((node) => !node.nodeId)) throw new Error("请使用画布支持的任务数量及独立节点");
+    if (nodes.length > 1 && (!batchId || !/^[A-Za-z0-9_-]+$/.test(batchId))) throw new Error("批次标识无效，未创建任务");
     const { identity, catalog } = connection();
     if (!catalog?.releaseGuard) throw new Error("服务尚未支持画布发布版本校验，已阻止创建任务");
     const errors = await validateJob(model, request);
@@ -71,10 +79,33 @@ export async function createIntent(projectId: string, nodeId: string, model: Cat
     const restricted = presetPolicyReason(model, request.parameters as Record<string, string | number | boolean>, catalog.policy);
     if (restricted) throw new Error(restricted);
     await flushStudioDocuments();
-    const id = nanoid();
-    const intent: Intent = { version: 1, id, identity, projectId, nodeId, body: freezeRequest({ ...request, client_request_id: id }), idempotencyKey: `studio-job-${id}`, releaseDigest: model.release.digest, stage: "prepared", activeNodeKey: `${identity.fingerprint}:${projectId}:${nodeId}`, output: { mediaTypes: model.usage.output.media_types, maxBytes: model.usage.output.max_bytes }, createdAt: Date.now(), updatedAt: Date.now() };
-    const saved = await prepareIntent({ ...intent, canvas });
+    connection(identity);
+    const intents: Intent[] = nodes.map(({ nodeId, canvas }, index) => {
+        const id = nanoid();
+        return { version: 1, id, identity, projectId, nodeId, body: freezeRequest({ ...request, client_request_id: id }), idempotencyKey: `studio-job-${id}`, releaseDigest: model.release.digest, stage: "prepared", activeNodeKey: `${identity.fingerprint}:${projectId}:${nodeId}`, output: { mediaTypes: model.usage.output.media_types, maxBytes: model.usage.output.max_bytes }, createdAt: Date.now(), updatedAt: Date.now(), canvas, ...(nodes.length > 1 ? { batch: { id: batchId!, index, total: nodes.length } } : {}) };
+    });
+    const saved = await prepareIntents(intents);
     changed(); return saved;
+}
+
+export async function submitPreparedBatch(batchId: string, projectId: string, identity: IdentityRef): Promise<number> {
+    connection(identity);
+    const tasks = (await localTasks()).filter((intent) => intent.batch?.id === batchId && intent.projectId === projectId);
+    if (!tasks.length) throw new Error("找不到当前连接的原批次");
+    assertBatchMembers(tasks);
+    let confirmed = 0;
+    for (const task of tasks.sort((a, b) => a.batch!.index - b.batch!.index)) {
+        const current = await journalGet("intents", task.id);
+        if (!current || current.job || current.stage !== "prepared" || current.recovered) continue;
+        try {
+            const result = await submitIntent(current.id);
+            if (!result.job) throw new Error("原提交结果仍未知，请单独只读核对");
+            confirmed++;
+        } catch (error) {
+            throw new Error(`批次提交已暂停；已受理项保留，未发送项可稍后继续。${error instanceof Error ? error.message : "原提交结果待核对"}`);
+        }
+    }
+    return confirmed;
 }
 
 async function applyJob(id: string, result: ApiResult<RemoteJob>): Promise<Intent> {

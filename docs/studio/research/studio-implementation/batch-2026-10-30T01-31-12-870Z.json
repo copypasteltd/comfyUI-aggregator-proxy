@@ -1,0 +1,243 @@
+{
+  "started_at": "2026-10-30T01:31:12.882Z",
+  "scope": "Native Chromium strict IDB transactions and production UI, synthetic HTTP on insecure non-localhost origin; desktop/390px emulation, not real GPU, phone or fleet",
+  "checks": [
+    {
+      "name": "all 15 members reuse the existing range and commit independent keys before any generation request",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "second member QuotaExceeded abort rolls back the entire native transaction and sends nothing",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "active-node collision aborts preceding additions and preserves both original members",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "seven task schemas preserve exact inputs, asset references, presets, seed and release across a batch",
+      "passed": true,
+      "detail": [
+        "text_to_image",
+        "image_to_image",
+        "references_to_image",
+        "text_to_video",
+        "references_to_video",
+        "text_to_audio",
+        "image_to_3d"
+      ]
+    },
+    {
+      "name": "native v2 import preserves grouping but never authorizes prepared backup resubmission",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two actual pages continue one batch without repeating any member generation POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "stale connection identity is rejected before selecting or sending a batch",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "native journal, hashes and schema Worker operate on plain HTTP without WebCrypto",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "real composer defaults to one; all three members commit before first POST and second-response loss stops the third",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual task-page export preserves three original submissions and batch metadata in v2 without the saved API Key",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "restart preserves the pending and unknown members without automatic POST or mobile overflow",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-31-12-870Z/desktop-composer-three.png",
+      "bytes": 96911,
+      "sha256": "d9832b2608ccc9d401034f12fa8d06648961dec2739865920c094a37fbccaac7",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-31-12-870Z/desktop-partial-batch.png",
+      "bytes": 85963,
+      "sha256": "45391fb1aec89f15dbed882f20d014e75eda774f294b4f32821615ba84acd61f",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-31-12-870Z/mobile-partial-after-restart.png",
+      "bytes": 52664,
+      "sha256": "583fa62cca6bb08fb9091e83542ef6a507f5bdeb06da8638ac7c91f695a4024f",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "archive": {
+    "version": 2,
+    "tasks": 3,
+    "bytes": 3693,
+    "sha256": "0cba4ea5aa8e387aa26bcd9001e1a69613c2b6b3f5d26a7cb363c5f72a781590"
+  },
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n4 !== 5\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_batch.mjs:129:177\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:459:9)\n    at process.callbackTrampoline (node:internal/async_hooks:130:17)",
+  "business_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/lookup",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    }
+  ],
+  "generation_posts": 5,
+  "completed_at": "2026-10-30T01:31:21.905Z"
+}

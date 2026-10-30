@@ -48,3 +48,7 @@ All eight cloud artifacts expire 28,800s after job completion; local originals a
 Original-speed production UI with synthetic HTTP; not GPU or physical-phone evidence. Covers no-ID recovery, not-observed results and original job restoration without replay.
 
 [MP4](studio-submission-lookup.mp4) · [GIF](studio-submission-lookup.gif) · [SHA/decoder manifest](studio-submission-lookup-manifest.json) · [390px screenshot](../../assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png)
+
+## Batch creation and partial recovery
+
+[Original-speed MP4](studio-batch.mp4), [GIF](studio-batch.gif) and [hash/decode manifest](studio-batch-manifest.json) show the production UI with synthetic HTTP and native IndexedDB: three members, lost second response, restart, continue only the pending member, original-job cards and v2 read-only import. Desktop/390px emulation; no new GPU or physical-phone acceptance. [Contract](../../15-批量创作与部分失败恢复.md).

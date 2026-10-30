@@ -144,7 +144,8 @@ def main():
     assert current["full_acceptance"] == "HOLD" and current["no_new_gpu_submission"] and current["no_disabled_key_reenabled"]
     latest = read(evidence / "submission-lookup-validation-notes-1321.json")
     receipts = latest["passing_package_evidence"]
-    assert frozen.hexdigest() == latest["source_sha256"]
+    # 132.2 is immutable history; the current 133.1 source is verified below.
+    assert read(evidence / receipts["static_build"])["source_sha256"] == latest["source_sha256"]
     for kind in ("units", "types", "build"):
         result = read(evidence / receipts[kind])
         assert result["passed"] and result["source_unchanged"] and result["source_after"] == latest["source_sha256"]
@@ -158,7 +159,7 @@ def main():
         assert not result.get("page_errors")
         for screenshot in result["screenshots"]:
             assert sha(ROOT / screenshot["file"]) == screenshot["sha256"]
-    assert {file.relative_to(dist).as_posix(): sha(file) for file in dist.rglob("*") if file.is_file()} == final_ui["static_artifact_sha256"]
+    assert read(evidence / receipts["static_build"])["browser_report_sha256"] == sha(evidence / receipts["browser"])
     package = read(evidence / receipts["static_build"])
     promotion = read(evidence / receipts["static_promotion"])
     assert package["passed"] and package["file_count"] == len(final_ui["static_artifact_sha256"]) == 96
@@ -212,14 +213,71 @@ def main():
     assert all(not read(REPOSITORY / name)["passed"] for name in latest["failed_backend_reports_preserved"])
     assert all(not read(REPOSITORY / name)["passed"] for name in latest["failed_documentation_reports_preserved"])
     assert latest["full_acceptance"] == "HOLD" and latest["no_new_gpu_submission"] and latest["no_disabled_key_reenabled"]
+    batch_notes = read(evidence / "batch-validation-notes-1331.json")
+    batch_receipts = batch_notes["passing_package_evidence"]
+    assert frozen.hexdigest() == batch_notes["source_sha256"]
+    for kind in ("units", "types", "build"):
+        result = read(evidence / batch_receipts[kind])
+        assert result["passed"] and result["source_unchanged"] and result["source_after"] == batch_notes["source_sha256"]
+    log = (evidence / read(evidence / batch_receipts["units"])["log"]).read_text(encoding="utf-8")
+    assert re.search(r"^# tests 147$", log, re.M) and re.search(r"^# fail 0$", log, re.M)
+    current_ui = read(evidence / batch_receipts["browser"])
+    for name, count in (("browser", 18), ("storage", 22), ("task_backup", 25), ("submission_lookup", 15), ("batch", 15)):
+        result = read(evidence / batch_receipts[name])
+        assert result["passed"] and len(result["checks"]) == count and all(result["cleanup"].values())
+        assert result.get("static_artifact_unchanged", True) and result["static_artifact_sha256"] == current_ui["static_artifact_sha256"]
+        assert not result.get("page_errors") and not result.get("handler_failure") and not result.get("route_failure")
+        for screenshot in result["screenshots"]:
+            assert sha(ROOT / screenshot["file"]) == screenshot["sha256"]
+    assert {file.relative_to(dist).as_posix(): sha(file) for file in dist.rglob("*") if file.is_file()} == current_ui["static_artifact_sha256"]
+    batch = read(evidence / batch_receipts["batch"])
+    assert batch["browser_storage_version"] == 3 and batch["generation_posts"] == 5
+    assert batch["archive"]["version"] == 2 and batch["archive"]["tasks"] == 3
+    assert all(item["bearer_valid"] and not item["cookie_present"] for item in batch["business_requests"])
+    package = read(evidence / batch_receipts["static_build"])
+    promotion = read(evidence / batch_receipts["static_promotion"])
+    assert package["passed"] and package["file_count"] == len(current_ui["static_artifact_sha256"]) == 96
+    assert package["source_sha256"] == promotion["source_sha256"] == batch_notes["source_sha256"]
+    assert package["archive_sha256"] == promotion["archive_sha256"] and not promotion["backend_restarted"] and not promotion["old_ui_roundtrip_performed"]
+    assert package["browser_report_sha256"] == sha(evidence / batch_receipts["browser"])
+    health = read(evidence / batch_receipts["health"])
+    assert health["passed"] and health["backend"] == "linux-20261030.132.2" and health["studio"] == "studio-20261030.133.1"
+    assert health["original_worker_pid_unchanged"] and all(value == "active" for value in health["services"].values())
+    assert len(health["responses"]) == 4 and all(item["status"] == 200 for item in health["responses"])
+    assert len(health["cors"]) == 2 and all(item["status"] == 200 and item["allow_origin"] in ("*", item["requested_origin"]) for item in health["cors"])
+    public = read(evidence / batch_receipts["public_current_restart"])
+    assert public["passed"] and len(public["checks"]) == 3 and all(public["cleanup"].values()) and not public["blocked_mutations"] and not public["page_errors"]
+    assert public["checks"][0]["detail"] == {"before_version": 3, "after_version": 3, "static_release": "studio-20261030.133.1"}
+    for item in public["screenshots"]:
+        assert sha(ROOT / item["file"]) == item["sha256"]
+    runtime = read(evidence / batch_notes["backend_runtime_receipt"])
+    assert sha(evidence / batch_notes["backend_runtime_receipt"]) == batch_notes["backend_runtime_receipt_sha256"]
+    assert runtime["passed"] and runtime["runtime_commit"] == latest["runtime_commit"] and len(runtime["source_files"]) == 555
+    for name, digest in runtime["source_files"].items():
+        assert sha(REPOSITORY / "app" / name) == digest
+    for name, digest in batch_notes["report_sha256"].items():
+        assert sha(evidence / batch_receipts[name]) == digest
+    for name, count in (("backend_focused", 112), ("backend_compatibility", 1486)):
+        result = read(REPOSITORY / batch_notes[name])
+        assert result["passed"] and result["python"]["tests"] == count
+    batch_tour = read(MEDIA / "studio-batch-manifest.json")
+    assert batch_tour["passed"] and "synthetic" in batch_tour["scope"].lower()
+    assert batch_tour["source_report"].endswith(batch_receipts["batch"]) and sha(ROOT / batch_tour["source_report"]) == batch_tour["source_report_sha256"]
+    for item in batch_tour["files"]:
+        file = MEDIA / item["file"]
+        assert item["fully_decoded"] and file.stat().st_size == item["bytes"] and sha(file) == item["sha256"]
+        assert sha(file) == sha(REPOSITORY / "docs/studio/media/studio-131" / item["file"])
+    assert len(batch_notes["failed_reports_preserved"]) == 4
+    assert all(not read(evidence / name)["passed"] for name in batch_notes["failed_reports_preserved"])
+    assert batch_notes["full_acceptance"] == "HOLD" and batch_notes["no_new_gpu_submission"] and batch_notes["no_disabled_key_reenabled"]
     print(json.dumps({"passed": True, "at": datetime.now(UTC).isoformat(),
                       "scope": "Read-only source-mirror, public media/report/screenshot hashes, eight call receipts, all46 IDs and temporary Key revocation; not full runtime/phone/fleet acceptance",
                       "source_files_verified": len(source["source_files"]), "actual_gpu_modes": 8,
                       "browser_checks": 9, "public_samples": published, "large_glb_metadata_only": True,
                       "requirements_retained": 46, "temporary_keys_disabled": 3, "storage_checks": 22,
-                      "current_ui_checks": 18, "task_backup_checks": 25, "submission_lookup_checks": 15, "current_unit_tests": 136,
+                      "current_ui_checks": 18, "task_backup_checks": 25, "submission_lookup_checks": 15, "batch_checks": 15, "current_unit_tests": 147,
                       "backend_compatibility_cases": 1486, "live_lookup_checks": 5,
-                      "public_storage_upgrade_checks": 3, "current_static_release": "studio-20261030.132.2", "browser_storage_version": 3,
+                      "public_storage_upgrade_checks": 3, "current_static_release": "studio-20261030.133.1", "browser_storage_version": 3,
                       "browser_storage_downgrade_supported": False, "virtualization_used": False}, ensure_ascii=False))
 
 

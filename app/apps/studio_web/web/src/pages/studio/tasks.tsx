@@ -4,7 +4,8 @@ import { Alert, App, Button, Empty, Popconfirm, Tag } from "antd";
 import { Download, ExternalLink, RefreshCw, Square } from "lucide-react";
 import { saveAs } from "file-saver";
 import { useStudioStore } from "@/stores/use-studio-store";
-import { cancelIntent, jobStatusLabels, localTasks, lookupIntent, refreshIntent, saveRemoteResult, saveResult, submitIntent, subscribeStudioTasks } from "@/services/aggregator-engine";
+import { cancelIntent, jobStatusLabels, localTasks, lookupIntent, refreshIntent, saveRemoteResult, saveResult, submitIntent, submitPreparedBatch, subscribeStudioTasks } from "@/services/aggregator-engine";
+import { batchKey, batchSummary } from "@/services/aggregator-batch";
 import type { Intent } from "@/services/aggregator-journal";
 import { terminalStatuses, type ContentMetadata, type RemoteJob } from "@/services/api/aggregator/types";
 import { taskLabels } from "@/services/api/aggregator/capabilities";
@@ -33,11 +34,12 @@ export default function TasksPage() {
         {!client ? <section className="studio-card studio-empty"><Empty description="连接原服务和 API Key，查看此浏览器的任务" /><NavLink to="/config" className="studio-primary-link">连接服务</NavLink></section> : <>
             <div className="studio-actions"><Button icon={<RefreshCw size={16} />} onClick={() => void load()}>刷新本机记录</Button></div>
             {error && <Alert title={error} type="error" showIcon />}
+            <BatchOverview tasks={tasks} />
             <div className="studio-task-list">{tasks.map((intent) => {
                 const request = JSON.parse(intent.body);
                 const confirmed = !intent.recovered || intent.recoveryVerified === true;
                 const terminal = intent.job && terminalStatuses.has(intent.job.status);
-                return <article key={intent.id} className="studio-card studio-task-card"><div className="studio-task-heading"><div><span className="li-lab">{taskLabels[request.task_type] || request.task_type}</span><h2>{request.model}</h2></div><Tag>{!confirmed ? "备份记录待核对" : intent.job ? jobStatusLabels[intent.job.status] || intent.job.status : intent.stage === "prepared" ? "已保存，待提交" : "提交结果待核对"}</Tag></div><code>{intent.job?.id || intent.id}</code><p>{String(request.input?.prompt || "图片生 3D")}</p>
+                return <article key={intent.id} className="studio-card studio-task-card"><div className="studio-task-heading"><div><span className="li-lab">{taskLabels[request.task_type] || request.task_type}{intent.batch ? ` · 批次第 ${intent.batch.index + 1}/${intent.batch.total} 项` : ""}</span><h2>{request.model}</h2></div><Tag>{!confirmed ? "备份记录待核对" : intent.job ? jobStatusLabels[intent.job.status] || intent.job.status : intent.stage === "prepared" ? "已保存，待提交" : "提交结果待核对"}</Tag></div><code>{intent.job?.id || intent.id}</code><p>{String(request.input?.prompt || "图片生 3D")}</p>
                     {intent.recovered && <p className="studio-note">来自任务清单。{intent.job ? confirmed ? "已核对原任务，云端文件仍按原到期时间保留。" : "请先查询原任务，再读取产物或请求取消；备份中的状态尚未确认。" : "尚无任务 ID，请只读核对原提交。未查到时仍保留原记录，不会补发生成。"}</p>}
                     {intent.error && <Alert title="操作未确认" description={intent.error} type="warning" showIcon />}
                     <div className="studio-actions">{intent.job ? <Button loading={busy.includes(intent.id)} icon={<RefreshCw size={15} />} onClick={() => void action(intent.id, () => refreshIntent(intent.id))}>查询原任务</Button> : !intent.recovered && intent.stage === "prepared" ? <Button loading={busy.includes(intent.id)} onClick={() => void action(intent.id, () => submitIntent(intent.id))}>提交已保存请求</Button> : <Button loading={busy.includes(intent.id)} onClick={() => void action(intent.id, () => lookupIntent(intent.id))}>只读核对原提交</Button>}
@@ -53,6 +55,32 @@ export default function TasksPage() {
             })}</div>{!tasks.length && <Empty description="此浏览器尚无该连接的画布任务" />}<ServerHistory />
         </>}
     </main>;
+}
+
+function BatchOverview({ tasks }: { tasks: Intent[] }) {
+    const { message } = App.useApp();
+    const [busy, setBusy] = useState<string[]>([]);
+    const groups = new Map<string, Intent[]>();
+    for (const task of tasks) if (task.batch) { const key = batchKey(task); groups.set(key, [...(groups.get(key) || []), task]); }
+    if (!groups.size) return null;
+    const labels = { prepared: "未发送", unknown: "结果未知", active: "进行中", succeeded: "已完成", failed: "失败", cancelled: "已取消", expired: "已过期", unverified: "备份待核对" };
+    return <section aria-label="批次概览" className="studio-task-list">{[...groups].map(([key, items]) => {
+        const first = items[0];
+        let counts: ReturnType<typeof batchSummary>;
+        try { counts = batchSummary(items); }
+        catch { return <Alert key={key} type="error" showIcon title="批次关联需要核对" description="原记录已保留，未提交批次；请先导出任务清单并逐项核对。" />; }
+        return <article key={key} className="studio-card studio-task-card" aria-label={`批次 ${first.batch!.id}`}><span className="li-lab">BATCH</span><h2>{JSON.parse(first.body).model} · {first.batch!.total} 项创作</h2><p>已保留 {items.length}/{first.batch!.total} 项记录，各项结果独立保存。</p>
+            <div className="studio-actions">{Object.entries(counts).filter(([, count]) => count > 0).map(([name, count]) => <Tag key={name}>{labels[name as keyof typeof labels]} {count}</Tag>)}</div>
+            {items.length !== first.batch!.total && <p className="studio-note">批次记录不完整，请结合原任务历史核对；不会自动补建缺少的成员。</p>}
+            {counts.prepared > 0 && <div className="studio-actions"><Button loading={busy.includes(key)} onClick={() => void (async () => {
+                setBusy((values) => [...values, key]);
+                try { const count = await submitPreparedBatch(first.batch!.id, first.projectId, first.identity); message.success(`本次已确认 ${count} 项，其他原记录保留`); }
+                catch (error) { message.warning(error instanceof Error ? error.message : "批次提交已暂停，原记录保留"); }
+                finally { setBusy((values) => values.filter((value) => value !== key)); }
+            })()}>继续提交未发送项（{counts.prepared}）</Button></div>}
+            <p className="studio-note">未知项请在下方只读核对；继续提交会跳过已发送、终态及备份恢复记录。</p>
+        </article>;
+    })}</section>;
 }
 
 function ServerHistory() {

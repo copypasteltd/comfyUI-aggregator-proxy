@@ -2,7 +2,7 @@
 
 [中文](USAGE.md) · [Assessment and all 46 requirements](06-融合可行性评估与上线约束.md) · [Current progress](10-开发进度与交付记录.md)
 
-A managed React canvas built from basketikun/infinite-canvas v0.20.0, using the existing ComfyUI Aggregator Proxy. [Studio is live](http://43.165.167.179:39443/studio/) with backend 132.2/static 132.2. Eight actual GPU modes have completed on 3080/5070. The full fault matrix, physical phones and 10–20-node capacity remain separately tracked in [all 46 requirements](10-开发进度与交付记录.md).
+A managed React canvas built from basketikun/infinite-canvas v0.20.0, using the existing ComfyUI Aggregator Proxy. [Studio is live](http://43.165.167.179:39443/studio/) with backend 132.2/static 133.1. Eight actual GPU modes have completed on 3080/5070. The full fault matrix, physical phones and 10–20-node capacity remain separately tracked in [all 46 requirements](10-开发进度与交付记录.md).
 
 ![Actual public Lime canvas with a generated image](assets/studio/controls-2026-10-29T22-08-02-756Z/desktop-canvas.png)
 
@@ -16,14 +16,14 @@ Studio handles composition, references, advertised presets and result branches. 
 
 1. Open the high-port HTTP endpoint `http://43.165.167.179:39443/studio/`. Connect using the service origin and an administrator-issued business API Key. Do not place the Key in a URL or use an Admin/Worker credential. Temporary validation Keys are not delivery credentials.
 2. Read live model usage, Schema, presets, required references, roles and output types. Key-denied specifications are unavailable. Discovery does not guarantee an idle or healthy GPU.
-3. Create a canvas and open New Creation. Select a complete published preset and upload the required source/reference images in order. Audio is a Workflow output rather than an assumed speech endpoint. Each explicit submit creates one job.
+3. Create a canvas and open New Creation. Select a complete published preset and upload the required source/reference images in order. Audio is a Workflow output rather than an assumed speech endpoint. Choose 1–15 independent jobs (default one); each consumes quota separately and the fixed seed is preserved.
 4. Before POST, an IndexedDB transaction commits the original body, asset IDs, release digest, identity and idempotency key. Known jobs use GET. If the response is lost, reconcile the original submission; do not change the Key/model/assets to retry.
 5. Leave or reload the page and restore with the same connection. Stop Waiting affects browser requests only. Remote cancellation is explicit and the server decides the final state.
 6. Verify and load artifacts on demand. Images, video and audio become media nodes; GLB becomes an original-file download card. Continue from an image, save originals or export a local canvas ZIP. Unsupported playback formats remain downloadable without pretending to transcode.
 7. Server History reads existing jobs within the current Key's permissions, including from another browser. Offline ZIP imports create independent local copies and convert task cards to notes; import never generates content.
 8. Export the task journal separately from the Tasks page. In another browser, connect the original service/Key, choose the JSON, preview every record, then import records only. Existing records remain unchanged. Imported jobs require an explicit original-job query before their status, artifacts or cancellation can be used; records without job IDs cannot submit generation. A saved identity can export while disconnected. Journals omit media and connection Keys but retain original prompts, so keep the file private.
 
-The seven task types cover text-to-image, image editing, multi-reference images, text-to-video, distinct first-frame/multi-reference video models, Workflow audio and image-to-3D. Interactive 3D previews, explicit batches, Key-rotation adoption and physical-phone/large-file acceptance remain separately tracked.
+The seven task types cover text-to-image, image editing, multi-reference images, text-to-video, distinct first-frame/multi-reference video models, Workflow audio and image-to-3D. Interactive 3D previews, Key-rotation adoption and physical-phone/large-file acceptance remain separately tracked.
 
 ## Retention and identity
 
@@ -51,7 +51,7 @@ npm run build
 
 Serve dist at `/studio/` with a correct SPA fallback, MIME types and Worker path. Main-document strict CSP and the isolated Schema Worker's compilation policy are separate. Keep `/admin/` and `/v1/` on the existing service. No Docker, WSL or VM is used. The user manages domain reverse proxying; HTTP on the existing high port and any-origin CORS remain supported with business authentication.
 
-See current progress for F-01–F-46 and G-01–G-27, failures and rollback. Current evidence covers 136 frontend units, type/build, 18 UI groups, 22 storage groups, 25 journal groups and 15 read-only recovery groups; backend scoped/compatibility suites passed 112/1,486 cases. The sole later source change is regenerated Admin types, checked separately with type/build and all 45 emitted files equal to the verified seed. Public read-only Key checks (five), preservation/restart checks (three) and all four health endpoints passed. The [current evidence index](research/studio-implementation/submission-lookup-validation-notes-1321.json) preserves failures and corrections. Eight GPU modes mean one deployed-UI submission and seven API submissions, not all eleven aliases retested. Audio file/browser duration is 30,000ms versus 29,952ms decoder-progress metadata: a recorded 48ms difference within the existing 100ms validator tolerance; exact metering remains follow-up.
+See current progress for F-01–F-46 and G-01–G-27, failures and rollback. Current evidence covers 147 frontend units, type/build, 18 UI groups, 22 storage groups, 25 journal groups and 15 read-only recovery groups; backend scoped/compatibility suites passed 112/1,486 cases. The backend difference from that compatibility run is regenerated Admin types, checked separately with type/build and all 45 emitted files equal to the verified seed. Public read-only Key checks (five), preservation/restart checks (three) and all four health endpoints passed. The [current evidence index](research/studio-implementation/batch-validation-notes-1331.json) preserves failures and corrections. Eight GPU modes mean one deployed-UI submission and seven API submissions, not all eleven aliases retested. Audio file/browser duration is 30,000ms versus 29,952ms decoder-progress metadata: a recorded 48ms difference within the existing 100ms validator tolerance; exact metering remains follow-up.
 
 Actual backend/static rollback preserves existing jobs/content. A new 5070 ten-minute idle cycle completed with both CPU barriers. Builds, browser tests, GPU media, phones and fleet capacity remain separate evidence. Non-crash test-database settings do not change production durability or prove power-loss recovery.
 
@@ -66,3 +66,11 @@ After a lost response or journal import, `POST /v1/jobs/lookup` matches the orig
 [Operation and development contract](14-原提交只读核对与恢复.md) · [Original-speed MP4](media/studio-131/studio-submission-lookup.mp4) · [390px view](assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png). This recording uses the production build with synthetic HTTP, not a GPU run or physical phone.
 
 ![Read-only original submission recovery](media/studio-131/studio-submission-lookup.gif)
+
+## Independent batches (static133.1 deployed)
+
+Choose 1–15 jobs, default one. All members commit in one strict local transaction before sequential calls to the existing n=1 API. Each owns an independent job, idempotency key and canvas branch, using the same inputs/preset/references/fixed seed. An error or unknown response stops that invocation. Explicitly continue only native never-sent members; accepted, terminal, unknown and imported records are skipped. Unknown submissions use read-only lookup, and failed members never rerun successful siblings.
+
+Batch archives use v2; ordinary archives remain v1. Importing any member, even prepared, never authorizes generation. Browser DB stays v3. Loading/failed task cards expose original-job query controls. [Contract and limits](15-批量创作与部分失败恢复.md) · [Original-speed MP4](media/studio-131/studio-batch.mp4) · [GIF](media/studio-131/studio-batch.gif). The 15 batch groups use production UI with synthetic HTTP; real GPU batch faults, phones and fleet capacity remain open.
+
+![390px partial-batch UI with synthetic HTTP](assets/studio/batch-2026-10-30T01-37-58-914Z/mobile-partial-after-restart.png)

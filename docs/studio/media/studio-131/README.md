@@ -48,3 +48,7 @@
 原速界面录制，生产构建配合合成 HTTP；不代表 GPU 或物理手机。覆盖无 ID 恢复、未查到及找回原任务，不补发生成。
 
 [MP4](studio-submission-lookup.mp4) · [GIF](studio-submission-lookup.gif) · [SHA/decoder manifest](studio-submission-lookup-manifest.json) · [390px screenshot](../../assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png)
+
+## 批量创作与部分失败恢复
+
+[原速MP4](studio-batch.mp4)、[GIF](studio-batch.gif)及[摘要/完整解码清单](studio-batch-manifest.json)记录生产构建UI与合成HTTP、原生IndexedDB：三项任务、第二响应中断、重启、只继续未发送项、原任务卡及v2只读导入。桌面/390px模拟，本轮无新GPU或物理手机验收。见[具体契约](../../15-批量创作与部分失败恢复.md)。

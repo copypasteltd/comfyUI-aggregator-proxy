@@ -1,0 +1,287 @@
+{
+  "started_at": "2026-10-30T01:33:22.068Z",
+  "scope": "Native Chromium strict IDB transactions and production UI, synthetic HTTP on insecure non-localhost origin; desktop/390px emulation, not real GPU, phone or fleet",
+  "checks": [
+    {
+      "name": "all 15 members reuse the existing range and commit independent keys before any generation request",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "second member QuotaExceeded abort rolls back the entire native transaction and sends nothing",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "active-node collision aborts preceding additions and preserves both original members",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "seven task schemas preserve exact inputs, asset references, presets, seed and release across a batch",
+      "passed": true,
+      "detail": [
+        "text_to_image",
+        "image_to_image",
+        "references_to_image",
+        "text_to_video",
+        "references_to_video",
+        "text_to_audio",
+        "image_to_3d"
+      ]
+    },
+    {
+      "name": "native v2 import preserves grouping but never authorizes prepared backup resubmission",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two actual pages continue one batch without repeating any member generation POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "stale connection identity is rejected before selecting or sending a batch",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "native journal, hashes and schema Worker operate on plain HTTP without WebCrypto",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "real composer defaults to one; all three members commit before first POST and second-response loss stops the third",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual task-page export preserves three original submissions and batch metadata in v2 without the saved API Key",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "restart preserves the pending and unknown members without automatic POST or mobile overflow",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "explicit continue sends only the never-sent member; failed and successful siblings retain original job IDs",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-33-22-054Z/desktop-composer-three.png",
+      "bytes": 128792,
+      "sha256": "3db8bd8e37d14a98fd0f1f32bd5ed4bc4a7e8a11f3d4fc53366530e1758a24c1",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-33-22-054Z/desktop-partial-batch.png",
+      "bytes": 85943,
+      "sha256": "68670cafbf3a765bfac17a1c0131afacd625a58d1693cb7b4a246542265ff297",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-33-22-054Z/mobile-partial-after-restart.png",
+      "bytes": 52664,
+      "sha256": "583fa62cca6bb08fb9091e83542ef6a507f5bdeb06da8638ac7c91f695a4024f",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-33-22-054Z/mobile-independent-results.png",
+      "bytes": 52490,
+      "sha256": "6c66772ad8ce05226fc8ad51e683196c835d37aa9199b4530125af504dba019b",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-33-22-054Z/failure-state.png",
+      "bytes": 57549,
+      "sha256": "88ed71e2f5e75e2a7721722fd0052516a2c6bf86ad0630f853c49141a86867fd",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "project_url": "http://canvas-batch.test:9677/studio/canvas/wskdbSqvj8OuQ86jI52Jh",
+  "archive": {
+    "version": 2,
+    "tasks": 3,
+    "bytes": 3689,
+    "sha256": "c7ed56eff514fb7cb77c24bb1d94356235e5c64bdc78fea2ea9881f1356bf300"
+  },
+  "passed": false,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.studio-node-card').first() to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_batch.mjs:132:146",
+  "failure_url": "http://canvas-batch.test:9677/studio/canvas/wskdbSqvj8OuQ86jI52Jh",
+  "failure_page_text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n已连接\n画布\n资产\n提示词库\n画布元素\n3\n选择\n全部\nLustify / Krea2 · 文生图 · RTX 3080 · 3/3\n生成任务\nLustify / Krea2 · 文生图 · RTX 3080 · 2/3\n生成任务\nLustify / Krea2 · 文生图 · RTX 3080 · 1/3\n生成任务\n无限画布 1\n新建创作\n快捷键\n生成中\n生成失败\n重试\n生成中\n100%",
+  "business_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/lookup",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_valid": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_valid": true,
+      "cookie_present": false
+    }
+  ],
+  "generation_posts": 5,
+  "completed_at": "2026-10-30T01:34:07.787Z"
+}

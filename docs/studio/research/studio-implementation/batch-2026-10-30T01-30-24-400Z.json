@@ -1,0 +1,76 @@
+{
+  "started_at": "2026-10-30T01:30:24.410Z",
+  "scope": "Native Chromium strict IDB transactions and production UI, synthetic HTTP on insecure non-localhost origin; desktop/390px emulation, not real GPU, phone or fleet",
+  "checks": [
+    {
+      "name": "all 15 members reuse the existing range and commit independent keys before any generation request",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "second member QuotaExceeded abort rolls back the entire native transaction and sends nothing",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "active-node collision aborts preceding additions and preserves both original members",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "seven task schemas preserve exact inputs, asset references, presets, seed and release across a batch",
+      "passed": true,
+      "detail": [
+        "text_to_image",
+        "image_to_image",
+        "references_to_image",
+        "text_to_video",
+        "references_to_video",
+        "text_to_audio",
+        "image_to_3d"
+      ]
+    },
+    {
+      "name": "native v2 import preserves grouping but never authorizes prepared backup resubmission",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two actual pages continue one batch without repeating any member generation POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "stale connection identity is rejected before selecting or sending a batch",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "native journal, hashes and schema Worker operate on plain HTTP without WebCrypto",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/batch-2026-10-30T01-30-24-400Z/desktop-composer-three.png",
+      "bytes": 128873,
+      "sha256": "d8d81ef0ebf9d0c03a929f2812c8f03a1242f2bcb54f937b48115037b91920cc",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      }
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "handler_failure": "No generation POST may replay an original key",
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n5 !== 4\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_batch.mjs:118:154",
+  "completed_at": "2026-10-30T01:30:31.338Z"
+}

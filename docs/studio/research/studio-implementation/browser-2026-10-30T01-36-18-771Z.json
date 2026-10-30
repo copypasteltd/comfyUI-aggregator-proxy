@@ -1,0 +1,605 @@
+{
+  "started_at": "2026-10-30T01:36:18.857Z",
+  "scope": "active managed UI with synthetic API; plain non-localhost HTTP; desktop/mobile Chromium emulation, not a real phone or GPU",
+  "checks": [
+    {
+      "name": "connection/catalog/Schema Worker succeed on plain HTTP",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "main document CSP blocks arbitrary function compilation; Ajv stays in isolated Worker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all 11 historical model descriptors accepted through actual Worker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "uncertain-submit notification leaves primary navigation accessible",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "POST is preceded by committed durable intent; lost response stays unknown",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "read-only reconcile uses original body/key/digest, restores the same job and sends no additional create POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "verified result survives page reload and returns to original canvas",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "server history queries original scoped jobs and metadata without creating tasks",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual canvas ZIP exports verified bytes without credentials and imports without generation",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "history-first original reattaches to the original canvas without a second job",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "all business requests omit same-origin Admin cookie",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two pages cannot commit competing intents for the same active node",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "committed original request body cannot be changed",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "in-place mutations of frozen body/output are rejected atomically",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "390px viewport: no document overflow, canvas toolbar remains accessible",
+      "passed": true,
+      "detail": {
+        "documentWidth": 390,
+        "width": 390,
+        "height": 844,
+        "toolbar": {
+          "left": 16,
+          "right": 374,
+          "top": 768,
+          "bottom": 824,
+          "width": 358
+        },
+        "header": {
+          "left": 0,
+          "right": 390,
+          "top": 0,
+          "bottom": 64,
+          "width": 390
+        },
+        "title": {
+          "left": 76,
+          "right": 149.71875,
+          "top": 83.71875,
+          "bottom": 108.28125,
+          "width": 73.71875
+        }
+      }
+    },
+    {
+      "name": "mobile side panel opens and closes without covering global navigation or canvas controls",
+      "passed": true,
+      "detail": {
+        "panelBounds": {
+          "x": 0,
+          "y": 128,
+          "width": 123.796875,
+          "height": 716
+        },
+        "topbarBounds": {
+          "x": 0,
+          "y": 64,
+          "width": 390,
+          "height": 64
+        }
+      }
+    },
+    {
+      "name": "zoom and creation controls remain independently clickable on a narrow canvas",
+      "passed": true,
+      "detail": {
+        "zoomBounds": {
+          "x": 20,
+          "y": 704,
+          "width": 266,
+          "height": 56
+        },
+        "toolsBounds": {
+          "x": 16,
+          "y": 768,
+          "width": 358,
+          "height": 56
+        }
+      }
+    },
+    {
+      "name": "selected node toolbar cannot intercept fixed controls after portrait-to-landscape resizing",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/lookup",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001/download",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_00000000000000000000000000000001/download",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false,
+      "release_header_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-connection",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/desktop-connection.png",
+      "sha256": "97dcf216814502393fee063323b1f998997480a1b69450b5543f3a7e5d779fc8"
+    },
+    {
+      "name": "desktop-models",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/desktop-models.png",
+      "sha256": "b6b695f65d714476a4bdd07bed104c0c59acf42193b69de30f591006b8782cea"
+    },
+    {
+      "name": "desktop-canvas",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/desktop-canvas.png",
+      "sha256": "b9761769e590b1fbb5847439835cf836af3f6119d37bf4307351e55435a6febe"
+    },
+    {
+      "name": "desktop-composer",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/desktop-composer.png",
+      "sha256": "07bcc136b4c55f254e81714c1b265882e9381a14ea6837be029b4928b8114d39"
+    },
+    {
+      "name": "desktop-unknown-submit",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/desktop-unknown-submit.png",
+      "sha256": "b8e366adbe968cd1316344ebc3c0ef0b5ed022575dc6a4428b9b8e00579d930c"
+    },
+    {
+      "name": "desktop-result",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/desktop-result.png",
+      "sha256": "435752f863a37168872a9da686543263e4e15f181d0a7d6df9903da41899d1ba"
+    },
+    {
+      "name": "mobile-canvas",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/mobile-canvas.png",
+      "sha256": "776ac7deb29e5aae28828083ab825a47dbccd291d4b62d3859cf80bfac78060a"
+    },
+    {
+      "name": "mobile-panel-closed",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/mobile-panel-closed.png",
+      "sha256": "392a2b72c206b8c5383cd9f7b21dd1502fe87a286d1279ba582919e714d7d28d"
+    },
+    {
+      "name": "selected-node-landscape-controls",
+      "file": "docs/assets/studio/2026-10-30T01-36-18-771Z/selected-node-landscape-controls.png",
+      "sha256": "a0c316ad9c6aa17956adc0ecb6955c533e0f9b07ef021be3e88741231ef637ff"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "origin_kind": "non-localhost plain HTTP",
+  "mobile_bounds": {
+    "documentWidth": 390,
+    "width": 390,
+    "height": 844,
+    "toolbar": {
+      "left": 16,
+      "right": 374,
+      "top": 768,
+      "bottom": 824,
+      "width": 358
+    },
+    "header": {
+      "left": 0,
+      "right": 390,
+      "top": 0,
+      "bottom": 64,
+      "width": 390
+    },
+    "title": {
+      "left": 76,
+      "right": 149.71875,
+      "top": 83.71875,
+      "bottom": 108.28125,
+      "width": 73.71875
+    }
+  },
+  "focus_diagnostics": {
+    "visibility": "visible",
+    "id": "studio-task-8h3xcJZ06qrZxlnr3sd0V",
+    "node": {
+      "x": 372.9599914550781,
+      "y": 208.9600067138672,
+      "width": 98.07998657226562,
+      "height": 98.08000183105469,
+      "top": 208.9600067138672,
+      "right": 471.03997802734375,
+      "bottom": 307.0400085449219,
+      "left": 372.9599914550781
+    },
+    "transform": "translate(302.178px, 78.9394px) scale(0.191563)",
+    "parents": [
+      {
+        "rect": {
+          "x": 0,
+          "y": 76,
+          "width": 844,
+          "height": 314,
+          "top": 76,
+          "right": 844,
+          "bottom": 390,
+          "left": 0
+        },
+        "scrollTop": 0,
+        "scrollLeft": 0
+      },
+      {
+        "rect": {
+          "x": 0,
+          "y": 76,
+          "width": 844,
+          "height": 314,
+          "top": 76,
+          "right": 844,
+          "bottom": 390,
+          "left": 0
+        },
+        "scrollTop": 0,
+        "scrollLeft": 0
+      },
+      {
+        "rect": {
+          "x": 0,
+          "y": 76,
+          "width": 844,
+          "height": 314,
+          "top": 76,
+          "right": 844,
+          "bottom": 390,
+          "left": 0
+        },
+        "scrollTop": 0,
+        "scrollLeft": 0
+      }
+    ]
+  },
+  "selected_landscape_bounds": {
+    "focusedImage": {
+      "x": 373.3431091308594,
+      "y": 209.34312438964844,
+      "width": 97.31375122070312,
+      "height": 97.31373596191406
+    },
+    "fixedDock": {
+      "x": 16,
+      "y": 314,
+      "width": 812,
+      "height": 56
+    },
+    "fixedTop": {
+      "x": 0,
+      "y": 76,
+      "width": 844,
+      "height": 64
+    },
+    "nodeActions": {
+      "x": 135,
+      "y": 146.953125,
+      "width": 574,
+      "height": 48
+    }
+  },
+  "passed": true,
+  "finished_at": "2026-10-30T01:36:44.224Z",
+  "static_artifact_sha256": {
+    "assets/agent-url-bootstrap-DcZRvpiD.js": "2280ba8bc379fc6e8df6369caaeae893ce6cf2779c08a59cb344682813af9ef8",
+    "assets/app-config-modal-CzvUlldW.js": "9017b9ab0d6da1a964ca74ffc3e0faebfafa6d87739e0516947099564c553886",
+    "assets/arrow-right-C6mOyPdx.js": "94af0323e7e13d957c049e8ce2a8fc98071bd6a43bc829367bc2339fc5a0aad9",
+    "assets/asset-picker-modal-BhbukSkz.js": "4879e9149e2c5b12a6be251dd23fe6daba59f8f5e215b1d6c7e262509de7e272",
+    "assets/assets-CCOJsILh.js": "8669dfabceb4b3d74d9e3bde6611b6138908ba67ade76cbb64558feda47405c4",
+    "assets/audio-generation-wqWLF3NZ.js": "545db8de6e8d10f9e2e081ed29f383d46e2d5f9a4abf9740155102fc415a6dba",
+    "assets/box-C7S7fso_.js": "ee776c7f78d6a297d2b36df8e0bed9b786957417d3f180a89dec472d3638c62d",
+    "assets/canvas-C96Ss3Ax.js": "0dcbbe3cceac676cf12e69e32499f9de678f7a33feb04a674c6399d0191157bd",
+    "assets/canvas-export-Ckn-72sk.js": "c3c24e79007f217461b44680f87a00dbdd7e04e1e5ae788951ad2647a25be7d9",
+    "assets/canvas-theme-DRmlFIXZ.js": "5b93a32b2f3d7d3c6ae1698b2b0f4dbe8756b10c07987dff9cf883ae1c61b449",
+    "assets/connection-BgM02hrj.js": "de2db2247cec9ac14216776b78f088f3b8595e305d69d3ee53f607f795d358b9",
+    "assets/Drawer-CMK4m_BA.js": "9d74674ac2917976d80a55fa78a8d4edadaa65b61ff50563351e51b789060296",
+    "assets/env-Dqf6TFj4.js": "02c50e13287b1f0d4e236043f12ab3a14886c93b101ec0876c1b25a66578f667",
+    "assets/external-link--CH4if9O.js": "a793670942f0fba7bc835161b7c5aef6b975a1ac23868730f9c0962d568a035d",
+    "assets/file-text-QF9au8L7.js": "4e1fcca0034deaf5cdd3c647bb52aac846b722dff3aac4117c8e64c98523ad1a",
+    "assets/FileSaver.min-D-FI8_-c.js": "1631e30d3a890bb54bb2174439fa3e7da20ace46f17667681f7b5786e3db0278",
+    "assets/folder-plus-B_KoaAFE.js": "707bc5ade346844b8dddaa39f6d13d6caf2d9ed8ce42d409e1f1f21e9ad33b6c",
+    "assets/highlighted-body-OFNGDK62-Bv4erPer.js": "7b1f4d30dca382023e41042da41141fb9dbdac6053b733f47f3aced15a271681",
+    "assets/house-CJrdopfG.js": "93b30dd82318a9a5c7531a0a71b49d8a6b5f2a5600aad25a333511479c4c79e5",
+    "assets/image-C90lHTun.js": "ad513b6192f88762cc030759203210069b5c83d01eb0bb6860c2a3e05b846720",
+    "assets/image-plus-CW9btIwU.js": "f0a06a6517cd5a2c0e1c481887da5b659bf46b933665fba81cba51f4147aa7b5",
+    "assets/image-utils-Bw2uuXjT.js": "a5c4ed084f650cd52c95deefaed143e354844af010ba826d71663b9301afc7d3",
+    "assets/index-0q8VLYN_.js": "ac69469200b0f5ae188e0ba8ae2c1507f2c9466af26301bf82e29aec1c882043",
+    "assets/index-9D2T9wl6.js": "4fc7fe0f07961d590f218f21f87f2281b1cc17eab2b21673782e989741a8153b",
+    "assets/index-B2SKI3BK.js": "56d5e27732b08348a788b6427631d2e54a01581e51d2eb65f2f5472543f43b51",
+    "assets/index-B3DGc2ha.js": "db34126f6f76445fe1e60aeccc62cef46d6e87e45fde8a4a676c4a5a16da4c3e",
+    "assets/index-BfYjydv-.js": "c605be523ccef2ff3c20334dbd026f0d705807b0a43a09294e99e850e998a011",
+    "assets/index-BMNHB6Qs.js": "0992340f6c067c9ece2ab80599d72d9b4979cd96f1cce5bd1c2965790ed4447d",
+    "assets/index-BrFMT_dd.js": "ab387569581898729408f64add76831d1255933235fec697b749b41160cef39d",
+    "assets/index-Bv9zqXrJ.js": "23c62c94e32ceae4cdc1d5cdfa7af2dd0728e0c99a5f5dd1224a9278d4942902",
+    "assets/index-BvfmMzs6.js": "eac050f5653895953744859406e2681045515ade8441d243a522dc91966d1b06",
+    "assets/index-C-ZTpCsX.js": "7c126ec4e7cc2a0807539d2451456cef9d93af2c178305f457b73d9b89db7b91",
+    "assets/index-C2-HktBg.js": "20bdce3e07662d6ebaf69a9afee33b3e0b221f5fcdddf08bcee38dac1664f9ca",
+    "assets/index-CbmT369S.js": "47bac80ed7914c2a5c5147848665f177368c14bc762e743abf518794343b1442",
+    "assets/index-CDIkK6w-.js": "fc125fb48c059f5362212e7dfa65631bb0d76ea80f6537672f603032d85b5c6b",
+    "assets/index-CrMe9PQ0.js": "a43f162ce6d5a96610d2c966a935fb0b89a016919c56e35ad3ea83f11084de1f",
+    "assets/index-CUFRqJom.js": "b3f6f0cfa02e8afe464158caa1ce7adba1a5f906deed72479315c10230a4633a",
+    "assets/index-C_iMN0x2.js": "59adf451a0b5b9e5cc2019bf8be494a60efebee3df558aecd917360d3fb5c202",
+    "assets/index-DASiTFOl.js": "f6942390dd8f86816d4739a6ea2a7b4db9b98c83721a9ecdf3e0b76fc8fb2c41",
+    "assets/index-Di-dQoKH.js": "22dcd3fa8fba8cf3b014f128b0df7d1e80217a91bd12ac19e1df12b377300ece",
+    "assets/index-Diwut9cB.js": "126e50415e74183dd6121c4702f811ce51da981b7e943fdd1c72c181dcdf3da5",
+    "assets/index-DLpLaj8P.js": "7589feac937057f3c1dd04fc81eb9287348af091d5e7e134477d301badf0d2a5",
+    "assets/index-DnSIPfeo.js": "aedf3910fecf35e80099f15c962a10b389d39b65f62bed3133ba6519114a649c",
+    "assets/index-npyuX0C8.css": "b7dbce19383f485c47f239b3b793fc98ab090750d27122dfd8f2fe461dd69a60",
+    "assets/index-OWlNmlok.js": "cc1cb830829d82b1402444278ac0c062709b2a9a3009057e226e9e95fe897c8e",
+    "assets/KeyCode-C3ZfcqzQ.js": "3e07de442a67b8aebd99fbf2172603cd885bd014ad710c864563178ec3e5029b",
+    "assets/LeftOutlined-B8vAOM9f.js": "f4d4d2924adcbd87457e0b10843bb7755c3855647df1113b2f0b5bfbe7db2554",
+    "assets/link-2-BKr3fgw6.js": "f53b82123d7ff05b3a4cabcddccc0b4370b2d71f49b7e2df5e6e65dc99a30049",
+    "assets/localforage-storage-DokA7-8I.js": "b52a4ed4dc248d1c80bfb015b1592f141bc891a5e059acf6fa2c1ac420818648",
+    "assets/mermaid-GHXKKRXX-DApxqzGE.js": "1c44a94e662c8986bb6578fbdf48a624541de3b874f4be045ddd449a2b516b1b",
+    "assets/model-plugin-CIQhGzR5.js": "09ff8347388c34162190d6141f5cdbce3c4248cfa6ac86cc5a2df4fdf1611196",
+    "assets/models-D1qfB_p7.js": "17af0d1d22934ca9c640a757ebcbb79335b0e74900cd3e70ccc0ba6ed083b8af",
+    "assets/music-2-DY99nXY5.js": "0877a380a78086e5c1ebc02f09f565f44038201efa282b81a81f2b100c0aab5a",
+    "assets/navigation-tools-DvP9kEQg.js": "eddda901ea416d661d04cec200560495208356c17298ace836400a40db966b6a",
+    "assets/Overflow-CDpIRc44.js": "dc399cbbde6db47b643bae40ce01ba4f85133954d271a4d2478494e5321fd07b",
+    "assets/pencil-CIWz1hUY.js": "2580222e5032ba02db4566411b87413c454ee30a309f3d1f4a62a45f760caeda",
+    "assets/plus-BizdGMWX.js": "865f680fb5f09f46cc7d12e8774785707f4d33f9210732230b15d3eab81f1519",
+    "assets/project-CQWrHuQ7.js": "b8fe45e04a20da68ec73f17f9d528d689b8c9d2174ea9db521e398481b85e69b",
+    "assets/prompt-detail-dialog-DA0C5qGV.js": "cef86532a4da152a074bf8d718f0d95bac4bf18016a596f27d6ae478fc2569d7",
+    "assets/PurePanel-Dr_fIWHw.js": "7f53d2975a66bdbacfb9afa76af6d0e8db709d70dfa9cf232b91c3d1d140f909",
+    "assets/refresh-cw-DcDwgtdD.js": "ad3035602f011c47e26d92170e60eaaa4941e1f6f90b463993f755d3c22aec34",
+    "assets/schema-validator-cr1RTBjI.js": "8ff30ba46addbc0328d55a81fdd2cdb762c0481b28a6e3751523139f04259ee5",
+    "assets/schema-worker-BELMOVc3.js": "7a62cfd491975e88ffc049fea3ee69e21930393e9bd24f12220e2c63d27c58cb",
+    "assets/search-DP9W2txC.js": "a4081c55183c8970dfaaef568947491f39f1c6255f7d4378ee9ce2d3c1956316",
+    "assets/settings-2-CdJ_kmCg.js": "3eee2f523b69d20669a0517af17c856a9cd04c4182752044de5c966d2d929bfd",
+    "assets/square-c763k30B.js": "c619f3336a48b0bf1607f0148029bbc5d7ff244d11d2df329ace57d12e77bdbd",
+    "assets/square-check-big-Ba_6Q3dN.js": "4f0b2221756d3b60872ea051bfa761a5d926ccfda26129808f9d75d66976d94f",
+    "assets/tasks-wudCEe8X.js": "9324c54b0216133d5e6e3b3ca0f7d34bbd5dcbeacdcc807555f84d3fa168fe33",
+    "assets/trash-2--_UB_OIQ.js": "4a0ee3c4c543938cbaa295ec810db31e67563b1f798ac5238554f67a324a31f3",
+    "assets/upload-B4NvwHwg.js": "f6edcfe71f64d059600e18223260533e92f8a110ef7849cffabca7a2428e9265",
+    "assets/use-asset-store-BLxdRYtV.js": "80d1bb0ffcb127dd6016d78674d335f69023379e9bd91f97f2f44abc4d0624fe",
+    "assets/use-canvas-store-DCiDs7pd.js": "ea268a0208ecfb0b63202bb23a1b4b71d2407050ccccdb00d9a79015f9171470",
+    "assets/use-copy-text-ChYXP0KT.js": "f456a9d9e13e9b473fcfb0284b9b679dc2015a9c1499ac55d2d71c00db5b7a8a",
+    "assets/use-prompt-list-DJ1tbWvK.js": "09058c53d087cbbb8d36c0e8d61f1099b78ae7ac0815164524776799c980eb86",
+    "assets/use-workbench-agent-store-DKKM34tN.js": "7efc8839550f3dac872a4a57426f25129050638016a49a2c629b556a210d84d4",
+    "assets/useControlledState-Gj5kBHEb.js": "5e98c88d6c92f109f6f64f9ab4a5359ff42461e54e507c1b2c924a4ac105b0dc",
+    "assets/utils-CV2_ZWdw.js": "9dbcc63fd5c1563bf8a599465543f6e1c0a021f0cf3ccf6885aa60ff28e28015",
+    "assets/video-DV9OPaGC.js": "56e399cef9353cef9f9c04f6d2f94612e049af56728dc8b32cbf35e1191a6f25",
+    "assets/video-DZEKqGfS.js": "e2e85fd9de9e3ce6da6b40a44eecdca25640142c87a4665fc2f50e1477327e3f",
+    "assets/video-settings-panel-BNZy4Whv.js": "c373887ca8678fe7f04cf7aff2547b101bc3f0379e166846196a52c3f2c50849",
+    "assets/zip-vQtl9jF_.js": "ad1801c25d96b5c5b3efd9778f827b7e79e1fbbaf57d8fe58e64958aaea078be",
+    "config.js": "33c15a252c60b6103ad20c773e1ec662c1aaa636277aa24698274a7d2a743038",
+    "fonts/Anton-OFL.txt": "ee67e6ee22790b7929f1a3769ca2801d565c64b5a9096942c1adf5596de9c9e4",
+    "fonts/Anton-Reference.woff": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a",
+    "fonts/Manrope-OFL.txt": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+    "fonts/Manrope-Reference.woff": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd",
+    "icons/claude.svg": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364",
+    "icons/deepseek.svg": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439",
+    "icons/gemini.svg": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602",
+    "icons/glm.svg": "8174e65ff71647d5c705c920c953a82bd723d9e3e42887bdd4ffc9dfe51207a0",
+    "icons/grok.svg": "9175fc90c22655160231976c849f25a03b888d7cc0e04c5f1b987b659bb07c95",
+    "icons/linuxdo.svg": "dc7fe55ca4dc1062611111df4208da9d44655c36f85ad52727facd4bba2b4d60",
+    "icons/openai.svg": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186",
+    "index.html": "2f987fc299ee640fa85526b40f4f9f883845f5e625023519a58e5a96abdcc2d8",
+    "logo.svg": "76e174b82af0dfac35c55ba086d4e9781aa1d2ade984b50ddb6489b408efd831",
+    "plugins/index.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "static_artifact_unchanged": true
+}

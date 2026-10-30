@@ -1,5 +1,6 @@
 import { journalList, journalTransaction, type IdentityRef, type Intent } from "./aggregator-journal";
 import { createTaskJournal, readTaskJournal, sameJournalIdentity, taskJournalRecord, taskSubmissionSignature } from "./task-journal-format";
+import { assertBatchMembers, batchKey } from "./aggregator-batch";
 
 export async function exportTaskJournal(identity: IdentityRef) {
     const records = await journalList("intents");
@@ -18,6 +19,8 @@ export function restoreTaskJournal(source: string, identity: IdentityRef, stillC
                 const existing = request.result as Intent[];
                 if (existing.some((task) => task.version !== 1)) throw new Error("本机存在未知版本任务，已保留原记录，未导入清单");
                 const byId = new Map(existing.map((task) => [task.id, task]));
+                const groups = new Set(backup.tasks.filter((task) => task.batch).map(batchKey));
+                assertBatchMembers([...existing.filter((task) => task.batch && groups.has(batchKey(task))), ...backup.tasks.filter((task) => !byId.has(task.id))]);
                 const active = new Set(existing.filter((task) => task.activeNodeKey).map((task) => task.activeNodeKey));
                 let added = 0, kept = 0;
                 for (const task of backup.tasks) {

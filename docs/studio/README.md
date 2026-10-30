@@ -14,6 +14,8 @@
 - [11 个模型适配样本、完整用户流程与调用结构](09-模型适配样本与用户流程.md)
 - [本机引用事务、旧数据保留升级与保存失败恢复](12-本机引用事务与保存失败恢复.md)
 - [任务清单备份、原子导入与服务端首次确认](13-任务清单备份与只读恢复.md)
+- [原提交只读核对与无ID恢复](14-原提交只读核对与恢复.md)
+- [批量创作、部分失败及只继续未发送项](15-批量创作与部分失败恢复.md)
 - [46 项开发差距 CSV](research/fusion-assessment-2026-10-30/development-gaps.csv)
 - [评估汇总、来源摘要和证据索引 JSON](research/fusion-assessment-2026-10-30/assessment-summary.json)
 - [本地下载与静态接口核对记录](research/aggregator-integration-audit-2026-10-30.json)
