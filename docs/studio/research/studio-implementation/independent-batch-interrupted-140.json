@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "scope": "Read-only reconciliation of an interrupted test harness; not a successful GPU batch and not proof that an unobserved task never executed",
+  "generation_posts_forwarded": 0,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/lookup"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models"
+    }
+  ],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "intents": [
+    {
+      "id": "1jrj7jtub1I8D87EZliPr",
+      "stage": "prepared",
+      "body_sha256": "c5e08656de476485be96d885a8a12f9dd084b6bd92cafce61f982640c7dce8e7",
+      "parameters": {
+        "n": 1,
+        "size": "720x1080",
+        "quality": "standard",
+        "seed": 140
+      }
+    },
+    {
+      "id": "p0HBDBQWfrot5Rrour8ep",
+      "stage": "submitting",
+      "body_sha256": "de6edbbc189f14a9d6512c4fb90c82079498152844d4c2043a7040dcc75d4a62",
+      "parameters": {
+        "n": 1,
+        "size": "720x1080",
+        "quality": "standard",
+        "seed": 140
+      }
+    }
+  ],
+  "lookup_outcome": "not_observed",
+  "original_api_visible_jobs": 0,
+  "local_records_unchanged": true,
+  "cause": "Test route asserted512x512 before forwarding; the visible composer and frozen body were720x1080. Assertion interrupted the old harness. Original submitting intent is retained and never replayed.",
+  "finished_at": "2026-10-30T09:36:34.984Z"
+}

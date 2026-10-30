@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "scope": "Actual existing two-job batch exported/imported by unchanged139.2 public UI in separate owned browser profiles; read-only business requests, not another generation or physical-device acceptance",
+  "checks": [
+    "actual public UI exports the two original batch members as integrity-checked v2 JSON without the saved Key",
+    "separate-profile import preserves frozen ownership/grouping, trusts no backup state and makes no automatic original-job query or generation",
+    "explicit original-ID GETs verify both imported real tasks without adopting another Key or changing their original submissions",
+    "actual imported two-member batch remains within390px viewport, emulation only"
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_c828daf718844684b52fe4de7ad74ae5",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_747c4a0543bb48a396e455863f6feee8",
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-140/actual-batch-backup-import-unverified.png",
+      "sha256": "5954cb7daa79757fc97485863d687684ad5c3700e1641f305759907e8b207c69"
+    },
+    {
+      "file": "docs/media/studio-140/actual-batch-backup-import-390.png",
+      "sha256": "5f32f5b62fdf93db5c63557ddbef97049e1c9c6750f8734e90d9a026a0d2e543"
+    }
+  ],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browsers_closed": true
+  },
+  "archive": {
+    "bytes": 3219,
+    "sha256": "25d162aee3026767ad2d0f88a9987b971a4f37e6b34e88dbeb64af391a375058",
+    "version": 2,
+    "tasks": 2,
+    "key_absent": true,
+    "public_raw_archive": false
+  },
+  "generation_posts": 0,
+  "finished_at": "2026-10-30T09:51:53.334Z"
+}

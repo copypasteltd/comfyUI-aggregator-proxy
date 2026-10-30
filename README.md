@@ -10,11 +10,13 @@
 | 原业务API | `http://43.165.167.179:39443` |
 | 原管理后台 | [Admin](http://43.165.167.179:39443/admin/) |
 
-![139.2实际GPU原件离线恢复](docs/studio/media/studio-139/real-offline-fixed-desktop-attempt4.png)
+![真实两项批次的成功原件回到画布](docs/studio/media/studio-140/verified-actual-batch-result-canvas.png)
 
-[390px页面](docs/studio/media/studio-139/real-offline-fixed-390-attempt4.png) · [素材原件预览](docs/studio/media/studio-139/real-offline-library-attempt4.png) · [实际恢复MP4](docs/studio/media/studio-139/real-offline-resume.mp4)。本轮一项真实720×1080编辑完成；录像展示同一已保存原件的离线恢复，390px是浏览器视口模拟。验收Key已禁用。[完整故障与回执](docs/studio/24-真实故障恢复与离线素材验收.md)。
+[批次终态桌面](docs/studio/media/studio-140/verified-actual-batch-terminal-desktop.png) · [390px页面](docs/studio/media/studio-140/verified-actual-batch-result-390.png) · [去元数据样片](docs/studio/media/studio-140/actual-batch-first-display.png) · [实际恢复MP4](docs/studio/media/studio-140/actual-batch-recovery.mp4)。两项真实批次分别成功/取消；成功原件720×1080、720,638字节，端到端1,458秒（24分18秒），长度/SHA及完成后八小时时限通过。录像展示原批次恢复和另存，390px是视口模拟。验收Key已禁用并确认401。
 
-![真实原件离线恢复验收](docs/studio/media/studio-139/real-offline-resume.gif)
+![实际批次恢复与原件另存](docs/studio/media/studio-140/actual-batch-recovery.gif)
+
+证据140继续使用同一139.2静态版本：14组原生故障、6组冻结页面轮询、4项真实备份恢复和原批次原件复查分别留证；两项各一次生成POST，丢响应仍恢复原ID。draft被原Key策略禁用，未改额度或并发。空画布桌面/390px单次FCP704/716ms是诊断数据，非SLA。[当前批次、页面、GIF与失败回执](docs/studio/25-轮询取消与真实批次验收.md) · [前次实际编辑与离线恢复](docs/studio/24-真实故障恢复与离线素材验收.md)。
 
 ## 方案与功能
 
@@ -65,7 +67,7 @@ npm run build
 
 ## 验证与限制
 
-本轮179单元、类型/生产构建、11双源、10本机身份、7实际原件UI、107当前/170旧文件及14路由分别通过。一项真实编辑验证上传/生成丢响应仍同一任务；等长损坏与截短下载被拒绝。依赖复用先前锁定原生干净安装；八种媒体模式为历史证据，未全重跑。自有验收Key禁用后401，自建浏览器/夹具和测试PG已关闭。旧失败回执保留，MP4/GIF完整解码，公开样片去除元数据。
+冻结139.2已有179单元、类型/生产构建、11双源、10本机身份、7实际原件UI、107当前/170旧文件及14路由证据；本轮产品源码未改，未重跑构建或重新部署。证据140新增14组原生故障（含36查询异常组合）、6组冻结页面、4项真实备份恢复、3项原批次原件UI复查及两份单次加载观测，不混计GPU模式数量。真实批次成功/取消各一项；原件SHA和8小时到期通过。两段MP4与两段GIF完整解码，样片去元数据；浏览器原生中文profile下载崩溃的失败及最小复现保留，改用经realpath验证的既有ASCII联接完成同一profile取证。原API和静态服务未改或重启，两个API仓库边界相同；本轮Key停用401，自建浏览器/夹具全部关闭。八种媒体仍为历史证据，未全重跑。
 
 完整首期仍为**HOLD/pending-test**：完整故障、实际Android/iOS、大文件峰值/泄漏及10～20台容量待验；动画/更多3D格式未完成。云同步/文本助手只可使用原API既有能力，暂无则保留外部依赖；ComfyUI移交即删、异构设备合并及GPU优化也由原API负责，画布不另接后端或修改转发。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
 

@@ -10,11 +10,13 @@
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
 
-![Actual saved GPU image restored offline on139.2](docs/studio/media/studio-139/real-offline-fixed-desktop-attempt4.png)
+![The successful original from the actual two-member batch returns to its canvas](docs/studio/media/studio-140/verified-actual-batch-result-canvas.png)
 
-[390px view](docs/studio/media/studio-139/real-offline-fixed-390-attempt4.png) · [Local original preview](docs/studio/media/studio-139/real-offline-library-attempt4.png) · [Actual recovery MP4](docs/studio/media/studio-139/real-offline-resume.mp4). One real720×1080 image-edit job succeeded. The recording shows offline recovery of that same saved original;390px is viewport emulation. The verification Key is disabled. [Fault evidence and limits](docs/studio/24-真实故障恢复与离线素材验收.md).
+[Desktop terminal states](docs/studio/media/studio-140/verified-actual-batch-terminal-desktop.png) · [390px view](docs/studio/media/studio-140/verified-actual-batch-result-390.png) · [Metadata-free display sample](docs/studio/media/studio-140/actual-batch-first-display.png) · [Actual recovery MP4](docs/studio/media/studio-140/actual-batch-recovery.mp4). The two actual members succeeded/cancelled independently. The720×1080 original is720,638 bytes and took1,458 seconds (24m18s) end to end; length/SHA and eight-hour expiry passed. The recording shows original-batch recovery and saving;390px is emulation. The temporary Key is disabled with401 confirmed.
 
-![Actual saved-original offline recovery](docs/studio/media/studio-139/real-offline-resume.gif)
+![Actual batch recovery and original saving](docs/studio/media/studio-140/actual-batch-recovery.gif)
+
+Evidence140 keeps static139.2:14 native fault groups,6 frozen-UI polling groups,4 real backup/recovery checks and original-batch delivery are recorded separately. Each member was generated once and recovered its original ID after lost responses. Draft stays disabled by the unchanged Key policy. Desktop/390px single cold-page FCP704/716ms observations are diagnostics, not an SLA. [Current batch, pages, clips and preserved failures](docs/studio/25-轮询取消与真实批次验收.md) · [Earlier actual edit and offline recovery](docs/studio/24-真实故障恢复与离线素材验收.md).
 
 ## Architecture and capabilities
 
@@ -65,7 +67,7 @@ Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canva
 
 ## Validation and limits
 
-This increment separately passed179 units/type checking/production build,11 cross-origin groups,10 local-identity groups,7 actual saved-image UI checks,107 current/170 retained file hashes and14 routes. One real image-edit job recovered after lost upload/generation responses; corrupt and truncated downloads were rejected. Dependencies reuse the earlier native clean locked installation. Eight media modes are historical evidence, not a new full matrix. The temporary Key is disabled with401 confirmed; owned browsers, fixtures and test PostgreSQL are closed. Failed receipts remain, both clips fully decode, and public PNG samples omit metadata.
+Frozen139.2 already has179 units/type/build checks,11 cross-origin groups,10 local-identity groups,7 actual saved-image UI checks,107 current/170 retained hashes and14 routes. Product source is unchanged, with no rebuild or deployment. Evidence140 adds14 native fault groups (including36 query-error combinations),6 frozen-UI groups,4 actual backup checks,3 original-batch delivery UI checks and2 single-page load observations. The two actual members succeeded/cancelled independently, with verified original SHA and eight-hour expiry. Two MP4s and two GIFs fully decode; the display PNG omits metadata. Failed Windows native-browser PNG downloads from a Chinese-path persistent profile are preserved with minimal reproductions; the same profile succeeded through a realpath-verified existing ASCII junction. Neither original API nor static service changed/restarted; both API workspaces match their boundary. The temporary Key is disabled with401, all owned browsers/fixtures are closed. Eight media modes remain historical evidence.
 
 Full acceptance remains **HOLD/pending-test**: the complete fault matrix, physical Android/iOS, large-file peak/leaks and10–20-device capacity are unverified; animation and more3D formats are incomplete. Cloud sync/text assistance may use only existing API capabilities; otherwise they remain external dependencies. ComfyUI-original transfer deletion, heterogeneous pools and GPU optimization also belong to the API. The canvas adds no other backend connection or forwarding changes. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
 

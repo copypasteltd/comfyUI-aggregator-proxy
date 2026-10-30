@@ -1,0 +1,149 @@
+{
+  "passed": true,
+  "scope": "Current139.2 frozen production UI with synthetic HTTP and native IndexedDB on plain non-localhost HTTP; visibility/online properties injected by the fixture, not OS background or physical-phone acceptance",
+  "checks": [
+    {
+      "name": "frozen UI retains queued status after429 and503; server Retry-After respected and automatic reads paused",
+      "detail": true
+    },
+    {
+      "name": "a second task page restores the paused original without sending another job query",
+      "detail": true
+    },
+    {
+      "name": "injected hidden/offline signals suspend automatic reads in both pages while preserving the running job",
+      "detail": true
+    },
+    {
+      "name": "visibility alone does not resume a page whose injected network state remains offline",
+      "detail": true
+    },
+    {
+      "name": "online resume queries exactly the original ID, settles success, stops polling and preserves frozen request;390px no overflow",
+      "detail": true
+    },
+    {
+      "name": "all business calls are read-only Bearer/no-cookie; current139.2 static bytes remain unchanged",
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "path": "/v1/access-policy",
+      "method": "GET",
+      "at": 1793353295118,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/models",
+      "method": "GET",
+      "at": 1793353295128,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/capabilities",
+      "method": "GET",
+      "at": 1793353295136,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/access-policy",
+      "method": "GET",
+      "at": 1793353295531,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/models",
+      "method": "GET",
+      "at": 1793353295549,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/capabilities",
+      "method": "GET",
+      "at": 1793353295558,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/jobs/job_cccccccccccccccccccccccccccccccc",
+      "method": "GET",
+      "at": 1793353295674,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/jobs/job_cccccccccccccccccccccccccccccccc",
+      "method": "GET",
+      "at": 1793353296493,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/access-policy",
+      "method": "GET",
+      "at": 1793353296940,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/models",
+      "method": "GET",
+      "at": 1793353296949,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/capabilities",
+      "method": "GET",
+      "at": 1793353296958,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/jobs/job_cccccccccccccccccccccccccccccccc",
+      "method": "GET",
+      "at": 1793353297784,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "path": "/v1/jobs/job_cccccccccccccccccccccccccccccccc",
+      "method": "GET",
+      "at": 1793353298855,
+      "cookie_present": false,
+      "bearer_valid": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-140/synthetic-polling-paused-desktop.png",
+      "sha256": "5962edd853467f054b48611af6daaec1a79218e0644a3553c590a58601aff1c2"
+    },
+    {
+      "file": "docs/media/studio-140/synthetic-polling-reconciled-desktop.png",
+      "sha256": "ee5f06d1cdfed618f8d5d09d1723b3e196871228cc67e4d807bc3cf7555df0dc"
+    },
+    {
+      "file": "docs/media/studio-140/synthetic-polling-reconciled-390.png",
+      "sha256": "77c7c864ff8a56d75cc485a60b100591129d72a18a05922eb107b41fa38e73c6"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_closed": true
+  },
+  "frozen_index_sha256": "887beec33b7e2c82ab2ab326ade00389014cbdf85d2eea178a8290c28c0e5291",
+  "job_reads": 4,
+  "generation_posts": 0,
+  "private_video": ".local/studio140/poll-ui-2026-10-30T09-41-29-131Z/page@85a990fe77761bf0beb2a5f139bb90f2.webm",
+  "finished_at": "2026-10-30T09:41:40.271Z"
+}

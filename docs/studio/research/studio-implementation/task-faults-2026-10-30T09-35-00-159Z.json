@@ -1,0 +1,20 @@
+{
+  "passed": false,
+  "scope": "Native Chromium real HTTP and strict IndexedDB on a non-localhost insecure origin; synthetic job responses and failure injection only, not real GPU, physical phones or fleet acceptance",
+  "checks": [],
+  "requests": [],
+  "source_sha256": {
+    "services/aggregator-engine.ts": "d6f6394dbd309070417a5d9c6f620b74eb6f16d43c2eaa83e8addd0689865a29",
+    "services/aggregator-journal.ts": "72cec509c083c37561e005bef1f385af3be35a154005e171460529608ad26d9d",
+    "services/aggregator-budget.ts": "2b8366ef622da3e16c874c7beac9b5e17012aff3c96d77a2a64b44f2bb0023ad",
+    "services/api/aggregator/client.ts": "8814b6c0e62f770f36ecc6a5d07d7f4f026ac30e41c01bb02c5788fcef867a43"
+  },
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_closed": true
+  },
+  "failure": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'VITE_STUDIO_MODE')\n    at http://task-faults.test:6481/probe.mjs:11080:38\n    at install (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_task_faults.mjs:31:18)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_task_faults.mjs:78:75",
+  "finished_at": "2026-10-30T09:35:06.067Z"
+}

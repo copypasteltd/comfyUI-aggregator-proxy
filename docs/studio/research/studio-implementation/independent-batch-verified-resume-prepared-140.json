@@ -1,0 +1,202 @@
+{
+  "passed": true,
+  "phase": "resume-prepared",
+  "started_at": "2026-10-30T09:38:00.826Z",
+  "canvas_release": "canvas-20261030.139.2",
+  "scope": "Actual public independent canvas and two own original-API GPU jobs; browser-injected generation/cancel response loss;390px emulation, not physical phones or fleet acceptance",
+  "checks": [
+    {
+      "name": "interrupted pre-submit run reconciled: no original API job or durable intent exists; no accepted operation is replayed",
+      "detail": true
+    },
+    {
+      "name": "existing Key permits standard only; draft512x512 remains disabled without changing API policy",
+      "detail": true
+    },
+    {
+      "name": "both batch records committed before the two unique actual generation POSTs; second accepted response deliberately lost",
+      "detail": true
+    },
+    {
+      "name": "read-only lookup recovers the original second member; server contains exactly two own jobs",
+      "detail": true
+    },
+    {
+      "name": "explicit actual cancellation targets only the second original job; lost cancellation response is followed by original-ID reads",
+      "detail": {
+        "before": "queued",
+        "after": "cancelled"
+      }
+    },
+    {
+      "name": "actual two-member batch has no horizontal document overflow at390px, emulation only",
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_c828daf718844684b52fe4de7ad74ae5",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/lookup",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_747c4a0543bb48a396e455863f6feee8",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_747c4a0543bb48a396e455863f6feee8/cancel",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_c828daf718844684b52fe4de7ad74ae5",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_747c4a0543bb48a396e455863f6feee8",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_747c4a0543bb48a396e455863f6feee8",
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-140/verified-actual-batch-composer.png",
+      "sha256": "f9016d61f0fe41c24aa18937a28d958189fecc41992a59bf9f47682b97d2329a"
+    },
+    {
+      "file": "docs/media/studio-140/verified-actual-batch-after-cancel-desktop.png",
+      "sha256": "f3e4bc2ff74febfe50d90b2aa67af6c538346b4f0d80ce11cf6aa78a46da1fb5"
+    },
+    {
+      "file": "docs/media/studio-140/verified-actual-batch-after-cancel-390.png",
+      "sha256": "6d183049282a3544f0ba6bd359bb7948cb1bb65587c68e390b0e30cfd550ba8b"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "generation_posts": 2,
+  "actual_job_ids": [
+    "job_c828daf718844684b52fe4de7ad74ae5",
+    "job_747c4a0543bb48a396e455863f6feee8"
+  ],
+  "finished_at": "2026-10-30T09:38:15.691Z"
+}

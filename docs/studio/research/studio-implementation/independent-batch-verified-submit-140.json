@@ -1,0 +1,42 @@
+{
+  "passed": false,
+  "phase": "submit",
+  "started_at": "2026-10-30T09:36:41.826Z",
+  "canvas_release": "canvas-20261030.139.2",
+  "scope": "Actual public independent canvas and two own original-API GPU jobs; browser-injected generation/cancel response loss;390px emulation, not physical phones or fleet acceptance",
+  "checks": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-140/verified-failed-batch-submit.png",
+      "sha256": "27ddb8dff6b29245a4499f95485b7691b8a5aebc64c864894ba9f923b15f1525"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: The actual visible selected preset must be512x512 before any durable intent or POST\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_independent_batch_live.mjs:177:9",
+  "finished_at": "2026-10-30T09:36:49.541Z"
+}

@@ -1,0 +1,66 @@
+{
+  "passed": false,
+  "phase": "resume-prepared",
+  "started_at": "2026-10-30T09:30:28.465Z",
+  "canvas_release": "canvas-20261030.139.2",
+  "scope": "Actual public independent canvas and two own original-API GPU jobs; browser-injected generation/cancel response loss;390px emulation, not physical phones or fleet acceptance",
+  "checks": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-140/failed-batch-resume-prepared.png",
+      "sha256": "cbfd10612ec37b8d39a799ad8d9ada0488945708280df904372f0b65017fc0ef"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     activeNodeKey: 'd411c7a7229d50e27b2289bfc205e07d1f1497d5195331259a4db149a35c293a:FXGVXYcS0fXcSXtLsqnPw:studio-task-Dz5kEGBo1OKtwTqz8AgLo-1',\n+     batch: {\n+       id: 'studio-task-Dz5kEGBo1OKtwTqz8AgLo',\n+       index: 1,\n+       total: 2\n+     },\n+     body: '{\"model\":\"comfy-3080-image-lustify-krea2\",\"task_type\":\"text_to_image\",\"input\":{\"prompt\":\"A small lime green ceramic teapot, centered on a pale gray studio background, soft product photography lighting, clean simple shape, no people, no text, no logo.\"},\"parameters\":{\"n\":1,\"size\":\"720x1080\",\"quality\":\"standard\",\"seed\":140},\"client_request_id\":\"1jrj7jtub1I8D87EZliPr\"}',\n+     canvas: {\n+       node: {\n+         height: 260,\n+         id: 'studio-task-Dz5kEGBo1OKtwTqz8AgLo-1',\n+         metadata: {\n+           model: 'comfy-3080-image-lustify-krea2',\n+           prompt: 'A small lime green ceramic teapot, centered on a pale gray studio background, soft product photography lighting, clean simple shape, no people, no text, no logo.',\n+           status: 'loading'\n+         },\n+         position: {\n+           x: 789.515625,\n+           y: 332\n+         },\n+         title: 'Lustify / Krea2 · 文生图 · RTX 3080 · 2/2',\n+         type: 'studio:task',\n+         width: 340\n+       },\n+       sourceIds: []\n+     },\n+     createdAt: 1793352275410,\n+     id: '1jrj7jtub1I8D87EZliPr',\n+     idempotencyKey: 'studio-job-1jrj7jtub1I8D87EZliPr',\n+     identity: {\n+       fingerprint: 'd411c7a7229d50e27b2289bfc205e07d1f1497d5195331259a4db149a35c293a',\n+       origin: 'http://43.165.167.179:39443',\n+       profileId: 'mRAf1e42_O2j3-a6NT6cT'\n+     },\n+     nodeId: 'studio-task-Dz5kEGBo1OKtwTqz8AgLo-1',\n+     output: {\n+       maxBytes: 33554432,\n+       mediaTypes: [\n+         'image/png'\n+       ]\n+     },\n+     projectId: 'FXGVXYcS0fXcSXtLsqnPw',\n+     releaseDigest: '37af9154a015bfe0c4e22bafb11f8c30cb6a7d89ec36d5f7d55f0e8b0fba7c01',\n+     stage: 'prepared',\n+     updatedAt: 1793352275410,\n+     version: 1\n+   },\n+   {\n+     activeNodeKey: 'd411c7a7229d50e27b2289bfc205e07d1f1497d5195331259a4db149a35c293a:FXGVXYcS0fXcSXtLsqnPw:studio-task-Dz5kEGBo1OKtwTqz8AgLo',\n+     batch: {\n+       id: 'studio-task-Dz5kEGBo1OKtwTqz8AgLo',\n+       index: 0,\n+       total: 2\n+     },\n+     body: '{\"model\":\"comfy-3080-image-lustify-krea2\",\"task_type\":\"text_to_image\",\"input\":{\"prompt\":\"A small lime green ceramic teapot, centered on a pale gray studio background, soft product photography lighting, clean simple shape, no people, no text, no logo.\"},\"parameters\":{\"n\":1,\"size\":\"720x1080\",\"quality\":\"standard\",\"seed\":140},\"client_request_id\":\"p0HBDBQWfrot5Rrour8ep\"}',\n+     canvas: {\n+       node: {\n+         height: 260,\n+         id: 'studio-task-Dz5kEGBo1OKtwTqz8AgLo',\n+         metadata: {\n+           model: 'comfy-3080-image-lustify-krea2',\n+           prompt: 'A small lime green ceramic teapot, centered on a pale gray studio background, soft product photography lighting, clean simple shape, no people, no text, no logo.',\n+           status: 'loading'\n+         },\n+         position: {\n+           x: 409.515625,\n+           y: 332\n+         },\n+         title: 'Lustify / Krea2 · 文生图 · RTX 3080 · 1/2',\n+         type: 'studio:task',\n+         width: 340\n+       },\n+       sourceIds: []\n+     },\n+     createdAt: 1793352275410,\n+     error: undefined,\n+     id: 'p0HBDBQWfrot5Rrour8ep',\n+     idempotencyKey: 'studio-job-p0HBDBQWfrot5Rrour8ep',\n+     identity: {\n+       fingerprint: 'd411c7a7229d50e27b2289bfc205e07d1f1497d5195331259a4db149a35c293a',\n+       origin: 'http://43.165.167.179:39443',\n+       profileId: 'mRAf1e42_O2j3-a6NT6cT'\n+     },\n+     nodeId: 'studio-task-Dz5kEGBo1OKtwTqz8AgLo',\n+     output: {\n+       maxBytes: 33554432,\n+       mediaTypes: [\n+         'image/png'\n+       ]\n+     },\n+     projectId: 'FXGVXYcS0fXcSXtLsqnPw',\n+     releaseDigest: '37af9154a015bfe0c4e22bafb11f8c30cb6a7d89ec36d5f7d55f0e8b0fba7c01',\n+     stage: 'submitting',\n+     updatedAt: 1793352275592,\n+     version: 1\n+   }\n+ ]\n- []\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_independent_batch_live.mjs:146:20",
+  "finished_at": "2026-10-30T09:32:07.701Z"
+}

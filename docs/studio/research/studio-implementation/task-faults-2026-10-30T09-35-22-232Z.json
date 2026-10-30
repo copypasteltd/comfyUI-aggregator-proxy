@@ -1,0 +1,583 @@
+{
+  "passed": true,
+  "scope": "Native Chromium real HTTP and strict IndexedDB on a non-localhost insecure origin; synthetic job responses and failure injection only, not real GPU, physical phones or fleet acceptance",
+  "checks": [
+    {
+      "name": "query failures preserve original queued state across9 HTTP/network cases",
+      "detail": {
+        "cases": [
+          "401",
+          "403",
+          "404",
+          "429 without hint",
+          "429 Retry-After",
+          "503 without hint",
+          "503 Retry-After",
+          "500 malformed JSON",
+          "connection lost"
+        ]
+      }
+    },
+    {
+      "name": "query failures preserve original preparing state across9 HTTP/network cases",
+      "detail": {
+        "cases": [
+          "401",
+          "403",
+          "404",
+          "429 without hint",
+          "429 Retry-After",
+          "503 without hint",
+          "503 Retry-After",
+          "500 malformed JSON",
+          "connection lost"
+        ]
+      }
+    },
+    {
+      "name": "query failures preserve original running state across9 HTTP/network cases",
+      "detail": {
+        "cases": [
+          "401",
+          "403",
+          "404",
+          "429 without hint",
+          "429 Retry-After",
+          "503 without hint",
+          "503 Retry-After",
+          "500 malformed JSON",
+          "connection lost"
+        ]
+      }
+    },
+    {
+      "name": "query failures preserve original reconciling state across9 HTTP/network cases",
+      "detail": {
+        "cases": [
+          "401",
+          "403",
+          "404",
+          "429 without hint",
+          "429 Retry-After",
+          "503 without hint",
+          "503 Retry-After",
+          "500 malformed JSON",
+          "connection lost"
+        ]
+      }
+    },
+    {
+      "name": "queued/running/reconciling cancellation remains pending until authoritative cancelled response",
+      "detail": true
+    },
+    {
+      "name": "stopping local wait aborts only the GET and leaves remote status and frozen record unchanged",
+      "detail": true
+    },
+    {
+      "name": "unknown submission without a confirmed original job cannot issue cancellation",
+      "detail": true
+    },
+    {
+      "name": "late pre-cancellation GET cannot overwrite the newer succeeded terminal response",
+      "detail": true
+    },
+    {
+      "name": "late lower-revision cancel response cannot overwrite an already confirmed success",
+      "detail": true
+    },
+    {
+      "name": "same-revision contradictory terminal response is rejected while preserving original success",
+      "detail": true
+    },
+    {
+      "name": "higher-revision contradictory terminal response is rejected while preserving original success",
+      "detail": true
+    },
+    {
+      "name": "lost cancellation response preserves pending intent and reconciles by the same original job ID",
+      "detail": true
+    },
+    {
+      "name": "a second native page shares server Retry-After through committed IDB budget",
+      "detail": {
+        "resume_at": 1793352925305,
+        "request_at": 1793352925310
+      }
+    },
+    {
+      "name": "all traffic uses Bearer without cookies; zero generation POSTs and unchanged frontend sources",
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "at": 1793352923327,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "at": 1793352923336,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "at": 1793352923343,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000001",
+      "at": 1793352923401,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000002",
+      "at": 1793352923436,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000003",
+      "at": 1793352923458,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000004",
+      "at": 1793352923482,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000005",
+      "at": 1793352923498,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000006",
+      "at": 1793352923561,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000007",
+      "at": 1793352923571,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000008",
+      "at": 1793352923639,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000009",
+      "at": 1793352923648,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000009",
+      "at": 1793352923649,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000000a",
+      "at": 1793352923664,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000000b",
+      "at": 1793352923674,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000000c",
+      "at": 1793352923684,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000000d",
+      "at": 1793352923692,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000000e",
+      "at": 1793352923699,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000000f",
+      "at": 1793352923766,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000010",
+      "at": 1793352923779,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000011",
+      "at": 1793352923843,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000012",
+      "at": 1793352923850,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000012",
+      "at": 1793352923851,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000013",
+      "at": 1793352923858,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000014",
+      "at": 1793352923864,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000015",
+      "at": 1793352923873,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000016",
+      "at": 1793352923884,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000017",
+      "at": 1793352923891,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000018",
+      "at": 1793352923953,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000019",
+      "at": 1793352923959,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000001a",
+      "at": 1793352924016,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000001b",
+      "at": 1793352924023,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000001b",
+      "at": 1793352924024,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000001c",
+      "at": 1793352924031,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000001d",
+      "at": 1793352924039,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000001e",
+      "at": 1793352924046,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000001f",
+      "at": 1793352924052,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000020",
+      "at": 1793352924059,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000021",
+      "at": 1793352924125,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000022",
+      "at": 1793352924132,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000023",
+      "at": 1793352924187,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000024",
+      "at": 1793352924196,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000024",
+      "at": 1793352924197,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_00000000000000000000000000000025/cancel",
+      "at": 1793352924206,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000025",
+      "at": 1793352924214,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_00000000000000000000000000000026/cancel",
+      "at": 1793352924227,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000026",
+      "at": 1793352924233,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_00000000000000000000000000000027/cancel",
+      "at": 1793352924241,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000027",
+      "at": 1793352924246,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_00000000000000000000000000000028",
+      "at": 1793352924255,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000002a",
+      "at": 1793352924290,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_0000000000000000000000000000002a/cancel",
+      "at": 1793352924314,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_0000000000000000000000000000002b/cancel",
+      "at": 1793352924323,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000002b",
+      "at": 1793352924344,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000002b",
+      "at": 1793352924351,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000002b",
+      "at": 1793352924357,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_0000000000000000000000000000002c/cancel",
+      "at": 1793352924367,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_0000000000000000000000000000002c/cancel",
+      "at": 1793352924367,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/job_0000000000000000000000000000002c/cancel",
+      "at": 1793352924369,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000002c",
+      "at": 1793352924375,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "at": 1793352924471,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "at": 1793352924477,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "at": 1793352924481,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000002d",
+      "at": 1793352924502,
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_0000000000000000000000000000002d",
+      "at": 1793352925310,
+      "cookie_present": false,
+      "bearer_valid": true
+    }
+  ],
+  "source_sha256": {
+    "services/aggregator-engine.ts": "d6f6394dbd309070417a5d9c6f620b74eb6f16d43c2eaa83e8addd0689865a29",
+    "services/aggregator-journal.ts": "72cec509c083c37561e005bef1f385af3be35a154005e171460529608ad26d9d",
+    "services/aggregator-budget.ts": "2b8366ef622da3e16c874c7beac9b5e17012aff3c96d77a2a64b44f2bb0023ad",
+    "services/api/aggregator/client.ts": "8814b6c0e62f770f36ecc6a5d07d7f4f026ac30e41c01bb02c5788fcef867a43"
+  },
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_closed": true
+  },
+  "finished_at": "2026-10-30T09:35:25.521Z"
+}

@@ -1,5 +1,17 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## evidence-20261030.140 · 静态版本仍139.2 / pending-test
+
+- [验证] 14组原生HTTP/IndexedDB专项通过，覆盖4状态×9查询故障、取消晚到、终态冲突、停止本页等待和跨页服务端预算；零生成POST。
+- [验证] 6组冻结139.2页面专项通过：429按提示等待、503无提示暂停、双页恢复及模拟隐藏/离线后查询原ID成功，390px无横向溢出；非真机后台验收。
+- [验证] 两项真实GPU批次各受理一次，第二项响应丢失后只读核对找回原ID；取消响应丢失后原ID确认cancelled，第一项继续执行。
+- [交付] 第一项1,458秒成功，720×1080 PNG、720,638字节、SHA与8小时到期通过；3项实际UI另存/载入/刷新、4项真实任务JSON恢复通过，两MP4两GIF完整解码，样片去元数据，临时Key禁用401。
+- [取证] 本机Chromium中文持久profile下载PNG原生崩溃有最小复现；使用已核验为同一目录的既有ASCII联接完成复查，失败保留，不作为产品/API修复。
+- [复查] 原Key只允许standard，实际页面禁用draft正确；旧脚本和原记录保留、不补发，修正验证脚本后按授权720×1080 standard另建批次。
+- [边界] 产品源码、静态版本和线上服务均未改动/重建/部署/重启；原API源码、配置、发布指针与服务PID只读核对相同。
+
+Evidence140 adds14 native fault groups and6 frozen-UI polling groups without changing or redeploying139.2. Exactly two actual GPU members ended succeeded/cancelled, recovering original IDs after lost responses. The first took1,458 seconds and produced a720,638-byte720×1080 PNG with verified SHA and eight-hour expiry. Four actual backup and three original-delivery UI checks passed; two MP4s/two GIFs fully decode. The temporary Key is disabled with401. Existing policy is preserved. Windows native-browser profile-path download failures and their minimal diagnosis remain visible; the same profile worked through a verified existing ASCII junction. Physical-phone/background/fleet acceptance remains HOLD.
+
 ## canvas-20261030.139.2 · 已独立部署 / pending-test
 
 - [修复] 原API暂不可用时，使用已记住或当前输入的原Key读取已校验本机原件；离线读取不创建远端客户端，错误Key/源站、退出及身份切换继续隔离。
