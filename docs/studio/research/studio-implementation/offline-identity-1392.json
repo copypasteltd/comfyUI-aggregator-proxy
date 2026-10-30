@@ -1,0 +1,174 @@
+{
+  "passed": true,
+  "scope": "Native browser IndexedDB and synthetic existing HTTP catalog; local-only Key ownership, no production API/GPU or physical phone",
+  "checks": [
+    "online connection stores a separately verified local identity and expired-cloud original",
+    "remembered original Key restores local media after API failure and cloud expiry without a remote client",
+    "wrong Key cannot read the original and revokes its cached object URL",
+    "the same secret at another origin cannot read the original local media",
+    "disconnect removes remembered access; profile metadata alone never unlocks retained bytes",
+    "explicit original Key input unlocks only local copies while the API is unavailable",
+    "a connection change during IndexedDB read cannot return the previous identity's original",
+    "memory-only Key is not silently recovered after refresh",
+    "server rejection grants no remote client; a previously downloaded copy remains locally owned by the original Key",
+    "all catalog traffic is read-only and cookie-free; no generation or backend mutation"
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "cookie": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie": false
+    }
+  ],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  }
+}

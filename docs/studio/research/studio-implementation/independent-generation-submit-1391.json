@@ -1,0 +1,135 @@
+{
+  "passed": true,
+  "phase": "submit",
+  "started_at": "2026-10-30T07:53:03.316Z",
+  "scope": "Actual independent public HTTP canvas and original API; one real image-edit GPU task, explicit response loss; no API code/config/model/channel changes or physical phone acceptance",
+  "checks": [
+    {
+      "name": "lost real upload response preserves staged reference and sends no generation",
+      "detail": true
+    },
+    {
+      "name": "real generation POST followed committed original intent",
+      "detail": {
+        "job_id": "job_b3d89a5d08ab420694905358e439771b",
+        "body_sha256": "a13741e14cb28ccbb34cf6cc842fcf02ff68ddedbfe57b39acfc0b12a711ac62"
+      }
+    },
+    {
+      "name": "explicit upload recovery returns the same actual asset ID and checksum",
+      "detail": {
+        "asset_id": "asset_a2f48267dfd6468ba20cffabfe7ba7e8"
+      }
+    },
+    {
+      "name": "refresh and read-only reconciliation recover exactly one original real GPU job",
+      "detail": {
+        "job_id": "job_b3d89a5d08ab420694905358e439771b",
+        "status": "preparing",
+        "server_jobs": 1
+      }
+    },
+    {
+      "name": "all actual business requests go directly to the original API without cookies",
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs/lookup",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-139/real-reference-composer.png",
+      "sha256": "06e5c807d222a29abc024f6d111b77f240473aad27978480b3470b4612a1033b"
+    },
+    {
+      "file": "docs/media/studio-139/real-upload-response-lost.png",
+      "sha256": "2ad33db022fcb3cec4ba04338bbcbbf2268402199108b181ac51cd5469e6578f"
+    },
+    {
+      "file": "docs/media/studio-139/real-generation-response-lost.png",
+      "sha256": "752654424de0c49d5f7937eeff11215579a778040da4be0d7df5f784ce03e7ff"
+    },
+    {
+      "file": "docs/media/studio-139/real-original-job-recovered.png",
+      "sha256": "8580ba903bed3eeedc86181ce42cbbb4e1a43c2486d68875ce873a8633ff5494"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "canvas_release": "canvas-20261030.138.1",
+  "original_job_id": "job_b3d89a5d08ab420694905358e439771b",
+  "generation_posts": 1,
+  "server_jobs": 1,
+  "upload_posts": 2,
+  "finished_at": "2026-10-30T07:53:32.888Z"
+}

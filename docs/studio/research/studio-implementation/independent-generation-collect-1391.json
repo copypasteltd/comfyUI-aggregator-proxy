@@ -1,0 +1,209 @@
+{
+  "passed": false,
+  "phase": "collect",
+  "started_at": "2026-10-30T08:06:30.204Z",
+  "scope": "Actual independent public HTTP canvas and original API; one real image-edit GPU task, explicit response loss; no API code/config/model/channel changes or physical phone acceptance",
+  "checks": [
+    {
+      "name": "actual download fault rejected without saving or altering original task: same-length checksum corruption",
+      "detail": true
+    },
+    {
+      "name": "actual download fault rejected without saving or altering original task: truncated body and shorter declared response length",
+      "detail": true
+    },
+    {
+      "name": "verified actual 720x1080 GPU output loads into the independent canvas",
+      "detail": {
+        "width": 720,
+        "height": 1080
+      }
+    },
+    {
+      "name": "original task and verified local result survive browser close and page refresh",
+      "detail": true
+    },
+    {
+      "name": "UI original-file download matches original API length and SHA256",
+      "detail": {
+        "bytes": 634923,
+        "sha256": "f200bc866915dae22c7f234d6e89dfaab74123cd75a0128cd4df0ece1cddb59a"
+      }
+    },
+    {
+      "name": "actual generated result has no horizontal overflow at390px, emulated viewport only",
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_b3d89a5d08ab420694905358e439771b",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_494e730b82774d84af101711083618f8",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_b3d89a5d08ab420694905358e439771b",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_b3d89a5d08ab420694905358e439771b",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_494e730b82774d84af101711083618f8",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_494e730b82774d84af101711083618f8/download",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_494e730b82774d84af101711083618f8",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_494e730b82774d84af101711083618f8/download",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_494e730b82774d84af101711083618f8",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_494e730b82774d84af101711083618f8/download",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-139/real-download-rejected-1.png",
+      "sha256": "8c865bb4d02f7583c4ca6b7f77da465d294e3279763f7fe36f2c077212a74b14"
+    },
+    {
+      "file": "docs/media/studio-139/real-download-rejected-2.png",
+      "sha256": "a27f1295c4e6a7948a255bd2c4a52273389bc9a55d20d8bdf731bb44d86e7e84"
+    },
+    {
+      "file": "docs/media/studio-139/real-generated-result-desktop.png",
+      "sha256": "3ce4c250b710f726f5a6afe8198cf78b5a7d439f263edb5da875f3b8ad2cd6de"
+    },
+    {
+      "file": "docs/media/studio-139/real-generated-result-390.png",
+      "sha256": "6e074d5b00081cf0ae0a74bbfba3f8756c0de8b9f498e5989b2275289de3d583"
+    },
+    {
+      "file": "docs/media/studio-139/failed-collect.png",
+      "sha256": "776ac7deb29e5aae28828083ab825a47dbccd291d4b62d3859cf80bfac78060a"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-node-id] img[src^=\"blob:\"]').first() to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_independent_generation.mjs:261:72",
+  "private_video": ".local/studio139/collect-recording/page@9cebe93a7027d13d471496b43cd4cb1b.webm",
+  "finished_at": "2026-10-30T08:07:28.983Z"
+}

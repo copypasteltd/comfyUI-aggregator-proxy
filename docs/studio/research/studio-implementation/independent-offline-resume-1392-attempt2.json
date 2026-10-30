@@ -1,0 +1,70 @@
+{
+  "passed": false,
+  "started_at": "2026-10-30T08:33:52.808Z",
+  "canvas_release": "canvas-20261030.139.2",
+  "source_revision": "dda138adf9408f10f3bf366a6e590e057cbe1c63",
+  "index_sha256": "887beec33b7e2c82ab2ab326ade00389014cbdf85d2eea178a8290c28c0e5291",
+  "scope": "Actual public independent HTTP canvas, original already-generated GPU image and original browser database; API response loss and offline are browser-injected; 390px is emulation, not a physical phone",
+  "original_job_id": "job_b3d89a5d08ab420694905358e439771b",
+  "generation_posts": 0,
+  "checks": [
+    {
+      "name": "current 139.2 serves the frozen index and restores the same actual image with API unavailable from startup",
+      "detail": true
+    },
+    {
+      "name": "offline page refresh preserves original body, idempotency key, release digest, job and local result",
+      "detail": true
+    },
+    {
+      "name": "actual offline image has no horizontal document overflow at390px, emulated viewport only",
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-139/real-offline-fixed-desktop-attempt2.png",
+      "sha256": "e9a9d7f120ce332279a9cca973d11a1f35bb8f80e00e8177dd2e654cf114f762"
+    },
+    {
+      "file": "docs/media/studio-139/real-offline-fixed-390-attempt2.png",
+      "sha256": "0ec447d41f28ecf585c94583f6b3f4dd425428885cd4747aafe194d7e5bfdedd"
+    },
+    {
+      "file": "docs/media/studio-139/failed-offline-resume-attempt2.png",
+      "sha256": "c4e66cde916bf26437b7f5020821f042966e030b20f808597511547c303bcf4d"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '预览', exact: true })\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_independent_offline_resume.mjs:101:65",
+  "private_video": ".local/studio139/offline-resume-recording/page@caa3c8b11ae94b5fff227aa41e0d8083.webm",
+  "finished_at": "2026-10-30T08:34:46.059Z"
+}

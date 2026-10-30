@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "release_id": "canvas-20261030.139.2",
+  "api_unchanged": true,
+  "api_before": {
+    "current": "/opt/comfyui-aggregator/releases/linux-20261030.137.1",
+    "release_manifest_sha256": "e7ae0017ff2ac864ef33093b835bcee54b970c5731fd71a980b55b5624281a05",
+    "configuration_sha256": {
+      "cloud.env": "7bcacbe51d10a0c39f4c6359b48f00780637d8dcf5e1630cca0acec62cc9be86",
+      "http-worker.json": "64d77dcb15219704733697d13c48e7728117669b2fad206015f595951f2344b8",
+      "http-worker.secret": "397777c972e399e94a8566f1abdd382171cb7f7a9af9f1867487d1196a77ca35",
+      "initial-admin.json": "dce73c5d5c0bb1d5c8ae036f028525cd1ea8b92d4ea61c7b9d74fbc85c2c281e",
+      "nginx.conf": "9b6efdc286e2e0d4bec7050c56ab52adc56e78e650dafbd0a2fffefed6401305",
+      "pg_hba.conf": "e3b47154582b6c6944879e95a7cfe83ecf48491f9e004f64e3dabc83ff071cb2",
+      "postgresql.conf": "dd3fb083224d36e0962668ad9bb5b136df601fac9eee59eb4e01194b8666a127"
+    },
+    "services": {
+      "comfy-aggregator-api": "MainPID=2632288\nActiveState=active",
+      "comfy-aggregator-runner": "MainPID=2628181\nActiveState=active",
+      "comfy-aggregator-http-worker": "MainPID=803588\nActiveState=active",
+      "comfy-aggregator-edge": "MainPID=1119\nActiveState=active"
+    }
+  },
+  "api_after": {
+    "current": "/opt/comfyui-aggregator/releases/linux-20261030.137.1",
+    "release_manifest_sha256": "e7ae0017ff2ac864ef33093b835bcee54b970c5731fd71a980b55b5624281a05",
+    "configuration_sha256": {
+      "cloud.env": "7bcacbe51d10a0c39f4c6359b48f00780637d8dcf5e1630cca0acec62cc9be86",
+      "http-worker.json": "64d77dcb15219704733697d13c48e7728117669b2fad206015f595951f2344b8",
+      "http-worker.secret": "397777c972e399e94a8566f1abdd382171cb7f7a9af9f1867487d1196a77ca35",
+      "initial-admin.json": "dce73c5d5c0bb1d5c8ae036f028525cd1ea8b92d4ea61c7b9d74fbc85c2c281e",
+      "nginx.conf": "9b6efdc286e2e0d4bec7050c56ab52adc56e78e650dafbd0a2fffefed6401305",
+      "pg_hba.conf": "e3b47154582b6c6944879e95a7cfe83ecf48491f9e004f64e3dabc83ff071cb2",
+      "postgresql.conf": "dd3fb083224d36e0962668ad9bb5b136df601fac9eee59eb4e01194b8666a127"
+    },
+    "services": {
+      "comfy-aggregator-api": "MainPID=2632288\nActiveState=active",
+      "comfy-aggregator-runner": "MainPID=2628181\nActiveState=active",
+      "comfy-aggregator-http-worker": "MainPID=803588\nActiveState=active",
+      "comfy-aggregator-edge": "MainPID=1119\nActiveState=active"
+    }
+  },
+  "static_before": "MainPID=2724238\nActiveState=active",
+  "static_after": "MainPID=2724238\nActiveState=active",
+  "static_configuration_written": true,
+  "static_reload_only": true,
+  "static_service_restarted": false,
+  "old_config_sha256": "2a232bedb3d48d7f76de15f1457cf2abab0a1db90934bfe8164042c0bab2a2e7",
+  "new_config_sha256": "6b19394b9eecd66e2399dfc4daff4359cc7c5e039a03e2042047d0d3c737bc55",
+  "index_sha256": "887beec33b7e2c82ab2ab326ade00389014cbdf85d2eea178a8290c28c0e5291",
+  "routes": {
+    "/studio/": 200,
+    "/studio/config": 200,
+    "/studio/canvas": 200,
+    "/studio/models": 200,
+    "/studio/tasks": 200,
+    "/studio/assets": 200,
+    "/studio/assets/": 200,
+    "/studio/storage": 200,
+    "/studio/task-access": 200,
+    "/studio/assets/missing-1392.js": 404,
+    "/v1/models": 404,
+    "/admin/": 404,
+    "/internal/v1/register": 404,
+    "/api/agents": 404
+  },
+  "public_routes_verified": true
+}

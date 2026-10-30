@@ -6,15 +6,15 @@
 
 | 入口 | 地址 |
 | --- | --- |
-| 独立画布138.1 | [打开画布](http://43.165.167.179:39445/studio/) |
+| 独立画布139.2 | [打开画布](http://43.165.167.179:39445/studio/) |
 | 原业务API | `http://43.165.167.179:39443` |
 | 原管理后台 | [Admin](http://43.165.167.179:39443/admin/) |
 
-![实际公网桌面模型目录](docs/studio/media/studio-138/public-independent-models-desktop.png)
+![139.2实际GPU原件离线恢复](docs/studio/media/studio-139/real-offline-fixed-desktop-attempt4.png)
 
-[390px页面](docs/studio/media/studio-138/public-independent-models-390.png) · [导览MP4](docs/studio/media/studio-138/independent-desktop.mp4)。实际截图使用已禁用的只读验收 Key，生成权限提示为预期；导览使用合成 API 协议，不代表本轮 GPU 生成或真机手机验收。
+[390px页面](docs/studio/media/studio-139/real-offline-fixed-390-attempt4.png) · [素材原件预览](docs/studio/media/studio-139/real-offline-library-attempt4.png) · [实际恢复MP4](docs/studio/media/studio-139/real-offline-resume.mp4)。本轮一项真实720×1080编辑完成；录像展示同一已保存原件的离线恢复，390px是浏览器视口模拟。验收Key已禁用。[完整故障与回执](docs/studio/24-真实故障恢复与离线素材验收.md)。
 
-![独立画布导览：合成API协议](docs/studio/media/studio-138/independent-desktop.gif)
+![真实原件离线恢复验收](docs/studio/media/studio-139/real-offline-resume.gif)
 
 ## 方案与功能
 
@@ -41,7 +41,7 @@ flowchart LR
 1. 打开独立画布，在连接页填写**原API地址39443**和管理员发放的业务Key，按需选择是否在本机记住Key。地址不要填写画布39445、`/admin/`或ComfyUI8188。
 2. 连接后查看模型用法，按授权选择完整规格、尺寸/时长及参考槽位。目录列出模型不代表设备当前空闲；首帧视频与多参考视频是不同能力，音频是Workflow产物。
 3. 新建画布并新建创作，提交后保留原任务。响应丢失使用核对原提交；停止本页等待不等于取消GPU任务。
-4. 完成后校验并载入素材，可继续创作、交互预览GLB或另存原件。云端沿用完成后8小时到期，本机副本受浏览器配额和清理影响，建议另存或导出ZIP。
+4. 完成后校验并载入素材，可继续创作、预览GLB或另存原件。云端完成后8小时到期；原Key可在API不可用时读取已保存的本机副本，生成仍需在线鉴权。默认内存Key刷新需重输，明确保存后才自动恢复。本机受配额和清理影响，请另存或导出ZIP。
 5. 需要管理模型、Workflow、渠道、Key或排队时，打开原Admin。原系统缺少的功能属于外部依赖，画布不会绕过API实现。
 
 **换端口/域名不会自动迁移本机数据。** 先在旧39443画布导出作品ZIP、必要原件和任务JSON，到新39445入口导入并重新填写业务Key；确认可用前保留旧数据。导入作品不会重新生成；任务清单需主动查询原ID。数据库v4不得被静态回退降级。
@@ -61,11 +61,11 @@ npm run build
 
 仅发布`web/dist/`，由独立静态服务提供`/studio/`和SPA回退。`managed`是功能约束模式，与是否独立部署无关；不要换成启用上游脚本/Agent的`standalone`模式。默认API是公开地址，Key不进入构建。没有默认API时连接页留空。
 
-当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.138.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录；原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛。本地开发/验证禁止Docker、WSL和虚拟机。[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。
+当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.139.2/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，并保留旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
 
 ## 验证与限制
 
-本轮179前端单元、类型/生产构建、11组合成双源浏览器、107静态文件公网摘要及2组真实API目录浏览器检查通过。依赖复用先前原生空目录的锁定安装；不是本轮重新安装。临时只读Key已禁用，自建浏览器/夹具和测试PG均已关闭。图片、视频、音频和GLB八种真实模式为历史证据，本轮未重发GPU任务。
+本轮179单元、类型/生产构建、11双源、10本机身份、7实际原件UI、107当前/170旧文件及14路由分别通过。一项真实编辑验证上传/生成丢响应仍同一任务；等长损坏与截短下载被拒绝。依赖复用先前锁定原生干净安装；八种媒体模式为历史证据，未全重跑。自有验收Key禁用后401，自建浏览器/夹具和测试PG已关闭。旧失败回执保留，MP4/GIF完整解码，公开样片去除元数据。
 
 完整首期仍为**HOLD/pending-test**：故障矩阵、实际Android/iOS、大文件峰值/泄漏及10～20台容量待验。WebDAV/云同步、可选文本助手、动画/更多3D格式未完成；ComfyUI原件移交即删除、异构设备合并及GPU优化是原API外部依赖，不能通过修改转发来补足。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
 

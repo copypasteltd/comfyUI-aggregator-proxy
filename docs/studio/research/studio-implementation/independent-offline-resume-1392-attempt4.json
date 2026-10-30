@@ -1,0 +1,165 @@
+{
+  "passed": true,
+  "started_at": "2026-10-30T08:37:46.317Z",
+  "canvas_release": "canvas-20261030.139.2",
+  "source_revision": "dda138adf9408f10f3bf366a6e590e057cbe1c63",
+  "index_sha256": "887beec33b7e2c82ab2ab326ade00389014cbdf85d2eea178a8290c28c0e5291",
+  "scope": "Actual public independent HTTP canvas, original already-generated GPU image and original browser database; API response loss and offline are browser-injected; 390px is emulation, not a physical phone",
+  "original_job_id": "job_b3d89a5d08ab420694905358e439771b",
+  "generation_posts": 0,
+  "checks": [
+    {
+      "name": "current 139.2 serves the frozen index and restores the same actual image with API unavailable from startup",
+      "detail": true
+    },
+    {
+      "name": "offline page refresh preserves original body, idempotency key, release digest, job and local result",
+      "detail": true
+    },
+    {
+      "name": "actual offline image has no horizontal document overflow at390px, emulated viewport only",
+      "detail": true
+    },
+    {
+      "name": "offline local library previews and exports the exact actual original while remote delete remains disabled",
+      "detail": {
+        "bytes": 634923,
+        "sha256": "f200bc866915dae22c7f234d6e89dfaab74123cd75a0128cd4df0ece1cddb59a"
+      }
+    },
+    {
+      "name": "wrong actual UI Key cannot read the original user's saved local image",
+      "detail": true
+    },
+    {
+      "name": "failed wrong-Key connection leaves the saved original profile intact and original offline image recoverable",
+      "detail": true
+    },
+    {
+      "name": "restoring the original API reconnects the original profile without submitting another task",
+      "detail": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": true,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": false,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "blocked_offline": false,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "blocked_offline": false,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "blocked_offline": false,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "blocked_offline": false,
+      "cookie_present": false,
+      "bearer_present": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "blocked_offline": false,
+      "cookie_present": false,
+      "bearer_present": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-139/real-offline-fixed-desktop-attempt4.png",
+      "sha256": "e9a9d7f120ce332279a9cca973d11a1f35bb8f80e00e8177dd2e654cf114f762"
+    },
+    {
+      "file": "docs/media/studio-139/real-offline-fixed-390-attempt4.png",
+      "sha256": "0ec447d41f28ecf585c94583f6b3f4dd425428885cd4747aafe194d7e5bfdedd"
+    },
+    {
+      "file": "docs/media/studio-139/real-offline-library-attempt4.png",
+      "sha256": "1cd9b58565ac3d964b50bba25a49120890e9a97c0320425200156acfd4ede0e7"
+    },
+    {
+      "file": "docs/media/studio-139/real-restored-online-attempt4.png",
+      "sha256": "6871b5a1481eab9b0bdab1aaab35ee4f8a06bf0177c468644da5df1d41aefb10"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "download_event": {
+    "blob_url": true,
+    "page_closed_before_save": false
+  },
+  "original_metadata": {
+    "id": "content_494e730b82774d84af101711083618f8",
+    "media_type": "image/png",
+    "bytes": 634923,
+    "sha256": "f200bc866915dae22c7f234d6e89dfaab74123cd75a0128cd4df0ece1cddb59a"
+  },
+  "private_video": ".local/studio139/offline-resume-recording/page@08f26b5af58c9a675966d5fe50f4d20e.webm",
+  "finished_at": "2026-10-30T08:38:35.448Z"
+}

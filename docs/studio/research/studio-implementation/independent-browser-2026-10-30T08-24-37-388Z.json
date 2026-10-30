@@ -1,0 +1,130 @@
+{
+  "passed": true,
+  "at": "2026-10-30T08:24:37.765Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T08-21-55-487Z.json",
+  "scope": "Two native HTTP origins and synthetic API protocol; no production API mutation, GPU job or physical phone acceptance",
+  "checks": [
+    "desktop:explicit-api-default-no-eager-api-call",
+    "desktop:cross-origin-catalog-business-key-only-admin-is-link",
+    "desktop:new-connection-does-not-inherit-static-origin",
+    "desktop:published-models-and-real-schema-worker",
+    "desktop:no-admin-worker-comfy-agent-requests-no-page-errors",
+    "390:explicit-api-default-no-eager-api-call",
+    "390:cross-origin-catalog-business-key-only-admin-is-link",
+    "390:new-connection-does-not-inherit-static-origin",
+    "390:published-models-and-real-schema-worker",
+    "390:no-admin-worker-comfy-agent-requests-no-page-errors",
+    "all-business-requests-go-directly-to-configured-api-without-cookies"
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "origin_matches_canvas": true,
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-1392/independent-connection-desktop.png",
+      "sha256": "76ce6592159aca3bf6a7ba447c71ea786d6439f2ef6e7887fc40120cf079261d"
+    },
+    {
+      "file": "docs/media/studio-1392/independent-models-desktop.png",
+      "sha256": "3323059147792187cdf79faac9e9ebdaba1b1a02daf06b5e2b75edfd56fa1c27"
+    },
+    {
+      "file": "docs/media/studio-1392/independent-connection-390.png",
+      "sha256": "b18606a2e3d8cb3fc33644df3c63efef08a31586fc86fd29aadcc3ca485b4ce8"
+    },
+    {
+      "file": "docs/media/studio-1392/independent-models-390.png",
+      "sha256": "206b0fcf73c088c4555295593edc57f2f6744c4e4b24b5c54b371629da99bfd1"
+    }
+  ],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "static_and_fixture_servers_closed": true
+  },
+  "static_bytes_unchanged": true
+}

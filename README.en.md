@@ -6,15 +6,15 @@
 
 | Entry | Address |
 | --- | --- |
-| Independent canvas138.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
+| Independent canvas139.2 | [Open canvas](http://43.165.167.179:39445/studio/) |
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
 
-![Actual public model catalog, desktop](docs/studio/media/studio-138/public-independent-models-desktop.png)
+![Actual saved GPU image restored offline on139.2](docs/studio/media/studio-139/real-offline-fixed-desktop-attempt4.png)
 
-[390px view](docs/studio/media/studio-138/public-independent-models-390.png) · [MP4 tour](docs/studio/media/studio-138/independent-desktop.mp4). Actual screenshots used a read-only verification Key, now disabled; generation permission warnings are expected. The tour uses a synthetic API fixture and does not demonstrate a new GPU run or physical-phone acceptance.
+[390px view](docs/studio/media/studio-139/real-offline-fixed-390-attempt4.png) · [Local original preview](docs/studio/media/studio-139/real-offline-library-attempt4.png) · [Actual recovery MP4](docs/studio/media/studio-139/real-offline-resume.mp4). One real720×1080 image-edit job succeeded. The recording shows offline recovery of that same saved original;390px is viewport emulation. The verification Key is disabled. [Fault evidence and limits](docs/studio/24-真实故障恢复与离线素材验收.md).
 
-![Independent canvas tour using a synthetic API](docs/studio/media/studio-138/independent-desktop.gif)
+![Actual saved-original offline recovery](docs/studio/media/studio-139/real-offline-resume.gif)
 
 ## Architecture and capabilities
 
@@ -41,7 +41,7 @@ The canvas adds no generation backend or second queue. It does not modify the or
 1. Open the independent canvas. Enter the **existing API address on39443** and a business Key issued by its administrator. Choose whether to remember it locally; do not use the canvas39445, `/admin/` or ComfyUI8188 address as the API.
 2. Read the model usage and select an authorized complete preset, dimensions/duration and reference slots. Catalog presence does not mean a device is idle. First-frame and multiple-reference video are different capabilities; audio is a Workflow output.
 3. Create a canvas and a generation request. Preserve the original job; use submission reconciliation after a lost response. Stopping local polling does not cancel GPU work.
-4. Validate and load completed assets, continue creating, preview GLB or save originals. Existing cloud outputs expire eight hours after completion. Browser copies depend on local quota and user cleanup; export a ZIP or save originals separately.
+4. Validate and load completed assets, preview GLB or save originals. Cloud outputs expire eight hours after completion. The original Key can read already-saved local copies while the API is unavailable; generation still requires online authorization. Memory-only Keys must be entered again after refresh; only explicitly remembered Keys restore automatically. Export important copies separately.
 5. Open the original Admin to manage models, Workflows, channels, Keys and queues. Missing backend capabilities remain external dependencies; the canvas will not bypass the API.
 
 **Changing port or domain does not migrate browser data.** Export project ZIPs, required originals and task JSON from the old39443 canvas, import them at39445 and re-enter the business Key. Keep old data until verified. Project import does not generate again; task records require an explicit original-ID query. Static rollback must not downgrade IndexedDBv4.
@@ -61,11 +61,11 @@ npm run build
 
 Deploy only `web/dist/` to an independent static host with `/studio/` and SPA fallback. Keep `managed` mode: deployment independence does not mean the upstream `standalone` mode, which enables optional scripts/Agents. The default API address is public; never embed a Key. Without a default API, the connection field stays empty.
 
-Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.138.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Releases and rollbacks affect only this static canvas. The original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user will handle domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
+Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.139.2/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
 
 ## Validation and limits
 
-This increment passed179 frontend unit tests, type checking/production build,11 synthetic cross-origin browser groups, public hashes for107 static files and2 actual API-catalog browser groups. Dependencies reuse an earlier native clean locked installation; they were not installed again in this increment. The temporary read-only Key is disabled; owned browsers, fixtures and test PostgreSQL are closed. Eight real image/video/audio/GLB modes are historical evidence, not new GPU runs.
+This increment separately passed179 units/type checking/production build,11 cross-origin groups,10 local-identity groups,7 actual saved-image UI checks,107 current/170 retained file hashes and14 routes. One real image-edit job recovered after lost upload/generation responses; corrupt and truncated downloads were rejected. Dependencies reuse the earlier native clean locked installation. Eight media modes are historical evidence, not a new full matrix. The temporary Key is disabled with401 confirmed; owned browsers, fixtures and test PostgreSQL are closed. Failed receipts remain, both clips fully decode, and public PNG samples omit metadata.
 
 Full acceptance remains **HOLD/pending-test**. The complete fault matrix, physical Android/iOS, large-file peak memory/leaks and10–20-device capacity remain unverified. WebDAV/cloud sync, optional text assistant, animation and additional3D formats are incomplete. Transfer-triggered ComfyUI-original deletion, heterogeneous-device merging and GPU optimization belong to the existing API and are outside canvas implementation. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
 
