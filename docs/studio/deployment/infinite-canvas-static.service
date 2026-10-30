@@ -1,0 +1,15 @@
+[Unit]
+Description=Independent ComfyUI creative canvas static files
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/lib/infinite-canvas
+ExecStartPre=/usr/bin/nginx -t -e stderr -p /var/lib/infinite-canvas/ -c /etc/infinite-canvas/nginx.conf
+ExecStart=/usr/bin/nginx -e stderr -p /var/lib/infinite-canvas/ -c /etc/infinite-canvas/nginx.conf -g "daemon off;"
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "at": "2026-10-30T07:18:09.229501+00:00",
+  "release_id": "canvas-20261030.138.1",
+  "origin": "http://43.165.167.179:39445",
+  "api_origin": "http://43.165.167.179:39443",
+  "package_sha256": "652253dc5ce1b147a9716c0297436d2fcf00ab643d14182113064f61eaa29182",
+  "source_revision": "313790bccd9628ea81df7e17b6aab23d8a0b422b",
+  "static_files_verified": 107,
+  "static_routes": {
+    "/": 302,
+    "/studio/": 200,
+    "/studio/models": 200,
+    "/v1/models": 404,
+    "/admin/": 404,
+    "/internal/v1/register": 404,
+    "/api/agents": 404
+  },
+  "api_unauthenticated_status": 401,
+  "original_api_cors_allows_independent_origin": true,
+  "api_healthy": true,
+  "api_files_in_package": 0,
+  "api_source_modified": false,
+  "api_pointer_unchanged": true,
+  "api_configuration_unchanged": true,
+  "api_services_unchanged": true,
+  "api_services_before": {
+    "comfy-aggregator-api": "MainPID=2632288\nActiveState=active",
+    "comfy-aggregator-runner": "MainPID=2628181\nActiveState=active",
+    "comfy-aggregator-http-worker": "MainPID=803588\nActiveState=active",
+    "comfy-aggregator-edge": "MainPID=1119\nActiveState=active"
+  },
+  "api_services_after": {
+    "comfy-aggregator-api": "MainPID=2632288\nActiveState=active",
+    "comfy-aggregator-runner": "MainPID=2628181\nActiveState=active",
+    "comfy-aggregator-http-worker": "MainPID=803588\nActiveState=active",
+    "comfy-aggregator-edge": "MainPID=1119\nActiveState=active"
+  },
+  "initial_failures_preserved": [
+    "Root nginx syntax check created an unavailable PID file.",
+    "The host uses BT nginx and requires the installed resty Lua search path."
+  ],
+  "static_service": "MainPID=2724238\nActiveState=active",
+  "virtualization_used": false,
+  "generation_submitted": false,
+  "real_phone_acceptance": false
+}

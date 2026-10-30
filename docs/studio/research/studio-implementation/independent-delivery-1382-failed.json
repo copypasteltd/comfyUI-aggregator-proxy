@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "scope": "Independent static delivery HTTP verification",
+  "failure": "The probe required the literal Access-Control-Allow-Origin '*' but the existing API echoes each allowed arbitrary Origin.",
+  "observed": {
+    "independent_origin": "http://43.165.167.179:39445",
+    "unauthenticated_status": 401,
+    "allow_origin": "http://43.165.167.179:39445",
+    "preflight_status": 200
+  },
+  "api_changed_to_fix_probe": false,
+  "correction": "Accept '*' or the exact requested Origin and verify a second arbitrary Origin. The API remains unchanged.",
+  "superseded_by": "independent-delivery-1383.json"
+}

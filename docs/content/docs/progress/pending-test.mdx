@@ -7,6 +7,8 @@ description: Implemented changes that still need manual verification
 
 The current release needs manual verification in these areas:
 
+- Independent canvas138.1: open http://43.165.167.179:39445/studio/ and connect to the existing API on39443 with an administrator-issued business Key. Confirm a new/cleared connection uses the explicit API default, never the static canvas origin. Native179 unit/type/build checks,11 synthetic two-origin browser groups,107 public static hashes and2 actual catalog browser groups passed; no new GPU job or physical-phone acceptance is claimed. API source/configuration/pointer/service PIDs were unchanged; owned browser contexts/fixtures were closed and the temporary read-only Key disabled. Export/import projects and task records explicitly when moving origins; keep IndexedDBv4. See [current boundaries](../../../studio/20-独立画布与既有API融合最终边界.md) and [deployment](../../../studio/21-独立画布部署与使用.md). Full acceptance remains HOLD.
+
 - Managed Key rotation: verify explicit per-job permission proof, unchanged original identity/body, unknown-submission blocking, original-identity backup/restore, new-Key canvas/result ownership and v1/v2/v3 to v4 preservation. Wrong Keys, connection changes, two-page races and transaction aborts must not create an association. Browser/native and actual service evidence remain distinct.
 
 - Managed Lime buttons: verify default hover/active labels and borders remain dark and readable on the shared light background; focus stays visible in page and confirmation controls.

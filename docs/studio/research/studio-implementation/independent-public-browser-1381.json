@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "scope": "Actual public independent static site and existing API catalog with a temporary read-only key; no generation request, model/channel mutation or real phone acceptance",
+  "checks": [
+    "desktop: actual API catalog, explicit origin, read-only permission, no cookies/Admin/Worker/Comfy requests",
+    "390px: actual API catalog, explicit origin, read-only permission, no cookies/Admin/Worker/Comfy requests"
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-138/public-independent-models-desktop.png",
+      "sha256": "97673dc7c14339de2bbcd891df76d7d38f8caf6d17fa25bef4776793ea6f27c6"
+    },
+    {
+      "file": "docs/media/studio-138/public-independent-models-390.png",
+      "sha256": "7f8c976d06b3a38decb2f057e83769aeb88c79fe623257ec2e77e141cea2d5b7"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true
+  }
+}

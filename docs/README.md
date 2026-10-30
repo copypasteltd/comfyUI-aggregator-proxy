@@ -1,5 +1,7 @@
 # docs
 
+For this independent ComfyUI canvas, start with [studio/README.md](studio/README.md). The deployed canvas is static and does not require this optional Next.js documentation server. Build only `web/` in managed mode; leave the original API untouched. Local Docker/WSL/virtual machines are prohibited.
+
 This is a Next.js application generated with
 [Create Fumadocs](https://github.com/fuma-nama/fumadocs).
 
