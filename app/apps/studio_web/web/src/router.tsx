@@ -18,6 +18,7 @@ const ModelsPage = lazy(() => import("@/pages/studio/models"));
 const TasksPage = lazy(() => import("@/pages/studio/tasks"));
 const StudioAssetsPage = lazy(() => import("@/pages/studio/assets"));
 const StudioStoragePage = lazy(() => import("@/pages/studio/storage"));
+const StudioTaskAccessPage = lazy(() => import("@/pages/studio/task-access"));
 
 function RoutesLayout() {
     const content = <Suspense fallback={<div className="studio-route-loading" role="status">正在打开画布…</div>}><Outlet /></Suspense>;
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
         { path: "/models", element: <ModelsPage /> },
         { path: "/tasks", element: <TasksPage /> },
         { path: "/storage", element: MANAGED_STUDIO ? <StudioStoragePage /> : <Navigate to="/config" replace /> },
+        { path: "/task-access", element: MANAGED_STUDIO ? <StudioTaskAccessPage /> : <Navigate to="/config" replace /> },
         { path: "/image", element: MANAGED_STUDIO ? <Navigate to="/models" replace /> : <ImagePage /> },
         { path: "/video", element: MANAGED_STUDIO ? <Navigate to="/models" replace /> : <VideoPage /> },
         { path: "/assets", element: MANAGED_STUDIO ? <StudioAssetsPage /> : <AssetsPage /> },

@@ -10,6 +10,7 @@ import { terminalStatuses } from "@/services/api/aggregator/types";
 import { getMediaBlob } from "@/services/file-storage";
 import { useStudioStore } from "@/stores/use-studio-store";
 import { StudioModel3dPreview } from "@/components/studio-model3d-preview";
+import { canReadTask } from "@/services/studio-task-access";
 
 function TaskContent({ ctx }: { ctx: CanvasNodeContext }) {
     const [intent, setIntent] = useState<Intent>();
@@ -20,7 +21,7 @@ function TaskContent({ ctx }: { ctx: CanvasNodeContext }) {
         let active = true;
         const load = async () => {
             const value = ctx.node.metadata?.studioIntentId ? await journalGet("intents", ctx.node.metadata.studioIntentId) : undefined;
-            if (active) setIntent(value?.identity.fingerprint === client?.fingerprint && value?.identity.origin === client?.origin ? value : undefined);
+            if (active) setIntent(value && client && canReadTask(value, client) ? value : undefined);
         };
         void load().catch(() => {}); const off = subscribeStudioTasks(() => void load().catch(() => {}));
         return () => { active = false; off(); };

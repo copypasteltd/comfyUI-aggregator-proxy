@@ -1,0 +1,129 @@
+{
+  "scope": "Native IndexedDB and shipped production UI with synthetic Key rotation/API, immutable task and backup proofs, v1/v2/v3 preservation and stale-page protection; not real GPU, phone or production permission acceptance",
+  "checks": [
+    {
+      "name": "new identity cannot see or operate old task before explicit proof",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "successful GET atomically binds new Key while preserving all original submission bytes",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "duplicate association is idempotent and task becomes visible to the new identity",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "new Key reads original content into its own verified local result without moving old caches",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "rotated-identity local result is protected by the original reconstructable canvas task",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "explicit cancellation uses new credentials and retains original task identity",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "prepared and unknown submissions cannot be adopted, looked up or generated with a changed Key",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "cross-origin records are refused before requesting the current Key",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "404/403 and wrong ID/model/type leave no permission association",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "connection change while GET is pending prevents a stale permission write",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "changed original record while GET is pending prevents association",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "aborted permission transaction leaves original state and association untouched",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "original-identity backups omit access proofs and preserve original body/Key partition",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "old-identity restore refuses another service before writing",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "connecting a new secret preserves original profile identity, removes its old secret and does not remember the new Key by default",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "database v4 blocks older v3 clients from deleting unrecognized rotated-identity references",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "two real pages preserve independent explicit Key associations in one latest-state transaction",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "removing one Key association preserves another page's access and the original record",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "fresh browser restores old identity without network permission, then independently rechecks the known job",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "native v1 to v4 preserves task bytes, upload/result blobs, budgets and unique node index",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "native v2 to v4 preserves task bytes, upload/result blobs, budgets and unique node index",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "native v3 to v4 preserves task bytes, upload/result blobs, budgets and unique node index",
+      "passed": true,
+      "detail": {}
+    }
+  ],
+  "screenshots": [],
+  "page_errors": [
+    "Synthetic quota"
+  ],
+  "cleanup": {
+    "browser_closed": true,
+    "server_closed": true,
+    "contexts_closed": true
+  },
+  "browser_storage_version": 4,
+  "passed": false,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: '接管已知任务', exact: true }) to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_task_access.mjs:150:132",
+  "at": "2026-10-30T03:46:46.275Z",
+  "private_recordings": ".local/studio-task-access/2026-10-30T03-45-52-497Z"
+}

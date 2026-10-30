@@ -33,7 +33,7 @@ if __name__ == "__main__":
         result = {"passed": False, "failure": "Gate did not return a JSON report; inspect the retained private log"}
     result.update({"recorded_at": datetime.now(UTC).isoformat(), "gate": name, "exit_code": completed.returncode, "private_logs": private.relative_to(ROOT).as_posix(), "stdout_sha256": hashlib.sha256(completed.stdout).hexdigest(), "stderr_sha256": hashlib.sha256(completed.stderr).hexdigest()})
     result["passed"] = result.get("passed", False) and completed.returncode == 0
-    target = REPOSITORY / "docs/evidence/studio-release-135" / (name + "-final-" + label + ".json")
+    target = REPOSITORY / "docs/evidence/studio-release-136" / (name + "-final-" + label + ".json")
     target.parent.mkdir(parents=True, exist_ok=True)
     with target.open("x", encoding="utf-8") as output:
         output.write(json.dumps(result, ensure_ascii=False, indent=2) + "\n")

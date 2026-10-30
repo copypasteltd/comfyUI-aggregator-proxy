@@ -77,7 +77,7 @@ export function taskSubmissionSignature(task: TaskJournalRecord) {
     return JSON.stringify([task.version, task.id, task.identity.profileId, task.identity.origin, task.identity.fingerprint, task.projectId, task.nodeId, task.body, task.idempotencyKey, task.releaseDigest, task.createdAt, task.output.mediaTypes, task.output.maxBytes, task.batch && [task.batch.id, task.batch.index, task.batch.total]]);
 }
 
-export function readTaskJournal(source: string, owner: Pick<IdentityRef, "origin" | "fingerprint">): TaskJournalBackup & { sha256: string } {
+function parseTaskJournal(source: string, owner: { origin: string; fingerprint?: string }): TaskJournalBackup & { sha256: string } {
     let envelope, payload;
     try { envelope = JSON.parse(source); } catch { fail(); }
     fields(envelope, ["format", "version", "payload", "sha256"]);
@@ -87,7 +87,7 @@ export function readTaskJournal(source: string, owner: Pick<IdentityRef, "origin
     fields(payload, ["exportedAt", "identity", "tasks"]);
     fields(payload.identity, ["origin", "fingerprint"]);
     identity({ ...payload.identity, profileId: "backup" });
-    if (!sameJournalIdentity(payload.identity as Pick<IdentityRef, "origin" | "fingerprint">, owner)) throw new Error("请连接清单对应的原服务及原API Key，未导入其他身份的记录");
+    if (payload.identity.origin !== owner.origin || owner.fingerprint !== undefined && payload.identity.fingerprint !== owner.fingerprint) throw new Error("请连接清单对应的原服务及原API Key，未导入其他身份的记录");
     if (!natural(payload.exportedAt) || !Array.isArray(payload.tasks)) fail();
     const ids = new Set();
     const nodes = new Set();
@@ -95,13 +95,17 @@ export function readTaskJournal(source: string, owner: Pick<IdentityRef, "origin
         validateTaskRecord(task);
         if (envelope.version === 1 && task.batch !== undefined) fail();
         const node = `${task.identity.fingerprint}:${task.projectId}:${task.nodeId}`;
-        if (!sameJournalIdentity(task.identity, owner) || ids.has(task.id) || task.stage !== "terminal" && nodes.has(node)) fail();
+        if (!sameJournalIdentity(task.identity, payload.identity as Pick<IdentityRef, "origin" | "fingerprint">) || ids.has(task.id) || task.stage !== "terminal" && nodes.has(node)) fail();
         ids.add(task.id);
         if (task.stage !== "terminal") nodes.add(node);
     }
     assertBatchMembers(payload.tasks);
     return { ...(payload as TaskJournalBackup), sha256: envelope.sha256 };
 }
+
+export const readTaskJournal = (source: string, owner: Pick<IdentityRef, "origin" | "fingerprint">) => parseTaskJournal(source, owner);
+// Explicit rotation UI only: importing old identity records never imports access grants.
+export const readTaskJournalFromOrigin = (source: string, origin: string) => parseTaskJournal(source, { origin });
 
 export function createTaskJournal(tasks: Intent[], owner: Pick<IdentityRef, "origin" | "fingerprint">): string {
     const payload = JSON.stringify({ exportedAt: Date.now(), identity: { origin: owner.origin, fingerprint: owner.fingerprint }, tasks: tasks.map(taskJournalRecord) } satisfies TaskJournalBackup);

@@ -176,10 +176,12 @@ try {
     check("explicit retry commits retained in-memory edit; actual canvas survives reload");
     const stalePage = await pageIn(ui, origin + "/studio/canvas");
     await stalePage.getByRole("button", { name: "新建画布", exact: true }).first().waitFor();
+    await uiPage.bringToFront();
     await uiPage.getByRole("link", { name: "画布", exact: true }).click();
     await uiPage.getByRole("button", { name: "新建画布", exact: true }).first().click();
     await uiPage.waitForFunction(async () => { const j = await import("/probe.mjs"); return JSON.parse((await j.journalGet("documents", j.documentNames[0])).value).state.projects.length === 2; });
     const committedProject = uiPage.url().split("/").at(-1);
+    await stalePage.bringToFront();
     await stalePage.getByRole("button", { name: "新建画布", exact: true }).first().click();
     await stalePage.getByText("本机编辑尚未保存", { exact: true }).waitFor();
     assert.equal(await stalePage.getByRole("button", { name: "重试保存", exact: true }).count(), 0);

@@ -1,5 +1,5 @@
 import { journalList, journalTransaction, type IdentityRef, type Intent } from "./aggregator-journal";
-import { createTaskJournal, readTaskJournal, sameJournalIdentity, taskJournalRecord, taskSubmissionSignature } from "./task-journal-format";
+import { createTaskJournal, readTaskJournal, readTaskJournalFromOrigin, sameJournalIdentity, taskJournalRecord, taskSubmissionSignature } from "./task-journal-format";
 import { assertBatchMembers, batchKey } from "./aggregator-batch";
 
 export async function exportTaskJournal(identity: IdentityRef) {
@@ -10,6 +10,14 @@ export async function exportTaskJournal(identity: IdentityRef) {
 // Only the transaction completion permits the success UI; no network or canvas writes occur here.
 export function restoreTaskJournal(source: string, identity: IdentityRef, stillConnected: () => boolean) {
     const backup = readTaskJournal(source, identity);
+    return restoreRecords(backup, stillConnected);
+}
+
+export function restoreOriginalTaskJournal(source: string, origin: string, stillConnected: () => boolean) {
+    return restoreRecords(readTaskJournalFromOrigin(source, origin), stillConnected);
+}
+
+function restoreRecords(backup: ReturnType<typeof readTaskJournal>, stillConnected: () => boolean) {
     return journalTransaction<{ added: number; kept: number }>(["intents"], "readwrite", (tx, result, abort) => {
         const store = tx.objectStore("intents");
         const request = store.getAll();

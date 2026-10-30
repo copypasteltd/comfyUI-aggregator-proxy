@@ -230,7 +230,7 @@ try {
     report.private_recording = path.relative(root, await page.video().path()).replaceAll("\\", "/");
     report.business_requests = requests;
     assert.equal(report.page_errors.length, 0); assert.deepEqual(await snapshot(), before);
-    report.dist_files = Object.keys(before).length; report.static_artifact_sha256 = before; report.static_artifact_unchanged = true; report.browser_storage_version = 3;
+    report.dist_files = Object.keys(before).length; report.static_artifact_sha256 = before; report.static_artifact_unchanged = true; report.browser_storage_version = 4;
     check("production static bytes unchanged, all owned pages free of uncaught errors and all business writes absent");
     report.passed = true;
 } catch (error) { report.passed = false; report.failure = error.stack; console.error(error.stack); }

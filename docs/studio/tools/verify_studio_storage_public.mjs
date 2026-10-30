@@ -9,7 +9,7 @@ import assert from "node:assert/strict";
 const root = fileURLToPath(new URL("../../", import.meta.url)), web = path.join(root, "infinite-canvas/web"), dist = path.join(web, "dist");
 const require = createRequire(path.join(web, "package.json"));
 const { chromium } = require("C:/Users/carzy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
-const origin = "http://43.165.167.179:39443", release = "studio-20261030.135.1", label = new Date().toISOString().replaceAll(/[:.]/g, "-");
+const origin = "http://43.165.167.179:39443", release = "studio-20261030.136.1", label = new Date().toISOString().replaceAll(/[:.]/g, "-");
 const shots = path.join(root, `docs/assets/studio/public-storage-space-${label}`), evidence = path.join(root, "docs/research/studio-implementation");
 await mkdir(shots, { recursive: true });
 const hash = (value) => createHash("sha256").update(value).digest("hex");
@@ -21,14 +21,22 @@ async function shot(page, name) { const file = path.join(shots, name + ".png"); 
 try {
     browser = await chromium.launch({ executablePath: "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe", headless: true });
     context = await browser.newContext({ viewport: { width: 1440, height: 960 }, locale: "zh-CN" });
-    await context.route("**/*", async (route) => {
+    await context.route("**/*", (route) => {
         const request = route.request(), url = new URL(request.url());
-        if (url.origin !== origin || !["GET", "HEAD"].includes(request.method())) { report.blocked_mutations.push({ method: request.method(), origin: url.origin, path: url.pathname }); await route.abort(); return; }
+        if (url.origin !== origin || !["GET", "HEAD"].includes(request.method())) { report.blocked_mutations.push({ method: request.method(), origin: url.origin, path: url.pathname }); return route.abort(); }
         if (url.pathname.startsWith("/v1/")) business.push({ method: request.method(), path: url.pathname });
-        await route.continue();
+        // Preserve actual public bytes before document navigation invalidates their CDP handles.
+        const work = (async () => {
+            const response = await route.fetch({ maxRedirects: 0 }), body = await response.body();
+            if (url.pathname.startsWith("/studio/")) {
+                const name = url.pathname.slice(8), file = Object.hasOwn(expected, name) ? name : "index.html";
+                assert.equal(response.status(), 200); assert.equal(hash(body), expected[file]); report.received_static_sha256[file] = hash(body);
+            }
+            await route.fulfill({ response, body });
+        })().catch((error) => { report.response_failure = error.message; });
+        pending.push(work); return work;
     });
     const page = await context.newPage(); pages.push(page); page.on("pageerror", (error) => report.page_errors.push(error.message));
-    page.on("response", (response) => { const url = new URL(response.url()); if (url.origin === origin && url.pathname.startsWith("/studio/")) pending.push((async () => { const body = await response.body(), name = url.pathname.slice(8); const file = Object.hasOwn(expected, name) ? name : "index.html"; assert.equal(response.status(), 200); assert.equal(hash(body), expected[file]); report.received_static_sha256[file] = hash(body); })().catch((error) => { report.response_failure = error.message; })); });
     const response = await page.goto(origin + "/studio/storage"); assert.equal(response.status(), 200);
     report.csp = response.headers()["content-security-policy"];
     await page.getByRole("heading", { name: "给创作留出空间", exact: true }).waitFor();
@@ -43,9 +51,17 @@ try {
     await page.setViewportSize({ width: 390, height: 844 }); await page.getByRole("heading", { name: "给创作留出空间", exact: true }).scrollIntoViewIfNeeded();
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)); await shot(page, "public-storage-mobile");
     await page.getByRole("link", { name: "备份任务清单", exact: true }).click(); await page.getByRole("heading", { name: "创作继续，任务也在继续", exact: true }).waitFor();
-    await page.goto(origin + "/studio/storage"); await page.getByRole("heading", { name: "给创作留出空间", exact: true }).waitFor();
+    await Promise.all(pending); await page.goto(origin + "/studio/storage"); await page.getByRole("heading", { name: "给创作留出空间", exact: true }).waitFor();
     check("390px route and task-backup navigation work on actual public HTTP");
-    await page.reload(); await page.getByText("当前浏览器未提供", { exact: true }).first().waitFor(); await Promise.all(pending);
+    await Promise.all(pending); await page.goto(origin + "/studio/task-access"); await page.getByRole("heading", { name: "接管已知任务", exact: true }).waitFor();
+    await page.getByText("请先连接新API Key", { exact: true }).waitFor();
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    assert.equal(await page.getByRole("button", { name: "核对并接管", exact: true }).count(), 0);
+    await shot(page, "public-task-access-mobile"); check("new task-access deep link is usable at 390px and offers connection before exposing old identity records");
+    await page.setViewportSize({ width: 1440, height: 960 }); await Promise.all(pending); await page.reload(); await page.getByRole("heading", { name: "接管已知任务", exact: true }).waitFor();
+    await shot(page, "public-task-access-desktop"); check("new public desktop task-access route survives reload without business credentials or requests");
+    await Promise.all(pending); await page.goto(origin + "/studio/storage"); await page.getByRole("heading", { name: "给创作留出空间", exact: true }).waitFor();
+    await Promise.all(pending); await page.reload(); await page.getByText("当前浏览器未提供", { exact: true }).first().waitFor(); await Promise.all(pending);
     assert.equal(report.page_errors.length, 0); assert.equal(report.blocked_mutations.length, 0); assert.equal(business.length, 0);
     assert.ok(!report.response_failure);
     assert.ok(Object.keys(report.received_static_sha256).some((name) => /storage-.*\.js$/.test(name)));

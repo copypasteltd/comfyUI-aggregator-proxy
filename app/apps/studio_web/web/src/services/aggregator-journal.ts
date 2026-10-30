@@ -3,6 +3,7 @@ import type { CanvasNodeData } from "@/types/canvas";
 import { assertBatchMembers, batchKey, type BatchRef } from "./aggregator-batch";
 
 export type IdentityRef = { profileId: string; origin: string; fingerprint: string };
+export type TaskReadAccess = { version: 1; identity: IdentityRef; jobId: string; submissionSha256: string; verifiedAt: number };
 export type Intent = {
     version: 1; id: string; identity: IdentityRef; projectId: string; nodeId: string;
     body: string; idempotencyKey: string; releaseDigest: string;
@@ -13,6 +14,7 @@ export type Intent = {
     pollPaused?: boolean;
     recovered?: { version: 1; archiveSha256: string; importedAt: number };
     recoveryVerified?: boolean;
+    readAccess?: TaskReadAccess[];
     batch?: BatchRef;
     output: { mediaTypes: string[]; maxBytes: number };
     canvas?: { node: CanvasNodeData; sourceIds: string[]; detached?: boolean };
@@ -27,20 +29,20 @@ export type RequestBudget = { id: string; nextAt: number; pausedUntil: number };
 export type LocalDocument = { version: 1; id: string; revision: number; value: string; storageKeys: string[]; legacyValue: string | null };
 type JournalRecords = Records & { budgets: RequestBudget; documents: LocalDocument };
 const databaseName = "comfy-aggregator-studio:journal";
-const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.version, id: intent.id, identity: intent.identity, projectId: intent.projectId, nodeId: intent.nodeId, body: intent.body, idempotencyKey: intent.idempotencyKey, releaseDigest: intent.releaseDigest, createdAt: intent.createdAt, output: intent.output, canvas: intent.canvas && { node: intent.canvas.node, sourceIds: intent.canvas.sourceIds }, recovered: intent.recovered, batch: intent.batch });
+export const submissionSnapshot = (intent: Intent) => JSON.stringify({ version: intent.version, id: intent.id, identity: intent.identity, projectId: intent.projectId, nodeId: intent.nodeId, body: intent.body, idempotencyKey: intent.idempotencyKey, releaseDigest: intent.releaseDigest, createdAt: intent.createdAt, output: intent.output, canvas: intent.canvas && { node: intent.canvas.node, sourceIds: intent.canvas.sourceIds }, recovered: intent.recovered, batch: intent.batch });
 
 // Native transactions deliberately have no localStorage fallback. Completion is the commit signal.
 function openDatabase(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
         if (!globalThis.indexedDB) { reject(new Error("当前浏览器无法保存任务日志，已阻止提交；请启用浏览器存储")); return; }
-        const request = indexedDB.open(databaseName, 3);
+        const request = indexedDB.open(databaseName, 4);
         let abandoned = false;
         request.onupgradeneeded = (event) => {
             if (event.oldVersion === 0) {
                 const intents = request.result.createObjectStore("intents", { keyPath: "id" });
                 intents.createIndex("active_node", "activeNodeKey", { unique: true });
                 for (const name of ["uploads", "results", "budgets"]) request.result.createObjectStore(name, { keyPath: "id" });
-            } else if (![1, 2].includes(event.oldVersion) || ["intents", "uploads", "results", "budgets", ...(event.oldVersion === 2 ? ["documents"] : [])].some((name) => !request.result.objectStoreNames.contains(name))) {
+            } else if (![1, 2, 3].includes(event.oldVersion) || ["intents", "uploads", "results", "budgets", ...(event.oldVersion >= 2 ? ["documents"] : [])].some((name) => !request.result.objectStoreNames.contains(name))) {
                 request.transaction!.abort(); return;
             }
             if (event.oldVersion < 2) request.result.createObjectStore("documents", { keyPath: "id" });
@@ -65,8 +67,13 @@ export async function journalTransaction<T>(names: (keyof JournalRecords)[], mod
             tx.oncomplete = () => resolve(result);
             tx.onabort = () => reject(failure || tx.error || new Error("任务日志事务未提交，已阻止后续操作"));
             tx.onerror = () => { failure ||= tx.error; };
-            try { run(tx, (value) => { result = value; }, (error) => { if (failure) return; failure = error; tx.abort(); }); }
-            catch (error) { failure = error; tx.abort(); }
+            const abort = (error: unknown) => {
+                if (failure) return;
+                failure = error;
+                try { tx.abort(); } catch { reject(failure); }
+            };
+            try { run(tx, (value) => { result = value; }, abort); }
+            catch (error) { abort(error); }
         });
     } finally { database.close(); }
 }
@@ -160,19 +167,21 @@ export function prepareIntents(intents: Intent[]): Promise<Intent[]> {
 }
 
 export function updateIntent(id: string, update: (intent: Intent) => Intent): Promise<Intent> {
-    return transaction("intents", "readwrite", (store, result) => {
+    return journalTransaction(["intents"], "readwrite", (tx, result, abort) => {
+        const store = tx.objectStore("intents");
         const request = store.get(id);
         request.onsuccess = () => {
-            const existing = request.result as Intent | undefined;
-            if (!existing || existing.version !== 1) { store.transaction.abort(); return; }
-            const original = submissionSnapshot(existing);
-            let value: Intent;
-            try { value = update(existing); } catch { store.transaction.abort(); return; }
-            // Mutating an intent must never change its original submission identity or bytes.
-            if (submissionSnapshot(value) !== original) { store.transaction.abort(); return; }
-            if (value.stage === "terminal") delete value.activeNodeKey;
-            store.put(value);
-            result(value);
+            try {
+                const existing = request.result as Intent | undefined;
+                if (!existing || existing.version !== 1) throw new Error("原任务记录不存在或版本不受支持，未修改日志");
+                const original = submissionSnapshot(existing);
+                const value = update(existing);
+                // Mutating an intent must never change its original submission identity or bytes.
+                if (submissionSnapshot(value) !== original) throw new Error("原提交不可改写，未修改任务日志");
+                if (value.stage === "terminal") delete value.activeNodeKey;
+                store.put(value);
+                result(value);
+            } catch (error) { abort(error); }
         };
     });
 }

@@ -1,10 +1,10 @@
 # ComfyUI Aggregator Proxy
 
-[131 · 无限画布融合](docs/131-画布提交发布校验与异步查询契约.md)与[132 · 原提交只读核对](docs/132-画布原提交只读核对.md)：React创作前端复用现有七类媒体异步API、Key、Workflow和GPU调度；持久日志、原请求只读恢复、发布摘要及鉴权文件校验统一处理。当前前端169单元/类型/构建及140浏览器组通过，包含18界面、22存储、25清单、15恢复、15批次、17三维和28缓存专项；后端112专项、1,486兼容通过，生成Admin类型另验类型/构建。[公网画布](http://43.165.167.179:39443/studio/)当前静态135.1/后端132.2。八种真实GPU模式曾在3080/5070完成，包含30秒FLAC和76.94MB GLB；本轮未重复提交GPU。完整故障矩阵、手机真机和容量仍以[46项进度](docs/studio/10-开发进度与交付记录.md)分层验收。
+[131 · 无限画布融合](docs/131-画布提交发布校验与异步查询契约.md)与[132 · 原提交只读核对](docs/132-画布原提交只读核对.md)：React创作前端复用现有七类媒体异步API、Key、Workflow和GPU调度；持久日志、原请求只读恢复、发布摘要及鉴权文件校验统一处理。当前前端179单元/类型/构建及171浏览器组通过，包含18界面、22存储、25清单、15恢复、15批次、17三维、28缓存和31接管专项；后端112专项、1,486兼容通过，生成Admin类型另验类型/构建。[公网画布](http://43.165.167.179:39443/studio/)当前静态136.1/后端132.2。八种真实GPU模式曾在3080/5070完成，包含30秒FLAC和76.94MB GLB；本轮另完成一张Key轮换图片验证，耗时1,483秒；延迟待完善。完整故障矩阵、手机真机和容量仍以[46项进度](docs/studio/10-开发进度与交付记录.md)分层验收。
 
 任务页新增清单JSON导出、预览和原子导入：不含Key或媒体，保留原正文/幂等键/任务ID，不覆盖画布、不自动发起请求。恢复记录先标为待核对，主动查询原任务后才能取消/读取产物；无ID的备份禁止补发生成。作品ZIP与任务清单需分别备份；提示词按原文保留，请妥善保管。[具体机制](docs/studio/13-任务清单备份与只读恢复.md)、[原速MP4](docs/studio/media/studio-131/studio-task-backup-verified.mp4)、[GIF](docs/studio/media/studio-131/studio-task-backup-verified.gif)来自生产构建UI、合成API与配额故障注入，未使用真实GPU或物理手机。
 
-入口为高位HTTP `/studio/`，Admin为`/admin/`，业务API为`/v1/`，任意源CORS保持开放。本机文档/原件事务、保存失败重试与跨页冲突继续保留；历史v2→v3升级及当前135.1数据保留/重启通过，原Worker未重启。v3本机数据不能随静态包降级，普通image/file自动清理暂停；已新增三库占用/配额与当前身份已确认无引用缓存的手动清理，普通image/file安全回收及未知上传另验。[保存机制](docs/studio/12-本机引用事务与保存失败恢复.md)。
+入口为高位HTTP `/studio/`，Admin为`/admin/`，业务API为`/v1/`，任意源CORS保持开放。本机文档/原件事务、保存失败重试与跨页冲突继续保留；历史v2→v3及当前v3→v4数据保留/重启通过，原Worker未重启。v4本机数据不能随静态包降级，普通image/file自动清理暂停；已新增三库占用/配额与当前身份已确认无引用缓存的手动清理，普通image/file安全回收及未知上传另验。[保存机制](docs/studio/12-本机引用事务与保存失败恢复.md)。
 
 无新增生成后端，不需要本地Docker、WSL或Agent。源码与锁同步于`app/apps/studio_web/`，青柠样式沿用既有系统；图片、视频、Workflow音频与GLB分别呈现。云端完成八小时清理与本机离线副本独立管理。[完整使用与恢复](docs/studio/USAGE.md)、[原生发布运维](docs/studio/11-线上使用与原生发布运维.md)。
 
@@ -605,10 +605,26 @@ Three.js 0.186.1 / MIT随项目本地打包。预览阻止外链及未支持的�
 
 参考缓存仅列当前服务与Key身份；已确认上传、摘要/长度一致且未被任何原任务引用的缓存，才能经逐条确认后清理。确认时在同一事务内重读最新引用和所选记录；切换身份、新增引用、记录变化或事务失败均保留。所有任务阶段及源图/蒙版/多参考都受保护；上传晚到回执不会重建已删缓存。这里只删除本机缓存，远程任务、素材和生成原件不受影响。
 
-普通image/file自动回收、未确认上传的安全处置及真机配额恢复仍待完善。新增28组原生浏览器检查，含真实跨页事务及合成上传响应竞态；共169单元/140浏览器组通过。新锁原生空目录安装通过，补齐`.gitignore`后隔离最终源码构建的104文件与线上包完全一致。当前源码镜像262文件；线上存储4项、旧数据/重启3项及健康/CORS通过。本轮API、Worker和Edge均未重启，无新GPU或业务Key，完整验收仍HOLD。
+普通image/file自动回收、未确认上传的安全处置及真机配额恢复仍待完善。135.1增量当时新增28组原生浏览器检查，含真实跨页事务及合成上传响应竞态；共169单元/140浏览器组通过。新锁原生空目录安装通过，补齐`.gitignore`后隔离最终源码构建的104文件与线上包完全一致。当前源码镜像262文件；线上存储4项、旧数据/重启3项及健康/CORS通过。本轮API、Worker和Edge均未重启，无新GPU或业务Key，完整验收仍HOLD。
 
 [完整使用和开发约束](docs/studio/17-本机空间与参考缓存清理.md) · [原速MP4](docs/studio/media/studio-131/studio-upload-cache.mp4) · [GIF](docs/studio/media/studio-131/studio-upload-cache.gif) · [证据索引](docs/studio/research/studio-implementation/storage-validation-notes-1351.json)
 
 ![实际公网本机空间](docs/studio/assets/studio/public-storage-space-2026-10-30T03-11-34-336Z/public-storage-desktop.png)
 
 [390px确认弹层](docs/studio/assets/studio/upload-cache-2026-10-30T03-06-13-206Z/mobile-cache-confirmation.png)来自生产构建与合成API；公网空身份页面另行实测，未替代GPU或物理手机。
+
+## 换Key继续使用原任务（136.1）
+
+Admin对原业务Key执行“轮换”后，在连接页填写新凭证，再打开[接管已知任务](http://43.165.167.179:39443/studio/task-access)，逐项确认。服务器用新凭证返回匹配的原任务后才建立本机关联；原身份、提示词、幂等键、发布摘要及画布节点保留。新建另一把逻辑Key不会自动取得旧任务权限，取消还需要服务端取消权限。没有任务ID的记录不能换Key核对或补发。
+
+新连接保留旧身份元数据并移除旧连接保存的明文Key。任务清单按原身份导出，不包含访问关联、Key、画布或原件；跨浏览器须分别恢复作品ZIP和原身份清单，再逐项重新核对。清单中的SHA证明完整性，不能证明服务端授权或原提示词。新Key下载按新身份保存，旧缓存保留；解除关联不取消任务或删除文件。原件仍在完成后8小时到期。
+
+本机日志库升级到v4，保留v1/v2/v3记录；旧v3客户端必须重载，不能回退静态包来降级。当前179单元/类型/构建、171原生浏览器组（新增31接管组）通过，同锁隔离构建的106产物摘要一致，交付镜像265源码/配置文件。公网存储/接管6项、实际v3→v4保留/重启3项及健康/CORS通过，API/Worker/Edge未重启。真实Key轮换五组通过：同一720×1080图片一次提交并完成，新凭证下载747,994字节原件且SHA一致；旧凭证401、异逻辑Key404、撤销取消权限403。五把专用验收逻辑Key已禁用，六份凭证均401，用户原Key未改。该单样本端到端1,483秒（24分43秒），尚未拆分排队/加载/执行，不作为延迟或吞吐签收。完整故障、真机及容量仍HOLD。
+
+[完整契约](docs/studio/18-Key轮换与已知任务接管.md) · [当前证据索引](docs/studio/research/studio-implementation/task-access-validation-notes-1361.json) · [原速MP4](docs/studio/media/studio-131/studio-task-access.mp4) · [GIF](docs/studio/media/studio-131/studio-task-access.gif) · [媒体摘要及完整解码](docs/studio/media/studio-131/studio-task-access-manifest.json)。操作演示使用合成API与原生IndexedDB；真实服务器权限验证分别记录。
+
+![实际公网任务接管入口](docs/studio/assets/studio/public-storage-space-2026-10-30T04-18-31-346Z/public-task-access-desktop.png)
+
+[原任务关联](docs/studio/assets/studio/task-access-2026-10-30T04-05-17-889Z/desktop-associated.png) · [返回原画布](docs/studio/assets/studio/task-access-2026-10-30T04-05-17-889Z/desktop-original-canvas.png) · [390px确认](docs/studio/assets/studio/task-access-2026-10-30T04-05-17-889Z/mobile-confirmation.png) · [旧身份清单预览](docs/studio/assets/studio/task-access-2026-10-30T04-05-17-889Z/mobile-original-backup-preview.png)。这些操作截图来自验收的生产构建和合成接口，不是真机或GPU生成录制。
+
+[本次真实图片](docs/studio/media/studio-131/key-rotation-1361.png) · [原始调用、交付与耗时](docs/studio/research/studio-implementation/key-rotation-delivery-1361.json) · [验收Key关闭回执](docs/studio/research/studio-implementation/validation-key-closure-1361.json)。

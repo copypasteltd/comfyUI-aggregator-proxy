@@ -1,0 +1,115 @@
+{
+  "scope": "production dist with native Chromium IndexedDB; synthetic records and injected quota failure, not actual disk exhaustion, GPU, physical phone or multi-device capacity",
+  "started_at": "2026-10-30T03:56:26.593Z",
+  "checks": [
+    {
+      "name": "v1 upgrade preserves exact legacy JSON, original blob, uploads and budgets",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "v1 client is refused after v2 upgrade instead of downgrading data",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "upgrade preserves exact frozen intent and active-node unique index",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "unopened project protects its original without Zustand hydration",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "saved asset protects original while canvas has no media reference",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "reconstructable task protects original before node reference save",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "unknown task version refuses result deletion and preserves record",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "wrong identity rejected; explicitly detached and unreferenced original deletable",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "reference-first native transactions reject concurrent deletion",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "delete-first native transactions reject new dangling reference and retain prior document",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "malformed or unknown document versions preserve exact previous record",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "deleted whole project does not permanently pin detached canvas history",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "two actual pages reject stale revision without overwriting committed page-A document",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "actual UI displays injected quota failure and keeps old committed project document",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "failed canvas save blocks new generation before intent creation and HTTP POST",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "save error and retry remain visible below navigation at 390px emulation",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "explicit retry commits retained in-memory edit; actual canvas survives reload",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/storage-2026-10-30T03-56-23-121Z/desktop-save-failed.png",
+      "sha256": "e2fba5d146141142aee02712757dccb143b811d6f2336022538382539e8e45a2"
+    },
+    {
+      "file": "docs/assets/studio/storage-2026-10-30T03-56-23-121Z/mobile-save-failed.png",
+      "sha256": "7e2bcda6d6a62c669907e620aa0b18e17e0613b16bf9971655b625fb61270a32"
+    },
+    {
+      "file": "docs/assets/studio/storage-2026-10-30T03-56-23-121Z/mobile-saved-after-retry.png",
+      "sha256": "776ac7deb29e5aae28828083ab825a47dbccd291d4b62d3859cf80bfac78060a"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "passed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: '画布', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <a class=\"active\" aria-label=\"画布\" aria-current=\"page\" data-discover=\"true\" href=\"/studio/canvas\">…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_storage.mjs:179:65",
+  "completed_at": "2026-10-30T03:58:09.865Z"
+}

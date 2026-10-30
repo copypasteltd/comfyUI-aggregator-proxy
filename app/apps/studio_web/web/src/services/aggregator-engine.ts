@@ -8,6 +8,7 @@ import { assertBatchMembers } from "./aggregator-batch";
 import { assertLocalResult } from "./studio-result-ownership";
 import { flushStudioDocuments } from "./studio-persistence";
 import { useStudioStore } from "@/stores/use-studio-store";
+import { canReadTask, sameTaskIdentity, submissionHash, taskAccessReason } from "./studio-task-access";
 
 const inFlight = new Map<string, Promise<Intent>>();
 const controllers = new Map<string, AbortController>();
@@ -31,6 +32,12 @@ function connection(identity?: IdentityRef) {
     const reference = { profileId: state.activeProfileId, origin: state.client.origin, fingerprint: state.client.fingerprint };
     if (identity && (identity.fingerprint !== reference.fingerprint || identity.origin !== reference.origin)) throw new Error("请使用原服务及原 API Key 恢复这项任务");
     return { client: state.client, identity: reference, catalog: state.catalog };
+}
+
+function knownTaskConnection(intent: Intent) {
+    const current = connection();
+    if (!intent.job || !canReadTask(intent, current.identity)) throw new Error("请使用原连接，或先在接管页核对这项已知任务");
+    return current;
 }
 
 export async function stageUpload(file: File, model: CatalogModel): Promise<InputUpload> {
@@ -107,8 +114,7 @@ export async function submitPreparedBatch(batchId: string, projectId: string, id
     return confirmed;
 }
 
-async function applyJob(id: string, result: ApiResult<RemoteJob>): Promise<Intent> {
-    const updated = await updateIntent(id, (intent) => {
+function nextJobState(intent: Intent, result: ApiResult<RemoteJob>): Intent {
         const request = JSON.parse(intent.body) as JobRequest;
         if (result.data.model !== request.model || result.data.task_type !== request.task_type || intent.job && intent.job.id !== result.data.id) throw new Error("任务归属与原提交不符");
         const confirmed = !intent.recovered || intent.recoveryVerified === true;
@@ -116,8 +122,40 @@ async function applyJob(id: string, result: ApiResult<RemoteJob>): Promise<Inten
         if (confirmed && intent.job && (intent.job.updated_revision === result.data.updated_revision && intent.job.status !== result.data.status || terminalStatuses.has(intent.job.status) && intent.job.status !== result.data.status)) throw new Error("任务状态与已确认终态或版本冲突，原记录已保留");
         const pollIntervalMs = result.retryAt ? Math.max(0, result.retryAt - Date.now()) : intent.pollIntervalMs;
         return { ...intent, job: result.data, ...(intent.recovered ? { recoveryVerified: true } : {}), stage: terminalStatuses.has(result.data.status) ? "terminal" : "accepted", updatedAt: Date.now(), error: undefined, pollPaused: false, pollIntervalMs, retryAt: result.retryAt || (pollIntervalMs ? Date.now() + pollIntervalMs : undefined) };
+}
+
+async function applyJob(id: string, result: ApiResult<RemoteJob>): Promise<Intent> {
+    const updated = await updateIntent(id, (intent) => nextJobState(intent, result));
+    changed(); return updated;
+}
+
+export async function taskAccessCandidates(): Promise<Intent[]> {
+    const { identity } = connection();
+    return (await journalList("intents")).filter((intent) => intent.version === 1 && intent.identity?.origin === identity.origin && !sameTaskIdentity(intent.identity, identity)).sort((a, b) => b.createdAt - a.createdAt);
+}
+
+export async function associateKnownTask(original: Intent, signal?: AbortSignal): Promise<Intent> {
+    const { client, identity } = connection();
+    const reason = taskAccessReason(original, identity);
+    if (reason) throw new Error(reason);
+    const snapshot = submissionHash(original), jobId = original.job!.id;
+    const response = await client.job(jobId, signal);
+    const updated = await updateIntent(original.id, (current) => {
+        if (signal?.aborted || useStudioStore.getState().client !== client || submissionHash(current) !== snapshot || current.job?.id !== jobId || taskAccessReason(current, identity)) throw new Error("连接或原任务已变化，请重新确认接管");
+        const next = nextJobState(current, response);
+        return { ...next, readAccess: [...(current.readAccess || []).filter((item) => !sameTaskIdentity(item.identity, identity)), { version: 1, identity, jobId, submissionSha256: snapshot, verifiedAt: Date.now() }] };
     });
     changed(); return updated;
+}
+
+export async function removeTaskAccess(original: Intent): Promise<void> {
+    const { client, identity } = connection();
+    const snapshot = submissionHash(original);
+    await updateIntent(original.id, (current) => {
+        if (useStudioStore.getState().client !== client || submissionHash(current) !== snapshot || taskAccessReason(current, identity)) throw new Error("连接或原任务已变化，请重新确认解除");
+        return { ...current, readAccess: (current.readAccess || []).filter((item) => !sameTaskIdentity(item.identity, identity)) };
+    });
+    changed();
 }
 
 function singleFlight(id: string, run: (signal: AbortSignal) => Promise<Intent>, external?: AbortSignal): Promise<Intent> {
@@ -184,7 +222,7 @@ export function refreshIntent(id: string, signal?: AbortSignal): Promise<Intent>
     return singleFlight(id, async (activeSignal) => {
         const intent = await journalGet("intents", id);
         if (!intent?.job) throw new Error("尚未确认任务编号，请先核对原提交");
-        const { client } = connection(intent.identity);
+        const { client } = knownTaskConnection(intent);
         try { return await applyJob(id, await client.job(intent.job.id, activeSignal)); }
         catch (error) {
             if (activeSignal.aborted) throw error;
@@ -203,7 +241,7 @@ export async function cancelIntent(id: string, signal?: AbortSignal): Promise<In
     const intent = await journalGet("intents", id);
     if (intent?.recovered && !intent.recoveryVerified) throw new Error("请先查询原任务，确认备份中的状态和产物");
     if (!intent?.job) throw new Error("提交归属尚未确认，不能将浏览器中止当成远端取消；请先核对原提交");
-    const { client } = connection(intent.identity);
+    const { client } = knownTaskConnection(intent);
     await updateIntent(id, (value) => ({ ...value, cancelRequested: true, updatedAt: Date.now() }));
     changed();
     return applyJob(id, await client.cancel(intent.job.id, signal));
@@ -213,7 +251,7 @@ export async function saveResult(intentId: string, contentId: string, signal?: A
     const intent = await journalGet("intents", intentId);
     if (intent?.recovered && !intent.recoveryVerified) throw new Error("请先查询原任务，确认备份中的状态和产物");
     if (!intent?.job?.artifacts?.some((artifact) => artifact.id === contentId)) throw new Error("产物不属于这项任务，请先刷新任务详情");
-    const { client, identity } = connection(intent.identity);
+    const { client, identity } = knownTaskConnection(intent);
     const id = `studio:${identity.fingerprint}:${contentId}`;
     const existing = await journalGet("results", id);
     if (existing) {
@@ -225,13 +263,14 @@ export async function saveResult(intentId: string, contentId: string, signal?: A
     if (!intent.output.mediaTypes.includes(metadata.media_type) || metadata.bytes > intent.output.maxBytes) throw new Error("产物的媒体类型或大小超过原模型公布范围，未载入浏览器");
     const blob = await client.download(metadata, signal);
     const result: LocalResult = { version: 1, id, identity, intentId, jobId: intent.job!.id, metadata, blob, savedAt: Date.now() };
+    if (useStudioStore.getState().client !== client) throw new Error("连接已变化，未载入其他身份的产物");
     await journalPut("results", result);
     changed(); return result;
 }
 
 export async function localTasks(): Promise<Intent[]> {
     const { identity } = connection();
-    const values = (await journalList("intents")).filter((intent) => intent.version === 1 && intent.identity.fingerprint === identity.fingerprint && intent.identity.origin === identity.origin);
+    const values = (await journalList("intents")).filter((intent) => canReadTask(intent, identity));
     for (const intent of values) {
         try { const request = JSON.parse(intent.body); if (!request || typeof request.model !== "string" || typeof request.task_type !== "string" || !request.input) throw new Error(); }
         catch { throw new Error("部分任务日志损坏，原记录已保留；请从服务端历史查询已知任务"); }

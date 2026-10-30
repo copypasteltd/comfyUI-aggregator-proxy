@@ -140,7 +140,7 @@ try {
     check("actual v2 backup import reconstructs the batch as read-only recovery, including its prepared member, with zero create POST");
     await ui.close(); report.private_recording = path.relative(root, await uiPage.video().path()).replaceAll("\\", "/");
     assert.equal(report.page_errors.length, 0); assert.ok(!report.handler_failure && !report.route_failure); assert.ok(requests.every((request) => request.bearer_valid && !request.cookie_present)); assert.equal(creates(), 5); assert.deepEqual(await snapshot(), before);
-    report.business_requests = requests; report.generation_posts = creates(); report.browser_storage_version = 3; report.static_artifact_sha256 = before; report.static_artifact_unchanged = true;
+    report.business_requests = requests; report.generation_posts = creates(); report.browser_storage_version = 4; report.static_artifact_sha256 = before; report.static_artifact_unchanged = true;
     check("all five intentional first submissions are unique, use Bearer without cookies, and preserve shipped bytes and DB v3"); report.passed = true;
 } catch (error) { report.passed = false; report.failure = error.stack; console.error(error.stack); const page = pages.findLast((page) => !page.isClosed()); if (page) { report.failure_url = page.url(); report.failure_page_text = (await page.locator("body").innerText().catch(() => "")).slice(0, 4000); await shot(page, "failure-state").catch(() => {}); } }
 finally {

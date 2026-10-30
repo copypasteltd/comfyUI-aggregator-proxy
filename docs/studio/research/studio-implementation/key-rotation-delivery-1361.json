@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "at": "2026-10-30T04:26:23.733967+00:00",
+  "scope": "One actual 3080 image and rotated-credential delivery, independently fully decoded. Single-sample end-to-end latency includes queue/loading/execution; these components and steady-state performance are not separated or accepted.",
+  "request": {
+    "model": "comfy-3080-image-lustify-krea2",
+    "task_type": "text_to_image",
+    "input": {
+      "prompt": "A small ivory ceramic robot with lime green ears, on a plain light studio background, soft daylight, no text, no logo."
+    },
+    "parameters": {
+      "quality": "standard",
+      "size": "720x1080",
+      "n": 1,
+      "seed": 7313601
+    },
+    "client_request_id": "studio-rotation-1361-76d18c18f40148dea0feb34d69f28773"
+  },
+  "authorization": "Bearer <business-key omitted>",
+  "original_idempotency_token": "retained privately; one submission, no replay",
+  "release_digest": "37af9154a015bfe0c4e22bafb11f8c30cb6a7d89ec36d5f7d55f0e8b0fba7c01",
+  "job_id": "job_44f4b4c44f63489c88d4afab8d18d51b",
+  "created_at": 1793332726,
+  "completed_at": 1793334209,
+  "end_to_end_seconds": 1483,
+  "generation_posts": 1,
+  "artifact": {
+    "file": "docs/media/studio-131/key-rotation-1361.png",
+    "bytes": 747994,
+    "sha256": "ae2e154649ea89bc5e084ada5302123d7e67b095be3f6e6c35a37362002f7bb3",
+    "media_type": "image/png",
+    "width": 720,
+    "height": 1080,
+    "mode": "RGB",
+    "fully_decoded": true
+  },
+  "actual_permissions": {
+    "file": "docs/research/studio-implementation/live-key-rotation-1361.json",
+    "sha256": "145de513bdd1c93531c34e0a70dff382f9d07126cc203e983ad623f4991b233b"
+  },
+  "key_closure": {
+    "file": "docs/research/studio-implementation/validation-key-closure-1361.json",
+    "sha256": "debf6055a3113049373718e7677e03093f1b1a5eaa4f18aba913a03ce8be1521"
+  }
+}

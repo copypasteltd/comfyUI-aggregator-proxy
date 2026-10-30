@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "at": "2026-10-30T04:26:10.362761+00:00",
+  "scope": "Read-only actual Admin enabled-state and public credential rejection for all five owned validation Keys and six credentials; no enable, rotate, delete, generation or user-Key changes",
+  "checks": [
+    {
+      "role": "validation-key",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "role": "restricted-validation-key",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "role": "lookup-validation-key-1321",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "role": "rotation-test-1",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "role": "rotation-test-2",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "role": "rotated-test-credential",
+      "status": 401,
+      "passed": true
+    }
+  ],
+  "cleanup": {
+    "clients_and_admin_session_closed": true
+  },
+  "disabled_logical_keys": 5,
+  "rejected_credentials": 6
+}

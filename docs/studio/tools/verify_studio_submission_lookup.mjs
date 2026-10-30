@@ -161,7 +161,7 @@ try {
     assert.ok(requests.every((item) => item.bearer_valid && !item.cookie_present));
     assert.ok(requests.filter((item) => item.method !== "GET").every((item) => ["/v1/jobs", "/v1/jobs/lookup"].includes(item.path)));
     assert.equal(createCount(), 2); assert.deepEqual(await snapshot(), before);
-    report.business_requests = requests; report.generation_posts = createCount(); report.static_artifact_sha256 = before; report.static_artifact_unchanged = true; report.browser_storage_version = 3;
+    report.business_requests = requests; report.generation_posts = createCount(); report.static_artifact_sha256 = before; report.static_artifact_unchanged = true; report.browser_storage_version = 4;
     check("all owned tests preserve production bytes, use Bearer without cookies, perform exactly two intentional first submissions and no upload/cancel");
     report.passed = true;
 } catch (error) { report.passed = false; report.failure = error.stack; console.error(error.stack); }

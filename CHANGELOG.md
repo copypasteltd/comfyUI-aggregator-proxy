@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 136 · 已知任务Key轮换接管 / Known-task access after rotation
+
+- 原逻辑Key轮换后逐项GET核对已知任务，在严格事务中建立新身份关联；原请求/身份/Idem/画布不改，无ID记录不补发。新Key结果引用与旧身份备份保护同步，浏览器v4保留v1/v2/v3数据并拒绝旧v3客户端。
+- All 179 units/type/build and 171 native-browser groups pass, including 31 access cases. The same-lock isolated build reproduces all 106 assets; six public page checks and three actual v3→v4 preservation/restart checks pass. Backend 132.2 and API/Worker/Edge remain unchanged.
+- 一次真实720×1080图片通过轮换凭证下载及SHA/完整解码，401/404/403权限五组通过；五逻辑测试Key禁用、六凭证401，用户原Key未改。单样本1,483秒（24分43秒），延迟/吞吐仍待优化，不作性能签收。
+- Synced 265 source/config files, bilingual usage/constraints, screenshots, decoded MP4/GIF, actual request/image receipts and all 46 tracked items. Failed reports remain immutable; new features await manual user testing and full acceptance remains HOLD. See [136](docs/136-画布Key轮换与已知任务接管.md).
+
 ## 135 · 本机空间与参考缓存清理
 
 - 新增/storage三库占用与站点配额；浏览器无估算时明确未知。当前身份已确认、摘要/长度一致且无原任务引用的上传缓存支持逐条确认清理，同事务重查引用/身份/快照；失败保留，晚到上传不重建。

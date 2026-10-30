@@ -7,6 +7,7 @@ import "./task-journal.test";
 import "./aggregator-batch.test";
 import "./studio-glb.test";
 import "./studio-upload-cache.test";
+import "./studio-task-access.test";
 import assert from "node:assert/strict";
 import fixture from "./fixtures/catalog.json";
 import { assertLocalSchema, joinCatalog, presetParameters, presetPolicyReason, schemaProperties, validateJob } from "../src/services/api/aggregator/capabilities";
