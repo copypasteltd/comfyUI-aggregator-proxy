@@ -7,10 +7,10 @@ import { useStudioStore } from "@/stores/use-studio-store";
 import { inspectStudioGlb } from "@/lib/studio-glb";
 
 export function StudioModel3dPreview({ storageKey, name, bytes }: { storageKey: string; name: string; bytes: number }) {
-    const client = useStudioStore((state) => state.client);
+    const identity = useStudioStore((state) => state.client || state.localIdentity);
     const { message } = App.useApp();
-    const [request, setRequest] = useState<{ client: typeof client; storageKey: string }>();
-    const open = Boolean(request && request.client === client && request.storageKey === storageKey);
+    const [request, setRequest] = useState<{ identity: typeof identity; storageKey: string }>();
+    const open = Boolean(request && request.identity === identity && request.storageKey === storageKey);
     const [error, setError] = useState("");
     const [loaded, setLoaded] = useState<{ request: typeof request; data: ArrayBuffer; notes: string[]; Viewer: ComponentType<{ data: ArrayBuffer }> }>();
     useEffect(() => {
@@ -26,12 +26,13 @@ export function StudioModel3dPreview({ storageKey, name, bytes }: { storageKey: 
             if (active) setLoaded({ request, data, notes, Viewer });
         })().catch((reason) => { if (active) setError(reason instanceof Error ? reason.message : "GLB 读取失败，可另存原件检查"); });
         return () => { active = false; };
-    }, [open, request, storageKey, client]);
+    }, [open, request, storageKey, identity]);
     return <>
-        <Button icon={<Box size={15} />} onClick={() => setRequest({ client, storageKey })}>交互预览</Button>
+        <Button icon={<Box size={15} />} onClick={() => setRequest({ identity, storageKey })}>交互预览</Button>
         <Modal open={open} title="3D 原件预览" width={960} style={{ top: 24, paddingBottom: 24 }} styles={{ body: { maxHeight: "calc(100dvh - 220px)", overflowY: "auto" } }} destroyOnHidden onCancel={() => setRequest(undefined)} footer={<Button icon={<Download size={15} />} onClick={() => void (async () => {
             const blob = await getMediaBlob(storageKey);
-            if (!blob || blob.type !== "model/gltf-binary" || useStudioStore.getState().client !== client) throw new Error("原件不可读或连接已变化，请重新打开预览");
+            const state = useStudioStore.getState();
+            if (!blob || blob.type !== "model/gltf-binary" || (state.client || state.localIdentity) !== identity) throw new Error("原件不可读或连接已变化，请重新打开预览");
             saveAs(blob, `${name}.glb`);
         })().catch((reason) => message.error(reason instanceof Error ? reason.message : "原件读取失败"))}>保存 GLB 原件</Button>}>
             <p>{(bytes / 1024 / 1024).toFixed(2)} MiB · 本机原件 · 关闭预览会释放三维资源</p>

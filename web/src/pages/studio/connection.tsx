@@ -41,7 +41,7 @@ export default function ConnectionPage() {
                 {state.client ? <><p className="studio-break">{state.client.origin}</p><div className="studio-metric"><b className="li-d">{state.catalog?.models.length || 0}</b><span>当前授权的已发布模型</span></div><p>目录表示当前授权能力；任务能否开始执行仍取决于队列、设备和额度。</p>
                     {!state.catalog?.releaseGuard && <Alert title="此服务当前仅可查看模型" description="该 API 未声明提交所需的发布校验能力。请使用已支持此能力的原服务；画布不会修改 API。" type="warning" showIcon />}
                     <div className="studio-actions"><Button icon={<RefreshCw size={15} />} loading={state.loading} onClick={() => void state.refreshCatalog()}>刷新目录</Button><Button icon={<LogOut size={15} />} onClick={() => void state.disconnect().catch(() => {})}>退出连接</Button><a className="studio-inline-link" href={`${state.client.origin}/admin/`} target="_blank" rel="noopener noreferrer">打开管理后台</a></div>
-                </> : <p>图片、视频、音频和 3D 使用同一套任务与素材流程。选择模型、添加参考、提交后即可继续整理画布。</p>}
+                </> : state.localIdentity ? <><Alert type="info" showIcon title="本机原件已可读取" description="服务暂未连接。可以查看对应 Key 已保存的本机原件，生成和云端操作需连接成功。" /><div className="studio-actions"><NavLink to="/assets" className="studio-inline-link">查看本机原件</NavLink><Button icon={<LogOut size={15} />} onClick={() => void state.disconnect().catch(() => {})}>退出连接</Button></div></> : <p>图片、视频、音频和 3D 使用同一套任务与素材流程。选择模型、添加参考、提交后即可继续整理画布。</p>}
                 <div className="studio-scope-note">业务 Key 用于生成和内容访问。渠道、Workflow、队列与 Key 的管理仍由 Admin 完成。</div>
                 <NavLink to="/storage" className="studio-inline-link">查看本机存储空间</NavLink>
                 <NavLink to="/task-access" className="studio-inline-link">换Key后接管已知任务</NavLink>

@@ -3,6 +3,7 @@ import localforage from "localforage";
 import { nanoid } from "nanoid";
 import { AggregatorClient, normalizeOrigin } from "@/services/api/aggregator/client";
 import type { Catalog } from "@/services/api/aggregator/types";
+import type { IdentityRef } from "@/services/aggregator-journal";
 
 export type StudioProfile = { id: string; name: string; origin: string; fingerprint: string; savedKey?: string };
 type StudioState = {
@@ -10,6 +11,7 @@ type StudioState = {
     profiles: StudioProfile[];
     activeProfileId: string;
     client: AggregatorClient | null;
+    localIdentity: IdentityRef | null;
     catalog: Catalog | null;
     loading: boolean;
     error: string;
@@ -24,7 +26,7 @@ let hydration: Promise<void> | undefined;
 const saveProfiles = (profiles: StudioProfile[], activeProfileId: string) => storage.setItem("connections", { version: 1, profiles, activeProfileId });
 
 export const useStudioStore = create<StudioState>((set, get) => ({
-    hydrated: false, profiles: [], activeProfileId: "", client: null, catalog: null, loading: false, error: "",
+    hydrated: false, profiles: [], activeProfileId: "", client: null, localIdentity: null, catalog: null, loading: false, error: "",
     hydrate: () => {
         hydration ||= (async () => {
             try {
@@ -42,14 +44,16 @@ export const useStudioStore = create<StudioState>((set, get) => ({
     },
     connect: async (origin, key, remember, name, profileId) => {
         const revision = ++connectionRevision;
-        set({ loading: true, error: "", client: null, catalog: null });
+        set({ loading: true, error: "", client: null, localIdentity: null, catalog: null });
         try {
             const client = new AggregatorClient(origin, key);
+            const existing = get().profiles.find((profile) => profile.origin === client.origin && profile.fingerprint === client.fingerprint);
+            const profile: StudioProfile = { id: existing?.id || nanoid(), name: name?.trim() || existing?.name || new URL(client.origin).host, origin: normalizeOrigin(origin), fingerprint: client.fingerprint, ...(remember ? { savedKey: key } : {}) };
+            // The original Key unlocks only its verified local copies, not remote API access.
+            set({ localIdentity: { profileId: profile.id, origin: client.origin, fingerprint: client.fingerprint } });
             const catalog = await client.catalog();
             if (revision !== connectionRevision) return;
             const previous = get().profiles.find((profile) => profile.id === profileId);
-            const existing = get().profiles.find((profile) => profile.origin === client.origin && profile.fingerprint === client.fingerprint);
-            const profile: StudioProfile = { id: existing?.id || nanoid(), name: name?.trim() || existing?.name || new URL(client.origin).host, origin: normalizeOrigin(origin), fingerprint: client.fingerprint, ...(remember ? { savedKey: key } : {}) };
             const profiles = [...get().profiles.filter((item) => item.id !== profile.id).map((item) => {
                 if (item.id !== previous?.id) return item;
                 const { savedKey: _oldKey, ...metadata } = item;
@@ -65,7 +69,7 @@ export const useStudioStore = create<StudioState>((set, get) => ({
     disconnect: async () => {
         ++connectionRevision;
         const profiles = get().profiles.map(({ savedKey: _key, ...profile }) => profile.id === get().activeProfileId ? profile : { ...profile, ...( _key ? { savedKey: _key } : {}) });
-        set({ client: null, catalog: null, loading: false, error: "", profiles });
+        set({ client: null, localIdentity: null, catalog: null, loading: false, error: "", profiles });
         await saveProfiles(profiles, get().activeProfileId);
     },
     refreshCatalog: async () => {

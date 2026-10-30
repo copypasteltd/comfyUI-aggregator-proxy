@@ -7,8 +7,8 @@ export const isStudioKey = (key?: string): key is string => Boolean(key?.startsW
 
 export async function getStudioResult(key: string) {
     const result = await journalGet("results", key);
-    const client = useStudioStore.getState().client;
-    if (!result || result.version !== 1 || !client || client.fingerprint !== result.identity.fingerprint || client.origin !== result.identity.origin) return undefined;
+    const state = useStudioStore.getState(), identity = state.client || state.localIdentity;
+    if (!result || result.version !== 1 || !identity || identity.fingerprint !== result.identity.fingerprint || identity.origin !== result.identity.origin) return undefined;
     assertLocalResult(result, result.identity, result.metadata.id);
     return result;
 }
@@ -16,6 +16,8 @@ export async function getStudioResult(key: string) {
 export async function studioMediaUrl(key: string): Promise<string> {
     const result = await getStudioResult(key);
     if (!result) return "";
+    const state = useStudioStore.getState(), identity = state.client || state.localIdentity;
+    if (!identity || identity.fingerprint !== result.identity.fingerprint || identity.origin !== result.identity.origin) return "";
     const cached = urls.get(key);
     if (cached) return cached;
     const url = URL.createObjectURL(result.blob);
@@ -28,7 +30,8 @@ export function releaseStudioMedia(key?: string) {
 }
 
 useStudioStore.subscribe((state, previous) => {
-    if (state.client?.fingerprint !== previous.client?.fingerprint) releaseStudioMedia();
+    const identity = state.client || state.localIdentity, before = previous.client || previous.localIdentity;
+    if (identity?.fingerprint !== before?.fingerprint || identity?.origin !== before?.origin) releaseStudioMedia();
 });
 globalThis.addEventListener?.("pagehide", () => releaseStudioMedia());
 

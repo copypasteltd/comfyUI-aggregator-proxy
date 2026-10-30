@@ -268,8 +268,8 @@ export async function saveResult(intentId: string, contentId: string, signal?: A
     changed(); return result;
 }
 
-export async function localTasks(): Promise<Intent[]> {
-    const { identity } = connection();
+export async function localTasks(readIdentity?: Pick<IdentityRef, "origin" | "fingerprint">): Promise<Intent[]> {
+    const identity = readIdentity || connection().identity;
     const values = (await journalList("intents")).filter((intent) => canReadTask(intent, identity));
     for (const intent of values) {
         try { const request = JSON.parse(intent.body); if (!request || typeof request.model !== "string" || typeof request.task_type !== "string" || !request.input) throw new Error(); }

@@ -18,17 +18,19 @@ type Entry = Omit<LocalResult, "blob">;
 export default function StudioAssetsPage() {
     const { message } = App.useApp();
     const client = useStudioStore((state) => state.client);
+    const identity = useStudioStore((state) => state.client || state.localIdentity);
     const [entries, setEntries] = useState<Entry[]>([]);
     const [error, setError] = useState("");
     const [preview, setPreview] = useState<{ entry: Entry; url: string }>();
     const load = useCallback(async () => {
-        try { const values = await localResultIndex(); if (useStudioStore.getState().client === client) setEntries(values.filter((item) => item.version === 1 && item.identity.fingerprint === client?.fingerprint && item.identity.origin === client?.origin).sort((a, b) => b.savedAt - a.savedAt)); }
+        try { const values = await localResultIndex(); const state = useStudioStore.getState(); if ((state.client || state.localIdentity) === identity) setEntries(values.filter((item) => item.version === 1 && item.identity.fingerprint === identity?.fingerprint && item.identity.origin === identity?.origin).sort((a, b) => b.savedAt - a.savedAt)); }
         catch (reason) { setError(reason instanceof Error ? reason.message : "素材目录读取失败"); }
-    }, [client]);
+    }, [identity]);
     useEffect(() => { setPreview(undefined); void load(); const off = subscribeStudioTasks(() => void load()); return () => { off(); releaseStudioMedia(); }; }, [load]);
     const action = async (work: () => Promise<void>) => { try { setError(""); await work(); } catch (reason) { message.error(reason instanceof Error ? reason.message : "操作未完成"); } };
     return <main className="studio-page"><div className="studio-page-heading"><span className="li-lab">YOUR LOCAL LIBRARY</span><h1>留住每一次创作</h1><p>这里是已校验并存入当前浏览器的原件。云端到期不会主动删除这些副本；浏览器清理或设备丢失仍可能移除本机数据，请另存重要作品。</p></div>
-        {!client ? <section className="studio-card studio-empty"><Empty description="连接原服务与 API Key，打开对应素材" /><NavLink to="/config" className="studio-primary-link">连接服务</NavLink></section> : <>
+        {!identity ? <section className="studio-card studio-empty"><Empty description="填写原服务地址与 API Key，打开对应本机素材" /><NavLink to="/config" className="studio-primary-link">连接服务</NavLink></section> : <>
+            {!client && <Alert type="info" showIcon title="本机素材可离线查看" description="已保存原件可以预览和另存；生成及云端操作需要重新连接服务。" />}
             <div className="studio-actions"><Button icon={<RefreshCw size={16} />} onClick={() => void load()}>刷新目录</Button><Tag>{entries.length} 个原件 · {(entries.reduce((sum, item) => sum + item.metadata.bytes, 0) / 1024 / 1024).toFixed(2)} MiB</Tag><NavLink to="/storage" className="studio-inline-link">存储空间</NavLink></div>
             {error && <Alert type="error" showIcon title={error} />}
             <div className="studio-model-grid" style={{ marginTop: 24 }}>{entries.map((entry) => {
@@ -43,7 +45,7 @@ export default function StudioAssetsPage() {
                         if (used.has(entry.id)) throw new Error("该原件仍被画布或素材引用，请先移除引用");
                         if (!client || useStudioStore.getState().client !== client) throw new Error("连接已变化，请重新载入素材目录");
                         await deleteUnreferencedResult(entry.id, { profileId: useStudioStore.getState().activeProfileId!, origin: client.origin, fingerprint: client.fingerprint }); releaseStudioMedia(entry.id); await load();
-                    })}><Button aria-label="删除本机原件" icon={<Trash2 size={14} />} /></Popconfirm>
+                    })}><Button aria-label="删除本机原件" disabled={!client} icon={<Trash2 size={14} />} /></Popconfirm>
                 </div></article>;
             })}</div>{!entries.length && <Empty description="在任务卡中载入产物后，会在这里保留本机原件" />}
         </>}

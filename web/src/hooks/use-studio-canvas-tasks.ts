@@ -8,11 +8,11 @@ import { CanvasNodeType, type CanvasConnection, type CanvasNodeData, type Canvas
 import { fitNodeSize } from "@/lib/canvas/canvas-node-size";
 
 export function useStudioCanvasTasks(projectId: string, ready: boolean, nodes: CanvasNodeData[], setNodes: Dispatch<SetStateAction<CanvasNodeData[]>>, setConnections: Dispatch<SetStateAction<CanvasConnection[]>>) {
-    const client = useStudioStore((state) => state.client);
+    const identity = useStudioStore((state) => state.client || state.localIdentity);
     const nodeIds = useRef(new Set<string>());
     nodeIds.current = new Set(nodes.map((node) => node.id));
     useEffect(() => {
-        if (!ready || !client) return;
+        if (!ready || !identity) return;
         let active = true;
         let running = false;
         let requested = false;
@@ -20,11 +20,11 @@ export function useStudioCanvasTasks(projectId: string, ready: boolean, nodes: C
             if (running) { requested = true; return; }
             running = true;
             try {
-                const intents = (await localTasks()).filter((intent) => intent.projectId === projectId && intent.canvas && !intent.canvas.detached);
+                const intents = (await localTasks(identity)).filter((intent) => intent.projectId === projectId && intent.canvas && !intent.canvas.detached);
                 const updates = await Promise.all(intents.map(async (intent) => {
                     const artifact = intent.job?.artifacts?.[0];
-                    const saved = artifact ? await journalGet("results", `studio:${client.fingerprint}:${artifact.id}`) : undefined;
-                    if (saved) assertLocalResult(saved, { ...intent.identity, origin: client.origin, fingerprint: client.fingerprint }, artifact!.id, intent.job?.id);
+                    const saved = artifact ? await journalGet("results", `studio:${identity.fingerprint}:${artifact.id}`) : undefined;
+                    if (saved) assertLocalResult(saved, { ...intent.identity, origin: identity.origin, fingerprint: identity.fingerprint }, artifact!.id, intent.job?.id);
                     const type = saved ? saved.metadata.media_type.startsWith("image/") ? CanvasNodeType.Image : saved.metadata.media_type.startsWith("video/") ? CanvasNodeType.Video : saved.metadata.media_type.startsWith("audio/") ? CanvasNodeType.Audio : "studio:model3d" : "studio:task";
                     const status: CanvasNodeStatus = saved ? "success" : intent.job && ["failed", "cancelled", "expired"].includes(intent.job.status) ? "error" : intent.job?.status === "succeeded" ? "success" : "loading";
                     const dimensions = saved?.metadata.metadata;
@@ -34,7 +34,8 @@ export function useStudioCanvasTasks(projectId: string, ready: boolean, nodes: C
                         ...(saved ? { content: await studioMediaUrl(saved.id), storageKey: saved.id, studioContentId: saved.metadata.id, studioExpiresAt: saved.metadata.expires_at, bytes: saved.metadata.bytes, mimeType: saved.metadata.media_type, naturalWidth: width, naturalHeight: height, durationMs: typeof dimensions?.duration_milliseconds === "number" ? dimensions.duration_milliseconds : undefined } : {}) };
                     return { intent, type, metadata, size: width && height ? fitNodeSize(width, height) : undefined };
                 }));
-                if (!active || useStudioStore.getState().client !== client) return;
+                const state = useStudioStore.getState();
+                if (!active || (state.client || state.localIdentity) !== identity) return;
                 setNodes((nodes) => {
                     const next = [...nodes]; let changed = false;
                     for (const update of updates) {
@@ -57,5 +58,5 @@ export function useStudioCanvasTasks(projectId: string, ready: boolean, nodes: C
         };
         void sync().catch(() => {}); const off = subscribeStudioTasks(() => void sync().catch(() => {}));
         return () => { active = false; off(); releaseStudioMedia(); };
-    }, [projectId, ready, client, setNodes, setConnections]);
+    }, [projectId, ready, identity, setNodes, setConnections]);
 }
