@@ -8,7 +8,7 @@ import { deleteUnreferencedResult } from "@/services/studio-documents";
 import { flushStudioDocuments } from "@/services/studio-persistence";
 import { getStudioResult, mediaExtension, releaseStudioMedia, studioMediaUrl } from "@/services/studio-media";
 import { subscribeStudioTasks } from "@/services/aggregator-engine";
-import { collectMediaStorageKeys } from "@/services/file-storage";
+import { canvasStorageKeys } from "@/lib/canvas/canvas-transfer";
 import { useStudioStore } from "@/stores/use-studio-store";
 import { useCanvasStore } from "@/stores/canvas/use-canvas-store";
 import { useAssetStore } from "@/stores/use-asset-store";
@@ -41,7 +41,7 @@ export default function StudioAssetsPage() {
                     <Button icon={<Download size={14} />} onClick={() => void action(async () => { const result = await getStudioResult(entry.id); if (!result) throw new Error("请使用原连接读取本机原件"); saveAs(result.blob, `${metadata.id}.${mediaExtension(metadata.media_type)}`); })}>另存原件</Button>
                     <Popconfirm title="删除此浏览器的原件？" description="不会取消远端任务或延长云端期限。仍被画布或素材引用的原件会保留。" onConfirm={() => action(async () => {
                         await flushStudioDocuments();
-                        const used = collectMediaStorageKeys({ projects: useCanvasStore.getState().projects, assets: useAssetStore.getState().assets });
+                        const used = canvasStorageKeys({ projects: useCanvasStore.getState().projects, assets: useAssetStore.getState().assets });
                         if (used.has(entry.id)) throw new Error("该原件仍被画布或素材引用，请先移除引用");
                         if (!client || useStudioStore.getState().client !== client) throw new Error("连接已变化，请重新载入素材目录");
                         await deleteUnreferencedResult(entry.id, { profileId: useStudioStore.getState().activeProfileId!, origin: client.origin, fingerprint: client.fingerprint }); releaseStudioMedia(entry.id); await load();

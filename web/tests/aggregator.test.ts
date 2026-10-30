@@ -1,6 +1,7 @@
 import test from "node:test";
 import "./canvas-transfer.test";
 import "./studio-result-ownership.test";
+import "./studio-document-references.test";
 import "./studio-focus.test";
 import "./aggregator-composer.test";
 import "./task-journal.test";
