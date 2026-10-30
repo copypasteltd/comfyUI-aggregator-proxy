@@ -10,7 +10,7 @@ import "@/components/canvas/studio-result-node";
 import { useStudioComposerStore } from "@/stores/use-studio-composer-store";
 import { useStudioCanvasTasks } from "@/hooks/use-studio-canvas-tasks";
 import { updateIntent } from "@/services/aggregator-journal";
-import { getStudioResult, isStudioKey, mediaExtension } from "@/services/studio-media";
+import { useCanvasOriginalDownload } from "@/hooks/use-canvas-original-download";
 
 import { requestEdit, requestGeneration, requestImageQuestion } from "@/services/api/image";
 import { requestAudioGeneration, storeGeneratedAudio } from "@/services/api/audio";
@@ -58,7 +58,6 @@ import { exportCanvasProjects } from "@/lib/canvas/canvas-export";
 import { applyNodeConfigPatch, audioMetadata, buildAudioGenerationMetadata, buildImageGenerationMetadata, createCanvasNode, imageMetadata, videoMetadata } from "@/lib/canvas/canvas-node-factory";
 import { applyGroupSelection, applyUngroupSelection, canGroupSelectedNodes, canUngroupSelectedNodes, collectGroupMemberNodes, findContainingGroupId, findGroupDropTarget, focusViewportForNode, getConnectionTargetAnchor, getGroupWrapRect, normalizeConnection, snapNodesIntoGroup } from "@/lib/canvas/canvas-node-geometry";
 import {
-    audioExtension,
     buildAngleLabel,
     buildAnglePrompt,
     buildGenerationConfig,
@@ -69,7 +68,6 @@ import {
     hasResumableVideoTask,
     hydrateAssistantImages,
     hydrateCanvasImages,
-    imageExtension,
     isAudioFile,
     isGenerationCanceled,
     resetInterruptedGeneration,
@@ -177,6 +175,7 @@ function measureFocusFrame(container: HTMLDivElement | null, nodeId: string) {
 
 function InfiniteCanvasPage() {
     const { message, modal } = App.useApp();
+    const downloadOriginal = useCanvasOriginalDownload();
     const { t } = useTranslation();
     // Subscribe to the registry version so plugin registration changes rerender the canvas.
     const nodeRegistryVersion = useNodeRegistryVersion((state) => state.version);
@@ -1827,20 +1826,15 @@ function InfiniteCanvasPage() {
     }, []);
 
     const downloadNodeImage = useCallback(async (node: CanvasNodeData) => {
-        if (isStudioKey(node.metadata?.storageKey)) {
-            const result = await getStudioResult(node.metadata.storageKey);
-            if (!result) { message.error("请使用原连接读取本机素材"); return; }
-            saveAs(result.blob, `${result.metadata.id}.${mediaExtension(result.metadata.media_type)}`); return;
-        }
-        if ((node.type !== CanvasNodeType.Image && node.type !== CanvasNodeType.Video && node.type !== CanvasNodeType.Audio) || !node.metadata?.content) return;
-        saveAs(node.metadata.content, `canvas-${node.type}-${node.id}.${node.type === CanvasNodeType.Video ? "mp4" : node.type === CanvasNodeType.Audio ? audioExtension(node.metadata.mimeType) : imageExtension(node.metadata.content)}`);
-    }, []);
+        if (node.type !== CanvasNodeType.Image && node.type !== CanvasNodeType.Video && node.type !== CanvasNodeType.Audio) return;
+        await downloadOriginal(node.metadata, `canvas-${node.type}-${node.id}`);
+    }, [downloadOriginal]);
 
-    const downloadBatchImage = useCallback((node: CanvasNodeData, imageId: string) => {
+    const downloadBatchImage = useCallback(async (node: CanvasNodeData, imageId: string) => {
         const image = node.metadata?.images?.find((item) => item.id === imageId);
-        if (!image?.content) return;
-        saveAs(image.content, `canvas-image-${node.id}-${image.id}.${imageExtension(image.content)}`);
-    }, []);
+        if (!image) return;
+        await downloadOriginal(image, `canvas-image-${node.id}-${image.id}`);
+    }, [downloadOriginal]);
 
     const captureVideoNodeFrame = useCallback(
         async (nodeId: string, position: VideoFramePosition) => {

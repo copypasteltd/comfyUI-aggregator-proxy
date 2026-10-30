@@ -35,4 +35,4 @@ useStudioStore.subscribe((state, previous) => {
 });
 globalThis.addEventListener?.("pagehide", () => releaseStudioMedia());
 
-export const mediaExtension = (mime: string) => ({ "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "video/mp4": "mp4", "video/webm": "webm", "audio/wav": "wav", "audio/flac": "flac", "audio/mpeg": "mp3", "audio/ogg": "ogg", "audio/opus": "opus", "model/gltf-binary": "glb" }[mime] || "bin");
+export const mediaExtension = (mime: string) => ({ "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/gif": "gif", "image/avif": "avif", "video/mp4": "mp4", "video/webm": "webm", "audio/wav": "wav", "audio/x-wav": "wav", "audio/flac": "flac", "audio/mpeg": "mp3", "audio/ogg": "ogg", "audio/opus": "opus", "audio/aac": "aac", "audio/mp4": "m4a", "model/gltf-binary": "glb" }[mime.split(";", 1)[0].trim().toLowerCase()] || "bin");

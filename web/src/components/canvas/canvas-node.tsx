@@ -16,6 +16,7 @@ import type { CanvasResourceReference } from "@/lib/canvas/canvas-resource-refer
 import { useTranslation } from "react-i18next";
 import { MANAGED_STUDIO } from "@/constant/studio";
 import { lime } from "@/lib/lime-theme";
+import { useCanvasOriginalDownload } from "@/hooks/use-canvas-original-download";
 
 type ResizeCorner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 const selectionBlue = MANAGED_STUDIO ? lime.ink : "#2f80ff";
@@ -482,8 +483,8 @@ const nodeContentRenderers = {
     [CanvasNodeType.Text]: TextContent,
     [CanvasNodeType.Image]: ImageNodeContent,
     [CanvasNodeType.Config]: EmptyImageContent,
-    [CanvasNodeType.Video]: VideoNodeContent,
-    [CanvasNodeType.Audio]: AudioNodeContent,
+    [CanvasNodeType.Video]: MediaNodeContent,
+    [CanvasNodeType.Audio]: MediaNodeContent,
     [CanvasNodeType.Group]: GroupNodeContent,
 } satisfies Record<CanvasNodeType, (props: NodeContentRendererProps) => ReactNode>;
 
@@ -707,34 +708,36 @@ function EmptyImageContent({ theme }: NodeContentRendererProps) {
     );
 }
 
-function VideoNodeContent({ node, theme }: NodeContentRendererProps) {
+function MediaNodeContent({ node, theme }: NodeContentRendererProps) {
     const { t } = useTranslation();
-    if (!node.metadata?.content)
+    const downloadOriginal = useCanvasOriginalDownload();
+    const [failedSource, setFailedSource] = useState("");
+    const source = node.metadata?.content || "";
+    const video = node.type === CanvasNodeType.Video;
+    const Icon = video ? Video : Music2;
+    if (!source)
         return (
             <div className="flex h-full w-full flex-col items-center justify-center gap-3" style={{ color: theme.node.placeholder }}>
-                <Video className="size-7 opacity-35" />
-                <span className="text-sm">{t("canvas.node.emptyVideo")}</span>
+                <Icon className="size-7 opacity-35" />
+                <span className="text-sm">{t(video ? "canvas.node.emptyVideo" : "canvas.node.emptyAudio")}</span>
             </div>
         );
-    return <video src={node.metadata.content} controls className="h-full w-full rounded-[18px] bg-black object-contain" data-canvas-video={node.id} data-canvas-no-zoom />;
-}
-
-function AudioNodeContent({ node, theme }: NodeContentRendererProps) {
-    const { t } = useTranslation();
-    if (!node.metadata?.content)
-        return (
-            <div className="flex h-full w-full flex-col items-center justify-center gap-2" style={{ color: theme.node.placeholder }}>
-                <Music2 className="size-7 opacity-35" />
-                <span className="text-sm">{t("canvas.node.emptyAudio")}</span>
-            </div>
-        );
+    if (failedSource === source) return (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 overflow-auto px-3 py-2 text-center" style={{ background: theme.node.fill, color: theme.node.text }} role="status" data-canvas-media-error={node.id} data-canvas-no-zoom onWheel={(event) => event.stopPropagation()}>
+            <strong className="text-xs">当前浏览器无法播放此素材</strong>
+            <span className="text-[11px] leading-4" style={{ color: theme.node.muted }}>下载原件后可尝试其他播放器。</span>
+            <button type="button" className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-2 py-1 text-xs hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-offset-2 dark:hover:bg-white/10" onPointerDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); void downloadOriginal(node.metadata, `canvas-${node.type}-${node.id}`); }}><Download className="size-3.5" />下载原件</button>
+        </div>
+    );
+    const playbackEvents = { onError: () => setFailedSource(source), onLoadedMetadata: () => setFailedSource((failed) => failed === source ? "" : failed) };
+    if (video) return <video key={source} src={source} controls {...playbackEvents} className="h-full w-full rounded-[18px] bg-black object-contain" data-canvas-video={node.id} data-canvas-no-zoom />;
     return (
         <div className="flex h-full w-full flex-col justify-center gap-3 px-4" style={{ background: theme.node.fill, color: theme.node.text }}>
             <div className="flex min-w-0 items-center gap-2 text-sm opacity-70">
                 <Music2 className="size-4 shrink-0" />
                 <span className="truncate">{t("canvas.node.audio")}</span>
             </div>
-            <audio src={node.metadata.content} controls className="w-full" data-canvas-no-zoom />
+            <audio key={source} src={source} controls {...playbackEvents} className="w-full" data-canvas-no-zoom />
         </div>
     );
 }
