@@ -32,7 +32,7 @@ export default function TasksPage() {
     return <main className="studio-page"><div className="studio-page-heading"><span className="li-lab">YOUR TASKS</span><h1>创作继续，任务也在继续</h1><p>这里保留当前服务与 API Key 的本机提交记录。刷新或重新打开页面后，使用原连接核对任务；浏览器查询中止不代表设备停止。</p></div>
         <TaskBackup />
         {!client ? <section className="studio-card studio-empty"><Empty description="连接原服务和 API Key，查看此浏览器的任务" /><NavLink to="/config" className="studio-primary-link">连接服务</NavLink></section> : <>
-            <div className="studio-actions"><Button icon={<RefreshCw size={16} />} onClick={() => void load()}>刷新本机记录</Button></div>
+            <div className="studio-actions"><Button icon={<RefreshCw size={16} />} onClick={() => void load()}>刷新本机记录</Button><NavLink to="/task-access" className="studio-inline-link">换Key后接管已知任务</NavLink></div>
             {error && <Alert title={error} type="error" showIcon />}
             <BatchOverview tasks={tasks} />
             <div className="studio-task-list">{tasks.map((intent) => {

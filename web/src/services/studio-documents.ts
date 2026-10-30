@@ -1,5 +1,6 @@
 import { journalTransaction, type IdentityRef, type Intent, type LocalDocument, type LocalResult } from "./aggregator-journal";
 import { assertLocalResult } from "./studio-result-ownership";
+import { canReadTask, validTaskAccess } from "./studio-task-access";
 
 export const documentNames = ["infinite-canvas:canvas_store", "infinite-canvas:asset_store"] as const;
 export type DocumentName = typeof documentNames[number];
@@ -97,7 +98,8 @@ export function deleteUnreferencedResult(id: string, identity: IdentityRef): Pro
                             if (!cursor.result) { tx.objectStore("results").delete(id); result(); return; }
                             const intent = cursor.result.value as Intent;
                             if (intent.version !== 1) { abort(new DocumentReloadRequired("存在不受支持的任务记录版本，已保留本机原件")); return; }
-                            if (intent.version === 1 && intent.canvas && !intent.canvas.detached && projects.has(intent.projectId) && intent.identity.fingerprint === identity.fingerprint && intent.identity.origin === identity.origin && intent.job?.artifacts?.some((item) => item.id === entry.metadata.id)) {
+                            if (intent.readAccess !== undefined && (!Array.isArray(intent.readAccess) || !intent.readAccess.every((value) => validTaskAccess(value, intent)))) { abort(new Error("存在无法核对的任务访问关联，已保留本机原件")); return; }
+                            if (intent.version === 1 && intent.canvas && !intent.canvas.detached && projects.has(intent.projectId) && canReadTask(intent, identity) && intent.job?.artifacts?.some((item) => item.id === entry.metadata.id)) {
                                 abort(new Error("该原件仍由画布任务使用，请先在画布中移除该任务节点")); return;
                             }
                             cursor.result.continue();

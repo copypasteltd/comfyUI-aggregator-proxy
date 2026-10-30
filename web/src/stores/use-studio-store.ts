@@ -47,9 +47,14 @@ export const useStudioStore = create<StudioState>((set, get) => ({
             const client = new AggregatorClient(origin, key);
             const catalog = await client.catalog();
             if (revision !== connectionRevision) return;
-            const existing = get().profiles.find((profile) => profile.id === profileId || profile.origin === client.origin && profile.fingerprint === client.fingerprint);
+            const previous = get().profiles.find((profile) => profile.id === profileId);
+            const existing = get().profiles.find((profile) => profile.origin === client.origin && profile.fingerprint === client.fingerprint);
             const profile: StudioProfile = { id: existing?.id || nanoid(), name: name?.trim() || existing?.name || new URL(client.origin).host, origin: normalizeOrigin(origin), fingerprint: client.fingerprint, ...(remember ? { savedKey: key } : {}) };
-            const profiles = [...get().profiles.filter((item) => item.id !== profile.id), profile];
+            const profiles = [...get().profiles.filter((item) => item.id !== profile.id).map((item) => {
+                if (item.id !== previous?.id) return item;
+                const { savedKey: _oldKey, ...metadata } = item;
+                return metadata;
+            }), profile];
             await saveProfiles(profiles, profile.id);
             if (revision === connectionRevision) set({ profiles, activeProfileId: profile.id, client, catalog });
         } catch (error) {

@@ -7,6 +7,8 @@ description: Implemented changes that still need manual verification
 
 The current release needs manual verification in these areas:
 
+- Managed Key rotation: verify explicit per-job permission proof, unchanged original identity/body, unknown-submission blocking, original-identity backup/restore, new-Key canvas/result ownership and v1/v2/v3 to v4 preservation. Wrong Keys, connection changes, two-page races and transaction aborts must not create an association. Browser/native and actual service evidence remain distinct.
+
 - Managed Lime buttons: verify default hover/active labels and borders remain dark and readable on the shared light background; focus stays visible in page and confirmation controls.
 
 - Managed local storage: open Storage space from connection/library, refresh all three database totals (including nested original Blobs) and browser quota, including unavailable estimates on plain HTTP. Confirm only current-identity acknowledged, unreferenced upload caches can be removed; prepared/unknown/terminal task references, malformed/unknown records and mismatched receipts stay protected. Recheck confirmation races, connection changes, transaction aborts and late upload responses. No cloud files, generation results or task bodies are deleted. Ordinary image/file automatic collection remains pending; phone/quota acceptance is separate.

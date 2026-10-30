@@ -24,7 +24,7 @@ export function useStudioCanvasTasks(projectId: string, ready: boolean, nodes: C
                 const updates = await Promise.all(intents.map(async (intent) => {
                     const artifact = intent.job?.artifacts?.[0];
                     const saved = artifact ? await journalGet("results", `studio:${client.fingerprint}:${artifact.id}`) : undefined;
-                    if (saved) assertLocalResult(saved, intent.identity, artifact!.id, intent.job?.id);
+                    if (saved) assertLocalResult(saved, { ...intent.identity, origin: client.origin, fingerprint: client.fingerprint }, artifact!.id, intent.job?.id);
                     const type = saved ? saved.metadata.media_type.startsWith("image/") ? CanvasNodeType.Image : saved.metadata.media_type.startsWith("video/") ? CanvasNodeType.Video : saved.metadata.media_type.startsWith("audio/") ? CanvasNodeType.Audio : "studio:model3d" : "studio:task";
                     const status: CanvasNodeStatus = saved ? "success" : intent.job && ["failed", "cancelled", "expired"].includes(intent.job.status) ? "error" : intent.job?.status === "succeeded" ? "success" : "loading";
                     const dimensions = saved?.metadata.metadata;

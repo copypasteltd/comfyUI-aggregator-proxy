@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Alert, App, Button, Modal, Tag } from "antd";
 import { Download, Upload } from "lucide-react";
 import { saveAs } from "file-saver";
+import { NavLink } from "react-router-dom";
 import { useStudioStore } from "@/stores/use-studio-store";
 import { notifyStudioTasksChanged } from "@/services/aggregator-engine";
 import { exportTaskJournal, restoreTaskJournal } from "@/services/task-journal-recovery";
@@ -24,6 +25,7 @@ export default function TaskBackup() {
     return <section className="studio-card" style={{ marginBottom: 24 }} aria-label="任务清单备份">
         <h2>备份任务清单</h2>
         <p className="studio-note" style={{ marginTop: 12 }}>保存原提交和任务编号，供换浏览器后核对。文件含原提示词，请妥善保管；作品和原件请另外导出画布ZIP或另存文件。</p>
+        <p className="studio-note">此处导出当前原身份的记录。换Key关联的任务请到<NavLink to="/task-access" className="studio-inline-link">接管页按原身份备份或恢复</NavLink>；访问证明不随清单导出。</p>
         <div className="studio-actions">
             <Button icon={<Download size={15} />} disabled={!profile || busy} onClick={() => void act(async () => {
                 const source = await exportTaskJournal({ profileId: profile!.id, origin: profile!.origin, fingerprint: profile!.fingerprint });

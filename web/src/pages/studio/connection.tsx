@@ -14,7 +14,7 @@ export default function ConnectionPage() {
     const [selected, setSelected] = useState<string | undefined>(active?.id);
     const submit = async (event: React.FormEvent) => {
         event.preventDefault();
-        try { await state.connect(origin, key, remember, name, selected); setKey(""); }
+        try { await state.connect(origin, key, remember, name, selected); setKey(""); setSelected(useStudioStore.getState().activeProfileId); }
         catch { /* The shared error is rendered below without logging credentials. */ }
     };
     return <main className="studio-page studio-connection-page">
@@ -22,7 +22,7 @@ export default function ConnectionPage() {
         <div className="studio-connection-grid">
             <form onSubmit={submit} className="studio-card studio-form">
                 <h2><Link2 size={20} /> 服务连接</h2>
-                {state.profiles.length > 0 && <label>已保存的连接<Select aria-label="已保存的连接" value={selected} allowClear placeholder="新建连接" options={state.profiles.map((profile) => ({ value: profile.id, label: profile.name }))} onChange={(id) => {
+                {state.profiles.length > 0 && <label>已保存的连接<Select aria-label="已保存的连接" value={selected} allowClear placeholder="新建连接" options={state.profiles.map((profile) => ({ value: profile.id, label: `${profile.name} · ${profile.fingerprint.slice(0, 8)}` }))} onChange={(id) => {
                     setSelected(id); const profile = state.profiles.find((item) => item.id === id);
                     setOrigin(profile?.origin || window.location.origin); setName(profile?.name || ""); setKey(""); setRemember(false);
                 }} /></label>}
@@ -42,6 +42,7 @@ export default function ConnectionPage() {
                 </> : <p>图片、视频、音频和 3D 使用同一套任务与素材流程。选择模型、添加参考、提交后即可继续整理画布。</p>}
                 <div className="studio-scope-note">业务 Key 用于生成和内容访问。渠道、Workflow、队列与 Key 的管理仍由 Admin 完成。</div>
                 <NavLink to="/storage" className="studio-inline-link">查看本机存储空间</NavLink>
+                <NavLink to="/task-access" className="studio-inline-link">换Key后接管已知任务</NavLink>
             </section>
         </div>
     </main>;
