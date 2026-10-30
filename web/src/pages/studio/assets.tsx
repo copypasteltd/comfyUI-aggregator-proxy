@@ -12,6 +12,7 @@ import { collectMediaStorageKeys } from "@/services/file-storage";
 import { useStudioStore } from "@/stores/use-studio-store";
 import { useCanvasStore } from "@/stores/canvas/use-canvas-store";
 import { useAssetStore } from "@/stores/use-asset-store";
+import { StudioModel3dPreview } from "@/components/studio-model3d-preview";
 
 type Entry = Omit<LocalResult, "blob">;
 export default function StudioAssetsPage() {
@@ -33,8 +34,8 @@ export default function StudioAssetsPage() {
             <div className="studio-model-grid" style={{ marginTop: 24 }}>{entries.map((entry) => {
                 const metadata = entry.metadata;
                 const Icon = metadata.media_type === "model/gltf-binary" ? Box : metadata.media_type.startsWith("video/") ? Video : metadata.media_type.startsWith("audio/") ? Music2 : Image;
-                return <article key={entry.id} className="studio-card studio-model-card"><div className="studio-model-type"><Icon size={28} /><span>{metadata.media_type}</span></div><h2>{metadata.id}</h2><p>{(metadata.bytes / 1024 / 1024).toFixed(2)} MiB<br />云端{metadata.expires_at * 1000 > Date.now() ? `保留至 ${new Date(metadata.expires_at * 1000).toLocaleString()}` : "已到保留期限"}<br />本机原件独立保留</p><div className="studio-actions">
-                    {metadata.media_type !== "model/gltf-binary" && <Button onClick={() => void action(async () => { const url = await studioMediaUrl(entry.id); if (!url) throw new Error("本机原件无法读取"); setPreview({ entry, url }); })}>预览</Button>}
+                return <article key={entry.id} className="studio-card studio-model-card"><div className="studio-model-type"><Icon size={28} /><span>{metadata.media_type}</span></div><h2 style={{ overflowWrap: "anywhere" }}>{metadata.id}</h2><p>{(metadata.bytes / 1024 / 1024).toFixed(2)} MiB<br />云端{metadata.expires_at * 1000 > Date.now() ? `保留至 ${new Date(metadata.expires_at * 1000).toLocaleString()}` : "已到保留期限"}<br />本机原件独立保留</p><div className="studio-actions">
+                    {metadata.media_type === "model/gltf-binary" ? <StudioModel3dPreview storageKey={entry.id} name={metadata.id} bytes={metadata.bytes} /> : <Button onClick={() => void action(async () => { const url = await studioMediaUrl(entry.id); if (!url) throw new Error("本机原件无法读取"); setPreview({ entry, url }); })}>预览</Button>}
                     <Button icon={<Download size={14} />} onClick={() => void action(async () => { const result = await getStudioResult(entry.id); if (!result) throw new Error("请使用原连接读取本机原件"); saveAs(result.blob, `${metadata.id}.${mediaExtension(metadata.media_type)}`); })}>另存原件</Button>
                     <Popconfirm title="删除此浏览器的原件？" description="不会取消远端任务或延长云端期限。仍被画布或素材引用的原件会保留。" onConfirm={() => action(async () => {
                         await flushStudioDocuments();

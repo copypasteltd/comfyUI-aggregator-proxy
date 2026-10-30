@@ -9,6 +9,7 @@ import { cancelIntent, jobStatusLabels, lookupIntent, refreshIntent, saveResult,
 import { terminalStatuses } from "@/services/api/aggregator/types";
 import { getMediaBlob } from "@/services/file-storage";
 import { useStudioStore } from "@/stores/use-studio-store";
+import { StudioModel3dPreview } from "@/components/studio-model3d-preview";
 
 function TaskContent({ ctx }: { ctx: CanvasNodeContext }) {
     const [intent, setIntent] = useState<Intent>();
@@ -49,11 +50,12 @@ function Model3dContent({ ctx }: { ctx: CanvasNodeContext }) {
     const { message } = App.useApp();
     return <div className="studio-node-card" onPointerDown={(event) => event.stopPropagation()}>
         <Box size={56} strokeWidth={1} /><strong>3D 模型 · GLB</strong><span>{((ctx.node.metadata?.bytes || 0) / 1024 / 1024).toFixed(2)} MiB · 已存本机</span>
+        {ctx.node.metadata?.storageKey && <StudioModel3dPreview storageKey={ctx.node.metadata.storageKey} name={ctx.node.metadata.studioContentId || ctx.node.id} bytes={ctx.node.metadata.bytes || 0} />}
         <Button icon={<Download size={15} />} onClick={() => void (async () => {
             const blob = ctx.node.metadata?.storageKey ? await getMediaBlob(ctx.node.metadata.storageKey) : undefined;
             if (!blob || blob.type !== "model/gltf-binary") throw new Error("GLB 原件不可读；服务产物需使用原服务和 Key，导入的离线快照需包含文件");
             saveAs(blob, `${ctx.node.metadata?.studioContentId || ctx.node.id}.glb`);
-        })().catch((reason) => message.error(reason instanceof Error ? reason.message : "原件读取失败"))}>保存 GLB 原件</Button><small>交互式三维预览待单独验收。</small>
+        })().catch((reason) => message.error(reason instanceof Error ? reason.message : "原件读取失败"))}>保存 GLB 原件</Button>
     </div>;
 }
 
