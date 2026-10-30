@@ -227,3 +227,5 @@ Production acceptance remains open for actual devices and Workflows, model quali
 ## Increment 86 final evidence
 
 [Database diagnostics and concurrency](86-数据库故障脱敏诊断与并发观测.md) passed all 16 gates/3593 Python checks, 29 native cases within the complete concurrent CI window, 28 exact-candidate installation checks and eight installed-browser checks. The candidate matches 488 build inputs; 587 CI and 264 native runtime inputs are unchanged. It contains 166 payload files, 58 wheels and 62 runtime contracts. Failed attempts, one-time test-database maintenance and unresolved historical roots remain visible. See the [verification](evidence/2026-10-25/database-diagnostics-verification.json). All 70 pending items retain their acceptance boundaries.
+
+[132 · Exact read-only submission lookup](132-画布原提交只读核对.md): backend/static132.2 are deployed with native112/1,486 and public protocol evidence. Full acceptance remains HOLD.

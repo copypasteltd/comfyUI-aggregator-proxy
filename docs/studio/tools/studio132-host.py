@@ -13,7 +13,7 @@ assert spec and spec.loader
 core = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(core)
 core.TASK = TASK
-core.RELEASE_ID = "linux-20261030.132.1"
+core.RELEASE_ID = "linux-20261030.132.2"
 core.RELEASE = core.BASE / "releases" / core.RELEASE_ID
 core.OLD = core.BASE / "releases/linux-20261030.131.1"
 
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         assert (TASK / "prepare.state").read_text().strip() == "prepared"
         assert (core.BASE / "current").resolve() == core.OLD
         backup = core.check_backup()
-        result = {"passed": True, "action": "promote-1321", "at": datetime.now(UTC).isoformat(), "backup": backup, "steps": [core.switch(core.RELEASE)], "database_migration_executed": False, "worker_restarted": False, "static_pointer_changed": False}
+        result = {"passed": True, "action": "promote-1322", "at": datetime.now(UTC).isoformat(), "backup": backup, "steps": [core.switch(core.RELEASE)], "database_migration_executed": False, "worker_restarted": False, "static_pointer_changed": False}
         with (TASK / "promote.json").open("x") as output:
             output.write(json.dumps(result, indent=2) + "\n")
         print(json.dumps(result))

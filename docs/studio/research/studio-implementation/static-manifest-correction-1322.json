@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "scope": "Forward correction of an inaccurate package database-version field; identical 96 production UI files and source, no data downgrade or application-source change",
+  "previous_static": "studio-20261030.132.1",
+  "current_static": "studio-20261030.132.2",
+  "previous_declared_database_version": 2,
+  "current_declared_database_version": 3,
+  "actual_ui_files_identical": true,
+  "source_sha256": "3d62cdd587b520be229972660cf2dd79755bcca60571183942534ff4389e5b16",
+  "preserved_failed_report": "docs/research/studio-implementation/public-storage-after-2026-10-30T01-00-19-355Z.json",
+  "cause": "A storage report lacking a version field silently defaulted to 2; the packager now requires an explicitly observed version and uses the passing v3 journal report."
+}

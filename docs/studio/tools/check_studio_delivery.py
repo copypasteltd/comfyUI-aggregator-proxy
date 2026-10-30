@@ -166,18 +166,38 @@ def main():
     assert package["archive_sha256"] == promotion["archive_sha256"]
     assert not promotion["backend_restarted"] and not promotion["old_ui_roundtrip_performed"]
     health = read(evidence / receipts["health"])
-    assert health["passed"] and health["backend"] == "linux-20261030.132.1" and health["studio"] == "studio-20261030.132.1"
+    assert health["passed"] and health["backend"] == "linux-20261030.132.2" and health["studio"] == "studio-20261030.132.2"
     assert health["original_worker_pid_unchanged"] and all(value == "active" for value in health["services"].values())
     assert len(health["responses"]) == 4 and all(item["status"] == 200 for item in health["responses"])
     assert len(health["cors"]) == 2 and all(item["status"] == 200 and item["allow_origin"] in ("*", item["requested_origin"]) for item in health["cors"])
     public = read(evidence / receipts["public_current_restart"])
     assert public["passed"] and len(public["checks"]) == 3 and all(public["cleanup"].values()) and not public["blocked_mutations"]
-    assert public["checks"][0]["detail"] == {"before_version": 3, "after_version": 3, "static_release": "studio-20261030.132.1"}
+    assert public["checks"][0]["detail"] == {"before_version": 3, "after_version": 3, "static_release": "studio-20261030.132.2"}
+    correction = read(evidence / "static-manifest-correction-1322.json")
+    assert correction["passed"] and correction["actual_ui_files_identical"]
+    assert correction["previous_declared_database_version"] == 2 and correction["current_declared_database_version"] == 3
+    assert correction["source_sha256"] == latest["source_sha256"]
+    assert all(not read(evidence / name)["passed"] for name in latest["failed_public_reports_preserved"])
+    deployment = read(evidence / "production-deployment-1322.json")
+    assert deployment["passed"] and deployment["prepared"]["wheel_payload_files_verified"] == 249
+    assert deployment["prepared"]["source_revision"] == latest["runtime_commit"]
+    deployed = deployment["promotion"]
+    assert deployed["passed"] and not deployed["database_migration_executed"] and not deployed["worker_restarted"]
+    assert deployed["steps"][0]["before"] == deployed["steps"][0]["after"]
     for name, count in (("backend_focused", 112), ("backend_compatibility", 1486)):
         result = read(REPOSITORY / latest[name])
         assert result["passed"] and result["sources_unchanged"] and result["python"] == {"tests": count, "failures": 0, "errors": 0, "skipped": 0}
+    generated = read(REPOSITORY / "docs/evidence/studio-release-132/admin-generated-types-1322.json")
+    assert generated["passed"] and generated["typecheck_passed"] and generated["build_passed"] and generated["generated_copy_matches"]
+    assert generated["python_sources_unchanged_from_compatibility"] and generated["compatibility_report_sha256"] == sha(REPOSITORY / latest["backend_compatibility"])
+    assert sha(REPOSITORY / "app/config/openapi.json") == generated["openapi_sha256"]
+    assert set(generated["source_differences_from_compatibility"]) == {"app/apps/admin_web/src/generated/api.d.ts"}
     for name, digest in result["source_sha256"].items():
-        assert sha(REPOSITORY / name) == digest
+        if name == "app/apps/admin_web/src/generated/api.d.ts":
+            assert digest == generated["source_differences_from_compatibility"][name]["before"]
+            assert sha(REPOSITORY / name) == generated["generated_types_sha256"]
+        else:
+            assert sha(REPOSITORY / name) == digest
     assert sum(item["passed_cases"] for item in result["python_tests"] if item["path"].endswith("/test_studio_submission_lookup.py")) == 30
     live = read(evidence / receipts["live_lookup"])
     assert live["passed"] and len(live["checks"]) == 5 and live["jobs_before"] == live["jobs_after"]
@@ -190,6 +210,7 @@ def main():
         assert item["fully_decoded"] and sha(MEDIA / item["file"]) == item["sha256"]
         assert sha(MEDIA / item["file"]) == sha(REPOSITORY / "docs/studio/media/studio-131" / item["file"])
     assert all(not read(REPOSITORY / name)["passed"] for name in latest["failed_backend_reports_preserved"])
+    assert all(not read(REPOSITORY / name)["passed"] for name in latest["failed_documentation_reports_preserved"])
     assert latest["full_acceptance"] == "HOLD" and latest["no_new_gpu_submission"] and latest["no_disabled_key_reenabled"]
     print(json.dumps({"passed": True, "at": datetime.now(UTC).isoformat(),
                       "scope": "Read-only source-mirror, public media/report/screenshot hashes, eight call receipts, all46 IDs and temporary Key revocation; not full runtime/phone/fleet acceptance",
@@ -198,7 +219,7 @@ def main():
                       "requirements_retained": 46, "temporary_keys_disabled": 3, "storage_checks": 22,
                       "current_ui_checks": 18, "task_backup_checks": 25, "submission_lookup_checks": 15, "current_unit_tests": 136,
                       "backend_compatibility_cases": 1486, "live_lookup_checks": 5,
-                      "public_storage_upgrade_checks": 3, "current_static_release": "studio-20261030.132.1", "browser_storage_version": 3,
+                      "public_storage_upgrade_checks": 3, "current_static_release": "studio-20261030.132.2", "browser_storage_version": 3,
                       "browser_storage_downgrade_supported": False, "virtualization_used": False}, ensure_ascii=False))
 
 

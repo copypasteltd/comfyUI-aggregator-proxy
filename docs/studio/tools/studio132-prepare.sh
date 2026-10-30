@@ -6,7 +6,7 @@ task_root=/var/lib/comfyui-aggregator-deploy/studio132
 trap 'printf "failed\n" > "$task_root/prepare.state"' ERR
 printf 'running\n' > "$task_root/prepare.state"
 python3 "$task_root/studio132-host.py" extract
-release=/opt/comfyui-aggregator/releases/linux-20261030.132.1
+release=/opt/comfyui-aggregator/releases/linux-20261030.132.2
 export UV_CACHE_DIR=/var/lib/comfyui-aggregator-deploy/uv-cache
 export UV_PYTHON_DOWNLOADS=never
 export PYTHONDONTWRITEBYTECODE=1

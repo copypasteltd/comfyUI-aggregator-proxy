@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "at": "2026-10-30T01:00:46.442168+00:00",
+  "scope": "Actual public high-port HTTP, current read-only business Key, CORS and auth checks; no generation, replay, upload, physical phone or lost GPU response",
+  "checks": [
+    {
+      "name": "actual service advertises and exposes read-only lookup to an arbitrary Origin",
+      "passed": true
+    },
+    {
+      "name": "jobs:read-only Key receives explicit not-observed without a published model or admission",
+      "passed": true
+    },
+    {
+      "name": "same read-only Key cannot submit a generation request",
+      "passed": true
+    },
+    {
+      "name": "required original token and existing token/digest validation are enforced by public HTTP",
+      "passed": true
+    },
+    {
+      "name": "production job count and GPU occupancy stay unchanged throughout all lookup checks",
+      "passed": true
+    }
+  ],
+  "cleanup": {
+    "temporary_key_disabled": true,
+    "revoked_key_returns_401": true,
+    "previous_validation_keys_reenabled": false,
+    "clients_closed": true
+  },
+  "lookup_response": {
+    "object": "generation.submission_lookup",
+    "outcome": "not_observed",
+    "job": null
+  },
+  "jobs_before": 41,
+  "jobs_after": 41
+}

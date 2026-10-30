@@ -2,7 +2,7 @@
 
 [中文](USAGE.md) · [Assessment and all 46 requirements](06-融合可行性评估与上线约束.md) · [Current progress](10-开发进度与交付记录.md)
 
-A managed React canvas built from basketikun/infinite-canvas v0.20.0, using the existing ComfyUI Aggregator Proxy. [Studio is live](http://43.165.167.179:39443/studio/) with backend 131.1/static 131.9. Eight actual GPU modes have completed on 3080/5070. The full fault matrix, physical phones and 10–20-node capacity remain separately tracked in [all 46 requirements](10-开发进度与交付记录.md).
+A managed React canvas built from basketikun/infinite-canvas v0.20.0, using the existing ComfyUI Aggregator Proxy. [Studio is live](http://43.165.167.179:39443/studio/) with backend 132.2/static 132.2. Eight actual GPU modes have completed on 3080/5070. The full fault matrix, physical phones and 10–20-node capacity remain separately tracked in [all 46 requirements](10-开发进度与交付记录.md).
 
 ![Actual public Lime canvas with a generated image](assets/studio/controls-2026-10-29T22-08-02-756Z/desktop-canvas.png)
 
@@ -51,7 +51,7 @@ npm run build
 
 Serve dist at `/studio/` with a correct SPA fallback, MIME types and Worker path. Main-document strict CSP and the isolated Schema Worker's compilation policy are separate. Keep `/admin/` and `/v1/` on the existing service. No Docker, WSL or VM is used. The user manages domain reverse proxying; HTTP on the existing high port and any-origin CORS remain supported with business authentication.
 
-See current progress for F-01–F-46 and G-01–G-27, failures and rollback. Backend runtime is unchanged from the 82 scoped/1,456 compatibility checks. Current frontend verification covers 126 units, type/build, 18 UI groups, 22 storage groups and 25 task-journal groups. Public upgrades and original-SHA restoration are separate evidence. Eight GPU modes mean one deployed-UI submission and seven API submissions, not all eleven aliases retested. Audio file/browser duration is 30,000ms versus 29,952ms decoder-progress metadata: a recorded 48ms difference within the existing 100ms validator tolerance; exact metering remains follow-up.
+See current progress for F-01–F-46 and G-01–G-27, failures and rollback. Current evidence covers 136 frontend units, type/build, 18 UI groups, 22 storage groups, 25 journal groups and 15 read-only recovery groups; backend scoped/compatibility suites passed 112/1,486 cases. The sole later source change is regenerated Admin types, checked separately with type/build and all 45 emitted files equal to the verified seed. Public read-only Key checks (five), preservation/restart checks (three) and all four health endpoints passed. The [current evidence index](research/studio-implementation/submission-lookup-validation-notes-1321.json) preserves failures and corrections. Eight GPU modes mean one deployed-UI submission and seven API submissions, not all eleven aliases retested. Audio file/browser duration is 30,000ms versus 29,952ms decoder-progress metadata: a recorded 48ms difference within the existing 100ms validator tolerance; exact metering remains follow-up.
 
 Actual backend/static rollback preserves existing jobs/content. A new 5070 ten-minute idle cycle completed with both CPU barriers. Builds, browser tests, GPU media, phones and fleet capacity remain separate evidence. Non-crash test-database settings do not change production durability or prove power-loss recovery.
 
@@ -59,7 +59,7 @@ Actual backend/static rollback preserves existing jobs/content. A new 5070 ten-m
 
 Upstream [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas), MIT, commit `9cd3deacbcc598361807afc16c059a80dd18b6f9`. Preserve its license and author attribution. The managed UI uses the user's required [04 · Lime style](https://html.cafe/x5b381ea1); original CSS, font declarations, hashes and font licenses are preserved in web/src/styles/reference/ 和 web/public/fonts/, with separate adaptations.
 
-## Read-only submission recovery (132 candidate)
+## Read-only submission recovery (132.2 deployed)
 
 After a lost response or journal import, `POST /v1/jobs/lookup` matches the original business Key, frozen body, idempotency key and release digest to restore the original job ID. It requires only `jobs:read` and never generates, uploads or charges again. A not-observed result stays unknown; older services fail clearly without falling back to creation. An IDB write transaction also claims the first send across pages.
 

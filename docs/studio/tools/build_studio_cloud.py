@@ -49,6 +49,12 @@ if __name__ == "__main__":
     for item in manifest["files"]:
         path = (stage / item["path"]).resolve()
         assert path.is_relative_to(stage.resolve()) and path.stat().st_size == item["bytes"] and sha(path) == item["sha256"]
+    admin_check = json.loads((APP.parent / "docs/evidence/studio-release-132/admin-generated-types-1322.json").read_text(encoding="utf-8"))
+    assert admin_check["passed"] and admin_check["typecheck_passed"] and admin_check["build_passed"]
+    assert admin_check["generated_types_sha256"] == sha(APP / "apps/admin_web/src/generated/api.d.ts")
+    assert admin_check["openapi_sha256"] == sha(APP / "config/openapi.json")
+    admin_seed = {path.relative_to(stage / "admin").as_posix(): sha(path) for path in (stage / "admin").rglob("*") if path.is_file()}
+    assert admin_seed == admin_check["dist_sha256"], "Do not retain a seed Admin that differs from the checked current build"
     changed = []
     git = subprocess.Popen(["git", "cat-file", "--batch"], cwd=APP.parent, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     try:
@@ -102,6 +108,8 @@ if __name__ == "__main__":
             mapped_files_updated.append(relative.as_posix())
     manifest.update({"created_at": datetime.now(UTC).isoformat(), "release_id": RELEASE, "base_linux_release": "linux-20261029.129.3", "base_linux_archive_sha256": SEED_SHA, "application_source_revision": revision, "current_source_sha256": snapshot, "current_source_files_recorded": len(snapshot), "changed_seed_sources": changed, "project_wheels_rebuilt": True, "rebuilt_projects": list(wheel_hashes), "admin_rebuilt": False, "database_schema_changed": False, "database_head": "03d128a00001", "worker_protocol_changed": False})
     manifest["mapped_seed_files_updated"] = mapped_files_updated
+    manifest["admin_current_build_matches_seed"] = True
+    manifest["admin_generated_bindings_verified"] = True
     manifest["files"] = [{"path": path.relative_to(stage).as_posix(), "bytes": path.stat().st_size, "sha256": sha(path)} for path in sorted(stage.rglob("*")) if path.is_file() and path.name != "linux-deployment.json"]
     (stage / "linux-deployment.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     target = PRIVATE / (RELEASE + ".tar.gz")
@@ -111,7 +119,7 @@ if __name__ == "__main__":
             if path.is_file():
                 archive.add(path, arcname=path.relative_to(stage).as_posix())
     assert source_snapshot(APP) == snapshot
-    result = {"passed": True, "release_id": RELEASE, "archive_sha256": sha(target), "archive_bytes": target.stat().st_size, "application_source_revision": revision, "changed_sources": changed, "wheel_sha256": wheel_hashes, "source_files": len(snapshot), "new_database_migration": False, "worker_protocol_changed": False, "admin_rebuilt": False, "scope": "committed pure cloud wheel update from verified Linux 129.3 seed; frontend static artifact and ops backup repair tracked separately"}
+    result = {"passed": True, "release_id": RELEASE, "archive_sha256": sha(target), "archive_bytes": target.stat().st_size, "application_source_revision": revision, "changed_sources": changed, "wheel_sha256": wheel_hashes, "source_files": len(snapshot), "new_database_migration": False, "worker_protocol_changed": False, "admin_rebuilt": False, "admin_current_build_matches_seed": True, "admin_generated_bindings_verified": True, "scope": "committed pure cloud wheel update from verified Linux 129.3 seed; frontend static artifact and ops backup repair tracked separately"}
     (PRIVATE / "build.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     with (PRIVATE / (RELEASE + "-build.json")).open("x", encoding="utf-8") as receipt:
         receipt.write(json.dumps(result, indent=2) + "\n")

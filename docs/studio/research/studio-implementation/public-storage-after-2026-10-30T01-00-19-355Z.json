@@ -1,0 +1,26 @@
+{
+  "scope": "actual public HTTP and owned persistent Chromium profile; synthetic preexisting documents/local media, no API Key, generation or physical phone",
+  "phase": "after",
+  "checks": [],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/public-storage-2026-10-30T01-00-19-355Z/failure.png",
+      "diagnostic_failure": true
+    }
+  ],
+  "page_errors": [],
+  "blocked_mutations": [],
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true
+  },
+  "preexisting_database_version": 3,
+  "passed": false,
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n3 !== 2\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_public_storage.mjs:90:16\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:459:9)\n    at process.callbackTrampoline (node:internal/async_hooks:130:17)",
+  "diagnostics": {
+    "url": "http://43.165.167.179:39443/studio/canvas",
+    "images": [],
+    "body": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n连接服务\n\n画布库\n\n无限画布\n删除全部\n导入画布\n新建画布\n升级前保存的测试画布\n\n1 个节点 · 0 条连线\n\n更新于 10/30 07:40\n\n基于 basketikun / infinite-canvas · MIT\n画布和已保存素材存于当前浏览器"
+  },
+  "completed_at": "2026-10-30T01:00:31.195Z"
+}

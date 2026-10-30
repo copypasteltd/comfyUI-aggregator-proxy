@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "at": "2026-10-30T01:04:26.227631+00:00",
+  "scope": "136 frontend units, type/build, synthetic HTTP with actual browser storage, native PostgreSQL and current public high-port HTTP; no new GPU or physical-phone generation",
+  "source_sha256": "3d62cdd587b520be229972660cf2dd79755bcca60571183942534ff4389e5b16",
+  "backend_release": "linux-20261030.132.2",
+  "static_release": "studio-20261030.132.2",
+  "runtime_commit": "97459bc3ce83551bfec8c0ee65506a7eb02e60b9",
+  "passing_package_evidence": {
+    "units": "unit-2026-10-30T00-08-24-142Z.json",
+    "types": "typecheck-2026-10-30T00-08-24-139Z.json",
+    "build": "build-2026-10-30T00-11-21-335Z.json",
+    "browser": "browser-2026-10-30T00-28-15-671Z.json",
+    "storage": "storage-2026-10-30T00-32-21-360Z.json",
+    "task_backup": "task-backup-2026-10-30T00-30-53-585Z.json",
+    "submission_lookup": "submission-lookup-2026-10-30T00-27-20-776Z.json",
+    "static_build": "static-build-studio-20261030.132.2.json",
+    "static_promotion": "static-promotion-1322.json",
+    "health": "live-final-health-1322.json",
+    "public_current_restart": "public-storage-after-2026-10-30T01-01-52-608Z.json",
+    "live_lookup": "live-submission-lookup-1321.json"
+  },
+  "backend_focused": "docs/evidence/studio-release-132/studio-fcd6464d8b7548fabc7126b95e3d5b78.json",
+  "backend_compatibility": "docs/evidence/studio-release-132/studio-8eb8130972b846d6bf39443b4a876a71.json",
+  "admin_generated_binding_check": "docs/evidence/studio-release-132/admin-generated-types-1322.json",
+  "failed_backend_reports_preserved": [
+    "docs/evidence/studio-release-132/studio-c6c6b234938e416291fad2b549b049e7.json",
+    "docs/evidence/studio-release-132/studio-f1b0ae0df9a54a1e9ea3b15129ca0031.json"
+  ],
+  "failed_public_reports_preserved": [
+    "public-storage-after-2026-10-30T01-00-19-355Z.json"
+  ],
+  "failure_notes": [
+    "The first focused run exposed a test fixture reading the wrong issued-Key field; the fixture was corrected without changing lookup behavior.",
+    "The first compatibility run retained one stale evidence index and three existing 30-second native subprocess timeouts during parallel cold build work. The index was refreshed and the same budgets passed on the sequential 1486-case rerun.",
+    "The SSH-only Python environment lacks httpx; the public lookup script stopped before creating any Key. The successful run used the existing app Python with the read-only SSH site-packages on PYTHONPATH.",
+    "Admin type generation initially hit Redocly's non-ASCII Windows URL handling, then a Vite realpath/root mismatch. An owned verified alias and explicit workspace root fixed the harness. All failed private logs are retained. Only generated API types differ from the passing Python compatibility snapshot; type/build passed and all 45 Admin output files match the verified seed.",
+    "The first 132.1 static manifest silently declared database v2 from a report with no version. Actual UI data stayed v3. New 132.2 packaging requires an observed version, uses the passing v3 journal report and preserves all 96 UI file bytes; the failed public assertion and both releases are retained.",
+    "The first final documentation gate rejected a newly added design contract with schema_revision instead of the mandatory contract_version. The design metadata field was corrected to the existing 0.4.0 baseline; runtime sources and published packages are unchanged. The failed report is retained."
+  ],
+  "superseded_before_publication": "linux-20261030.132.1 (generated Admin contract alignment)",
+  "forward_manifest_correction": "static-manifest-correction-1322.json",
+  "recording_scope": "Synthetic HTTP with production UI and native IndexedDB. The manifest scope was corrected before publication; this is not actual GPU or public lost-response evidence.",
+  "full_acceptance": "HOLD",
+  "no_new_gpu_submission": true,
+  "no_disabled_key_reenabled": true,
+  "temporary_lookup_key_disabled_and_401": true,
+  "test_postgres_stopped": true,
+  "production_fsync_and_synchronous_commit": "on",
+  "browser_storage_version": 3,
+  "browser_storage_downgrade_supported": false,
+  "virtualization_used": false,
+  "failed_documentation_reports_preserved": [
+    "docs/evidence/studio-release-132/docs-final-20261030T010623944801Z.json"
+  ]
+}

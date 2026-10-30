@@ -1,10 +1,10 @@
 # ComfyUI Aggregator Proxy
 
-[131 · 无限画布融合](docs/131-画布提交发布校验与异步查询契约.md)：React创作前端复用现有七类媒体异步API、Key、Workflow和GPU调度；提交前持久日志、原幂等核对、发布摘要前置校验和受鉴权文件校验统一处理。修正GLB能力发现遗漏，原生专项82/82、兼容1,456/1,456；当前前端126单元/类型/构建、18组界面、22组存储及25组任务清单通过。[公网画布](http://43.165.167.179:39443/studio/)当前静态131.9/后端131.1。八种真实GPU模式曾在3080/5070完成，包含30秒FLAC和76.94MB GLB；本轮未重复提交GPU。完整故障矩阵、手机真机和容量仍以[46项进度](docs/studio/10-开发进度与交付记录.md)分层验收。
+[131 · 无限画布融合](docs/131-画布提交发布校验与异步查询契约.md)与[132 · 原提交只读核对](docs/132-画布原提交只读核对.md)：React创作前端复用现有七类媒体异步API、Key、Workflow和GPU调度；持久日志、原请求只读恢复、发布摘要及鉴权文件校验统一处理。当前前端136单元/类型/构建、18组界面、22组存储、25组清单和15组恢复检查通过；后端112专项、1,486兼容通过，生成Admin类型另验类型/构建。[公网画布](http://43.165.167.179:39443/studio/)当前静态132.2/后端132.2。八种真实GPU模式曾在3080/5070完成，包含30秒FLAC和76.94MB GLB；本轮未重复提交GPU。完整故障矩阵、手机真机和容量仍以[46项进度](docs/studio/10-开发进度与交付记录.md)分层验收。
 
 任务页新增清单JSON导出、预览和原子导入：不含Key或媒体，保留原正文/幂等键/任务ID，不覆盖画布、不自动发起请求。恢复记录先标为待核对，主动查询原任务后才能取消/读取产物；无ID的备份禁止补发生成。作品ZIP与任务清单需分别备份；提示词按原文保留，请妥善保管。[具体机制](docs/studio/13-任务清单备份与只读恢复.md)、[原速MP4](docs/studio/media/studio-131/studio-task-backup-verified.mp4)、[GIF](docs/studio/media/studio-131/studio-task-backup-verified.gif)来自生产构建UI、合成API与配额故障注入，未使用真实GPU或物理手机。
 
-入口为高位HTTP `/studio/`，Admin为`/admin/`，业务API为`/v1/`，任意源CORS保持开放。本机文档/原件事务、保存失败重试与跨页冲突继续保留；公网实测v2→v3保留升级及最终131.9重启通过，原Worker未重启。v3本机数据不能随静态包降级，普通image/file自动清理暂停；上传缓存和完整配额UI仍待完善。[保存机制](docs/studio/12-本机引用事务与保存失败恢复.md)。
+入口为高位HTTP `/studio/`，Admin为`/admin/`，业务API为`/v1/`，任意源CORS保持开放。本机文档/原件事务、保存失败重试与跨页冲突继续保留；历史v2→v3升级及当前132.2数据保留/重启通过，原Worker未重启。v3本机数据不能随静态包降级，普通image/file自动清理暂停；上传缓存和完整配额UI仍待完善。[保存机制](docs/studio/12-本机引用事务与保存失败恢复.md)。
 
 无新增生成后端，不需要本地Docker、WSL或Agent。源码与锁同步于`app/apps/studio_web/`，青柠样式沿用既有系统；图片、视频、Workflow音频与GLB分别呈现。云端完成八小时清理与本机离线副本独立管理。[完整使用与恢复](docs/studio/USAGE.md)、[原生发布运维](docs/studio/11-线上使用与原生发布运维.md)。
 
@@ -571,10 +571,12 @@ Python 集成测试要求本项目的原生 PostgreSQL 与独立 `render_control
 
 本仓库尚未指定项目整体的开源许可证。固定上游 [Sub2API](https://github.com/Wei-Shaw/sub2api) 及其依赖、媒体工具保留各自许可；仓库不包含 ComfyUI 模型权重、第三方完整上游副本或原生二进制。依赖固定信息见 [upstream-lock.json](app/integrations/sub2api/upstream-lock.json) 和工具链锁。
 
-## 原提交只读核对（132 候选）
+## 原提交只读核对（132.2 已部署）
 
 响应丢失或任务清单恢复后，可以通过原业务 Key、原请求、原幂等键和原发布摘要，使用 `POST /v1/jobs/lookup` 找回原任务 ID。只要求 `jobs:read`；不会再次生成、上传或计费。未查到继续保留未知状态，旧服务未声明支持时明确提示，不回退生成。两个页面也通过本机写事务共享首次发送占用。
 
 [完整操作与开发约束](docs/studio/14-原提交只读核对与恢复.md) · [原速 MP4](docs/studio/media/studio-131/studio-submission-lookup.mp4) · [390px 页面](docs/studio/assets/studio/submission-lookup-2026-10-30T00-27-20-776Z/mobile-original-job-restored.png)。以下为生产构建配合合成 API 的恢复演示，无 GPU 或物理手机实测含义。
 
 ![只读核对原提交](docs/studio/media/studio-131/studio-submission-lookup.gif)
+
+当前前端136单元、类型/构建、18组界面、22组存储、25组任务清单和15组只读恢复通过；后端112专项与1,486兼容回归通过，随后仅刷新生成的Admin类型并另验类型/构建，45个Admin文件与已核对种子一致。公网只读Key五项、数据保留/重启三项和四入口健康通过；[当前证据索引](docs/studio/research/studio-implementation/submission-lookup-validation-notes-1321.json)保留失败及修正。

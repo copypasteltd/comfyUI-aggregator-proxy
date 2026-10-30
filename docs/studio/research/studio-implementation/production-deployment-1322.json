@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "scope": "Actual native offline preparation, verified archive backup, backend promotion and unchanged database counts; no full disaster restore",
+  "prepared": {
+    "passed": true,
+    "release_id": "linux-20261030.132.2",
+    "wheel_payload_files_verified": 249,
+    "source_revision": "97459bc3ce83551bfec8c0ee65506a7eb02e60b9",
+    "at": "2026-10-30T00:58:58.507025+00:00"
+  },
+  "promotion": {
+    "passed": true,
+    "action": "promote-1322",
+    "at": "2026-10-30T00:59:27.311261+00:00",
+    "backup": {
+      "manifest": "control-20261030T005924363817Z.json",
+      "sha256": "2be7b7369de2493220add680068e98271d3cdb41272cecf0e35307011423eea2",
+      "bytes": 18620889
+    },
+    "steps": [
+      {
+        "old": "/opt/comfyui-aggregator/releases/linux-20261030.131.1",
+        "new": "/opt/comfyui-aggregator/releases/linux-20261030.132.2",
+        "before": {
+          "database_head": "03d128a00001",
+          "fsync": "on",
+          "synchronous_commit": "on",
+          "unfinished_jobs": 0,
+          "gpu_occupancies": 0,
+          "management_holds": 0,
+          "jobs": 41,
+          "content": 67
+        },
+        "after": {
+          "database_head": "03d128a00001",
+          "fsync": "on",
+          "synchronous_commit": "on",
+          "unfinished_jobs": 0,
+          "gpu_occupancies": 0,
+          "management_holds": 0,
+          "jobs": 41,
+          "content": 67
+        },
+        "http_worker_pid_unchanged": true
+      }
+    ],
+    "database_migration_executed": false,
+    "worker_restarted": false,
+    "static_pointer_changed": false
+  },
+  "private_source_receipt": ".local/studio-ops/ship-backend-status-1322-20261030T005946863881Z.json",
+  "source_receipt_sha256": "aeaf64d1c2bf32253ecdf1df76dde1c9333b5dc7012392979a107772fa49f4c7"
+}

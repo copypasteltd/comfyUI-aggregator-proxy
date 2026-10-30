@@ -43,7 +43,7 @@ Browser private-byte samples rose from about 347 to 651MiB, and JS heap from 8.2
 
 All eight cloud artifacts expire 28,800s after job completion; local originals and saved files are independent. This evidence does not certify every one of the 11 aliases, all codecs/faults, transfer-triggered ComfyUI cleanup, physical phones, global fair pooling or 10–20-node capacity. The complete backlog retains its F identifiers.
 
-## 132 candidate: read-only submission lookup
+## 132.2 deployed: read-only submission lookup
 
 Original-speed production UI with synthetic HTTP; not GPU or physical-phone evidence. Covers no-ID recovery, not-observed results and original job restoration without replay.
 

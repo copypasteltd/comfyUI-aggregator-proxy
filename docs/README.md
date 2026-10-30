@@ -267,3 +267,5 @@ OpenAI 格式兼容必须拆成三项验收：图片生成/编辑协议、异步
 ## 第 86 增量最终证据
 
 [86 最终验证](./86-数据库故障脱敏诊断与并发观测.md)完成完整 16 门禁/3593 Python、29 项完整 CI 窗口内原生协议、28 项候选安装与 8 项安装后浏览器检查；587 CI、264 协议运行、488 候选构建输入均与验证源码一致。候选 rc-20261025.86.1 含 166 载荷、58 wheels、62 运行契约。原失败与一次性测试库维护保留；未将本地通过提升为真实设备、实际 WinSW/SCM、远端 CI 或生产验收，70 项仍开放。最终证据见 [汇总](./evidence/2026-10-25/database-diagnostics-verification.json)、[完整门禁](./evidence/2026-10-25/database-diagnostics-final-ci-verification.json)、[并发窗口](./evidence/2026-10-25/database-diagnostics-maintained-concurrency-verification.json)与[候选安装](./evidence/2026-10-25/database-diagnostics-release-verification.json)。
+
+[132 · 原提交只读核对](132-画布原提交只读核对.md)：当前后端/静态132.2，原生112/1,486及公网协议已验；完整签收仍HOLD。

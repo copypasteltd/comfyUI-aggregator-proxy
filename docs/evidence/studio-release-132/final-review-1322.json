@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "at": "2026-10-30T01:10:34.509771+00:00",
+  "scope": "Current 132.2 implementation, native backend compatibility, public HTTP, source mirror and static delivery gates; not complete fault/phone/fleet acceptance",
+  "backend_release": "linux-20261030.132.2",
+  "studio_release": "studio-20261030.132.2",
+  "runtime_commit": "97459bc3ce83551bfec8c0ee65506a7eb02e60b9",
+  "frontend_commit": "d5027a3151a598a0bbe841bc15af4e3c93e280a0",
+  "runtime_source_files_verified": 555,
+  "runtime_sources_unchanged_after_deployment": true,
+  "gates": [
+    {
+      "file": "docs/evidence/studio-release-132/docs-final-20261030T010958107233Z.json",
+      "sha256": "e42ec4029d476d44fe302c1ebf24d821b0845f03ffcd17d2c09a93bb16c0413a",
+      "gate": "docs"
+    },
+    {
+      "file": "docs/evidence/studio-release-132/readme-final-20261030T010958107082Z.json",
+      "sha256": "7b4578e5d773eb9629f6473d149e15baa6f08e176689b5d09d24f1e5a7c259cd",
+      "gate": "readme"
+    },
+    {
+      "file": "docs/evidence/studio-release-132/delivery-final-20261030T010958107043Z.json",
+      "sha256": "50e5ecad23ea7a6ede38d534baf0332024b6e01e281aad32be39af12453ed033",
+      "gate": "delivery"
+    },
+    {
+      "file": "docs/evidence/studio-release-132/public-final-20261030T010958127238Z.json",
+      "sha256": "b3f04794d864c22e3a66688e76c9e833fb46fb0bb6ddaa86415994e8b5bf8a4e",
+      "gate": "public"
+    }
+  ],
+  "requirements_retained": 46,
+  "full_acceptance": "HOLD",
+  "new_gpu_generation": false,
+  "disabled_keys_reenabled": false,
+  "temporary_lookup_key_disabled_and_401": true,
+  "owned_browser_contexts_closed": true,
+  "owned_test_postgres_stopped": true,
+  "virtualization_used": false,
+  "limitations": [
+    "Real lost GPU-response/offline/background fault matrix",
+    "Physical Android/iOS and further browsers",
+    "Interactive GLB viewer, batch splitting, Key rotation adoption, WebDAV",
+    "Verified ComfyUI output deletion after transfer",
+    "Global balanced_ready fairness and measured 10-20-device fleet capacity"
+  ]
+}
