@@ -1129,6 +1129,8 @@ function InfiniteCanvasPage() {
             const bounds = containerRef.current?.getBoundingClientRect();
             const target = focusViewportForNode(node, bounds || size, measureFocusFrame(containerRef.current, nodeId));
             setSelectedNodeIds(new Set([nodeId]));
+            setToolbarNodeId(nodeId);
+            setDialogNodeId((current) => current === nodeId ? current : null);
             setSelectedConnectionId(null);
             setContextMenu(null);
 

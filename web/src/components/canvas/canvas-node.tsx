@@ -726,7 +726,7 @@ function MediaNodeContent({ node, theme }: NodeContentRendererProps) {
         <div className="flex h-full w-full flex-col items-center justify-center gap-2 overflow-auto px-3 py-2 text-center" style={{ background: theme.node.fill, color: theme.node.text }} role="status" data-canvas-media-error={node.id} data-canvas-no-zoom onWheel={(event) => event.stopPropagation()}>
             <strong className="text-xs">当前浏览器无法播放此素材</strong>
             <span className="text-[11px] leading-4" style={{ color: theme.node.muted }}>下载原件后可尝试其他播放器。</span>
-            <button type="button" className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-2 py-1 text-xs hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-offset-2 dark:hover:bg-white/10" onPointerDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); void downloadOriginal(node.metadata, `canvas-${node.type}-${node.id}`); }}><Download className="size-3.5" />下载原件</button>
+            <button type="button" className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-2 py-1 text-xs hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-offset-2 dark:hover:bg-white/10" onPointerDown={(event) => event.stopPropagation()} onMouseDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); void downloadOriginal(node.metadata, `canvas-${node.type}-${node.id}`); }}><Download className="size-3.5" />下载原件</button>
         </div>
     );
     const playbackEvents = { onError: () => setFailedSource(source), onLoadedMetadata: () => setFailedSource((failed) => failed === source ? "" : failed) };
