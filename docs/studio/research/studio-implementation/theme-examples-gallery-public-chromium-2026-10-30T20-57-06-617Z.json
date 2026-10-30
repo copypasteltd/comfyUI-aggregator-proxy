@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "at": "2026-10-30T20:57:06.619Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T20-48-07-010Z.json",
+  "source_sha256": "6d4174ad64c92a8742189441edad2dffa40fa048ec3222262e98e829cbab4a85",
+  "public_static_site": true,
+  "checks": [
+    "gallery waits for catalog and all lazily loaded covers to finish decoding",
+    "four stable theme gallery captures with zero generation or upload requests"
+  ],
+  "screenshots": [
+    {
+      "name": "examples-dark-desktop",
+      "file": "docs/media/studio-151/gallery-public-chromium-2026-10-30T20-57-06-617Z/examples-dark-desktop.png",
+      "sha256": "7b6eb0dbdd45167cb763e803e3b802bbd6adeeadf3501e2a1a14b95e56f2f25c"
+    },
+    {
+      "name": "examples-light-desktop",
+      "file": "docs/media/studio-151/gallery-public-chromium-2026-10-30T20-57-06-617Z/examples-light-desktop.png",
+      "sha256": "9a2621a2c2faf359a3ce4ac60e892b791c55a1c45c41edf4f3beedcdf131a209"
+    },
+    {
+      "name": "examples-light-390",
+      "file": "docs/media/studio-151/gallery-public-chromium-2026-10-30T20-57-06-617Z/examples-light-390.png",
+      "sha256": "3765778ce07548460d6cf8f18f7ddd3e2e3ccce8b94ee00a39355b752629360d"
+    },
+    {
+      "name": "examples-dark-390",
+      "file": "docs/media/studio-151/gallery-public-chromium-2026-10-30T20-57-06-617Z/examples-dark-390.png",
+      "sha256": "d693c1e1517fc5dd2095121f83406053785427aecbebaf9a1f6a7742861ffda1"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    }
+  ],
+  "submissions": [],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "scope": "Supplemental actual public/local gallery capture with synthetic catalog, fully decoded example covers and zero generation or upload requests; not real GPU evidence.",
+  "api_transport": "Explicit test routing to owned synthetic API; not production CORS/authentication proof",
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://43.165.167.179:39445",
+    "synthetic_api": "http://192.168.31.95:9914"
+  },
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "gallery_only": true,
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio151/gallery-public-chromium-2026-10-30T20-57-06-617Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

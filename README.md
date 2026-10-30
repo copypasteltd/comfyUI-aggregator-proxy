@@ -1,7 +1,17 @@
 # ComfyUI 创作画布
 
+<!-- independent151:start -->
+**Web静态153.1已部署**：[明暗主题与八类预设案例](docs/studio/36-明暗主题与预设创作案例.md)。右上角切换浅色/深色并保存在当前浏览器，页面、弹层和画布统一使用青柠主题；同源启动脚本在刷新时恢复选择。“案例”入口创建可编辑的独立本机画布，按当前Key的任务类型、参考槽位和完整合法规格匹配；用户确认后才上传和生成。保存后可以继续创作，不自动把生成图加入参考。
+
+218单元/类型/生产构建通过；完整通过69组页面检查、43截图，Firefox本机通过。[完整MP4](docs/studio/media/studio-151/themes-and-examples-public.mp4) / [GIF](docs/studio/media/studio-151/themes-and-examples-public.gif)使用合成API，不代表真实GPU成功。本轮只更新独立画布静态内容；完整Web验收HOLD，原服务视频准备失败及公网Firefox等待验仍保留。
+
+| 浅色 | 深色 |
+| --- | --- |
+| ![浅色案例页](docs/studio/media/studio-151/gallery-public-chromium-2026-10-30T20-57-06-617Z/examples-light-desktop.png) | ![深色案例页](docs/studio/media/studio-151/gallery-public-chromium-2026-10-30T20-57-06-617Z/examples-dark-desktop.png) |
+<!-- independent151:end -->
+
 <!-- independent150:start -->
-**Web静态150.1已部署**：[画布参考创作与生成表单](docs/studio/35-画布参考创作与生成表单.md)。直接改造既有开源画布：选图自动填槽位、缩略图、合法完整规格、目录恢复、全输入预检及实际来源连线。207单元/类型/构建、Chromium本机/公网与Firefox本机共69组表单、15截图通过；Firefox公网未完成，单列待验；[完整所选页MP4](docs/studio/media/studio-150/canvas-reference-creation-public.mp4) / [GIF](docs/studio/media/studio-150/canvas-reference-creation-public.gif)展示合成接口流程。一次真实双参考视频受理后由原服务返回 `preparation_transport_failure`，没有生成结果；测试Key已禁用。仅发布画布静态文件及兼容150.0恢复包，原API/服务/配置不改。完整Web验收仍 **HOLD**。
+**历史150.1交付**：[画布参考创作与生成表单](docs/studio/35-画布参考创作与生成表单.md)。直接改造既有开源画布：选图自动填槽位、缩略图、合法完整规格、目录恢复、全输入预检及实际来源连线。207单元/类型/构建、Chromium本机/公网与Firefox本机共69组表单、15截图通过；Firefox公网未完成，单列待验；[完整所选页MP4](docs/studio/media/studio-150/canvas-reference-creation-public.mp4) / [GIF](docs/studio/media/studio-150/canvas-reference-creation-public.gif)展示合成接口流程。一次真实双参考视频受理后由原服务返回 `preparation_transport_failure`，没有生成结果；测试Key已禁用。仅发布画布静态文件及兼容150.0恢复包，原API/服务/配置不改。完整Web验收仍 **HOLD**。
 
 ![实际双参考创作页面；本次视频准备失败](docs/studio/media/studio-150/live-2026-10-30T18-25-27-662Z/real-two-reference-form.png)
 

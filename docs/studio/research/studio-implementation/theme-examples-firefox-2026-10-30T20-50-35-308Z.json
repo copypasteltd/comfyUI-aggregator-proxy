@@ -1,0 +1,517 @@
+{
+  "passed": true,
+  "at": "2026-10-30T20:50:35.310Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T20-48-07-010Z.json",
+  "source_sha256": "6d4174ad64c92a8742189441edad2dffa40fa048ec3222262e98e829cbab4a85",
+  "public_static_site": false,
+  "checks": [
+    "fresh profile defaults to original Lime light theme",
+    "dark mode persists across reload and color-scheme matches",
+    "dark input, primary action and Lime panel link text meet 4.5 contrast; panel keyboard focus remains dark",
+    "same-origin startup script restores dark mode before the application module under strict CSP",
+    "keyboard Enter switches the theme in both directions",
+    "an unconnected user can open and save an editable image example without API requests",
+    "example library survives a direct reload on its independent business route",
+    "all main pages keep dark palette; eight examples are discoverable and labels remain readable over reference images",
+    "product-photo: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "product-edit: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "selected and keyboard-active model option preserves Lime background and readable dark text",
+    "reference-style: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "video-scene: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "video-first-frame: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "video-references: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "workflow-audio: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "object-3d: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "GLB preview modal and native WebGL view follow both themes",
+    "light/dark desktop and 390px examples have no document horizontal overflow",
+    "example projects persist in the existing canvas library",
+    "saved example reuses its marked original inputs and task family, excluding generated images",
+    "all-specification-denied Key shows truthful availability without a fallback model",
+    "unknown stored theme falls back to supported light mode"
+  ],
+  "screenshots": [
+    {
+      "name": "connection-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/connection-dark.png",
+      "sha256": "eaef0a48364a67535c0b6c839f4fdb7e9b0bc51391b0a123831f6369804fcf00"
+    },
+    {
+      "name": "offline-example-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/offline-example-dark.png",
+      "sha256": "26126b8d78e337df09fe036bab800f10aac5429962da5d3ee88df1285472e525"
+    },
+    {
+      "name": "examples-dark-desktop",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/examples-dark-desktop.png",
+      "sha256": "45396e68c319e6b57d5fea5d743daa1b00b8028fc983d845746adfff41f0cd19"
+    },
+    {
+      "name": "two-reference-composer-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/two-reference-composer-dark.png",
+      "sha256": "e01f6529961cdc700695058800476b592b33f9b0512fed4a5c68af1d9e0983f9"
+    },
+    {
+      "name": "model-selector-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/model-selector-dark.png",
+      "sha256": "bfde1e057253bab5417bc4b869a11f5b99f8ff7b46bb1db44b841101eb64c94e"
+    },
+    {
+      "name": "glb-preview-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/glb-preview-dark.png",
+      "sha256": "618defba7c6c4b0435005ec54b2a42b8eb2c903ab00846e89bf23c4fb8fa2289"
+    },
+    {
+      "name": "glb-preview-light",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/glb-preview-light.png",
+      "sha256": "6b42c7307761d5cfbc8de4f416522b94a6cf7a5b5e45be3d5727c2ff488fa37a"
+    },
+    {
+      "name": "examples-light-desktop",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/examples-light-desktop.png",
+      "sha256": "d73e926741ff2d9d16a7ef3ae1c0ab81684e9d86caa75bd88602fb3d28388f53"
+    },
+    {
+      "name": "examples-light-390",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/examples-light-390.png",
+      "sha256": "2c4ab6ff8b596247152557d78dc971aa0ca6f3802b3ada16221bc33f263b4ca7"
+    },
+    {
+      "name": "examples-dark-390",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/examples-dark-390.png",
+      "sha256": "715441e581ff25e1add323662d94a889dac06115bde9c14431844d5aee2bb762"
+    },
+    {
+      "name": "canvas-library-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/canvas-library-dark.png",
+      "sha256": "fff96363724ba0de61cf37b39ed16c787eccf4a9212a4b8cadd16eab62bfe009"
+    },
+    {
+      "name": "saved-example-continues-with-original-references",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/saved-example-continues-with-original-references.png",
+      "sha256": "187e7cce102fcf2e94095b313433c9a0207ac932c2cdbc755ddd6ca22726c51a"
+    },
+    {
+      "name": "examples-no-authorized-specification",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-50-35-308Z/examples-no-authorized-specification.png",
+      "sha256": "69d25d50f07187fa3337f093a1eeddc14f3434e588848d5f04b28f48c191be42"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_4539ef47670d4e4a91dac66b13eae9ce",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_4539ef47670d4e4a91dac66b13eae9ce/download",
+      "cookie_present": false,
+      "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_7451f203cf5d4268bfdcabbdc7c78344",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_7451f203cf5d4268bfdcabbdc7c78344/download",
+      "cookie_present": false,
+      "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_483e13f0d75e4c289141c89f7275a77d",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_483e13f0d75e4c289141c89f7275a77d/download",
+      "cookie_present": false,
+      "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_311eb29832f04982bc567c4347f08947",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_311eb29832f04982bc567c4347f08947/download",
+      "cookie_present": false,
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_cf4a1457db624112a305431a64adcd4b",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_cf4a1457db624112a305431a64adcd4b/download",
+      "cookie_present": false,
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_3d90e3d98b114c99894375b2d2c6c8ff",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_3d90e3d98b114c99894375b2d2c6c8ff/download",
+      "cookie_present": false,
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_154fcb506ad14b0e8078ffa0015c72e0",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_154fcb506ad14b0e8078ffa0015c72e0/download",
+      "cookie_present": false,
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_c40f02f1dd8c4ba2b305c385ea12955f",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_c40f02f1dd8c4ba2b305c385ea12955f/download",
+      "cookie_present": false,
+      "sha256": "b2ed9ebfa0ce8af70822a3944db2c2244cc3c7ae1e511c7ce7ffa7d6d540dcab"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    }
+  ],
+  "submissions": [
+    {
+      "body": {
+        "model": "comfy-3080-image-lustify-krea2",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "一台青柠绿色的圆润小机器人，白色无缝背景，柔和的摄影棚光线，正面三分之四视角，主体完整，产品摄影，无文字，无水印。"
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "qe7XR2o_j6KYi9yCJYD4y"
+      },
+      "job_id": "job_ab228d50e97c4a74a976c9ea4da4512c",
+      "content_id": "content_4539ef47670d4e4a91dac66b13eae9ce"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-image-edit-wai",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "保留参考图中机器人的形状和颜色，将背景换成干净的浅灰色展台与柔和侧光，保持主体完整清晰，无文字。",
+          "source_image": {
+            "asset_id": "asset_3ab555eef8d2490fb76c6889b333fc0e"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "S3qkHL4PwXCkHpTqMwY5D"
+      },
+      "job_id": "job_ecb1164b9db64041a52d6e0347d379f7",
+      "content_id": "content_7451f203cf5d4268bfdcabbdc7c78344"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "参考第一张图的机器人主体，结合第二张图的造型与配色，创作一张统一风格的产品概念图，干净背景，主体完整。",
+          "references": [
+            {
+              "asset_id": "asset_80b7b250ad2643f2991b243354bb4f00",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_bd5588a086d741c7ba6126760f6d32a2",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "z0Y6ekrSV0fHIC4CfZrUn"
+      },
+      "job_id": "job_2019f3fe6204433999d741c3fbe0fdf7",
+      "content_id": "content_483e13f0d75e4c289141c89f7275a77d"
+    },
+    {
+      "body": {
+        "model": "comfy-4090-video-h3",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "柔和摄影棚中，一台青柠绿色小机器人缓慢转向镜头，镜头轻轻推进，光线稳定，动作自然，无文字。"
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "client_request_id": "6IJ-RzLz-UIBgidEucdVy"
+      },
+      "job_id": "job_f3d86d0a70734402ac242284e4f8db4c",
+      "content_id": "content_311eb29832f04982bc567c4347f08947"
+    },
+    {
+      "body": {
+        "model": "comfy-4090-video-h3-i2v",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "以参考图作为镜头起点，机器人轻轻转头，镜头缓慢推进，保持主体外观与背景稳定，动作柔和。",
+          "references": [
+            {
+              "asset_id": "asset_136156bfab734a9c86b40e6c2cba8de9",
+              "role": "first_frame"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "client_request_id": "vL6mUrOO1g9-wCORDRPO3"
+      },
+      "job_id": "job_cbaee895b73a45f089745806c64a4a7f",
+      "content_id": "content_cf4a1457db624112a305431a64adcd4b"
+    },
+    {
+      "body": {
+        "model": "comfy-4090-video-h3-refs",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "结合两张参考图，展示小机器人在柔和光线下缓慢转动，镜头平稳，保持主体一致，动作自然。",
+          "references": [
+            {
+              "asset_id": "asset_44a89f3dd3004024a7299964f65e938b",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_83af214a819c4d3b9272c1fa5fe8dd5d",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "client_request_id": "ljSHG0EPYr-WWyaHgzf8x"
+      },
+      "job_id": "job_70419a580f8144a6a8a5a45d83ae2edd",
+      "content_id": "content_3d90e3d98b114c99894375b2d2c6c8ff"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-music-yue2",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "轻快、温暖的电子器乐配乐，柔和的合成器与轻打击乐，适合小机器人产品展示，无人声。"
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard",
+          "seconds": 30
+        },
+        "client_request_id": "_GxLSRwbjOSjPbevLrue7"
+      },
+      "job_id": "job_403cec3d77074f208cbd8aead6f4f4d5",
+      "content_id": "content_154fcb506ad14b0e8078ffa0015c72e0"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-3d-trellis2",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_b3ac8385181c4f329e939cf923ef2943"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard"
+        },
+        "client_request_id": "mqTnTdBgZPMk-zx_MNvC0"
+      },
+      "job_id": "job_745d76ae5a604b779bd6d2809f862e5a",
+      "content_id": "content_c40f02f1dd8c4ba2b305c385ea12955f"
+    }
+  ],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "scope": "Actual theme and editable example Web flows with synthetic API/media; no real GPU generation, fleet, physical touch or full browser acceptance.",
+  "api_transport": "Native ordinary HTTP on two different origins, no business interception",
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:13030",
+    "synthetic_api": "http://192.168.31.95:13029"
+  },
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio151/firefox-2026-10-30T20-50-35-308Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

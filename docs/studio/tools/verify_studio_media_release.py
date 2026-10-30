@@ -75,6 +75,11 @@ with httpx.Client(trust_env=False, timeout=20, follow_redirects=False) as http:
         response = http.get(origin + route); routes[route] = response.status_code
         assert response.status_code == expected, (route, response.status_code)
     cors = []
+    if arguments.plan and plan['operation'].startswith('151-theme-examples'):
+        for route, expected in [('/studio/library/', 200), ('/studio/examples', 301), ('/studio/examples/', 403)]:
+            response = http.get(origin + route)
+            routes[route] = response.status_code
+            assert response.status_code == expected, (route, response.status_code)
     for allowed in [origin, 'http://independent-origin.example:18080']:
         response = http.get(api + '/v1/models', headers={'Origin': allowed})
         assert response.status_code == 401 and response.headers.get('access-control-allow-origin') in {'*', allowed}

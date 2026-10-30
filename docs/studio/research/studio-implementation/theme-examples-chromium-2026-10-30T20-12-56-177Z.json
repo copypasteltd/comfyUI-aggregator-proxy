@@ -1,0 +1,78 @@
+{
+  "passed": false,
+  "at": "2026-10-30T20:12:56.393Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T19-49-43-276Z.json",
+  "source_sha256": "719e7afc1fed3ac6c7782106dec383f8d1bcd690c892c864f7cc1217e3562860",
+  "public_static_site": false,
+  "checks": [
+    "fresh profile defaults to original Lime light theme",
+    "dark mode persists across reload and color-scheme matches",
+    "dark input and primary action text meet 4.5 contrast",
+    "same-origin startup script restores dark mode before the application module under strict CSP",
+    "keyboard Enter switches the theme in both directions",
+    "an unconnected user can open and save an editable image example without API requests"
+  ],
+  "screenshots": [
+    {
+      "name": "offline-example-dark",
+      "file": "docs/media/studio-151/chromium-2026-10-30T20-12-56-177Z/offline-example-dark.png",
+      "sha256": "e56edb5a23bcf1881e9c0a500fd4ca1d5d6fcbdaacf6952c6c8a39fdc38887e0"
+    },
+    {
+      "name": "failure",
+      "file": "docs/media/studio-151/chromium-2026-10-30T20-12-56-177Z/failure.png",
+      "sha256": "f993618f80cba35d262d2ff65fe248863fff21fb73a99501bf687fdb4ec79065"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    }
+  ],
+  "submissions": [],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "scope": "Actual theme and editable example Web flows with synthetic API/media; no real GPU generation, fleet, physical touch or full browser acceptance.",
+  "api_transport": "Native ordinary HTTP on two different origins, no business interception",
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:6102",
+    "synthetic_api": "http://192.168.31.95:6101"
+  },
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 8\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_theme_examples.mjs:124:12",
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio151/chromium-2026-10-30T20-12-56-177Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

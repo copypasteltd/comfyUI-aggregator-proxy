@@ -15,6 +15,7 @@ parser.add_argument('--source', default='canvas-20261030.145.1')
 parser.add_argument('--release', default='canvas-20261030.146.0')
 parser.add_argument('--expected-source-revision', default='ae0ca22e996c16c137b2ed35ceab7c1c3e492044')
 parser.add_argument('--protocol', default='docs/research/studio-implementation/managed-cleanup-protocol-2026-10-30T13-17-46-730Z.json')
+parser.add_argument('--delivery-proof', help='Exact already-deployed source verification with the same complete storage contract')
 arguments = parser.parse_args()
 SOURCE_ID, RELEASE = arguments.source, arguments.release
 require(re.fullmatch(r'canvas-\d{8}\.\d+\.\d+', SOURCE_ID) and re.fullmatch(r'canvas-\d{8}\.\d+\.0', RELEASE) and SOURCE_ID != RELEASE, 'Invalid recovery identity')
@@ -25,21 +26,29 @@ package = json.loads((SOURCE / 'package.json').read_text(encoding='utf-8'))
 archive = SOURCE / (SOURCE_ID + '.tar.gz')
 require(package['passed'] and sha(archive.read_bytes()) == package['archive_sha256'], 'Original recovery archive changed')
 require(package['source_revision'] == arguments.expected_source_revision, 'Unexpected frozen recovery source')
-protocol_path = (ROOT / arguments.protocol).resolve()
+protocol_path = (ROOT / (arguments.delivery_proof or arguments.protocol)).resolve()
 require(protocol_path.is_relative_to((ROOT / 'docs/research/studio-implementation').resolve()), 'Protocol must be owned public evidence')
 protocol = json.loads(protocol_path.read_text(encoding='utf-8'))
-require(protocol['passed'] and protocol['source_revision'] == package['source_revision'] and len(protocol['checks']) == 18 and all(protocol['cleanup'].values()), 'Missing native v5 proof')
+if arguments.delivery_proof:
+    require(protocol['passed'] and protocol['release_id'] == SOURCE_ID and protocol['source_revision'] == package['source_revision']
+            and protocol['source_sha256'] == package['source_sha256'] and protocol['storage_contract'] == CONTRACT
+            and protocol['package_sha256'] == package['archive_sha256'], 'Missing exact deployed-source compatibility proof')
+else:
+    require(protocol['passed'] and protocol['source_revision'] == package['source_revision'] and len(protocol['checks']) == 18 and all(protocol['cleanup'].values()), 'Missing native v5 proof')
 with tarfile.open(archive) as source:
     original_raw = source.extractfile('canvas-deployment.json').read()
     manifest = json.loads(original_raw)
     require(manifest.get('storage_contract', CONTRACT) == CONTRACT, 'Recovery source declares an incompatible storage contract')
+    if arguments.delivery_proof:
+        require(manifest.get('storage_contract') == CONTRACT and protocol['static_files_verified'] == len(manifest['files']), 'Deployed source lacks the exact complete contract or inventory')
     files = manifest_files(manifest)
     require(manifest['release_id'] == SOURCE_ID, 'Wrong recovery source')
     payload = {name: source.extractfile(name).read() for name in files}
     for name, entry in files.items():
         require(len(payload[name]) == entry['bytes'] and sha(payload[name]) == entry['sha256'], 'Original recovery file changed')
+proof_name = 'deployed_source_report' if arguments.delivery_proof else 'native_protocol_report'
 manifest.update({'release_id': RELEASE, 'at': datetime.now(UTC).isoformat(), 'storage_contract': CONTRACT,
-                 'recovery_source': {'release_id': SOURCE_ID, 'manifest_sha256': sha(original_raw), 'archive_sha256': package['archive_sha256'], 'native_protocol_report': protocol_path.relative_to(ROOT).as_posix(), 'native_protocol_report_sha256': sha(protocol_path.read_bytes())}})
+                 'recovery_source': {'release_id': SOURCE_ID, 'manifest_sha256': sha(original_raw), 'archive_sha256': package['archive_sha256'], proof_name: protocol_path.relative_to(ROOT).as_posix(), proof_name + '_sha256': sha(protocol_path.read_bytes())}})
 payload['canvas-deployment.json'] = (json.dumps(manifest, indent=2) + '\n').encode()
 TARGET.mkdir()
 target = TARGET / (RELEASE + '.tar.gz')

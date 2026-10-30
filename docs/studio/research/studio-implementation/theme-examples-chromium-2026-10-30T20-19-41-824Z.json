@@ -1,0 +1,107 @@
+{
+  "passed": false,
+  "at": "2026-10-30T20:19:41.826Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T19-49-43-276Z.json",
+  "source_sha256": "719e7afc1fed3ac6c7782106dec383f8d1bcd690c892c864f7cc1217e3562860",
+  "public_static_site": false,
+  "checks": [
+    "fresh profile defaults to original Lime light theme",
+    "dark mode persists across reload and color-scheme matches",
+    "dark input and primary action text meet 4.5 contrast",
+    "same-origin startup script restores dark mode before the application module under strict CSP",
+    "keyboard Enter switches the theme in both directions",
+    "an unconnected user can open and save an editable image example without API requests",
+    "all main pages keep dark palette and eight examples are discoverable"
+  ],
+  "screenshots": [
+    {
+      "name": "offline-example-dark",
+      "file": "docs/media/studio-151/chromium-2026-10-30T20-19-41-824Z/offline-example-dark.png",
+      "sha256": "8a60e786a18f72a0a8708b3be8e85dd28137c72251cc06a2fc1289962d5afedb"
+    },
+    {
+      "name": "examples-dark-desktop",
+      "file": "docs/media/studio-151/chromium-2026-10-30T20-19-41-824Z/examples-dark-desktop.png",
+      "sha256": "887834ac03b0bd455a287dbcd05b857875711ff6136f1e122981e7de4057aaa6"
+    },
+    {
+      "name": "failure",
+      "file": "docs/media/studio-151/chromium-2026-10-30T20-19-41-824Z/failure.png",
+      "sha256": "0c831dc9c2c3054a6a354780d9b9a2a43bf00d9db5ace33c9fb879cf0801c726"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    }
+  ],
+  "submissions": [
+    {
+      "body": {
+        "model": "comfy-3080-image-lustify-krea2",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "一台青柠绿色的圆润小机器人，白色无缝背景，柔和的摄影棚光线，正面三分之四视角，主体完整，产品摄影，无文字，无水印。"
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "89BvmFaowJSebM5BXLe9T"
+      },
+      "job_id": "job_9bc2704a91e147f5809826c33280a29e",
+      "content_id": "content_851481a578a1421991127489d7e3cf18"
+    }
+  ],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "scope": "Actual theme and editable example Web flows with synthetic API/media; no real GPU generation, fleet, physical touch or full browser acceptance.",
+  "api_transport": "Native ordinary HTTP on two different origins, no business interception",
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:8373",
+    "synthetic_api": "http://192.168.31.95:8372"
+  },
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "failure": "AssertionError [ERR_ASSERTION]: Test observation window exceeded\n    at waitFor (file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_theme_examples.mjs:39:97)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_theme_examples.mjs:136:9",
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio151/chromium-2026-10-30T20-19-41-824Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

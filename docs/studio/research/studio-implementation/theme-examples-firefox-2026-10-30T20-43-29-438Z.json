@@ -1,0 +1,187 @@
+{
+  "passed": false,
+  "at": "2026-10-30T20:43:29.440Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T20-39-16-554Z.json",
+  "source_sha256": "f8056c0d9647251c52be6567d5c35143dc2791ef165d02df9efc8b88fe85548b",
+  "public_static_site": false,
+  "checks": [
+    "fresh profile defaults to original Lime light theme",
+    "dark mode persists across reload and color-scheme matches",
+    "dark input, primary action and Lime panel link text meet 4.5 contrast; panel keyboard focus remains dark",
+    "same-origin startup script restores dark mode before the application module under strict CSP",
+    "keyboard Enter switches the theme in both directions",
+    "an unconnected user can open and save an editable image example without API requests",
+    "example library survives a direct reload on its independent business route",
+    "all main pages keep dark palette; eight examples are discoverable and labels remain readable over reference images",
+    "product-photo: editable originals, no automatic POST, published form, one explicit synthetic task and result download",
+    "product-edit: editable originals, no automatic POST, published form, one explicit synthetic task and result download"
+  ],
+  "screenshots": [
+    {
+      "name": "connection-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-43-29-438Z/connection-dark.png",
+      "sha256": "eaef0a48364a67535c0b6c839f4fdb7e9b0bc51391b0a123831f6369804fcf00"
+    },
+    {
+      "name": "offline-example-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-43-29-438Z/offline-example-dark.png",
+      "sha256": "f4405846f89f819d4ee6b24e66b43ff639a40e2936c7a60da587f5a627885bf0"
+    },
+    {
+      "name": "examples-dark-desktop",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-43-29-438Z/examples-dark-desktop.png",
+      "sha256": "904d86de0308f472b1e60e9585726ede611acbffa22c86b84cfc817ea4bf6704"
+    },
+    {
+      "name": "two-reference-composer-dark",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-43-29-438Z/two-reference-composer-dark.png",
+      "sha256": "64f53c492c93aea907650229152e29525976b15785819a0087a936a349d0a46f"
+    },
+    {
+      "name": "failure",
+      "file": "docs/media/studio-151/firefox-2026-10-30T20-43-29-438Z/failure.png",
+      "sha256": "9bdd21dd5f4e3bcd4adbfe38bc87063fccea640198f9387cd74f1117a20e09c6"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_8b7fa999ad7248b592699062ff229af2",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_8b7fa999ad7248b592699062ff229af2/download",
+      "cookie_present": false,
+      "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_cb0e377165dc44f3b18175412ab35990",
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_cb0e377165dc44f3b18175412ab35990/download",
+      "cookie_present": false,
+      "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf"
+    }
+  ],
+  "submissions": [
+    {
+      "body": {
+        "model": "comfy-3080-image-lustify-krea2",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "一台青柠绿色的圆润小机器人，白色无缝背景，柔和的摄影棚光线，正面三分之四视角，主体完整，产品摄影，无文字，无水印。"
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "GPz_vDAyFCH723XSVKhvy"
+      },
+      "job_id": "job_c077470006754368a839c6ce81056fcd",
+      "content_id": "content_8b7fa999ad7248b592699062ff229af2"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-image-edit-wai",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "保留参考图中机器人的形状和颜色，将背景换成干净的浅灰色展台与柔和侧光，保持主体完整清晰，无文字。",
+          "source_image": {
+            "asset_id": "asset_565bbb99bb12428d9907a38b9f87a546"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "ajXAIH-GMhRj-AII3-sj9"
+      },
+      "job_id": "job_2eb8cf1898fd441db73ce696409d59bb",
+      "content_id": "content_cb0e377165dc44f3b18175412ab35990"
+    }
+  ],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "scope": "Actual theme and editable example Web flows with synthetic API/media; no real GPU generation, fleet, physical touch or full browser acceptance.",
+  "api_transport": "Native ordinary HTTP on two different origins, no business interception",
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:8353",
+    "synthetic_api": "http://192.168.31.95:8352"
+  },
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "failure": "page.waitForFunction: Timeout 20000ms exceeded.\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_theme_examples.mjs:135:24",
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio151/firefox-2026-10-30T20-43-29-438Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

@@ -1,0 +1,22 @@
+{
+  "passed": false,
+  "at": "2026-10-30T20:40:09.262874+00:00",
+  "release": "canvas-20261031.151.2",
+  "observed_routes": [
+    {
+      "path": "/studio/examples",
+      "status": 301
+    },
+    {
+      "path": "/studio/examples/",
+      "status": 403
+    }
+  ],
+  "cause": "Business route examples collides with a physical public image directory; initial local fallback did not simulate directory handling.",
+  "correction": "Final frontend business route uses library. Keep retained image paths; do not change service configurations.",
+  "api_health": 200,
+  "api_written": false,
+  "generation_posts": 0,
+  "service_restarts": 0,
+  "scope": "Actual public route failure; not a successful UI or generation acceptance."
+}

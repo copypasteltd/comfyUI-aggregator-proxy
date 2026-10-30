@@ -1,7 +1,17 @@
 # ComfyUI Creative Canvas
 
+<!-- independent151:start -->
+**Web static 153.1 is deployed:** [Light/dark themes and eight editable examples](docs/studio/36-明暗主题与预设创作案例.md). The header toggle saves the browser's theme; pages, overlays, canvas nodes and GLB previews share the Lime palette. A same-origin startup script restores it on reload under the existing CSP. Examples create independent editable local canvases, match the current Key's published task type/reference slots/complete allowed preset, and upload or generate only after explicit confirmation. Reopened examples retain their original inputs without adding generated images automatically.
+
+218 units, types and production build passed, with 69 complete UI groups and 43 screenshots. Local Firefox passed. [Full MP4](docs/studio/media/studio-151/themes-and-examples-public.mp4) / [GIF](docs/studio/media/studio-151/themes-and-examples-public.gif) use a synthetic API and do not prove GPU generation. Only independent frontend static files changed. Full Web acceptance remains **HOLD**; the earlier real video preparation failure and public Firefox gap remain open.
+
+| Light | Dark |
+| --- | --- |
+| ![Light examples page](docs/studio/media/studio-151/gallery-public-chromium-2026-10-30T20-57-06-617Z/examples-light-desktop.png) | ![Dark examples page](docs/studio/media/studio-151/gallery-public-chromium-2026-10-30T20-57-06-617Z/examples-dark-desktop.png) |
+<!-- independent151:end -->
+
 <!-- independent150:start -->
-**Web static 150.1 is deployed:** [Canvas reference creation](docs/studio/35-画布参考创作与生成表单.md). The existing open-source canvas now populates published slots from selected images, shows original previews, chooses an allowed complete preset, initializes once after catalog restoration, validates all inputs before upload and links actual sources. 207 units/type/build and 69 synthetic UI groups passed on local/public Chromium and local Firefox, with 15 screenshots. Public Firefox remains unaccepted after two incomplete runs. [Complete selected page MP4](docs/studio/media/studio-150/canvas-reference-creation-public.mp4) / [GIF](docs/studio/media/studio-150/canvas-reference-creation-public.gif). The one real two-reference video was accepted but ended with `preparation_transport_failure`; no GPU output was produced, and the temporary Key is disabled. Only independent static files changed, compatible 150.0 recovery is prepared, original API/services/configuration unchanged. Full Web acceptance remains **HOLD**.
+**Historical 150.1 delivery:** [Canvas reference creation](docs/studio/35-画布参考创作与生成表单.md). The existing open-source canvas now populates published slots from selected images, shows original previews, chooses an allowed complete preset, initializes once after catalog restoration, validates all inputs before upload and links actual sources. 207 units/type/build and 69 synthetic UI groups passed on local/public Chromium and local Firefox, with 15 screenshots. Public Firefox remains unaccepted after two incomplete runs. [Complete selected page MP4](docs/studio/media/studio-150/canvas-reference-creation-public.mp4) / [GIF](docs/studio/media/studio-150/canvas-reference-creation-public.gif). The one real two-reference video was accepted but ended with `preparation_transport_failure`; no GPU output was produced, and the temporary Key is disabled. Only independent static files changed, compatible 150.0 recovery is prepared, original API/services/configuration unchanged. Full Web acceptance remains **HOLD**.
 
 ![Actual reference form; this video failed during preparation](docs/studio/media/studio-150/live-2026-10-30T18-25-27-662Z/real-two-reference-form.png)
 
