@@ -1,0 +1,169 @@
+{
+  "passed": false,
+  "at": "2026-10-30T12:24:13.859Z",
+  "scope": "Frozen static UI on ordinary HTTP; native Windows Chromium IndexedDB/WebGL, injected visibility events and 390px emulation; synthetic originals, not physical phone/GPU/cross-database garbage collection acceptance",
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T12-20-13-004Z.json",
+  "checks": [
+    {
+      "name": "ordinary HTTP scan of an empty site leaves both databases absent",
+      "detail": true
+    },
+    {
+      "name": "native scan preserves every row/version, opens only readonly transactions, and reads no Blob bodies or network",
+      "detail": {
+        "calls": {
+          "blob": 0,
+          "writes": 0,
+          "fetch": 0
+        },
+        "transaction_modes": [
+          "readonly",
+          "readonly"
+        ],
+        "files": 4,
+        "missing": 2,
+        "warnings": 5,
+        "row_and_version_snapshots_identical": true
+      }
+    },
+    {
+      "name": "saved/trash/legacy/history/current references, preview-only missing originals and unconfirmed staged files remain distinct",
+      "detail": true
+    },
+    {
+      "name": "unknown document/task versions, malformed records and nonstring keys warn without exporting prompts or configuration",
+      "detail": true
+    },
+    {
+      "name": "shipped storage page scans and downloads a reference-only JSON report, preserving unconfirmed files",
+      "detail": {
+        "bytes": 1042,
+        "sha256": "c577e415332f8454fce01e8f41827f37ff29a2e7142a2c256f56d1ef4c94453d",
+        "format": "canvas-local-media-inventory",
+        "files": 3,
+        "missing": 1
+      }
+    },
+    {
+      "name": "390px storage layout fits the viewport with both expanded reference lists",
+      "detail": true
+    },
+    {
+      "name": "two embedded GLB clips load with actual native WebGL and remain paused by default",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-24-11-634Z/desktop-readonly-inventory.png",
+      "bytes": 84153,
+      "sha256": "45a968603906d0cd44d343a4b0f60109be0b9f5a00f4c42cc32d907df689df66"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-24-11-634Z/390-readonly-inventory.png",
+      "bytes": 50679,
+      "sha256": "f38c008718b24b35b4c6823311727e30a7afd0730191db8f563a5d5a8e7e2e66"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-24-11-634Z/failure.png",
+      "bytes": 88223,
+      "sha256": "08cc37af8fff39243063207e6997a41ecc9479bd32ac9c77912d4efef9e7c762"
+    }
+  ],
+  "fixture_api_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_valid": true
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "synthetic_glb": {
+    "file": "docs/media/studio-144/media-2026-10-30T12-24-11-634Z/synthetic-two-animations.glb",
+    "bytes": 1580,
+    "sha256": "b2ed9ebfa0ce8af70822a3944db2c2244cc3c7ae1e511c7ce7ffa7d6d540dcab",
+    "animations": 2
+  },
+  "origin": "http://canvas-media.test:11487",
+  "native_inventory": {
+    "calls": {
+      "blob": 0,
+      "writes": 0,
+      "fetch": 0
+    },
+    "transaction_modes": [
+      "readonly",
+      "readonly"
+    ],
+    "files": 4,
+    "missing": 2,
+    "warnings": 5,
+    "row_and_version_snapshots_identical": true
+  },
+  "exported_inventory": {
+    "bytes": 1042,
+    "sha256": "c577e415332f8454fce01e8f41827f37ff29a2e7142a2c256f56d1ef4c94453d",
+    "format": "canvas-local-media-inventory",
+    "files": 3,
+    "missing": 1
+  },
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('option', { name: '2. 原地旋转', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <div role=\"option\" id=\"_r_c__list_1\" aria-label=\"2. 原地旋转\" aria-selected=\"false\">1</div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not stable\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m  57 × retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_media_tools.mjs:192:138",
+  "failure_page_text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n已连接\n本机编辑尚未保存\n旧版页面修改了迁移前的副本，已保留两份记录；请先导出旧页面内容，再处理副本冲突\nYOUR LOCAL LIBRARY\n留住每一次创作\n\n这里是已校验并存入当前浏览器的原件。云端到期不会主动删除这些副本；浏览器清理或设备丢失仍可能移除本机数据，请另存重要作品。\n\n刷新目录\n1 个原件 · 0.00 MiB\n存储空间\nmodel/gltf-binary\ncontent_77777777777777777777777777777777\n\n0.00 MiB\n云端保留至 2026/10/31 04:24:15\n本机原件独立保留\n\n交互预览\n另存原件\n基于 basketikun / infinite-canvas · MIT\n画布和已保存素材存于当前浏览器\n3D 原件预览\n\n0.00 MiB · 本机原件 · 关闭预览会释放三维资源\n\n拖动旋转、滚轮缩放；触屏单指旋转、双指缩放或平移。大型模型可能占用较多内存，可随时关闭或另存原件。\n\n复位视图\n3 顶点 · 1 三角面\n1. 向右平移\n播放动画\n回到动画起点\n2 个内嵌动画 · 切换片段后暂停\n\n聚焦模型后可用方向键平移，Ctrl + 方向键旋转。内嵌动画默认暂停；页面隐藏时停止动画更新，返回后继续。压缩解码和未支持的扩展可另存后查看。\n\n保存 GLB 原件\n0\n1\n1. 向右平移\n2. 原地旋转",
+  "failure_resources": {
+    "contexts": [
+      {
+        "lost": false,
+        "draws": 14
+      }
+    ],
+    "frames": 0,
+    "bitmaps": 1,
+    "image_urls": 0,
+    "observers": 1
+  },
+  "private_recordings": [
+    ".local/studio144/media-2026-10-30T12-24-11-634Z/page@36fb7f24e1aeb770fc442835b7448427.webm",
+    ".local/studio144/media-2026-10-30T12-24-11-634Z/page@3bec2abcfb13c502ab589824229bac70.webm",
+    ".local/studio144/media-2026-10-30T12-24-11-634Z/page@33d12882fe9f5dde9e5f7cb090619a79.webm"
+  ],
+  "completed_at": "2026-10-30T12:24:49.674Z"
+}

@@ -1,5 +1,14 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## canvas-20261030.144.1 · 已独立部署 / pending-test
+
+- [新增] 存储页只读普通原件引用清单、缺件/未知记录提示及JSON下载；不读取原件正文、不写库、不发业务请求，无引用不等于可删除。
+- [新增] GLB内嵌动画片段选择、播放/暂停与起点复位，默认暂停；隐藏停止/返回恢复，关闭/离开/上下文丢失释放帧和三维资源。
+- [设计] 普通跨库安全回收的受控同库原件/占用、旧版屏障和迁移验收契约，未升级DB或启用普通文件清理。
+- [交付] 197单元/类型/构建、11双源、14ZIP、14本机+14公网媒体专项，109当前/510旧资源及14路由；文档29、双语README、截图和完整解码MP4/GIF。原API与服务/配置不改，无实际Key/GPU任务；完整签收HOLD。
+
+144.1 adds a read-only local-original inventory with reference categories, missing-original diagnosis and JSON download. It reads no Blob bodies, writes no database records and makes no business requests. Unconfirmed files remain retained. Embedded GLB clips now have explicit selection, play/pause and reset; hidden pages stop frame updates and disposal releases animation/WebGL resources. Safe ordinary-media cleanup remains a documented future contract.197 units/typecheck/build,11 dual-origin groups,14 ZIP groups,14 native plus14 public media-tool groups and109 current/510 retained files with14 routes passed. Screenshots and the full MP4/GIF decode. Original API/services/config remain unchanged; no actual Key/GPU job was created. Full acceptance remains HOLD.
+
 ## canvas-20261030.143.1 · 已独立部署 / pending-test
 
 - [修复] 本机原件删除与保存统一识别历史references，覆盖画布、素材及可恢复回收站；普通提示词不猜作文件。

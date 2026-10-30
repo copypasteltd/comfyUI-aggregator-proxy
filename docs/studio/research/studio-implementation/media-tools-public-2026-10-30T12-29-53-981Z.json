@@ -1,0 +1,219 @@
+{
+  "passed": true,
+  "at": "2026-10-30T12:29:54.086Z",
+  "scope": "Frozen static UI on ordinary HTTP; native Windows Chromium IndexedDB/WebGL, injected visibility events and 390px emulation; synthetic originals, not physical phone/GPU/cross-database garbage collection acceptance",
+  "public_static_site": true,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T12-20-13-004Z.json",
+  "checks": [
+    {
+      "name": "ordinary HTTP scan of an empty site leaves both databases absent",
+      "detail": true
+    },
+    {
+      "name": "native scan preserves every row/version, opens only readonly transactions, and reads no Blob bodies or network",
+      "detail": {
+        "calls": {
+          "blob": 0,
+          "writes": 0,
+          "fetch": 0
+        },
+        "transaction_modes": [
+          "readonly",
+          "readonly"
+        ],
+        "files": 4,
+        "missing": 3,
+        "warnings": 5,
+        "row_and_version_snapshots_identical": true
+      }
+    },
+    {
+      "name": "saved/trash/legacy/history/current references, preview-only missing originals and unconfirmed staged files remain distinct",
+      "detail": true
+    },
+    {
+      "name": "unknown document/task versions, malformed records and nonstring keys warn without exporting prompts or configuration",
+      "detail": true
+    },
+    {
+      "name": "shipped storage page scans and downloads a reference-only JSON report, preserving unconfirmed files",
+      "detail": {
+        "bytes": 1168,
+        "sha256": "539e367982780354eadf0c52d82070b6b7fe20b1068fe07e0fced12df9e2b104",
+        "format": "canvas-local-media-inventory",
+        "files": 3,
+        "missing": 1
+      }
+    },
+    {
+      "name": "390px storage layout fits the viewport with both expanded reference lists",
+      "detail": true
+    },
+    {
+      "name": "two embedded GLB clips load with actual native WebGL and remain paused by default",
+      "detail": true
+    },
+    {
+      "name": "play/pause changes and freezes rendered pixels; reset restores the start pose and clip selection plays the other track",
+      "detail": true
+    },
+    {
+      "name": "injected hidden/visible events stop and resume animation, and closing while playing releases frames/WebGL/textures/observers",
+      "detail": {
+        "contexts": [
+          {
+            "lost": true,
+            "draws": 91
+          }
+        ],
+        "frames": 0,
+        "bitmaps": 0,
+        "image_urls": 0,
+        "observers": 0
+      }
+    },
+    {
+      "name": "actual WebGL context loss during playback cancels the loop and retains original-save fallback",
+      "detail": true
+    },
+    {
+      "name": "closing during pending bitmap decode cannot create a late animated renderer",
+      "detail": true
+    },
+    {
+      "name": "390px animation controls work and original download remains byte-identical after playback",
+      "detail": true
+    },
+    {
+      "name": "same-document route departure and connection exit leave no animation frames or live WebGL contexts",
+      "detail": true
+    },
+    {
+      "name": "all requests stay inside owned fixtures/static files, no cookies or generation; every frozen artifact remains identical",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-readonly-inventory.png",
+      "bytes": 84216,
+      "sha256": "14ecfdbf86b40d5089574dd7ced13239c4d7824694f3e496f7dda4cef6a65ff2"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-readonly-inventory.png",
+      "bytes": 54695,
+      "sha256": "a994c2e577a33602ba27a63f9792f0956f9d4016fad05be8fae49f31bfe3b808"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-missing-original-details.png",
+      "bytes": 46409,
+      "sha256": "a5fec739c62fd9e4005f28506e9f0fdd89dcc8dbafeb06f5c9fe87c4e85a3b7c"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-glb-animation.png",
+      "bytes": 81317,
+      "sha256": "d8a18b8828f4b2c9dd70908da5d5daf3e1291939680be85278826d55b76a21c4"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-glb-animation.png",
+      "bytes": 34471,
+      "sha256": "566dd13bd0a726d4397b09afe3f5f85f77449223115094cc5dc47efc157e7688"
+    }
+  ],
+  "fixture_api_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_valid": true
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "synthetic_glb": {
+    "file": "docs/media/studio-144/media-2026-10-30T12-29-53-981Z/synthetic-two-animations.glb",
+    "bytes": 1580,
+    "sha256": "b2ed9ebfa0ce8af70822a3944db2c2244cc3c7ae1e511c7ce7ffa7d6d540dcab",
+    "animations": 2
+  },
+  "origin": "http://43.165.167.179:39445",
+  "native_inventory": {
+    "calls": {
+      "blob": 0,
+      "writes": 0,
+      "fetch": 0
+    },
+    "transaction_modes": [
+      "readonly",
+      "readonly"
+    ],
+    "files": 4,
+    "missing": 3,
+    "warnings": 5,
+    "row_and_version_snapshots_identical": true
+  },
+  "exported_inventory": {
+    "bytes": 1168,
+    "sha256": "539e367982780354eadf0c52d82070b6b7fe20b1068fe07e0fced12df9e2b104",
+    "format": "canvas-local-media-inventory",
+    "files": 3,
+    "missing": 1
+  },
+  "closed_resources": {
+    "contexts": [
+      {
+        "lost": true,
+        "draws": 91
+      }
+    ],
+    "frames": 0,
+    "bitmaps": 0,
+    "image_urls": 0,
+    "observers": 0
+  },
+  "actual_api_requests": 0,
+  "generation_posts": 0,
+  "static_bytes_unchanged": true,
+  "private_recordings": [
+    ".local/studio144/media-2026-10-30T12-29-53-981Z/page@2f84117dad06fe7f77af0d7c0ee2b88e.webm",
+    ".local/studio144/media-2026-10-30T12-29-53-981Z/page@29bef84598fa14d42eaad44082251b3a.webm",
+    ".local/studio144/media-2026-10-30T12-29-53-981Z/page@f7b3b91423603d1dd8d95e6833955b76.webm"
+  ],
+  "completed_at": "2026-10-30T12:30:06.669Z"
+}

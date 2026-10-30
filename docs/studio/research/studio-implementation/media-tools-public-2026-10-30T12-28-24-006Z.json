@@ -1,0 +1,214 @@
+{
+  "passed": true,
+  "at": "2026-10-30T12:28:24.101Z",
+  "scope": "Frozen static UI on ordinary HTTP; native Windows Chromium IndexedDB/WebGL, injected visibility events and 390px emulation; synthetic originals, not physical phone/GPU/cross-database garbage collection acceptance",
+  "public_static_site": true,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T12-20-13-004Z.json",
+  "checks": [
+    {
+      "name": "ordinary HTTP scan of an empty site leaves both databases absent",
+      "detail": true
+    },
+    {
+      "name": "native scan preserves every row/version, opens only readonly transactions, and reads no Blob bodies or network",
+      "detail": {
+        "calls": {
+          "blob": 0,
+          "writes": 0,
+          "fetch": 0
+        },
+        "transaction_modes": [
+          "readonly",
+          "readonly"
+        ],
+        "files": 4,
+        "missing": 3,
+        "warnings": 5,
+        "row_and_version_snapshots_identical": true
+      }
+    },
+    {
+      "name": "saved/trash/legacy/history/current references, preview-only missing originals and unconfirmed staged files remain distinct",
+      "detail": true
+    },
+    {
+      "name": "unknown document/task versions, malformed records and nonstring keys warn without exporting prompts or configuration",
+      "detail": true
+    },
+    {
+      "name": "shipped storage page scans and downloads a reference-only JSON report, preserving unconfirmed files",
+      "detail": {
+        "bytes": 1168,
+        "sha256": "b3c2bbe6742d290247761aaef3d766cc1cf4c2f43089b344af7ce53891365385",
+        "format": "canvas-local-media-inventory",
+        "files": 3,
+        "missing": 1
+      }
+    },
+    {
+      "name": "390px storage layout fits the viewport with both expanded reference lists",
+      "detail": true
+    },
+    {
+      "name": "two embedded GLB clips load with actual native WebGL and remain paused by default",
+      "detail": true
+    },
+    {
+      "name": "play/pause changes and freezes rendered pixels; reset restores the start pose and clip selection plays the other track",
+      "detail": true
+    },
+    {
+      "name": "injected hidden/visible events stop and resume animation, and closing while playing releases frames/WebGL/textures/observers",
+      "detail": {
+        "contexts": [
+          {
+            "lost": true,
+            "draws": 84
+          }
+        ],
+        "frames": 0,
+        "bitmaps": 0,
+        "image_urls": 0,
+        "observers": 0
+      }
+    },
+    {
+      "name": "actual WebGL context loss during playback cancels the loop and retains original-save fallback",
+      "detail": true
+    },
+    {
+      "name": "closing during pending bitmap decode cannot create a late animated renderer",
+      "detail": true
+    },
+    {
+      "name": "390px animation controls work and original download remains byte-identical after playback",
+      "detail": true
+    },
+    {
+      "name": "same-document route departure and connection exit leave no animation frames or live WebGL contexts",
+      "detail": true
+    },
+    {
+      "name": "all requests stay inside owned fixtures/static files, no cookies or generation; every frozen artifact remains identical",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-28-24-006Z/public-desktop-readonly-inventory.png",
+      "bytes": 84189,
+      "sha256": "ee233e97c1a268605c8998b982c469c2e62d69c07899ff4f7d629cb5630695c8"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-28-24-006Z/public-390-readonly-inventory.png",
+      "bytes": 54815,
+      "sha256": "4e1e14570d9efa65ad774b3d738208946e082067350e9da727cefcff75efe143"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-28-24-006Z/public-desktop-glb-animation.png",
+      "bytes": 81460,
+      "sha256": "c4c9eadd9cd3111e488ed7ac741e31c5fcf354e71b47f67e8ca90f801cb400f9"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-28-24-006Z/public-390-glb-animation.png",
+      "bytes": 34607,
+      "sha256": "1b71a9e51b71dbd6484caf67f3b62249d73a744b762e37f944eee31babbdc019"
+    }
+  ],
+  "fixture_api_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_valid": true
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "synthetic_glb": {
+    "file": "docs/media/studio-144/media-2026-10-30T12-28-24-006Z/synthetic-two-animations.glb",
+    "bytes": 1580,
+    "sha256": "b2ed9ebfa0ce8af70822a3944db2c2244cc3c7ae1e511c7ce7ffa7d6d540dcab",
+    "animations": 2
+  },
+  "origin": "http://43.165.167.179:39445",
+  "native_inventory": {
+    "calls": {
+      "blob": 0,
+      "writes": 0,
+      "fetch": 0
+    },
+    "transaction_modes": [
+      "readonly",
+      "readonly"
+    ],
+    "files": 4,
+    "missing": 3,
+    "warnings": 5,
+    "row_and_version_snapshots_identical": true
+  },
+  "exported_inventory": {
+    "bytes": 1168,
+    "sha256": "b3c2bbe6742d290247761aaef3d766cc1cf4c2f43089b344af7ce53891365385",
+    "format": "canvas-local-media-inventory",
+    "files": 3,
+    "missing": 1
+  },
+  "closed_resources": {
+    "contexts": [
+      {
+        "lost": true,
+        "draws": 84
+      }
+    ],
+    "frames": 0,
+    "bitmaps": 0,
+    "image_urls": 0,
+    "observers": 0
+  },
+  "actual_api_requests": 0,
+  "generation_posts": 0,
+  "static_bytes_unchanged": true,
+  "private_recordings": [
+    ".local/studio144/media-2026-10-30T12-28-24-006Z/page@3a430c84e6051a2b92d0b0c1fe5d651f.webm",
+    ".local/studio144/media-2026-10-30T12-28-24-006Z/page@d2c04075029662dbb7f22503c62e4078.webm",
+    ".local/studio144/media-2026-10-30T12-28-24-006Z/page@af94aeba6fb0a7b44a23f17afd97e155.webm"
+  ],
+  "completed_at": "2026-10-30T12:28:34.922Z"
+}

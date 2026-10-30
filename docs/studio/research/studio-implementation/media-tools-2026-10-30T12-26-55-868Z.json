@@ -1,0 +1,210 @@
+{
+  "passed": true,
+  "at": "2026-10-30T12:26:55.933Z",
+  "scope": "Frozen static UI on ordinary HTTP; native Windows Chromium IndexedDB/WebGL, injected visibility events and 390px emulation; synthetic originals, not physical phone/GPU/cross-database garbage collection acceptance",
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T12-20-13-004Z.json",
+  "checks": [
+    {
+      "name": "ordinary HTTP scan of an empty site leaves both databases absent",
+      "detail": true
+    },
+    {
+      "name": "native scan preserves every row/version, opens only readonly transactions, and reads no Blob bodies or network",
+      "detail": {
+        "calls": {
+          "blob": 0,
+          "writes": 0,
+          "fetch": 0
+        },
+        "transaction_modes": [
+          "readonly",
+          "readonly"
+        ],
+        "files": 4,
+        "missing": 3,
+        "warnings": 5,
+        "row_and_version_snapshots_identical": true
+      }
+    },
+    {
+      "name": "saved/trash/legacy/history/current references, preview-only missing originals and unconfirmed staged files remain distinct",
+      "detail": true
+    },
+    {
+      "name": "unknown document/task versions, malformed records and nonstring keys warn without exporting prompts or configuration",
+      "detail": true
+    },
+    {
+      "name": "shipped storage page scans and downloads a reference-only JSON report, preserving unconfirmed files",
+      "detail": {
+        "bytes": 1168,
+        "sha256": "d5e4c8dc962ecc87d38dd154787975bd47e45c2190053290c2eb241a112df712",
+        "format": "canvas-local-media-inventory",
+        "files": 3,
+        "missing": 1
+      }
+    },
+    {
+      "name": "390px storage layout fits the viewport with both expanded reference lists",
+      "detail": true
+    },
+    {
+      "name": "two embedded GLB clips load with actual native WebGL and remain paused by default",
+      "detail": true
+    },
+    {
+      "name": "play/pause changes and freezes rendered pixels; reset restores the start pose and clip selection plays the other track",
+      "detail": true
+    },
+    {
+      "name": "injected hidden/visible events stop and resume animation, and closing while playing releases frames/WebGL/textures/observers",
+      "detail": {
+        "contexts": [
+          {
+            "lost": true,
+            "draws": 75
+          }
+        ],
+        "frames": 0,
+        "bitmaps": 0,
+        "image_urls": 0,
+        "observers": 0
+      }
+    },
+    {
+      "name": "actual WebGL context loss during playback cancels the loop and retains original-save fallback",
+      "detail": true
+    },
+    {
+      "name": "closing during pending bitmap decode cannot create a late animated renderer",
+      "detail": true
+    },
+    {
+      "name": "390px animation controls work and original download remains byte-identical after playback",
+      "detail": true
+    },
+    {
+      "name": "same-document route departure and connection exit leave no animation frames or live WebGL contexts",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-26-55-868Z/desktop-readonly-inventory.png",
+      "bytes": 84023,
+      "sha256": "cbbe6efa0ee430c5aa0fbdb0c69b824a4a7a6642007f4e7d68daf35fa91711a2"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-26-55-868Z/390-readonly-inventory.png",
+      "bytes": 54808,
+      "sha256": "9342878d5c9e669f6738045a9f1c02adc771b4c587a1425fdab9fa8788a461b3"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-26-55-868Z/desktop-glb-animation.png",
+      "bytes": 81474,
+      "sha256": "0ad720d0761819b89abd913891c15ef4349cb7ae9714b51c710c5b9e9ec1f400"
+    },
+    {
+      "file": "docs/media/studio-144/media-2026-10-30T12-26-55-868Z/390-glb-animation.png",
+      "bytes": 34621,
+      "sha256": "bff732b9f187d5c2d391fa05f40c56f7c95972f574d2c6273677e854e5d4d76a"
+    }
+  ],
+  "fixture_api_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "cookie_present": false,
+      "bearer_valid": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "cookie_present": false,
+      "bearer_valid": true
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "synthetic_glb": {
+    "file": "docs/media/studio-144/media-2026-10-30T12-26-55-868Z/synthetic-two-animations.glb",
+    "bytes": 1580,
+    "sha256": "b2ed9ebfa0ce8af70822a3944db2c2244cc3c7ae1e511c7ce7ffa7d6d540dcab",
+    "animations": 2
+  },
+  "origin": "http://canvas-media.test:4539",
+  "native_inventory": {
+    "calls": {
+      "blob": 0,
+      "writes": 0,
+      "fetch": 0
+    },
+    "transaction_modes": [
+      "readonly",
+      "readonly"
+    ],
+    "files": 4,
+    "missing": 3,
+    "warnings": 5,
+    "row_and_version_snapshots_identical": true
+  },
+  "exported_inventory": {
+    "bytes": 1168,
+    "sha256": "d5e4c8dc962ecc87d38dd154787975bd47e45c2190053290c2eb241a112df712",
+    "format": "canvas-local-media-inventory",
+    "files": 3,
+    "missing": 1
+  },
+  "closed_resources": {
+    "contexts": [
+      {
+        "lost": true,
+        "draws": 75
+      }
+    ],
+    "frames": 0,
+    "bitmaps": 0,
+    "image_urls": 0,
+    "observers": 0
+  },
+  "actual_api_requests": 0,
+  "generation_posts": 0,
+  "static_bytes_unchanged": true,
+  "private_recordings": [
+    ".local/studio144/media-2026-10-30T12-26-55-868Z/page@a142b72c200ea1af50f001698d16a065.webm",
+    ".local/studio144/media-2026-10-30T12-26-55-868Z/page@6f068ea53f6ae683dd1cd747700741f6.webm",
+    ".local/studio144/media-2026-10-30T12-26-55-868Z/page@57dd9cc3ae8e079e8a5b4c299803f140.webm"
+  ],
+  "completed_at": "2026-10-30T12:27:03.888Z"
+}

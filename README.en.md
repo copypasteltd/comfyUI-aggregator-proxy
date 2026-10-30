@@ -6,15 +6,15 @@
 
 | Entry | Address |
 | --- | --- |
-| Independent canvas143.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
+| Independent canvas144.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
 
-Current143.1 protects originals referenced only by historical lists in canvases, saved assets and recoverable deleted projects. An exact recognized old index is rebuilt atomically with a revision increment while preserving document bytes, originals and tasks. Concurrent save/delete cannot introduce a dangling reference; unknown indices fail closed. [Usage and evidence](docs/studio/28-历史引用原件删除保护与索引升级.md).
+Current144.1 adds a local-original reference inventory, missing-original diagnosis and JSON report, plus embedded GLB clip selection, play/pause and reset. The scan is read-only, reads no Blob bodies and makes no business requests. Unconfirmed files stay retained; ordinary-media garbage collection remains unimplemented. Historical-reference protection and complete project ZIP backups remain available. [Usage, cleanup contract and evidence](docs/studio/29-本机原件引用检查与GLB动画.md).
 
-![Public UI preserves a referenced original](docs/studio/media/studio-143/references-2026-10-30T11-55-07-246Z/public-historical-reference-protected-desktop.png)
+![GLB animation controls on the public canvas](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-glb-animation.png)
 
-[390px](docs/studio/media/studio-143/references-2026-10-30T11-55-07-246Z/public-unreferenced-deleted-protected-remains.png) · [MP4](docs/studio/media/studio-143/synthetic-reference-protection.mp4) · [GIF](docs/studio/media/studio-143/synthetic-reference-protection.gif). Synthetic originals and a browser-contained API fixture; zero actual API/GPU requests.390px is emulation.
+[Inventory](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-readonly-inventory.png) · [390px missing originals](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-missing-original-details.png) · [390px animation](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-glb-animation.png) · [MP4](docs/studio/media/studio-144/synthetic-local-inventory-animation.mp4) · [GIF](docs/studio/media/studio-144/synthetic-local-inventory-animation.gif). Synthetic originals and a browser-contained API fixture; zero actual business/GPU requests.390px is emulation.
 
 The following actual generation evidence comes from earlier139.2/evidence140, with no new generation this turn:
 
@@ -40,7 +40,7 @@ flowchart LR
 ```
 
 - Discover the current Key's model catalog, descriptions, JSON Schema, complete presets and reference slots. Create images, video, Workflow audio and image-to-3D using capabilities already published by the API.
-- Organize references and outputs on a canvas, with a local media library, task history, batches, image/video/audio nodes and on-demand static GLB interaction.
+- Organize references and outputs on a canvas, with a local media library, task history, batches, image/video/audio nodes and on-demand GLB interaction and embedded animation controls.
 - Persist the original request before submission. Query a known job ID; reconcile an unknown submission before further action. Support recovery, explicit remote cancellation and verified per-job Key adoption without resubmitting unknown jobs under a different identity.
 - Validate media type, length and SHA-256 before local saving. Project ZIPs include canvas assets; task JSON backs up request records and IDs. These are separate from cloud synchronization.
 
@@ -53,6 +53,8 @@ The canvas adds no generation backend or second queue. It does not modify the or
 3. Create a canvas and a generation request. Preserve the original job; use submission reconciliation after a lost response. Stopping local polling does not cancel GPU work.
 4. Validate and load completed assets, preview GLB or save originals. Cloud outputs expire eight hours after completion. The original Key can read already-saved local copies while the API is unavailable; generation still requires online authorization. Memory-only Keys must be entered again after refresh; only explicitly remembered Keys restore automatically. Export important copies separately.
 5. Open the original Admin to manage models, Workflows, channels, Keys and queues. Missing backend capabilities remain external dependencies; the canvas will not bypass the API.
+
+In Storage, explicitly scan references and download the report. Keep documents with missing originals and restore from a complete backup. In a GLB preview, select a clip and press Play; playback starts paused, suspends while hidden and releases resources on close. The inventory contains no media bytes and does not replace a project ZIP.
 
 **Changing port or domain does not migrate browser data.** Export project ZIPs, required originals and task JSON from the old39443 canvas, import them at39445 and re-enter the business Key. Keep old data until verified. Project import does not generate again; task records require an explicit original-ID query. Static rollback must not downgrade IndexedDBv4.
 
@@ -71,13 +73,13 @@ npm run build
 
 Deploy only `web/dist/` to an independent static host with `/studio/` and SPA fallback. Keep `managed` mode: deployment independence does not mean the upstream `standalone` mode, which enables optional scripts/Agents. The default API address is public; never embed a Key. Without a default API, the connection field stays empty.
 
-Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.143.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
+Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.144.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
 
 ## Validation and limits
 
-Current143.1 passes188 units, typecheck/build,11 dual-origin groups,14 ZIP groups and15 local plus15 public original-protection groups. All107 current/425 retained resources and14 routes are verified. The focused regression goes from3 failures to0. Screenshots and an MP4/GIF fully decode; owned browsers and fixtures are closed. Both API workspaces, configuration/pointer/services and the static service/config remain unchanged, with no restarts. Earlier GPU evidence remains historical.
+Current144.1 passes197 units, typecheck/build,11 dual-origin groups,14 ZIP groups and14 native plus14 public media-tool groups. All109 current/510 retained resources and14 routes are verified. Screenshots and the full MP4/GIF decode; owned browsers and fixtures are closed. Both API workspaces, configuration/pointer/services and the static service/config remain unchanged, with no restarts. Earlier GPU evidence remains historical.
 
-Full acceptance remains **HOLD/pending-test**: the complete fault matrix, physical Android/iOS, large-file peak/leaks and10–20-device capacity are unverified; animation and more3D formats are incomplete. Cloud sync/text assistance may use only existing API capabilities; otherwise they remain external dependencies. ComfyUI-original transfer deletion, heterogeneous pools and GPU optimization also belong to the API. The canvas adds no other backend connection or forwarding changes. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
+Full acceptance remains **HOLD/pending-test**: the complete fault matrix, physical Android/iOS, large-file peak/leaks and10–20-device capacity are unverified; more animation tracks/3D formats and safe ordinary-media cleanup remain incomplete. Cloud sync/text assistance may use only existing API capabilities; otherwise they remain external dependencies. ComfyUI-original transfer deletion, heterogeneous pools and GPU optimization also belong to the API. The canvas adds no other backend connection or forwarding changes. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
 
 ## Documentation and license
 

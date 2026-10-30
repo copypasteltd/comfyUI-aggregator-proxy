@@ -6,15 +6,15 @@
 
 | 入口 | 地址 |
 | --- | --- |
-| 独立画布143.1 | [打开画布](http://43.165.167.179:39445/studio/) |
+| 独立画布144.1 | [打开画布](http://43.165.167.179:39445/studio/) |
 | 原业务API | `http://43.165.167.179:39443` |
 | 原管理后台 | [Admin](http://43.165.167.179:39443/admin/) |
 
-当前143.1补齐历史参考原件的删除与保存保护：画布、素材和可恢复回收站仍引用的原件不能删除；已识别的旧索引原子补齐并递增修订，正文/原件/任务保留。保存与删除同时发生时拒绝悬空引用；未知索引保留数据并报错。[使用逻辑与证据](docs/studio/28-历史引用原件删除保护与索引升级.md)。
+当前144.1新增本机原件引用检查、缺件定位和JSON核对清单，以及GLB内嵌动画选择/播放/暂停/复位。扫描只读，不读原件正文、不发业务请求；无引用不等于可删除，普通图片/媒体自动回收尚未启用。历史引用保护与完整作品ZIP继续保留。[使用逻辑、清理契约与证据](docs/studio/29-本机原件引用检查与GLB动画.md)。
 
-![Public UI preserves a referenced original](docs/studio/media/studio-143/references-2026-10-30T11-55-07-246Z/public-historical-reference-protected-desktop.png)
+![GLB animation controls on the public canvas](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-glb-animation.png)
 
-[390px](docs/studio/media/studio-143/references-2026-10-30T11-55-07-246Z/public-unreferenced-deleted-protected-remains.png) · [MP4](docs/studio/media/studio-143/synthetic-reference-protection.mp4) · [GIF](docs/studio/media/studio-143/synthetic-reference-protection.gif)。合成原件、浏览器内API夹具；零实际API/GPU请求，390px非真机。
+[原件清单](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-readonly-inventory.png) · [390px缺件明细](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-missing-original-details.png) · [390px动画](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-glb-animation.png) · [MP4](docs/studio/media/studio-144/synthetic-local-inventory-animation.mp4) · [GIF](docs/studio/media/studio-144/synthetic-local-inventory-animation.gif)。合成原件、浏览器内API夹具；零实际业务/GPU请求，390px是模拟。
 
 下面为先前139.2/证据140的真实生成记录，本轮没有重新生成：
 
@@ -40,7 +40,7 @@ flowchart LR
 ```
 
 - 动态读取当前 Key 的模型目录、注释、Schema、完整 preset 与参考槽位；按原 API 已发布能力创作图片、视频、Workflow 音频及图片生3D。
-- 画布组织参考素材和结果分支，支持本机媒体库、任务历史、批量任务、图片/视频/音频节点与按需 GLB 静态交互预览。
+- 画布组织参考素材和结果分支，支持本机媒体库、任务历史、批量任务、图片/视频/音频节点与按需 GLB 交互预览及内嵌动画控制。
 - 先持久化原请求再提交；已知任务查询原ID，未知提交先核对。支持离开恢复、显式远程取消、已知任务的逐项Key接管；不通过换Key或改参数重发未知任务。
 - 下载核对类型/长度/SHA-256，再保存本机。作品ZIP备份画布和原件，任务JSON备份原请求与编号；均不替代云同步。
 
@@ -53,6 +53,8 @@ flowchart LR
 3. 新建画布并新建创作，提交后保留原任务。响应丢失使用核对原提交；停止本页等待不等于取消GPU任务。
 4. 完成后校验并载入素材，可继续创作、预览GLB或另存原件。云端完成后8小时到期；原Key可在API不可用时读取已保存的本机副本，生成仍需在线鉴权。默认内存Key刷新需重输，明确保存后才自动恢复。本机受配额和清理影响，请另存或导出ZIP。
 5. 需要管理模型、Workflow、渠道、Key或排队时，打开原Admin。原系统缺少的功能属于外部依赖，画布不会绕过API实现。
+
+在“存储空间”主动检查本机引用并导出清单；遇到缺件保留原文档，使用已有完整备份恢复。GLB预览有动画时手动选择片段并播放，隐藏时停止更新，关闭后释放资源；默认不播放。核对清单不含媒体正文，不能替代作品ZIP。
 
 **换端口/域名不会自动迁移本机数据。** 先在旧39443画布导出作品ZIP、必要原件和任务JSON，到新39445入口导入并重新填写业务Key；确认可用前保留旧数据。导入作品不会重新生成；任务清单需主动查询原ID。数据库v4不得被静态回退降级。
 
@@ -71,13 +73,13 @@ npm run build
 
 仅发布`web/dist/`，由独立静态服务提供`/studio/`和SPA回退。`managed`是功能约束模式，与是否独立部署无关；不要换成启用上游脚本/Agent的`standalone`模式。默认API是公开地址，Key不进入构建。没有默认API时连接页留空。
 
-当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.143.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，并保留旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
+当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.144.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，并保留旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
 
 ## 验证与限制
 
-当前143.1通过188单元、类型/生产构建、11双源、14ZIP、15本机+15公网原件保护组；107当前/425旧资源及14路由逐项核对。专项回归3失败→0失败；截图、MP4/GIF完整解码，自有浏览器/夹具已关闭。原API两个工作区、线上配置/指针/服务及静态服务/配置不变，零重启。早先GPU证据仍属历史。
+当前144.1通过197单元、类型/生产构建、11双源、14ZIP、14本机+14公网媒体专项；109当前/510旧资源及14路由逐项核对。截图和全段MP4/GIF完整解码，自有浏览器/夹具关闭。原API两个工作区、线上配置/指针/服务及静态服务/配置不变，无重启。先前GPU证据仍属历史。
 
-完整首期仍为**HOLD/pending-test**：完整故障、实际Android/iOS、大文件峰值/泄漏及10～20台容量待验；动画/更多3D格式未完成。云同步/文本助手只可使用原API既有能力，暂无则保留外部依赖；ComfyUI移交即删、异构设备合并及GPU优化也由原API负责，画布不另接后端或修改转发。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
+完整首期仍为**HOLD/pending-test**：完整故障、实际Android/iOS、大文件峰值/泄漏及10～20台容量待验；更多动画轨道/3D格式及普通媒体安全回收待完成。云同步/文本助手只可使用原API既有能力，暂无则保留外部依赖；ComfyUI移交即删、异构设备合并及GPU优化也由原API负责，画布不另接后端或修改转发。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
 
 ## 文档与许可
 
