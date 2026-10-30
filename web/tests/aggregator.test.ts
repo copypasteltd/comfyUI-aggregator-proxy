@@ -133,6 +133,50 @@ test("job detail cannot replace the requested job with another identity", async 
     await assert.rejects(client.job(job.id), /编号/);
 });
 
+test("submission lookup sends the original bytes and headers to the fixed read-only route", async () => {
+    const body = ' { "model":"synthetic-image", "task_type":"text_to_image", "input":{"prompt":"原文"}, "parameters":{}, "client_request_id":"original" } ';
+    const client = new AggregatorClient("http://example.test", "synthetic-key", (async (url, init) => {
+        assert.equal(String(url), "http://example.test/v1/jobs/lookup");
+        assert.equal(init?.method, "POST"); assert.equal(init?.body, body);
+        assert.equal(init?.credentials, "omit"); assert.equal(init?.redirect, "error");
+        const headers = new Headers(init?.headers);
+        assert.equal(headers.get("Authorization"), "Bearer synthetic-key");
+        assert.equal(headers.get("Idempotency-Key"), "studio-original-token");
+        assert.equal(headers.get("X-Expected-Release-Digest"), "a".repeat(64));
+        return respond({ object: "generation.submission_lookup", outcome: "found", job });
+    }) as typeof fetch);
+    const found = await client.lookupSubmission(body, "studio-original-token", "a".repeat(64));
+    assert.equal(found.data.outcome, "found");
+    assert.equal(found.data.job?.id, job.id);
+});
+
+test("not observed is represented explicitly and never converted into a create request", async () => {
+    let calls = 0;
+    const client = new AggregatorClient("http://example.test", "synthetic-key", (async (url) => {
+        calls++; assert.equal(String(url), "http://example.test/v1/jobs/lookup");
+        return respond({ object: "generation.submission_lookup", outcome: "not_observed", job: null });
+    }) as typeof fetch);
+    assert.deepEqual((await client.lookupSubmission("{}", "studio-original-token", "a".repeat(64))).data, { object: "generation.submission_lookup", outcome: "not_observed", job: null });
+    assert.equal(calls, 1);
+});
+
+for (const invalid of [null, {}, { object: "generation.submission_lookup", outcome: "found", job: null }, { object: "generation.submission_lookup", outcome: "not_observed", job }, { object: "generation.submission_lookup", outcome: "retry_create", job: null }, { object: "generation.submission_lookup", outcome: "found", job: { ...job, id: "https://foreign.test/job" } }]) {
+    test(`invalid submission lookup response stays an error: ${JSON.stringify(invalid)}`, async () => {
+        const client = new AggregatorClient("http://example.test", "synthetic-key", (async () => respond(invalid)) as typeof fetch);
+        await assert.rejects(client.lookupSubmission("{}", "studio-original-token", "a".repeat(64)));
+    });
+}
+
+for (const advertised of [true, false]) {
+    test(`submission lookup is available only after explicit capability advertisement: ${advertised}`, async () => {
+        const client = new AggregatorClient("http://example.test", "synthetic-key", (async (url) => {
+            if (String(url).endsWith("access-policy")) return respond({ scopes: fixture.scopes, limits: {} }, { headers: { "X-Studio-Contract": "1", ...(advertised ? { "X-Studio-Submission-Lookup": "1" } : {}) } });
+            return respond({ data: String(url).endsWith("models") ? models : capabilities });
+        }) as typeof fetch);
+        assert.equal((await client.catalog()).submissionLookup, advertised);
+    });
+}
+
 async function downloadFixture(bytes: Uint8Array, mediaType = "image/png") {
     const blob = new Blob([bytes], { type: mediaType });
     const metadata: ContentMetadata = { id: contentId, bytes: bytes.length, sha256: await blobHash(blob), media_type: mediaType, expires_at: 9999999999, metadata: {} };

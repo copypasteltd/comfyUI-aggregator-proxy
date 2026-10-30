@@ -80,7 +80,7 @@ export class AggregatorClient {
 
     private async json<T>(path: string, options?: RequestInit): Promise<ApiResult<T>> {
         const response = await this.send(path, options);
-        return { data: await response.json() as T, retryAt: parseRetryAfter(response.headers.get("Retry-After")), requestId: response.headers.get("X-Request-ID") || undefined, studioContract: response.headers.get("X-Studio-Contract") || undefined };
+        return { data: await response.json() as T, retryAt: parseRetryAfter(response.headers.get("Retry-After")), requestId: response.headers.get("X-Request-ID") || undefined, studioContract: response.headers.get("X-Studio-Contract") || undefined, submissionLookup: response.headers.get("X-Studio-Submission-Lookup") || undefined };
     }
 
     async catalog(signal?: AbortSignal): Promise<Catalog> {
@@ -91,13 +91,23 @@ export class AggregatorClient {
         const models = await this.json<{ data: PublishedModel[] }>("/v1/models", { signal });
         const capabilities = await this.json<{ data: Capability[] }>("/v1/capabilities", { signal });
         if (!Array.isArray(models.data.data) || !Array.isArray(capabilities.data.data)) throw new Error("模型目录格式不受支持");
-        return { policy: policy.data, models: await joinCatalog(models.data.data, capabilities.data.data, policy.data.scopes), releaseGuard: policy.studioContract === "1" };
+        return { policy: policy.data, models: await joinCatalog(models.data.data, capabilities.data.data, policy.data.scopes), releaseGuard: policy.studioContract === "1", submissionLookup: policy.submissionLookup === "1" };
     }
 
     async createJob(body: string, idempotencyKey: string, releaseDigest: string, signal?: AbortSignal): Promise<ApiResult<RemoteJob>> {
         if (!idempotencyKey || !/^[a-f0-9]{64}$/.test(releaseDigest)) throw new Error("缺少持久提交标识或发布摘要");
         const result = await this.json<unknown>("/v1/jobs", { method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey, "X-Expected-Release-Digest": releaseDigest }, body, signal });
         return { ...result, data: jobResponse(result.data) };
+    }
+
+    async lookupSubmission(body: string, idempotencyKey: string, releaseDigest: string, signal?: AbortSignal): Promise<ApiResult<import("./types").SubmissionLookup>> {
+        if (!idempotencyKey || !/^[a-f0-9]{64}$/.test(releaseDigest)) throw new Error("缺少原提交标识或发布摘要，无法只读核对");
+        const result = await this.json<unknown>("/v1/jobs/lookup", { method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey, "X-Expected-Release-Digest": releaseDigest }, body, signal });
+        const value = result.data;
+        if (!object(value) || value.object !== "generation.submission_lookup") throw new Error("核对响应格式不受支持，原记录已保留");
+        if (value.outcome === "found") return { ...result, data: { object: value.object, outcome: "found", job: jobResponse(value.job) } };
+        if (value.outcome === "not_observed" && value.job === null) return { ...result, data: { object: value.object, outcome: "not_observed", job: null } };
+        throw new Error("核对结果与任务信息不符，原记录已保留");
     }
 
     async job(id: string, signal?: AbortSignal): Promise<ApiResult<RemoteJob>> {
