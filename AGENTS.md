@@ -112,3 +112,5 @@
 - 新版普通原件使用本机日志 v5 的 local_media，与文档/任务同域；旧版普通原件继续保留。安全清理必须在独立维护入口，原生事务同时核对 editors、local_media、documents、intents、uploads、results；页面占用仅凭浏览器原生连接释放证明解除，禁止按时长推定页面失效。未知标记、版本、索引或缺失引用必须保留；旧 v4 调用被版本门禁阻止，不做数据库降级。
 
 - Web跨引擎验收先匹配SDK与原生浏览器revision，使用独立自有持久profile，finally关闭全部测试资源。WebKit临时会话Blob失败不通过改产品存储或放宽断言处理；图片夹具先独立校验/解码。Windows WebKit不等同实际Safari，Cookie隔离失败保留最小对照与未签收状态。
+
+- Web文件输入验收须等画布完成水合，不能只等可见按钮就设置隐藏input；setInputFiles不会代替按钮的禁用保护。迁移摘要通过与浏览器解码通过分别统计，Windows WebKit失败不得外推为实际Safari结论。

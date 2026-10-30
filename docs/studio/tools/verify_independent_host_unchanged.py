@@ -30,7 +30,7 @@ if version.startswith(('142', '143', '144', '145', '146')):
     with tarfile.open(root / ('.local/independent-canvas-package/canvas-20261030.' + previous_version + '.1/canvas-20261030.' + previous_version + '.1.tar.gz')) as archive:
         manifest = json.load(archive.extractfile('canvas-deployment.json'))
     baseline = {'api_after': deployment['api_after'], 'index_sha256': next(item['sha256'] for item in manifest['files'] if item['path'] == 'studio/index.html')}
-elif version == '147':
+elif version in {'147', '148'}:
     # Evidence-only continuation of the same verified 146.1 release; no promotion.
     names = json.loads((root / '.local/studio146/receipts.json').read_text(encoding='utf-8'))
     rollback = json.loads((evidence / names['rollback_web']).read_text(encoding='utf-8'))

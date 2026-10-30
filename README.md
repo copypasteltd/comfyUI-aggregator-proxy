@@ -12,7 +12,9 @@
 
 当前146.1交付 **Web端**：独立网页、浏览器操作与响应式布局。清理页已修复旧快照覆盖新状态；发布清单绑定完整存储契约，兼容恢复包146.0保留新旧页面资源。实际公网回退与恢复8项通过，作品/原件/原任务完整保留；只支持v4的旧版被拒绝切换。原生客户端与应用商店不在范围。[完整方案、操作与证据](docs/studio/31-Web交付范围与兼容静态回退.md)。
 
-![Firefox公网恢复的合成画布](docs/studio/media/studio-147/archive-firefox-2026-10-30T15-14-12-158Z/public-archive-restored-canvas-desktop.png)
+**混合媒体迁移补充（证据148，产品仍146.1）**：[文档33](docs/studio/33-Web混合媒体跨浏览器备份恢复.md)记录Firefox→Chromium→Windows WebKit→Firefox的实际ZIP互导，共34组通过；九节点、五连线、八原件及重复参考完整保留，刷新和GLB原件下载摘要一致，任务不重提。Windows WebKit四份音视频code=4，播放未签收；回到Firefox后均正常载入。普通WebM另存后缀仍需完善，完整ZIP已保留正确类型。[最终恢复MP4](docs/studio/media/studio-148/Firefox-mixed-originals-recovery.mp4) / [GIF](docs/studio/media/studio-148/Firefox-mixed-originals-recovery.gif) · [WebKit迁移MP4](docs/studio/media/studio-148/WebKit-mixed-originals-migration.mp4) / [GIF](docs/studio/media/studio-148/WebKit-mixed-originals-migration.gif)。小型合成文件、完整所选页录像，零生产生成请求；原API和静态服务未修改或重启。完整Web验收仍HOLD。
+
+![Firefox公网恢复的合成画布](docs/studio/media/studio-148/migration-3-firefox-2026-10-30T15-48-56-958Z/mixed-canvas-desktop.png)
 
 [最新快照](docs/studio/media/studio-146/refresh-2026-10-30T14-40-06-009Z/latest-snapshot-ready.png) · [兼容恢复的两节点合成作品](docs/studio/media/studio-146/rollback-2026-10-30T14-37-15-637Z/compatible-recovery-renders-saved-Web-project.png) · [390px网页](docs/studio/media/studio-146/cleanup-2026-10-30T14-38-50-017Z/public-390-bottom-original-controls.png) · [清理MP4](docs/studio/media/studio-146/synthetic-Web-local-cleanup.mp4) / [GIF](docs/studio/media/studio-146/synthetic-Web-local-cleanup.gif) · [恢复页面MP4](docs/studio/media/studio-146/synthetic-Web-compatible-recovery.mp4) / [GIF](docs/studio/media/studio-146/synthetic-Web-compatible-recovery.gif)。合成文件，完整所选页面录像，零业务API/GPU请求。补充证据147新增Firefox38组、Windows WebKit本机功能27组通过；WebKit Cookie隔离未签收，实际Safari未验，390px仅视口模拟。203单元/类型/构建、12发布守卫、18原生协议及当前114/保留688文件验证通过；完整Web人工/故障签收仍 **HOLD/pending-test**。
 

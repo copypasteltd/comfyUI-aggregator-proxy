@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "scope": "Small synthetic originals for actual ZIP migration; native CPU FFmpeg/Pillow, not API/GPU outputs or production throughput.",
+  "fixtures": [
+    {
+      "file": "docs/media/studio-148/fixtures/actual-file-input.png",
+      "name": "actual-file-input.png",
+      "bytes": 81,
+      "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf",
+      "mime_type": "image/png",
+      "width": 16,
+      "height": 8,
+      "integrity_and_format_verified": true
+    },
+    {
+      "file": "docs/media/studio-148/fixtures/synthetic-animated.glb",
+      "name": "synthetic-animated.glb",
+      "bytes": 1580,
+      "sha256": "b2ed9ebfa0ce8af70822a3944db2c2244cc3c7ae1e511c7ce7ffa7d6d540dcab",
+      "mime_type": "model/gltf-binary",
+      "embedded_animation_clips": 2,
+      "source_fixture": "docs/media/studio-144/media-2026-10-30T12-26-55-868Z/synthetic-two-animations.glb",
+      "integrity_and_format_verified": true
+    },
+    {
+      "file": "docs/media/studio-148/fixtures/synthetic.flac",
+      "name": "synthetic.flac",
+      "bytes": 14641,
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e",
+      "mime_type": "audio/flac",
+      "media": {
+        "codec_name": "flac",
+        "codec_type": "audio",
+        "sample_rate": "16000",
+        "channels": 1,
+        "duration": "1.000000"
+      },
+      "duration_seconds": 1.0,
+      "integrity_and_format_verified": true
+    },
+    {
+      "file": "docs/media/studio-148/fixtures/synthetic.mp4",
+      "name": "synthetic.mp4",
+      "bytes": 3120,
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c",
+      "mime_type": "video/mp4",
+      "media": {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 64,
+        "height": 48,
+        "duration": "1.000000"
+      },
+      "duration_seconds": 1.0,
+      "integrity_and_format_verified": true
+    },
+    {
+      "file": "docs/media/studio-148/fixtures/synthetic.wav",
+      "name": "synthetic.wav",
+      "bytes": 32078,
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e",
+      "mime_type": "audio/wav",
+      "media": {
+        "codec_name": "pcm_s16le",
+        "codec_type": "audio",
+        "sample_rate": "16000",
+        "channels": 1,
+        "duration": "1.000000"
+      },
+      "duration_seconds": 1.0,
+      "integrity_and_format_verified": true
+    },
+    {
+      "file": "docs/media/studio-148/fixtures/synthetic.webm",
+      "name": "synthetic.webm",
+      "bytes": 2645,
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782",
+      "mime_type": "video/webm",
+      "media": {
+        "codec_name": "vp8",
+        "codec_type": "video",
+        "width": 64,
+        "height": 48
+      },
+      "duration_seconds": 1.0,
+      "integrity_and_format_verified": true
+    },
+    {
+      "file": "docs/media/studio-148/fixtures/web-original.png",
+      "name": "web-original.png",
+      "bytes": 69,
+      "sha256": "6d8a138844c3f3e4d69d522fd0b8e3d1cac0414ffc63bfeda43e9e3d860266f2",
+      "mime_type": "image/png",
+      "width": 1,
+      "height": 1,
+      "integrity_and_format_verified": true
+    },
+    {
+      "file": "docs/media/studio-148/fixtures/web-reference.png",
+      "name": "web-reference.png",
+      "bytes": 69,
+      "sha256": "659bfb16b7df25318d4c9e9cc86227a01b716b3791b6a59ded2f4338d542d631",
+      "mime_type": "image/png",
+      "width": 1,
+      "height": 1,
+      "integrity_and_format_verified": true
+    }
+  ],
+  "virtualization_used": false,
+  "production_api_requests": 0
+}

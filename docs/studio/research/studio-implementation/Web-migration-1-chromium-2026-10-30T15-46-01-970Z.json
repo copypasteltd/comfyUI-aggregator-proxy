@@ -1,0 +1,55 @@
+{
+  "passed": false,
+  "at": "2026-10-30T15:46:01.973Z",
+  "stage": 1,
+  "chain_id": "dba1704d-03cc-4fd9-8fee-abbe1485734b",
+  "scope": "Actual frozen production Web UI ZIP download/file-input import and native IndexedDB across fresh persistent browser profiles and public/LAN ordinary HTTP origins; synthetic local originals, not GPU outputs, actual Safari, cloud synchronization or native app acceptance",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "static_release": "canvas-20261030.146.1",
+  "new_product_release": false,
+  "checks": [
+    {
+      "name": "recipient is a fresh browser profile and origin with no project, task or original copied through its database",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-148/migration-1-chromium-2026-10-30T15-46-01-970Z/failure.png",
+      "bytes": 33193,
+      "sha256": "5b6abd5741ed4ba817a10e6a6f40b9a793f34d74d76dd89fa9436f9d649e74aa"
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://192.168.31.95:11179",
+  "origin_kind": "owned LAN HTTP new origin serving byte-identical frozen static UI",
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: '给创作留出空间', exact: true }) to be visible\u001b[22m\n",
+    "stack": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: '给创作留出空间', exact: true }) to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_web_migration.mjs:157:119"
+  },
+  "failure_alerts": [],
+  "resource_close_errors": [],
+  "private_recording": ".local/studio148/migration-dba1704d-03cc-4fd9-8fee-abbe1485734b/stage-1-chromium-2026-10-30T15-46-01-970Z/page@10f285d802c95215bc7581a5332ee424.webm"
+}

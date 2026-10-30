@@ -1,5 +1,14 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## 证据148 · 混合媒体跨浏览器/跨源站备份恢复，产品仍146.1 / pending-test
+
+- [验证] Firefox→Chromium→Windows WebKit→Firefox的实际ZIP下载/文件输入、刷新、再次导出共34组通过；九节点/五连线/八原件、重复参考、新键和GLB下载字节一致，任务不重提。
+- [待验] Windows WebKit四音视频均code=4，解码未通过；原件经最终Firefox再次载入正常。播放器失败说明、普通WebM另存命名及更多格式继续完善，不宣称Safari支持。
+- [文档] 文档33、双语README、全部46项、12通过截图与完整所选页两MP4/两GIF同步，三次测试夹具/定位/水合失败保留并关闭全部自有浏览器。
+- [边界] 仅Web、合成小文件、无业务Key或GPU请求；复用146.1冻结203单元回执，不冒充重新构建。原API/静态配置、指针及服务PID不变，无部署或重启。
+
+Evidence148 validates actual mixed-media ZIP hand-offs across three native engines and fresh public/LAN origins,34 checks in four stages. Eight original lengths/MIME/SHA, nine nodes, five edges, references, reload and GLB downloads match; tasks are not replayed. Windows WebKit cannot decode the four audio/video fixtures, while final Firefox reloads them. Playback, general WebM save naming and actual Safari remain pending. Bilingual document33, screenshots and two complete selected page MP4/GIF recordings preserve the limitations and early fixture/script failures. No product/API change or deployment; full Web acceptance stays HOLD.
+
 ## 证据147 · Web浏览器验收补充，产品仍146.1 / pending-test
 
 - [验证] Firefox新增38组、Windows WebKit本机功能27组通过；包括真实文件输入/下载、ZIP原件/引用/刷新、双页保护及390px视口。

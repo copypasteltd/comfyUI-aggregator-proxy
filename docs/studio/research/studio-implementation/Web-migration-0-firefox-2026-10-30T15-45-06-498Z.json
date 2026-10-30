@@ -1,0 +1,50 @@
+{
+  "passed": false,
+  "at": "2026-10-30T15:45:06.500Z",
+  "stage": 0,
+  "chain_id": "dba1704d-03cc-4fd9-8fee-abbe1485734b",
+  "scope": "Actual frozen production Web UI ZIP download/file-input import and native IndexedDB across fresh persistent browser profiles and public/LAN ordinary HTTP origins; synthetic local originals, not GPU outputs, actual Safari, cloud synchronization or native app acceptance",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "static_release": "canvas-20261030.146.1",
+  "new_product_release": false,
+  "checks": [],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-148/migration-0-firefox-2026-10-30T15-45-06-498Z/failure.png",
+      "bytes": 7849,
+      "sha256": "13e91e79478ecf4e045e4b2d63da987098e7b41576f7d95616270e37b16d60d5"
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://43.165.167.179:39445",
+  "origin_kind": "actual public static site, fresh owned profile",
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "error": {
+    "name": "Error",
+    "message": "page.evaluate: 新版原件必须使用独立文件键，未覆盖旧原件\naddManagedMedia@http://43.165.167.179:39445/probe.mjs:949:37\n@debugger eval code line 311 > eval:5:51\nasync*evaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+    "stack": "page.evaluate: 新版原件必须使用独立文件键，未覆盖旧原件\naddManagedMedia@http://43.165.167.179:39445/probe.mjs:949:37\n@debugger eval code line 311 > eval:5:51\nasync*evaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_web_migration.mjs:140:16"
+  },
+  "failure_alerts": [],
+  "resource_close_errors": [],
+  "private_recording": ".local/studio148/migration-dba1704d-03cc-4fd9-8fee-abbe1485734b/stage-0-firefox-2026-10-30T15-45-06-498Z/page@ec241a94019824afef872585b81cc77d.webm"
+}
