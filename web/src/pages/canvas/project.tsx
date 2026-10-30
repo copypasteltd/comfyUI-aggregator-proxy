@@ -5,6 +5,7 @@ import { Group, Video } from "lucide-react";
 import { saveAs } from "file-saver";
 import { useTranslation } from "react-i18next";
 import { MANAGED_STUDIO } from "@/constant/studio";
+import { studioExamples } from "@/lib/studio-examples";
 import StudioComposer from "@/components/canvas/studio-composer";
 import "@/components/canvas/studio-result-node";
 import { useStudioComposerStore } from "@/stores/use-studio-composer-store";
@@ -597,14 +598,24 @@ function InfiniteCanvasPage() {
         const rect = containerRef.current?.getBoundingClientRect();
         return screenToCanvas((rect?.left || 0) + (rect?.width || size.width) / 2, (rect?.top || 0) + (rect?.height || size.height) / 2);
     }, [screenToCanvas, size.height, size.width]);
+    const openStudioCreation = useCallback((preferredModel?: string, exampleId?: string) => {
+        const selected = nodesRef.current.filter((node) => selectedNodeIdsRef.current.has(node.id));
+        const marker = nodesRef.current.find((node) => node.type === CanvasNodeType.Text && node.metadata?.studioExampleId)?.metadata?.studioExampleId;
+        const example = studioExamples.find((item) => item.id === (exampleId || (!preferredModel && !selected.length ? marker : undefined)));
+        const sources = example ? nodesRef.current.filter((node) => node.metadata?.studioExampleId === example.id && (node.type === CanvasNodeType.Image || (example.taskType !== "image_to_3d" && node.type === CanvasNodeType.Text))) : selected;
+        const prompt = example?.taskType === "image_to_3d" ? "" : sources.find((node) => node.type === CanvasNodeType.Text)?.metadata?.content || example?.prompt || "";
+        const center = getCanvasCenter();
+        useStudioComposerStore.getState().open({ position: { x: center.x - 170, y: center.y - 130 }, preferredModel, sources, prompt, taskType: example?.taskType });
+    }, [getCanvasCenter]);
     const openedStudioModel = useRef("");
     useEffect(() => {
         const model = searchParams.get("model");
-        if (!MANAGED_STUDIO || !projectLoaded || !model || openedStudioModel.current === `${projectId}:${model}`) return;
-        openedStudioModel.current = `${projectId}:${model}`;
-        const center = getCanvasCenter();
-        useStudioComposerStore.getState().open({ position: { x: center.x - 170, y: center.y - 130 }, preferredModel: model });
-    }, [getCanvasCenter, projectId, projectLoaded, searchParams]);
+        const example = studioExamples.find((item) => item.id === searchParams.get("example"));
+        const identity = `${projectId}:${model || example?.id}`;
+        if (!MANAGED_STUDIO || !projectLoaded || (!model && !example) || openedStudioModel.current === identity) return;
+        openedStudioModel.current = identity;
+        openStudioCreation(model || undefined, model ? undefined : example?.id);
+    }, [openStudioCreation, projectId, projectLoaded, searchParams]);
 
     const setConnecting = useCallback((next: ConnectionHandle | null) => {
         connectingParamsRef.current = next;
@@ -3206,7 +3217,7 @@ function InfiniteCanvasPage() {
                     onHome={() => navigate("/")}
                     onProjects={() => navigate("/canvas")}
                     onCreateProject={createAndOpenProject}
-                    onCreateGeneration={MANAGED_STUDIO ? () => { const center = getCanvasCenter(); useStudioComposerStore.getState().open({ position: { x: center.x - 170, y: center.y - 130 }, sources: nodesRef.current.filter((node) => selectedNodeIdsRef.current.has(node.id)) }); } : undefined}
+                    onCreateGeneration={MANAGED_STUDIO ? () => openStudioCreation() : undefined}
                     onDeleteProject={deleteCurrentProject}
                     onExportProject={exportCurrentProject}
                     onImportImage={() => handleUploadRequest()}

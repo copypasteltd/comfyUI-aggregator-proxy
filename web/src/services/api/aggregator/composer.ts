@@ -1,5 +1,5 @@
 import { object, presetParameters, presetPolicyReason, schemaProperties } from "./capabilities";
-import type { AccessPolicy, CatalogModel, JobRequest, JsonObject } from "./types";
+import type { AccessPolicy, CatalogModel, JobRequest, JsonObject, TaskType } from "./types";
 
 export type ReferenceChoice = { assetId: string; weight?: number };
 export type ComposerValues = { input: JsonObject; parameters: JsonObject; references: Record<string, ReferenceChoice | undefined> };
@@ -8,8 +8,8 @@ export function firstAllowedPreset(model: CatalogModel, policy: AccessPolicy): n
     return model.usage.presets.findIndex((preset) => !presetPolicyReason(model, preset, policy));
 }
 
-export function suggestComposerModel(models: CatalogModel[], policy: AccessPolicy, preferred?: string, media?: string, imageCount = 0): CatalogModel | undefined {
-    const available = models.filter((model) => !model.unavailable_reason && firstAllowedPreset(model, policy) >= 0);
+export function suggestComposerModel(models: CatalogModel[], policy: AccessPolicy, preferred?: string, media?: string, imageCount = 0, taskType?: TaskType): CatalogModel | undefined {
+    const available = models.filter((model) => !model.unavailable_reason && firstAllowedPreset(model, policy) >= 0 && (!taskType || model.task_type === taskType));
     if (preferred) return available.find((model) => model.id === preferred);
     const matching = available.filter((model) => !media || model.usage.output.media_types.some((mime) => mime.startsWith(`${media}/`)));
     const slots = (model: CatalogModel) => model.usage.references.slots.filter((slot) => slot.path !== "input.mask").length;

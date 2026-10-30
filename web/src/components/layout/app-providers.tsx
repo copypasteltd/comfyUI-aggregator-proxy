@@ -26,7 +26,7 @@ const queryClient = new QueryClient({
 
 export function AppProviders({ children }: { children: ReactNode }) {
     const { i18n, t } = useTranslation();
-    const theme = useThemeStore((state) => MANAGED_STUDIO ? "light" : state.theme);
+    const theme = useThemeStore((state) => state.theme);
     const dark = theme === "dark";
     const locale = i18n.resolvedLanguage as AppLocale;
 

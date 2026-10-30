@@ -13,6 +13,7 @@ import { router } from "@/router";
 import { MANAGED_STUDIO } from "@/constant/studio";
 
 if (!MANAGED_STUDIO) initAnalytics();
+if (MANAGED_STUDIO) document.body.dataset.c = "lime";
 
 document.body.style.fontFamily = MANAGED_STUDIO ? 'Manrope,"PingFang SC","Microsoft YaHei",system-ui,sans-serif' : '"SF Pro Display","SF Pro Text","PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif';
 

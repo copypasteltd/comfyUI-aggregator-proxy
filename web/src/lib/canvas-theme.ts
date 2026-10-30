@@ -60,8 +60,8 @@ const upstreamThemes = {
     },
 } as const;
 
-export const canvasThemes = { ...upstreamThemes, light: MANAGED_STUDIO ? limeCanvasTheme : upstreamThemes.light };
+export const canvasThemes = MANAGED_STUDIO ? { light: limeCanvasTheme, dark: limeDarkCanvasTheme } : upstreamThemes;
 
 export type CanvasTheme = (typeof canvasThemes)[CanvasColorTheme];
 import { MANAGED_STUDIO } from "@/constant/studio";
-import { limeCanvasTheme } from "@/lib/lime-theme";
+import { limeCanvasTheme, limeDarkCanvasTheme } from "@/lib/lime-theme";

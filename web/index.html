@@ -6,14 +6,7 @@
         <meta name="description" content="一个无限画布创作工具" />
         <link rel="icon" href="/logo.svg" />
         <title>无限画布</title>
-        <script>
-            try {
-                var s = JSON.parse(localStorage.getItem("infinite-canvas:theme_store") || "{}");
-                var t = s.state && s.state.theme === "light" ? "light" : "dark";
-                document.documentElement.classList.toggle("dark", t === "dark");
-                document.documentElement.style.colorScheme = t;
-            } catch (e) {}
-        </script>
+        <script src="/theme-init-v1.js"></script>
     </head>
     <body class="bg-background text-foreground antialiased">
         <div id="root"></div>

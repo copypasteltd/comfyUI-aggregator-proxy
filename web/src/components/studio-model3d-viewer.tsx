@@ -5,11 +5,15 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { embeddedGlbUri } from "@/lib/studio-glb";
-import { lime } from "@/lib/lime-theme";
+import { lime, limeThemes } from "@/lib/lime-theme";
+import { useThemeStore } from "@/stores/use-theme-store";
 import { createGlbPlayback } from "@/lib/studio-glb-playback";
 
 export default function StudioModel3dViewer({ data }: { data: ArrayBuffer }) {
     const host = useRef<HTMLDivElement>(null), reset = useRef<() => void>(() => {});
+    const theme = useThemeStore((state) => state.theme);
+    const repaint = useRef<() => void>(() => {}), background = useRef<THREE.Color | undefined>(undefined);
+    useEffect(() => { background.current?.set(limeThemes[theme].canvas); repaint.current(); }, [theme]);
     const [error, setError] = useState(""), [stats, setStats] = useState("");
     const playback = useRef<ReturnType<typeof createGlbPlayback> | undefined>(undefined);
     const [animations, setAnimations] = useState<string[]>([]), [selected, setSelected] = useState(0), [playing, setPlaying] = useState(false), [animationError, setAnimationError] = useState("");
@@ -38,7 +42,7 @@ export default function StudioModel3dViewer({ data }: { data: ArrayBuffer }) {
             if (mesh.skeleton && !skeletons.has(mesh.skeleton)) { skeletons.add(mesh.skeleton); if (disposed) mesh.skeleton.dispose(); }
         });
         const cleanup = () => {
-            if (disposed) return; disposed = true; reset.current = () => {};
+            if (disposed) return; disposed = true; reset.current = () => {}; repaint.current = () => {}; background.current = undefined;
             player?.dispose(); if (playback.current === player) playback.current = undefined;
             document.removeEventListener("visibilitychange", visibilityChanged);
             observer?.disconnect(); controls?.dispose();
@@ -80,11 +84,12 @@ export default function StudioModel3dViewer({ data }: { data: ArrayBuffer }) {
             renderer.domElement.setAttribute("aria-label", "三维模型交互区"); renderer.domElement.setAttribute("role", "img"); renderer.domElement.tabIndex = 0;
             renderer.domElement.style.cssText = "display:block;width:100%;height:100%;outline-offset:-3px";
             renderer.domElement.addEventListener("webglcontextlost", contextLost); element.appendChild(renderer.domElement);
-            const scene = new THREE.Scene(); scene.background = new THREE.Color(lime.canvas); scene.add(gltf.scene, new THREE.HemisphereLight(lime.card, lime.muted, 3));
+            const scene = new THREE.Scene(); background.current = new THREE.Color(limeThemes[useThemeStore.getState().theme].canvas); scene.background = background.current; scene.add(gltf.scene, new THREE.HemisphereLight(lime.card, lime.muted, 3));
             const light = new THREE.DirectionalLight(lime.card, 3); light.position.set(1, 2, 3); scene.add(light);
             const camera = new THREE.PerspectiveCamera(40, 1, sphere.radius / 1000, sphere.radius * 1000);
             controls = new OrbitControls(camera, renderer.domElement); controls.target.copy(sphere.center); controls.listenToKeyEvents(renderer.domElement);
             const render = () => { try { if (!disposed && renderer) renderer.render(scene, camera); } catch (reason) { fail(reason); } };
+            repaint.current = render;
             const fit = () => {
                 const fov = 2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * Math.min(1, camera.aspect));
                 camera.position.copy(sphere.center).add(new THREE.Vector3(1, 0.6, 1).normalize().multiplyScalar(sphere.radius / Math.sin(fov / 2) * 1.15));

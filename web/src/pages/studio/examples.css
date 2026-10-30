@@ -1,0 +1,12 @@
+.studio-examples-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
+.studio-example-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.studio-example-cover { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; height: 180px; border-radius: 16px; background: var(--cv); color: var(--ink2); overflow: hidden; }
+.studio-example-cover img { width: 43%; height: 86%; object-fit: contain; border-radius: 12px; }
+.studio-example-cover .ant-tag { position: absolute; left: 10px; bottom: 8px; margin: 0; }
+.studio-example-card h2 { margin: 8px 0 0; }
+.studio-example-card > p { font-size: 14px; line-height: 1.8; margin: 0; }
+.studio-example-card small { font-size: 12px; line-height: 1.8; color: var(--ink2); }
+.studio-example-availability { display: flex; flex-direction: column; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink2); font-size: 11px; line-height: 1.8; overflow-wrap: anywhere; }
+.studio-example-card > button { align-self: start; }
+@media (max-width: 1050px) { .studio-examples-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .studio-examples-grid { grid-template-columns: 1fr; } }

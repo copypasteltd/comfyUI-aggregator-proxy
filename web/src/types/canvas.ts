@@ -90,6 +90,7 @@ export type CanvasNodeMetadata = {
     studioStatus?: string;
     studioContentId?: string;
     studioExpiresAt?: number;
+    studioExampleId?: string;
 };
 
 export type CanvasNodeData = {

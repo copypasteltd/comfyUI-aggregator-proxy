@@ -2,7 +2,7 @@ import { newManagedMediaKey } from "@/services/studio-local-media";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { App, Button } from "antd";
-import { Download, FileUp, Plus } from "lucide-react";
+import { BookOpen, Download, FileUp, Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { readZip } from "@/lib/zip";
@@ -120,6 +120,7 @@ export default function CanvasPage() {
                         <h1 className="mt-3 text-3xl font-semibold">{t("canvas.title")}</h1>
                     </div>
                     <div className="flex items-center gap-2">
+                        {MANAGED_STUDIO && <Button icon={<BookOpen className="size-4" />} onClick={() => navigate("/examples")}>预设案例</Button>}
                         {selectedIds.length ? (
                             <>
                                 <Button disabled={!hydrated} icon={<Download className="size-4" />} onClick={() => void exportCanvasProjects(projects.filter((project) => selectedIds.includes(project.id)), `${t("canvas.title")}-${selectedIds.length}`).catch((error) => message.error(error instanceof Error ? error.message : "备份未完成"))}>

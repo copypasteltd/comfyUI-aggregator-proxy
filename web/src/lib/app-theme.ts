@@ -1,7 +1,7 @@
 import type { ThemeConfig } from "antd";
 import { theme as antdTheme } from "antd";
 import { MANAGED_STUDIO } from "@/constant/studio";
-import { lime } from "@/lib/lime-theme";
+import { lime, limeThemes } from "@/lib/lime-theme";
 
 const neutral = {
     light: {
@@ -31,12 +31,15 @@ const neutral = {
 };
 
 export function getAntThemeConfig(dark: boolean): ThemeConfig {
-    if (MANAGED_STUDIO) return {
-        algorithm: antdTheme.defaultAlgorithm,
-        cssVar: { key: "comfy-studio-lime" },
-        token: { colorPrimary: lime.primary, colorPrimaryHover: lime.hover, colorPrimaryActive: lime.hover, colorInfo: lime.ink, colorInfoBg: lime.canvas, colorInfoBorder: lime.primary, colorInfoText: lime.ink, colorText: lime.ink, colorTextSecondary: lime.muted, colorTextLightSolid: lime.ink, colorLink: lime.ink, colorLinkHover: lime.muted, colorBgLayout: lime.canvas, colorBgContainer: lime.card, colorBgElevated: lime.card, colorBorder: "#dadad0", colorError: "#b33215", colorWarning: lime.warning, controlItemBgActive: lime.primary, controlItemBgHover: lime.canvas, borderRadius: 14, controlHeight: 40, fontFamily: 'Manrope, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif' },
-        components: { Button: { primaryShadow: "none", defaultShadow: "none", fontWeight: 650, defaultHoverColor: lime.ink, defaultActiveColor: lime.ink, defaultHoverBorderColor: lime.ink, defaultActiveBorderColor: lime.ink, defaultHoverBg: lime.canvas, defaultActiveBg: lime.canvas }, Select: { optionSelectedBg: lime.primary, optionSelectedColor: lime.ink, optionActiveBg: lime.canvas }, Dropdown: { controlItemBgHover: lime.canvas, controlItemBgActive: lime.primary }, Menu: { itemSelectedBg: lime.primary, itemSelectedColor: lime.ink, itemHoverBg: lime.canvas }, Drawer: { colorBgElevated: lime.canvas }, Modal: { contentBg: lime.canvas, headerBg: lime.canvas }, Tag: { defaultBg: lime.primary, defaultColor: lime.ink } },
-    };
+    if (MANAGED_STUDIO) {
+        const color = limeThemes[dark ? "dark" : "light"];
+        return {
+            algorithm: dark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+            cssVar: { key: dark ? "comfy-studio-lime-dark" : "comfy-studio-lime-light" },
+            token: { colorPrimary: lime.primary, colorPrimaryHover: lime.hover, colorPrimaryActive: lime.hover, colorInfo: color.ink, colorInfoBg: color.canvas, colorInfoBorder: lime.primary, colorInfoText: color.ink, colorText: color.ink, colorTextSecondary: color.muted, colorTextLightSolid: lime.ink, colorLink: color.ink, colorLinkHover: color.muted, colorBgLayout: color.canvas, colorBgContainer: color.card, colorBgElevated: color.card, colorBorder: color.border, colorError: color.error, colorWarning: lime.warning, controlItemBgActive: color.selection, controlItemBgHover: color.canvas, borderRadius: 14, controlHeight: 40, fontFamily: 'Manrope, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif' },
+            components: { Button: { primaryShadow: "none", defaultShadow: "none", fontWeight: 650, defaultColor: color.ink, defaultHoverColor: color.ink, defaultActiveColor: color.ink, defaultHoverBorderColor: color.ink, defaultActiveBorderColor: color.ink, defaultHoverBg: color.canvas, defaultActiveBg: color.canvas, primaryColor: lime.ink }, Select: { optionSelectedBg: lime.primary, optionSelectedColor: lime.ink, optionActiveBg: color.canvas }, Dropdown: { colorBgElevated: color.card, controlItemBgHover: color.canvas, controlItemBgActive: color.selection }, Menu: { itemSelectedBg: color.selection, itemSelectedColor: color.ink, itemHoverBg: color.canvas }, Drawer: { colorBgElevated: color.canvas }, Modal: { contentBg: color.canvas, headerBg: color.canvas }, Tag: { defaultBg: color.selection, defaultColor: color.ink } },
+        };
+    }
     const color = dark ? neutral.dark : neutral.light;
 
     return {

@@ -13,6 +13,7 @@ import type { CatalogModel, JsonObject } from "@/services/api/aggregator/types";
 import { CanvasNodeType, type CanvasNodeData } from "@/types/canvas";
 import { getImageBlob } from "@/services/image-storage";
 import StudioReferencePreview from "./studio-reference-preview";
+import { exampleModel } from "@/lib/studio-examples";
 
 const fieldLabels: Record<string, string> = { prompt: "创作描述", negative_prompt: "避免出现的内容", seed: "种子", strength: "变换强度", fps: "帧率" };
 function field(name: string, schema: JsonObject, value: unknown, change: (value: unknown) => void, disabled: boolean) {
@@ -51,7 +52,7 @@ export default function StudioComposer({ projectId, nodes }: { projectId: string
         if (!draft) { initializedDraft.current = undefined; return; }
         if (initializedDraft.current === draft.id) return;
         if (!catalog) { setModelId(""); return; }
-        const suggested = catalog ? suggestComposerModel(models, catalog.policy, draft.preferredModel, draft.media, selectedImages.length) : undefined;
+        const suggested = draft.taskType ? exampleModel({ taskType: draft.taskType, references: selectedImages.length }, catalog) : suggestComposerModel(models, catalog.policy, draft.preferredModel, draft.media, selectedImages.length);
         setModelId(suggested?.id || ""); setPresetIndex(suggested && catalog ? firstAllowedPreset(suggested, catalog.policy) : -1); setCount(1); setInput({ prompt: draft.prompt }); setParameters({}); setChoices(initialChoices(suggested)); setCanvasSources({}); setWeights({}); setError("");
         initializedDraft.current = draft.id;
     // Initialize once per explicit creation, after a restoring catalog becomes available.

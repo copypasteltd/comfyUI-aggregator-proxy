@@ -13,8 +13,11 @@ export const useThemeStore = create<ThemeStore>()(
     persist(
         (set) => ({
             theme: MANAGED_STUDIO ? "light" : "dark",
-            setTheme: (theme) => set({ theme: MANAGED_STUDIO ? "light" : theme }),
+            setTheme: (theme) => set({ theme }),
         }),
-        { name: "infinite-canvas:theme_store", merge: (saved, current) => ({ ...current, ...(saved as Partial<ThemeStore>), ...(MANAGED_STUDIO ? { theme: "light" as const } : {}) }) },
+        { name: "infinite-canvas:theme_store", merge: (saved, current) => {
+            const theme = (saved as Partial<ThemeStore> | undefined)?.theme;
+            return { ...current, ...(theme === "light" || theme === "dark" ? { theme } : {}) };
+        } },
     ),
 );

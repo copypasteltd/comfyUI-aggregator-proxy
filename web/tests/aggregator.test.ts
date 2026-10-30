@@ -4,6 +4,7 @@ import "./studio-result-ownership.test";
 import "./studio-document-references.test";
 import "./studio-focus.test";
 import "./aggregator-composer.test";
+import "./studio-examples.test";
 import "./task-journal.test";
 import "./aggregator-batch.test";
 import "./studio-glb.test";
