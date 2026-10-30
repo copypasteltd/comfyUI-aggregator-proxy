@@ -1,16 +1,25 @@
 # ComfyUI 创作画布
 
+<!-- independent149:start -->
+**当前Web静态149.1已部署**：[原件下载与播放失败处理](docs/studio/34-Web媒体原件下载与播放失败处理.md)。普通WebM、JPEG/WebP批次原件后缀已修复；原生解码失败显示原件下载，缺件明确拒绝，替换后重新判断。图层操作栏跟随当前节点，下载不误开编辑面板。三引擎本机/公网各36组、78次实际下载、18截图，203单元/类型/构建及相关回归通过。Windows WebKit解码与Cookie、实际Safari及完整Web签收仍 **HOLD**。仅切独立静态目录，兼容149.0恢复包准备完成，原API与全部服务/配置不变。
+
+![公网媒体原件与失败提示](docs/studio/media/studio-149/actions-chromium-2026-10-30T17-12-41-354Z/media-originals-and-native-fallback.png)
+
+[实际下载/替换MP4](docs/studio/media/studio-149/Chromium-original-download-and-replacement.mp4) / [GIF](docs/studio/media/studio-149/Chromium-original-download-and-replacement.gif) · [WebKit失败提示MP4](docs/studio/media/studio-149/WebKit-native-failure-and-original-download.mp4) / [GIF](docs/studio/media/studio-149/WebKit-native-failure-and-original-download.gif)。完整所选页面录像、合成小文件，本轮没有GPU生成；下载通过不代表WebKit播放通过。下方146/147/148是历史证据。
+<!-- independent149:end -->
+
+
 [English](README.en.md) · [文档索引](docs/studio/README.md) · [部署与使用](docs/studio/21-独立画布部署与使用.md) · [全部46项状态](docs/studio/10-开发进度与交付记录.md)
 
 **独立静态画布，只调用现有 ComfyUI API。** 前端基于 [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas)，全面采用已拉取的 04·青柠样式。画布独立构建、发布与回滚；模型、Workflow、业务 Key、队列、GPU 和内容生命周期由原 API 系统管理。
 
 | 入口 | 地址 |
 | --- | --- |
-| 独立画布146.1 | [打开画布](http://43.165.167.179:39445/studio/) |
+| 独立画布149.1 | [打开画布](http://43.165.167.179:39445/studio/) |
 | 原业务API | `http://43.165.167.179:39443` |
 | 原管理后台 | [Admin](http://43.165.167.179:39443/admin/) |
 
-当前146.1交付 **Web端**：独立网页、浏览器操作与响应式布局。清理页已修复旧快照覆盖新状态；发布清单绑定完整存储契约，兼容恢复包146.0保留新旧页面资源。实际公网回退与恢复8项通过，作品/原件/原任务完整保留；只支持v4的旧版被拒绝切换。原生客户端与应用商店不在范围。[完整方案、操作与证据](docs/studio/31-Web交付范围与兼容静态回退.md)。
+此前146.1交付 **Web端**：独立网页、浏览器操作与响应式布局。清理页已修复旧快照覆盖新状态；发布清单绑定完整存储契约，兼容恢复包146.0保留新旧页面资源。实际公网回退与恢复8项通过，作品/原件/原任务完整保留；只支持v4的旧版被拒绝切换。原生客户端与应用商店不在范围。[完整方案、操作与证据](docs/studio/31-Web交付范围与兼容静态回退.md)。
 
 **混合媒体迁移补充（证据148，产品仍146.1）**：[文档33](docs/studio/33-Web混合媒体跨浏览器备份恢复.md)记录Firefox→Chromium→Windows WebKit→Firefox的实际ZIP互导，共34组通过；九节点、五连线、八原件及重复参考完整保留，刷新和GLB原件下载摘要一致，任务不重提。Windows WebKit四份音视频code=4，播放未签收；回到Firefox后均正常载入。普通WebM另存后缀仍需完善，完整ZIP已保留正确类型。[最终恢复MP4](docs/studio/media/studio-148/Firefox-mixed-originals-recovery.mp4) / [GIF](docs/studio/media/studio-148/Firefox-mixed-originals-recovery.gif) · [WebKit迁移MP4](docs/studio/media/studio-148/WebKit-mixed-originals-migration.mp4) / [GIF](docs/studio/media/studio-148/WebKit-mixed-originals-migration.gif)。小型合成文件、完整所选页录像，零生产生成请求；原API和静态服务未修改或重启。完整Web验收仍HOLD。
 
@@ -77,7 +86,7 @@ npm run build
 
 仅发布`web/dist/`，由独立静态服务提供`/studio/`和SPA回退。`managed`是功能约束模式，与是否独立部署无关；不要换成启用上游脚本/Agent的`standalone`模式。默认API是公开地址，Key不进入构建。没有默认API时连接页留空。
 
-当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.146.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，先校验兼容契约并保留新旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
+当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261031.149.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，先校验兼容契约并保留新旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
 
 ## 验证与限制
 

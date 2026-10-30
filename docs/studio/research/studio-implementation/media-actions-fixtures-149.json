@@ -1,0 +1,110 @@
+{
+  "passed": true,
+  "scope": "Six small valid local originals and two deliberately invalid media originals for actual native error events and lossless download; not GPU generation or general codec acceptance.",
+  "fixtures": [
+    {
+      "file": "docs/media/studio-149/fixtures/synthetic.wav",
+      "name": "synthetic.wav",
+      "bytes": 32078,
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e",
+      "mime_type": "audio/wav",
+      "media": {
+        "codec_name": "pcm_s16le",
+        "codec_type": "audio",
+        "sample_rate": "16000",
+        "channels": 1,
+        "duration": "1.000000"
+      },
+      "duration_seconds": 1.0,
+      "integrity_and_format_verified": true,
+      "expected_decodable": true
+    },
+    {
+      "file": "docs/media/studio-149/fixtures/synthetic.flac",
+      "name": "synthetic.flac",
+      "bytes": 14641,
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e",
+      "mime_type": "audio/flac",
+      "media": {
+        "codec_name": "flac",
+        "codec_type": "audio",
+        "sample_rate": "16000",
+        "channels": 1,
+        "duration": "1.000000"
+      },
+      "duration_seconds": 1.0,
+      "integrity_and_format_verified": true,
+      "expected_decodable": true
+    },
+    {
+      "file": "docs/media/studio-149/fixtures/synthetic.mp4",
+      "name": "synthetic.mp4",
+      "bytes": 3120,
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c",
+      "mime_type": "video/mp4",
+      "media": {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 64,
+        "height": 48,
+        "duration": "1.000000"
+      },
+      "duration_seconds": 1.0,
+      "integrity_and_format_verified": true,
+      "expected_decodable": true
+    },
+    {
+      "file": "docs/media/studio-149/fixtures/synthetic.webm",
+      "name": "synthetic.webm",
+      "bytes": 2645,
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782",
+      "mime_type": "video/webm",
+      "media": {
+        "codec_name": "vp8",
+        "codec_type": "video",
+        "width": 64,
+        "height": 48
+      },
+      "duration_seconds": 1.0,
+      "integrity_and_format_verified": true,
+      "expected_decodable": true
+    },
+    {
+      "file": "docs/media/studio-149/fixtures/original.jpg",
+      "name": "original.jpg",
+      "mime_type": "image/jpeg",
+      "width": 16,
+      "height": 12,
+      "bytes": 632,
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428",
+      "expected_decodable": true
+    },
+    {
+      "file": "docs/media/studio-149/fixtures/variant.webp",
+      "name": "variant.webp",
+      "mime_type": "image/webp",
+      "width": 16,
+      "height": 12,
+      "bytes": 62,
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d",
+      "expected_decodable": true
+    },
+    {
+      "file": "docs/media/studio-149/fixtures/invalid-audio.wav",
+      "name": "invalid-audio.wav",
+      "mime_type": "audio/wav",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b",
+      "expected_decodable": false
+    },
+    {
+      "file": "docs/media/studio-149/fixtures/invalid-video.bin",
+      "name": "invalid-video.bin",
+      "mime_type": "application/x-synthetic-unsupported",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b",
+      "expected_decodable": false
+    }
+  ],
+  "virtualization_used": false
+}

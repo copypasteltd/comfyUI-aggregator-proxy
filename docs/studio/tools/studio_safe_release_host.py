@@ -61,7 +61,7 @@ def prepare():
         manifests[name], directories[name], packages[name] = manifest, directory, package
     recovery = manifests[RECOVERY]
     require(recovery['recovery_source']['release_id'] == ORIGINAL and recovery['recovery_source']['manifest_sha256'] == sha((old_dir / 'canvas-deployment.json').read_bytes()), 'Recovery provenance does not match actual previous release')
-    require(recovery['source_revision'] == old['source_revision'] and recovery['source_sha256'] == old['source_sha256'] and entry_map(recovery['files']) == entry_map(old['files']), 'Recovery application differs from known 145.1 bytes')
+    require(recovery['source_revision'] == old['source_revision'] and recovery['source_sha256'] == old['source_sha256'] and entry_map(recovery['files']) == entry_map(old['files']), 'Recovery application differs from the verified source release')
     compatible(recovery, manifests[NEW])
     union = dict(old_files)
     sources = {name: old_dir for name in old_files}
@@ -82,7 +82,7 @@ def prepare():
             output.write(json.dumps({'release_id': ORIGINAL, 'files': list(retained.values())}, indent=2) + '\n')
         read_release(directories[release])
     after = snapshots(); verify_boundary(before, after, old_dir)
-    result = {'passed': True, 'at': datetime.now(UTC).isoformat(), 'original': ORIGINAL, 'new': NEW, 'recovery': RECOVERY, 'storage_contract': CONTRACT, 'manifest_sha256': {name: sha((directory / 'canvas-deployment.json').read_bytes()) for name, directory in {ORIGINAL: old_dir, **directories}.items()}, 'retained_inventory_sha256': {name: sha((directory / 'retained-previous-assets.json').read_bytes()) for name, directory in {ORIGINAL: old_dir, **directories}.items()}, 'packages': packages, 'before': before, 'after': after, 'api_unchanged': True, 'static_service_restarted': False, 'current_pointer_changed': False, 'recovery_application_bytes_identical_to_1451': True}
+    result = {'passed': True, 'at': datetime.now(UTC).isoformat(), 'original': ORIGINAL, 'new': NEW, 'recovery': RECOVERY, 'storage_contract': CONTRACT, 'manifest_sha256': {name: sha((directory / 'canvas-deployment.json').read_bytes()) for name, directory in {ORIGINAL: old_dir, **directories}.items()}, 'retained_inventory_sha256': {name: sha((directory / 'retained-previous-assets.json').read_bytes()) for name, directory in {ORIGINAL: old_dir, **directories}.items()}, 'packages': packages, 'before': before, 'after': after, 'api_unchanged': True, 'static_service_restarted': False, 'current_pointer_changed': False, 'recovery_application_bytes_identical_to_source': True}
     write('prepared.json', result); print(json.dumps(result))
 
 

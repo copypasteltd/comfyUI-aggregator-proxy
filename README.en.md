@@ -1,16 +1,25 @@
 # ComfyUI Creative Canvas
 
+<!-- independent149:start -->
+**Web static 149.1 is deployed:** [Original downloads and native playback errors](docs/studio/34-Web媒体原件下载与播放失败处理.md). General WebM and main/alternate JPEG/WebP downloads now preserve the stored original format. Native decode failures show an original-download action; missing keyed originals are refused, and real file replacement resets source-specific errors. Layer focus keeps the correct action bar and downloads do not open an editor. Three engines passed 36 local plus 36 public groups, 78 actual downloads and 18 screenshots; 203 units/type/build and related regressions passed. Windows WebKit decoding/Cookie isolation, actual Safari and full Web acceptance remain **HOLD**. Only independent static files were promoted, with compatible 149.0 recovery prepared; the original API and all services/configuration stay unchanged.
+
+![Public original media and native failure handling](docs/studio/media/studio-149/actions-chromium-2026-10-30T17-12-41-354Z/media-originals-and-native-fallback.png)
+
+[Actual download/replacement MP4](docs/studio/media/studio-149/Chromium-original-download-and-replacement.mp4) / [GIF](docs/studio/media/studio-149/Chromium-original-download-and-replacement.gif) · [WebKit failure-handling MP4](docs/studio/media/studio-149/WebKit-native-failure-and-original-download.mp4) / [GIF](docs/studio/media/studio-149/WebKit-native-failure-and-original-download.gif). Complete selected pages, small synthetic fixtures, no GPU generation. Download success does not establish WebKit playback. The 146/147/148 evidence below is historical.
+<!-- independent149:end -->
+
+
 [中文](README.md) · [Documentation](docs/studio/README.md) · [Deployment and usage](docs/studio/21-独立画布部署与使用.md) · [All 46 tracked items](docs/studio/10-开发进度与交付记录.md)
 
 **An independently deployed static canvas that calls the existing ComfyUI API directly.** Built on [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas), with the downloaded 04 Lime design. The canvas has its own build, release and rollback. The original API owns models, Workflows, business API Keys, queues, GPUs and content retention.
 
 | Entry | Address |
 | --- | --- |
-| Independent canvas146.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
+| Independent canvas149.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
 
-Current146.1 delivers a **Web application**: an independent website, browser interactions and responsive layouts. Cleanup keeps the newest snapshot authoritative. Release manifests bind the full storage contract; compatible recovery146.0 retains old and new page assets. Eight actual public rollback/restore checks preserve projects, original bytes and frozen tasks; v4-only targets are refused. Native clients and app stores are outside scope. [Architecture, operations and evidence](docs/studio/31-Web交付范围与兼容静态回退.md).
+Earlier146.1 delivered a **Web application**: an independent website, browser interactions and responsive layouts. Cleanup keeps the newest snapshot authoritative. Release manifests bind the full storage contract; compatible recovery146.0 retains old and new page assets. Eight actual public rollback/restore checks preserve projects, original bytes and frozen tasks; v4-only targets are refused. Native clients and app stores are outside scope. [Architecture, operations and evidence](docs/studio/31-Web交付范围与兼容静态回退.md).
 
 **Mixed-media migration supplement (evidence148, application still146.1):** [Document33](docs/studio/33-Web混合媒体跨浏览器备份恢复.md) records actual ZIP hand-offs Firefox→Chromium→Windows WebKit→Firefox:34 checks passed, preserving nine nodes, five edges, eight byte-identical originals and duplicate references, with reload and actual GLB downloads. No tasks are replayed. Windows WebKit reports media error4 for all four audio/video samples; playback remains unaccepted. The final Firefox recipient loads all four. The general WebM save filename still needs correction; the full ZIP preserves its proper type. [Final Firefox MP4](docs/studio/media/studio-148/Firefox-mixed-originals-recovery.mp4) / [GIF](docs/studio/media/studio-148/Firefox-mixed-originals-recovery.gif) · [WebKit migration MP4](docs/studio/media/studio-148/WebKit-mixed-originals-migration.mp4) / [GIF](docs/studio/media/studio-148/WebKit-mixed-originals-migration.gif). Small synthetic files, complete selected page recordings, no production generation, rebuild, deployment or API/service changes. Full Web acceptance remains HOLD.
 
@@ -77,7 +86,7 @@ npm run build
 
 Deploy only `web/dist/` to an independent static host with `/studio/` and SPA fallback. Keep `managed` mode: deployment independence does not mean the upstream `standalone` mode, which enables optional scripts/Agents. The default API address is public; never embed a Key. Without a default API, the connection field stays empty.
 
-Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.146.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Verify the full compatible storage contract and retain hashed assets required by both page versions before switching. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
+Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261031.149.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Verify the full compatible storage contract and retain hashed assets required by both page versions before switching. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
 
 ## Validation and limits
 

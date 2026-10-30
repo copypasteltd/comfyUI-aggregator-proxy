@@ -1,0 +1,376 @@
+{
+  "passed": true,
+  "at": "2026-10-30T17:01:29.088Z",
+  "baseline_reproduction": false,
+  "public_static_site": false,
+  "scope": "Actual production Web UI with native Windows persistent profiles, real decoder errors, real file inputs and original downloads; small synthetic files, not actual Safari, all codecs, GPU or physical touch hardware acceptance",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T16-35-35-334Z.json",
+  "checks": [
+    {
+      "name": "actual standard video download preserves WebM filename and exact original bytes",
+      "detail": true
+    },
+    {
+      "name": "standard MP4/WAV/FLAC/JPEG downloads use stored original type and SHA, including stale JPEG metadata",
+      "detail": true
+    },
+    {
+      "name": "actual primary and expanded batch-image downloads preserve JPEG and WebP originals",
+      "detail": true
+    },
+    {
+      "name": "native invalid audio/video error events produce explicit playback fallback without task failure or generation",
+      "detail": true
+    },
+    {
+      "name": "Windows WebKit unsupported valid samples retain original downloads and explicit failure; decoder support unaccepted",
+      "detail": true
+    },
+    {
+      "name": "fallback downloads retain undecodable bytes/WAV/bin without opening an editor; focused layer actions stay on the selected node",
+      "detail": true
+    },
+    {
+      "name": "missing stored original refuses download instead of falling back to cached URL; explicit restoration recovers exact bytes",
+      "detail": true
+    },
+    {
+      "name": "all download/failure paths leave originals and generation task stores unchanged",
+      "detail": true
+    },
+    {
+      "name": "refresh recreates native error state and preserves original download without submitting work",
+      "detail": true
+    },
+    {
+      "name": "actual replace-audio/video file choosers load new stored originals; previous source error does not poison supported playback",
+      "detail": true
+    },
+    {
+      "name": "replacement originals download with their new type and exact SHA",
+      "detail": true
+    },
+    {
+      "name": "390px Web viewport has no horizontal document overflow; emulation only",
+      "detail": true
+    }
+  ],
+  "downloads": [
+    {
+      "fixture": "synthetic.webm",
+      "suggested_filename": "canvas-video-video-webm.webm",
+      "expected_extension": "webm",
+      "actual_extension": ".webm",
+      "bytes": 2645,
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    },
+    {
+      "fixture": "synthetic.mp4",
+      "suggested_filename": "canvas-video-video-mp4.mp4",
+      "expected_extension": "mp4",
+      "actual_extension": ".mp4",
+      "bytes": 3120,
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "fixture": "synthetic.wav",
+      "suggested_filename": "canvas-audio-audio-wav.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 32078,
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e"
+    },
+    {
+      "fixture": "synthetic.flac",
+      "suggested_filename": "canvas-audio-audio-flac.flac",
+      "expected_extension": "flac",
+      "actual_extension": ".flac",
+      "bytes": 14641,
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e"
+    },
+    {
+      "fixture": "original.jpg",
+      "suggested_filename": "canvas-image-image-jpeg.jpg",
+      "expected_extension": "jpg",
+      "actual_extension": ".jpg",
+      "bytes": 632,
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "fixture": "original.jpg",
+      "suggested_filename": "canvas-image-image-batch-primary-jpeg.jpg",
+      "expected_extension": "jpg",
+      "actual_extension": ".jpg",
+      "bytes": 632,
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "fixture": "variant.webp",
+      "suggested_filename": "canvas-image-image-batch-alternate-webp.webp",
+      "expected_extension": "webp",
+      "actual_extension": ".webp",
+      "bytes": 62,
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "fixture": "invalid-audio.wav",
+      "suggested_filename": "canvas-audio-broken-audio.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "fixture": "invalid-video.bin",
+      "suggested_filename": "canvas-video-broken-video.bin",
+      "expected_extension": "bin",
+      "actual_extension": ".bin",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "fixture": "invalid-audio.wav",
+      "suggested_filename": "canvas-audio-broken-audio.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "fixture": "invalid-audio.wav",
+      "suggested_filename": "canvas-audio-broken-audio.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "fixture": "synthetic.wav",
+      "suggested_filename": "canvas-audio-broken-audio.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 32078,
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e"
+    },
+    {
+      "fixture": "synthetic.webm",
+      "suggested_filename": "canvas-video-broken-video.webm",
+      "expected_extension": "webm",
+      "actual_extension": ".webm",
+      "bytes": 2645,
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-149/actions-webkit-2026-10-30T17-01-29-085Z/media-originals-and-native-fallback.png",
+      "bytes": 111772,
+      "sha256": "42f2c3197e63dc8771f7348b9556cf4bc3da255acc7b89f79fe11707183c0216"
+    },
+    {
+      "file": "docs/media/studio-149/actions-webkit-2026-10-30T17-01-29-085Z/replacement-originals.png",
+      "bytes": 107066,
+      "sha256": "7e56e87d69cfa38f83f5d6b839ff2c9cc745d5f9efa0199780ee5b0c862f13b1"
+    },
+    {
+      "file": "docs/media/studio-149/actions-webkit-2026-10-30T17-01-29-085Z/390-media-page.png",
+      "bytes": 63157,
+      "sha256": "0fa0e7ceee3fa1c95568e297b86f9c4a419dffb7bad80d6eea1929a113d6acdd"
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "static_request_failures": [],
+  "test_canvas_ready_observation_timeout_ms": 60000,
+  "product_timeouts_changed": false,
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://192.168.31.95:14528",
+  "browser_engine": "webkit",
+  "native_browser": {
+    "engine": "webkit",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "2359",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/webkit-2359/Playwright.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "26.6",
+  "originals_before": [
+    {
+      "key": "file:managed-v1:actions-invalid-audio-wav",
+      "bytes": 85,
+      "mimeType": "audio/wav",
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "key": "file:managed-v1:actions-invalid-video-bin",
+      "bytes": 85,
+      "mimeType": "application/x-synthetic-unsupported",
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-flac",
+      "bytes": 14641,
+      "mimeType": "audio/flac",
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-mp4",
+      "bytes": 3120,
+      "mimeType": "video/mp4",
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-wav",
+      "bytes": 32078,
+      "mimeType": "audio/wav",
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-webm",
+      "bytes": 2645,
+      "mimeType": "video/webm",
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    },
+    {
+      "key": "image:managed-v1:actions-original-jpg",
+      "bytes": 632,
+      "mimeType": "image/jpeg",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "key": "image:managed-v1:actions-variant-webp",
+      "bytes": 62,
+      "mimeType": "image/webp",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    }
+  ],
+  "native_decoder_errors": [
+    {
+      "node_id": "video-webm",
+      "code": 4,
+      "source": "blob:http://192.168.31.95:14528/4ca7b312-6c74-4491-81a2-af2aa9adb831"
+    },
+    {
+      "node_id": "video-mp4",
+      "code": 4,
+      "source": "blob:http://192.168.31.95:14528/e7010693-74ba-4f99-a550-43cb4035df39"
+    },
+    {
+      "node_id": "audio-wav",
+      "code": 4,
+      "source": "blob:http://192.168.31.95:14528/b1f92a36-b3d8-43c6-9984-d4e115873ae8"
+    },
+    {
+      "node_id": "audio-flac",
+      "code": 4,
+      "source": "blob:http://192.168.31.95:14528/277d758b-79f7-4c8b-af36-a8e4f91e7c88"
+    },
+    {
+      "node_id": "broken-audio",
+      "code": 4,
+      "source": "blob:http://192.168.31.95:14528/1271f542-dccb-4a40-8a36-de33ba534bfe"
+    },
+    {
+      "node_id": "broken-video",
+      "code": 4,
+      "source": "blob:http://192.168.31.95:14528/e5e4f619-5087-4d7e-83c0-6eeb20914216"
+    },
+    {
+      "code": 4,
+      "source": "blob:http://192.168.31.95:14528/4ca7b312-6c74-4491-81a2-af2aa9adb831"
+    },
+    {
+      "code": 4,
+      "source": "blob:http://192.168.31.95:14528/e7010693-74ba-4f99-a550-43cb4035df39"
+    }
+  ],
+  "valid_fixture_playback_accepted": false,
+  "viewport_before_layout": {
+    "inner_width": 390,
+    "document_scroll_width": 930,
+    "body_scroll_width": 390
+  },
+  "viewport_after_layout": {
+    "inner_width": 390,
+    "document_scroll_width": 390,
+    "body_scroll_width": 390
+  },
+  "originals_after": [
+    {
+      "key": "file:managed-v1:S0vcDM8W9eC0jHI33OmCK",
+      "bytes": 2645,
+      "mimeType": "video/webm",
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    },
+    {
+      "key": "file:managed-v1:actions-invalid-audio-wav",
+      "bytes": 85,
+      "mimeType": "audio/wav",
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "key": "file:managed-v1:actions-invalid-video-bin",
+      "bytes": 85,
+      "mimeType": "application/x-synthetic-unsupported",
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-flac",
+      "bytes": 14641,
+      "mimeType": "audio/flac",
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-mp4",
+      "bytes": 3120,
+      "mimeType": "video/mp4",
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-wav",
+      "bytes": 32078,
+      "mimeType": "audio/wav",
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-webm",
+      "bytes": 2645,
+      "mimeType": "video/webm",
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    },
+    {
+      "key": "file:managed-v1:lqwjmmu7VJoyQyaFWI2_g",
+      "bytes": 32078,
+      "mimeType": "audio/wav",
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e"
+    },
+    {
+      "key": "image:managed-v1:actions-original-jpg",
+      "bytes": 632,
+      "mimeType": "image/jpeg",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "key": "image:managed-v1:actions-variant-webp",
+      "bytes": 62,
+      "mimeType": "image/webp",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    }
+  ],
+  "static_bytes_unchanged": true,
+  "production_api_requests": 0,
+  "generation_posts": 0,
+  "resource_close_errors": [],
+  "private_recording": ".local/studio149/media-actions-webkit-2026-10-30T17-01-29-085Z/page@05b3c111918a01051b0de780c2f23d21.webm",
+  "download_events": 13
+}

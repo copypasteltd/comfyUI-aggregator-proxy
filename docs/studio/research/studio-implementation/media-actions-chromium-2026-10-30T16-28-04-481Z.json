@@ -1,0 +1,28 @@
+{
+  "passed": false,
+  "at": "2026-10-30T16:28:04.483Z",
+  "baseline_reproduction": false,
+  "public_static_site": false,
+  "scope": "Actual production Web UI with native Windows persistent profiles, real decoder errors, real file inputs and original downloads; small synthetic files, not actual Safari, all codecs, GPU or physical touch hardware acceptance",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T16-12-16-882Z.json",
+  "checks": [],
+  "downloads": [],
+  "screenshots": [],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "static_request_failures": [],
+  "test_canvas_ready_observation_timeout_ms": 60000,
+  "product_timeouts_changed": false,
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "error": {
+    "name": "AssertionError",
+    "message": "The expression evaluated to a falsy value:\n\n  assert(index.ok)\n",
+    "stack": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(index.ok)\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_media_actions.mjs:81:53\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+  },
+  "download_events": 0
+}

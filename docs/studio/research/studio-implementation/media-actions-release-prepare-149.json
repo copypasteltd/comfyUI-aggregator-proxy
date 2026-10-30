@@ -1,0 +1,143 @@
+{
+  "passed": true,
+  "at": "2026-10-30T17:12:14.721803+00:00",
+  "original": "canvas-20261030.146.1",
+  "new": "canvas-20261031.149.1",
+  "recovery": "canvas-20261031.149.0",
+  "storage_contract": {
+    "format_version": 1,
+    "journal": {
+      "name": "comfy-aggregator-studio:journal",
+      "version": 5
+    },
+    "document_record": 1,
+    "task_record": 1,
+    "upload_record": 1,
+    "result_record": 1,
+    "controlled_media_record": 1,
+    "editor_record": 1,
+    "editor_marker_versions": [
+      1,
+      2
+    ],
+    "project_archive": 3
+  },
+  "manifest_sha256": {
+    "canvas-20261030.146.1": "20f4001be3b6cde294603c2b0d28f66ce10baf16c659468b139f860d9ddf9d24",
+    "canvas-20261031.149.1": "734afb8b56c6928f0ddd990c324473bddfb19756bb50520e44df27f397b38af5",
+    "canvas-20261031.149.0": "3d46713ff04e2b1db445b14b48989066da12ba2f56999554a9dcf45768c636aa"
+  },
+  "retained_inventory_sha256": {
+    "canvas-20261030.146.1": "2012d6c2d7f873e3ce1f186d91cb11880f2e605c4cab3a30ac8cc2623441ea16",
+    "canvas-20261031.149.1": "e57cda3341dd57419864423a48b04b6d9d639c4872dac42faec9c63050327507",
+    "canvas-20261031.149.0": "e32ad65c369e0926d8e55e80219c01430c78ea5f9fce6a8db95b6cc789a5c41c"
+  },
+  "packages": {
+    "canvas-20261031.149.1": {
+      "passed": true,
+      "release_id": "canvas-20261031.149.1",
+      "archive_sha256": "f8ffc46484d08c88e04f74116976cd34802ffdbeb624fe572d702538002e992b",
+      "archive_bytes": 1546601,
+      "source_revision": "2b04d500c3f914304d3af9228f417e67b32e29b8",
+      "source_sha256": "11b3ddca5eb904d1e5afc302830ad9193518e980595b4ad24a86929174041f67",
+      "static_files": 114,
+      "original_browser_verified_files": 113,
+      "additional_mit_notice": true,
+      "api_files": 0,
+      "api_modified": false
+    },
+    "canvas-20261031.149.0": {
+      "passed": true,
+      "release_id": "canvas-20261031.149.0",
+      "archive_sha256": "624595757aa7bbbd934ee7cdfbc5d85640a22e449f6b5a6fffb10206ee865541",
+      "archive_bytes": 1545814,
+      "source_revision": "db56cae3634da0361074e84024ccd5b428d189fa",
+      "source_sha256": "f3609d1d7820729c732b2effa4460cf1c5bbb095cac97cabaaca0d3f8fad6616",
+      "static_files": 114,
+      "original_browser_verified_files": 113,
+      "additional_mit_notice": true,
+      "api_files": 0,
+      "api_modified": false,
+      "recovery_source_release": "canvas-20261030.146.1",
+      "application_bytes_identical_to_source": true,
+      "storage_contract": {
+        "format_version": 1,
+        "journal": {
+          "name": "comfy-aggregator-studio:journal",
+          "version": 5
+        },
+        "document_record": 1,
+        "task_record": 1,
+        "upload_record": 1,
+        "result_record": 1,
+        "controlled_media_record": 1,
+        "editor_record": 1,
+        "editor_marker_versions": [
+          1,
+          2
+        ],
+        "project_archive": 3
+      }
+    }
+  },
+  "before": {
+    "api": {
+      "current": "/opt/comfyui-aggregator/releases/linux-20261030.137.1",
+      "release_manifest_sha256": "e7ae0017ff2ac864ef33093b835bcee54b970c5731fd71a980b55b5624281a05",
+      "configuration_sha256": {
+        "cloud.env": "7bcacbe51d10a0c39f4c6359b48f00780637d8dcf5e1630cca0acec62cc9be86",
+        "http-worker.json": "64d77dcb15219704733697d13c48e7728117669b2fad206015f595951f2344b8",
+        "http-worker.secret": "397777c972e399e94a8566f1abdd382171cb7f7a9af9f1867487d1196a77ca35",
+        "initial-admin.json": "dce73c5d5c0bb1d5c8ae036f028525cd1ea8b92d4ea61c7b9d74fbc85c2c281e",
+        "nginx.conf": "9b6efdc286e2e0d4bec7050c56ab52adc56e78e650dafbd0a2fffefed6401305",
+        "pg_hba.conf": "e3b47154582b6c6944879e95a7cfe83ecf48491f9e004f64e3dabc83ff071cb2",
+        "postgresql.conf": "dd3fb083224d36e0962668ad9bb5b136df601fac9eee59eb4e01194b8666a127"
+      },
+      "services": {
+        "comfy-aggregator-api": "MainPID=2632288\nActiveState=active",
+        "comfy-aggregator-runner": "MainPID=2628181\nActiveState=active",
+        "comfy-aggregator-http-worker": "MainPID=803588\nActiveState=active",
+        "comfy-aggregator-edge": "MainPID=1119\nActiveState=active"
+      }
+    },
+    "static": {
+      "current": "/opt/infinite-canvas/releases/canvas-20261030.146.1",
+      "config_sha256": "6b19394b9eecd66e2399dfc4daff4359cc7c5e039a03e2042047d0d3c737bc55",
+      "unit_sha256": "ae1c59204e52edea22dd073a298c56d691d9a67a50234501c5f7bc714f962254",
+      "service": "MainPID=2724238\nActiveState=active"
+    }
+  },
+  "after": {
+    "api": {
+      "current": "/opt/comfyui-aggregator/releases/linux-20261030.137.1",
+      "release_manifest_sha256": "e7ae0017ff2ac864ef33093b835bcee54b970c5731fd71a980b55b5624281a05",
+      "configuration_sha256": {
+        "cloud.env": "7bcacbe51d10a0c39f4c6359b48f00780637d8dcf5e1630cca0acec62cc9be86",
+        "http-worker.json": "64d77dcb15219704733697d13c48e7728117669b2fad206015f595951f2344b8",
+        "http-worker.secret": "397777c972e399e94a8566f1abdd382171cb7f7a9af9f1867487d1196a77ca35",
+        "initial-admin.json": "dce73c5d5c0bb1d5c8ae036f028525cd1ea8b92d4ea61c7b9d74fbc85c2c281e",
+        "nginx.conf": "9b6efdc286e2e0d4bec7050c56ab52adc56e78e650dafbd0a2fffefed6401305",
+        "pg_hba.conf": "e3b47154582b6c6944879e95a7cfe83ecf48491f9e004f64e3dabc83ff071cb2",
+        "postgresql.conf": "dd3fb083224d36e0962668ad9bb5b136df601fac9eee59eb4e01194b8666a127"
+      },
+      "services": {
+        "comfy-aggregator-api": "MainPID=2632288\nActiveState=active",
+        "comfy-aggregator-runner": "MainPID=2628181\nActiveState=active",
+        "comfy-aggregator-http-worker": "MainPID=803588\nActiveState=active",
+        "comfy-aggregator-edge": "MainPID=1119\nActiveState=active"
+      }
+    },
+    "static": {
+      "current": "/opt/infinite-canvas/releases/canvas-20261030.146.1",
+      "config_sha256": "6b19394b9eecd66e2399dfc4daff4359cc7c5e039a03e2042047d0d3c737bc55",
+      "unit_sha256": "ae1c59204e52edea22dd073a298c56d691d9a67a50234501c5f7bc714f962254",
+      "service": "MainPID=2724238\nActiveState=active"
+    }
+  },
+  "api_unchanged": true,
+  "static_service_restarted": false,
+  "current_pointer_changed": false,
+  "recovery_application_bytes_identical_to_source": true,
+  "ssh_session_closed": true,
+  "source_private_receipt": "remote-prepare.json"
+}

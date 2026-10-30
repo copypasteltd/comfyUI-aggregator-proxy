@@ -1,0 +1,246 @@
+{
+  "passed": false,
+  "at": "2026-10-30T16:28:16.526Z",
+  "baseline_reproduction": false,
+  "public_static_site": false,
+  "scope": "Actual production Web UI with native Windows persistent profiles, real decoder errors, real file inputs and original downloads; small synthetic files, not actual Safari, all codecs, GPU or physical touch hardware acceptance",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T16-12-16-882Z.json",
+  "checks": [
+    {
+      "name": "actual standard video download preserves WebM filename and exact original bytes",
+      "detail": true
+    },
+    {
+      "name": "standard MP4/WAV/FLAC/JPEG downloads use stored original type and SHA, including stale JPEG metadata",
+      "detail": true
+    },
+    {
+      "name": "actual primary and expanded batch-image downloads preserve JPEG and WebP originals",
+      "detail": true
+    },
+    {
+      "name": "native invalid audio/video error events produce explicit playback fallback without task failure or generation",
+      "detail": true
+    },
+    {
+      "name": "valid native MP4/WebM/WAV/FLAC elements remain usable and have no failure overlay",
+      "detail": true
+    },
+    {
+      "name": "fallback downloads retain even undecodable bytes, WAV extension and honest bin for unknown original MIME",
+      "detail": true
+    },
+    {
+      "name": "missing stored original refuses download instead of falling back to cached URL; explicit restoration recovers exact bytes",
+      "detail": true
+    },
+    {
+      "name": "all download/failure paths leave originals and generation task stores unchanged",
+      "detail": true
+    },
+    {
+      "name": "refresh recreates native error state and preserves original download without submitting work",
+      "detail": true
+    }
+  ],
+  "downloads": [
+    {
+      "fixture": "synthetic.webm",
+      "suggested_filename": "canvas-video-video-webm.webm",
+      "expected_extension": "webm",
+      "actual_extension": ".webm",
+      "bytes": 2645,
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    },
+    {
+      "fixture": "synthetic.mp4",
+      "suggested_filename": "canvas-video-video-mp4.mp4",
+      "expected_extension": "mp4",
+      "actual_extension": ".mp4",
+      "bytes": 3120,
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "fixture": "synthetic.wav",
+      "suggested_filename": "canvas-audio-audio-wav.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 32078,
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e"
+    },
+    {
+      "fixture": "synthetic.flac",
+      "suggested_filename": "canvas-audio-audio-flac.flac",
+      "expected_extension": "flac",
+      "actual_extension": ".flac",
+      "bytes": 14641,
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e"
+    },
+    {
+      "fixture": "original.jpg",
+      "suggested_filename": "canvas-image-image-jpeg.jpg",
+      "expected_extension": "jpg",
+      "actual_extension": ".jpg",
+      "bytes": 632,
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "fixture": "original.jpg",
+      "suggested_filename": "canvas-image-image-batch-primary-jpeg.jpg",
+      "expected_extension": "jpg",
+      "actual_extension": ".jpg",
+      "bytes": 632,
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "fixture": "variant.webp",
+      "suggested_filename": "canvas-image-image-batch-alternate-webp.webp",
+      "expected_extension": "webp",
+      "actual_extension": ".webp",
+      "bytes": 62,
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "fixture": "invalid-audio.wav",
+      "suggested_filename": "canvas-audio-broken-audio.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "fixture": "invalid-video.bin",
+      "suggested_filename": "canvas-video-broken-video.bin",
+      "expected_extension": "bin",
+      "actual_extension": ".bin",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "fixture": "invalid-audio.wav",
+      "suggested_filename": "canvas-audio-broken-audio.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "fixture": "invalid-audio.wav",
+      "suggested_filename": "canvas-audio-broken-audio.wav",
+      "expected_extension": "wav",
+      "actual_extension": ".wav",
+      "bytes": 85,
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-149/actions-chromium-2026-10-30T16-28-16-523Z/media-originals-and-native-fallback.png",
+      "bytes": 131347,
+      "sha256": "618a8d2bde44e2eeeec23da41edde8fe0720adaa2e11120f41e21f46fc0a1395"
+    },
+    {
+      "file": "docs/media/studio-149/actions-chromium-2026-10-30T16-28-16-523Z/failure.png",
+      "bytes": 148550,
+      "sha256": "700f6fd0344154d0338a610323666456654fbcb853cef28b1e6e2c0b9aa55283"
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "static_request_failures": [],
+  "test_canvas_ready_observation_timeout_ms": 60000,
+  "product_timeouts_changed": false,
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://192.168.31.95:10273",
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "originals_before": [
+    {
+      "key": "file:managed-v1:actions-invalid-audio-wav",
+      "bytes": 85,
+      "mimeType": "audio/wav",
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "key": "file:managed-v1:actions-invalid-video-bin",
+      "bytes": 85,
+      "mimeType": "application/x-synthetic-unsupported",
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-flac",
+      "bytes": 14641,
+      "mimeType": "audio/flac",
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-mp4",
+      "bytes": 3120,
+      "mimeType": "video/mp4",
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-wav",
+      "bytes": 32078,
+      "mimeType": "audio/wav",
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-webm",
+      "bytes": 2645,
+      "mimeType": "video/webm",
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    },
+    {
+      "key": "image:managed-v1:actions-original-jpg",
+      "bytes": 632,
+      "mimeType": "image/jpeg",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "key": "image:managed-v1:actions-variant-webp",
+      "bytes": 62,
+      "mimeType": "image/webp",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    }
+  ],
+  "native_decoder_errors": [
+    {
+      "node_id": "broken-video",
+      "code": 4,
+      "source": "blob:http://192.168.31.95:10273/1b2b2679-105b-4515-95ad-2f4ecf11c0eb"
+    },
+    {
+      "node_id": "broken-audio",
+      "code": 4,
+      "source": "blob:http://192.168.31.95:10273/8e50e47a-352f-4a2f-8777-bdac91f27719"
+    }
+  ],
+  "valid_fixture_playback_accepted": "loaded and decoded only; full playback/voice/background not accepted",
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.click: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-node-id=\"broken-video\"]')\u001b[22m\n\u001b[2m    - locator resolved to <div data-node-id=\"broken-video\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-10 \">…</div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"absolute z-50 size-7 -right-[14px] -top-[14px] cursor-nesw-resize\"></div> from <div data-node-id=\"broken-audio\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"absolute z-50 size-7 -right-[14px] -top-[14px] cursor-nesw-resize\"></div> from <div data-node-id=\"broken-audio\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    39 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"absolute z-50 size-7 -right-[14px] -top-[14px] cursor-nesw-resize\"></div> from <div data-node-id=\"broken-audio\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+    "stack": "locator.click: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-node-id=\"broken-video\"]')\u001b[22m\n\u001b[2m    - locator resolved to <div data-node-id=\"broken-video\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-10 \">…</div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"absolute z-50 size-7 -right-[14px] -top-[14px] cursor-nesw-resize\"></div> from <div data-node-id=\"broken-audio\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"absolute z-50 size-7 -right-[14px] -top-[14px] cursor-nesw-resize\"></div> from <div data-node-id=\"broken-audio\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    39 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"absolute z-50 size-7 -right-[14px] -top-[14px] cursor-nesw-resize\"></div> from <div data-node-id=\"broken-audio\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at toolbar (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_media_actions.mjs:53:47)\n    at replace (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_media_actions.mjs:64:23)\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_media_actions.mjs:138:74"
+  },
+  "failure_alerts": [],
+  "resource_close_errors": [],
+  "private_recording": ".local/studio149/media-actions-chromium-2026-10-30T16-28-16-523Z/page@24f3087990f74fd4b2714ccc0e35d425.webm",
+  "download_events": 11
+}

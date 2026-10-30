@@ -1,0 +1,122 @@
+{
+  "passed": true,
+  "at": "2026-10-30T17:14:01.702Z",
+  "scope": "Frozen static production Web UI on ordinary HTTP; native browser upload/download, local originals/refusal/cleanup, 390px viewport emulation; synthetic local data, not real disk exhaustion, physical touch hardware or GPU acceptance",
+  "public_static_site": true,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T16-35-35-334Z.json",
+  "checks": [
+    {
+      "name": "actual canvas image and audio file inputs persist new controlled originals with committed document references",
+      "detail": true
+    },
+    {
+      "name": "real save-and-leave navigates to separate static entry; another live canvas disables deletion",
+      "detail": true
+    },
+    {
+      "name": "closing actual second editor automatically releases native marker and enables eligible cleanup",
+      "detail": true
+    },
+    {
+      "name": "actual original download preserves full byte length and SHA",
+      "detail": {
+        "bytes": 69,
+        "sha256": "6d8a138844c3f3e4d69d522fd0b8e3d1cac0414ffc63bfeda43e9e3d860266f2"
+      }
+    },
+    {
+      "name": "cancelling deletion confirmation preserves original",
+      "detail": true
+    },
+    {
+      "name": "actual delete rechecks latest references and refuses stale UI candidate",
+      "detail": true
+    },
+    {
+      "name": "confirmed cleanup removes only selected controlled file; referenced files and old raw original stay intact",
+      "detail": true
+    },
+    {
+      "name": "390px maintenance layout fits viewport and native scrolling reaches bottom controls and returns to header; emulation only",
+      "detail": true
+    },
+    {
+      "name": "returning from maintenance creates a fresh usable editor page",
+      "detail": true
+    },
+    {
+      "name": "real document quota failure prevents leaving editor for maintenance; unsaved banner remains",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-149/cleanup-chromium-2026-10-30T17-14-01-405Z/public-desktop-other-editor-protected.png",
+      "bytes": 80034,
+      "sha256": "5fc96831b91082f394dfdd524f2d1b9af1ebcf2ddfeaffeb2126205dd9c9ffee",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-149/cleanup-chromium-2026-10-30T17-14-01-405Z/public-desktop-ready-to-clean.png",
+      "bytes": 71114,
+      "sha256": "3847c65331d493bdd348d357db9d701743952ab76e7f10e9a673acc329feb6c1",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-149/cleanup-chromium-2026-10-30T17-14-01-405Z/public-desktop-cleaned-and-retained.png",
+      "bytes": 71658,
+      "sha256": "191ad100b7375ce314104ac92a966868af52174b32f31275225ea30047bc5735",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-149/cleanup-chromium-2026-10-30T17-14-01-405Z/public-390-cleaned-and-retained.png",
+      "bytes": 52654,
+      "sha256": "72215867366f3614133a01ed225d161623171a877324f9f6957128ebbf04755c",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-149/cleanup-chromium-2026-10-30T17-14-01-405Z/public-390-bottom-original-controls.png",
+      "bytes": 48719,
+      "sha256": "eef84f8e3b5486dcc9f09cf2404fc43da657594ed9d7b08dceb0ef2ec4fe651a",
+      "viewport_only": true
+    },
+    {
+      "file": "docs/media/studio-149/cleanup-chromium-2026-10-30T17-14-01-405Z/public-desktop-save-failure-retained.png",
+      "bytes": 87399,
+      "sha256": "b84638d2f0c216615562cdf56c8b3a52c1f937c51764ab7fc06c9cd46d9ebe2a",
+      "viewport_only": true
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://43.165.167.179:39445",
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 2,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "actual_api_requests": 0,
+  "generation_posts": 0,
+  "static_bytes_unchanged": true,
+  "resource_close_errors": [],
+  "private_recordings": [
+    ".local/studio149/cleanup-chromium-2026-10-30T17-14-01-405Z/page@e28b2ebc9e41794c34bc18de60a7f0a1.webm",
+    ".local/studio149/cleanup-chromium-2026-10-30T17-14-01-405Z/page@93586a15828608ace8a865d122ad46ce.webm",
+    ".local/studio149/cleanup-chromium-2026-10-30T17-14-01-405Z/page@60ece7d772f441402c1a511b8c10adf9.webm"
+  ]
+}

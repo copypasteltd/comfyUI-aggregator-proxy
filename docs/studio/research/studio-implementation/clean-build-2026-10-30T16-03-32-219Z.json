@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "scope": "Final source units/type/build in an isolated tree using the exact unchanged dependency lock from the bound native empty-directory npm ci receipt; install not rerun, no canonical node_modules reuse or virtualization",
+  "stages": [
+    {
+      "name": "unit",
+      "exit_code": 0,
+      "seconds": 0.94,
+      "log_sha256": "e7697edc4832941119c1ad96145efd3484f6af6bfb02d83b2da954fa7feec4cf"
+    },
+    {
+      "name": "typecheck",
+      "exit_code": 2,
+      "seconds": 361.683,
+      "log_sha256": "9b70fc984dda99f1986433e6e4630cd195e284f7f3221377fac6d599f9a74e7e"
+    }
+  ],
+  "virtualization_used": false,
+  "force_or_peer_bypass": false,
+  "install_scripts_disabled": false,
+  "build_environment": {
+    "base": "/studio/",
+    "studio_mode": "managed",
+    "aggregator_origin": "http://43.165.167.179:39443"
+  },
+  "source_before": "8a110e6245e96cd4050fc3d4f14b21250eee06ba72be7f1019d2559299c2d310",
+  "clean_install_reused": {
+    "file": "docs/research/studio-implementation/clean-build-2026-10-30T02-58-55-356Z.json",
+    "sha256": "f65508f803124cf7c516aecf2b540f47bbd613428321c1c445efa0592e86cfd3"
+  },
+  "copied_source_files": 281,
+  "node": "22.14.0",
+  "npm": "10.9.2",
+  "package_sha256": "cfe0886ff976f31288e21f7b2d8ccc9d0aeed98447568e4c8376299de7c43d11",
+  "lock_sha256": "329ec677796edcd60428a1a6d98b227ac33063551766cec7a48101f0d23f1e51",
+  "unit_tests": 203,
+  "unit_failures": 0,
+  "failure": "typecheck failed; inspect the retained private log",
+  "private_logs": ".local/studio-isolated-builds/2026-10-30T16-03-32-219Z"
+}

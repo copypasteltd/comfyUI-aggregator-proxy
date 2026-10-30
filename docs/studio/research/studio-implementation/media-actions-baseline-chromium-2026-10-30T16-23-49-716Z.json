@@ -1,0 +1,49 @@
+{
+  "passed": false,
+  "at": "2026-10-30T16:23:49.858Z",
+  "baseline_reproduction": true,
+  "public_static_site": true,
+  "scope": "Actual production Web UI with native Windows persistent profiles, real decoder errors, real file inputs and original downloads; small synthetic files, not actual Safari, all codecs, GPU or physical touch hardware acceptance",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "checks": [],
+  "downloads": [],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-149/actions-chromium-2026-10-30T16-23-49-716Z/failure.png",
+      "bytes": 27008,
+      "sha256": "3a9f4a74ff40a4d995f085321509b691614e8795c186139c90ce479725baf1fa"
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://43.165.167.179:39445",
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-canvas-title]') to be visible\u001b[22m\n",
+    "stack": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-canvas-title]') to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_media_actions.mjs:95:105"
+  },
+  "failure_alerts": [],
+  "resource_close_errors": [],
+  "private_recording": ".local/studio149/media-actions-chromium-2026-10-30T16-23-49-716Z/page@c00aafb9f569dfb29bc98cc192e52bd7.webm",
+  "download_events": 0
+}

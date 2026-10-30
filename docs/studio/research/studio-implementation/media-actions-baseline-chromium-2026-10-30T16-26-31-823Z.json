@@ -1,0 +1,111 @@
+{
+  "passed": false,
+  "at": "2026-10-30T16:26:32.319Z",
+  "baseline_reproduction": true,
+  "public_static_site": true,
+  "scope": "Actual production Web UI with native Windows persistent profiles, real decoder errors, real file inputs and original downloads; small synthetic files, not actual Safari, all codecs, GPU or physical touch hardware acceptance",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-52-01-248Z.json",
+  "checks": [],
+  "downloads": [
+    {
+      "fixture": "synthetic.webm",
+      "suggested_filename": "canvas-video-video-webm.mp4",
+      "expected_extension": "webm",
+      "actual_extension": ".mp4",
+      "bytes": 2645,
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-149/actions-chromium-2026-10-30T16-26-31-823Z/failure.png",
+      "bytes": 149169,
+      "sha256": "ff1d8d050370384486ea3d7f3530f9904e63d42e6da8b99990ae57b43c324a8e"
+    }
+  ],
+  "page_errors": [],
+  "unexpected_requests": [],
+  "static_request_failures": [],
+  "test_canvas_ready_observation_timeout_ms": 60000,
+  "product_timeouts_changed": false,
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://43.165.167.179:39445",
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "originals_before": [
+    {
+      "key": "file:managed-v1:actions-invalid-audio-wav",
+      "bytes": 85,
+      "mimeType": "audio/wav",
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "key": "file:managed-v1:actions-invalid-video-bin",
+      "bytes": 85,
+      "mimeType": "application/x-synthetic-unsupported",
+      "sha256": "e1a16a62e9e65135b56a4561a84f551b4a09e95837f269faf44fa43ede8e969b"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-flac",
+      "bytes": 14641,
+      "mimeType": "audio/flac",
+      "sha256": "c4e621b3cff990f3d05e699108d6a7e0ac2835846a17dbcf4cb9ba121ba5125e"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-mp4",
+      "bytes": 3120,
+      "mimeType": "video/mp4",
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-wav",
+      "bytes": 32078,
+      "mimeType": "audio/wav",
+      "sha256": "c02e0b0304c1fa2f22a08b991e6859c1d5dd549d554b862ea08dc651ecef020e"
+    },
+    {
+      "key": "file:managed-v1:actions-synthetic-webm",
+      "bytes": 2645,
+      "mimeType": "video/webm",
+      "sha256": "c20fc6d9d08cf2d10ee6101704a083edc40845530cf417e2708c4935c3ebd782"
+    },
+    {
+      "key": "image:managed-v1:actions-original-jpg",
+      "bytes": 632,
+      "mimeType": "image/jpeg",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "key": "image:managed-v1:actions-variant-webp",
+      "bytes": 62,
+      "mimeType": "image/webp",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    }
+  ],
+  "error": {
+    "name": "AssertionError",
+    "message": "Original filename must preserve its actual media format\n\n'.mp4' !== '.webm'\n",
+    "stack": "AssertionError [ERR_ASSERTION]: Original filename must preserve its actual media format\n\n'.mp4' !== '.webm'\n\n    at downloadOriginal (file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_media_actions.mjs:60:12)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_media_actions.mjs:99:54"
+  },
+  "failure_alerts": [],
+  "resource_close_errors": [],
+  "private_recording": ".local/studio149/media-actions-chromium-2026-10-30T16-26-31-823Z/page@01f372bfa3f3e8e43c1814a84b4ca9f0.webm",
+  "download_events": 1
+}

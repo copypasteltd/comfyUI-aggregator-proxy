@@ -1,5 +1,18 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+<!-- independent149:start -->
+## canvas-20261031.149.1 · Web原件下载与播放失败处理 / pending-test
+
+- [修复] 普通WebM及批次JPEG/WebP下载使用本机原件MIME/字节；缺少存储原件明确拒绝，不回退残留URL。
+- [新增] 原生video/audio失败提示和原件下载，真实替换后按新来源判断；图层操作栏同步当前节点，下载不打开编辑面板。
+- [验证] 三引擎本机/公网36+36组、78次下载、18截图；203单元/类型/构建、18协议、11双源、12守卫及ZIP/清理回归。
+- [交付] 独立静态149.1与兼容149.0，全部新旧资源/路由核对；双语、文档34、两MP4两GIF和失败留证更新。原API/全部服务/配置不变。
+- [待验] Windows WebKit解码/Cookie、实际Safari、完整播放/声音/后台、键盘触控、配额/故障及全部46项；完整Web签收HOLD。
+
+Web149.1 preserves original media formats, refuses missing keyed bytes, and handles native playback errors without failing a completed task. Real replacement and layer action selection are verified. Three engines passed 72 local/public groups with 78 actual downloads. Compatible recovery is prepared; only independent static files changed. Windows WebKit decoding/Cookie isolation, actual Safari and full Web acceptance remain HOLD.
+<!-- independent149:end -->
+
+
 ## 证据148 · 混合媒体跨浏览器/跨源站备份恢复，产品仍146.1 / pending-test
 
 - [验证] Firefox→Chromium→Windows WebKit→Firefox的实际ZIP下载/文件输入、刷新、再次导出共34组通过；九节点/五连线/八原件、重复参考、新键和GLB下载字节一致，任务不重提。

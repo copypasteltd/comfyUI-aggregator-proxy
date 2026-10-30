@@ -16,7 +16,7 @@ const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const buildPath = path.resolve(root, process.argv[2] || '');
 const publicMode = process.argv.includes('--public');
 const suite = process.argv.find((value) => value.startsWith('--suite='))?.slice(8) || '141';
-assert(['141', '142', '145', '146', '147'].includes(suite));
+assert(['141', '142', '145', '146', '147', '149'].includes(suite));
 assert(process.argv.slice(3).every((value) => value === '--public' || value === '--suite=' + suite || webEngineArgument(value)));
 if (webEngine !== 'chromium') assert(publicMode, 'Cross-engine acceptance uses the real public HTTP site');
 assert(buildPath.startsWith(path.join(root, 'docs/research/studio-implementation') + path.sep));

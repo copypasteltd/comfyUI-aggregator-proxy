@@ -1,5 +1,10 @@
 # 33 · Web混合媒体跨浏览器备份恢复
 
+<!-- independent149:start -->
+**149.1补充**：[文档34](34-Web媒体原件下载与播放失败处理.md)已修复普通WebM/批次图片后缀并实现原生播放失败提示、缺件拒绝及替换恢复；三引擎本机/公网共72组。Windows WebKit解码与Cookie仍未签收。仅独立静态更新，原API不改；下方保留各自历史证据，当前部署见文档21。
+<!-- independent149:end -->
+
+
 证据148继续使用线上 **canvas-20261030.146.1**，产品代码为`db56cae3634da0361074e84024ccd5b428d189fa`。仅建设和验证Web端；本轮没有改产品源码、重新构建或部署，也没有修改原API、Worker、调度或服务配置。完整签收仍为 **HOLD/pending-test**。
 
 本轮通过实际网页下载和文件选择完成 **Firefox → Chromium → Windows WebKit → Firefox** 四步链路，共34组检查通过。Windows WebKit四份音视频的原生解码失败，明确不计播放通过；备份中的原件仍完整，最终回到Firefox后四份均正常载入。Windows WebKit不等同于实际Safari，前轮Cookie隔离问题也仍未签收。
