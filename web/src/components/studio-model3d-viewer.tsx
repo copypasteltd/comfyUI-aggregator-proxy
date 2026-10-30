@@ -1,18 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { Alert, Button } from "antd";
-import { RotateCcw } from "lucide-react";
+import { Alert, Button, Select } from "antd";
+import { Pause, Play, RotateCcw, SkipBack } from "lucide-react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { embeddedGlbUri } from "@/lib/studio-glb";
 import { lime } from "@/lib/lime-theme";
+import { createGlbPlayback } from "@/lib/studio-glb-playback";
 
 export default function StudioModel3dViewer({ data }: { data: ArrayBuffer }) {
     const host = useRef<HTMLDivElement>(null), reset = useRef<() => void>(() => {});
     const [error, setError] = useState(""), [stats, setStats] = useState("");
+    const playback = useRef<ReturnType<typeof createGlbPlayback> | undefined>(undefined);
+    const [animations, setAnimations] = useState<string[]>([]), [selected, setSelected] = useState(0), [playing, setPlaying] = useState(false), [animationError, setAnimationError] = useState("");
     useEffect(() => {
         const element = host.current!;
         let disposed = false, renderer: THREE.WebGLRenderer | undefined, controls: OrbitControls | undefined, observer: ResizeObserver | undefined;
+        let player: ReturnType<typeof createGlbPlayback> | undefined;
+        const visibilityChanged = () => player?.setVisible(!document.hidden);
         const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>(), textures = new Set<THREE.Texture>(), skeletons = new Set<THREE.Skeleton>(), urls = new Set<string>(), closedImages = new Set<ImageBitmap>();
         const closeTexture = (texture: THREE.Texture) => {
             const image = texture.source?.data;
@@ -34,6 +39,8 @@ export default function StudioModel3dViewer({ data }: { data: ArrayBuffer }) {
         });
         const cleanup = () => {
             if (disposed) return; disposed = true; reset.current = () => {};
+            player?.dispose(); if (playback.current === player) playback.current = undefined;
+            document.removeEventListener("visibilitychange", visibilityChanged);
             observer?.disconnect(); controls?.dispose();
             if (renderer) { renderer.domElement.removeEventListener("webglcontextlost", contextLost); renderer.dispose(); renderer.forceContextLoss(); renderer.domElement.remove(); }
             for (const geometry of geometries) geometry.dispose();
@@ -63,7 +70,7 @@ export default function StudioModel3dViewer({ data }: { data: ArrayBuffer }) {
             });
             return null;
         } }));
-        setError(""); setStats("");
+        setError(""); setStats(""); setAnimations([]); setSelected(0); setPlaying(false); setAnimationError("");
         void loader.parseAsync(data, "").then((gltf) => {
             for (const scene of gltf.scenes) trackObject(scene);
             if (disposed) return;
@@ -84,6 +91,11 @@ export default function StudioModel3dViewer({ data }: { data: ArrayBuffer }) {
                 controls!.target.copy(sphere.center); controls!.update(); render();
             };
             reset.current = fit;
+            if (gltf.animations.length) {
+                player = createGlbPlayback(gltf.scene, gltf.animations, render, fail); playback.current = player;
+                visibilityChanged(); document.addEventListener("visibilitychange", visibilityChanged);
+                setAnimations(gltf.animations.map((clip, index) => `${index + 1}. ${clip.name || "未命名动画"}`));
+            }
             controls.addEventListener("change", render);
             let framed = false;
             observer = new ResizeObserver(() => {
@@ -97,10 +109,18 @@ export default function StudioModel3dViewer({ data }: { data: ArrayBuffer }) {
         }).catch(fail);
         return cleanup;
     }, [data]);
+    const animate = (work: () => void) => { try { setAnimationError(""); work(); } catch (reason) { setPlaying(false); setAnimationError(reason instanceof Error ? reason.message : "动画无法播放，请保存原件检查"); } };
     return <>
         {error && <Alert type="warning" showIcon title="暂时无法交互预览" description={error} />}
         <div ref={host} role="group" aria-label="三维视图容器" style={{ width: "100%", height: "min(52vh, 520px)", minHeight: 240, borderRadius: 12, overflow: "hidden", display: error ? "none" : "block", background: "var(--cv)" }} />
         {!error && <div className="studio-actions" style={{ flexWrap: "wrap" }}><Button icon={<RotateCcw size={14} />} disabled={!stats} onClick={() => reset.current()}>复位视图</Button><span role="status">{stats || "正在解析三维原件…"}</span></div>}
-        <p className="studio-note" style={{ marginTop: 12 }}>聚焦模型后可用方向键平移，Ctrl + 方向键旋转。当前展示静态几何与材质；动画、压缩解码和未支持的扩展可另存后查看。</p>
+        {!error && animations.length > 0 && <div className="studio-actions" style={{ flexWrap: "wrap", marginTop: 12 }}>
+            <Select aria-label="动画片段" value={selected} style={{ width: 300, maxWidth: "100%" }} options={animations.map((label, value) => ({ label, value }))} onChange={(value) => animate(() => { playback.current?.select(value); setSelected(value); setPlaying(false); })} />
+            <Button icon={playing ? <Pause size={14} /> : <Play size={14} />} aria-pressed={playing} onClick={() => animate(() => { if (playing) playback.current?.pause(); else playback.current?.play(); setPlaying(!playing); })}>{playing ? "暂停动画" : "播放动画"}</Button>
+            <Button icon={<SkipBack size={14} />} onClick={() => animate(() => { playback.current?.reset(); setPlaying(false); })}>回到动画起点</Button>
+            <span className="studio-note">{animations.length} 个内嵌动画 · 切换片段后暂停</span>
+        </div>}
+        {animationError && <Alert type="warning" showIcon title="动画暂不可播放" description={animationError} />}
+        <p className="studio-note" style={{ marginTop: 12 }}>聚焦模型后可用方向键平移，Ctrl + 方向键旋转。内嵌动画默认暂停；页面隐藏时停止动画更新，返回后继续。压缩解码和未支持的扩展可另存后查看。</p>
     </>;
 }

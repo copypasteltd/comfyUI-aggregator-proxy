@@ -6,6 +6,7 @@ import { readLocalStorageUsage, type LocalStorageUsage } from "@/services/local-
 import { deleteCachedUpload, readUploadCache, type CachedUpload } from "@/services/studio-upload-cache";
 import { notifyStudioTasksChanged } from "@/services/aggregator-engine";
 import { useStudioStore } from "@/stores/use-studio-store";
+import { LocalMediaInspector } from "./local-media-inspector";
 
 const bytes = (value: number) => value < 1024 ? `${value} B` : value < 1024 ** 2 ? `${(value / 1024).toFixed(1)} KiB` : value < 1024 ** 3 ? `${(value / 1024 ** 2).toFixed(2)} MiB` : `${(value / 1024 ** 3).toFixed(2)} GiB`;
 const labels: Record<string, string> = { documents: "画布与素材文档", intents: "原任务日志", uploads: "参考图缓存", results: "已保存的生成原件", budgets: "查询预算", profiles: "连接配置", app_state: "旧文档与应用状态", image_files: "图片原件", image_previews: "图片缩略图", media_files: "媒体及离线副本" };
@@ -58,6 +59,7 @@ export default function StudioStoragePage() {
         <section className="studio-card" style={{ marginTop: 20 }}><h2>当前连接的参考图缓存</h2><p>清理仅移除本机缓存。已被原任务引用的参考图、上传未确认和无法核对的记录会保留；清理前会再次检查最新任务。正在编辑的参考选择可能需要重新选图。</p>
             {!client ? <Empty description={<NavLink to="/config">连接原服务与 API Key 后管理对应缓存</NavLink>} /> : !entries.length ? <Empty description={loading ? "正在读取参考缓存…" : "当前连接没有参考图缓存"} /> : entries.map((item) => <article key={item.id} style={{ borderTop: "1px solid var(--line)", padding: "18px 0" }}><div className="studio-actions" style={{ justifyContent: "space-between" }}><strong style={{ overflowWrap: "anywhere" }}>{item.name}</strong><Tag>{bytes(item.bytes)}</Tag></div><p className="studio-note">{item.blockedReason || "上传已确认，尚无原任务引用；可清理本机缓存。"}</p><Popconfirm open={selected === item.id && cache?.client === client} onOpenChange={(open) => setSelected(open ? item.id : undefined)} title="清理这份本机参考缓存？" description="清理后需要重新选图才能再次使用；云端源图和任务不变。" okText="清理缓存" cancelText="保留" onConfirm={() => remove(item)} okButtonProps={{ loading: busy }} disabled={Boolean(item.blockedReason) || loading || busy}><Button icon={<Trash2 size={14} />} disabled={Boolean(item.blockedReason) || loading || busy}>清理缓存</Button></Popconfirm></article>)}
         </section>
+        <LocalMediaInspector />
         <p className="studio-note" style={{ marginTop: 20 }}>普通图片、媒体及离线副本暂不自动回收，避免误删其他画布引用。删除生成原件请使用素材库，仍被画布或任务引用的原件会受到保护。</p>
     </main>;
 }

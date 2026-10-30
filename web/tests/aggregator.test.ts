@@ -7,6 +7,8 @@ import "./aggregator-composer.test";
 import "./task-journal.test";
 import "./aggregator-batch.test";
 import "./studio-glb.test";
+import "./studio-glb-playback.test";
+import "./local-media-inventory.test";
 import "./studio-upload-cache.test";
 import "./studio-task-access.test";
 import assert from "node:assert/strict";
