@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Alert, App, Button, ConfigProvider, Empty, Popconfirm, Tag } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
@@ -18,20 +18,28 @@ function MaintenancePage() {
     const [probes, setProbes] = useState(editorProbes);
     const [busy, setBusy] = useState(false), [loading, setLoading] = useState(false);
     const [error, setError] = useState(""), [notice, setNotice] = useState("");
+    const refreshRevision = useRef(0);
     const refresh = useCallback(async () => {
+        const revision = ++refreshRevision.current;
         setLoading(true);
         try {
-            const next = await readCleanupSnapshot(); setSnapshot(next); setError("");
+            const next = await readCleanupSnapshot();
+            if (revision !== refreshRevision.current) return;
+            setSnapshot(next); setError("");
             next.editors.forEach(probeStudioEditor);
-        } catch (reason) { setError(reason instanceof Error ? reason.message : "检查未完成，文件继续保留"); }
-        finally { setLoading(false); }
+        } catch (reason) { if (revision === refreshRevision.current) setError(reason instanceof Error ? reason.message : "检查未完成，文件继续保留"); }
+        finally { if (revision === refreshRevision.current) setLoading(false); }
     }, []);
     useEffect(() => {
+        const released = new Set(editorProbes().filter((probe) => probe.state === "released").map((probe) => probe.id));
         void refresh();
-        return subscribeEditorProbes(() => {
+        const unsubscribe = subscribeEditorProbes(() => {
             const next = editorProbes(); setProbes(next);
-            if (next.some((probe) => probe.state === "released")) void refresh();
+            const changed = next.filter((probe) => probe.state === "released" && !released.has(probe.id));
+            changed.forEach((probe) => released.add(probe.id));
+            if (changed.length) void refresh();
         });
+        return () => { ++refreshRevision.current; unsubscribe(); };
     }, [refresh]);
     const remove = async (files: CleanupFile[]) => {
         if (busy) return;

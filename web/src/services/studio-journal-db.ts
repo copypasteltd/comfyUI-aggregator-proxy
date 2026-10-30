@@ -1,5 +1,7 @@
-export const journalDatabaseName = "comfy-aggregator-studio:journal";
-export const journalDatabaseVersion = 5;
+import storageContract from "./studio-storage-contract.json";
+
+export const journalDatabaseName = storageContract.journal.name;
+export const journalDatabaseVersion = storageContract.journal.version;
 const originalStores = ["intents", "uploads", "results", "budgets"];
 const documentStores = [...originalStores, "documents"];
 const currentStores = [...documentStores, "local_media", "editors"];
