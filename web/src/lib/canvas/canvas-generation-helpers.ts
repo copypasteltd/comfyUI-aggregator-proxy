@@ -63,6 +63,9 @@ export async function hydrateCanvasImages(nodes: CanvasNodeData[]) {
                 void ensureImagePreview(metadata.storageKey);
                 return { ...node, metadata: { ...metadata, content: await resolveImageUrl(metadata.storageKey, content || ""), images } };
             }
+            const primary = images.find((image) => image.id === (metadata.primaryImageId || images[0]?.id));
+            if (!content && primary?.content)
+                return { ...node, metadata: { ...metadata, content: primary.content, storageKey: primary.storageKey, naturalWidth: primary.naturalWidth, naturalHeight: primary.naturalHeight, bytes: primary.bytes, mimeType: primary.mimeType, primaryImageId: primary.id, images } };
             if (!content?.startsWith("data:image/")) return metadata.images ? { ...node, metadata: { ...metadata, images } } : node;
             return { ...node, metadata: { ...metadata, ...imageMetadata(await uploadImage(content)) } };
         }),
