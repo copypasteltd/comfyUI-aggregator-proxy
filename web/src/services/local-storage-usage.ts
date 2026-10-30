@@ -1,10 +1,12 @@
 export type IndexedDbStoreUsage = { name: string; records: number; bytes: number };
 export type IndexedDbDatabaseUsage = { name: string; version: number; bytes: number; stores: IndexedDbStoreUsage[] };
-export type LocalStorageUsage = { usage: number; quota: number | null; contentBytes: number; databases: IndexedDbDatabaseUsage[] };
+export type LocalStorageUsage = { usage: number; quota: number | null; siteEstimateAvailable: boolean; contentBytes: number; databases: IndexedDbDatabaseUsage[] };
 
-export async function readLocalStorageUsage(): Promise<LocalStorageUsage> {
-    const [estimate, database] = await Promise.all([readStorageEstimate(), readDatabaseUsage("infinite-canvas")]);
-    return { usage: estimate?.usage ?? database.bytes, quota: estimate?.quota ?? null, contentBytes: database.bytes, databases: [database] };
+export async function readLocalStorageUsage(names = ["infinite-canvas"]): Promise<LocalStorageUsage> {
+    const [estimate, databases] = await Promise.all([readStorageEstimate(), Promise.all(names.map(readDatabaseUsage))]);
+    const contentBytes = databases.reduce((total, database) => total + database.bytes, 0);
+    const siteEstimateAvailable = typeof estimate?.usage === "number" && Number.isFinite(estimate.usage) && estimate.usage >= 0;
+    return { usage: siteEstimateAvailable ? estimate!.usage! : contentBytes, quota: estimate?.quota ?? null, siteEstimateAvailable, contentBytes, databases };
 }
 
 async function readStorageEstimate() {
@@ -19,7 +21,10 @@ async function readStorageEstimate() {
 function readDatabaseUsage(name: string) {
     return new Promise<IndexedDbDatabaseUsage>((resolve, reject) => {
         const request = indexedDB.open(name);
-        request.onerror = () => reject(request.error);
+        let absent = false;
+        // A read-only meter must not create a missing database or change its version.
+        request.onupgradeneeded = () => { absent = true; request.transaction!.abort(); };
+        request.onerror = () => absent ? resolve({ name, version: 0, bytes: 0, stores: [] }) : reject(request.error);
         request.onsuccess = () => {
             const database = request.result;
             const names = Array.from(database.objectStoreNames);
@@ -29,10 +34,15 @@ function readDatabaseUsage(name: string) {
                 return;
             }
             const transaction = database.transaction(names, "readonly");
+            let stores: IndexedDbStoreUsage[] = [];
+            transaction.oncomplete = () => {
+                database.close();
+                resolve({ name, version: database.version, bytes: stores.reduce((total, store) => total + store.bytes, 0), stores: stores.sort((a, b) => b.bytes - a.bytes) });
+            };
+            transaction.onabort = () => { database.close(); reject(transaction.error || new Error("本机占用统计未完成，请刷新重试")); };
             Promise.all(names.map((storeName) => readStoreUsage(transaction.objectStore(storeName))))
-                .then((stores) => resolve({ name, version: database.version, bytes: stores.reduce((total, store) => total + store.bytes, 0), stores: stores.sort((a, b) => b.bytes - a.bytes) }))
-                .catch(reject)
-                .finally(() => database.close());
+                .then((values) => { stores = values; })
+                .catch((error) => { reject(error); database.close(); });
         };
     });
 }
@@ -50,15 +60,27 @@ function readStoreUsage(store: IDBObjectStore) {
                 return;
             }
             records += 1;
-            bytes += valueBytes(cursor.value);
+            bytes += storageValueBytes(cursor.value);
             cursor.continue();
         };
     });
 }
 
-function valueBytes(value: unknown) {
-    if (value instanceof Blob) return value.size;
-    if (value instanceof ArrayBuffer) return value.byteLength;
-    if (ArrayBuffer.isView(value)) return value.byteLength;
-    return new TextEncoder().encode(typeof value === "string" ? value : JSON.stringify(value)).byteLength;
+export function storageValueBytes(value: unknown) {
+    let binary = 0;
+    const seen = new WeakSet<object>();
+    const json = JSON.stringify(value, (_key, item) => {
+        if (typeof item === "bigint") return item.toString();
+        if (item && typeof item === "object") {
+            if (seen.has(item)) return null;
+            seen.add(item);
+            if (item instanceof Blob || item instanceof ArrayBuffer || ArrayBuffer.isView(item)) {
+                binary += item instanceof Blob ? item.size : item.byteLength;
+                return null;
+            }
+            if (item instanceof Map || item instanceof Set) return Array.from(item);
+        }
+        return item;
+    });
+    return binary + new TextEncoder().encode(json ?? "").byteLength;
 }

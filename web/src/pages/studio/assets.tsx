@@ -29,7 +29,7 @@ export default function StudioAssetsPage() {
     const action = async (work: () => Promise<void>) => { try { setError(""); await work(); } catch (reason) { message.error(reason instanceof Error ? reason.message : "操作未完成"); } };
     return <main className="studio-page"><div className="studio-page-heading"><span className="li-lab">YOUR LOCAL LIBRARY</span><h1>留住每一次创作</h1><p>这里是已校验并存入当前浏览器的原件。云端到期不会主动删除这些副本；浏览器清理或设备丢失仍可能移除本机数据，请另存重要作品。</p></div>
         {!client ? <section className="studio-card studio-empty"><Empty description="连接原服务与 API Key，打开对应素材" /><NavLink to="/config" className="studio-primary-link">连接服务</NavLink></section> : <>
-            <div className="studio-actions"><Button icon={<RefreshCw size={16} />} onClick={() => void load()}>刷新目录</Button><Tag>{entries.length} 个原件 · {(entries.reduce((sum, item) => sum + item.metadata.bytes, 0) / 1024 / 1024).toFixed(2)} MiB</Tag></div>
+            <div className="studio-actions"><Button icon={<RefreshCw size={16} />} onClick={() => void load()}>刷新目录</Button><Tag>{entries.length} 个原件 · {(entries.reduce((sum, item) => sum + item.metadata.bytes, 0) / 1024 / 1024).toFixed(2)} MiB</Tag><NavLink to="/storage" className="studio-inline-link">存储空间</NavLink></div>
             {error && <Alert type="error" showIcon title={error} />}
             <div className="studio-model-grid" style={{ marginTop: 24 }}>{entries.map((entry) => {
                 const metadata = entry.metadata;
