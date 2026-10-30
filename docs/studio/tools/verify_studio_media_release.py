@@ -1,5 +1,6 @@
 """Read-only verification of every new/retained static byte and the API boundary."""
 import hashlib
+import argparse
 import json
 import sys
 import tarfile
@@ -15,8 +16,19 @@ from studio_remote import connect
 
 PRIVATE = ROOT / '.local/studio149'
 RELEASE = 'canvas-20261031.149.1'
-prepared = json.loads(json.loads((PRIVATE / 'remote-prepare.json').read_text(encoding='utf-8'))['stdout'])
-promoted = json.loads(json.loads((PRIVATE / 'remote-promote.json').read_text(encoding='utf-8'))['stdout'])
+parser = argparse.ArgumentParser()
+parser.add_argument('--plan')
+arguments = parser.parse_args()
+prepare_name, promote_name = 'remote-prepare.json', 'remote-promote.json'
+if arguments.plan:
+    plan_path = (ROOT / arguments.plan).resolve()
+    assert plan_path.is_relative_to((ROOT / '.local').resolve())
+    plan = json.loads(plan_path.read_text(encoding='utf-8'))
+    RELEASE, PRIVATE = plan['new'], plan_path.parent
+    assert __import__('re').fullmatch(r'canvas-\d{8}\.\d+\.\d+', RELEASE)
+    prepare_name, promote_name = 'static-prepare.json', 'static-promote.json'
+prepared = json.loads(json.loads((PRIVATE / prepare_name).read_text(encoding='utf-8'))['stdout'])
+promoted = json.loads(json.loads((PRIVATE / promote_name).read_text(encoding='utf-8'))['stdout'])
 assert prepared['passed'] and promoted['passed'] and promoted['to'] == RELEASE
 package = json.loads((ROOT / '.local/independent-canvas-package' / RELEASE / 'package.json').read_text(encoding='utf-8'))
 with tarfile.open(ROOT / '.local/independent-canvas-package' / RELEASE / (RELEASE + '.tar.gz')) as archive:
@@ -34,6 +46,7 @@ base=Path('/opt/infinite-canvas')
 selected=base/'releases/canvas-20261031.149.1'
 print(json.dumps({'api':api_snapshot(),'static':{'current':str((base/'current').resolve()),'config_sha256':hashlib.sha256(CONFIG.read_bytes()).hexdigest(),'unit_sha256':hashlib.sha256(UNIT.read_bytes()).hexdigest(),'service':run('systemctl','show','infinite-canvas-static','--property=MainPID','--property=ActiveState')},'manifest_sha256':hashlib.sha256((selected/'canvas-deployment.json').read_bytes()).hexdigest(),'retained':json.loads((selected/'retained-previous-assets.json').read_text()),'retained_sha256':hashlib.sha256((selected/'retained-previous-assets.json').read_bytes()).hexdigest()}))
 '''
+    code = code.replace('canvas-20261031.149.1', RELEASE)
     stdin, stdout, stderr = client.exec_command('sudo -n python3 -B -', timeout=55)
     stdin.write(code); stdin.channel.shutdown_write()
     raw, error = stdout.read(), stderr.read()
@@ -77,6 +90,7 @@ value = {'passed': True, 'at': datetime.now(UTC).isoformat(), 'release_id': RELE
          'storage_contract': manifest['storage_contract'], 'ssh_session_closed': True, 'api_workspaces_written': False,
          'service_restarts': 0, 'generation_posts': 0, 'virtualization_used': False,
          'scope': 'Exact public static bytes and routes, existing API CORS/unauthenticated/health plus original service/configuration snapshots; not generation, browser codec or full acceptance'}
-target = ROOT / 'docs/research/studio-implementation/independent-delivery-1491.json'
+suffix = ''.join(RELEASE.split('.')[1:])
+target = ROOT / 'docs/research/studio-implementation' / ('independent-delivery-' + suffix + '.json')
 with target.open('x', encoding='utf-8') as output: output.write(json.dumps(value, indent=2) + '\n')
 print(json.dumps({key: value[key] for key in ['passed', 'release_id', 'static_files_verified', 'retained_previous_assets_verified', 'api_services_unchanged']}))

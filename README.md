@@ -1,7 +1,16 @@
 # ComfyUI 创作画布
 
+<!-- independent150:start -->
+**Web静态150.1已部署**：[画布参考创作与生成表单](docs/studio/35-画布参考创作与生成表单.md)。直接改造既有开源画布：选图自动填槽位、缩略图、合法完整规格、目录恢复、全输入预检及实际来源连线。207单元/类型/构建、Chromium本机/公网与Firefox本机共69组表单、15截图通过；Firefox公网未完成，单列待验；[完整所选页MP4](docs/studio/media/studio-150/canvas-reference-creation-public.mp4) / [GIF](docs/studio/media/studio-150/canvas-reference-creation-public.gif)展示合成接口流程。一次真实双参考视频受理后由原服务返回 `preparation_transport_failure`，没有生成结果；测试Key已禁用。仅发布画布静态文件及兼容150.0恢复包，原API/服务/配置不改。完整Web验收仍 **HOLD**。
+
+![实际双参考创作页面；本次视频准备失败](docs/studio/media/studio-150/live-2026-10-30T18-25-27-662Z/real-two-reference-form.png)
+
+操作：连接原API和业务Key → 在画布选择图片 → 新建创作 → 核对模型、完整规格和每张参考图 → 提交并查询原任务 → 成功后载入/另存原件。视频、音频和3D使用各自已发布Schema；不新建生成后端。下方149及更早证据保留原时点。
+<!-- independent150:end -->
+
+
 <!-- independent149:start -->
-**当前Web静态149.1已部署**：[原件下载与播放失败处理](docs/studio/34-Web媒体原件下载与播放失败处理.md)。普通WebM、JPEG/WebP批次原件后缀已修复；原生解码失败显示原件下载，缺件明确拒绝，替换后重新判断。图层操作栏跟随当前节点，下载不误开编辑面板。三引擎本机/公网各36组、78次实际下载、18截图，203单元/类型/构建及相关回归通过。Windows WebKit解码与Cookie、实际Safari及完整Web签收仍 **HOLD**。仅切独立静态目录，兼容149.0恢复包准备完成，原API与全部服务/配置不变。
+**历史149.1交付**：[原件下载与播放失败处理](docs/studio/34-Web媒体原件下载与播放失败处理.md)。普通WebM、JPEG/WebP批次原件后缀已修复；原生解码失败显示原件下载，缺件明确拒绝，替换后重新判断。图层操作栏跟随当前节点，下载不误开编辑面板。三引擎本机/公网各36组、78次实际下载、18截图，203单元/类型/构建及相关回归通过。Windows WebKit解码与Cookie、实际Safari及完整Web签收仍 **HOLD**。仅切独立静态目录，兼容149.0恢复包准备完成，原API与全部服务/配置不变。
 
 ![公网媒体原件与失败提示](docs/studio/media/studio-149/actions-chromium-2026-10-30T17-12-41-354Z/media-originals-and-native-fallback.png)
 
@@ -15,7 +24,7 @@
 
 | 入口 | 地址 |
 | --- | --- |
-| 独立画布149.1 | [打开画布](http://43.165.167.179:39445/studio/) |
+| 独立画布150.1 | [打开画布](http://43.165.167.179:39445/studio/) |
 | 原业务API | `http://43.165.167.179:39443` |
 | 原管理后台 | [Admin](http://43.165.167.179:39443/admin/) |
 

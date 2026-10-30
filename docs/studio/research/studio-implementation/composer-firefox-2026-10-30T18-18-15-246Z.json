@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "at": "2026-10-30T18:18:15.284Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T18-04-09-240Z.json",
+  "public_static_site": false,
+  "baseline_reproduction": false,
+  "scope": "Actual frozen Web UI, native owned profiles, canvas selection and form/request/result binding for 11 published examples. All API responses and media are synthetic; not GPU generation, physical touch, production authorization or complete browser acceptance.",
+  "api_transport": "Two real native non-loopback HTTP origins; no business route interception",
+  "checks": [],
+  "api_requests": [],
+  "submissions": [],
+  "screenshots": [],
+  "server_errors": [],
+  "page_errors": [],
+  "forbidden_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:13582",
+    "synthetic_api": "http://192.168.31.95:13581"
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(index.ok)\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_composer.mjs:129:70\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
+  "static_bytes_unchanged": true
+}

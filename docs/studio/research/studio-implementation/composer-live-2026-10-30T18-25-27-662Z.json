@@ -1,0 +1,218 @@
+{
+  "passed": false,
+  "at": "2026-10-30T18:25:27.677Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T18-04-09-240Z.json",
+  "scope": "One real native Chromium canvas two-reference video request through the unchanged existing business API; not fleet, other media or complete browser acceptance.",
+  "model": "comfy-5070-video-h3-refs",
+  "preset": {
+    "quality": "standard",
+    "size": "512x288",
+    "seconds": 1.625
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/jobs/job_2e8ec734243547589651321e2be6a962"
+    }
+  ],
+  "checks": [
+    {
+      "name": "real original business API connection, policy and catalog",
+      "detail": true
+    },
+    {
+      "name": "two existing canvas originals fill the published reference slots",
+      "detail": true
+    },
+    {
+      "name": "one real generation accepted by the original API",
+      "detail": {
+        "job_id": "job_2e8ec734243547589651321e2be6a962",
+        "status": "queued"
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-150/live-2026-10-30T18-25-27-662Z/real-two-reference-form.png",
+      "bytes": 197267,
+      "sha256": "19c513c742330248cae5d35f979527ee263bd2673a06bc90951f17eea85ca80a"
+    },
+    {
+      "file": "docs/media/studio-150/live-2026-10-30T18-25-27-662Z/real-task-accepted.png",
+      "bytes": 190681,
+      "sha256": "757aac6328ab97c946a11bd7317d25ea03c23ebbd297c5af3db038f2e95ebe1c"
+    },
+    {
+      "file": "docs/media/studio-150/live-2026-10-30T18-25-27-662Z/failure.png",
+      "bytes": 183197,
+      "sha256": "7cd3cfa2b18c0d160ebf824651807c20b6d897bb4cc98c3a862086af0f1c0bd2"
+    }
+  ],
+  "page_errors": [],
+  "forbidden_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "native_static_server_closed": true
+  },
+  "generation_posts": 1,
+  "product_timeouts_changed": false,
+  "test_observation_limit_minutes": 30,
+  "origins": {
+    "canvas": "http://192.168.31.95:3299",
+    "existing_api": "http://43.165.167.179:39443"
+  },
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "submitted_body": {
+    "model": "comfy-5070-video-h3-refs",
+    "task_type": "references_to_video",
+    "input": {
+      "prompt": "Two friendly toy robots inspired by the reference images stand together on a clean studio tabletop. Preserve their distinctive faces and orange accents. Both gently wave, subtle natural motion, fixed camera, soft consistent lighting, no text, no watermark.",
+      "references": [
+        {
+          "asset_id": "asset_86f342b5218b45dbbb1a624d8bae94e3",
+          "role": "reference_0"
+        },
+        {
+          "asset_id": "asset_86f44d39034e4aa2ab89045bcbcc0625",
+          "role": "reference_1"
+        }
+      ]
+    },
+    "parameters": {
+      "n": 1,
+      "size": "512x288",
+      "quality": "standard",
+      "seconds": 1.625
+    },
+    "client_request_id": "8E6l__Pab2uQcmrNoptUW"
+  },
+  "job_id": "job_2e8ec734243547589651321e2be6a962",
+  "final_job_status": "failed",
+  "failure": "AssertionError [ERR_ASSERTION]: Observe/query the known original job; never submit a replacement\n+ actual - expected\n\n+ 'failed'\n- 'succeeded'\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_composer_live.mjs:65:46",
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio150/live-2026-10-30T18-25-27-662Z/complete-page.webm"
+}

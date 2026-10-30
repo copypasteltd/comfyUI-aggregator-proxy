@@ -1,0 +1,56 @@
+{
+  "passed": false,
+  "at": "2026-10-30T18:42:07.627Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T18-29-33-472Z.json",
+  "public_static_site": false,
+  "baseline_reproduction": false,
+  "scope": "Actual frozen Web UI, native owned profiles, canvas selection and form/request/result binding for 11 published examples. All API responses and media are synthetic; not GPU generation, physical touch, production authorization or complete browser acceptance.",
+  "api_transport": "Two real native non-loopback HTTP origins; no business route interception",
+  "checks": [],
+  "api_requests": [],
+  "submissions": [],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-42-07-119Z/failure.png",
+      "bytes": 6489,
+      "sha256": "cb9c3b8047859412e8abcaed51ad9ecefb4bd820c8849af4992e593d500d1836"
+    }
+  ],
+  "server_errors": [],
+  "page_errors": [],
+  "forbidden_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:5881",
+    "synthetic_api": "http://192.168.31.95:5879"
+  },
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "failure": "page.goto: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://192.168.31.95:5881/blank\", waiting until \"load\"\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_composer.mjs:150:16",
+  "failure_state": {
+    "intents": [],
+    "results": [],
+    "text": ""
+  },
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio150/composer-chromium-2026-10-30T18-42-07-119Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

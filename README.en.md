@@ -1,7 +1,16 @@
 # ComfyUI Creative Canvas
 
+<!-- independent150:start -->
+**Web static 150.1 is deployed:** [Canvas reference creation](docs/studio/35-画布参考创作与生成表单.md). The existing open-source canvas now populates published slots from selected images, shows original previews, chooses an allowed complete preset, initializes once after catalog restoration, validates all inputs before upload and links actual sources. 207 units/type/build and 69 synthetic UI groups passed on local/public Chromium and local Firefox, with 15 screenshots. Public Firefox remains unaccepted after two incomplete runs. [Complete selected page MP4](docs/studio/media/studio-150/canvas-reference-creation-public.mp4) / [GIF](docs/studio/media/studio-150/canvas-reference-creation-public.gif). The one real two-reference video was accepted but ended with `preparation_transport_failure`; no GPU output was produced, and the temporary Key is disabled. Only independent static files changed, compatible 150.0 recovery is prepared, original API/services/configuration unchanged. Full Web acceptance remains **HOLD**.
+
+![Actual reference form; this video failed during preparation](docs/studio/media/studio-150/live-2026-10-30T18-25-27-662Z/real-two-reference-form.png)
+
+Use: connect the original API and business Key → select canvas images → create → check the model, complete preset and each reference → submit and follow the original job → load/save the successful original. Video, Workflow audio and 3D follow their published schemas; no generation backend is added. The 149 and earlier evidence below is historical.
+<!-- independent150:end -->
+
+
 <!-- independent149:start -->
-**Web static 149.1 is deployed:** [Original downloads and native playback errors](docs/studio/34-Web媒体原件下载与播放失败处理.md). General WebM and main/alternate JPEG/WebP downloads now preserve the stored original format. Native decode failures show an original-download action; missing keyed originals are refused, and real file replacement resets source-specific errors. Layer focus keeps the correct action bar and downloads do not open an editor. Three engines passed 36 local plus 36 public groups, 78 actual downloads and 18 screenshots; 203 units/type/build and related regressions passed. Windows WebKit decoding/Cookie isolation, actual Safari and full Web acceptance remain **HOLD**. Only independent static files were promoted, with compatible 149.0 recovery prepared; the original API and all services/configuration stay unchanged.
+**Historical Web149.1 delivery:** [Original downloads and native playback errors](docs/studio/34-Web媒体原件下载与播放失败处理.md). General WebM and main/alternate JPEG/WebP downloads now preserve the stored original format. Native decode failures show an original-download action; missing keyed originals are refused, and real file replacement resets source-specific errors. Layer focus keeps the correct action bar and downloads do not open an editor. Three engines passed 36 local plus 36 public groups, 78 actual downloads and 18 screenshots; 203 units/type/build and related regressions passed. Windows WebKit decoding/Cookie isolation, actual Safari and full Web acceptance remain **HOLD**. Only independent static files were promoted, with compatible 149.0 recovery prepared; the original API and all services/configuration stay unchanged.
 
 ![Public original media and native failure handling](docs/studio/media/studio-149/actions-chromium-2026-10-30T17-12-41-354Z/media-originals-and-native-fallback.png)
 
@@ -15,7 +24,7 @@
 
 | Entry | Address |
 | --- | --- |
-| Independent canvas149.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
+| Independent canvas150.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
 

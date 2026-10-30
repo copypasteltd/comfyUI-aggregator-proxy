@@ -1,0 +1,482 @@
+{
+  "passed": false,
+  "at": "2026-10-30T18:24:09.708Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T18-04-09-240Z.json",
+  "public_static_site": false,
+  "baseline_reproduction": false,
+  "scope": "Actual frozen Web UI, native owned profiles, canvas selection and form/request/result binding for 11 published examples. All API responses and media are synthetic; not GPU generation, physical touch, production authorization or complete browser acceptance.",
+  "api_transport": "Two real native non-loopback HTTP origins; no business route interception",
+  "checks": [
+    {
+      "name": "existing API catalog and standard-only policy load through actual connection UI",
+      "detail": true
+    },
+    {
+      "name": "selected canvas images suggest the published two-reference model and populate ordered visible previews",
+      "detail": true
+    },
+    {
+      "name": "invalid prompt is rejected before local staging or remote upload",
+      "detail": true
+    },
+    {
+      "name": "unreadable second original sends neither the first upload nor a generation request",
+      "detail": true
+    },
+    {
+      "name": "unconfirmed upload retains staged references and sends no generation",
+      "detail": true
+    },
+    {
+      "name": "explicit retry reuses original upload identity and ordered asset-role bindings",
+      "detail": true
+    },
+    {
+      "name": "downloaded original returns to a canvas image with the actual selected-source connections",
+      "detail": true
+    }
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "f75bf19aebfc6296ef799f1998e65909dbf8d69144342d19a27fca7edd5054f6",
+      "asset_id": "asset_7d4039caca714c888587a914fd2d9696",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "f75bf19aebfc6296ef799f1998e65909dbf8d69144342d19a27fca7edd5054f6",
+      "asset_id": "asset_7d4039caca714c888587a914fd2d9696",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "cbaa486e1e2d943f9ef33354ae3007af48e8c3658e761ed1346516d7b8d5ebb3",
+      "asset_id": "asset_996b4df7aea748ac9c0d0a778fd345d2",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/jobs",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/content/content_3917d84cfb264aca95e2604610a7a5f0",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_3917d84cfb264aca95e2604610a7a5f0",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/content/content_3917d84cfb264aca95e2604610a7a5f0/download",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_3917d84cfb264aca95e2604610a7a5f0/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "f6e52d2042003178ba861bed304c839693d56a502bf6da5d98cc9a122b92ff18",
+      "asset_id": "asset_0f7c88ffc6454f2ca5a9e1052d6613af",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/jobs",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "submissions": [
+    {
+      "job_id": "job_cbf8a7c2f09747dcbb1520bde226add8",
+      "body": {
+        "model": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "Synthetic UI contract check: preserve the two references in their published order.",
+          "references": [
+            {
+              "asset_id": "asset_7d4039caca714c888587a914fd2d9696",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_996b4df7aea748ac9c0d0a778fd345d2",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "q4fo2j95mcfwyK_xJZM6y"
+      },
+      "idempotency_sha256": "40ecf6a39299ca49a158f1b6e9b8e3e377a01f02fc319446e5df9f89c61f0889",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_55194fc22a274b8f9f97b73a9201f988",
+      "body": {
+        "model": "comfy-3080-image-edit-wai",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "Synthetic published model form verification.",
+          "source_image": {
+            "asset_id": "asset_0f7c88ffc6454f2ca5a9e1052d6613af"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "Fb7W0CbwO4oZf87YcIZ0T"
+      },
+      "idempotency_sha256": "4dee6b2424030c5b5d80ebec441d45c571e225e1d6b971eb04373689710fd7cb",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-150/composer-firefox-2026-10-30T18-24-09-706Z/selected-canvas-references.png",
+      "bytes": 119611,
+      "sha256": "bcdc7de7b492e3a4b9a14dbe05702be1c10cb7a2d9d704e5d77430301db039fd"
+    },
+    {
+      "file": "docs/media/studio-150/composer-firefox-2026-10-30T18-24-09-706Z/reference-result-returned-to-canvas.png",
+      "bytes": 160011,
+      "sha256": "4354c93a578363ab678fcd014cc7b15b5861ab28d19e1662e7e330be6a8c12f3"
+    },
+    {
+      "file": "docs/media/studio-150/composer-firefox-2026-10-30T18-24-09-706Z/failure.png",
+      "bytes": 86358,
+      "sha256": "272663aa80621197949ee0ca8a9f7c0d5ce7be01a81f26aa30df4613f5cc77a1"
+    }
+  ],
+  "server_errors": [],
+  "page_errors": [],
+  "forbidden_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:4012",
+    "synthetic_api": "http://192.168.31.95:4011"
+  },
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "failure": "locator.click: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-node-id=\"studio-task-icQr2MOQGYYA622T-VXjO\"]').getByRole('button', { name: '载入产物', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" class=\"ant-btn css-1tzwyuk comfy-studio-lime ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>载入产物</span> from <div data-node-id=\"studio-task-S_P0buaUaPxeWw713GFdI\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>载入产物</span> from <div data-node-id=\"studio-task-S_P0buaUaPxeWw713GFdI\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    35 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <span>载入产物</span> from <div data-node-id=\"studio-task-S_P0buaUaPxeWw713GFdI\" class=\"node-element group/node absolute flex select-none flex-col transition-shadow duration-200 z-50 \">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_composer.mjs:190:32",
+  "failure_state": {
+    "intents": [
+      {
+        "version": 1,
+        "id": "Fb7W0CbwO4oZf87YcIZ0T",
+        "identity": {
+          "profileId": "NcUXbIwiVTNHwGCE1z--E",
+          "origin": "http://192.168.31.95:4011",
+          "fingerprint": "2dd32365662fe3e08998cff1060377d2783b885cdb5d10c419c4e50965b33901"
+        },
+        "projectId": "composer-project-0",
+        "nodeId": "studio-task-icQr2MOQGYYA622T-VXjO",
+        "idempotencyKey": "studio-job-Fb7W0CbwO4oZf87YcIZ0T",
+        "releaseDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage": "terminal",
+        "output": {
+          "mediaTypes": [
+            "image/png"
+          ],
+          "maxBytes": 33554432
+        },
+        "createdAt": 1793384709818,
+        "updatedAt": 1793384710362,
+        "canvas": {
+          "node": {
+            "id": "studio-task-icQr2MOQGYYA622T-VXjO",
+            "type": "studio:task",
+            "title": "WAI · 图像编辑 · RTX 3080",
+            "position": {
+              "x": 554.375,
+              "y": 447.5
+            },
+            "width": 340,
+            "height": 260,
+            "metadata": {
+              "model": "comfy-3080-image-edit-wai",
+              "prompt": "Synthetic published model form verification.",
+              "status": "loading"
+            }
+          },
+          "sourceIds": [
+            "reference-0"
+          ]
+        },
+        "job": {
+          "id": "job_55194fc22a274b8f9f97b73a9201f988",
+          "object": "generation.job",
+          "model": "comfy-3080-image-edit-wai",
+          "task_type": "image_to_image",
+          "status": "succeeded",
+          "updated_revision": 1,
+          "created_at": 1793384710,
+          "completed_at": 1793384710,
+          "artifacts": [
+            {
+              "id": "content_1a8a1aa3bed54d8bb5a7a90fdf03e1f9"
+            }
+          ]
+        },
+        "pollPaused": false
+      },
+      {
+        "version": 1,
+        "id": "q4fo2j95mcfwyK_xJZM6y",
+        "identity": {
+          "profileId": "NcUXbIwiVTNHwGCE1z--E",
+          "origin": "http://192.168.31.95:4011",
+          "fingerprint": "2dd32365662fe3e08998cff1060377d2783b885cdb5d10c419c4e50965b33901"
+        },
+        "projectId": "composer-project-0",
+        "nodeId": "studio-task-S_P0buaUaPxeWw713GFdI",
+        "idempotencyKey": "studio-job-q4fo2j95mcfwyK_xJZM6y",
+        "releaseDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage": "terminal",
+        "output": {
+          "mediaTypes": [
+            "image/png"
+          ],
+          "maxBytes": 33554432
+        },
+        "createdAt": 1793384704557,
+        "updatedAt": 1793384705135,
+        "canvas": {
+          "node": {
+            "id": "studio-task-S_P0buaUaPxeWw713GFdI",
+            "type": "studio:task",
+            "title": "WAI · 双参考图生图 · RTX 3080",
+            "position": {
+              "x": 554.375,
+              "y": 447.5
+            },
+            "width": 340,
+            "height": 260,
+            "metadata": {
+              "model": "comfy-3080-image-refs-wai",
+              "prompt": "Synthetic UI contract check: preserve the two references in their published order.",
+              "status": "loading"
+            }
+          },
+          "sourceIds": [
+            "reference-0",
+            "reference-1"
+          ]
+        },
+        "job": {
+          "id": "job_cbf8a7c2f09747dcbb1520bde226add8",
+          "object": "generation.job",
+          "model": "comfy-3080-image-refs-wai",
+          "task_type": "references_to_image",
+          "status": "succeeded",
+          "updated_revision": 1,
+          "created_at": 1793384705,
+          "completed_at": 1793384705,
+          "artifacts": [
+            {
+              "id": "content_3917d84cfb264aca95e2604610a7a5f0"
+            }
+          ]
+        },
+        "pollPaused": false
+      }
+    ],
+    "results": [],
+    "text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n已连接\n画布\n资产\n提示词库\n画布元素\n4\n选择\n全部\n参考 A · 主体与构图\n图片\n参考 B · 光线与配色\n图片\nWAI · 双参考图生图 · RTX 3080\n生成任务\nWAI · 图像编辑 · RTX 3080\n生成任务\n参考创作 · WAI · 图像编辑 · RTX 3080\n新建创作\n快捷键\n参考 A · 主体与构图\n参考 B · 光线与配色\nWAI · 双参考图生图 · RTX 3080\n已完成\njob_cbf8a7c2f09747dcbb1520bde226add8\n继续查询\n载入产物\n云端产物有保留期限，请及时载入或保存原件。\n已完成\njob_55194fc22a274b8f9f97b73a9201f988\n继续查询\n载入产物\n云端产物有保留期限，请及时载入或保存原件。\n打组\n80%"
+  },
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio150/composer-firefox-2026-10-30T18-24-09-706Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

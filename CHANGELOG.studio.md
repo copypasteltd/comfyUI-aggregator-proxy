@@ -1,5 +1,18 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+<!-- independent150:start -->
+## canvas-20261031.150.1 · 画布参考创作 / pending-test
+
+- [新增] 画布选图自动填参考槽位，统一选择与实际缩略图，结果连接实际使用的来源。
+- [修复] 当前Key合法规格选择、无规格模型禁用和目录晚到初始化；刷新不覆盖已初始化草稿。
+- [调整] 整份Schema和全部原件先预检，再上传；明确重试复用原上传身份，角色和数组顺序保持发布契约。
+- [验证] 207单元/类型/构建、11双源及Chromium本机/公网与Firefox本机69组，15截图与完整所选页MP4/GIF；Firefox公网未完成。合成接口结果不替代GPU。
+- [交付] 150.1静态与兼容150.0，全部资源/路由核对；原API/配置及全部服务PID不变。一次真实视频返回 `preparation_transport_failure`，未生成结果，测试Key已禁用；完整Web验收HOLD。
+
+Canvas150.1 binds selected originals to published reference slots, shows previews, chooses an allowed complete preset, initializes a draft once after catalog restoration, validates all inputs before the first upload, and links actual sources. 69 groups passed on local/public Chromium and local Firefox; public Firefox remains unaccepted after two incomplete runs. The one real video request was accepted but failed during original-service preparation; GPU output is not accepted. Only independent static files were promoted; compatible recovery is prepared, original API/services unchanged. Full Web acceptance remains HOLD.
+<!-- independent150:end -->
+
+
 <!-- independent149:start -->
 ## canvas-20261031.149.1 · Web原件下载与播放失败处理 / pending-test
 

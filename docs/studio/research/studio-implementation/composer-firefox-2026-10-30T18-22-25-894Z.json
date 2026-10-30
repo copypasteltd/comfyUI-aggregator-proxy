@@ -1,0 +1,324 @@
+{
+  "passed": false,
+  "at": "2026-10-30T18:22:25.896Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T18-04-09-240Z.json",
+  "public_static_site": false,
+  "baseline_reproduction": false,
+  "scope": "Actual frozen Web UI, native owned profiles, canvas selection and form/request/result binding for 11 published examples. All API responses and media are synthetic; not GPU generation, physical touch, production authorization or complete browser acceptance.",
+  "api_transport": "Two real native non-loopback HTTP origins; no business route interception",
+  "checks": [
+    {
+      "name": "existing API catalog and standard-only policy load through actual connection UI",
+      "detail": true
+    },
+    {
+      "name": "selected canvas images suggest the published two-reference model and populate ordered visible previews",
+      "detail": true
+    },
+    {
+      "name": "invalid prompt is rejected before local staging or remote upload",
+      "detail": true
+    },
+    {
+      "name": "unreadable second original sends neither the first upload nor a generation request",
+      "detail": true
+    },
+    {
+      "name": "unconfirmed upload retains staged references and sends no generation",
+      "detail": true
+    },
+    {
+      "name": "explicit retry reuses original upload identity and ordered asset-role bindings",
+      "detail": true
+    },
+    {
+      "name": "downloaded original returns to a canvas image with the actual selected-source connections",
+      "detail": true
+    }
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "db94f208c3917d4142efc689d7757eee779f7df342e928aea1bab9b0d778c966",
+      "asset_id": "asset_f21c78fdafac4e5fb5ffee96f2737a5b",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "db94f208c3917d4142efc689d7757eee779f7df342e928aea1bab9b0d778c966",
+      "asset_id": "asset_f21c78fdafac4e5fb5ffee96f2737a5b",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "2951f8005768c2570e43ee7ff9a9f40863e021093d730c237f0807b584e2c586",
+      "asset_id": "asset_006df258f47d4b1bbd6ad0d1e6902560",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/jobs",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/content/content_3c0090407bcc4ac18f29bff2271940d0",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_3c0090407bcc4ac18f29bff2271940d0",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/content/content_3c0090407bcc4ac18f29bff2271940d0/download",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_3c0090407bcc4ac18f29bff2271940d0/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "97872bf248cb0ce50eabafd2dfa04bf1ba247bce060bea4b6373ce14bd02770d",
+      "asset_id": "asset_7fab1003382d4b29b48d90d63aabc2d9",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    }
+  ],
+  "submissions": [
+    {
+      "job_id": "job_83baa0dd4e64413fba370fcddd0415fd",
+      "body": {
+        "model": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "Synthetic UI contract check: preserve the two references in their published order.",
+          "references": [
+            {
+              "asset_id": "asset_f21c78fdafac4e5fb5ffee96f2737a5b",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_006df258f47d4b1bbd6ad0d1e6902560",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "LHpAgwHc4XhYDbyiCbrs5"
+      },
+      "idempotency_sha256": "b0341636b63710711129e713778598201936e7d7452c86cff3ed108391c9c407",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-150/composer-firefox-2026-10-30T18-22-25-894Z/selected-canvas-references.png",
+      "bytes": 119522,
+      "sha256": "0c2edf8f3bb3d8383fa2290f4778d3b6f91ef919c7deee4b59055de9ca4798cf"
+    },
+    {
+      "file": "docs/media/studio-150/composer-firefox-2026-10-30T18-22-25-894Z/reference-result-returned-to-canvas.png",
+      "bytes": 160069,
+      "sha256": "cf412fdca384ffae48fc883b6ecf3ed474a80b62dd3acc45bf4daac3984834ab"
+    },
+    {
+      "file": "docs/media/studio-150/composer-firefox-2026-10-30T18-22-25-894Z/failure.png",
+      "bytes": 127652,
+      "sha256": "8b9fcdccef09f7f11564c8a43961515394c8ed98c9023240a543c259844e65ea"
+    }
+  ],
+  "server_errors": [],
+  "page_errors": [],
+  "forbidden_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:14278",
+    "synthetic_api": "http://192.168.31.95:14276"
+  },
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 2\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_composer.mjs:178:20",
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio150/composer-firefox-2026-10-30T18-22-25-894Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

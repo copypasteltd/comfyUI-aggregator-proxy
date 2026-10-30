@@ -15,7 +15,7 @@ TARGET = FRONT / 'docs/studio'
 HISTORICAL = ROOT / 'aggregator-service/docs/studio'
 HISTORY_URL = 'https://github.com/copypasteltd/comfyUI-aggregator-proxy/blob/843aac47791f23755e71f976a00cf592380ddf99/docs/studio/'
 LINK = re.compile(r'(!?\[[^\]\n]*\]\()([^\s\n)]+)(\))')
-ACTIVE_MEDIA = ('media/studio-138/', 'media/studio-139/', 'media/studio-1392/', 'media/studio-140/', 'media/studio-141/', 'media/studio-142/', 'media/studio-143/', 'media/studio-144/', 'media/studio-145/', 'media/studio-146/', 'media/studio-147/', 'media/studio-148/', 'media/studio-149/')
+ACTIVE_MEDIA = ('media/studio-138/', 'media/studio-139/', 'media/studio-1392/', 'media/studio-140/', 'media/studio-141/', 'media/studio-142/', 'media/studio-143/', 'media/studio-144/', 'media/studio-145/', 'media/studio-146/', 'media/studio-147/', 'media/studio-148/', 'media/studio-149/', 'media/studio-150/')
 ACTIVE_REPORTS = {
     'clean-build-2026-10-30T16-03-32-219Z.json',
     'clean-build-2026-10-30T16-12-16-882Z.json',
@@ -67,7 +67,7 @@ def copy_public(source: Path, target: Path):
 
 def main():
     assert FRONT.resolve().is_relative_to(ROOT.resolve())
-    for version in ['141', '142', '143', '144', '145', '146', '147', '148', '149']:
+    for version in ['141', '142', '143', '144', '145', '146', '147', '148', '149', '150']:
         current = ROOT / ('.local/studio' + version + '/receipts.json')
         if not current.is_file():
             continue
@@ -75,7 +75,7 @@ def main():
         for name in names:
             assert re.fullmatch(r'[A-Za-z0-9-]+\.json', name) and (DOCS / 'research/studio-implementation' / name).is_file()
             ACTIVE_REPORTS.add(name)
-        ACTIVE_REPORTS.add('independent-review-' + version + ('' if version in {'147', '148', '149'} else '1') + '.json')
+        ACTIVE_REPORTS.add('independent-review-' + version + ('' if version in {'147', '148', '149', '150'} else '1') + '.json')
     ACTIVE_REPORTS.update({'archive-import-2026-10-30T10-42-03-468Z.json', 'archive-import-2026-10-30T10-43-48-579Z.json', 'archive-import-2026-10-30T10-50-23-649Z.json', 'clean-build-2026-10-30T10-28-45-254Z.json', 'clean-build-2026-10-30T10-37-49-073Z.json', 'clean-build-2026-10-30T10-46-27-970Z.json', 'independent-browser-2026-10-30T10-42-00-613Z.json', 'independent-browser-2026-10-30T10-50-22-944Z.json', 'independent-host-unchanged-141-preflight.json'})
     ACTIVE_REPORTS.update({'reference-probe-setup-failed-143.json', 'reference-deletion-2026-10-30T11-52-46-814Z.json', 'reference-deletion-2026-10-30T11-53-26-725Z.json'})
     ACTIVE_REPORTS.update({'media-tools-2026-10-30T12-24-11-634Z.json', 'media-tools-2026-10-30T12-25-29-257Z.json', 'media-tools-2026-10-30T12-26-55-868Z.json', 'media-tools-public-2026-10-30T12-28-24-006Z.json'})
@@ -112,6 +112,8 @@ def main():
     if migration_document.is_file(): queue.append(migration_document)
     media_actions_document = DOCS / '34-Web媒体原件下载与播放失败处理.md'
     if media_actions_document.is_file(): queue.append(media_actions_document)
+    composer_document = DOCS / '35-画布参考创作与生成表单.md'
+    if composer_document.is_file(): queue.append(composer_document)
     ACTIVE_REPORTS.update(file.name for file in (DOCS/'research/studio-implementation').glob('managed-cleanup-*.json'))
     for pattern in ['safe-release-*.json', 'safe-rollback-Web-*.json', 'cleanup-refresh-*.json', 'Web-engine-diagnostic-*.json', 'Web-credentials-diagnostic-*.json', 'Web-migration-*.json', 'media-actions-*.json']:
         ACTIVE_REPORTS.update(file.name for file in (DOCS / 'research/studio-implementation').glob(pattern))
@@ -147,7 +149,7 @@ def main():
         if not local.is_file():
             # The final reviewer materializes its own receipt in both doc trees
             # before publication; all other missing targets remain fatal.
-            if local in {DOCS / 'research/studio-implementation/independent-review-147.json', DOCS / 'research/studio-implementation/independent-review-148.json', DOCS / 'research/studio-implementation/independent-review-149.json'}:
+            if local in {DOCS / 'research/studio-implementation/independent-review-147.json', DOCS / 'research/studio-implementation/independent-review-148.json', DOCS / 'research/studio-implementation/independent-review-149.json', DOCS / 'research/studio-implementation/independent-review-150.json'}:
                 return match[0]
             raise AssertionError(f'Missing documentation target: {source.name}: {raw}')
         current = relative.startswith(ACTIVE_MEDIA) or local.name in ACTIVE_REPORTS or relative.startswith('deployment/')
@@ -176,7 +178,7 @@ def main():
         copied.add(source)
 
     # Include current public evidence and all current images/clips without a backend source mirror.
-    media = [file for directory in ('studio-138', 'studio-139', 'studio-1392', 'studio-140', 'studio-141', 'studio-142', 'studio-143', 'studio-144', 'studio-145', 'studio-146', 'studio-147', 'studio-148', 'studio-149') for file in (DOCS / 'media' / directory).rglob('*') if file.is_file() and (file.suffix.lower() != '.webm' or directory in {'studio-148', 'studio-149'} and file.parent.name == 'fixtures')]
+    media = [file for directory in ('studio-138', 'studio-139', 'studio-1392', 'studio-140', 'studio-141', 'studio-142', 'studio-143', 'studio-144', 'studio-145', 'studio-146', 'studio-147', 'studio-148', 'studio-149', 'studio-150') for file in (DOCS / 'media' / directory).rglob('*') if file.is_file() and (file.suffix.lower() != '.webm' or directory in {'studio-148', 'studio-149'} and file.parent.name == 'fixtures')]
     for source in media + [DOCS / 'research/studio-implementation' / n for n in ACTIVE_REPORTS]:
         if source.is_file():
             target = TARGET / source.relative_to(DOCS)
@@ -184,6 +186,10 @@ def main():
             copy_public(source, target)
     for source in (DOCS / 'research/studio-implementation').glob('independent-api-boundary-*.json'):
         copy_public(source, TARGET / source.relative_to(DOCS))
+    # These current delivery tools may otherwise be linked to a historical API
+    # snapshot. Keep their explicitly reviewed independent copies current too.
+    for name in ['package_independent_canvas.py', 'prepare_independent_docs.py']:
+        copy_public(DOCS / 'tools' / name, TARGET / 'tools' / name)
 
     tree = ast.parse((DOCS / 'tools/studio_independent_host.py').read_text(encoding='utf-8'))
     constants = {node.targets[0].id: ast.literal_eval(node.value) for node in tree.body

@@ -37,6 +37,11 @@ def main():
     release = RELEASE
     if arguments[:1] == ['--release']:
         release, arguments = arguments[1], arguments[2:]
+    composer_path = None
+    if '--composer-report' in arguments:
+        index = arguments.index('--composer-report')
+        composer_path = (ROOT / arguments[index + 1]).resolve()
+        arguments = arguments[:index] + arguments[index + 2:]
     assert re.fullmatch(r'canvas-\d{8}\.\d+\.\d+', release)
     suffix = ''.join(release.split('.')[1:])
     private = PRIVATE if release == RELEASE else PRIVATE / release
@@ -51,6 +56,8 @@ def main():
         assert len(arguments) == 6, 'Archive, cleanup UI and native protocol evidence required'
     if release == 'canvas-20261031.149.1':
         assert len(arguments) == 7, 'Archive, cleanup, native protocol and three-engine media actions evidence required'
+    if release == 'canvas-20261031.150.1':
+        assert len(arguments) == 3 and composer_path, 'Frozen native catalog and composer main-flow evidence required'
     build_path, browser_path, boundary_path = [ROOT / value for value in arguments[:3]]
     build, browser, boundary = [json.loads(value.read_text(encoding='utf-8')) for value in (build_path, browser_path, boundary_path)]
     assert all(value['passed'] for value in (build, browser, boundary))
@@ -75,11 +82,19 @@ def main():
                 'api_modified': False, 'api_origin': 'http://43.165.167.179:39443', 'mode': 'managed', 'base': '/studio/',
                 'application_backend': False, 'virtualization_used': False,
                 'files': [{'path': name, 'bytes': len(data), 'sha256': digest(data)} for name, data in sorted(contents.items())]}
-    if release in {'canvas-20261030.146.1', 'canvas-20261031.149.1'}:
+    if release in {'canvas-20261030.146.1', 'canvas-20261031.149.1', 'canvas-20261031.150.1'}:
         from studio_release_guard import CONTRACT
         contract = json.loads((SOURCE / 'web/src/services/studio-storage-contract.json').read_text(encoding='utf-8'))
         assert contract == CONTRACT
         manifest['storage_contract'] = contract
+    if composer_path:
+        assert composer_path.is_relative_to((ROOT / 'docs/research/studio-implementation').resolve())
+        composer = json.loads(composer_path.read_text(encoding='utf-8'))
+        assert composer['passed'] and not composer['baseline_reproduction'] and not composer['public_static_site']
+        assert all(composer['cleanup'].values()) and composer['static_bytes_unchanged'] and len(composer['submissions']) == 12
+        assert (ROOT / composer['build_report']).resolve() == build_path.resolve()
+        assert composer['server_errors'] == composer['page_errors'] == composer['forbidden_requests'] == []
+        manifest.update({'composer_report': composer_path.relative_to(ROOT).as_posix(), 'composer_report_sha256': digest(composer_path.read_bytes()), 'unchanged_storage_regression_not_rerun': True})
     if len(arguments) >= 4:
         extra_path = (ROOT / arguments[3]).resolve()
         assert extra_path.is_relative_to((ROOT / 'docs/research/studio-implementation').resolve())

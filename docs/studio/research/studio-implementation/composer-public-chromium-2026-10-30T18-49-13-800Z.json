@@ -1,0 +1,1115 @@
+{
+  "passed": true,
+  "at": "2026-10-30T18:49:13.826Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T18-29-33-472Z.json",
+  "public_static_site": true,
+  "baseline_reproduction": false,
+  "scope": "Actual frozen Web UI, native owned profiles, canvas selection and form/request/result binding for 11 published examples. All API responses and media are synthetic; not GPU generation, physical touch, production authorization or complete browser acceptance.",
+  "api_transport": "Explicit Playwright forwarding to the owned synthetic HTTP server; public UI acceptance only, not native CORS proof",
+  "checks": [
+    {
+      "name": "existing API catalog and standard-only policy load through actual connection UI",
+      "detail": true
+    },
+    {
+      "name": "a creation opened during native catalog restoration initializes once after the original catalog arrives",
+      "detail": true
+    },
+    {
+      "name": "selected canvas images suggest the published two-reference model and populate ordered visible previews",
+      "detail": true
+    },
+    {
+      "name": "invalid prompt is rejected before local staging or remote upload",
+      "detail": true
+    },
+    {
+      "name": "unreadable second original sends neither the first upload nor a generation request",
+      "detail": true
+    },
+    {
+      "name": "unconfirmed upload retains staged references and sends no generation",
+      "detail": true
+    },
+    {
+      "name": "explicit retry reuses original upload identity and ordered asset-role bindings",
+      "detail": true
+    },
+    {
+      "name": "downloaded original returns to a canvas image with the actual selected-source connections",
+      "detail": true
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-3080-image-edit-wai",
+      "detail": {
+        "task_type": "image_to_image",
+        "output": "image/png"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-3080-image-lustify-krea2",
+      "detail": {
+        "task_type": "text_to_image",
+        "output": "image/png"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-3080-image-refs-wai",
+      "detail": {
+        "task_type": "references_to_image",
+        "output": "image/png"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-3080-music-yue2",
+      "detail": {
+        "task_type": "text_to_audio",
+        "output": "audio/flac"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-4090-video-h3",
+      "detail": {
+        "task_type": "text_to_video",
+        "output": "video/mp4"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-4090-video-h3-i2v",
+      "detail": {
+        "task_type": "references_to_video",
+        "output": "video/mp4"
+      }
+    },
+    {
+      "name": "explicitly exchanging the two canvas images preserves published roles and links the actual input sources",
+      "detail": true
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-4090-video-h3-refs",
+      "detail": {
+        "task_type": "references_to_video",
+        "output": "video/mp4"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-5070-video-h3",
+      "detail": {
+        "task_type": "text_to_video",
+        "output": "video/mp4"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-5070-video-h3-i2v",
+      "detail": {
+        "task_type": "references_to_video",
+        "output": "video/mp4"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-5070-video-h3-refs",
+      "detail": {
+        "task_type": "references_to_video",
+        "output": "video/mp4"
+      }
+    },
+    {
+      "name": "published form, single generation binding and verified result: comfy-3080-3d-trellis2",
+      "detail": {
+        "task_type": "image_to_3d",
+        "output": "model/gltf-binary"
+      }
+    },
+    {
+      "name": "390px Web drawer keeps reference choices and submission controls inside the viewport",
+      "detail": true
+    },
+    {
+      "name": "model detail refuses creation when the current Key has no allowed specifications",
+      "detail": true
+    },
+    {
+      "name": "all business calls stay within the configured existing v1 protocol; no Admin, Worker, ComfyUI or agent requests",
+      "detail": true
+    }
+  ],
+  "api_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "ed5fbb447abf80e27915e03c89e808731d9f3ee5188d7385b2d1aca96342ed60",
+      "asset_id": "asset_30a6c249ce674f34a83c5abdf2dbf07b",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "ed5fbb447abf80e27915e03c89e808731d9f3ee5188d7385b2d1aca96342ed60",
+      "asset_id": "asset_30a6c249ce674f34a83c5abdf2dbf07b",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "81f1d03f294a8c65a6aef15325cb6a0df6e06fb274924a7d5e22956beb1fc09c",
+      "asset_id": "asset_0e7213fe10cf47e6bcc088b88f5ec06e",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_33652032e69c4223a260110aff3b7c82",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_33652032e69c4223a260110aff3b7c82/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "0267b6d2bbd8e4e300a3c1177eddee4ecf237ef9653aa43238cbfdd0403f5ace",
+      "asset_id": "asset_2603da7a5b5d4ae6a1c02b6798fa69b5",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_1183a261a242468a8ee9de1252015791",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_1183a261a242468a8ee9de1252015791/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_b2cb155dae264b438c52e28084949124",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_b2cb155dae264b438c52e28084949124/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "5447e158153e4af1e05b3fbe6b272eef97e12c25d46e158d46d9c52cf892e451",
+      "asset_id": "asset_77db6aa0c14b401b848d28b18f69c6b9",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "c9b10b5e409def1adbe0c28fed8576654dc3f593500eee0f2ac4450cefa2c290",
+      "asset_id": "asset_7698a305b9534d2985cd0f129de9868c",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_f96d21050bed43b496fd6ef9c0c8ac7f",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_f96d21050bed43b496fd6ef9c0c8ac7f/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_6e4eb0aca73f48d5b609ee48c360bd08",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_6e4eb0aca73f48d5b609ee48c360bd08/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_126d4f6ca80f4d2e9eb0f9f0ae61b455",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_126d4f6ca80f4d2e9eb0f9f0ae61b455/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "92e3def138117891d651e70133e956629e46c1405e18e0eda2ad3940b21c4497",
+      "asset_id": "asset_097c2a844e104299a516be45c3e0431e",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_d9b3116a9231409a9d1a20481266c2ff",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_d9b3116a9231409a9d1a20481266c2ff/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "625d1f005119dd9b71f4a49ee73ee5f6ba93dc00ae29f42f4c22677e7856e992",
+      "asset_id": "asset_1675dc55678b415f8bc46b72ce38f3ef",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "7fb9e6f7542cd5d99974067ffd393f17ee9a47e1c1bf072593d3ffcfe0ef3172",
+      "asset_id": "asset_f435e484a8ec46d0ad566aef1d4a3f45",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_630e16708b7344a6a656e65a8c236322",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_630e16708b7344a6a656e65a8c236322/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_2d5dfd63595743148e017132a598b17d",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_2d5dfd63595743148e017132a598b17d/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "22747de6a116dc50c053e2dd32ed3726bb7b35ff0f0a9650d99e226d7758fbfc",
+      "asset_id": "asset_d8f12184633743d58ee59f70fb5300da",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_60fd0ab1414c41f39781e9a32fb0d66c",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_60fd0ab1414c41f39781e9a32fb0d66c/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "2a30ef741d3b1f3c72a8a576ddcfcecc97f4196d819ac90168e11663f3725a33",
+      "asset_id": "asset_1d93b3878ac44e93ba361c284e6ef440",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "5f65a7ef5faca1a66aef4145ff87480d5203de515a1a551ec89409e255894923",
+      "asset_id": "asset_9c000dbac2d84c07a0640b95e139ca21",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_ac8be7012b8541cd9d9323a5d58c8fed",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_ac8be7012b8541cd9d9323a5d58c8fed/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "cbe8cc503331cf6e0a7c633d9af388b4572a89b976e814ceb3231e4078234bef",
+      "asset_id": "asset_189cee3734804a4594a54f0f459e6a24",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_48f850267f464543a76f1e709c64efbc",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_48f850267f464543a76f1e709c64efbc/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "submissions": [
+    {
+      "job_id": "job_b00a9ce84cad40468e11cc13449e954b",
+      "body": {
+        "model": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "Synthetic UI contract check: preserve the two references in their published order.",
+          "references": [
+            {
+              "asset_id": "asset_30a6c249ce674f34a83c5abdf2dbf07b",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_0e7213fe10cf47e6bcc088b88f5ec06e",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "tg-SgTjxiJiCWsSj3GcNK"
+      },
+      "idempotency_sha256": "af9443afda564e6a2b3bccad24973569c5de0dcb962d277187714c433edd4021",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_c1eee9c23d8a4832baa18565899d5c84",
+      "body": {
+        "model": "comfy-3080-image-edit-wai",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "Synthetic published model form verification.",
+          "source_image": {
+            "asset_id": "asset_2603da7a5b5d4ae6a1c02b6798fa69b5"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "CF8RyGnvqKwOF1ntGSc8Z"
+      },
+      "idempotency_sha256": "0f035713aa6ac60ac4c92eb88a9ddfbbce866f52c210b19900cd99a96700a9f7",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_6bf95cd00d42427e83ae8fae20d82feb",
+      "body": {
+        "model": "comfy-3080-image-lustify-krea2",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "Synthetic published model form verification."
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "sgmOkfLDdN96dCQC9NaVR"
+      },
+      "idempotency_sha256": "a27121b27e1f1106554b8777cf4dd03e0bebbbdc17867aa11f23d7fe1c74205a",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_80c4867ec3f8497f92e316660ac86b47",
+      "body": {
+        "model": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "Synthetic published model form verification.",
+          "references": [
+            {
+              "asset_id": "asset_77db6aa0c14b401b848d28b18f69c6b9",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_7698a305b9534d2985cd0f129de9868c",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "O9NjFZKq-Rj4gY44Y5Xpw"
+      },
+      "idempotency_sha256": "9f08fbd022e8951135bb98ed376acc36ebb98f5c9e8f16bb6f6e91343e37fea1",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_64f24ceca8144b55962d20b38fa3cb3c",
+      "body": {
+        "model": "comfy-3080-music-yue2",
+        "task_type": "text_to_audio",
+        "input": {
+          "prompt": "Synthetic published model form verification."
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard",
+          "seconds": 30
+        },
+        "client_request_id": "fpK2cr0LduyiByVcQqg_G"
+      },
+      "idempotency_sha256": "f07cfdd8b0a0d88c1aa900172e6f58b76e272e711c1883cbd7bf18ae65a9da76",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_640b24cad09a478db85c06fc5c64bd56",
+      "body": {
+        "model": "comfy-4090-video-h3",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "Synthetic published model form verification."
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "client_request_id": "4Ugd1uo7GSYHeDvNGMtP7"
+      },
+      "idempotency_sha256": "a8b7c5b6064febba304cf44467c0b0befd403284efb374102e13392d38b314d8",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_a785cb2105a44d6eb72003bf812d67b5",
+      "body": {
+        "model": "comfy-4090-video-h3-i2v",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic published model form verification.",
+          "references": [
+            {
+              "asset_id": "asset_097c2a844e104299a516be45c3e0431e",
+              "role": "first_frame"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "client_request_id": "9987P6S0j6ugH4AElIFXE"
+      },
+      "idempotency_sha256": "78fb3e4703d3c59d9ba888edb371acbbcab6c30eb15f42af81f932dce9edbc0a",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_8a020d9f5fa34e93b515d855afb46ab0",
+      "body": {
+        "model": "comfy-4090-video-h3-refs",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic published model form verification.",
+          "references": [
+            {
+              "asset_id": "asset_1675dc55678b415f8bc46b72ce38f3ef",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_f435e484a8ec46d0ad566aef1d4a3f45",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard",
+          "seconds": 5.167
+        },
+        "client_request_id": "shz449vptdBPfGuulkArR"
+      },
+      "idempotency_sha256": "c5e55c3cd5f2f9a273b677d755c9704083f375050241609ace8eeec5d7eccdc7",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_99a59ef2747e455cac9375a1d60eb6bf",
+      "body": {
+        "model": "comfy-5070-video-h3",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "Synthetic published model form verification."
+        },
+        "parameters": {
+          "n": 1,
+          "size": "512x288",
+          "quality": "standard",
+          "seconds": 1.625
+        },
+        "client_request_id": "zvqf7TQVcEijKfFkRI6HJ"
+      },
+      "idempotency_sha256": "53a3c1d178fd60b3717ae07a65d3cd8d12da18bec13622f077658908b5ca9b08",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_b1daaae3d4f246869cc4d7929936301d",
+      "body": {
+        "model": "comfy-5070-video-h3-i2v",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic published model form verification.",
+          "references": [
+            {
+              "asset_id": "asset_d8f12184633743d58ee59f70fb5300da",
+              "role": "first_frame"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "512x288",
+          "quality": "standard",
+          "seconds": 1.625
+        },
+        "client_request_id": "Ewd_GMLzZZ8iPtrDuXCbY"
+      },
+      "idempotency_sha256": "b6baaeb00fcaa6bab58d29eaa7772fc0885457cabc3e799ffb420002137df30c",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_18da1547f3a242508aad50d62430d31a",
+      "body": {
+        "model": "comfy-5070-video-h3-refs",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic published model form verification.",
+          "references": [
+            {
+              "asset_id": "asset_1d93b3878ac44e93ba361c284e6ef440",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_9c000dbac2d84c07a0640b95e139ca21",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "512x288",
+          "quality": "standard",
+          "seconds": 1.625
+        },
+        "client_request_id": "Dq1kXcLIoX1mxzGPBl-BL"
+      },
+      "idempotency_sha256": "ee8a43755f43922bc02b0e79d94d094390f6391f9c6129d5c9b6bbe1bc76ecee",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_998b6e425c3c4ece8d1806f9c1bdcc00",
+      "body": {
+        "model": "comfy-3080-3d-trellis2",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_189cee3734804a4594a54f0f459e6a24"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard"
+        },
+        "client_request_id": "w2HnPhjbF1vMVqRJCpjbP"
+      },
+      "idempotency_sha256": "b490e2cd8bb9f510af36d063f496ae636673a10bc378209556da4548ebc106b2",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-49-13-800Z/selected-canvas-references.png",
+      "bytes": 104774,
+      "sha256": "d02b8264e722f80bc29a46a9b4a27b83dcc70fe362c00c3d1f1c8e9e13d8c1ea"
+    },
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-49-13-800Z/reference-result-returned-to-canvas.png",
+      "bytes": 98906,
+      "sha256": "62eca0b7db4b68a1598c0230496014c6cfa47cf63b296c6b74c6e90a19a89033"
+    },
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-49-13-800Z/published-video-form-and-reference-choice.png",
+      "bytes": 121427,
+      "sha256": "6f8b7fc0a8f917df4196236527abbe505ba02e01a65d0f80aa98119286330ee8"
+    },
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-49-13-800Z/glb-result-returned-to-canvas.png",
+      "bytes": 89164,
+      "sha256": "edff5203cdb7070f397c90c706414b938ed7e86952edde903282b39cc841b141"
+    },
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-49-13-800Z/390-reference-composer.png",
+      "bytes": 51376,
+      "sha256": "4dca7929d3a616b66c2637eac87352132bd1cb830938c56c56b208423432de18"
+    }
+  ],
+  "server_errors": [],
+  "page_errors": [],
+  "forbidden_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://43.165.167.179:39445",
+    "synthetic_api": "http://192.168.31.95:6859"
+  },
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio150/composer-chromium-2026-10-30T18-49-13-800Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

@@ -1,0 +1,555 @@
+{
+  "passed": false,
+  "at": "2026-10-30T18:24:09.748Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T18-04-09-240Z.json",
+  "public_static_site": false,
+  "baseline_reproduction": false,
+  "scope": "Actual frozen Web UI, native owned profiles, canvas selection and form/request/result binding for 11 published examples. All API responses and media are synthetic; not GPU generation, physical touch, production authorization or complete browser acceptance.",
+  "api_transport": "Two real native non-loopback HTTP origins; no business route interception",
+  "checks": [
+    {
+      "name": "existing API catalog and standard-only policy load through actual connection UI",
+      "detail": true
+    },
+    {
+      "name": "selected canvas images suggest the published two-reference model and populate ordered visible previews",
+      "detail": true
+    },
+    {
+      "name": "invalid prompt is rejected before local staging or remote upload",
+      "detail": true
+    },
+    {
+      "name": "unreadable second original sends neither the first upload nor a generation request",
+      "detail": true
+    },
+    {
+      "name": "unconfirmed upload retains staged references and sends no generation",
+      "detail": true
+    },
+    {
+      "name": "explicit retry reuses original upload identity and ordered asset-role bindings",
+      "detail": true
+    },
+    {
+      "name": "downloaded original returns to a canvas image with the actual selected-source connections",
+      "detail": true
+    }
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "a7693f80fad43324b949fbb63b5de194f405f5e7803a0db73584f8645173773a",
+      "asset_id": "asset_38fdc379624340d988d1f1c83074e390",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "a7693f80fad43324b949fbb63b5de194f405f5e7803a0db73584f8645173773a",
+      "asset_id": "asset_38fdc379624340d988d1f1c83074e390",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "c7dab5130cf2dd15295d41231e2800440e33656ce7fe2666334255fae6fb7ebf",
+      "asset_id": "asset_ddf3765094d643a391c2971c9a8c6c92",
+      "sha256": "eb1c6d03fed8a04fc38ae0911247b0138f04dc6b1d1787b8a4b735caa11af96d"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/jobs",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/content/content_dcc807c90ae84e9a9b4080aae25a333c",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_dcc807c90ae84e9a9b4080aae25a333c",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/content/content_dcc807c90ae84e9a9b4080aae25a333c/download",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_dcc807c90ae84e9a9b4080aae25a333c/download",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/assets",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/assets",
+      "bearer_present": true,
+      "cookie_present": false,
+      "idempotency_sha256": "becffd3e29230cfbd5e4557f58f3aa67c7c8c71cbaf1503f58c1539a2e4b8920",
+      "asset_id": "asset_fd2041d9a42c4fe4a2d7986573ea61d1",
+      "sha256": "f375c5167cc0a067a65751e02f7a7364763873aaf214de640245d4e1cffa8428"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/jobs",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/jobs",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/content/content_6beb9d60d6584311916da9311c927dd0",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_6beb9d60d6584311916da9311c927dd0",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/content/content_6beb9d60d6584311916da9311c927dd0/download",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/content/content_6beb9d60d6584311916da9311c927dd0/download",
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "submissions": [
+    {
+      "job_id": "job_431325f475a64845bde7aaf0e5a3c657",
+      "body": {
+        "model": "comfy-3080-image-refs-wai",
+        "task_type": "references_to_image",
+        "input": {
+          "prompt": "Synthetic UI contract check: preserve the two references in their published order.",
+          "references": [
+            {
+              "asset_id": "asset_38fdc379624340d988d1f1c83074e390",
+              "role": "reference_0"
+            },
+            {
+              "asset_id": "asset_ddf3765094d643a391c2971c9a8c6c92",
+              "role": "reference_1"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "bwNIlcA_9JHTVtjV-35IC"
+      },
+      "idempotency_sha256": "4b68ae0a7197dc7cad0ba5bbc4cedbb11d9c734751a06963fc2778e44aeeb888",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "job_id": "job_1a75b8deb6fb4103a201dc5f23d2212e",
+      "body": {
+        "model": "comfy-3080-image-edit-wai",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "Synthetic published model form verification.",
+          "source_image": {
+            "asset_id": "asset_fd2041d9a42c4fe4a2d7986573ea61d1"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "size": "720x1080",
+          "quality": "standard"
+        },
+        "client_request_id": "FPfpIYhWnkWKCofLIsyNn"
+      },
+      "idempotency_sha256": "8fd9539e4cf75f91b7b9e9061a31bb9d8a1a1997b6a8e95b5baf26572dcb36b1",
+      "release_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-24-09-747Z/selected-canvas-references.png",
+      "bytes": 128303,
+      "sha256": "dfc2150aa99e2c849a8bf5d8fd07e8c346ee5c19f24fe66fae344d256029a0d5"
+    },
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-24-09-747Z/reference-result-returned-to-canvas.png",
+      "bytes": 113663,
+      "sha256": "45add9ad3d721a1f74c1c89fdbdde287c3cf2e8fee79e725ef428922fc07be37"
+    },
+    {
+      "file": "docs/media/studio-150/composer-chromium-2026-10-30T18-24-09-747Z/failure.png",
+      "bytes": 110380,
+      "sha256": "f8d9ff55354577d60c3e17e20028b573161dfa4af0ea9b504807ba321730f421"
+    }
+  ],
+  "server_errors": [],
+  "page_errors": [],
+  "forbidden_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:4010",
+    "synthetic_api": "http://192.168.31.95:4009"
+  },
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "failure": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'blob')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:157)\n    at async <anonymous>:337:30\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_composer.mjs:193:38",
+  "failure_state": {
+    "intents": [
+      {
+        "version": 1,
+        "id": "FPfpIYhWnkWKCofLIsyNn",
+        "identity": {
+          "profileId": "sLn4QbC3nnQ-UofwexVK_",
+          "origin": "http://192.168.31.95:4009",
+          "fingerprint": "24e05ddbae5c3fc14eb92b8aedf0a62bf1747798ce8396ab58e44ce3eb0eaa01"
+        },
+        "projectId": "composer-project-0",
+        "nodeId": "studio-task-o3tWIWBb20Wec6B5mEWH6",
+        "idempotencyKey": "studio-job-FPfpIYhWnkWKCofLIsyNn",
+        "releaseDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage": "terminal",
+        "output": {
+          "mediaTypes": [
+            "image/png"
+          ],
+          "maxBytes": 33554432
+        },
+        "createdAt": 1793384691532,
+        "updatedAt": 1793384691762,
+        "canvas": {
+          "node": {
+            "id": "studio-task-o3tWIWBb20Wec6B5mEWH6",
+            "type": "studio:task",
+            "title": "WAI · 图像编辑 · RTX 3080",
+            "position": {
+              "x": 554.375,
+              "y": 447.5
+            },
+            "width": 340,
+            "height": 260,
+            "metadata": {
+              "model": "comfy-3080-image-edit-wai",
+              "prompt": "Synthetic published model form verification.",
+              "status": "loading"
+            }
+          },
+          "sourceIds": [
+            "reference-0"
+          ]
+        },
+        "job": {
+          "id": "job_1a75b8deb6fb4103a201dc5f23d2212e",
+          "object": "generation.job",
+          "model": "comfy-3080-image-edit-wai",
+          "task_type": "image_to_image",
+          "status": "succeeded",
+          "updated_revision": 1,
+          "created_at": 1793384691,
+          "completed_at": 1793384691,
+          "artifacts": [
+            {
+              "id": "content_6beb9d60d6584311916da9311c927dd0"
+            }
+          ]
+        },
+        "pollPaused": false
+      },
+      {
+        "version": 1,
+        "id": "bwNIlcA_9JHTVtjV-35IC",
+        "identity": {
+          "profileId": "sLn4QbC3nnQ-UofwexVK_",
+          "origin": "http://192.168.31.95:4009",
+          "fingerprint": "24e05ddbae5c3fc14eb92b8aedf0a62bf1747798ce8396ab58e44ce3eb0eaa01"
+        },
+        "projectId": "composer-project-0",
+        "nodeId": "studio-task--FE85g6Qcrt3m5ZbsHZ7k",
+        "idempotencyKey": "studio-job-bwNIlcA_9JHTVtjV-35IC",
+        "releaseDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage": "terminal",
+        "output": {
+          "mediaTypes": [
+            "image/png"
+          ],
+          "maxBytes": 33554432
+        },
+        "createdAt": 1793384686991,
+        "updatedAt": 1793384687251,
+        "canvas": {
+          "node": {
+            "id": "studio-task--FE85g6Qcrt3m5ZbsHZ7k",
+            "type": "studio:task",
+            "title": "WAI · 双参考图生图 · RTX 3080",
+            "position": {
+              "x": 554.375,
+              "y": 447.5
+            },
+            "width": 340,
+            "height": 260,
+            "metadata": {
+              "model": "comfy-3080-image-refs-wai",
+              "prompt": "Synthetic UI contract check: preserve the two references in their published order.",
+              "status": "loading"
+            }
+          },
+          "sourceIds": [
+            "reference-0",
+            "reference-1"
+          ]
+        },
+        "job": {
+          "id": "job_431325f475a64845bde7aaf0e5a3c657",
+          "object": "generation.job",
+          "model": "comfy-3080-image-refs-wai",
+          "task_type": "references_to_image",
+          "status": "succeeded",
+          "updated_revision": 1,
+          "created_at": 1793384687,
+          "completed_at": 1793384687,
+          "artifacts": [
+            {
+              "id": "content_dcc807c90ae84e9a9b4080aae25a333c"
+            }
+          ]
+        },
+        "pollPaused": false
+      }
+    ],
+    "results": [
+      {
+        "version": 1,
+        "id": "studio:24e05ddbae5c3fc14eb92b8aedf0a62bf1747798ce8396ab58e44ce3eb0eaa01:content_6beb9d60d6584311916da9311c927dd0",
+        "identity": {
+          "profileId": "sLn4QbC3nnQ-UofwexVK_",
+          "origin": "http://192.168.31.95:4009",
+          "fingerprint": "24e05ddbae5c3fc14eb92b8aedf0a62bf1747798ce8396ab58e44ce3eb0eaa01"
+        },
+        "intentId": "FPfpIYhWnkWKCofLIsyNn",
+        "jobId": "job_1a75b8deb6fb4103a201dc5f23d2212e",
+        "metadata": {
+          "id": "content_6beb9d60d6584311916da9311c927dd0",
+          "bytes": 81,
+          "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf",
+          "media_type": "image/png",
+          "expires_at": 1793413491,
+          "metadata": {
+            "width": 16,
+            "height": 8,
+            "duration_milliseconds": 1000
+          }
+        },
+        "savedAt": 1793384692549
+      },
+      {
+        "version": 1,
+        "id": "studio:24e05ddbae5c3fc14eb92b8aedf0a62bf1747798ce8396ab58e44ce3eb0eaa01:content_dcc807c90ae84e9a9b4080aae25a333c",
+        "identity": {
+          "profileId": "sLn4QbC3nnQ-UofwexVK_",
+          "origin": "http://192.168.31.95:4009",
+          "fingerprint": "24e05ddbae5c3fc14eb92b8aedf0a62bf1747798ce8396ab58e44ce3eb0eaa01"
+        },
+        "intentId": "bwNIlcA_9JHTVtjV-35IC",
+        "jobId": "job_431325f475a64845bde7aaf0e5a3c657",
+        "metadata": {
+          "id": "content_dcc807c90ae84e9a9b4080aae25a333c",
+          "bytes": 81,
+          "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf",
+          "media_type": "image/png",
+          "expires_at": 1793413487,
+          "metadata": {
+            "width": 16,
+            "height": 8,
+            "duration_milliseconds": 1000
+          }
+        },
+        "savedAt": 1793384687868
+      }
+    ],
+    "text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n已连接\n画布\n资产\n提示词库\n画布元素\n4\n选择\n全部\n参考 A · 主体与构图\n图片\n参考 B · 光线与配色\n图片\nWAI · 双参考图生图 · RTX 3080\n图片\nWAI · 图像编辑 · RTX 3080\n图片\n参考创作 · WAI · 图像编辑 · RTX 3080\n新建创作\n快捷键\nWAI · 图像编辑 · RTX 3080\n80%\n任务已受理，可以离开画布，稍后继续查看"
+  },
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio150/composer-chromium-2026-10-30T18-24-09-747Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}

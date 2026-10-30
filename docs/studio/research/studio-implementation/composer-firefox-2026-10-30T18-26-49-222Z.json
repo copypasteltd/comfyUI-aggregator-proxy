@@ -1,0 +1,134 @@
+{
+  "passed": false,
+  "at": "2026-10-30T18:26:49.248Z",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T18-04-09-240Z.json",
+  "public_static_site": false,
+  "baseline_reproduction": false,
+  "scope": "Actual frozen Web UI, native owned profiles, canvas selection and form/request/result binding for 11 published examples. All API responses and media are synthetic; not GPU generation, physical touch, production authorization or complete browser acceptance.",
+  "api_transport": "Two real native non-loopback HTTP origins; no business route interception",
+  "checks": [
+    {
+      "name": "existing API catalog and standard-only policy load through actual connection UI",
+      "detail": true
+    }
+  ],
+  "api_requests": [
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/access-policy",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/access-policy",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/models",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "bearer_present": true,
+      "cookie_present": false
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/v1/capabilities",
+      "bearer_present": false,
+      "cookie_present": false
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities",
+      "bearer_present": true,
+      "cookie_present": false
+    }
+  ],
+  "submissions": [],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-150/composer-firefox-2026-10-30T18-26-49-222Z/failure.png",
+      "bytes": 89273,
+      "sha256": "b8ddc91b1f008ae930da4d4eff3017d00c668aa024e54b15d9e6a2b7fdd5d3f0"
+    }
+  ],
+  "server_errors": [],
+  "page_errors": [],
+  "forbidden_requests": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "fixture_servers_closed": true
+  },
+  "product_timeouts_changed": false,
+  "origins": {
+    "canvas": "http://192.168.31.95:7208",
+    "synthetic_api": "http://192.168.31.95:7103"
+  },
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "155.0",
+  "failure": "page.waitForFunction: Timeout 20000ms exceeded.\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_composer.mjs:155:20",
+  "failure_state": {
+    "intents": [],
+    "results": [],
+    "text": "跳到主要内容\n青柠画布\nCOMFY STUDIO\n画布\n模型\n任务\n素材\n已连接\n画布\n资产\n提示词库\n画布元素\n2\n选择\n全部\n参考 A · 主体与构图\n图片\n参考 B · 光线与配色\n图片\n参考创作 · 预检与恢复\n新建创作\n快捷键\n参考 A · 主体与构图\n参考 B · 光线与配色\n打组\n80%\n新建创作\n模型\n请选择可用模型\n当前创作类型没有已授权的可用规格时，可以选择其他模型，或返回模型页刷新目录。\n关 闭\n提交 1 项生成任务"
+  },
+  "resource_close_errors": [],
+  "full_selected_page_recording": ".local/studio150/composer-firefox-2026-10-30T18-26-49-222Z/complete-page.webm",
+  "static_bytes_unchanged": true
+}
