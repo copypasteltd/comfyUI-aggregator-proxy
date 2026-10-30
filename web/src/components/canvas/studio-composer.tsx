@@ -103,7 +103,7 @@ export default function StudioComposer({ projectId, nodes }: { projectId: string
     const imageNodes = nodes.filter((node) => node.type === CanvasNodeType.Image && node.metadata?.storageKey);
     return <Drawer open={Boolean(draft)} onClose={() => !busy && close()} title={<span><Sparkles size={17} /> 新建创作</span>} size="large" className="studio-composer" destroyOnHidden={false} footer={<div className="studio-actions"><Button onClick={close} disabled={busy}>稍后继续</Button><Button type="primary" icon={<Sparkles size={16} />} loading={busy} disabled={!model || Boolean(model.unavailable_reason) || !catalog?.releaseGuard} onClick={() => void submit()}>提交 {count} 项生成任务</Button></div>}>
         {!client ? <Alert showIcon type="info" title="连接你的生成服务" description={<NavLink to="/config" onClick={close}>填写地址及业务 API Key 后开始创作</NavLink>} /> : <div className="studio-form">
-            {!catalog?.releaseGuard && <Alert showIcon type="warning" title="当前服务暂不支持画布提交版本校验" description="可以查看模型说明，服务升级后刷新连接即可提交。" />}
+            {!catalog?.releaseGuard && <Alert showIcon type="warning" title="当前服务仅可查看模型" description="该 API 未声明提交所需的发布校验能力，请连接已支持此能力的原服务。" />}
             {error && <Alert type="error" showIcon title="操作尚未完成" description={error} />}
             <label>模型<Select aria-label="生成模型" showSearch optionFilterProp="label" value={modelId || undefined} onChange={(id) => { setModelId(id); setPresetIndex(0); setParameters({}); setChoices({}); setWeights({}); setError(""); }} disabled={busy} options={models.map((item) => ({ value: item.id, disabled: Boolean(item.unavailable_reason), label: `${taskLabels[item.task_type]} · ${item.usage?.display_name || item.id}` }))} /></label>
             {model && <>

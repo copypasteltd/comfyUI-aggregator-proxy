@@ -176,7 +176,7 @@ async function reconcileSubmission(id: string, signal: AbortSignal): Promise<Int
     if (!intent) throw new Error("找不到原提交记录，无法只读核对");
     const { client, catalog } = connection(intent.identity);
     if (intent.job) return intent;
-    if (!catalog?.submissionLookup) throw new Error("原服务尚未支持只读核对，请更新服务后重新连接；原记录已保留");
+    if (!catalog?.submissionLookup) throw new Error("原服务未提供只读核对能力；原记录已保留，请通过原任务记录确认，不要补发生成");
     try {
         const result = await client.lookupSubmission(intent.body, intent.idempotencyKey, intent.releaseDigest, signal);
         if (result.data.outcome === "found") return await applyJob(id, { ...result, data: result.data.job });
