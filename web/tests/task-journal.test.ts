@@ -37,7 +37,7 @@ test("journal SHA, format/version, foreign identity and added configuration fiel
     const source = createTaskJournal([task()], identity);
     const corrupted = JSON.parse(source); corrupted.payload += " ";
     assert.throws(() => readTaskJournal(JSON.stringify(corrupted), identity), /SHA-256/);
-    const unknown = JSON.parse(source); unknown.version = 2;
+    const unknown = JSON.parse(source); unknown.version = 99;
     assert.throws(() => readTaskJournal(JSON.stringify(unknown), identity));
     assert.throws(() => readTaskJournal(source, { ...identity, origin: "http://another.test" }), /原服务/);
     assert.throws(() => readTaskJournal(source, { ...identity, fingerprint: "b".repeat(64) }), /原API Key/);

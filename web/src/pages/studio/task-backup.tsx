@@ -53,7 +53,7 @@ export default function TaskBackup() {
             {preview && <div style={{ display: "grid", gap: 16, overflowWrap: "anywhere" }}>
                 <p>{preview.filename} · {preview.value.tasks.length}条记录 · 有任务ID {preview.value.tasks.filter((task) => task.job).length}条 · 无任务ID {preview.value.tasks.filter((task) => !task.job).length}条</p>
                 <p className="studio-note">原服务：{preview.value.identity.origin}</p>
-                <Alert title="导入后请主动核对" description="现有记录保留；导入不发起生成或查询。已有任务ID可主动查询，无任务ID的备份会阻止补发生成，请读取原服务历史核对。" type="info" showIcon />
+                <Alert title="导入后请主动核对" description="现有记录保留；导入不发起生成或查询。已有任务ID可主动查询，无任务ID的备份只读核对原提交；批次关联不会允许补发生成。" type="info" showIcon />
                 {error && <Alert title="未导入，原记录已保留" description={error} type="error" showIcon />}
                 <ul style={{ maxHeight: "40vh", overflowY: "auto", margin: 0, padding: 0, listStyle: "none" }}>{preview.value.tasks.map((task) => <li key={task.id} style={{ marginBottom: 16 }}><b>{JSON.parse(task.body).model}</b> <Tag>{task.job ? "有任务ID" : "待核对"}</Tag><div style={{ fontSize: 12 }}>{task.job?.id || task.id}</div></li>)}</ul>
             </div>}

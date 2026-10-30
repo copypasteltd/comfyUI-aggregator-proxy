@@ -4,7 +4,8 @@ import { Alert, App, Button, Drawer, Input, InputNumber, Select, Switch } from "
 import { Sparkles, Upload } from "lucide-react";
 import { useStudioStore } from "@/stores/use-studio-store";
 import { useStudioComposerStore } from "@/stores/use-studio-composer-store";
-import { createIntent, stageUpload, submitIntent, uploadReference, subscribeStudioTasks } from "@/services/aggregator-engine";
+import { createIntentBatch, stageUpload, submitIntent, submitPreparedBatch, uploadReference, subscribeStudioTasks } from "@/services/aggregator-engine";
+import { MAX_GENERATION_COUNT } from "@/constant/generation";
 import { journalList, type InputUpload } from "@/services/aggregator-journal";
 import { describePreset, presetPolicyReason, schemaProperties, taskLabels } from "@/services/api/aggregator/capabilities";
 import { buildComposerRequest, slotIndex, type ReferenceChoice } from "@/services/api/aggregator/composer";
@@ -29,6 +30,7 @@ export default function StudioComposer({ projectId, nodes }: { projectId: string
     const catalog = useStudioStore((state) => state.catalog);
     const [modelId, setModelId] = useState("");
     const [presetIndex, setPresetIndex] = useState(0);
+    const [count, setCount] = useState(1);
     const [input, setInput] = useState<JsonObject>({});
     const [parameters, setParameters] = useState<JsonObject>({});
     const [choices, setChoices] = useState<Record<string, string | undefined>>({});
@@ -44,7 +46,7 @@ export default function StudioComposer({ projectId, nodes }: { projectId: string
         const available = models.filter((item) => !item.unavailable_reason);
         const suggested = available.find((item) => item.id === draft.preferredModel) || available.find((item) => !draft.media || item.usage.output.media_types.some((mime) => mime.startsWith(`${draft.media}/`))) || available[0];
         const firstPreset = suggested && catalog ? suggested.usage.presets.findIndex((preset) => !presetPolicyReason(suggested, preset, catalog.policy)) : 0;
-        setModelId(suggested?.id || ""); setPresetIndex(Math.max(0, firstPreset ?? 0)); setInput({ prompt: draft.prompt }); setParameters({}); setChoices({}); setWeights({}); setError("");
+        setModelId(suggested?.id || ""); setPresetIndex(Math.max(0, firstPreset ?? 0)); setCount(1); setInput({ prompt: draft.prompt }); setParameters({}); setChoices({}); setWeights({}); setError("");
     // A new explicit creation starts a new draft. Refreshing catalog must not replace a user's draft.
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [draft?.id]);
@@ -71,6 +73,7 @@ export default function StudioComposer({ projectId, nodes }: { projectId: string
     });
     const submit = () => act(async () => {
         if (!model || !draft || !client) throw new Error("请先连接服务并选择模型");
+        if (!Number.isSafeInteger(count) || count < 1 || count > MAX_GENERATION_COUNT) throw new Error("请选择画布支持的任务数量");
         const restriction = catalog && presetPolicyReason(model, model.usage.presets[presetIndex], catalog.policy);
         if (restriction) throw new Error(restriction);
         const fingerprint = client.fingerprint;
@@ -85,17 +88,20 @@ export default function StudioComposer({ projectId, nodes }: { projectId: string
         if (useStudioStore.getState().client?.fingerprint !== fingerprint) throw new Error("连接已切换，请使用原连接继续");
         const allowed = schemaProperties(model.usage, "input");
         const request = buildComposerRequest(model, presetIndex, { input: Object.fromEntries(Object.entries(input).filter(([key]) => key in allowed)), parameters, references });
-        const node: CanvasNodeData = { id: draft.id, type: "studio:task", title: model.usage.display_name, position: draft.position, width: 340, height: 260, metadata: { model: model.id, prompt: String(request.input.prompt || ""), status: "loading" } };
-        const intent = await createIntent(projectId, node.id, model, request, { node, sourceIds: draft.sourceIds });
+        const entries = Array.from({ length: count }, (_, index) => {
+            const node: CanvasNodeData = { id: index ? `${draft.id}-${index}` : draft.id, type: "studio:task", title: model.usage.display_name + (count > 1 ? ` · ${index + 1}/${count}` : ""), position: { x: draft.position.x + index % 3 * 380, y: draft.position.y + Math.floor(index / 3) * 300 }, width: 340, height: 260, metadata: { model: model.id, prompt: String(request.input.prompt || ""), status: "loading" } };
+            return { nodeId: node.id, canvas: { node, sourceIds: draft.sourceIds } };
+        });
+        const intents = await createIntentBatch(projectId, model, request, entries, draft.id);
         close();
-        try { await submitIntent(intent.id); message.success("任务已受理，可以离开画布，稍后继续查看"); }
+        try { if (count > 1) await submitPreparedBatch(draft.id, projectId, intents[0].identity); else await submitIntent(intents[0].id); message.success(count > 1 ? "批次已提交，可在任务页逐项查看" : "任务已受理，可以离开画布，稍后继续查看"); }
         catch (reason) { message.warning(reason instanceof Error ? reason.message : "提交结果待核对；原提交记录已保留"); }
     });
     const inputProperties = model ? schemaProperties(model.usage, "input") : {};
     const parameterProperties = model ? schemaProperties(model.usage, "parameters") : {};
     const fixedFields = Object.keys(model?.usage.presets[presetIndex] || {});
     const imageNodes = nodes.filter((node) => node.type === CanvasNodeType.Image && node.metadata?.storageKey);
-    return <Drawer open={Boolean(draft)} onClose={() => !busy && close()} title={<span><Sparkles size={17} /> 新建创作</span>} size="large" className="studio-composer" destroyOnHidden={false} footer={<div className="studio-actions"><Button onClick={close} disabled={busy}>稍后继续</Button><Button type="primary" icon={<Sparkles size={16} />} loading={busy} disabled={!model || Boolean(model.unavailable_reason) || !catalog?.releaseGuard} onClick={() => void submit()}>提交 1 项生成任务</Button></div>}>
+    return <Drawer open={Boolean(draft)} onClose={() => !busy && close()} title={<span><Sparkles size={17} /> 新建创作</span>} size="large" className="studio-composer" destroyOnHidden={false} footer={<div className="studio-actions"><Button onClick={close} disabled={busy}>稍后继续</Button><Button type="primary" icon={<Sparkles size={16} />} loading={busy} disabled={!model || Boolean(model.unavailable_reason) || !catalog?.releaseGuard} onClick={() => void submit()}>提交 {count} 项生成任务</Button></div>}>
         {!client ? <Alert showIcon type="info" title="连接你的生成服务" description={<NavLink to="/config" onClick={close}>填写地址及业务 API Key 后开始创作</NavLink>} /> : <div className="studio-form">
             {!catalog?.releaseGuard && <Alert showIcon type="warning" title="当前服务暂不支持画布提交版本校验" description="可以查看模型说明，服务升级后刷新连接即可提交。" />}
             {error && <Alert type="error" showIcon title="操作尚未完成" description={error} />}
@@ -103,6 +109,8 @@ export default function StudioComposer({ projectId, nodes }: { projectId: string
             {model && <>
                 <p>{model.usage.description}</p>
                 <label>完整规格<Select aria-label="完整规格" value={presetIndex} onChange={(index) => { setPresetIndex(index); setParameters({}); }} disabled={busy} options={model.usage.presets.map((preset, index) => { const restriction = catalog && presetPolicyReason(model, preset, catalog.policy); return { value: index, disabled: Boolean(restriction), label: `${describePreset(preset)}${restriction ? ` · ${restriction}` : ""}` }; })} /></label>
+                <label>任务数量<InputNumber aria-label="任务数量" value={count} min={1} max={MAX_GENERATION_COUNT} precision={0} disabled={busy} onChange={(value) => setCount(value ?? 1)} style={{ width: "100%" }} /></label>
+                {count > 1 && <p className="studio-note">将创建 {count} 项独立任务，分别排队并占用额度；固定种子会重复使用。中途提交未确认时暂停，已受理项继续，未发送项可在任务页继续。</p>}
                 {Object.entries(inputProperties).filter(([name]) => !["source_image", "mask", "references"].includes(name)).map(([name, schema]) => <label key={name}>{fieldLabels[name] || name}{field(name, schema, input[name], (value) => setInput((values) => ({ ...values, [name]: value })))}</label>)}
                 {model.usage.references.slots.map((slot) => {
                     const index = slotIndex(slot.path);
@@ -123,7 +131,7 @@ export default function StudioComposer({ projectId, nodes }: { projectId: string
                     </fieldset>;
                 })}
                 {Object.entries(parameterProperties).filter(([name]) => name !== "n" && !fixedFields.includes(name)).map(([name, schema]) => <label key={name}>{fieldLabels[name] || name}{field(name, schema, parameters[name], (value) => setParameters((values) => ({ ...values, [name]: value })))}</label>)}
-                <div className="studio-note">{model.usage.notes.map((note) => <p key={note}>{note}</p>)}<p>生成完成后的云端素材保留 {model.usage.output_retention_seconds / 3600} 小时；存入本机的副本独立保留。每次提交仅创建一个任务。</p></div>
+                <div className="studio-note">{model.usage.notes.map((note) => <p key={note}>{note}</p>)}<p>生成完成后的云端素材保留 {model.usage.output_retention_seconds / 3600} 小时；存入本机的副本独立保留。每项使用相同输入与完整规格，结果独立保留。</p></div>
             </>}
         </div>}
     </Drawer>;

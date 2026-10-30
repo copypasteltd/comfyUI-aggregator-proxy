@@ -2,8 +2,9 @@ import { sha256 } from "@noble/hashes/sha256";
 import { bytesToHex } from "@noble/hashes/utils";
 import { taskTypes, terminalStatuses, type RemoteJob } from "./api/aggregator/types";
 import type { IdentityRef, Intent } from "./aggregator-journal";
+import { assertBatchMembers, assertBatchRef } from "./aggregator-batch";
 
-export type TaskJournalRecord = Pick<Intent, "version" | "id" | "identity" | "projectId" | "nodeId" | "body" | "idempotencyKey" | "releaseDigest" | "stage" | "createdAt" | "updatedAt" | "output" | "job">;
+export type TaskJournalRecord = Pick<Intent, "version" | "id" | "identity" | "projectId" | "nodeId" | "body" | "idempotencyKey" | "releaseDigest" | "stage" | "createdAt" | "updatedAt" | "output" | "job" | "batch">;
 export type TaskJournalBackup = { exportedAt: number; identity: Pick<IdentityRef, "origin" | "fingerprint">; tasks: TaskJournalRecord[] };
 const digest = (value: string) => bytesToHex(sha256(new TextEncoder().encode(value)));
 const object = (value: unknown): value is Record<string, unknown> => Boolean(value && typeof value === "object" && !Array.isArray(value));
@@ -36,9 +37,10 @@ function validateRequest(value: unknown) {
 }
 
 export function validateTaskRecord(value: unknown): asserts value is TaskJournalRecord {
-    fields(value, ["version", "id", "identity", "projectId", "nodeId", "body", "idempotencyKey", "releaseDigest", "stage", "createdAt", "updatedAt", "output", "job"]);
+    fields(value, ["version", "id", "identity", "projectId", "nodeId", "body", "idempotencyKey", "releaseDigest", "stage", "createdAt", "updatedAt", "output", "job", "batch"]);
     if (value.version !== 1 || !text(value.id) || !/^[A-Za-z0-9_-]+$/.test(value.id) || !text(value.projectId) || !text(value.nodeId) || !text(value.body) || value.idempotencyKey !== `studio-job-${value.id}` || !hash(value.releaseDigest) || !natural(value.createdAt) || !natural(value.updatedAt) || !["prepared", "submitting", "unknown", "accepted", "terminal"].includes(String(value.stage))) fail();
     identity(value.identity);
+    if (value.batch !== undefined) assertBatchRef(value.batch);
     let request;
     try { request = JSON.parse(value.body); } catch { fail(); }
     fields(request, ["model", "task_type", "input", "parameters", "client_request_id"]);
@@ -66,20 +68,20 @@ export function validateTaskRecord(value: unknown): asserts value is TaskJournal
 export function taskJournalRecord(intent: Intent): TaskJournalRecord {
     const { version, id, identity: owner, projectId, nodeId, body, idempotencyKey, releaseDigest, stage, createdAt, updatedAt, output } = intent;
     const job = intent.job && { id: intent.job.id, object: intent.job.object, model: intent.job.model, task_type: intent.job.task_type, status: intent.job.status, updated_revision: intent.job.updated_revision, created_at: intent.job.created_at, ...(intent.job.completed_at !== undefined ? { completed_at: intent.job.completed_at } : {}), ...(intent.job.artifacts ? { artifacts: intent.job.artifacts.map(({ id }) => ({ id })) } : {}) } as RemoteJob;
-    const result = { version, id, identity: { profileId: owner.profileId, origin: owner.origin, fingerprint: owner.fingerprint }, projectId, nodeId, body, idempotencyKey, releaseDigest, stage, createdAt, updatedAt, output: { mediaTypes: output.mediaTypes, maxBytes: output.maxBytes }, ...(job ? { job } : {}) };
+    const result = { version, id, identity: { profileId: owner.profileId, origin: owner.origin, fingerprint: owner.fingerprint }, projectId, nodeId, body, idempotencyKey, releaseDigest, stage, createdAt, updatedAt, output: { mediaTypes: output.mediaTypes, maxBytes: output.maxBytes }, ...(job ? { job } : {}), ...(intent.batch ? { batch: { ...intent.batch } } : {}) };
     validateTaskRecord(result);
     return result;
 }
 
 export function taskSubmissionSignature(task: TaskJournalRecord) {
-    return JSON.stringify([task.version, task.id, task.identity.profileId, task.identity.origin, task.identity.fingerprint, task.projectId, task.nodeId, task.body, task.idempotencyKey, task.releaseDigest, task.createdAt, task.output.mediaTypes, task.output.maxBytes]);
+    return JSON.stringify([task.version, task.id, task.identity.profileId, task.identity.origin, task.identity.fingerprint, task.projectId, task.nodeId, task.body, task.idempotencyKey, task.releaseDigest, task.createdAt, task.output.mediaTypes, task.output.maxBytes, task.batch && [task.batch.id, task.batch.index, task.batch.total]]);
 }
 
 export function readTaskJournal(source: string, owner: Pick<IdentityRef, "origin" | "fingerprint">): TaskJournalBackup & { sha256: string } {
     let envelope, payload;
     try { envelope = JSON.parse(source); } catch { fail(); }
     fields(envelope, ["format", "version", "payload", "sha256"]);
-    if (envelope.format !== "comfy-studio-task-journal" || envelope.version !== 1 || !text(envelope.payload) || !hash(envelope.sha256)) fail();
+    if (envelope.format !== "comfy-studio-task-journal" || envelope.version !== 1 && envelope.version !== 2 || !text(envelope.payload) || !hash(envelope.sha256)) fail();
     if (digest(envelope.payload) !== envelope.sha256) throw new Error("任务清单SHA-256不符，未写入任何记录");
     try { payload = JSON.parse(envelope.payload); } catch { fail(); }
     fields(payload, ["exportedAt", "identity", "tasks"]);
@@ -91,17 +93,19 @@ export function readTaskJournal(source: string, owner: Pick<IdentityRef, "origin
     const nodes = new Set();
     for (const task of payload.tasks) {
         validateTaskRecord(task);
+        if (envelope.version === 1 && task.batch !== undefined) fail();
         const node = `${task.identity.fingerprint}:${task.projectId}:${task.nodeId}`;
         if (!sameJournalIdentity(task.identity, owner) || ids.has(task.id) || task.stage !== "terminal" && nodes.has(node)) fail();
         ids.add(task.id);
         if (task.stage !== "terminal") nodes.add(node);
     }
+    assertBatchMembers(payload.tasks);
     return { ...(payload as TaskJournalBackup), sha256: envelope.sha256 };
 }
 
 export function createTaskJournal(tasks: Intent[], owner: Pick<IdentityRef, "origin" | "fingerprint">): string {
     const payload = JSON.stringify({ exportedAt: Date.now(), identity: { origin: owner.origin, fingerprint: owner.fingerprint }, tasks: tasks.map(taskJournalRecord) } satisfies TaskJournalBackup);
-    const source = JSON.stringify({ format: "comfy-studio-task-journal", version: 1, payload, sha256: digest(payload) }, null, 2);
+    const source = JSON.stringify({ format: "comfy-studio-task-journal", version: tasks.some((task) => task.batch) ? 2 : 1, payload, sha256: digest(payload) }, null, 2);
     readTaskJournal(source, owner);
     return source;
 }

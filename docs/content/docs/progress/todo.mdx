@@ -6,7 +6,7 @@ description: Planned follow-up work
 # TODO
 
 - Managed local storage follow-up: extend transactional ownership to ordinary image/file stores, add upload-cache cleanup and complete quota/recovery UI. Studio result reference protection and visible save failure are implemented for acceptance; this does not complete all F-27 cleanup work.
-- Managed Studio remaining acceptance is tracked by F-01–F-46 in the fusion workspace docs: the full fault matrix, additional formats, large-file limits, and real Android/iOS interaction. Eight actual GPU modes now have original-file evidence; this is not eleven-alias or phone/fleet acceptance. Native clean locked install and actual backend/static-package rollback are recorded separately. Implement explicit batch splitting, authorized Key-rotation adoption, safe unreferenced upload cleanup and any optional text assistant separately. Journal recovery is implemented for acceptance below; unknown submissions still need authoritative server reconciliation. Offline ZIP snapshots are not submission-journal backups or cloud synchronization.
+- Managed Studio remaining acceptance is tracked by F-01–F-46 in the fusion workspace docs: the full fault matrix, additional formats, large-file limits, and real Android/iOS interaction. Eight actual GPU modes now have original-file evidence; this is not eleven-alias or phone/fleet acceptance. Native clean locked install and actual backend/static-package rollback are recorded separately. Implement authorized Key-rotation adoption, safe unreferenced upload cleanup and any optional text assistant separately. Journal recovery is implemented for acceptance below; unknown submissions still need authoritative server reconciliation. Offline ZIP snapshots are not submission-journal backups or cloud synchronization.
 - Upstream aggregator follow-up: verified transfer cleanup of ComfyUI output files and global balanced_ready fairness/capacity remain separate work. Existing idle memory reclamation is already implemented; verify its current receipts rather than calling it a design-only feature.
 
 - Replace the Claude Code CLI adapter with a Claude Agent SDK adapter and improve the tool queue, following the [Local Agent Integration Plan](/docs/progress/local-agent-integration-plan).
@@ -15,3 +15,7 @@ description: Planned follow-up work
 ## Managed Studio: read-only submission lookup
 
 - Complete actual lost GPU responses, long offline/background recovery and physical-device fault cases. Implemented behavior is listed under pending manual acceptance; synthetic HTTP does not replace those tests.
+
+## Managed batches
+
+- Batch submission, recovery and imported-record protection are under automated verification. Actual GPU mixed failures, long offline sessions and physical phones remain acceptance work in the fusion workspace.
