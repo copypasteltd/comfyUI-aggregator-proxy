@@ -40,13 +40,17 @@ function knownTaskConnection(intent: Intent) {
     return current;
 }
 
-export async function stageUpload(file: File, model: CatalogModel): Promise<InputUpload> {
-    const { identity } = connection();
+export async function validateReferenceOriginal(file: Blob, model: CatalogModel): Promise<void> {
     const references = model.usage.references;
     if (!references.media_types.includes(file.type) || file.size <= 0 || file.size > references.max_upload_bytes) throw new Error("参考图类型或文件大小不符合模型要求");
     const bitmap = await createImageBitmap(file);
     try { if (bitmap.width * bitmap.height > references.max_image_pixels) throw new Error("参考图像素超过模型公布的上限"); }
     finally { bitmap.close(); }
+}
+
+export async function stageUpload(file: File, model: CatalogModel): Promise<InputUpload> {
+    const { identity } = connection();
+    await validateReferenceOriginal(file, model);
     const record: InputUpload = { version: 1, id: nanoid(), identity, name: file.name, blob: file, sha256: await blobHash(file), idempotencyKey: `studio-upload-${nanoid()}`, createdAt: Date.now() };
     await journalPut("uploads", record);
     return record;

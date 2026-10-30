@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Alert, Button, Drawer, Empty, Input, Select, Tag } from "antd";
 import { ArrowUpRight, Box, Image, Music2, RefreshCw, Video } from "lucide-react";
 import { describePreset, taskLabels } from "@/services/api/aggregator/capabilities";
+import { firstAllowedPreset } from "@/services/api/aggregator/composer";
 import type { CatalogModel } from "@/services/api/aggregator/types";
 import { useStudioStore } from "@/stores/use-studio-store";
 import { useCanvasStore } from "@/stores/canvas/use-canvas-store";
@@ -31,7 +32,7 @@ export default function ModelsPage() {
         </>}
         <Drawer open={Boolean(detail)} onClose={() => setDetail(null)} title={detail?.usage?.display_name || detail?.id} size="large">
             {detail && <div className="studio-model-detail"><code>{detail.id}</code>{detail.unavailable_reason && <Alert title={detail.unavailable_reason} type="warning" showIcon />}<p>{detail.usage?.description}</p>
-                {detail.usage && <><Button type="primary" disabled={Boolean(detail.unavailable_reason)} onClick={() => { const id = useCanvasStore.getState().createProject(detail.usage.display_name); navigate(`/canvas/${id}?model=${encodeURIComponent(detail.id)}`); }}>用此模型新建画布</Button><h3>可用规格</h3>{detail.usage.presets.map((preset, index) => <Tag key={index}>{describePreset(preset)}</Tag>)}<h3>输入要求</h3>{detail.usage.references.slots.map((slot) => <p key={slot.path}><b>{slot.required ? "必填" : "可选"} · {slot.path}</b><br />{slot.description}{slot.weight_supported ? "（支持权重）" : ""}</p>)}<h3>参数说明</h3>{detail.usage.parameter_details.map((parameter) => <p key={parameter.path}><b>{parameter.path}</b><br />{parameter.description}</p>)}<h3>使用说明</h3><ul>{detail.usage.notes.map((note) => <li key={note}>{note}</li>)}</ul><p>{detail.usage.availability_note}</p><h3>调用示例</h3><pre>{JSON.stringify(detail.usage.example_request, null, 2)}</pre></>}
+                {detail.usage && <><Button type="primary" disabled={Boolean(detail.unavailable_reason) || !catalog?.releaseGuard || firstAllowedPreset(detail, catalog.policy) < 0} onClick={() => { const id = useCanvasStore.getState().createProject(detail.usage.display_name); navigate(`/canvas/${id}?model=${encodeURIComponent(detail.id)}`); }}>用此模型新建画布</Button>{catalog && firstAllowedPreset(detail, catalog.policy) < 0 && <p role="status">当前 Key 没有可用规格，请选择其他模型或联系管理员调整权限。</p>}<h3>可用规格</h3>{detail.usage.presets.map((preset, index) => <Tag key={index}>{describePreset(preset)}</Tag>)}<h3>输入要求</h3>{detail.usage.references.slots.map((slot) => <p key={slot.path}><b>{slot.required ? "必填" : "可选"} · {slot.path}</b><br />{slot.description}{slot.weight_supported ? "（支持权重）" : ""}</p>)}<h3>参数说明</h3>{detail.usage.parameter_details.map((parameter) => <p key={parameter.path}><b>{parameter.path}</b><br />{parameter.description}</p>)}<h3>使用说明</h3><ul>{detail.usage.notes.map((note) => <li key={note}>{note}</li>)}</ul><p>{detail.usage.availability_note}</p><h3>调用示例</h3><pre>{JSON.stringify(detail.usage.example_request, null, 2)}</pre></>}
             </div>}
         </Drawer>
     </main>;

@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fixture from "./fixtures/catalog.json";
 import type { Capability, CatalogModel } from "../src/services/api/aggregator/types";
-import { buildComposerRequest, type ReferenceChoice } from "../src/services/api/aggregator/composer";
+import { buildComposerRequest, firstAllowedPreset, suggestComposerModel, type ReferenceChoice } from "../src/services/api/aggregator/composer";
 import { schemaProperties, validateJob } from "../src/services/api/aggregator/capabilities";
 
 const models = fixture.capabilities.map((item) => ({ ...item as unknown as Capability, usage: fixture.models.find((model) => model.id === item.id)!.usage })) as unknown as CatalogModel[];
@@ -32,4 +32,30 @@ test("composer: fixed preset, n and unknown input cannot be overwritten", () => 
     const model = models.find((item) => item.task_type === "text_to_image")!;
     for (const parameters of [{ n: 2 }, { size: "999x999" }, { unknown: true }]) assert.throws(() => buildComposerRequest(model, 0, { input: { prompt: "test" }, parameters, references: {} }));
     assert.throws(() => buildComposerRequest(model, 0, { input: { unexpected: "test" }, parameters: {}, references: {} }));
+});
+
+const policy = { scopes: fixture.scopes, limits: {} };
+test("composer: selected image count picks a published input contract, not a model name", () => {
+    assert.equal(suggestComposerModel(models, policy, undefined, "image", 1)?.task_type, "image_to_image");
+    assert.equal(suggestComposerModel(models, policy, undefined, "image", 2)?.task_type, "references_to_image");
+    assert.equal(suggestComposerModel(models, policy, undefined, "image", 0)?.task_type, "text_to_image");
+});
+test("composer: explicit model is respected and unavailable choices never silently switch", () => {
+    const audio = models.find((model) => model.task_type === "text_to_audio")!;
+    assert.equal(suggestComposerModel(models, policy, audio.id, undefined, 2)?.id, audio.id);
+    assert.equal(suggestComposerModel([{ ...audio, unavailable_reason: "not available" }, ...models.filter((model) => model.id !== audio.id)], policy, audio.id), undefined);
+    assert.equal(suggestComposerModel(models, policy, "unknown-model"), undefined);
+});
+test("composer: requested output type without a matching model stays unselected", () => {
+    assert.equal(suggestComposerModel(models.filter((model) => model.task_type !== "text_to_audio"), policy, undefined, "audio"), undefined);
+});
+test("composer: blocked first preset is skipped; all blocked specifications cannot be selected", () => {
+    const model = structuredClone(models.find((item) => item.task_type === "text_to_image")!);
+    model.usage.presets = [{ ...model.usage.presets[0], quality: "draft" }, { ...model.usage.presets[0], quality: "standard" }];
+    const standard = { ...policy, spec_limits: { allowed_qualities: ["standard"] } };
+    assert.equal(firstAllowedPreset(model, standard), 1);
+    assert.equal(suggestComposerModel([model], standard)?.id, model.id);
+    const denied = { ...policy, spec_limits: { allowed_qualities: [] } };
+    assert.equal(firstAllowedPreset(model, denied), -1);
+    assert.equal(suggestComposerModel([model], denied), undefined);
 });
