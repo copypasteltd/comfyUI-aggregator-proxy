@@ -1,0 +1,62 @@
+{
+  "passed": false,
+  "at": "2026-10-30T13:21:46.299Z",
+  "scope": "Frozen static production UI on ordinary HTTP; native Chromium upload/download, local originals/refusal/cleanup, 390px emulation; synthetic local data, not real disk exhaustion, phone or GPU acceptance",
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-11-25-574Z.json",
+  "checks": [
+    {
+      "name": "actual canvas image and audio file inputs persist new controlled originals with committed document references",
+      "detail": true
+    },
+    {
+      "name": "real save-and-leave navigates to separate static entry; another live canvas disables deletion",
+      "detail": true
+    },
+    {
+      "name": "closing actual second editor automatically releases native marker and enables eligible cleanup",
+      "detail": true
+    },
+    {
+      "name": "actual original download preserves full byte length and SHA",
+      "detail": {
+        "bytes": 68,
+        "sha256": "1f3b40322c29a8108ead1415f2aae739495eaee8b1952323ffcdc1a4258ea186"
+      }
+    },
+    {
+      "name": "cancelling deletion confirmation preserves original",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-21-46-241Z/desktop-other-editor-protected.png",
+      "bytes": 82052,
+      "sha256": "97a03d485c014f1fb1b7a9b3839fccbb6ddc523f6483887561b869f86668706f"
+    },
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-21-46-241Z/desktop-ready-to-clean.png",
+      "bytes": 74540,
+      "sha256": "4fb6b465e021dd536096acaa15936f47360f712def7989668f88b24857d68137"
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://canvas-cleanup.test:11697",
+  "error": {
+    "name": "Error",
+    "message": "locator.click: Error: strict mode violation: locator('.ant-popconfirm-buttons').getByRole('button', { name: '清理原件', exact: true }) resolved to 2 elements:\n    1) <button type=\"button\" class=\"ant-btn css-1tzwyuk comfy-studio-lime ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm\">…</button> aka locator('[id=\"_r_9_\"]').getByRole('button', { name: '清理原件' })\n    2) <button type=\"button\" class=\"ant-btn css-1tzwyuk comfy-studio-lime ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm\">…</button> aka locator('[id=\"_r_5_\"]').getByRole('button', { name: '清理原件' })\n\nCall log:\n\u001b[2m  - waiting for locator('.ant-popconfirm-buttons').getByRole('button', { name: '清理原件', exact: true })\u001b[22m\n",
+    "stack": "locator.click: Error: strict mode violation: locator('.ant-popconfirm-buttons').getByRole('button', { name: '清理原件', exact: true }) resolved to 2 elements:\n    1) <button type=\"button\" class=\"ant-btn css-1tzwyuk comfy-studio-lime ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm\">…</button> aka locator('[id=\"_r_9_\"]').getByRole('button', { name: '清理原件' })\n    2) <button type=\"button\" class=\"ant-btn css-1tzwyuk comfy-studio-lime ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm\">…</button> aka locator('[id=\"_r_5_\"]').getByRole('button', { name: '清理原件' })\n\nCall log:\n\u001b[2m  - waiting for locator('.ant-popconfirm-buttons').getByRole('button', { name: '清理原件', exact: true })\u001b[22m\n\n    at confirm (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_managed_cleanup_ui.mjs:62:136)\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_managed_cleanup_ui.mjs:108:100"
+  },
+  "private_recordings": [
+    ".local/studio145/cleanup-2026-10-30T13-21-46-241Z/page@7b532ed040acf82bf88533aaaf5d5686.webm",
+    ".local/studio145/cleanup-2026-10-30T13-21-46-241Z/page@7217ef1ca807fc20eb5d0aec6448cf00.webm"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "passed": false,
+  "at": "2026-10-30T13:22:13.619Z",
+  "scope": "Frozen static production UI on ordinary HTTP; native Chromium upload/download, local originals/refusal/cleanup, 390px emulation; synthetic local data, not real disk exhaustion, phone or GPU acceptance",
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-11-25-574Z.json",
+  "checks": [
+    {
+      "name": "actual canvas image and audio file inputs persist new controlled originals with committed document references",
+      "detail": true
+    }
+  ],
+  "screenshots": [],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://canvas-cleanup.test:1744",
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: '本机安全清理', exact: true }) to be visible\u001b[22m\n",
+    "stack": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: '本机安全清理', exact: true }) to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_managed_cleanup_ui.mjs:91:70"
+  },
+  "private_recordings": [
+    ".local/studio145/cleanup-2026-10-30T13-22-13-550Z/page@a124d199a28363625cbddda8014bc4f3.webm",
+    ".local/studio145/cleanup-2026-10-30T13-22-13-550Z/page@bacafd70e7a6a05d60c349130f7e652b.webm"
+  ]
+}

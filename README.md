@@ -6,15 +6,15 @@
 
 | 入口 | 地址 |
 | --- | --- |
-| 独立画布144.1 | [打开画布](http://43.165.167.179:39445/studio/) |
+| 独立画布145.1 | [打开画布](http://43.165.167.179:39445/studio/) |
 | 原业务API | `http://43.165.167.179:39443` |
 | 原管理后台 | [Admin](http://43.165.167.179:39443/admin/) |
 
-当前144.1新增本机原件引用检查、缺件定位和JSON核对清单，以及GLB内嵌动画选择/播放/暂停/复位。扫描只读，不读原件正文、不发业务请求；无引用不等于可删除，普通图片/媒体自动回收尚未启用。历史引用保护与完整作品ZIP继续保留。[使用逻辑、清理契约与证据](docs/studio/29-本机原件引用检查与GLB动画.md)。
+当前145.1新增本机原件安全清理：新上传/ZIP导入原件与文档同库保存，活动页面受原生占用保护；保存后进入独立维护页，备份并确认回收未引用原件。删除同事务重新核对画布、回收站、素材与原任务，旧原件/缩略图和未知状态保留。日志升级v5，不降级或回退仅支持v4的144.1。[完整使用、方案与证据](docs/studio/30-新版原件安全清理与页面占用保护.md)。
 
-![GLB animation controls on the public canvas](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-glb-animation.png)
+![Safe local-original cleanup on the public canvas](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-cleaned-and-retained.png)
 
-[原件清单](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-readonly-inventory.png) · [390px缺件明细](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-missing-original-details.png) · [390px动画](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-glb-animation.png) · [MP4](docs/studio/media/studio-144/synthetic-local-inventory-animation.mp4) · [GIF](docs/studio/media/studio-144/synthetic-local-inventory-animation.gif)。合成原件、浏览器内API夹具；零实际业务/GPU请求，390px是模拟。
+[页面占用保护](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-other-editor-protected.png) · [390px](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-390-cleaned-and-retained.png) · [保存失败保留](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-save-failure-retained.png) · [MP4](docs/studio/media/studio-145/synthetic-safe-local-cleanup.mp4) · [GIF](docs/studio/media/studio-145/synthetic-safe-local-cleanup.gif)。合成本机文件，零业务API/GPU请求；390px为模拟。
 
 下面为先前139.2/证据140的真实生成记录，本轮没有重新生成：
 
@@ -56,7 +56,7 @@ flowchart LR
 
 在“存储空间”主动检查本机引用并导出清单；遇到缺件保留原文档，使用已有完整备份恢复。GLB预览有动画时手动选择片段并播放，隐藏时停止更新，关闭后释放资源；默认不播放。核对清单不含媒体正文，不能替代作品ZIP。
 
-**换端口/域名不会自动迁移本机数据。** 先在旧39443画布导出作品ZIP、必要原件和任务JSON，到新39445入口导入并重新填写业务Key；确认可用前保留旧数据。导入作品不会重新生成；任务清单需主动查询原ID。数据库v4不得被静态回退降级。
+**换端口/域名不会自动迁移本机数据。** 先在旧39443画布导出作品ZIP、必要原件和任务JSON，到新39445入口导入并重新填写业务Key；确认可用前保留旧数据。导入作品不会重新生成；任务清单需主动查询原ID。日志v5不得降级，不能回退仅支持v4的144.1；兼容静态回退包仍待验收。
 
 ## 原生开发与部署
 
@@ -73,16 +73,18 @@ npm run build
 
 仅发布`web/dist/`，由独立静态服务提供`/studio/`和SPA回退。`managed`是功能约束模式，与是否独立部署无关；不要换成启用上游脚本/Agent的`standalone`模式。默认API是公开地址，Key不进入构建。没有默认API时连接页留空。
 
-当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.144.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，并保留旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
+当前独立服务为`infinite-canvas-static.service`，目录`/opt/infinite-canvas/releases/canvas-20261030.145.1/`，指针`/opt/infinite-canvas/current`，监听39445。只切换画布自己的发布目录，并保留旧页面所需哈希资源。素材库路径与静态assets目录分别处理，深链可刷新；配置样本见[部署详情与迁移](docs/studio/21-独立画布部署与使用.md)。原API不随画布部署或回退。HTTP高位端口供用户自行反代，不设HTTPS门槛，本地禁止Docker、WSL和虚拟机。
 
 ## 验证与限制
 
-当前144.1通过197单元、类型/生产构建、11双源、14ZIP、14本机+14公网媒体专项；109当前/510旧资源及14路由逐项核对。截图和全段MP4/GIF完整解码，自有浏览器/夹具关闭。原API两个工作区、线上配置/指针/服务及静态服务/配置不变，无重启。先前GPU证据仍属历史。
+当前145.1通过203单元/类型/构建、18原生协议、10本机+10公网清理、14本机+14公网ZIP、11双源及14媒体回归。114当前/598旧资源和15路由逐项核对，截图/完整MP4/GIF已同步，浏览器/夹具关闭。原API两个工作区、线上指针/配置/服务及独立静态服务/配置不变。完整验收HOLD。
 
-完整首期仍为**HOLD/pending-test**：完整故障、实际Android/iOS、大文件峰值/泄漏及10～20台容量待验；更多动画轨道/3D格式及普通媒体安全回收待完成。云同步/文本助手只可使用原API既有能力，暂无则保留外部依赖；ComfyUI移交即删、异构设备合并及GPU优化也由原API负责，画布不另接后端或修改转发。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
+完整首期仍为**HOLD/pending-test**：完整故障、实际Android/iOS、大文件峰值/泄漏及10～20台容量待验；更多动画轨道/3D格式、旧原件迁移、缩略图回收与不确定占用恢复待完成。云同步/文本助手只可使用原API既有能力，暂无则保留外部依赖；ComfyUI移交即删、异构设备合并及GPU优化也由原API负责，画布不另接后端或修改转发。[已实现编号与全部待办](docs/studio/10-开发进度与交付记录.md)。
 
 ## 文档与许可
 
 源代码在`web/`；独立文档、公开证据和页面资料从[文档索引](docs/studio/README.md)进入。更新说明见[独立画布更新记录](docs/studio/23-独立画布更新记录.md)，旧融合/中转报告保留历史标记；文档20/21为当前架构和部署依据。
 
 保留上游[MIT许可](LICENSE)与作者声明，04·青柠源样式/字体说明随项目和静态包保留。功能分支独立维护，不向basketikun上游推送，也不更新原API分支。
+
+在存储页保存并进入安全清理；新版未引用原件可备份后手动回收，其他编辑页、旧原件、缩略图和无法核对的记录继续保留。完整说明见文档30。

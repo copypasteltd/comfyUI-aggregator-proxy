@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "at": "2026-10-30T13:23:48.504Z",
+  "scope": "Frozen static production UI on ordinary HTTP; native Chromium upload/download, local originals/refusal/cleanup, 390px emulation; synthetic local data, not real disk exhaustion, phone or GPU acceptance",
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-11-25-574Z.json",
+  "checks": [
+    {
+      "name": "actual canvas image and audio file inputs persist new controlled originals with committed document references",
+      "detail": true
+    },
+    {
+      "name": "real save-and-leave navigates to separate static entry; another live canvas disables deletion",
+      "detail": true
+    },
+    {
+      "name": "closing actual second editor automatically releases native marker and enables eligible cleanup",
+      "detail": true
+    },
+    {
+      "name": "actual original download preserves full byte length and SHA",
+      "detail": {
+        "bytes": 68,
+        "sha256": "1f3b40322c29a8108ead1415f2aae739495eaee8b1952323ffcdc1a4258ea186"
+      }
+    },
+    {
+      "name": "cancelling deletion confirmation preserves original",
+      "detail": true
+    },
+    {
+      "name": "actual delete rechecks latest references and refuses stale UI candidate",
+      "detail": true
+    },
+    {
+      "name": "confirmed cleanup removes only selected controlled file; referenced files and old raw original stay intact",
+      "detail": true
+    },
+    {
+      "name": "390px maintenance layout fits viewport and scrolls; emulation only",
+      "detail": true
+    },
+    {
+      "name": "returning from maintenance creates a fresh usable editor page",
+      "detail": true
+    },
+    {
+      "name": "real document quota failure prevents leaving editor for maintenance; unsaved banner remains",
+      "detail": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-23-48-377Z/desktop-other-editor-protected.png",
+      "bytes": 82188,
+      "sha256": "66d2de5cc74af29064bc2118414df22f2773ff50b0bc2a4dcbc1aadcf73ca0a7"
+    },
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-23-48-377Z/desktop-ready-to-clean.png",
+      "bytes": 75238,
+      "sha256": "9829009423e8109f03357acf1740e48b8198539dbc7f92484cd665078e522926"
+    },
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-23-48-377Z/desktop-cleaned-and-retained.png",
+      "bytes": 70138,
+      "sha256": "9b19461c81aafd3f9e908f04dd56947acc460d43a57737273bae2ab7d046cd76"
+    },
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-23-48-377Z/390-cleaned-and-retained.png",
+      "bytes": 55259,
+      "sha256": "6a0611fee08afd16b3eff2d3a9ff502d4ab4cf0e9a6c777c7b166a8989a19a65"
+    },
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-23-48-377Z/desktop-save-failure-retained.png",
+      "bytes": 84241,
+      "sha256": "e977a2ceff9b294e6a4684342c6beaf3c5487f71acc7939b5b88eaea909095b2"
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://canvas-cleanup.test:1084",
+  "actual_api_requests": 0,
+  "generation_posts": 0,
+  "static_bytes_unchanged": true,
+  "private_recordings": [
+    ".local/studio145/cleanup-2026-10-30T13-23-48-377Z/page@47d283918c90f4615e7dc2b04f4a7682.webm",
+    ".local/studio145/cleanup-2026-10-30T13-23-48-377Z/page@7fb4c56d980f4ab51691f666e46e6f30.webm",
+    ".local/studio145/cleanup-2026-10-30T13-23-48-377Z/page@e1419fcb888d28462695e8fc40884f29.webm"
+  ]
+}

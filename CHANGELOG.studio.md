@@ -1,5 +1,14 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## canvas-20261030.145.1 · 已独立部署 / pending-test
+
+- [新增] 新上传/ZIP导入普通原件与文档同库保存，独立不可覆盖的新键；旧原件保留并可读取。
+- [新增] 独立本机安全清理入口，文档先保存、原生连接占用保护、原件备份与显式逐项/整批清理；实际删除同事务复核全部引用，未知状态保留。
+- [调整] 日志升级v5，保留原文档/原件/上传/原任务正文及幂等键/预算；旧v4调用被阻止，不降级或回退仅支持v4的144.1。
+- [交付] 203单元/类型/构建、18原生协议、10本机+10公网清理、14本机+14公网ZIP、11双源及14媒体回归；114当前/598旧资源与15路由、双语文档30/README、截图和完整解码MP4/GIF。原API及服务/配置不改；无业务Key/GPU任务，完整签收HOLD。
+
+145.1 adds explicit cleanup for newly controlled local originals in the document database. Native connection liveness protects active editors; every delete rechecks all references and registrations in one transaction. Old raw originals and previews stay retained. Downloads preserve bytes. Journal v5 retains existing data and fences v4 callers; do not roll back an upgraded client to v4-only144.1. 203 units/type/build,18 protocol groups,10 local+10 public cleanup groups,14 local+14 public ZIP groups,11 dual-origin and14 media regression groups passed. Original API/services/config remain unchanged; no business Key/GPU task. Full acceptance remains HOLD.
+
 ## canvas-20261030.144.1 · 已独立部署 / pending-test
 
 - [新增] 存储页只读普通原件引用清单、缺件/未知记录提示及JSON下载；不读取原件正文、不写库、不发业务请求，无引用不等于可删除。

@@ -1,0 +1,58 @@
+{
+  "passed": false,
+  "at": "2026-10-30T13:20:28.272Z",
+  "scope": "Frozen static production UI on ordinary HTTP; native Chromium upload/download, local originals/refusal/cleanup, 390px emulation; synthetic local data, not real disk exhaustion, phone or GPU acceptance",
+  "public_static_site": false,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-10-30T13-11-25-574Z.json",
+  "checks": [
+    {
+      "name": "actual canvas image and audio file inputs persist new controlled originals with committed document references",
+      "detail": true
+    },
+    {
+      "name": "real save-and-leave navigates to separate static entry; another live canvas disables deletion",
+      "detail": true
+    },
+    {
+      "name": "closing actual second editor automatically releases native marker and enables eligible cleanup",
+      "detail": true
+    },
+    {
+      "name": "actual original download preserves full byte length and SHA",
+      "detail": {
+        "bytes": 68,
+        "sha256": "1f3b40322c29a8108ead1415f2aae739495eaee8b1952323ffcdc1a4258ea186"
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-20-28-181Z/desktop-other-editor-protected.png",
+      "bytes": 82211,
+      "sha256": "4d42b0ce242fb66ed5d904bcb71de61031f989057bbc21072ea6063d8f06a7ad"
+    },
+    {
+      "file": "docs/media/studio-145/cleanup-2026-10-30T13-20-28-181Z/desktop-ready-to-clean.png",
+      "bytes": 73734,
+      "sha256": "fa07e62d0b1f4a3a7aa9ed188a06c4537508f9ce49cf0fa5eedeefa6d3bc7995"
+    }
+  ],
+  "unexpected_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "origin": "http://canvas-cleanup.test:4341",
+  "error": {
+    "name": "TimeoutError",
+    "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.ant-popconfirm-buttons').getByRole('button', { name: '保留', exact: true })\u001b[22m\n",
+    "stack": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.ant-popconfirm-buttons').getByRole('button', { name: '保留', exact: true })\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_managed_cleanup_ui.mjs:105:100"
+  },
+  "private_recordings": [
+    ".local/studio145/cleanup-2026-10-30T13-20-28-181Z/page@2a4546bdb4affe0865cbe5c73a02cdcc.webm",
+    ".local/studio145/cleanup-2026-10-30T13-20-28-181Z/page@6e9fe3a1aa2ee682f835fadc9cf715cd.webm"
+  ]
+}

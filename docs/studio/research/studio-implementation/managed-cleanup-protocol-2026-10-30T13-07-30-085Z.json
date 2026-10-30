@@ -1,0 +1,18 @@
+{
+  "passed": false,
+  "at": "2026-10-30T13:07:30.271Z",
+  "scope": "Native Windows Chromium IndexedDB v4-to-v5, connection liveness, atomic references/deletion and malformed-state refusal; synthetic local data, no actual disk exhaustion/phone/GPU acceptance",
+  "checks": [],
+  "api_requests": [],
+  "page_errors": [],
+  "cleanup": {
+    "all_owned_contexts_closed": true,
+    "browser_closed": true,
+    "fixture_server_closed": true
+  },
+  "error": {
+    "name": "AssertionError",
+    "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    {\n+     id: 'infinite-canvas:asset_store',\n-     id: 'infinite-canvas:canvas_store',\n      legacyValue: null,\n      revision: 8,\n      storageKeys: [],\n+     value: '{\"version\":0,\"state\":{\"assets\":[]}}',\n-     value: '{\"version\":0,\"state\":{\"projects\":[],\"deletedProjects\":[]}}',\n      version: 1\n    },\n    {\n+     id: 'infinite-canvas:canvas_store',\n-     id: 'infinite-canvas:asset_store',\n      legacyValue: null,\n      revision: 8,\n      storageKeys: [],\n+     value: '{\"version\":0,\"state\":{\"projects\":[],\"deletedProjects\":[]}}',\n-     value: '{\"version\":0,\"state\":{\"assets\":[]}}',\n      version: 1\n    }\n  ]\n",
+    "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    {\n+     id: 'infinite-canvas:asset_store',\n-     id: 'infinite-canvas:canvas_store',\n      legacyValue: null,\n      revision: 8,\n      storageKeys: [],\n+     value: '{\"version\":0,\"state\":{\"assets\":[]}}',\n-     value: '{\"version\":0,\"state\":{\"projects\":[],\"deletedProjects\":[]}}',\n      version: 1\n    },\n    {\n+     id: 'infinite-canvas:canvas_store',\n-     id: 'infinite-canvas:asset_store',\n      legacyValue: null,\n      revision: 8,\n      storageKeys: [],\n+     value: '{\"version\":0,\"state\":{\"projects\":[],\"deletedProjects\":[]}}',\n-     value: '{\"version\":0,\"state\":{\"assets\":[]}}',\n      version: 1\n    }\n  ]\n\n    at file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_managed_cleanup_protocol.mjs:56:12"
+  }
+}

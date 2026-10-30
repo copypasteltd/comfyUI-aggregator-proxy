@@ -6,15 +6,15 @@
 
 | Entry | Address |
 | --- | --- |
-| Independent canvas144.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
+| Independent canvas145.1 | [Open canvas](http://43.165.167.179:39445/studio/) |
 | Existing business API | `http://43.165.167.179:39443` |
 | Existing management UI | [Admin](http://43.165.167.179:39443/admin/) |
 
-Current144.1 adds a local-original reference inventory, missing-original diagnosis and JSON report, plus embedded GLB clip selection, play/pause and reset. The scan is read-only, reads no Blob bodies and makes no business requests. Unconfirmed files stay retained; ordinary-media garbage collection remains unimplemented. Historical-reference protection and complete project ZIP backups remain available. [Usage, cleanup contract and evidence](docs/studio/29-本机原件引用检查与GLB动画.md).
+Current145.1 adds explicit safe cleanup for new local uploads and ZIP originals. Files share the document database; native connection liveness protects active editors. Save and enter maintenance, back up originals, then confirm deletion. Every delete atomically rechecks canvas, trash, assets and frozen-task references. Legacy originals, previews and unknown states stay retained. Journal v5 must not be downgraded or rolled back to v4-only144.1. [Usage, architecture and evidence](docs/studio/30-新版原件安全清理与页面占用保护.md).
 
-![GLB animation controls on the public canvas](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-glb-animation.png)
+![Safe local-original cleanup on the public canvas](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-cleaned-and-retained.png)
 
-[Inventory](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-desktop-readonly-inventory.png) · [390px missing originals](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-missing-original-details.png) · [390px animation](docs/studio/media/studio-144/media-2026-10-30T12-29-53-981Z/public-390-glb-animation.png) · [MP4](docs/studio/media/studio-144/synthetic-local-inventory-animation.mp4) · [GIF](docs/studio/media/studio-144/synthetic-local-inventory-animation.gif). Synthetic originals and a browser-contained API fixture; zero actual business/GPU requests.390px is emulation.
+[Live-editor protection](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-other-editor-protected.png) · [390px](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-390-cleaned-and-retained.png) · [Save failure](docs/studio/media/studio-145/cleanup-2026-10-30T13-29-54-752Z/public-desktop-save-failure-retained.png) · [MP4](docs/studio/media/studio-145/synthetic-safe-local-cleanup.mp4) · [GIF](docs/studio/media/studio-145/synthetic-safe-local-cleanup.gif). Synthetic local files, zero business API/GPU requests;390px is emulation.
 
 The following actual generation evidence comes from earlier139.2/evidence140, with no new generation this turn:
 
@@ -56,7 +56,7 @@ The canvas adds no generation backend or second queue. It does not modify the or
 
 In Storage, explicitly scan references and download the report. Keep documents with missing originals and restore from a complete backup. In a GLB preview, select a clip and press Play; playback starts paused, suspends while hidden and releases resources on close. The inventory contains no media bytes and does not replace a project ZIP.
 
-**Changing port or domain does not migrate browser data.** Export project ZIPs, required originals and task JSON from the old39443 canvas, import them at39445 and re-enter the business Key. Keep old data until verified. Project import does not generate again; task records require an explicit original-ID query. Static rollback must not downgrade IndexedDBv4.
+**Changing port or domain does not migrate browser data.** Export project ZIPs, required originals and task JSON from the old39443 canvas, import them at39445 and re-enter the business Key. Keep old data until verified. Project import does not generate again; task records require an explicit original-ID query. Do not downgrade journalv5 or return upgraded clients to v4-only144.1; a compatible static rollback package still needs verification.
 
 ## Native development and deployment
 
@@ -73,16 +73,18 @@ npm run build
 
 Deploy only `web/dist/` to an independent static host with `/studio/` and SPA fallback. Keep `managed` mode: deployment independence does not mean the upstream `standalone` mode, which enables optional scripts/Agents. The default API address is public; never embed a Key. Without a default API, the connection field stays empty.
 
-Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.144.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
+Current service: `infinite-canvas-static.service`; release: `/opt/infinite-canvas/releases/canvas-20261030.145.1/`; pointer: `/opt/infinite-canvas/current`; port39445. Retained hashed files support already-open pages. The assets page has explicit SPA locations separate from static resources. Releases and rollbacks affect only this canvas; the original API is neither redeployed nor restarted. HTTP on a high port is intentional; the user handles domain reverse proxying. No local Docker, WSL or virtual machines. [Deployment and migration details](docs/studio/21-独立画布部署与使用.md).
 
 ## Validation and limits
 
-Current144.1 passes197 units, typecheck/build,11 dual-origin groups,14 ZIP groups and14 native plus14 public media-tool groups. All109 current/510 retained resources and14 routes are verified. Screenshots and the full MP4/GIF decode; owned browsers and fixtures are closed. Both API workspaces, configuration/pointer/services and the static service/config remain unchanged, with no restarts. Earlier GPU evidence remains historical.
+Current145.1 passes203 units/typecheck/build,18 native protocol groups,10 local+10 public cleanup groups,14 local+14 public ZIP groups,11 dual-origin groups and14 media regression groups. All114 current/598 retained resources and15 routes are verified. Screenshots/full MP4/GIF are synchronized and owned browsers/fixtures closed. Both API trees, API pointer/config/services and static service/config remain unchanged. Full acceptance: HOLD.
 
-Full acceptance remains **HOLD/pending-test**: the complete fault matrix, physical Android/iOS, large-file peak/leaks and10–20-device capacity are unverified; more animation tracks/3D formats and safe ordinary-media cleanup remain incomplete. Cloud sync/text assistance may use only existing API capabilities; otherwise they remain external dependencies. ComfyUI-original transfer deletion, heterogeneous pools and GPU optimization also belong to the API. The canvas adds no other backend connection or forwarding changes. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
+Full acceptance remains **HOLD/pending-test**: the complete fault matrix, physical Android/iOS, large-file peak/leaks and10–20-device capacity are unverified. More animation tracks/3D formats, legacy-original migration, preview cleanup and recovery of uncertain editor claims remain incomplete. Cloud sync/text assistance may use only existing API capabilities; otherwise they remain external dependencies. ComfyUI-original transfer deletion, heterogeneous pools and GPU optimization also belong to the API. The canvas adds no other backend connection or forwarding changes. [Implemented items and complete backlog](docs/studio/10-开发进度与交付记录.md).
 
 ## Documentation and license
 
 Application source lives in `web/`; independent design, evidence and media are linked from the [documentation index](docs/studio/README.md). See the [independent canvas update notes](docs/studio/23-独立画布更新记录.md). Earlier fusion/backend reports remain historical; documents20/21 define current architecture and deployment.
 
 The upstream [MIT license](LICENSE) and author notices remain. Original04 Lime style/font attribution is retained in the project and static package. Work is maintained on an independent feature branch; neither the basketikun upstream nor the existing API branch is updated.
+
+Use Storage → save and enter safe cleanup. Back up newly controlled unreferenced originals before explicit deletion. Other live editors, legacy originals, previews and uncertain records remain protected. See document30.
