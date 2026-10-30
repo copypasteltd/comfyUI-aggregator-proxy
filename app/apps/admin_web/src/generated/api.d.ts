@@ -1754,6 +1754,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/jobs/lookup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submission Lookup */
+        post: operations["submission_lookup_v1_jobs_lookup_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/jobs/{identifier}": {
         parameters: {
             query?: never;
@@ -4771,6 +4788,52 @@ export interface components {
             /** Password */
             password: string;
         };
+        /** LookupArtifact */
+        LookupArtifact: {
+            /** Id */
+            id: string;
+            /** Position */
+            position: number;
+        };
+        /** LookupJob */
+        LookupJob: {
+            /** Id */
+            id: string;
+            /**
+             * Object
+             * @constant
+             */
+            object: "generation.job";
+            /** Model */
+            model: string;
+            /**
+             * Task Type
+             * @enum {string}
+             */
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "admission_pending" | "queued" | "leased" | "preparing" | "submitting" | "running" | "collecting" | "uploading" | "verifying" | "reconciling" | "retry_wait" | "cancel_requested" | "succeeded" | "failed" | "cancelled" | "expired";
+            /** Created At */
+            created_at: number;
+            /** Updated Revision */
+            updated_revision: number;
+            /** Error */
+            error?: {
+                [key: string]: string;
+            } | null;
+            /** Completed At */
+            completed_at?: number | null;
+            retry?: components["schemas"]["RetryInfo"] | null;
+            /** Artifacts */
+            artifacts?: components["schemas"]["LookupArtifact"][] | null;
+            /** Size */
+            size?: string | null;
+            /** Seconds */
+            seconds?: string | null;
+        };
         /** ManagedWorkflow */
         ManagedWorkflow: {
             /** Id */
@@ -6358,6 +6421,20 @@ export interface components {
             cancelled: number;
             /** Expired */
             expired: number;
+        };
+        /** SubmissionLookup */
+        SubmissionLookup: {
+            /**
+             * Object
+             * @constant
+             */
+            object: "generation.submission_lookup";
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "found" | "not_observed";
+            job: components["schemas"]["LookupJob"] | null;
         };
         /** SuccessfulDuration */
         SuccessfulDuration: {
@@ -11757,6 +11834,42 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    submission_lookup_v1_jobs_lookup_post: {
+        parameters: {
+            query?: never;
+            header: {
+                "idempotency-key": string;
+                "x-expected-release-digest"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubmissionLookup"];
                 };
             };
             /** @description Validation Error */
