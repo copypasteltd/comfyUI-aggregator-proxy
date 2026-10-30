@@ -9,7 +9,7 @@ import type { CanvasProject } from "@/stores/canvas/use-canvas-store";
 import { CanvasNodeType, type CanvasNodeData } from "@/types/canvas";
 import { MANAGED_STUDIO } from "@/constant/studio";
 import { blobHash } from "@/services/api/aggregator/client";
-import { withoutCredentials } from "./canvas-transfer";
+import { canvasStorageKeys, withoutCredentials } from "./canvas-transfer";
 
 export async function exportCanvasProjects(projects: CanvasProject[], fileName = i18n.t("canvas.export.defaultProjectName")) {
     const zipFiles: { name: string; data: BlobPart }[] = [];
@@ -17,7 +17,7 @@ export async function exportCanvasProjects(projects: CanvasProject[], fileName =
         projects.map(async (project) => {
             const files: CanvasExportAsset[] = [];
             await Promise.all(
-                collectStorageKeys(project).map(async (storageKey) => {
+                [...canvasStorageKeys(project)].map(async (storageKey) => {
                     const blob = storageKey.startsWith("image:") ? await getImageBlob(storageKey) : await getMediaBlob(storageKey);
                     if (!blob) {
                         if (MANAGED_STUDIO) throw new Error("备份未完成：部分原件不可读，请使用原服务和 Key，先载入需要保存的产物");
@@ -69,13 +69,6 @@ export async function exportCanvasNodes(nodes: CanvasNodeData[], fileName = i18n
 
     const zip = await createZip(zipFiles);
     saveAs(zip, `${safeFileName(fileName)}.zip`);
-}
-
-function collectStorageKeys(value: unknown, keys = new Set<string>()) {
-    if (!value || typeof value !== "object") return [...keys];
-    if ("storageKey" in value && typeof value.storageKey === "string" && value.storageKey.includes(":")) keys.add(value.storageKey);
-    Object.values(value).forEach((item) => (Array.isArray(item) ? item.forEach((child) => collectStorageKeys(child, keys)) : collectStorageKeys(item, keys)));
-    return [...keys];
 }
 
 function safeFileName(value: string) {

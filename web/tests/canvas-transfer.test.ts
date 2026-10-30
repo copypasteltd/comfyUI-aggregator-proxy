@@ -75,3 +75,25 @@ test("credential export covers cookies, header keys and URL fragment credentials
     assert.equal(result.anchor, source.anchor);
     assert.equal(source.headers.Cookie, "private-cookie");
 });
+
+test("archive requires originals referenced only by typed local-reference lists without treating prompt text or external URLs as local files", () => {
+    const referenced = structuredClone(archive);
+    const metadata = referenced.projects[0].project.nodes[0].metadata!;
+    Object.assign(metadata, { prompt: "image:literal-prompt", references: ["image:history-only", "file:audio-only", "studio:identity:content_1", "https://example.test/reference.png", "image:history-only"] });
+    for (const key of ["image:history-only", "file:audio-only"]) referenced.projects[0].files.push({ ...archive.projects[0].files[0], storageKey: key, path: `files/${key.replace(":", "-")}.bin` });
+    assert.doesNotThrow(() => validateCanvasArchive(referenced));
+    for (const missing of ["image:history-only", "file:audio-only"]) {
+        const incomplete = structuredClone(referenced);
+        incomplete.projects[0].files = incomplete.projects[0].files.filter((file) => file.storageKey !== missing);
+        assert.throws(() => validateCanvasArchive(incomplete), missing);
+    }
+});
+
+test("offline import remaps ordered local-reference keys including duplicates and retains prompt literals and ordinary URLs", () => {
+    const source = structuredClone(project);
+    Object.assign(source.nodes[0].metadata!, { prompt: "image:history-only", generationType: "edit", references: ["image:history-only", "file:audio-only", "studio:identity:content_1", "image:history-only", "https://example.test/reference.png", "blob:expired-reference"] });
+    const copied = importedCanvasSnapshot(source, new Map([["image:history-only", "image:new-reference"], ["file:audio-only", "file:new-audio"], ["studio:identity:content_1", "image:new-result"]]));
+    assert.deepEqual(copied.nodes[0].metadata?.references, ["image:new-reference", "file:new-audio", "image:new-result", "image:new-reference", "https://example.test/reference.png", ""]);
+    assert.equal(copied.nodes[0].metadata?.prompt, "image:history-only");
+    assert.equal(source.nodes[0].metadata?.references?.[0], "image:history-only");
+});

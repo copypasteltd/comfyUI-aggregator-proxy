@@ -5,6 +5,15 @@ import { CanvasNodeType } from "@/types/canvas";
 const record = (value: unknown): value is Record<string, unknown> => Boolean(value && typeof value === "object" && !Array.isArray(value));
 const secrets = /^(?:api[_-]?keys?|x[_-]?api[_-]?key|authorization|proxy[_-]?authorization|password|secret|client[_-]?secret|token|bearer[_-]?token|access[_-]?token|refresh[_-]?token|csrf[_-]?token|session[_-]?(?:id|token)|cookies?|set[_-]?cookie|webdav[_-]?password)$/i;
 const prototypeKey = (key: string) => ["__proto__", "constructor", "prototype"].includes(key);
+const localReference = (value: unknown): value is string => typeof value === "string" && /^(?:image|file|studio):/.test(value);
+
+export function canvasStorageKeys(value: unknown, keys = new Set<string>()) {
+    if (!value || typeof value !== "object") return keys;
+    if ("storageKey" in value && typeof value.storageKey === "string" && value.storageKey.includes(":")) keys.add(value.storageKey);
+    if ("references" in value && Array.isArray(value.references)) value.references.forEach((item) => { if (localReference(item)) keys.add(item); });
+    Object.values(value).forEach((item) => canvasStorageKeys(item, keys));
+    return keys;
+}
 
 // A canvas snapshot contains local work, never reusable service credentials.
 export function withoutCredentials<T>(value: T): T {
@@ -62,13 +71,7 @@ export function validateCanvasArchive(value: unknown): asserts value is CanvasEx
             files.add(file.storageKey);
             filePaths.add(file.path);
         }
-        const verifyReferences = (entry: unknown): void => {
-            if (Array.isArray(entry)) { entry.forEach(verifyReferences); return; }
-            if (!record(entry)) return;
-            if (typeof entry.storageKey === "string" && entry.storageKey.includes(":") && !files.has(entry.storageKey)) throw new Error("备份引用了文件清单以外的原件，未写入任何项目");
-            Object.values(entry).forEach(verifyReferences);
-        };
-        verifyReferences(item.project);
+        for (const key of canvasStorageKeys(item.project)) if (!files.has(key)) throw new Error("备份引用了文件清单以外的原件，未写入任何项目");
     }
 }
 
@@ -96,7 +99,11 @@ export function importedCanvasSnapshot(project: CanvasProject, keys: Map<string,
     const rewrite = (value: unknown): unknown => {
         if (Array.isArray(value)) return value.map(rewrite);
         if (!record(value)) return typeof value === "string" && value.startsWith("blob:") ? "" : value;
-        return Object.fromEntries(Object.entries(value).filter(([key]) => !key.startsWith("studio")).map(([key, item]) => [key, key === "storageKey" && typeof item === "string" ? keys.get(item) || item : rewrite(item)]));
+        return Object.fromEntries(Object.entries(value).filter(([key]) => !key.startsWith("studio")).map(([key, item]) => [key,
+            key === "storageKey" && typeof item === "string" ? keys.get(item) || item
+                : key === "references" && Array.isArray(item) ? item.map((reference) => localReference(reference) ? keys.get(reference) || reference : rewrite(reference))
+                    : rewrite(item),
+        ]));
     };
     const snapshot = rewrite(clean) as CanvasProject;
     snapshot.chatSessions = []; snapshot.activeChatId = null;
