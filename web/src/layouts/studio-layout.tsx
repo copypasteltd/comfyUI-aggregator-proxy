@@ -26,7 +26,7 @@ export default function StudioLayout({ children }: { children: ReactNode }) {
                 <NavLink to="/models" aria-label="模型"><Boxes size={17} /><span>模型</span></NavLink>
                 <NavLink to="/tasks" aria-label="任务"><ListTodo size={17} /><span>任务</span></NavLink>
                 <NavLink to="/assets" aria-label="素材"><Layers3 size={17} /><span>素材</span></NavLink>
-                <NavLink to="/examples" aria-label="案例"><BookOpen size={17} /><span>案例</span></NavLink>
+                <NavLink to="/library" aria-label="案例"><BookOpen size={17} /><span>案例</span></NavLink>
             </nav>
             <div className="studio-header-actions">
                 <Button type="text" className="studio-theme-toggle" aria-label={theme === "dark" ? "切换到浅色" : "切换到深色"} title={theme === "dark" ? "切换到浅色" : "切换到深色"} aria-pressed={theme === "dark"} icon={theme === "dark" ? <Sun size={18} /> : <Moon size={18} />} onClick={() => setTheme(theme === "dark" ? "light" : "dark")} />

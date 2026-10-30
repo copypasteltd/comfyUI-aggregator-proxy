@@ -114,3 +114,5 @@
 - Web跨引擎验收先匹配SDK与原生浏览器revision，使用独立自有持久profile，finally关闭全部测试资源。WebKit临时会话Blob失败不通过改产品存储或放宽断言处理；图片夹具先独立校验/解码。Windows WebKit不等同实际Safari，Cookie隔离失败保留最小对照与未签收状态。
 
 - Web文件输入验收须等画布完成水合，不能只等可见按钮就设置隐藏input；setInputFiles不会代替按钮的禁用保护。迁移摘要通过与浏览器解码通过分别统计，Windows WebKit失败不得外推为实际Safari结论。
+
+- 新增Web业务路由前检查public目录、构建输出和保留旧资源的同名冲突，并在现有静态服务器验证直接打开、刷新和尾斜杠行为，不能只验开发服务器的SPA回退。案例页使用/library，/examples仅存示例图片；不为此修改原API或静态服务配置。

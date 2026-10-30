@@ -120,7 +120,7 @@ export default function CanvasPage() {
                         <h1 className="mt-3 text-3xl font-semibold">{t("canvas.title")}</h1>
                     </div>
                     <div className="flex items-center gap-2">
-                        {MANAGED_STUDIO && <Button icon={<BookOpen className="size-4" />} onClick={() => navigate("/examples")}>预设案例</Button>}
+                        {MANAGED_STUDIO && <Button icon={<BookOpen className="size-4" />} onClick={() => navigate("/library")}>预设案例</Button>}
                         {selectedIds.length ? (
                             <>
                                 <Button disabled={!hydrated} icon={<Download className="size-4" />} onClick={() => void exportCanvasProjects(projects.filter((project) => selectedIds.includes(project.id)), `${t("canvas.title")}-${selectedIds.length}`).catch((error) => message.error(error instanceof Error ? error.message : "备份未完成"))}>

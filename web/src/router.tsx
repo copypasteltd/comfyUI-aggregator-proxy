@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         { path: "/canvas/:id", element: <CanvasProjectPage /> },
         { path: "/config", element: MANAGED_STUDIO ? <ConnectionPage /> : <ConfigPage /> },
         { path: "/models", element: <ModelsPage /> },
-        { path: "/examples", element: MANAGED_STUDIO ? <StudioExamplesPage /> : <Navigate to="/canvas" replace /> },
+        { path: "/library", element: MANAGED_STUDIO ? <StudioExamplesPage /> : <Navigate to="/canvas" replace /> },
         { path: "/tasks", element: <TasksPage /> },
         { path: "/storage", element: MANAGED_STUDIO ? <StudioStoragePage /> : <Navigate to="/config" replace /> },
         { path: "/task-access", element: MANAGED_STUDIO ? <StudioTaskAccessPage /> : <Navigate to="/config" replace /> },
