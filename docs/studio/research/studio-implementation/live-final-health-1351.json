@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "at": "2026-10-30T03:11:37.463385+00:00",
+  "scope": "Read-only public HTTP, CORS preflight and native host; no restart, database or GPU mutation",
+  "backend": "linux-20261030.132.2",
+  "studio": "studio-20261030.135.1",
+  "services": {
+    "comfy-aggregator-api.service": "active",
+    "comfy-aggregator-runner.service": "active",
+    "comfy-aggregator-http-worker.service": "active",
+    "comfy-aggregator-edge.service": "active"
+  },
+  "original_worker_pid_unchanged": true,
+  "responses": [
+    {
+      "path": "/studio/",
+      "status": 200,
+      "content_type": "text/html",
+      "body_sha256": "7e4bad00a04b22855d51c2d741797116f117424c4a5fb93967907c78a1893419"
+    },
+    {
+      "path": "/studio/models",
+      "status": 200,
+      "content_type": "text/html",
+      "body_sha256": "7e4bad00a04b22855d51c2d741797116f117424c4a5fb93967907c78a1893419"
+    },
+    {
+      "path": "/admin/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "body_sha256": "d0216b8dbefd89e023c05d06305261d293b197136654fba183b7e5d5916aaf50"
+    },
+    {
+      "path": "/health/ready",
+      "status": 200,
+      "content_type": "application/json",
+      "body_sha256": "a29ee2b15c494311c52521766e44af56a3ad2248e7a8ab465e5206463c13d288"
+    }
+  ],
+  "cors": [
+    {
+      "status": 200,
+      "requested_origin": "http://storage-validation.invalid",
+      "allow_origin": "http://storage-validation.invalid"
+    },
+    {
+      "status": 200,
+      "requested_origin": "https://another-source.invalid",
+      "allow_origin": "https://another-source.invalid"
+    }
+  ],
+  "virtualization_used": false
+}

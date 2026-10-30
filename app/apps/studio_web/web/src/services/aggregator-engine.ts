@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { GatewayError, blobHash, freezeRequest } from "./api/aggregator/client";
 import { presetPolicyReason, validateJob } from "./api/aggregator/capabilities";
 import { terminalStatuses, type ApiResult, type CatalogModel, type JobRequest, type RemoteJob } from "./api/aggregator/types";
-import { journalGet, journalList, journalPut, prepareIntents, updateIntent, type IdentityRef, type InputUpload, type Intent, type LocalResult } from "./aggregator-journal";
+import { journalGet, journalList, journalPut, prepareIntents, updateIntent, updateUpload, type IdentityRef, type InputUpload, type Intent, type LocalResult } from "./aggregator-journal";
 import { MAX_GENERATION_COUNT } from "@/constant/generation";
 import { assertBatchMembers } from "./aggregator-batch";
 import { assertLocalResult } from "./studio-result-ownership";
@@ -55,12 +55,11 @@ export async function uploadReference(id: string, signal?: AbortSignal): Promise
     }
     try {
         const asset = await client.upload(record.blob, record.name, record.idempotencyKey, record.sha256, signal);
-        const result = { ...record, asset, error: undefined };
-        await journalPut("uploads", result);
+        const result = await updateUpload(record, (current) => current.asset ? current : { ...current, asset, error: undefined });
         changed();
         return result;
     } catch (error) {
-        await journalPut("uploads", { ...record, error: error instanceof Error ? error.message : "上传结果未知" });
+        await updateUpload(record, (current) => current.asset ? current : { ...current, error: error instanceof Error ? error.message : "上传结果未知" });
         changed(); throw error;
     }
 }

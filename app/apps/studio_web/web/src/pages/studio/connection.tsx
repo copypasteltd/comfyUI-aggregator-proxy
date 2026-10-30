@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Alert, Button, Checkbox, Input, Select } from "antd";
 import { ArrowRight, KeyRound, Link2, LogOut, RefreshCw } from "lucide-react";
 import { useStudioStore } from "@/stores/use-studio-store";
+import { NavLink } from "react-router-dom";
 
 export default function ConnectionPage() {
     const state = useStudioStore();
@@ -40,6 +41,7 @@ export default function ConnectionPage() {
                     <div className="studio-actions"><Button icon={<RefreshCw size={15} />} loading={state.loading} onClick={() => void state.refreshCatalog()}>刷新目录</Button><Button icon={<LogOut size={15} />} onClick={() => void state.disconnect().catch(() => {})}>退出连接</Button><a className="studio-inline-link" href={`${state.client.origin}/admin/`} target="_blank" rel="noopener noreferrer">打开管理后台</a></div>
                 </> : <p>图片、视频、音频和 3D 使用同一套任务与素材流程。选择模型、添加参考、提交后即可继续整理画布。</p>}
                 <div className="studio-scope-note">业务 Key 用于生成和内容访问。渠道、Workflow、队列与 Key 的管理仍由 Admin 完成。</div>
+                <NavLink to="/storage" className="studio-inline-link">查看本机存储空间</NavLink>
             </section>
         </div>
     </main>;

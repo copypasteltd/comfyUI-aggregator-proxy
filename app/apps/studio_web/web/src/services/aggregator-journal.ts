@@ -109,6 +109,22 @@ export function journalDelete(name: keyof JournalRecords, id: string): Promise<v
     return transaction(name, "readwrite", (store, result) => { store.delete(id); result(); });
 }
 
+export function updateUpload(original: InputUpload, change: (current: InputUpload) => InputUpload): Promise<InputUpload> {
+    return journalTransaction(["uploads"], "readwrite", (tx, result, abort) => {
+        const store = tx.objectStore("uploads");
+        const request = store.get(original.id);
+        request.onsuccess = () => {
+            try {
+                const current = request.result as InputUpload | undefined;
+                if (!current) throw new Error("本机参考缓存已清理，请重新选图");
+                if (current.version !== 1 || current.sha256 !== original.sha256 || current.idempotencyKey !== original.idempotencyKey || current.identity?.origin !== original.identity.origin || current.identity?.fingerprint !== original.identity.fingerprint) throw new Error("原上传记录已变化，未覆盖缓存");
+                const next = change(current);
+                store.put(next); result(next);
+            } catch (error) { abort(error); }
+        };
+    });
+}
+
 export function prepareIntent(intent: Intent): Promise<Intent> {
     return prepareIntents([intent]).then((saved) => saved[0]);
 }

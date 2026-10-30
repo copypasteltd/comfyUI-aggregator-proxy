@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "at": "2026-10-30T03:19:15.310799+00:00",
+  "scope": "Delivery binding failure; underlying scoped unit/type/build result remains unchanged",
+  "failed_assertion": "Isolated final build must equal canonical production asset map",
+  "isolated_report": "clean-build-2026-10-30T03-04-29-542Z.json",
+  "isolated_report_sha256": "1405b7a01ef62296fbab0ebcf85f198eeecd8aa5687573498986bfc88c0b1891",
+  "canonical_report": "browser-2026-10-30T03-06-14-720Z.json",
+  "canonical_report_sha256": "079af5d19bb3911398aba9957bc3128bd0a59bcf671808fa3f8f25662610a042",
+  "source_equal": true,
+  "cause": "Test tree omitted root .gitignore; Tailwind scanned retained dist input",
+  "correction": "Copy the repository ignore file and rebuild using the same clean-installed lock; retain all earlier evidence",
+  "production_mutated": false
+}

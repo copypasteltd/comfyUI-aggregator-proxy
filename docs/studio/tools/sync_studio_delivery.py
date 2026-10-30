@@ -34,7 +34,7 @@ def copy(source: Path, target: Path) -> None:
 
 if __name__ == "__main__":
     assert (REPOSITORY / ".git").is_dir()
-    tracked = subprocess.check_output(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", "web", "VERSION", "CHANGELOG.md", "LICENSE"], cwd=SOURCE).decode("utf-8").split("\0")
+    tracked = subprocess.check_output(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", "web", "VERSION", "CHANGELOG.md", "LICENSE", ".gitignore"], cwd=SOURCE).decode("utf-8").split("\0")
     sources = {}
     for name in sorted(set(tracked) - {""}):
         if any(part in {"node_modules", ".local", "dist", ".git"} for part in Path(name).parts):

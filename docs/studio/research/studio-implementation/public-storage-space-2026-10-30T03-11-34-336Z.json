@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "scope": "Actual public HTTP storage route in a fresh unauthenticated owned browser: CSP, unknown estimate, navigation, mobile and received static hashes; native synthetic tests separately cover authenticated cache removal. No business Key/GPU/server mutation.",
+  "static_release": "studio-20261030.135.1",
+  "checks": [
+    {
+      "name": "public storage deep link loads actual shipped route and policy, showing unavailable browser estimates explicitly",
+      "passed": true
+    },
+    {
+      "name": "unauthenticated public storage page exposes no identity-owned cache and performs no business query",
+      "passed": true
+    },
+    {
+      "name": "390px route and task-backup navigation work on actual public HTTP",
+      "passed": true
+    },
+    {
+      "name": "reload preserves route behavior and all received assets match current dist with zero business requests or uncaught errors",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/public-storage-space-2026-10-30T03-11-34-336Z/public-storage-desktop.png",
+      "sha256": "acdd3f91fdcfa22ceaa4d745ce572725173fefc97283906212e7ae588b9865b3"
+    },
+    {
+      "file": "docs/assets/studio/public-storage-space-2026-10-30T03-11-34-336Z/public-storage-mobile.png",
+      "sha256": "8d2f5289a446f0ca7ef649c666bb9b7fada67f2980fe16833dee546d4e8fed4f"
+    }
+  ],
+  "page_errors": [],
+  "blocked_mutations": [],
+  "received_static_sha256": {
+    "index.html": "7e4bad00a04b22855d51c2d741797116f117424c4a5fb93967907c78a1893419",
+    "config.js": "33c15a252c60b6103ad20c773e1ec662c1aaa636277aa24698274a7d2a743038",
+    "assets/index-npyuX0C8.css": "b7dbce19383f485c47f239b3b793fc98ab090750d27122dfd8f2fe461dd69a60",
+    "assets/index-CpnngISn.js": "33fca682e18f5d088b2b621f96423ab18766045bc71deb17a0263d944983f82d",
+    "assets/storage-BibXF4qk.js": "2a5194e9d05503428c9ca11fd2968e3c4474a1aa7396b12c6f0f0e0e72087d82",
+    "assets/local-storage-usage-CEJy_oSC.js": "31456c1c31551457999e13fb2cc3ac7ce4d21a0ca67df6d73c54557f3f6f2936",
+    "assets/CheckOutlined-BPfAhpm_.js": "233905cf57df2764e9d5ffdbbe54752c41cbb094928389aee5e0ae1c8ba49b14",
+    "assets/refresh-cw-BzIXXsAS.js": "093f97c625bfcc66666062b9348ee401d0f8481348d102765a1dd55ef6880567",
+    "assets/useControlledState-BAIU75N6.js": "44f8b638f741e0180e76a4b2b87a3e34f1c1bd6cb066aeb6f1805a6e5b16b9f9",
+    "fonts/Manrope-Reference.woff": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd",
+    "assets/index-B1EuNpMn.js": "04bb18fa416dbcce31ee492f069b1c64b5e125110a2d66e032d2695e07043b75",
+    "assets/index-KM9P6CM3.js": "68deeb2063666687483b8fc62acbe9cf878250d80de9ad6c1c684c3fe8315778",
+    "assets/index-BvLlcnXp.js": "360cda65580c5fd08ea3572400ef389fe16196edc0e418238f5fb9f030d7730a",
+    "assets/index-B3ddORig.js": "07a81cb2464b0291af00277a1710d7664f1384a00d437fa4e5ebc5e4c61b27dd",
+    "assets/index-QwTmscUg.js": "ca25e7ce3ff999125df3616b469da32e5e833eff0292d414862237e91c9a7f73",
+    "assets/trash-2-BJGe1iAZ.js": "94e4efd9887cc0e69efb0d626b6a8690d49d19f01e61bcdf9edef8a0794bbb4a",
+    "assets/index-B2HVanMz.js": "3305680102dd6d9d6177dd9dae98e7ec242e21f06ee237e7ba4c55afbf91b792",
+    "logo.svg": "76e174b82af0dfac35c55ba086d4e9781aa1d2ade984b50ddb6489b408efd831",
+    "fonts/Anton-Reference.woff": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a",
+    "assets/PurePanel-DWEUoRc0.js": "b12a8b489e9415399502a9fda0dddf2045c46c70fb9c08b1b90011391c46c78d",
+    "assets/index-z8GKmiLM.js": "600aae48606dc37514b83546b7f9ea654708f2eb5320da4fc844de2ed3e50178",
+    "assets/external-link-DRNgtJVq.js": "85add015f1aaa1e1836e585f88ae4a37beae2efabb6cf5e23b9a18191c0032c5",
+    "assets/upload-DhK1kTvl.js": "b9d5c346c18a854258a7c1c0247aefd50ff7b44e8fdd67d671cf21d327e087f6",
+    "assets/FileSaver.min-CRj_5YGq.js": "5c0aa4b38937ed3f5981a2d9580cab6685a7ba04cc959dbb39cd775d48f6a398",
+    "assets/tasks-BF3YcSzU.js": "c3cffdb913dde78697270497e4a168d3c2a855f9c1980e91d6aace368dee69f4",
+    "assets/square-D5heMNal.js": "ad309f04e454b0d6b60e4b93f49d4620ea663e431638316d52585337489f5f04"
+  },
+  "cleanup": {
+    "pages_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; media-src 'self' blob:; font-src 'self'; worker-src 'self'; connect-src http: https: blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+  "business_requests": 0,
+  "generation_posts": 0,
+  "static_artifact_match": true,
+  "completed_at": "2026-10-30T03:11:39.295Z"
+}

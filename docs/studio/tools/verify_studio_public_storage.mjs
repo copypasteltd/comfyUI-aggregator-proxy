@@ -9,7 +9,7 @@ import assert from "node:assert/strict";
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const mode = process.argv[2];
 const release = process.argv[3] || "studio-20261030.131.7";
-if (!/^studio-20261030\.(?:131|132|133|134)\.\d+$/.test(release)) throw new Error("Invalid owned static release");
+if (!/^studio-20261030\.(?:131|132|133|134|135)\.\d+$/.test(release)) throw new Error("Invalid owned static release");
 if (!["before", "snapshot", "after"].includes(mode)) throw new Error("Choose before, snapshot or after");
 const require = createRequire(path.join(root, "infinite-canvas/web/package.json"));
 const { chromium } = require("C:/Users/carzy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");

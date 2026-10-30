@@ -36,3 +36,5 @@
 以上 2026-10-30 评估段落为当时基线；正式分支已经实现适配器、日志与媒体节点，最新构建、浏览器、部署和真实验证以文档 10 为准。
 
 - [原提交只读核对、无ID恢复和首次发送保护](14-原提交只读核对与恢复.md) · [132.2当前证据](research/studio-implementation/submission-lookup-validation-notes-1321.json)
+
+- [本机空间、站点配额与参考缓存手动清理](17-本机空间与参考缓存清理.md) · [135.1当前证据](research/studio-implementation/storage-validation-notes-1351.json)

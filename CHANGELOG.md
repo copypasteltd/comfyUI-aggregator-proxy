@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 135 · 本机空间与参考缓存清理
+
+- 新增/storage三库占用与站点配额；浏览器无估算时明确未知。当前身份已确认、摘要/长度一致且无原任务引用的上传缓存支持逐条确认清理，同事务重查引用/身份/快照；失败保留，晚到上传不重建。
+- Fix shared Lime button hover contrast (17.30:1) while retaining original reference CSS. All 169 units/type/build and 140 native-browser groups pass, including 28 cache groups; native clean-lock installation and the corrected isolated final build reproduce all 104 production assets.
+- 静态135.1已部署，公网存储4项/保留重启3项/健康与任意源CORS通过；API/Worker/Edge均未重启，无新GPU或Key。262源码/配置镜像含.gitignore，保留首次打包和构建摘要差异记录，完整验收HOLD。
+- 同步双语README、使用/开发约束、桌面/390px截图、原速MP4/GIF与全部46项开发/完善追踪。
+
 ## 134 · 画布GLB交互预览与资源释放
 
 - 画布和本机素材库支持GLB按需预览、旋转/缩放/平移/复位与原件保存，关闭或失败释放三维资源，保护晚到解析。

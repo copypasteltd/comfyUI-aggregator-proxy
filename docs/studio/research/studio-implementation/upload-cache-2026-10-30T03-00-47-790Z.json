@@ -1,0 +1,285 @@
+{
+  "scope": "Actual native IndexedDB transactions and production UI under synthetic HTTP, including three-database estimates, cleanup/identity races and late upload response; no GPU or production writes",
+  "checks": [
+    {
+      "name": "read-only meter leaves an absent database absent",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "three-database totals include nested original Blob bytes",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "available browser estimates remain distinct from content totals",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "failed browser estimates are explicitly unavailable without inventing a quota",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "aborted meter rejects instead of reporting success",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "cache directory is partitioned by source and Key fingerprint",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "prepared, submitting, unknown, accepted and terminal nested references all protect caches",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "source-image and mask roles protect the original cache",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "corrupt bodies, unsupported versions and unowned task records fail closed",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "wrong identity or identity changes refuse destructive work inside the transaction",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "confirmation snapshot refuses changed upload records",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "newly committed references defeat an earlier cleanup selection",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "transaction abort retains cache bytes",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "cleanup-first ordering removes only the confirmed cache; late updates cannot resurrect it and existing data stays intact",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "late upload failure cannot erase an acknowledged outcome",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "pending/unknown, mismatched and task-owned records remain visible and protected",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "an actual delayed synthetic upload response cannot recreate a cache removed after another confirmed acknowledgement",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "production page hydrates its own profile, shows current-identity rows and disables protected records without exposing credentials",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "actual confirmation can retain the selected original cache",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "a second real page adding a reference while confirmation is open prevents the UI deletion",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "keyboard-confirmed cleanup persists and refreshes current usage without cloud deletion",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "reload preserves cleanup and plain HTTP displays unavailable quota explicitly",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "390px responsive storage and keyboard focus fit without horizontal overflow",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "390px cache confirmation fits inside the viewport and retain preserves the original",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "actual connection switch replaces the cache directory and hides previous-Key rows",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "actual progress UI handles a synthetic available browser quota without treating record bytes as site usage",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "all checks use unchanged production files, one synthetic delayed upload, no remote deletion/generation and no uncaught page errors",
+      "passed": true,
+      "detail": {}
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/assets/studio/upload-cache-2026-10-30T03-00-47-790Z/desktop-storage.png",
+      "sha256": "75e3a691d2dcf26e26f0bf7a88725d9f8115424dee12d0497e271fc52c496b44"
+    },
+    {
+      "file": "docs/assets/studio/upload-cache-2026-10-30T03-00-47-790Z/desktop-cache-controls.png",
+      "sha256": "5fae8ed74bde740554fc2c034caef5bcac45062103a346ae897e8c789a7d6ee4"
+    },
+    {
+      "file": "docs/assets/studio/upload-cache-2026-10-30T03-00-47-790Z/mobile-storage.png",
+      "sha256": "58a649d51dfb6829c05e6dff1c83caf96d0ab97a276b09c8904974f4a55e3e40"
+    },
+    {
+      "file": "docs/assets/studio/upload-cache-2026-10-30T03-00-47-790Z/mobile-cache-confirmation.png",
+      "sha256": "410ddec4339fa64aff15d974e122ec4a994afa9fe35042264c7819b2da98e18a"
+    },
+    {
+      "file": "docs/assets/studio/upload-cache-2026-10-30T03-00-47-790Z/mobile-new-identity.png",
+      "sha256": "58a649d51dfb6829c05e6dff1c83caf96d0ab97a276b09c8904974f4a55e3e40"
+    }
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "browser_storage_version": 3,
+  "static_artifact_sha256": {
+    "assets/agent-url-bootstrap-DcZRvpiD.js": "2280ba8bc379fc6e8df6369caaeae893ce6cf2779c08a59cb344682813af9ef8",
+    "assets/app-config-modal-zTP16QPf.js": "c57fa83a983bce246f083a1d32a0f0801c1744c0c0f48d1dc987b6c5981e56d8",
+    "assets/arrow-right-D16B1P0B.js": "ba17766a44c29962eee27e8fb775e995fe383ad57799e9194789aa6ce6e3b150",
+    "assets/asset-picker-modal-Cdw2M_OO.js": "d9519b20e0478887865334f8688654d15e93b9d6fce90cedafa0f01aa089de23",
+    "assets/assets-IoEbLzCM.js": "5a4d2bba38a7824c8ca603429256017efa58ac0b15d2ec30d6885c532d7f45f5",
+    "assets/audio-generation-DwHpecOz.js": "ab57a7fc81719b90218439bc8fb1b9f4e8be06333a0898b4fde34021ef5e9a12",
+    "assets/box-BY6xn6e2.js": "4f7a13e0895eba82afafce86730a23a91fcdfde5b557d1fae1e547d98c0cafc3",
+    "assets/canvas-DMp8g4lM.js": "ba304d9a23ac73542c5506de72c8befe87e568dfc26ab595e6f0da243e9eb869",
+    "assets/canvas-export-DKkxsRhD.js": "9539dd4d62fed0e30e06b4b8060dfbae22fb5c945da31723d5ee6a86c879130a",
+    "assets/canvas-theme-DzVpCmdp.js": "135f85d19c47f504f11bdc0f5ef856430c60dd7d9423e5a497f3f972c32a981d",
+    "assets/CheckOutlined-BhS9GfZk.js": "f83208b35d7b8a43c86247cd5d0d53db0f38843fd425342cab38fb905e323009",
+    "assets/connection-DHPdEhBa.js": "0e5c5737eaf08bbd9e28e6b0252a639a8c9e54d046679bb76e81496d59892ca5",
+    "assets/Drawer-BHfWIJa4.js": "55551661f1ba77a3ac26c39f24c0b5fc26e0e2d0bb97f4552819d81719048238",
+    "assets/env-rf9HlCrR.js": "21aab3e44da0eae135004f6387fdb4279d74cb2fa2d952b0b934eac6709c0f52",
+    "assets/external-link-CRBOuR4-.js": "8899539a268f8a69743886c424eb8cdbca8b020ff728a68808b2a091236fa97a",
+    "assets/file-text-Q1TYe6uu.js": "3b9789b1b96c81b7384f9b7854dd4ff21db6c036fc20e116cd6aaa841956b372",
+    "assets/FileSaver.min-Drzoh7ro.js": "f031dd8cbb52f5ccff0d4dc281d554d04cfe2d1ed55e9e44f95ed204c31b1c44",
+    "assets/folder-plus-ChNlFsRO.js": "bb1ca4e8590b9fb2bc1df044a1fb5f50e7c24150c66766c1237c50d6a0dedaac",
+    "assets/highlighted-body-OFNGDK62-B7KmolhI.js": "a6862a63904020eba0ef1b5558365369a8f108eed0fc4ffe6b7db635a75c0e10",
+    "assets/house-CxvkcPOH.js": "4af0a93ec1d6f19cb9e396bff0c3b84c95a1c2d5337681a5a9d528beec46d185",
+    "assets/image-CDeBSp9R.js": "9cb8e076b8b04600f3446b3a8a1e34da346bdcf261c4bc8ff99d7193eee3487d",
+    "assets/image-plus-CMrLRr-2.js": "fe3282742867b87a059acdc3bb78eabddfe10d546209e42554a9a17819c39be4",
+    "assets/image-utils-C_fXj3jC.js": "8719ee75da35a47641fdc23504f584eb408ba595984efe6af63b63a1982a2291",
+    "assets/index-4TlEogKJ.js": "66f69814d99594e4a65cdcb4b2eb796376d79a2bdff2803b64e7966913ddfa17",
+    "assets/index-5-ABB41C.js": "61d5f1add17ba1bee5d1d682bb75d85a988e7f896c9a47a4a34edbd43fcefad7",
+    "assets/index-B7ELCsuX.js": "3a347a5e8fdb07a0c946a7c76b5eab5eb609e4f1e943c514beca4769da3155c1",
+    "assets/index-BE7yBf4l.js": "070a65b0bbfafd1bcf717e70072601d33b3722f3afeeb066ed9cd5ab70f2d410",
+    "assets/index-BGWrHjV3.js": "1a387ece34d9c2e71f00fb3802e9a580f8b84c508c5edeb133a218fe71f9cfe8",
+    "assets/index-BJjdhpSA.js": "13f31333fc1147931853e75853c076607d7ebf771a1d762e0b8a64561282ecae",
+    "assets/index-C3v-LD1T.js": "93409c41cb2ebd79543854f95b68f0ab2a452791f23669bd88310038f049788a",
+    "assets/index-CKBJzHDO.js": "dd6bc5ee144e8ca7ea40fb8603e5d548d404127c0fc8c14ebb72aeeef6a49d75",
+    "assets/index-CktkhVlc.js": "e83995f8a0d42c4e88b2d5b89e639b5466cde1bf990be75849785767a288968b",
+    "assets/index-COu1Masj.js": "68e3583836705f06227bf8aad6551a7523f3420e5b886cde97c1151e72ea018d",
+    "assets/index-Creez1uD.js": "ea52c32c8f916d50c4dd5257bb53d759f5f9c4c4513858fd51e4ba4dc9542258",
+    "assets/index-CWUe9Slm.js": "e2ea72a1e15ad733936801208840bb10acda26794460d9c644407ec24e03538b",
+    "assets/index-CWzT76b9.js": "07cafbd4483b0620b86ed36ceaf2e8dc9a346c1e190fd7033b6ec9e3372699a9",
+    "assets/index-D7Jg8A99.js": "58afe8e0ecc11aef431fe2edb222c964f8d501182ad75b8f110fbbcd723db403",
+    "assets/index-DBkCl2_-.js": "3f148d9df5aac9a8622100b2c1a19f160f112d8bd2bd3096a9d34dbe85e0a248",
+    "assets/index-DhV-idiH.js": "b15f3c0df846f1dde2feffb82f427465065eb8f29c9c87a941a03ee188e351d9",
+    "assets/index-Douu9Ee2.js": "aab7eab56ab36ee8455c13cdf38c6815f0cb69b1d9cef32632e3d27e94952155",
+    "assets/index-DzMEW7Yi.js": "90eff893d2d3c2ca71e2a6692e9b0372e0be0058b16ccc8e55f1350d2cdf60a5",
+    "assets/index-iUM2LVnJ.js": "91525e9d37632e04e6098bb5906407ffb1fb69848cfb2064e068e0ba10362e25",
+    "assets/index-lTwduMs_.js": "188b89bcc6dd0f220f6985a9f3a0f98b6dd4a0c522e1dc782238ac3b2aad0c9b",
+    "assets/index-npyuX0C8.css": "b7dbce19383f485c47f239b3b793fc98ab090750d27122dfd8f2fe461dd69a60",
+    "assets/index-qkQMUbk0.js": "390b8fc4b34d031b3dd806c43351f122e8b35652e1b61c3e994b4946d3c42663",
+    "assets/index-Qx0-7r-y.js": "8942b8499f02281b8c4b3758a7b7b2336d7176e0057d54edd46c563ded2646d7",
+    "assets/index-ri0pVaWS.js": "7a0f0c56415fcce35eecf094bac408ba73c49c6a0835b79bd7cedd091f22916f",
+    "assets/KeyCode-C3ZfcqzQ.js": "3e07de442a67b8aebd99fbf2172603cd885bd014ad710c864563178ec3e5029b",
+    "assets/LeftOutlined-Bk-94Tc-.js": "cb3f9b362f53961a51414e789d36cc1de601df966569dba7e4a310a5093d6db1",
+    "assets/link-2-Ds2iaCz1.js": "c3685d0ff44d271bdd9e03a4e8d04448fc12a1f3f8a8f02f586d2d91bb1bc57f",
+    "assets/local-storage-usage-g5qLD5k-.js": "28e0e0ea188ab9d83ee9db7f97a1e071a6c372be41f7c2fba2c494f33963d557",
+    "assets/localforage-storage-CnVq_wfS.js": "f051215b7271c860738851613e8f11a3524433ab846aa1e9dea225d729c7a580",
+    "assets/mermaid-GHXKKRXX-DmXbVuWB.js": "f95cf1d3a92744c3e9d16827582621b18b1d57110f7c08656d87cf9158dec41c",
+    "assets/model-plugin-BHk8yMKe.js": "4755b58a1a65f2877d0582c9bfe876f12b3ec24d48cc0af78f4709f6f6f396b2",
+    "assets/models-RRM9lyHu.js": "45097b594e6416eb7b0a9d09f936c7a1ff05f851b42c23ca7d67ec922d21d2fa",
+    "assets/music-2-Chab4Bp8.js": "bff05ccff72bb8a77264a900e204c1e62a14a994f949ef7cc26a4c73b9b0c7d7",
+    "assets/navigation-tools-SOT_ADOW.js": "3e94fe5e3ed2f20b69b0ea38773bffce025b2c4486cc5d7246279747c4f136d4",
+    "assets/Overflow-Dz6RDLp3.js": "4332a704267ecfde32fc81c0739e73dc2b6b4f003858f0d1b6419e65af5bfa71",
+    "assets/pencil-DHTl79MH.js": "f0f63f18c5bf7766c60ef7491f193143306860e41600a274a0e173a9defead33",
+    "assets/plus-DSPqRxRH.js": "b0b30f3ae08be387be47580e328f317d6874b9a17c51d00fac347856e101b306",
+    "assets/project-BdcnYrZx.js": "96656d35b18f6a87f0303e490bbbac9a0db7be94766b38fbf00da7dbd52ab098",
+    "assets/prompt-detail-dialog-tNR82ECM.js": "b9667b95180bf07a0a733cddb1227d5aa614d8c8412a600a9d275238e1be3408",
+    "assets/PurePanel-B7hy_HZZ.js": "666c915431c7c6d6aa96a3063779e0fc6fc6836b5d7effc6a477b66ab162d754",
+    "assets/refresh-cw-ngzvYQyY.js": "bcf63ea955d328b7788f70b6f04bddbb738306026b3f7d9cfe5f821583ef29f0",
+    "assets/rotate-ccw-CvivBT5x.js": "b916562dc568b37fbc65d2c538d28ad3539bc5096f828837ebc4c7ea56f24f8b",
+    "assets/schema-validator-CWnLFv0H.js": "9cb75e8f1c6a7ce6e22b586a470cd248e07d707c082138d61cfe6d87ffa0b35f",
+    "assets/schema-worker-BELMOVc3.js": "7a62cfd491975e88ffc049fea3ee69e21930393e9bd24f12220e2c63d27c58cb",
+    "assets/search-DViAC9fA.js": "5cfb222d1ff820373f2b318d78a12692bebd868e829045b5dc746898a3a258ea",
+    "assets/settings-2-BXh2ARoH.js": "8748dedf372c35bbfa6b9d58c47da561039125583be79620554b38f6432ff911",
+    "assets/square-check-big-C9EQw4Vn.js": "fe6a10dcee79e4e038ed65e27e6107b027d6e39ccb86f930914ba99be41c6e79",
+    "assets/square-DeUabhG2.js": "d2735496c27700e5f25352cb3c6bf109783dd38b03af2ca92ac28ef54a075aee",
+    "assets/storage-R66oizGZ.js": "a65b99357d1a7f728e19d34883b25fda34faa6fa1b6c9da4706e8efc0aac9a4f",
+    "assets/studio-model3d-preview-BL629FB_.js": "73be7cef756a7826f9bf3f0f4a45532a0cae7af78b400c58a370434a36b58309",
+    "assets/studio-model3d-viewer-D4KLA75h.js": "ce85386185942e6edad3a8ead37f9fb62e8f7f68d197c09c66e4539b6973195a",
+    "assets/tasks-ado8jASa.js": "2cd3fe51dce6da2018e777e6458345d8688fc0134da7665d31d27ed76fea9bd5",
+    "assets/trash-2-BtMvd9cX.js": "3ede8f04174d7831bd1f39ad5bd481566bdadb1d9ac45dce6fabbe926d90c402",
+    "assets/upload-BGlFtYJD.js": "650536a4b80fa813141b736e86345c7b301f76ebdc8f912de35bac8a156466fe",
+    "assets/use-asset-store-pq5UDx7A.js": "787e8ead1c97af2240d79ebb34fca03e742543269027ec38a595eb68c8c9a129",
+    "assets/use-canvas-store-G1JnKgJS.js": "d79969b3481fec565fd825fabf4015c8e868ea7b058099476922eb925560771e",
+    "assets/use-copy-text-DFVSpc90.js": "2e049b741402b410bec03f951bd2bcbc07132683647867269eb9f5fdf8a3d770",
+    "assets/use-prompt-list-CeNhxX2J.js": "49f62967cd649de5d24608e29536373f74bec45f73d2a7767f4b86796f01ef23",
+    "assets/use-workbench-agent-store-DPvGOz2Z.js": "6ce31e7451bb809f58976fad952d797ebe4dad92507d578454c0c137b9833084",
+    "assets/useControlledState-Cuekb3lh.js": "6f5e9410175f57002025ad1d69bce19abc719cd56f2d27af098670e4d146d8ff",
+    "assets/utils-BgGH5rrs.js": "f5477b160defd68303bd9041e5ba2117af3d10a08d635dc6de16c466393c5825",
+    "assets/video-BpDFemSV.js": "136d96de073917a2d85d03d6f201e31df21db9115b4c6c28593ff5a8120c34e4",
+    "assets/video-BwStQTr9.js": "4006566941d5f3a914434617c9f48fb3ccdd19d89183b8a5c64009624a4be848",
+    "assets/video-settings-panel-SU4xFIAE.js": "a6c8ac3b05a4707f7e3f0a28c25ac7aeffc946e90f6776f91e2cff63d0e26897",
+    "assets/zip-vQtl9jF_.js": "ad1801c25d96b5c5b3efd9778f827b7e79e1fbbaf57d8fe58e64958aaea078be",
+    "config.js": "33c15a252c60b6103ad20c773e1ec662c1aaa636277aa24698274a7d2a743038",
+    "fonts/Anton-OFL.txt": "ee67e6ee22790b7929f1a3769ca2801d565c64b5a9096942c1adf5596de9c9e4",
+    "fonts/Anton-Reference.woff": "3e24c24de16e130bfa17a49aec4b7626e615b11ffd7e7c7acac67ca94764267a",
+    "fonts/Manrope-OFL.txt": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+    "fonts/Manrope-Reference.woff": "c28e4b71c9f408d904a55e1e28ab142a703b48177926d2d05ac416e3c6f369dd",
+    "icons/claude.svg": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364",
+    "icons/deepseek.svg": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439",
+    "icons/gemini.svg": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602",
+    "icons/glm.svg": "8174e65ff71647d5c705c920c953a82bd723d9e3e42887bdd4ffc9dfe51207a0",
+    "icons/grok.svg": "9175fc90c22655160231976c849f25a03b888d7cc0e04c5f1b987b659bb07c95",
+    "icons/linuxdo.svg": "dc7fe55ca4dc1062611111df4208da9d44655c36f85ad52727facd4bba2b4d60",
+    "icons/openai.svg": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186",
+    "index.html": "747b7ccbb64f9130a519280754f086644147def3ec256310d7e8cbcb94f236f4",
+    "licenses/three-MIT.txt": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "logo.svg": "76e174b82af0dfac35c55ba086d4e9781aa1d2ade984b50ddb6489b408efd831",
+    "plugins/index.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "static_artifact_unchanged": true,
+  "generation_posts": 0,
+  "production_mutations": 0,
+  "synthetic_upload_posts": 1,
+  "remote_delete_requests": 0,
+  "video": ".local/studio-upload-cache/2026-10-30T03-00-47-790Z/page@495de008bf009fd518024d38569cf2f1.webm",
+  "private_recording": ".local/studio-upload-cache/2026-10-30T03-00-47-790Z/page@495de008bf009fd518024d38569cf2f1.webm",
+  "passed": true,
+  "completed_at": "2026-10-30T03:01:26.747Z"
+}
