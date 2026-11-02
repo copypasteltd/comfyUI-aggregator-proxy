@@ -1,6 +1,6 @@
 # 生图生视 API 封装：开发文档入口
 
-[130 · MediaGen Skill 1.1.1](130-MediaGenSkill兼容同步与发布.md)：同步云端 129.3 的 3D 独立权限、单图请求、实际几何字段、GLB 下载与恢复边界；安装和公开包验证见专题。[安装/升级](126-MediaGenSkill安装与调用.md) · [发行入口](127-MediaGenSkill-Release说明.md)。
+[131 · 单文件 Skill 1.2.0 与固定在线地址](131-单文件Skill与固定在线地址.md)：[skill.md](https://gen.sub2share.xyz/skill.md) 完整嵌入说明、API 参考及客户端，保留版本入口和 ZIP；涵盖安装、可复现发行、原生静态部署与回退。[安装/升级](126-MediaGenSkill安装与调用.md) · [发行入口](127-MediaGenSkill-Release说明.md) · [历史 1.1.1](130-MediaGenSkill兼容同步与发布.md)。
 
 [129 · 三维兼容复查与 GLB 边界修复](129-三维兼容复查与GLB边界修复.md)：修复 accessor 计数、全节点层级、最小权限 Key 的 3D 权限映射及下载文件扩展名，最终 339 项兼容回归通过；线上生效、新生成和完整下载/计量独立记录。
 
@@ -10,7 +10,7 @@
 
 [124 · 已上线交付](124-模型使用说明与公开Skill交付.md)：10 个模型说明、正式 [Skill Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.0.0)、三台十分钟自动回收和四条真实多模态调用均已验证。[安装调用](126-MediaGenSkill安装与调用.md) · [发布说明](127-MediaGenSkill-Release说明.md) · [实际媒体](media/media-gen-124/README.md)。
 
-当前增量：[130 · Skill 兼容同步](130-MediaGenSkill兼容同步与发布.md)；云端兼容复查见 [129](129-三维兼容复查与GLB边界修复.md)。3D 接入见 [128](128-ComfyUI三维模型产物与3080适配.md)，既有能力与历史交付见 [124 · 模型说明与公开 Skill](124-模型使用说明与公开Skill交付.md)、[125 · 空闲回收与双屏障](125-ComfyUI空闲内存回收与双屏障.md)；客户端安装见 [126](126-MediaGenSkill安装与调用.md)。
+当前增量：[131 · 单文件 Skill 与固定入口](131-单文件Skill与固定在线地址.md)；历史 Skill 兼容同步见 [130](130-MediaGenSkill兼容同步与发布.md)，云端兼容复查见 [129](129-三维兼容复查与GLB边界修复.md)。3D 接入见 [128](128-ComfyUI三维模型产物与3080适配.md)，既有能力与历史交付见 [124 · 模型说明与公开 Skill](124-模型使用说明与公开Skill交付.md)、[125 · 空闲回收与双屏障](125-ComfyUI空闲内存回收与双屏障.md)；客户端安装见 [126](126-MediaGenSkill安装与调用.md)。
 
 [123 · 空闲资源释放与多设备模型池调度](./123-空闲资源释放与多设备模型池调度设计.md)：核对当前 GPU 槽位释放与 Worker 抢领，确认没有 600 秒自动模型卸载、线上没有多渠道发布别名。给出实例级维护/空闲代数、受控释放回执、共享实例竞争保护和设备公平预留的设计；10 项开发/14 组验收均待完成。[机器决策](contracts/comfy-idle-and-pool-policy.json)与[只读证据](evidence/2026-10-28/runtime-idle-and-pool-audit-123.json)区分现状与计划，不代表线上启用。
 

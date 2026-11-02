@@ -1,0 +1,126 @@
+{
+  "format_version": 1,
+  "at": "2026-11-02T11:33:37.394641+00:00",
+  "passed": true,
+  "sources_unchanged": true,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "scope": "Media Gen Skill 1.2.0 source and generated single-file validation, including independent extraction/execution and native loopback client behavior: image/video/audio/3D request/recovery/download compatibility. No live GPU job, server deployment, browser, database or virtualization is used.",
+  "version": "1.2.0",
+  "checks": [
+    {
+      "name": "single_file_validator",
+      "passed": true,
+      "exit_code": 0,
+      "log_sha256": "6cf9e7f0d34ccd36dbd28f270cd28dd04277b2e1516bd4333ce7bb501d7b18d4",
+      "budget_seconds": 30
+    },
+    {
+      "name": "skill_validator",
+      "passed": true,
+      "exit_code": 0,
+      "log_sha256": "6cf9e7f0d34ccd36dbd28f270cd28dd04277b2e1516bd4333ce7bb501d7b18d4",
+      "budget_seconds": 30
+    },
+    {
+      "name": "ruff",
+      "passed": true,
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "budget_seconds": 30
+    },
+    {
+      "name": "cli_help",
+      "passed": true,
+      "exit_code": 0,
+      "log_sha256": "520e20f873d091066ece1723f7374100ce566a76e2272118e1b71dbb755e5aaf",
+      "budget_seconds": 10
+    },
+    {
+      "name": "pytest",
+      "passed": true,
+      "exit_code": 0,
+      "log_sha256": "7ee90747e3fc440088d702cca023a706224199c368e021ee1e8cbc50f7770a56",
+      "budget_seconds": 360
+    }
+  ],
+  "python": {
+    "tests": 12,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/skills/media-gen-skill/SKILL.md": "fc7188427e8054ffeb6156d00980051e0768f4ae0a6751102adc94011d8ffc3c",
+    "app/skills/media-gen-skill/VERSION": "1e5b51cde515396a9fa762909cf8ca6584ccc564b325d2eebeea76175fe95c4d",
+    "app/skills/media-gen-skill/agents/openai.yaml": "3226beacd9026da82591b836d05f48dcb7a5dc7d9d167e8cdf16aa258f3914c4",
+    "app/skills/media-gen-skill/references/api.md": "32171f13ef4cbdb20c6eea2d98327225676014fe708ed332eeaeabf85cf2b889",
+    "app/skills/media-gen-skill/scripts/media_gen.py": "c18cb55922e22a9fb52d79f25f5f2ce586c7d221abc6eda4ad3df657fb39d871",
+    "app/tests/unit/test_media_gen_skill.py": "fd82e51985c28004a0c9f8190a6912c43363897698fa2fd9acd0b3206127ab6e",
+    "app/tests/conftest.py": "933bb37e526584aae0c18fab514c56de0f16d9ac985935bed6abdfc2c6605153",
+    "app/scripts/build-media-gen-skill.py": "e0707047b63e7f332a0e917629911aa7136c27b1233fade57c8974abe6a1df6c",
+    "app/scripts/publish-media-gen-skill.sh": "1212a9d9d180999ec98ca3bd6e1bd168a6f9fb2a5bff871214879c744bb64f3d",
+    "app/pyproject.toml": "679b146465e5b93b50ce4ebff535eb627252f1e2c07b5ba36a68b960c614d035",
+    "app/uv.lock": "e9437260790daa7d2426a96d3bc57d445fc1912ad768cb49771492345a3db43a",
+    "app/deploy/native-linux/publish-public-skill.py": "7bd932f4c255c9d9044447e1c1e55dec29a7e42ed1d8b2296adad1ca70658986",
+    "app/deploy/native-linux/public-skills.nginx.conf": "86d74cd12fedf056da0936ee493e77b31c825d4347db6b47dd2928d9eec2bd7c"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_audio_presets_fixed_encoding_does_not_require_unexposed_parameters",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_cli_outputs_utf8_when_windows_redirect_encoding_is_ascii",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_download_verifies_and_never_overwrites_or_leaves_partial",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_lost_submission_reuses_exact_identity_and_body_then_only_polls",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_model3d_client_uses_image_only_and_declared_parameters",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_model3d_download_uses_canonical_extension",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_redirect_refused_and_origin_locked",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_single_file_runs_independently_and_downloads_a_verified_glb",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_wait_stops_on_native_unsuccessful_terminal_status",
+      "passed_cases": 3
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "0c7039bc89f878ba2b618691da6c832ad26dd6138ee44a222b7ceb84f9ffa679",
+  "python_log_sha256": "7ee90747e3fc440088d702cca023a706224199c368e021ee1e8cbc50f7770a56",
+  "seconds": 25.814,
+  "single_file_sha256": "ff96161dbce701bc1c6bcb08e817641e0ac38c2766034d75d2b339634bca1a59",
+  "single_file_bytes": 35951,
+  "validator_environment_note": "The first unrecorded quick_validate invocation used Windows GBK and could not decode UTF-8; this recorded run explicitly uses Python -X utf8. No Skill validation rule was bypassed."
+}

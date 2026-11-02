@@ -10,6 +10,8 @@ test "$RELEASE_TAG" = "media-gen-skill-v$version"
 python3 app/scripts/build-media-gen-skill.py --output app/.local/skill-release
 python3 app/scripts/build-media-gen-skill.py --output app/.local/skill-rebuild
 cmp "app/.local/skill-release/media-gen-skill-$version.zip" "app/.local/skill-rebuild/media-gen-skill-$version.zip"
+cmp app/.local/skill-release/skill.md app/.local/skill-rebuild/skill.md
+cmp app/.local/skill-release/release.json app/.local/skill-rebuild/release.json
 (cd app/.local/skill-release && sha256sum --check SHA256SUMS.txt)
 
 set -euo pipefail
@@ -27,7 +29,7 @@ else
 fi
 gh release download "$RELEASE_TAG" --dir app/.local/skill-download
 (cd app/.local/skill-download && sha256sum --check SHA256SUMS.txt)
-for asset in "media-gen-skill-$version.zip" SHA256SUMS.txt release.json; do
+for asset in "media-gen-skill-$version.zip" skill.md SHA256SUMS.txt release.json; do
   cmp "app/.local/skill-release/$asset" "app/.local/skill-download/$asset"
 done
 gh release edit "$RELEASE_TAG" --draft=false --latest=false

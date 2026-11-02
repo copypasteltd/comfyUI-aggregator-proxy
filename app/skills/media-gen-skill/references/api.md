@@ -19,7 +19,7 @@ For `image_to_3d`, use the dedicated request, quota and download guidance below.
 
 ## Image-to-3D compatibility
 
-The example deployment's cloud release 129.3 corrects mesh-only admission and canonical GLB attachment filenames, and validates POSITION counts and hierarchies outside the default scene. Skill version 1.1.1 documents those verified server behaviors; installing a Skill archive does not upgrade another deployment's server or Worker. Discover that deployment's approved model first.
+The example deployment's cloud release 129.3 introduced corrected mesh-only admission and canonical GLB attachment filenames, and validates POSITION counts and hierarchies outside the default scene. Skill version 1.2.0 retains those verified server behaviors; installing a Skill does not upgrade another deployment's server or Worker. Discover that deployment's approved model first.
 
 For a complete source-image upload, job and result flow, the minimal scope set is `models:read`, `assets:upload`, `jobs:create`, `jobs:read`, `meshes:create`, `artifacts:read`, `content:read` and `content:download`. The `capabilities` command additionally uses `capabilities:read`. Enable the selected alias/release/channel/task in the Key's policy. Set a nonzero `daily_mesh_count` at Tenant, Project and Key levels; old policies default to zero. Do not add `images:create` to work around an outdated server's mesh-scope defect. Visibility alone is not admission or quota approval.
 

@@ -194,3 +194,26 @@ def test_model3d_download_uses_canonical_extension(server: Any, tmp_path: Path) 
     result = client.wait_job(client.Api(base, "synthetic-key"), JOB, 1, tmp_path)
     target = Path(result["downloads"][0]["path"])
     assert target.suffix == ".glb" and target.read_bytes() == PAYLOAD
+
+
+def test_single_file_runs_independently_and_downloads_a_verified_glb(server: Any, tmp_path: Path) -> None:
+    builder_path = PATH.parents[3] / "scripts/build-media-gen-skill.py"
+    builder_spec = importlib.util.spec_from_file_location("skill_builder", builder_path)
+    assert builder_spec and builder_spec.loader
+    builder = importlib.util.module_from_spec(builder_spec)
+    builder_spec.loader.exec_module(builder)
+    skill_dir = PATH.parents[1]
+    payload = {name: (skill_dir / name).read_bytes() for name in builder.FILES}
+    text = builder.render_single_file(payload, payload["VERSION"].decode().strip()).decode("utf-8")
+    (tmp_path / "SKILL.md").write_text(text, "utf-8")
+    extraction = next(line for line in text.splitlines() if line.startswith('python -c "'))[11:-1]
+    subprocess.run([sys.executable, "-I", "-c", extraction], cwd=tmp_path, capture_output=True, check=True, timeout=10)  # noqa: S603 -- extract the checked-in, generated client into an isolated test directory
+    extracted = tmp_path / "media_gen.py"
+    assert extracted.read_text("utf-8") == PATH.read_text("utf-8")
+    base, state = server
+    state["media_type"] = "model/gltf-binary"
+    result = subprocess.run([sys.executable, "-I", str(extracted), "--base-url", base, "wait", JOB, "--timeout", "1", "--download", "--output-dir", str(tmp_path / "output")], cwd=tmp_path, env=dict(os.environ, MEDIA_GEN_API_KEY="synthetic-key"), capture_output=True, check=True, timeout=10)  # noqa: S603 -- isolated extracted client and owned loopback fixture
+    value = json.loads(result.stdout.decode("utf-8"))
+    assert Path(value["downloads"][0]["path"]).suffix == ".glb"
+    assert Path(value["downloads"][0]["path"]).read_bytes() == PAYLOAD
+    assert not state["posts"]

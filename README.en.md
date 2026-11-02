@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+**Single-file Skill 1.2.0: [online skill.md](https://gen.sub2share.xyz/skill.md)**. Save it as `media-gen-skill/SKILL.md` in your agent's skills directory. Instructions, API reference and the complete Python client are embedded; no additional scripts/references download is required. Configure your business Key, discover live models, then generate images, video, audio or supported GLB 3D. The fixed URL serves the latest deployed version; [immutable 1.2.0](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md) and ZIP distribution remain available. [Installation, updates and publication](docs/131-单文件Skill与固定在线地址.md).
+
 [129 · 3D compatibility review](docs/129-三维兼容复查与GLB边界修复.md) fixes POSITION accessor counts, invalid node hierarchies outside the default scene, an incorrect image-permission requirement for 3D-only Keys, and missing .glb download filename extensions. All 339 final scoped checks pass, including least privilege across seven task types, HTTP admission and full/HEAD/Range downloads. See the review for deployment and fresh generation evidence.
 
 Cloud **129.3** is verified: a Key with only the mesh generation scope successfully ran RTX 3080 TRELLIS2 and returned a 100,424,732-byte GLB. Full SHA, canonical filename, cross-Key isolation and once-only mesh usage pass. Both temporary Keys are disabled. [Fresh real requests and responses](docs/examples/model3d/recheck-129/README.md).
@@ -14,7 +16,7 @@ Deployed at **https://gen.sub2share.xyz**: **11 published models across 3 enable
 
 Three devices have a 10-minute idle policy that releases reclaimable RAM/VRAM through ComfyUI HTTP APIs. In Admin, open a model's usage dialog to view capabilities or edit its public description; open a channel's idle-reclamation dialog to configure and inspect execution proof. New channels need explicit policy activation.
 
-The published [Media Gen Skill 1.1.1 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.1.1) includes a standalone Python 3.10+ client, source manifest and SHA-256 checksum. It aligns with cloud 129.3 mesh-only permissions, GLB downloads and supported boundaries: 3D uses `meshes:create` without requiring `images:create`. Configure a business Key, discover models and parameters, then submit an asynchronous job. Visibility and quotas remain controlled by the Key. [Update and verification](docs/130-MediaGenSkill兼容同步与发布.md).
+The [Media Gen Skill 1.2.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.2.0) provides the single file, ZIP, source manifest and SHA-256 checksums. Its Python 3.10+ standard-library client retains mesh-only permissions and GLB handling introduced by cloud 129.3: 3D uses `meshes:create` without `images:create`. The commands below use the extracted ZIP; single-file users extract the embedded client and replace `scripts/media_gen.py` with `media_gen.py`. Visibility and quotas remain controlled by your business Key. [Current release](docs/131-单文件Skill与固定在线地址.md) · [Previous compatibility review](docs/130-MediaGenSkill兼容同步与发布.md).
 
 ```sh
 export MEDIA_GEN_API_KEY='YOUR_BUSINESS_API_KEY'

@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-02 · 131 · Single-file Skill 1.2.0
+
+- 新增自包含 `skill.md`，完整嵌入说明、API 参考和 Python 标准库客户端；同时保留原 ZIP 分发。两种形式由同一来源编译，清单和 SHA-256 可核对。
+- Add a stable public `/skill.md` and immutable version paths through a dedicated Nginx static directory, atomic current pointer, config hash guard and failure rollback. Publish without replacing the running application or restarting generation services.
+- GitHub 标签发行四项资产，固定 ZIP 创建系统并统一单文件换行；维护者按 [131](docs/131-单文件Skill与固定在线地址.md) 再同步静态入口。双语安装、更新和版本说明同步。
+- Validate standalone extraction/execution with verified GLB download and all 12 scoped client regressions, Skill validation and Ruff. Preserve earlier GPU evidence and full acceptance status; this increment changes distribution, not generation behavior.
+
 ## 2026-10-29 · 130 · Media Gen Skill 1.1.1
 
 - 同步调用 Skill 与云端 129.3：明确 3D 独立 meshes:create、完整上传/任务/内容最小权限及三级 daily_mesh_count，遇到旧服务权限缺陷不通过自动扩权绕行。
