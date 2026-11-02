@@ -1,0 +1,49 @@
+{
+  "format_version": 1,
+  "at": "2026-11-02T11:41:11.944016+00:00",
+  "passed": true,
+  "scope": "Two native builds of four assets from committed sources/builder; exact ZIP member/hash validation, Linux creator metadata, self-contained file equality with the tested candidate and Python 3.10 syntax. Public release and static deployment are verified separately.",
+  "version": "1.2.0",
+  "source_revision": "ce982ff43a633e86c4faa6e3e99a7927510b0767",
+  "assets": [
+    {
+      "name": "media-gen-skill-1.2.0.zip",
+      "bytes": 14421,
+      "sha256": "ed1ab6ece24693cd37d8be5e49e39a5a9e3202d19f90097678592213f0d19c35"
+    },
+    {
+      "name": "skill.md",
+      "bytes": 35951,
+      "sha256": "ff96161dbce701bc1c6bcb08e817641e0ac38c2766034d75d2b339634bca1a59"
+    },
+    {
+      "name": "release.json",
+      "bytes": 1005,
+      "sha256": "ece82bff315fde9daa5e02930301239c21bdd0b78b049006396817977076662c"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 167,
+      "sha256": "ae3fecf2ce469602fd0ec271005f86520bed6df566642cd3b0f9e60b505ca45a"
+    }
+  ],
+  "source_sha256": {
+    "app/skills/media-gen-skill/SKILL.md": "fc7188427e8054ffeb6156d00980051e0768f4ae0a6751102adc94011d8ffc3c",
+    "app/skills/media-gen-skill/VERSION": "1e5b51cde515396a9fa762909cf8ca6584ccc564b325d2eebeea76175fe95c4d",
+    "app/skills/media-gen-skill/agents/openai.yaml": "3226beacd9026da82591b836d05f48dcb7a5dc7d9d167e8cdf16aa258f3914c4",
+    "app/skills/media-gen-skill/references/api.md": "32171f13ef4cbdb20c6eea2d98327225676014fe708ed332eeaeabf85cf2b889",
+    "app/skills/media-gen-skill/scripts/media_gen.py": "c18cb55922e22a9fb52d79f25f5f2ce586c7d221abc6eda4ad3df657fb39d871",
+    "app/scripts/build-media-gen-skill.py": "e0707047b63e7f332a0e917629911aa7136c27b1233fade57c8974abe6a1df6c"
+  },
+  "checks": [
+    "Committed five-file Skill payload and builder",
+    "Two builds identical for all four release assets",
+    "ZIP CRC and exact safe member set",
+    "Every source and manifest digest matches",
+    "Single-file content identical to independently validated/tested file",
+    "Embedded client has Python 3.10 syntax and equals the tested source",
+    "ZIP platform field fixed to Unix on Windows build"
+  ],
+  "credentials_included": false,
+  "full_acceptance": "pending"
+}

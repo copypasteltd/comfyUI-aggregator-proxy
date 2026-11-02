@@ -28,7 +28,7 @@
 
 Download [the current file](https://gen.sub2share.xyz/skill.md), save it as `media-gen-skill/SKILL.md` in your agent's skills directory, and open a new session. Configure your business API Key yourself. The instructions, native API reference and complete standard-library client are embedded. Native HTTP tools can use the API directly; extract the client only for CLI use. After an update, deliberately replace an old extracted client or extract into a new working directory.
 
-固定版本：[1.2.0/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.2.0/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.2.0/SHA256SUMS.txt) 和 ZIP；用于来源核对、固定版本和回退。固定 `/skill.md` 每次重新验证缓存；版本入口可长时缓存。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
+固定版本：[1.2.0/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.2.0/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.2.0/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.2.0/media-gen-skill-1.2.0.zip)；用于来源核对、固定版本和回退。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
 
 ## 4. 后续发布 / Maintainer workflow
 
@@ -47,4 +47,25 @@ sudo python3 /home/ubuntu/skill-publish/publish-public-skill.py \
 
 The tag workflow publishes GitHub assets; the static publisher updates the production URL separately. It verifies checksums/manifest/ZIP members, refuses to overwrite a different immutable version, guards the inspected configuration hash, backs up configuration, tests Nginx and reloads it gracefully. Local HTTP verification checks GET/HEAD, ETag/304, arbitrary origins/OPTIONS, version/missing paths, live health, business authentication and the private-ingress boundary. It also requires every existing service PID and application release pointer to stay unchanged. Keep the previous version directory for rollback; do not delete history while long-lived caches may still reference it.
 
-实际公开发行、部署和外部读取的版本化结果在完成后追加于此；历史 ZIP 与 1.1.x Release 保留。
+## 5. 已发布与实测结果 / Published result
+
+2026-11-02 已上线，当前及版本入口均可匿名读取。文件 **35,951 字节**，SHA-256：
+
+```text
+ff96161dbce701bc1c6bcb08e817641e0ac38c2766034d75d2b339634bca1a59
+```
+
+| 核对 | 结果与证据 |
+| --- | --- |
+| 本地行为 | [12 项回归](evidence/2026-11-02/media-gen-single-file-131-local.json)；单文件独立提取/执行、真实回环 HTTP 和校验下载通过；两种 Skill 均通过 quick_validate |
+| 来源与两次构建 | [构建报告](evidence/2026-11-02/media-gen-single-file-131-build.json)；来源 `ce982ff43a633e86c4faa6e3e99a7927510b0767`，四项资产两次一致，单文件等于被测候选，内嵌客户端具有 Python 3.10 语法 |
+| GitHub 正式发行 | [1.2.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.2.0)；[匿名独立下载报告](evidence/2026-11-02/media-gen-single-file-131-public-release.json)，四项 Linux 发行资产与两次 Windows 原生构建逐字节相同；校验摘要、标签、清单及全部 ZIP 成员通过 |
+| 原生线上部署 | [部署报告](evidence/2026-11-02/media-gen-single-file-131-deployment.json) 和 [最终发布器/安装核对](evidence/2026-11-02/media-gen-single-file-131-publisher-checks.json)；实际安装与当前源码摘要一致，Ruff/Python 3.10 语法通过；保留 `linux-20261030.137.1`，五个服务 PID 和应用指针未变，Nginx 语法、GET/HEAD、条件请求、CORS、版本/不存在路径、健康及鉴权边界通过 |
+| 高位入口及域名 | [38 项外部检查](evidence/2026-11-02/media-gen-single-file-131-external.json)；固定/版本四项文件完整匹配、UTF-8 Markdown、GET/HEAD、任意来源 GET/OPTIONS、写入拒绝、缺失路径、live/ready、原 Admin/Studio 和业务鉴权均通过 |
+| 失败自动恢复 | 首次缺少 Markdown charset，第二次 OPTIONS 被方法过滤提前拒绝；两次均实际恢复原配置/指针并核对五个原 PID。保留 [首次回退](evidence/2026-11-02/media-gen-single-file-131-first-deploy-rollback.json)、[第二次原因](evidence/2026-11-02/media-gen-single-file-131-second-deploy-preflight.json) 及 [第二次回退](evidence/2026-11-02/media-gen-single-file-131-second-deploy-rollback.json)，修正 charset_types 和允许 OPTIONS 后按原断言通过 |
+
+域名已有代理会追加重复 no-cache；本次观察到 CF-Cache-Status 为 DYNAMIC，条件请求返回相同 ETag/完整摘要的 200，而直接高位入口返回 304。初始外部探针把缓存头原文及域名 304 写死而停止，最终按实际代理语义核对：源站仍严格要求 304，域名允许正确 304 或带相同 ETag/摘要、DYNAMIC/no-cache 的完整 200。无需改变用户代理，说明读取仍为最新发行内容；公开文件字节和业务鉴权断言没有放宽。
+
+Version 1.2.0 is published at both URLs and on GitHub. All four public release assets match both native Windows builds byte for byte. All 12 local client cases and 38 external HTTP checks pass. The existing application release and five service PIDs are preserved. Two initial Nginx integration failures were rolled back and recorded before correcting Markdown charset and OPTIONS handling; strict origin assertions pass after the fix. The existing domain proxy returns fresh 200 for conditional requests while the origin returns 304, documented separately. No GPU generation, browser, database migration, local virtualization or user reverse-proxy change was required.
+
+历史 ZIP 与 1.1.x Release 保留。没有创建新的常驻服务；线上仅增加静态版本目录、current 指针和文档路由，备份/部署记录留作恢复。本次分发验收不提升整个产品、10～20 台实机或其他未完成工作包的验收状态。

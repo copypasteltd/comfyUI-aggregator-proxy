@@ -90,7 +90,8 @@ def verify_http(version: str, data: bytes) -> dict[str, object]:
     assert status == 200 and not body and int(head["content-length"]) == len(data)
     status, _, body = request("/skill.md", headers={"If-None-Match": headers["etag"]})
     assert status == 304 and not body
-    assert request("/skill.md", "OPTIONS", {"Origin": "https://second-origin.example", "Access-Control-Request-Method": "GET"})[0] == 204
+    preflight, _, _ = request("/skill.md", "OPTIONS", {"Origin": "https://second-origin.example", "Access-Control-Request-Method": "GET"})
+    assert preflight == 204, f"Public Skill preflight returned {preflight} instead of 204"
     status, history, body = request(f"/skills/media-gen/{version}/skill.md")
     assert status == 200 and body == data and "immutable" in history["cache-control"]
     assert request("/skills/media-gen/0.0.0/skill.md")[0] == 404

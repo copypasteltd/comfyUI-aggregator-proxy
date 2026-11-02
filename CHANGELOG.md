@@ -6,6 +6,7 @@
 - Add a stable public `/skill.md` and immutable version paths through a dedicated Nginx static directory, atomic current pointer, config hash guard and failure rollback. Publish without replacing the running application or restarting generation services.
 - GitHub 标签发行四项资产，固定 ZIP 创建系统并统一单文件换行；维护者按 [131](docs/131-单文件Skill与固定在线地址.md) 再同步静态入口。双语安装、更新和版本说明同步。
 - Validate standalone extraction/execution with verified GLB download and all 12 scoped client regressions, Skill validation and Ruff. Preserve earlier GPU evidence and full acceptance status; this increment changes distribution, not generation behavior.
+- 已正式发布并上线 35,951 字节单文件；四项公开 Release 资产与两次 Windows 构建逐字节相同，38 项域名/高位入口检查通过。修正 Markdown charset_types 和 OPTIONS 方法过滤，保留两次自动回退证据；原应用版本及五个服务 PID 保持。Existing domain-proxy conditional 200 behavior is recorded separately from origin 304; no proxy/certificate changes.
 
 ## 2026-10-29 · 130 · Media Gen Skill 1.1.1
 

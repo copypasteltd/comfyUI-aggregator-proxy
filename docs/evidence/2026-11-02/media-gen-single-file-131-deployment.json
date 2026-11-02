@@ -1,0 +1,41 @@
+{
+  "at": "2026-11-02T11:47:39.602067+00:00",
+  "version": "1.2.0",
+  "source_revision": "ce982ff43a633e86c4faa6e3e99a7927510b0767",
+  "application_release": "/opt/comfyui-aggregator/releases/linux-20261030.137.1",
+  "services_unchanged": true,
+  "service_pids": {
+    "comfy-aggregator-api.service": "2632288",
+    "comfy-aggregator-runner.service": "2628181",
+    "comfy-aggregator-gc.service": "2628182",
+    "comfy-aggregator-http-worker.service": "803588",
+    "comfy-aggregator-edge.service": "1119"
+  },
+  "previous_pointer": null,
+  "current_pointer": "1.2.0",
+  "config_before_sha256": "9b6efdc286e2e0d4bec7050c56ab52adc56e78e650dafbd0a2fffefed6401305",
+  "config_after_sha256": "be99d41647c1a76d145dbec1f7c69b0a6ef739a6fc7ea38a02ac7fd6397d854d",
+  "snippet_sha256": "16b832a9a330c6dfb35d38fa8576d0345ce9cb62ebd3c39c511e1a0344f69566",
+  "backup": "/etc/comfyui-aggregator/nginx.conf.before-skill-20261102T114738976514Z",
+  "http": {
+    "get_head": true,
+    "conditional_get": true,
+    "cors_options": true,
+    "immutable_version": true,
+    "missing_paths_404": true,
+    "health_live": true,
+    "business_auth_preserved": true,
+    "private_ingress_preserved": true,
+    "sha256": "ff96161dbce701bc1c6bcb08e817641e0ac38c2766034d75d2b339634bca1a59"
+  },
+  "format_version": 1,
+  "passed": true,
+  "scope": "Publish verified public Skill assets through native Nginx with explicit Markdown charset types; loopback HTTP, health/auth boundaries and unchanged application/service PIDs. External verification is recorded separately.",
+  "full_acceptance": "pending",
+  "gpu_generation_run": false,
+  "local_virtualization_used": false,
+  "source_sha256": {
+    "app/deploy/native-linux/publish-public-skill.py": "50e9fde43eeb85e792d161acf664880bb635e2a8690accbb62d555d3445ec325",
+    "app/deploy/native-linux/public-skills.nginx.conf": "16b832a9a330c6dfb35d38fa8576d0345ce9cb62ebd3c39c511e1a0344f69566"
+  }
+}

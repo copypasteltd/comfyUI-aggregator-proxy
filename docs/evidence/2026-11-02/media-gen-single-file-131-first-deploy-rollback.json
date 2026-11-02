@@ -1,0 +1,28 @@
+{
+  "format_version": 1,
+  "at": "2026-11-02T11:45:26.145847+00:00",
+  "scope": "First production static publish and automatic rollback after a strict content-type assertion failed.",
+  "first_publish_passed": false,
+  "cause": "Nginx charset_types did not include text/markdown: UTF-8 body matched, but Content-Type omitted the required charset. The assertion is retained; explicit charset_types is added for Markdown/text/JSON.",
+  "rollback_verified": true,
+  "restored": {
+    "config_sha256": "9b6efdc286e2e0d4bec7050c56ab52adc56e78e650dafbd0a2fffefed6401305",
+    "current_exists": false,
+    "include_exists": false,
+    "application": "/opt/comfyui-aggregator/releases/linux-20261030.137.1",
+    "pids": {
+      "comfy-aggregator-api.service": "2632288",
+      "comfy-aggregator-runner.service": "2628181",
+      "comfy-aggregator-gc.service": "2628182",
+      "comfy-aggregator-http-worker.service": "803588",
+      "comfy-aggregator-edge.service": "1119"
+    }
+  },
+  "failed_source_sha256": {
+    "app/deploy/native-linux/publish-public-skill.py": "7bd932f4c255c9d9044447e1c1e55dec29a7e42ed1d8b2296adad1ca70658986",
+    "app/deploy/native-linux/public-skills.nginx.conf": "86d74cd12fedf056da0936ee493e77b31c825d4347db6b47dd2928d9eec2bd7c"
+  },
+  "private_stderr_sha256": "2d4599f76cd25a017db32b43c75c8a5858cc84dc5c1f359a78d2a62bc332f6e7",
+  "public_release_assets_modified": false,
+  "application_restarted": false
+}

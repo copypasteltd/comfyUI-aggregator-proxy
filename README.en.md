@@ -2,6 +2,8 @@
 
 **Single-file Skill 1.2.0: [online skill.md](https://gen.sub2share.xyz/skill.md)**. Save it as `media-gen-skill/SKILL.md` in your agent's skills directory. Instructions, API reference and the complete Python client are embedded; no additional scripts/references download is required. Configure your business Key, discover live models, then generate images, video, audio or supported GLB 3D. The fixed URL serves the latest deployed version; [immutable 1.2.0](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md) and ZIP distribution remain available. [Installation, updates and publication](docs/131-单文件Skill与固定在线地址.md).
 
+All 12 scoped client cases, 38 external access checks and byte-for-byte Windows/Linux checks of the four public assets pass. The existing generation release and five service PIDs are preserved. Future Skill updates must synchronize the fixed URL, versioned release and bilingual instructions.
+
 [129 · 3D compatibility review](docs/129-三维兼容复查与GLB边界修复.md) fixes POSITION accessor counts, invalid node hierarchies outside the default scene, an incorrect image-permission requirement for 3D-only Keys, and missing .glb download filename extensions. All 339 final scoped checks pass, including least privilege across seven task types, HTTP admission and full/HEAD/Range downloads. See the review for deployment and fresh generation evidence.
 
 Cloud **129.3** is verified: a Key with only the mesh generation scope successfully ran RTX 3080 TRELLIS2 and returned a 100,424,732-byte GLB. Full SHA, canonical filename, cross-Key isolation and once-only mesh usage pass. Both temporary Keys are disabled. [Fresh real requests and responses](docs/examples/model3d/recheck-129/README.md).

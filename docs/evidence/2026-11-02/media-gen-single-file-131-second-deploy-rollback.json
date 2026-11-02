@@ -1,0 +1,20 @@
+{
+  "format_version": 1,
+  "at": "2026-11-02T11:47:36.356685+00:00",
+  "scope": "Read-only inspection after the OPTIONS failure: original config, absent initial current/include, all five original service PIDs and application release restored again.",
+  "rollback_verified": true,
+  "restored": {
+    "config_sha256": "9b6efdc286e2e0d4bec7050c56ab52adc56e78e650dafbd0a2fffefed6401305",
+    "current_exists": false,
+    "include_exists": false,
+    "application": "/opt/comfyui-aggregator/releases/linux-20261030.137.1",
+    "pids": {
+      "comfy-aggregator-api.service": "2632288",
+      "comfy-aggregator-runner.service": "2628181",
+      "comfy-aggregator-gc.service": "2628182",
+      "comfy-aggregator-http-worker.service": "803588",
+      "comfy-aggregator-edge.service": "1119"
+    }
+  },
+  "private_stderr_sha256": "3e520b828c12c8dcc3fc737d169903c2ce314e69a71f9bc4b7c95e372592b945"
+}

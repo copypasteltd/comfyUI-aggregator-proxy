@@ -1,0 +1,11 @@
+{
+  "format_version": 1,
+  "at": "2026-11-02T11:47:13.428998+00:00",
+  "second_publish_passed": false,
+  "cause": "Nginx selects the limit_except access context before location rewrite for OPTIONS. Omitting OPTIONS from the allowed method list denied preflight before its return-204 rule could run. Permit GET/HEAD and OPTIONS; keep write methods denied.",
+  "observed_error": "access forbidden by rule",
+  "observed_method_path": "OPTIONS /skill.md",
+  "scope": "Read-only bounded edge log confirmation. No private API logs are published; strict preflight assertion remains.",
+  "original_log_lines_count": 9,
+  "full_acceptance": "pending"
+}
