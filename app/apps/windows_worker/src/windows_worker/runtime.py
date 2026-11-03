@@ -19,6 +19,8 @@ from generation_domain.errors import DomainError
 from generation_domain.media_types import output_mime
 from generation_domain.retries import RETRY_POLICY
 from generation_domain.values import fingerprint
+from generation_domain.workflow_contexts import MAX_CONTEXT_BYTES, inspect_context
+from generation_domain.workflow_inputs import INPUT_FEATURE, INPUT_SUFFIXES, input_assets
 from generation_domain.workflows import compile_graph
 
 from windows_worker.api_environment import observe_api_environment
@@ -96,32 +98,87 @@ class Execution:
 
     async def inputs(self, comfy: httpx.AsyncClient) -> dict[str, str]:
         execution = self.claim["execution"]
-        items = [(name, value["asset_id"]) for name, value in execution["input"].items() if name in ("source_image", "mask")]
-        items.extend((f"reference_{i}", value["asset_id"]) for i, value in enumerate(execution["input"].get("references", [])))
+        items = input_assets(execution["input"], self.claim["workflow"])
         result = {}
-        for slot, identifier in items:
+        for item in items:
+            slot, identifier = item.source, item.asset_id
             self.current()
-            target = self.worker.settings.state_root / "inputs" / (uuid4().hex + ".image")
+            if item.path_mode == "comfy_absolute":
+                local = self.worker.settings.channel(self.claim["channel"]["base_url"])
+                if local.connection_mode == "remote_http":
+                    raise DomainError("input_path_mode_unsupported", "该素材槽需要本机 ComfyUI 输入目录")
+            target = self.worker.settings.state_root / "inputs" / (uuid4().hex + ".input")
             target.parent.mkdir(parents=True, exist_ok=True)
             try:
                 async with self.worker.http.stream("GET", f"/internal/v1/attempts/{self.aid}/inputs/{identifier}", params={"boot_id": self.worker.boot, "fencing_token": self.claim["fencing_token"]}) as response:
                     response.raise_for_status()
+                    media_type = response.headers.get("content-type", "image/png" if item.kind == "image" else "").split(";", 1)[0].strip()
+                    if media_type not in item.mime_types:
+                        raise DomainError("input_type_mismatch", "下载素材类型不符合已冻结槽位")
                     size = 0
                     with target.open("xb") as file:
                         async for chunk in response.aiter_bytes(1024 * 1024):
                             size += len(chunk)
-                            if size > 20 * 1024 * 1024:
+                            if size > item.max_bytes:
                                 raise DomainError("input_too_large", "输入超过限制")
                             file.write(chunk)
-                digest, _ = await self.worker.blocking(file_digest, target, 20 * 1024 * 1024)
+                digest, _ = await self.worker.blocking(file_digest, target, item.max_bytes)
                 if digest != execution["asset_hashes"][identifier]:
                     raise DomainError("input_digest_mismatch", "输入素材完整性校验失败")
                 with target.open("rb") as file:
-                    value = await async_request_json(comfy, "POST", "/upload/image", maximum=MAX_RECEIPT_BYTES, files={"image": (f"rc-{uuid4().hex}.png", file, "application/octet-stream")}, data={"type": "input", "overwrite": "false"})
-                result[slot] = uploaded_input(value)
+                    value = await async_request_json(comfy, "POST", "/upload/image", maximum=MAX_RECEIPT_BYTES, files={"image": (f"rc-{uuid4().hex}{INPUT_SUFFIXES[media_type]}", file, media_type)}, data={"type": "input", "overwrite": "false", "subfolder": f"render-control/{self.aid}"})
+                relative = uploaded_input(value)
+                result[slot] = str(safe_path(local.local_root / "input", relative)) if item.path_mode == "comfy_absolute" else relative
             finally:
                 target.unlink(missing_ok=True)
+        if execution.get("context"):
+            result["context_latent"] = await self.context_input(comfy)
         return result
+
+    async def context_input(self, comfy: httpx.AsyncClient) -> str:
+        frozen = self.claim["execution"]["context"]
+        self.current()
+        target = self.worker.settings.state_root / "inputs" / (uuid4().hex + ".context")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            size = 0
+            async with self.worker.http.stream("GET", f"/internal/v1/attempts/{self.aid}/context", params={"boot_id": self.worker.boot, "fencing_token": self.claim["fencing_token"]}) as response:
+                response.raise_for_status()
+                with target.open("xb") as outgoing:
+                    async for chunk in response.aiter_bytes(1024 * 1024):
+                        size += len(chunk)
+                        if size > min(frozen["bytes"], MAX_CONTEXT_BYTES):
+                            raise DomainError("invalid_workflow_context", "上下文下载超过冻结大小")
+                        outgoing.write(chunk)
+            digest, length = await self.worker.blocking(file_digest, target, MAX_CONTEXT_BYTES)
+            if digest != frozen["sha256"] or length != frozen["bytes"]:
+                raise DomainError("invalid_workflow_context", "上下文摘要与冻结资源不符")
+            await self.worker.blocking(inspect_context, target)
+            with target.open("rb") as incoming:
+                receipt = await async_request_json(comfy, "POST", "/upload/image", maximum=MAX_RECEIPT_BYTES, files={"image": ("rc-" + uuid4().hex + ".safetensors", incoming, "application/octet-stream")}, data={"type": "input", "overwrite": "false", "subfolder": f"render-control/{self.aid}"})
+            return uploaded_input(receipt)
+        finally:
+            target.unlink(missing_ok=True)
+
+    async def collect_context(self, history: dict[str, Any], local: LocalChannel, comfy: httpx.AsyncClient) -> dict[str, Any] | None:
+        profile = self.claim["workflow"].get("context") or {}
+        if not profile.get("save_node_id"):
+            return None
+        files = output_files(history, [profile["save_node_id"]], "latents")
+        if len(files) != 1 or files[0].get("type") != "output":
+            raise DomainError("invalid_workflow_context", "上下文保存节点没有唯一的正式文件")
+        item = files[0]
+        locator = output_locator(item)
+        target = self.worker.settings.state_root / "outputs" / self.aid / "99.ctx"
+        if local.connection_mode == "remote_http":
+            async def verify(path: Path, maximum: int) -> tuple[str, int]:
+                return await self.worker.blocking(file_digest, path, maximum)
+            digest, size = await download_output(comfy, item, target, MAX_CONTEXT_BYTES, self.worker.settings.state_root, verify)
+        else:
+            source = safe_path(local.local_root / "output", "/".join(part for part in (locator["subfolder"], locator["filename"]) if part))
+            digest, size = await self.worker.blocking(copy_output, source, target, MAX_CONTEXT_BYTES, self.worker.settings.state_root)
+        await self.worker.blocking(inspect_context, target)
+        return {"file": target.relative_to(self.worker.settings.state_root).as_posix(), "sha256": digest, "bytes": size}
 
     async def collect(self, history: dict[str, Any], local: LocalChannel, comfy: httpx.AsyncClient | None = None) -> tuple[list[Path], list[dict[str, Any]]]:
         adapter = self.claim["workflow"]["output"]
@@ -270,7 +327,8 @@ class Execution:
                     await self.require_stopped(comfy, prompt)
                     await self.fail("comfy_output_invalid")
                     return
-                self.worker.journal.save_outputs(self.aid, {"files": [f.relative_to(self.worker.settings.state_root).as_posix() for f in files], "specs": specs})
+                context = await self.collect_context(history, local, comfy)
+                self.worker.journal.save_outputs(self.aid, {"files": [f.relative_to(self.worker.settings.state_root).as_posix() for f in files], "specs": specs, **({"context": context} if context else {})})
                 await self.emit("outputs_collected", {"manifest_digest": fingerprint(specs), "output_count": len(specs), "files_stable": True})
                 await self.emit("gpu_released", {"gpu_id": self.claim["channel"]["gpu_id"], "compute_stopped": True, "gpu_encoding_stopped": True, "evidence_digest": fingerprint({"prompt_id": prompt, "manifest": specs})})
                 self.released = True
@@ -296,6 +354,23 @@ class Execution:
             await asyncio.gather(renew, return_exceptions=True)
 
     async def upload(self, files: list[Path], specs: list[dict[str, Any]]) -> None:
+        package = self.worker.journal.outputs(self.aid)
+        context = package.get("context") if package else None
+        if (self.claim["workflow"].get("context") or {}).get("save_node_id"):
+            if not context:
+                raise DomainError("workflow_context_not_verified", "可恢复的上下文产物包缺失")
+            path = safe_path(self.worker.settings.state_root, context["file"])
+            if await self.worker.blocking(file_digest, path, MAX_CONTEXT_BYTES) != (context["sha256"], context["bytes"]):
+                raise DomainError("invalid_workflow_context", "恢复上下文摘要不符")
+            with path.open("rb") as incoming_context:
+                async def context_chunks() -> Any:
+                    while chunk := incoming_context.read(1024 * 1024):
+                        yield chunk
+                response = await self.worker.http.put(f"/internal/v1/attempts/{self.aid}/context", params={"boot_id": self.worker.boot, "fencing_token": self.claim["fencing_token"]}, content=context_chunks(), headers={"Content-Length": str(context["bytes"])})
+                response.raise_for_status()
+                receipt = response.json()
+                if receipt.get("verified") is not True or receipt.get("sha256") != context["sha256"] or receipt.get("bytes") != context["bytes"]:
+                    raise DomainError("workflow_context_not_verified", "上下文回执与 journal 不符")
         plan = await self.worker.post(f"/internal/v1/attempts/{self.aid}/upload-authorizations", {**self.auth, "outputs": specs})
         for file, upload in zip(files, plan["uploads"], strict=True):
             self.current()
@@ -548,7 +623,7 @@ class Worker:
     async def run(self) -> None:
         background: list[asyncio.Task[None]] = []
         try:
-            features = ["audio-output-v1", "model3d-output-v1"] + (["remote-http-v1"] if any(c.connection_mode == "remote_http" for c in self.settings.channels) else [])
+            features = ["audio-output-v1", "model3d-output-v1", INPUT_FEATURE] + (["remote-http-v1"] if any(c.connection_mode == "remote_http" for c in self.settings.channels) else [])
             registration = await self.post("/internal/v1/register", {"protocol_version": "0.4.0", "boot_id": self.boot, "inventory": {"gpus": [gpu.model_dump() for gpu in self.settings.gpus], "features": features}})
             if registration.get("node_id") != self.node_id or registration.get("boot_id") != self.boot:
                 raise DomainError("worker_registration_identity_mismatch", "Worker 注册回执身份不匹配")

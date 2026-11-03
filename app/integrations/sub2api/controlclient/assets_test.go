@@ -92,13 +92,62 @@ func TestAssetUploadRejectsInputsBeforeHTTP(t *testing.T) {
 	for _, value := range []struct {
 		size             int64
 		sha, kind, token string
-	}{{0, assetSum(), "image/png", "token"}, {MaxAssetBytes + 1, assetSum(), "image/png", "token"}, {1, "private-sha", "image/png", "token"}, {1, assetSum(), "video/mp4", "token"}, {1, assetSum(), "image/png", "bad token"}} {
+	}{{0, assetSum(), "image/png", "token"}, {MaxAssetBytes + 1, assetSum(), "image/png", "token"}, {1, "private-sha", "image/png", "token"}, {1, assetSum(), "text/plain", "token"}, {1, assetSum(), "image/png", "bad token"}} {
 		if _, err := client.UploadAsset(context.Background(), testSubject(t), bytes.NewReader(mediaSample), value.size, value.sha, value.kind, value.token); err == nil {
 			t.Fatal("invalid upload accepted")
 		}
 	}
 	if calls.Load() != 0 {
 		t.Fatal("invalid upload made HTTP request")
+	}
+}
+
+func TestTypedAssetTransportKeepsKindBytesAndResponseIdentity(t *testing.T) {
+	for _, mediaType := range []string{"audio/wav", "audio/flac", "audio/mpeg", "audio/ogg", "video/mp4", "video/webm", "model/gltf-binary"} {
+		t.Run(mediaType, func(t *testing.T) {
+			kind, maximum := AssetKind(mediaType)
+			if maximum < 256<<20 {
+				t.Fatal("incorrect media budget")
+			}
+			server := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				reader, err := r.MultipartReader()
+				if err != nil {
+					t.Fatal(err)
+				}
+				part, err := reader.NextPart()
+				if err != nil {
+					t.Fatal(err)
+				}
+				value, _ := io.ReadAll(part)
+				if part.FormName() != "kind" || string(value) != kind {
+					t.Error("explicit kind lost")
+				}
+				part, err = reader.NextPart()
+				if err != nil {
+					t.Fatal(err)
+				}
+				value, _ = io.ReadAll(part)
+				if part.FormName() != "file" || !bytes.Equal(value, mediaSample) {
+					t.Error("media bytes changed")
+				}
+				if _, err = reader.NextPart(); err != io.EOF {
+					t.Error("extra upload fields")
+				}
+				response := assetResponse()
+				response.MediaType = mediaType
+				if kind == "audio" || kind == "model" {
+					response.Width, response.Height = 0, 0
+				}
+				w.WriteHeader(201)
+				_ = json.NewEncoder(w).Encode(response)
+			}))
+			defer server.Close()
+			client := testClient(t, server, 2048)
+			asset, err := client.UploadAsset(context.Background(), testSubject(t), bytes.NewReader(mediaSample), int64(len(mediaSample)), assetSum(), mediaType, "typed-upload")
+			if err != nil || asset.MediaType != mediaType {
+				t.Fatal("typed asset relay rejected", err)
+			}
+		})
 	}
 }
 
@@ -187,8 +236,8 @@ func TestAssetMetadataDeleteAndMediaUseFixedOriginalPaths(t *testing.T) {
 	}
 }
 
-func TestAssetRangeCannotHideOversizedOrNonImageObject(t *testing.T) {
-	for name, kind := range map[string]string{"oversized_range": "image/png", "not_image": "video/mp4"} {
+func TestAssetRangeCannotHideOversizedOrUnsupportedObject(t *testing.T) {
+	for name, kind := range map[string]string{"oversized_range": "image/png", "unsupported_media": "application/pdf"} {
 		t.Run(name, func(t *testing.T) {
 			server := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				mediaHeaders(w)

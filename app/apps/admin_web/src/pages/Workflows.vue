@@ -26,7 +26,7 @@ type Action = { key: string; description: string } & (
 const session = useSession(), snapshot = ref<components['schemas']['WorkflowDirectoryPage'] | null>(null), loading = ref(false), error = ref(''), page = ref(1)
 const rows = computed(() => snapshot.value?.data ?? []), visible = ref(!document.hidden), loadedAt = ref(0)
 const filters = reactive({ q: '', project_id: '', task_type: '' as Task | '', status: '' as 'active' | 'archived' | '' }), applied = ref({ ...filters })
-const taskNames: Record<Task, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考文图生图', text_to_video: '文生视频', references_to_video: '多参考文图生视频', text_to_audio: '音频生成', image_to_3d: '单图生成 3D' }
+const taskNames: Record<Task, string> = { text_to_image: '文生图', image_to_image: '图生图', references_to_image: '多参考文图生图', text_to_video: '文生视频', references_to_video: '多参考文图生视频', text_to_audio: '音频生成', image_to_3d: '图像与网格生成 3D' }
 const metadataDirty = ref(false), restoreStatus = ref(false)
 const drawer = ref(false), editing = ref<Workflow | null>(null), detailLoading = ref(false), jsonText = ref('{}'), formError = ref(''), readonlyDraft = ref(false)
 const form = ref({ name: '', project_id: '', task_type: 'text_to_image' as Task }), scope = ref<ScopeOption | null>(null), fileInput = ref<HTMLInputElement | null>(null), fileLoading = ref(false)
@@ -179,7 +179,7 @@ onBeforeUnmount(() => { disposed = true; stopAll(); pending.value = null; clearD
     <el-button v-if="!pending" size="small" @click="restoreStatus = false; writeError = ''">关闭恢复提示</el-button>
   </section>
   <WorkflowImportDialog v-if="visible && session.info && !session.ending" v-model="importDialog" :target="importTarget" @completed="refresh"/>
-  <div class="page-heading"><div><p class="eyebrow li-lab">CAPABILITIES / WORKFLOWS</p><h1>Workflow 管理</h1><p class="muted">统一管理图片、视频和音频草稿、冻结版本与渠道同步。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" :disabled="!visible" @click="refresh">刷新</el-button><el-button v-if="session.allows('workflows:write')" :disabled="blocked || !visible" @click="openImport()">从渠道导入</el-button><el-button v-if="session.allows('workflows:write')" type="primary" :icon="Plus" :disabled="blocked || !visible" @click="open()">导入 Workflow</el-button></div></div>
+  <div class="page-heading"><div><p class="eyebrow li-lab">CAPABILITIES / WORKFLOWS</p><h1>Workflow 管理</h1><p class="muted">统一管理图片、视频、音频和 3D 草稿、冻结版本与渠道同步。</p></div><div class="toolbar"><el-button :icon="Refresh" :loading="loading" :disabled="!visible" @click="refresh">刷新</el-button><el-button v-if="session.allows('workflows:write')" :disabled="blocked || !visible" @click="openImport()">从渠道导入</el-button><el-button v-if="session.allows('workflows:write')" type="primary" :icon="Plus" :disabled="blocked || !visible" @click="open()">导入 Workflow</el-button></div></div>
   <el-alert v-if="error" :title="error + (loadedAt ? '。当前显示最后成功读取的数据。' : '。目录尚未读取成功。')" type="error" :closable="false"/>
   <el-button v-if="!visible" @click="visibility">核对管理会话</el-button>
   <el-alert v-if="notice" :title="notice" type="success" :closable="false"/><p v-if="operationId" class="form-help">操作 ID：{{ operationId }} · <router-link to="/operations">在操作中心查看</router-link></p>

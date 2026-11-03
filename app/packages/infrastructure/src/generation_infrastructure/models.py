@@ -493,6 +493,34 @@ class JobAssetReference(Scoped, Base):
     __table_args__ = (ForeignKeyConstraint(["tenant_id", "project_id", "key_id", "job_id"], ["jobs.tenant_id", "jobs.project_id", "jobs.key_id", "jobs.id"]), ForeignKeyConstraint(["tenant_id", "project_id", "key_id", "asset_id"], ["assets.tenant_id", "assets.project_id", "assets.key_id", "assets.id"]), Index("ix_job_asset_references_asset", "asset_id"))
 
 
+class WorkflowContext(Entity, Scoped, Base):
+    __tablename__ = "workflow_contexts"
+    key_id: Mapped[UUID] = mapped_column(ForeignKey("api_keys.id"))
+    job_id: Mapped[UUID] = mapped_column(ForeignKey("jobs.id"))
+    attempt_id: Mapped[UUID] = mapped_column(ForeignKey("attempts.id"), unique=True)
+    object_id: Mapped[UUID] = mapped_column(ForeignKey("object_records.id"), unique=True)
+    compatibility: Mapped[str] = mapped_column(String(64))
+    __table_args__ = scope_constraints(
+        UniqueConstraint("tenant_id", "project_id", "key_id", "id"),
+        ForeignKeyConstraint(["tenant_id", "project_id", "key_id", "job_id"], ["jobs.tenant_id", "jobs.project_id", "jobs.key_id", "jobs.id"]),
+        ForeignKeyConstraint(["job_id", "attempt_id"], ["attempts.job_id", "attempts.id"]),
+        ForeignKeyConstraint(["tenant_id", "project_id", "object_id"], ["object_records.tenant_id", "object_records.project_id", "object_records.id"]),
+        CheckConstraint("compatibility ~ '^[a-f0-9]{64}$'", name="compatibility"),
+    )
+
+
+class JobContextReference(Scoped, Base):
+    __tablename__ = "job_context_references"
+    job_id: Mapped[UUID] = mapped_column(ForeignKey("jobs.id"), primary_key=True)
+    key_id: Mapped[UUID] = mapped_column(ForeignKey("api_keys.id"))
+    context_id: Mapped[UUID] = mapped_column(ForeignKey("workflow_contexts.id"))
+    __table_args__ = (
+        ForeignKeyConstraint(["tenant_id", "project_id", "key_id", "job_id"], ["jobs.tenant_id", "jobs.project_id", "jobs.key_id", "jobs.id"]),
+        ForeignKeyConstraint(["tenant_id", "project_id", "key_id", "context_id"], ["workflow_contexts.tenant_id", "workflow_contexts.project_id", "workflow_contexts.key_id", "workflow_contexts.id"]),
+        Index("ix_job_context_references_context", "context_id"),
+    )
+
+
 class ManagementOperation(Entity, Base):
     __tablename__ = "management_operations"
     actor_id: Mapped[UUID] = mapped_column(ForeignKey("admin_users.id"))

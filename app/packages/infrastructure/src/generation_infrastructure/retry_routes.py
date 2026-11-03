@@ -6,6 +6,7 @@ from uuid import UUID
 from generation_contracts.capacity import output_reservation
 from generation_domain.retries import OOM_CODE
 from generation_domain.values import parse_id, public_id, utcnow
+from generation_domain.workflow_inputs import supports_inputs
 from sqlalchemy import Select, select
 from sqlalchemy.orm import Session
 
@@ -68,6 +69,8 @@ def has_oom_alternative(session: Session, job: Job, source_gpu: UUID, *, allow_s
                Node.observed_at > now - timedelta(seconds=15)).order_by(Channel.id).limit(101))
     for channel, gpu, node, binding in rows:
         if public_id("ch", channel.id) not in job.eligible_channels:
+            continue
+        if not supports_inputs(release.manifest, node.inventory.get("features", [])):
             continue
         if not retry_route_approved(binding, release, gpu, allow_synthetic_catalog=allow_synthetic_catalog) or blocks_claim(session, job, gpu):
             continue

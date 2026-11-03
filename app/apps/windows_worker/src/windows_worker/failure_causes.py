@@ -10,7 +10,7 @@ from generation_domain.values import fingerprint
 
 from windows_worker.comfy_json import prompt_identifier
 
-COLLECTION_REJECTIONS = frozenset({"output_count_mismatch", "invalid_output_path", "unsafe_path", "output_too_large", "output_media_mismatch"})
+COLLECTION_REJECTIONS = frozenset({"output_count_mismatch", "invalid_output_path", "unsafe_path", "output_too_large", "output_media_mismatch", "invalid_workflow_context"})
 MEDIA_REJECTIONS = frozenset({"invalid_image", "unsupported_image", "invalid_video", "invalid_audio", "media_type_mismatch", "output_spec_mismatch"})
 
 

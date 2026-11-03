@@ -13,6 +13,23 @@ import (
 )
 
 const MaxAssetBytes int64 = 20 << 20
+const MaxMediaAssetBytes int64 = 512 << 20
+
+// AssetKind returns the explicit upload contract and its byte budget.
+func AssetKind(mediaType string) (string, int64) {
+	switch mediaType {
+	case "image/png", "image/jpeg", "image/webp":
+		return "image", MaxAssetBytes
+	case "video/mp4", "video/webm":
+		return "video", MaxMediaAssetBytes
+	case "audio/wav", "audio/flac", "audio/mpeg", "audio/ogg":
+		return "audio", 256 << 20
+	case "model/gltf-binary":
+		return "model", MaxMediaAssetBytes
+	default:
+		return "", 0
+	}
+}
 
 type UploadedAsset struct {
 	ID        string `json:"id"`
@@ -27,17 +44,24 @@ type UploadedAsset struct {
 }
 
 func validAssetType(value string) bool {
-	return value == "image/png" || value == "image/jpeg" || value == "image/webp"
+	kind, _ := AssetKind(value)
+	return kind != ""
 }
 
 // UploadAsset sends once, without a buffering goroutine, redirects or transport
 // retries. The caller has persisted token/target/hash and owns the source file.
 func (c *Client) UploadAsset(ctx context.Context, subject Subject, source io.Reader, length int64, sha, mediaType, token string) (UploadedAsset, error) {
-	if source == nil || length < 1 || length > MaxAssetBytes || !sha256Pattern.MatchString(sha) || !validAssetType(mediaType) || !ascii(token, 1, 128) {
+	kind, maximum := AssetKind(mediaType)
+	if source == nil || length < 1 || length > maximum || !sha256Pattern.MatchString(sha) || kind == "" || !ascii(token, 1, 128) {
 		return UploadedAsset{}, &CallError{Code: "invalid_request"}
 	}
 	var framing bytes.Buffer
 	writer := multipart.NewWriter(&framing)
+	if kind != "image" {
+		if err := writer.WriteField("kind", kind); err != nil {
+			return UploadedAsset{}, &CallError{Code: "invalid_request"}
+		}
+	}
 	if _, err := writer.CreateFormFile("file", "input"); err != nil {
 		return UploadedAsset{}, &CallError{Code: "invalid_request"}
 	}
@@ -66,7 +90,8 @@ func (c *Client) UploadAsset(ctx context.Context, subject Subject, source io.Rea
 	}
 	data, err := io.ReadAll(io.LimitReader(response.Body, c.limit+1))
 	var result UploadedAsset
-	if err != nil || int64(len(data)) > c.limit || json.Unmarshal(data, &result) != nil || !identifier("asset", result.ID) || result.Object != "asset" || result.Status != "ready" || result.Bytes != length || result.SHA256 != sha || result.MediaType != mediaType || result.Width < 1 || result.Height < 1 || int64(result.Width)*int64(result.Height) > 25000000 || result.Width > 25000000 || result.Height > 25000000 || result.ExpiresAt < 1 {
+	visual := kind == "image" || kind == "video"
+	if err != nil || int64(len(data)) > c.limit || json.Unmarshal(data, &result) != nil || !identifier("asset", result.ID) || result.Object != "asset" || result.Status != "ready" || result.Bytes != length || result.SHA256 != sha || result.MediaType != mediaType || visual && (result.Width < 1 || result.Height < 1 || int64(result.Width)*int64(result.Height) > 25000000 || result.Width > 25000000 || result.Height > 25000000) || result.ExpiresAt < 1 {
 		return UploadedAsset{}, &CallError{Code: "invalid_response", Uncertain: true}
 	}
 	return result, nil
@@ -78,7 +103,8 @@ func (c *Client) Asset(ctx context.Context, subject Subject, id string) (Content
 	}
 	var result ContentMetadata
 	err := c.call(ctx, http.MethodGet, "/gateway/v1/assets/"+id, &subject, nil, &result)
-	if err == nil && (result.ID != id || result.Bytes < 1 || result.Bytes > MaxAssetBytes || !validAssetType(result.MediaType) || !sha256Pattern.MatchString(result.SHA256) || result.ExpiresAt < 1) {
+	_, maximum := AssetKind(result.MediaType)
+	if err == nil && (result.ID != id || result.Bytes < 1 || result.Bytes > maximum || !validAssetType(result.MediaType) || !sha256Pattern.MatchString(result.SHA256) || result.ExpiresAt < 1) {
 		err = &CallError{Code: "invalid_response"}
 	}
 	return result, err
@@ -97,12 +123,16 @@ func (c *Client) OpenAsset(ctx context.Context, subject Subject, id string, head
 	}
 	file, err := c.openMedia(ctx, subject, "/gateway/v1/assets/"+id+"/content", head, requestedRange)
 	tooLarge := false
+	var maximum int64
+	if err == nil {
+		_, maximum = AssetKind(file.MediaType)
+	}
 	if err == nil && file.ContentRange != "" {
 		parts := strings.Split(file.ContentRange, "/")
 		total, parseErr := strconv.ParseInt(parts[len(parts)-1], 10, 64)
-		tooLarge = parseErr != nil || total > MaxAssetBytes
+		tooLarge = parseErr != nil || total > maximum
 	}
-	if err == nil && (file.Length > MaxAssetBytes || tooLarge || !validAssetType(file.MediaType)) {
+	if err == nil && (file.Length > maximum || tooLarge || !validAssetType(file.MediaType)) {
 		_ = file.Body.Close()
 		return nil, &CallError{Code: "invalid_response"}
 	}

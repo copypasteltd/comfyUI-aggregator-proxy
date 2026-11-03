@@ -1,5 +1,14 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 133 · Full-catalog preparation / 全量工作流接入准备
+
+- Add named image/video/audio/GLB and literal text inputs, bounded uploads, owned Worker transfers and up to 16 image references per explicitly configured Key.
+- Add explicit video audio policies and same-owner H3 continuation contexts with fenced transfers, durable recovery and eight-hour retention.
+- Support nested scalar bindings inside operator-frozen JSON, non-Git custom-node file locks and safe export basenames; preserve legacy workflows and requests.
+- Retain usage through Sub2API discovery, translate public parent task identity, and validate millisecond durations without binary-float rounding errors.
+- Map 330 statically eligible source files to 213 candidate packages; record 67 source blockers. Candidates pass usage/example compilation checks; real generation and publication remain pending.
+- 补齐命名素材、脚本/歌词/转写、声音策略、续拍、功能备注和青柠管理表单；增加双语说明、截图、原速录屏与 GIF。局部回归通过，发布状态单独记录于文档 133。
+
 ## 2026-11-04 · 132 · Dual-GPU workflow inventory
 
 - 只读核对 3080 的 100 份及 4090 的 297 份实际工作流，另识别 2 份 JSON 报告；330 份通过节点/模型选项/必填输入/连接的静态检查，不能作为新生成或上线验收。

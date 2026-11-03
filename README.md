@@ -1,5 +1,13 @@
 # ComfyUI Aggregator Proxy
 
+**2026-11-04 全量接入开发**：[133 · 多模态输入与全量工作流](docs/133-全量工作流接入与多模态输入.md)。397 份来源中，330 份通过静态检查，整理为 213 个独立候选封装；67 份存在已记录的源工作流阻塞。213 个候选均通过公开调用示例和执行图编译预检，尚待逐项实机验证与线上发布。候选数量不计入已发布模型。
+
+Workflow 1.3 为每个模型公开命名图片、视频、参考声音、GLB 和文本槽位。调用方先查询 `/v1/models/{alias}` 的 `usage`，向 `/v1/assets` 上传素材时指定 `kind`，再把返回的 `asset_id` 填入 `input.media`，把脚本、歌词或转写填入 `input.texts`。声音策略、固定规格和续拍要求均随模型声明。原生续拍通过 `input.context.job_id` 引用同一 Key 的成功父任务；通过 Sub2API 时使用其返回的 `rc_…` 任务编号。旧模型和旧输入格式继续保留。
+
+[新增管理界面截图、录屏与 GIF](docs/media/typed-inputs-133/README.md) 使用明确标记的合成数据，展示素材槽、文本槽、声音策略、续拍与最多 16 张参考图的 Key 设置。局部验证：725 项受影响 Python 回归、1773 项契约/调用说明补充回归、555 项 Sub2API 测试通过；另有 1 项既有测试跳过。部署及真实生成状态见专题发布记录。
+
+![Workflow 1.3 管理界面演示，合成数据](docs/media/typed-inputs-133/workflow-inputs-admin.gif)
+
 **2026-11-04 工作流盘点**：[3080 / 4090 的 API 封装候选](docs/132-双GPU工作流现状与API封装候选.md)。现场共 397 份工作流文件，包含 UI/API 配对和场景副本；330 份通过本轮静态检查，两台当前已有 8 个发布别名。完整表格区分直接封装候选、需要视频/音频/网格输入扩展的流程，以及缺权重/旧字段阻塞项；文件名中的 2K/4K 按实际产物尺寸说明。本轮仅检查和文档整理，没有新增生成、发布模型或部署。
 
 **单文件 Skill 1.2.0：[在线 skill.md](https://gen.sub2share.xyz/skill.md)**。将它保存为 Agent 的 `media-gen-skill/SKILL.md`，即可获得完整说明、API 参考及内嵌 Python 客户端，无需另外下载 scripts/references。设置自己的业务 API Key 后先发现模型，再生成图片、视频、音频或已发布的 GLB 3D。固定地址提供最新部署版；[1.2.0 固定版本](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md) 和原 ZIP 均保留。[安装、更新与发布](docs/131-单文件Skill与固定在线地址.md)。

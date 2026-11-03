@@ -9,9 +9,13 @@ def body_limit(path: str, content_type: str = "") -> int:
         return 8 * 1024 * 1024
     if path.startswith("/internal/v1/uploads/") and path.endswith("/content"):
         return 2147483648
+    if path.startswith("/internal/v1/attempts/") and path.endswith("/context"):
+        return 512 * 1024 * 1024
     media = path in ("/v1/images/edits", "/v1/images/edits/async", "/v1/videos")
     multipart = path in ("/v1/assets", "/gateway/v1/assets") and content_type.startswith("multipart/form-data")
-    return 128 * 1024 * 1024 if media or multipart else 10 * 1024 * 1024 if "/workflows" in path else 1024 * 1024
+    if multipart:
+        return 513 * 1024 * 1024  # 512 MiB file plus bounded multipart overhead.
+    return 128 * 1024 * 1024 if media else 10 * 1024 * 1024 if "/workflows" in path else 1024 * 1024
 
 
 class BodyLimitMiddleware:

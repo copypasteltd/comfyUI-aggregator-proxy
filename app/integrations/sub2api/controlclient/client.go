@@ -418,13 +418,20 @@ func (c *Client) resolveRequest(ctx context.Context, request RequestIdentity, cl
 type Artifact struct {
 	ID string `json:"id"`
 }
+type WorkflowContext struct {
+	Available     bool   `json:"available"`
+	Family        string `json:"family"`
+	Compatibility string `json:"compatibility"`
+	ExpiresAt     int64  `json:"expires_at"`
+}
 type Job struct {
-	ID              string     `json:"id"`
-	Status          string     `json:"status"`
-	Model           string     `json:"model"`
-	TaskType        string     `json:"task_type"`
-	UpdatedRevision int64      `json:"updated_revision"`
-	Artifacts       []Artifact `json:"artifacts"`
+	ID              string           `json:"id"`
+	Status          string           `json:"status"`
+	Model           string           `json:"model"`
+	TaskType        string           `json:"task_type"`
+	UpdatedRevision int64            `json:"updated_revision"`
+	Artifacts       []Artifact       `json:"artifacts"`
+	Context         *WorkflowContext `json:"context,omitempty"`
 }
 
 func (c *Client) Job(ctx context.Context, subject Subject, id string) (Job, error) {
@@ -447,6 +454,9 @@ func (c *Client) jobAction(ctx context.Context, subject Subject, id string, canc
 		err = &CallError{Code: "invalid_response", Uncertain: cancel}
 	}
 	if err == nil {
+		if value := result.Context; value != nil && (result.Status != "succeeded" || value.Family != "h3-av-v1" || !sha256Pattern.MatchString(value.Compatibility) || value.ExpiresAt < 1) {
+			return Job{}, &CallError{Code: "invalid_response", Uncertain: cancel}
+		}
 		seen := map[string]bool{}
 		for _, artifact := range result.Artifacts {
 			if !identifier("content", artifact.ID) || seen[artifact.ID] {

@@ -1,18 +1,34 @@
 from __future__ import annotations
 
 import json
+import math
+from fractions import Fraction
 from functools import lru_cache
 from importlib.resources import files
 from typing import Any, Literal
 
-from jsonschema import Draft202012Validator, FormatChecker
+from jsonschema import Draft202012Validator, FormatChecker, ValidationError, validators
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+
+def _decimal_multiple_of(schema_validator: Any, divisor: Any, value: Any, schema: Any) -> Any:
+    if not schema_validator.is_type(value, "number"):
+        return
+    # JSON decimals denote exact decimal values. Binary float division rejects
+    # valid millisecond durations such as 34.157 / 0.001 on some values.
+    if isinstance(value, float) and not math.isfinite(value):
+        yield ValidationError("Nonfinite values are not JSON numbers")
+    elif Fraction(str(value)) % Fraction(str(divisor)):
+        yield ValidationError(f"{value!r} is not a multiple of {divisor}")
+
+
+ContractValidator = validators.extend(Draft202012Validator, {"multipleOf": _decimal_multiple_of})
 
 
 @lru_cache
 def validator(name: str) -> Draft202012Validator:
     schema = json.loads(files("generation_contracts").joinpath("schemas", name + ".schema.json").read_text(encoding="utf-8"))
-    return Draft202012Validator(schema, format_checker=FormatChecker())
+    return ContractValidator(schema, format_checker=FormatChecker())
 
 
 def validate(name: str, value: dict[str, Any]) -> dict[str, Any]:
@@ -67,7 +83,7 @@ class SpecificationLimits(StrictDTO):
     video_max_pixels: int
     video_max_milliseconds: int
     audio_max_milliseconds: int = Field(default=0, ge=0, le=600000)
-    max_references: int
+    max_references: int = Field(ge=0, le=16)
     allowed_qualities: list[Literal["draft", "standard", "high"]]
 
 

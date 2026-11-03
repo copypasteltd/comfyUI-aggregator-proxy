@@ -31,6 +31,8 @@ from generation_infrastructure.models import (
     JobAssetReference,
     ObjectRecord,
     OutputUpload,
+    WorkflowContext,
+    WorkflowRelease,
 )
 from generation_infrastructure.output_retention import OUTPUT_RETENTION
 from generation_infrastructure.spec_isolation import verified_success
@@ -108,7 +110,7 @@ class OutputRepository:
                 job, _, _ = self.leases._lock_attempt(session, node_id, boot_id, attempt_id, fence)
                 if job.state != "uploading":
                     raise DomainError("invalid_state", "任务已停止接收上传")
-                check_specification(metadata, job.execution["parameters"], audio_spec=job.execution.get("audio_spec"))
+                check_specification(metadata, job.execution["parameters"], audio_spec=job.execution.get("audio_spec"), video_audio_policy=job.execution.get("video_audio_policy"))
                 upload = session.execute(select(OutputUpload).where(OutputUpload.id == upload_id).with_for_update()).scalar_one()
                 if upload.object_id:
                     result = {"id": public_id("upl", upload.id), "verified": True}
@@ -168,6 +170,13 @@ class OutputRepository:
             rows = list(session.scalars(select(OutputUpload).where(OutputUpload.attempt_id == attempt.id).order_by(OutputUpload.position)))
             if [row.id for row in rows] != identifiers or not rows or any(row.object_id is None for row in rows) or fingerprint([row.specification for row in rows]) != data.manifest_digest:
                 raise DomainError("manifest_not_verified", "完成清单没有全部通过云端验证")
+            release = session.get(WorkflowRelease, job.release_id)
+            if release and (release.manifest.get("context") or {}).get("save_node_id"):
+                context = session.scalar(select(WorkflowContext).where(WorkflowContext.attempt_id == attempt.id))
+                context_obj = session.get(ObjectRecord, context.object_id) if context else None
+                if not context or not context_obj or not context_obj.verified_at or not context_obj.version_id or context_obj.deleted_at or context_obj.delete_requested_at:
+                    raise DomainError("workflow_context_not_verified", "续拍上下文尚未可靠保存，任务不能标记成功", 409)
+                context_obj.expires_at = utcnow() + OUTPUT_RETENTION
             job.state = transition(job.state, "verifying", "complete_manifest", {"current_lease", "outputs_stable"})
             artifacts = []
             verified_objects = []

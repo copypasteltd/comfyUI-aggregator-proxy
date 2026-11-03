@@ -43,12 +43,12 @@ def inspect_media(path: Path, media_type: str) -> dict[str, Any]:
         video = videos[0]
         if not 0 < video["width"] * video["height"] <= 25000000:
             raise ValueError
-        return {"media_type": media_type, "width": video["width"], "height": video["height"], "duration_milliseconds": int(duration * 1000)}
+        return {"media_type": media_type, "width": video["width"], "height": video["height"], "duration_milliseconds": int(duration * 1000), "has_audio": any(s.get("codec_type") == "audio" for s in data["streams"])}
     except (subprocess.SubprocessError, ValueError, KeyError, InvalidOperation, TypeError) as exc:
         raise DomainError("invalid_video", "输出视频无法通过媒体验证", 422) from exc
 
 
-def check_specification(metadata: dict[str, Any], execution: dict[str, Any], *, audio_spec: dict[str, Any] | None = None) -> None:
+def check_specification(metadata: dict[str, Any], execution: dict[str, Any], *, audio_spec: dict[str, Any] | None = None, video_audio_policy: dict[str, Any] | None = None) -> None:
     if metadata["media_type"] == "model/gltf-binary":
         if any(name in execution for name in ("size", "seconds", "fps", "strength")):
             raise DomainError("output_spec_mismatch", "3D 输出不能套用图像或音视频规格", 422)
@@ -62,3 +62,5 @@ def check_specification(metadata: dict[str, Any], execution: dict[str, Any], *, 
         raise DomainError("output_spec_mismatch", "输出分辨率与冻结规格不符", 422)
     if "seconds" in execution and abs(metadata.get("duration_milliseconds", 0) - int(Decimal(str(execution["seconds"])) * 1000)) > 100:
         raise DomainError("output_spec_mismatch", "输出时长与冻结规格不符", 422)
+    if video_audio_policy is not None and metadata.get("has_audio") is not (video_audio_policy["mode"] != "silent"):
+        raise DomainError("output_spec_mismatch", "输出音轨与冻结声音策略不符", 422)

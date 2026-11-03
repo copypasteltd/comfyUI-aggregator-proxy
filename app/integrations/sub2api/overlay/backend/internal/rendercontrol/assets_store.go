@@ -30,7 +30,8 @@ func scanUpload(row scanner) (assetUpload, error) {
 }
 
 func (s *Store) reserveAsset(ctx context.Context, subject Subject, target Target, model, token, sha, mediaType string, length int64) (assetUpload, error) {
-	if _, err := subject.GatewaySubject(); err != nil || !gatewayPattern.MatchString(target.gatewayID) || !textValue(model, 1, 128) || !asciiPublic(token, 1, 128) || !shaPattern.MatchString(sha) || length < 1 || length > controlclient.MaxAssetBytes || (mediaType != "image/png" && mediaType != "image/jpeg" && mediaType != "image/webp") {
+	kind, maximum := controlclient.AssetKind(mediaType)
+	if _, err := subject.GatewaySubject(); err != nil || !gatewayPattern.MatchString(target.gatewayID) || !textValue(model, 1, 128) || !asciiPublic(token, 1, 128) || !shaPattern.MatchString(sha) || length < 1 || length > maximum || kind == "" {
 		return assetUpload{}, ErrInvalid
 	}
 	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
@@ -119,11 +120,13 @@ func requireAssetBindings(ctx context.Context, tx *sql.Tx, subject Subject, targ
 			ids = append(ids, id)
 		}
 	}
-	if refs, ok := request.Input["references"].([]any); ok {
-		for _, ref := range refs {
-			item, _ := ref.(map[string]any)
-			id, _ := item["asset_id"].(string)
-			ids = append(ids, id)
+	for _, field := range []string{"references", "media"} {
+		if refs, ok := request.Input[field].([]any); ok {
+			for _, ref := range refs {
+				item, _ := ref.(map[string]any)
+				id, _ := item["asset_id"].(string)
+				ids = append(ids, id)
+			}
 		}
 	}
 	for _, id := range ids {

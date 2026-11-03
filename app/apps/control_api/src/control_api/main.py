@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from typing import Annotated, Any, Literal
 from uuid import UUID, uuid4
 
-from fastapi import Depends, FastAPI, File, Header, Query, Request, Response, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, Query, Request, Response, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, StreamingResponse
 from generation_application.admin_access import require_permission
@@ -230,6 +230,7 @@ from generation_infrastructure.settings import Settings
 from generation_infrastructure.storage import make_store
 from generation_infrastructure.validation_jobs import ValidationJobs
 from generation_infrastructure.wait_estimates import WaitEstimates
+from generation_infrastructure.workflow_contexts import ContextRepository
 from generation_infrastructure.workflow_directory import WorkflowDirectory
 from generation_infrastructure.workflow_history import WorkflowHistory
 from sqlalchemy import text
@@ -239,6 +240,7 @@ from starlette.exceptions import HTTPException
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from control_api.access import AccessEventMiddleware, normalized_ip
+from control_api.asset_upload import AssetUploadRoute
 from control_api.collections import content_query, job_query
 from control_api.compatibility import compatibility_routes
 from control_api.gateway import gateway_routes
@@ -314,6 +316,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     content = ContentRepository(sessions, store)
     cursors = CursorCodec(settings.encryption_key.get_secret_value())
     outputs = OutputRepository(sessions, store, leases, settings.spool_root)
+    contexts = ContextRepository(sessions, store, leases)
     recovery = RecoveryRepository(leases)
     access_writer = AccessEventWriter(settings)
     access_queries = AccessEventQueries(sessions, settings.access_log_retention_days)
@@ -333,6 +336,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             await asyncio.to_thread(sessions.kw["bind"].dispose)
 
     app = ObservedAPI(metrics=monitoring.process, request_log=request_log, allow_any_origin=settings.allow_any_origin, title="Render Control", version="0.1.0", docs_url=None, redoc_url=None, lifespan=lifespan)
+    app.router.route_class = AssetUploadRoute
     app.state.sessions = sessions
     app.state.settings = settings
     app.state.access_writer = access_writer
@@ -1009,9 +1013,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return catalog.public_models(identity, capabilities=True)
 
     @app.post("/v1/assets", status_code=201)
-    def upload_asset(request: Request, identity: Annotated[BusinessIdentity, Depends(business)], file: Annotated[UploadFile, File()]) -> dict[str, Any]:
+    def upload_asset(request: Request, identity: Annotated[BusinessIdentity, Depends(business)], file: Annotated[UploadFile, File()], kind: Annotated[Literal["image", "video", "audio", "model"], Form()] = "image") -> dict[str, Any]:
         try:
-            return content.upload_asset(identity, file.file, request.state.request_id, upload_token(request))
+            return content.upload_asset(identity, file.file, request.state.request_id, upload_token(request), kind=kind)
         finally:
             file.file.close()
 
@@ -1145,6 +1149,41 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         obj = outputs.input_object(node, parse_id("att", identifier), parse_id("asset", asset_id), boot, fencing_token)
         assert obj.version_id
         return StreamingResponse(store.read(obj.object_key, obj.version_id, 0, obj.bytes - 1), media_type=obj.media_type, headers={"Content-Length": str(obj.bytes), "X-Content-SHA256": obj.sha256})
+
+    @app.get("/internal/v1/attempts/{identifier}/context")
+    def worker_context(identifier: str, node: Annotated[UUID, Depends(worker)], boot_id: str, fencing_token: int = Query(ge=1)) -> Response:
+        try:
+            boot = UUID(boot_id)
+        except ValueError as exc:
+            raise DomainError("invalid_boot", "boot_id 无效", 422) from exc
+        obj = contexts.input_object(node, parse_id("att", identifier), boot, fencing_token)
+        assert obj.version_id
+        return StreamingResponse(store.read(obj.object_key, obj.version_id, 0, obj.bytes - 1), media_type=obj.media_type, headers={"Content-Length": str(obj.bytes), "X-Content-SHA256": obj.sha256})
+
+    @app.put("/internal/v1/attempts/{identifier}/context")
+    async def upload_context(identifier: str, request: Request, node: Annotated[UUID, Depends(worker)], boot_id: str, fencing_token: int = Query(ge=1)) -> dict[str, Any]:
+        try:
+            boot = UUID(boot_id)
+        except ValueError as exc:
+            raise DomainError("invalid_boot", "boot_id 无效", 422) from exc
+        attempt = parse_id("att", identifier)
+        await asyncio.to_thread(contexts.preflight, node, attempt, boot, fencing_token)
+        settings.spool_root.mkdir(parents=True, exist_ok=True)
+        temporary = settings.spool_root / (uuid4().hex + ".context")
+        try:
+            size = 0
+            with temporary.open("xb") as file:
+                async with asyncio.timeout(600):
+                    async for chunk in request.stream():
+                        size += len(chunk)
+                        if size > 512 * 1024**2:
+                            raise DomainError("workflow_context_too_large", "上下文超过受控上限", 413)
+                        await asyncio.to_thread(file.write, chunk)
+                await asyncio.to_thread(file.flush)
+                await asyncio.to_thread(os.fsync, file.fileno())
+            return await asyncio.to_thread(contexts.accept, node, attempt, boot, fencing_token, temporary)
+        finally:
+            temporary.unlink(missing_ok=True)
 
     @app.post("/internal/v1/commands/{identifier}/receipts")
     def command_receipt(identifier: str, data: CommandReceipt, node: Annotated[UUID, Depends(worker)]) -> dict[str, Any]:

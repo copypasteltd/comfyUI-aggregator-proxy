@@ -425,6 +425,364 @@
           "seconds": 30
         }
       }
+    },
+    {
+      "id": "model3d_image_job",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_prompt",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          },
+          "prompt": "Synthetic ignored prompt"
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_references",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          },
+          "references": [
+            {
+              "asset_id": "asset_reference1"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_image_size",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1,
+          "size": "720x1080"
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_video_seconds",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 1,
+          "seconds": 5
+        }
+      }
+    },
+    {
+      "id": "model3d_reject_multiple_outputs",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "example-model3d-v1",
+        "task_type": "image_to_3d",
+        "input": {
+          "source_image": {
+            "asset_id": "asset_source0001"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seed": 17,
+          "n": 2
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_typed_video_inputs",
+      "valid": true,
+      "data": {
+        "model": "synthetic-source-video",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic controlled motion",
+          "media": [
+            {
+              "slot": "source_video",
+              "asset_id": "asset_source0001"
+            },
+            {
+              "slot": "target_person",
+              "asset_id": "asset_person0001"
+            }
+          ]
+        },
+        "parameters": {
+          "seconds": 6,
+          "quality": "standard",
+          "size": "640x384"
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_typed_audio_script",
+      "valid": true,
+      "data": {
+        "model": "synthetic-dialogue",
+        "task_type": "text_to_audio",
+        "input": {
+          "texts": {
+            "script": "[S1] A synthetic greeting. [S2] A synthetic answer."
+          },
+          "media": [
+            {
+              "slot": "voice_one",
+              "asset_id": "asset_voice0001"
+            }
+          ]
+        },
+        "parameters": {
+          "seconds": 20,
+          "quality": "standard"
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_typed_slot_path",
+      "valid": false,
+      "data": {
+        "model": "m",
+        "task_type": "text_to_audio",
+        "input": {
+          "texts": {
+            "../script": "Synthetic"
+          }
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_typed_media_path",
+      "valid": false,
+      "data": {
+        "model": "m",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic",
+          "media": [
+            {
+              "slot": "source_video",
+              "asset_id": "asset_source0001",
+              "path": "private.mp4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_typed_text_not_string",
+      "valid": false,
+      "data": {
+        "model": "m",
+        "task_type": "text_to_audio",
+        "input": {
+          "texts": {
+            "script": {
+              "command": "invalid"
+            }
+          }
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_context_parent",
+      "valid": true,
+      "data": {
+        "model": "synthetic-continuation",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "Continue a synthetic clip",
+          "context": {
+            "job_id": "job_11111111111111111111111111111111"
+          }
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_context_reference",
+      "valid": true,
+      "data": {
+        "model": "synthetic-continuation",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Continue",
+          "context": {
+            "job_id": "job_22222222222222222222222222222222"
+          },
+          "media": [
+            {
+              "slot": "first_frame",
+              "asset_id": "asset_frame0001"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_context_wrong_task",
+      "valid": false,
+      "data": {
+        "model": "synthetic-image",
+        "task_type": "text_to_image",
+        "input": {
+          "prompt": "Synthetic",
+          "context": {
+            "job_id": "job_11111111111111111111111111111111"
+          }
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_context_path",
+      "valid": false,
+      "data": {
+        "model": "synthetic-continuation",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "Synthetic",
+          "context": {
+            "path": "private.safetensors"
+          }
+        }
+      }
+    },
+    {
+      "schema": "job-create.schema.json",
+      "id": "job_context_extra_field",
+      "valid": false,
+      "data": {
+        "model": "synthetic-continuation",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "Synthetic",
+          "context": {
+            "job_id": "job_11111111111111111111111111111111",
+            "path": "private"
+          }
+        }
+      }
+    },
+    {
+      "id": "job_media_only_performance",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "synthetic-performance",
+        "task_type": "references_to_video",
+        "input": {
+          "media": [
+            {
+              "slot": "source_image",
+              "asset_id": "asset_image0001"
+            },
+            {
+              "slot": "source_video",
+              "asset_id": "asset_video0001"
+            }
+          ]
+        },
+        "parameters": {
+          "seconds": 5.167
+        }
+      }
+    },
+    {
+      "id": "job_millisecond_decimal",
+      "schema": "job-create.schema.json",
+      "valid": true,
+      "data": {
+        "model": "synthetic-timeline",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "Synthetic timeline"
+        },
+        "parameters": {
+          "seconds": 34.157
+        }
+      }
+    },
+    {
+      "id": "job_submillisecond_rejected",
+      "schema": "job-create.schema.json",
+      "valid": false,
+      "data": {
+        "model": "synthetic-timeline",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "Synthetic timeline"
+        },
+        "parameters": {
+          "seconds": 34.1571
+        }
+      }
     }
   ]
 }

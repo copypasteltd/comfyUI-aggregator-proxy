@@ -320,7 +320,7 @@ func InstallFromEnvironment(db *sql.DB, auth middleware.APIKeyAuthMiddleware, se
 				return nil, ErrInvalid
 			}
 		}
-		client, err := controlclient.New(controlclient.Config{GatewayID: gateway.ID, Origin: gateway.Origin, Credential: credential, RootCAs: roots, MaxResponseBytes: 4 << 20})
+		client, err := controlclient.New(controlclient.Config{GatewayID: gateway.ID, Origin: gateway.Origin, Credential: credential, RootCAs: roots, MaxResponseBytes: 8 << 20})
 		if err != nil {
 			return nil, ErrInvalid
 		}

@@ -300,6 +300,11 @@ class Journal:
             package = json.loads(row["package"])
             confirmed, until = package["confirmed_at"], package["retain_until"]
             aid, names = row["attempt_id"], package.get("files")
+            if isinstance(names, list) and "context" in package:
+                context = package["context"]
+                if not isinstance(context, dict) or not isinstance(context.get("file"), str):
+                    continue
+                names = [*names, context["file"]]
             if not (0 <= confirmed <= until <= 2**53 - 1 and until >= confirmed + 3600 and current >= until
                     and re.fullmatch(r"att_[0-9a-f]{32}", aid) and isinstance(names, list) and 0 < len(names) <= 1000):
                 continue

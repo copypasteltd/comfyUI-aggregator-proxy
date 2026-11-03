@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 131,
+  "increment": 133,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-02/development-trace-baselines-131-single-file.json",
-    "sha256": "a36c5e3ff1dc29cd2a71733e0c7d94313b718ae51876c9723f19367666b54aaa"
+    "path": "docs/evidence/2026-11-04/development-trace-baselines-133-final.json",
+    "sha256": "0608cd707885a0470c8da7042562fd3282a42ff95ff15c860305b09a4f53b703"
   },
   "requirements": [
     {
@@ -15,27 +15,27 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "package93"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -43,67 +43,67 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -116,7 +116,9 @@
         "history107",
         "worker118",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "18",
@@ -133,27 +135,27 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "package93"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -161,67 +163,67 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_image_standard_sources_roles_and_options_reach_native_job",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -232,7 +234,9 @@
         "history107",
         "worker118",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "19",
@@ -249,27 +253,27 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "package93"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -277,73 +281,73 @@
           "path": "app/tests/unit/test_workflows.py",
           "symbol": "test_second_reference_cannot_be_silently_ignored",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflows.py",
           "symbol": "test_reference_compilation_preserves_order_and_never_modifies_release",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -354,7 +358,9 @@
         "history107",
         "worker118",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "20",
@@ -371,31 +377,31 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/media.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "video92"
+          "baseline": "contract133"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "package93"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -403,67 +409,67 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_video_json_multipart_and_native_share_ready_asset_and_job",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -476,7 +482,9 @@
         "history107",
         "worker118",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "21",
@@ -493,27 +501,27 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "package93"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -521,73 +529,73 @@
           "path": "app/tests/unit/test_workflows.py",
           "symbol": "test_second_reference_cannot_be_silently_ignored",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_single_video_cannot_enter_a_multiple_reference_workflow_or_consume_quota",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -598,7 +606,9 @@
         "history107",
         "worker118",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "22",
@@ -615,31 +625,31 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/audio_media.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "package93"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -647,73 +657,73 @@
           "path": "app/tests/unit/test_audio_media.py",
           "symbol": "test_audio_files_are_probed_and_fully_decoded",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_audio.py",
           "symbol": "test_verified_audio_refunds_reservation_difference_and_replay_is_once",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_capabilities_reject_graph_edge_overwrites",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
           "symbol": "test_six_valid_scalar_overrides_keep_edges_reference_order_and_release_immutable",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_workflow_scalar_worker.py",
           "symbol": "test_legacy_edge_overwrites_stop_before_journal_intent_or_comfy_http",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_six_capabilities_resume_only_identical_output_copies",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_collection_resume.py",
           "symbol": "test_mismatched_existing_output_is_preserved_for_reconciliation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_history_output_files.py",
           "symbol": "test_declared_fields_keep_standard_files_and_custom_extras",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -730,7 +740,10 @@
         "worker118",
         "http122",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "23",
@@ -748,55 +761,55 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/model3d_media.py",
-          "baseline": "mesh129"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/model_usage.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/ResourceLimitsEditor.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/WorkflowManifestForm.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/application/src/generation_application/ports.py",
-          "baseline": "mesh129permissions"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "single131"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -804,133 +817,133 @@
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_legacy_worker_and_legacy_key_cannot_run_mesh",
           "language": "python",
-          "baseline": "mesh129downloads"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_concurrent_admission_honors_last_slot_and_cancel_refunds",
           "language": "python",
-          "baseline": "mesh129downloads"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_delivery_is_once_isolated_downloadable_and_expires_after_eight_hours",
           "language": "python",
-          "baseline": "mesh129downloads"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_quota_missing_or_zero_rejects_every_parent",
           "language": "python",
-          "baseline": "mesh129downloads"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_model3d_worker.py",
           "symbol": "test_model3d_collects_declared_final_glb_not_previews",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_glb_is_validated_as_geometry_not_video",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_glb_rejects_corruption_and_invalid_geometry",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_glb_rejects_unsupported_or_unbounded_references",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_model3d_rejects_missing_image_and_ignored_prompt",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_model3d_rejects_nonmesh_parameters",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_old_policies_never_inherit_mesh_permission_or_quota",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_release_cannot_claim_unimplemented_mesh_capabilities",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_single_image_glb_contract_and_usage_match",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_position_accessor_used_as_custom_attribute_is_still_counted_and_bounded",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_glb_rejects_invalid_hierarchy_outside_the_default_scene",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_model3d.py",
           "symbol": "test_glb_accepts_a_valid_unselected_scene",
           "language": "python",
-          "baseline": "mesh129"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_model3d_pipeline.py",
           "symbol": "test_mesh_http_requires_mesh_scope_without_image_permission",
           "language": "python",
-          "baseline": "mesh129downloads"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_generation_permissions.py",
           "symbol": "test_generation_accepts_only_the_requested_media_permission",
           "language": "python",
-          "baseline": "mesh129permissions"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_generation_permissions.py",
           "symbol": "test_mesh_permission_never_substitutes_for_jobs_or_images",
           "language": "python",
-          "baseline": "mesh129permissions"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_model3d_client_uses_image_only_and_declared_parameters",
           "language": "python",
-          "baseline": "single131"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_model3d_download_uses_canonical_extension",
           "language": "python",
-          "baseline": "single131"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_single_file_runs_independently_and_downloads_a_verified_glb",
           "language": "python",
-          "baseline": "single131"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -940,7 +953,10 @@
         "mesh129permissions",
         "mesh129downloads",
         "skill130",
-        "single131"
+        "single131",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "20",
@@ -955,11 +971,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "cors116"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -967,12 +983,14 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
-        "cors116"
+        "cors116",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "51",
@@ -986,11 +1004,11 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "media124"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/discovery.go",
@@ -998,11 +1016,11 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/model_usage.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "single131"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -1010,23 +1028,24 @@
           "path": "app/tests/integration/test_discovery.py",
           "symbol": "test_capability_projection_uses_published_contract_without_private_fields",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_discovery.py",
           "symbol": "test_discovery_visibility_selectors_filter_single_and_collection",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/discovery_test.go",
           "symbol": "TestStockCatalogCompletesAbsentMetadataAndPreservesExtensions",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
-          "baseline": "single131",
+          "baseline": "typed133",
           "language": "python"
         }
       ],
@@ -1041,7 +1060,9 @@
         "media124final",
         "mesh128",
         "skill130",
-        "single131"
+        "single131",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "30",
@@ -1056,33 +1077,35 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "video92"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/database_diagnostics.py",
-          "baseline": "dependency101"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/unit/test_compatibility_delivery.py",
           "symbol": "test_inline_delivery_is_bounded_verified_and_closes_iterator",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_image_standard_sources_roles_and_options_reach_native_job",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_dependency_error_http.py",
           "symbol": "test_dependency_errors_are_safe_and_do_not_retry_the_request",
           "language": "python",
-          "baseline": "dependency101"
+          "baseline": "typed133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/dependency_error_test.go",
@@ -1098,7 +1121,9 @@
         "video92",
         "sdk92",
         "dependency101",
-        "go80"
+        "go80",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "30",
@@ -1112,15 +1137,15 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "media124"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -1128,19 +1153,19 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_admin_controls.py",
           "symbol": "test_admin_cancel_keeps_gpu_and_retry_refuses_uncertain_execution",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_dependency_error_http.py",
           "symbol": "test_503_after_actual_commit_does_not_promise_rollback_or_retry",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -1151,7 +1176,9 @@
         "dependency101",
         "cors116",
         "media124",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "29",
@@ -1174,7 +1201,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility.go",
@@ -1194,15 +1221,15 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "video92"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/domain/src/generation_domain/videos.py",
-          "baseline": "video92"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -1210,86 +1237,91 @@
           "path": "app/tests/integration/test_gateway.py",
           "symbol": "test_pending_cannot_dispatch_and_concurrent_confirmation_accounts_once",
           "language": "python",
-          "baseline": "meshgateway128"
+          "baseline": "typed133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/catalog_consumer_test.go",
           "symbol": "TestProviderCatalogActivationSnapshotsWithdrawalAndRestart",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/video_specification_test.go",
           "symbol": "TestVideoSpecificationPreservesExactMillisecondsAndSafeTerminalErrors",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/video_specification_test.go",
           "symbol": "TestVideoReadRetainsFrozenMetadataWhenRequestCipherUnavailable",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/video_specification_test.go",
           "symbol": "TestVideoSpecificationMigrationPreservesLegacyUnknownAndRejectsMutation",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility_test.go",
           "symbol": "TestCompatibilityVideoJSONAndOriginalTaskContent",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_native_video_list_keeps_json_deferred_and_nonvideo_routes_unchanged",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_video_duration_rejection_keeps_public_and_key_limits",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_video_projection_all_states_use_safe_errors_without_mutation",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_video_projection_corrupt_known_metadata_fails_closed",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_video_projection_corrupt_metadata_objects_fail_closed",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_video_projection_current_permissions_and_resource_scope",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_video_projection_freezes_defaults_across_replay_and_reads",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_video_projection_legacy_unknown_fields_are_not_guessed",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_video_projection.py",
           "symbol": "test_video_projection_preserves_exact_milliseconds",
           "language": "python",
-          "baseline": "video92"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -1301,7 +1333,9 @@
         "video92",
         "sdk92",
         "mesh128",
-        "meshgateway128"
+        "meshgateway128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "28",
@@ -1319,15 +1353,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -1335,13 +1369,13 @@
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_video_invalid_json_and_multipart_leave_no_persistent_inputs",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_request_limits_and_validation_never_echo_secrets",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -1349,7 +1383,9 @@
         "video92",
         "scalar104",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "30",
@@ -1364,36 +1400,40 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_concurrent_idempotency_accepts_and_reserves_once",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_access_events.py",
           "symbol": "test_http_records_real_results_without_payloads_or_client_identity",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_dependency_error_http.py",
           "symbol": "test_dependency_errors_are_safe_and_do_not_retry_the_request",
           "language": "python",
-          "baseline": "dependency101"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "video92",
         "dependency101",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "29",
@@ -1408,25 +1448,28 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_concurrent_idempotency_accepts_and_reserves_once",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "video92",
         "media124",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "29",
@@ -1440,28 +1483,32 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/worker_capacity.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_only_matching_approved_profile_changes_the_dispatch_estimate",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_worker_capacity.py",
           "symbol": "test_capacity_gate_creates_no_attempt_occupancy_or_generation_charge",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
-        "load58"
+        "load58",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "13",
@@ -1477,97 +1524,99 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
-          "baseline": "wait94"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
-          "baseline": "browser94"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/runtime_basis.py",
-          "baseline": "wait94"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/contracts/src/generation_contracts/wait_estimates.py",
-          "baseline": "wait94"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_persistent_cost_share_across_recreated_repositories",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_same_tenant_old_low_priority_overtakes_new_high_priority",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_six_capabilities_use_actual_slot_samples_and_public_shape",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_unknown_cases_do_not_invent_zero_wait",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_wait_estimates.py",
           "symbol": "test_shared_gpu_channels_do_not_create_extra_capacity",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_wait_estimates.py",
           "symbol": "test_fair_service_history_changes_dispatch_and_inputs_remain_unchanged",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_wait_estimates.py",
           "symbol": "test_retry_readiness_and_deadline_are_not_ignored",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_wait_estimates.py",
           "symbol": "test_compute_budget_returns_unknown_instead_of_stalling",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_forecast_is_read_only_and_uses_bounded_lateral_index_lookups",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_recent_fence_limit_precedes_history_sample_filter",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_actual_claim_freezes_basis_and_replay_preserves_it",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -1576,7 +1625,10 @@
         "video92",
         "wait94",
         "browser94",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "06",
@@ -1592,23 +1644,23 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -1616,19 +1668,19 @@
           "path": "app/tests/integration/test_phase_observations.py",
           "symbol": "test_phase_observations_commit_with_event_and_ignore_replay_or_fenced_delivery",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -1639,7 +1691,9 @@
         "history107",
         "worker118",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "25",
@@ -1655,28 +1709,32 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/protocol/test_journal.py",
           "symbol": "test_intent_survives_lost_response_and_forbids_resubmit",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_recovery.py",
           "symbol": "test_absent_history_never_releases_but_matching_prompt_restores_same_attempt",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
-        "native86"
+        "native86",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "54",
@@ -1692,36 +1750,40 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/retries.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/retry_routes.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_confirmed_failure_retries.py",
           "symbol": "test_mixed_oom_and_preparation_share_budget_and_never_return_to_oom_gpu",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_confirmed_failure_retries.py",
           "symbol": "test_second_oom_is_terminal_even_when_a_third_gpu_exists",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_future_retry_ready_time_and_nonwaiting_states",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "native86",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "54",
@@ -1736,18 +1798,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/command_recovery.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_admin_controls.py",
           "symbol": "test_admin_cancel_keeps_gpu_and_retry_refuses_uncertain_execution",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_job_cancellations.py",
@@ -1756,7 +1819,9 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "17",
@@ -1771,35 +1836,39 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_expiry_does_not_free_gpu_or_allow_old_boot",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_recovery.py",
           "symbol": "test_cancel_intent_survives_expired_lease_and_reconciliation",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_wait_estimates.py",
           "symbol": "test_unknown_or_overrun_occupancy_is_never_assumed_free",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "54",
@@ -1814,11 +1883,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -1826,38 +1895,40 @@
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_complete_is_once_and_does_not_release_reused_gpu",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_committed_output_survives_lost_commit_ack",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_duplicate_cleanup_keeps_original_published_version",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_cleanup_waits_for_inflight_publication_before_absence_read",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "publication110",
         "retention119",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "43",
@@ -1873,23 +1944,23 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -1897,37 +1968,37 @@
           "path": "app/tests/integration/test_command_recovery.py",
           "symbol": "test_finished_result_closes_once_without_restoring_environment",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_comfy_metadata.py",
           "symbol": "test_ambiguous_prompt_receipt_survives_restart_without_second_post",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_native_writer_exit_preserves_prefix_and_copy_continues",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_fsync_failure_keeps_copy_for_verified_reuse",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -1937,7 +2008,9 @@
         "history107",
         "worker118",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "55",
@@ -1954,19 +2027,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_nodes.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/configuration.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/WorkerNodes.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/api_environment.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -1988,7 +2061,10 @@
         "installed87",
         "visual87",
         "worker118",
-        "http122"
+        "http122",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "13",
@@ -2005,19 +2081,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/validation_jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/commands.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/commands.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2038,7 +2114,9 @@
         "ci86",
         "worker118",
         "http122",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "17",
@@ -2054,29 +2132,32 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/worker_capacity.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/observations.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_worker_capacity.py",
           "symbol": "test_heartbeat_sequence_missing_snapshot_and_new_boot_never_revive_permission",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "load58",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "14",
@@ -2092,24 +2173,27 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_two_channels_share_one_gpu_and_old_upload_keeps_result_lease",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "15",
@@ -2125,15 +2209,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_nodes.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/WorkerNodes.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2151,7 +2235,10 @@
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "14",
@@ -2167,15 +2254,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/spec_isolation.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/maintenance.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/SpecIsolations.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2193,7 +2280,10 @@
       "evidence": [
         "ci86",
         "installed87",
-        "visual87"
+        "visual87",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "27",
@@ -2208,15 +2298,15 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/main.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/process_lock.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2224,19 +2314,21 @@
           "path": "app/tests/protocol/test_worker_startup.py",
           "symbol": "test_native_processes_cross_directory_exclusion_crash_and_unknown_journal",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_journal.py",
           "symbol": "test_journal_allows_only_one_writer",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "worker118",
-        "http122"
+        "http122",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "14",
@@ -2252,11 +2344,11 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/command_recovery.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2267,7 +2359,9 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "15",
@@ -2282,19 +2376,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/configuration.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
-          "baseline": "media124"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/memory_reclamation.py",
-          "baseline": "media124final"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2313,7 +2407,10 @@
         "http122",
         "media124",
         "media124final",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "15",
@@ -2328,48 +2425,52 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/uploads.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_content.py",
           "symbol": "test_input_permissions_and_real_file_verification",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_compatibility_inputs.py",
           "symbol": "test_corrupt_checksum_image_returns_controlled_error_without_publication",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_cleanup_waits_for_publication_commit",
           "language": "python",
-          "baseline": "asset112"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_rollback_cleanup_requires_verified_absence",
           "language": "python",
-          "baseline": "asset112"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_duplicate_cleanup_releases_database_before_delete",
           "language": "python",
-          "baseline": "asset112"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "asset112",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "29",
@@ -2384,31 +2485,34 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_expiry_does_not_free_gpu_or_allow_old_boot",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "wait94",
         "retention119",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "37",
@@ -2423,35 +2527,38 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/media.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/audio_media.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/unit/test_audio_media.py",
           "symbol": "test_audio_files_are_probed_and_fully_decoded",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "publication110",
         "retention119",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "21",
@@ -2468,11 +2575,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2480,50 +2587,52 @@
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_complete_is_once_and_does_not_release_reused_gpu",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_outputs.py",
           "symbol": "test_corrupt_upload_cannot_publish_success",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_committed_output_survives_lost_commit_ack",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_rollback_cleanup_requires_successful_absence_read",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_cleanup_delete_failure_preserves_original_error",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_duplicate_cleanup_keeps_original_published_version",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_cleanup_waits_for_inflight_publication_before_absence_read",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "publication110",
         "retention119",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "37",
@@ -2538,11 +2647,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content.go",
@@ -2553,7 +2662,8 @@
         {
           "path": "app/tests/integration/test_content.py",
           "symbol": "test_content_sharing_stays_inside_tenant_and_is_explicit",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -2561,7 +2671,9 @@
         "go80",
         "asset112",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "37",
@@ -2577,11 +2689,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/collections.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content_routes.go",
@@ -2592,12 +2704,14 @@
         {
           "path": "app/tests/integration/test_content.py",
           "symbol": "test_invalid_ranges_are_rejected",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_admin_content_metadata_range_delete_and_observer_access",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -2605,7 +2719,9 @@
         "go80",
         "asset112",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "32",
@@ -2621,31 +2737,31 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "copy106"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "history107"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/http_output.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2653,77 +2769,77 @@
           "path": "app/tests/protocol/test_capacity_retention.py",
           "symbol": "test_retention_survives_restart_duplicate_confirm_and_clock_rollback",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_output_copy_worker.py",
           "symbol": "test_restarted_worker_reuses_original_output_without_generation",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_native_writer_exit_preserves_prefix_and_copy_continues",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_existing_unique_or_longer_file_is_never_truncated_or_overwritten",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_source_changes_during_prefix_validation_prevent_any_append",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_hardlinked_target_is_preserved",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_output_copy_recovery.py",
           "symbol": "test_directory_reparse_target_cannot_redirect_copy",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_history_shapes_worker.py",
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_final_output_shapes.py",
           "symbol": "test_six_capabilities_reject_malformed_declared_outputs_before_file_access",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_committed_output_survives_lost_commit_ack",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_rollback_cleanup_requires_successful_absence_read",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_cleanup_waits_for_publication_commit",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_http_worker.py",
-          "baseline": "http122",
+          "baseline": "typed133",
           "symbol": "test_http_copy_resumes_exact_prefix_and_checks_stable_source",
           "language": "python"
         }
@@ -2738,7 +2854,9 @@
         "retention119",
         "http122",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "43",
@@ -2752,100 +2870,101 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/garbage_collection.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content_management.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/capacity.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/output_retention.py",
-          "baseline": "retention119"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_content_retention.py",
           "symbol": "test_active_inputs_stay_pinned_and_terminal_retention_is_extended",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/protocol/test_capacity_retention.py",
           "symbol": "test_scan_limits_fail_closed_and_do_not_delete",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_rollback_cleanup_requires_successful_absence_read",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_cleanup_delete_failure_preserves_original_error",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_duplicate_cleanup_keeps_original_published_version",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_cleanup_waits_for_inflight_publication_before_absence_read",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_cleanup_waits_for_publication_commit",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_rollback_cleanup_requires_verified_absence",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_asset_publication_cleanup.py",
           "symbol": "test_asset_duplicate_cleanup_releases_database_before_delete",
           "language": "python",
-          "baseline": "http122"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_retention_policy.py",
           "symbol": "test_output_access_and_gc_switch_at_eight_hours",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_retention_policy.py",
           "symbol": "test_backfill_is_audited_idempotent_and_preserves_inputs_and_unpublished_objects",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_output_retention_policy.py",
           "symbol": "test_backfill_never_extends_earlier_expiry_or_shortens_input_backed_output",
           "language": "python",
-          "baseline": "retention119"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -2855,7 +2974,9 @@
         "retention119",
         "http122",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "40",
@@ -2871,11 +2992,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content_management.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/garbage_collection.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -2891,7 +3012,9 @@
         }
       ],
       "evidence": [
-        "ci86"
+        "ci86",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "40",
@@ -2906,11 +3029,11 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "video92"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content_routes.go",
@@ -2921,12 +3044,14 @@
         {
           "path": "app/tests/integration/test_discovery.py",
           "symbol": "test_capability_projection_uses_published_contract_without_private_fields",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_content_management_operations.py",
           "symbol": "test_content_http_auth_csrf_ifmatch_ranges_preview_lifecycle_and_sensitive_input",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -2935,7 +3060,9 @@
         "video92",
         "asset112",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "30",
@@ -2951,7 +3078,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/pricing.go",
@@ -2966,14 +3093,17 @@
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/billing_test.go",
           "symbol": "TestSubscriptionVideoPriceUsesCeilingThenFrozenMultiplier",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         }
       ],
       "evidence": [
         "ci86",
         "go80",
         "video92",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "06",
@@ -2988,11 +3118,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/store.go",
@@ -3008,12 +3138,13 @@
           "path": "app/tests/integration/test_gateway.py",
           "symbol": "test_pending_cannot_dispatch_and_concurrent_confirmation_accounts_once",
           "language": "python",
-          "baseline": "meshgateway128"
+          "baseline": "typed133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/ledger_test.go",
           "symbol": "TestReserveTransactionRollsBackOnOutboxFailure",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/dependency_error_test.go",
@@ -3027,7 +3158,9 @@
         "go80",
         "video92",
         "mesh128",
-        "meshgateway128"
+        "meshgateway128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "29",
@@ -3043,7 +3176,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/coordinator.go",
@@ -3058,18 +3191,20 @@
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/coordinator_test.go",
           "symbol": "TestCoordinatorSettlementAckReplayDoesNotRebill",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/effect_consumer_test.go",
           "symbol": "TestEffectsCacheFailureRetriesWithoutRebillingOrDuplicateUsage",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/tests/integration/test_output_publication_cleanup.py",
           "symbol": "test_committed_output_survives_lost_commit_ack",
           "language": "python",
-          "baseline": "publication110"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3079,7 +3214,9 @@
         "sdk92",
         "publication110",
         "retention119",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "28",
@@ -3095,7 +3232,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/audio_media.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/pricing.go",
@@ -3110,17 +3247,21 @@
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/audio_test.go",
           "symbol": "TestAudioSettlementUsesIndependentActualMeterAndExactlyOneNativeUsage",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/effect_consumer_test.go",
           "symbol": "TestEffectsNativeUsageOutcomesAndVideoMetering",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         }
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "25",
@@ -3135,7 +3276,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "video92"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility.go",
@@ -3150,13 +3291,16 @@
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/effect_consumer_test.go",
           "symbol": "TestEffectsNativeUsageOutcomesAndVideoMetering",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         }
       ],
       "evidence": [
         "ci86",
         "go80",
-        "video92"
+        "video92",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "30",
@@ -3170,7 +3314,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway_intent.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/store.go",
@@ -3185,17 +3329,21 @@
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/ledger_test.go",
           "symbol": "TestSettlementRollsBackAllEffects",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/billing_test.go",
           "symbol": "TestSubscriptionNativeUsageCacheAndPubsub",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         }
       ],
       "evidence": [
         "ci86",
-        "go80"
+        "go80",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "28",
@@ -3225,12 +3373,14 @@
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/billing_test.go",
           "symbol": "TestSubscriptionNativeProcessCrashAfterSettlement",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/effect_consumer_test.go",
           "symbol": "TestEffectsCacheFailureRetriesWithoutRebillingOrDuplicateUsage",
-          "language": "go"
+          "language": "go",
+          "baseline": "go80"
         }
       ],
       "evidence": [
@@ -3251,15 +3401,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "cors116"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "media124"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Users.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -3267,19 +3417,19 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_admin_sessions.py",
           "symbol": "test_activity_waiting_on_revocation_cannot_revive_session",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_admin_session_permission_and_missing_job_http",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3289,7 +3439,10 @@
         "wait94",
         "dependency101",
         "cors116",
-        "media124"
+        "media124",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "50",
@@ -3304,15 +3457,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_nodes.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
-          "baseline": "media124"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -3331,7 +3484,10 @@
         "ci86",
         "installed87",
         "visual87",
-        "media124"
+        "media124",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "14",
@@ -3346,15 +3502,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/commands.py",
-          "baseline": "http122"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
-          "baseline": "media124"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -3378,7 +3534,10 @@
         "worker118",
         "http122",
         "media124",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "17",
@@ -3393,37 +3552,39 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_workflows.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/workflow_lifecycle.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Workflows.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/WorkflowManifestForm.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_workflow_lifecycle.py",
           "symbol": "test_six_capabilities_archive_and_unarchive_exactly_once_without_loading_graph",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_workflow_history.py",
           "symbol": "test_audio_parameters_graph_dependencies_and_exact_zero",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_workflow_scalar_admin.py",
           "symbol": "test_admin_http_freeze_rejects_edge_writes_without_persistent_side_effects",
           "language": "python",
-          "baseline": "scalar104"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3433,7 +3594,10 @@
         "scalar104",
         "browser122",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "18",
@@ -3454,37 +3618,39 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_workflow_imports.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/workflow_history.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Workflows.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/WorkflowImportDialog.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_workflow_imports.py",
           "symbol": "test_full_manifest_import_is_lossless_and_task_type_guarded",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_workflow_retries.py",
           "symbol": "test_partial_failure_retries_only_failed_preserves_original_and_survives_service_restart",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_workflow_scalar_admin.py",
           "symbol": "test_channel_import_keeps_unsafe_graph_editable_but_never_publishable",
           "language": "python",
-          "baseline": "scalar104"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3493,7 +3659,10 @@
         "visual87",
         "scalar104",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "24",
@@ -3508,19 +3677,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_model_artifacts.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway_catalogs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Models.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/GatewayCatalogDrawer.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -3538,7 +3707,10 @@
         "media124",
         "browser124",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "24",
@@ -3554,56 +3726,57 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/operational.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/queue_queries.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Overview.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/QueueFilters.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
-          "baseline": "wait94"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
-          "baseline": "browser94"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_queue_filter_operations.py",
           "symbol": "test_filters_intersect_frozen_history_time_and_current_or_eligible_channel",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_operational_statistics.py",
           "symbol": "test_statistics_are_three_bounded_read_only_queries_with_no_accounting_effect",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_six_capabilities_use_actual_slot_samples_and_public_shape",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_unknown_cases_do_not_invent_zero_wait",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3613,7 +3786,10 @@
         "visual87",
         "wait94",
         "browser94",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "48",
@@ -3628,15 +3804,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/queue_queries.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/observations.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
-          "baseline": "media124"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -3651,7 +3827,10 @@
         "installed87",
         "load58",
         "visual87",
-        "media124"
+        "media124",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "15",
@@ -3667,51 +3846,53 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Jobs.vue",
-          "baseline": "browser94"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/JobCancellationDialog.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
-          "baseline": "wait94"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
-          "baseline": "browser94"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_admin_controls.py",
           "symbol": "test_priority_revision_and_dispatch_order",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_job_cancellations.py",
           "symbol": "test_different_batches_do_not_double_account_or_settle",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_six_capabilities_use_actual_slot_samples_and_public_shape",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_unknown_cases_do_not_invent_zero_wait",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3720,7 +3901,10 @@
         "visual87",
         "browser94",
         "wait94",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "49",
@@ -3735,47 +3919,49 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/operational.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Overview.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
-          "baseline": "wait94"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
-          "baseline": "browser94"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_admin_sessions.py",
           "symbol": "test_sse_rechecks_idle_expiry_without_persisting_activity",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_filter_operations.py",
           "symbol": "test_waiting_stops_at_first_attempt_and_detail_uses_same_clock",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_six_capabilities_use_actual_slot_samples_and_public_shape",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
           "symbol": "test_unknown_cases_do_not_invent_zero_wait",
           "language": "python",
-          "baseline": "wait94"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3785,7 +3971,10 @@
         "visual87",
         "wait94",
         "browser94",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "09",
@@ -3801,15 +3990,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_audit.py",
-          "baseline": "python89"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_base.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Audit.vue",
-          "baseline": "browser97"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -3836,7 +4025,10 @@
         "installed87",
         "visual87",
         "python89",
-        "browser97"
+        "browser97",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "45",
@@ -3852,22 +4044,23 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_base.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/operational.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Records.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_workflow_retries.py",
           "symbol": "test_partial_failure_retries_only_failed_preserves_original_and_survives_service_restart",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_operational_statistics.py",
@@ -3882,7 +4075,10 @@
         "load58",
         "native86",
         "visual87",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "50",
@@ -3898,18 +4094,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_keys.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Keys.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3917,7 +4114,10 @@
         "installed87",
         "visual87",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "50",
@@ -3931,11 +4131,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "cors116"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -3943,7 +4143,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
@@ -3955,7 +4155,9 @@
       "evidence": [
         "ci86",
         "cors116",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "51",
@@ -3969,26 +4171,27 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/key_generation_options.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/KeyGenerationSelect.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_key_generation_options.py",
           "symbol": "test_selected_directory_values_enforce_audio_model_version_channel_and_empty_policy",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -3997,7 +4200,10 @@
         "visual87",
         "video92",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "29",
@@ -4012,19 +4218,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "cors116"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/key_policy_options.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/components/PolicyDirectorySelect.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -4032,13 +4238,13 @@
           "path": "app/tests/integration/test_key_policy_options.py",
           "symbol": "test_resolved_historical_creator_grants_control_real_content_reads_and_revocation",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_content.py",
           "symbol": "test_content_sharing_stays_inside_tenant_and_is_explicit",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -4048,7 +4254,10 @@
         "asset112",
         "cors116",
         "mesh128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "51",
@@ -4063,15 +4272,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "cors116"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_scopes.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -4079,20 +4288,22 @@
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_parallel_keys_share_parent_budget_and_other_tenant_is_independent",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_parent_and_key_rate_rejection_rolls_back_all_levels",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "video92",
         "cors116",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "34",
@@ -4107,11 +4318,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "cors116"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -4119,18 +4330,20 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_key_policy_options.py",
           "symbol": "test_resolved_historical_creator_grants_control_real_content_reads_and_revocation",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
-        "cors116"
+        "cors116",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "51",
@@ -4146,15 +4359,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_keys.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "cors116"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Keys.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -4162,13 +4375,13 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_access_events.py",
           "symbol": "test_verified_denials_rotation_and_invalid_secret_are_attributed_correctly",
           "language": "python",
-          "baseline": "cors116"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -4177,7 +4390,10 @@
         "visual87",
         "cors116",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "50",
@@ -4192,19 +4408,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content_management.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/access_events.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/KeyAccess.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -4224,7 +4440,10 @@
         "installed87",
         "visual87",
         "mesh128",
-        "meshui128"
+        "meshui128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "40",
@@ -4240,7 +4459,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "mesh129downloads"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content.go",
@@ -4248,23 +4467,25 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "video92"
+          "baseline": "contract133"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
-          "baseline": "meshui128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_content_management_operations.py",
           "symbol": "test_content_http_auth_csrf_ifmatch_ranges_preview_lifecycle_and_sensitive_input",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/unit/test_compatibility_delivery.py",
           "symbol": "test_inline_delivery_is_bounded_verified_and_closes_iterator",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
@@ -4276,7 +4497,10 @@
         "asset112",
         "mesh128",
         "meshui128",
-        "mesh129downloads"
+        "mesh129downloads",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "30",
@@ -4294,7 +4518,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/public_auth.go",
@@ -4306,7 +4530,7 @@
         },
         {
           "path": "app/apps/admin_web/src/pages/Gateways.vue",
-          "baseline": "admin87"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -4330,7 +4554,10 @@
         "native86",
         "visual87",
         "mesh128",
-        "meshgateway128"
+        "meshgateway128",
+        "typed133",
+        "browser133",
+        "contract133"
       ],
       "remaining_backlog": [
         "28",
@@ -4346,15 +4573,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
-          "baseline": "ci86"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -4362,18 +4589,21 @@
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_disabling_scope_blocks_new_calls_but_preserves_accepted_job_and_gpu",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_key_disable_and_scope_edits_do_not_cancel_accepted_routing",
-          "language": "python"
+          "language": "python",
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "video92",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "49",
@@ -4388,15 +4618,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_keys.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "cors116"
+          "baseline": "contract133"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "mesh128"
+          "baseline": "contract133"
         }
       ],
       "tests": [
@@ -4404,20 +4634,22 @@
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_scope_concurrent_idempotency_revision_noop_and_rollback",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_usage_snapshot_timezone_and_limits_edits_preserve_buckets",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "typed133"
         }
       ],
       "evidence": [
         "ci86",
         "cors116",
         "media124",
-        "mesh128"
+        "mesh128",
+        "typed133",
+        "contract133"
       ],
       "remaining_backlog": [
         "50",

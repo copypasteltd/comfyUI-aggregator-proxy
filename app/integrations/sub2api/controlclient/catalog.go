@@ -16,10 +16,11 @@ var modelAliasPattern = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$`)
 var presetSizePattern = regexp.MustCompile(`^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$`)
 
 type PublishedModel struct {
-	ID      string `json:"id"`
-	Object  string `json:"object"`
-	Created int64  `json:"created"`
-	OwnedBy string `json:"owned_by"`
+	ID      string          `json:"id"`
+	Object  string          `json:"object"`
+	Created int64           `json:"created"`
+	OwnedBy string          `json:"owned_by"`
+	Usage   json.RawMessage `json:"usage,omitempty"`
 }
 
 type ModelCatalog struct {
@@ -63,7 +64,7 @@ type CapabilityCatalog struct {
 }
 
 func validPublishedModel(model PublishedModel) bool {
-	return modelAliasPattern.MatchString(model.ID) && model.Object == "model" && model.Created > 0 && model.Created <= 253402300799 && model.OwnedBy == "render-control"
+	return modelAliasPattern.MatchString(model.ID) && model.Object == "model" && model.Created > 0 && model.Created <= 253402300799 && model.OwnedBy == "render-control" && validUsage(model.Usage, model.ID)
 }
 
 // Validate JSON keys before projecting known fields. Ordinary encoding/json
@@ -78,7 +79,7 @@ func catalogJSON(raw []byte) error {
 	var visit func(int) error
 	visit = func(depth int) error {
 		nodes++
-		if depth > 16 || nodes > 100000 {
+		if depth > 16 || nodes > 250000 {
 			return errors.New("catalog JSON exceeds structural limits")
 		}
 		token, err := decoder.Token()

@@ -87,6 +87,12 @@ func (h *PublicHandler) discover(ctx context.Context, subject Subject, key *serv
 					responses[index].err = err
 					for _, item := range catalog.Data {
 						if rule, exists := allowed[item.ID]; exists && rule.model.Target.gatewayID == targets[index] && rule.model.TaskType == item.TaskType {
+							projected, projectErr := item.PublishedModel.WithPublicTaskIDs()
+							if projectErr != nil {
+								responses[index].err = projectErr
+								break
+							}
+							item.PublishedModel = projected
 							responses[index].capabilities = append(responses[index].capabilities, item)
 						}
 					}
@@ -95,6 +101,12 @@ func (h *PublicHandler) discover(ctx context.Context, subject Subject, key *serv
 					responses[index].err = err
 					for _, item := range catalog.Data {
 						if rule, exists := allowed[item.ID]; exists && rule.model.Target.gatewayID == targets[index] {
+							projected, projectErr := item.WithPublicTaskIDs()
+							if projectErr != nil {
+								responses[index].err = projectErr
+								break
+							}
+							item = projected
 							responses[index].models = append(responses[index].models, item)
 						}
 					}

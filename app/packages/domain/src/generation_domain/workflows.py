@@ -15,6 +15,12 @@ from generation_domain.media_types import (
     task_media_kind,
 )
 from generation_domain.values import fingerprint
+from generation_domain.workflow_inputs import (
+    declared_slots,
+    validate_named_inputs,
+    validate_slot_declarations,
+)
+from generation_domain.workflow_json_inputs import document_target, replace_scalar
 
 TASK_TYPES = frozenset({"text_to_image", "image_to_image", "references_to_image", "text_to_video", "references_to_video", "text_to_audio", "image_to_3d"})
 
@@ -51,6 +57,8 @@ def _binding_target(graph: dict[str, Any], binding: dict[str, Any]) -> tuple[str
     node_id, input_name = binding.get("node_id"), binding.get("input_name")
     if not isinstance(node_id, str) or not isinstance(input_name, str) or not _scalar_input(graph, node_id, input_name):
         raise DomainError("invalid_binding", "绑定只能写入已登记的节点标量输入", 422)
+    if binding.get("pointer") is not None:
+        document_target(graph[node_id]["inputs"][input_name], binding["pointer"])
     return node_id, input_name
 
 
@@ -65,7 +73,8 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
     required = {"format_version", "task_type", "workflow_api", "bindings", "output", "presets", "dependency_lock", "runtime_profiles", "supported_parameters"}
     audio = task_type == "text_to_audio"
     model3d = task_type == "image_to_3d"
-    if not required <= manifest.keys() or manifest["format_version"] != ("1.2" if model3d else "1.1" if audio else "1.0") or manifest["task_type"] != task_type or task_type not in TASK_TYPES:
+    modern = manifest.get("format_version") == "1.3"
+    if not required <= manifest.keys() or manifest["format_version"] not in ("1.3", "1.2" if model3d else "1.1" if audio else "1.0") or manifest["task_type"] != task_type or task_type not in TASK_TYPES:
         raise DomainError("invalid_manifest", "发布包缺少必要字段或能力类型不匹配", 422)
     graph = manifest["workflow_api"]
     if not isinstance(graph, dict) or not graph or "nodes" in graph or "links" in graph or len(graph) > 2000:
@@ -80,27 +89,44 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
     if not isinstance(bindings, list) or not bindings:
         raise DomainError("bindings_required", "需要指定参数到节点输入的绑定", 422)
     sources: set[str] = set()
-    targets: set[tuple[str, str]] = set()
+    targets: set[tuple[str, str, str | None]] = set()
     for binding in bindings:
-        if not isinstance(binding, dict) or set(binding) != {"source", "node_id", "input_name"}:
-            raise DomainError("invalid_binding", "绑定只能包含 source、node_id、input_name", 422)
+        if not isinstance(binding, dict) or not {"source", "node_id", "input_name"} <= set(binding) or set(binding) - {"source", "node_id", "input_name", "pointer"} or binding.get("pointer") is not None and not modern:
+            raise DomainError("invalid_binding", "绑定只能包含 source、node_id、input_name 和 1.3 的可选 pointer", 422)
         _binding_target(graph, binding)
         source = binding["source"]
         permitted = {"prompt", "negative_prompt", "seed", "width", "height", "seconds", "fps", "strength", "source_image", "mask", "output_prefix"}
         permitted |= {f"reference_{i}" for i in range(4)} | {f"reference_weight_{i}" for i in range(4)}
-        if source not in permitted or (binding["node_id"], binding["input_name"]) in targets:
+        if modern:
+            permitted.add("output_basename")
+            permitted |= {"media:" + slot["name"] for slot in manifest.get("input_slots", []) if isinstance(slot, dict) and isinstance(slot.get("name"), str)}
+            permitted |= {"text:" + slot["name"] for slot in manifest.get("text_slots", []) if isinstance(slot, dict) and isinstance(slot.get("name"), str)}
+            if (manifest.get("context") or {}).get("load"):
+                permitted.add("context_latent")
+        identity = (binding["node_id"], binding["input_name"], binding.get("pointer"))
+        if source not in permitted or identity in targets or any(target[:2] == identity[:2] and (target[2] is None or identity[2] is None or target[2].startswith(identity[2] + "/") or identity[2].startswith(target[2] + "/")) for target in targets):
             raise DomainError("invalid_binding", "绑定来源不受支持或重复写同一输入", 422)
-        targets.add((binding["node_id"], binding["input_name"]))
+        targets.add(identity)
         sources.add(source)
-    needed = {"seed", "output_prefix", "source_image"} if model3d else {"prompt", "seed", "output_prefix"}
-    if task_type == "image_to_image":
+    validate_slot_declarations(manifest, sources)
+    named_images = [slot for slot in manifest.get("input_slots", []) if slot["kind"] == "image" and slot["required"]]
+    needed = {"output_prefix"} if modern else {"seed", "output_prefix", "source_image"} if model3d else {"prompt", "seed", "output_prefix"}
+    if modern and "output_basename" in sources:
+        needed.discard("output_prefix")
+    if modern and "seed" in manifest["supported_parameters"]:
+        needed.add("seed")
+    if modern and not model3d and not manifest.get("text_slots") and not manifest.get("input_slots"):
+        needed.add("prompt")
+    if task_type in ("image_to_image", "image_to_3d") and (not modern or not named_images):
         needed.add("source_image")
-    if task_type.startswith("references_"):
+    if task_type.startswith("references_") and (not modern or not manifest.get("input_slots")):
         needed.add("reference_0")
         if task_type == "references_to_image":
             needed.add("reference_1")
     if not needed <= sources:
         raise DomainError("missing_semantic_binding", "缺少必要输入绑定：" + ", ".join(sorted(needed - sources)), 422)
+    if modern and (set(manifest["supported_parameters"]) & {"seed", "fps", "strength", "negative_prompt"}) - sources:
+        raise DomainError("missing_semantic_binding", "声明的可变标量参数必须实际绑定到执行图", 422)
     slots = {i for i in range(4) if f"reference_{i}" in sources}
     if slots and slots != set(range(len(slots))):
         raise DomainError("invalid_reference_slots", "参考槽位必须从 reference_0 开始连续绑定", 422)
@@ -109,12 +135,31 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
         raise DomainError("invalid_output_adapter", "输出适配必须选择真实的最终节点，主产物数量为 1", 422)
     if output["adapter"] != {"image": "save-image-v1", "video": "video-files-v1", "audio": "audio-files-v1", "model": "model3d-glb-v1"}[task_media_kind(task_type)]:
         raise DomainError("output_type_mismatch", "输出适配器与能力类型不匹配", 422)
+    if (policy := output.get("audio_policy")) is not None:
+        if not modern or not task_type.endswith("video") or not isinstance(policy, dict) or set(policy) - {"mode", "source_slot", "description"} or policy.get("mode") not in ("generated", "source_video", "reference_audio", "silent") or not isinstance(policy.get("description"), str) or not 1 <= len(policy["description"].strip()) <= 1000:
+            raise DomainError("invalid_audio_policy", "声音策略只用于 1.3 视频工作流，必须明确实际成品行为", 422)
+        required_kind = {"source_video": "video", "reference_audio": "audio"}.get(policy["mode"])
+        source_slot = policy.get("source_slot")
+        slot = declared_slots(manifest, "input_slots").get(source_slot) if isinstance(source_slot, str) else None
+        if required_kind and (not slot or slot["kind"] != required_kind or not slot["required"]) or not required_kind and policy.get("source_slot") is not None:
+            raise DomainError("invalid_audio_policy", "保留源声音必须绑定对应的必填视频或音频槽位", 422)
     if audio and (output.get("history_field") != "audio" or not 0 < output.get("max_bytes", 0) <= MAX_AUDIO_BYTES or not output.get("mime_types") or not set(output["mime_types"]) <= set(AUDIO_MIME_TYPES.values()) or sources & {"width", "height", "fps", "strength", "source_image", "mask"} or any(source.startswith("reference_") for source in sources)):
         raise DomainError("invalid_audio_adapter", "音频必须声明受控 audio 文件输出，不接受图像参数绑定", 422)
-    if model3d and (output.get("history_field") != "3d" or not 0 < output.get("max_bytes", 0) <= MAX_MODEL3D_BYTES or output.get("mime_types") != [MODEL3D_MIME] or sources - {"seed", "source_image", "output_prefix"} or set(manifest["supported_parameters"]) - {"quality", "seed", "n"}):
-        raise DomainError("invalid_model3d_adapter", "3D 仅支持自包含 GLB、单张源图和受控质量预设", 422)
+    if model3d and (output.get("history_field") != "3d" or not 0 < output.get("max_bytes", 0) <= MAX_MODEL3D_BYTES or output.get("mime_types") != [MODEL3D_MIME] or sources - ({"seed", "source_image", "output_prefix"} | ({"output_basename"} | {source for source in sources if source.startswith(("media:", "text:"))} if modern else set())) or set(manifest["supported_parameters"]) - {"quality", "seed", "n"}):
+        raise DomainError("invalid_model3d_adapter", "3D 仅支持自包含 GLB、已声明的源素材和受控质量预设", 422)
     reachable: set[str] = set()
     pending = list(output["final_node_ids"])
+    if (context := manifest.get("context")) is not None:
+        if not modern or not task_type.endswith("video") or not isinstance(context, dict) or context.get("family") != "h3-av-v1" or not isinstance(context.get("compatibility"), str) or len(context["compatibility"]) != 64 or any(c not in "0123456789abcdef" for c in context["compatibility"]) or type(context.get("load")) is not bool or set(context) - {"family", "compatibility", "load", "save_node_id"}:
+            raise DomainError("invalid_workflow_context", "续拍上下文声明无效", 422)
+        if context["load"] != ("context_latent" in sources):
+            raise DomainError("invalid_workflow_context", "续拍必须实际绑定父任务上下文", 422)
+        if context["load"] and any(graph[b["node_id"]]["class_type"] != "MiniMaxH3MotionContextLoadLatent" or b["input_name"] != "latent_path" for b in bindings if b["source"] == "context_latent"):
+            raise DomainError("invalid_workflow_context", "上下文只允许交给受控的 H3 AV 加载节点", 422)
+        if (save_id := context.get("save_node_id")) is not None:
+            if save_id not in graph or graph[save_id]["class_type"] != "MiniMaxH3MotionContextSaveLatent" or not any(b["source"] == "output_prefix" and b["node_id"] == save_id and b["input_name"] == "filename_prefix" for b in bindings):
+                raise DomainError("invalid_workflow_context", "上下文保存节点必须使用本次执行的受控输出前缀", 422)
+            pending.append(save_id)
     while pending:
         node_id = pending.pop()
         if node_id in reachable:
@@ -157,6 +202,17 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
         relative_file(model["path"])
         if len(model.get("sha256", "")) != 64:
             raise DomainError("model_hash_required", "模型依赖必须包含 SHA-256", 422)
+    files = lock.get("files", [])
+    if not isinstance(files, list) or len(files) > 2000:
+        raise DomainError("dependency_files_invalid", "本机节点文件依赖数量无效", 422)
+    file_paths: set[str] = set()
+    for item in files:
+        if not isinstance(item, dict) or set(item) != {"path", "sha256", "bytes"} or not isinstance(item["path"], str) or not item["path"].startswith("custom_nodes/") or not isinstance(item["sha256"], str) or len(item["sha256"]) != 64 or any(c not in "0123456789abcdef" for c in item["sha256"]) or type(item["bytes"]) is not int or not 0 < item["bytes"] <= 64 * 1024**2:
+            raise DomainError("dependency_files_invalid", "本机节点文件必须固定受控相对路径、SHA-256 和大小", 422)
+        path = relative_file(item["path"])
+        if path.casefold() in file_paths or any(part.casefold() in {".git", "__pycache__"} for part in path.split("/")):
+            raise DomainError("dependency_files_invalid", "本机节点文件不能重复或引用版本库与缓存", 422)
+        file_paths.add(path.casefold())
     profiles = manifest["runtime_profiles"]
     if not isinstance(profiles, list):
         raise DomainError("profiles_required", "必须声明待验证的运行画像", 422)
@@ -164,6 +220,7 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
 
 
 def validate_reference_inputs(manifest: dict[str, Any], supplied: dict[str, Any]) -> None:
+    validate_named_inputs(manifest, supplied)
     references = supplied.get("references", [])
     if not references:
         return
@@ -194,6 +251,9 @@ def compile_graph(manifest: dict[str, Any], execution: dict[str, Any], inputs: d
         width, height = (int(v) for v in parameters["size"].split("x"))
         dimensions = {"width": width, "height": height}
     values = {**parameters, **inputs, **dimensions, "prompt": execution["input"].get("prompt", ""), "negative_prompt": execution["input"].get("negative_prompt", ""), "output_prefix": relative_file(output_prefix)}
+    if manifest.get("format_version") == "1.3":
+        values["output_basename"] = "rc-" + fingerprint({"prefix": relative_file(output_prefix)})[:40]
+    values.update({"text:" + name: value for name, value in execution["input"].get("texts", {}).items()})
     for i, reference in enumerate(execution["input"].get("references", [])):
         if "weight" in reference:
             values[f"reference_weight_{i}"] = reference["weight"]
@@ -201,11 +261,24 @@ def compile_graph(manifest: dict[str, Any], execution: dict[str, Any], inputs: d
     for binding in manifest["bindings"]:
         source = binding["source"]
         if source in values:
-            graph[binding["node_id"]]["inputs"][binding["input_name"]] = values[source]
+            node_inputs = graph[binding["node_id"]]["inputs"]
+            if binding.get("pointer") is not None:
+                node_inputs[binding["input_name"]] = replace_scalar(node_inputs[binding["input_name"]], binding["pointer"], values[source])
+            else:
+                node_inputs[binding["input_name"]] = values[source]
             consumed.add(source)
         elif source.startswith("reference_") and not source.startswith("reference_weight_"):
             raise DomainError("missing_reference", "预设所需的参考槽位缺少输入", 422)
+        elif source.startswith(("media:", "text:")):
+            prefix, name = source.split(":", 1)
+            declaration = declared_slots(manifest, "input_slots" if prefix == "media" else "text_slots")[name]
+            if declaration["required"]:
+                raise DomainError("missing_input_slot", "必填槽位尚未准备完成", 422)
+        elif source == "context_latent":
+            raise DomainError("workflow_context_required", "父任务上下文尚未准备完成", 422)
     for i in range(len(execution["input"].get("references", []))):
         if f"reference_{i}" not in consumed:
             raise DomainError("unconsumed_reference", "所有参考图必须实际绑定到执行图", 422)
+    if any("media:" + item["slot"] not in consumed for item in execution["input"].get("media", [])) or any("text:" + name not in consumed for name in execution["input"].get("texts", {})):
+        raise DomainError("unconsumed_input", "所有命名输入必须实际绑定到执行图", 422)
     return graph

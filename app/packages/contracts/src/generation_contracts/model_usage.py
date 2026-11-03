@@ -6,6 +6,7 @@ from pydantic import Field, field_validator
 
 from generation_contracts.admin import ExpectedRevision
 from generation_contracts.validation import StrictDTO
+from generation_contracts.workflows import TextSlot, VideoAudioPolicy
 
 
 class ModelDocumentation(StrictDTO):
@@ -65,10 +66,30 @@ class UsageOutput(StrictDTO):
     media_types: list[Literal["image/png", "image/jpeg", "image/webp", "video/mp4", "video/webm", "audio/wav", "audio/flac", "audio/mpeg", "audio/ogg", "model/gltf-binary"]] = Field(min_length=1, max_length=9)
     expected_count: Literal[1]
     max_bytes: int = Field(ge=1, le=2147483648)
+    audio_policy: VideoAudioPolicy | None = None
+
+
+class PublicInputSlot(StrictDTO):
+    name: str = Field(pattern=r"^[a-z][a-z0-9_]{0,31}$")
+    kind: Literal["image", "video", "audio", "model"]
+    label: str = Field(min_length=1, max_length=160)
+    description: str = Field(min_length=1, max_length=1000)
+    required: bool
+    max_bytes: int = Field(gt=0, le=512 * 1024**2)
+    mime_types: list[str] = Field(min_length=1, max_length=4)
+
+
+class ContextUsage(StrictDTO):
+    family: Literal["h3-av-v1"]
+    required: bool
+    produces: bool
+    compatibility: str = Field(pattern=r"^[a-f0-9]{64}$")
+    retention_seconds: Literal[28800] = 28800
+    scope: Literal["same_api_key"] = "same_api_key"
 
 
 class ModelUsage(StrictDTO):
-    schema_version: Literal["1.0"] = "1.0"
+    schema_version: Literal["1.0", "1.1"] = "1.0"
     display_name: str = Field(min_length=1, max_length=160)
     description: str = Field(min_length=1, max_length=4000)
     notes: list[str] = Field(max_length=12)
@@ -81,6 +102,9 @@ class ModelUsage(StrictDTO):
     defaults: dict[str, str | int | float | bool]
     parameter_details: list[ParameterUsage] = Field(min_length=1, max_length=12)
     references: ReferenceUsage
+    input_slots: list[PublicInputSlot] = Field(default_factory=list, max_length=16)
+    text_slots: list[TextSlot] = Field(default_factory=list, max_length=16)
+    context: ContextUsage | None = None
     presets: list[dict[str, str | int | float | bool]] = Field(min_length=1, max_length=128)
     output: UsageOutput
     request_schema: dict[str, Any]

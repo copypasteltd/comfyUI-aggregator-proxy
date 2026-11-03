@@ -58,5 +58,5 @@ def output_reservation(manifest: object, fallback: int) -> int:
     if isinstance(manifest, dict) and isinstance(output := manifest.get("output"), dict):
         size, count = output.get("max_bytes"), output.get("expected_count")
         if type(size) is int and type(count) is int and 0 < size <= MAX_BYTES and 0 < count <= 1000:
-            return min(MAX_BYTES, size * count)
+            return min(MAX_BYTES, size * count + (512 * 1024**2 if (manifest.get("context") or {}).get("save_node_id") else 0))
     return fallback

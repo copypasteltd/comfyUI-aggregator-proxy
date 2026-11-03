@@ -19,6 +19,7 @@ from generation_domain.errors import DomainError
 from generation_domain.policies import enforce_limit
 from generation_domain.spec_isolation import GLOBAL_UNFINISHED_JOBS, spec_digest
 from generation_domain.values import public_id
+from generation_domain.workflow_inputs import supports_inputs
 from sqlalchemy import String, and_, cast, exists, func, literal, or_, select, tuple_
 from sqlalchemy.orm import Session
 
@@ -91,7 +92,7 @@ def eligible_candidates(session: Session, node: Node, now: datetime, *, allow_sy
     if not jobs:
         return []
     release_ids = {job.release_id for job in jobs}
-    releases = {identifier: (output, test_only) for identifier, output, test_only in session.execute(select(WorkflowRelease.id, WorkflowRelease.manifest["output"], WorkflowRelease.validation["test_only"].as_boolean()).where(WorkflowRelease.id.in_(release_ids)))}
+    releases = {identifier: (output, test_only, version) for identifier, output, test_only, version in session.execute(select(WorkflowRelease.id, WorkflowRelease.manifest["output"], WorkflowRelease.validation["test_only"].as_boolean(), WorkflowRelease.manifest["format_version"].astext).where(WorkflowRelease.id.in_(release_ids)))}
     routes: dict[UUID, list[tuple[str, UUID, UUID, UUID, bool]]] = defaultdict(list)
     matched = 0
     for release_id, channel_id, gpu_id, tenant_id, project_id, runtime_approved in session.execute(select(WorkflowBinding.release_id, Channel.id, Gpu.id, Channel.tenant_id, Channel.project_id, approved).join(Channel, Channel.id == WorkflowBinding.channel_id).join(Gpu, Gpu.id == Channel.gpu_id).where(WorkflowBinding.release_id.in_(release_ids), *ready).limit(MAX_ROUTE_MATCHES + 1)):
@@ -107,7 +108,9 @@ def eligible_candidates(session: Session, node: Node, now: datetime, *, allow_sy
     candidates = []
     excluded_gpus = failed_oom_gpus(session, [job.id for job in jobs])
     for job in jobs:
-        output, test_only = releases[job.release_id]
+        output, test_only, version = releases[job.release_id]
+        if not supports_inputs({"format_version": version}, node.inventory.get("features", [])):
+            continue
         if not node.current_boot_id or not capacity_ready(node.inventory, node.current_boot_id, now, next_reserve=output_reservation({"output": output}, 2 * 1024**3)):
             continue
         digest = spec_digest(job.task_type, job.execution)

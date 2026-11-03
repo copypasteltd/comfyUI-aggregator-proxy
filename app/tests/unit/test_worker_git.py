@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import hashlib
 import os
 import shutil
 import subprocess
 from pathlib import Path
 
 import pytest
+from generation_domain.errors import DomainError
 from windows_worker.configuration import WorkerSettings
 from windows_worker.environment import commit, verify_environment
 
@@ -24,6 +26,15 @@ def test_native_git_dependency_check_without_process_path(tmp_path: Path, monkey
     assert commit(root, settings.git_executable) == expected
     manifest = {"format_version": "1.0", "task_type": "text_to_image", "workflow_api": {"1": {"class_type": "FixtureOutput", "inputs": {"prompt": "", "seed": 1, "prefix": "fixture"}}}, "bindings": [{"source": source, "node_id": "1", "input_name": field} for source, field in (("prompt", "prompt"), ("seed", "seed"), ("output_prefix", "prefix"))], "output": {"adapter": "save-image-v1", "final_node_ids": ["1"], "expected_count": 1}, "presets": [{"quality": "standard", "size": "512x512", "values": {}}], "dependency_lock": {"comfy_commit": expected, "models": [], "custom_nodes": []}, "runtime_profiles": [], "supported_parameters": []}
     assert verify_environment(root, manifest, settings.git_executable)["environment_verified"]
+    source = root / "custom_nodes" / "native_fixture" / "nodes.py"
+    source.parent.mkdir(parents=True)
+    data = b"# measured native adapter\n"
+    source.write_bytes(data)
+    manifest["dependency_lock"]["files"] = [{"path": "custom_nodes/native_fixture/nodes.py", "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}]
+    assert verify_environment(root, manifest, settings.git_executable)["environment_verified"]
+    source.write_bytes(b"# changed native adapter!\n")
+    with pytest.raises(DomainError):
+        verify_environment(root, manifest, settings.git_executable)
     with pytest.raises(subprocess.CalledProcessError):
         commit(tmp_path / "absent", settings.git_executable)
 

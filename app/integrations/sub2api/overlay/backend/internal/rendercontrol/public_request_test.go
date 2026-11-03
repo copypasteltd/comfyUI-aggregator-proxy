@@ -4,6 +4,7 @@ import (
 	"bytes"
 	_ "embed"
 	"encoding/json"
+	"math"
 	"strings"
 	"testing"
 )
@@ -19,7 +20,7 @@ func TestPublicRequestMatchesFrozenFixtures(t *testing.T) {
 			Data  json.RawMessage `json:"data"`
 		} `json:"cases"`
 	}
-	if json.Unmarshal(publicContractFixtures, &fixtures) != nil || len(fixtures.Cases) != 23 {
+	if json.Unmarshal(publicContractFixtures, &fixtures) != nil || len(fixtures.Cases) != 42 {
 		t.Fatal("frozen fixtures missing")
 	}
 	for _, item := range fixtures.Cases {
@@ -38,7 +39,15 @@ func TestPublicRequestMatchesFrozenFixtures(t *testing.T) {
 				}
 				if request.TaskType == "text_to_video" || request.TaskType == "references_to_video" {
 					frozen, err := NewRequest("videos.create", request)
-					if err != nil || frozen.units != 6 || bytes.Contains(frozen.body, []byte("duration_seconds")) {
+					if _, explicitDuration := request.Parameters["seconds"]; !explicitDuration {
+						if err == nil {
+							t.Fatal("billing invented a duration before configured defaults were applied")
+						}
+						return
+					}
+					seconds, numberOK := request.Parameters["seconds"].(json.Number)
+					duration, numberErr := seconds.Float64()
+					if err != nil || !numberOK || numberErr != nil || frozen.units != int64(math.Ceil(duration)) || bytes.Contains(frozen.body, []byte("duration_seconds")) {
 						t.Fatal("video wire duration and billing diverged")
 					}
 				}

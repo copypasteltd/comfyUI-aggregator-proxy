@@ -185,6 +185,9 @@ func (h *PublicHandler) NewNativeRouter(auth middleware.APIKeyAuthMiddleware, tr
 		limit := int64(2 << 20)
 		if uploadRequest(c.Request) {
 			limit = 128 << 20
+			if c.Request.URL.Path == "/v1/assets" {
+				limit = 513 << 20
+			}
 		}
 		c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, limit)
 		c.Next()
@@ -254,16 +257,17 @@ func authorizePublicRule(key *service.APIKey, model, task string, rule publicRul
 }
 
 type publicJob struct {
-	ID                string                   `json:"id"`
-	Object            string                   `json:"object"`
-	Model             string                   `json:"model"`
-	TaskType          string                   `json:"task_type"`
-	Status            string                   `json:"status"`
-	CreatedAt         int64                    `json:"created_at"`
-	PollURL           string                   `json:"poll_url"`
-	Artifacts         []controlclient.Artifact `json:"artifacts"`
-	VideoMilliseconds int64                    `json:"-"`
-	VideoSize         string                   `json:"-"`
+	ID                string                         `json:"id"`
+	Object            string                         `json:"object"`
+	Model             string                         `json:"model"`
+	TaskType          string                         `json:"task_type"`
+	Status            string                         `json:"status"`
+	CreatedAt         int64                          `json:"created_at"`
+	PollURL           string                         `json:"poll_url"`
+	Artifacts         []controlclient.Artifact       `json:"artifacts"`
+	Context           *controlclient.WorkflowContext `json:"context,omitempty"`
+	VideoMilliseconds int64                          `json:"-"`
+	VideoSize         string                         `json:"-"`
 }
 
 func localPublicJob(i Intent) publicJob {
@@ -349,12 +353,28 @@ func (h *PublicHandler) reserveRequest(c *gin.Context, native controlclient.JobR
 		parameters[name] = value
 	}
 	native.Parameters = parameters
+	if parent, ok := native.Input["context"].(map[string]any); ok {
+		// Resolve only this authenticated customer's public task. The control
+		// plane verifies the successful context and its compatibility at admission.
+		id, _ := parent["job_id"].(string)
+		previous, loadErr := h.store.Load(c.Request.Context(), subject, id)
+		if loadErr != nil {
+			return Intent{}, loadErr
+		}
+		if previous.TargetGatewayID != rule.model.Target.gatewayID || previous.RemoteJobID == "" {
+			return Intent{}, ErrNotFound
+		}
+		if err = h.authorizeIntent(c.Request.Context(), key, previous); err != nil {
+			return Intent{}, err
+		}
+		parent["job_id"] = previous.RemoteJobID
+	}
 	request, err := NewRequest(publicOperation(native.TaskType), native)
 	if err != nil {
 		return Intent{}, err
 	}
 	request.inputHash = digest(requested)
-	request.requireAssets = c.GetBool("render_control_asset_inputs")
+	request.requireAssets = c.GetBool("render_control_asset_inputs") || native.Input["media"] != nil
 	request.usageAccountID = rule.model.UsageAccountID
 	request.catalog = rule.model.Catalog
 	return h.store.Reserve(c.Request.Context(), subject, rule.model.Target, token, request, Quote{Version: rule.model.PriceVersion, UnitPrice: rule.model.UnitPrice, MaxUnits: request.units})
@@ -440,6 +460,7 @@ func (h *PublicHandler) project(ctx context.Context, subject Subject, i Intent) 
 			return publicJob{}, err
 		}
 		result.Status = job.Status
+		result.Context = job.Context
 		if job.Artifacts != nil {
 			result.Artifacts = job.Artifacts
 		}

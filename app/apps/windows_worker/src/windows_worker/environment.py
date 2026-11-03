@@ -54,4 +54,14 @@ def verify_environment(root: Path, manifest: dict[str, Any], git_executable: Pat
     for node in lock["custom_nodes"]:
         if commit(safe_path(root / "custom_nodes", node["directory"]), git_executable) != node["commit"]:
             raise DomainError("custom_node_mismatch", "自定义节点提交与发布包不一致")
-    return {"environment_verified": True, "environment_digest": fingerprint({"dependency_lock": lock, "models": checked})}
+    files = []
+    for item in lock.get("files", []):
+        target = safe_path(root, item["path"])
+        digest, size = file_digest(target, item["bytes"])
+        if digest != item["sha256"] or size != item["bytes"]:
+            raise DomainError("dependency_file_mismatch", "本机节点文件大小或摘要不符")
+        files.append({"path": item["path"], "sha256": digest, "bytes": size})
+    result = {"dependency_lock": lock, "models": checked}
+    if files:
+        result["files"] = files
+    return {"environment_verified": True, "environment_digest": fingerprint(result)}

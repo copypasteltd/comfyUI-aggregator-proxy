@@ -138,7 +138,7 @@ def hash_model(path: Path, maximum: int) -> tuple[str, int]:
 
 def lock_dependencies(root: Path, declared: Any, maximum: int) -> dict[str, Any]:
     root = plain_path(root)
-    if not isinstance(declared, dict) or set(declared) - {"comfy_commit", "models", "custom_nodes"}:
+    if not isinstance(declared, dict) or set(declared) - {"comfy_commit", "models", "custom_nodes", "files"}:
         raise PackageError("dependency_declaration_invalid")
     models, nodes = declared.get("models", []), declared.get("custom_nodes", [])
     if not isinstance(models, list) or not isinstance(nodes, list) or len(models) + len(nodes) > MAX_DEPENDENCIES:
@@ -165,7 +165,23 @@ def lock_dependencies(root: Path, declared: Any, maximum: int) -> dict[str, Any]
         locked_nodes.append({"directory": item["directory"], "commit": revision(relative_path(root / "custom_nodes", item["directory"]))})
     if revision(root) != commit:
         raise PackageError("dependency_revision_changed")
-    return {"comfy_commit": commit, "models": locked_models, "custom_nodes": locked_nodes}
+    locked_files = []
+    files = declared.get("files", [])
+    if not isinstance(files, list) or len(files) > MAX_DEPENDENCIES:
+        raise PackageError("dependency_declaration_invalid")
+    for item in files:
+        if not isinstance(item, dict) or set(item) - {"path", "sha256", "bytes"} or not isinstance(item.get("path"), str) or not item["path"].startswith("custom_nodes/"):
+            raise PackageError("dependency_declaration_invalid")
+        key = "file/" + item["path"].casefold()
+        if key in seen:
+            raise PackageError("duplicate_dependency")
+        seen.add(key)
+        digest, size = hash_model(relative_path(root, item["path"]), 64 * 1024**2)
+        locked_files.append({"path": item["path"], "sha256": digest, "bytes": size})
+    result = {"comfy_commit": commit, "models": locked_models, "custom_nodes": locked_nodes}
+    if locked_files:
+        result["files"] = locked_files
+    return result
 
 
 def validate_document(document: dict[str, Any]) -> dict[str, Any]:

@@ -8544,6 +8544,158 @@
         }
       }
     },
+    "/internal/v1/attempts/{identifier}/context": {
+      "get": {
+        "summary": "Worker Context",
+        "operationId": "worker_context_internal_v1_attempts__identifier__context_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "boot_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Boot Id"
+            }
+          },
+          {
+            "name": "fencing_token",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "title": "Fencing Token"
+            }
+          },
+          {
+            "name": "X-Worker-Node-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 37,
+                  "maxLength": 37,
+                  "pattern": "^node_[0-9a-f]{32}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Worker-Node-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Upload Context",
+        "operationId": "upload_context_internal_v1_attempts__identifier__context_put",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "boot_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Boot Id"
+            }
+          },
+          {
+            "name": "fencing_token",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "title": "Fencing Token"
+            }
+          },
+          {
+            "name": "X-Worker-Node-Id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 37,
+                  "maxLength": 37,
+                  "pattern": "^node_[0-9a-f]{32}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Worker-Node-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Upload Context Internal V1 Attempts  Identifier  Context Put"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/internal/v1/commands/{identifier}/receipts": {
       "post": {
         "summary": "Command Receipt",
@@ -13033,6 +13185,17 @@
             "type": "string",
             "contentMediaType": "application/octet-stream",
             "title": "File"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "image",
+              "video",
+              "audio",
+              "model"
+            ],
+            "title": "Kind",
+            "default": "image"
           }
         },
         "type": "object",
@@ -13047,6 +13210,17 @@
             "type": "string",
             "contentMediaType": "application/octet-stream",
             "title": "File"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "image",
+              "video",
+              "audio",
+              "model"
+            ],
+            "title": "Kind",
+            "default": "image"
           }
         },
         "type": "object",
@@ -14980,6 +15154,49 @@
         ],
         "title": "ContentView"
       },
+      "ContextUsage": {
+        "properties": {
+          "family": {
+            "type": "string",
+            "const": "h3-av-v1",
+            "title": "Family"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required"
+          },
+          "produces": {
+            "type": "boolean",
+            "title": "Produces"
+          },
+          "compatibility": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Compatibility"
+          },
+          "retention_seconds": {
+            "type": "integer",
+            "const": 28800,
+            "title": "Retention Seconds",
+            "default": 28800
+          },
+          "scope": {
+            "type": "string",
+            "const": "same_api_key",
+            "title": "Scope",
+            "default": "same_api_key"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "family",
+          "required",
+          "produces",
+          "compatibility"
+        ],
+        "title": "ContextUsage"
+      },
       "CursorPage_ContentSummary_": {
         "properties": {
           "object": {
@@ -16059,11 +16276,12 @@
               "enum": [
                 "audio-output-v1",
                 "remote-http-v1",
-                "model3d-output-v1"
+                "model3d-output-v1",
+                "workflow-inputs-v1"
               ]
             },
             "type": "array",
-            "maxItems": 3,
+            "maxItems": 4,
             "title": "Features"
           }
         },
@@ -18803,7 +19021,10 @@
         "properties": {
           "schema_version": {
             "type": "string",
-            "const": "1.0",
+            "enum": [
+              "1.0",
+              "1.1"
+            ],
             "title": "Schema Version",
             "default": "1.0"
           },
@@ -18902,6 +19123,32 @@
           },
           "references": {
             "$ref": "#/components/schemas/ReferenceUsage"
+          },
+          "input_slots": {
+            "items": {
+              "$ref": "#/components/schemas/PublicInputSlot"
+            },
+            "type": "array",
+            "maxItems": 16,
+            "title": "Input Slots"
+          },
+          "text_slots": {
+            "items": {
+              "$ref": "#/components/schemas/TextSlot"
+            },
+            "type": "array",
+            "maxItems": 16,
+            "title": "Text Slots"
+          },
+          "context": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ContextUsage"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "presets": {
             "items": {
@@ -20096,6 +20343,68 @@
           "tenant_limits"
         ],
         "title": "ProjectView"
+      },
+      "PublicInputSlot": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,31}$",
+            "title": "Name"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "image",
+              "video",
+              "audio",
+              "model"
+            ],
+            "title": "Kind"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Label"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Description"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required"
+          },
+          "max_bytes": {
+            "type": "integer",
+            "maximum": 536870912.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Max Bytes"
+          },
+          "mime_types": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "minItems": 1,
+            "title": "Mime Types"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "kind",
+          "label",
+          "description",
+          "required",
+          "max_bytes",
+          "mime_types"
+        ],
+        "title": "PublicInputSlot"
       },
       "PublicOutput": {
         "properties": {
@@ -21941,6 +22250,8 @@
           },
           "max_references": {
             "type": "integer",
+            "maximum": 16.0,
+            "minimum": 0.0,
             "title": "Max References"
           },
           "allowed_qualities": {
@@ -22299,6 +22610,47 @@
         ],
         "title": "TenantView"
       },
+      "TextSlot": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,31}$",
+            "title": "Name"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Label"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Description"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required"
+          },
+          "max_length": {
+            "type": "integer",
+            "maximum": 32000.0,
+            "minimum": 1.0,
+            "title": "Max Length"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "label",
+          "description",
+          "required",
+          "max_length"
+        ],
+        "title": "TextSlot"
+      },
       "UpdateImportTarget": {
         "properties": {
           "mode": {
@@ -22431,6 +22783,16 @@
             "maximum": 2147483648.0,
             "minimum": 1.0,
             "title": "Max Bytes"
+          },
+          "audio_policy": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VideoAudioPolicy"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -22592,6 +22954,45 @@
           "request"
         ],
         "title": "ValidationJob"
+      },
+      "VideoAudioPolicy": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "generated",
+              "source_video",
+              "reference_audio",
+              "silent"
+            ],
+            "title": "Mode"
+          },
+          "source_slot": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,31}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Slot"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Description"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "mode",
+          "description"
+        ],
+        "title": "VideoAudioPolicy"
       },
       "WaitEstimate": {
         "properties": {

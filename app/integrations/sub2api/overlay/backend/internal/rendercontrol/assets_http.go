@@ -80,25 +80,47 @@ func (h *PublicHandler) uploadAsset(c *gin.Context) {
 		publicError(c, err)
 		return
 	}
-	part, err := reader.NextRawPart()
-	if err != nil {
-		publicError(c, ErrInvalid)
-		return
-	}
-	if part.FormName() != "file" || part.FileName() == "" || part.Header.Get("Content-Transfer-Encoding") != "" {
+	kind, seenKind := "image", false
+	var file *uploadFile
+	defer func() { file.close() }()
+	for count := 0; ; count++ {
+		part, nextErr := reader.NextRawPart()
+		if nextErr == io.EOF {
+			break
+		}
+		if nextErr != nil || count >= 2 || part.Header.Get("Content-Transfer-Encoding") != "" {
+			publicError(c, ErrInvalid)
+			return
+		}
+		if part.FormName() == "file" && part.FileName() != "" && file == nil {
+			file, err = spoolFile(h.uploadDirectory, part, controlclient.MaxMediaAssetBytes)
+		} else if part.FormName() == "kind" && part.FileName() == "" && !seenKind {
+			var value []byte
+			value, err = io.ReadAll(io.LimitReader(part, 17))
+			kind, seenKind = string(value), true
+			if kind != "image" && kind != "audio" && kind != "video" && kind != "model" {
+				err = ErrInvalid
+			}
+		} else {
+			err = ErrInvalid
+		}
 		_ = part.Close()
+		if err != nil {
+			publicError(c, err)
+			return
+		}
+	}
+	if file == nil {
 		publicError(c, ErrInvalid)
 		return
 	}
-	file, err := spoolFile(h.uploadDirectory, part, controlclient.MaxAssetBytes)
-	_ = part.Close()
-	if err != nil {
-		publicError(c, err)
+	actual, maximum := controlclient.AssetKind(file.MediaType)
+	if actual != kind {
+		publicError(c, ErrInvalid)
 		return
 	}
-	defer file.close()
-	if _, err = reader.NextRawPart(); err != io.EOF {
-		publicError(c, ErrInvalid)
+	if file.Bytes > maximum {
+		publicError(c, errUploadSize)
 		return
 	}
 	asset, err := h.ingestAsset(c, subject, rule, file, "asset:"+digest([]byte(token)), false)

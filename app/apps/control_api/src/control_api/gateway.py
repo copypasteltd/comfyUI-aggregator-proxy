@@ -1,7 +1,7 @@
 from collections.abc import Callable
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, File, Query, Request, Response, UploadFile
+from fastapi import APIRouter, Depends, File, Form, Query, Request, Response, UploadFile
 from fastapi.responses import StreamingResponse
 from generation_application.ports import (
     AdminIdentity,
@@ -43,13 +43,14 @@ from generation_infrastructure.gateway_catalogs import GatewayCatalogAdministrat
 from generation_infrastructure.jobs import JobRepository
 
 from control_api.access import normalized_ip
+from control_api.asset_upload import AssetUploadRoute
 from control_api.collections import content_query, job_query
 from control_api.gateway_catalogs import catalog_routes
 from control_api.uploads import upload_token
 
 
 def gateway_routes(repository: GatewayRepository, administration: GatewayAdministration, catalog: CatalogAdministration, content: ContentRepository, jobs: GenerationService, gateway: Callable[..., GatewayIdentity], permission: Callable[..., Any], token: Callable[[Request], str], revision: Callable[[Request, int], None], cursors: CursorCodec) -> APIRouter:
-    router = APIRouter()
+    router = APIRouter(route_class=AssetUploadRoute)
     router.include_router(catalog_routes(GatewayCatalogAdministration(repository.sessions, administration.settings), gateway, permission, token, revision))
 
     def delegated(request: Request, service: Annotated[GatewayIdentity, Depends(gateway)]) -> BusinessIdentity:
@@ -144,9 +145,9 @@ def gateway_routes(repository: GatewayRepository, administration: GatewayAdminis
         return catalog.public_models(identity, capabilities=True)
 
     @router.post("/gateway/v1/assets", status_code=201)
-    def upload_asset(request: Request, identity: Annotated[BusinessIdentity, Depends(delegated)], file: Annotated[UploadFile, File()]) -> dict[str, Any]:
+    def upload_asset(request: Request, identity: Annotated[BusinessIdentity, Depends(delegated)], file: Annotated[UploadFile, File()], kind: Annotated[Literal["image", "video", "audio", "model"], Form()] = "image") -> dict[str, Any]:
         try:
-            return content.upload_asset(identity, file.file, request.state.request_id, upload_token(request, required=True))
+            return content.upload_asset(identity, file.file, request.state.request_id, upload_token(request, required=True), kind=kind)
         finally:
             file.file.close()
 

@@ -37,6 +37,7 @@ def model_usage(alias: str, task_type: str, manifest: dict[str, Any], defaults: 
     """Project only public contract values; never copy graph or dependency metadata."""
     text = ModelDocumentation.model_validate(documentation)
     sources = {binding["source"] for binding in manifest["bindings"]}
+    modern = manifest.get("format_version") == "1.3"
     supported = set(manifest["supported_parameters"])
     presets = [PublicPreset.model_validate({k: v for k, v in preset.items() if k in PUBLIC_PRESET_FIELDS}).model_dump(exclude_none=True) for preset in manifest["presets"]]
     if set(defaults) - {"size", "quality", "seconds", "n"}:
@@ -53,16 +54,16 @@ def model_usage(alias: str, task_type: str, manifest: dict[str, Any], defaults: 
     properties["model"] = {"const": alias}
     properties["task_type"] = {"const": task_type}
     inputs = properties["input"]
-    input_names = set() if task_type == "image_to_3d" else {"prompt"}
-    inputs["required"] = [] if task_type == "image_to_3d" else ["prompt"]
+    input_names = ({"prompt"} if "prompt" in sources else set()) if modern else set() if task_type == "image_to_3d" else {"prompt"}
+    inputs["required"] = sorted(input_names)
     if "negative_prompt" in supported:
         input_names.add("negative_prompt")
     example_input: dict[str, Any] = {"prompt": text.example_prompt.strip() or ("A quiet garden in soft morning light" if task_type != "text_to_audio" else "An original gentle instrumental melody")}
-    if task_type == "image_to_3d":
+    if task_type == "image_to_3d" or modern and "prompt" not in sources:
         example_input = {}
     slots = []
     reference_count = sum(f"reference_{i}" in sources for i in range(4))
-    if task_type in ("image_to_image", "image_to_3d"):
+    if task_type in ("image_to_image", "image_to_3d") and (not modern or "source_image" in sources):
         input_names.add("source_image")
         inputs["required"].append("source_image")
         example_input["source_image"] = {"asset_id": "asset_REPLACE_WITH_UPLOADED_ID"}
@@ -70,7 +71,7 @@ def model_usage(alias: str, task_type: str, manifest: dict[str, Any], defaults: 
         if "mask" in supported and "mask" in sources:
             input_names.add("mask")
             slots.append({"path": "input.mask", "required": False, "description": "可选遮罩图片；仅此模型的绑定支持时传入。"})
-    if task_type.startswith("references_"):
+    if task_type.startswith("references_") and (not modern or reference_count):
         if not reference_count:
             raise ValueError("Reference workflow has no bound reference slots")
         input_names.add("references")
@@ -90,11 +91,35 @@ def model_usage(alias: str, task_type: str, manifest: dict[str, Any], defaults: 
             references["prefixItems"].append(slot_schema)
             slots.append({"path": f"input.references[{index}]", "required": True, "description": "视频首帧图片，role 必须为 first_frame。" if first_frame else f"第 {index + 1} 张参考图，数组顺序与 Workflow 槽位一致；role 为语义标签，不改变槽位顺序。", "weight_supported": weight_supported})
             example_input["references"].append({"asset_id": "asset_REPLACE_WITH_UPLOADED_ID_" + str(index + 1), "role": "first_frame" if first_frame else "reference_" + str(index)})
+    if modern and manifest.get("input_slots"):
+        input_names.add("media")
+        media = inputs["properties"]["media"]
+        media["maxItems"] = len(manifest["input_slots"])
+        media["items"]["properties"]["slot"]["enum"] = [slot["name"] for slot in manifest["input_slots"]]
+        media["allOf"] = [{"contains": {"properties": {"slot": {"const": slot["name"]}}, "required": ["slot"]}, "minContains": 1 if slot["required"] else 0, "maxContains": 1} for slot in manifest["input_slots"]]
+        required_media = [slot for slot in manifest["input_slots"] if slot["required"]]
+        if required_media:
+            inputs["required"].append("media")
+            example_input["media"] = [{"slot": slot["name"], "asset_id": "asset_REPLACE_WITH_UPLOADED_" + slot["name"].upper()} for slot in required_media]
+    if modern and manifest.get("text_slots"):
+        input_names.add("texts")
+        texts = inputs["properties"]["texts"]
+        texts["additionalProperties"] = False
+        texts["properties"] = {slot["name"]: {"type": "string", "minLength": 1, "maxLength": slot["max_length"]} for slot in manifest["text_slots"]}
+        texts["required"] = [slot["name"] for slot in manifest["text_slots"] if slot["required"]]
+        if texts["required"]:
+            inputs["required"].append("texts")
+            example_input["texts"] = {slot["name"]: (text.example_prompt.strip() or "Example text")[:slot["max_length"]] for slot in manifest["text_slots"] if slot["required"]}
+    context = manifest.get("context")
+    if modern and context and context["load"]:
+        input_names.add("context")
+        inputs["required"].append("context")
+        example_input["context"] = {"job_id": "job_" + "0" * 32}
     inputs["properties"] = {k: v for k, v in inputs["properties"].items() if k in input_names}
     if "mask" not in input_names:
         inputs.pop("dependentRequired", None)
     parameters = properties["parameters"]
-    allowed = supported | set(defaults) | {"seed", "n"}
+    allowed = supported | set(defaults) | ({"n"} if modern else {"seed", "n"})
     parameters["properties"] = {k: v for k, v in parameters["properties"].items() if k in allowed}
     for name, rules in parameters["properties"].items():
         if name in defaults:
@@ -111,29 +136,36 @@ def model_usage(alias: str, task_type: str, manifest: dict[str, Any], defaults: 
             branch["required"] = required
         combinations.append(branch)
     parameters["anyOf"] = combinations
-    example = {"model": alias, "task_type": task_type, "input": example_input, "parameters": {**defaults, "seed": 42, "n": 1}}
+    example_parameters = {**defaults, **({"seed": 42} if "seed" in allowed else {}), "n": 1}
+    example = {"model": alias, "task_type": task_type, "input": example_input, "parameters": example_parameters}
     JobCreate.model_validate(example)
     Draft202012Validator.check_schema(schema)
-    Draft202012Validator(schema).validate(example)
+    from generation_contracts.validation import ContractValidator
+
+    ContractValidator(schema).validate(example)
     validate_reference_inputs(manifest, example_input)
     for preset in presets:
-        sample = {**example, "parameters": {**{k: v for k, v in preset.items() if k in ("size", "quality", "seconds")}, "seed": 42, "n": 1}}
+        sample = {**example, "parameters": {**{k: v for k, v in preset.items() if k in ("size", "quality", "seconds")}, **({"seed": 42} if "seed" in allowed else {}), "n": 1}}
         JobCreate.model_validate(sample)
     detail = [{"path": "input." + name, "required": name in inputs["required"], "description": PARAMETER_DESCRIPTIONS[name], "rules": deepcopy(rules)} for name, rules in inputs["properties"].items() if name in PARAMETER_DESCRIPTIONS]
     detail += [{"path": "parameters." + name, "required": False, "description": PARAMETER_DESCRIPTIONS[name], "rules": deepcopy(rules)} for name, rules in parameters["properties"].items()]
     scopes = ["models:read", "capabilities:read", "jobs:create", {"image": "images:create", "video": "videos:create", "audio": "audio:create", "model": "meshes:create"}[task_media_kind(task_type)], "jobs:read", "artifacts:read", "content:read", "content:download"]
-    if slots:
+    if slots or manifest.get("input_slots"):
         scopes.append("assets:upload")
     return ModelUsage.model_validate({
+        "schema_version": "1.1" if modern else "1.0",
         "display_name": text.display_name.strip() or alias,
         "description": text.description.strip() or TASK_DESCRIPTIONS[task_type],
         "notes": text.notes, "tags": text.tags, "task_type": task_type,
         "required_scopes": scopes, "defaults": defaults, "parameter_details": detail,
+        "input_slots": [{name: value for name, value in slot.items() if name != "path_mode"} for slot in manifest.get("input_slots", [])],
+        "text_slots": manifest.get("text_slots", []),
+        "context": {"family": context["family"], "required": context["load"], "produces": context.get("save_node_id") is not None, "compatibility": context["compatibility"]} if context else None,
         "references": {"supported": bool(slots), "exact_reference_count": reference_count,
                        "slots": slots, "media_types": ["image/png", "image/jpeg", "image/webp"] if slots else [],
                        "max_upload_bytes": 20 * 1024**2,
                        "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"},
         "presets": presets, "request_schema": schema, "example_request": example,
-        "output": {"media_types": manifest["output"]["mime_types"], "expected_count": manifest["output"]["expected_count"], "max_bytes": manifest["output"]["max_bytes"]},
+        "output": {"media_types": manifest["output"]["mime_types"], "expected_count": manifest["output"]["expected_count"], "max_bytes": manifest["output"]["max_bytes"], "audio_policy": manifest["output"].get("audio_policy")},
         "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。",
     }).model_dump()

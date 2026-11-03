@@ -18,6 +18,7 @@ from generation_domain.spec_isolation import GLOBAL_UNFINISHED_JOBS
 from generation_domain.state import TERMINAL, transition
 from generation_domain.values import fingerprint, parse_id, public_id, request_fingerprint, utcnow
 from generation_domain.videos import frozen_video_specification
+from generation_domain.workflow_inputs import input_assets
 from generation_domain.workflows import (
     audio_specification,
     matching_presets,
@@ -45,15 +46,18 @@ from generation_infrastructure.models import (
     Idempotency,
     Job,
     JobAssetReference,
+    JobContextReference,
     ObjectRecord,
     OutboxEvent,
     Project,
     PublicModel,
     Tenant,
     UsageLedger,
+    WorkflowContext,
     WorkflowRelease,
 )
 from generation_infrastructure.transactions import lock_buckets, record_change
+from generation_infrastructure.workflow_contexts import freeze_context
 from generation_infrastructure.workflow_lifecycle import require_active_workflow
 
 
@@ -61,6 +65,8 @@ def check_input_contract(manifest: dict[str, Any], request: dict[str, Any]) -> N
     validate_reference_inputs(manifest, request["input"])
     support = set(manifest.get("supported_parameters", []))
     optional = set(request.get("parameters", {})) - {"size", "quality", "seed", "n", "seconds"}
+    if manifest.get("format_version") == "1.3":
+        optional |= set(request.get("parameters", {})) - {"quality", "n"}
     if not optional <= support or ("negative_prompt" in request["input"] and "negative_prompt" not in support) or ("mask" in request["input"] and "mask" not in support):
         raise DomainError("parameter_not_supported", "工作流没有声明对应参数能力", 422)
 
@@ -203,6 +209,8 @@ class JobRepository:
                 check_admission_model(session, gateway_configuration, model, release, pending_gateway.price_version)
             require_active_workflow(session, release.workflow_id)
             check_input_contract(release.manifest, request)
+            self._asset_hashes(session, identity, request, require_ready=True, manifest=release.manifest)
+            context = freeze_context(session, identity, release.manifest, request["input"])
             routes = list(session.scalars(select(Channel).where(Channel.tenant_id == identity.tenant_id, Channel.project_id == identity.project_id, Channel.deleted_at.is_(None), Channel.enabled.is_(True), Channel.draining.is_(False)).order_by(Channel.id).with_for_update(read=True)))
             eligible = [public_id("ch", c.id) for c in routes if public_id("ch", c.id) in model.channel_ids and selected(policy["channels"], public_id("ch", c.id))]
             if validation_channel is not None:
@@ -230,7 +238,8 @@ class JobRepository:
             if (video or audio) and duration <= 0:
                 raise DomainError("duration_required", "视频/音频模型必须配置有效时长", 422)
             spec = policy["spec_limits"]
-            if (not audio and not model3d and width * height > spec["video_max_pixels" if video else "image_max_pixels"]) or duration > (spec.get("audio_max_milliseconds", 0) if audio else spec["video_max_milliseconds"]) or len(request["input"].get("references", [])) > spec["max_references"] or parameters["quality"] not in spec["allowed_qualities"]:
+            reference_count = len(request["input"].get("references", [])) + sum(item.kind == "image" for item in input_assets({"media": request["input"].get("media", [])}, release.manifest))
+            if (not audio and not model3d and width * height > spec["video_max_pixels" if video else "image_max_pixels"]) or duration > (spec.get("audio_max_milliseconds", 0) if audio else spec["video_max_milliseconds"]) or reference_count > spec["max_references"] or parameters["quality"] not in spec["allowed_qualities"]:
                 raise DomainError("spec_denied", "生成规格超过授权限制", 403)
             enforce_limit({"unfinished_jobs": {"mode": "bounded", "value": GLOBAL_UNFINISHED_JOBS}}, "unfinished_jobs", buckets["0_global", "active"].unfinished_jobs, 1)
             for kind, limits in [("1_tenant", tenant.limits), ("2_project", project.limits), ("3_key", policy["limits"])]:
@@ -238,8 +247,12 @@ class JobRepository:
                     enforce_limit(limits, name, getattr(buckets[kind, period], name), addition)
                 enforce_limit(limits, "unfinished_jobs", buckets[kind, "active"].unfinished_jobs, 1)
             execution = {"release_id": public_id("wfr", release.id), "release_digest": release.digest, "parameters": parameters, "input": request["input"], "asset_hashes": asset_hashes}
+            if release.manifest.get("output", {}).get("audio_policy") is not None:
+                execution["video_audio_policy"] = release.manifest["output"]["audio_policy"]
             if audio:
                 execution["audio_spec"] = audio_specification(release.manifest, parameters)
+            if context is not None:
+                execution["context"] = context
             job = Job(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, model_alias=model.alias, task_type=model.task_type, state="admission_pending" if pending_gateway else "queued", release_id=release.id, request=request, execution=execution, request_fingerprint=digest, execution_fingerprint=fingerprint(execution), eligible_channels=eligible, deadline=now + timedelta(seconds=3600 if video or audio or model3d else 900), accepted_period=period)
             job.is_validation = validation_channel is not None
             job.retry_of = retry_of
@@ -247,6 +260,8 @@ class JobRepository:
             session.add(job)
             session.flush()
             idem.resource_id = job.id
+            if context is not None:
+                session.add(JobContextReference(tenant_id=job.tenant_id, project_id=job.project_id, key_id=job.key_id, job_id=job.id, context_id=parse_id("ctx", context["id"])))
             for identifier in asset_hashes:
                 session.add(JobAssetReference(tenant_id=job.tenant_id, project_id=job.project_id, key_id=job.key_id, job_id=job.id, asset_id=parse_id("asset", identifier)))
             if pending_gateway:
@@ -265,18 +280,19 @@ class JobRepository:
             record_change(session, audit_actor or public_id("key", key.id), "job.accepted", job.id, request_id, {"retry_of": public_id("job", retry_of)} if retry_of else None)
             return job_projection(job, sensitive="content:sensitive" in policy["scopes"], include_video_specification=True)
 
-    def _asset_hashes(self, session: Session, identity: BusinessIdentity, request: dict[str, Any], *, require_ready: bool) -> dict[str, str]:
-        items = request["input"]
-        identifiers = [v["asset_id"] for k, v in items.items() if k in ("source_image", "mask")]
-        identifiers += [v["asset_id"] for v in items.get("references", [])]
+    def _asset_hashes(self, session: Session, identity: BusinessIdentity, request: dict[str, Any], *, require_ready: bool, manifest: dict[str, Any] | None = None) -> dict[str, str]:
+        inputs = input_assets(request["input"], manifest)
         result = {}
-        for identifier in identifiers:
+        for identifier in sorted({item.asset_id for item in inputs}):
             query = select(Asset, ObjectRecord).join(ObjectRecord, Asset.object_id == ObjectRecord.id).where(Asset.id == parse_id("asset", identifier), Asset.tenant_id == identity.tenant_id, Asset.project_id == identity.project_id, Asset.key_id == identity.key_id)
             if require_ready:
                 query = query.where(Asset.deleted_at.is_(None), ObjectRecord.deleted_at.is_(None), ObjectRecord.delete_requested_at.is_(None), ObjectRecord.verified_at.is_not(None), ObjectRecord.expires_at > utcnow()).with_for_update()
             asset = session.execute(query).one_or_none()
             if not asset:
                 raise DomainError("asset_not_available", "输入素材不存在或未授权", 404)
+            for item in inputs:
+                if item.asset_id == identifier and item.kind is not None and (asset[1].media_type not in item.mime_types or asset[1].bytes > item.max_bytes):
+                    raise DomainError("input_type_mismatch", "素材类型或字节数不符合工作流输入槽位", 422)
             result[identifier] = asset[1].sha256
         return result
 
@@ -286,6 +302,10 @@ class JobRepository:
             session.execute(text("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY"))
             job = owned_job(session, identity, job_id)
             result = job_projection(job, sensitive="content:sensitive" in identity.policy["scopes"], include_video_specification=True)
+            context = session.scalar(select(WorkflowContext).where(WorkflowContext.attempt_id == job.current_attempt_id)) if job.state == "succeeded" else None
+            if context:
+                obj = session.get(ObjectRecord, context.object_id)
+                result["context"] = {"available": bool(obj and obj.verified_at and obj.version_id and not obj.deleted_at and not obj.delete_requested_at and obj.expires_at > utcnow()), "family": "h3-av-v1", "compatibility": context.compatibility, "expires_at": int(obj.expires_at.timestamp()) if obj else None}
             if "artifacts:read" in identity.policy["scopes"]:
                 result["artifacts"] = [{"id": public_id("content", a.id), "position": a.position} for a in session.scalars(select(Artifact).where(Artifact.job_id == job.id, Artifact.deleted_at.is_(None)).order_by(Artifact.position))]
             return result

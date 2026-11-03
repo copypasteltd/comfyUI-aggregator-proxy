@@ -12,6 +12,7 @@ from generation_domain.retries import OOM_CODE, RETRY_POLICY, confirmed_oom_evid
 from generation_domain.spec_isolation import spec_digest
 from generation_domain.state import TERMINAL, transition, uncertain
 from generation_domain.values import fingerprint, parse_id, public_id, utcnow
+from generation_domain.workflow_inputs import supports_inputs
 from sqlalchemy import select, text
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, sessionmaker
@@ -243,6 +244,8 @@ class LeaseRepository:
                 continue
             release = session.get(WorkflowRelease, job.release_id, populate_existing=True)
             if not release:
+                continue
+            if not supports_inputs(release.manifest, node.inventory.get("features", [])):
                 continue
             if not job.is_validation and not binding.runtime_approval and not (self.allow_synthetic_catalog and release and release.validation.get("test_only")):
                 continue

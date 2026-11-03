@@ -1,6 +1,7 @@
 package rendercontrol
 
 import (
+	"bytes"
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
@@ -114,6 +115,23 @@ func spoolFile(directory string, source io.Reader, maximum int64) (*uploadFile, 
 		return nil, ErrStorage
 	}
 	result.MediaType = http.DetectContentType(magic[:n])
+	// Sniff only the allowed container signatures; the control plane fully decodes.
+	switch {
+	case n >= 12 && bytes.Equal(magic[:4], []byte("glTF")):
+		result.MediaType = "model/gltf-binary"
+	case n >= 12 && bytes.Equal(magic[:4], []byte("RIFF")) && bytes.Equal(magic[8:12], []byte("WAVE")):
+		result.MediaType = "audio/wav"
+	case n >= 4 && bytes.Equal(magic[:4], []byte("fLaC")):
+		result.MediaType = "audio/flac"
+	case n >= 4 && bytes.Equal(magic[:4], []byte("OggS")):
+		result.MediaType = "audio/ogg"
+	case n >= 3 && bytes.Equal(magic[:3], []byte("ID3")) || n >= 2 && magic[0] == 0xff && magic[1]&0xe0 == 0xe0:
+		result.MediaType = "audio/mpeg"
+	case n >= 12 && bytes.Equal(magic[4:8], []byte("ftyp")):
+		result.MediaType = "video/mp4"
+	case n >= 4 && bytes.Equal(magic[:4], []byte{0x1a, 0x45, 0xdf, 0xa3}):
+		result.MediaType = "video/webm"
+	}
 	_, err = file.Seek(0, 0)
 	if err != nil {
 		return nil, ErrStorage

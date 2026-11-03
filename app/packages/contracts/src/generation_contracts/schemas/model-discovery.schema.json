@@ -516,8 +516,11 @@
       "additionalProperties": false,
       "properties": {
         "schema_version": {
-          "const": "1.0",
           "default": "1.0",
+          "enum": [
+            "1.0",
+            "1.1"
+          ],
           "title": "Schema Version",
           "type": "string"
         },
@@ -616,6 +619,33 @@
         },
         "references": {
           "$ref": "#/$defs/ReferenceUsage"
+        },
+        "input_slots": {
+          "items": {
+            "$ref": "#/$defs/PublicInputSlot"
+          },
+          "maxItems": 16,
+          "title": "Input Slots",
+          "type": "array"
+        },
+        "text_slots": {
+          "items": {
+            "$ref": "#/$defs/TextSlot"
+          },
+          "maxItems": 16,
+          "title": "Text Slots",
+          "type": "array"
+        },
+        "context": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ContextUsage"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "presets": {
           "items": {
@@ -720,6 +750,17 @@
           "minimum": 1,
           "title": "Max Bytes",
           "type": "integer"
+        },
+        "audio_policy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VideoAudioPolicy"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -728,6 +769,192 @@
         "max_bytes"
       ],
       "title": "UsageOutput",
+      "type": "object"
+    },
+    "ContextUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "family": {
+          "const": "h3-av-v1",
+          "title": "Family",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "produces": {
+          "title": "Produces",
+          "type": "boolean"
+        },
+        "compatibility": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Compatibility",
+          "type": "string"
+        },
+        "retention_seconds": {
+          "const": 28800,
+          "default": 28800,
+          "title": "Retention Seconds",
+          "type": "integer"
+        },
+        "scope": {
+          "const": "same_api_key",
+          "default": "same_api_key",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "family",
+        "required",
+        "produces",
+        "compatibility"
+      ],
+      "title": "ContextUsage",
+      "type": "object"
+    },
+    "PublicInputSlot": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[a-z][a-z0-9_]{0,31}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "image",
+            "video",
+            "audio",
+            "model"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "max_bytes": {
+          "exclusiveMinimum": 0,
+          "maximum": 536870912,
+          "title": "Max Bytes",
+          "type": "integer"
+        },
+        "mime_types": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Mime Types",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "label",
+        "description",
+        "required",
+        "max_bytes",
+        "mime_types"
+      ],
+      "title": "PublicInputSlot",
+      "type": "object"
+    },
+    "TextSlot": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[a-z][a-z0-9_]{0,31}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "max_length": {
+          "maximum": 32000,
+          "minimum": 1,
+          "title": "Max Length",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "description",
+        "required",
+        "max_length"
+      ],
+      "title": "TextSlot",
+      "type": "object"
+    },
+    "VideoAudioPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "generated",
+            "source_video",
+            "reference_audio",
+            "silent"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "source_slot": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_]{0,31}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Slot"
+        },
+        "description": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode",
+        "description"
+      ],
+      "title": "VideoAudioPolicy",
       "type": "object"
     }
   }

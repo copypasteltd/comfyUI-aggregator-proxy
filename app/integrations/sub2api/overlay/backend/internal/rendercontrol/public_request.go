@@ -15,6 +15,7 @@ import (
 
 var publicAssetPattern = regexp.MustCompile(`^asset_[A-Za-z0-9_-]{6,80}$`)
 var publicRolePattern = regexp.MustCompile(`^[a-z][a-z0-9_]{0,31}$`)
+var publicParentJobPattern = regexp.MustCompile(`^(job|rc)_[a-f0-9]{32}$`)
 var publicSizePattern = regexp.MustCompile(`^[1-9][0-9]{1,4}x[1-9][0-9]{1,4}$`)
 
 func properties(value map[string]any, names ...string) bool {
@@ -115,7 +116,61 @@ func ParsePublicRequest(raw []byte) (controlclient.JobRequest, error) {
 		return controlclient.JobRequest{}, ErrInvalid
 	}
 	input, ok := root["input"].(map[string]any)
-	if !ok || !properties(input, "prompt", "negative_prompt", "source_image", "mask", "references") || !textValue(input["prompt"], 1, 8000) {
+	if !ok || !properties(input, "prompt", "negative_prompt", "source_image", "mask", "references", "media", "texts", "context") {
+		return controlclient.JobRequest{}, ErrInvalid
+	}
+	if value, present := input["context"]; present {
+		context, valid := value.(map[string]any)
+		if !valid || !properties(context, "job_id") || task != "text_to_video" && task != "references_to_video" {
+			return controlclient.JobRequest{}, ErrInvalid
+		}
+		parent, valid := context["job_id"].(string)
+		if !valid || !publicParentJobPattern.MatchString(parent) {
+			return controlclient.JobRequest{}, ErrInvalid
+		}
+	}
+	_, prompt := input["prompt"]
+	if prompt && !textValue(input["prompt"], 1, 8000) {
+		return controlclient.JobRequest{}, ErrInvalid
+	}
+	_, media := input["media"]
+	if media {
+		items, valid := input["media"].([]any)
+		if !valid || len(items) < 1 || len(items) > 16 {
+			return controlclient.JobRequest{}, ErrInvalid
+		}
+		seen := map[string]bool{}
+		for _, item := range items {
+			value, valid := item.(map[string]any)
+			if !valid || !properties(value, "slot", "asset_id") {
+				return controlclient.JobRequest{}, ErrInvalid
+			}
+			slot, valid := value["slot"].(string)
+			id, validID := value["asset_id"].(string)
+			if !valid || !validID || !publicRolePattern.MatchString(slot) || !publicAssetPattern.MatchString(id) || seen[slot] {
+				return controlclient.JobRequest{}, ErrInvalid
+			}
+			seen[slot] = true
+		}
+	}
+	_, texts := input["texts"]
+	if texts {
+		values, valid := input["texts"].(map[string]any)
+		if !valid || len(values) < 1 || len(values) > 16 {
+			return controlclient.JobRequest{}, ErrInvalid
+		}
+		total := 0
+		for name, value := range values {
+			if !publicRolePattern.MatchString(name) || !textValue(value, 1, 32000) {
+				return controlclient.JobRequest{}, ErrInvalid
+			}
+			total += utf8.RuneCountInString(value.(string))
+		}
+		if total > 32000 {
+			return controlclient.JobRequest{}, ErrInvalid
+		}
+	}
+	if !prompt && !texts && !media && task != "image_to_3d" {
 		return controlclient.JobRequest{}, ErrInvalid
 	}
 	if value, present := input["negative_prompt"]; present && !textValue(value, 0, 8000) {
@@ -185,11 +240,15 @@ func ParsePublicRequest(raw []byte) (controlclient.JobRequest, error) {
 			return controlclient.JobRequest{}, ErrInvalid
 		}
 	case "image_to_image":
-		if !source || references {
+		if !source && !media || references {
 			return controlclient.JobRequest{}, ErrInvalid
 		}
 	case "references_to_image", "references_to_video":
-		if !references || source || mask {
+		if !references && !media || source || mask {
+			return controlclient.JobRequest{}, ErrInvalid
+		}
+	case "image_to_3d":
+		if !source && !media || prompt || input["negative_prompt"] != nil || references || mask {
 			return controlclient.JobRequest{}, ErrInvalid
 		}
 	default:
@@ -198,6 +257,9 @@ func ParsePublicRequest(raw []byte) (controlclient.JobRequest, error) {
 	video := task == "text_to_video" || task == "references_to_video"
 	audio := task == "text_to_audio"
 	_, size := parameters["size"]
+	if task == "image_to_3d" && (size || seconds || fps || strength) {
+		return controlclient.JobRequest{}, ErrInvalid
+	}
 	if !video && !audio && seconds || !video && fps || audio && size || task != "image_to_image" && strength {
 		return controlclient.JobRequest{}, ErrInvalid
 	}

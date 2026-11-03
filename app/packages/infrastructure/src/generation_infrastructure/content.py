@@ -17,6 +17,7 @@ from generation_domain.errors import DomainError
 from generation_domain.media_types import MODEL3D_MIME
 from generation_domain.state import TERMINAL
 from generation_domain.values import fingerprint, parse_id, public_id, utcnow
+from generation_domain.workflow_inputs import INPUT_KINDS
 from PIL import Image, UnidentifiedImageError
 from sqlalchemy import and_, literal, or_, select, tuple_
 from sqlalchemy.dialects.postgresql import insert
@@ -30,6 +31,7 @@ from generation_infrastructure.content_management import (
     content_status,
 )
 from generation_infrastructure.cursors import CursorCodec
+from generation_infrastructure.input_media import validate_input
 from generation_infrastructure.models import (
     ApiKey,
     Artifact,
@@ -39,10 +41,12 @@ from generation_infrastructure.models import (
     Idempotency,
     Job,
     JobAssetReference,
+    JobContextReference,
     ObjectRecord,
     OutputUpload,
     Project,
     Tenant,
+    WorkflowContext,
 )
 from generation_infrastructure.queue_queries import begin_queue_read
 from generation_infrastructure.transactions import record_change
@@ -105,7 +109,9 @@ class AuthorizedDownload:
 def object_in_use(session: Session, identifier: UUID) -> bool:
     inputs = session.scalar(select(JobAssetReference.job_id).join(Asset, JobAssetReference.asset_id == Asset.id).join(Job, JobAssetReference.job_id == Job.id).where(Asset.object_id == identifier, Job.state.not_in(TERMINAL)).limit(1))
     outputs = session.scalar(select(OutputUpload.id).join(Attempt, OutputUpload.attempt_id == Attempt.id).join(Job, Attempt.job_id == Job.id).where(OutputUpload.object_id == identifier, Job.current_attempt_id == Attempt.id, Job.state.not_in(TERMINAL)).limit(1))
-    return inputs is not None or outputs is not None
+    contexts = session.scalar(select(JobContextReference.job_id).join(WorkflowContext, JobContextReference.context_id == WorkflowContext.id).join(Job, JobContextReference.job_id == Job.id).where(WorkflowContext.object_id == identifier, Job.state.not_in(TERMINAL)).limit(1))
+    producers = session.scalar(select(WorkflowContext.id).join(Job, WorkflowContext.job_id == Job.id).where(WorkflowContext.object_id == identifier, Job.current_attempt_id == WorkflowContext.attempt_id, Job.state.not_in(TERMINAL)).limit(1))
+    return any(value is not None for value in (inputs, outputs, contexts, producers))
 
 
 def content_projection(row: Asset | Artifact, obj: ObjectRecord, now: datetime | None = None) -> dict[str, Any]:
@@ -122,7 +128,9 @@ class ContentRepository:
             asset, obj = self._object(session, identity, identifier, asset=True)
         except DomainError as exc:
             raise DomainError("asset_replay_unavailable", "原上传素材已到期或删除，不能用相同幂等键复活", 410) from exc
-        return {"id": public_id("asset", asset.id), "object": "asset", "status": "ready", "bytes": obj.bytes, "sha256": obj.sha256, "media_type": obj.media_type, "width": obj.metadata_json["width"], "height": obj.metadata_json["height"], "expires_at": int(obj.expires_at.timestamp())}
+        result = {"id": public_id("asset", asset.id), "object": "asset", "status": "ready", "bytes": obj.bytes, "sha256": obj.sha256, "media_type": obj.media_type, "expires_at": int(obj.expires_at.timestamp())}
+        result.update({name: obj.metadata_json[name] for name in ("width", "height", "duration_milliseconds", "sample_rate", "channels", "fps", "has_audio", "mesh_count", "vertex_count", "triangle_count") if name in obj.metadata_json})
+        return result
 
     def _upload_identity(self, session: Session, identity: BusinessIdentity) -> None:
         key = session.scalar(select(ApiKey).where(ApiKey.id == identity.key_id).with_for_update(key_share=True))
@@ -146,11 +154,11 @@ class ContentRepository:
             # Preserve potentially committed bytes; never mask the original failure.
             logging.getLogger(__name__).warning("asset_cleanup_deferred_pending_publication_verification")
 
-    def upload_asset(self, identity: BusinessIdentity, source: BinaryIO, request_id: str, token: str | None = None) -> dict[str, Any]:
+    def upload_asset(self, identity: BusinessIdentity, source: BinaryIO, request_id: str, token: str | None = None, *, kind: str = "image") -> dict[str, Any]:
         identity.require("assets:upload")
         if token is not None and (not 1 <= len(token) <= 128 or any(not 33 <= ord(c) <= 126 for c in token)):
             raise DomainError("invalid_idempotency_key", "上传幂等键格式无效", 400)
-        metadata = validate_image(source)
+        metadata = validate_input(source, kind)
         size = source.seek(0, 2)
         source.seek(0)
         digest = hashlib.sha256()
@@ -171,7 +179,7 @@ class ContentRepository:
                         raise DomainError("asset_upload_pending", "原上传尚未完成，请使用相同幂等键重试", 409)
                     return self._uploaded_asset(session, identity, previous.resource_id)
         key = f"inputs/{identity.tenant_id.hex}/{uuid4().hex}"
-        stored = self.store.put(key, source, metadata["media_type"], 20 * 1024 * 1024)
+        stored = self.store.put(key, source, metadata["media_type"], INPUT_KINDS[kind][0])
         try:
             if stored.sha256 != sha256 or stored.bytes != size or stored.media_type != metadata["media_type"]:
                 raise DomainError("asset_integrity_mismatch", "上传对象与已验证素材不一致", 503)

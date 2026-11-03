@@ -71,6 +71,37 @@ def audio_wav(tmp_path: Path) -> Path:
     return path
 
 
+@pytest.fixture
+def multimodal_manifest() -> dict[str, Any]:
+    from generation_domain.workflow_inputs import INPUT_KINDS
+    graph: dict[str, Any] = {}
+    slots, bindings = [], []
+    for index, (name, kind, node_type, field) in enumerate((("first_frame", "image", "LoadImage", "image"), ("source_video", "video", "LoadVideo", "video"), ("voice", "audio", "LoadAudio", "audio"), ("coarse_mesh", "model", "LoadMesh", "file_path")), 1):
+        graph[str(index)] = {"class_type": node_type, "inputs": {field: "frozen-fixture"}}
+        slots.append({"name": name, "kind": kind, "label": name, "description": "Synthetic controlled input " + name, "required": True, "max_bytes": INPUT_KINDS[kind][0], "mime_types": sorted(INPUT_KINDS[kind][1]), "path_mode": "comfy_relative"})
+        bindings.append({"source": "media:" + name, "node_id": str(index), "input_name": field})
+    graph["5"] = {"class_type": "SyntheticMultimodal", "inputs": {"image": ["1", 0], "video": ["2", 0], "audio": ["3", 0], "mesh": ["4", 0], "prompt": "", "script": "", "seed": 0}}
+    graph["6"] = {"class_type": "SaveVideo", "inputs": {"video": ["5", 0], "filename_prefix": ""}}
+    bindings += [{"source": "prompt", "node_id": "5", "input_name": "prompt"}, {"source": "text:script", "node_id": "5", "input_name": "script"}, {"source": "seed", "node_id": "5", "input_name": "seed"}, {"source": "output_prefix", "node_id": "6", "input_name": "filename_prefix"}]
+    return {"format_version": "1.3", "task_type": "references_to_video", "workflow_api": graph, "bindings": bindings, "input_slots": slots, "text_slots": [{"name": "script", "label": "Dialogue", "description": "Synthetic structured dialogue text", "required": True, "max_length": 8000}], "output": {"adapter": "video-files-v1", "final_node_ids": ["6"], "history_field": "videos", "expected_count": 1, "max_bytes": 1048576, "mime_types": ["video/mp4"]}, "presets": [{"quality": "standard", "size": "320x240", "seconds": 0.5, "values": {}}], "dependency_lock": {"comfy_commit": "a" * 40, "models": [], "custom_nodes": []}, "runtime_profiles": [], "supported_parameters": ["size", "quality", "seconds", "seed", "n"]}
+
+
+@pytest.fixture
+def context_manifest() -> dict[str, Any]:
+    return {"format_version": "1.3", "task_type": "text_to_video", "workflow_api": {"1": {"class_type": "SyntheticVideo", "inputs": {"prompt": "", "seed": 1}}, "2": {"class_type": "SaveVideo", "inputs": {"video": ["1", 0], "filename_prefix": ""}}, "3": {"class_type": "MiniMaxH3MotionContextSaveLatent", "inputs": {"latent": ["1", 0], "filename_prefix": ""}}}, "bindings": [{"source": "prompt", "node_id": "1", "input_name": "prompt"}, {"source": "seed", "node_id": "1", "input_name": "seed"}, {"source": "output_prefix", "node_id": "2", "input_name": "filename_prefix"}, {"source": "output_prefix", "node_id": "3", "input_name": "filename_prefix"}], "context": {"family": "h3-av-v1", "compatibility": "c" * 64, "load": False, "save_node_id": "3"}, "output": {"adapter": "video-files-v1", "final_node_ids": ["2"], "history_field": "videos", "expected_count": 1, "max_bytes": 1048576, "mime_types": ["video/mp4"], "audio_policy": {"mode": "generated", "description": "Synthetic generated audio track."}}, "presets": [{"quality": "standard", "size": "320x240", "seconds": 0.5, "values": {}}], "dependency_lock": {"comfy_commit": "a" * 40, "models": [], "custom_nodes": []}, "runtime_profiles": [], "supported_parameters": ["size", "quality", "seconds", "seed", "n"]}
+
+
+@pytest.fixture
+def input_video(tmp_path: Path) -> Path:
+    import shutil
+    import subprocess
+    executable = shutil.which("ffmpeg")
+    assert executable, "Native ffmpeg is required; do not replace this verification with mocks"
+    path = tmp_path / "synthetic-input.mp4"
+    subprocess.run([executable, "-nostdin", "-v", "error", "-f", "lavfi", "-i", "color=c=lime:s=320x240:r=24:d=0.5", "-f", "lavfi", "-i", "sine=frequency=440:sample_rate=24000:duration=0.5", "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest", str(path)], check=True, timeout=20)  # noqa: S603 -- fixed native synthetic fixture
+    return path
+
+
 def capacity_sample(**overrides: Any) -> dict[str, Any]:
     """Explicit synthetic healthy resource budget, never a real host measurement."""
     from generation_contracts.capacity import WorkerCapacity

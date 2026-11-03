@@ -2009,6 +2009,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/internal/v1/attempts/{identifier}/context": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Worker Context */
+        get: operations["worker_context_internal_v1_attempts__identifier__context_get"];
+        /** Upload Context */
+        put: operations["upload_context_internal_v1_attempts__identifier__context_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/internal/v1/commands/{identifier}/receipts": {
         parameters: {
             query?: never;
@@ -3329,11 +3347,23 @@ export interface components {
         Body_upload_asset_gateway_v1_assets_post: {
             /** File */
             file: string;
+            /**
+             * Kind
+             * @default image
+             * @enum {string}
+             */
+            kind: "image" | "video" | "audio" | "model";
         };
         /** Body_upload_asset_v1_assets_post */
         Body_upload_asset_v1_assets_post: {
             /** File */
             file: string;
+            /**
+             * Kind
+             * @default image
+             * @enum {string}
+             */
+            kind: "image" | "video" | "audio" | "model";
         };
         /** CancellationTargetView */
         CancellationTargetView: {
@@ -3960,6 +3990,32 @@ export interface components {
              */
             preview_supported: boolean;
         };
+        /** ContextUsage */
+        ContextUsage: {
+            /**
+             * Family
+             * @constant
+             */
+            family: "h3-av-v1";
+            /** Required */
+            required: boolean;
+            /** Produces */
+            produces: boolean;
+            /** Compatibility */
+            compatibility: string;
+            /**
+             * Retention Seconds
+             * @default 28800
+             * @constant
+             */
+            retention_seconds: 28800;
+            /**
+             * Scope
+             * @default same_api_key
+             * @constant
+             */
+            scope: "same_api_key";
+        };
         /** CursorPage[ContentSummary] */
         CursorPage_ContentSummary_: {
             /**
@@ -4341,7 +4397,7 @@ export interface components {
             /** Gpus */
             gpus: components["schemas"]["GpuInventory"][];
             /** Features */
-            features?: ("audio-output-v1" | "remote-http-v1" | "model3d-output-v1")[];
+            features?: ("audio-output-v1" | "remote-http-v1" | "model3d-output-v1" | "workflow-inputs-v1")[];
         };
         /** InventoryView */
         InventoryView: {
@@ -5253,9 +5309,9 @@ export interface components {
             /**
              * Schema Version
              * @default 1.0
-             * @constant
+             * @enum {string}
              */
-            schema_version: "1.0";
+            schema_version: "1.0" | "1.1";
             /** Display Name */
             display_name: string;
             /** Description */
@@ -5291,6 +5347,11 @@ export interface components {
             /** Parameter Details */
             parameter_details: components["schemas"]["ParameterUsage"][];
             references: components["schemas"]["ReferenceUsage"];
+            /** Input Slots */
+            input_slots?: components["schemas"]["PublicInputSlot"][];
+            /** Text Slots */
+            text_slots?: components["schemas"]["TextSlot"][];
+            context?: components["schemas"]["ContextUsage"] | null;
             /** Presets */
             presets: {
                 [key: string]: string | number | boolean;
@@ -5727,6 +5788,26 @@ export interface components {
             /** Tenant Enabled */
             tenant_enabled: boolean;
             tenant_limits: components["schemas"]["ResourceLimits"];
+        };
+        /** PublicInputSlot */
+        PublicInputSlot: {
+            /** Name */
+            name: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "image" | "video" | "audio" | "model";
+            /** Label */
+            label: string;
+            /** Description */
+            description: string;
+            /** Required */
+            required: boolean;
+            /** Max Bytes */
+            max_bytes: number;
+            /** Mime Types */
+            mime_types: string[];
         };
         /** PublicOutput */
         PublicOutput: {
@@ -6456,6 +6537,19 @@ export interface components {
             /** Observed At */
             observed_at: number;
         };
+        /** TextSlot */
+        TextSlot: {
+            /** Name */
+            name: string;
+            /** Label */
+            label: string;
+            /** Description */
+            description: string;
+            /** Required */
+            required: boolean;
+            /** Max Length */
+            max_length: number;
+        };
         /** UpdateImportTarget */
         UpdateImportTarget: {
             /**
@@ -6526,6 +6620,7 @@ export interface components {
             expected_count: 1;
             /** Max Bytes */
             max_bytes: number;
+            audio_policy?: components["schemas"]["VideoAudioPolicy"] | null;
         };
         /** UserView */
         UserView: {
@@ -6580,6 +6675,18 @@ export interface components {
             /** Channel Id */
             channel_id: string;
             request: components["schemas"]["JobCreate"];
+        };
+        /** VideoAudioPolicy */
+        VideoAudioPolicy: {
+            /**
+             * Mode
+             * @enum {string}
+             */
+            mode: "generated" | "source_video" | "reference_audio" | "silent";
+            /** Source Slot */
+            source_slot?: string | null;
+            /** Description */
+            description: string;
         };
         /** WaitEstimate */
         WaitEstimate: {
@@ -12311,6 +12418,80 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    worker_context_internal_v1_attempts__identifier__context_get: {
+        parameters: {
+            query: {
+                boot_id: string;
+                fencing_token: number;
+            };
+            header?: {
+                "X-Worker-Node-Id"?: string | null;
+            };
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_context_internal_v1_attempts__identifier__context_put: {
+        parameters: {
+            query: {
+                boot_id: string;
+                fencing_token: number;
+            };
+            header?: {
+                "X-Worker-Node-Id"?: string | null;
+            };
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
             /** @description Validation Error */
