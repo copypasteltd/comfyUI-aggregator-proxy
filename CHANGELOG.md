@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 132 · Dual-GPU workflow inventory
+
+- 只读核对 3080 的 100 份及 4090 的 297 份实际工作流，另识别 2 份 JSON 报告；330 份通过节点/模型选项/必填输入/连接的静态检查，不能作为新生成或上线验收。
+- Document eight published aliases, image/audio candidates, 11 distinct 3D workflows, H3 modes and all 22 community variants. Separate missing exact weights, stale widget mappings, invalid links and platform input gaps; report actual native-output dimensions instead of 2K/4K filenames.
+- 核对云端实际运行 137.1 的绑定约束；既有设备成功记录与当前检查分开，单图 3D、视频/音频/网格输入、多视图和上下文资源的边界明确列出。本轮没有更改服务、Skill 或发布目录，临时浏览器已关闭。
+- Update bilingual entry points and preserve private workflow/media sources outside the public repository. Full file-level listing remains in the local documentation private directory; sanitized evidence is linked from [132](docs/132-双GPU工作流现状与API封装候选.md).
+
 ## 2026-11-02 · 131 · Single-file Skill 1.2.0
 
 - 新增自包含 `skill.md`，完整嵌入说明、API 参考和 Python 标准库客户端；同时保留原 ZIP 分发。两种形式由同一来源编译，清单和 SHA-256 可核对。
