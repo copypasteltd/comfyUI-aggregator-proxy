@@ -168,4 +168,4 @@ def model_usage(alias: str, task_type: str, manifest: dict[str, Any], defaults: 
         "presets": presets, "request_schema": schema, "example_request": example,
         "output": {"media_types": manifest["output"]["mime_types"], "expected_count": manifest["output"]["expected_count"], "max_bytes": manifest["output"]["max_bytes"], "audio_policy": manifest["output"].get("audio_policy")},
         "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。",
-    }).model_dump()
+    }).model_dump(exclude_none=True)

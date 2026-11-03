@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://generation.local/contracts/admin-device-routing.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "policy": {
+      "default": "first_ready",
+      "enum": [
+        "first_ready",
+        "balanced_ready"
+      ],
+      "title": "Policy",
+      "type": "string"
+    },
+    "weights": {
+      "additionalProperties": {
+        "maximum": 1000,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "maxProperties": 100,
+      "title": "Weights",
+      "type": "object"
+    }
+  },
+  "title": "DeviceRouting",
+  "type": "object"
+}

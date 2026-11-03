@@ -1,0 +1,45 @@
+{
+  "synthetic_data": true,
+  "authentication_omitted": true,
+  "responses": [
+    {
+      "route": "/admin/api/v1/public-models/{id}/usage",
+      "synthetic_data": true,
+      "request_example": {
+        "model": "demo-multimodal-context",
+        "task_type": "references_to_video",
+        "input": {
+          "prompt": "Synthetic documentation prompt",
+          "media": [
+            {
+              "slot": "first_frame",
+              "asset_id": "asset_REPLACE_WITH_UPLOADED_FIRST_FRAME"
+            },
+            {
+              "slot": "source_video",
+              "asset_id": "asset_REPLACE_WITH_UPLOADED_SOURCE_VIDEO"
+            },
+            {
+              "slot": "voice",
+              "asset_id": "asset_REPLACE_WITH_UPLOADED_VOICE"
+            },
+            {
+              "slot": "coarse_mesh",
+              "asset_id": "asset_REPLACE_WITH_UPLOADED_COARSE_MESH"
+            }
+          ],
+          "texts": {
+            "script": "Synthetic documentation prompt"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "size": "320x240",
+          "quality": "standard",
+          "seconds": 0.5,
+          "seed": 42
+        }
+      }
+    }
+  ]
+}

@@ -94,6 +94,7 @@ class MappingChannel(StrictDTO):
     enabled: bool
     draining: bool
     revision: int = Field(ge=1)
+    gpu_id: str = Field(pattern=r"^gpu_[a-f0-9]{32}$")
 
 
 class MappingDefaults(StrictDTO):

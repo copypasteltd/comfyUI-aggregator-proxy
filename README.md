@@ -4,6 +4,8 @@
 
 Workflow 1.3 为每个模型公开命名图片、视频、参考声音、GLB 和文本槽位。调用方先查询 `/v1/models/{alias}` 的 `usage`，向 `/v1/assets` 上传素材时指定 `kind`，再把返回的 `asset_id` 填入 `input.media`，把脚本、歌词或转写填入 `input.texts`。声音策略、固定规格和续拍要求均随模型声明。原生续拍通过 `input.context.job_id` 引用同一 Key 的成功父任务；通过 Sub2API 时使用其返回的 `rc_…` 任务编号。旧模型和旧输入格式继续保留。
 
+[135 · 兼容升级](docs/135-全量接入与线上版本兼容升级.md) 保留线上 137.1 已有的加权设备池、任务恢复查询、发布摘要及 3D 声明；新迁移从线上数据库版本向前升级。独立 Studio 的部署仍由其原安装管理。新增模型须实际运行批准后才对业务 Key 可见。
+
 [新增管理界面截图、录屏与 GIF](docs/media/typed-inputs-133/README.md) 使用明确标记的合成数据，展示素材槽、文本槽、声音策略、续拍与最多 16 张参考图的 Key 设置。局部验证：725 项受影响 Python 回归、1773 项契约/调用说明补充回归、555 项 Sub2API 测试通过；另有 1 项既有测试跳过。部署及真实生成状态见专题发布记录。
 
 ![Workflow 1.3 管理界面演示，合成数据](docs/media/typed-inputs-133/workflow-inputs-admin.gif)

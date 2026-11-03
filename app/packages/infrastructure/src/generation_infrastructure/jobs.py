@@ -29,6 +29,7 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, defer, sessionmaker
 
 from generation_infrastructure.cursors import CursorCodec
+from generation_infrastructure.device_pools import freeze_pool
 from generation_infrastructure.gateway_catalogs import (
     check_admission_model,
     lock_catalog_for_admission,
@@ -140,7 +141,7 @@ class JobRepository:
             require_active_workflow(session, release.workflow_id)
             check_input_contract(release.manifest, request)
 
-    def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str, *, validation_channel: UUID | None = None, pending_gateway: PendingGateway | None = None, _session: Session | None = None, retry_of: UUID | None = None, audit_actor: str | None = None, validation_model: tuple[UUID, UUID, int] | None = None, validation_revision: int | None = None) -> dict[str, Any]:
+    def create(self, identity: BusinessIdentity, request: dict[str, Any], token: str, request_id: str, *, expected_release_digest: str | None = None, validation_channel: UUID | None = None, pending_gateway: PendingGateway | None = None, _session: Session | None = None, retry_of: UUID | None = None, audit_actor: str | None = None, validation_model: tuple[UUID, UUID, int] | None = None, validation_revision: int | None = None) -> dict[str, Any]:
         now = utcnow()
         period = now.astimezone(ZoneInfo("Asia/Taipei")).date().isoformat()
         with self.sessions.begin() if _session is None else nullcontext(_session) as session:
@@ -149,7 +150,7 @@ class JobRepository:
                 if fence.closed_at is not None:
                     raise DomainError("gateway_request_closed", "网关请求已经持久关闭", 409)
             asset_hashes = self._asset_hashes(session, identity, request, require_ready=False)
-            digest = request_fingerprint(request, asset_hashes)
+            digest = request_fingerprint(request, asset_hashes, expected_release_digest=expected_release_digest)
             token_digest = hashlib.sha256(token.encode()).hexdigest()
             session.execute(insert(Idempotency).values(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, operation="create_job", token_digest=token_digest, request_fingerprint=digest).on_conflict_do_nothing())
             idem = session.execute(select(Idempotency).where(Idempotency.key_id == identity.key_id, Idempotency.operation == "create_job", Idempotency.token_digest == token_digest).with_for_update()).scalar_one()
@@ -195,8 +196,7 @@ class JobRepository:
             model_query = select(PublicModel).where(PublicModel.tenant_id == identity.tenant_id, PublicModel.project_id == identity.project_id, PublicModel.alias == request["model"])
             if validation_channel is None:
                 model_query = model_query.where(PublicModel.published.is_(True))
-            if validation_channel is not None or pending_gateway is not None:
-                model_query = model_query.with_for_update(read=True)
+            model_query = model_query.with_for_update(read=True)
             model = session.execute(model_query).scalar_one_or_none()
             if model is None or model.task_type != request["task_type"]:
                 raise DomainError("model_not_available", "模型未发布或不支持该任务", 422)
@@ -205,6 +205,8 @@ class JobRepository:
             release = session.get(WorkflowRelease, model.release_id)
             if not release or not release.validated or not selected(policy["workflow_releases"], public_id("wfr", release.id)):
                 raise DomainError("workflow_denied", "工作流不可用或未授权", 403)
+            if expected_release_digest is not None and release.digest != expected_release_digest:
+                raise DomainError("model_release_changed", "模型发布已变化，请刷新模型说明并明确选择后再创建任务", 409)
             if gateway_configuration is not None and pending_gateway is not None:
                 check_admission_model(session, gateway_configuration, model, release, pending_gateway.price_version)
             require_active_workflow(session, release.workflow_id)
@@ -253,7 +255,7 @@ class JobRepository:
                 execution["audio_spec"] = audio_specification(release.manifest, parameters)
             if context is not None:
                 execution["context"] = context
-            job = Job(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, model_alias=model.alias, task_type=model.task_type, state="admission_pending" if pending_gateway else "queued", release_id=release.id, request=request, execution=execution, request_fingerprint=digest, execution_fingerprint=fingerprint(execution), eligible_channels=eligible, deadline=now + timedelta(seconds=3600 if video or audio or model3d else 900), accepted_period=period)
+            job = Job(tenant_id=identity.tenant_id, project_id=identity.project_id, key_id=identity.key_id, model_alias=model.alias, task_type=model.task_type, state="admission_pending" if pending_gateway else "queued", release_id=release.id, request=request, execution=execution, request_fingerprint=digest, execution_fingerprint=fingerprint(execution), eligible_channels=eligible, device_pool_id=freeze_pool(session, model) if validation_channel is None else None, deadline=now + timedelta(seconds=3600 if video or audio or model3d else 900), accepted_period=period)
             job.is_validation = validation_channel is not None
             job.retry_of = retry_of
             job.accepted_at = None if pending_gateway else now
@@ -295,6 +297,31 @@ class JobRepository:
                     raise DomainError("input_type_mismatch", "素材类型或字节数不符合工作流输入槽位", 422)
             result[identifier] = asset[1].sha256
         return result
+
+    def lookup(self, identity: BusinessIdentity, request: dict[str, Any], token: str, *, expected_release_digest: str | None = None) -> dict[str, Any]:
+        # No admission, locks, current publication lookup or live input asset lookup.
+        with self.sessions() as session:
+            session.execute(text("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY"))
+            idem = session.scalar(select(Idempotency).where(
+                Idempotency.tenant_id == identity.tenant_id,
+                Idempotency.project_id == identity.project_id,
+                Idempotency.key_id == identity.key_id,
+                Idempotency.operation == "create_job",
+                Idempotency.token_digest == hashlib.sha256(token.encode()).hexdigest(),
+            ))
+            if idem is None or idem.resource_id is None:
+                return {"object": "generation.submission_lookup", "outcome": "not_observed", "job": None}
+            job = owned_job(session, identity, idem.resource_id)
+            hashes = job.execution.get("asset_hashes") if isinstance(job.execution, dict) else None
+            if not isinstance(hashes, dict) or any(not isinstance(key, str) or not isinstance(value, str) or len(value) != 64 or any(c not in "0123456789abcdef" for c in value) for key, value in hashes.items()):
+                raise DomainError("submission_unverifiable", "原提交缺少可核验的冻结信息，原记录已保留", 409)
+            digest = request_fingerprint(request, hashes, expected_release_digest=expected_release_digest)
+            if fingerprint(request) != fingerprint(job.request) or digest != idem.request_fingerprint or digest != job.request_fingerprint:
+                raise DomainError("submission_mismatch", "原提交信息不匹配，原记录已保留", 409)
+            result = job_projection(job, include_video_specification=True)
+            if "artifacts:read" in identity.policy["scopes"]:
+                result["artifacts"] = [{"id": public_id("content", a.id), "position": a.position} for a in session.scalars(select(Artifact).where(Artifact.job_id == job.id, Artifact.deleted_at.is_(None)).order_by(Artifact.position))]
+            return {"object": "generation.submission_lookup", "outcome": "found", "job": result}
 
     def get(self, identity: BusinessIdentity, job_id: UUID) -> dict[str, Any]:
         with self.sessions() as session:

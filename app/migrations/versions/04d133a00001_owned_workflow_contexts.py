@@ -1,13 +1,13 @@
 """Owned, fenced H3 AV continuation contexts.
 
 Revision ID: 04d133a00001
-Revises: 03d128a00001
+Revises: 04d137a00001
 """
 import sqlalchemy as sa
 from alembic import op
 
 revision = "04d133a00001"
-down_revision = "03d128a00001"
+down_revision = "04d137a00001"
 branch_labels = None
 depends_on = None
 

@@ -4,6 +4,8 @@
 
 Workflow 1.3 publishes named image, video, reference-audio, GLB and text slots. Discover `usage` through `/v1/models/{alias}`, upload assets to `/v1/assets` with `kind`, then submit their IDs in `input.media` and scripts, lyrics or reference transcripts in `input.texts`. Each model declares its audio policy, frozen presets and continuation requirements. Native continuation references a successful same-Key parent through `input.context.job_id`; Sub2API callers use their public `rc_…` task ID. Existing models and input formats remain supported.
 
+[135 · Compatible upgrade](docs/135-全量接入与线上版本兼容升级.md) preserves the weighted device pools, submission recovery, release-digest checks and 3D declarations already deployed in 137.1. The new migration upgrades forward from that database revision. The separate Studio installation keeps its own deployment. New aliases become visible to business Keys only after actual runtime approval.
+
 [Admin screenshots, recording and GIF](docs/media/typed-inputs-133/README.md) use clearly identified synthetic fixtures. They show media/text slots, audio policy, continuation and Key limits up to 16 reference images. Scoped verification passed 725 affected Python cases, 1773 contract/usage follow-up cases and 555 Sub2API tests; one existing test remains skipped. Deployment and actual generation status are recorded separately in document 133.
 
 ![Workflow 1.3 Admin demonstration, synthetic data](docs/media/typed-inputs-133/workflow-inputs-admin.gif)

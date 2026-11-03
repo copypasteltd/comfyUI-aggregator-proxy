@@ -1493,6 +1493,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/admin/api/v1/public-models/{identifier}/device-pool": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Model Device Pool */
+        get: operations["model_device_pool_admin_api_v1_public_models__identifier__device_pool_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/admin/api/v1/public-models/{identifier}/documentation": {
         parameters: {
             query?: never;
@@ -1748,6 +1765,23 @@ export interface paths {
         put?: never;
         /** Job Create */
         post: operations["job_create_v1_jobs_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/jobs/lookup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submission Lookup */
+        post: operations["submission_lookup_v1_jobs_lookup_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4058,6 +4092,48 @@ export interface components {
             /** Next Cursor */
             next_cursor: string | null;
         };
+        /** DevicePoolMemberView */
+        DevicePoolMemberView: {
+            /** Gpu Id */
+            gpu_id: string;
+            /** Weight */
+            weight: number;
+            /** Assigned Count */
+            assigned_count: number;
+            /** Last Sequence */
+            last_sequence: number;
+        };
+        /** DevicePoolView */
+        DevicePoolView: {
+            /** Model Id */
+            model_id: string;
+            /** Model Revision */
+            model_revision: number;
+            /**
+             * Policy
+             * @enum {string}
+             */
+            policy: "first_ready" | "balanced_ready";
+            /** Pool Id */
+            pool_id: string | null;
+            /** Sequence */
+            sequence: number;
+            /** Members */
+            members: components["schemas"]["DevicePoolMemberView"][];
+        };
+        /** DeviceRouting */
+        DeviceRouting: {
+            /**
+             * Policy
+             * @default first_ready
+             * @enum {string}
+             */
+            policy: "first_ready" | "balanced_ready";
+            /** Weights */
+            weights?: {
+                [key: string]: number;
+            };
+        };
         /** DispatchPolicy */
         DispatchPolicy: {
             /**
@@ -4827,6 +4903,52 @@ export interface components {
             /** Password */
             password: string;
         };
+        /** LookupArtifact */
+        LookupArtifact: {
+            /** Id */
+            id: string;
+            /** Position */
+            position: number;
+        };
+        /** LookupJob */
+        LookupJob: {
+            /** Id */
+            id: string;
+            /**
+             * Object
+             * @constant
+             */
+            object: "generation.job";
+            /** Model */
+            model: string;
+            /**
+             * Task Type
+             * @enum {string}
+             */
+            task_type: "text_to_image" | "image_to_image" | "references_to_image" | "text_to_video" | "references_to_video" | "text_to_audio" | "image_to_3d";
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "admission_pending" | "queued" | "leased" | "preparing" | "submitting" | "running" | "collecting" | "uploading" | "verifying" | "reconciling" | "retry_wait" | "cancel_requested" | "succeeded" | "failed" | "cancelled" | "expired";
+            /** Created At */
+            created_at: number;
+            /** Updated Revision */
+            updated_revision: number;
+            /** Error */
+            error?: {
+                [key: string]: string;
+            } | null;
+            /** Completed At */
+            completed_at?: number | null;
+            retry?: components["schemas"]["RetryInfo"] | null;
+            /** Artifacts */
+            artifacts?: components["schemas"]["LookupArtifact"][] | null;
+            /** Size */
+            size?: string | null;
+            /** Seconds */
+            seconds?: string | null;
+        };
         /** ManagedWorkflow */
         ManagedWorkflow: {
             /** Id */
@@ -4878,6 +5000,8 @@ export interface components {
             draining: boolean;
             /** Revision */
             revision: number;
+            /** Gpu Id */
+            gpu_id: string;
         };
         /** MappingDefaults */
         MappingDefaults: {
@@ -5120,6 +5244,7 @@ export interface components {
                 [key: string]: string | number | boolean;
             };
             documentation?: components["schemas"]["ModelDocumentation"];
+            routing?: components["schemas"]["DeviceRouting"];
         };
         /** ModelDocumentation */
         ModelDocumentation: {
@@ -5303,6 +5428,7 @@ export interface components {
             defaults: {
                 [key: string]: string | number | boolean;
             };
+            routing?: components["schemas"]["DeviceRouting"] | null;
         };
         /** ModelUsage */
         ModelUsage: {
@@ -5399,6 +5525,7 @@ export interface components {
             /** Published */
             published: boolean;
             documentation?: components["schemas"]["ModelDocumentation"];
+            routing?: components["schemas"]["DeviceRouting"];
         };
         /** MonitoringConfiguration */
         MonitoringConfiguration: {
@@ -6439,6 +6566,20 @@ export interface components {
             cancelled: number;
             /** Expired */
             expired: number;
+        };
+        /** SubmissionLookup */
+        SubmissionLookup: {
+            /**
+             * Object
+             * @constant
+             */
+            object: "generation.submission_lookup";
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "found" | "not_observed";
+            job: components["schemas"]["LookupJob"] | null;
         };
         /** SuccessfulDuration */
         SuccessfulDuration: {
@@ -11206,6 +11347,37 @@ export interface operations {
             };
         };
     };
+    model_device_pool_admin_api_v1_public_models__identifier__device_pool_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                identifier: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DevicePoolView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     model_documentation_admin_api_v1_public_models__identifier__documentation_patch: {
         parameters: {
             query?: never;
@@ -11844,6 +12016,7 @@ export interface operations {
             query?: never;
             header?: {
                 "idempotency-key"?: string | null;
+                "x-expected-release-digest"?: string | null;
             };
             path?: never;
             cookie?: never;
@@ -11863,6 +12036,42 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    submission_lookup_v1_jobs_lookup_post: {
+        parameters: {
+            query?: never;
+            header: {
+                "idempotency-key": string;
+                "x-expected-release-digest"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubmissionLookup"];
                 };
             };
             /** @description Validation Error */

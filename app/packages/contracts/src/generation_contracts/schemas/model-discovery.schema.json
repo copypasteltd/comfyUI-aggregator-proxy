@@ -267,16 +267,38 @@
                 }
               },
               "else": {
-                "properties": {
-                  "output": {
-                    "properties": {
-                      "media_types": {
-                        "items": {
-                          "enum": [
-                            "image/png",
-                            "image/jpeg",
-                            "image/webp"
-                          ]
+                "if": {
+                  "properties": {
+                    "task_type": {
+                      "const": "image_to_3d"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "output": {
+                      "properties": {
+                        "media_types": {
+                          "items": {
+                            "const": "model/gltf-binary"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "else": {
+                  "properties": {
+                    "output": {
+                      "properties": {
+                        "media_types": {
+                          "items": {
+                            "enum": [
+                              "image/png",
+                              "image/jpeg",
+                              "image/webp"
+                            ]
+                          }
                         }
                       }
                     }
@@ -290,7 +312,10 @@
               "properties": {
                 "task_type": {
                   "not": {
-                    "const": "text_to_audio"
+                    "enum": [
+                      "text_to_audio",
+                      "image_to_3d"
+                    ]
                   }
                 }
               }
@@ -322,6 +347,61 @@
                       ]
                     }
                   }
+                }
+              }
+            }
+          },
+          {
+            "then": {
+              "properties": {
+                "presets": {
+                  "items": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "size"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "seconds"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "audio_format"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "sample_rate"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "channels"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                "supported_parameters": {
+                  "items": {
+                    "enum": [
+                      "quality",
+                      "seed",
+                      "n"
+                    ]
+                  }
+                }
+              }
+            },
+            "if": {
+              "properties": {
+                "task_type": {
+                  "const": "image_to_3d"
                 }
               }
             }

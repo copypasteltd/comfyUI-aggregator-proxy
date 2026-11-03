@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://generation.local/contracts/admin-device-pool.schema.json",
+  "$defs": {
+    "DevicePoolMemberView": {
+      "additionalProperties": false,
+      "properties": {
+        "gpu_id": {
+          "title": "Gpu Id",
+          "type": "string"
+        },
+        "weight": {
+          "title": "Weight",
+          "type": "integer"
+        },
+        "assigned_count": {
+          "title": "Assigned Count",
+          "type": "integer"
+        },
+        "last_sequence": {
+          "title": "Last Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "gpu_id",
+        "weight",
+        "assigned_count",
+        "last_sequence"
+      ],
+      "title": "DevicePoolMemberView",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "model_id": {
+      "title": "Model Id",
+      "type": "string"
+    },
+    "model_revision": {
+      "title": "Model Revision",
+      "type": "integer"
+    },
+    "policy": {
+      "enum": [
+        "first_ready",
+        "balanced_ready"
+      ],
+      "title": "Policy",
+      "type": "string"
+    },
+    "pool_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Pool Id"
+    },
+    "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "members": {
+      "items": {
+        "$ref": "#/$defs/DevicePoolMemberView"
+      },
+      "title": "Members",
+      "type": "array"
+    }
+  },
+  "required": [
+    "model_id",
+    "model_revision",
+    "policy",
+    "pool_id",
+    "sequence",
+    "members"
+  ],
+  "title": "DevicePoolView",
+  "type": "object"
+}

@@ -57,7 +57,7 @@ class ModelMappingReads(AdminBase):
                 statement = statement.where(Workflow.id.in_([parse_id("wf", value) for value in query.ids]))
             return statement.order_by(Workflow.created_at.desc(), Workflow.id), {}
         if query.kind == "channel":
-            statement = select(Channel.id, Channel.name, Channel.enabled, Channel.draining, Channel.revision).where(Channel.project_id == project, Channel.deleted_at.is_(None))
+            statement = select(Channel.id, Channel.name, Channel.enabled, Channel.draining, Channel.revision, Channel.gpu_id).where(Channel.project_id == project, Channel.deleted_at.is_(None))
             if query.model_id:
                 model = session.execute(select(PublicModel.channel_ids).where(PublicModel.id == parse_id("mdl", query.model_id), PublicModel.project_id == project)).one_or_none()
                 if model is None:
@@ -101,6 +101,8 @@ class ModelMappingReads(AdminBase):
             row["id"] = public_id({"workflow": "wf", "release": "wfr", "channel": "ch"}[query.kind], row["id"])
             if query.kind == "release":
                 row["workflow_id"] = public_id("wf", row["workflow_id"])
+            if query.kind == "channel":
+                row["gpu_id"] = public_id("gpu", row["gpu_id"])
             return {"kind": query.kind, **row}
         defaults = {"n": 1, **{name: row[name] for name in ("quality", "size", "seconds") if row[name] is not None}}
         result = {"kind": "preset", "id": "preset_" + str(row["ordinal"] - 1), "release_id": query.release_id, "task_type": context["task_type"], "defaults": defaults, "usable": row["matches"] == 1}

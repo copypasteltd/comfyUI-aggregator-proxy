@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 135 · Preserve deployed backend behavior / 合并线上兼容行为
+
+- Port the deployed `c108dcce` backend/Admin delta: weighted device pools, submission lookup, expected release digest, GLB discovery constraints and native backup configuration.
+- Chain the unreleased workflow-context migration after the deployed device-pool migration; keep one migration head and preserve the independent Studio installation.
+- Filter typed-input device pools by Worker capability and normalize optional usage fields across list, detail and capabilities. Compatibility verification and deployment status are recorded in document 135.
+
 ## 2026-11-04 · 133 · Full-catalog preparation / 全量工作流接入准备
 
 - Add named image/video/audio/GLB and literal text inputs, bounded uploads, owned Worker transfers and up to 16 image references per explicitly configured Key.

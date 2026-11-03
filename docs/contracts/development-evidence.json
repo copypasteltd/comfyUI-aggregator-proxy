@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-04/development-trace-baselines-133-final.json",
-    "sha256": "0608cd707885a0470c8da7042562fd3282a42ff95ff15c860305b09a4f53b703"
+    "path": "docs/evidence/2026-11-04/development-trace-baselines-135.json",
+    "sha256": "bf2d7ec41c124848fd14b89cc0c81219667eacfd42b7aa66a22f569bf7dcbf30"
   },
   "requirements": [
     {
@@ -15,27 +15,27 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -43,7 +43,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/unit/test_workflow_package.py",
@@ -118,7 +118,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "18",
@@ -135,27 +136,27 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -236,7 +237,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "19",
@@ -253,27 +255,27 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -360,7 +362,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "20",
@@ -377,31 +380,31 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/media.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -484,7 +487,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "21",
@@ -501,27 +505,27 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -608,7 +612,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "22",
@@ -625,31 +630,31 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/audio_media.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -743,7 +748,9 @@
         "meshui128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "23",
@@ -761,55 +768,55 @@
       "implementation": [
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/model3d_media.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/model_usage.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/components/ResourceLimitsEditor.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/admin_web/src/components/WorkflowManifestForm.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/packages/application/src/generation_application/ports.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -956,7 +963,9 @@
         "single131",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "20",
@@ -971,11 +980,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -983,14 +992,15 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         }
       ],
       "evidence": [
         "ci86",
         "cors116",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "51",
@@ -1004,23 +1014,23 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/discovery.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/model_usage.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1062,7 +1072,8 @@
         "skill130",
         "single131",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "30",
@@ -1077,15 +1088,15 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/database_diagnostics.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1123,7 +1134,8 @@
         "dependency101",
         "go80",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "30",
@@ -1137,15 +1149,15 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1153,7 +1165,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_images_async_and_native_jobs_share_idempotency",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_admin_controls.py",
@@ -1178,7 +1190,8 @@
         "media124",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "29",
@@ -1193,43 +1206,43 @@
       "implementation": [
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/public_http.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/catalog_consumer.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/types.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/store.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/migrations/258_render_control_video_specification.sql",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/domain/src/generation_domain/videos.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1335,7 +1348,8 @@
         "mesh128",
         "meshgateway128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "28",
@@ -1353,15 +1367,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility_inputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1375,7 +1389,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_request_limits_and_validation_never_echo_secrets",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         }
       ],
       "evidence": [
@@ -1385,7 +1399,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "30",
@@ -1400,11 +1415,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1412,7 +1427,7 @@
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_concurrent_idempotency_accepts_and_reserves_once",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_access_events.py",
@@ -1433,7 +1448,8 @@
         "dependency101",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "29",
@@ -1448,11 +1464,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1460,7 +1476,7 @@
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_concurrent_idempotency_accepts_and_reserves_once",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         }
       ],
       "evidence": [
@@ -1469,7 +1485,8 @@
         "media124",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "29",
@@ -1483,11 +1500,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/worker_capacity.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1495,7 +1512,7 @@
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_only_matching_approved_profile_changes_the_dispatch_estimate",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_worker_capacity.py",
@@ -1508,7 +1525,8 @@
         "ci86",
         "load58",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "13",
@@ -1524,31 +1542,31 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/runtime_basis.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/contracts/src/generation_contracts/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1556,13 +1574,13 @@
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_persistent_cost_share_across_recreated_repositories",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_same_tenant_old_low_priority_overtakes_new_high_priority",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_queue_wait_estimates.py",
@@ -1628,7 +1646,9 @@
         "mesh128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "06",
@@ -1644,23 +1664,23 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1693,7 +1713,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "25",
@@ -1709,11 +1730,11 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1734,7 +1755,8 @@
         "ci86",
         "native86",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "54",
@@ -1750,11 +1772,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/retries.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/retry_routes.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1783,7 +1805,8 @@
         "wait94",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "54",
@@ -1798,11 +1821,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/command_recovery.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1821,7 +1844,8 @@
       "evidence": [
         "ci86",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "17",
@@ -1836,11 +1860,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1848,7 +1872,7 @@
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_expiry_does_not_free_gpu_or_allow_old_boot",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_recovery.py",
@@ -1868,7 +1892,8 @@
         "wait94",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "54",
@@ -1883,11 +1908,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -1928,7 +1953,8 @@
         "retention119",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "43",
@@ -1944,23 +1970,23 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2010,7 +2036,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "55",
@@ -2027,19 +2054,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_nodes.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/configuration.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/WorkerNodes.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/api_environment.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2064,7 +2091,9 @@
         "http122",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "13",
@@ -2081,19 +2110,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/validation_jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/commands.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/commands.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2116,7 +2145,8 @@
         "http122",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "17",
@@ -2132,15 +2162,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/worker_capacity.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/observations.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2157,7 +2187,8 @@
         "wait94",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "14",
@@ -2173,11 +2204,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2185,7 +2216,7 @@
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_two_channels_share_one_gpu_and_old_upload_keeps_result_lease",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         }
       ],
       "evidence": [
@@ -2193,7 +2224,8 @@
         "wait94",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "15",
@@ -2209,15 +2241,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_nodes.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/WorkerNodes.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -2238,7 +2270,9 @@
         "visual87",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "14",
@@ -2254,15 +2288,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/spec_isolation.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/maintenance.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/SpecIsolations.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -2283,7 +2317,9 @@
         "visual87",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "27",
@@ -2298,15 +2334,15 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/main.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/process_lock.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2328,7 +2364,8 @@
         "worker118",
         "http122",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "14",
@@ -2344,11 +2381,11 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/command_recovery.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2361,7 +2398,8 @@
       "evidence": [
         "ci86",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "15",
@@ -2376,19 +2414,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/configuration.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/memory_reclamation.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2410,7 +2448,9 @@
         "mesh128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "15",
@@ -2425,11 +2465,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/uploads.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2470,7 +2510,8 @@
         "mesh128",
         "mesh129downloads",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "29",
@@ -2485,11 +2526,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2497,7 +2538,7 @@
           "path": "app/tests/integration/test_queue.py",
           "symbol": "test_expiry_does_not_free_gpu_or_allow_old_boot",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_outputs.py",
@@ -2512,7 +2553,8 @@
         "retention119",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "37",
@@ -2527,15 +2569,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/media.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/audio_media.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2558,7 +2600,8 @@
         "retention119",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "21",
@@ -2575,11 +2618,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2632,7 +2675,8 @@
         "retention119",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "37",
@@ -2647,15 +2691,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2673,7 +2717,8 @@
         "mesh128",
         "mesh129downloads",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "37",
@@ -2689,15 +2734,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/collections.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content_routes.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2711,7 +2756,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_admin_content_metadata_range_delete_and_observer_access",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         }
       ],
       "evidence": [
@@ -2721,7 +2766,8 @@
         "mesh128",
         "mesh129downloads",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "32",
@@ -2737,31 +2783,31 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/http_output.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2856,7 +2902,8 @@
         "mesh128",
         "mesh129downloads",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "43",
@@ -2870,27 +2917,27 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/garbage_collection.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content_management.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/capacity.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/output_retention.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -2976,7 +3023,8 @@
         "mesh128",
         "mesh129downloads",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "40",
@@ -2992,11 +3040,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content_management.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/garbage_collection.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3014,7 +3062,8 @@
       "evidence": [
         "ci86",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "40",
@@ -3029,15 +3078,15 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content_routes.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3062,7 +3111,8 @@
         "mesh128",
         "mesh129downloads",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "30",
@@ -3078,15 +3128,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/pricing.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/catalog_store.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3103,7 +3153,8 @@
         "video92",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "06",
@@ -3118,19 +3169,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/transactions.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/store.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/transitions.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3160,7 +3211,8 @@
         "mesh128",
         "meshgateway128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "29",
@@ -3176,15 +3228,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/coordinator.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/effect_consumer.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3216,7 +3268,8 @@
         "retention119",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "28",
@@ -3232,15 +3285,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/audio_media.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/pricing.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/subscriptions.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3261,7 +3314,8 @@
         "ci86",
         "go80",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "25",
@@ -3276,15 +3330,15 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/compatibility.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/effects.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3300,7 +3354,8 @@
         "go80",
         "video92",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "30",
@@ -3314,15 +3369,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway_intent.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/store.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/subscriptions.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3343,7 +3398,8 @@
         "ci86",
         "go80",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "28",
@@ -3358,15 +3414,15 @@
       "implementation": [
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/runtime.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/recovery.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/effect_consumer.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -3386,7 +3442,8 @@
       "evidence": [
         "ci86",
         "go80",
-        "native86"
+        "native86",
+        "compat135"
       ],
       "remaining_backlog": [
         "28",
@@ -3401,15 +3458,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Users.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3417,7 +3474,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_admin_sessions.py",
@@ -3442,7 +3499,9 @@
         "media124",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "50",
@@ -3457,15 +3516,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_nodes.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3487,7 +3546,9 @@
         "media124",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "14",
@@ -3502,15 +3563,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_channels.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/commands.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3537,7 +3598,9 @@
         "mesh128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "17",
@@ -3552,19 +3615,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_workflows.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/workflow_lifecycle.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Workflows.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/admin_web/src/components/WorkflowManifestForm.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3597,7 +3660,9 @@
         "meshui128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "18",
@@ -3618,19 +3683,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_workflow_imports.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/workflow_history.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Workflows.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/admin_web/src/components/WorkflowImportDialog.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3662,7 +3727,9 @@
         "meshui128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "24",
@@ -3677,26 +3744,27 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_model_artifacts.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway_catalogs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Models.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/admin_web/src/components/GatewayCatalogDrawer.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
         {
           "path": "app/tests/integration/test_model_catalog.py",
           "symbol": "test_all_six_media_types_offer_safe_frozen_presets_that_existing_writes_accept",
-          "language": "python"
+          "language": "python",
+          "baseline": "compat135"
         }
       ],
       "evidence": [
@@ -3710,7 +3778,9 @@
         "meshui128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "24",
@@ -3726,31 +3796,31 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/operational.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/queue_queries.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Overview.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/admin_web/src/components/QueueFilters.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3789,7 +3859,9 @@
         "mesh128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "48",
@@ -3804,15 +3876,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/queue_queries.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/observations.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Channels.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3830,7 +3902,9 @@
         "media124",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "15",
@@ -3846,27 +3920,27 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Jobs.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/admin_web/src/components/JobCancellationDialog.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3904,7 +3978,9 @@
         "mesh128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "49",
@@ -3919,23 +3995,23 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/operational.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Overview.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/packages/domain/src/generation_domain/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/wait_estimates.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/components/JobWaitEstimate.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -3974,7 +4050,9 @@
         "mesh128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "09",
@@ -3990,15 +4068,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_audit.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_base.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Audit.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4028,7 +4106,9 @@
         "browser97",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "45",
@@ -4044,15 +4124,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_base.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/operational.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Records.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4078,7 +4158,9 @@
         "mesh128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "50",
@@ -4094,11 +4176,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_keys.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Keys.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4106,7 +4188,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         }
       ],
       "evidence": [
@@ -4117,7 +4199,9 @@
         "meshui128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "50",
@@ -4131,11 +4215,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -4143,7 +4227,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_cookie_csrf_and_identity_realms",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
@@ -4157,7 +4241,8 @@
         "cors116",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "51",
@@ -4171,19 +4256,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/key_generation_options.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/components/KeyGenerationSelect.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4203,7 +4288,9 @@
         "meshui128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "29",
@@ -4218,19 +4305,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/key_policy_options.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/components/PolicyDirectorySelect.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4257,7 +4344,9 @@
         "mesh129downloads",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "51",
@@ -4272,15 +4361,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_scopes.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -4303,7 +4392,8 @@
         "cors116",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "34",
@@ -4318,11 +4408,11 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/access.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -4330,7 +4420,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_key_policy_options.py",
@@ -4343,7 +4433,8 @@
         "ci86",
         "cors116",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "51",
@@ -4359,15 +4450,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_keys.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Keys.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4375,7 +4466,7 @@
           "path": "app/tests/integration/test_http_auth.py",
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         },
         {
           "path": "app/tests/integration/test_access_events.py",
@@ -4393,7 +4484,9 @@
         "meshui128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "50",
@@ -4408,19 +4501,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content_management.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/access_events.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         },
         {
           "path": "app/apps/admin_web/src/pages/KeyAccess.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4443,7 +4536,9 @@
         "meshui128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "40",
@@ -4459,19 +4554,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/content.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/content.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/control_api/src/control_api/compatibility.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4500,7 +4595,9 @@
         "mesh129downloads",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "30",
@@ -4518,19 +4615,19 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/gateway.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/public_auth.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/integrations/sub2api/overlay/backend/internal/rendercontrol/store.go",
-          "baseline": "go80"
+          "baseline": "compat135"
         },
         {
           "path": "app/apps/admin_web/src/pages/Gateways.vue",
-          "baseline": "contract133"
+          "baseline": "browser135"
         }
       ],
       "tests": [
@@ -4557,7 +4654,9 @@
         "meshgateway128",
         "typed133",
         "browser133",
-        "contract133"
+        "contract133",
+        "compat135",
+        "browser135"
       ],
       "remaining_backlog": [
         "28",
@@ -4573,15 +4672,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/dispatch.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_jobs.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -4595,7 +4694,7 @@
           "path": "app/tests/integration/test_dispatch_transactions.py",
           "symbol": "test_key_disable_and_scope_edits_do_not_cancel_accepted_routing",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "compat135"
         }
       ],
       "evidence": [
@@ -4603,7 +4702,8 @@
         "video92",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "49",
@@ -4618,15 +4718,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_keys.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/auth.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "contract133"
+          "baseline": "compat135"
         }
       ],
       "tests": [
@@ -4649,7 +4749,8 @@
         "media124",
         "mesh128",
         "typed133",
-        "contract133"
+        "contract133",
+        "compat135"
       ],
       "remaining_backlog": [
         "50",
