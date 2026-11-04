@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 142 · Image variants and actual audio / 图像型号与真实音频
+
+- Identify 13 image variants from their locked generative checkpoint, including NoctQ v4, Lustify v10 Krea2, WAI Illustrious SDXL v17, Qwen Image 2.1 and Dasiwa H3 Hybrid v2. Disclose resizing/cropping only when every final output is actually connected to the matching delivery scale.
+- Update actual Admin model/Workflow names with revision checks, preserving aliases, frozen graphs, defaults and publication state. All 213 offline examples, all 213 actual usage documents and 47 scoped regressions pass.
+- Record 15 new models with independent business generation and verified downloads: 12 image and three audio models. Publish the actual 30-second YuE2 ABC FLAC, its synthetic request and delivery proof. Strip embedded workflow metadata and verify identical decoded audio, retaining separate file hashes.
+- Keep device-administration, auxiliary-file permission and single-speaker test-request failures separately visible; these do not become source-workflow exclusions or generation approval.
+
 ## 2026-11-04 · 141 · Model families and export notes / 模型家族与导出备注
 
 - Name Hunyuan3D, MOSS-TTSD v1.0 and FireRedTTS2 explicitly. Describe geometry, PaintMesh vertex colors, baked UV/PBR and UV texture variants using only the path connected to the final export. State missing-PBR limitations.

@@ -189,6 +189,26 @@ def public_documentation(item: dict, manifest: dict) -> dict:
                 family, tag = marker, marker.lower()
                 break
     kind = item["output_kind"]
+    if kind == "image":
+        checkpoints = [
+            model["path"].replace("\\", "/").rsplit("/", 1)[-1].lower()
+            for model in manifest.get("dependency_lock", {}).get("models", [])
+            if any(
+                "/" + category + "/" in "/" + model["path"].replace("\\", "/").lower()
+                for category in ("checkpoints", "diffusion_models", "unet")
+            )
+        ]
+        if len(checkpoints) == 1:
+            for prefix, name, slug in (
+                ("noctq_v4", "NoctQ v4", "noctq"),
+                ("lustifynsfwcheckpoint_v10krea2", "Lustify v10 Krea2", "lustify"),
+                ("waiillustrioussdxl_v170", "WAI Illustrious SDXL v17", "illustrious"),
+                ("qwen_image_2.1", "Qwen Image 2.1", "qwen"),
+                ("dasiwaminimaxh3_dasiwahybridv2", "Dasiwa H3 Hybrid v2", "h3"),
+            ):
+                if checkpoints[0].startswith(prefix):
+                    family, tag = name, slug
+                    break
     types = {
         "model": "图像/网格转三维 / Image or mesh to 3D",
         "video": "视频生成 / Video generation",
@@ -247,10 +267,29 @@ def public_documentation(item: dict, manifest: dict) -> dict:
     if specification:
         notes.append("冻结输出规格 / Frozen output specification: " + specification)
     if kind == "image":
-        notes.append(
-            "声明尺寸指最终交付：末端使用 Lanczos 缩放与居中裁切；上游原生采样尺寸可能跟随参考图。"
-            "The declared size is the delivered canvas: Lanczos resize and center crop are applied at output; native sampling size may follow the reference."
-        )
+        final_nodes = manifest["output"].get("final_node_ids", [])
+        delivery_scales = []
+        for node_id in final_nodes:
+            link = graph[node_id]["inputs"].get("images")
+            node = graph.get(link[0]) if isinstance(link, list) and len(link) == 2 and isinstance(link[0], str) else None
+            if node and node["class_type"] == "ImageScale":
+                values = node["inputs"]
+                delivery_scales.append(
+                    values.get("upscale_method") == "lanczos" and values.get("crop") == "center"
+                    and f"{values.get('width')}x{values.get('height')}" == preset.get("size")
+                )
+            else:
+                delivery_scales.append(False)
+        if delivery_scales and all(delivery_scales):
+            notes.append(
+                "声明尺寸指最终交付：末端使用 Lanczos 缩放与居中裁切；上游原生采样尺寸可能跟随参考图。"
+                "The declared size is the delivered canvas: Lanczos resize and center crop are applied at output; native sampling size may follow the reference."
+            )
+        else:
+            notes.append(
+                "声明尺寸是冻结的交付规格；此版本未声明末端 Lanczos 缩放或居中裁切。"
+                "The declared size is the frozen delivery specification; this version does not declare a final Lanczos resize or center crop."
+            )
     if manifest.get("input_slots"):
         notes.append(
             "素材槽位 / Media slots: "

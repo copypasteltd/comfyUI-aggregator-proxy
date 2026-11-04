@@ -99,11 +99,30 @@ def test_image_delivery_preserves_colliding_source_node() -> None:
 
 def test_image_usage_discloses_delivery_resize_in_both_languages() -> None:
     manifest = {
-        "workflow_api": {"1": {"class_type": "QwenImage21FastSampler", "inputs": {}}},
+        "workflow_api": {
+            "1": {"class_type": "QwenImage21FastSampler", "inputs": {}},
+            "2": {"class_type": "ImageScale", "inputs": {"image": ["1", 0], "width": 768, "height": 1376, "upscale_method": "lanczos", "crop": "center"}},
+            "3": {"class_type": "SaveImage", "inputs": {"images": ["2", 0]}},
+        },
         "task_type": "image_to_image", "presets": [{"size": "768x1376"}],
-        "bindings": [{"source": "prompt"}], "output": {},
+        "bindings": [{"source": "prompt"}], "output": {"final_node_ids": ["3"]},
     }
     documentation = ModelDocumentation.model_validate(public_documentation(
         {"source": "synthetic/qwen.api.json", "output_kind": "image", "gpu": "3080"}, manifest,
     ))
     assert any("交付" in note and "Lanczos" in note and "delivered canvas" in note for note in documentation.notes)
+
+
+def test_image_usage_does_not_claim_an_unconnected_delivery_resize() -> None:
+    manifest = {
+        "workflow_api": {
+            "1": {"class_type": "QwenImage21FastSampler", "inputs": {}},
+            "2": {"class_type": "ImageScale", "inputs": {"image": ["1", 0], "width": 512, "height": 512, "upscale_method": "lanczos", "crop": "center"}},
+            "3": {"class_type": "SaveImage", "inputs": {"images": ["1", 0]}},
+        },
+        "task_type": "text_to_image", "presets": [{"size": "512x512"}],
+        "bindings": [{"source": "prompt"}], "output": {"final_node_ids": ["3"]},
+    }
+    documentation = public_documentation({"source": "synthetic/native-size.api.json", "output_kind": "image", "gpu": "3080"}, manifest)
+    assert any("does not declare a final Lanczos resize" in note for note in documentation["notes"])
+    assert not any("Lanczos resize and center crop are applied" in note for note in documentation["notes"])

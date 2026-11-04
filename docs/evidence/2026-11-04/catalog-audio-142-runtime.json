@@ -1,0 +1,57 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T03:14:49.283345+00:00",
+  "passed": true,
+  "scope": "One actual YuE2 ABC music workflow: fresh hardware validation, publication, ordinary business generation and complete FLAC download. Metadata-only public export preserves decoded audio exactly and is non-silent. Other pending audio/3D/video candidates are excluded.",
+  "real_resource_acceptance": true,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "alias": "comfy-3080-01-yue2-full-bf16-abc-music-2e68f4",
+  "display_name": "YuE2 · 音乐生成 · 30s · RTX 3080 · a376a0",
+  "model_id": "mdl_16ee97933552456b878bf1959a88d68e",
+  "release_id": "wfr_c8c93c010d1a4a369676a356b3c1a358",
+  "release_digest": "1b4323dd83db6bc14cd71aaff09e2476589ff4f14a6c03b8326e1ff2562eb785",
+  "validation_job_id": "job_21930e932fbc4a6199286668fcd4cef9",
+  "business_job_id": "job_7275fecececc49b8b95fc4aee21dbbb1",
+  "request": {
+    "model": "comfy-3080-01-yue2-full-bf16-abc-music-2e68f4",
+    "task_type": "text_to_audio",
+    "input": {
+      "texts": {
+        "style": "Cheerful instrumental chamber music, pizzicato strings and gentle woodwinds, no vocals."
+      }
+    },
+    "parameters": {
+      "quality": "standard",
+      "seconds": 30,
+      "n": 1,
+      "seed": 17
+    }
+  },
+  "download": {
+    "content_id": "content_0446170d0f8f448fba154aa969d48658",
+    "bytes": 2453726,
+    "sha256": "0e69b35a6448ec910fe0a2b443bc6b70198f7c62a40bc8b4d3f2c98846672c72",
+    "media_type": "audio/flac",
+    "verified_at": 1793761954,
+    "synthetic_input": true
+  },
+  "actual": {
+    "codec": "flac",
+    "sample_rate": 48000,
+    "channels": 2,
+    "duration_seconds": 30.0,
+    "maximum_seconds": 30,
+    "samples_including_channels": 2880000,
+    "rms_dbfs": -18.237,
+    "peak_dbfs": -3.524
+  },
+  "public_media": {
+    "file": "docs/media/catalog-142/yue2-abc-music.flac",
+    "bytes": 2452283,
+    "sha256": "19e92fc55a844f0e32ecd23659ce723f1a60e527b7a6c5d0035f357bb863f079",
+    "embedded_metadata_removed": true,
+    "decoded_pcm_unchanged": true,
+    "decoded_pcm_sha256": "2abeec9ce14935360bab2226b0b3ca1367653cf2e52eab327709a799021c4e5d"
+  }
+}
