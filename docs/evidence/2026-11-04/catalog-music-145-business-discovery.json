@@ -1,0 +1,86 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T04:57:21.416446+00:00",
+  "passed": true,
+  "scope": "Ordinary business-Key discovery after correcting the two music descriptions. Actual public usage names, descriptions, notes and text slots exactly match the updated frozen input capability documentation. No generation is rerun and customer Keys are untouched.",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "models": [
+    {
+      "alias": "comfy-3080-01-yue2-full-bf16-abc-music-2e68f4",
+      "display_name": "YuE2 · 风格/歌词自动作谱音乐 · 30s · RTX 3080 · a376a0",
+      "description": "风格/歌词自动作谱音乐 / Music with a generated ABC score；YuE2，RTX 3080。音乐/语音生成 / Music or speech generation。01_yue2_full_bf16_abc_music。按公开 usage 中的槽位、规格与示例调用。Use this model's public usage schema for exact slots, presets and examples.",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 01_yue2_full_bf16_abc_music",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "文本槽位 / Text slots: lyrics?, style*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此版本接收 style 风格与选填 lyrics；ABC 曲谱由连接到输出的 YuE2GenerateABC 自动生成。This version accepts style and optional lyrics; its connected YuE2GenerateABC node generates the score."
+      ],
+      "text_slots": [
+        {
+          "name": "lyrics",
+          "label": "lyrics",
+          "description": "传入该工作流的lyrics文本；不作为文件路径或命令执行。",
+          "required": false,
+          "max_length": 8000
+        },
+        {
+          "name": "style",
+          "label": "style",
+          "description": "传入该工作流的style文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "release_id": "wfr_c8c93c010d1a4a369676a356b3c1a358",
+      "release_digest": "1b4323dd83db6bc14cd71aaff09e2476589ff4f14a6c03b8326e1ff2562eb785",
+      "prior_business_job_id": "job_7275fecececc49b8b95fc4aee21dbbb1",
+      "discovered_with_business_key": true
+    },
+    {
+      "alias": "comfy-3080-00-yue2-full-bf16-text2music-77ea35",
+      "display_name": "YuE2 · 音乐生成 · 可传 ABC 曲谱 · 30s · RTX 3080 · 9a0005",
+      "description": "音乐生成 · 可传 ABC 曲谱 / Music with an optional supplied ABC score；YuE2，RTX 3080。音乐/语音生成 / Music or speech generation。00_yue2_full_bf16_text2music。按公开 usage 中的槽位、规格与示例调用。Use this model's public usage schema for exact slots, presets and examples.",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 00_yue2_full_bf16_text2music",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "文本槽位 / Text slots: abc?, lyrics?, style*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此版本可通过 abc 传入 ABC 记谱，style 填风格，lyrics 按声明选填；以实际文本槽位的必填标记为准。This version exposes an abc text slot for an optional supplied ABC score, alongside style and optional lyrics. Follow the advertised required fields."
+      ],
+      "text_slots": [
+        {
+          "name": "abc",
+          "label": "abc",
+          "description": "曲谱采用 ABC 记谱；歌词与风格分别传入。",
+          "required": false,
+          "max_length": 8000
+        },
+        {
+          "name": "lyrics",
+          "label": "lyrics",
+          "description": "传入该工作流的lyrics文本；不作为文件路径或命令执行。",
+          "required": false,
+          "max_length": 8000
+        },
+        {
+          "name": "style",
+          "label": "style",
+          "description": "传入该工作流的style文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "release_id": "wfr_2808b0688fbb4011bee984ff047d3b8e",
+      "release_digest": "67371e2c0aa9db161cf1812fdfeb64c3a50b0aa37a38c428e4cd6b30325564df",
+      "prior_business_job_id": "job_3a6ae64d825e4a65af23fbe50e1e39df",
+      "discovered_with_business_key": true
+    }
+  ]
+}

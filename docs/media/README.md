@@ -1,5 +1,7 @@
 # 演示素材 / Demonstration media
 
+[145 · UniForge3D 实际几何 / Actual UniForge3D geometry](catalog-145/README.md)：业务 GLB 的 24 帧旋转 GIF 与 PNG，原始青柠配色，完整下载及网格结构证明。图像由原生 CPU 投影生成、明确使用显示材质；不是推理过程原速录屏，也不代表其他三维候选已通过。
+
 [144 · 真实单人语音 / Actual single-speaker speech](catalog-144/README.md)：FireRedTTS2 与 MOSS-TTSD 的业务调用产物，移除 MP3 元数据后解码音频一致，附实际请求和下载摘要。[142 · 真实音乐 / Actual music](catalog-142/README.md)：30 秒 YuE2 FLAC，实际只传 style，由工作流内部生成 ABC；历史输入归属错误有明确更正，音频和原报告保留。
 
 [124 · 实际模型说明、Skill 调用与自动回收](media-gen-124/README.md)：线上已发布模型说明和三台回收证据，13.56 秒原速录屏/GIF、实际 API 响应及去元数据的生图/视频/参考视频/音乐样本。[English](media-gen-124/README.en.md)。

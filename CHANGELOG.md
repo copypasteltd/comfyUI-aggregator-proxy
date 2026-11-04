@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 145 · First multiview mesh delivery / 首个多视图三维交付
+
+- UniForge3D passes independent hardware validation, publication and a separate business call with the same four original synthetic object views. Verify the complete 2,399,092-byte GLB by SHA-256 and an independent bounded static-mesh inspection: 49,958 vertices, 99,689 triangles, one material and no embedded textures. This run takes approximately 19 minutes; it is an observation rather than a latency promise.
+- Document all 18 frozen mesh input contracts, exact aliases and single-image/multiview/refinement/texturing calls. Publish a 24-frame GIF and PNG from the actual downloaded geometry, using the checked-in Lime palette and a labelled solid display material. Preserve the source GLB and distinguish the offline projection from an inference screen recording or material-quality acceptance.
+- The ninth catalog snapshot records 22 newly published and business-verified models. The other 17 mesh candidates continue individual trials; the 4090 Worker upgrade still needs device administrator access. Public business discovery independently confirms both corrected music names, notes and text slots.
+
 ## 2026-11-04 · 144 · Audio delivery and music inputs / 音频交付与音乐输入
 
 - All nine new RTX 3080 audio models pass independent validation, publication, ordinary business generation and complete download verification. The four native-read failures and single-speaker fixture failure now have successful fresh retries with original attempts preserved. Combined with 12 image candidates, 21 new models have verified business delivery; 3D trials continue.
