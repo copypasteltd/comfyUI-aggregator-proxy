@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 151 · Thirteen mesh deliveries and device recovery / 十三项三维交付与设备恢复
+
+- Record 34 newly published models with independent business delivery: 12 image, nine audio and 13 mesh. Inspect all 13 full GLBs, hashes, release identities and actual appearance channels; preserve prior eight- and three-model snapshots. Ordinary business discovery finds 34 published candidates and hides 179 drafts, with two selected unpublished aliases returning 404.
+- Restore native 3080 ComfyUI startup after PowerShell treated a normal Python INFO log as a fatal redirected error. Preserve the original launcher backup, launch arguments, explicit native exit-code check and Worker service process. Retain the uncertain UniTexture submission and GPU occupancy; empty history after restart does not authorize resubmission. The controlled stop-confirmation path and 4090 administrator access remain open.
+- Recheck all five daily caps across one tenant, one project and 22 nondeleted Keys: explicitly unlimited, with protected policies and actual counters preserved. Keep three initial Admin session read-timeout observations separately from the later successful sequential reads. Synchronize the numbered catalog, implementation status and bilingual entry points; no cloud/Worker/Skill release or UI change is implied.
+
 ## 2026-11-04 · 150 · Unlimited daily quotas / 关闭全部日限额
 
 - Set all five new daily quota defaults to explicit unlimited values and share the same defaults with native project bootstrap. Existing grants, rate/concurrency controls and per-request specifications are preserved.

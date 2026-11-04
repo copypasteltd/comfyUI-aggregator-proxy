@@ -1,0 +1,14 @@
+--- a/Start-AudioImage-Validated.ps1
++++ b/Start-AudioImage-Validated.ps1
+@@ -59,2 +59,10 @@
+-& $Python -B -s -X utf8 -u $Application --windows-standalone-build --listen 0.0.0.0 --port 8188 --use-pytorch-cross-attention --reserve-vram 1.2 --disable-dynamic-vram --disable-comfy-compiler --disable-async-offload --disable-cuda-malloc
++# Windows PowerShell 5.1 can wrap redirected native stderr as NativeCommandError.
++# Preserve normal Python logging; the explicit LASTEXITCODE check below remains authoritative.
++$ComfyNativePreviousErrorAction=$ErrorActionPreference
++try {
++ $ErrorActionPreference='Continue'
++ & $Python -B -s -X utf8 -u $Application --windows-standalone-build --listen 0.0.0.0 --port 8188 --use-pytorch-cross-attention --reserve-vram 1.2 --disable-dynamic-vram --disable-comfy-compiler --disable-async-offload --disable-cuda-malloc
++} finally {
++ $ErrorActionPreference=$ComfyNativePreviousErrorAction
++}
+ if($LASTEXITCODE -ne 0){throw "ComfyUI exited with code $LASTEXITCODE"}

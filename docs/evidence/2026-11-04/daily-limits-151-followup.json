@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "counts": {
+    "tenants": 1,
+    "projects": 1,
+    "api-keys": 22
+  },
+  "daily_fields": [
+    "daily_jobs",
+    "daily_image_count",
+    "daily_video_milliseconds",
+    "daily_audio_milliseconds",
+    "daily_mesh_count"
+  ],
+  "limit": {
+    "mode": "unlimited",
+    "value": null
+  },
+  "protected_policies_unchanged": true,
+  "deleted_keys_skipped": 8,
+  "outcomes": {
+    "first_write_committed_response_failed_then_nulls_repaired": 1,
+    "changed": 23
+  },
+  "format_version": 1,
+  "at": "2026-11-04T07:51:54.951471+00:00",
+  "scope": "Read-only follow-up verification through the existing Admin API after catalog progress checks; all five daily caps and protected policy hashes rechecked. No policy writes or usage-counter resets.",
+  "virtualization_used": false,
+  "direct_database_writes": false,
+  "full_acceptance": "pending"
+}

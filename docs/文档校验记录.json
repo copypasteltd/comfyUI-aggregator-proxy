@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-04T12:04:17+08:00",
+  "checked_at": "2026-11-04T16:06:04+08:00",
   "baseline": "v0.4",
   "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
   "project": "E:\\dev\\sandbox\\生图生视API封装",
@@ -10,12 +10,12 @@
   },
   "checks": {
     "markdown": {
-      "documents": 161,
+      "documents": 167,
       "instruction_files": 1,
-      "fenced_blocks": 82,
-      "json_examples": 25,
+      "fenced_blocks": 88,
+      "json_examples": 26,
       "yaml_examples": 1,
-      "local_links_checked": 3058
+      "local_links_checked": 3156
     },
     "contracts": {
       "json_files": 80,
@@ -70,10 +70,10 @@
         "framework": 7,
         "implemented": 67
       },
-      "named_test_references": 199,
+      "named_test_references": 202,
       "baseline_python_cases": 3593,
-      "reports": 48,
-      "current_source_files": 203,
+      "reports": 49,
+      "current_source_files": 205,
       "full_acceptance": "pending"
     },
     "topic_presence": {
@@ -138,15 +138,15 @@
     },
     {
       "file": "docs/08-APIKey鉴权与访问控制.md",
-      "bytes": 24177,
-      "lines": 190,
-      "sha256": "fdb1e5da2cd383be50a6a11716185464cb8535779037b93537b822417f32d309"
+      "bytes": 24619,
+      "lines": 192,
+      "sha256": "cc972c7bc3a979522c933c59e6eac40abeaa98501b525d11b05bb6c60b7ef3b9"
     },
     {
       "file": "docs/09-开发总纲与强制约束.md",
-      "bytes": 11941,
-      "lines": 87,
-      "sha256": "abe3f1f186bd41d041657e48dd5d50713901c3652a85fced578013887ca69cac"
+      "bytes": 12266,
+      "lines": 89,
+      "sha256": "85409ac9e740fdfcda6039adafbe327257f3ce283a11e776be712c6c2c9bce53"
     },
     {
       "file": "docs/10-技术栈与工程结构.md",
@@ -324,9 +324,9 @@
     },
     {
       "file": "docs/126-MediaGenSkill安装与调用.md",
-      "bytes": 13298,
+      "bytes": 13374,
       "lines": 97,
-      "sha256": "50c80c74dd67695657ce2599fbd7b53db84325a21efaea6dffda1e13ce7f159d"
+      "sha256": "3bac5298a6c2e8cf1cda5b2ed7ed9f2450cc44a1d2c667b884efcfd00b34a1d3"
     },
     {
       "file": "docs/127-MediaGenSkill-Release说明.md",
@@ -372,15 +372,15 @@
     },
     {
       "file": "docs/133-全量工作流接入与多模态输入.md",
-      "bytes": 11716,
+      "bytes": 12160,
       "lines": 74,
-      "sha256": "af433b774a0ccab69d5d213f89f9cf0bf537f0dfc8ee982c92cb1baad8a7317d"
+      "sha256": "a69200c4d86fd1a6bddc526237fd1886fe993c0eaccb325892710963876aee1c"
     },
     {
       "file": "docs/134-新增模型目录与调用说明.md",
-      "bytes": 69162,
+      "bytes": 69460,
       "lines": 233,
-      "sha256": "c2223f06715ab678825a736265b283df97911feefdb017db92590f15443c2ae3"
+      "sha256": "230d0065f212ad9c2a921a140803446f1ee1bd837f910d1d250e7fd078a00267"
     },
     {
       "file": "docs/135-全量接入与线上版本兼容升级.md",
@@ -390,21 +390,45 @@
     },
     {
       "file": "docs/136-原生辅助依赖冻结与校验.md",
-      "bytes": 11816,
-      "lines": 64,
-      "sha256": "4a7e207caca90f6831817932fdcb29c8eed3b7e84e8b39a49b7677ed2e8bfc93"
+      "bytes": 12291,
+      "lines": 66,
+      "sha256": "aac46cc26ca61c7a4ba466a4f2f0b1bf3428c83e1d20d15263db1ffaa5b851e6"
     },
     {
       "file": "docs/137-模型家族与三维导出能力说明.md",
-      "bytes": 6112,
-      "lines": 37,
-      "sha256": "f9a11444a777791b3d24a05596752a5c98e273fa78376e72e736a6b37105174e"
+      "bytes": 7800,
+      "lines": 47,
+      "sha256": "8e72b9cd49ae0b46f2c0cfff946441549e6aec7f31fe4abbaa7da4564e2a11a8"
+    },
+    {
+      "file": "docs/138-音频模型调用与验证.md",
+      "bytes": 8347,
+      "lines": 79,
+      "sha256": "f5b2caf1680f85c4ebb8679a3c30e174882784941d1ce0bec76bb3a6edb2a061"
+    },
+    {
+      "file": "docs/139-三维模型调用与逐项验证.md",
+      "bytes": 12427,
+      "lines": 94,
+      "sha256": "1438bc8293e75ea6011bd34d997b34eb8f86ef767ef9f3e7057eb5f168fcebfd"
     },
     {
       "file": "docs/14-测试策略与质量门禁.md",
       "bytes": 20594,
       "lines": 154,
       "sha256": "edb3e895c136e3f3e289e79cdb30deaf96fc3db2404446b0a710ce220786891b"
+    },
+    {
+      "file": "docs/140-关闭每日限额与默认策略.md",
+      "bytes": 7046,
+      "lines": 55,
+      "sha256": "9a422952100432c3abfdf24b6b74043051c50406a82d884ad9b74299d596db77"
+    },
+    {
+      "file": "docs/141-工作流接入进度与设备恢复.md",
+      "bytes": 8089,
+      "lines": 54,
+      "sha256": "b58536db3fec3636b1739cc5d573056bd7fd552e4b129195e79577073e98bfd2"
     },
     {
       "file": "docs/15-原生部署配置与运维.md",
@@ -648,9 +672,9 @@
     },
     {
       "file": "docs/55-音频契约与兼容迁移.md",
-      "bytes": 13232,
-      "lines": 86,
-      "sha256": "86e56eca1b7ac663a294c952eb54375bd3578a3268e9332ed55a8a5701a3b326"
+      "bytes": 13554,
+      "lines": 88,
+      "sha256": "b501bf81c0d149ad6c100806b4a7364e7ccc2af914fc7400bd8bedbec44a45f5"
     },
     {
       "file": "docs/56-Windows节点登记与凭证管理.md",
@@ -846,9 +870,9 @@
     },
     {
       "file": "docs/88-需求实现与分层证据追踪.md",
-      "bytes": 84575,
-      "lines": 267,
-      "sha256": "04da5e76b5e77649b9a10f2aa388a8bac23c1a4510500f56660dd64079103baf"
+      "bytes": 86243,
+      "lines": 271,
+      "sha256": "4fabc2ea414ca22a5b4aeaf50d8e8a6702c946bb0cfb8a3ce3a19a111dbc0ac2"
     },
     {
       "file": "docs/89-审计分页投影上限与版本化复验.md",
@@ -1158,9 +1182,9 @@
     },
     {
       "file": "docs/contracts/development-evidence.json",
-      "bytes": 213901,
-      "lines": 7061,
-      "sha256": "334344bc3944990b4af04145156add319915a9f34ba81c3f80d14e7d2697ec09"
+      "bytes": 215210,
+      "lines": 7097,
+      "sha256": "e07486ac821a8cc5fd5dcb020a81bc4351bd91e143aa4c8153ef040f611d6a37"
     },
     {
       "file": "docs/contracts/development-traceability.json",
@@ -1440,9 +1464,21 @@
     },
     {
       "file": "docs/media/catalog-142/README.md",
-      "bytes": 1489,
-      "lines": 12,
-      "sha256": "892ae2cb7a908e61161de70dc11ed952031281b3cd9b3b656864c42266e57e1d"
+      "bytes": 2318,
+      "lines": 16,
+      "sha256": "e0b59bf54b09e8e54642b2eddf674f2d857a9fba3673f743d4ea3c21f44376e3"
+    },
+    {
+      "file": "docs/media/catalog-144/README.md",
+      "bytes": 2143,
+      "lines": 19,
+      "sha256": "50e14279490428ed2a49e6c846b34b80c19b62d72052a4ef2979ee3ab14b3306"
+    },
+    {
+      "file": "docs/media/catalog-145/README.md",
+      "bytes": 3242,
+      "lines": 30,
+      "sha256": "0c6070cae18f4b9d079701e7260d8376f20a170b8f6abd00641f95408b71c6be"
     },
     {
       "file": "docs/media/comfy-onboarding-118/README.md",
@@ -1476,9 +1512,9 @@
     },
     {
       "file": "docs/media/README.md",
-      "bytes": 15504,
-      "lines": 131,
-      "sha256": "b211c7bed8f7bde332f03343cff03528707f2a05d3f8b1e3ac97f3b7d7d093de"
+      "bytes": 16248,
+      "lines": 135,
+      "sha256": "879f506109fdbd92dd33f15d8720a5da1b67ece5a1465c38123b9a2bcab1ba71"
     },
     {
       "file": "docs/media/reference-capabilities-120/README.md",
@@ -1500,15 +1536,15 @@
     },
     {
       "file": "docs/README.en.md",
-      "bytes": 39758,
-      "lines": 231,
-      "sha256": "e2c77f0e2810a11bda321db1819111b2fb1ea0dea82d43b4a702659cce2fa18b"
+      "bytes": 41280,
+      "lines": 237,
+      "sha256": "296046b1c106a161bfdcb86500117f52cb79c943774486d4d7bec148114e3a33"
     },
     {
       "file": "docs/README.md",
-      "bytes": 51935,
-      "lines": 275,
-      "sha256": "47d7d64f506d1db5be1f323c02558475198a669cf95c18e0aef7dfc926148354"
+      "bytes": 53519,
+      "lines": 283,
+      "sha256": "1d6a1cc98f2d7f5d5ff75beeda54d8ae2245d82d7999835c67fee9c7bfa01dcd"
     },
     {
       "file": "docs/releases/media-gen-skill/1.1.0.md",

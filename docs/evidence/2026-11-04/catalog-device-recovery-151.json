@@ -1,0 +1,75 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T07:58:10.732924+00:00",
+  "passed": true,
+  "scope": "Native 3080 ComfyUI startup repair and read-only inspection of the still-uncertain owned submission. This does not accept UniTexture or authorize resubmission/GPU occupancy release.",
+  "virtualization_used": false,
+  "browser_tabs_created": 0,
+  "devices": {
+    "3080": {
+      "administrator": true,
+      "initial_comfy_listener": false,
+      "worker_service_retained": true,
+      "worker_service_pid": 21968,
+      "startup_failure": {
+        "code": "NativeCommandError",
+        "source": "PowerShell 5.1 redirected Python INFO log",
+        "scheduled_task_exit_code": 1
+      },
+      "launcher_repair": {
+        "before_sha256": "3d5a92591f3ace947c154895bc4f2bc56084067e40fb7586e4fcb3e63b11d561",
+        "after_sha256": "15cc0881dad061aed9525c978c9651a9ae2aa489c886370ccc0d133173692e45",
+        "original_backup_preserved": true,
+        "launch_arguments_changed": false,
+        "native_exit_code_check_preserved": true,
+        "patch_source": "app/ops/windows/comfy-launcher-native-stderr.patch",
+        "patch_checks_against_original_hash": true
+      },
+      "after": {
+        "comfy_pid": 24936,
+        "observed_running_seconds": 221.213,
+        "listener": "0.0.0.0:8188",
+        "startup_task_state": "Running",
+        "startup_task_code": 267009,
+        "queue": {
+          "running": 0,
+          "pending": 0
+        },
+        "history_entries": 0
+      },
+      "submission": {
+        "job_id": "job_bedd08efb6e24747823f3d5675c437e7",
+        "attempt_id": "att_82ea1392575b48ee8cf87bbbd76aa2e8",
+        "status": "reconciling",
+        "journal_stage": "posting",
+        "has_prompt_id": false,
+        "matched_in_queue_or_history": false,
+        "workflow_published": false,
+        "blind_resubmission_performed": false,
+        "gpu_occupancy_force_released": false,
+        "required_followup": "Obtain authoritative evidence for the original attempt and use a supported audited recovery path; absence in a restarted ComfyUI instance is insufficient."
+      }
+    },
+    "4090": {
+      "administrator": false,
+      "comfy_listener": true,
+      "queue": {
+        "pending": 0,
+        "running": 0
+      },
+      "new_worker_service_switched": false,
+      "blocker": "administrator_access_required_for_native_worker_service_switch"
+    }
+  },
+  "initial_control_plane_observation": {
+    "concurrent_admin_session_read_timeouts": 3,
+    "cloud_health_live_status": 200,
+    "cloud_health_ready_status": 200,
+    "query_blockers_observed": 0,
+    "subsequent_sequential_catalog_visibility_and_daily_verification": "passed_without_increasing_timeouts",
+    "timeout_root_cause": "unresolved"
+  },
+  "production_database_writes_for_recovery": false,
+  "existing_customer_key_policies_changed": false,
+  "full_acceptance": "pending"
+}
