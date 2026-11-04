@@ -11,6 +11,7 @@ from typing import Any, Literal
 from urllib.parse import urlparse
 
 from generation_domain.errors import DomainError
+from generation_domain.native_dependencies import NATIVE_ROOT_NAME
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
@@ -108,6 +109,7 @@ class LocalChannel(BaseModel):
     connection_mode: Literal["local", "remote_http"] = "local"
     comfy_root: Path | None = None
     workflow_export_root: Path | None = None
+    native_dependency_roots: dict[str, Path] = Field(default_factory=dict, max_length=8)
 
     @property
     def local_root(self) -> Path:
@@ -145,6 +147,7 @@ class WorkerSettings(BaseModel):
             self.git_executable = self.git_executable.resolve(strict=True)
             if self.git_executable.name.lower() != "git.exe" or not stat.S_ISREG(self.git_executable.stat().st_mode):
                 raise ValueError("git_executable must select an existing native git.exe")
+        self.state_root = self.state_root.resolve()
         ids = [gpu.hardware_id for gpu in self.gpus]
         if len(ids) != len(set(ids)) or len({c.base_url for c in self.channels}) != len(self.channels):
             raise ValueError("duplicate GPU or channel URL")
@@ -154,7 +157,7 @@ class WorkerSettings(BaseModel):
                 raise ValueError("invalid local ComfyUI channel")
             channel.base_url = channel.base_url.rstrip("/")
             if channel.connection_mode == "remote_http":
-                if not self.allow_api_only or channel.comfy_root is not None:
+                if not self.allow_api_only or channel.comfy_root is not None or channel.native_dependency_roots:
                     raise ValueError("remote_http requires explicit allow_api_only and no local ComfyUI root")
             elif channel.comfy_root is None:
                 raise ValueError("local ComfyUI requires comfy_root")
@@ -163,7 +166,19 @@ class WorkerSettings(BaseModel):
             if channel.workflow_export_root is not None:
                 from windows_worker.workflow_exports import configured_export_root
                 channel.workflow_export_root = configured_export_root(channel.workflow_export_root)
-        self.state_root = self.state_root.resolve()
+            configured: dict[str, Path] = {}
+            for name, selected in channel.native_dependency_roots.items():
+                if not NATIVE_ROOT_NAME.fullmatch(name) or not selected.is_absolute() or selected.is_symlink() or getattr(selected, "is_junction", lambda: False)():
+                    raise ValueError("native dependencies require named ordinary absolute directories")
+                target = selected.resolve(strict=True)
+                if not target.is_dir() or len(target.parts) < 3 or any(target == p or target in p.parents or p in target.parents for p in (self.state_root, self.credential_file.resolve().parent)):
+                    raise ValueError("native dependency roots must exclude private Worker state and credentials")
+                if channel.comfy_root is not None and (target == channel.comfy_root or target in channel.comfy_root.parents or any(target == channel.comfy_root / name or channel.comfy_root / name in target.parents for name in ("input", "output", "temp"))):
+                    raise ValueError("native dependency roots must exclude ComfyUI customer data")
+                if any(str(target).casefold() == str(other).casefold() or target in other.parents or other in target.parents for other in configured.values()):
+                    raise ValueError("native dependency roots cannot overlap")
+                configured[name] = target
+            channel.native_dependency_roots = configured
         return self
 
     def channel(self, base_url: str) -> LocalChannel:

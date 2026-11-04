@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import shutil
+import stat
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -37,7 +38,7 @@ def commit(root: Path, git_executable: Path | None = None) -> str:
     return result.stdout.decode("ascii").strip()
 
 
-def verify_environment(root: Path, manifest: dict[str, Any], git_executable: Path | None = None) -> dict[str, Any]:
+def verify_environment(root: Path, manifest: dict[str, Any], git_executable: Path | None = None, native_roots: dict[str, Path] | None = None) -> dict[str, Any]:
     validate_manifest(manifest, manifest["task_type"])
     lock = manifest["dependency_lock"]
     if lock.get("mode") == "comfy-api-only-v1":
@@ -64,4 +65,39 @@ def verify_environment(root: Path, manifest: dict[str, Any], git_executable: Pat
     result = {"dependency_lock": lock, "models": checked}
     if files:
         result["files"] = files
-    return {"environment_verified": True, "environment_digest": fingerprint(result)}
+    native = []
+    for dependency in lock.get("native_roots", []):
+        selected = (native_roots or {}).get(dependency["name"])
+        if selected is None:
+            raise DomainError("native_dependency_not_allowlisted", "原生辅助依赖根尚未在该渠道本地登记", 422)
+        try:
+            root_metadata = selected.lstat()
+            if not stat.S_ISDIR(root_metadata.st_mode) or bool(getattr(root_metadata, "st_file_attributes", 0) & 0x400):
+                raise DomainError("native_dependency_unsafe", "原生辅助依赖根必须保持普通目录", 422)
+        except OSError:
+            raise DomainError("native_dependency_unavailable", "原生辅助依赖根不可用", 422) from None
+        checked_files = []
+        for item in dependency["files"]:
+            try:
+                target = safe_path(selected, item["path"])
+                cursor = selected
+                for part in item["path"].split("/"):
+                    cursor /= part
+                    metadata = cursor.lstat()
+                    if stat.S_ISLNK(metadata.st_mode) or bool(getattr(metadata, "st_file_attributes", 0) & 0x400):
+                        raise DomainError("native_dependency_unsafe", "原生辅助依赖不能引用文件链接", 422)
+                if not stat.S_ISREG(target.stat().st_mode):
+                    raise DomainError("native_dependency_unsafe", "原生辅助依赖必须是普通文件", 422)
+                digest, size = file_digest(target, item["bytes"])
+            except OSError:
+                raise DomainError("native_dependency_unavailable", "原生辅助依赖文件缺失或不可读", 422) from None
+            if digest != item["sha256"] or size != item["bytes"]:
+                raise DomainError("native_dependency_mismatch", "原生辅助依赖大小或摘要变化", 422)
+            checked_files.append({"path": item["path"], "sha256": digest, "bytes": size})
+        native.append({"name": dependency["name"], "files": checked_files})
+    if native:
+        result["native_roots"] = native
+    receipt: dict[str, Any] = {"environment_verified": True, "environment_digest": fingerprint(result)}
+    if native:
+        receipt["native_dependencies_verified"] = True
+    return receipt

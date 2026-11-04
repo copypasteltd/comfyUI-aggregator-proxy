@@ -13,6 +13,7 @@ from generation_application.ports import AdminIdentity
 from generation_contracts.admin import ChannelPatch
 from generation_contracts.catalog import ApproveRuntime, BindRelease, ValidationJob, WorkflowSync
 from generation_domain.errors import DomainError
+from generation_domain.native_dependencies import NATIVE_DEPENDENCY_FEATURE
 from generation_domain.values import fingerprint, parse_id, public_id, utcnow
 from generation_infrastructure.admin_catalog import CatalogAdministration
 from generation_infrastructure.admin_channels import ChannelAdministration
@@ -57,6 +58,76 @@ def actor(pg: sessionmaker[Session]) -> AdminIdentity:
 
 def batch(catalog: dict[str, Any], **overrides: Any) -> WorkflowSync:
     return WorkflowSync.model_validate({"direction": "push", "release_id": public_id("wfr", catalog["release_id"]), "release_digest": catalog["release_digest"], "targets": [{"channel_id": public_id("ch", identifier), "expected_revision": 1} for identifier in catalog["channel_ids"]], **overrides})
+
+
+def native_release(pg: sessionmaker[Session], catalog: dict[str, Any], manifest: dict[str, Any], *, supported: bool) -> None:
+    manifest["dependency_lock"]["native_roots"] = [{"name": "native_3d", "files": [{"path": "worker.py", "sha256": "f" * 64, "bytes": 10}]}]
+    with pg.begin() as session:
+        previous = session.get(WorkflowRelease, catalog["release_id"])
+        assert previous
+        release = WorkflowRelease(tenant_id=previous.tenant_id, project_id=previous.project_id, workflow_id=previous.workflow_id, version=2, manifest=manifest, digest=fingerprint(manifest), validated=True, validation={"test_only": True})
+        session.add(release)
+        session.flush()
+        catalog.update(release_id=release.id, release_digest=release.digest)
+        node = session.get(Node, catalog["node_id"])
+        assert node
+        node.inventory = {"features": [NATIVE_DEPENDENCY_FEATURE] if supported else []}
+
+
+@pytest.mark.parametrize("mode", ["single", "batch"])
+def test_native_dependency_sync_rejects_legacy_workers_without_mutating_bindings(pg: sessionmaker[Session], catalog: dict[str, Any], multimodal_manifest: dict[str, Any], actor: AdminIdentity, test_settings: Settings, mode: str) -> None:
+    with pg() as session:
+        original_bindings = {binding.id: (binding.verified_digest, binding.runtime_approval) for binding in session.scalars(select(WorkflowBinding))}
+    native_release(pg, catalog, multimodal_manifest, supported=False)
+    service = CatalogAdministration(pg, test_settings)
+    with pytest.raises(DomainError) as error:
+        if mode == "single":
+            service.bind(actor, catalog["channel_ids"][0], BindRelease(expected_revision=1, release_id=public_id("wfr", catalog["release_id"])), "synthetic-native-single", "test")
+        else:
+            service.synchronize(actor, batch(catalog), "synthetic-native-batch", "test")
+    assert error.value.code == "worker_upgrade_required"
+    with pg() as session:
+        assert session.scalar(select(func.count()).select_from(WorkerCommand)) == 0
+        assert session.scalar(select(func.count()).select_from(ManagementOperation)) == 0
+        assert all(not channel.draining and channel.revision == 1 for channel in session.scalars(select(Channel)))
+        assert {binding.id: (binding.verified_digest, binding.runtime_approval) for binding in session.scalars(select(WorkflowBinding))} == original_bindings
+
+
+def test_native_dependency_sync_cannot_be_delivered_after_worker_capability_downgrade(pg: sessionmaker[Session], catalog: dict[str, Any], multimodal_manifest: dict[str, Any], actor: AdminIdentity, test_settings: Settings) -> None:
+    native_release(pg, catalog, multimodal_manifest, supported=True)
+    CatalogAdministration(pg, test_settings).bind(actor, catalog["channel_ids"][0], BindRelease(expected_revision=1, release_id=public_id("wfr", catalog["release_id"])), "synthetic-native-downgrade", "test")
+    with pg.begin() as session:
+        node = session.get(Node, catalog["node_id"])
+        assert node
+        node.inventory = {"features": []}
+    commands = CommandRepository(pg, SecretVault(test_settings.encryption_key.get_secret_value()))
+    assert commands.claim(catalog["node_id"], catalog["boot_id"]) is None
+    with pg() as session:
+        command = session.scalar(select(WorkerCommand))
+        assert command and command.state == "failed" and command.receipt == {"success": False, "error_code": "worker_upgrade_required"}
+        gpu = session.get(Gpu, catalog["gpu_id"])
+        assert gpu and gpu.management_hold is None
+
+
+def test_native_sync_receipt_requires_explicit_native_verification_before_binding_is_usable(pg: sessionmaker[Session], catalog: dict[str, Any], multimodal_manifest: dict[str, Any], actor: AdminIdentity, test_settings: Settings) -> None:
+    native_release(pg, catalog, multimodal_manifest, supported=True)
+    CatalogAdministration(pg, test_settings).bind(actor, catalog["channel_ids"][0], BindRelease(expected_revision=1, release_id=public_id("wfr", catalog["release_id"])), "synthetic-native-receipt", "test")
+    commands = CommandRepository(pg, SecretVault(test_settings.encryption_key.get_secret_value()))
+    issued = commands.claim(catalog["node_id"], catalog["boot_id"])
+    assert issued
+    receipt = {"success": True, "applied_revision": 1, "environment_verified": True, "release_digest": catalog["release_digest"]}
+    with pytest.raises(DomainError) as error:
+        commands.receipt(catalog["node_id"], parse_id("cmd", issued["command_id"]), catalog["boot_id"], issued["command_digest"], receipt)
+    assert error.value.code == "workflow_not_verified"
+    with pg() as session:
+        binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == catalog["channel_ids"][0], WorkflowBinding.release_id == catalog["release_id"]))
+        assert binding and binding.verified_digest is None
+        assert session.scalar(select(WorkerCommand.state)) == "running"
+    receipt["native_dependencies_verified"] = True
+    assert commands.receipt(catalog["node_id"], parse_id("cmd", issued["command_id"]), catalog["boot_id"], issued["command_digest"], receipt)["status"] == "succeeded"
+    with pg() as session:
+        binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == catalog["channel_ids"][0], WorkflowBinding.release_id == catalog["release_id"]))
+        assert binding and binding.verified_digest == catalog["release_digest"]
 
 
 @pytest.mark.parametrize("receipt_success", [True, False])

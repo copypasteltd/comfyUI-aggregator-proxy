@@ -17,6 +17,7 @@ from generation_contracts.command_recovery import (
 )
 from generation_domain.errors import DomainError
 from generation_domain.media_types import output_mime
+from generation_domain.native_dependencies import NATIVE_DEPENDENCY_FEATURE
 from generation_domain.retries import RETRY_POLICY
 from generation_domain.values import fingerprint
 from generation_domain.workflow_contexts import MAX_CONTEXT_BYTES, inspect_context
@@ -267,7 +268,7 @@ class Execution:
                 if local.connection_mode == "remote_http":
                     await self.worker.blocking(observe_api_environment, local.base_url, self.claim["channel"].get("authorization"), self.claim["workflow"])
                 else:
-                    await self.worker.blocking(verify_environment, local.local_root, self.claim["workflow"], self.worker.settings.git_executable)
+                    await self.worker.blocking(verify_environment, local.local_root, self.claim["workflow"], self.worker.settings.git_executable, local.native_dependency_roots)
             profile = next((p for p in self.claim["workflow"]["runtime_profiles"] if p["gpu_hardware_id"] == local.hardware_id), None)
             if not profile:
                 raise DomainError("profile_not_available", "发布包没有此物理 GPU 的执行画像")
@@ -624,6 +625,8 @@ class Worker:
         background: list[asyncio.Task[None]] = []
         try:
             features = ["audio-output-v1", "model3d-output-v1", INPUT_FEATURE] + (["remote-http-v1"] if any(c.connection_mode == "remote_http" for c in self.settings.channels) else [])
+            if any(c.native_dependency_roots for c in self.settings.channels):
+                features.append(NATIVE_DEPENDENCY_FEATURE)
             registration = await self.post("/internal/v1/register", {"protocol_version": "0.4.0", "boot_id": self.boot, "inventory": {"gpus": [gpu.model_dump() for gpu in self.settings.gpus], "features": features}})
             if registration.get("node_id") != self.node_id or registration.get("boot_id") != self.boot:
                 raise DomainError("worker_registration_identity_mismatch", "Worker 注册回执身份不匹配")

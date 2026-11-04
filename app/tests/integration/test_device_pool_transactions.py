@@ -88,10 +88,13 @@ def choice(pg, identifier):
         return selected.gpu_id if selected else None
 
 
-def test_typed_input_pool_waits_for_a_compatible_worker(pg, catalog):
+@pytest.mark.parametrize("native", [False, True])
+def test_typed_input_pool_waits_for_a_compatible_worker(pg, catalog, native):
     with pg.begin() as session:
         previous = session.get(WorkflowRelease, catalog["release_id"])
         manifest = {**previous.manifest, "format_version": "1.3"}
+        if native:
+            manifest["dependency_lock"] = {**manifest.get("dependency_lock", {}), "native_roots": [{"name": "native_3d", "files": [{"path": "worker.py", "sha256": "f" * 64, "bytes": 10}]}]}
         release = WorkflowRelease(tenant_id=previous.tenant_id, project_id=previous.project_id, workflow_id=previous.workflow_id, version=2, digest=fingerprint(manifest), manifest=manifest, validated=True, validation={"test_only": True})
         session.add(release)
         session.flush()
@@ -105,6 +108,11 @@ def test_typed_input_pool_waits_for_a_compatible_worker(pg, catalog):
     with pg.begin() as session:
         node = session.get(Node, devices[1]["node_id"])
         node.inventory = {**node.inventory, "features": ["workflow-inputs-v1"]}
+    if native:
+        assert choice(pg, identifier) is None
+        with pg.begin() as session:
+            node = session.get(Node, devices[1]["node_id"])
+            node.inventory = {**node.inventory, "features": ["workflow-inputs-v1", "native-dependency-roots-v1"]}
     assert choice(pg, identifier) == devices[1]["gpu_id"]
 
 

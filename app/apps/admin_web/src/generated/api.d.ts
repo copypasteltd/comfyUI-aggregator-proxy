@@ -4473,7 +4473,7 @@ export interface components {
             /** Gpus */
             gpus: components["schemas"]["GpuInventory"][];
             /** Features */
-            features?: ("audio-output-v1" | "remote-http-v1" | "model3d-output-v1" | "workflow-inputs-v1")[];
+            features?: ("audio-output-v1" | "remote-http-v1" | "model3d-output-v1" | "workflow-inputs-v1" | "native-dependency-roots-v1")[];
         };
         /** InventoryView */
         InventoryView: {

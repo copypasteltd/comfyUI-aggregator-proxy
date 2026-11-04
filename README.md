@@ -8,6 +8,8 @@ Workflow 1.3 为每个模型公开命名图片、视频、参考声音、GLB 和
 
 云端现运行 `linux-20261104.133.4`，包含后台试跑对视频、音频、GLB 命名素材的所有权转换及长视频规格修复，47 项事务检查通过。3080 Worker 已更新，原三条渠道重新核验并恢复。213 个草稿已导入，新增模型正在逐项真实调用、批准和发布；4090 新 Worker 切换等待该设备的管理权限。候选名称包含实际功能、固定规格、设备和稳定版本标识；导入草稿与正式上架分别统计。
 
+本轮已新增发布并完成普通业务生成、下载校验的模型为 **7 个**；另有一项素材准备连接失败，保留失败任务待复查。[136 · 原生辅助依赖](docs/136-原生辅助依赖冻结与校验.md) 为 13 个 3D/播客候选补充实际外部程序、解释器、模型及辅助库的文件锁；213 个新版本草稿通过编译预检。原生依赖功能的生产部署和相关候选实机批准尚未完成，草稿不计入可调用模型。
+
 [新增管理界面截图、录屏与 GIF](docs/media/typed-inputs-133/README.md) 使用明确标记的合成数据，展示素材槽、文本槽、声音策略、续拍与最多 16 张参考图的 Key 设置。局部验证：725 项受影响 Python 回归、1773 项契约/调用说明补充回归、555 项 Sub2API 测试通过；另有 1 项既有测试跳过。部署及真实生成状态见专题发布记录。
 
 ![Workflow 1.3 管理界面演示，合成数据](docs/media/typed-inputs-133/workflow-inputs-admin.gif)
@@ -28,7 +30,7 @@ Skill 1.3.0 已通过 17 项客户端检查及线上视频、音频、GLB 流式
 
 外部用户先查 `/v1/models/{alias}` 的 usage，使用同一业务 Key 向 `/v1/assets` 上传源图，再向 `/v1/jobs` 提交 `task_type=image_to_3d`、`input.source_image.asset_id` 和公布的质量/seed。该流程不接收文字提示或图像尺寸。成功后读取 `artifacts[].id` 并下载 GLB；Admin 可管理发布与权限、筛选 3D 内容、查看几何计数并下载。首批不提供网页旋转预览、OBJ/多文件 glTF 或 Sub2API 3D 计价。[冻结工作流和自制输入](docs/examples/model3d/README.md) 提供具体调用示例。
 
-已部署到 **https://gen.sub2share.xyz**：当前 **11 个发布模型、3 条启用渠道**，包括实际验证并发布的 `comfy-3080-3d-trellis2`。3D 平台验证和独立业务调用均成功；业务 GLB 为 100,424,732 字节，完整下载、摘要、HEAD/Range、幂等和跨 Key 隔离通过。[实际请求/响应](docs/examples/model3d/README.md)、[验收与部署记录](docs/128-ComfyUI三维模型产物与3080适配.md) 和 [Admin 实测截图、原速录屏与 GIF](docs/media/model3d-128/README.md) 可核对。
+128 版曾部署到 **https://gen.sub2share.xyz**，当时为 **11 个发布模型、3 条启用渠道**，包括实际验证并发布的 `comfy-3080-3d-trellis2`。3D 平台验证和独立业务调用均成功；业务 GLB 为 100,424,732 字节，完整下载、摘要、HEAD/Range、幂等和跨 Key 隔离通过。[实际请求/响应](docs/examples/model3d/README.md)、[验收与部署记录](docs/128-ComfyUI三维模型产物与3080适配.md) 和 [Admin 实测截图、原速录屏与 GIF](docs/media/model3d-128/README.md) 可核对；最新发布进度以上方记录及在线发现接口为准。
 
 ![实际 3080 直接调用产物的几何展示，使用标明的实色材质](docs/media/model3d-128/trellis2-orbit.gif)
 
@@ -47,7 +49,7 @@ python scripts/media_gen.py generate --model comfy-3080-image-lustify-krea2 --pr
 
 [124 · 完整交付与验收](docs/124-模型使用说明与公开Skill交付.md) 记录四条真实 Skill 调用、三台自动回收、部署备份恢复及测试范围。[125 · 回收方案](docs/125-ComfyUI空闲内存回收与双屏障.md) 使用持久互斥、`/free` 和两个有序 CPU 屏障确认完成；暂时失联阻止释放，未知执行保留保护，指标不承诺归零。原始功能版本通过 16 门禁/4391 Python，后续修正通过 1761 项相关回归；两组验证范围分别记录。
 
-[实际截图、原速录屏、GIF、API 响应与生成样本](docs/media/media-gen-124/README.md) 来自线上平台和正式 Skill Release，发布样本已去除嵌入 Workflow 元数据。本次临时测试 Key 已停用。多设备池可把同一冻结发布绑定到多个已验证渠道，现有抢领按可用槽位分配；当前 11 个别名仍各为单渠道，不保证严格轮询或设备任务数相等。
+[实际截图、原速录屏、GIF、API 响应与生成样本](docs/media/media-gen-124/README.md) 来自线上平台和正式 Skill Release，发布样本已去除嵌入 Workflow 元数据。该轮临时测试 Key 已停用。多设备池可把同一冻结发布绑定到多个已验证渠道；124 时点采用抢领分配，现已保留线上加权设备池实现，具体策略和当前成员以模型发现及 Admin 配置为准。
 
 ![实际模型说明与自动回收](docs/media/media-gen-124/model-usage-and-idle-policy.gif)
 

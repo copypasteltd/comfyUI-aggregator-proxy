@@ -134,7 +134,7 @@ class WaitEstimates(AdminBase):
         if not any(job.id == identifier for job in queued):
             return result.model_copy(update={"reason": "deadline"}).model_dump()
         release_ids = {job.release_id for job in queued}
-        releases = {row.id: row for row in session.execute(select(WorkflowRelease.id, WorkflowRelease.digest, WorkflowRelease.manifest["output"].label("output"), WorkflowRelease.manifest["runtime_profiles"].label("profiles"), WorkflowRelease.manifest["format_version"].astext.label("format_version"), WorkflowRelease.validation["test_only"].as_boolean().label("test_only")).where(WorkflowRelease.id.in_(release_ids)))}
+        releases = {row.id: row for row in session.execute(select(WorkflowRelease.id, WorkflowRelease.digest, WorkflowRelease.manifest["output"].label("output"), WorkflowRelease.manifest["runtime_profiles"].label("profiles"), WorkflowRelease.manifest["format_version"].astext.label("format_version"), WorkflowRelease.manifest["dependency_lock"]["native_roots"][0].is_not(None).label("native_required"), WorkflowRelease.validation["test_only"].as_boolean().label("test_only")).where(WorkflowRelease.id.in_(release_ids)))}
         topology = list(session.execute(select(Channel.id.label("channel_id"), Channel.tenant_id, Channel.project_id, Channel.gpu_id, Channel.applied_revision,
             Channel.observation["queue_observed_at"].label("queue_at"), Channel.observation["queue_revision"].label("queue_revision"), Channel.observation["queue"].label("queue"),
             Gpu.hardware_id, Node.id.label("node_id"), Node.current_boot_id, Node.inventory["capacity"].label("capacity"), Node.inventory["features"].label("features"),
@@ -188,7 +188,7 @@ class WaitEstimates(AdminBase):
                 if not job.is_validation and ((row.gpu_id, job.release_id, job.specification) in isolated or (not row.runtime_approval and not synthetic)):
                     continue
                 inventory = {"capacity": row.capacity, "features": row.features or []}
-                if not supports_inputs({"format_version": release.format_version}, inventory["features"]):
+                if not supports_inputs({"format_version": release.format_version}, inventory["features"], native_required=release.native_required):
                     continue
                 if job.task_type == "image_to_3d" and "model3d-output-v1" not in inventory["features"]:
                     continue

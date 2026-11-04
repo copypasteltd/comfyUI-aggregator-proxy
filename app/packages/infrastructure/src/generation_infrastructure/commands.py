@@ -11,6 +11,7 @@ from generation_contracts.command_recovery import CommandReconciliation
 from generation_contracts.model_files import ModelInspectionReceipt, ModelInventoryReceipt
 from generation_contracts.workflow_catalogs import WorkflowCatalogReceipt
 from generation_domain.errors import DomainError
+from generation_domain.native_dependencies import NATIVE_DEPENDENCY_FEATURE
 from generation_domain.values import canonical_json, fingerprint, parse_id, public_id, utcnow
 from generation_domain.workflow_catalogs import parse_catalog_cursor
 from generation_domain.workflow_imports import checked_source_receipt
@@ -54,6 +55,8 @@ def command_transaction(sessions: sessionmaker[Session]) -> Iterator[Session]:
 
 def environment_receipt_valid(payload: dict[str, Any], result: dict[str, Any]) -> bool:
     lock = payload.get("manifest", {}).get("dependency_lock", {})
+    if lock.get("native_roots") and result.get("native_dependencies_verified") is not True:
+        return False
     if lock.get("mode") == "comfy-api-only-v1":
         return result.get("environment_verified") is False and result.get("api_profile_verified") is True and result.get("environment_digest") == fingerprint({"mode": "comfy-api-only-v1", "dependency_lock": lock})
     return result.get("environment_verified") is True
@@ -147,6 +150,11 @@ class CommandRepository:
             if command.payload.get("revision") != channel.desired_revision:
                 command.state = "failed"
                 command.receipt = {"error_code": "superseded_revision"}
+                self._operation(session, command)
+                return {"command": None, "reconciliation": None}
+            if command.command == "apply_workflow_release" and command.payload.get("manifest", {}).get("dependency_lock", {}).get("native_roots") and NATIVE_DEPENDENCY_FEATURE not in node.inventory.get("features", []):
+                command.state = "failed"
+                command.receipt = {"success": False, "error_code": "worker_upgrade_required"}
                 self._operation(session, command)
                 return {"command": None, "reconciliation": None}
             if command.command == "pull_workflow" and command.payload.get("mode") == "catalog" and command.payload.get("export_boot_id") != str(boot_id):

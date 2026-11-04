@@ -6,6 +6,7 @@ from typing import Any
 
 from generation_domain.errors import DomainError
 from generation_domain.media_types import AUDIO_MIME_TYPES, MAX_AUDIO_BYTES, MAX_MODEL3D_BYTES
+from generation_domain.native_dependencies import NATIVE_DEPENDENCY_FEATURE
 
 INPUT_FEATURE = "workflow-inputs-v1"
 INPUT_KINDS: dict[str, tuple[int, frozenset[str]]] = {
@@ -18,8 +19,8 @@ INPUT_SUFFIXES = {"image/png": ".png", "image/jpeg": ".jpg", "image/webp": ".web
 SLOT_NAME = re.compile(r"^[a-z][a-z0-9_]{0,31}$")
 
 
-def supports_inputs(manifest: dict[str, Any], features: list[str]) -> bool:
-    return manifest.get("format_version") != "1.3" or INPUT_FEATURE in features
+def supports_inputs(manifest: dict[str, Any], features: list[str], *, native_required: bool = False) -> bool:
+    return (manifest.get("format_version") != "1.3" or INPUT_FEATURE in features) and (not (native_required or manifest.get("dependency_lock", {}).get("native_roots")) or NATIVE_DEPENDENCY_FEATURE in features)
 
 
 @dataclass(frozen=True)

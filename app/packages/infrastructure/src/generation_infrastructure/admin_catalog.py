@@ -16,6 +16,7 @@ from generation_contracts.discovery import PublishedCapability
 from generation_contracts.model_catalog import ModelCatalogQuery
 from generation_contracts.model_usage import ModelDocumentationPatch
 from generation_domain.errors import DomainError
+from generation_domain.native_dependencies import NATIVE_DEPENDENCY_FEATURE
 from generation_domain.values import canonical_json, fingerprint, parse_id, public_id, utcnow
 from generation_domain.workflows import matching_presets
 from jsonschema.exceptions import SchemaError
@@ -41,6 +42,7 @@ from generation_infrastructure.models import (
     Channel,
     Job,
     ManagementOperation,
+    Node,
     ObjectRecord,
     PublicModel,
     WorkerCommand,
@@ -220,6 +222,10 @@ class CatalogAdministration(AdminBase):
 
     def _prepare_binding(self, session: Session, channel: Channel, release: WorkflowRelease) -> dict[str, Any]:
         require_active_workflow(session, release.workflow_id)
+        if release.manifest.get("dependency_lock", {}).get("native_roots"):
+            node = session.get(Node, channel.node_id)
+            if not node or NATIVE_DEPENDENCY_FEATURE not in node.inventory.get("features", []):
+                raise DomainError("worker_upgrade_required", "目标 Worker 尚不支持原生辅助依赖校验，请先升级并登记本地依赖根", 422)
         binding = session.scalar(select(WorkflowBinding).where(WorkflowBinding.channel_id == channel.id, WorkflowBinding.release_id == release.id))
         if not binding:
             binding = WorkflowBinding(tenant_id=channel.tenant_id, project_id=channel.project_id, channel_id=channel.id, release_id=release.id, desired_digest=release.digest)

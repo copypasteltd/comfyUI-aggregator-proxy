@@ -92,7 +92,7 @@ def eligible_candidates(session: Session, node: Node, now: datetime, *, allow_sy
     if not jobs:
         return []
     release_ids = {job.release_id for job in jobs}
-    releases = {identifier: (output, test_only, version) for identifier, output, test_only, version in session.execute(select(WorkflowRelease.id, WorkflowRelease.manifest["output"], WorkflowRelease.validation["test_only"].as_boolean(), WorkflowRelease.manifest["format_version"].astext).where(WorkflowRelease.id.in_(release_ids)))}
+    releases = {identifier: (output, test_only, version, native) for identifier, output, test_only, version, native in session.execute(select(WorkflowRelease.id, WorkflowRelease.manifest["output"], WorkflowRelease.validation["test_only"].as_boolean(), WorkflowRelease.manifest["format_version"].astext, WorkflowRelease.manifest["dependency_lock"]["native_roots"][0].is_not(None)).where(WorkflowRelease.id.in_(release_ids)))}
     routes: dict[UUID, list[tuple[str, UUID, UUID, UUID, bool]]] = defaultdict(list)
     matched = 0
     for release_id, channel_id, gpu_id, tenant_id, project_id, runtime_approved in session.execute(select(WorkflowBinding.release_id, Channel.id, Gpu.id, Channel.tenant_id, Channel.project_id, approved).join(Channel, Channel.id == WorkflowBinding.channel_id).join(Gpu, Gpu.id == Channel.gpu_id).where(WorkflowBinding.release_id.in_(release_ids), *ready).limit(MAX_ROUTE_MATCHES + 1)):
@@ -108,8 +108,8 @@ def eligible_candidates(session: Session, node: Node, now: datetime, *, allow_sy
     candidates = []
     excluded_gpus = failed_oom_gpus(session, [job.id for job in jobs])
     for job in jobs:
-        output, test_only, version = releases[job.release_id]
-        if not supports_inputs({"format_version": version}, node.inventory.get("features", [])):
+        output, test_only, version, native = releases[job.release_id]
+        if not supports_inputs({"format_version": version}, node.inventory.get("features", []), native_required=native):
             continue
         if not node.current_boot_id or not capacity_ready(node.inventory, node.current_boot_id, now, next_reserve=output_reservation({"output": output}, 2 * 1024**3)):
             continue

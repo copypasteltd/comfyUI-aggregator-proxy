@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 139 · Native auxiliary locks / 原生辅助依赖冻结
+
+- Freeze operator-owned auxiliary roots by relative file, SHA-256 and byte count; verify them at workflow synchronization and execution. Keep local paths and programs outside business request control, and reject HTTP-only access, links, private directories and undeclared roots.
+- Gate synchronization, command delivery, job dispatch, retries, device pools and wait estimates on `native-dependency-roots-v1`; require explicit native verification in successful receipts. Existing releases without the optional lock remain compatible.
+- Read and hash 3,567 actual files without GPU generation, installation or downloads. Prepare new immutable draft inputs for 13 affected 3080 candidates; preserve model aliases and older releases. Production deployment and hardware approval of these candidates remain pending.
+- Seven newly published models pass ordinary business generation and SHA-256 downloads. Keep the input-transfer failure separate from source-workflow blockers; the 4090 service upgrade still needs device administrator access.
+
 ## 2026-11-04 · 138 · Multimodal Skill / 多模态调用 Skill
 
 - Add Skill 1.3.0 named image/video/audio/GLB streaming uploads, explicit workflow text fields and compatible parent-job selection. Required inputs are explicit; example placeholders are never submitted.

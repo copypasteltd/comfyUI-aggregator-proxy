@@ -11,6 +11,7 @@ from generation_application.ports import AdminIdentity, BusinessIdentity
 from generation_contracts.catalog import ValidationJob
 from generation_contracts.validation import JobCreate
 from generation_domain.errors import DomainError
+from generation_domain.native_dependencies import NATIVE_DEPENDENCY_FEATURE
 from generation_domain.values import fingerprint, parse_id, public_id
 from generation_domain.workflow_inputs import INPUT_FEATURE
 from generation_infrastructure.content import ContentRepository
@@ -115,7 +116,10 @@ def test_wrong_type_budget_and_cross_key_never_admit_a_job(pg: sessionmaker[Sess
         assert session.scalar(select(func.count()).select_from(JobAssetReference)) == 0
 
 
-def test_legacy_worker_cannot_claim_until_new_feature_is_registered(pg: sessionmaker[Session], catalog: dict[str, Any], multimodal_manifest: dict[str, Any], tmp_path: Path, audio_wav: Path, input_video: Path, model3d_glb: Path, test_settings: Settings) -> None:
+@pytest.mark.parametrize("native", [False, True])
+def test_legacy_worker_cannot_claim_until_new_feature_is_registered(pg: sessionmaker[Session], catalog: dict[str, Any], multimodal_manifest: dict[str, Any], tmp_path: Path, audio_wav: Path, input_video: Path, model3d_glb: Path, test_settings: Settings, native: bool) -> None:
+    if native:
+        multimodal_manifest["dependency_lock"]["native_roots"] = [{"name": "native_3d", "files": [{"path": "worker.py", "sha256": "f" * 64, "bytes": 10}]}]
     publish(pg, catalog, multimodal_manifest)
     assets = uploaded(ContentRepository(pg, LocalDevelopmentStore(tmp_path / "objects")), catalog["identity"], audio_wav, input_video, model3d_glb)
     job = JobRepository(pg).create(catalog["identity"], payload(assets), "feature-gated-inputs", "synthetic")
@@ -125,6 +129,12 @@ def test_legacy_worker_cannot_claim_until_new_feature_is_registered(pg: sessionm
         node = session.get(Node, catalog["node_id"])
         assert node
         node.inventory = {**node.inventory, "features": [INPUT_FEATURE]}
+    if native:
+        assert leases.claim(catalog["node_id"], catalog["boot_id"]) is None
+        with pg.begin() as session:
+            node = session.get(Node, catalog["node_id"])
+            assert node
+            node.inventory = {**node.inventory, "features": [INPUT_FEATURE, NATIVE_DEPENDENCY_FEATURE]}
     claim = leases.claim(catalog["node_id"], catalog["boot_id"])
     assert claim and claim["job_id"] == job["id"] and len(claim["execution"]["asset_hashes"]) == 4
 

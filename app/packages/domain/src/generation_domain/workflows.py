@@ -14,6 +14,7 @@ from generation_domain.media_types import (
     MODEL3D_MIME,
     task_media_kind,
 )
+from generation_domain.native_dependencies import validate_native_dependencies
 from generation_domain.values import fingerprint
 from generation_domain.workflow_inputs import (
     declared_slots,
@@ -213,6 +214,7 @@ def validate_manifest(manifest: dict[str, Any], task_type: str) -> dict[str, Any
         if path.casefold() in file_paths or any(part.casefold() in {".git", "__pycache__"} for part in path.split("/")):
             raise DomainError("dependency_files_invalid", "本机节点文件不能重复或引用版本库与缓存", 422)
         file_paths.add(path.casefold())
+    validate_native_dependencies(manifest)
     profiles = manifest["runtime_profiles"]
     if not isinstance(profiles, list):
         raise DomainError("profiles_required", "必须声明待验证的运行画像", 422)

@@ -51,11 +51,23 @@ class LockedNode(StrictDTO):
     commit: str = Field(pattern="^[a-f0-9]{40}$")
 
 
+class LockedNativeFile(StrictDTO):
+    path: str = Field(min_length=1, max_length=512)
+    sha256: str = Field(pattern="^[a-f0-9]{64}$")
+    bytes: int = Field(strict=True, gt=0, le=1024**4)
+
+
+class LockedNativeRoot(StrictDTO):
+    name: str = Field(pattern=r"^[a-z][a-z0-9_]{0,31}$")
+    files: list[LockedNativeFile] = Field(min_length=1, max_length=4096)
+
+
 class DependencyLock(StrictDTO):
     comfy_commit: str = Field(pattern="^[a-f0-9]{40}$")
     models: list[LockedModel]
     custom_nodes: list[LockedNode]
     files: list[LockedModel] = Field(default_factory=list, max_length=2000)
+    native_roots: list[LockedNativeRoot] = Field(default_factory=list, max_length=8)
 
 
 class ApiModelInput(StrictDTO):
