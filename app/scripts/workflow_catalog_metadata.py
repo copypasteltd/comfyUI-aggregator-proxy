@@ -151,6 +151,7 @@ def public_documentation(item: dict, manifest: dict) -> dict:
         ("Qwen Image", "qwen", "Qwen"),
         ("Pixal3D", "pixal3d", "Pixal3D"),
         ("Trellis2", "trellis2", "Trellis2"),
+        ("Hunyuan3D", "hunyuan3d", "Hunyuan3D"),
         ("SAM 3D", "sam3d", "SAM3D"),
         ("UniForge3D", "uniforge", "UniForge3D"),
         ("UltraShape", "ultrashape", "UltraShape"),
@@ -164,6 +165,18 @@ def public_documentation(item: dict, manifest: dict) -> dict:
     )
     if "easy multiTrackEditor" in classes:
         family, tag = "MiniMax H3 Timeline", "h3-timeline"
+    if family == "Podcast Trio":
+        models = {
+            node["inputs"].get("model") for node in graph.values()
+            if node["class_type"] == "PodcastTrioNative"
+            and isinstance(node["inputs"].get("model"), str)
+        }
+        podcast_names = {
+            "MOSS-TTSD-v1.0": ("MOSS-TTSD v1.0", "moss-ttsd"),
+            "FireRedTTS2": ("FireRedTTS2", "fireredtts2"),
+        }
+        if len(models) == 1 and (model := next(iter(models))) in podcast_names:
+            family, tag = podcast_names[model]
     if family == "ComfyUI":
         model_names = str(manifest["dependency_lock"]["models"]).lower()
         for marker, name, slug in (("illustrious", "Illustrious", "illustrious"), ("flux", "FLUX", "flux"), ("qwen", "Qwen Image", "qwen"), ("z_image", "Z Image", "z-image")):
@@ -273,6 +286,43 @@ def public_documentation(item: dict, manifest: dict) -> dict:
         notes.append(
             "输出自包含 GLB；几何、顶点色和 PBR 材质版本按独立模型区分，不保证未声明的贴图。Returns a self-contained GLB; geometry, vertex-color and PBR variants are separate models."
         )
+        active = set()
+        pending = list(manifest["output"]["final_node_ids"])
+        while pending:
+            node_id = pending.pop()
+            if node_id in active:
+                continue
+            active.add(node_id)
+            pending.extend(
+                value[0] for value in graph[node_id]["inputs"].values()
+                if isinstance(value, list) and len(value) == 2
+                and isinstance(value[0], str) and value[0] in graph
+            )
+        exported = {graph[node_id]["class_type"] for node_id in active}
+        if {"ApplyTextureToMesh", "BakeTextureFromVoxel"} <= exported:
+            operation += " · UV/PBR GLB"
+            notes.append(
+                "此变体烘焙 UV 基础色和 PBR 通道；原生节点在缺少 PBR 场时会输出黑色金属度/粗糙度，不能保证材质质量。"
+                "This variant bakes UV base color and PBR channels. Missing source PBR fields bake black metallic/roughness maps; material quality is not guaranteed."
+            )
+        elif "PaintMesh" in exported:
+            operation += " · 顶点色 GLB"
+            notes.append(
+                "此变体通过 PaintMesh 输出顶点色，不承诺 UV 贴图或 PBR 材质。"
+                "This variant exports PaintMesh vertex colors; UV textures and PBR materials are not promised."
+            )
+        elif "UTXFastSurfaceTextureBaker" in exported:
+            operation += " · UV 贴图 GLB"
+            notes.append(
+                "此变体把生成视图烘焙到输入网格的 UV 贴图；不承诺额外 PBR 通道。"
+                "This variant bakes generated views onto the input mesh's UV texture; additional PBR channels are not promised."
+            )
+        elif "NativeWindows3D" in exported or "VAEDecodeHunyuan3D" in exported or "UltraShapeConvertToGLB" in exported:
+            operation += " · 几何 GLB"
+            notes.append(
+                "此变体提供几何网格；不承诺顶点色、UV 贴图或 PBR 材质。"
+                "This variant provides mesh geometry; vertex colors, UV textures and PBR materials are not promised."
+            )
     return {
         "display_name": f"{family} · {operation}" + (" · " + specification if specification else "") + f" · RTX {item['gpu']} · {variant}",
         "description": f"{operation} / {operation_en}；{family}，RTX {item['gpu']}。{types[kind]}。{title}。按公开 usage 中的槽位、规格与示例调用。Use this model's public usage schema for exact slots, presets and examples.",

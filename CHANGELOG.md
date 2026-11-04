@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 141 · Model families and export notes / 模型家族与导出备注
+
+- Name Hunyuan3D, MOSS-TTSD v1.0 and FireRedTTS2 explicitly. Describe geometry, PaintMesh vertex colors, baked UV/PBR and UV texture variants using only the path connected to the final export. State missing-PBR limitations.
+- Update names/notes for 22 unpublished models and their Admin Workflow names with revision checks and preserved operation intents. Keep aliases, presets, immutable releases and customer Key policies. All 213 offline examples and actual Admin usage documents pass; all 46 scoped regressions pass against the current source.
+- Record ten newly published models with ordinary business generation and verified downloads. The corrected Qwen editing version returns 768×1376; publish its actual image with embedded workflow metadata removed and pixel equality verified. Keep separate original-download and public-image hashes.
+
 ## 2026-11-04 · 140 · Image delivery canvas / 图像交付尺寸
 
 - A Qwen editing workflow produced a valid 1024×1024 PNG while its package declared 768×1376 from an unused latent node. Freeze a final delivery canvas for image packages and disclose Lanczos resizing/center cropping in bilingual notes. Reuse an identical output scale without self-cycles and preserve colliding source nodes.
