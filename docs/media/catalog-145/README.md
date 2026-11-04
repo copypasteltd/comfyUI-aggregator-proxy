@@ -10,6 +10,18 @@ This preview uses the GLB from a separate ordinary business call to the publishe
 
 The 24-frame GIF is an offline CPU projection of the actual active-scene geometry, with 120 ms per frame. It uses the project's checked-in Lime palette and a labelled solid display material. Original textures are not rendered, the source GLB is unchanged, and this is not an original-speed recording of inference. Generation/delivery success does not establish shape fidelity or material quality.
 
+本次实际上传的四张参考图如下，由本项目自行绘制几何机器人视图。公开副本与业务请求所引用素材逐张核对字节数和 SHA-256，完全相同；PNG 不含内嵌工作流或其他元数据。[输入来源与校验清单](input-manifest-146.json) 将各图明确对应到该业务任务的命名槽位。
+
+These are the four original synthetic views actually uploaded for the recorded business job. Each public PNG is byte-identical to its referenced asset and contains no embedded workflow metadata; the input manifest maps each role and hash to the preserved request.
+
+| 正面 / Front | 背面 / Back |
+| --- | --- |
+| ![Actual front input](inputs/front.png) | ![Actual back input](inputs/back.png) |
+
+| 左侧 / Left | 右侧 / Right |
+| --- | --- |
+| ![Actual left input](inputs/left.png) | ![Actual right input](inputs/right.png) |
+
 - [静态预览 / Still preview](uniforge3d-geometry.png)
 - [调用、任务、下载与几何证明 / Runtime and complete-download evidence](../../evidence/2026-11-04/catalog-mesh-145-first-runtime.json)
 - [来源与预览文件摘要 / Preview provenance and hashes](manifest.json)

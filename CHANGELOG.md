@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 146 · Six mesh outputs and actual inputs / 六个三维结果与实际输入
+
+- Six new mesh models pass ordinary business discovery, independent validation/generation jobs, complete SHA-verified downloads and bounded GLB inspection. The latest snapshot records 27 new business-verified models: 12 image, nine audio and six mesh; 12 mesh candidates continue trials.
+- Inspect actual appearance channels: Pixal3D vertex colors, Pixal3D multiview UV/PBR and Trellis2 UV/PBR. Both baked variants contain UV coordinates plus base-color and metallic/roughness textures. PartCrafter's sample contains three meshes. Record actual output counts without certifying visual quality or promising identical counts for other inputs.
+- Publish the four original synthetic robot PNGs used in the recorded UniForge3D business call. Verify byte identity against each uploaded asset and preserved request, with no embedded metadata. Keep earlier reports, the GLB hash and the existing Lime geometry previews unchanged; add a separate input provenance manifest and bilingual comparisons.
+
 ## 2026-11-04 · 145 · First multiview mesh delivery / 首个多视图三维交付
 
 - UniForge3D passes independent hardware validation, publication and a separate business call with the same four original synthetic object views. Verify the complete 2,399,092-byte GLB by SHA-256 and an independent bounded static-mesh inspection: 49,958 vertices, 99,689 triangles, one material and no embedded textures. This run takes approximately 19 minutes; it is an observation rather than a latency promise.
