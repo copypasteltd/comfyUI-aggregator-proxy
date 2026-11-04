@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 133,
+  "increment": 150,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-04/development-trace-baselines-144.json",
-    "sha256": "c5dd22416022690d401f501b7a847d50532d14c34755f241264acba4aec9440b"
+    "path": "docs/evidence/2026-11-04/development-trace-baselines-150.json",
+    "sha256": "a296be6d6278f3a7604bc3b59575b7f3366e3dc4f6642b0e3977baaf34ddbfa9"
   },
   "requirements": [
     {
@@ -4529,7 +4529,7 @@
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_business_key_cannot_access_any_scope_management_route",
           "language": "python",
-          "baseline": "mesh128"
+          "baseline": "daily150"
         }
       ],
       "evidence": [
@@ -4539,7 +4539,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "daily150"
       ],
       "remaining_backlog": [
         "51",
@@ -4668,7 +4669,15 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_scopes.py",
-          "baseline": "native139"
+          "baseline": "daily150"
+        },
+        {
+          "path": "app/packages/contracts/src/generation_contracts/defaults.py",
+          "baseline": "daily150"
+        },
+        {
+          "path": "app/apps/control_api/src/control_api/cli.py",
+          "baseline": "daily150"
         }
       ],
       "tests": [
@@ -4676,13 +4685,25 @@
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_parallel_keys_share_parent_budget_and_other_tenant_is_independent",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "daily150"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_parent_and_key_rate_rejection_rolls_back_all_levels",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "daily150"
+        },
+        {
+          "path": "app/tests/integration/test_scope_administration.py",
+          "symbol": "test_unlimited_scope_patch_preserves_nulls_usage_and_replay",
+          "language": "python",
+          "baseline": "daily150"
+        },
+        {
+          "path": "app/tests/integration/test_scope_administration.py",
+          "symbol": "test_new_admin_defaults_remove_only_daily_caps",
+          "language": "python",
+          "baseline": "daily150"
         }
       ],
       "evidence": [
@@ -4693,7 +4714,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "daily150"
       ],
       "remaining_backlog": [
         "34",
@@ -4993,7 +5015,7 @@
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_disabling_scope_blocks_new_calls_but_preserves_accepted_job_and_gpu",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "daily150"
         },
         {
           "path": "app/tests/integration/test_dispatch_transactions.py",
@@ -5009,7 +5031,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "daily150"
       ],
       "remaining_backlog": [
         "49",
@@ -5040,13 +5063,13 @@
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_scope_concurrent_idempotency_revision_noop_and_rollback",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "daily150"
         },
         {
           "path": "app/tests/integration/test_scope_administration.py",
           "symbol": "test_usage_snapshot_timezone_and_limits_edits_preserve_buckets",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "daily150"
         }
       ],
       "evidence": [
@@ -5057,7 +5080,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "daily150"
       ],
       "remaining_backlog": [
         "50",

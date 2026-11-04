@@ -1,0 +1,40 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T07:24:00.978038+00:00",
+  "passed": false,
+  "scope": "First broad Python verification after unlimited defaults and scope-null repair. Preserve failures; this is not a passed full-suite gate. Relevant scope/auth/legacy-policy checks have their own separate execution report.",
+  "python": {
+    "tests": 4777,
+    "failures": 2,
+    "errors": 1,
+    "skipped": 0
+  },
+  "passed_cases": 4774,
+  "failures": [
+    {
+      "path": "app/tests/integration/test_channel_deletion.py",
+      "symbol": "test_reference_wins_and_delete_rechecks_after_waiting[admission]",
+      "result": "failure"
+    },
+    {
+      "path": "app/tests/integration/test_gateway_catalogs.py",
+      "symbol": "test_rejected_and_duplicate_receipts_are_monotonic_and_audited_once",
+      "result": "setup_error"
+    },
+    {
+      "path": "app/tests/unit/test_development_evidence.py",
+      "symbol": "test_repository_mapping_checks_actual_current_inputs_without_private_artifacts",
+      "result": "failure"
+    }
+  ],
+  "junit_sha256": "8a13f5d33e31bccd4576c96e08406a445e0d696233acb2b139db9aa39fee27b3",
+  "python_log_sha256": "aae210628e8d4777179622a6177cb9a29c04b67c771602bc223fe198d6fdb15a",
+  "observations": [
+    "Scope evidence references were intentionally pending refresh and failed the repository mapping assertion; refresh and mapping verification are recorded separately.",
+    "Native channel deletion lock-wait observation failed for the admission case. The original failure is preserved; no timeout or retry budget was increased.",
+    "A gateway test fixture received HTTP 500 during Admin session initialization after about five seconds. This native database observation remains outside the completed daily-limit component verification."
+  ],
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "logs_and_parameter_payloads_published": false
+}

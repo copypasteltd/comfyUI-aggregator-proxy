@@ -1,0 +1,287 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T07:14:45.047073+00:00",
+  "passed": true,
+  "scope": "All existing tenants/projects/nondeleted API Keys have all five daily caps explicitly unlimited. Audited Admin API writes with optimistic revisions and private intent journal. Existing access policies, enabled/expiration, RPM/burst/concurrency/per-request specifications preserved.",
+  "counts": {
+    "tenants": 1,
+    "projects": 1,
+    "api-keys": 22
+  },
+  "daily_fields": [
+    "daily_jobs",
+    "daily_image_count",
+    "daily_video_milliseconds",
+    "daily_audio_milliseconds",
+    "daily_mesh_count"
+  ],
+  "limit": {
+    "mode": "unlimited",
+    "value": null
+  },
+  "protected_policies_unchanged": true,
+  "deleted_keys_skipped": 8,
+  "outcomes": {
+    "first_write_committed_response_failed_then_nulls_repaired": 1,
+    "changed": 23
+  },
+  "usage_counters_rewritten": false,
+  "direct_database_writes": false,
+  "virtualization_used": false,
+  "new_defaults_deployment": "separately_verified",
+  "full_acceptance": "pending",
+  "rows": [
+    {
+      "kind": "tenants",
+      "id": "ten_bc0c4928b568401cb61cc6f2ada4aab4",
+      "revision_before": 4,
+      "revision_after": 6,
+      "protected_sha256": "7cee042a3b869ae4bf431eb73121ce25778ebf23a2b30145ba73ecfe900533f4",
+      "usage_before": {
+        "period": "2026-11-04",
+        "daily_jobs": 73,
+        "unfinished_jobs": 1,
+        "generating_jobs": 1,
+        "daily_image_count": 25,
+        "daily_video_milliseconds": 0,
+        "daily_audio_milliseconds": 188856,
+        "daily_mesh_count": 27
+      },
+      "usage_after": {
+        "period": "2026-11-04",
+        "daily_jobs": 73,
+        "unfinished_jobs": 1,
+        "generating_jobs": 1,
+        "daily_image_count": 25,
+        "daily_video_milliseconds": 0,
+        "daily_audio_milliseconds": 188856,
+        "daily_mesh_count": 27
+      }
+    },
+    {
+      "kind": "projects",
+      "id": "prj_5a1dd83718284a5ca57e78280819c8c9",
+      "revision_before": 4,
+      "revision_after": 5,
+      "protected_sha256": "7ae32a1df49239338cbb392b4317e8f3902f59b8c59cd39b2eb0cae865abbbe4",
+      "usage_before": {
+        "period": "2026-11-04",
+        "daily_jobs": 73,
+        "unfinished_jobs": 1,
+        "generating_jobs": 1,
+        "daily_image_count": 25,
+        "daily_video_milliseconds": 0,
+        "daily_audio_milliseconds": 188856,
+        "daily_mesh_count": 27
+      },
+      "usage_after": {
+        "period": "2026-11-04",
+        "daily_jobs": 73,
+        "unfinished_jobs": 1,
+        "generating_jobs": 1,
+        "daily_image_count": 25,
+        "daily_video_milliseconds": 0,
+        "daily_audio_milliseconds": 188856,
+        "daily_mesh_count": 27
+      }
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_8dc0bf52c849444c91c730296aaee865",
+      "revision_before": 3,
+      "revision_after": 4,
+      "protected_sha256": "305ad6a181f28af5ea0380e53af98d47b436cd1452840705e9b9ce3fe57f8d32",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_e42d172b1b5146b6b04dce5a35cfd5fe",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "41733e8a25096cda2c2361a06e351f9b77ad7d74d215d571aac649af325d9e60",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_f3cf516c6d76415fb86bbee05bb42f48",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "819f84ad740c7d0b6aac9b158f80235fb288257c58a94a596d61d8f064275b59",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_7066026aed214da09dc54082581fe1ac",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "5c54e4039cd320b4266216d4463883e5edd31267dc1bb38d7cdbfbea4d76af7f",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_9a605ed3cf6c48288540aa4c20b1eb49",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "2510d5e35ce0fc21ac764821aeb4a69e5aa2eaa511049bde1cb85011564b104c",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_cc2bd6042dc748f180694263c3725c22",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "1f56fadaf8626e004670c3e7eb9173367a6c521e66116e79fa05155f4ca8b0d4",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_cb9593191cfd46829f2cb439b6539c00",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "ba31f94e25872718c3174bf548152712b9df0b3fe717efb7932bf2f739f5a6c5",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_1296cd69d62d4590991b7019383b572e",
+      "revision_before": 4,
+      "revision_after": 5,
+      "protected_sha256": "8fed26c94b9e7509a1396237e02c1919fe70ae68bd015c0e29757c1f5c0b9c98",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_cd87970dd9e44a7f8c828112d0b72b4d",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "94de997982f7bf8829091e4918c993386f0254735d294a293fdc82436dee058f",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_1fd3c8ebf1db41318649de370f628a89",
+      "revision_before": 3,
+      "revision_after": 4,
+      "protected_sha256": "85fa569b05064f1003772e16a7c46e1a2deeb4be5bad48c9ee1b643ab152b556",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_302583db16c34e498e6acb18ce7a56d6",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "1ce1e403328f879f67cedcd216fc87f268c3c05f9d705ddcac715d832a9b23ff",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_93554548f01a4001a517b24f9bbc5d3a",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "ab6e14092a7aac113d0e7f24ba9d59b1b929bd7d80bf17acb72dcc5ce0e2eb43",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_edec7db2ceab46538769f6d675ecf6d1",
+      "revision_before": 4,
+      "revision_after": 5,
+      "protected_sha256": "7d59283b32b6c88d15305484c5ebd7d7533b5210640379442a83dc8c9cd15445",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_7e374522ffb94e57a1fb7e873406e170",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "e36f929b0026958e9921e4391d547bdecb1f4a9ccf7dcd72145ade94602d0d05",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_d876ac29248d4a3c8a8398ea386c37f6",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "263c28e115f882786fdc7a1e444444557bf05a74ce6e93db58fd025ded1c8270",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_7ed34c0bada1498499a378ceb20b11dc",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "b88cb45d329dbe5ed1997d515ba27b3236c25a794efddb169c7022abbc0e35ad",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_32716a1c4e2b4c5b8e791ca4d64a96df",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "41824e99cea0801b1ad7448aaeb9f36162cc70405f37474b6d63ab6e07972864",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_555b879fce8f436183ffd7ec88673667",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "7358281462c935b8764de7bd21d7d98531fa12a82cc3881674370ec45663831d",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_e6d7b70e55dd4d38a131547a1552dab6",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "d1ebf3d9f0b90194adc97f7efe8e8f85f27d7ef8a84ff60c2a5ea2e7eecf26c9",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_d333b298385f44fa9e16d9e5e3ca19fd",
+      "revision_before": 2,
+      "revision_after": 3,
+      "protected_sha256": "7626437d906e068a8e009c00ffcdc4803660168da75c4941e7d34239dc858058",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_21be4655d4ce45f8a956a1367aa0b9ed",
+      "revision_before": 3,
+      "revision_after": 4,
+      "protected_sha256": "d07be67d565eb6f02d74f63dc798e6a7446ae2927f12297f633c5ab93ccf2711",
+      "usage_before": null,
+      "usage_after": null
+    },
+    {
+      "kind": "api-keys",
+      "id": "key_2340a5786b87409fb09ef2af4b9e35b0",
+      "revision_before": 4,
+      "revision_after": 5,
+      "protected_sha256": "997a2af8b1c7bdc03d98e58e0299104cf6cc90aa6887b97dfe5a4d7c2c1b79f6",
+      "usage_before": null,
+      "usage_after": null
+    }
+  ]
+}

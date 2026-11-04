@@ -1,0 +1,58 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T07:17:52.053230+00:00",
+  "passed": true,
+  "scope": "Actual deployed Admin list defaults consumed by tenant/project/API Key creation forms. New daily limits explicitly unlimited; rate/concurrency defaults bounded. Public arbitrary-origin CORS and unauthenticated model-access rejection both preserved.",
+  "default_layers_verified": 3,
+  "daily_fields": [
+    "daily_jobs",
+    "daily_image_count",
+    "daily_video_milliseconds",
+    "daily_audio_milliseconds",
+    "daily_mesh_count"
+  ],
+  "limits": {
+    "rpm": {
+      "mode": "bounded",
+      "value": 120
+    },
+    "burst": {
+      "mode": "bounded",
+      "value": 10
+    },
+    "daily_jobs": {
+      "mode": "unlimited",
+      "value": null
+    },
+    "unfinished_jobs": {
+      "mode": "bounded",
+      "value": 20
+    },
+    "generating_jobs": {
+      "mode": "bounded",
+      "value": 2
+    },
+    "daily_image_count": {
+      "mode": "unlimited",
+      "value": null
+    },
+    "daily_video_milliseconds": {
+      "mode": "unlimited",
+      "value": null
+    },
+    "daily_audio_milliseconds": {
+      "mode": "unlimited",
+      "value": null
+    },
+    "daily_mesh_count": {
+      "mode": "unlimited",
+      "value": null
+    }
+  },
+  "non_daily_defaults_preserved": true,
+  "cors_arbitrary_origin": true,
+  "unauthenticated_model_list_status": 401,
+  "https_checks_performed": false,
+  "virtualization_used": false,
+  "full_acceptance": "pending"
+}

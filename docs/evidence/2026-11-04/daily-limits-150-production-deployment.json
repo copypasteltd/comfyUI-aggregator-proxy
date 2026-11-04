@@ -1,0 +1,115 @@
+{
+  "at": "2026-11-04T07:13:52.963400+00:00",
+  "passed": true,
+  "release": "linux-20261104.150.1",
+  "source_revision": "5c68771ed7bb559c2e6230fffe82b6d0bc183ac3",
+  "database_head": "04d133a00001",
+  "database_migration_required": false,
+  "restart_scope": "API only; existing Runner/GC/HTTP Worker processes retained, compatible contracts unchanged",
+  "before_pids": {
+    "comfy-aggregator-api.service": 1283537,
+    "comfy-aggregator-runner.service": 1283541,
+    "comfy-aggregator-gc.service": 1283539,
+    "comfy-aggregator-http-worker.service": 1283715
+  },
+  "after_pids": {
+    "comfy-aggregator-api.service": 1630977,
+    "comfy-aggregator-runner.service": 1283541,
+    "comfy-aggregator-gc.service": 1283539,
+    "comfy-aggregator-http-worker.service": 1283715
+  },
+  "unfinished_jobs_preserved": 1,
+  "gpu_occupancies_observed": 1,
+  "api_only_changes": [
+    "contracts/defaults.py",
+    "infrastructure/admin_scopes.py",
+    "control_api/cli.py"
+  ],
+  "virtualization_used": false,
+  "installed_source_sha256": {
+    "app/packages/contracts/src/generation_contracts/defaults.py": "350f670f56e297d78692febd97bfb1072fbc52f76147ace5621c13b9d78f683a",
+    "app/apps/control_api/src/control_api/cli.py": "df7bd3db49d5e5789c0e0f1496cb2007b05d2d0d02fc9c4082db3cdf66ae07a3",
+    "app/packages/infrastructure/src/generation_infrastructure/admin_scopes.py": "810f9792621b71ff849408a35a9e60c16b6c71ed16914cae9a3a3a878301738c"
+  },
+  "bootstrap_defaults_shared": true,
+  "daily_defaults": {
+    "daily_jobs": {
+      "mode": "unlimited",
+      "value": null
+    },
+    "daily_image_count": {
+      "mode": "unlimited",
+      "value": null
+    },
+    "daily_video_milliseconds": {
+      "mode": "unlimited",
+      "value": null
+    },
+    "daily_audio_milliseconds": {
+      "mode": "unlimited",
+      "value": null
+    },
+    "daily_mesh_count": {
+      "mode": "unlimited",
+      "value": null
+    }
+  },
+  "services_verified": {
+    "comfy-aggregator-api.service": {
+      "active": true,
+      "pid": 1630977
+    },
+    "comfy-aggregator-runner.service": {
+      "active": true,
+      "pid": 1283541
+    },
+    "comfy-aggregator-gc.service": {
+      "active": true,
+      "pid": 1283539
+    },
+    "comfy-aggregator-http-worker.service": {
+      "active": true,
+      "pid": 1283715
+    }
+  },
+  "http_checks": [
+    {
+      "origin": "http://127.0.0.1:32880",
+      "route": "/health/live",
+      "status": 200
+    },
+    {
+      "origin": "http://127.0.0.1:32880",
+      "route": "/health/ready",
+      "status": 200
+    },
+    {
+      "origin": "http://127.0.0.1:32880",
+      "route": "/admin/",
+      "status": 200
+    },
+    {
+      "origin": "http://43.165.167.179:39443",
+      "route": "/health/live",
+      "status": 200
+    },
+    {
+      "origin": "http://43.165.167.179:39443",
+      "route": "/health/ready",
+      "status": 200
+    },
+    {
+      "origin": "http://43.165.167.179:39443",
+      "route": "/admin/",
+      "status": 200
+    }
+  ],
+  "https_checks_performed": false,
+  "disk_free_bytes": 6240489472,
+  "format_version": 1,
+  "scope": "Native immutable API/defaults rollout and source-byte verification. Existing Runner, GC and HTTP Worker process identities preserved; current jobs not cancelled or requeued. Separate live Admin report checks all existing daily policies.",
+  "candidate_archive_sha256": "2e99133fbae09ac5b3191ae87f42bc4f9c462460bf0115d12ef2c1796ec7c40d",
+  "linux_archive_sha256": "cf976151c3751d1608585f85f0b79c84b9bbe8597822fe7bb8b38af8edf995ce",
+  "full_acceptance": "pending",
+  "real_generation_acceptance": false
+}

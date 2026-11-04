@@ -4,7 +4,8 @@
 
 - Set all five new daily quota defaults to explicit unlimited values and share the same defaults with native project bootstrap. Existing grants, rate/concurrency controls and per-request specifications are preserved.
 - Preserve nested null values in tenant/project patches. Read older unlimited records and idempotent receipts without treating missing bounded quotas as unlimited; retain the original request fingerprint for replay compatibility.
-- Five native PostgreSQL/HTTP regressions pass for tenant/project persistence, replay, old records, parent display, usage preservation and Admin defaults. Production configuration and immutable release evidence are recorded separately in document 140.
+- Deploy API `linux-20261104.150.1` and read back all 120 daily fields across one tenant, one project and 22 nondeleted Keys. Preserve eight deleted Keys, protected access policies, actual counters and existing Runner/GC/HTTP Worker process identities. Verify installed source bytes, all three Admin defaults, ordinary HTTP and arbitrary-origin CORS.
+- Five initial and 60 component PostgreSQL/HTTP regressions pass; 85 evidence checks pass after the trace refresh. Preserve the separate broad run (4,774 passed, two failed and one setup error), and leave its native database observations/full engineering gate open. No timeout or retry budget was raised. Details and immutable reports: document 140.
 
 ## 2026-11-04 · 148 · SAM3D multiview and Pixal3D PBR / 多视图与单图贴图交付
 

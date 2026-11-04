@@ -1,0 +1,185 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T07:23:19.745421+00:00",
+  "passed": true,
+  "scope": "Native PostgreSQL/HTTP scope administration, unchanged quota counters/rates/concurrency, business/Admin authentication and legacy audio/mesh omission rejection; new unlimited daily defaults and null-preserving replay. This component report does not accept unrelated full-suite database races or real GPU generation.",
+  "source_revision": "5c68771ed7bb559c2e6230fffe82b6d0bc183ac3",
+  "sources_unchanged": true,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "python": {
+    "tests": 60,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/packages/contracts/src/generation_contracts/defaults.py": "350f670f56e297d78692febd97bfb1072fbc52f76147ace5621c13b9d78f683a",
+    "app/apps/control_api/src/control_api/cli.py": "df7bd3db49d5e5789c0e0f1496cb2007b05d2d0d02fc9c4082db3cdf66ae07a3",
+    "app/packages/infrastructure/src/generation_infrastructure/admin_scopes.py": "810f9792621b71ff849408a35a9e60c16b6c71ed16914cae9a3a3a878301738c",
+    "app/tests/conftest.py": "886b269e44417223f3b2037007dddb2fa5bb26c6ddf5868ae0fcb851cb358e25",
+    "app/tests/integration/test_scope_administration.py": "ea9a3255b4e5d752babb5040db2886f9c515e57e5c442266f1741d8c590642ba",
+    "app/tests/unit/test_scope_contracts.py": "8e342c900772cd8b14da8b093c29ef49015b6da0c226c15468fdbb7282059bf1",
+    "app/tests/integration/test_http_auth.py": "c0a34c354bab1d2e7b031689419f296099c7f1c68209ddd0ad0d958d0e1d1ab1",
+    "app/tests/unit/test_audio_media.py": "1adee85167ed4b56214de0c9c825d41fd667e2d5a6cee32adbb43d1a46e397ef",
+    "app/tests/unit/test_model3d.py": "7452e86f49aa51bd5812aab1a9bd17b47e483da6d9241983116eabc8b9325287"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_admin_content_metadata_range_delete_and_observer_access",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_cookie_csrf_and_identity_realms",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_images_async_and_native_jobs_share_idempotency",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_model_discovery_http_single_scope_and_current_publication",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_observer_and_stale_configuration_are_rejected",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_one_time_secret_replay_rotation_and_revocation",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_public_job_cursor_http_rotation_revocation_and_query_validation",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_request_limits_and_validation_never_echo_secrets",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_studio_release_header_validation_poll_hint_and_cors",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_http_auth.py",
+      "symbol": "test_sync_image_modes_require_delivery_scopes_before_create",
+      "passed_cases": 6
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_business_key_cannot_access_any_scope_management_route",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_disabling_scope_blocks_new_calls_but_preserves_accepted_job_and_gpu",
+      "passed_cases": 2
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_new_admin_defaults_remove_only_daily_caps",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_paged_directory_options_search_disabled_and_immutable_parent",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_parallel_keys_share_parent_budget_and_other_tenant_is_independent",
+      "passed_cases": 2
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_parent_and_key_rate_rejection_rolls_back_all_levels",
+      "passed_cases": 3
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_scope_concurrent_idempotency_revision_noop_and_rollback",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_scope_http_create_permissions_csrf_revision_and_pagination",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_unlimited_scope_patch_preserves_nulls_usage_and_replay",
+      "passed_cases": 4
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_usage_snapshot_timezone_and_limits_edits_preserve_buckets",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_audio_media.py",
+      "symbol": "test_old_policy_and_worker_do_not_implicitly_support_audio",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_model3d.py",
+      "symbol": "test_old_policies_never_inherit_mesh_permission_or_quota",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_scope_contracts.py",
+      "symbol": "test_invalid_scope_names",
+      "passed_cases": 7
+    },
+    {
+      "path": "app/tests/unit/test_scope_contracts.py",
+      "symbol": "test_limits_require_explicit_modes_and_complete_shape",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_scope_contracts.py",
+      "symbol": "test_scope_limit_write_boundaries",
+      "passed_cases": 6
+    },
+    {
+      "path": "app/tests/unit/test_scope_contracts.py",
+      "symbol": "test_scope_names_are_normalized_and_project_ownership_is_required",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_scope_contracts.py",
+      "symbol": "test_scope_patch_requires_revision_and_actual_field",
+      "passed_cases": 4
+    },
+    {
+      "path": "app/tests/unit/test_scope_contracts.py",
+      "symbol": "test_scope_query_coercion_and_legacy_read_limits",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_scope_contracts.py",
+      "symbol": "test_scope_query_is_bounded",
+      "passed_cases": 6
+    }
+  ],
+  "junit_sha256": "0494c4e1e1b31d71cb372bc025b8659c66350a5eade60cc8b2ae2b17d1049e59",
+  "python_log_sha256": "016c0f0e8f14e0d7954a06a23aa28c8aea69fe00e832254399ceab66c2e719b8",
+  "seconds": 28.153,
+  "files_selected": [
+    "tests/integration/test_scope_administration.py",
+    "tests/unit/test_scope_contracts.py",
+    "tests/integration/test_http_auth.py",
+    "tests/unit/test_audio_media.py::test_old_policy_and_worker_do_not_implicitly_support_audio",
+    "tests/unit/test_model3d.py::test_old_policies_never_inherit_mesh_permission_or_quota"
+  ]
+}
