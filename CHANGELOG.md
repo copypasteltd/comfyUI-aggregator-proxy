@@ -5,7 +5,7 @@
 - Add Skill 1.3.0 named image/video/audio/GLB streaming uploads, explicit workflow text fields and compatible parent-job selection. Required inputs are explicit; example placeholders are never submitted.
 - Verify 17 client cases, actual production audio/video/GLB uploads, live discovery, durable business submission and SHA-256-checked image download. Local and real-resource reports keep separate scopes.
 - Deploy the Admin typed-input ownership fix as immutable cloud `linux-20261104.133.4`; reverify all original bindings and resume the original channels. Import all 213 candidate drafts and continue real-generation approval/publication. The 4090 Worker upgrade awaits device administrator access.
-- Skill source publication is in progress; fixed-URL rollout will be recorded after external digest verification.
+- Publish immutable Skill 1.3.0 on GitHub and the fixed `/skill.md` URL. All four public assets match both native builds; external high-port/domain, CORS/cache and auth-boundary checks pass. Preserve Skill 1.2.0 and all generation service PIDs. Install the local loader as a junction to the project canonical source.
 
 ## 2026-11-04 · 136 · Typed validation and catalog names / 多模态试跑与功能命名
 

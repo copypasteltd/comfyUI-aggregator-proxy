@@ -4,11 +4,11 @@
 
 ## 安装 / Install
 
-推荐单文件：[最新 skill.md](https://gen.sub2share.xyz/skill.md)；[固定 1.2.0](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md)。下载后命名为 `media-gen-skill/SKILL.md`，放入 Agent 的 Skill 目录并重新打开会话。所有说明、API 参考和客户端均内嵌，无需其他下载。若要执行 CLI，按文件内命令在工作目录提取 `media_gen.py`，下方示例的 `scripts/media_gen.py` 改为 `media_gen.py`。同一固定地址更新；版本入口保持不变，更新不会自动覆盖已安装文件。
+推荐单文件：[最新 skill.md](https://gen.sub2share.xyz/skill.md)；[固定 1.3.0](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md)。下载后命名为 `media-gen-skill/SKILL.md`，放入 Agent 的 Skill 目录并重新打开会话。所有说明、API 参考和客户端均内嵌，无需其他下载。若要执行 CLI，按文件内命令在工作目录提取 `media_gen.py`，下方示例的 `scripts/media_gen.py` 改为 `media_gen.py`。同一固定地址更新；版本入口保持不变，更新不会自动覆盖已安装文件。
 
-For one-file installation, save the [current skill.md](https://gen.sub2share.xyz/skill.md) as `media-gen-skill/SKILL.md` in your agent's skills directory. Open a new session. The API reference and complete client are embedded. To use CLI examples, extract `media_gen.py` following the instructions inside the file and omit `scripts/` from the commands below. Re-fetch the current URL to update; retain private state and reload the session. The [versioned URL](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md) remains immutable. [Release and static deployment](131-单文件Skill与固定在线地址.md).
+For one-file installation, save the [current skill.md](https://gen.sub2share.xyz/skill.md) as `media-gen-skill/SKILL.md` in your agent's skills directory. Open a new session. The API reference and complete client are embedded. To use CLI examples, extract `media_gen.py` following the instructions inside the file and omit `scripts/` from the commands below. Re-fetch the current URL to update; retain private state and reload the session. The [versioned URL](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md) remains immutable. [Release and static deployment](131-单文件Skill与固定在线地址.md).
 
-也可从正式 [Media Gen Skill 1.2.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.2.0) 获取 `media-gen-skill-1.2.0.zip` 和 `SHA256SUMS.txt`，先校验摘要，再解压为 `media-gen-skill/`。Codex 用户可把该目录放到自己的 `$CODEX_HOME/skills/` 或用户 skills 目录后重新打开会话。其他支持 SKILL.md 的 Agent 使用其对应的 Skill 安装目录；也可直接运行脚本。
+也可从正式 [Media Gen Skill 1.3.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.3.0) 获取 `media-gen-skill-1.3.0.zip` 和 `SHA256SUMS.txt`，先校验摘要，再解压为 `media-gen-skill/`。Codex 用户可把该目录放到自己的 `$CODEX_HOME/skills/` 或用户 skills 目录后重新打开会话。其他支持 SKILL.md 的 Agent 使用其对应的 Skill 安装目录；也可直接运行脚本。
 
 Download the archive and checksum from this repository's Releases, verify SHA-256, and extract the single `media-gen-skill` directory. Install that directory in your agent's skills folder, or run the client directly. A `release.json` inside the archive binds every file to its source commit. **A local archive is not proof of a published GitHub Release**; current publication and independent asset verification are recorded in [131](131-单文件Skill与固定在线地址.md); historical 1.1.1 evidence remains in [130](130-MediaGenSkill兼容同步与发布.md).
 
@@ -74,9 +74,24 @@ Outputs expire eight hours after successful completion. Download promptly. Trans
 ## 维护与发布 / Maintainer release
 
 ```powershell
-python app/scripts/build-media-gen-skill.py --output app/.local/media-gen-skill-1.2.0
+python app/scripts/build-media-gen-skill.py --output app/.local/media-gen-skill-1.3.0
 ```
 
-打包要求 Skill 源码和构建器已提交，ZIP 包含单一根目录、文件清单与来源提交；另生成独立 `skill.md`，SHA256SUMS 同时覆盖 ZIP 和单文件。发布标签约定 `media-gen-skill-v1.2.0`，正式发行四项资产：ZIP、skill.md、SHA256SUMS.txt 和 release.json。构建器固定 ZIP 创建平台并统一单文件换行，便于跨平台复现。版本升级同步 VERSION、文档、兼容行为、验证、GitHub Release 和固定在线入口；静态部署步骤见 [131](131-单文件Skill与固定在线地址.md)。
+打包要求 Skill 源码和构建器已提交，ZIP 包含单一根目录、文件清单与来源提交；另生成独立 `skill.md`，SHA256SUMS 同时覆盖 ZIP 和单文件。发布标签约定 `media-gen-skill-v1.3.0`，正式发行四项资产：ZIP、skill.md、SHA256SUMS.txt 和 release.json。构建器固定 ZIP 创建平台并统一单文件换行，便于跨平台复现。版本升级同步 VERSION、文档、兼容行为、验证、GitHub Release 和固定在线入口；静态部署步骤见 [131](131-单文件Skill与固定在线地址.md)。
 
 Packaging requires committed Skill sources and never includes `.local`、`__pycache__`、真实素材或凭证。仓库应用部署与 Skill 分发版本分别记录；无需给客户分发整个平台。
+
+## 1.3 命名素材、文本与续拍 / Named inputs and continuation
+
+先查看所选模型的 `usage.input_slots`、`text_slots`、`context`、`output.audio_policy` 和完整 `request_schema`。命名槽与旧版 `source_image` / `references` 是分别声明的接口，不能任意混用。以下是不同型号的调用形式，不代表同一个模型支持全部字段：
+
+```sh
+python scripts/media_gen.py upload clip.mp4 --kind video --idempotency-key MY_UPLOAD_TOKEN
+python scripts/media_gen.py generate --model MODEL_ALIAS --media source_video=clip.mp4 --wait
+python scripts/media_gen.py generate --model MODEL_ALIAS --media speaker_1=voice.wav --text-file speaker_1_transcript=transcript.txt --text-file dialogue=dialogue.txt --wait
+python scripts/media_gen.py generate --model CONTINUATION_ALIAS --prompt "Continue the motion" --parent-job JOB_ID --wait
+```
+
+Only use the advertised fields. Add `--prompt` when the selected schema requires it. Use `--media SLOT=FILE`, `--text NAME=TEXT` or `--text-file NAME=FILE` for named roles; required values must be explicit. Pair the transcript with the actual reference recording, separately from generated dialogue. The continuation parent belongs to the same Key/project and must still have a compatible unexpired context. Soundtrack strategy is frozen by the model; no generic switch is invented. Video/audio/GLB uploads stream with bounded memory. The server validates the complete media and current ownership/quotas.
+
+固定入口已部署 1.3.0，发行四项资产和生成服务保持情况见 [131](131-单文件Skill与固定在线地址.md)。用户本地需主动重新下载并更新自己的安装；不会自动覆盖已提取客户端或私有请求状态。

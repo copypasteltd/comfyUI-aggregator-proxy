@@ -7,7 +7,7 @@
 | 编号 | 交付 | 约束 |
 | --- | --- | --- |
 | SF01 | 最新入口 `https://gen.sub2share.xyz/skill.md` | 公开 UTF-8 Markdown；无需业务 Key 读取说明；生成和内容 API 仍保持原鉴权 |
-| SF02 | 版本入口 `/skills/media-gen/1.2.0/skill.md` | 版本目录不可覆盖；latest/current 原子切换；保留历史以便回退 |
+| SF02 | 版本入口 `/skills/media-gen/1.3.0/skill.md` | 版本目录不可覆盖；latest/current 原子切换；保留历史以便回退 |
 | SF03 | 自包含文件 | 现有 Skill、API 参考、客户端由同一来源编译，不依赖额外下载；内嵌客户端与被测脚本一致；只使用实时模型发现决定能力和参数 |
 | SF04 | 更新与发布 | 沿用版本标签发布流程；Release 同时包含 ZIP、skill.md、来源清单与摘要；固定地址由原生部署工具更新，验证失败恢复原指针/配置 |
 | SF05 | 服务隔离 | 使用现有 Nginx 静态入口和独立只读发布目录，不改现有生成服务、Worker、数据库或用户反代；无本地 Docker/WSL/浏览器 |
@@ -28,7 +28,7 @@
 
 Download [the current file](https://gen.sub2share.xyz/skill.md), save it as `media-gen-skill/SKILL.md` in your agent's skills directory, and open a new session. Configure your business API Key yourself. The instructions, native API reference and complete standard-library client are embedded. Native HTTP tools can use the API directly; extract the client only for CLI use. After an update, deliberately replace an old extracted client or extract into a new working directory.
 
-固定版本：[1.2.0/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.2.0/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.2.0/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.2.0/media-gen-skill-1.2.0.zip)；用于来源核对、固定版本和回退。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
+固定版本：[1.3.0/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.3.0/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.3.0/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.3.0/media-gen-skill-1.3.0.zip)；用于来源核对、固定版本和回退。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
 
 ## 4. 后续发布 / Maintainer workflow
 
@@ -47,7 +47,29 @@ sudo python3 /home/ubuntu/skill-publish/publish-public-skill.py \
 
 The tag workflow publishes GitHub assets; the static publisher updates the production URL separately. It verifies checksums/manifest/ZIP members, refuses to overwrite a different immutable version, guards the inspected configuration hash, backs up configuration, tests Nginx and reloads it gracefully. Local HTTP verification checks GET/HEAD, ETag/304, arbitrary origins/OPTIONS, version/missing paths, live health, business authentication and the private-ingress boundary. It also requires every existing service PID and application release pointer to stay unchanged. Keep the previous version directory for rollback; do not delete history while long-lived caches may still reference it.
 
-## 5. 已发布与实测结果 / Published result
+## 5. 当前 1.3.0 发行 / Current release
+
+2026-11-04 已同步 GitHub 及原固定地址。来源 `4bc242fcf2dff14c30fa83469cee443937408984`，单文件 **46,550 字节**，SHA-256：
+
+```text
+ddce149dfc6ad7f713ad4a49c9ee75a57e251055d8471289d34ad115a4e59ee9
+```
+
+| 编号 | 核对 | 实际结果 |
+| --- | --- | --- |
+| SK130-01 | 客户端和单文件 | [17 项本地检查](evidence/2026-11-04/media-gen-skill-130-local.json) 通过，含独立单文件运行、GLB 下载、流式 multipart、命名视频/音频、转写与父任务输入 |
+| SK130-02 | 真实业务 | [线上报告](evidence/2026-11-04/media-gen-skill-130-live.json)：音频、视频、GLB 上传，实时发现、持久化幂等提交、生图及字节/SHA-256 下载核对通过；合成输入，不代表全部候选已通过 |
+| SK130-03 | 构建与源码 | [两次原生构建](evidence/2026-11-04/media-gen-skill-130-build.json) 的四项资产逐字节相同；内嵌客户端等于被测来源，Python 3.10 语法和两种形式的官方 Skill 验证通过 |
+| SK130-04 | GitHub 发行 | [1.3.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.3.0)；[匿名独立下载](evidence/2026-11-04/media-gen-skill-130-public-release.json) 的四项 Linux 资产与两次 Windows 构建一致 |
+| SK130-05 | 原生静态发布 | [部署记录](evidence/2026-11-04/media-gen-skill-130-deployment.json) 通过，保留应用 `linux-20261104.133.4` 和五个原服务 PID，current 切到 1.3.0，1.2.0 保留 |
+| SK130-06 | 对外固定/版本入口 | [高位入口和现有域名](evidence/2026-11-04/media-gen-skill-130-external.json) 的完整文件、GET/HEAD、缓存、任意源读取/预检、版本资产及历史、live/ready、业务鉴权与内部接口边界均通过 |
+
+Version 1.3.0 adds typed streaming uploads, named media/text fields and compatible parent jobs. Required fields are explicit; example placeholders are never submitted. All four GitHub assets match both native Windows builds. The fixed URL serves the same verified file and preserves historical 1.2.0. Publication leaves the generation application, database and service PIDs unchanged. Local installed source uses a junction from the Codex skills directory to this project's canonical `app/skills/media-gen-skill/`; no unrelated skill repository was modified.
+
+第一次本地匿名 GitHub 资产连接被重置，改由已授权原生云服务器匿名下载后经固定主机密钥 SSH 取回并核对，未改 TLS 校验或资产。外部 HEAD 核对显式请求 identity 编码，避免已有代理对压缩响应省略 Content-Length。域名条件请求返回完整新鲜 200，源站返回 304；文件字节、ETag 和摘要仍严格匹配。没有修改用户反代。
+
+## 6. 历史 1.2.0 发行 / Previous release
+
 
 2026-11-02 已上线，当前及版本入口均可匿名读取。文件 **35,951 字节**，SHA-256：
 
