@@ -6,6 +6,8 @@ Workflow 1.3 publishes named image, video, reference-audio, GLB and text slots. 
 
 [135 · Compatible upgrade](docs/135-全量接入与线上版本兼容升级.md) preserves the weighted device pools, submission recovery, release-digest checks and 3D declarations already deployed in 137.1. The new migration upgrades forward from that database revision. The separate Studio installation keeps its own deployment. New aliases become visible to business Keys only after actual runtime approval.
 
+The cloud now runs `linux-20261104.133.2`; the 3080 Worker is updated and all three original channels have been reverified and resumed. Admin validation now copies ownership aliases for named video, audio and GLB inputs and admits declared long-video samples. Its 47 transaction checks pass; this follow-up fix awaits the next cloud release. Candidate names identify function, fixed specification, device and stable variant; imported drafts and published models are counted separately.
+
 [Admin screenshots, recording and GIF](docs/media/typed-inputs-133/README.md) use clearly identified synthetic fixtures. They show media/text slots, audio policy, continuation and Key limits up to 16 reference images. Scoped verification passed 725 affected Python cases, 1773 contract/usage follow-up cases and 555 Sub2API tests; one existing test remains skipped. Deployment and actual generation status are recorded separately in document 133.
 
 ![Workflow 1.3 Admin demonstration, synthetic data](docs/media/typed-inputs-133/workflow-inputs-admin.gif)

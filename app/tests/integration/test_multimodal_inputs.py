@@ -7,16 +7,18 @@ from uuid import uuid4
 
 import pytest
 from fastapi.testclient import TestClient
-from generation_application.ports import BusinessIdentity
+from generation_application.ports import AdminIdentity, BusinessIdentity
+from generation_contracts.catalog import ValidationJob
 from generation_contracts.validation import JobCreate
 from generation_domain.errors import DomainError
-from generation_domain.values import fingerprint, parse_id
+from generation_domain.values import fingerprint, parse_id, public_id
 from generation_domain.workflow_inputs import INPUT_FEATURE
 from generation_infrastructure.content import ContentRepository
 from generation_infrastructure.jobs import JobRepository
 from generation_infrastructure.leases import LeaseRepository
 from generation_infrastructure.models import (
     ApiKey,
+    Asset,
     Job,
     JobAssetReference,
     Node,
@@ -27,11 +29,13 @@ from generation_infrastructure.models import (
 from generation_infrastructure.security import SecretVault
 from generation_infrastructure.settings import Settings
 from generation_infrastructure.storage import LocalDevelopmentStore
+from generation_infrastructure.validation_jobs import ValidationJobs
 from PIL import Image
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session, sessionmaker
 from test_http_auth import client as client
 from test_http_auth import key_body, login
+from test_workflow_management import actor as actor
 
 pytestmark = pytest.mark.integration
 
@@ -123,6 +127,52 @@ def test_legacy_worker_cannot_claim_until_new_feature_is_registered(pg: sessionm
         node.inventory = {**node.inventory, "features": [INPUT_FEATURE]}
     claim = leases.claim(catalog["node_id"], catalog["boot_id"])
     assert claim and claim["job_id"] == job["id"] and len(claim["execution"]["asset_hashes"]) == 4
+
+
+def test_admin_validation_copies_all_typed_media_without_changing_business_owner(pg: sessionmaker[Session], catalog: dict[str, Any], multimodal_manifest: dict[str, Any], tmp_path: Path, audio_wav: Path, input_video: Path, model3d_glb: Path, test_settings: Settings, actor: AdminIdentity) -> None:
+    publish(pg, catalog, multimodal_manifest)
+    assets = uploaded(ContentRepository(pg, LocalDevelopmentStore(tmp_path / "objects")), catalog["identity"], audio_wav, input_video, model3d_glb)
+    request = payload(assets)
+    with pg() as session:
+        model_id = session.scalar(select(PublicModel.id))
+        assert model_id
+    body = ValidationJob(channel_id=public_id("ch", catalog["channel_ids"][0]), request=JobCreate.model_validate(request))
+    service = ValidationJobs(pg, test_settings)
+    first = service.create(actor, model_id, body, "typed-admin-validation", "synthetic")
+    replay = service.create(actor, model_id, body, "typed-admin-validation", "synthetic")
+    assert replay["id"] == first["id"]
+    assert payload(assets) == request
+    with pg() as session:
+        job = session.get(Job, parse_id("job", first["id"]))
+        assert job and job.is_validation and job.key_id != catalog["identity"].key_id
+        assert session.scalar(select(func.count()).select_from(JobAssetReference)) == 4
+        for item in job.request["input"]["media"]:
+            original = session.get(Asset, parse_id("asset", assets[item["slot"]]))
+            copied = session.get(Asset, parse_id("asset", item["asset_id"]))
+            assert original and copied and original.id != copied.id
+            assert original.object_id == copied.object_id
+            assert original.key_id == catalog["identity"].key_id and copied.key_id == job.key_id
+
+
+def test_admin_validation_admits_declared_long_video_sample_without_widening_customer_key(pg: sessionmaker[Session], catalog: dict[str, Any], multimodal_manifest: dict[str, Any], tmp_path: Path, audio_wav: Path, input_video: Path, model3d_glb: Path, test_settings: Settings, actor: AdminIdentity) -> None:
+    multimodal_manifest["presets"][0]["seconds"] = 34.157
+    publish(pg, catalog, multimodal_manifest)
+    with pg.begin() as session:
+        model = session.scalar(select(PublicModel))
+        assert model
+        model.defaults = {**model.defaults, "seconds": 34.157}
+        model_id = model.id
+    assets = uploaded(ContentRepository(pg, LocalDevelopmentStore(tmp_path / "objects")), catalog["identity"], audio_wav, input_video, model3d_glb)
+    body = ValidationJob(channel_id=public_id("ch", catalog["channel_ids"][0]), request=JobCreate.model_validate(payload(assets)))
+    created = ValidationJobs(pg, test_settings).create(actor, model_id, body, "typed-admin-long-video", "synthetic")
+    with pg() as session:
+        job = session.get(Job, parse_id("job", created["id"]))
+        assert job
+        validation_key = session.get(ApiKey, job.key_id)
+        customer_key = session.get(ApiKey, catalog["identity"].key_id)
+        assert validation_key and customer_key
+        assert validation_key.policy["spec_limits"]["video_max_milliseconds"] == 34157
+        assert customer_key.policy["spec_limits"]["video_max_milliseconds"] == 15000
 
 
 def test_http_upload_kind_is_explicit_and_real_content_wins_over_filename(client: TestClient, catalog: dict[str, Any], audio_wav: Path) -> None:

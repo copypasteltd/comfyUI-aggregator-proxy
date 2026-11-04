@@ -1,0 +1,32 @@
+{
+  "format_version": 1,
+  "at": "2026-11-03T23:59:29.103301+00:00",
+  "passed": true,
+  "scope": "Native project-isolated PostgreSQL 18 on port 55439. Root streams the immutable backup into an owned separate temporary database; a peer-authenticated PostgreSQL service-user child upgrades/downgrades/reupgrades and checks preserved core rows. Production database and authentication rules remain untouched.",
+  "backup_sha256": "ba039cc4eeea93f45f299f5ff5ab2520e21acf4851d1d01a59af152f503b739a",
+  "backup_bytes": 50545351,
+  "restored_core_rows": {
+    "jobs": 46,
+    "artifacts": 41,
+    "public_models": 13,
+    "channels": 3,
+    "workflow_releases": 13,
+    "device_pools": 0,
+    "device_pool_members": 0
+  },
+  "migrated_core_rows": {
+    "jobs": 46,
+    "artifacts": 41,
+    "public_models": 13,
+    "channels": 3,
+    "workflow_releases": 13,
+    "device_pools": 0,
+    "device_pool_members": 0
+  },
+  "migration_head": "04d133a00001",
+  "downgrade_and_reupgrade_verified": true,
+  "owned_temporary_database_dropped": true,
+  "full_disaster_recovery_verified": false,
+  "virtualization_used": false,
+  "seconds": 11.473
+}

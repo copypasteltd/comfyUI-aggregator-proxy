@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from decimal import Decimal
 from typing import Any
 from uuid import UUID
 
@@ -10,6 +11,7 @@ from generation_contracts.catalog import ValidationJob
 from generation_contracts.defaults import default_key_policy
 from generation_domain.errors import DomainError
 from generation_domain.values import parse_id, public_id, utcnow
+from generation_domain.workflow_inputs import input_assets
 from sqlalchemy import select, text
 
 from generation_infrastructure.admin_base import AdminBase, mutation
@@ -43,8 +45,7 @@ class ValidationJobs(AdminBase):
 
     def _prepare(self, actor: AdminIdentity, model_id: UUID, channel_id: str, request: dict[str, Any], release_id: UUID | None, model_revision: int | None, channel_revision: int | None) -> tuple[BusinessIdentity, tuple[UUID, UUID, int], int]:
         inputs = request["input"]
-        identifiers = {item["asset_id"] for item in inputs.get("references", [])}
-        identifiers.update(inputs[name]["asset_id"] for name in ("source_image", "mask") if name in inputs)
+        identifiers = {item.asset_id for item in input_assets(inputs)}
         if identifiers:
             require_permission(actor, "content:sensitive")
         # Reusable aliases precede admission locks. Failed admission leaves no job or quota.
@@ -86,6 +87,21 @@ class ValidationJobs(AdminBase):
                 if policy != key.policy:
                     key.policy = policy
                     key.revision += 1
+            # Only this nonpublic validation identity receives the frozen sample's
+            # required specification. Tenant/project quotas still apply normally.
+            policy = deepcopy(key.policy)
+            parameters = {**model.defaults, **request.get("parameters", {})}
+            spec = policy["spec_limits"]
+            if "size" in parameters:
+                width, height = (int(value) for value in parameters["size"].split("x"))
+                field = "video_max_pixels" if model.task_type.endswith("video") else "image_max_pixels"
+                spec[field] = max(spec[field], width * height)
+            if model.task_type.endswith("video"):
+                spec["video_max_milliseconds"] = max(spec["video_max_milliseconds"], int(Decimal(str(parameters.get("seconds", 0))) * 1000))
+            spec["max_references"] = 16
+            if policy != key.policy:
+                key.policy = policy
+                key.revision += 1
             identity = BusinessIdentity(key.tenant_id, key.project_id, key.id, key.policy)
             assets = list(session.scalars(select(Asset).where(Asset.id.in_([parse_id("asset", identifier) for identifier in identifiers]), Asset.tenant_id == key.tenant_id, Asset.project_id == key.project_id).order_by(Asset.id).with_for_update()))
             if len(assets) != len(identifiers) or any(asset.deleted_at for asset in assets):
@@ -107,4 +123,6 @@ class ValidationJobs(AdminBase):
             for name in ("source_image", "mask"):
                 if name in inputs:
                     inputs[name]["asset_id"] = replacements[inputs[name]["asset_id"]]
+            for media in inputs.get("media", []):
+                media["asset_id"] = replacements[media["asset_id"]]
             return identity, target, revision

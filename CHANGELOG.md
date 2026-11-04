@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 136 · Typed validation and catalog names / 多模态试跑与功能命名
+
+- Copy all declared media inputs into the internal validation owner without changing customer asset ownership or widening customer Key policies; support the sample's declared video specification. 47 native PostgreSQL tests pass.
+- Name 213 candidates by actual function, frozen output specification, GPU and stable variant, with bilingual usage notes. The original three channels have been reverified and resumed after the 133.2 cloud upgrade; new-model publication remains in progress.
+- Verify the production backup in a separate native database through restore, upgrade, downgrade and reupgrade; remove the owned temporary database. Full object-store disaster recovery remains unverified.
+
 ## 2026-11-04 · 135 · Preserve deployed backend behavior / 合并线上兼容行为
 
 - Port the deployed `c108dcce` backend/Admin delta: weighted device pools, submission lookup, expected release digest, GLB discovery constraints and native backup configuration.

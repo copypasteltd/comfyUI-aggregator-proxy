@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import re
 from pathlib import Path
 
@@ -162,6 +164,17 @@ def public_documentation(item: dict, manifest: dict) -> dict:
     )
     if "easy multiTrackEditor" in classes:
         family, tag = "MiniMax H3 Timeline", "h3-timeline"
+    if family == "ComfyUI":
+        model_names = str(manifest["dependency_lock"]["models"]).lower()
+        for marker, name, slug in (("illustrious", "Illustrious", "illustrious"), ("flux", "FLUX", "flux"), ("qwen", "Qwen Image", "qwen"), ("z_image", "Z Image", "z-image")):
+            if marker in model_names:
+                family, tag = name, slug
+                break
+    if family == "Native 3D":
+        for marker in ("PartCrafter", "TripoSG", "Hunyuan3D", "InstantMesh"):
+            if marker.lower() in str(graph).lower():
+                family, tag = marker, marker.lower()
+                break
     kind = item["output_kind"]
     types = {
         "model": "图像/网格转三维 / Image or mesh to 3D",
@@ -176,10 +189,50 @@ def public_documentation(item: dict, manifest: dict) -> dict:
         .removesuffix(".workflow")
     )
     title = re.sub(r"作者原始参数|【原生成参数·原生出片】", "", title).strip("_-")
+    slots = manifest.get("input_slots", [])
+    roles = {slot["name"] for slot in slots}
+    kinds = {slot["kind"] for slot in slots}
+    operation, operation_en = {
+        "text_to_image": ("文生图", "Text to image"),
+        "image_to_image": ("图像编辑", "Image editing"),
+        "references_to_image": ("多参考生图", "Reference image generation"),
+        "text_to_video": ("文生视频", "Text to video"),
+        "references_to_video": ("参考生视频", "Reference video generation"),
+        "text_to_audio": ("音乐生成" if tag == "yue2" else "语音生成", "Music generation" if tag == "yue2" else "Speech generation"),
+        "image_to_3d": ("图像转三维", "Image to 3D"),
+    }[manifest["task_type"]]
+    if kind == "video":
+        if (manifest.get("context") or {}).get("load"):
+            operation, operation_en = "视频续拍", "Video continuation"
+        elif "video" in kinds:
+            operation, operation_en = "视频参考生成", "Video reference generation"
+        elif {"first_frame", "last_frame"} <= roles:
+            operation, operation_en = "首尾帧生视频", "First/last frame video"
+        elif "first_last_frame" in roles:
+            operation, operation_en = "首尾共图生视频", "Shared first/last frame video"
+        elif sum(slot["kind"] == "image" for slot in slots) > 1:
+            operation, operation_en = "多图参考生视频", "Multiple image reference video"
+        elif "image" in kinds:
+            operation, operation_en = "图生视频", "Image to video"
+        elif "audio" in kinds:
+            operation, operation_en = "音频参考生视频", "Audio reference video"
+    elif kind == "model":
+        if "model" in kinds:
+            operation, operation_en = ("网格贴图", "Mesh texturing") if tag == "unitexture" else ("网格精化", "Mesh refinement")
+        elif len(slots) > 1:
+            operation, operation_en = "多视图转三维", "Multiple views to 3D"
+    elif kind == "audio" and {"speaker_1", "speaker_2"} <= roles:
+        operation, operation_en = "双人对话语音", "Two speaker dialogue"
+    preset = manifest["presets"][0]
+    specification = " / ".join(str(preset[field]) + ("s" if field == "seconds" else "") for field in ("size", "seconds") if field in preset)
+    variant = hashlib.sha256(json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:6]
     notes = [
         "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
         "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
     ]
+    notes.append("源工作流 / Source workflow: " + title)
+    if specification:
+        notes.append("冻结输出规格 / Frozen output specification: " + specification)
     if manifest.get("input_slots"):
         notes.append(
             "素材槽位 / Media slots: "
@@ -216,8 +269,8 @@ def public_documentation(item: dict, manifest: dict) -> dict:
             "输出自包含 GLB；几何、顶点色和 PBR 材质版本按独立模型区分，不保证未声明的贴图。Returns a self-contained GLB; geometry, vertex-color and PBR variants are separate models."
         )
     return {
-        "display_name": f"{family} · {title} · RTX {item['gpu']}"[:160],
-        "description": f"{types[kind]}；{family}，RTX {item['gpu']}。{title}。按公开 usage 中的槽位、规格与示例调用。Use this model's public usage schema for exact slots, presets and examples.",
+        "display_name": f"{family} · {operation}" + (" · " + specification if specification else "") + f" · RTX {item['gpu']} · {variant}",
+        "description": f"{operation} / {operation_en}；{family}，RTX {item['gpu']}。{types[kind]}。{title}。按公开 usage 中的槽位、规格与示例调用。Use this model's public usage schema for exact slots, presets and examples.",
         "notes": [note[:500] for note in notes],
         "tags": [tag, kind, "rtx-" + item["gpu"], "async", "workflow-inputs-v1"],
         "example_prompt": "A small blue ceramic teapot on a plain background."
