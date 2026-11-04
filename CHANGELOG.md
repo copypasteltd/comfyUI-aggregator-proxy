@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 148 · SAM3D multiview and Pixal3D PBR / 多视图与单图贴图交付
+
+- SAM3D multiview and Pixal3D single-image UV/PBR pass separate validation and ordinary business calls plus complete downloads. Independently inspect all eight delivered mesh models, including the actual UV/base-color/metallic-roughness channels. The new SAM3D sample contains 144,134 vertices and 288,260 triangles; the new Pixal3D sample contains three embedded images.
+- The eleventh catalog snapshot records 29 newly business-verified models: 12 image, nine audio and eight mesh. Ten mesh candidates continue trials; 174 RTX 4090 drafts remain blocked on administrator access for the native Worker service switch. Do not treat these drafts as callable models.
+- A separate earlier visibility observation finds exactly 28 published candidates through the fully scoped test Key, hides the other 185 drafts, and confirms that two Key-selected unpublished aliases return 404. Preserve that timestamped observation separately from later publication and generation evidence. Customer Key policies remain unchanged.
+
 ## 2026-11-04 · 147 · Complete mesh calling examples / 补齐三维调用示例
 
 - Correct the mesh guide's UniTexture texturing example: a source GLB and reference image also require `input.texts.prompt_25` for the generated appearance. Preserve the existing online contract and make the required text visible in the table and full Skill command.

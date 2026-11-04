@@ -1,0 +1,850 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T06:08:47.011085+00:00",
+  "passed": true,
+  "scope": "Selected new 3080 mesh workflows with successful independent validation and business calls: live publication/discovery and exact usage, complete SHA-verified local downloads, and independent bounded static triangle GLB inspection. Unfinished candidates remain pending. A successful file-delivery check does not certify shape fidelity or materials.",
+  "real_resource_acceptance": true,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "counts": {
+    "mesh_candidates": 18,
+    "verified_business_downloads": 8,
+    "remaining_candidates": 10
+  },
+  "models": [
+    {
+      "key": "3080-4b4a545a1136e594",
+      "alias": "comfy-3080-partcrafter-4b4a54",
+      "display_name": "PartCrafter · 图像转三维 · 几何 GLB · RTX 3080 · ad0c41",
+      "release_id": "wfr_c1e6046cf625485b980e9c09fafa9773",
+      "release_digest": "37c59a8227b639a29f3b18a80d0eddadad8e2163125a0af875e8d8c94e8bb6d0",
+      "published": true,
+      "discovered_with_business_key": true,
+      "input_slots": [
+        {
+          "name": "source_image",
+          "kind": "image",
+          "label": "输入图像 / Source image",
+          "description": "上传输入图像。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the source image. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      ],
+      "text_slots": [],
+      "validation_job_id": "job_7fe1eb3f33244353a0d43078195244e7",
+      "business_job_id": "job_f1fd200abfbf4b8b816c46996fd18ec5",
+      "request": {
+        "model": "comfy-3080-partcrafter-4b4a54",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "source_image",
+              "asset_id": "asset_f6da7f3392d149e082eea7bbf024e908"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_9ebd5806355f4b8799d7a2e1adeb8983",
+        "bytes": 3951884,
+        "sha256": "7b634c213f800de041a1796ba48b15cb3eab95fda21c652923503a6da28b3efd",
+        "media_type": "model/gltf-binary",
+        "verified_at": 1793769689,
+        "synthetic_input": true
+      },
+      "independently_inspected_glb": {
+        "media_type": "model/gltf-binary",
+        "format": "glb",
+        "mesh_count": 3,
+        "vertex_count": 98864,
+        "triangle_count": 197292,
+        "material_count": 0,
+        "texture_count": 0,
+        "has_textures": false
+      },
+      "inspected_appearance_channels": {
+        "primitives": 3,
+        "primitives_with_vertex_colors": 3,
+        "primitives_with_uv0": 0,
+        "materials_with_base_color_texture": 0,
+        "materials_with_metallic_roughness_texture": 0,
+        "quality_certified": false
+      },
+      "actual_business_timing": {
+        "snapshot_at_ms": 1793772522490,
+        "elapsed": {
+          "status": "complete",
+          "milliseconds": 58763,
+          "started_at_ms": 1793769618592,
+          "ended_at_ms": 1793769677355
+        },
+        "queue": {
+          "status": "complete",
+          "milliseconds": 482,
+          "started_at_ms": 1793769618592,
+          "ended_at_ms": 1793769619074
+        }
+      }
+    },
+    {
+      "key": "3080-5117036a5e81e1d8",
+      "alias": "comfy-3080-hunyuan3d21-511703",
+      "display_name": "Hunyuan3D · 图像转三维 · 几何 GLB · RTX 3080 · ab3b5b",
+      "release_id": "wfr_d2b0df4630334a709cbfb72f3e5f5cc9",
+      "release_digest": "f9e145c6fcfdb479649dcbd26229ebcec3e9f1212c601ede44ac826535a87cb7",
+      "published": true,
+      "discovered_with_business_key": true,
+      "input_slots": [
+        {
+          "name": "source_image",
+          "kind": "image",
+          "label": "输入图像 / Source image",
+          "description": "上传输入图像。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the source image. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      ],
+      "text_slots": [],
+      "validation_job_id": "job_67f2661cae774dd8a50e1e1856308969",
+      "business_job_id": "job_2cb89280583c449786164c272f6db3b9",
+      "request": {
+        "model": "comfy-3080-hunyuan3d21-511703",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "source_image",
+              "asset_id": "asset_f6da7f3392d149e082eea7bbf024e908"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_2881fcd209954e1b84741a801507ab45",
+        "bytes": 5388436,
+        "sha256": "b56515c66f40bd286c181d449678b8e0b7bfd4e87b0486b9cba50d9ed54989f2",
+        "media_type": "model/gltf-binary",
+        "verified_at": 1793770004,
+        "synthetic_input": true
+      },
+      "independently_inspected_glb": {
+        "media_type": "model/gltf-binary",
+        "format": "glb",
+        "mesh_count": 1,
+        "vertex_count": 114536,
+        "triangle_count": 219870,
+        "material_count": 1,
+        "texture_count": 0,
+        "has_textures": false
+      },
+      "inspected_appearance_channels": {
+        "primitives": 1,
+        "primitives_with_vertex_colors": 0,
+        "primitives_with_uv0": 0,
+        "materials_with_base_color_texture": 0,
+        "materials_with_metallic_roughness_texture": 0,
+        "quality_certified": false
+      },
+      "actual_business_timing": {
+        "snapshot_at_ms": 1793772522958,
+        "elapsed": {
+          "status": "complete",
+          "milliseconds": 101259,
+          "started_at_ms": 1793769892023,
+          "ended_at_ms": 1793769993282
+        },
+        "queue": {
+          "status": "complete",
+          "milliseconds": 1484,
+          "started_at_ms": 1793769892023,
+          "ended_at_ms": 1793769893507
+        }
+      }
+    },
+    {
+      "key": "3080-6816bd7bc5a4959d",
+      "alias": "comfy-3080-mv-sam3d-6816bd",
+      "display_name": "SAM 3D · 多视图转三维 · RTX 3080 · 56e303",
+      "release_id": "wfr_9840cf1cb16d43f6a289dca36b37c021",
+      "release_digest": "21962d5905e945f2b573bac69599ff99fcff8461cf61726b16f5fbc7101260e7",
+      "published": true,
+      "discovered_with_business_key": true,
+      "input_slots": [
+        {
+          "name": "back",
+          "kind": "image",
+          "label": "背视图 / Back view",
+          "description": "上传背视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the back view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "front",
+          "kind": "image",
+          "label": "正视图 / Front view",
+          "description": "上传正视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the front view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "left",
+          "kind": "image",
+          "label": "左视图 / Left view",
+          "description": "上传左视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the left view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "right",
+          "kind": "image",
+          "label": "右视图 / Right view",
+          "description": "上传右视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the right view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      ],
+      "text_slots": [],
+      "validation_job_id": "job_744220b8c7b94bec9332a6fec489242c",
+      "business_job_id": "job_929d1d99717a474bb0ece648fc0d6016",
+      "request": {
+        "model": "comfy-3080-mv-sam3d-6816bd",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "back",
+              "asset_id": "asset_25de5ecdd3c84a75953aaa627cf68452"
+            },
+            {
+              "slot": "front",
+              "asset_id": "asset_f6da7f3392d149e082eea7bbf024e908"
+            },
+            {
+              "slot": "left",
+              "asset_id": "asset_9eb38231ae1646109b7f26695b34cd92"
+            },
+            {
+              "slot": "right",
+              "asset_id": "asset_308cd2d4c3b94b168103ff117384fb3c"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_dfc8d012abc44b558eabbff64ee14e77",
+        "bytes": 5766244,
+        "sha256": "d6a37ab41dd7bca65779f1866ac5d6d3ea69685dc4ccca42c142c5a160ee91a9",
+        "media_type": "model/gltf-binary",
+        "verified_at": 1793771996,
+        "synthetic_input": true
+      },
+      "independently_inspected_glb": {
+        "media_type": "model/gltf-binary",
+        "format": "glb",
+        "mesh_count": 1,
+        "vertex_count": 144134,
+        "triangle_count": 288260,
+        "material_count": 0,
+        "texture_count": 0,
+        "has_textures": false
+      },
+      "inspected_appearance_channels": {
+        "primitives": 1,
+        "primitives_with_vertex_colors": 1,
+        "primitives_with_uv0": 0,
+        "materials_with_base_color_texture": 0,
+        "materials_with_metallic_roughness_texture": 0,
+        "quality_certified": false
+      },
+      "actual_business_timing": {
+        "snapshot_at_ms": 1793772523474,
+        "elapsed": {
+          "status": "complete",
+          "milliseconds": 933216,
+          "started_at_ms": 1793771051857,
+          "ended_at_ms": 1793771985073
+        },
+        "queue": {
+          "status": "complete",
+          "milliseconds": 1916,
+          "started_at_ms": 1793771051857,
+          "ended_at_ms": 1793771053773
+        }
+      }
+    },
+    {
+      "key": "3080-3a489f750ab1ca61",
+      "alias": "comfy-3080-pixal3d-mv-3a489f",
+      "display_name": "Pixal3D · 多视图转三维 · UV/PBR GLB · RTX 3080 · 7d0a4a",
+      "release_id": "wfr_e5192f33b136445c93ff7139d9c62abd",
+      "release_digest": "ba93262d15bdfa8022fa23889f6474549a175a3b74193bcb34020562f9acbc70",
+      "published": true,
+      "discovered_with_business_key": true,
+      "input_slots": [
+        {
+          "name": "back",
+          "kind": "image",
+          "label": "背视图 / Back view",
+          "description": "上传背视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the back view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "front",
+          "kind": "image",
+          "label": "正视图 / Front view",
+          "description": "上传正视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the front view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "left",
+          "kind": "image",
+          "label": "左视图 / Left view",
+          "description": "上传左视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the left view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "right",
+          "kind": "image",
+          "label": "右视图 / Right view",
+          "description": "上传右视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the right view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      ],
+      "text_slots": [],
+      "validation_job_id": "job_a24a10da549f46eeb3c1d0a41f65dfdc",
+      "business_job_id": "job_c373b000799143d5b31b7a9bdc2c12c1",
+      "request": {
+        "model": "comfy-3080-pixal3d-mv-3a489f",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "back",
+              "asset_id": "asset_25de5ecdd3c84a75953aaa627cf68452"
+            },
+            {
+              "slot": "front",
+              "asset_id": "asset_f6da7f3392d149e082eea7bbf024e908"
+            },
+            {
+              "slot": "left",
+              "asset_id": "asset_9eb38231ae1646109b7f26695b34cd92"
+            },
+            {
+              "slot": "right",
+              "asset_id": "asset_308cd2d4c3b94b168103ff117384fb3c"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_d7ea0cc73b9846b994ac16f71c57adf1",
+        "bytes": 9035700,
+        "sha256": "26ae306b72715890cfe513dbc59d56024832d4b0dcdbff4ff9cbf1b66869f24d",
+        "media_type": "model/gltf-binary",
+        "verified_at": 1793769046,
+        "synthetic_input": true
+      },
+      "independently_inspected_glb": {
+        "media_type": "model/gltf-binary",
+        "format": "glb",
+        "mesh_count": 1,
+        "vertex_count": 66177,
+        "triangle_count": 97943,
+        "material_count": 1,
+        "texture_count": 3,
+        "has_textures": true
+      },
+      "inspected_appearance_channels": {
+        "primitives": 1,
+        "primitives_with_vertex_colors": 0,
+        "primitives_with_uv0": 1,
+        "materials_with_base_color_texture": 1,
+        "materials_with_metallic_roughness_texture": 1,
+        "quality_certified": false
+      },
+      "actual_business_timing": {
+        "snapshot_at_ms": 1793772523984,
+        "elapsed": {
+          "status": "complete",
+          "milliseconds": 143168,
+          "started_at_ms": 1793768890884,
+          "ended_at_ms": 1793769034052
+        },
+        "queue": {
+          "status": "complete",
+          "milliseconds": 794,
+          "started_at_ms": 1793768890884,
+          "ended_at_ms": 1793768891678
+        }
+      }
+    },
+    {
+      "key": "3080-24a105ad5bb7e069",
+      "alias": "comfy-3080-pixal3d-24a105",
+      "display_name": "Pixal3D · 图像转三维 · 顶点色 GLB · RTX 3080 · 02596e",
+      "release_id": "wfr_b6b7fb8c99414b2c84ddc865a9df265b",
+      "release_digest": "e8e9e09a5c66c01a3036d57d6036c8868157e328df95e76978b2167037016074",
+      "published": true,
+      "discovered_with_business_key": true,
+      "input_slots": [
+        {
+          "name": "source_image",
+          "kind": "image",
+          "label": "输入图像 / Source image",
+          "description": "上传输入图像。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the source image. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      ],
+      "text_slots": [],
+      "validation_job_id": "job_d14e5682dbec4e80adb4704f62a9f3af",
+      "business_job_id": "job_9629539e8a1d43149d634dcd61ebb975",
+      "request": {
+        "model": "comfy-3080-pixal3d-24a105",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "source_image",
+              "asset_id": "asset_f6da7f3392d149e082eea7bbf024e908"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_f5738f9a6219486aaf3a12dcf735d47d",
+        "bytes": 34642260,
+        "sha256": "cc6767f3ba720dc03ae218b4e9e8d7f17e0d47f977c76b552d1a4b1bd58c1c22",
+        "media_type": "model/gltf-binary",
+        "verified_at": 1793768628,
+        "synthetic_input": true
+      },
+      "independently_inspected_glb": {
+        "media_type": "model/gltf-binary",
+        "format": "glb",
+        "mesh_count": 1,
+        "vertex_count": 719811,
+        "triangle_count": 1447138,
+        "material_count": 1,
+        "texture_count": 0,
+        "has_textures": false
+      },
+      "inspected_appearance_channels": {
+        "primitives": 1,
+        "primitives_with_vertex_colors": 1,
+        "primitives_with_uv0": 0,
+        "materials_with_base_color_texture": 0,
+        "materials_with_metallic_roughness_texture": 0,
+        "quality_certified": false
+      },
+      "actual_business_timing": {
+        "snapshot_at_ms": 1793772524575,
+        "elapsed": {
+          "status": "complete",
+          "milliseconds": 109969,
+          "started_at_ms": 1793768512112,
+          "ended_at_ms": 1793768622081
+        },
+        "queue": {
+          "status": "complete",
+          "milliseconds": 672,
+          "started_at_ms": 1793768512112,
+          "ended_at_ms": 1793768512784
+        }
+      }
+    },
+    {
+      "key": "3080-696813cf4cc949c2",
+      "alias": "comfy-3080-pixal3d-696813",
+      "display_name": "Pixal3D · 图像转三维 · UV/PBR GLB · RTX 3080 · f25572",
+      "release_id": "wfr_507e46bd1ef0455a87e7ad95edf42370",
+      "release_digest": "eab947d42392f951b32cd03ff6ae1c1409abd4c7ea0bb1b6258959a3f99319de",
+      "published": true,
+      "discovered_with_business_key": true,
+      "input_slots": [
+        {
+          "name": "source_image",
+          "kind": "image",
+          "label": "输入图像 / Source image",
+          "description": "上传输入图像。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the source image. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      ],
+      "text_slots": [],
+      "validation_job_id": "job_1e49f68b91034a3c8a140e4f869f816e",
+      "business_job_id": "job_83b15ce3f74a4886b17dfe6777d660bc",
+      "request": {
+        "model": "comfy-3080-pixal3d-696813",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "source_image",
+              "asset_id": "asset_f6da7f3392d149e082eea7bbf024e908"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_8dd8cb15094e4053b8170488035b4cb5",
+        "bytes": 9977664,
+        "sha256": "2bd58f7a995ba012a81fec280dce9fc2647233f3d1af3111bed2c616e617d732",
+        "media_type": "model/gltf-binary",
+        "verified_at": 1793772448,
+        "synthetic_input": true
+      },
+      "independently_inspected_glb": {
+        "media_type": "model/gltf-binary",
+        "format": "glb",
+        "mesh_count": 1,
+        "vertex_count": 65733,
+        "triangle_count": 98434,
+        "material_count": 1,
+        "texture_count": 3,
+        "has_textures": true
+      },
+      "inspected_appearance_channels": {
+        "primitives": 1,
+        "primitives_with_vertex_colors": 0,
+        "primitives_with_uv0": 1,
+        "materials_with_base_color_texture": 1,
+        "materials_with_metallic_roughness_texture": 1,
+        "quality_certified": false
+      },
+      "actual_business_timing": {
+        "snapshot_at_ms": 1793772525739,
+        "elapsed": {
+          "status": "complete",
+          "milliseconds": 151530,
+          "started_at_ms": 1793772260046,
+          "ended_at_ms": 1793772411576
+        },
+        "queue": {
+          "status": "complete",
+          "milliseconds": 1953,
+          "started_at_ms": 1793772260046,
+          "ended_at_ms": 1793772261999
+        }
+      }
+    },
+    {
+      "key": "3080-4b2389d8089679fd",
+      "alias": "comfy-3080-trellis2-4b2389",
+      "display_name": "Trellis2 · 图像转三维 · UV/PBR GLB · RTX 3080 · 428a22",
+      "release_id": "wfr_7af86101232d41ff9e60c542cef9a8e8",
+      "release_digest": "7704c94a0f710c32b75987fbffddc1895ced84cbd89da4f1f2c2199d0a78d735",
+      "published": true,
+      "discovered_with_business_key": true,
+      "input_slots": [
+        {
+          "name": "source_image",
+          "kind": "image",
+          "label": "输入图像 / Source image",
+          "description": "上传输入图像。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the source image. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      ],
+      "text_slots": [],
+      "validation_job_id": "job_f3a39ea3ef034c9c971be97191e8f71c",
+      "business_job_id": "job_ec4fbd23201e4e3894c997bf425287a4",
+      "request": {
+        "model": "comfy-3080-trellis2-4b2389",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "source_image",
+              "asset_id": "asset_f6da7f3392d149e082eea7bbf024e908"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_d692fefe801c4db1a2b0a9fd9e3276d0",
+        "bytes": 9215976,
+        "sha256": "c443b189eec216b49164f31e99d9635e7249712af85dc8f3280d5ee105adf2d9",
+        "media_type": "model/gltf-binary",
+        "verified_at": 1793769450,
+        "synthetic_input": true
+      },
+      "independently_inspected_glb": {
+        "media_type": "model/gltf-binary",
+        "format": "glb",
+        "mesh_count": 1,
+        "vertex_count": 62850,
+        "triangle_count": 99257,
+        "material_count": 1,
+        "texture_count": 3,
+        "has_textures": true
+      },
+      "inspected_appearance_channels": {
+        "primitives": 1,
+        "primitives_with_vertex_colors": 0,
+        "primitives_with_uv0": 1,
+        "materials_with_base_color_texture": 1,
+        "materials_with_metallic_roughness_texture": 1,
+        "quality_certified": false
+      },
+      "actual_business_timing": {
+        "snapshot_at_ms": 1793772526261,
+        "elapsed": {
+          "status": "complete",
+          "milliseconds": 139799,
+          "started_at_ms": 1793769297599,
+          "ended_at_ms": 1793769437398
+        },
+        "queue": {
+          "status": "complete",
+          "milliseconds": 494,
+          "started_at_ms": 1793769297599,
+          "ended_at_ms": 1793769298093
+        }
+      }
+    },
+    {
+      "key": "3080-1231f7be33f17abc",
+      "alias": "comfy-3080-uniforge3d-1231f7",
+      "display_name": "UniForge3D · 多视图转三维 · RTX 3080 · aae913",
+      "release_id": "wfr_672f199f31d1405fadde9ddc2f9bbead",
+      "release_digest": "4b0ea6c09fa84d39fc36276f4b6c6b7afad950bc190313b1d90e08ba955f8249",
+      "published": true,
+      "discovered_with_business_key": true,
+      "input_slots": [
+        {
+          "name": "back",
+          "kind": "image",
+          "label": "背视图 / Back view",
+          "description": "上传背视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the back view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "front",
+          "kind": "image",
+          "label": "正视图 / Front view",
+          "description": "上传正视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the front view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "left",
+          "kind": "image",
+          "label": "左视图 / Left view",
+          "description": "上传左视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the left view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        },
+        {
+          "name": "right",
+          "kind": "image",
+          "label": "右视图 / Right view",
+          "description": "上传右视图。多视图须是同一物体、相同外观和一致背景；首尾帧按标签匹配。Upload the right view. Multi-view images must depict the same object consistently; first/last anchors follow their labels.",
+          "required": true,
+          "max_bytes": 20971520,
+          "mime_types": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ]
+        }
+      ],
+      "text_slots": [],
+      "validation_job_id": "job_01a781ccdb154cda8aaee45887169049",
+      "business_job_id": "job_de663427d142404d84100925df15c7ce",
+      "request": {
+        "model": "comfy-3080-uniforge3d-1231f7",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "back",
+              "asset_id": "asset_25de5ecdd3c84a75953aaa627cf68452"
+            },
+            {
+              "slot": "front",
+              "asset_id": "asset_f6da7f3392d149e082eea7bbf024e908"
+            },
+            {
+              "slot": "left",
+              "asset_id": "asset_9eb38231ae1646109b7f26695b34cd92"
+            },
+            {
+              "slot": "right",
+              "asset_id": "asset_308cd2d4c3b94b168103ff117384fb3c"
+            }
+          ]
+        },
+        "parameters": {
+          "quality": "standard",
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_7e6d3fdb4008457180658ee00eb8f93d",
+        "bytes": 2399092,
+        "sha256": "a8202460dbb1bfb7969ae53b21cf690468eb45d31564b5bd369844b5f0065607",
+        "media_type": "model/gltf-binary",
+        "verified_at": 1793768285,
+        "synthetic_input": true
+      },
+      "independently_inspected_glb": {
+        "media_type": "model/gltf-binary",
+        "format": "glb",
+        "mesh_count": 1,
+        "vertex_count": 49958,
+        "triangle_count": 99689,
+        "material_count": 1,
+        "texture_count": 0,
+        "has_textures": false
+      },
+      "inspected_appearance_channels": {
+        "primitives": 1,
+        "primitives_with_vertex_colors": 0,
+        "primitives_with_uv0": 0,
+        "materials_with_base_color_texture": 0,
+        "materials_with_metallic_roughness_texture": 0,
+        "quality_certified": false
+      },
+      "actual_business_timing": {
+        "snapshot_at_ms": 1793772526935,
+        "elapsed": {
+          "status": "complete",
+          "milliseconds": 1141723,
+          "started_at_ms": 1793767131394,
+          "ended_at_ms": 1793768273117
+        },
+        "queue": {
+          "status": "complete",
+          "milliseconds": 1932,
+          "started_at_ms": 1793767131394,
+          "ended_at_ms": 1793767133326
+        }
+      }
+    }
+  ],
+  "customer_keys_modified": false
+}
