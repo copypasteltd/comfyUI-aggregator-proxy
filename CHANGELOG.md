@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 150 · Unlimited daily quotas / 关闭全部日限额
+
+- Set all five new daily quota defaults to explicit unlimited values and share the same defaults with native project bootstrap. Existing grants, rate/concurrency controls and per-request specifications are preserved.
+- Preserve nested null values in tenant/project patches. Read older unlimited records and idempotent receipts without treating missing bounded quotas as unlimited; retain the original request fingerprint for replay compatibility.
+- Five native PostgreSQL/HTTP regressions pass for tenant/project persistence, replay, old records, parent display, usage preservation and Admin defaults. Production configuration and immutable release evidence are recorded separately in document 140.
+
 ## 2026-11-04 · 148 · SAM3D multiview and Pixal3D PBR / 多视图与单图贴图交付
 
 - SAM3D multiview and Pixal3D single-image UV/PBR pass separate validation and ordinary business calls plus complete downloads. Independently inspect all eight delivered mesh models, including the actual UV/base-color/metallic-roughness channels. The new SAM3D sample contains 144,134 vertices and 288,260 triangles; the new Pixal3D sample contains three embedded images.

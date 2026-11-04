@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from generation_contracts.admin import AdminUserCreate
+from generation_contracts.defaults import default_limits
 from generation_domain.values import public_id
 from generation_infrastructure.database import make_sessions
 from generation_infrastructure.models import AdminUser, Node, Project, Tenant
@@ -13,11 +14,6 @@ from generation_infrastructure.security import issue_secret, password_hash, veri
 from generation_infrastructure.settings import Settings
 from pydantic import SecretStr
 from sqlalchemy import select
-
-
-def default_limits() -> dict[str, object]:
-    values = {"rpm": 120, "burst": 10, "daily_jobs": 1000, "unfinished_jobs": 20, "generating_jobs": 2, "daily_image_count": 1000, "daily_video_milliseconds": 3600000, "daily_audio_milliseconds": 0}
-    return {k: {"mode": "bounded", "value": v} for k, v in values.items()}
 
 
 def main() -> None:

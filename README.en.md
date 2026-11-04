@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[140 · Unlimited daily quotas](docs/140-关闭每日限额与默认策略.md): the latest instruction removes all five daily caps from tenants, projects, nondeleted API Keys and new defaults. Access grants, concurrency, request rates and per-request specifications remain unchanged; actual usage continues to accumulate. The same change fixes scope updates dropping the null value required by unlimited limits. See the topic for rollout and verification status.
+
 **2026-11-04 full-catalog implementation:** [133 · Multimodal inputs and workflow coverage](docs/133-全量工作流接入与多模态输入.md). Of 397 source workflows, 330 pass static checks and map to 213 distinct candidate packages; 67 have recorded source blockers. All 213 candidates pass public request-example and graph-compilation checks and have been imported as drafts. Individual hardware approval and publication continue; [the numbered catalog](docs/134-新增模型目录与调用说明.md) distinguishes drafts from published and business-verified models.
 
 Workflow 1.3 publishes named image, video, reference-audio, GLB and text slots. Discover `usage` through `/v1/models/{alias}`, upload assets to `/v1/assets` with `kind`, then submit their IDs in `input.media` and scripts, lyrics or reference transcripts in `input.texts`. Each model declares its audio policy, frozen presets and continuation requirements. Native continuation references a successful same-Key parent through `input.context.job_id`; Sub2API callers use their public `rc_…` task ID. Existing models and input formats remain supported.

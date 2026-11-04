@@ -1,0 +1,38 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T07:10:07.521854+00:00",
+  "passed": true,
+  "scope": "Five native PostgreSQL/HTTP regressions for tenant/project unlimited writes, historical null omission, parent display, replay, unchanged counters and access-restricted new defaults. Full-suite coverage is recorded separately.",
+  "source_revision": "1a3274b8f07bc5e06c70183c8445226e35f15750",
+  "sources_unchanged": true,
+  "source_files_modified_before_run": true,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "python": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/packages/contracts/src/generation_contracts/defaults.py": "350f670f56e297d78692febd97bfb1072fbc52f76147ace5621c13b9d78f683a",
+    "app/apps/control_api/src/control_api/cli.py": "df7bd3db49d5e5789c0e0f1496cb2007b05d2d0d02fc9c4082db3cdf66ae07a3",
+    "app/packages/infrastructure/src/generation_infrastructure/admin_scopes.py": "810f9792621b71ff849408a35a9e60c16b6c71ed16914cae9a3a3a878301738c",
+    "app/tests/integration/test_scope_administration.py": "ea9a3255b4e5d752babb5040db2886f9c515e57e5c442266f1741d8c590642ba"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_unlimited_scope_patch_preserves_nulls_usage_and_replay",
+      "passed_cases": 4
+    },
+    {
+      "path": "app/tests/integration/test_scope_administration.py",
+      "symbol": "test_new_admin_defaults_remove_only_daily_caps",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "05b68d27b2a6466043357aa3a7fb535ec4e81c9fa2bbf6cd25164b1da920729b",
+  "python_log_sha256": "15f533bac1fbeabad7323be14dc527e603a1e5470feb75e8886ffeac3c650807"
+}

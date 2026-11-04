@@ -30,6 +30,15 @@ def scope_search(model: type[Tenant] | type[Project], prefix: str, query: str) -
     return or_(model.name.icontains(query, autoescape=True), identifier == query)
 
 
+def scope_record(record: dict[str, Any]) -> dict[str, Any]:
+    # Older scope patches recursively removed nulls, including unlimited values.
+    result = dict(record)
+    for field in ("limits", "tenant_limits"):
+        if field in result:
+            result[field] = {name: {**limit, "value": None} if limit.get("mode") == "unlimited" and "value" not in limit else limit for name, limit in result[field].items()}
+    return result
+
+
 def projections(session: Session, rows: Sequence[Tenant | Project], *, projects: bool, now: datetime) -> list[dict[str, Any]]:
     period = now.astimezone(ZoneInfo("Asia/Taipei")).date().isoformat()
     scope_kind = "2_project" if projects else "1_tenant"
@@ -43,7 +52,7 @@ def projections(session: Session, rows: Sequence[Tenant | Project], *, projects:
         if isinstance(row, Project):
             tenant = parents[row.tenant_id]
             record.update({"tenant_id": public_id("ten", tenant.id), "tenant_name": tenant.name, "tenant_enabled": tenant.enabled, "tenant_limits": tenant.limits})
-        result.append(record)
+        result.append(scope_record(record))
     return result
 
 
@@ -139,12 +148,12 @@ class ScopeAdministration(AdminBase):
         with self.sessions.begin() as session:
             idem = mutation(session, actor, kind + ".patch:" + str(identifier), token, data.model_dump(exclude_none=True))
             if idem.result is not None:
-                return idem.result
+                return scope_record(idem.result)
             row = session.scalar(select(Project).where(Project.id == identifier).with_for_update(key_share=True)) if project else session.scalar(select(Tenant).where(Tenant.id == identifier).with_for_update(key_share=True))
             if row is None:
                 raise DomainError("not_found", "项目或租户不存在", 404)
             require_revision(row.revision, data.expected_revision)
-            changes = data.model_dump(exclude={"expected_revision"}, exclude_none=True)
+            changes = {name: value for name, value in data.model_dump(exclude={"expected_revision"}).items() if value is not None}
             changed = any(getattr(row, name) != value for name, value in changes.items())
             if changed:
                 for name, value in changes.items():

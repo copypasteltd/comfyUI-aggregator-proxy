@@ -3,6 +3,7 @@ from __future__ import annotations
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 from datetime import UTC, datetime, timedelta
+from hashlib import sha256
 from typing import Any
 from uuid import UUID, uuid4
 
@@ -270,3 +271,64 @@ def test_business_key_cannot_access_any_scope_management_route(client: TestClien
     for path in ("tenants", "projects", "scopes/options", "tenants/" + public_id("ten", catalog["identity"].tenant_id), "projects/" + public_id("prj", catalog["identity"].project_id)):
         assert client.get("/admin/api/v1/" + path, headers=headers).status_code == 401
     assert client.post("/admin/api/v1/tenants", json={"name": "Unauthorized", "limits": default_limits()}, headers=headers).status_code == 401
+
+
+@pytest.mark.parametrize("project", [False, True])
+@pytest.mark.parametrize("legacy_nulls_removed", [False, True])
+def test_unlimited_scope_patch_preserves_nulls_usage_and_replay(client: TestClient, pg: sessionmaker[Session], catalog: dict[str, Any], project: bool, legacy_nulls_removed: bool) -> None:
+    identity = catalog["identity"]
+    cls, identifier = (Project, identity.project_id) if project else (Tenant, identity.tenant_id)
+    daily = ("daily_jobs", "daily_image_count", "daily_video_milliseconds", "daily_audio_milliseconds", "daily_mesh_count")
+    with pg.begin() as session:
+        row = session.get(cls, identifier)
+        limits = deepcopy(row.limits)
+        limits.update({field: {"mode": "bounded", "value": 1} for field in daily})
+        row.limits = limits
+        bucket = QuotaBucket(scope_kind="2_project" if project else "1_tenant", scope_id=identifier, period="2000-01-01", daily_jobs=777, daily_image_count=888, daily_mesh_count=999)
+        session.add(bucket)
+        session.flush()
+        bucket_id = (bucket.scope_kind, bucket.scope_id, bucket.period)
+    login(client)
+    endpoint = "/admin/api/v1/" + ("projects/" if project else "tenants/") + public_id("prj" if project else "ten", identifier)
+    before = client.get(endpoint).json()
+    target = deepcopy(before["limits"])
+    target.update({field: {"mode": "unlimited", "value": None} for field in daily})
+    token = str(uuid4())
+    body = {"expected_revision": before["revision"], "limits": target}
+    headers = {"Idempotency-Key": token, "If-Match": '"' + str(before["revision"]) + '"'}
+    response = client.patch(endpoint, json=body, headers=headers)
+    assert response.status_code == 200, response.text
+    updated = response.json()
+    assert updated["limits"] == target and updated["revision"] == before["revision"] + 1
+    assert updated["enabled"] == before["enabled"]
+    with pg.begin() as session:
+        row = session.get(cls, identifier)
+        assert row.limits == target
+        bucket = session.get(QuotaBucket, bucket_id)
+        assert (bucket.daily_jobs, bucket.daily_image_count, bucket.daily_mesh_count) == (777, 888, 999)
+        if legacy_nulls_removed:
+            broken = {name: {key: value for key, value in limit.items() if value is not None} for name, limit in target.items()}
+            row.limits = broken
+            mutation_row = session.scalar(select(AdminMutation).where(AdminMutation.token_digest == sha256(token.encode()).hexdigest()))
+            mutation_row.result = {**mutation_row.result, "limits": broken}
+    assert client.get(endpoint).json()["limits"] == target
+    replay = client.patch(endpoint, json=body, headers=headers)
+    assert replay.status_code == 200 and replay.json() == updated
+    if not project:
+        project_view = client.get("/admin/api/v1/projects/" + public_id("prj", identity.project_id))
+        assert project_view.status_code == 200 and project_view.json()["tenant_limits"] == target
+
+
+def test_new_admin_defaults_remove_only_daily_caps(client: TestClient) -> None:
+    login(client)
+    snapshots = [client.get("/admin/api/v1/" + kind).json() for kind in ("tenants", "projects", "api-keys")]
+    policies = [snapshots[0]["default_limits"], snapshots[1]["default_limits"], snapshots[2]["default_policy"]["limits"]]
+    for limits in policies:
+        for field in ("daily_jobs", "daily_image_count", "daily_video_milliseconds", "daily_audio_milliseconds", "daily_mesh_count"):
+            assert limits[field] == {"mode": "unlimited", "value": None}
+        assert limits["generating_jobs"] == {"mode": "bounded", "value": 2}
+        assert limits["unfinished_jobs"] == {"mode": "bounded", "value": 20}
+        assert limits["rpm"] == {"mode": "bounded", "value": 120}
+    policy = snapshots[2]["default_policy"]
+    assert "audio:create" not in policy["scopes"] and "meshes:create" not in policy["scopes"]
+    assert all(policy[field] == {"mode": "selected", "selected_ids": []} for field in ("models", "workflow_releases", "channels"))

@@ -4,8 +4,11 @@ from typing import Any
 
 
 def default_limits() -> dict[str, Any]:
-    values = {"rpm": 120, "burst": 10, "daily_jobs": 1000, "unfinished_jobs": 20, "generating_jobs": 2, "daily_image_count": 1000, "daily_video_milliseconds": 3600000, "daily_audio_milliseconds": 0, "daily_mesh_count": 0}
-    return {k: {"mode": "bounded", "value": v} for k, v in values.items()}
+    values = {"rpm": 120, "burst": 10, "unfinished_jobs": 20, "generating_jobs": 2}
+    return {
+        **{k: {"mode": "bounded", "value": v} for k, v in values.items()},
+        **{k: {"mode": "unlimited", "value": None} for k in ("daily_jobs", "daily_image_count", "daily_video_milliseconds", "daily_audio_milliseconds", "daily_mesh_count")},
+    }
 
 
 def default_key_policy() -> dict[str, Any]:
