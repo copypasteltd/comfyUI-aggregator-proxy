@@ -1,0 +1,68 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T04:19:28.497526+00:00",
+  "passed": true,
+  "scope": "One SoulX single-speaker candidate: preserve the original failed request referencing an unprovided S2 voice, then validate and business-test a request using only its frozen S1 reference slot. No frozen graph change or approval transfer.",
+  "real_resource_acceptance": true,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "alias": "comfy-3080-02-soulx-podcast-1-7b-9108b8",
+  "display_name": "SoulX Podcast · 单人语音 · 30s · RTX 3080 · 639eaf",
+  "release_id": "wfr_b4898c5b35e44d34bd159779175ef9b2",
+  "release_digest": "a8a8501985e986a906a951f72b5d706b324eb29ef6a507df27f314e003d40bd6",
+  "previous_failure": {
+    "job_id": "job_ba5aaec31e314d07be6609b81cd2ca9c",
+    "error_code": "comfy_execution_failed",
+    "dialogue": "[S1] Hello! Today we are testing a small blue robot.\n[S2] It looks ready for a friendly adventure.",
+    "supplied_speaker_slots": [
+      "speaker_1"
+    ],
+    "reason": "The source parser rejects S2 without corresponding reference audio."
+  },
+  "validation_job_id": "job_2c2cef4ce7034a30b895676183051589",
+  "business_job_id": "job_f10580f8b2654e43bba317f6c9f835ba",
+  "corrected_request": {
+    "model": "comfy-3080-02-soulx-podcast-1-7b-9108b8",
+    "task_type": "text_to_audio",
+    "input": {
+      "media": [
+        {
+          "slot": "speaker_1",
+          "asset_id": "asset_006d54a1b5684c22bd59c0113d2874d6"
+        }
+      ],
+      "texts": {
+        "dialogue": "[S1] Hello! Today we are testing a small blue robot.",
+        "speaker_1_transcript": "Hello. This is a synthetic voice sample for testing."
+      }
+    },
+    "parameters": {
+      "quality": "standard",
+      "seconds": 30,
+      "n": 1,
+      "seed": 17
+    }
+  },
+  "download": {
+    "content_id": "content_aebf01c420da480eb43a9aaf4adf8873",
+    "bytes": 79524,
+    "sha256": "00f671ba6c1682f67e1d394b83a21c3793c8caa0327196ab1f0be2375b67fc00",
+    "media_type": "audio/mpeg",
+    "verified_at": 1793765834,
+    "synthetic_input": true,
+    "actual": {
+      "duration": "3.840000",
+      "streams": [
+        {
+          "codec_type": "audio",
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      ]
+    }
+  },
+  "prior_failed_intents_preserved": true,
+  "frozen_release_unchanged": true,
+  "fresh_validation_and_approval": true
+}

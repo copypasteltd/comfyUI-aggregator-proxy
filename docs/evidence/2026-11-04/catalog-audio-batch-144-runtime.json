@@ -1,0 +1,827 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T04:29:29.773530+00:00",
+  "passed": true,
+  "scope": "All nine new RTX 3080 audio workflows: ordinary business-Key discovery and exact usage notes, independent successful validation/business jobs, and SHA-256-verified local downloads with decoded duration/streams. Source and completed environment failures retain their own historical records. Image, 3D and 4090 video acceptance are outside this report.",
+  "real_resource_acceptance": true,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "counts": {
+    "audio_models": 9,
+    "successful_validation_jobs": 9,
+    "successful_business_downloads": 9,
+    "native_access_failures_recovered": 4,
+    "single_speaker_fixture_failures_recovered": 1
+  },
+  "models": [
+    {
+      "key": "3080-77ea3545a7efe17a",
+      "alias": "comfy-3080-00-yue2-full-bf16-text2music-77ea35",
+      "display_name": "YuE2 · 音乐生成 · 30s · RTX 3080 · 9a0005",
+      "release_id": "wfr_2808b0688fbb4011bee984ff047d3b8e",
+      "release_digest": "67371e2c0aa9db161cf1812fdfeb64c3a50b0aa37a38c428e4cd6b30325564df",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [],
+      "text_slots": [
+        {
+          "name": "abc",
+          "label": "abc",
+          "description": "曲谱采用 ABC 记谱；歌词与风格分别传入。",
+          "required": false,
+          "max_length": 8000
+        },
+        {
+          "name": "lyrics",
+          "label": "lyrics",
+          "description": "传入该工作流的lyrics文本；不作为文件路径或命令执行。",
+          "required": false,
+          "max_length": 8000
+        },
+        {
+          "name": "style",
+          "label": "style",
+          "description": "传入该工作流的style文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_81b6785ebffc471e957044cb3e5027de",
+      "business_job_id": "job_3a6ae64d825e4a65af23fbe50e1e39df",
+      "request": {
+        "model": "comfy-3080-00-yue2-full-bf16-text2music-77ea35",
+        "task_type": "text_to_audio",
+        "input": {
+          "texts": {
+            "abc": "X:1\nT:Small Robot\nM:4/4\nL:1/8\nQ:1/4=100\nK:C\nC2 E2 G2 E2 | F2 A2 G4 | E2 D2 C2 D2 | E4 C4 | G2 E2 G2 c2 | A2 F2 G4 | E2 G2 D2 E2 | C8 |]",
+            "style": "Cheerful instrumental chamber music, pizzicato strings and gentle woodwinds, no vocals."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_b69b5596bc744f25bb826042bd26eb23",
+        "bytes": 2576139,
+        "sha256": "60189c9e85a9cd2fa47eb74b174f37b59577f22eef5fe1b57fdf18a7a18c2938",
+        "media_type": "audio/flac",
+        "verified_at": 1793763419,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "30.000000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "flac",
+              "sample_rate": "48000",
+              "channels": 2
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 0
+    },
+    {
+      "key": "3080-2e68f48820334bd6",
+      "alias": "comfy-3080-01-yue2-full-bf16-abc-music-2e68f4",
+      "display_name": "YuE2 · 音乐生成 · 30s · RTX 3080 · a376a0",
+      "release_id": "wfr_c8c93c010d1a4a369676a356b3c1a358",
+      "release_digest": "1b4323dd83db6bc14cd71aaff09e2476589ff4f14a6c03b8326e1ff2562eb785",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [],
+      "text_slots": [
+        {
+          "name": "lyrics",
+          "label": "lyrics",
+          "description": "传入该工作流的lyrics文本；不作为文件路径或命令执行。",
+          "required": false,
+          "max_length": 8000
+        },
+        {
+          "name": "style",
+          "label": "style",
+          "description": "传入该工作流的style文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_21930e932fbc4a6199286668fcd4cef9",
+      "business_job_id": "job_7275fecececc49b8b95fc4aee21dbbb1",
+      "request": {
+        "model": "comfy-3080-01-yue2-full-bf16-abc-music-2e68f4",
+        "task_type": "text_to_audio",
+        "input": {
+          "texts": {
+            "style": "Cheerful instrumental chamber music, pizzicato strings and gentle woodwinds, no vocals."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_0446170d0f8f448fba154aa969d48658",
+        "bytes": 2453726,
+        "sha256": "0e69b35a6448ec910fe0a2b443bc6b70198f7c62a40bc8b4d3f2c98846672c72",
+        "media_type": "audio/flac",
+        "verified_at": 1793761954,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "30.000000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "flac",
+              "sample_rate": "48000",
+              "channels": 2
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 0
+    },
+    {
+      "key": "3080-d02a4795200a2806",
+      "alias": "comfy-3080-20-soulx-official-voice-tts-d02a47",
+      "display_name": "SoulX Podcast · 单人语音 · 30s · RTX 3080 · 5506be",
+      "release_id": "wfr_203135463c8440309514a5f45278bee6",
+      "release_digest": "4720f7758f77f15fae24716e43ecdd302d7519e04da4dc02648e83c0330023f3",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [
+        {
+          "name": "speaker_1",
+          "kind": "audio",
+          "label": "speaker 1 / Speaker 1",
+          "description": "上传 speaker_1 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        }
+      ],
+      "text_slots": [
+        {
+          "name": "dialogue",
+          "label": "dialogue",
+          "description": "传入该工作流的dialogue文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "speaker_1_transcript",
+          "label": "S1 参考录音转写 / Reference transcript",
+          "description": "逐字填写该说话者上传参考录音的实际内容。This transcript must match the reference audio; generation dialogue is supplied separately.",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_570f15443ad249bc8c13d1d5e79d3f55",
+      "business_job_id": "job_c0079fd8116241c0805f55a43cc2b163",
+      "request": {
+        "model": "comfy-3080-20-soulx-official-voice-tts-d02a47",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_006d54a1b5684c22bd59c0113d2874d6"
+            }
+          ],
+          "texts": {
+            "dialogue": "[S1] Hello! Today we are testing a small blue robot.",
+            "speaker_1_transcript": "Hello. This is a synthetic voice sample for testing."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_6508a1b244b74764b54d80041444bc7c",
+        "bytes": 65365,
+        "sha256": "12d28154a4857a71fc9b3b71ede37fa08749e72f8591ad7e2847db5bc0cc3eab",
+        "media_type": "audio/flac",
+        "verified_at": 1793766517,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "3.840000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "flac",
+              "sample_rate": "24000",
+              "channels": 1
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 0
+    },
+    {
+      "key": "3080-ba95ea767a9e1344",
+      "alias": "comfy-3080-01-moss-tech-ba95ea",
+      "display_name": "MOSS-TTSD v1.0 · 双人对话语音 · 30s · RTX 3080 · eff007",
+      "release_id": "wfr_61266b73412d4c7896b275cf69ae51b9",
+      "release_digest": "a223dafca71487107d609dc585e333a898f30f4edf194fed066a5f84ce433e3e",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [
+        {
+          "name": "speaker_1",
+          "kind": "audio",
+          "label": "speaker 1 / Speaker 1",
+          "description": "上传 speaker_1 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        },
+        {
+          "name": "speaker_2",
+          "kind": "audio",
+          "label": "speaker 2 / Speaker 2",
+          "description": "上传 speaker_2 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        }
+      ],
+      "text_slots": [
+        {
+          "name": "dialogue",
+          "label": "dialogue",
+          "description": "传入该工作流的dialogue文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "s1_text",
+          "label": "s1_text",
+          "description": "传入该工作流的s1_text文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "s2_text",
+          "label": "s2_text",
+          "description": "传入该工作流的s2_text文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_c07e4e7a01d04119942b1b5ae43febcf",
+      "business_job_id": "job_ac387eeb84524fa48c006400582d8212",
+      "request": {
+        "model": "comfy-3080-01-moss-tech-ba95ea",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_006d54a1b5684c22bd59c0113d2874d6"
+            },
+            {
+              "slot": "speaker_2",
+              "asset_id": "asset_98c62b3b72384a3a940101fa92a1cdb1"
+            }
+          ],
+          "texts": {
+            "dialogue": "[S1] Hello! Today we are testing a small blue robot.\n[S2] It looks ready for a friendly adventure.",
+            "s1_text": "Hello. This is a synthetic voice sample for testing.",
+            "s2_text": "Welcome. We are testing a short conversation today."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_077d8b2b05164c119516b3207f821e73",
+        "bytes": 130923,
+        "sha256": "f1f3daba3f1e06cd0e45099669df61ad3f74cc47cbc554821e2db3a99ca634e4",
+        "media_type": "audio/mpeg",
+        "verified_at": 1793766360,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "6.400000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "mp3",
+              "sample_rate": "24000",
+              "channels": 1
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 1
+    },
+    {
+      "key": "3080-4156b30e68b62b36",
+      "alias": "comfy-3080-03-soulx-cafe-4156b3",
+      "display_name": "SoulX Podcast · 双人对话语音 · 30s · RTX 3080 · 52b048",
+      "release_id": "wfr_32e97214cc5e459799a686c84e1b5f79",
+      "release_digest": "86acf15273eea088d0e7ca1c974b6c4099ab72158a06e5ec9469b013f556e6ce",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [
+        {
+          "name": "speaker_1",
+          "kind": "audio",
+          "label": "speaker 1 / Speaker 1",
+          "description": "上传 speaker_1 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        },
+        {
+          "name": "speaker_2",
+          "kind": "audio",
+          "label": "speaker 2 / Speaker 2",
+          "description": "上传 speaker_2 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        }
+      ],
+      "text_slots": [
+        {
+          "name": "dialogue",
+          "label": "dialogue",
+          "description": "传入该工作流的dialogue文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "speaker_1_transcript",
+          "label": "S1 参考录音转写 / Reference transcript",
+          "description": "逐字填写该说话者上传参考录音的实际内容。This transcript must match the reference audio; generation dialogue is supplied separately.",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "speaker_2_transcript",
+          "label": "S2 参考录音转写 / Reference transcript",
+          "description": "逐字填写该说话者上传参考录音的实际内容。This transcript must match the reference audio; generation dialogue is supplied separately.",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_53518a355dbb428bbe4fc6c5db3dd748",
+      "business_job_id": "job_0bc4d163cc474ba6a36ac2cfb6dc9836",
+      "request": {
+        "model": "comfy-3080-03-soulx-cafe-4156b3",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_006d54a1b5684c22bd59c0113d2874d6"
+            },
+            {
+              "slot": "speaker_2",
+              "asset_id": "asset_98c62b3b72384a3a940101fa92a1cdb1"
+            }
+          ],
+          "texts": {
+            "dialogue": "[S1] Hello! Today we are testing a small blue robot.\n[S2] It looks ready for a friendly adventure.",
+            "speaker_1_transcript": "Hello. This is a synthetic voice sample for testing.",
+            "speaker_2_transcript": "Welcome. We are testing a short conversation today."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_327312dcf09045e5a3ae871c737e7791",
+        "bytes": 127937,
+        "sha256": "66481329ec078b5b170e6635da04c52f56050a2fa974ab382912909e6ced9a30",
+        "media_type": "audio/mpeg",
+        "verified_at": 1793763089,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "6.240000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "mp3",
+              "sample_rate": "24000",
+              "channels": 1
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 0
+    },
+    {
+      "key": "3080-8635cc412d4b9a03",
+      "alias": "comfy-3080-05-firered-film-8635cc",
+      "display_name": "FireRedTTS2 · 双人对话语音 · 30s · RTX 3080 · 761c26",
+      "release_id": "wfr_eef4ac0f564948d799e8bebcdc821837",
+      "release_digest": "f41f5284a9a9be700d40fbcf37a9f5db90cc379d080629af9178e5d06b094c51",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [
+        {
+          "name": "speaker_1",
+          "kind": "audio",
+          "label": "speaker 1 / Speaker 1",
+          "description": "上传 speaker_1 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        },
+        {
+          "name": "speaker_2",
+          "kind": "audio",
+          "label": "speaker 2 / Speaker 2",
+          "description": "上传 speaker_2 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        }
+      ],
+      "text_slots": [
+        {
+          "name": "dialogue",
+          "label": "dialogue",
+          "description": "传入该工作流的dialogue文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "s1_text",
+          "label": "s1_text",
+          "description": "传入该工作流的s1_text文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "s2_text",
+          "label": "s2_text",
+          "description": "传入该工作流的s2_text文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_8ff3b92d890745ea9808df71be2ca504",
+      "business_job_id": "job_d51bab0b7e3b4154a1e4c78840a54205",
+      "request": {
+        "model": "comfy-3080-05-firered-film-8635cc",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_006d54a1b5684c22bd59c0113d2874d6"
+            },
+            {
+              "slot": "speaker_2",
+              "asset_id": "asset_98c62b3b72384a3a940101fa92a1cdb1"
+            }
+          ],
+          "texts": {
+            "dialogue": "[S1] Hello! Today we are testing a small blue robot.\n[S2] It looks ready for a friendly adventure.",
+            "s1_text": "Hello. This is a synthetic voice sample for testing.",
+            "s2_text": "Welcome. We are testing a short conversation today."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_fcb7a81bce0e41529c3264946a42072b",
+        "bytes": 124680,
+        "sha256": "be6d555526bdad8fa0aebabc6166380158acb2ee193766d59f80fee0332704cd",
+        "media_type": "audio/mpeg",
+        "verified_at": 1793765677,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "6.080000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "mp3",
+              "sample_rate": "24000",
+              "channels": 1
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 1
+    },
+    {
+      "key": "3080-72f65344c7341e96",
+      "alias": "comfy-3080-01-moss-ttsd-v1-0-72f653",
+      "display_name": "MOSS-TTSD v1.0 · 单人语音 · 30s · RTX 3080 · 40c09c",
+      "release_id": "wfr_bd9980f27ca949b8ba0b5434ccb3fa57",
+      "release_digest": "e53956158f3e28cbc3f912005892615c798696d7ba9d2a17d64570f10971451f",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [
+        {
+          "name": "speaker_1",
+          "kind": "audio",
+          "label": "speaker 1 / Speaker 1",
+          "description": "上传 speaker_1 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        }
+      ],
+      "text_slots": [
+        {
+          "name": "dialogue",
+          "label": "dialogue",
+          "description": "传入该工作流的dialogue文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "s1_text",
+          "label": "s1_text",
+          "description": "传入该工作流的s1_text文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_826d319067cc4e028c084f336dfbb187",
+      "business_job_id": "job_f3df8f19ade44ee88b56ca6219a945b1",
+      "request": {
+        "model": "comfy-3080-01-moss-ttsd-v1-0-72f653",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_006d54a1b5684c22bd59c0113d2874d6"
+            }
+          ],
+          "texts": {
+            "dialogue": "[S1] Hello! Today we are testing a small blue robot.",
+            "s1_text": "Hello. This is a synthetic voice sample for testing."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_9cf2a1ee3fe1456d963276bfdddd2f25",
+        "bytes": 72932,
+        "sha256": "73a38377177d34f05704730a1b52b79fa7cd716956581f77fb8f05af2d1ff5d2",
+        "media_type": "audio/mpeg",
+        "verified_at": 1793765213,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "3.520000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "mp3",
+              "sample_rate": "24000",
+              "channels": 1
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 1
+    },
+    {
+      "key": "3080-9108b819fc9f4ff6",
+      "alias": "comfy-3080-02-soulx-podcast-1-7b-9108b8",
+      "display_name": "SoulX Podcast · 单人语音 · 30s · RTX 3080 · 639eaf",
+      "release_id": "wfr_b4898c5b35e44d34bd159779175ef9b2",
+      "release_digest": "a8a8501985e986a906a951f72b5d706b324eb29ef6a507df27f314e003d40bd6",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [
+        {
+          "name": "speaker_1",
+          "kind": "audio",
+          "label": "speaker 1 / Speaker 1",
+          "description": "上传 speaker_1 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        }
+      ],
+      "text_slots": [
+        {
+          "name": "dialogue",
+          "label": "dialogue",
+          "description": "传入该工作流的dialogue文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "speaker_1_transcript",
+          "label": "S1 参考录音转写 / Reference transcript",
+          "description": "逐字填写该说话者上传参考录音的实际内容。This transcript must match the reference audio; generation dialogue is supplied separately.",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_2c2cef4ce7034a30b895676183051589",
+      "business_job_id": "job_f10580f8b2654e43bba317f6c9f835ba",
+      "request": {
+        "model": "comfy-3080-02-soulx-podcast-1-7b-9108b8",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_006d54a1b5684c22bd59c0113d2874d6"
+            }
+          ],
+          "texts": {
+            "dialogue": "[S1] Hello! Today we are testing a small blue robot.",
+            "speaker_1_transcript": "Hello. This is a synthetic voice sample for testing."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_aebf01c420da480eb43a9aaf4adf8873",
+        "bytes": 79524,
+        "sha256": "00f671ba6c1682f67e1d394b83a21c3793c8caa0327196ab1f0be2375b67fc00",
+        "media_type": "audio/mpeg",
+        "verified_at": 1793765834,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "3.840000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "mp3",
+              "sample_rate": "24000",
+              "channels": 1
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 1
+    },
+    {
+      "key": "3080-347a5d3702fb7d97",
+      "alias": "comfy-3080-03-fireredtts2-347a5d",
+      "display_name": "FireRedTTS2 · 单人语音 · 30s · RTX 3080 · 7e6d33",
+      "release_id": "wfr_e74ae54a71e04e488e1b2f4b8255167b",
+      "release_digest": "c2dcd1cf6c725ad6ffff7cec6fcf8ce9c10be109c96f68365e40d5012ee36116",
+      "discovered_with_business_key": true,
+      "published": true,
+      "input_slots": [
+        {
+          "name": "speaker_1",
+          "kind": "audio",
+          "label": "speaker 1 / Speaker 1",
+          "description": "上传 speaker_1 的参考录音；若要求转写，必须逐字匹配该录音，不能填待生成台词。Upload this speaker/reference recording. A required transcript must match the recording; generated dialogue is separate.",
+          "required": true,
+          "max_bytes": 268435456,
+          "mime_types": [
+            "audio/flac",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/wav"
+          ]
+        }
+      ],
+      "text_slots": [
+        {
+          "name": "dialogue",
+          "label": "dialogue",
+          "description": "传入该工作流的dialogue文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        },
+        {
+          "name": "s1_text",
+          "label": "s1_text",
+          "description": "传入该工作流的s1_text文本；不作为文件路径或命令执行。",
+          "required": true,
+          "max_length": 8000
+        }
+      ],
+      "validation_job_id": "job_1155ac7f61214612909425092d53aee4",
+      "business_job_id": "job_7562ba845dae48a8accde13efb960a29",
+      "request": {
+        "model": "comfy-3080-03-fireredtts2-347a5d",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_006d54a1b5684c22bd59c0113d2874d6"
+            }
+          ],
+          "texts": {
+            "dialogue": "[S1] Hello! Today we are testing a small blue robot.",
+            "s1_text": "Hello. This is a synthetic voice sample for testing."
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "seconds": 30,
+          "n": 1,
+          "seed": 17
+        }
+      },
+      "download": {
+        "content_id": "content_4940da923e0e43f0b838d6492b9a3b6d",
+        "bytes": 98369,
+        "sha256": "151e2086a1caa3a197fc6f2dcad6ec74f285c89a7c06eda0b657eb0b0c405fd4",
+        "media_type": "audio/mpeg",
+        "verified_at": 1793764750,
+        "synthetic_input": true,
+        "actual": {
+          "duration": "4.800000",
+          "streams": [
+            {
+              "codec_type": "audio",
+              "codec_name": "mp3",
+              "sample_rate": "24000",
+              "channels": 1
+            }
+          ]
+        }
+      },
+      "prior_terminal_attempts_retained": 1
+    }
+  ],
+  "customer_keys_modified": false,
+  "callers_need_their_own_model_release_grants": true
+}

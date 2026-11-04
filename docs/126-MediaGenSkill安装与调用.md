@@ -48,7 +48,7 @@ python3 scripts/media_gen.py describe MODEL_ALIAS_FROM_LIST
 | 多参考 / Multiple refs | `generate --model ALIAS --prompt "Preserve both subjects" --reference one.png --reference two.png --wait` | 精确匹配该模型参考数量，按位置上传并绑定，不能只看模型名字猜能力 |
 | 图像编辑 / Image edit | `generate --model ALIAS --prompt "Change the background" --source-image original.png --wait` | 使用声明 source_image 的模型；高级 mask/weight 可用 submit JSON |
 | 单图生成 3D / Image-to-3D | `generate --model comfy-3080-3d-trellis2 --source-image robot.png --seed 17 --wait --timeout 1800` | 先确认模型可见；只传源图，不传 prompt、size 或 seconds；成功后下载 GLB |
-| 音乐 / Music | `generate --model ALIAS --prompt "Warm acoustic strings and piano" --wait --timeout 1800` | 当前 YuE2 的 prompt 为音乐风格，歌词由冻结工作流提供；尚未开放歌词编辑、TTS 或音色克隆。长文本可用 --prompt-file |
+| 历史音乐 / Legacy music | `generate --model comfy-3080-music-yue2 --prompt "Warm acoustic strings and piano" --wait --timeout 1800` | 此历史别名的 prompt 为风格，歌词由冻结图提供。新音乐、单人/双人语音使用各自命名文本和声音槽位，见 [138 · 音频调用](138-音频模型调用与验证.md) |
 | 精确请求 / Exact request | `submit request.json --wait --state-file request-state.json` | 请求体参考 usage.example_request；负面提示词在 input 内，参数在 parameters 内 |
 | 查询 / Status | `status JOB_ID` | 查询任务状态，poll timeout 不会取消服务端生成 |
 | 等待下载 / Wait | `wait JOB_ID --timeout 1800 --download --output-dir output` | 成功后按 artifacts 的 content_id 读取 metadata，再下载并校验大小和 SHA-256 |

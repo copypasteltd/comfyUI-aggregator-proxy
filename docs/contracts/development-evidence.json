@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-04/development-trace-baselines-143.json",
-    "sha256": "b3f11f856a277c8d251ce06fc402b986f79b669a0ff75f1bb1746a90f59c4847"
+    "path": "docs/evidence/2026-11-04/development-trace-baselines-144.json",
+    "sha256": "c5dd22416022690d401f501b7a847d50532d14c34755f241264acba4aec9440b"
   },
   "requirements": [
     {
@@ -486,6 +486,12 @@
           "symbol": "test_podcast_usage_names_only_speakers_with_declared_reference_slots",
           "language": "python",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_music_usage_describes_the_connected_score_source",
+          "language": "python",
+          "baseline": "canvas140"
         }
       ],
       "evidence": [
@@ -744,6 +750,12 @@
         {
           "path": "app/tests/unit/test_catalog_delivery_contracts.py",
           "symbol": "test_podcast_usage_names_only_speakers_with_declared_reference_slots",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_music_usage_describes_the_connected_score_source",
           "language": "python",
           "baseline": "canvas140"
         }

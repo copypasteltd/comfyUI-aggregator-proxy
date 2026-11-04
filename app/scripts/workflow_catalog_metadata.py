@@ -140,6 +140,23 @@ def describe_media_slots(item: dict) -> None:
             binding["source"] = "media:" + renames[binding["source"][6:]]
 
 
+def _output_classes(manifest: dict) -> set[str]:
+    graph = manifest["workflow_api"]
+    pending = list(manifest.get("output", {}).get("final_node_ids", []))
+    seen = set()
+    while pending:
+        node_id = pending.pop()
+        if node_id in seen:
+            continue
+        seen.add(node_id)
+        pending.extend(
+            value[0] for value in graph[node_id]["inputs"].values()
+            if isinstance(value, list) and len(value) == 2
+            and isinstance(value[0], str) and value[0] in graph
+        )
+    return {graph[node_id]["class_type"] for node_id in seen}
+
+
 def public_documentation(item: dict, manifest: dict) -> dict:
     graph = manifest["workflow_api"]
     classes = {node["class_type"] for node in graph.values()}
@@ -258,6 +275,11 @@ def public_documentation(item: dict, manifest: dict) -> dict:
         operation, operation_en = "双人对话语音", "Two speaker dialogue"
     elif kind == "audio" and roles & {"speaker_1", "speaker_2"}:
         operation, operation_en = "单人语音", "Single speaker speech"
+    elif kind == "audio" and tag == "yue2":
+        if "YuE2GenerateABC" in _output_classes(manifest):
+            operation, operation_en = "风格/歌词自动作谱音乐", "Music with a generated ABC score"
+        elif any(binding["source"] == "text:abc" for binding in manifest["bindings"]):
+            operation, operation_en = "音乐生成 · 可传 ABC 曲谱", "Music with an optional supplied ABC score"
     preset = manifest["presets"][0]
     specification = " / ".join(str(preset[field]) + ("s" if field == "seconds" else "") for field in ("size", "seconds") if field in preset)
     variant = hashlib.sha256(json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:6]
@@ -316,9 +338,16 @@ def public_documentation(item: dict, manifest: dict) -> dict:
             "Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
         )
     if any("YuE2" in c for c in classes):
-        notes.append(
-            "style 填风格；lyrics 填歌词或留空生成纯音乐；abc 为 ABC 记谱，带自动作谱节点的版本由风格/歌词生成曲谱。Supply style and optional lyrics; abc uses ABC notation. Score-generator variants derive the score from style/lyrics."
-        )
+        if "YuE2GenerateABC" in _output_classes(manifest):
+            notes.append(
+                "此版本接收 style 风格与选填 lyrics；ABC 曲谱由连接到输出的 YuE2GenerateABC 自动生成。"
+                "This version accepts style and optional lyrics; its connected YuE2GenerateABC node generates the score."
+            )
+        elif any(binding["source"] == "text:abc" for binding in manifest["bindings"]):
+            notes.append(
+                "此版本可通过 abc 传入 ABC 记谱，style 填风格，lyrics 按声明选填；以实际文本槽位的必填标记为准。"
+                "This version exposes an abc text slot for an optional supplied ABC score, alongside style and optional lyrics. Follow the advertised required fields."
+            )
     if policy := manifest["output"].get("audio_policy"):
         notes.append("声音策略 / Audio policy: " + policy["mode"] + ". " + policy["description"])
     if context := manifest.get("context"):

@@ -1,5 +1,7 @@
 # 演示素材 / Demonstration media
 
+[144 · 真实单人语音 / Actual single-speaker speech](catalog-144/README.md)：FireRedTTS2 与 MOSS-TTSD 的业务调用产物，移除 MP3 元数据后解码音频一致，附实际请求和下载摘要。[142 · 真实音乐 / Actual music](catalog-142/README.md)：30 秒 YuE2 FLAC，实际只传 style，由工作流内部生成 ABC；历史输入归属错误有明确更正，音频和原报告保留。
+
 [124 · 实际模型说明、Skill 调用与自动回收](media-gen-124/README.md)：线上已发布模型说明和三台回收证据，13.56 秒原速录屏/GIF、实际 API 响应及去元数据的生图/视频/参考视频/音乐样本。[English](media-gen-124/README.en.md)。
 
 [122 · 实际 5070 精选接入 / Actual selected 5070 workflows](5070-workflows-122/README.md)：当前三渠道、十个发布别名及 API-only 表单的实际截图、原速录屏和 GIF；附三种真实业务视频及自制参考图，来源、摘要及使用边界单独记录。[English](5070-workflows-122/README.en.md)。

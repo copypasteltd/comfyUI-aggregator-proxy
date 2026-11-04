@@ -1,0 +1,70 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T04:39:22.313502+00:00",
+  "passed": true,
+  "scope": "Correct the music sample input attribution using preserved actual request/job/download evidence and output-connected frozen graph inspection. The catalog-142 sample accepted style only and generated its ABC internally. The other YuE2 variant accepted the supplied original ABC. No new generation, release, media bytes or historical evidence is fabricated or overwritten.",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "correction": {
+    "incorrect_claim": "The catalog-142 sample used a caller-supplied original ABC score.",
+    "correct_claim": "The catalog-142 sample used a synthetic style prompt; its connected YuE2GenerateABC generated the score internally.",
+    "historical_manifest_field": "kind",
+    "historical_manifest_classification_superseded": true
+  },
+  "preserved_historical_evidence": {
+    "docs/evidence/2026-11-04/catalog-audio-142-runtime.json": "0a340e543c0aed1e2762d5c7bd5914a28bbc669d653ec044c31efaaf0d85c719",
+    "docs/media/catalog-142/manifest.json": "58ba1dd2c85a248849fe64c28b022ff65591aa6890607d9bccaff1688de77b5c"
+  },
+  "models": [
+    {
+      "alias": "comfy-3080-01-yue2-full-bf16-abc-music-2e68f4",
+      "display_name": "YuE2 · 风格/歌词自动作谱音乐 · 30s · RTX 3080 · a376a0",
+      "release_id": "wfr_c8c93c010d1a4a369676a356b3c1a358",
+      "release_digest": "1b4323dd83db6bc14cd71aaff09e2476589ff4f14a6c03b8326e1ff2562eb785",
+      "declared_text_slots": {
+        "lyrics": false,
+        "style": true
+      },
+      "connected_score_generator": true,
+      "score_source": "generated_inside_workflow",
+      "actual_business_text_input": {
+        "style": "Cheerful instrumental chamber music, pizzicato strings and gentle woodwinds, no vocals."
+      },
+      "validation_job_id": "job_21930e932fbc4a6199286668fcd4cef9",
+      "business_job_id": "job_7275fecececc49b8b95fc4aee21dbbb1",
+      "download_sha256": "0e69b35a6448ec910fe0a2b443bc6b70198f7c62a40bc8b4d3f2c98846672c72",
+      "unchanged_frozen_manifest": true
+    },
+    {
+      "alias": "comfy-3080-00-yue2-full-bf16-text2music-77ea35",
+      "display_name": "YuE2 · 音乐生成 · 可传 ABC 曲谱 · 30s · RTX 3080 · 9a0005",
+      "release_id": "wfr_2808b0688fbb4011bee984ff047d3b8e",
+      "release_digest": "67371e2c0aa9db161cf1812fdfeb64c3a50b0aa37a38c428e4cd6b30325564df",
+      "declared_text_slots": {
+        "abc": false,
+        "lyrics": false,
+        "style": true
+      },
+      "connected_score_generator": false,
+      "score_source": "optional_caller_supplied_abc_slot",
+      "actual_business_text_input": {
+        "abc": "X:1\nT:Small Robot\nM:4/4\nL:1/8\nQ:1/4=100\nK:C\nC2 E2 G2 E2 | F2 A2 G4 | E2 D2 C2 D2 | E4 C4 | G2 E2 G2 c2 | A2 F2 G4 | E2 G2 D2 E2 | C8 |]",
+        "style": "Cheerful instrumental chamber music, pizzicato strings and gentle woodwinds, no vocals."
+      },
+      "validation_job_id": "job_81b6785ebffc471e957044cb3e5027de",
+      "business_job_id": "job_3a6ae64d825e4a65af23fbe50e1e39df",
+      "download_sha256": "60189c9e85a9cd2fa47eb74b174f37b59577f22eef5fe1b57fdf18a7a18c2938",
+      "unchanged_frozen_manifest": true
+    }
+  ],
+  "public_media": {
+    "file": "docs/media/catalog-142/yue2-abc-music.flac",
+    "bytes": 2452283,
+    "sha256": "19e92fc55a844f0e32ecd23659ce723f1a60e527b7a6c5d0035f357bb863f079",
+    "embedded_metadata_removed": true,
+    "decoded_pcm_unchanged": true,
+    "decoded_pcm_sha256": "2abeec9ce14935360bab2226b0b3ca1367653cf2e52eab327709a799021c4e5d"
+  },
+  "metadata_update_evidence": "docs/evidence/2026-11-04/catalog-music-144-live-update.json"
+}

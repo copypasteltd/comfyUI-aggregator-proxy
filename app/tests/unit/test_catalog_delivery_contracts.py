@@ -142,3 +142,24 @@ def test_podcast_usage_names_only_speakers_with_declared_reference_slots(speaker
     assert ("[S2]" in note) == ("speaker_2" in speakers)
     assert "supplied reference recording" in note and "exact transcript" in note
     assert ("Single speaker speech" in documentation["description"]) == (len(speakers) == 1)
+
+
+@pytest.mark.parametrize("score_mode", ["generated", "supplied", "unconnected_generator"])
+def test_music_usage_describes_the_connected_score_source(score_mode: str) -> None:
+    generated = score_mode == "generated"
+    graph = {
+        "music": {"class_type": "YuE2GenerateMusic", "inputs": {"abc": ["score", 0] if generated else ""}},
+        "save": {"class_type": "SaveAudio", "inputs": {"audio": ["music", 0]}},
+    }
+    if score_mode != "supplied":
+        graph["score"] = {"class_type": "YuE2GenerateABC", "inputs": {}}
+    manifest = {
+        "workflow_api": graph, "task_type": "text_to_audio", "presets": [{"seconds": 30}],
+        "bindings": [] if generated else [{"source": "text:abc"}],
+        "output": {"final_node_ids": ["save"]},
+    }
+    documentation = public_documentation({"source": "synthetic/music.api.json", "output_kind": "audio", "gpu": "3080"}, manifest)
+    assert ("自动作谱" in documentation["display_name"]) == generated
+    assert ("可传 ABC" in documentation["display_name"]) == (not generated)
+    assert any("generates the score" in note for note in documentation["notes"]) == generated
+    assert any("exposes an abc text slot" in note for note in documentation["notes"]) == (not generated)

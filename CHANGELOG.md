@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 144 · Audio delivery and music inputs / 音频交付与音乐输入
+
+- All nine new RTX 3080 audio models pass independent validation, publication, ordinary business generation and complete download verification. The four native-read failures and single-speaker fixture failure now have successful fresh retries with original attempts preserved. Combined with 12 image candidates, 21 new models have verified business delivery; 3D trials continue.
+- Add a bilingual audio guide with all nine stable aliases, recording/transcript roles, two music-input modes, concrete Skill calls and eight-hour delivery retention. Publish actual FireRedTTS2/MOSS single-speaker MP3 samples with identical decoded audio after metadata removal.
+- Correct the catalog-142 sample attribution: its business request supplied style only and the connected workflow generated ABC internally. Preserve the historical evidence, manifest and media bytes; add an explicit correction and corrected classification sidecar. The separate music variant exposes optional supplied ABC. Update both live model/Workflow names and notes without changing aliases, frozen graphs, releases or publication states.
+- All 53 scoped regressions, 213 offline usage examples and 213 actual usage inspections pass. Current source traceability is refreshed in the existing component group. No customer Key policy is widened and no deployment is implied by the metadata-only source change.
+
 ## 2026-11-04 · 143 · Speech roles and service access / 语音角色与服务权限
 
 - Distinguish single/two-speaker speech names and advertise only labels with declared reference-audio slots. Improve seven actual model/Workflow descriptions without changing aliases, presets, releases or publication state. All 50 scoped regressions, 213 offline examples and 213 actual usage documents pass.
