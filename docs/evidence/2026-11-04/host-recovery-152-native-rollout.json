@@ -1,0 +1,120 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T09:29:28.314518+00:00",
+  "passed": true,
+  "scope": "Actual native 3080 Worker replacement with unchanged ComfyUI, configuration and original attempt; matching SQLite/control-plane checkpoints and repeated increasing uptime retain the uncertain GPU. No OS reboot, stop confirmation, resubmission or new GPU-generation acceptance.",
+  "source_revision": "38abc83210ade91b4ffa7346e905b08f140eeb1a",
+  "worker_release": "rc-20261104.152.1",
+  "installation": {
+    "phase": "complete",
+    "error_type": null,
+    "new_release": "rc-20261104.152.1",
+    "preserved_pending_attempts": 1,
+    "configuration_preserved": true,
+    "journal_backup_verified": true,
+    "host_reboot_performed": false,
+    "old_service_restored": null
+  },
+  "before_service": {
+    "worker_pid": 21968,
+    "service_state": "Running",
+    "comfy_pids": [
+      24936
+    ]
+  },
+  "after_service": {
+    "worker_pid": 22592,
+    "service_state": "Running",
+    "comfy_pids": [
+      24936
+    ]
+  },
+  "startup": {
+    "comfy_startup_uses_system": true,
+    "comfy_boot_trigger": true,
+    "worker_start_mode": "Auto"
+  },
+  "native_observations": [
+    {
+      "attempt_id": "att_82ea1392575b48ee8cf87bbbd76aa2e8",
+      "stage": "posting",
+      "cloud_ack": false,
+      "has_association": true,
+      "has_prompt_id": false,
+      "checkpoint_present": true,
+      "server_digest": "1c97676eafe8fbf16c6e0f15f2a886e5dfed6b50c4e32d3456479d586a987991",
+      "uptime_ms": 915189750,
+      "checkpoint_uptime_ms": 915063156,
+      "same_host_installation": true,
+      "native_stop_reset_proven": false,
+      "channel_locality_verified": true,
+      "original_worker_boot_id": "abedbf6f-5776-4834-970a-3fc57c96a046",
+      "original_fence": 100,
+      "configuration_sha256": "3589e29e8238e79d32d664461d54cb967c6bb04b1d5bb0f7cde65431f28aff72"
+    },
+    {
+      "attempt_id": "att_82ea1392575b48ee8cf87bbbd76aa2e8",
+      "stage": "posting",
+      "cloud_ack": false,
+      "has_association": true,
+      "has_prompt_id": false,
+      "checkpoint_present": true,
+      "server_digest": "1c97676eafe8fbf16c6e0f15f2a886e5dfed6b50c4e32d3456479d586a987991",
+      "uptime_ms": 915378859,
+      "checkpoint_uptime_ms": 915063156,
+      "same_host_installation": true,
+      "native_stop_reset_proven": false,
+      "channel_locality_verified": true,
+      "original_worker_boot_id": "abedbf6f-5776-4834-970a-3fc57c96a046",
+      "original_fence": 100,
+      "configuration_sha256": "3589e29e8238e79d32d664461d54cb967c6bb04b1d5bb0f7cde65431f28aff72"
+    }
+  ],
+  "control_plane": {
+    "observed_at": "2026-11-04T09:27:25.603787+00:00",
+    "job_id": "job_bedd08efb6e24747823f3d5675c437e7",
+    "attempt_id": "att_82ea1392575b48ee8cf87bbbd76aa2e8",
+    "job_status": "reconciling",
+    "current_attempt_preserved": true,
+    "attempt_count": 1,
+    "original_boot_id": "abedbf6f-5776-4834-970a-3fc57c96a046",
+    "original_fence": 100,
+    "worker_boot_changed": true,
+    "checkpoint_bound_to_current_worker": true,
+    "checkpoint_digest": "1c97676eafe8fbf16c6e0f15f2a886e5dfed6b50c4e32d3456479d586a987991",
+    "checkpoint_uptime_ms": 915063156,
+    "physical_gpu_occupied": true,
+    "occupancy_uncertain": true,
+    "generation_released": false,
+    "attempt_closed": false,
+    "has_prompt_id": false,
+    "usage_settlements": 0,
+    "host_restart_confirmations": 0,
+    "retry_count": 0,
+    "host_reboot_performed": false
+  },
+  "device4090": {
+    "worker_pid": 9048,
+    "service_state": "Running",
+    "administrator": false,
+    "hostname": "DESKTOP-TE44HE1",
+    "comfy_pids": [
+      33052
+    ]
+  },
+  "raw_observation_sha256": {
+    "host152-worker-probe-first.jsonl": "6d2bbcfd69425e9ef3346d89b602742ce0bfb6c7b01a6ce600ab64adc85a5ef5",
+    "host152-worker-probe-second.jsonl": "6d658f0009b837bdefce2bc5e33d461aa15fc1307f3a8c18ff58546cad7db285",
+    "host152-worker-probe-final.jsonl": "90bef97faf058d4bf5cb8bee6a972ad3dc1a7f8425a4097259fabb7c83cd4291",
+    "host152-4090-permission-probe.jsonl": "d47a598ea747812a7db9095d6b458700f767029bdd8a7fa4decbf5cdd11e554a",
+    "host152-reconciliation-second-private.stdout": "2d53ee1ce6e11fc00e6af27b3ce492a437d2ffb45f4a0808dfbb0dfe919dc73c"
+  },
+  "owned_distribution_listener_closed": true,
+  "owned_local_postgresql_stopped": true,
+  "browser_tabs_created": 0,
+  "virtualization_used": false,
+  "host_reboot_performed": false,
+  "actual_host_restart_acceptance": "pending",
+  "real_generation_acceptance": false,
+  "full_acceptance": "pending"
+}

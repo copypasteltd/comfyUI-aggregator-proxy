@@ -1,0 +1,99 @@
+{
+  "at": "2026-11-04T09:14:55.364462+00:00",
+  "phase": "complete",
+  "passed": true,
+  "before_pids": {
+    "comfy-aggregator-api.service": 1630977,
+    "comfy-aggregator-runner.service": 1283541,
+    "comfy-aggregator-gc.service": 1283539,
+    "comfy-aggregator-http-worker.service": 1283715
+  },
+  "before_facts": {
+    "database_head": "04d133a00001",
+    "unfinished_jobs": 1,
+    "gpu_occupancies": 1
+  },
+  "release": "linux-20261104.152.1",
+  "source_revision": "38abc83210ade91b4ffa7346e905b08f140eeb1a",
+  "virtualization_used": false,
+  "host_reboot_performed": false,
+  "after_pids": {
+    "comfy-aggregator-api.service": 1754744,
+    "comfy-aggregator-runner.service": 1283541,
+    "comfy-aggregator-gc.service": 1283539,
+    "comfy-aggregator-http-worker.service": 1283715
+  },
+  "after_facts": {
+    "database_head": "04d152a00001",
+    "unfinished_jobs": 1,
+    "gpu_occupancies": 1
+  },
+  "backup": {
+    "at": "2026-11-04T09:15:04.369809+00:00",
+    "database": "comfy_aggregator",
+    "server_version": 180006,
+    "revision": "head",
+    "backup_file": "20261104T091456320480Z.dump",
+    "backup_sha256": "b863ccb262f394c9a9e404b261014294bb846d0860c0026db19d597f77e10925",
+    "archive_list_verified": true,
+    "restore_rehearsed": false
+  },
+  "completed_at": "2026-11-04T09:15:09.462899+00:00",
+  "restart_scope": "API only; Runner/GC/HTTP Worker processes preserved",
+  "https_checks_performed": false,
+  "installed_source_sha256": {
+    "app/packages/contracts/src/generation_contracts/defaults.py": "350f670f56e297d78692febd97bfb1072fbc52f76147ace5621c13b9d78f683a",
+    "app/packages/contracts/src/generation_contracts/recovery.py": "6064caba8db856e8c376a2cc83b125622053f2835306d9f278157e4a3be32f98",
+    "app/packages/infrastructure/src/generation_infrastructure/models.py": "8b03073b460486eee0bb08a9d18daac633da78c0d030f04d45cd83ae193f606b",
+    "app/packages/infrastructure/src/generation_infrastructure/leases.py": "ccf858bd7992814ada2698e4d548d4e19953faf58fc931c4d40eb37619c1f061",
+    "app/packages/infrastructure/src/generation_infrastructure/recovery.py": "c60091ab15747e7135f01332b0ef91a7ea930600477719e1e51bf7f3514546ac",
+    "app/apps/windows_worker/src/windows_worker/host_recovery.py": "0892414bc532478897471c1796afbdaf7f082bbdbc32876b899d53fbf8e9ad4d",
+    "app/apps/windows_worker/src/windows_worker/runtime.py": "e258ebeddee9b0015b03680a84ac33262353db86eb1acf652f86d19fc9c56e9d",
+    "app/apps/windows_worker/src/windows_worker/journal.py": "05a7a8fac0d075a3096ab534f692f0d2eab2af663e0a7662d37b8823f8e1a6a4"
+  },
+  "scope_daily_limits_verified": {
+    "tenants": 1,
+    "projects": 1,
+    "keys": 22
+  },
+  "daily_fields_verified": 120,
+  "http_checks": [
+    {
+      "origin": "http://127.0.0.1:32880",
+      "route": "/health/live",
+      "status": 200
+    },
+    {
+      "origin": "http://127.0.0.1:32880",
+      "route": "/health/ready",
+      "status": 200
+    },
+    {
+      "origin": "http://127.0.0.1:32880",
+      "route": "/admin/",
+      "status": 200
+    },
+    {
+      "origin": "http://43.165.167.179:39443",
+      "route": "/health/live",
+      "status": 200
+    },
+    {
+      "origin": "http://43.165.167.179:39443",
+      "route": "/health/ready",
+      "status": 200
+    },
+    {
+      "origin": "http://43.165.167.179:39443",
+      "route": "/admin/",
+      "status": 200
+    }
+  ],
+  "arbitrary_origin_cors_verified": true,
+  "full_acceptance": "pending",
+  "real_generation_acceptance": false,
+  "format_version": 1,
+  "scope": "Immutable native API source/HTTP/CORS/defaults rollout, forward migration and preserved live occupancy/processes. Actual host reboot and GPU generation remain pending.",
+  "candidate_archive_sha256": "f2b523e4724f3c1de719105aa255142149db6b173e60a24a9f63a3c5caee1548",
+  "linux_archive_sha256": "62f24bbc3d0e36a4cedac676c69583a9c31b1e4394a3a9054c50b8d2538c9254"
+}
