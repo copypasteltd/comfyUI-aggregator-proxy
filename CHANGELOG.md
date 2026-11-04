@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 143 · Speech roles and service access / 语音角色与服务权限
+
+- Distinguish single/two-speaker speech names and advertise only labels with declared reference-audio slots. Improve seven actual model/Workflow descriptions without changing aliases, presets, releases or publication state. All 50 scoped regressions, 213 offline examples and 213 actual usage documents pass.
+- Grant the installed 3080 Worker service scoped read access to its 3,567 declared auxiliary files and access to 698 directories. Preserve ACL backups, journals and previous failed operations. An independent cloud command receipt explicitly verifies native dependencies and the matching release digest; no hash gate is bypassed.
+- Retry four terminal dependency-access failures with fresh persisted intents. Correct the single-speaker test fixture and preserve its original failed two-speaker request. FireRedTTS2 passes validation and separate business generation/download; the snapshot records 16 newly verified models. Other candidates continue individual trials.
+- Reapply the previously authorized archived-journal/APT-cache policy before larger 3D outputs. Reclaim 3,439,300,608 journal bytes and 3,514,368 cache bytes; root free space becomes 7,160,270,848 bytes with all five application service PIDs preserved. Output retention remains eight hours.
+
 ## 2026-11-04 · 142 · Image variants and actual audio / 图像型号与真实音频
 
 - Identify 13 image variants from their locked generative checkpoint, including NoctQ v4, Lustify v10 Krea2, WAI Illustrious SDXL v17, Qwen Image 2.1 and Dasiwa H3 Hybrid v2. Disclose resizing/cropping only when every final output is actually connected to the matching delivery scale.

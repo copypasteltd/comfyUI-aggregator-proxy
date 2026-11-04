@@ -256,6 +256,8 @@ def public_documentation(item: dict, manifest: dict) -> dict:
             operation, operation_en = "多视图转三维", "Multiple views to 3D"
     elif kind == "audio" and {"speaker_1", "speaker_2"} <= roles:
         operation, operation_en = "双人对话语音", "Two speaker dialogue"
+    elif kind == "audio" and roles & {"speaker_1", "speaker_2"}:
+        operation, operation_en = "单人语音", "Single speaker speech"
     preset = manifest["presets"][0]
     specification = " / ".join(str(preset[field]) + ("s" if field == "seconds" else "") for field in ("size", "seconds") if field in preset)
     variant = hashlib.sha256(json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:6]
@@ -306,8 +308,12 @@ def public_documentation(item: dict, manifest: dict) -> dict:
             "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier."
         )
     if any("Podcast" in c for c in classes):
+        speakers = [label for role, label in (("speaker_1", "[S1]"), ("speaker_2", "[S2]")) if role in roles]
+        supported = ", ".join(speakers) if speakers else "已声明的说话者 / declared speakers"
         notes.append(
-            "对话逐行使用 [S1]、[S2] 标记；参考音频和对应转写按说话者配对。Dialogue uses one [S1]/[S2] line per turn; pair each reference voice with its exact transcript."
+            "此模型的说话者标记 / Speaker labels for this model: " + supported + ". "
+            "每行只使用已提供参考录音的说话者；参考音频和实际转写按说话者配对，生成台词另填。"
+            "Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
         )
     if any("YuE2" in c for c in classes):
         notes.append(

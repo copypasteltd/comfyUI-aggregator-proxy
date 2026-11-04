@@ -126,3 +126,19 @@ def test_image_usage_does_not_claim_an_unconnected_delivery_resize() -> None:
     documentation = public_documentation({"source": "synthetic/native-size.api.json", "output_kind": "image", "gpu": "3080"}, manifest)
     assert any("does not declare a final Lanczos resize" in note for note in documentation["notes"])
     assert not any("Lanczos resize and center crop are applied" in note for note in documentation["notes"])
+
+
+@pytest.mark.parametrize("speakers", [("speaker_1",), ("speaker_2",), ("speaker_1", "speaker_2")])
+def test_podcast_usage_names_only_speakers_with_declared_reference_slots(speakers: tuple[str, ...]) -> None:
+    manifest = {
+        "workflow_api": {"1": {"class_type": "SoulXPodcastInputParser", "inputs": {}}},
+        "task_type": "text_to_audio", "presets": [{"seconds": 30}],
+        "input_slots": [{"name": speaker, "kind": "audio"} for speaker in speakers],
+        "bindings": [], "output": {},
+    }
+    documentation = public_documentation({"source": "synthetic/speech.api.json", "output_kind": "audio", "gpu": "3080"}, manifest)
+    note = next(note for note in documentation["notes"] if "Speaker labels for this model" in note)
+    assert ("[S1]" in note) == ("speaker_1" in speakers)
+    assert ("[S2]" in note) == ("speaker_2" in speakers)
+    assert "supplied reference recording" in note and "exact transcript" in note
+    assert ("Single speaker speech" in documentation["description"]) == (len(speakers) == 1)

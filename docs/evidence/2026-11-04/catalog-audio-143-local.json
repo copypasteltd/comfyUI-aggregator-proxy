@@ -1,0 +1,167 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T03:53:25.026367+00:00",
+  "passed": true,
+  "scope": "Declared one/two-speaker voice references and exact transcript guidance; image delivery canvas and package/native dependency preservation. No GPU acceptance.",
+  "source_revision": "ec958f2bac1376d4ab70533c29cfa27d00316a09",
+  "sources_unchanged": true,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "python": {
+    "tests": 50,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/scripts/workflow_catalog_canvas.py": "db2b30a02f33028ccffd44be346359d3beaa06e37f4451bebd7194f45ff1240e",
+    "app/scripts/workflow_catalog_freeze.py": "927bdf6ff9f6f305682ba341c43f88a9adb204c68e5f7d795e0bfe03cacdabe6",
+    "app/scripts/workflow_catalog_metadata.py": "4408412ab16eb2f8a40a9d98e0b65d3b24811cb0b62c1002b3d4f56720101bbb",
+    "app/scripts/workflow_catalog_native.py": "db97c3063313b70e8f92c54bbee618f2b373643b1451c953810339dd9e114766",
+    "app/scripts/workflow_package.py": "df1a98315d3e6217c7a2379f91c1f3262cd9116fb4f5f282255f438626cb3b1f",
+    "app/tests/unit/test_catalog_delivery_contracts.py": "9a347c3697ce51fc8f50c0c8c4a0a4245f3a146b597187bbd6ad6bd57507d5b7",
+    "app/tests/unit/test_workflow_package.py": "b01ad4c40d6d03a7c206d6fda906f549fda229b9d80d3f6572b29cbd779d5af4",
+    "app/tests/unit/test_native_catalog.py": "207f0226806d8a460a23790b4dded206714224bbdb8171be71132e05ce38600b"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_decimal_millisecond_durations_are_accepted_exactly",
+      "passed_cases": 5
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_existing_delivery_canvas_is_reused_without_self_cycle",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_image_delivery_preserves_colliding_source_node",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_image_usage_discloses_delivery_resize_in_both_languages",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_image_usage_does_not_claim_an_unconnected_delivery_resize",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_performance_can_supply_named_media_without_an_unused_prompt",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_podcast_usage_names_only_speakers_with_declared_reference_slots",
+      "passed_cases": 3
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_roles_follow_transforms_and_keep_shared_anchors_and_bindings",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_submillisecond_nonfinite_and_overlimit_durations_are_rejected",
+      "passed_cases": 5
+    },
+    {
+      "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+      "symbol": "test_unused_latent_dimensions_do_not_bypass_image_delivery_canvas",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_native_catalog.py",
+      "symbol": "test_native_catalog_keeps_model_identity_and_source_draft_immutable",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_native_catalog.py",
+      "symbol": "test_native_catalog_refuses_incomplete_or_previously_frozen_dependencies",
+      "passed_cases": 4
+    },
+    {
+      "path": "app/tests/unit/test_native_catalog.py",
+      "symbol": "test_podcast_auxiliary_code_uses_explicit_native_roots",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_actual_cli_build_import_and_local_reverification_with_native_git",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_cli_errors_do_not_print_private_workflow_or_paths",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_dependency_path_rejection_does_not_create_a_package",
+      "passed_cases": 5
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_duplicate_dependencies_and_oversized_models_are_rejected",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_existing_output_is_preserved_and_extra_files_are_rejected",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_forged_offline_approval_is_rejected_even_with_recomputed_checksums",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_junction_cannot_redirect_model_reads",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_local_verification_rejects_changed_weight_with_unchanged_size",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_model_write_observed_on_open_handle_is_rejected",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_native_git_revision_refuses_dirty_worktrees_and_ancestor_repositories",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_package_tampering_and_incomplete_writes_are_detected",
+      "passed_cases": 2
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
+      "passed_cases": 7
+    },
+    {
+      "path": "app/tests/unit/test_workflow_package.py",
+      "symbol": "test_ui_graph_and_duplicate_json_keys_do_not_become_manifests",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "54adc6979538f064abf60bcd7a46c11854fc0e054069fa9269c313af1d98f2b3",
+  "python_log_sha256": "cd34783bb2f848d4b45bc9174f3fe401e661521845c9b6bc81f787718c7eb85c",
+  "seconds": 6.145,
+  "files_selected": [
+    "tests/unit/test_catalog_delivery_contracts.py",
+    "tests/unit/test_workflow_package.py",
+    "tests/unit/test_native_catalog.py"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T04:03:35.800579+00:00",
+  "passed": true,
+  "scope": "Repeat the already authorized 115 archived-journal policy (at most seven days/512 MiB) and remove APT download archives to create space for real mesh outputs. Active logging continues; database, objects, application releases and dependencies are not cleaned. No service restart or application deployment.",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "policy_reference": "docs/115-Linux服务器部署与磁盘清理.md",
+  "before": {
+    "root_free_bytes": 3597713408,
+    "journal_allocated_bytes": 3959865344,
+    "apt_archive_allocated_bytes": 3514368
+  },
+  "after": {
+    "root_free_bytes": 7160270848,
+    "journal_allocated_bytes": 520564736,
+    "apt_archive_allocated_bytes": 0
+  },
+  "journal_reclaimed_bytes": 3439300608,
+  "apt_archive_reclaimed_bytes": 3514368,
+  "root_free_increase_bytes": 3562557440,
+  "service_pids_preserved": true,
+  "services": {
+    "comfy-aggregator-api.service": {
+      "MainPID": "1283537",
+      "ActiveState": "active"
+    },
+    "comfy-aggregator-runner.service": {
+      "MainPID": "1283541",
+      "ActiveState": "active"
+    },
+    "comfy-aggregator-gc.service": {
+      "MainPID": "1283539",
+      "ActiveState": "active"
+    },
+    "comfy-aggregator-http-worker.service": {
+      "MainPID": "1283715",
+      "ActiveState": "active"
+    },
+    "comfy-aggregator-edge.service": {
+      "MainPID": "1119",
+      "ActiveState": "active"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "journalctl",
+        "--rotate"
+      ],
+      "exit_code": 0,
+      "output_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "argv": [
+        "journalctl",
+        "--vacuum-time=7d",
+        "--vacuum-size=512M"
+      ],
+      "exit_code": 0,
+      "output_sha256": "853435e85f924087e145508a72b25a21850414b66d1d0d4739cc6e6bded7c8ad"
+    },
+    {
+      "argv": [
+        "apt-get",
+        "clean"
+      ],
+      "exit_code": 0,
+      "output_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    }
+  ],
+  "generation_acceptance": "separate"
+}

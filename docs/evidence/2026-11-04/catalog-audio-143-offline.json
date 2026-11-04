@@ -1,0 +1,160 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T03:53:46.535971+00:00",
+  "passed": true,
+  "scope": "Actual frozen speech reference roles: name single-speaker speech explicitly and advertise only speaker labels with corresponding declared recording slots. Every candidate example is schema-validated and compiled. Names and notes change only; no workflow or GPU acceptance.",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "metadata_source_sha256": "4408412ab16eb2f8a40a9d98e0b65d3b24811cb0b62c1002b3d4f56720101bbb",
+  "counts": {
+    "candidates": 213,
+    "changed_metadata": 7,
+    "generic_family_names": 0
+  },
+  "by_task_type": {
+    "image_to_3d": 18,
+    "text_to_audio": 9,
+    "text_to_image": 4,
+    "image_to_image": 5,
+    "references_to_image": 4,
+    "text_to_video": 41,
+    "references_to_video": 132
+  },
+  "aliases_defaults_and_frozen_manifests_unchanged": true,
+  "models": [
+    {
+      "key": "3080-d02a4795200a2806",
+      "alias": "comfy-3080-20-soulx-official-voice-tts-d02a47",
+      "old_name": "SoulX Podcast · 语音生成 · 30s · RTX 3080 · 5506be",
+      "display_name": "SoulX Podcast · 单人语音 · 30s · RTX 3080 · 5506be",
+      "model_id": "mdl_ad2816957b3b451ca5d2719847fc963a",
+      "release_id": "wfr_203135463c8440309514a5f45278bee6",
+      "release_digest": "4720f7758f77f15fae24716e43ecdd302d7519e04da4dc02648e83c0330023f3",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 20_soulx_official_voice_tts",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "素材槽位 / Media slots: speaker_1 (audio)",
+        "文本槽位 / Text slots: dialogue*, speaker_1_transcript*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此模型的说话者标记 / Speaker labels for this model: [S1]. 每行只使用已提供参考录音的说话者；参考音频和实际转写按说话者配对，生成台词另填。Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
+      ]
+    },
+    {
+      "key": "3080-ba95ea767a9e1344",
+      "alias": "comfy-3080-01-moss-tech-ba95ea",
+      "old_name": "MOSS-TTSD v1.0 · 双人对话语音 · 30s · RTX 3080 · eff007",
+      "display_name": "MOSS-TTSD v1.0 · 双人对话语音 · 30s · RTX 3080 · eff007",
+      "model_id": "mdl_f0da8b21378b451a89228bcbb87f81d7",
+      "release_id": "wfr_61266b73412d4c7896b275cf69ae51b9",
+      "release_digest": "a223dafca71487107d609dc585e333a898f30f4edf194fed066a5f84ce433e3e",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 01-MOSS-tech",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "素材槽位 / Media slots: speaker_1 (audio), speaker_2 (audio)",
+        "文本槽位 / Text slots: dialogue*, s1_text*, s2_text*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此模型的说话者标记 / Speaker labels for this model: [S1], [S2]. 每行只使用已提供参考录音的说话者；参考音频和实际转写按说话者配对，生成台词另填。Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
+      ]
+    },
+    {
+      "key": "3080-4156b30e68b62b36",
+      "alias": "comfy-3080-03-soulx-cafe-4156b3",
+      "old_name": "SoulX Podcast · 双人对话语音 · 30s · RTX 3080 · 52b048",
+      "display_name": "SoulX Podcast · 双人对话语音 · 30s · RTX 3080 · 52b048",
+      "model_id": "mdl_d0018070c5f64b9abadec7b72a3f6c25",
+      "release_id": "wfr_32e97214cc5e459799a686c84e1b5f79",
+      "release_digest": "86acf15273eea088d0e7ca1c974b6c4099ab72158a06e5ec9469b013f556e6ce",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 03-SoulX-cafe",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "素材槽位 / Media slots: speaker_1 (audio), speaker_2 (audio)",
+        "文本槽位 / Text slots: dialogue*, speaker_1_transcript*, speaker_2_transcript*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此模型的说话者标记 / Speaker labels for this model: [S1], [S2]. 每行只使用已提供参考录音的说话者；参考音频和实际转写按说话者配对，生成台词另填。Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
+      ]
+    },
+    {
+      "key": "3080-8635cc412d4b9a03",
+      "alias": "comfy-3080-05-firered-film-8635cc",
+      "old_name": "FireRedTTS2 · 双人对话语音 · 30s · RTX 3080 · 761c26",
+      "display_name": "FireRedTTS2 · 双人对话语音 · 30s · RTX 3080 · 761c26",
+      "model_id": "mdl_bd6cc1254ccb4a35b0937e3a39f554c2",
+      "release_id": "wfr_eef4ac0f564948d799e8bebcdc821837",
+      "release_digest": "f41f5284a9a9be700d40fbcf37a9f5db90cc379d080629af9178e5d06b094c51",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 05-FireRed-film",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "素材槽位 / Media slots: speaker_1 (audio), speaker_2 (audio)",
+        "文本槽位 / Text slots: dialogue*, s1_text*, s2_text*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此模型的说话者标记 / Speaker labels for this model: [S1], [S2]. 每行只使用已提供参考录音的说话者；参考音频和实际转写按说话者配对，生成台词另填。Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
+      ]
+    },
+    {
+      "key": "3080-72f65344c7341e96",
+      "alias": "comfy-3080-01-moss-ttsd-v1-0-72f653",
+      "old_name": "MOSS-TTSD v1.0 · 语音生成 · 30s · RTX 3080 · 40c09c",
+      "display_name": "MOSS-TTSD v1.0 · 单人语音 · 30s · RTX 3080 · 40c09c",
+      "model_id": "mdl_4468e9fbef0d4e23a89bd4ce9adc7d72",
+      "release_id": "wfr_bd9980f27ca949b8ba0b5434ccb3fa57",
+      "release_digest": "e53956158f3e28cbc3f912005892615c798696d7ba9d2a17d64570f10971451f",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 01-MOSS-TTSD-v1.0",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "素材槽位 / Media slots: speaker_1 (audio)",
+        "文本槽位 / Text slots: dialogue*, s1_text*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此模型的说话者标记 / Speaker labels for this model: [S1]. 每行只使用已提供参考录音的说话者；参考音频和实际转写按说话者配对，生成台词另填。Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
+      ]
+    },
+    {
+      "key": "3080-9108b819fc9f4ff6",
+      "alias": "comfy-3080-02-soulx-podcast-1-7b-9108b8",
+      "old_name": "SoulX Podcast · 语音生成 · 30s · RTX 3080 · 639eaf",
+      "display_name": "SoulX Podcast · 单人语音 · 30s · RTX 3080 · 639eaf",
+      "model_id": "mdl_48dc705fbc844ce6a1695444021a2166",
+      "release_id": "wfr_b4898c5b35e44d34bd159779175ef9b2",
+      "release_digest": "a8a8501985e986a906a951f72b5d706b324eb29ef6a507df27f314e003d40bd6",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 02-SoulX-Podcast-1.7B",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "素材槽位 / Media slots: speaker_1 (audio)",
+        "文本槽位 / Text slots: dialogue*, speaker_1_transcript*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此模型的说话者标记 / Speaker labels for this model: [S1]. 每行只使用已提供参考录音的说话者；参考音频和实际转写按说话者配对，生成台词另填。Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
+      ]
+    },
+    {
+      "key": "3080-347a5d3702fb7d97",
+      "alias": "comfy-3080-03-fireredtts2-347a5d",
+      "old_name": "FireRedTTS2 · 语音生成 · 30s · RTX 3080 · 7e6d33",
+      "display_name": "FireRedTTS2 · 单人语音 · 30s · RTX 3080 · 7e6d33",
+      "model_id": "mdl_10d449529c0348d88fe9b335d59a7547",
+      "release_id": "wfr_e74ae54a71e04e488e1b2f4b8255167b",
+      "release_digest": "c2dcd1cf6c725ad6ffff7cec6fcf8ce9c10be109c96f68365e40d5012ee36116",
+      "notes": [
+        "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+        "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+        "源工作流 / Source workflow: 03-FireRedTTS2",
+        "冻结输出规格 / Frozen output specification: 30s",
+        "素材槽位 / Media slots: speaker_1 (audio)",
+        "文本槽位 / Text slots: dialogue*, s1_text*; *=required / 必填, ?=optional / 选填.",
+        "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+        "此模型的说话者标记 / Speaker labels for this model: [S1]. 每行只使用已提供参考录音的说话者；参考音频和实际转写按说话者配对，生成台词另填。Each dialogue line must use a speaker with a supplied reference recording. Pair each reference voice with its exact transcript; supply generated dialogue separately."
+      ]
+    }
+  ]
+}

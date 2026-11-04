@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-04/development-trace-baselines-142.json",
-    "sha256": "55517c83643e14ce6fae3e9e9ae6b6c5b69c34c07718268efd5d60f00c263dd0"
+    "path": "docs/evidence/2026-11-04/development-trace-baselines-143.json",
+    "sha256": "b3f11f856a277c8d251ce06fc402b986f79b669a0ff75f1bb1746a90f59c4847"
   },
   "requirements": [
     {
@@ -480,6 +480,12 @@
           "symbol": "test_image_usage_does_not_claim_an_unconnected_delivery_resize",
           "language": "python",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_podcast_usage_names_only_speakers_with_declared_reference_slots",
+          "language": "python",
+          "baseline": "canvas140"
         }
       ],
       "evidence": [
@@ -734,6 +740,12 @@
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
           "baseline": "typed133"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_podcast_usage_names_only_speakers_with_declared_reference_slots",
+          "language": "python",
+          "baseline": "canvas140"
         }
       ],
       "evidence": [
