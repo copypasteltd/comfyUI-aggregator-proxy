@@ -1,5 +1,7 @@
 # 开发设计契约
 
+第 152 增量新增 [Worker 执行核对请求](worker-reconciliation.schema.json)：保留旧请求，显式区分 absent 检查点与 host_restarted 停止证明，冻结额外字段、来源、数值及互斥关系。22 个新增正反例同时校验 JSON Schema 和严格 DTO；实际本机连接、原尝试绑定、主机计数下降、并发结算和 HTTP-only 拒绝由原生协议及 PostgreSQL 测试证明。协议不执行重启，见 [142](../142-主机重启证据与未知执行收口.md)。
+
 契约基线 `0.4.0`。这些文件是设计输入和静态验证对象；已登记实现路由的 OpenAPI 在 `app/config/openapi.json`，Admin 类型由其生成，迁移在 `app/migrations`。设计端点与实际登记差异在 implementation-inventory.json，不能从清单推断全部已实现。
 
 | 文件 | 作用与边界 |

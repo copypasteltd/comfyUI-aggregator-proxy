@@ -1,12 +1,12 @@
 {
   "contract_version": "0.4.0",
   "format_version": 1,
-  "increment": 150,
+  "increment": 152,
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-04/development-trace-baselines-150.json",
-    "sha256": "a296be6d6278f3a7604bc3b59575b7f3366e3dc4f6642b0e3977baaf34ddbfa9"
+    "path": "docs/evidence/2026-11-04/development-trace-baselines-152.json",
+    "sha256": "52225c4d5e4e5d55b33f80af55f5c52d9f9a83fabfe6f6c302dcbee13f024e4a"
   },
   "requirements": [
     {
@@ -23,7 +23,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/scripts/workflow_package.py",
@@ -163,7 +163,8 @@
         "contract133",
         "compat135",
         "native139",
-        "canvas140"
+        "canvas140",
+        "host152"
       ],
       "remaining_backlog": [
         "18",
@@ -192,7 +193,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -326,7 +327,8 @@
         "contract133",
         "compat135",
         "native139",
-        "canvas140"
+        "canvas140",
+        "host152"
       ],
       "remaining_backlog": [
         "19",
@@ -355,7 +357,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -507,7 +509,8 @@
         "contract133",
         "compat135",
         "native139",
-        "canvas140"
+        "canvas140",
+        "host152"
       ],
       "remaining_backlog": [
         "20",
@@ -540,7 +543,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -634,7 +637,8 @@
         "contract133",
         "compat135",
         "native139",
-        "canvas140"
+        "canvas140",
+        "host152"
       ],
       "remaining_backlog": [
         "21",
@@ -663,7 +667,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -773,7 +777,8 @@
         "contract133",
         "compat135",
         "native139",
-        "canvas140"
+        "canvas140",
+        "host152"
       ],
       "remaining_backlog": [
         "22",
@@ -794,7 +799,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/admin_web/src/pages/Content.vue",
@@ -912,7 +917,8 @@
         "compat135",
         "browser135",
         "native139",
-        "canvas140"
+        "canvas140",
+        "host152"
       ],
       "remaining_backlog": [
         "23",
@@ -950,7 +956,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -1129,7 +1135,8 @@
         "compat135",
         "browser135",
         "skill138",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "20",
@@ -1640,7 +1647,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "native139"
+          "baseline": "host152"
         }
       ],
       "tests": [
@@ -1659,7 +1666,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "29",
@@ -1839,7 +1847,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -1847,7 +1855,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -1890,7 +1898,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "25",
@@ -1906,11 +1915,23 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "native139"
+          "baseline": "host152"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/host_recovery.py",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/packages/contracts/src/generation_contracts/recovery.py",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/migrations/versions/04d152a00001_host_recovery_checkpoint.py",
+          "baseline": "host152"
         }
       ],
       "tests": [
@@ -1925,6 +1946,24 @@
           "symbol": "test_absent_history_never_releases_but_matching_prompt_restores_same_attempt",
           "language": "python",
           "baseline": "typed133"
+        },
+        {
+          "path": "app/tests/integration/test_host_recovery_transactions.py",
+          "symbol": "test_confirmed_host_restart_closes_once_and_keeps_original_attempt",
+          "language": "python",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/tests/integration/test_host_recovery_transactions.py",
+          "symbol": "test_incomplete_stop_proof_never_releases_generation",
+          "language": "python",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/tests/protocol/test_host_recovery_worker.py",
+          "symbol": "test_original_checkpoint_survives_worker_restart_and_requires_successful_absence",
+          "language": "python",
+          "baseline": "host152"
         }
       ],
       "evidence": [
@@ -1933,7 +1972,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "54",
@@ -2039,11 +2079,23 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "native139"
+          "baseline": "host152"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/host_recovery.py",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/packages/contracts/src/generation_contracts/recovery.py",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/migrations/versions/04d152a00001_host_recovery_checkpoint.py",
+          "baseline": "host152"
         }
       ],
       "tests": [
@@ -2064,6 +2116,24 @@
           "symbol": "test_unknown_or_overrun_occupancy_is_never_assumed_free",
           "language": "python",
           "baseline": "native139"
+        },
+        {
+          "path": "app/tests/integration/test_host_recovery_transactions.py",
+          "symbol": "test_confirmed_host_restart_closes_once_and_keeps_original_attempt",
+          "language": "python",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/tests/integration/test_host_recovery_transactions.py",
+          "symbol": "test_incomplete_stop_proof_never_releases_generation",
+          "language": "python",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/tests/protocol/test_host_recovery_worker.py",
+          "symbol": "test_original_checkpoint_survives_worker_restart_and_requires_successful_absence",
+          "language": "python",
+          "baseline": "host152"
         }
       ],
       "evidence": [
@@ -2073,7 +2143,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "54",
@@ -2151,15 +2222,15 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/recovery.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -2168,6 +2239,18 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/apps/windows_worker/src/windows_worker/host_recovery.py",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/packages/contracts/src/generation_contracts/recovery.py",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/migrations/versions/04d152a00001_host_recovery_checkpoint.py",
+          "baseline": "host152"
         }
       ],
       "tests": [
@@ -2206,6 +2289,24 @@
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
           "baseline": "typed133"
+        },
+        {
+          "path": "app/tests/integration/test_host_recovery_transactions.py",
+          "symbol": "test_confirmed_host_restart_closes_once_and_keeps_original_attempt",
+          "language": "python",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/tests/integration/test_host_recovery_transactions.py",
+          "symbol": "test_incomplete_stop_proof_never_releases_generation",
+          "language": "python",
+          "baseline": "host152"
+        },
+        {
+          "path": "app/tests/protocol/test_host_recovery_worker.py",
+          "symbol": "test_original_checkpoint_survives_worker_restart_and_requires_successful_absence",
+          "language": "python",
+          "baseline": "host152"
         }
       ],
       "evidence": [
@@ -2219,7 +2320,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "55",
@@ -2367,7 +2469,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/worker_capacity.py",
@@ -2394,7 +2496,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "14",
@@ -2414,7 +2517,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "native139"
+          "baseline": "host152"
         }
       ],
       "tests": [
@@ -2432,7 +2535,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "15",
@@ -2547,7 +2651,7 @@
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/process_lock.py",
@@ -2602,7 +2706,8 @@
         "contract133",
         "compat135",
         "native139",
-        "canvas140"
+        "canvas140",
+        "host152"
       ],
       "remaining_backlog": [
         "14",
@@ -2767,7 +2872,7 @@
       "implementation": [
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/leases.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/storage.py",
@@ -2796,7 +2901,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "37",
@@ -3029,11 +3135,11 @@
       "implementation": [
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/journal.py",
-          "baseline": "native139"
+          "baseline": "host152"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/outputs.py",
@@ -3150,7 +3256,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "host152"
       ],
       "remaining_backlog": [
         "43",
@@ -5055,7 +5162,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "native139"
+          "baseline": "host152"
         }
       ],
       "tests": [
@@ -5081,7 +5188,8 @@
         "contract133",
         "compat135",
         "native139",
-        "daily150"
+        "daily150",
+        "host152"
       ],
       "remaining_backlog": [
         "50",

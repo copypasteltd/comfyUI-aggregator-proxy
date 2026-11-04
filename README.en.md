@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[142 · Host restart and uncertain execution](docs/142-主机重启证据与未知执行收口.md) adds durable checkpoints on both sides. An old attempt closes exactly once only after the same Windows host's uptime has demonstrably reset, a successful ComfyUI query finds its original association absent, and every attempt binding matches. Worker restarts, empty history and expired leases retain occupancy. This mechanism neither reboots devices nor automatically resubmits work; component checks and production rollout have separate evidence.
+
 [140 · Unlimited daily quotas](docs/140-关闭每日限额与默认策略.md): the latest instruction removes all five daily caps from tenants, projects, nondeleted API Keys and new defaults. Access grants, concurrency, request rates and per-request specifications remain unchanged; actual usage continues to accumulate. The same change fixes scope updates dropping the null value required by unlimited limits. See the topic for rollout and verification status.
 
 **2026-11-04 full-catalog implementation:** [133 · Multimodal inputs and workflow coverage](docs/133-全量工作流接入与多模态输入.md). Of 397 source workflows, 330 pass static checks and map to 213 distinct candidate packages; 67 have recorded source blockers. All 213 candidates pass public request-example and graph-compilation checks and have been imported as drafts. Individual hardware approval and publication continue; [the numbered catalog](docs/134-新增模型目录与调用说明.md) distinguishes drafts from published and business-verified models.

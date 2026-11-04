@@ -36,6 +36,8 @@ for name in ("admin-memory-policy", "admin-memory-view"):
 for name in ("admin-device-routing", "admin-device-pool"):
     targets[name + ".schema.json"] = app / "packages/contracts/src/generation_contracts/schemas" / (name + ".schema.json")
 
+targets["worker-reconciliation.schema.json"] = app / "packages/contracts/src/generation_contracts/schemas/worker-reconciliation.schema.json"
+
 drift = []
 for name in ("gateway-catalog-publication", "gateway-catalog-replay", "gateway-catalog-receipt", "gateway-catalog-stamp", "gateway-catalog-configuration"):
     targets[name + ".schema.json"] = app / "packages/contracts/src/generation_contracts/schemas" / (name + ".schema.json")

@@ -423,6 +423,7 @@ class Worker:
         self.capacity_sequence = 0
         self.capacity_lock = asyncio.Lock()
         self._blocking: set[asyncio.Task[Any]] = set()
+        self.host_recovery_supported = False
 
     async def blocking[T](self, operation: Callable[..., T], *args: Any) -> T:
         if self._closed:
@@ -539,8 +540,25 @@ class Worker:
                     observation.setdefault("prompt_id", row["prompt_id"])
                 except (DomainError, OSError):
                     pass
+            host_fields: dict[str, Any] = {}
+            if self.host_recovery_supported and observation["observation"] == "absent" and not previous.get("generation_released"):
+                from windows_worker.host_recovery import host_recovery_fields, observe_native_host
+                try:
+                    local = self.settings.channel(previous["channel"]["base_url"])
+                    sample = await self.blocking(observe_native_host, local)
+                    record = self.journal.host_checkpoint(row["id"])
+                    if record is None:
+                        record = self.journal.save_host_checkpoint(row["id"], sample.checkpoint())
+                    host_fields = host_recovery_fields(sample, record)
+                    if host_fields.get("observation") == "host_restarted":
+                        observation = {**host_fields, "prompt_id": row["prompt_id"]}
+                        host_fields = {"host_restart": host_fields["host_restart"]}
+                except (DomainError, OSError, ValueError, TypeError, KeyError):
+                    pass
             try:
-                result = await self.post("/internal/v1/reconciliations", {"boot_id": self.boot, "attempt_id": row["id"], "previous_boot_id": previous["boot_id"], "previous_fencing_token": previous["fencing_token"], "association_id": row["association_id"], "prompt_id": observation.get("prompt_id"), "observation": observation["observation"], "source": observation["source"], "evidence_digest": fingerprint(observation), "manifest_digest": observation.get("manifest_digest")})
+                result = await self.post("/internal/v1/reconciliations", {"boot_id": self.boot, "attempt_id": row["id"], "previous_boot_id": previous["boot_id"], "previous_fencing_token": previous["fencing_token"], "association_id": row["association_id"], "prompt_id": observation.get("prompt_id"), "observation": observation["observation"], "source": observation["source"], "evidence_digest": fingerprint(observation), "manifest_digest": observation.get("manifest_digest"), **host_fields})
+                if "host_checkpoint_digest" in result:
+                    self.journal.acknowledge_host_checkpoint(row["id"], result["host_checkpoint_digest"])
                 if result["status"] == "closed":
                     self.journal.finish(row["id"], retention_seconds=self.settings.output_retention_seconds)
                 elif result["status"] == "resumed":
@@ -630,6 +648,9 @@ class Worker:
             registration = await self.post("/internal/v1/register", {"protocol_version": "0.4.0", "boot_id": self.boot, "inventory": {"gpus": [gpu.model_dump() for gpu in self.settings.gpus], "features": features}})
             if registration.get("node_id") != self.node_id or registration.get("boot_id") != self.boot:
                 raise DomainError("worker_registration_identity_mismatch", "Worker 注册回执身份不匹配")
+            from generation_contracts.recovery import HOST_RESTART_PROTOCOL
+            protocols = registration.get("recovery_protocols", [])
+            self.host_recovery_supported = isinstance(protocols, list) and HOST_RESTART_PROTOCOL in protocols
             self.quarantined |= bool(registration.get("reconciliation_required"))
             self.untracked_recovery = set(registration.get("reconciliation_required", [])) - {row["id"] for row in self.journal.recovery()}
             background = [asyncio.create_task(self.heartbeat()), asyncio.create_task(self.management()), asyncio.create_task(self.observe())]

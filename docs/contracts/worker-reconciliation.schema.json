@@ -1,0 +1,287 @@
+{
+  "$defs": {
+    "HostRecoveryCheckpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "protocol": {
+          "const": "windows-host-uptime-reset-v1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "nonce": {
+          "pattern": "^[0-9a-f]{32}$",
+          "title": "Nonce",
+          "type": "string"
+        },
+        "host_identity_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Host Identity Digest",
+          "type": "string"
+        },
+        "uptime_ms": {
+          "maximum": 9223372036854775807,
+          "minimum": 1,
+          "title": "Uptime Ms",
+          "type": "integer"
+        },
+        "gpu_hardware_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Gpu Hardware Id",
+          "type": "string"
+        },
+        "channel_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Channel Digest",
+          "type": "string"
+        },
+        "locality": {
+          "const": "same-host-tcp-v1",
+          "title": "Locality",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocol",
+        "nonce",
+        "host_identity_digest",
+        "uptime_ms",
+        "gpu_hardware_id",
+        "channel_digest",
+        "locality"
+      ],
+      "title": "HostRecoveryCheckpoint",
+      "type": "object"
+    },
+    "HostRestartProof": {
+      "additionalProperties": false,
+      "properties": {
+        "protocol": {
+          "const": "windows-host-uptime-reset-v1",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "checkpoint_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Checkpoint Digest",
+          "type": "string"
+        },
+        "host_identity_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Host Identity Digest",
+          "type": "string"
+        },
+        "uptime_ms": {
+          "maximum": 9223372036854775807,
+          "minimum": 1,
+          "title": "Uptime Ms",
+          "type": "integer"
+        },
+        "comfy_observation": {
+          "const": "absent",
+          "title": "Comfy Observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocol",
+        "checkpoint_digest",
+        "host_identity_digest",
+        "uptime_ms",
+        "comfy_observation"
+      ],
+      "title": "HostRestartProof",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "boot_id": {
+      "title": "Boot Id",
+      "type": "string"
+    },
+    "attempt_id": {
+      "title": "Attempt Id",
+      "type": "string"
+    },
+    "previous_boot_id": {
+      "title": "Previous Boot Id",
+      "type": "string"
+    },
+    "previous_fencing_token": {
+      "minimum": 1,
+      "title": "Previous Fencing Token",
+      "type": "integer"
+    },
+    "association_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Association Id"
+    },
+    "prompt_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Prompt Id"
+    },
+    "observation": {
+      "enum": [
+        "found",
+        "absent",
+        "unknown",
+        "local_outputs",
+        "host_restarted"
+      ],
+      "title": "Observation",
+      "type": "string"
+    },
+    "source": {
+      "enum": [
+        "queue_running",
+        "queue_pending",
+        "history",
+        "local_outputs",
+        "unknown",
+        "native_host_uptime"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "evidence_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Evidence Digest",
+      "type": "string"
+    },
+    "manifest_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manifest Digest"
+    },
+    "host_checkpoint": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/HostRecoveryCheckpoint"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "host_restart": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/HostRestartProof"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "boot_id",
+    "attempt_id",
+    "previous_boot_id",
+    "previous_fencing_token",
+    "association_id",
+    "prompt_id",
+    "observation",
+    "source",
+    "evidence_digest"
+  ],
+  "title": "Reconciliation",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:render-control:worker-reconciliation:0.5.0",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "observation": {
+            "const": "host_restarted"
+          }
+        },
+        "required": [
+          "observation"
+        ]
+      },
+      "then": {
+        "required": [
+          "host_restart"
+        ],
+        "properties": {
+          "source": {
+            "const": "native_host_uptime"
+          },
+          "host_restart": {
+            "$ref": "#/$defs/HostRestartProof"
+          },
+          "host_checkpoint": {
+            "type": "null"
+          },
+          "manifest_digest": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "host_restart": {
+            "type": "null"
+          },
+          "source": {
+            "not": {
+              "const": "native_host_uptime"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "host_checkpoint"
+        ],
+        "properties": {
+          "host_checkpoint": {
+            "type": "object"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observation": {
+            "const": "absent"
+          },
+          "source": {
+            "const": "unknown"
+          },
+          "manifest_digest": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

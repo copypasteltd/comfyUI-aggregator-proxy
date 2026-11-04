@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 152 · Evidence for uncertain native executions / 原生未知执行的停止证据
+
+- Add capability negotiation, separate PostgreSQL/SQLite checkpoints and same-host Windows uptime-reset evidence to the existing authenticated reconciliation protocol. Preserve old-server/old-Worker compatibility, original attempts, fences, source graphs and all unlimited daily defaults.
+- Keep uncertain generation occupied until independently persisted checkpoint and current proof match the original node, Worker boot, fence, association, prompt, physical GPU and frozen local channel. HTTP-only channels, ordinary Worker restarts, failed queries and conflicting evidence cannot close the attempt. A confirmed host restart fails/cancels the old job with one terminal settlement and no automatic retry.
+- Freeze the optional request fields and positive/negative examples; protect recovery evidence against destructive downgrade. Native component checks and rollout status are recorded separately in document 142. No device reboot is performed by this feature.
+
 ## 2026-11-04 · 151 · Thirteen mesh deliveries and device recovery / 十三项三维交付与设备恢复
 
 - Record 34 newly published models with independent business delivery: 12 image, nine audio and 13 mesh. Inspect all 13 full GLBs, hashes, release identities and actual appearance channels; preserve prior eight- and three-model snapshots. Ordinary business discovery finds 34 published candidates and hides 179 drafts, with two selected unpublished aliases returning 404.

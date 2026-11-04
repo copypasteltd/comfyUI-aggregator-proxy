@@ -15,6 +15,16 @@ ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = json.loads((ROOT / "docs/contracts/fixtures.json").read_text(encoding="utf-8"))["cases"]
 
 
+@pytest.mark.parametrize("case", [c for c in FIXTURES if c["schema"] == "worker-reconciliation.schema.json"], ids=lambda c: c["id"])
+def test_worker_reconciliation_dto_matches_frozen_fixture(case: dict[str, Any]) -> None:
+    from generation_contracts.recovery import Reconciliation
+    if case["valid"]:
+        assert Reconciliation.model_validate(case["data"]).model_dump(exclude_unset=True) == case["data"]
+    else:
+        with pytest.raises(ValueError):
+            Reconciliation.model_validate(case["data"])
+
+
 @pytest.mark.parametrize("case", [c for c in FIXTURES if c["schema"] in {"gateway-catalog-publication.schema.json", "gateway-catalog-replay.schema.json", "gateway-catalog-stamp.schema.json", "gateway-catalog-receipt.schema.json"}], ids=lambda c: c["id"])
 def test_gateway_catalog_dto_matches_frozen_fixture(case: dict[str, Any]) -> None:
     from generation_contracts.gateway_catalogs import (

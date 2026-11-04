@@ -5,6 +5,7 @@ from typing import Any
 from uuid import UUID, uuid4
 
 from generation_contracts.capacity import WorkerCapacity, output_reservation
+from generation_contracts.recovery import HOST_RESTART_PROTOCOL
 from generation_contracts.validation import WorkerEvent
 from generation_domain.errors import DomainError
 from generation_domain.policies import enforce_limit
@@ -108,7 +109,7 @@ class LeaseRepository:
                     session.add(Gpu(node_id=node_id, hardware_id=info["hardware_id"], name=info["name"], memory_bytes=info.get("memory_bytes")))
             record_change(session, public_id("node", node_id), "worker.registered", node_id, str(uuid4()))
             pending = list(session.scalars(select(Attempt.id).where(Attempt.node_id == node_id, Attempt.closed_at.is_(None), Attempt.boot_id != boot_id)))
-            return {"node_id": public_id("node", node_id), "boot_id": str(boot_id), "heartbeat_seconds": 5, "reconciliation_required": [public_id("att", identifier) for identifier in pending]}
+            return {"node_id": public_id("node", node_id), "boot_id": str(boot_id), "heartbeat_seconds": 5, "reconciliation_required": [public_id("att", identifier) for identifier in pending], "recovery_protocols": [HOST_RESTART_PROTOCOL]}
 
     def heartbeat(self, node_id: UUID, boot_id: UUID, observations: list[dict[str, Any]], capacity: dict[str, Any] | None = None) -> dict[str, Any]:
         sample = WorkerCapacity.model_validate(capacity) if capacity is not None else None

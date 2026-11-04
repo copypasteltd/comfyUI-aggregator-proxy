@@ -420,7 +420,8 @@ class Attempt(Entity, Base):
     association_id: Mapped[UUID | None] = mapped_column()
     journal_seq: Mapped[int] = mapped_column(BigInteger, default=0)
     generation_evidence: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
-    __table_args__ = (UniqueConstraint("gpu_id", "fence"), UniqueConstraint("job_id", "id"))
+    recovery_checkpoint: Mapped[dict[str, Any] | None] = mapped_column(JSONB(none_as_null=True))
+    __table_args__ = (UniqueConstraint("gpu_id", "fence"), UniqueConstraint("job_id", "id"), CheckConstraint("recovery_checkpoint IS NULL OR jsonb_typeof(recovery_checkpoint) = 'object'", name="recovery_checkpoint"))
 
 
 class GpuOccupancy(Base):

@@ -12,10 +12,10 @@
       "framework": 7,
       "implemented": 67
     },
-    "named_test_references": 202,
+    "named_test_references": 205,
     "baseline_python_cases": 3593,
-    "reports": 49,
-    "current_source_files": 205
+    "reports": 50,
+    "current_source_files": 210
   },
   "errors": [],
   "checked_files": [
@@ -56,6 +56,7 @@
     "app/apps/windows_worker/src/windows_worker/commands.py",
     "app/apps/windows_worker/src/windows_worker/configuration.py",
     "app/apps/windows_worker/src/windows_worker/environment.py",
+    "app/apps/windows_worker/src/windows_worker/host_recovery.py",
     "app/apps/windows_worker/src/windows_worker/http_output.py",
     "app/apps/windows_worker/src/windows_worker/journal.py",
     "app/apps/windows_worker/src/windows_worker/main.py",
@@ -92,8 +93,10 @@
     "app/integrations/sub2api/overlay/backend/internal/rendercontrol/types.go",
     "app/integrations/sub2api/overlay/backend/internal/rendercontrol/video_specification_test.go",
     "app/integrations/sub2api/overlay/backend/migrations/258_render_control_video_specification.sql",
+    "app/migrations/versions/04d152a00001_host_recovery_checkpoint.py",
     "app/packages/application/src/generation_application/ports.py",
     "app/packages/contracts/src/generation_contracts/defaults.py",
+    "app/packages/contracts/src/generation_contracts/recovery.py",
     "app/packages/contracts/src/generation_contracts/wait_estimates.py",
     "app/packages/domain/src/generation_domain/native_dependencies.py",
     "app/packages/domain/src/generation_domain/videos.py",
@@ -172,6 +175,7 @@
     "app/tests/integration/test_discovery.py",
     "app/tests/integration/test_dispatch_transactions.py",
     "app/tests/integration/test_gateway.py",
+    "app/tests/integration/test_host_recovery_transactions.py",
     "app/tests/integration/test_http_auth.py",
     "app/tests/integration/test_http_worker_sync.py",
     "app/tests/integration/test_job_cancellations.py",
@@ -203,6 +207,7 @@
     "app/tests/protocol/test_comfy_metadata.py",
     "app/tests/protocol/test_final_output_shapes.py",
     "app/tests/protocol/test_history_shapes_worker.py",
+    "app/tests/protocol/test_host_recovery_worker.py",
     "app/tests/protocol/test_journal.py",
     "app/tests/protocol/test_model3d_worker.py",
     "app/tests/protocol/test_output_collection_resume.py",
@@ -289,7 +294,8 @@
     "docs/evidence/2026-11-02/media-gen-single-file-131-local.json",
     "docs/evidence/2026-11-04/catalog-music-144-local.json",
     "docs/evidence/2026-11-04/daily-limits-150-local.json",
-    "docs/evidence/2026-11-04/development-trace-baselines-150.json",
+    "docs/evidence/2026-11-04/development-trace-baselines-152.json",
+    "docs/evidence/2026-11-04/host-recovery-152-local-final.json",
     "docs/evidence/2026-11-04/media-gen-skill-130-local.json",
     "docs/evidence/2026-11-04/native-dependencies-136-local-third.json",
     "docs/evidence/2026-11-04/typed-inputs-133-admin-validation-provenance.json",
@@ -317,5 +323,5 @@
     "docs/evidence/2026-11-04/typed-inputs-133-ui/verification.json",
     "docs/evidence/native-ci/ci86-20261025-maintained-database/summary.json"
   ],
-  "checked_at": "2026-11-04T08:03:01.303970+00:00"
+  "checked_at": "2026-11-04T09:04:28.363884+00:00"
 }

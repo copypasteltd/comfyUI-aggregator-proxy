@@ -46718,6 +46718,520 @@
           "seconds": 34.1571
         }
       }
+    },
+    {
+      "id": "host_recovery_legacy_absent",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": true,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "host_recovery_checkpoint",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": true,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_restart",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": true,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "host_restarted",
+        "source": "native_host_uptime",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_restart": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "checkpoint_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 1000,
+          "comfy_observation": "absent"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_outputs",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": true,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "local_outputs",
+        "source": "local_outputs",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "manifest_digest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    },
+    {
+      "id": "host_recovery_missing_proof",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "host_restarted",
+        "source": "native_host_uptime",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "host_recovery_restart_source",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "host_restarted",
+        "source": "history",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_restart": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "checkpoint_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 1000,
+          "comfy_observation": "absent"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_restart_observation",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "found",
+        "source": "native_host_uptime",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_restart": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "checkpoint_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 1000,
+          "comfy_observation": "absent"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_restart_manifest_digest",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "host_restarted",
+        "source": "native_host_uptime",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_restart": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "checkpoint_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 1000,
+          "comfy_observation": "absent"
+        },
+        "manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "host_recovery_restart_host_checkpoint",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "host_restarted",
+        "source": "native_host_uptime",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_restart": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "checkpoint_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 1000,
+          "comfy_observation": "absent"
+        },
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_checkpoint_observation",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "unknown",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_checkpoint_source",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "history",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_checkpoint_manifest_digest",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        },
+        "manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "host_recovery_invalid_checkpoint_uptime_ms_0",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 0,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_invalid_checkpoint_nonce_xxxxxxxxxx",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_invalid_checkpoint_host_identity_digest_xxxxxxxxxx",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_invalid_checkpoint_locality_declared-l",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "declared-local"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_invalid_checkpoint_protocol_unknown",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "unknown",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_invalid_checkpoint_uptime_ms_True",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": true,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_invalid_checkpoint_extra_1",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "unknown",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_checkpoint": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 900000,
+          "gpu_hardware_id": "SYNTHETIC-GPU",
+          "channel_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "locality": "same-host-tcp-v1",
+          "extra": 1
+        }
+      }
+    },
+    {
+      "id": "host_recovery_restart_negative_uptime",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "host_restarted",
+        "source": "native_host_uptime",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_restart": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "checkpoint_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": -1,
+          "comfy_observation": "absent"
+        }
+      }
+    },
+    {
+      "id": "host_recovery_restart_extra",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "host_restarted",
+        "source": "native_host_uptime",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "host_restart": {
+          "protocol": "windows-host-uptime-reset-v1",
+          "checkpoint_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "host_identity_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "uptime_ms": 1000,
+          "comfy_observation": "absent",
+          "execute_reboot": true
+        }
+      }
+    },
+    {
+      "id": "host_recovery_legacy_native_source",
+      "schema": "worker-reconciliation.schema.json",
+      "valid": false,
+      "data": {
+        "boot_id": "11111111-1111-4111-8111-111111111111",
+        "attempt_id": "att_11111111111111111111111111111111",
+        "previous_boot_id": "22222222-2222-4222-8222-222222222222",
+        "previous_fencing_token": 1,
+        "association_id": "33333333-3333-4333-8333-333333333333",
+        "prompt_id": null,
+        "observation": "absent",
+        "source": "native_host_uptime",
+        "evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
     }
   ]
 }

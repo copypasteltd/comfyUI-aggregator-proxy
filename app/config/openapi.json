@@ -16337,6 +16337,99 @@
         ],
         "title": "Heartbeat"
       },
+      "HostRecoveryCheckpoint": {
+        "properties": {
+          "protocol": {
+            "type": "string",
+            "const": "windows-host-uptime-reset-v1",
+            "title": "Protocol"
+          },
+          "nonce": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{32}$",
+            "title": "Nonce"
+          },
+          "host_identity_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Host Identity Digest"
+          },
+          "uptime_ms": {
+            "type": "integer",
+            "maximum": 9.223372036854776e+18,
+            "minimum": 1.0,
+            "title": "Uptime Ms"
+          },
+          "gpu_hardware_id": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Gpu Hardware Id"
+          },
+          "channel_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Channel Digest"
+          },
+          "locality": {
+            "type": "string",
+            "const": "same-host-tcp-v1",
+            "title": "Locality"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "protocol",
+          "nonce",
+          "host_identity_digest",
+          "uptime_ms",
+          "gpu_hardware_id",
+          "channel_digest",
+          "locality"
+        ],
+        "title": "HostRecoveryCheckpoint"
+      },
+      "HostRestartProof": {
+        "properties": {
+          "protocol": {
+            "type": "string",
+            "const": "windows-host-uptime-reset-v1",
+            "title": "Protocol"
+          },
+          "checkpoint_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Checkpoint Digest"
+          },
+          "host_identity_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Host Identity Digest"
+          },
+          "uptime_ms": {
+            "type": "integer",
+            "maximum": 9.223372036854776e+18,
+            "minimum": 1.0,
+            "title": "Uptime Ms"
+          },
+          "comfy_observation": {
+            "type": "string",
+            "const": "absent",
+            "title": "Comfy Observation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "protocol",
+          "checkpoint_digest",
+          "host_identity_digest",
+          "uptime_ms",
+          "comfy_observation"
+        ],
+        "title": "HostRestartProof"
+      },
       "ImageGeneration": {
         "properties": {
           "model": {
@@ -21539,7 +21632,8 @@
               "found",
               "absent",
               "unknown",
-              "local_outputs"
+              "local_outputs",
+              "host_restarted"
             ],
             "title": "Observation"
           },
@@ -21550,7 +21644,8 @@
               "queue_pending",
               "history",
               "local_outputs",
-              "unknown"
+              "unknown",
+              "native_host_uptime"
             ],
             "title": "Source"
           },
@@ -21570,6 +21665,26 @@
               }
             ],
             "title": "Manifest Digest"
+          },
+          "host_checkpoint": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HostRecoveryCheckpoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "host_restart": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HostRestartProof"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,

@@ -4412,6 +4412,48 @@ export interface components {
             observations?: components["schemas"]["ChannelObservation"][];
             capacity?: components["schemas"]["WorkerCapacity"] | null;
         };
+        /** HostRecoveryCheckpoint */
+        HostRecoveryCheckpoint: {
+            /**
+             * Protocol
+             * @constant
+             */
+            protocol: "windows-host-uptime-reset-v1";
+            /** Nonce */
+            nonce: string;
+            /** Host Identity Digest */
+            host_identity_digest: string;
+            /** Uptime Ms */
+            uptime_ms: number;
+            /** Gpu Hardware Id */
+            gpu_hardware_id: string;
+            /** Channel Digest */
+            channel_digest: string;
+            /**
+             * Locality
+             * @constant
+             */
+            locality: "same-host-tcp-v1";
+        };
+        /** HostRestartProof */
+        HostRestartProof: {
+            /**
+             * Protocol
+             * @constant
+             */
+            protocol: "windows-host-uptime-reset-v1";
+            /** Checkpoint Digest */
+            checkpoint_digest: string;
+            /** Host Identity Digest */
+            host_identity_digest: string;
+            /** Uptime Ms */
+            uptime_ms: number;
+            /**
+             * Comfy Observation
+             * @constant
+             */
+            comfy_observation: "absent";
+        };
         /** ImageGeneration */
         ImageGeneration: {
             /** Model */
@@ -6153,16 +6195,18 @@ export interface components {
              * Observation
              * @enum {string}
              */
-            observation: "found" | "absent" | "unknown" | "local_outputs";
+            observation: "found" | "absent" | "unknown" | "local_outputs" | "host_restarted";
             /**
              * Source
              * @enum {string}
              */
-            source: "queue_running" | "queue_pending" | "history" | "local_outputs" | "unknown";
+            source: "queue_running" | "queue_pending" | "history" | "local_outputs" | "unknown" | "native_host_uptime";
             /** Evidence Digest */
             evidence_digest: string;
             /** Manifest Digest */
             manifest_digest?: string | null;
+            host_checkpoint?: components["schemas"]["HostRecoveryCheckpoint"] | null;
+            host_restart?: components["schemas"]["HostRestartProof"] | null;
         };
         /** ReferenceSlot */
         ReferenceSlot: {

@@ -63,6 +63,11 @@ class Journal:
             CREATE TABLE IF NOT EXISTS output_packages (
                 attempt_id TEXT PRIMARY KEY REFERENCES attempts(id), package TEXT NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS host_recovery_checkpoints (
+                attempt_id TEXT PRIMARY KEY REFERENCES attempts(id),
+                claim_digest TEXT NOT NULL, checkpoint TEXT NOT NULL,
+                server_digest TEXT
+            );
             CREATE TABLE IF NOT EXISTS claim_requests (
                 boot_id TEXT PRIMARY KEY, request_id TEXT NOT NULL
             );
@@ -241,6 +246,40 @@ class Journal:
     def recovery(self) -> list[dict[str, Any]]:
         return [dict(row) for row in self.db.execute("SELECT * FROM attempts WHERE cloud_ack=0 ORDER BY id")]
 
+    def host_checkpoint(self, attempt_id: str) -> dict[str, Any] | None:
+        from generation_domain.values import fingerprint
+        row = self.db.execute("SELECT * FROM host_recovery_checkpoints WHERE attempt_id=?", (attempt_id,)).fetchone()
+        if row is None:
+            return None
+        attempt = self.get(attempt_id)
+        if not attempt or attempt["cloud_ack"] or row["claim_digest"] != fingerprint(json.loads(attempt["claim"])):
+            raise DomainError("host_checkpoint_conflict", "主机检查点与当前 journal 身份不符")
+        return {"checkpoint": json.loads(row["checkpoint"]), "server_digest": row["server_digest"]}
+
+    def save_host_checkpoint(self, attempt_id: str, checkpoint: dict[str, Any]) -> dict[str, Any]:
+        from generation_contracts.recovery import HostRecoveryCheckpoint
+        from generation_domain.values import fingerprint
+        checked = HostRecoveryCheckpoint.model_validate(checkpoint).model_dump()
+        with self.db:
+            attempt = self.get(attempt_id)
+            if not attempt or attempt["cloud_ack"] or attempt["stage"] == "uploading" or self.outputs(attempt_id) is not None:
+                raise DomainError("host_checkpoint_unavailable", "当前 journal 不允许建立主机检查点")
+            if existing := self.host_checkpoint(attempt_id):
+                if existing["checkpoint"] != checked:
+                    raise DomainError("host_checkpoint_conflict", "主机检查点不可覆盖")
+                return existing
+            self.db.execute("INSERT INTO host_recovery_checkpoints(attempt_id,claim_digest,checkpoint) VALUES(?,?,?)", (attempt_id, fingerprint(json.loads(attempt["claim"])), canonical_json(checked)))
+        return {"checkpoint": checked, "server_digest": None}
+
+    def acknowledge_host_checkpoint(self, attempt_id: str, digest: str) -> None:
+        if not re.fullmatch(r"[a-f0-9]{64}", digest):
+            raise DomainError("host_checkpoint_conflict", "主机检查点回执摘要无效")
+        with self.db:
+            previous = self.host_checkpoint(attempt_id)
+            if previous is None or previous["server_digest"] not in (None, digest):
+                raise DomainError("host_checkpoint_conflict", "主机检查点回执与持久记录不符")
+            self.db.execute("UPDATE host_recovery_checkpoints SET server_digest=? WHERE attempt_id=?", (digest, attempt_id))
+
     def finish(self, attempt_id: str, *, retention_seconds: int = 3600, now: int | None = None) -> None:
         if type(retention_seconds) is not int or not 3600 <= retention_seconds <= 30 * 86400:
             raise ValueError("output retention must be at least one hour")
@@ -349,6 +388,7 @@ class Journal:
         persisted = {**claim, "channel": {k: v for k, v in claim["channel"].items() if k != "authorization"}}
         with self.db:
             self.db.execute("DELETE FROM events WHERE attempt_id=?", (claim["attempt_id"],))
+            self.db.execute("DELETE FROM host_recovery_checkpoints WHERE attempt_id=?", (claim["attempt_id"],))
             self.db.execute("UPDATE attempts SET claim=?,stage=?,prompt_id=?,next_seq=? WHERE id=? AND execution_digest=?", (canonical_json(persisted), claim["resume_state"], claim.get("prompt_id"), claim["journal_seq"] + 1, claim["attempt_id"], claim["execution_digest"]))
 
     def stage(self, attempt_id: str, value: str) -> None:

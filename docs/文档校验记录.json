@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-04T16:06:04+08:00",
+  "checked_at": "2026-11-04T17:05:56+08:00",
   "baseline": "v0.4",
   "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
   "project": "E:\\dev\\sandbox\\生图生视API封装",
@@ -10,19 +10,19 @@
   },
   "checks": {
     "markdown": {
-      "documents": 167,
+      "documents": 168,
       "instruction_files": 1,
       "fenced_blocks": 88,
       "json_examples": 26,
       "yaml_examples": 1,
-      "local_links_checked": 3156
+      "local_links_checked": 3173
     },
     "contracts": {
-      "json_files": 80,
-      "schemas": 69,
-      "fixtures": 1058,
-      "positive_fixtures": 256,
-      "negative_fixtures": 802,
+      "json_files": 81,
+      "schemas": 70,
+      "fixtures": 1080,
+      "positive_fixtures": 260,
+      "negative_fixtures": 820,
       "capabilities_covered": [
         "image_to_3d",
         "image_to_image",
@@ -70,10 +70,10 @@
         "framework": 7,
         "implemented": 67
       },
-      "named_test_references": 202,
+      "named_test_references": 205,
       "baseline_python_cases": 3593,
-      "reports": 49,
-      "current_source_files": 205,
+      "reports": 50,
+      "current_source_files": 210,
       "full_acceptance": "pending"
     },
     "topic_presence": {
@@ -426,9 +426,15 @@
     },
     {
       "file": "docs/141-工作流接入进度与设备恢复.md",
-      "bytes": 8089,
+      "bytes": 8094,
       "lines": 54,
-      "sha256": "b58536db3fec3636b1739cc5d573056bd7fd552e4b129195e79577073e98bfd2"
+      "sha256": "f25427c77d4eb9bc99834cc563d6b9ff15882df67968dafd11a02a758fb89d40"
+    },
+    {
+      "file": "docs/142-主机重启证据与未知执行收口.md",
+      "bytes": 6218,
+      "lines": 42,
+      "sha256": "76cb42a4028d0d355ff9bfb872891d48eeeaf92a3fc3de55747e757a17c843f9"
     },
     {
       "file": "docs/15-原生部署配置与运维.md",
@@ -870,9 +876,9 @@
     },
     {
       "file": "docs/88-需求实现与分层证据追踪.md",
-      "bytes": 86243,
-      "lines": 271,
-      "sha256": "4fabc2ea414ca22a5b4aeaf50d8e8a6702c946bb0cfb8a3ce3a19a111dbc0ac2"
+      "bytes": 88512,
+      "lines": 273,
+      "sha256": "57780f85e6f440575f0f328aa00e05549908cee7d3865752172aae0d242e93cf"
     },
     {
       "file": "docs/89-审计分页投影上限与版本化复验.md",
@@ -1182,9 +1188,9 @@
     },
     {
       "file": "docs/contracts/development-evidence.json",
-      "bytes": 215210,
-      "lines": 7097,
-      "sha256": "e07486ac821a8cc5fd5dcb020a81bc4351bd91e143aa4c8153ef040f611d6a37"
+      "bytes": 219083,
+      "lines": 7205,
+      "sha256": "aaf3275abdc14ec39edb87725264fdf0a2b6fcdff706692ddd4958b30ab64b80"
     },
     {
       "file": "docs/contracts/development-traceability.json",
@@ -1206,9 +1212,9 @@
     },
     {
       "file": "docs/contracts/fixtures.json",
-      "bytes": 1525099,
-      "lines": 46723,
-      "sha256": "5c78dcb01e1b8f5d75794fee948e479552799f1d4ed191c7c03386855a4f5b2f"
+      "bytes": 1548253,
+      "lines": 47237,
+      "sha256": "9fae6b3f56e4da53ba312f6d9f037520c5b5a97d15e7e88d92b899f887c3185d"
     },
     {
       "file": "docs/contracts/gateway-catalog-configuration.schema.json",
@@ -1320,9 +1326,9 @@
     },
     {
       "file": "docs/contracts/README.md",
-      "bytes": 21812,
-      "lines": 152,
-      "sha256": "8ab4529d99bc10d37b4496fce156a07e6f53a7ac6ba6f1d4e4926c2885e62e91"
+      "bytes": 22323,
+      "lines": 154,
+      "sha256": "8eb38ca97a4bc9991327af932f0eada546c51568934c4f8949662d2de7fea82f"
     },
     {
       "file": "docs/contracts/recovery-checkpoint.schema.json",
@@ -1401,6 +1407,12 @@
       "bytes": 1585,
       "lines": 70,
       "sha256": "9bc6b47946bce0d38674587ce0726992a1a0604bfbd8a87e59d8b630fdd18172"
+    },
+    {
+      "file": "docs/contracts/worker-reconciliation.schema.json",
+      "bytes": 6438,
+      "lines": 287,
+      "sha256": "d82ac45a77329e5c53d164d24a14665cbe8242737fd72b8d2879c44582b8feff"
     },
     {
       "file": "docs/contracts/workflow-catalog-receipt.schema.json",
