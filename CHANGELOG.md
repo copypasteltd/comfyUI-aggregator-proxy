@@ -4,8 +4,10 @@
 
 - Freeze operator-owned auxiliary roots by relative file, SHA-256 and byte count; verify them at workflow synchronization and execution. Keep local paths and programs outside business request control, and reject HTTP-only access, links, private directories and undeclared roots.
 - Gate synchronization, command delivery, job dispatch, retries, device pools and wait estimates on `native-dependency-roots-v1`; require explicit native verification in successful receipts. Existing releases without the optional lock remain compatible.
-- Read and hash 3,567 actual files without GPU generation, installation or downloads. Prepare new immutable draft inputs for 13 affected 3080 candidates; preserve model aliases and older releases. Production deployment and hardware approval of these candidates remain pending.
-- Seven newly published models pass ordinary business generation and SHA-256 downloads. Keep the input-transfer failure separate from source-workflow blockers; the 4090 service upgrade still needs device administrator access.
+- Read and hash 3,567 actual files without GPU generation, installation or downloads. Create new immutable release versions for 13 affected 3080 candidates; preserve model aliases and older releases, and replace only corresponding temporary test-Key release grants. Individual hardware approval continues.
+- Deploy immutable cloud/3080 Worker 136.1. All 18 original model-binding environment checks and three channel probes pass; high-port HTTP and unrestricted-origin preflight checks pass. Preserve the credential-compatible origin echo. See [production evidence](docs/evidence/2026-11-04/native-dependencies-136-production-deployment.json).
+- Seven newly published models pass ordinary business generation and SHA-256 downloads in the recorded snapshot. Retry the terminal input-transfer failure only after proving no submitted prompt or GPU occupancy; retain its previous intents. The 4090 service upgrade still needs device administrator access.
+- Reclaim 1,841,831,936 bytes by pruning 11 inactive project installations after checking process/configuration references. Keep four current/rollback installations, all project data and backups, and the independent Studio/Skill assets. No unrelated caches or data are deleted.
 
 ## 2026-11-04 · 138 · Multimodal Skill / 多模态调用 Skill
 

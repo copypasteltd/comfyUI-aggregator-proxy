@@ -1,0 +1,393 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T02:00:12.384390+00:00",
+  "passed": true,
+  "scope": "Actual immutable cloud/RTX3080 Worker installation, capability registration, all original binding environment rechecks and unrestricted-origin HTTP availability; candidate GPU generation approval remains separate.",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "application_source_revision": "5e107d1915150481b855f357e59eed72ec33baa2",
+  "cloud": {
+    "release_id": "linux-20261104.136.1",
+    "database_head": "04d133a00001",
+    "archive_sha256": "204397df0713677dc1740651828698456eb9ef35f3f931197e74898f9b12a6cd",
+    "services_active": 4,
+    "disk_after_install_and_cleanup_free_bytes": 3536801792
+  },
+  "worker_3080": {
+    "release_id": "rc-20261104.136.1",
+    "archive_sha256": "d847d056d4a3b62e267175774109954eee2b62fee8d24353927caf6024a614f6",
+    "manifest_sha256": "e3a42ae5c3042d2f48083d356e882bfcda2906bf70dc97c34b763cbc943b4012",
+    "native_service_running": true,
+    "installation_seconds": 150.331,
+    "configured_root_aliases": [
+      "comfy_aux",
+      "native_3d",
+      "podcast_model_code",
+      "podcast_runtime"
+    ]
+  },
+  "capabilities": [
+    {
+      "name": "HTTP RTX 5070",
+      "observed_at": "2026-11-04 01:50:08.947219+00:00",
+      "boot_registered": true,
+      "features": [
+        "audio-output-v1",
+        "model3d-output-v1",
+        "workflow-inputs-v1",
+        "remote-http-v1"
+      ]
+    },
+    {
+      "name": "Windows RTX 3080",
+      "observed_at": "2026-11-04 01:50:06.562588+00:00",
+      "boot_registered": true,
+      "features": [
+        "audio-output-v1",
+        "model3d-output-v1",
+        "workflow-inputs-v1",
+        "native-dependency-roots-v1"
+      ]
+    },
+    {
+      "name": "Windows RTX 4090",
+      "observed_at": "2026-11-04 01:50:07.306672+00:00",
+      "boot_registered": true,
+      "features": [
+        "audio-output-v1"
+      ]
+    }
+  ],
+  "original_bindings_reverified": [
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_f04f05cfc09848c385252157aca370ff",
+      "operation_id": "op_1fdf936013fa4a91855102df20c4b766",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_5e146ae70c4e4810920306c6ee65c098",
+      "operation_id": "op_653d54b3680d4cdba81c0c9e70fe089a",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_478944eccc904ef7881d4b1d4a4101e3",
+      "operation_id": "op_f084b9779d884eee84b968666f3537e0",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_02df8c635f904aa29d90daba2afc7ac8",
+      "operation_id": "op_c181627b857e468894b92b3aa905355e",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_9c4f89df412a4578b5caaf1288d3d6e9",
+      "operation_id": "op_417fd7f078c643d9b58439a51b732b8a",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_9779bff346a545fcadeeb8604aeaa905",
+      "operation_id": "op_d0f45c0e2f254cabbefd43710a7a39a1",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_a31b8fad0bca44d48d3f851fe71f85f1",
+      "operation_id": "op_b742d0c7abbc492397daaaa5b34a007b",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_3066c5565b224fb4adcf5dd49f51bb1b",
+      "operation_id": "op_64246e0467204cc5a47c4d1cbfab1172",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_e934e4f698ff4dc7b70a5788ea4b3931-wfr_4f2ee473a30047c29c396034f43c4bf6",
+      "operation_id": "op_129b8f494b22406487d019203adc5ce0",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_e934e4f698ff4dc7b70a5788ea4b3931-wfr_1f2ca4bc45984f889e504964dee3a1ed",
+      "operation_id": "op_63a528b80d4c4e89af36cd1fdc341186",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_e934e4f698ff4dc7b70a5788ea4b3931-wfr_10f77b73aeb04a4696cb67a9185ab92b",
+      "operation_id": "op_a798403e4956432e92c4b710a1459f09",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_1443a0ee5666432a88cfcc0f6ed699c9-wfr_deccc88fba6547368a240ee21cda6f49",
+      "operation_id": "op_666ab832ad064fa1976118cb634fe235",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_1443a0ee5666432a88cfcc0f6ed699c9-wfr_81503486068145c5addc3b465e3a75e6",
+      "operation_id": "op_37492ba7c8854428b7e0c81f000783f7",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_e07baab991d74de99828e4cdba715ac5",
+      "operation_id": "op_48c7060f03f7462e9240a5743cc1ddef",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_d646551303654a518310df7930546102",
+      "operation_id": "op_c8bd30b9aba74c99be88897b407e0213",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_1443a0ee5666432a88cfcc0f6ed699c9-wfr_59e1af9a71e44ad9af7dd367c0729dc4",
+      "operation_id": "op_5ecc635c79024f0a8753fe3065f448fb",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_4455b320d0f8402caf282d533e938f55",
+      "operation_id": "op_fc9cdf851be842e5ab5b89a3c3e0befa",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268-wfr_81748eea50b84b6191a7bb4b5ab1bdd8",
+      "operation_id": "op_a8a6d11e002d430e9f0e0735afbebc75",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_e934e4f698ff4dc7b70a5788ea4b3931",
+      "operation_id": "op_f06192b832f1487dbe68ee4a0d5ddff1",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_1443a0ee5666432a88cfcc0f6ed699c9",
+      "operation_id": "op_1b96525c058d4e73a563c99245a6c484",
+      "status": "succeeded"
+    },
+    {
+      "label": "ch_0718027e267045cebcf328739e7c6268",
+      "operation_id": "op_d1647876c6e942d88c8136782931dc57",
+      "status": "succeeded"
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_e934e4f698ff4dc7b70a5788ea4b3931",
+      "name": "RTX 5070 / ComfyUI HTTP",
+      "enabled": true,
+      "draining": false,
+      "desired_revision": 1,
+      "applied_revision": 1,
+      "verified_revision": 1
+    },
+    {
+      "id": "ch_1443a0ee5666432a88cfcc0f6ed699c9",
+      "name": "Windows RTX 4090 / ComfyUI",
+      "enabled": true,
+      "draining": false,
+      "desired_revision": 1,
+      "applied_revision": 1,
+      "verified_revision": 1
+    },
+    {
+      "id": "ch_0718027e267045cebcf328739e7c6268",
+      "name": "Windows RTX 3080 / ComfyUI",
+      "enabled": true,
+      "draining": true,
+      "desired_revision": 1,
+      "applied_revision": 1,
+      "verified_revision": 1
+    }
+  ],
+  "external": [
+    {
+      "entry": "native_high_port",
+      "path": "/health/live",
+      "status": 200
+    },
+    {
+      "entry": "native_high_port",
+      "path": "/health/ready",
+      "status": 200
+    },
+    {
+      "entry": "native_high_port",
+      "arbitrary_origin_preflight": true,
+      "requested_origin": "https://native-rollout-check.invalid",
+      "credential_compatible_origin_echo": true,
+      "status": 200
+    },
+    {
+      "entry": "native_high_port",
+      "arbitrary_origin_preflight": true,
+      "requested_origin": "http://other-rollout-check.invalid:59123",
+      "credential_compatible_origin_echo": true,
+      "status": 200
+    }
+  ],
+  "new_unpublished_release_versions": [
+    {
+      "key": "3080-4b4a545a1136e594",
+      "alias": "comfy-3080-partcrafter-4b4a54",
+      "old_release_id": "wfr_b55e64fc1a144b50a4ec1995545d7e9a",
+      "new_release_id": "wfr_c1e6046cf625485b980e9c09fafa9773",
+      "old_digest": "120b2c043a729787e41dc0cb5ece9be02cc15120411f0761f0898bba070300cc",
+      "new_digest": "37c59a8227b639a29f3b18a80d0eddadad8e2163125a0af875e8d8c94e8bb6d0",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-b4d86d0bfc0d4b71",
+      "alias": "comfy-3080-triposg-b4d86d",
+      "old_release_id": "wfr_9276b356753543909af5d2c9d0007296",
+      "new_release_id": "wfr_22c0aad124294a3c8a309e802fb30ee4",
+      "old_digest": "924972f34f7ea7fa4f601c84d5f67e959e0cf3a6c234c38b23d04165d0e4a06f",
+      "new_digest": "817464dacbddb9fdba7bf7061f25937034e9642381ecbf553a4c098782f1fd01",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-6816bd7bc5a4959d",
+      "alias": "comfy-3080-mv-sam3d-6816bd",
+      "old_release_id": "wfr_d4c102de2cd541e68c2cd9fb6d21c921",
+      "new_release_id": "wfr_9840cf1cb16d43f6a289dca36b37c021",
+      "old_digest": "05ad2c50d669f4b837619d5e93369a0f0ec474ed339bb47fb755181391615897",
+      "new_digest": "21962d5905e945f2b573bac69599ff99fcff8461cf61726b16f5fbc7101260e7",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-d0d42cb67788422d",
+      "alias": "comfy-3080-partcrafter-d0d42c",
+      "old_release_id": "wfr_40ed49922b614276ac9fc190846a81cc",
+      "new_release_id": "wfr_9649b32e00494da7b73b4ca7230efe1d",
+      "old_digest": "e90afb4a5eb5b7381766e19f3314560337a7a3ce349fbb4f59b3a83ce30fdee0",
+      "new_digest": "7078263dd1c166e8604ca6195796e7b8f5c07e3684a8cc9213bc74c4e5fb0df8",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-e4af3eab70773a61",
+      "alias": "comfy-3080-sam3d-e4af3e",
+      "old_release_id": "wfr_34e1f7d9844d4474bf21ec3a03682a9b",
+      "new_release_id": "wfr_79f7bc8fc3164d64aae7530250886e27",
+      "old_digest": "e3909b34f7976cb190c89f1472818ec13cdd0be4175805db5dd7de8d9bb508d6",
+      "new_digest": "b557a79b52f95dec5d3f1a5dae4c76faf37245adc9004263d149590292e651fa",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-fe5a6e9ba249e29f",
+      "alias": "comfy-3080-triposg-fe5a6e",
+      "old_release_id": "wfr_a934415097334e84901ad816aeae392c",
+      "new_release_id": "wfr_480016dd800a43f4a4a4fffbd6db8cbc",
+      "old_digest": "fea676860fce3a64f06f6e3e7c34abaa825bbd816cd554a47119142bd964631f",
+      "new_digest": "210117fccbc8bde846237e8ef6d91c1e18f2db69b4e92c35dc433d1c90ece1eb",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-7d4ac1b20f7e1a45",
+      "alias": "comfy-3080-ultrashape1-7d4ac1",
+      "old_release_id": "wfr_c8b17cc0d0df4c50bca74a3907bb87a0",
+      "new_release_id": "wfr_c220d9e3320043eaaf9788a61ed7f2ae",
+      "old_digest": "88c2ed78951b15486e0dd037ba12800529380627fa7122a545beb3c97ead3ac5",
+      "new_digest": "4315751653cad47e06cb32badda3fbd0f21079c06b45b8da65433f7750585248",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-bd8cd49a9da6815e",
+      "alias": "comfy-3080-ultratex-bd8cd4",
+      "old_release_id": "wfr_23b76e3f24ff45058a842695c9a04206",
+      "new_release_id": "wfr_f94607fa2fd24fe183928156666b4a71",
+      "old_digest": "fbeae795228dae92b9ecbc087f86f41093aac6aa4e19359a6b1cef23c79a3076",
+      "new_digest": "9a731de702dd0786a9137c6b8940a1c04ae58d95c1055a22815bf66d91ca0132",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-1231f7be33f17abc",
+      "alias": "comfy-3080-uniforge3d-1231f7",
+      "old_release_id": "wfr_43246bedab344c89a11c5a83f830f223",
+      "new_release_id": "wfr_672f199f31d1405fadde9ddc2f9bbead",
+      "old_digest": "8a9c872f4d47a09684c745b91e3ef4732a1fd60e3be0715000bc0795aae08598",
+      "new_digest": "4b0ea6c09fa84d39fc36276f4b6c6b7afad950bc190313b1d90e08ba955f8249",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-ba95ea767a9e1344",
+      "alias": "comfy-3080-01-moss-tech-ba95ea",
+      "old_release_id": "wfr_0081aef2f83f4764b3e0756b77949a86",
+      "new_release_id": "wfr_61266b73412d4c7896b275cf69ae51b9",
+      "old_digest": "37a4a5005aab19fad74774945ffb25e8dce76258436fe21b00f295e4a828ee5b",
+      "new_digest": "a223dafca71487107d609dc585e333a898f30f4edf194fed066a5f84ce433e3e",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-8635cc412d4b9a03",
+      "alias": "comfy-3080-05-firered-film-8635cc",
+      "old_release_id": "wfr_716fc63349e84076b2b7432f615d6bd5",
+      "new_release_id": "wfr_eef4ac0f564948d799e8bebcdc821837",
+      "old_digest": "33130e684965f0eb85fb0cbd99a4444a34e28ddc7c6c0ae17531b5ed028045b6",
+      "new_digest": "f41f5284a9a9be700d40fbcf37a9f5db90cc379d080629af9178e5d06b094c51",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-72f65344c7341e96",
+      "alias": "comfy-3080-01-moss-ttsd-v1-0-72f653",
+      "old_release_id": "wfr_5665189dad8340509f002885c9a17e34",
+      "new_release_id": "wfr_bd9980f27ca949b8ba0b5434ccb3fa57",
+      "old_digest": "38030dae2790fd6e5c606675c36da5fd63c02ca7f4efa86fd39a1a2a58438bb8",
+      "new_digest": "e53956158f3e28cbc3f912005892615c798696d7ba9d2a17d64570f10971451f",
+      "old_release_preserved": true
+    },
+    {
+      "key": "3080-347a5d3702fb7d97",
+      "alias": "comfy-3080-03-fireredtts2-347a5d",
+      "old_release_id": "wfr_554000a6b44646a3b978dc9233331416",
+      "new_release_id": "wfr_e74ae54a71e04e488e1b2f4b8255167b",
+      "old_digest": "a7dcb21140771337673256d44369839fcb96bc68d9ffc2445499d6a168a9b8c6",
+      "new_digest": "c2dcd1cf6c725ad6ffff7cec6fcf8ce9c10be109c96f68365e40d5012ee36116",
+      "old_release_preserved": true
+    }
+  ],
+  "temporary_test_key_release_count": 213,
+  "customer_keys_modified": false,
+  "cleanup": {
+    "at": 1793757243,
+    "removed_inactive_project_releases": [
+      "linux-20261027.116.2",
+      "linux-20261027.119.1",
+      "linux-20261028.122.1",
+      "linux-20261028.124.1",
+      "linux-20261028.124.2",
+      "linux-20261029.128.1",
+      "linux-20261029.129.1",
+      "linux-20261029.129.2",
+      "linux-20261029.129.3",
+      "linux-20261030.131.1",
+      "linux-20261030.132.2"
+    ],
+    "retained": [
+      "linux-20261030.137.1",
+      "linux-20261104.133.2",
+      "linux-20261104.133.4",
+      "linux-20261104.136.1"
+    ],
+    "bytes_reclaimed": 1841831936,
+    "root_free_bytes": 3536801792,
+    "project_data_or_backups_deleted": false,
+    "studio_or_skill_deleted": false,
+    "cache_or_unrelated_data_deleted": false
+  },
+  "backup": {
+    "at": "2026-11-04T01:39:33.075786+00:00",
+    "file": "control-20261104T013926498388Z.dump",
+    "bytes": 54484117,
+    "sha256": "8e74ccd676d86b8a977108933571fab230859885b5fa4fad8d1cd41867798de7",
+    "archive_list_verified": true,
+    "full_disaster_recovery_verified": false
+  },
+  "private_receipts_sha256": {
+    "native-136-worker-probe.jsonl": "96fc4f7219858d255d7c1607d5ad51a15fcac6cbfd871ec1491e05c614cf064e",
+    "native-136-cloud-promote.log": "876fd1c88ff2fb3108667c3f51cb0ccd7140213482b9d5bc08961a71869d9264",
+    "native-136-inventory-observed.json": "038b1806a9a37238ad363cd509ddfa1be098e93e66581840d4675a26e2bb5b8c",
+    "native-136-cleanup-result.json": "5948f371c46af7d390e1a11fce9d061176e3ffdaca5be95cdf37c02873d26290",
+    "native-136-catalog-revision.log": "3902057aa4517988cc7339685e91b4b018e43d16461e2cba3c9e5934cdc5fb80"
+  },
+  "observer_correction": "The initial observer expected a literal wildcard; the configured credential-compatible unrestricted CORS returns the requesting origin. Rechecked two unrelated arbitrary origins without changing production configuration.",
+  "remaining": [
+    "Individual real-generation approval and ordinary business verification for unfinished candidates",
+    "4090 Worker service switch requires device administrator access",
+    "Complete acceptance and full object-store disaster recovery remain pending"
+  ]
+}
