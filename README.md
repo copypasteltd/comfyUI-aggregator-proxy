@@ -14,6 +14,8 @@ Workflow 1.3 为每个模型公开命名图片、视频、参考声音、GLB 和
 
 [六个三维结果的独立复查](docs/evidence/2026-11-04/catalog-mesh-146-middle-runtime.json) 覆盖 PartCrafter、Hunyuan3D 2.1、Pixal3D 单图/多视图、Trellis2 和 UniForge3D：PartCrafter 实例包含三个网格，顶点色及两种 UV/PBR 变体的实际通道均核对通过。[四张实际输入图](docs/media/catalog-145/README.md) 与上传素材逐字节相同，便于对照输入和输出。
 
+UniTexture 贴图调用还须提供 `prompt_25` 外观描述；三维专页已补齐该必填文本及完整命令。[18 个输入组合与两条文档命令](docs/evidence/2026-11-04/mesh-guide-147-local.json) 通过真实 Skill 解析与请求构造检查，上传使用离线替身，不计作实机生成证明。
+
 图片声明尺寸指最终交付画布；备注按实际冻结链路说明是否使用末端 Lanczos 缩放和居中裁切。Qwen 编辑的修正版本已完成实机验证、普通业务调用和 768×1376 图片下载。[真实图片及下载证明](docs/media/catalog-140/README.md)。[137 · 模型名称与材质说明](docs/137-模型家族与三维导出能力说明.md) 补全 22 个三维/播客型号及 13 个图像型号的具体家族与功能备注，包括 NoctQ v4、Lustify v10 Krea2、WAI Illustrious SDXL v17 和 Qwen Image 2.1；全部 213 份线上 usage 与 47 项相关回归通过。名称更新保留别名和冻结图，待发布项继续逐个验证。
 
 YuE2 自动作谱型号已通过实机试跑和独立业务调用，实际返回 **30 秒、48 kHz、双声道 FLAC**。[可播放样本、实际请求与下载证明](docs/media/catalog-142/README.md) 只传入风格文本，曲谱由工作流内部生成；此前“调用方原创曲谱”的描述已[明确更正](docs/evidence/2026-11-04/music-input-correction-144.json)，原证据和音频字节保留。另一 YuE2 型号支持传入 ABC 曲谱。

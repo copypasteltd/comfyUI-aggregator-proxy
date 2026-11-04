@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 147 · Complete mesh calling examples / 补齐三维调用示例
+
+- Correct the mesh guide's UniTexture texturing example: a source GLB and reference image also require `input.texts.prompt_25` for the generated appearance. Preserve the existing online contract and make the required text visible in the table and full Skill command.
+- Check all 18 exact candidate aliases, 18 input combinations and two copied commands with the actual Skill parser/request builder and current schemas. Verify image/model upload kinds and exact media/text roles using offline upload stubs. Record the initial omitted-text failure and correction; do not promote pending models or claim new hardware execution.
+
 ## 2026-11-04 · 146 · Six mesh outputs and actual inputs / 六个三维结果与实际输入
 
 - Six new mesh models pass ordinary business discovery, independent validation/generation jobs, complete SHA-verified downloads and bounded GLB inspection. The latest snapshot records 27 new business-verified models: 12 image, nine audio and six mesh; 12 mesh candidates continue trials.
