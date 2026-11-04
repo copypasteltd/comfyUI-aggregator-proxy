@@ -8,6 +8,8 @@ import subprocess
 import sys
 import threading
 from collections.abc import Iterator
+from email.parser import BytesParser
+from email.policy import default
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
@@ -34,6 +36,14 @@ def server() -> Iterator[tuple[str, dict[str, Any]]]:
 
         def do_POST(self) -> None:
             data = self.rfile.read(int(self.headers["Content-Length"]))
+            if self.path == "/v1/assets":
+                message = BytesParser(policy=default).parsebytes(("Content-Type: " + self.headers["Content-Type"] + "\r\nMIME-Version: 1.0\r\n\r\n").encode() + data)
+                parts = list(message.iter_parts())
+                state["upload"] = {"kind": parts[0].get_payload(decode=True).decode(), "bytes": parts[1].get_payload(decode=True), "filename": parts[1].get_filename(), "mime": parts[1].get_content_type(), "transfer_encoding": self.headers.get("Transfer-Encoding"), "token": self.headers.get("Idempotency-Key")}
+                self.send_response(201)
+                self.end_headers()
+                self.wfile.write(json.dumps({"id": "asset_" + "c" * 32}).encode())
+                return
             state["posts"].append((self.path, self.headers.get("Idempotency-Key"), json.loads(data)))
             if state["lost"]:
                 state["lost"] = False
@@ -217,3 +227,57 @@ def test_single_file_runs_independently_and_downloads_a_verified_glb(server: Any
     assert Path(value["downloads"][0]["path"]).suffix == ".glb"
     assert Path(value["downloads"][0]["path"]).read_bytes() == PAYLOAD
     assert not state["posts"]
+
+
+def test_typed_audio_upload_streams_multipart_with_explicit_kind_and_stable_token(server: Any, audio_wav: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    base, state = server
+    expected = audio_wav.read_bytes()
+
+    def forbid_full_read(path: Path) -> bytes:
+        raise AssertionError("The upload client must stream files")
+
+    monkeypatch.setattr(Path, "read_bytes", forbid_full_read)
+    result = client.Api(base, "synthetic-key").upload(audio_wav, kind="audio", token="audio-retry-token")
+    assert result["id"].startswith("asset_")
+    assert state["upload"] == {"kind": "audio", "bytes": expected, "filename": "input.wav", "mime": "audio/wav", "transfer_encoding": None, "token": "audio-retry-token"}
+    with pytest.raises(client.ClientError, match="signature"):
+        client.Api(base, "synthetic-key").upload(audio_wav)
+
+
+def test_named_inputs_keep_video_audio_and_transcripts_in_their_semantic_slots(tmp_path: Path) -> None:
+    usage = {"example_request": {"model": "typed", "task_type": "references_to_video", "input": {"media": [{"slot": "source_video", "asset_id": "placeholder"}], "texts": {"speaker_1_transcript": "placeholder"}}, "parameters": {"quality": "standard", "seconds": 5}}, "request_schema": {"properties": {"input": {"properties": {"media": {}, "texts": {}, "context": {}}}, "parameters": {"properties": {"quality": {"enum": ["standard"]}, "seconds": {"enum": [5]}}}}}, "references": {"exact_reference_count": 0}, "presets": [{"quality": "standard", "seconds": 5}], "context": {"required": True, "scope": "same_api_key"}, "input_slots": [{"name": "source_video", "kind": "video", "required": True, "max_bytes": 100}, {"name": "speaker_1", "kind": "audio", "required": True, "max_bytes": 100}], "text_slots": [{"name": "speaker_1_transcript", "required": True, "max_length": 100}]}
+
+    class Fake:
+        uploads: list[tuple[str, str]] = []
+
+        def describe(self, alias: str) -> dict[str, Any]:
+            return {"usage": usage}
+
+        def upload(self, path: str, *, kind: str) -> dict[str, str]:
+            self.uploads.append((path, kind))
+            return {"id": "asset_" + kind + "_synthetic"}
+
+    video, audio, transcript = tmp_path / "video.mp4", tmp_path / "voice.wav", tmp_path / "voice.txt"
+    video.write_bytes(b"synthetic typed file")
+    audio.write_bytes(b"synthetic typed file")
+    transcript.write_text("These exact words were spoken.", "utf-8")
+    args = client.parser().parse_args(["generate", "--model", "typed", "--media", "source_video=" + str(video), "--media", "speaker_1=" + str(audio), "--text-file", "speaker_1_transcript=" + str(transcript), "--parent-job", JOB])
+    fake = Fake()
+    body = client.generation_request(fake, args)
+    assert body["input"] == {"media": [{"slot": "source_video", "asset_id": "asset_video_synthetic"}, {"slot": "speaker_1", "asset_id": "asset_audio_synthetic"}], "texts": {"speaker_1_transcript": "These exact words were spoken."}, "context": {"job_id": JOB}}
+    assert fake.uploads == [(str(video), "video"), (str(audio), "audio")]
+    assert usage["example_request"]["input"]["media"][0]["asset_id"] == "placeholder"
+    args.parent_job = None
+    with pytest.raises(client.ClientError, match="requires --parent-job"):
+        client.generation_request(fake, args)
+    assert len(fake.uploads) == 2
+    args.parent_job = JOB
+    args.text = ["speaker_1_transcript=duplicate"]
+    with pytest.raises(client.ClientError, match="both inline"):
+        client.generation_request(fake, args)
+
+
+@pytest.mark.parametrize("values", [["not-a-slot=value"], ["source_video=a", "source_video=b"], ["speaker_1="]])
+def test_invalid_named_input_arguments_are_rejected(values: list[str]) -> None:
+    with pytest.raises(client.ClientError, match="NAME=VALUE"):
+        client.assignments(values)

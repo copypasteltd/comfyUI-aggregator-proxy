@@ -19,7 +19,7 @@ For `image_to_3d`, use the dedicated request, quota and download guidance below.
 
 ## Image-to-3D compatibility
 
-The example deployment's cloud release 129.3 introduced corrected mesh-only admission and canonical GLB attachment filenames, and validates POSITION counts and hierarchies outside the default scene. Skill version 1.2.0 retains those verified server behaviors; installing a Skill does not upgrade another deployment's server or Worker. Discover that deployment's approved model first.
+The example deployment's cloud release 129.3 introduced corrected mesh-only admission and canonical GLB attachment filenames, and validates POSITION counts and hierarchies outside the default scene. Skill version 1.3.0 retains those server behaviors and adds declared typed media/text inputs; installing a Skill does not upgrade another deployment's server or Worker. Discover that deployment's approved model first. The source-image-only example below describes the legacy profile; newer multiview, refinement or texturing variants declare their own named inputs in live usage.
 
 For a complete source-image upload, job and result flow, the minimal scope set is `models:read`, `assets:upload`, `jobs:create`, `jobs:read`, `meshes:create`, `artifacts:read`, `content:read` and `content:download`. The `capabilities` command additionally uses `capabilities:read`. Enable the selected alias/release/channel/task in the Key's policy. Set a nonzero `daily_mesh_count` at Tenant, Project and Key levels; old policies default to zero. Do not add `images:create` to work around an outdated server's mesh-scope defect. Visibility alone is not admission or quota approval.
 
@@ -57,7 +57,7 @@ The illustrated size/task type is not a promise that a particular model supports
 
 ## Reference assets
 
-POST multipart/form-data to `/v1/assets`, field **file**. Only static PNG/JPEG/WebP, at most 20 MiB and 25 million pixels. Use the returned `id` with the same Key; do not manually substitute local paths or URLs.
+POST multipart/form-data to `/v1/assets` with exactly one **file** and optional **kind** (`image`, `video`, `audio`, `model`; default `image`). Image uploads accept static PNG/JPEG/WebP, at most 20 MiB and 25 million pixels. Typed video accepts MP4/WebM up to 512 MiB/120 seconds, audio up to 256 MiB/600 seconds, and model accepts self-contained static GLB up to 512 MiB. The server decodes actual contents instead of trusting the extension. The client streams uploads with a known length. A stable `Idempotency-Key` can recover the same upload for 24 hours. Use the returned `id` with the same Key; local paths and URLs are not asset IDs.
 
 An image edit supplies `input.source_image: {"asset_id": "asset_..."}`. Supply a mask only if the live model schema permits it. Reference image/video tasks supply an ordered array:
 
@@ -71,7 +71,19 @@ An image edit supplies `input.source_image: {"asset_id": "asset_..."}`. Supply a
 }
 ```
 
-Use exactly the count in `usage.references.exact_reference_count`. For a video model with one reference the role must be **first_frame**. With multiple references, roles are semantic labels; array positions determine frozen Workflow slots. Do not pass `weight` unless that exact slot advertises support; allowed values are 0–2. Current reference contracts accept images; they do not advertise arbitrary video/audio reference files. Workflow audio generation uses text in `input.prompt`; special score/lyrics formats are documented by the publisher's example.
+Use exactly the count in `usage.references.exact_reference_count`. For a legacy video model with one reference the role must be **first_frame**. With multiple legacy references, array positions determine frozen Workflow slots. Do not pass `weight` unless that exact slot advertises support; allowed values are 0–2. The legacy `references` array accepts images only. New typed inputs use `input_slots` and `text_slots` as described below. Some legacy audio models consume `input.prompt`; new versions expose separate dialogue, score, style and transcript fields.
+
+## Named media, text, audio policy and continuation
+
+Workflow 1.3 advertises each `usage.input_slots` entry with its name, kind, semantic role, required flag, MIME types and byte limit. Upload with the same Key and correct kind, then submit `input.media: [{"slot":"source_video","asset_id":"asset_..."}]`. A model may require first/last images, multiple views of one object, a speaker reference, a source video or a coarse GLB. Provide the exact roles; do not substitute a local path, an absolute device path or a network URL.
+
+Named text uses `input.texts: {"dialogue":"[S1] ...\n[S2] ...","speaker_1_transcript":"..."}`. Required names come from `usage.text_slots`. Reference transcripts must match the corresponding uploaded recordings; dialogue is the newly generated speech. Music variants can declare separate `style`, `lyrics` and `abc` notation fields. Up to 16 media slots and 16 text slots are accepted; total named text is at most 32,000 characters. Optional fields may be omitted; unknown, duplicate or missing required slots fail before admission.
+
+The helper exposes `--media SLOT=FILE`, `--text NAME=TEXT` and `--text-file NAME=FILE`. It uploads using the advertised kind, supplies returned IDs, and preserves semantic slot names. Omit `--prompt` when the schema has no prompt field. For an explicit request, upload each file with `upload FILE --kind KIND`, edit the live example and use `submit request.json`.
+
+`usage.output.audio_policy` states the frozen video soundtrack behavior: `generated` creates audio, `source_video` retains the selected source video's audio, `reference_audio` uses the declared audio reference, and `silent` returns no audio track. This is part of the model's contract and is not an arbitrary request switch. Conditioning on a voice does not promise lossless source audio.
+
+A continuation model declares `usage.context.required=true` and a compatibility digest. Pass `input.context: {"job_id":"job_..."}` or `--parent-job JOB_ID`. The parent must be successful, have produced the matching owned context, and belong to the same Tenant, Project and API Key. Context normally expires after eight hours; an admitted unfinished child protects its referenced context from premature cleanup. Do not share context files across Keys or accept caller-provided raw context paths.
 
 ## Idempotency, timeouts and download safety
 

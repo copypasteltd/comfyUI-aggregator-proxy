@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-04T04:40:16+08:00",
+  "checked_at": "2026-11-04T08:44:40+08:00",
   "baseline": "v0.4",
   "scope": "Offline documentation syntax, links, schemas/fixtures, state graph, endpoint metadata and traceability only; no service, auth, database, browser, GPU, gateway or real node runtime tested.",
   "project": "E:\\dev\\sandbox\\生图生视API封装",
@@ -10,19 +10,19 @@
   },
   "checks": {
     "markdown": {
-      "documents": 151,
+      "documents": 157,
       "instruction_files": 1,
       "fenced_blocks": 80,
       "json_examples": 25,
       "yaml_examples": 1,
-      "local_links_checked": 2923
+      "local_links_checked": 2976
     },
     "contracts": {
-      "json_files": 76,
-      "schemas": 67,
-      "fixtures": 1045,
-      "positive_fixtures": 250,
-      "negative_fixtures": 795,
+      "json_files": 80,
+      "schemas": 69,
+      "fixtures": 1058,
+      "positive_fixtures": 256,
+      "negative_fixtures": 802,
       "capabilities_covered": [
         "image_to_3d",
         "image_to_image",
@@ -40,11 +40,11 @@
       "guards": 24
     },
     "endpoints": {
-      "total": 195,
+      "total": 197,
       "by_identity": {
-        "service": 27,
+        "service": 28,
         "admin_login": 1,
-        "admin": 125,
+        "admin": 126,
         "worker": 12,
         "gateway": 28,
         "monitoring": 2
@@ -72,7 +72,7 @@
       },
       "named_test_references": 185,
       "baseline_python_cases": 3593,
-      "reports": 39,
+      "reports": 46,
       "current_source_files": 194,
       "full_acceptance": "pending"
     },
@@ -369,6 +369,24 @@
       "bytes": 18794,
       "lines": 170,
       "sha256": "c0607eed13e4d43e10409a142f9b7056ef5edb76014d94f5b8eaaebc502a23c1"
+    },
+    {
+      "file": "docs/133-全量工作流接入与多模态输入.md",
+      "bytes": 10774,
+      "lines": 68,
+      "sha256": "cf10e01b75d289ea4ab50e7e4287353bcd404f1b8cb4c82c47d34d3d76502553"
+    },
+    {
+      "file": "docs/134-新增模型目录与调用说明.md",
+      "bytes": 50291,
+      "lines": 233,
+      "sha256": "6a270913650c79299a74a53cb3666a3c92d7f3bf685a92e472dd7f760527af9c"
+    },
+    {
+      "file": "docs/135-全量接入与线上版本兼容升级.md",
+      "bytes": 6697,
+      "lines": 45,
+      "sha256": "d4efe2abb8d602d67f365dca25ce0729904742ba5af2074734c8e85018465588"
     },
     {
       "file": "docs/14-测试策略与质量门禁.md",
@@ -816,9 +834,9 @@
     },
     {
       "file": "docs/88-需求实现与分层证据追踪.md",
-      "bytes": 77570,
+      "bytes": 80717,
       "lines": 267,
-      "sha256": "adeeb03d9cfad0cb93db59ed54db97c3943dce738e837f487ec1f4212e87e539"
+      "sha256": "30e524065b4dc574865dbef4c52de20c374a0f48d81c5b7c1dd7183e3940a126"
     },
     {
       "file": "docs/89-审计分页投影上限与版本化复验.md",
@@ -923,6 +941,18 @@
       "sha256": "facfac6abe1fe68f488f50a995abea7da85f452c6f6cb4dcb22d1b9416e2f65d"
     },
     {
+      "file": "docs/contracts/admin-device-pool.schema.json",
+      "bytes": 1824,
+      "lines": 86,
+      "sha256": "a4a0c031d437cc0693229e786624a2e986acd468dcdf5602bc98f0685f6dc394"
+    },
+    {
+      "file": "docs/contracts/admin-device-routing.schema.json",
+      "bytes": 666,
+      "lines": 28,
+      "sha256": "bef9984def3a7f78ec43ba92f57b0be5328d6f014f62b3eb78fdbb03ce179a82"
+    },
+    {
       "file": "docs/contracts/admin-job-cancellations.schema.json",
       "bytes": 670,
       "lines": 30,
@@ -954,9 +984,9 @@
     },
     {
       "file": "docs/contracts/admin-model-mapping-options.schema.json",
-      "bytes": 14696,
-      "lines": 508,
-      "sha256": "b097e897356246b71f1d7e9d93adfbcc372a5dc20a3c3a9bfe214b83faa62cb3"
+      "bytes": 14953,
+      "lines": 516,
+      "sha256": "4d59cb5cf92965492e0b72c6f82570239bb5fa10a539dda6b2c28add65ed5f09"
     },
     {
       "file": "docs/contracts/admin-model-mapping-query.schema.json",
@@ -1116,9 +1146,9 @@
     },
     {
       "file": "docs/contracts/development-evidence.json",
-      "bytes": 194955,
-      "lines": 6433,
-      "sha256": "e84982dd13ea54dbb596dd54d77c84bae9b52c97c5c2d6971178603ffd22cee4"
+      "bytes": 203902,
+      "lines": 6769,
+      "sha256": "afebc4a355930a7002021143d676523225d07d97997bce6272962f2abb9ff42f"
     },
     {
       "file": "docs/contracts/development-traceability.json",
@@ -1134,15 +1164,15 @@
     },
     {
       "file": "docs/contracts/endpoint-catalog.json",
-      "bytes": 113191,
-      "lines": 3675,
-      "sha256": "e673eb7e8fbadd3c405bfa8886d8235de040ab75d145d1be92799e87fd721ef0"
+      "bytes": 114313,
+      "lines": 3713,
+      "sha256": "7dfba692bf387ee6e2c9de57235e7c2c86c68e75ab1033e177b8e6a66c027a35"
     },
     {
       "file": "docs/contracts/fixtures.json",
-      "bytes": 1519130,
-      "lines": 46486,
-      "sha256": "e7b093e8bb53103b038dc43c9a0ed085175951297284738e56fa04e8c8cfd228"
+      "bytes": 1525099,
+      "lines": 46723,
+      "sha256": "5c78dcb01e1b8f5d75794fee948e479552799f1d4ed191c7c03386855a4f5b2f"
     },
     {
       "file": "docs/contracts/gateway-catalog-configuration.schema.json",
@@ -1182,9 +1212,9 @@
     },
     {
       "file": "docs/contracts/job-create.schema.json",
-      "bytes": 10548,
-      "lines": 499,
-      "sha256": "c66b3c310de2452052f5a3bb5802b4870c20881ab4ce99a5846764c544fa14b5"
+      "bytes": 13186,
+      "lines": 613,
+      "sha256": "03daa80fe9e338429b10a25f3a18ce0839bdb7a07176dcba3986185ff9c3ebea"
     },
     {
       "file": "docs/contracts/job-retry.schema.json",
@@ -1218,15 +1248,15 @@
     },
     {
       "file": "docs/contracts/key-policy.schema.json",
-      "bytes": 8680,
+      "bytes": 8681,
       "lines": 399,
-      "sha256": "eb6d466b02b148696540e32a364821d50658ee8da0a63a1477d1f9e9cea45577"
+      "sha256": "23eb24024d8c2f096a70f6b748e2c778a5b795eff49ddc823fbca9e49e375e53"
     },
     {
       "file": "docs/contracts/model-discovery.schema.json",
-      "bytes": 19479,
-      "lines": 734,
-      "sha256": "4b88813a4d8524e8b57acb83b423611e1dd421806f027389960234aee6672682"
+      "bytes": 26178,
+      "lines": 1041,
+      "sha256": "3c6735b7b8abbbc107edc5fabcb3c3b50bc5f2e6dfadef118459986453d90119"
     },
     {
       "file": "docs/contracts/model-file-receipt.schema.json",
@@ -1236,9 +1266,9 @@
     },
     {
       "file": "docs/contracts/model-usage.schema.json",
-      "bytes": 9351,
-      "lines": 396,
-      "sha256": "d4c7f15bf4d83300fb76abce53088f30569cf4f5c42cd73536fd91f6a2be25f5"
+      "bytes": 14598,
+      "lines": 623,
+      "sha256": "5743fd580124112ac3cd08938cb2a445f38f1852b7c1cdba9195feb37dbe7823"
     },
     {
       "file": "docs/contracts/monitoring-configuration.schema.json",
@@ -1299,6 +1329,18 @@
       "bytes": 1714,
       "lines": 74,
       "sha256": "8a28b6719c79a069b44f2003b9bd04d1577f2f2e36d3d2eaf1b5ff2e87f51586"
+    },
+    {
+      "file": "docs/contracts/studio-submission-lookup.json",
+      "bytes": 2065,
+      "lines": 25,
+      "sha256": "1052219baa787609b1f991e378ac5a2b4c2bf08e7cea521f66b56db75591ec56"
+    },
+    {
+      "file": "docs/contracts/studio-submit-policy.json",
+      "bytes": 965,
+      "lines": 18,
+      "sha256": "f721257e7404049fafbefae11def0ee036abd2854ff391d36bc209a0075cc256"
     },
     {
       "file": "docs/contracts/worker-capacity.schema.json",
@@ -1421,6 +1463,18 @@
       "sha256": "766565379cfbf5f862071624dd2f7a1b87d29246341c1bb7654f6aed7989ec6b"
     },
     {
+      "file": "docs/media/typed-inputs-133/README.md",
+      "bytes": 1921,
+      "lines": 19,
+      "sha256": "138d20afc43f7af43bd2081e165dc38d8a0a81aba8ed23b7076d6a47be4a5e39"
+    },
+    {
+      "file": "docs/media/typed-inputs-135/README.md",
+      "bytes": 2200,
+      "lines": 20,
+      "sha256": "f9692ed859f69cd40ae5443f9d3dfce0a9850632caa5173fc68daf732df28ece"
+    },
+    {
       "file": "docs/README.en.md",
       "bytes": 38398,
       "lines": 227,
@@ -1428,9 +1482,9 @@
     },
     {
       "file": "docs/README.md",
-      "bytes": 50234,
-      "lines": 269,
-      "sha256": "f494c86a7e303845813883d6f0b281c3473f4a54565829a1408d92e8fd39824d"
+      "bytes": 50865,
+      "lines": 271,
+      "sha256": "ebe72ffb61e840ee2dbb642b0b8f3c116c4b24017e5b15aed58a572aedfb6800"
     },
     {
       "file": "docs/releases/media-gen-skill/1.1.0.md",
@@ -1449,6 +1503,12 @@
       "bytes": 2565,
       "lines": 15,
       "sha256": "6fcfe447340bd502bd8379991ec010889a89dc9ba8cf5208888aa9d7b2c3003c"
+    },
+    {
+      "file": "docs/releases/media-gen-skill/1.3.0.md",
+      "bytes": 2417,
+      "lines": 13,
+      "sha256": "baff2464b26736f8cf5ce90a9c95a2719b3d45450d9c828e33a4437ad5c5e08a"
     },
     {
       "file": "docs/tools/development_evidence.py",

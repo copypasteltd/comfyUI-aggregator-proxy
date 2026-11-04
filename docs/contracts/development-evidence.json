@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-04/development-trace-baselines-137.json",
-    "sha256": "8f4f4fa2001a0eae3fd2197975bc8c99c1a898706795635f2e200c3c6fd97794"
+    "path": "docs/evidence/2026-11-04/development-trace-baselines-138.json",
+    "sha256": "3ac611f953d96df5504ce155b2144914f20069e8567880f3aedf5273d5c313ee"
   },
   "requirements": [
     {
@@ -816,7 +816,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "compat135"
+          "baseline": "skill138"
         }
       ],
       "tests": [
@@ -938,19 +938,19 @@
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_model3d_client_uses_image_only_and_declared_parameters",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "skill138"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_model3d_download_uses_canonical_extension",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "skill138"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_single_file_runs_independently_and_downloads_a_verified_glb",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "skill138"
         }
       ],
       "evidence": [
@@ -965,7 +965,8 @@
         "browser133",
         "contract133",
         "compat135",
-        "browser135"
+        "browser135",
+        "skill138"
       ],
       "remaining_backlog": [
         "20",
@@ -1030,7 +1031,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "compat135"
+          "baseline": "skill138"
         }
       ],
       "tests": [
@@ -1055,7 +1056,7 @@
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
-          "baseline": "typed133",
+          "baseline": "skill138",
           "language": "python"
         }
       ],
@@ -1073,7 +1074,8 @@
         "single131",
         "typed133",
         "contract133",
-        "compat135"
+        "compat135",
+        "skill138"
       ],
       "remaining_backlog": [
         "30",
