@@ -233,6 +233,11 @@ def public_documentation(item: dict, manifest: dict) -> dict:
     notes.append("源工作流 / Source workflow: " + title)
     if specification:
         notes.append("冻结输出规格 / Frozen output specification: " + specification)
+    if kind == "image":
+        notes.append(
+            "声明尺寸指最终交付：末端使用 Lanczos 缩放与居中裁切；上游原生采样尺寸可能跟随参考图。"
+            "The declared size is the delivered canvas: Lanczos resize and center crop are applied at output; native sampling size may follow the reference."
+        )
     if manifest.get("input_slots"):
         notes.append(
             "素材槽位 / Media slots: "

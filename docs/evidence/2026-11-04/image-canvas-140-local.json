@@ -1,0 +1,37 @@
+{
+  "format_version": 1,
+  "at": "2026-11-04T02:16:25.201041+00:00",
+  "passed": false,
+  "scope": "Image delivery canvas despite unused latent nodes; idempotent scale reuse and source-node collision protection; bilingual delivery notes and package/native dependency preservation. No GPU acceptance.",
+  "source_revision": "50b21da2c7a23e3c128d325c1c8ad083fedaff33",
+  "sources_unchanged": true,
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "python": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/scripts/workflow_catalog_freeze.py": "8d710f050bc82fb330adb32a0753a03f2531ad8f1c6e2cbee4d8d6a5769b4f27",
+    "app/scripts/workflow_catalog_metadata.py": "5d2e97002b70b049e1cd521e9aaf84cd6f97830e902d522ec62e92edddb0b78d",
+    "app/tests/unit/test_catalog_delivery_contracts.py": "b2ade195b6e4f7540771361c54a9c9f2fce01470b08a885e6468d877189640d1"
+  },
+  "python_tests": [
+    {
+      "path": "app/.py",
+      "symbol": "tests.unit.test_catalog_delivery_contracts",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "3b389592b62ea28a0ec25fd5f1e62ba8f0adf608ef5075eea88f263c31f8619a",
+  "python_log_sha256": "721873d10bdcfdcd1e1ed5badb10701d1339f6e1956c13f7cae10e61f4b4e584",
+  "seconds": 2.511,
+  "files_selected": [
+    "tests/unit/test_catalog_delivery_contracts.py",
+    "tests/unit/test_workflow_package.py",
+    "tests/unit/test_native_catalog.py"
+  ]
+}

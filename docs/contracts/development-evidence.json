@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-04/development-trace-baselines-139.json",
-    "sha256": "649eae9f45c806191161c9bff4245b8303a585b78dd38b8edbea8127861bc55d"
+    "path": "docs/evidence/2026-11-04/development-trace-baselines-140.json",
+    "sha256": "8ab46b135131861f39fcdd4b6736233230f37adc2529f2681f6a53e65ff87bad"
   },
   "requirements": [
     {
@@ -27,7 +27,7 @@
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/output_copy.py",
@@ -36,6 +36,18 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_canvas.py",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_freeze.py",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_metadata.py",
+          "baseline": "canvas140"
         }
       ],
       "tests": [
@@ -49,7 +61,7 @@
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "canvas140"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
@@ -104,6 +116,30 @@
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
           "baseline": "typed133"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_unused_latent_dimensions_do_not_bypass_image_delivery_canvas",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_existing_delivery_canvas_is_reused_without_self_cycle",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_image_delivery_preserves_colliding_source_node",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_image_usage_discloses_delivery_resize_in_both_languages",
+          "language": "python",
+          "baseline": "canvas140"
         }
       ],
       "evidence": [
@@ -120,7 +156,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "canvas140"
       ],
       "remaining_backlog": [
         "18",
@@ -145,7 +182,7 @@
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -158,6 +195,18 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_canvas.py",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_freeze.py",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_metadata.py",
+          "baseline": "canvas140"
         }
       ],
       "tests": [
@@ -171,7 +220,7 @@
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "canvas140"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
@@ -226,6 +275,30 @@
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
           "baseline": "typed133"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_unused_latent_dimensions_do_not_bypass_image_delivery_canvas",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_existing_delivery_canvas_is_reused_without_self_cycle",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_image_delivery_preserves_colliding_source_node",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_image_usage_discloses_delivery_resize_in_both_languages",
+          "language": "python",
+          "baseline": "canvas140"
         }
       ],
       "evidence": [
@@ -240,7 +313,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "canvas140"
       ],
       "remaining_backlog": [
         "19",
@@ -265,7 +339,7 @@
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -278,6 +352,18 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_canvas.py",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_freeze.py",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_catalog_metadata.py",
+          "baseline": "canvas140"
         }
       ],
       "tests": [
@@ -297,7 +383,7 @@
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "canvas140"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
@@ -352,6 +438,30 @@
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
           "baseline": "typed133"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_unused_latent_dimensions_do_not_bypass_image_delivery_canvas",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_existing_delivery_canvas_is_reused_without_self_cycle",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_image_delivery_preserves_colliding_source_node",
+          "language": "python",
+          "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_catalog_delivery_contracts.py",
+          "symbol": "test_image_usage_discloses_delivery_resize_in_both_languages",
+          "language": "python",
+          "baseline": "canvas140"
         }
       ],
       "evidence": [
@@ -366,7 +476,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "canvas140"
       ],
       "remaining_backlog": [
         "20",
@@ -395,7 +506,7 @@
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -421,7 +532,7 @@
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "canvas140"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
@@ -492,7 +603,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "canvas140"
       ],
       "remaining_backlog": [
         "21",
@@ -517,7 +629,7 @@
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/runtime.py",
@@ -549,7 +661,7 @@
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "canvas140"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
@@ -618,7 +730,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "canvas140"
       ],
       "remaining_backlog": [
         "22",
@@ -647,7 +760,7 @@
         },
         {
           "path": "app/scripts/workflow_package.py",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/packages/domain/src/generation_domain/workflows.py",
@@ -679,7 +792,7 @@
           "path": "app/tests/unit/test_workflow_package.py",
           "symbol": "test_packages_round_trip_through_existing_import_and_execution_compiler",
           "language": "python",
-          "baseline": "typed133"
+          "baseline": "canvas140"
         },
         {
           "path": "app/tests/unit/test_workflow_scalar_targets.py",
@@ -756,7 +869,8 @@
         "contract133",
         "compat135",
         "browser135",
-        "native139"
+        "native139",
+        "canvas140"
       ],
       "remaining_backlog": [
         "23",
@@ -2399,7 +2513,7 @@
         },
         {
           "path": "app/scripts/workflow_catalog_native.py",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/apps/windows_worker/src/windows_worker/configuration.py",
@@ -2423,13 +2537,13 @@
           "path": "app/tests/unit/test_native_catalog.py",
           "symbol": "test_native_catalog_keeps_model_identity_and_source_draft_immutable",
           "language": "python",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/tests/unit/test_native_catalog.py",
           "symbol": "test_native_catalog_refuses_incomplete_or_previously_frozen_dependencies",
           "language": "python",
-          "baseline": "native139"
+          "baseline": "canvas140"
         },
         {
           "path": "app/tests/unit/test_native_dependencies.py",
@@ -2445,7 +2559,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "canvas140"
       ],
       "remaining_backlog": [
         "14",

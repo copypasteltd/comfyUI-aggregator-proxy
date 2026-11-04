@@ -16,6 +16,7 @@ from generation_contracts.workflows import WorkflowManifest
 from generation_domain.errors import DomainError
 from generation_domain.values import fingerprint
 from generation_domain.workflows import validate_manifest
+from workflow_catalog_canvas import freeze_image_size
 from workflow_catalog_metadata import describe_media_slots, public_documentation
 
 parser = argparse.ArgumentParser(description=__doc__)
@@ -136,34 +137,7 @@ def specs(item, graph):
                 final["audio"] = ["rc_audio_trim", 0]
         return preset
     if kind == "image":
-        choices = [
-            node["inputs"]
-            for node in graph.values()
-            if node["class_type"] in ["EmptyLatentImage", "EmptySD3LatentImage", "ImageScale"]
-        ]
-        choices = [values for values in choices if "width" in values and "height" in values]
-        if choices:
-            try:
-                w, h = (int(scalar(graph, choices[-1][name])) for name in ["width", "height"])
-            except ValueError:
-                w, h = 1024, 1024
-        else:
-            w, h = 1024, 1024
-        # Freeze a deterministic delivery size for graphs whose latent size follows input.
-        final = graph[item["final_node_id"]]["inputs"]
-        source = final.get("images")
-        if not choices or any(n["class_type"] == "QwenRegionSelect" for n in graph.values()):
-            graph["rc_delivery_size"] = {
-                "class_type": "ImageScale",
-                "inputs": {
-                    "image": source,
-                    "upscale_method": "lanczos",
-                    "width": w,
-                    "height": h,
-                    "crop": "center",
-                },
-            }
-            final["images"] = ["rc_delivery_size", 0]
+        w, h = freeze_image_size(graph, item["final_node_id"], scalar)
         preset["size"] = f"{w}x{h}"
         return preset
     timelines = [n for n in graph.values() if n["class_type"] == "easy multiTrackEditor"]

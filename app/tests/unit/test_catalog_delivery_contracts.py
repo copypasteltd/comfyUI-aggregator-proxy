@@ -3,9 +3,11 @@ from __future__ import annotations
 from copy import deepcopy
 
 import pytest
+from generation_contracts.model_usage import ModelDocumentation
 from generation_contracts.validation import JobCreate
 
-from scripts.workflow_catalog_metadata import describe_media_slots
+from scripts.workflow_catalog_canvas import ensure_image_delivery, freeze_image_size
+from scripts.workflow_catalog_metadata import describe_media_slots, public_documentation
 
 
 @pytest.mark.parametrize("seconds", [0.001, 5.167, 14.792, 34.157, 119.999])
@@ -53,3 +55,55 @@ def test_roles_follow_transforms_and_keep_shared_anchors_and_bindings() -> None:
     assert [binding["source"] for binding in item["bindings"]] == ["media:first_last_frame", "media:speaker_2"]
     assert item["workflow_api"] == graph
     assert "transcript" in item["input_slots"][1]["description"]
+
+
+def test_unused_latent_dimensions_do_not_bypass_image_delivery_canvas() -> None:
+    graph = {
+        "reference": {"class_type": "LoadImage", "inputs": {"image": "synthetic.png"}},
+        "encode": {"class_type": "TextEncodeQwenImage21", "inputs": {"images.image_1": ["reference", 0]}},
+        "unused": {"class_type": "EmptyLatentImage", "inputs": {"width": 768, "height": 1376}},
+        "decode": {"class_type": "VAEDecode", "inputs": {"samples": ["encode", 2]}},
+        "save": {"class_type": "SaveImage", "inputs": {"images": ["decode", 0]}},
+    }
+    width, height = freeze_image_size(graph, "save", lambda _graph, value: value)
+    assert (width, height) == (768, 1376)
+    delivery = graph[graph["save"]["inputs"]["images"][0]]
+    assert delivery["class_type"] == "ImageScale"
+    assert (delivery["inputs"]["width"], delivery["inputs"]["height"]) == (768, 1376)
+    assert delivery["inputs"]["image"] == ["decode", 0]
+
+
+def test_existing_delivery_canvas_is_reused_without_self_cycle() -> None:
+    graph = {
+        "source": {"class_type": "LoadImage", "inputs": {"image": "synthetic.png"}},
+        "resize": {"class_type": "ImageScale", "inputs": {"image": ["source", 0], "width": 512, "height": 512, "crop": "center", "upscale_method": "lanczos"}},
+        "save": {"class_type": "SaveImage", "inputs": {"images": ["resize", 0]}},
+    }
+    before = deepcopy(graph)
+    ensure_image_delivery(graph, "save", 512, 512)
+    ensure_image_delivery(graph, "save", 512, 512)
+    assert graph == before
+
+
+def test_image_delivery_preserves_colliding_source_node() -> None:
+    graph = {
+        "source": {"class_type": "LoadImage", "inputs": {"image": "synthetic.png"}},
+        "rc_delivery_size": {"class_type": "SyntheticSourceNode", "inputs": {}},
+        "save": {"class_type": "SaveImage", "inputs": {"images": ["source", 0]}},
+    }
+    before = deepcopy(graph)
+    with pytest.raises(ValueError, match="image_delivery_node_collision"):
+        ensure_image_delivery(graph, "save", 512, 512)
+    assert graph == before
+
+
+def test_image_usage_discloses_delivery_resize_in_both_languages() -> None:
+    manifest = {
+        "workflow_api": {"1": {"class_type": "QwenImage21FastSampler", "inputs": {}}},
+        "task_type": "image_to_image", "presets": [{"size": "768x1376"}],
+        "bindings": [{"source": "prompt"}], "output": {},
+    }
+    documentation = ModelDocumentation.model_validate(public_documentation(
+        {"source": "synthetic/qwen.api.json", "output_kind": "image", "gpu": "3080"}, manifest,
+    ))
+    assert any("交付" in note and "Lanczos" in note and "delivered canvas" in note for note in documentation.notes)

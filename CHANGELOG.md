@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-04 · 140 · Image delivery canvas / 图像交付尺寸
+
+- A Qwen editing workflow produced a valid 1024×1024 PNG while its package declared 768×1376 from an unused latent node. Freeze a final delivery canvas for image packages and disclose Lanczos resizing/center cropping in bilingual notes. Reuse an identical output scale without self-cycles and preserve colliding source nodes.
+- Create a new version of the affected package, retaining its previous release, failed collection and operation intents. Update only its temporary test-Key release grant. Fresh hardware validation and publication pass; ordinary business verification continues without a backend-service replacement. The catalog snapshot records nine newly published models and eight verified business downloads.
+- All 46 scoped checks and 213 corrected-catalog compilation checks pass. A first test collection used an unsafe CLI import; extract the canvas helper into an import-safe module. Preserve the first private preparation/empty-directory failure and the corrected run.
+- Read actual Admin usage for all 213 drafts and confirm exact documentation/schema/example/compilation agreement. Correct an observer regex that mistook URL suffixes for Windows paths; retain the failed observation and the successful follow-up. This read-only check does not approve GPU generation.
+
 ## 2026-11-04 · 139 · Native auxiliary locks / 原生辅助依赖冻结
 
 - Freeze operator-owned auxiliary roots by relative file, SHA-256 and byte count; verify them at workflow synchronization and execution. Keep local paths and programs outside business request control, and reject HTTP-only access, links, private directories and undeclared roots.
