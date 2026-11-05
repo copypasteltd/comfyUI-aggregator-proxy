@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-06 · API progress audit / API 更新进度复核
+
+- Recheck actual high-port HTTP, Admin, PostgreSQL, system services, native Windows state and all three ComfyUI queues. Pass 72 HTTP checks, inspect all 213 live candidate usage documents and verify the deployed Skill against immutable 1.3.0 bytes. Recheck all three unlimited Keys and all 135 daily fields across 25 nondeleted Keys and their tenant/project.
+- Record the unchanged new-candidate delivery count: 34/213, leaving five 3080 mesh models and 174 4090 models pending. Distinguish the complete 226-record catalog, 45 published models and 181 drafts. Preserve the user's no-reboot decision and original 3080 attempt; report that the 4090 connection is still nonadministrator and its ComfyUI has one running task outside current platform tracking.
+- Document stale inventories, incomplete 3080 binding verification, unknown 5070 idle-memory observation, zero published multi-device pools, design-only ComfyUI source cleanup, actual Sub2API/10–20-device acceptance and open full gates. Verify the latest backup oneshot succeeded and its timer is waiting. Update bilingual entry points and correct the old API/Worker version row; no generation, publication, deployment, task cancellation or policy change is performed.
+
 ## 2026-11-05 · Unlimited business API Keys / 不限额业务密钥
 
 - Issue exactly three independent, non-expiring business Keys through the audited Admin API. Set all nine resource fields to explicit unlimited values at Key, project and tenant levels, including rates, bursts, unfinished jobs and generation concurrency. Existing Key policies and actual counters remain intact.

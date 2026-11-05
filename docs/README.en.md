@@ -1,5 +1,9 @@
 # Documentation index
 
+[144 · API progress and live audit](144-API更新进度与运行复核.md): the November 6 high-port HTTP, Admin, database and three-device review passes 72 HTTP checks and 213 candidate usage inspections. There are 45 published models overall; the new batch remains at 34/213, leaving 179 pending. Separates 3080 uncertain occupancy, 4090 nonadministrator access/current work, 135 unlimited daily fields, unconfigured multi-device pools and design-only source cleanup.
+
+[142 · Host restart evidence and uncertain execution](142-主机重启证据与未知执行收口.md): API/3080 checkpoints are deployed and 2,020 selected native regressions pass. The user's no-reboot decision preserves the original task; actual reboot acceptance remains open. See 144 for current observations.
+
 [143 · Unlimited business Keys and usage](143-不限额业务密钥与调用.md): three Keys and their parent scopes have all nine resource limits unlimited, with access to all 45 published models. Records 18 actual HTTP checks, unchanged existing Key policies and calling steps. Raw credentials are excluded from the repository.
 
 [140 · Unlimited daily quotas](140-关闭每日限额与默认策略.md): all five daily caps become explicitly unlimited for existing tenants, projects, nondeleted API Keys and new defaults. Grants, concurrency and actual metering remain intact. Includes the null-preservation fix and separate rollout evidence.
