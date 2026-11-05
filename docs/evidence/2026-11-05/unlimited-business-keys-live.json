@@ -1,0 +1,182 @@
+{
+  "format_version": 1,
+  "observed_at": "2026-11-05T19:26:56.928716+08:00",
+  "passed": true,
+  "scope": "Exactly three owner-requested business keys issued using audited Admin API. All nine resource limits unlimited at key, project and tenant levels. All currently published models/release/channel selections authorized, any client IP, no expiry. Existing key policies unchanged. No generation or hardware recovery performed.",
+  "business_base_url": "http://43.165.167.179:39443/v1",
+  "new_key_count": 3,
+  "resource_fields": [
+    "rpm",
+    "burst",
+    "daily_jobs",
+    "unfinished_jobs",
+    "generating_jobs",
+    "daily_image_count",
+    "daily_video_milliseconds",
+    "daily_audio_milliseconds",
+    "daily_mesh_count"
+  ],
+  "limit": {
+    "mode": "unlimited",
+    "value": null
+  },
+  "parent_updates": [
+    {
+      "kind": "tenants",
+      "id": "ten_bc0c4928b568401cb61cc6f2ada4aab4",
+      "revision_before": 6,
+      "revision_after": 7
+    },
+    {
+      "kind": "projects",
+      "id": "prj_5a1dd83718284a5ca57e78280819c8c9",
+      "revision_before": 5,
+      "revision_after": 6
+    }
+  ],
+  "existing_key_count": 30,
+  "existing_key_policies_unchanged": true,
+  "published_model_count": 45,
+  "scopes": [
+    "models:read",
+    "capabilities:read",
+    "jobs:create",
+    "jobs:read",
+    "jobs:cancel",
+    "images:create",
+    "videos:create",
+    "assets:upload",
+    "assets:read",
+    "artifacts:read",
+    "content:read",
+    "content:download",
+    "content:delete",
+    "content:sensitive",
+    "audio:create",
+    "meshes:create"
+  ],
+  "content_scope": "owner_only",
+  "checks": [
+    {
+      "key_id": "key_7ffecc3402704e5dab56be4acd5ac67c",
+      "name": "unlimited-01-20261105",
+      "enabled": true,
+      "expires_at": null,
+      "checks": [
+        {
+          "path": "/v1/access-policy",
+          "status": 200,
+          "all_nine_resources_unlimited": true
+        },
+        {
+          "path": "/v1/models",
+          "status": 200,
+          "published_model_count": 45
+        },
+        {
+          "path": "/v1/capabilities",
+          "status": 200
+        },
+        {
+          "path": "/v1/jobs?limit=1",
+          "status": 200,
+          "own_resource_list_empty": true
+        },
+        {
+          "path": "/v1/content?limit=1",
+          "status": 200,
+          "own_resource_list_empty": true
+        },
+        {
+          "path": "/admin/api/v1/api-keys",
+          "status": 401,
+          "admin_identity_separate": true
+        }
+      ]
+    },
+    {
+      "key_id": "key_587e5f26d18d4512886a15967e3255c0",
+      "name": "unlimited-02-20261105",
+      "enabled": true,
+      "expires_at": null,
+      "checks": [
+        {
+          "path": "/v1/access-policy",
+          "status": 200,
+          "all_nine_resources_unlimited": true
+        },
+        {
+          "path": "/v1/models",
+          "status": 200,
+          "published_model_count": 45
+        },
+        {
+          "path": "/v1/capabilities",
+          "status": 200
+        },
+        {
+          "path": "/v1/jobs?limit=1",
+          "status": 200,
+          "own_resource_list_empty": true
+        },
+        {
+          "path": "/v1/content?limit=1",
+          "status": 200,
+          "own_resource_list_empty": true
+        },
+        {
+          "path": "/admin/api/v1/api-keys",
+          "status": 401,
+          "admin_identity_separate": true
+        }
+      ]
+    },
+    {
+      "key_id": "key_e653a2b2ed5d4442b74a6a6173ca0197",
+      "name": "unlimited-03-20261105",
+      "enabled": true,
+      "expires_at": null,
+      "checks": [
+        {
+          "path": "/v1/access-policy",
+          "status": 200,
+          "all_nine_resources_unlimited": true
+        },
+        {
+          "path": "/v1/models",
+          "status": 200,
+          "published_model_count": 45
+        },
+        {
+          "path": "/v1/capabilities",
+          "status": 200
+        },
+        {
+          "path": "/v1/jobs?limit=1",
+          "status": 200,
+          "own_resource_list_empty": true
+        },
+        {
+          "path": "/v1/content?limit=1",
+          "status": 200,
+          "own_resource_list_empty": true
+        },
+        {
+          "path": "/admin/api/v1/api-keys",
+          "status": 401,
+          "admin_identity_separate": true
+        }
+      ]
+    }
+  ],
+  "raw_credentials_in_public_evidence": false,
+  "usage_counters_rewritten": false,
+  "direct_database_writes": false,
+  "generation_submitted": false,
+  "host_reboot_performed": false,
+  "virtualization_used": false,
+  "full_workflow_acceptance": "pending",
+  "nondeleted_key_count": 25,
+  "private_delivery_directory_acl_restricted": true,
+  "public_evidence_contains_credential_values": false
+}

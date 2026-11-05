@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[143 · Unlimited business Keys and usage](docs/143-不限额业务密钥与调用.md): three independent Keys were issued on 2026-11-05 with all nine resource/rate/concurrency limits unlimited, no expiry and any client IP. Each discovers all 45 published models. Shared tenant/project caps were removed; existing Key policies and Key-owned content isolation remain. Eighteen live HTTP checks pass. Credentials are delivered privately; Workflow specifications and device queues determine actual execution.
+
 [142 · Host restart and uncertain execution](docs/142-主机重启证据与未知执行收口.md) is deployed to the API and 3080 Worker, with 2,020 native regressions passing. The actual Worker replacement preserves ComfyUI, the original attempt and occupancy; increasing uptime within the same OS boot does not release the GPU. Closure requires matching attempt bindings, demonstrably reset uptime on the same host and a successful ComfyUI query finding the original association absent. Actual device reboot and subsequent generation still require authorization and hardware checks. The mechanism does not automatically reboot or resubmit.
 
 [140 · Unlimited daily quotas](docs/140-关闭每日限额与默认策略.md): the latest instruction removes all five daily caps from tenants, projects, nondeleted API Keys and new defaults. Access grants, concurrency, request rates and per-request specifications remain unchanged; actual usage continues to accumulate. The same change fixes scope updates dropping the null value required by unlimited limits. See the topic for rollout and verification status.

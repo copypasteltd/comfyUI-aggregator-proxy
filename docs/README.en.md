@@ -1,5 +1,7 @@
 # Documentation index
 
+[143 · Unlimited business Keys and usage](143-不限额业务密钥与调用.md): three Keys and their parent scopes have all nine resource limits unlimited, with access to all 45 published models. Records 18 actual HTTP checks, unchanged existing Key policies and calling steps. Raw credentials are excluded from the repository.
+
 [140 · Unlimited daily quotas](140-关闭每日限额与默认策略.md): all five daily caps become explicitly unlimited for existing tenants, projects, nondeleted API Keys and new defaults. Grants, concurrency and actual metering remain intact. Includes the null-preservation fix and separate rollout evidence.
 
 [139 · Mesh contracts and individual verification](139-三维模型调用与逐项验证.md): 18 candidate aliases and exact image/multiview/refinement/texturing slots. Eight models pass ordinary business generation, complete downloads and independent GLB/vertex-color/UV/PBR checks, now including SAM3D multiview and single-image Pixal3D UV/PBR. The [actual Lime geometry GIF and four input views](media/catalog-145/README.md) identify the offline display material and preserve byte-identical uploaded inputs. The eleventh catalog snapshot records 29 newly business-verified models; 10 mesh candidates continue trials. Business discovery and hidden drafts have a separate live check.

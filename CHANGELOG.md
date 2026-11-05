@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-05 · Unlimited business API Keys / 不限额业务密钥
+
+- Issue exactly three independent, non-expiring business Keys through the audited Admin API. Set all nine resource fields to explicit unlimited values at Key, project and tenant levels, including rates, bursts, unfinished jobs and generation concurrency. Existing Key policies and actual counters remain intact.
+- Authorize all published models/releases/channels, all 16 business operations and any client IP. Each new Key discovers 45 published models; content ownership and separate Admin authentication continue to apply. Eighteen live HTTP checks pass. Deliver credentials privately and publish only redacted evidence, bilingual usage and configuration notes in document 143.
+- Preserve the user's decision to retain the uncertain 3080 attempt without rebooting its host. This issuance submits no generation job, upgrades no service and does not accept the unfinished Workflow catalog.
+
 ## 2026-11-04 · 152 · Evidence for uncertain native executions / 原生未知执行的停止证据
 
 - Add capability negotiation, separate PostgreSQL/SQLite checkpoints and same-host Windows uptime-reset evidence to the existing authenticated reconciliation protocol. Preserve old-server/old-Worker compatibility, original attempts, fences, source graphs and all unlimited daily defaults.
