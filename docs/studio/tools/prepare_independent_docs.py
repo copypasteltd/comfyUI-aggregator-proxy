@@ -100,6 +100,7 @@ def main():
     put(FRONT / 'CHANGELOG.studio.md', frontend_changelog())
 
     queue = [DOCS / 'README.md'] + [p for p in DOCS.glob('*.md') if p.name[:2].isdigit() and 6 <= int(p.name[:2]) <= 21]
+    queue.append(DOCS / '37-交付范围纠正与核心适配现状.md')
     queue.append(DOCS / '23-独立画布更新记录.md')
     queue.append(DOCS / '24-真实故障恢复与离线素材验收.md')
     queue.append(DOCS / '25-轮询取消与真实批次验收.md')

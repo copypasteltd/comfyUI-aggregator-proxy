@@ -3,7 +3,7 @@
 ## Independent ComfyUI canvas
 
 - [Current independent documentation](studio/README.md): static canvas39445 directly calls the existing API39443. API repositories and running services are read-only; no forwarding changes.
-- [Deployment and usage](studio/21-独立画布部署与使用.md) · [Boundaries](studio/20-独立画布与既有API融合最终边界.md) · [All46 tracked items](studio/10-开发进度与交付记录.md).
+- [Current core scope and specific limits](studio/37-交付范围纠正与核心适配现状.md) · [Deployment and usage](studio/21-独立画布部署与使用.md) · [Boundaries](studio/20-独立画布与既有API融合最终边界.md) · [Current progress](studio/10-开发进度与交付记录.md). The historical46-row assessment is not a development backlog or a mandatory all-item release gate.
 - [139.2 actual GPU-response recovery and offline originals](studio/24-真实故障恢复与离线素材验收.md): one real image-edit job, seven actual saved-image UI checks, retained failures and MP4/GIF; physical phones and fleet acceptance remain pending.
 - [Independent update notes](../CHANGELOG.studio.md). Upstream optional Agent/backend/Docker guides below are not part of the managed deployment; local Docker/WSL/virtual machines are prohibited.
 
@@ -44,5 +44,5 @@
 
 ## Notes
 
-- Canvas projects and My Assets are primarily stored in the browser. WebDAV can be configured for cross-device synchronization.
-- The AI API key is stored in the browser, which sends requests directly to OpenAI-compatible endpoints.
+- Managed canvas projects and My Assets primarily live in the current browser origin. Local ZIP/task exports are available; cloud sync/WebDAV is not part of the managed integration. Upstream standalone guides do not authorize adding another service connection.
+- The business Key stays in page memory by default and can optionally be remembered in a trusted browser. Managed business requests go directly to the configured existing Aggregator API using credentials: omit.

@@ -1,0 +1,67 @@
+> 历史快照：保留当时的实现、待办和验收措辞，不作为当前开发清单。当前范围见[文档37](../37-交付范围纠正与核心适配现状.md)。
+
+---
+title: TODO
+description: 当前项目后续值得处理的事项
+---
+
+<!-- independent151:start -->
+### 153.1 · 已实现，等待完整Web人工签收
+
+明暗偏好、CSP启动、八类可编辑案例及原输入继续创作已实现；218单元、69完整页面组、43截图通过。Firefox本机通过。所有生成测试使用合成API，本轮无真实GPU请求；原API未修改。完整F-01～F-46及真实视频、公网Firefox、WebKit/Safari、后台/配额/故障待验保留。详见[本轮说明](../36-明暗主题与预设创作案例.md)。
+<!-- independent151:end -->
+
+
+# TODO
+
+{/* independent150:start */}
+
+Web150.1: selected canvas originals, reference previews, allowed presets, deferred catalog initialization, all-input preflight, stable upload retry and actual-source links are implemented for manual acceptance.207 units/type/build and 69 synthetic UI groups passed on local/public Chromium and local Firefox; public Firefox remains unaccepted after two incomplete runs. One real video ended in preparation_transport_failure; it is not GPU success, and the temporary Key is disabled. Independent document35, screenshots, complete MP4/GIF and all F-01–F-46 are updated. Compatible150.0 is prepared; original API/services remain unchanged. Full Web acceptance, Windows WebKit/Safari, more specifications, quota/background/faults and actual video recovery remain HOLD.
+
+{/* independent150:end */}
+
+{/* independent149:start */}
+
+Web 149.1: original WebM/JPEG/WebP filenames, native audio/video error fallback, missing-original refusal, real replacement and focused layer actions are implemented. Three engines passed 36 local + 36 public groups, 78 actual downloads and 18 screenshots; 203 units/type/build, related regressions and compatible 149.0 static recovery are recorded in independent document 34. Two complete selected public page MP4/GIF recordings and earlier failures are retained. Windows WebKit decoding/Cookie isolation, actual Safari, full playback/voice/background, keyboard/touch/quota/faults and all F-01–F-46 remain HOLD/pending-test. Web only; original API/services unchanged, no native app or GPU generation.
+
+{/* independent149:end */}
+
+
+**当前范围：仅Web端。** 独立网页、浏览器操作与响应式布局；原生客户端和应用商店不属于门禁。下方旧版记录保留历史时点，最新范围及全部46项以独立文档10/20/31/32/33为准。
+
+- 证据148保持146.1冻结Web产品：实际Firefox→Chromium→Windows WebKit→Firefox混合媒体ZIP互导34组通过，九节点/五连线/八原件/重复参考/刷新及GLB下载一致，无任务重提。文档33、12截图和两MP4/两GIF同步。Windows WebKit四音视频解码code=4及原Cookie问题仍未签收，实际Safari、WebM普通另存后缀、更多版本/大文件/故障继续；全部46项和Web人工验收HOLD。无产品/API/服务/部署变更。
+
+- 证据147继续冻结146.1，仅Web端：Firefox新增38组、Windows WebKit本机功能27组通过，实际文件/ZIP/刷新/双页保护与390px截图及两MP4/两GIF同步。WebKit Cookie隔离最小对照仍失败，实际Safari网页及完整人工/故障验收继续HOLD；参见独立文档32和全部F-01～F-46。无产品源码/构建/部署、API或服务变更。
+
+- 146.1已实现项移入pending-test。继续F-27旧库/缩略图/不确定占用/真实配额，F-37实际Safari网页、Windows WebKit Cookie隔离和键盘/触控/后台（证据147已完成Firefox38/WebKit本机功能27组），F-43/F-44更多版本/中断/损坏故障，以及全46项Web人工验收。兼容v5实际回退已验，不再写成完全未实现；不扩大到原生App。
+
+- 独立145.1：新版受控普通原件同库保存、原生页面占用及显式安全清理已实现并进入人工待测；203单元/类型/构建、18原生协议、10本机+10公网清理和14本机+14公网ZIP等回执及完整MP4/GIF见独立文档30。F-27继续保留旧库/缩略图/不确定占用/真实配额；v5兼容回退及真机/完整故障/全部46项仍HOLD。原API不改。
+
+- 独立144.1：只读普通原件引用/缺件清单及JSON下载、GLB内嵌动画控制与隐藏/关闭释放已实现。197单元、11双源、14ZIP、14本机+14公网媒体组及109当前/510旧资源、14路由通过；文档29、截图、全段MP4/GIF留证。普通媒体安全回收仅有开发契约，真机/完整故障/更多轨道及全部46项完整验收继续；原API不改。
+
+- 独立143.1：历史references/回收站原件删除保护、旧索引原子补齐、保存/删除竞态及双页升级已实现并进入人工待测；188单元、11双源、14ZIP、15本机+15公网保护及静态逐文件/14路由通过，见独立文档28。普通image/file跨库安全回收、真磁盘/真机/跨浏览器故障与全部46项完整验收仍保留；原API不改。
+
+- 独立142.1后续：引用备份/完整性/重映射/再导出和双页冲突备份已转入待人工测试；继续跨浏览器/版本/更多媒体的灾备、真实磁盘/配额及跨进程故障。旧ZIP缺失的原件不能凭键名恢复，保留原站数据并重新导出；普通媒体及暂存孤儿的安全回收仍单独实现/验收。
+
+- 独立141.1后续：本轮ZIP整批导入/失败重试/图片恢复/凭证过滤转入待人工验收；继续普通媒体及暂存孤儿原件的跨库安全回收、真实磁盘/配额、跨浏览器/版本灾备和完整恶意配置/导出矩阵。维持原API只读、无新后端/队列；不以合成故障代替真机、物理故障或10～20设备容量。
+
+本文档用来记录当前项目后续比较值得处理的事项。
+
+- 独立证据140后续：原生14组、页面6组、真实备份4项及原件UI3项已转入待人工测试；真实两项各一次POST，分别成功/取消，原件SHA和8小时到期通过。继续真实运行中/完成瞬间取消、失败兄弟项、更多媒体/浏览器、物理手机和长离线矩阵；单次FCP不是性能SLA，1,458秒GPU耗时需后续观测。证据140沿用139.2已归档；后续静态更新仍保持原API只读，不改转发。
+
+- 托管本机存储后续：普通image/file跨库引用安全回收、未确认上传的安全处置和物理手机配额恢复。空间/配额界面及已确认参考缓存手动清理已转入待测试；不将其写成F-27全部完成。
+
+- 托管3D后续：Android/iOS真机、重复大模型峰值/泄漏、更多浏览器及贴图组合。静态GLB交互预览已实现，转入待人工测试；Draco/Meshopt/KTX2解码、动画和其他三维格式另行适配，预览失败保留原件保存。
+
+- 本地 Agent 接入后续：按[本地 Agent 接入规划](/zh-CN/docs/progress/local-agent-integration-plan)把 Claude Code CLI Adapter 升级为 Claude Agent SDK Adapter，并完善工具队列体验。
+- Agent Skill 后续：补充网络检索安装、Skill 资源文件管理和可控的本地记忆沉淀。
+
+## 托管画布：原提交只读核对
+
+- 待完成真实 GPU 响应丢失、长时间离线、后台恢复及物理手机故障矩阵；已实现部分移入待人工验收，不以合成接口替代这些实测。
+
+## 托管批次后续
+
+- 批次提交、恢复和导入保护已进入机器验证；真实GPU混合失败、长离线和物理手机仍需验收，分层结果记录在融合工作区。
+
+- Key轮换后续：物理手机、长离线及更多真实权限组合；未知提交仍绑定原Key，不允许当作已知任务接管。

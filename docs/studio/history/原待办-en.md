@@ -1,0 +1,70 @@
+> 历史快照：保留当时的实现、待办和验收措辞，不作为当前开发清单。当前范围见[文档37](../37-交付范围纠正与核心适配现状.md)。
+
+---
+title: TODO
+description: Planned follow-up work
+---
+
+<!-- independent151:start -->
+### 153.1 · 已实现，等待完整Web人工签收
+
+明暗偏好、CSP启动、八类可编辑案例及原输入继续创作已实现；218单元、69完整页面组、43截图通过。Firefox本机通过。所有生成测试使用合成API，本轮无真实GPU请求；原API未修改。完整F-01～F-46及真实视频、公网Firefox、WebKit/Safari、后台/配额/故障待验保留。详见[本轮说明](../36-明暗主题与预设创作案例.md)。
+<!-- independent151:end -->
+
+
+# TODO
+
+{/* independent150:start */}
+
+Web150.1: selected canvas originals, reference previews, allowed presets, deferred catalog initialization, all-input preflight, stable upload retry and actual-source links are implemented for manual acceptance.207 units/type/build and 69 synthetic UI groups passed on local/public Chromium and local Firefox; public Firefox remains unaccepted after two incomplete runs. One real video ended in preparation_transport_failure; it is not GPU success, and the temporary Key is disabled. Independent document35, screenshots, complete MP4/GIF and all F-01–F-46 are updated. Compatible150.0 is prepared; original API/services remain unchanged. Full Web acceptance, Windows WebKit/Safari, more specifications, quota/background/faults and actual video recovery remain HOLD.
+
+{/* independent150:end */}
+
+{/* independent149:start */}
+
+Web 149.1: original WebM/JPEG/WebP filenames, native audio/video error fallback, missing-original refusal, real replacement and focused layer actions are implemented. Three engines passed 36 local + 36 public groups, 78 actual downloads and 18 screenshots; 203 units/type/build, related regressions and compatible 149.0 static recovery are recorded in independent document 34. Two complete selected public page MP4/GIF recordings and earlier failures are retained. Windows WebKit decoding/Cookie isolation, actual Safari, full playback/voice/background, keyboard/touch/quota/faults and all F-01–F-46 remain HOLD/pending-test. Web only; original API/services unchanged, no native app or GPU generation.
+
+{/* independent149:end */}
+
+
+**Current scope: Web only.** Independent pages, browser interactions and responsive layouts; native clients and app stores are outside acceptance. Older notes below retain their historical context. Independent docs10/20/31/32/33 define the current scope and all46 items.
+
+- Evidence148 keeps frozen146.1 Web: actual Firefox→Chromium→Windows WebKit→Firefox mixed-media ZIP hand-offs passed34 checks, preserving nine nodes/five edges/eight originals/references/reload/GLB downloads without replay. Document33,12 screenshots and two complete selected page MP4/GIF recordings are updated. Windows WebKit media error4 and Cookie isolation remain unaccepted; actual Safari, general WebM save naming, versions/large files/faults and all46 Web manual items remain HOLD. No product/API/service/deployment change.
+
+- Evidence147 keeps frozen146.1 and Web-only scope:38 new Firefox groups and27 Windows WebKit local-original/project groups passed, with native files/ZIP/reload/editor protection,390px screenshots and two complete selected page MP4/GIF recordings. WebKit Cookie isolation still fails in a minimal native diagnostic; actual Safari Web and full manual/fault acceptance remain HOLD. See independent document32 and all F-01–F-46. No product source/build/deployment, API or service change.
+
+- Independent146.1 implementation moves to pending-test. Continue F-27 legacy/previews/uncertain claims/actual quota, F-37 actual Safari Web, Windows WebKit Cookie isolation and keyboard/touch/background behavior (evidence147 completed38 Firefox and27 WebKit local-original groups), F-43/F-44 more versions/interruption/corruption faults, and all46 manual Web items. Compatible v5 rollback is verified rather than wholly unimplemented. Native apps remain outside scope.
+
+- Independent145.1: controlled local originals, native editor protection and explicit transactional cleanup move to manual pending tests;203 units/type/build,18 protocol groups,10 local+10 public cleanup and14 local+14 public ZIP groups passed. See document30 and full MP4/GIF. Legacy/previews/uncertain claims/actual quota, compatible v5 rollback, physical phones, complete faults and all46 tracked items remain HOLD. Original API is unchanged.
+
+- Independent144.1: read-only local-original inventory/missing-reference diagnosis/JSON export and embedded GLB playback controls with hidden/disposal cleanup move to manual pending tests.197 units,11 dual-origin,14 ZIP,14 native+14 public media groups and109 current/510 retained files with14 routes passed. See document29 and full MP4/GIF. Ordinary-media cleanup is still a future contract; physical phones, complete faults, more animation tracks and all46 tracked items remain. Keep the original API unchanged.
+
+- 独立143.1：历史references/回收站原件删除保护、旧索引原子补齐、保存/删除竞态及双页升级已实现并进入人工待测；188单元、11双源、14ZIP、15本机+15公网保护及静态逐文件/14路由通过，见独立文档28。普通image/file跨库安全回收、真磁盘/真机/跨浏览器故障与全部46项完整验收仍保留；原API不改。
+
+- Independent142.1 follow-up: reference backup/completeness/remapping/re-export and stale-page backup move to manual pending tests. Continue cross-browser/version/media disaster recovery, actual disk/quota and cross-process faults. Missing bytes in old ZIPs cannot be recovered from key names; preserve the old origin and export again. Safe ordinary-media/staged-orphan cleanup remains separate development and acceptance.
+
+- Independent141.1 follow-up: whole-batch ZIP import, recovery, image hydration and credential filtering move to manual pending tests. Continue safe cross-database cleanup of ordinary media/staged orphan originals, actual disk/quota recovery, cross-browser/version disaster recovery and complete malicious-configuration/export coverage. Keep the original API read-only with no additional backend/queue; synthetic faults do not establish physical-phone/fleet capacity.
+
+- Evidence140 follow-up:14 native groups,6 frozen-UI groups,4 actual backup checks and3 original-delivery UI checks moved to pending manual tests. Two actual members ended succeeded/cancelled after one POST each, with original SHA/eight-hour expiry verified. Actual running/completion cancellation races, failed siblings, more media/browsers, physical phones and long offline remain. Single-page FCP is not an SLA; the1,458-second GPU latency needs further observation. Evidence140 remains archived on139.2; future static updates keep the original API unchanged and never alter forwarding.
+
+- Independent deployment follow-up: complete manual/physical Android/iOS acceptance, remaining faults, large-file peak/leaks, long offline/background, and broader static-only recovery.139.2 local-original offline access, wrong-Key isolation and static assets-route fixes have moved to pending tests, with native and one actual GPU-image recovery evidence. Only call existing business APIs: do not alter forwarding/Workers/protocol/database/Admin or mirror into API repositories. F-29 transfer-triggered deletion and F-41 heterogeneous/fleet capacity remain external dependencies. Static rollback must preserveDBv4 and resources required by already-open pages.
+
+- Managed 3D remaining acceptance: physical Android/iOS, repeated large-model peak/leak measurement, more browser/texture combinations and additional extensions. Interactive static GLB viewing is implemented for manual acceptance; Draco/Meshopt/KTX2 decoder integration, animation playback and other 3D formats remain separate scope. Original saving remains available on preview failure.
+
+- Managed local storage follow-up: extend transactional ownership to ordinary image/file stores, safely handle unconfirmed uploads and validate real phone/quota recovery. Storage/quota UI and manual acknowledged-cache cleanup have moved to pending tests; ordinary automatic collection remains paused, and F-27 is not wholly complete.
+- Managed Studio remaining acceptance is tracked by F-01–F-46 in the fusion workspace docs: the full fault matrix, additional formats, large-file limits, and real Android/iOS interaction. Eight actual GPU modes now have original-file evidence; this is not eleven-alias or phone/fleet acceptance. Native clean locked install and actual backend/static-package rollback are recorded separately. Explicit known-job Key-rotation adoption and acknowledged upload-cache cleanup are implemented for pending tests; uncertain uploads and any optional text assistant remain separate follow-up. Journal recovery is implemented for acceptance below; unknown submissions still need authoritative server reconciliation. Offline ZIP snapshots are not submission-journal backups or cloud synchronization.
+- External API limitations, read-only: verified transfer cleanup of ComfyUI output files and real heterogeneous balanced capacity remain outside this canvas project. Original137.1 already has a persistent device-pool implementation and idle memory reclamation; their presence does not prove physical multi-card/20-device capacity. Do not change the API to satisfy canvas acceptance.
+- Historical WebDAV/cloud-sync and text-assistant ideas may use only capabilities already provided by the original API. If unavailable, keep them as external dependencies; do not add another backend/provider connection or modify forwarding. Local ZIP/JSON backups remain supported.
+
+- Replace the Claude Code CLI adapter with a Claude Agent SDK adapter and improve the tool queue, following the [Local Agent Integration Plan](/docs/progress/local-agent-integration-plan).
+- Add Skill installation from web search, Skill resource-file management, and controlled local-memory persistence.
+
+## Managed Studio: read-only submission lookup
+
+- Complete actual lost GPU responses, long offline/background recovery and physical-device fault cases. Implemented behavior is listed under pending manual acceptance; synthetic HTTP does not replace those tests.
+
+## Managed batches
+
+- Batch submission, recovery and imported-record protection are under automated verification. Actual GPU mixed failures, long offline sessions and physical phones remain acceptance work in the fusion workspace.
+
+- Key-rotation follow-up: physical-phone/long-offline and additional actual permission combinations. Unknown submissions remain bound to the original Key and cannot be adopted as known jobs.

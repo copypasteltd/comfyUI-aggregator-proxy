@@ -1,5 +1,15 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## 文档修正 · 收敛为既有画布的 API 适配
+
+纠正历史46项矩阵被当作46项未开发功能的问题。以[核心清单与具体限制](docs/studio/37-交付范围纠正与核心适配现状.md)为当前依据：复用已有画布，区分已实现适配、真实问题、可选加固和原API依赖。两份AGENTS取消全项自动开发/每轮全表要求；双语README、待办/待测试、进度/边界/使用和文档索引重整，旧清单与失败归档保留。
+
+应用源码、存储和静态153.1不变；没有新增构建、部署、GPU任务或API改动。公开画布/案例与API健康HTTP检查通过，模型列表无Key返回401。本次没有有效业务Key环境配置，不声明当前全模型已重新验证。近期双参考视频准备失败、WebKit诊断失败及Safari未验继续披露。核对范围见[本次记录](docs/studio/research/studio-implementation/scope-repair-review.json)。
+
+Scope correction: adapt the existing open-source canvas rather than treating 46 historical assessment rows as unfinished features. Core implementation, concrete issues, optional hardening and original-API dependencies now have separate status. Bilingual README, TODO/pending tests, development constraints and current docs are synchronized; earlier evidence remains archived. Application 153.1 and API application sources are unchanged. Concurrent API documentation/evidence updates are preserved separately in the review. Public HTTP was checked; no build, deployment, new Key or GPU job was performed, and no all-model execution claim is made.
+
+下方为各次交付的原时点记录。“完整Web签收HOLD/全部46项”保留其历史含义，不再用作当前核心开发量或自动启动新工程的依据。
+
 <!-- independent151:start -->
 ## 153.1 I-173～I-180 · Web静态153.1
 
