@@ -2,7 +2,7 @@ import { journalTransaction, type IdentityRef, type InputUpload, type Intent } f
 
 export type CachedUpload = { id: string; name: string; bytes: number; createdAt: number; blockedReason: string | null; snapshot: string };
 const owns = (value: { identity?: IdentityRef }, identity: IdentityRef) => value.identity?.origin === identity.origin && value.identity?.fingerprint === identity.fingerprint;
-const snapshot = (value: InputUpload) => JSON.stringify([value.version, value.id, value.identity, value.sha256, value.idempotencyKey, value.name, value.createdAt, value.blob.size, value.blob.type, value.asset, value.error]);
+const snapshot = (value: InputUpload) => JSON.stringify([value.version, value.id, value.identity, value.sha256, value.idempotencyKey, value.name, value.createdAt, value.blob.size, value.blob.type, value.asset, value.error, value.kind || "image"]);
 
 export function uploadCacheBlocker(upload: InputUpload, intents: Intent[]): string | null {
     if (upload.version !== 1 || !(upload.blob instanceof Blob) || !/^[a-f0-9]{64}$/.test(upload.sha256)) return "缓存记录无法核对，已保留";

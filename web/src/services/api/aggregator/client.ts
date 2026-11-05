@@ -2,7 +2,7 @@ import { sha256 } from "@noble/hashes/sha256";
 import { bytesToHex } from "@noble/hashes/utils";
 import { joinCatalog, object } from "./capabilities";
 import { pauseBusinessRequests, waitBusinessTurn } from "../../aggregator-budget";
-import { taskTypes, type AccessPolicy, type ApiResult, type Capability, type Catalog, type ContentMetadata, type JobRequest, type ListPage, type PublishedModel, type RemoteJob, type UploadedAsset } from "./types";
+import { taskTypes, type AccessPolicy, type ApiResult, type AssetKind, type Capability, type Catalog, type ContentMetadata, type JobRequest, type ListPage, type PublishedModel, type RemoteJob, type UploadedAsset } from "./types";
 
 export function normalizeOrigin(value: string): string {
     const url = new URL(value.trim());
@@ -127,12 +127,13 @@ export class AggregatorClient {
     jobs(cursor?: string, signal?: AbortSignal) { return this.json<ListPage<RemoteJob>>(`/v1/jobs${cursor ? `?cursor=${encodeURIComponent(cursor)}` : ""}`, { signal }); }
     contents(cursor?: string, signal?: AbortSignal) { return this.json<ListPage<ContentMetadata & { job_id: string }>>(`/v1/content${cursor ? `?cursor=${encodeURIComponent(cursor)}` : ""}`, { signal }); }
 
-    async upload(file: Blob, name: string, idempotencyKey: string, expectedHash: string, signal?: AbortSignal): Promise<UploadedAsset> {
+    async upload(file: Blob, name: string, idempotencyKey: string, expectedHash: string, signal?: AbortSignal, kind: AssetKind = "image"): Promise<UploadedAsset> {
         const form = new FormData();
         form.append("file", file, name);
+        if (kind !== "image") form.append("kind", kind);
         const { data } = await this.json<UploadedAsset>("/v1/assets", { method: "POST", headers: { "Idempotency-Key": idempotencyKey }, body: form, signal });
         identifier(data.id, "asset");
-        if (data.status !== "ready" || data.bytes !== file.size || data.sha256 !== expectedHash || data.media_type !== file.type) throw new Error("上传文件的完整性或媒体类型不匹配；请核对原上传记录");
+        if (data.status !== "ready" || data.bytes !== file.size || data.sha256 !== expectedHash || data.media_type !== file.type || data.kind !== undefined && data.kind !== kind) throw new Error("上传文件的完整性或媒体类型不匹配；请核对原上传记录");
         return data;
     }
 

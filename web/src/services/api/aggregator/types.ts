@@ -2,10 +2,14 @@ export const taskTypes = ["text_to_image", "image_to_image", "references_to_imag
 export type TaskType = (typeof taskTypes)[number];
 export type JsonObject = Record<string, unknown>;
 export type Preset = Record<string, string | number | boolean>;
+export type AssetKind = "image" | "video" | "audio" | "model";
+export type NamedInputSlot = { name: string; kind: AssetKind; label: string; description: string; required: boolean; max_bytes: number; mime_types: string[] };
+export type TextSlot = { name: string; label: string; description: string; required: boolean; max_length: number };
+export type ContextUsage = { family: string; required: boolean; produces: boolean; compatibility: string; retention_seconds: number; scope: "same_api_key" };
 
 export type ReferenceSlot = { path: string; required: boolean; description: string; weight_supported: boolean };
 export type ModelUsage = {
-    schema_version: "1.0";
+    schema_version: "1.0" | "1.1";
     display_name: string;
     description: string;
     notes: string[];
@@ -18,7 +22,10 @@ export type ModelUsage = {
     example_request: JobRequest;
     parameter_details: { path: string; required: boolean; description: string; rules: JsonObject }[];
     references: { exact_reference_count: number; slots: ReferenceSlot[]; media_types: string[]; max_upload_bytes: number; max_image_pixels: number };
-    output: { media_types: string[]; max_bytes: number; expected_count: number };
+    input_slots?: NamedInputSlot[];
+    text_slots?: TextSlot[];
+    context?: ContextUsage | null;
+    output: { media_types: string[]; max_bytes: number; expected_count: number; audio_policy?: { mode: "generated" | "source_video" | "reference_audio" | "silent"; source_slot?: string | null; description: string } | null };
     output_retention_seconds: number;
     availability_note: string;
 };
@@ -47,7 +54,7 @@ export type ContentMetadata = {
     expires_at: number;
     metadata: Record<string, string | number | boolean>;
 };
-export type UploadedAsset = { id: string; bytes: number; sha256: string; media_type: string; status: "ready"; expires_at: number; width: number; height: number };
+export type UploadedAsset = { id: string; bytes: number; sha256: string; media_type: string; status: "ready"; expires_at: number; width?: number | null; height?: number | null; kind?: AssetKind };
 export const terminalStatuses = new Set(["succeeded", "failed", "cancelled", "expired"]);
 export type RemoteJob = {
     id: string;
@@ -60,6 +67,7 @@ export type RemoteJob = {
     completed_at?: number;
     artifacts?: { id: string; [key: string]: unknown }[];
     error?: { code?: string; message?: string } | null;
+    context?: { available: boolean; family: string; compatibility: string; expires_at: number | null };
     [key: string]: unknown;
 };
 export type ListPage<T> = { data: T[]; has_more: boolean; next_cursor: string | null };

@@ -15,6 +15,9 @@ test("all task stages protect nested original reference IDs", () => {
 test("source image and mask references are protected", () => {
     for (const role of ["source_image", "mask"]) assert.match(uploadCacheBlocker(upload(), [intent({ [role]: { asset_id: "asset" } })])!, /仍引用/);
 });
+test("named image, video, audio and mesh inputs keep their original upload protected", () => {
+    for (const kind of ["image", "video", "audio", "model"] as const) assert.match(uploadCacheBlocker({ ...upload(), kind }, [intent({ media: [{ slot: "source", asset_id: "asset" }] })])!, /仍引用/);
+});
 test("another identity does not disclose or block unrelated references", () => assert.equal(uploadCacheBlocker(upload(), [{ ...intent({ asset_id: "asset" }), identity: { ...identity, fingerprint: "c".repeat(64) } }]), null));
 test("pending and unknown uploads retain original bytes", () => assert.match(uploadCacheBlocker({ ...upload(), asset: undefined, error: "response lost" }, [])!, /未确认/));
 test("mismatched acknowledgement retains original bytes", () => {

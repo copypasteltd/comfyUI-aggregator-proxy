@@ -1,4 +1,4 @@
-import type { ContentMetadata, RemoteJob, UploadedAsset } from "./api/aggregator/types";
+import type { AssetKind, ContentMetadata, RemoteJob, UploadedAsset } from "./api/aggregator/types";
 import type { CanvasNodeData } from "@/types/canvas";
 import { assertBatchMembers, batchKey, type BatchRef } from "./aggregator-batch";
 import { editorTransaction, type EditorClaim } from "./studio-editor-session";
@@ -24,6 +24,7 @@ export type Intent = {
 export type InputUpload = {
     version: 1; id: string; identity: IdentityRef; name: string; blob: Blob;
     sha256: string; idempotencyKey: string; createdAt: number; asset?: UploadedAsset; error?: string;
+    kind?: AssetKind;
 };
 export type LocalResult = { version: 1; id: string; identity: IdentityRef; intentId: string; jobId?: string; metadata: ContentMetadata; blob: Blob; savedAt: number };
 type Records = { intents: Intent; uploads: InputUpload; results: LocalResult };
@@ -84,7 +85,7 @@ export function updateUpload(original: InputUpload, change: (current: InputUploa
             try {
                 const current = request.result as InputUpload | undefined;
                 if (!current) throw new Error("本机参考缓存已清理，请重新选图");
-                if (current.version !== 1 || current.sha256 !== original.sha256 || current.idempotencyKey !== original.idempotencyKey || current.identity?.origin !== original.identity.origin || current.identity?.fingerprint !== original.identity.fingerprint) throw new Error("原上传记录已变化，未覆盖缓存");
+                if (current.version !== 1 || (current.kind || "image") !== (original.kind || "image") || current.sha256 !== original.sha256 || current.idempotencyKey !== original.idempotencyKey || current.identity?.origin !== original.identity.origin || current.identity?.fingerprint !== original.identity.fingerprint) throw new Error("原上传记录已变化，未覆盖缓存");
                 const next = change(current);
                 store.put(next); result(next);
             } catch (error) { abort(error); }

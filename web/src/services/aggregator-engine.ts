@@ -9,6 +9,7 @@ import { assertLocalResult } from "./studio-result-ownership";
 import { flushStudioDocuments } from "./studio-persistence";
 import { useStudioStore } from "@/stores/use-studio-store";
 import { canReadTask, sameTaskIdentity, submissionHash, taskAccessReason } from "./studio-task-access";
+import { composerSlots, inputKind, normalizeInputFile, validateSlotOriginal, type ComposerSlot } from "./api/aggregator/inputs";
 
 const inFlight = new Map<string, Promise<Intent>>();
 const controllers = new Map<string, AbortController>();
@@ -40,18 +41,17 @@ function knownTaskConnection(intent: Intent) {
     return current;
 }
 
-export async function validateReferenceOriginal(file: Blob, model: CatalogModel): Promise<void> {
-    const references = model.usage.references;
-    if (!references.media_types.includes(file.type) || file.size <= 0 || file.size > references.max_upload_bytes) throw new Error("参考图类型或文件大小不符合模型要求");
-    const bitmap = await createImageBitmap(file);
-    try { if (bitmap.width * bitmap.height > references.max_image_pixels) throw new Error("参考图像素超过模型公布的上限"); }
-    finally { bitmap.close(); }
+export async function validateReferenceOriginal(file: Blob, model: CatalogModel, slot?: ComposerSlot): Promise<void> {
+    const target = slot || composerSlots(model.usage).find((item) => item.kind === "image");
+    if (!target) throw new Error("当前模型没有可用的素材输入槽");
+    await validateSlotOriginal(file, target);
 }
 
-export async function stageUpload(file: File, model: CatalogModel): Promise<InputUpload> {
+export async function stageUpload(file: File, model: CatalogModel, slot?: ComposerSlot): Promise<InputUpload> {
     const { identity } = connection();
-    await validateReferenceOriginal(file, model);
-    const record: InputUpload = { version: 1, id: nanoid(), identity, name: file.name, blob: file, sha256: await blobHash(file), idempotencyKey: `studio-upload-${nanoid()}`, createdAt: Date.now() };
+    file = normalizeInputFile(file);
+    await validateReferenceOriginal(file, model, slot);
+    const record: InputUpload = { version: 1, id: nanoid(), identity, name: file.name, blob: file, kind: slot?.kind || "image", sha256: await blobHash(file), idempotencyKey: `studio-upload-${nanoid()}`, createdAt: Date.now() };
     await journalPut("uploads", record);
     return record;
 }
@@ -60,12 +60,13 @@ export async function uploadReference(id: string, signal?: AbortSignal): Promise
     const record = await journalGet("uploads", id);
     if (!record || record.version !== 1) throw new Error("找不到原上传记录，未发起新上传");
     const { client } = connection(record.identity);
+    if ((record.kind || "image") !== inputKind(record.blob.type) || await blobHash(record.blob) !== record.sha256) throw new Error("原素材类型或内容已变化，请保留原上传记录并重新选择素材");
     if (record.asset) {
-        if (record.asset.expires_at * 1000 <= Date.now()) throw new Error("源图片已过期，请明确选择新的图片再创建任务");
+        if (record.asset.expires_at * 1000 <= Date.now()) throw new Error("参考素材已过期，请明确选择新的素材再创建任务");
         return record;
     }
     try {
-        const asset = await client.upload(record.blob, record.name, record.idempotencyKey, record.sha256, signal);
+        const asset = await client.upload(record.blob, record.name, record.idempotencyKey, record.sha256, signal, record.kind || "image");
         const result = await updateUpload(record, (current) => current.asset ? current : { ...current, asset, error: undefined });
         changed();
         return result;

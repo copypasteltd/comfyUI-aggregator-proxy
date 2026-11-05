@@ -1,5 +1,6 @@
 import type { Catalog, CatalogModel, TaskType } from "@/services/api/aggregator/types";
 import { firstAllowedPreset } from "@/services/api/aggregator/composer";
+import { composerSlots } from "@/services/api/aggregator/inputs";
 
 export type StudioExample = { id: string; title: string; description: string; taskType: TaskType; references: number; prompt: string; steps: string };
 export const studioExamples: StudioExample[] = [
@@ -16,6 +17,7 @@ export const studioExamples: StudioExample[] = [
 export function exampleModel(example: Pick<StudioExample, "taskType" | "references">, catalog: Catalog): CatalogModel | undefined {
     return catalog.models.find((model) => model.task_type === example.taskType && !model.unavailable_reason
         && firstAllowedPreset(model, catalog.policy) >= 0
-        && !model.usage.references.slots.some((slot) => slot.path === "input.mask" && slot.required)
-        && model.usage.references.slots.filter((slot) => slot.path !== "input.mask").length === example.references);
+        && !model.usage.context?.required && !model.usage.text_slots?.some((slot) => slot.required)
+        && !composerSlots(model.usage).some((slot) => slot.required && (slot.path === "input.mask" || slot.kind !== "image"))
+        && composerSlots(model.usage).filter((slot) => slot.kind === "image" && slot.path !== "input.mask").length === example.references);
 }

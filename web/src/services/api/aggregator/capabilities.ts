@@ -40,7 +40,7 @@ export function presetPolicyReason(model: CatalogModel, preset: Preset, policy: 
     if (!audio && !mesh && size && typeof pixels === "number" && Number(size[1]) * Number(size[2]) > pixels) return "当前 Key 未授权此图像尺寸";
     const duration = spec[audio ? "audio_max_milliseconds" : "video_max_milliseconds"];
     if ((audio || video) && typeof duration === "number" && Number(effective.seconds) * 1000 > duration) return "当前 Key 未授权此时长";
-    if (typeof spec.max_references === "number" && model.usage.references.exact_reference_count > spec.max_references) return "当前 Key 未授权此参考图数量";
+    if (typeof spec.max_references === "number" && model.usage.references.exact_reference_count + (model.usage.input_slots || []).filter((slot) => slot.kind === "image" && slot.required).length > spec.max_references) return "当前 Key 未授权此参考图数量";
     return undefined;
 }
 
@@ -62,9 +62,14 @@ export async function joinCatalog(models: PublishedModel[], capabilities: Capabi
         const usage = byId.get(capability.id)?.usage;
         let unavailable_reason = "";
         try {
-            if (!usage || usage.schema_version !== "1.0" || !taskTypes.includes(usage.task_type) || usage.task_type !== capability.task_type) throw new Error("缺少受支持的模型用法说明");
+            if (!usage || !["1.0", "1.1"].includes(usage.schema_version) || !taskTypes.includes(usage.task_type) || usage.task_type !== capability.task_type) throw new Error("缺少受支持的模型用法说明");
             if (!/^[a-f0-9]{64}$/.test(capability.release?.digest || "")) throw new Error("缺少明确的发布版本");
             if (!usage.presets?.length || !usage.parameter_details?.length || !usage.references?.slots || !usage.output?.media_types?.length) throw new Error("模型规格或输入槽位不完整");
+            if (usage.schema_version === "1.1" && (!Array.isArray(usage.input_slots) || !Array.isArray(usage.text_slots))) throw new Error("命名输入说明不完整");
+            const named = usage.input_slots || [], texts = usage.text_slots || [];
+            if (new Set(named.map((slot) => slot.name)).size !== named.length || named.some((slot) => !/^[a-z][a-z0-9_]{0,31}$/.test(slot.name) || !["image", "video", "audio", "model"].includes(slot.kind) || !slot.label || !Array.isArray(slot.mime_types) || !slot.mime_types.length || !Number.isSafeInteger(slot.max_bytes) || slot.max_bytes <= 0)) throw new Error("命名素材说明不受支持");
+            if (new Set(texts.map((slot) => slot.name)).size !== texts.length || texts.some((slot) => !/^[a-z][a-z0-9_]{0,31}$/.test(slot.name) || !slot.label || !Number.isSafeInteger(slot.max_length) || slot.max_length <= 0)) throw new Error("命名文本说明不受支持");
+            if (usage.context && (!/^[a-f0-9]{64}$/.test(usage.context.compatibility) || !usage.context.family)) throw new Error("续拍上下文说明不完整");
             if (!usage.required_scopes.every((scope) => scopes.includes(scope))) throw new Error("当前 API Key 缺少此模型所需权限");
             const properties = usage.request_schema.properties as Record<string, JsonObject> | undefined;
             if (properties?.model?.const !== capability.id || properties?.task_type?.const !== capability.task_type) throw new Error("模型 Schema 与发布身份不符");
