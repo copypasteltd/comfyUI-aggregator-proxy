@@ -1,0 +1,66 @@
+{
+  "passed": false,
+  "at": "2026-11-05T22:11:47.609Z",
+  "source_sha256": "437d1970d4da3f78d0ac00af8f88c42e606398da379869bfc5b5c418b3770cec",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-11-05T22-00-59-732Z.json",
+  "real_business_api": true,
+  "public_static_site": true,
+  "checks": [
+    "business connection discovers actual usage 1.0 and 1.1 without exposing the Key",
+    "all 45 discovered models have usable published descriptions",
+    "text-image: actual published form inspected without remote upload or generation"
+  ],
+  "screenshots": [
+    {
+      "name": "models-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T22-11-45-861Z/models-light.png",
+      "sha256": "3921f77f5e0a013133affe46213bb34841494136204eae1613a36188ef98b405",
+      "recording_seconds": 16.147
+    },
+    {
+      "name": "text-image-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T22-11-45-861Z/text-image-light.png",
+      "sha256": "ef1860f7e46bf60b2500233e0ce1e699feb2766ea171acb9f87b0bbf416a6a7c",
+      "recording_seconds": 28.127
+    },
+    {
+      "name": "failure",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T22-11-45-861Z/failure.png",
+      "sha256": "ef1860f7e46bf60b2500233e0ce1e699feb2766ea171acb9f87b0bbf416a6a7c",
+      "recording_seconds": 48.791
+    }
+  ],
+  "submissions": [],
+  "uploads": [],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "web_closed": true,
+    "synthetic_api_closed": true
+  },
+  "scope": "Real unchanged business API authentication, catalog and form inspection on current static bytes. Files staged locally only; no business uploads or job submissions, no GPU output claim.",
+  "inspect_only": true,
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "cold_start_form_observation_ms": 60000,
+  "failure": "locator.click: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: '模型', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <a class=\"\" aria-label=\"模型\" data-discover=\"true\" href=\"/studio/models\">…</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"ant-drawer-mask\"></div> from <div>…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"ant-drawer-mask\"></div> from <div>…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    36 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"ant-drawer-mask\"></div> from <div>…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at openModel (E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_inputs_154.mjs:65:63)\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_inputs_154.mjs:165:19",
+  "last_page_title": "青柠画布 · Comfy Studio",
+  "resource_close_errors": [],
+  "recording_private": ".local/studio154/live-chromium-2026-11-05T22-11-45-861Z/complete.webm",
+  "static_bytes_unchanged": true
+}

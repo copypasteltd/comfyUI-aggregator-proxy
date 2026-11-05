@@ -5,6 +5,8 @@ description: Implemented canvas behavior for user acceptance
 
 # Pending Tests
 
+Release 154.1 is deployed: 279 units, type checking, build, Chromium/Firefox named-input UI and legacy examples pass. Public catalog/forms were inspected with the actual Key. The real image job expired without output, so GPU acceptance is not passed. See [current evidence](../../../studio/38-现有API新版输入适配与整轮验收.md).
+
 These capabilities are implemented, with the evidence below. User acceptance is still distinct from implementation and automated verification; this page does not declare user sign-off. It is not another development backlog or a requirement to complete every historical fault/browser combination.
 
 | Implemented flow | What to try | Existing evidence |
@@ -16,6 +18,6 @@ These capabilities are implemented, with the evidence below. User acceptance is 
 | Lime light/dark | Toggle theme, reload, check canvas and forms | [Document 36](../../../studio/36-明暗主题与预设创作案例.md): 218 frozen-source units, 69 synthetic theme/example groups, 43 screenshots |
 | Eight editable examples | Open `/library`, edit a case, verify no upload/job before explicit submit, save and continue editing | Same document36; no actual GPU request in that theme/example run |
 
-Current deployment remains 153.1. This update changes documentation and constraints only; unchanged build/UI evidence is reused explicitly. The latest real multiple-reference video preparation failure remains unresolved externally; Windows WebKit failures and untested actual Safari are not passes. Current all-model execution was not reverified. See [specific limits](../../../studio/37-交付范围纠正与核心适配现状.md).
+The 153.1 counts in the table are historical evidence; document 38 records the current checks. The latest real multiple-reference video preparation failure, Windows WebKit failures and untested actual Safari remain explicit limits. Current all-model GPU execution is not claimed.
 
 Existing local persistence, backups and safe-release protections remain. Additional platforms, extreme faults and optional enhancements stay separate in [TODO](todo.mdx). [Historical pending tests](../../../studio/history/原待测试-en.md) retain older release details and upstream standalone checks without making them current requirements. Earlier receipts are unchanged.

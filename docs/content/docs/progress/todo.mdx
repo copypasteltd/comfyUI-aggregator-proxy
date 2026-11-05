@@ -1,27 +1,10 @@
 ---
 title: TODO
-description: Confirmed canvas issues, optional work and external dependencies
+description: Product implementation and real-device acceptance remain distinct
 ---
 
 # TODO
 
-This project adapts the existing open-source canvas to the existing Aggregator API. The [current scope](../../../studio/37-交付范围纠正与核心适配现状.md) replaces the historical 46-row matrix as the working checklist. Implemented features belong in [pending tests](pending-test.mdx), not this development backlog.
+The confirmed A-01–A-03 product implementation and A-04 verification code, UI checks and static delivery are complete; see [document 38](../../../studio/38-现有API新版输入适配与整轮验收.md). There is no additional confirmed frontend product-code TODO.
 
-## Confirmed core development work
-
-The scope review did not identify an additional missing core feature. Connection/discovery, published forms, uploads, asynchronous jobs, artifact placement, local projects, Lime themes and eight examples are implemented. A concrete failing canvas interaction or incorrect request should be recorded as a defect with reproduction steps; an untested additional combination is not itself evidence of missing code.
-
-## Specific issues and external dependencies
-
-| Item | State and responsibility |
-| --- | --- |
-| Latest multiple-reference video | Last actual request failed with `preparation_transport_failure`. The original API/device preparation path needs recovery and a subsequent explicit end-to-end test. Keep the failure visible; do not modify forwarding or automatically create another job |
-| Browser claims | Local Chromium/Firefox and public Chromium have evidence. Windows WebKit Cookie/decode failures and actual Safari remain unaccepted; do not advertise those as supported. A new browser commitment requires corresponding validation |
-| Current all-model execution | Not retested in this documentation correction. Catalog visibility and historical outputs do not prove current GPU availability |
-| Original API operations | Transfer-triggered ComfyUI deletion, fleet balancing/capacity, idle memory policies and Admin operations remain original-system work, outside canvas development |
-
-## Optional, not scheduled by this list
-
-Additional codecs/3D decoders, new input types, assistants or cloud sync need an explicit product requirement. More OS/browser coverage, extreme quota faults, long offline sessions, cross-version recovery and sustained large-file pressure are extended validation or hardening. Keep existing protections; do not continue building frameworks simply because an old acceptance row is incomplete.
-
-[Historical TODO](../../../studio/history/原待办-en.md) preserves older assessment and upstream standalone Agent/script/WebDAV ideas. Those are not requirements for the current managed Web build. [Release notes](../../../studio/23-独立画布更新记录.md) retain earlier delivery evidence and failures.
+Real generation acceptance is incomplete: the original image job expired after queuing without output; read-only inspection found an older uncertain 3080 occupancy and incomplete channel/binding verification; their original recovery cause remains unestablished. Current reference-edit/audio acceptance is pending and the historical multiple-reference video failure remains recorded. The original API stays read-only. Unpublished named-video/continuation models need an actual existing API release; further browsers/codecs, physical devices and fleet capacity are separate validation, not missing canvas features.

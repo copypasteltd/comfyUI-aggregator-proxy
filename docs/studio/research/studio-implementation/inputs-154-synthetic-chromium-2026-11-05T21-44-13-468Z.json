@@ -1,0 +1,114 @@
+{
+  "passed": false,
+  "at": "2026-11-05T21:44:18.127Z",
+  "source_sha256": "c44bbe733adcd6273e746de5b120292941a4530a7fd510733044c69bdd657810",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-11-05T21-30-36-545Z.json",
+  "real_business_api": false,
+  "public_static_site": false,
+  "checks": [
+    "business connection discovers actual usage 1.0 and 1.1 without exposing the Key",
+    "all 47 discovered models have usable published descriptions",
+    "named-edit light: explicit submission validates and artifact returns to canvas"
+  ],
+  "screenshots": [
+    {
+      "name": "models-light",
+      "file": "docs/media/studio-154/synthetic-chromium-2026-11-05T21-44-13-468Z/models-light.png",
+      "sha256": "3921f77f5e0a013133affe46213bb34841494136204eae1613a36188ef98b405"
+    },
+    {
+      "name": "named-edit-light",
+      "file": "docs/media/studio-154/synthetic-chromium-2026-11-05T21-44-13-468Z/named-edit-light.png",
+      "sha256": "462aa274a7360735c60ab7f48cd03a27e8cdfc1e0ce951cc895c70e3f28e6e39"
+    },
+    {
+      "name": "named-edit-result-light",
+      "file": "docs/media/studio-154/synthetic-chromium-2026-11-05T21-44-13-468Z/named-edit-result-light.png",
+      "sha256": "90148a4b3a2d09d68d9c50cd8e679aeeeed74a011de99ac95ef9dfcc0f442cd7"
+    },
+    {
+      "name": "named-voice-light",
+      "file": "docs/media/studio-154/synthetic-chromium-2026-11-05T21-44-13-468Z/named-voice-light.png",
+      "sha256": "ef54a8dde69d996087c6cf8a83c09a69905fcbfbb0b8e51a1bbed4bef6485b01"
+    },
+    {
+      "name": "failure",
+      "file": "docs/media/studio-154/synthetic-chromium-2026-11-05T21-44-13-468Z/failure.png",
+      "sha256": "a4dcdc037ccb7da02431aeb3f4f98092d889fd953dc16d1d11c9f7f16c04897e"
+    }
+  ],
+  "submissions": [
+    {
+      "body": {
+        "model": "comfy-3080-34-lustify-2d7246",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "A friendly small lime-green toy robot, clean white background, soft studio light, no text.",
+          "media": [
+            {
+              "slot": "reference_image_1",
+              "asset_id": "asset_738e1af22a5946d7877d5fc3461ddf94"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "512x512",
+          "quality": "standard"
+        },
+        "client_request_id": "zA0UzSN_5RmIH9cMxZYfh"
+      },
+      "job_id": "job_5536eebaa8c44032a1175d2cfb534273"
+    }
+  ],
+  "uploads": [
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_738e1af22a5946d7877d5fc3461ddf94"
+    },
+    {
+      "kind": "audio",
+      "bytes": 14641,
+      "media_type": "audio/flac",
+      "id": "asset_0a9cb3a15bc743cc868c06852b1f4f2a"
+    },
+    {
+      "kind": "audio",
+      "bytes": 14641,
+      "media_type": "audio/flac",
+      "id": "asset_d553159246ff4fbbbd5ce3ccdd660213"
+    }
+  ],
+  "errors": [
+    "The expression evaluated to a falsy value:\n\n  assert(source)\n"
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "web_closed": true,
+    "synthetic_api_closed": true
+  },
+  "scope": "Owned native browser UI against an independent synthetic API using actual public model schemas plus labelled multimodal/continuation fixtures; no GPU execution.",
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "failure": "AssertionError [ERR_ASSERTION]: Observation deadline reached; original task stays intact\n    at waitFor (file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_inputs_154.mjs:53:112)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_inputs_154.mjs:159:20",
+  "resource_close_errors": [],
+  "recording_private": ".local/studio154/synthetic-chromium-2026-11-05T21-44-13-468Z/complete.webm",
+  "static_bytes_unchanged": true
+}

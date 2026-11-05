@@ -1,0 +1,65 @@
+{
+  "passed": false,
+  "at": "2026-11-05T21:48:26.113Z",
+  "source_sha256": "c44bbe733adcd6273e746de5b120292941a4530a7fd510733044c69bdd657810",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-11-05T21-30-36-545Z.json",
+  "real_business_api": true,
+  "public_static_site": false,
+  "checks": [
+    "business connection discovers actual usage 1.0 and 1.1 without exposing the Key",
+    "all 45 discovered models have usable published descriptions"
+  ],
+  "screenshots": [
+    {
+      "name": "models-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T21-48-22-499Z/models-light.png",
+      "sha256": "3921f77f5e0a013133affe46213bb34841494136204eae1613a36188ef98b405"
+    },
+    {
+      "name": "text-image-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T21-48-22-499Z/text-image-light.png",
+      "sha256": "ef1860f7e46bf60b2500233e0ce1e699feb2766ea171acb9f87b0bbf416a6a7c"
+    },
+    {
+      "name": "failure",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T21-48-22-499Z/failure.png",
+      "sha256": "f2b5b9bf0dcc08dc6cb4c9c9f4ab4cfae72ee99d407d688acb7b7acf69c3d31e"
+    }
+  ],
+  "submissions": [
+    {
+      "job_id": "job_2e8c72346a6d4d22b6e30764fbf4d2a3",
+      "model": "comfy-3080-11-lustify-v10-krea2-turbo-exact-f3f6c2",
+      "status": "queued"
+    }
+  ],
+  "uploads": [],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "web_closed": true,
+    "synthetic_api_closed": true
+  },
+  "scope": "Explicit real browser submissions through the unchanged original API; not every model, fleet or browser acceptance.",
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "failure": "AssertionError [ERR_ASSERTION]: Observation deadline reached; original task stays intact\n    at waitFor (file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_inputs_154.mjs:59:187)\n    at async file:///E:/dev/sandbox/%E6%97%A0%E9%99%90%E7%94%BB%E5%B8%83/docs/tools/verify_studio_inputs_154.mjs:163:17",
+  "resource_close_errors": [],
+  "recording_private": ".local/studio154/live-chromium-2026-11-05T21-48-22-499Z/complete.webm",
+  "static_bytes_unchanged": true
+}

@@ -1,0 +1,98 @@
+{
+  "inspection_passed": true,
+  "generation_acceptance_passed": false,
+  "scope": "Read-only metadata for the original acceptance job and its only eligible route. Current dispatch blockers are established; the original cause of the older uncertain attempt and missing verification is not established.",
+  "observed_at": "2026-11-05 22:48:01.922458+00:00",
+  "read_only_transaction": true,
+  "job": {
+    "id": "2e8c7234-6a6d-4d22-b6e3-0764fbf4d2a3",
+    "state": "expired",
+    "created_at": "2026-11-05 21:48:46.414219+00:00",
+    "deadline": "2026-11-05 22:03:46.367055+00:00",
+    "terminal_at": "2026-11-05 22:03:47.381153+00:00",
+    "has_attempt": false,
+    "error_code": null,
+    "model_alias": "comfy-3080-11-lustify-v10-krea2-turbo-exact-f3f6c2",
+    "attempts": 0
+  },
+  "eligible_route_count": 1,
+  "route": {
+    "channel": "Windows RTX 3080 / ComfyUI",
+    "channel_enabled": true,
+    "draining": false,
+    "channel_live": true,
+    "desired_revision": 1,
+    "applied_revision": 1,
+    "verified_revision": null,
+    "channel_observed_at": "2026-11-05 22:47:56.170539+00:00",
+    "channel_revisions_verified": null,
+    "binding_verified": null,
+    "runtime_profile_approved": true,
+    "binding_observed_at": "2026-11-04 01:53:32.459536+00:00",
+    "node": "Windows RTX 3080",
+    "node_enabled": true,
+    "node_has_boot": true,
+    "node_observed_at": "2026-11-05 22:47:56.170539+00:00",
+    "gpu_enabled": true,
+    "gpu_management_hold": false,
+    "gpu_occupied": true,
+    "occupancy_acquired_at": "2026-11-04 06:46:49.732532+00:00",
+    "occupancy_uncertain": true,
+    "occupying_lease_expires_at": "2026-11-04 06:48:35.586985+00:00",
+    "occupying_attempt_closed_at": null,
+    "occupying_job_state": "reconciling",
+    "occupying_job_created_at": "2026-11-04 06:46:49.368028+00:00",
+    "capacity_report_present": true,
+    "capacity_age_seconds": 5.781,
+    "capacity_status": "ready",
+    "capacity_sample_keys": [
+      "available_memory_bytes",
+      "free_disk_bytes",
+      "generation_reserve_bytes",
+      "maximum_spool_bytes",
+      "maximum_uploads",
+      "minimum_available_memory_bytes",
+      "minimum_free_disk_bytes",
+      "observed_ago_ms",
+      "pending_uploads",
+      "protocol",
+      "reasons",
+      "reserved_bytes",
+      "scope",
+      "sequence",
+      "spool_bytes",
+      "status"
+    ]
+  },
+  "nodes": [
+    {
+      "name": "HTTP RTX 5070",
+      "enabled": true,
+      "observed_at": "2026-11-05 22:48:00.549947+00:00",
+      "has_boot": true
+    },
+    {
+      "name": "Windows RTX 3080",
+      "enabled": true,
+      "observed_at": "2026-11-05 22:47:56.170539+00:00",
+      "has_boot": true
+    },
+    {
+      "name": "Windows RTX 4090",
+      "enabled": true,
+      "observed_at": "2026-11-05 22:47:56.467285+00:00",
+      "has_boot": true
+    }
+  ],
+  "blockers": [
+    "The only eligible 3080 GPU has an uncertain occupancy acquired before this acceptance job; its older job remains reconciling and its attempt is not closed.",
+    "The channel has no verified_revision and the workflow binding is not fully verified. Both must satisfy the existing dispatcher before selection."
+  ],
+  "next_operational_step": "Use the original service recovery procedure to reconcile the older uncertain execution and restore channel/workflow verification before a new separately authorized real acceptance. Do not delete occupancy or re-submit an uncertain job to bypass recovery.",
+  "new_generation_posts": 0,
+  "database_writes": 0,
+  "remote_config_changes": 0,
+  "service_restarts": 0,
+  "api_source_modified": false,
+  "ssh_session_closed": true
+}

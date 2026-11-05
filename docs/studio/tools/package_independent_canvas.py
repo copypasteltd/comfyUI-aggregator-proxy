@@ -68,6 +68,12 @@ def main():
         assert browser['build_report'] == build_path.relative_to(ROOT).as_posix()
         assert browser['source_sha256'] == build['source_after']
         assert len(browser['submissions']) == 8 and not browser['errors'] and not browser['page_errors']
+    if release == 'canvas-20261106.154.1':
+        assert len(arguments) == 3 and composer_path is None
+        assert not browser['public_static_site'] and not browser['real_business_api'] and not browser.get('resource_close_errors')
+        assert browser['build_report'] == build_path.relative_to(ROOT).as_posix() and browser['source_sha256'] == build['source_after']
+        assert len(browser['submissions']) == 12 and {row['kind'] for row in browser['uploads']} == {'image', 'video', 'audio', 'model'}
+        assert not browser['errors'] and not browser['page_errors']
     assert build['source_before'] == build['source_after'] == build['copied_source_after'] == source_digest()
     clean = json.loads((ROOT / build['clean_install_reused']['file']).read_text(encoding='utf-8'))
     dist = ROOT / clean['private_logs'] / 'repository/web/dist'
@@ -88,7 +94,7 @@ def main():
                 'api_modified': False, 'api_origin': 'http://43.165.167.179:39443', 'mode': 'managed', 'base': '/studio/',
                 'application_backend': False, 'virtualization_used': False,
                 'files': [{'path': name, 'bytes': len(data), 'sha256': digest(data)} for name, data in sorted(contents.items())]}
-    if release in {'canvas-20261030.146.1', 'canvas-20261031.149.1', 'canvas-20261031.150.1', 'canvas-20261031.151.1', 'canvas-20261031.151.2', 'canvas-20261031.152.1', 'canvas-20261031.153.1'}:
+    if release in {'canvas-20261030.146.1', 'canvas-20261031.149.1', 'canvas-20261031.150.1', 'canvas-20261031.151.1', 'canvas-20261031.151.2', 'canvas-20261031.152.1', 'canvas-20261031.153.1', 'canvas-20261106.154.1'}:
         from studio_release_guard import CONTRACT
         contract = json.loads((SOURCE / 'web/src/services/studio-storage-contract.json').read_text(encoding='utf-8'))
         assert contract == CONTRACT

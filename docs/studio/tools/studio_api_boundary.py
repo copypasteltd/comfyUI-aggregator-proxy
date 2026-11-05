@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import subprocess
 import sys
@@ -26,18 +27,22 @@ def snapshot() -> dict:
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('action', choices=['capture', 'check'])
+    parser.add_argument('--baseline', default=str(BASELINE))
+    arguments = parser.parse_args()
+    baseline = Path(arguments.baseline).resolve()
+    assert baseline.is_relative_to((ROOT / '.local').resolve()), 'Baseline must remain private to this independent workspace'
     actual = snapshot()
-    if sys.argv[1:] == ['capture']:
-        with BASELINE.open('x', encoding='utf-8') as target:
+    if arguments.action == 'capture':
+        with baseline.open('x', encoding='utf-8') as target:
             target.write(json.dumps(actual, indent=2) + '\n')
         print(json.dumps({'api_baseline_recorded': True, 'api_workspaces_written': False}))
         return
-    if sys.argv[1:] != ['check']:
-        raise SystemExit('Choose capture or check')
-    expected = json.loads(BASELINE.read_text(encoding='utf-8'))
+    expected = json.loads(baseline.read_text(encoding='utf-8'))
     passed = actual == expected
     result = {'passed': passed, 'at': datetime.now(UTC).isoformat(), 'api_workspaces': actual,
-              'api_workspaces_written': False, 'api_changes_allowed': False,
+              'api_workspaces_written': False, 'api_changes_allowed': False, 'baseline_sha256': hashlib.sha256(baseline.read_bytes()).hexdigest(),
               'scope': 'Git HEAD, tracked diff and worktree status compared with the independent canvas baseline; no runtime/API requests performed'}
     target = ROOT / 'docs/research/studio-implementation' / ('independent-api-boundary-' + uuid4().hex + '.json')
     target.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
