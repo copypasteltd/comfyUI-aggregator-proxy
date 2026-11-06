@@ -1,0 +1,47 @@
+{
+  "passed": false,
+  "at": "2026-11-05T23:41:13.996Z",
+  "source_sha256": "437d1970d4da3f78d0ac00af8f88c42e606398da379869bfc5b5c418b3770cec",
+  "original_browser_report": "docs/research/studio-implementation/inputs-154-live-chromium-2026-11-05T23-29-32-996Z.json",
+  "real_business_api": true,
+  "public_static_site": true,
+  "inspect_only": false,
+  "submissions": [],
+  "new_generation_posts": 0,
+  "local_artifacts": [],
+  "recovered_jobs": [],
+  "screenshots": [
+    {
+      "name": "failure",
+      "file": "docs/media/studio-155/recovery-2026-11-05T23-41-13-955Z/failure.png",
+      "sha256": "4dbacf7ce1ebd22855884e70a1a201b6cc43b952909eab653f73b78c007c76de",
+      "recording_seconds": 29.425
+    }
+  ],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true
+  },
+  "scope": "Original successful jobs and original owned browser profile only. Verify rendered media, committed Blob length/MIME/SHA and offline reload. No replacement generation, upload, storage reset or API change.",
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false,
+    "reused_owned_profile": true
+  },
+  "browser_version": "153.0.8010.12",
+  "failure": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.studio-model-card').first() to be visible\u001b[22m\n\n    at E:\\dev\\sandbox\\无限画布\\docs\\tools\\verify_studio_artifact_recovery_155.mjs:46:121",
+  "resource_close_errors": [],
+  "recording_private": ".local/studio-recovery-155/artifacts-2026-11-05T23-41-13-955Z/complete.webm"
+}

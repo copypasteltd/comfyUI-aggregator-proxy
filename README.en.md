@@ -4,7 +4,7 @@
 
 An independent Web canvas adapted from [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas). It reuses the existing pan/zoom, nodes, connections and projects, and connects them to the existing ComfyUI Aggregator models, reference inputs, asynchronous jobs and artifacts. The browser calls that API directly; no new generation backend, queue or GPU proxy is required.
 
-Static **154.1** is deployed. This round fixes rejection of 34 published usage 1.1 models: all 45 models and 50 published presets pass request mapping. Named image/video/audio/GLB inputs, workflow text and compatible parent jobs are adapted. A real image job remained queued during observation and later expired without output; real generation acceptance is not passed. See [implementation and evidence](docs/studio/38-现有API新版输入适配与整轮验收.md).
+Static **154.1** is deployed. The 45 published models/50 presets and usage 1.0/1.1 named media, workflow text and compatible-parent contract are adapted. Following device recovery, five selected real modes pass generation and canvas retrieval: text-to-image, named-reference editing, workflow music, first-frame video and two-reference video. Earlier failures remain recorded. See [recovery and real acceptance](docs/studio/39-设备恢复与真实生成补充验收.md) and [implementation details](docs/studio/38-现有API新版输入适配与整轮验收.md).
 
 | Canvas | Existing business API | Management |
 | --- | --- | --- |
@@ -85,12 +85,22 @@ Open `http://localhost:3000/studio/`. Keep these variables for production, run `
 
 `managed` selects the existing Aggregator integration and disables upstream custom scripts, plugins and local Agents; it still deploys independently. Local Docker, WSL and virtual machines are prohibited. Keep the existing high HTTP port; the user handles domain proxying. No HTTPS gate is added and the API's existing any-origin CORS is unchanged. Static updates switch only the canvas directory, preserve data/older-page assets and do not restart the API. See [deployment instructions](docs/studio/21-独立画布部署与使用.md), including compatible-recovery limitations.
 
+## Fresh real-generation examples
+
+| Text-to-image | Named-reference editing |
+| --- | --- |
+| ![Real text-to-image](docs/studio/media/studio-155/text-image.png) | ![Real named-reference edit](docs/studio/media/studio-155/named-edit.png) |
+
+![Real video retrieval and reload](docs/studio/media/studio-155/video-recovery.gif)
+
+[Original first-frame video](docs/studio/media/studio-155/video-first-frame.mp4) · [Original two-reference video](docs/studio/media/studio-155/video-two-references.mp4) · [Original workflow music](docs/studio/media/studio-155/named-music.flac) · [Complete generation page MP4](docs/studio/media/studio-155/image-audio-generation.mp4) · [Generation page GIF](docs/studio/media/studio-155/image-audio-generation.gif). The retrieval recording uses the original successful jobs, with no new generation submissions. [Document 39](docs/studio/39-设备恢复与真实生成补充验收.md) states the exact evidence scope.
+
 ## Verification and current limits
 
-- This round passes 279 units, type checking and production build, including all 45 actual models and 50 presets. Chromium passes six named-input/continuation submissions in each theme; eight legacy example flows pass. Firefox named-input UI passed. The mixed-media and continuation models are explicitly synthetic fixtures, not newly published GPU models.
-- All 124 static files, retained assets and routes were verified for independent release 154.1. Original API sources, pointer, configuration and services stay unchanged; existing high HTTP ports and any-origin CORS are retained.
-- The real image submission returned its original job ID, stayed queued during the ten-minute observation and later expired on read-only reconciliation. Read-only inspection confirms zero attempts, an older uncertain 3080 occupancy and incomplete channel/binding verification (document 38). No replacement generation or fresh GPU artifact is claimed; real reference-edit/audio device acceptance is also pending. The historical multiple-reference video `preparation_transport_failure` remains recorded.
-- Historical image, video, Workflow audio and GLB evidence does not establish fresh execution of all 45 models. Windows WebKit diagnostics failed; actual Safari and physical touch remain untested. A 390px view is emulation. Additional browser/codec work and original-API fleet capacity are separate from missing canvas features.
+- The unchanged 154.1 source has 279 passed units, type checking and production build; 45 models/50 presets and eight legacy examples were checked. The stronger Chromium/Firefox runs each complete 12 light/dark form submissions and returned artifacts, verifying every committed Blob's length, MIME and SHA. Mixed named-video/GLB-input and continuation combinations remain explicitly synthetic fixtures.
+- Static 154.1, journal v5, 04·Lime and original API sources/cloud configuration are retained. The user authorised one normal 3080 host restart; existing Admin operations restore 39 approved 3080 bindings and 3 approved 5070 bindings. No new model publication or scheduler change is implied.
+- Five real modes pass generation, rendered-canvas delivery, independent download and original-profile reload. Earlier expired/failed jobs remain unchanged. The old unknown execution closes safely with execution_host_restarted; that is not a successful old generation. See document 39.
+- This is not an execution run of all 45 models or a 10–20-node capacity result. Unpublished named-video/continuation modes still need an actual original-API release. Windows WebKit diagnostics failed; actual Safari and physical touch remain untested. The 390px checks use viewport emulation. These validation boundaries do not create additional frontend features.
 
 
 [Core checklist and specific issues](docs/studio/37-交付范围纠正与核心适配现状.md) · [Current progress](docs/studio/10-开发进度与交付记录.md) · [Historical delivery details](docs/studio/history/10-历史交付与46项评估.md). Follow-up work addresses explicit requirements and actual defects. Documentation and release notes stay synchronized on the authorized `feat/independent-canvas` branch; no upstream, main or original API branch push.

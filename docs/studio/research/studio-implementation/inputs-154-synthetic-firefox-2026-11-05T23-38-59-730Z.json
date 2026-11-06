@@ -1,0 +1,822 @@
+{
+  "passed": true,
+  "at": "2026-11-05T23:39:05.212Z",
+  "source_sha256": "437d1970d4da3f78d0ac00af8f88c42e606398da379869bfc5b5c418b3770cec",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-11-05T22-00-59-732Z.json",
+  "real_business_api": false,
+  "public_static_site": false,
+  "checks": [
+    "business connection discovers actual usage 1.0 and 1.1 without exposing the Key",
+    "all 47 discovered models have usable published descriptions",
+    "named-edit light: explicit submission validates and artifact returns to canvas",
+    "named-voice light: explicit submission validates and artifact returns to canvas",
+    "four-views light: explicit submission validates and artifact returns to canvas",
+    "mesh-input light: explicit submission validates and artifact returns to canvas",
+    "incomplete form makes zero uploads and zero job submissions",
+    "wrong file kind is rejected locally before any upload",
+    "all-media light: explicit submission validates and artifact returns to canvas",
+    "continuation light: explicit submission validates and artifact returns to canvas",
+    "named-edit dark: explicit submission validates and artifact returns to canvas",
+    "named-voice dark: explicit submission validates and artifact returns to canvas",
+    "four-views dark: explicit submission validates and artifact returns to canvas",
+    "mesh-input dark: explicit submission validates and artifact returns to canvas",
+    "incomplete form makes zero uploads and zero job submissions",
+    "wrong file kind is rejected locally before any upload",
+    "all-media dark: explicit submission validates and artifact returns to canvas",
+    "continuation dark: explicit submission validates and artifact returns to canvas"
+  ],
+  "screenshots": [
+    {
+      "name": "models-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/models-light.png",
+      "sha256": "989bf4f098bf54368b78280229ab69b319c3eacb1aa28f6b396f7cbe9719626f",
+      "recording_seconds": 10.007
+    },
+    {
+      "name": "named-edit-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/named-edit-light.png",
+      "sha256": "0bcbfdcee1d177a489e292b42039c1fa6ee61d30b0079656e1b104b6d5f8e857",
+      "recording_seconds": 17.949
+    },
+    {
+      "name": "named-edit-result-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/named-edit-result-light.png",
+      "sha256": "ef5a454d5ba0f86a5495c382b9de64bd26e85d4b7a4484b07773631e6a432eee",
+      "recording_seconds": 26.518
+    },
+    {
+      "name": "named-voice-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/named-voice-light.png",
+      "sha256": "a6762bb471361fad9448e41065df5e0a303070393f8839effdacc131a07883e9",
+      "recording_seconds": 37.311
+    },
+    {
+      "name": "named-voice-result-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/named-voice-result-light.png",
+      "sha256": "9f137ae5450e6f35765929a51d7676bef2cf79ef1d0efa4a7434729fb6a6ac08",
+      "recording_seconds": 43.009
+    },
+    {
+      "name": "four-views-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/four-views-light.png",
+      "sha256": "798df3ae412e1016bb16c45ed6c73b5ac2aaec43e6227909fff4c782db4b2913",
+      "recording_seconds": 46.802
+    },
+    {
+      "name": "four-views-result-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/four-views-result-light.png",
+      "sha256": "d086a8f5bde70dab5375ece290e1a4de46d70cd1236b6fa9ca679040f53f17af",
+      "recording_seconds": 51.212
+    },
+    {
+      "name": "mesh-input-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/mesh-input-light.png",
+      "sha256": "c01a504d1cde1461a47ef8fb1c4160add3b335c4f5cd9fea2ea159b917fedf92",
+      "recording_seconds": 54.688
+    },
+    {
+      "name": "mesh-input-result-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/mesh-input-result-light.png",
+      "sha256": "8b236eed793db66f9d342dbcd689bfacf5b87f547db392ae76d1094b36222eab",
+      "recording_seconds": 57.385
+    },
+    {
+      "name": "all-media-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/all-media-light.png",
+      "sha256": "934fcde0fa435d14d5eb9999d380f79f5fd73bd7de71308b2470751babd4966d",
+      "recording_seconds": 63.267
+    },
+    {
+      "name": "all-media-result-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/all-media-result-light.png",
+      "sha256": "6506d4c709a67044ecdeb5d28125ac042e14d70c89a33f4d2442a814f9b898b9",
+      "recording_seconds": 66.985
+    },
+    {
+      "name": "continuation-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/continuation-light.png",
+      "sha256": "b8d92752cf3a342d72c3ba400b0145973f388e6443e1633bd8be086d60091887",
+      "recording_seconds": 69.98
+    },
+    {
+      "name": "continuation-result-light",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/continuation-result-light.png",
+      "sha256": "a893a4d4c7f9ee28facc5fadcb2c308494c7f2c0c3adb574766fd8d1cb02c23d",
+      "recording_seconds": 74.287
+    },
+    {
+      "name": "named-edit-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/named-edit-dark.png",
+      "sha256": "1084f45d57ada81dec84b3b6f73398de11d06988c248ac82014dddf2ef19f740",
+      "recording_seconds": 78.409
+    },
+    {
+      "name": "named-edit-result-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/named-edit-result-dark.png",
+      "sha256": "475f885158f8c8b211dd6235c5d6194cefd3a55274680806a8f314fc061e468b",
+      "recording_seconds": 83.54
+    },
+    {
+      "name": "named-voice-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/named-voice-dark.png",
+      "sha256": "f10511a56c4caaf99c58fa00e9c1fbbeabcb37c62c8ba14a2a59717b4943594c",
+      "recording_seconds": 87.395
+    },
+    {
+      "name": "named-voice-result-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/named-voice-result-dark.png",
+      "sha256": "496fd9c6c7e052277ca6d33b61a1c1c1b7ac7552a55619a5c391d0ede521dfaa",
+      "recording_seconds": 91.284
+    },
+    {
+      "name": "four-views-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/four-views-dark.png",
+      "sha256": "be130a19daf01a1bb703bc0bddd2766e0cc87b06720a8e834551f5fc8edc7952",
+      "recording_seconds": 95.074
+    },
+    {
+      "name": "four-views-result-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/four-views-result-dark.png",
+      "sha256": "a0428f36445c731924914e02bbd5502dfc7ccfa7c04a78a0b20c4357d2d1b96d",
+      "recording_seconds": 98.981
+    },
+    {
+      "name": "mesh-input-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/mesh-input-dark.png",
+      "sha256": "1f457986521eae20bb9c9e22fd938bdd05ad659fdfe9d77e48ce60b6d18a2ba1",
+      "recording_seconds": 102.493
+    },
+    {
+      "name": "mesh-input-result-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/mesh-input-result-dark.png",
+      "sha256": "eb61c63122b1d10bb4c22b08eb84a15c3b8e058a3c3339ac7b3153185f5f27d1",
+      "recording_seconds": 108.091
+    },
+    {
+      "name": "all-media-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/all-media-dark.png",
+      "sha256": "9c71cfe7a77f71b7a57d53e1b2c5cf588246143a440e19dbb808d036ccd8a481",
+      "recording_seconds": 113.29
+    },
+    {
+      "name": "all-media-result-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/all-media-result-dark.png",
+      "sha256": "c42671575aa0175a1d5b1d248750936983f4e69177980fc7e626cde2a1f0c259",
+      "recording_seconds": 117.434
+    },
+    {
+      "name": "continuation-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/continuation-dark.png",
+      "sha256": "69e50bddf3254d9b3d5974d1e4baff37baf8d5cba534585dc5fe9106649bc983",
+      "recording_seconds": 120.612
+    },
+    {
+      "name": "continuation-result-dark",
+      "file": "docs/media/studio-154/synthetic-firefox-2026-11-05T23-38-59-730Z/continuation-result-dark.png",
+      "sha256": "99b13693f771c12093bc56b559c1892e385f0e2828a1d040fb159fffcf1548d1",
+      "recording_seconds": 124.404
+    }
+  ],
+  "submissions": [
+    {
+      "body": {
+        "model": "comfy-3080-34-lustify-2d7246",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "A friendly small lime-green toy robot, clean white background, soft studio light, no text.",
+          "media": [
+            {
+              "slot": "reference_image_1",
+              "asset_id": "asset_b8a8fc74ef3044e3917b56b88d627e52"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "512x512",
+          "quality": "standard"
+        },
+        "client_request_id": "4BtTVSKIoONrgAewtVjpa"
+      },
+      "job_id": "job_1ad4631e996a42cdbad5a95cc532c2b6"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-03-soulx-cafe-4156b3",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_04b5756446d2431aa41abd85964a6753"
+            },
+            {
+              "slot": "speaker_2",
+              "asset_id": "asset_ef87795077f44a4291e03bd9641615bb"
+            }
+          ],
+          "texts": {
+            "dialogue": "Example text",
+            "speaker_1_transcript": "Example text",
+            "speaker_2_transcript": "Example text"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard",
+          "seconds": 30
+        },
+        "client_request_id": "MPh6sdCzHKKDxiSFi1D5J"
+      },
+      "job_id": "job_509206ddccf840ec82a00393015bb66b"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-mv-sam3d-6816bd",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "back",
+              "asset_id": "asset_3e90403113da434b90d1e9ec55517bd8"
+            },
+            {
+              "slot": "front",
+              "asset_id": "asset_fd5af7b5167845aba8af234007d0367b"
+            },
+            {
+              "slot": "left",
+              "asset_id": "asset_de399ce0b1cf45bcace795d0b524aa6e"
+            },
+            {
+              "slot": "right",
+              "asset_id": "asset_95444e9995034cd1a71654f32457555a"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard"
+        },
+        "client_request_id": "KGfBZSJcdx0nznMBPnCSB"
+      },
+      "job_id": "job_aa0a09b306a44090927795fea54f8731"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-ultrashape1-7d4ac1",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "coarse_mesh",
+              "asset_id": "asset_54ee003543ee45eeada201c4148c42c1"
+            },
+            {
+              "slot": "source_image",
+              "asset_id": "asset_98391db7218e4050a4b7fcaf36a73e03"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard"
+        },
+        "client_request_id": "b0MBrdWVDQdL14NG-4zmv"
+      },
+      "job_id": "job_31c37bb2721e4c8db6e72971c7481f06"
+    },
+    {
+      "body": {
+        "model": "synthetic-multimodal-154",
+        "task_type": "text_to_video",
+        "input": {
+          "media": [
+            {
+              "slot": "source_image",
+              "asset_id": "asset_b92f26f780c34375a1d214d35f25ee3e"
+            },
+            {
+              "slot": "source_video",
+              "asset_id": "asset_03a5f1a84dd5401c8da49612ff7c8151"
+            },
+            {
+              "slot": "reference_audio",
+              "asset_id": "asset_7ca3197be85940ab875ca9ccb1be0ac0"
+            },
+            {
+              "slot": "source_mesh",
+              "asset_id": "asset_25a6855209e24b76a011b6ec6546a260"
+            }
+          ],
+          "texts": {
+            "dialogue": "合成台词，仅用于测试。"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "320x240",
+          "seconds": 0.5,
+          "n": 1
+        },
+        "client_request_id": "ND_1RXzg-Ida1PbktLBZE"
+      },
+      "job_id": "job_b47f1ba7c3e74d09a4f2ebf167eebae3"
+    },
+    {
+      "body": {
+        "model": "studio-image-v1",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "A friendly small lime-green toy robot, clean white background, soft studio light, no text.",
+          "context": {
+            "job_id": "job_ffffffffffffffffffffffffffffffff"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "320x240",
+          "seconds": 0.5,
+          "n": 1
+        },
+        "client_request_id": "QR5_2XO_7W1A_qFIo6aBZ"
+      },
+      "job_id": "job_d17401b1c0884d049504941211b6dbe7"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-34-lustify-2d7246",
+        "task_type": "image_to_image",
+        "input": {
+          "prompt": "A friendly small lime-green toy robot, clean white background, soft studio light, no text.",
+          "media": [
+            {
+              "slot": "reference_image_1",
+              "asset_id": "asset_b0ae0434b38c48d8abf49fc4629b8dd8"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "size": "512x512",
+          "quality": "standard"
+        },
+        "client_request_id": "y8BQIebqe0zB6UtobRN4F"
+      },
+      "job_id": "job_12dcbc4586df459e95a2608c156853d4"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-03-soulx-cafe-4156b3",
+        "task_type": "text_to_audio",
+        "input": {
+          "media": [
+            {
+              "slot": "speaker_1",
+              "asset_id": "asset_94272ed9215747b285ca61bbc03c5a16"
+            },
+            {
+              "slot": "speaker_2",
+              "asset_id": "asset_5b1b7d4424a14dcda2c5fa553bebd34b"
+            }
+          ],
+          "texts": {
+            "dialogue": "Example text",
+            "speaker_1_transcript": "Example text",
+            "speaker_2_transcript": "Example text"
+          }
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard",
+          "seconds": 30
+        },
+        "client_request_id": "QDPhiXHWaDJ3MrobB4yYs"
+      },
+      "job_id": "job_1a47612a931d491a89fed2c9ac3e0090"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-mv-sam3d-6816bd",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "back",
+              "asset_id": "asset_ce3137a4316a4357b17d3aa37b191e86"
+            },
+            {
+              "slot": "front",
+              "asset_id": "asset_4a26cfd491d14ad3b73daa74b9fe62a8"
+            },
+            {
+              "slot": "left",
+              "asset_id": "asset_920b71d488654822b1f36f52c9877e2e"
+            },
+            {
+              "slot": "right",
+              "asset_id": "asset_0579de6f6a764d6ca3174e3af7759c83"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard"
+        },
+        "client_request_id": "hnurQiRbDH5C_OqpDexaN"
+      },
+      "job_id": "job_1ad29f517c6f438d905a0fa858212a38"
+    },
+    {
+      "body": {
+        "model": "comfy-3080-ultrashape1-7d4ac1",
+        "task_type": "image_to_3d",
+        "input": {
+          "media": [
+            {
+              "slot": "coarse_mesh",
+              "asset_id": "asset_a5f6a7bbebb9487aa853884ad3595274"
+            },
+            {
+              "slot": "source_image",
+              "asset_id": "asset_51fbed83ba264b3cb1b5d8cc90fae51d"
+            }
+          ]
+        },
+        "parameters": {
+          "n": 1,
+          "quality": "standard"
+        },
+        "client_request_id": "8NyYsoehTIoN0h2so_EjJ"
+      },
+      "job_id": "job_6b51fc3f8c684f28b9be1056fb6d983c"
+    },
+    {
+      "body": {
+        "model": "synthetic-multimodal-154",
+        "task_type": "text_to_video",
+        "input": {
+          "media": [
+            {
+              "slot": "source_image",
+              "asset_id": "asset_7fdd0135393144e299f53e278b2c12fe"
+            },
+            {
+              "slot": "source_video",
+              "asset_id": "asset_675e71fe48fb43a7886ac80e7d2d201c"
+            },
+            {
+              "slot": "reference_audio",
+              "asset_id": "asset_9b21d9acde37449a8eaa6f1ce4825346"
+            },
+            {
+              "slot": "source_mesh",
+              "asset_id": "asset_cba62a88832245d0863dfb7000cc2b31"
+            }
+          ],
+          "texts": {
+            "dialogue": "合成台词，仅用于测试。"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "320x240",
+          "seconds": 0.5,
+          "n": 1
+        },
+        "client_request_id": "AWeE17tJVFm85SCUn7qkV"
+      },
+      "job_id": "job_7c2bbea8f0dc49b1a2ce39a317732b83"
+    },
+    {
+      "body": {
+        "model": "studio-image-v1",
+        "task_type": "text_to_video",
+        "input": {
+          "prompt": "A friendly small lime-green toy robot, clean white background, soft studio light, no text.",
+          "context": {
+            "job_id": "job_ffffffffffffffffffffffffffffffff"
+          }
+        },
+        "parameters": {
+          "quality": "standard",
+          "size": "320x240",
+          "seconds": 0.5,
+          "n": 1
+        },
+        "client_request_id": "FqeP38x-yJarxk-KDFFDG"
+      },
+      "job_id": "job_7e3d2557e92f424c87b3f8487e6ecf46"
+    }
+  ],
+  "uploads": [
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_b8a8fc74ef3044e3917b56b88d627e52"
+    },
+    {
+      "kind": "audio",
+      "bytes": 14641,
+      "media_type": "audio/flac",
+      "id": "asset_04b5756446d2431aa41abd85964a6753"
+    },
+    {
+      "kind": "audio",
+      "bytes": 14641,
+      "media_type": "audio/flac",
+      "id": "asset_ef87795077f44a4291e03bd9641615bb"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_3e90403113da434b90d1e9ec55517bd8"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_fd5af7b5167845aba8af234007d0367b"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_de399ce0b1cf45bcace795d0b524aa6e"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_95444e9995034cd1a71654f32457555a"
+    },
+    {
+      "kind": "model",
+      "bytes": 384,
+      "media_type": "model/gltf-binary",
+      "id": "asset_54ee003543ee45eeada201c4148c42c1"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_98391db7218e4050a4b7fcaf36a73e03"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_b92f26f780c34375a1d214d35f25ee3e"
+    },
+    {
+      "kind": "video",
+      "bytes": 3120,
+      "media_type": "video/mp4",
+      "id": "asset_03a5f1a84dd5401c8da49612ff7c8151"
+    },
+    {
+      "kind": "audio",
+      "bytes": 14641,
+      "media_type": "audio/flac",
+      "id": "asset_7ca3197be85940ab875ca9ccb1be0ac0"
+    },
+    {
+      "kind": "model",
+      "bytes": 384,
+      "media_type": "model/gltf-binary",
+      "id": "asset_25a6855209e24b76a011b6ec6546a260"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_b0ae0434b38c48d8abf49fc4629b8dd8"
+    },
+    {
+      "kind": "audio",
+      "bytes": 14641,
+      "media_type": "audio/flac",
+      "id": "asset_94272ed9215747b285ca61bbc03c5a16"
+    },
+    {
+      "kind": "audio",
+      "bytes": 14641,
+      "media_type": "audio/flac",
+      "id": "asset_5b1b7d4424a14dcda2c5fa553bebd34b"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_ce3137a4316a4357b17d3aa37b191e86"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_4a26cfd491d14ad3b73daa74b9fe62a8"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_920b71d488654822b1f36f52c9877e2e"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_0579de6f6a764d6ca3174e3af7759c83"
+    },
+    {
+      "kind": "model",
+      "bytes": 384,
+      "media_type": "model/gltf-binary",
+      "id": "asset_a5f6a7bbebb9487aa853884ad3595274"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_51fbed83ba264b3cb1b5d8cc90fae51d"
+    },
+    {
+      "kind": "image",
+      "bytes": 81,
+      "media_type": "image/png",
+      "id": "asset_7fdd0135393144e299f53e278b2c12fe"
+    },
+    {
+      "kind": "video",
+      "bytes": 3120,
+      "media_type": "video/mp4",
+      "id": "asset_675e71fe48fb43a7886ac80e7d2d201c"
+    },
+    {
+      "kind": "audio",
+      "bytes": 14641,
+      "media_type": "audio/flac",
+      "id": "asset_9b21d9acde37449a8eaa6f1ce4825346"
+    },
+    {
+      "kind": "model",
+      "bytes": 384,
+      "media_type": "model/gltf-binary",
+      "id": "asset_cba62a88832245d0863dfb7000cc2b31"
+    }
+  ],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "web_closed": true,
+    "synthetic_api_closed": true
+  },
+  "scope": "Owned native browser UI against an independent synthetic API using actual public model schemas plus labelled multimodal/continuation fixtures; no GPU execution.",
+  "inspect_only": false,
+  "browser_engine": "firefox",
+  "native_browser": {
+    "engine": "firefox",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1543",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/firefox-1543/firefox/firefox.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false,
+    "reused_owned_profile": false
+  },
+  "browser_version": "155.0",
+  "cold_start_form_observation_ms": 60000,
+  "local_artifacts": [
+    {
+      "job_id": "job_1ad4631e996a42cdbad5a95cc532c2b6",
+      "content_id": "content_e3d0b0fe4a9a43d2975f9c2f13bda426",
+      "bytes": 81,
+      "media_type": "image/png",
+      "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_509206ddccf840ec82a00393015bb66b",
+      "content_id": "content_745c032f3c6e48e49ed6b61d84b37c93",
+      "bytes": 3465,
+      "media_type": "audio/mpeg",
+      "sha256": "370d73dfa72188ec669c2b019aeb415092910fbaea686f2f018ae022af98f5a9",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_aa0a09b306a44090927795fea54f8731",
+      "content_id": "content_d91ef1ecaa9849868037799785f23156",
+      "bytes": 384,
+      "media_type": "model/gltf-binary",
+      "sha256": "3cace8a7b35a60d93efc5ea0f6581eac5af0640c591dd508063ae482bb8cd7d6",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_31c37bb2721e4c8db6e72971c7481f06",
+      "content_id": "content_ce43cded37f54eeb9293e2aef52db8c6",
+      "bytes": 384,
+      "media_type": "model/gltf-binary",
+      "sha256": "3cace8a7b35a60d93efc5ea0f6581eac5af0640c591dd508063ae482bb8cd7d6",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_b47f1ba7c3e74d09a4f2ebf167eebae3",
+      "content_id": "content_477f6b9bb42f4045b897d13ff0a184a4",
+      "bytes": 3120,
+      "media_type": "video/mp4",
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_d17401b1c0884d049504941211b6dbe7",
+      "content_id": "content_66f255a1349b483597568edc4ba1b5cf",
+      "bytes": 3120,
+      "media_type": "video/mp4",
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_12dcbc4586df459e95a2608c156853d4",
+      "content_id": "content_f29e3acbd47b40189106611d0be7483a",
+      "bytes": 81,
+      "media_type": "image/png",
+      "sha256": "67eb6d1989e58c249254c7e817488e0b75c031eb8bf3ee5ff3e13d3f7ee344bf",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_1a47612a931d491a89fed2c9ac3e0090",
+      "content_id": "content_89446410f4f648e8a8448c871c5b617b",
+      "bytes": 3465,
+      "media_type": "audio/mpeg",
+      "sha256": "370d73dfa72188ec669c2b019aeb415092910fbaea686f2f018ae022af98f5a9",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_1ad29f517c6f438d905a0fa858212a38",
+      "content_id": "content_858b46c4f79f4912a28ab51cbf280c0b",
+      "bytes": 384,
+      "media_type": "model/gltf-binary",
+      "sha256": "3cace8a7b35a60d93efc5ea0f6581eac5af0640c591dd508063ae482bb8cd7d6",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_6b51fc3f8c684f28b9be1056fb6d983c",
+      "content_id": "content_88bc778542d44cbfaaf3b15edee53fba",
+      "bytes": 384,
+      "media_type": "model/gltf-binary",
+      "sha256": "3cace8a7b35a60d93efc5ea0f6581eac5af0640c591dd508063ae482bb8cd7d6",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_7c2bbea8f0dc49b1a2ce39a317732b83",
+      "content_id": "content_fae3c5b607164344ae7d27954d31c7cf",
+      "bytes": 3120,
+      "media_type": "video/mp4",
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    },
+    {
+      "job_id": "job_7e3d2557e92f424c87b3f8487e6ecf46",
+      "content_id": "content_c1853808fe364832bfc9bd8b02888269",
+      "bytes": 3120,
+      "media_type": "video/mp4",
+      "sha256": "d494d5779c58245ee3a5227895cbf3cd0b78bee057dbbc26fe20d8908222f74c",
+      "journal_version": 5,
+      "committed_original_verified": true,
+      "rendered_media_verified": true
+    }
+  ],
+  "resource_close_errors": [],
+  "recording_private": ".local/studio154/synthetic-firefox-2026-11-05T23-38-59-730Z/complete.webm",
+  "static_bytes_unchanged": true
+}

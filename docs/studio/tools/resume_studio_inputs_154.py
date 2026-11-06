@@ -12,9 +12,11 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ROOT = Path(__file__).resolve().parents[2]
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('label', choices=['text-image', 'named-edit', 'named-music'])
+parser.add_argument('label', help='Exact existing submission label; never creates a generation request.')
 parser.add_argument('--wait', action='store_true')
 args = parser.parse_args()
+if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', args.label):
+    parser.error('Expected an existing lower-case submission label.')
 private = ROOT / '.local/studio-ops'
 connection = json.loads((private / 'canvas-154-connection.json').read_text(encoding='utf-8'))
 marker_file = private / f'canvas-154-once-{args.label}.json'

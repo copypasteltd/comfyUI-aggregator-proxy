@@ -1,0 +1,118 @@
+{
+  "passed": true,
+  "at": "2026-11-05T23:29:35.082Z",
+  "source_sha256": "437d1970d4da3f78d0ac00af8f88c42e606398da379869bfc5b5c418b3770cec",
+  "build_report": "docs/research/studio-implementation/clean-build-2026-11-05T22-00-59-732Z.json",
+  "real_business_api": true,
+  "public_static_site": true,
+  "checks": [
+    "business connection discovers actual usage 1.0 and 1.1 without exposing the Key",
+    "all 45 discovered models have usable published descriptions",
+    "recovery155-video-first-frame light: explicit submission validates and artifact returns to canvas",
+    "recovery155-video-two-references light: explicit submission validates and artifact returns to canvas"
+  ],
+  "screenshots": [
+    {
+      "name": "models-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T23-29-32-996Z/models-light.png",
+      "sha256": "3921f77f5e0a013133affe46213bb34841494136204eae1613a36188ef98b405",
+      "recording_seconds": 10.063
+    },
+    {
+      "name": "recovery155-video-first-frame-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T23-29-32-996Z/recovery155-video-first-frame-light.png",
+      "sha256": "7869fd94aa68841f094b90e013e39fd55ae3c0526b898098c2ac138cf6d8e3b6",
+      "recording_seconds": 13.819
+    },
+    {
+      "name": "recovery155-video-first-frame-result-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T23-29-32-996Z/recovery155-video-first-frame-result-light.png",
+      "sha256": "12583438d8dd50c4a75eaaabee88b3871b6805833b1858514b40e6f63016b4ac",
+      "recording_seconds": 73.674
+    },
+    {
+      "name": "recovery155-video-two-references-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T23-29-32-996Z/recovery155-video-two-references-light.png",
+      "sha256": "e1a35544c7356378538878f5f791fbedba4680aa7aac5160799658dbb08ebbcc",
+      "recording_seconds": 76.497
+    },
+    {
+      "name": "recovery155-video-two-references-result-light",
+      "file": "docs/media/studio-154/live-chromium-2026-11-05T23-29-32-996Z/recovery155-video-two-references-result-light.png",
+      "sha256": "c4cccf74e2bb7a4b11736af4124b61d2703809a96650a209a07171fa98d5a517",
+      "recording_seconds": 381.434
+    }
+  ],
+  "submissions": [
+    {
+      "job_id": "job_7d3bf31572e54d459bcd449f8a5307c1",
+      "model": "comfy-5070-video-h3-i2v",
+      "status": "queued",
+      "final_status": "succeeded",
+      "error": null
+    },
+    {
+      "job_id": "job_9596f0dee58047bc88d4027e731767fb",
+      "model": "comfy-5070-video-h3-refs",
+      "status": "queued",
+      "final_status": "succeeded",
+      "error": null
+    }
+  ],
+  "uploads": [],
+  "errors": [],
+  "page_errors": [],
+  "cleanup": {
+    "page_closed": true,
+    "context_closed": true,
+    "browser_closed": true,
+    "web_closed": true,
+    "synthetic_api_closed": true
+  },
+  "scope": "Explicit real browser submissions through the unchanged original API; not every model, fleet or browser acceptance.",
+  "inspect_only": false,
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 1,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false
+  },
+  "browser_version": "153.0.8010.12",
+  "cold_start_form_observation_ms": 60000,
+  "staged_source_inputs": [
+    {
+      "model": "comfy-5070-video-h3-i2v",
+      "slot": "input.references[0]",
+      "file": "docs/media/studio-131/image.png",
+      "mime_type": "image/png",
+      "bytes": 931820,
+      "sha256": "8db0e1fa7d3b76a20cca863c927981deb0b08e0c550b747ebada8555f3b9f687"
+    },
+    {
+      "model": "comfy-5070-video-h3-refs",
+      "slot": "input.references[0]",
+      "file": "docs/media/studio-131/image.png",
+      "mime_type": "image/png",
+      "bytes": 931820,
+      "sha256": "8db0e1fa7d3b76a20cca863c927981deb0b08e0c550b747ebada8555f3b9f687"
+    },
+    {
+      "model": "comfy-5070-video-h3-refs",
+      "slot": "input.references[1]",
+      "file": "docs/media/studio-131/edit.png",
+      "mime_type": "image/png",
+      "bytes": 698598,
+      "sha256": "1745b287c495b1d38d3f86d184b5c16c881c51cb54fe006ba9e0f781a496e82f"
+    }
+  ],
+  "resource_close_errors": [],
+  "recording_private": ".local/studio154/live-chromium-2026-11-05T23-29-32-996Z/complete.webm",
+  "static_bytes_unchanged": true
+}

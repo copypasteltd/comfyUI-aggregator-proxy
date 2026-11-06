@@ -9,7 +9,7 @@ export const webEngine = process.argv.find((value) => value.startsWith('--browse
 assert(['chromium', 'firefox', 'webkit'].includes(webEngine));
 export const webEngineArgument = (value) => value === '--browser=' + webEngine || value.startsWith('--sdk=');
 
-export async function launchStudioWebBrowser({ root, temporary, report, args = [] }) {
+export async function launchStudioWebBrowser({ root, temporary, report, args = [], existingProfile }) {
     const require = createRequire(path.join(root, 'infinite-canvas/web/package.json'));
     const sdk = process.argv.find((value) => value.startsWith('--sdk='))?.slice(6) || 'D:/dev/copypasted/戴登移民/dev/node_modules/playwright-core';
     const playwright = require(sdk), metadataBytes = await readFile(path.join(sdk, 'browsers.json'));
@@ -25,6 +25,10 @@ export async function launchStudioWebBrowser({ root, temporary, report, args = [
     const actual = await realpath(temporary), relative = path.relative(localRoot, actual);
     assert(relative && !relative.startsWith('..') && !path.isAbsolute(relative));
     const runtime = path.join(junction, relative); assert.equal(await realpath(runtime), actual);
+    if (existingProfile) {
+        assert.equal(path.dirname(await realpath(existingProfile)), actual, 'Only an exact profile from this owned session may be resumed');
+        assert(/^profile-[a-f0-9-]{36}$/.test(path.basename(existingProfile)));
+    }
     process.env.TEMP = runtime; process.env.TMP = runtime;
     const contexts = [], browsers = [];
     report.browser_engine = webEngine;
@@ -35,7 +39,10 @@ export async function launchStudioWebBrowser({ root, temporary, report, args = [
         test_observation_timeout_ms: 20000, product_timeouts_changed: false };
     return {
         async newContext(options) {
-            const profile = path.join(runtime, 'profile-' + randomUUID()); await mkdir(profile);
+            assert(!existingProfile || contexts.length === 0, 'An owned profile can have only one open context');
+            const profile = existingProfile ? path.join(runtime, path.basename(existingProfile)) : path.join(runtime, 'profile-' + randomUUID());
+            if (!existingProfile) await mkdir(profile);
+            report.native_browser.reused_owned_profile = Boolean(existingProfile);
             const context = await playwright[webEngine].launchPersistentContext(profile, {
                 executablePath, headless: true, ...options,
                 ...(webEngine === 'chromium' ? { args } : {}),

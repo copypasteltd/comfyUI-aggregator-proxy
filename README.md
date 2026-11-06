@@ -4,7 +4,7 @@
 
 基于 [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas) 二次开发的独立 Web 创作画布。复用原有拖拽、缩放、节点、连线和项目管理，适配现有 ComfyUI 聚合 API 的模型、参考输入、异步任务与产物。浏览器直接调用原 API，无须新增生成后端、队列或 GPU 代理。
 
-当前已部署 **154.1**。本轮修复了实时目录中34个usage 1.1模型被旧画布拒绝的问题：45个模型及50组公开规格均通过映射验证，并适配命名图片/视频/音频/GLB输入、专用文本及兼容父任务。真实生图曾受理并排队，随后原任务到期，未产出素材；真实生成验收未通过。详见[本轮实现和验收](docs/studio/38-现有API新版输入适配与整轮验收.md)。
+当前已部署 **154.1**。已适配实时目录的45个模型、50组规格及usage 1.0/1.1命名素材、文本和兼容父任务。设备恢复后，文生图、命名参考编辑、Workflow音乐、首帧视频、双参考视频五项真实生成及画布取件均已通过；旧失败记录保留。当前结果见[恢复与真实验收](docs/studio/39-设备恢复与真实生成补充验收.md)，实现细节见[文档38](docs/studio/38-现有API新版输入适配与整轮验收.md)。
 
 | 画布 | 原业务 API | 管理后台 |
 | --- | --- | --- |
@@ -85,12 +85,22 @@ npm run dev
 
 `managed`表示使用既有聚合API并禁用上游任意脚本/插件/本地Agent，仍是独立静态部署。用户禁止本地Docker、WSL和虚拟机。沿用高位HTTP端口，域名反代由用户处理；不增加HTTPS门槛，不修改原API任意源CORS。静态更新只切画布目录，保留数据与旧页面资源，不重启原API。详细操作及兼容恢复限制见[部署文档](docs/studio/21-独立画布部署与使用.md)。
 
+## 本次真实生成
+
+| 文生图 | 命名素材参考编辑 |
+| --- | --- |
+| ![真实文生图](docs/studio/media/studio-155/text-image.png) | ![真实参考编辑](docs/studio/media/studio-155/named-edit.png) |
+
+![真实视频取件与刷新](docs/studio/media/studio-155/video-recovery.gif)
+
+[首帧视频原件](docs/studio/media/studio-155/video-first-frame.mp4) · [双参考视频原件](docs/studio/media/studio-155/video-two-references.mp4) · [Workflow音乐原件](docs/studio/media/studio-155/named-music.flac) · [完整生成页面MP4](docs/studio/media/studio-155/image-audio-generation.mp4) · [生成页面GIF](docs/studio/media/studio-155/image-audio-generation.gif)。视频取件演示使用原成功任务，不再提交生成；记录及准确范围见[文档39](docs/studio/39-设备恢复与真实生成补充验收.md)。
+
 ## 当前验证与限制
 
-- 本轮279项单元、类型检查和生产构建通过；45个实际模型、50组规格通过契约映射。Chromium明暗各6次命名输入/续拍表单与回填通过，八类旧案例回归通过。Firefox新版命名输入页面通过。四类素材混合及续拍使用明确标注的合成模型，不冒充已上线模型。
-- 独立静态154.1的全部124个文件及保留资源、页面路由已核对；原API源代码、指针、配置和服务不改，继续使用高位HTTP端口和现有任意源CORS。
-- 本轮真实生图已返回原任务ID，10分钟观察期内持续排队，随后只读复查为expired；没有本轮新GPU产物，也未补发替代生成。后续只读检查确认原任务执行尝试为0；3080有较早的不确定占用且渠道/绑定验证不完整，详见文档38。参考编辑/音频的真实设备验收未签收，历史多参考视频的 `preparation_transport_failure` 仍保留。
-- 历史真实图像、视频、Workflow音频和GLB记录可查，但不代表当前45模型全部重新执行。Windows WebKit诊断失败、实际Safari及真机触摸未验，390px仅视口模拟。更多浏览器/编码、原API的10～20台容量不是缺少画布前端功能。
+- 冻结154.1源码的279单元、类型检查和生产构建通过；45模型/50规格映射和八类旧案例已验证。本次更严格的Chromium、Firefox检查各完成12次明暗表单与回填，逐件核对已提交Blob的长度、MIME和SHA。混合命名视频/GLB输入及续拍的组合仍明确使用合成模型。
+- 154.1静态文件、原存储v5、04·青柠和原API源码/云端配置保留。经用户授权仅对3080做一次普通主机重启，并通过原Admin恢复3080的39个和5070的3个已批准绑定；不是发布新模型或修改调度。
+- 五类真实生成、实际画布回填、独立下载和原profile刷新均通过。旧排队到期任务和历史视频准备失败保持原记录；旧未知执行以execution_host_restarted安全失败收口，不冒充生成成功。详见文档39。
+- 本次不是45个模型全部重新执行，也不是10～20台容量验收。尚未发布的命名视频/续拍需要原API提供对应模型；Windows WebKit诊断失败、实际Safari及真机触摸未验。390px是视口模拟；这些验证边界不等于新增前端开发项。
 
 
 [核心清单及具体问题](docs/studio/37-交付范围纠正与核心适配现状.md) · [当前进度](docs/studio/10-开发进度与交付记录.md) · [历史交付明细](docs/studio/history/10-历史交付与46项评估.md)。后续只处理明确需求与实际缺陷，相关说明同步到授权远端`feat/independent-canvas`；不推上游、不修改main或原API分支。

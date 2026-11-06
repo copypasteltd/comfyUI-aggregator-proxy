@@ -9,6 +9,7 @@ import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { launchStudioWebBrowser, webEngine } from './studio_web_browser.mjs';
+import { assertStudioArtifact } from './studio_artifact_assertions.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url)), webRoot = path.join(root, 'infinite-canvas/web');
 const require = createRequire(path.join(webRoot, 'package.json')), sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -21,6 +22,13 @@ for (const [file, digest] of Object.entries(build.static_artifact_sha256)) asser
 const live = process.argv.includes('--live'), publicSite = process.argv.includes('--public');
 const inspectOnly = process.argv.includes('--inspect-only'); assert(!inspectOnly || live);
 const only = process.argv.find((arg) => arg.startsWith('--only='))?.slice(7);
+const livePlanFile = process.argv.find((arg) => arg.startsWith('--live-plan='))?.slice(12);
+const livePlan = livePlanFile ? JSON.parse(await readFile(path.resolve(root, livePlanFile), 'utf8')) : null;
+if (livePlan) {
+    assert(live && Array.isArray(livePlan) && livePlan.length);
+    assert.equal(new Set(livePlan.map((item) => item.label)).size, livePlan.length);
+    for (const item of livePlan) assert(/^[a-z0-9-]+$/.test(item.label) && typeof item.model === 'string');
+}
 const stamp = `${live ? 'live' : 'synthetic'}-${webEngine}-${new Date().toISOString().replaceAll(/[:.]/g, '-')}`;
 const temporary = path.join(root, '.local/studio154', stamp), media = path.join(root, 'docs/media/studio-154', stamp);
 await mkdir(temporary, { recursive: true }); await mkdir(media, { recursive: true });
@@ -69,7 +77,7 @@ async function openModel(model) {
     await page.locator('[data-canvas-title]').waitFor();
     await page.locator('.studio-composer').getByRole('combobox', { name: '生成模型', exact: true }).waitFor();
 }
-async function fillForm(model, negative = false) {
+async function fillForm(model, negative = false, files = {}) {
     const drawer = page.locator('.studio-composer'), usage = model.usage;
     if (usage.request_schema.properties.input.properties.prompt) await drawer.getByRole('textbox', { name: '创作描述', exact: true }).fill('A friendly small lime-green toy robot, clean white background, soft studio light, no text.');
     for (const slot of usage.text_slots || []) {
@@ -87,9 +95,18 @@ async function fillForm(model, negative = false) {
         await drawer.getByText(/类型或文件大小不符合/).waitFor(); assert.equal(report.uploads.length, before); check('wrong file kind is rejected locally before any upload');
     }
     for (const slot of slots.filter((slot) => slot.required)) {
-        const source = sources.get(slot.mime_types[0]) || sources.get([...sources.keys()].find((mime) => slot.mime_types.includes(mime))); assert(source, slot.name || slot.path);
+        const declared = files[slot.path];
+        let source = sources.get(slot.mime_types[0]) || sources.get([...sources.keys()].find((mime) => slot.mime_types.includes(mime))), mime;
+        if (declared) {
+            assert(live && slot.mime_types.includes(declared.mime_type));
+            const file = path.resolve(root, declared.file); assert(!relative(file).startsWith('../'));
+            const bytes = await readFile(file); assert.equal(sha(bytes), declared.sha256);
+            source = { bytes, name: path.basename(file), path: file }; mime = declared.mime_type;
+            (report.staged_source_inputs ||= []).push({ model: model.id, slot: slot.path, file: relative(file), mime_type: mime, bytes: bytes.length, sha256: declared.sha256 });
+        }
+        assert(source, slot.name || slot.path);
         const field = drawer.locator(`[data-studio-slot="${slot.path}"]`);
-        await field.locator('input[type=file]').setInputFiles({ name: source.name, mimeType: slot.kind === 'model' ? '' : [...sources.entries()].find(([, row]) => row === source)[0], buffer: source.bytes });
+        await field.locator('input[type=file]').setInputFiles({ name: source.name, mimeType: slot.kind === 'model' ? '' : mime || [...sources.entries()].find(([, row]) => row === source)[0], buffer: source.bytes });
         await field.getByText(/已选用/).waitFor();
     }
 }
@@ -157,14 +174,14 @@ try {
     await page.getByPlaceholder('http://服务器:端口').fill(apiOrigin, { timeout: 60000 }); await page.getByPlaceholder('输入管理员提供的 API Key').fill(connection.key); await page.getByRole('button', { name: '连接并读取模型', exact: true }).click(); await page.getByRole('button', { name: '刷新目录', exact: true }).waitFor();
     assert.equal(await page.getByPlaceholder('输入管理员提供的 API Key').inputValue(), ''); check('business connection discovers actual usage 1.0 and 1.1 without exposing the Key');
     await page.getByRole('link', { name: '模型', exact: true }).click(); await page.locator('.studio-model-card').first().waitFor(); assert.equal(await page.locator('.studio-model-card').count(), models.length); assert.equal(await page.locator('.studio-model-warning').count(), 0); await shot('models-light'); check(`all ${models.length} discovered models have usable published descriptions`);
-    const cases = live ? [['text-image', models.find((item) => item.id.includes('11-lustify-v10'))], ['named-edit', models.find((item) => item.id.includes('34-lustify'))], ['named-music', models.find((item) => item.id.includes('01-yue2-full-bf16-abc-music'))]] : [['named-edit', models.find((item) => item.id.includes('34-lustify'))], ['named-voice', models.find((item) => item.id.includes('03-soulx-cafe'))], ['four-views', models.find((item) => item.id.includes('mv-sam3d'))], ['mesh-input', models.find((item) => item.id.includes('ultrashape1'))], ['all-media', mixed.model], ['continuation', models.find((item) => item.id === continuation.example_request.model)]];
+    const cases = livePlan ? livePlan.map((item) => [item.label, models.find((model) => model.id === item.model), item.inputs]) : live ? [['text-image', models.find((item) => item.id.includes('11-lustify-v10'))], ['named-edit', models.find((item) => item.id.includes('34-lustify'))], ['named-music', models.find((item) => item.id.includes('01-yue2-full-bf16-abc-music'))]] : [['named-edit', models.find((item) => item.id.includes('34-lustify'))], ['named-voice', models.find((item) => item.id.includes('03-soulx-cafe'))], ['four-views', models.find((item) => item.id.includes('mv-sam3d'))], ['mesh-input', models.find((item) => item.id.includes('ultrashape1'))], ['all-media', mixed.model], ['continuation', models.find((item) => item.id === continuation.example_request.model)]];
     for (const theme of live ? ['light'] : ['light', 'dark']) {
         if (theme === 'dark') await page.getByRole('button', { name: '切换到深色', exact: true }).click();
-        for (const [label, model] of cases.filter(([name]) => !only || name === only)) {
+        for (const [label, model, files] of cases.filter(([name]) => !only || name === only)) {
             assert(model, label); const before = report.submissions.length;
             await openModel(model);
             if (!live && label === 'all-media') { const uploads = report.uploads.length; await page.getByRole('button', { name: '提交 1 项生成任务', exact: true }).click(); await page.getByText('操作尚未完成', { exact: true }).waitFor(); assert.equal(report.uploads.length, uploads); assert.equal(report.submissions.length, before); check('incomplete form makes zero uploads and zero job submissions'); }
-            await fillForm(model, !live && label === 'all-media'); await shot(label + '-' + theme);
+            await fillForm(model, !live && label === 'all-media', files); await shot(label + '-' + theme);
             if (inspectOnly) { await page.locator('.studio-composer').getByRole('button', { name: '关闭', exact: true }).click(); await page.locator('.studio-composer').waitFor({ state: 'hidden' }); check(`${label}: actual published form inspected without remote upload or generation`); continue; }
             if (live) { currentMarker = path.join(root, '.local/studio-ops/canvas-154-once-' + label + '.json'); await writeFile(currentMarker, JSON.stringify({ model: model.id, temporary: relative(temporary), state: 'prepared; rerun forbidden, inspect original browser journal or job' }), { flag: 'wx' }); }
             await page.getByRole('button', { name: '提交 1 项生成任务', exact: true }).click();
@@ -174,7 +191,7 @@ try {
                 const job = jobs.get(accepted.job_id); report.submissions.at(-1).final_status = job.status; report.submissions.at(-1).error = job.error; assert.equal(job.status, 'succeeded', JSON.stringify(job.error));
             } else await waitFor(() => report.submissions.length === before + 1);
             await page.getByRole('button', { name: '载入产物', exact: true }).click();
-            await page.getByRole('button', { name: '载入产物', exact: true }).waitFor({ state: 'detached' });
+            (report.local_artifacts ||= []).push(await assertStudioArtifact(page, report.submissions.at(-1).job_id, model.usage.output.media_types));
             await shot(label + '-result-' + theme); check(`${label} ${theme}: explicit submission validates and artifact returns to canvas`);
             currentMarker = undefined;
         }
