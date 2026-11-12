@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "scope": "Default HTTPS connection, actual read-only business catalog and unchanged saved connection metadata; no generation or API configuration change",
+  "public_static_site": true,
+  "build_report": "docs/research/studio-implementation/clean-build-2026-11-12T16-15-55-573Z.json",
+  "source_sha256": "d20e0e285116012eba205e22583e265ac1228a48c3fd0bcf0aa4bce243dc489f",
+  "default_api_origin": "https://gen.sub2share.xyz",
+  "requests": [
+    {
+      "url": "https://gen.sub2share.xyz/v1/access-policy",
+      "method": "GET",
+      "cookie_present": false
+    },
+    {
+      "url": "https://gen.sub2share.xyz/v1/models",
+      "method": "GET",
+      "cookie_present": false
+    },
+    {
+      "url": "https://gen.sub2share.xyz/v1/capabilities",
+      "method": "GET",
+      "cookie_present": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/media/studio-156/2026-11-12T16-23-06-976Z/https-default-light.png",
+      "sha256": "2e82230fd3ff4b04d405c3ded3f711fd0b849989e61a679284edc3e33b8c42aa"
+    },
+    {
+      "file": "docs/media/studio-156/2026-11-12T16-23-06-976Z/https-default-dark.png",
+      "sha256": "5ec91367d4b85fd349e620cd0c1d388184973e34a8d86bce09fb89e3887dc2f5"
+    },
+    {
+      "file": "docs/media/studio-156/2026-11-12T16-23-06-976Z/https-models.png",
+      "sha256": "bafc07cd0bfe1c4ffb4c81e98a3bcc15bc382c1b8b0501c851420170b2eeefb3"
+    }
+  ],
+  "checks": [
+    "Fresh connection defaults to HTTPS without automatic business requests.",
+    "Unedited default connects to the real HTTPS catalog; all business requests omit cookies and use /v1/.",
+    "Saved legacy endpoint stays intact and is not contacted or silently migrated."
+  ],
+  "page_errors": [],
+  "cleanup": {
+    "pages_closed": true,
+    "contexts_closed": true,
+    "browser_closed": true,
+    "static_server_closed": true
+  },
+  "virtualization_used": false,
+  "browser_engine": "chromium",
+  "native_browser": {
+    "engine": "chromium",
+    "playwright_version": "1.63.0",
+    "sdk_browser_metadata_sha256": "545d52f8382c391e605562c330e9c1c534a16045898203037a49bb8bd769a946",
+    "native_revision": "1243",
+    "executable": "C:/Users/carzy/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe",
+    "persistent_owned_profiles": true,
+    "ascii_runtime_verified": true,
+    "isolated_profiles": 2,
+    "test_observation_timeout_ms": 20000,
+    "product_timeouts_changed": false,
+    "reused_owned_profile": false
+  },
+  "browser_version": "153.0.8010.12",
+  "models_visible": 45,
+  "static_bytes_unchanged": true,
+  "resource_close_errors": []
+}
