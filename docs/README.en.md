@@ -1,5 +1,7 @@
 # Documentation index
 
+[145 · Unrestricted public CORS](145-公网入口统一开放CORS.md): deployed November 13 across public routes, supporting arbitrary origins, methods, request headers, credentials and private-network preflights. Fixes the previous method/private-network 400 responses and restrictive Skill headers. Nine local checks, 14 server HTTP checks and 76 public HTTP checks pass; all five service master PIDs remain unchanged.
+
 [144 · API progress and live audit](144-API更新进度与运行复核.md): the November 6 high-port HTTP, Admin, database and three-device review passes 72 HTTP checks and 213 candidate usage inspections. There are 45 published models overall; the new batch remains at 34/213, leaving 179 pending. Separates 3080 uncertain occupancy, 4090 nonadministrator access/current work, 135 unlimited daily fields, unconfigured multi-device pools and design-only source cleanup.
 
 [142 · Host restart evidence and uncertain execution](142-主机重启证据与未知执行收口.md): API/3080 checkpoints are deployed and 2,020 selected native regressions pass. The user's no-reboot decision preserves the original task; actual reboot acceptance remains open. See 144 for current observations.

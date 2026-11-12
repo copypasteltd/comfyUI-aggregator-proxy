@@ -1,0 +1,89 @@
+{
+  "format_version": 1,
+  "at": "2026-11-12T16:11:19.149030+00:00",
+  "scope": "Original observed CORS limitations, retained without complete private configuration.",
+  "preflights": [
+    {
+      "path": "/v1/models",
+      "method": "POST",
+      "status": 200,
+      "request_headers": {
+        "Origin": "https://cors-client.invalid",
+        "Access-Control-Request-Method": "POST"
+      },
+      "response_headers": {
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Request-Private-Network",
+        "access-control-allow-methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, QUERY",
+        "access-control-max-age": "600",
+        "access-control-allow-credentials": "true",
+        "access-control-allow-origin": "https://cors-client.invalid"
+      }
+    },
+    {
+      "path": "/v1/models",
+      "method": "PROPFIND",
+      "status": 400,
+      "request_headers": {
+        "Origin": "https://cors-client.invalid",
+        "Access-Control-Request-Method": "PROPFIND"
+      },
+      "response_headers": {
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Request-Private-Network",
+        "access-control-allow-methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, QUERY",
+        "access-control-max-age": "600",
+        "access-control-allow-credentials": "true",
+        "access-control-allow-origin": "https://cors-client.invalid"
+      }
+    },
+    {
+      "path": "/v1/models",
+      "method": "POST",
+      "status": 400,
+      "request_headers": {
+        "Origin": "https://cors-client.invalid",
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Private-Network": "true"
+      },
+      "response_headers": {
+        "vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Request-Private-Network",
+        "access-control-allow-methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, QUERY",
+        "access-control-max-age": "600",
+        "access-control-allow-credentials": "true",
+        "access-control-allow-origin": "https://cors-client.invalid"
+      }
+    },
+    {
+      "path": "/skill.md",
+      "method": "GET",
+      "status": 204,
+      "request_headers": {
+        "Origin": "https://cors-client.invalid",
+        "Access-Control-Request-Method": "GET"
+      },
+      "response_headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+        "Access-Control-Allow-Headers": "If-None-Match, If-Modified-Since",
+        "Access-Control-Expose-Headers": "ETag, Last-Modified, Content-Length"
+      }
+    },
+    {
+      "path": "/skill.md",
+      "method": "GET",
+      "status": 204,
+      "request_headers": {
+        "Origin": "https://cors-client.invalid",
+        "Access-Control-Request-Method": "GET",
+        "Access-Control-Request-Headers": "Authorization,X-Extra-Header"
+      },
+      "response_headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+        "Access-Control-Allow-Headers": "If-None-Match, If-Modified-Since",
+        "Access-Control-Expose-Headers": "ETag, Last-Modified, Content-Length"
+      }
+    }
+  ],
+  "full_acceptance": "pending",
+  "virtualization_used": false
+}

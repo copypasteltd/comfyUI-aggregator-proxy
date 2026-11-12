@@ -1,0 +1,100 @@
+{
+  "at": "2026-11-12T16:18:04.845947+00:00",
+  "passed": true,
+  "scope": "Dedicated public HTTP edge CORS only; actual route/auth/private-ingress controls remain.",
+  "backup": "/var/lib/comfyui-aggregator-deploy/cors-20261112T161804052993Z",
+  "before_sha256": {
+    "nginx.conf": "be99d41647c1a76d145dbec1f7c69b0a6ef739a6fc7ea38a02ac7fd6397d854d",
+    "public-skills.conf": "16b832a9a330c6dfb35d38fa8576d0345ce9cb62ebd3c39c511e1a0344f69566"
+  },
+  "after_sha256": {
+    "nginx.conf": "d025aed15ff05646613bdf90360e9cd492ca8af5390b94503d57bb38e232a69b",
+    "public-skills.conf": "4a0714332791865a6782d822219d1826f7bd2b5d80b2538b1fab103cf5604821"
+  },
+  "application_release": "/opt/comfyui-aggregator/releases/linux-20261104.152.1",
+  "service_pids": {
+    "comfy-aggregator-edge.service": "1132",
+    "comfy-aggregator-api.service": "1128",
+    "comfy-aggregator-runner.service": "1145",
+    "comfy-aggregator-gc.service": "1139",
+    "comfy-aggregator-http-worker.service": "2543"
+  },
+  "service_pids_unchanged": true,
+  "http": {
+    "passed": true,
+    "checks": [
+      {
+        "path": "/v1/models",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "path": "/admin/api/v1/session",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "path": "/studio/",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "path": "/skill.md",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "path": "/skills/media-gen/1.3.0/skill.md",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "path": "/internal/health",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "path": "/missing-cors-check",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "path": "/health/live",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/health/ready",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/admin/",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/studio/",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/skill.md",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/v1/models",
+        "status": 401,
+        "passed": true
+      },
+      {
+        "path": "/internal/health",
+        "status": 404,
+        "passed": true
+      }
+    ]
+  },
+  "virtualization_used": false,
+  "deployed_script_sha256": "2c81954336fa44ec901be5b345bddddddab968761cf4fdff6e0f0eafdbdffc00"
+}

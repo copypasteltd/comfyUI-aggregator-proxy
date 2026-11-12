@@ -1,0 +1,38 @@
+{
+  "format_version": 1,
+  "at": "2026-11-13T00:22:16.670528+08:00",
+  "passed": true,
+  "scope": "Dedicated edge CORS transformation tests and local static checks. Actual Linux configuration/reload and public HTTP are separate reports. No full engineering/GPU acceptance.",
+  "python": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "ruff_passed": true,
+  "mypy_linux_target_passed": true,
+  "deployment_tool_exact_source_installed": true,
+  "source_sha256": {
+    "app/deploy/native-linux/open_cors.py": "2c81954336fa44ec901be5b345bddddddab968761cf4fdff6e0f0eafdbdffc00",
+    "app/deploy/native-linux/public-skills.nginx.conf": "61e552c18c2849a3894b13c84a08fd3e3da92d44090e633270350f402ccbd499",
+    "app/deploy/native-linux/publish-public-skill.py": "ded58df6d4bc2a085918fa6ace0e640e0d6bcfa78121f83e2e6fb6c693e226d9",
+    "app/deploy/native-linux/nginx.conf.example": "497b46d12cda54ce28f571cefd050987fbcb5103f85bc947ea93414fcb4f1cfe",
+    "app/tests/unit/test_public_cors_edge.py": "c5b0fe89b643deb86d5c2d9ceaf4b387e8d9d52ef9b11b34366f53f33dfc63cd"
+  },
+  "private_logs_sha256": {
+    "local-tests-complete.log": "60a669babdbb0cb45cd270652e2a1e22cc3fb4df83b20e18b7c5b3802197f564",
+    "local-tests-complete.xml": "ddab8efe7a2cbeb1a200bbb0e4757b560bc816a363738a06c817a8006b452df3",
+    "ruff.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "ruff-final.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "mypy.log": "3f7a950d6ef1086018ff0f7723a66673eab20af07b99a4e447ea979dad293829",
+    "mypy-linux.log": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+  },
+  "initial_check_observations": [
+    "Ruff initially mistook a lexer variable named token for a password; renamed it lexeme and passed the current-source scan.",
+    "The initial default Windows mypy target has no os.geteuid. Rechecked the Linux-only deployment command with its Linux target and passed; no runtime bypass was added."
+  ],
+  "virtualization_used": false,
+  "browser_tabs_created": 0,
+  "owned_background_services_left": 0,
+  "full_acceptance": "pending"
+}

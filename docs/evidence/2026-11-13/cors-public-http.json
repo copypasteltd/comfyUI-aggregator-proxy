@@ -1,0 +1,675 @@
+{
+  "format_version": 1,
+  "at": "2026-11-13T00:19:06.538908+08:00",
+  "origin": "http://43.165.167.179:39443",
+  "passed": true,
+  "preflight_checks": [
+    {
+      "path": "/v1/jobs",
+      "origin": "https://another-client.invalid",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/jobs",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/jobs",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/jobs",
+      "origin": "http://localhost:5173",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/jobs",
+      "origin": "http://localhost:5173",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/jobs",
+      "origin": "http://localhost:5173",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/jobs",
+      "origin": "null",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/jobs",
+      "origin": "null",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/jobs",
+      "origin": "null",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "https://another-client.invalid",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "http://localhost:5173",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "http://localhost:5173",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "http://localhost:5173",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "null",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "null",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/v1/assets",
+      "origin": "null",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "https://another-client.invalid",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "http://localhost:5173",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "http://localhost:5173",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "http://localhost:5173",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "null",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "null",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/session",
+      "origin": "null",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "https://another-client.invalid",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "http://localhost:5173",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "http://localhost:5173",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "http://localhost:5173",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "null",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "null",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "origin": "null",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "https://another-client.invalid",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "http://localhost:5173",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "http://localhost:5173",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "http://localhost:5173",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "null",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "null",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "origin": "null",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "https://another-client.invalid",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "http://localhost:5173",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "http://localhost:5173",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "http://localhost:5173",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "null",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "null",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/1.3.0/skill.md",
+      "origin": "null",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "https://another-client.invalid",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "https://another-client.invalid",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "http://localhost:5173",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "http://localhost:5173",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "http://localhost:5173",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "null",
+      "requested_method": "POST",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "null",
+      "requested_method": "PATCH",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "origin": "null",
+      "requested_method": "PROPFIND",
+      "private_network": true,
+      "custom_request_headers": true,
+      "status": 204,
+      "passed": true
+    }
+  ],
+  "actual_response_checks": [
+    {
+      "path": "/health/live",
+      "status": 200,
+      "expected_status": 200,
+      "credential_compatible_origin": true,
+      "passed": true
+    },
+    {
+      "path": "/health/ready",
+      "status": 200,
+      "expected_status": 200,
+      "credential_compatible_origin": true,
+      "passed": true
+    },
+    {
+      "path": "/admin/",
+      "status": 200,
+      "expected_status": 200,
+      "credential_compatible_origin": true,
+      "passed": true
+    },
+    {
+      "path": "/studio/",
+      "status": 200,
+      "expected_status": 200,
+      "credential_compatible_origin": true,
+      "passed": true,
+      "csp_preserved": true
+    },
+    {
+      "path": "/skill.md",
+      "status": 200,
+      "expected_status": 200,
+      "credential_compatible_origin": true,
+      "passed": true,
+      "sha256": "ddce149dfc6ad7f713ad4a49c9ee75a57e251055d8471289d34ad115a4e59ee9",
+      "bytes": 46550
+    },
+    {
+      "path": "/v1/models",
+      "status": 401,
+      "expected_status": 401,
+      "credential_compatible_origin": true,
+      "passed": true
+    },
+    {
+      "path": "/admin/api/v1/api-keys",
+      "status": 401,
+      "expected_status": 401,
+      "credential_compatible_origin": true,
+      "passed": true
+    },
+    {
+      "path": "/internal/health",
+      "status": 404,
+      "expected_status": 404,
+      "credential_compatible_origin": true,
+      "passed": true
+    },
+    {
+      "path": "/skills/media-gen/0.0.0/skill.md",
+      "status": 404,
+      "expected_status": 404,
+      "credential_compatible_origin": true,
+      "passed": true
+    },
+    {
+      "path": "/missing-cors-check",
+      "status": 404,
+      "expected_status": 404,
+      "credential_compatible_origin": true,
+      "passed": true
+    },
+    {
+      "path": "/v1/models",
+      "status": 200,
+      "model_count": 45,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "method": "HEAD",
+      "status": 206,
+      "passed": true
+    },
+    {
+      "path": "/skill.md",
+      "method": "GET",
+      "range": true,
+      "status": 206,
+      "passed": true
+    }
+  ],
+  "checks_total": 76,
+  "tls_tested": false,
+  "browser_tabs_created": 0,
+  "virtualization_used": false,
+  "generation_submitted": false,
+  "credentials_published": false
+}

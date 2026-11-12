@@ -18,6 +18,27 @@ http {
     server {
         listen 39443;
         server_name PUBLIC_HOST;
+        # Managed unrestricted public CORS 145
+        add_header Access-Control-Allow-Origin $http_origin always;
+        add_header Access-Control-Allow-Credentials "true" always;
+        add_header Access-Control-Allow-Methods $http_access_control_request_method always;
+        add_header Access-Control-Allow-Headers $http_access_control_request_headers always;
+        add_header Access-Control-Allow-Private-Network "true" always;
+        add_header Access-Control-Expose-Headers "X-Request-ID, X-Studio-Contract, X-Studio-Submission-Lookup, ETag, Last-Modified, Retry-After, Content-Range, Accept-Ranges, Content-Disposition, Content-Length, Content-Type" always;
+        add_header Access-Control-Max-Age 600 always;
+        add_header Vary "Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Request-Private-Network" always;
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        proxy_hide_header Access-Control-Allow-Methods;
+        proxy_hide_header Access-Control-Allow-Headers;
+        proxy_hide_header Access-Control-Allow-Private-Network;
+        proxy_hide_header Access-Control-Expose-Headers;
+        proxy_hide_header Access-Control-Max-Age;
+        set $comfy_public_cors_preflight 0;
+        if ($request_method = OPTIONS) { set $comfy_public_cors_preflight 1; }
+        if ($http_origin = "") { set $comfy_public_cors_preflight 0; }
+        if ($http_access_control_request_method = "") { set $comfy_public_cors_preflight 0; }
+        if ($comfy_public_cors_preflight = 1) { return 204; }
         location = / { return 302 /admin/; }
         location = /internal { return 404; }
         location ^~ /internal/ { return 404; }

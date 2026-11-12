@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-13 · Unrestricted public CORS / 公网入口统一开放跨域
+
+- Remove the remaining public CORS restrictions: arbitrary preflight methods, request headers and private-network requests now return 204. Reflect the actual origin and allow credentials across API, Admin, Studio, Skill and error responses; hide duplicate upstream CORS headers while preserving authentication, route methods, CSP and private listeners.
+- Add a native edge configuration tool with inspected SHA-256 guards, restricted backups, configuration validation, graceful reload and rollback. Keep new-install and Skill templates plus future publisher checks consistent. The installed application remains 152.1, all five service master PIDs are preserved, and Skill 1.3.0 bytes remain unchanged.
+- Pass nine local configuration tests, Ruff/Linux-target mypy, 14 server HTTP checks and 76 independent public HTTP checks. Record the original failures and validation boundaries. No generation, database migration, Key change, Windows reboot, browser session or user reverse-proxy modification is performed.
+
 ## 2026-11-06 · API progress audit / API 更新进度复核
 
 - Recheck actual high-port HTTP, Admin, PostgreSQL, system services, native Windows state and all three ComfyUI queues. Pass 72 HTTP checks, inspect all 213 live candidate usage documents and verify the deployed Skill against immutable 1.3.0 bytes. Recheck all three unlimited Keys and all 135 daily fields across 25 nondeleted Keys and their tenant/project.

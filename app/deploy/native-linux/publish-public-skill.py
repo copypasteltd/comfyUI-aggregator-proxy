@@ -84,14 +84,18 @@ def verify_http(version: str, data: bytes) -> dict[str, object]:
     status, headers, body = request("/skill.md", headers={"Origin": "https://any-origin.example"})
     assert status == 200 and body == data
     assert headers["content-type"] == "text/markdown; charset=utf-8"
-    assert headers["cache-control"] == "no-cache" and headers["access-control-allow-origin"] == "*"
+    assert headers["cache-control"] == "no-cache" and headers["access-control-allow-origin"] == "https://any-origin.example"
+    assert headers["access-control-allow-credentials"] == "true"
     assert headers["x-content-type-options"] == "nosniff" and headers.get("etag")
     status, head, body = request("/skill.md", "HEAD")
     assert status == 200 and not body and int(head["content-length"]) == len(data)
     status, _, body = request("/skill.md", headers={"If-None-Match": headers["etag"]})
     assert status == 304 and not body
-    preflight, _, _ = request("/skill.md", "OPTIONS", {"Origin": "https://second-origin.example", "Access-Control-Request-Method": "GET"})
+    preflight, cors, _ = request("/skill.md", "OPTIONS", {"Origin": "https://second-origin.example", "Access-Control-Request-Method": "GET", "Access-Control-Request-Headers": "Authorization,X-Custom-Header", "Access-Control-Request-Private-Network": "true"})
     assert preflight == 204, f"Public Skill preflight returned {preflight} instead of 204"
+    assert cors["access-control-allow-origin"] == "https://second-origin.example"
+    assert cors["access-control-allow-methods"] == "GET" and cors["access-control-allow-headers"] == "Authorization,X-Custom-Header"
+    assert cors["access-control-allow-private-network"] == "true" and cors["access-control-allow-credentials"] == "true"
     status, history, body = request(f"/skills/media-gen/{version}/skill.md")
     assert status == 200 and body == data and "immutable" in history["cache-control"]
     assert request("/skills/media-gen/0.0.0/skill.md")[0] == 404
