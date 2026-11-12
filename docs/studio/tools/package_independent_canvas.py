@@ -91,10 +91,10 @@ def main():
                 'build_report': build_path.relative_to(ROOT).as_posix(), 'build_report_sha256': digest(build_path.read_bytes()),
                 'browser_report': browser_path.relative_to(ROOT).as_posix(), 'browser_report_sha256': digest(browser_path.read_bytes()),
                 'api_boundary_report': boundary_path.relative_to(ROOT).as_posix(), 'api_boundary_report_sha256': digest(boundary_path.read_bytes()),
-                'api_modified': False, 'api_origin': 'http://43.165.167.179:39443', 'mode': 'managed', 'base': '/studio/',
+                'api_modified': False, 'api_origin': build['build_environment']['aggregator_origin'] or 'https://gen.sub2share.xyz', 'mode': 'managed', 'base': '/studio/',
                 'application_backend': False, 'virtualization_used': False,
                 'files': [{'path': name, 'bytes': len(data), 'sha256': digest(data)} for name, data in sorted(contents.items())]}
-    if release in {'canvas-20261030.146.1', 'canvas-20261031.149.1', 'canvas-20261031.150.1', 'canvas-20261031.151.1', 'canvas-20261031.151.2', 'canvas-20261031.152.1', 'canvas-20261031.153.1', 'canvas-20261106.154.1'}:
+    if release in {'canvas-20261030.146.1', 'canvas-20261031.149.1', 'canvas-20261031.150.1', 'canvas-20261031.151.1', 'canvas-20261031.151.2', 'canvas-20261031.152.1', 'canvas-20261031.153.1', 'canvas-20261106.154.1', 'canvas-20261113.156.1'}:
         from studio_release_guard import CONTRACT
         contract = json.loads((SOURCE / 'web/src/services/studio-storage-contract.json').read_text(encoding='utf-8'))
         assert contract == CONTRACT

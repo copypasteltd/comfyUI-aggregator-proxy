@@ -4,11 +4,11 @@
 
 基于 [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas) 二次开发的独立 Web 创作画布。复用原有拖拽、缩放、节点、连线和项目管理，适配现有 ComfyUI 聚合 API 的模型、参考输入、异步任务与产物。浏览器直接调用原 API，无须新增生成后端、队列或 GPU 代理。
 
-当前已部署 **154.1**。已适配实时目录的45个模型、50组规格及usage 1.0/1.1命名素材、文本和兼容父任务。设备恢复后，文生图、命名参考编辑、Workflow音乐、首帧视频、双参考视频五项真实生成及画布取件均已通过；旧失败记录保留。当前结果见[恢复与真实验收](docs/39-设备恢复与真实生成补充验收.md)，实现细节见[文档38](docs/38-现有API新版输入适配与整轮验收.md)。
+默认业务 API 为 **`https://gen.sub2share.xyz`**，新建连接无需填写 HTTP IP。已有连接及本机任务保持原地址；旧连接要使用 HTTPS 时，请在连接页新建或选择连接并明确填写新地址和业务 Key。已适配实时目录的45个模型、50组规格及usage 1.0/1.1命名素材、文本和兼容父任务。设备恢复后，文生图、命名参考编辑、Workflow音乐、首帧视频、双参考视频五项真实生成及画布取件均已通过；旧失败记录保留。当前结果见[恢复与真实验收](docs/39-设备恢复与真实生成补充验收.md)，实现细节见[文档38](docs/38-现有API新版输入适配与整轮验收.md)。
 
 | 画布 | 原业务 API | 管理后台 |
 | --- | --- | --- |
-| [打开创作画布](http://43.165.167.179:39445/studio/) | `http://43.165.167.179:39443` | [原 Admin](http://43.165.167.179:39443/admin/) |
+| [打开创作画布](http://43.165.167.179:39445/studio/) | `https://gen.sub2share.xyz` | [原 Admin](https://gen.sub2share.xyz/admin/) |
 
 ## 方案与能力
 
@@ -77,7 +77,7 @@ Set-Location web
 npm ci
 $env:VITE_BASE='/studio/'
 $env:VITE_STUDIO_MODE='managed'
-$env:VITE_AGGREGATOR_ORIGIN='http://43.165.167.179:39443'
+$env:VITE_AGGREGATOR_ORIGIN='https://gen.sub2share.xyz'
 npm run dev
 ```
 

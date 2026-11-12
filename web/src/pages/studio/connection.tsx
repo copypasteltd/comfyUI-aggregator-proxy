@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 export default function ConnectionPage() {
     const state = useStudioStore();
     const active = state.profiles.find((profile) => profile.id === state.activeProfileId);
-    const defaultOrigin = import.meta.env.VITE_AGGREGATOR_ORIGIN || "";
+    const defaultOrigin = import.meta.env.VITE_AGGREGATOR_ORIGIN?.trim() || "https://gen.sub2share.xyz";
     const [origin, setOrigin] = useState(active?.origin || defaultOrigin);
     const [name, setName] = useState(active?.name || "");
     const [key, setKey] = useState("");

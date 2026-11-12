@@ -35,3 +35,5 @@
 - [历次I编号与46行状态归档](history/10-历史交付与46项评估.md)、[部署验证归档](history/21-历史部署与验证记录.md)、[旧TODO](history/原待办-zh.md)、[English TODO](history/原待办-en.md)、[旧待测试](history/原待测试-zh.md)、[English pending tests](history/原待测试-en.md)。
 
 开发仅修改`infinite-canvas/`与本目录；原API两个工作区只读。禁止本地Docker/WSL/虚拟机。浏览器自动化结束必须关闭自建标签和临时服务。当前源码/边界核对见[范围修正记录](research/studio-implementation/scope-repair-review.json)。
+
+- [默认 HTTPS 接口地址与验证](40-默认HTTPS接口地址.md)

@@ -18,9 +18,9 @@ class ReleaseGuardTests(unittest.TestCase):
         self.root = Path(self.temporary.name)
         self.release = self.root / 'canvas-20261030.146.1'
 
-    def archive(self, corrupt=False, extra=None):
+    def archive(self, corrupt=False, extra=None, api_origin='http://43.165.167.179:39443'):
         payload = {'studio/index.html': b'<title>new</title>', 'studio/maintenance.html': b'<title>maintenance</title>', 'studio/licenses/infinite-canvas-MIT.txt': b'MIT'}
-        manifest = {'format_version': 1, 'release_id': self.release.name, 'source_revision': 'a' * 40, 'source_sha256': 'b' * 64, 'api_modified': False, 'application_backend': False, 'virtualization_used': False, 'base': '/studio/', 'mode': 'managed', 'api_origin': 'http://43.165.167.179:39443', 'storage_contract': CONTRACT, 'files': [{'path': name, 'bytes': len(data), 'sha256': sha(data)} for name, data in payload.items()]}
+        manifest = {'format_version': 1, 'release_id': self.release.name, 'source_revision': 'a' * 40, 'source_sha256': 'b' * 64, 'api_modified': False, 'application_backend': False, 'virtualization_used': False, 'base': '/studio/', 'mode': 'managed', 'api_origin': api_origin, 'storage_contract': CONTRACT, 'files': [{'path': name, 'bytes': len(data), 'sha256': sha(data)} for name, data in payload.items()]}
         payload['canvas-deployment.json'] = json.dumps(manifest).encode()
         if corrupt: payload['studio/index.html'] = b'changed'
         archive = self.root / 'release.tar.gz'
@@ -39,6 +39,18 @@ class ReleaseGuardTests(unittest.TestCase):
 
     def test_exact_contract_is_compatible(self):
         self.assertTrue(compatible({'storage_contract': CONTRACT}, {'storage_contract': CONTRACT}))
+
+    def test_https_default_package_preserves_the_complete_storage_contract(self):
+        archive, package = self.archive(api_origin='https://gen.sub2share.xyz')
+        manifest, files = unpack_verified(archive, package, self.release)
+        self.assertEqual(manifest['storage_contract'], CONTRACT)
+        self.assertEqual(read_release(self.release)[1], files)
+
+    def test_wrong_api_origin_refuses_before_creating_a_release(self):
+        for origin in ['http://gen.sub2share.xyz', 'https://gen.sub2share.xyz.other.test', 'https://gen.sub2share.xyz/admin/']:
+            archive, package = self.archive(api_origin=origin)
+            with self.assertRaises(ReleaseRefused): unpack_verified(archive, package, self.release)
+            self.assertFalse(self.release.exists())
 
     def test_missing_or_old_contract_refuses(self):
         for old in [{}, {'storage_contract': {'journal': {'version': 4}}}]:

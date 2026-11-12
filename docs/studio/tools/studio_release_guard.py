@@ -44,7 +44,7 @@ def manifest_files(manifest):
     require(isinstance(manifest, dict) and manifest.get('format_version') == 1, 'Unknown static manifest')
     require(isinstance(manifest.get('release_id'), str) and RELEASE_NAME.fullmatch(manifest['release_id']), 'Unknown release ID')
     require(manifest.get('api_modified') is False and manifest.get('application_backend') is False and manifest.get('virtualization_used') is False, 'Release contains application/API changes')
-    require(manifest.get('base') == '/studio/' and manifest.get('mode') == 'managed' and manifest.get('api_origin') == 'http://43.165.167.179:39443', 'Wrong independent deployment boundary')
+    require(manifest.get('base') == '/studio/' and manifest.get('mode') == 'managed' and manifest.get('api_origin') in {'https://gen.sub2share.xyz', 'http://43.165.167.179:39443'}, 'Wrong independent deployment boundary')
     require(re.fullmatch(r'[a-f0-9]{40}', manifest.get('source_revision', '')) and HEX.fullmatch(manifest.get('source_sha256', '')), 'Missing frozen source identity')
     files = entry_map(manifest.get('files'))
     require({'studio/index.html', 'studio/maintenance.html', 'studio/licenses/infinite-canvas-MIT.txt'} <= files.keys(), 'Incomplete multi-entry static release')

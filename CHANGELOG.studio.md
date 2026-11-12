@@ -1,5 +1,11 @@
 # 独立画布更新记录 / Independent canvas release notes
 
+## 156.1 · HTTPS 默认接口 / HTTPS default endpoint
+
+默认 API 调整为 `https://gen.sub2share.xyz`，构建未配置地址时同样使用该 HTTPS 默认值。已保存的连接和任务身份保留；不修改原 API 转发、Worker、反代或 CORS。验证结果见[文档40](docs/studio/40-默认HTTPS接口地址.md)。
+
+Default the business API to `https://gen.sub2share.xyz`, including builds without an explicit origin. Preserve saved connections and task identities; leave the API forwarding service and proxy configuration unchanged. See [document 40](docs/studio/40-默认HTTPS接口地址.md) for validation.
+
 ## 证据155 · 设备恢复与五类真实生成 / Device recovery and five real-generation modes
 
 3080 经授权完成一次普通重启，现有 Worker 通过原检查点和系统开机计数下降安全关闭旧未知执行；不是旧任务生成成功。原 Admin 已重新验证并恢复 3080 的39个、5070的3个既有已批准绑定，未发布未批准草稿。文生图、命名素材参考编辑、Workflow音乐、首帧视频、双参考视频五项真实调用均成功；页面实际回填、日志v5原件长度/MIME/SHA、原任务取件及刷新复查通过。修正验收脚本对loading按钮名称的误判，Chromium和Firefox各12次完整原件检查通过。截图、完整所选页MP4/GIF及原始媒体见[文档39](docs/studio/39-设备恢复与真实生成补充验收.md)。

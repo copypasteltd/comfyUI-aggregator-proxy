@@ -4,11 +4,11 @@
 
 An independent Web canvas adapted from [basketikun/infinite-canvas](https://github.com/basketikun/infinite-canvas). It reuses the existing pan/zoom, nodes, connections and projects, and connects them to the existing ComfyUI Aggregator models, reference inputs, asynchronous jobs and artifacts. The browser calls that API directly; no new generation backend, queue or GPU proxy is required.
 
-Static **154.1** is deployed. The 45 published models/50 presets and usage 1.0/1.1 named media, workflow text and compatible-parent contract are adapted. Following device recovery, five selected real modes pass generation and canvas retrieval: text-to-image, named-reference editing, workflow music, first-frame video and two-reference video. Earlier failures remain recorded. See [recovery and real acceptance](docs/studio/39-设备恢复与真实生成补充验收.md) and [implementation details](docs/studio/38-现有API新版输入适配与整轮验收.md).
+Static **156.1** uses **`https://gen.sub2share.xyz`** as the default business API. Existing saved endpoints and local task identities stay intact; explicitly select or create an HTTPS connection to switch an older HTTP profile. The 45 published models/50 presets and usage 1.0/1.1 named media, workflow text and compatible-parent contract are adapted. Following device recovery, five selected real modes pass generation and canvas retrieval: text-to-image, named-reference editing, workflow music, first-frame video and two-reference video. Earlier failures remain recorded. See [recovery and real acceptance](docs/studio/39-设备恢复与真实生成补充验收.md) and [implementation details](docs/studio/38-现有API新版输入适配与整轮验收.md).
 
 | Canvas | Existing business API | Management |
 | --- | --- | --- |
-| [Open canvas](http://43.165.167.179:39445/studio/) | `http://43.165.167.179:39443` | [Existing Admin](http://43.165.167.179:39443/admin/) |
+| [Open canvas](http://43.165.167.179:39445/studio/) | `https://gen.sub2share.xyz` | [Existing Admin](https://gen.sub2share.xyz/admin/) |
 
 ## Design and capabilities
 
@@ -77,7 +77,7 @@ Set-Location web
 npm ci
 $env:VITE_BASE='/studio/'
 $env:VITE_STUDIO_MODE='managed'
-$env:VITE_AGGREGATOR_ORIGIN='http://43.165.167.179:39443'
+$env:VITE_AGGREGATOR_ORIGIN='https://gen.sub2share.xyz'
 npm run dev
 ```
 
