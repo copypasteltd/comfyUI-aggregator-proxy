@@ -1,16 +1,24 @@
 {
   "scope": "Route registration only; not permission, behavior, hardware or gateway acceptance",
-  "design_endpoint_count": 195,
-  "implemented_method_path_count": 202,
-  "matched_design_count": 195,
+  "design_endpoint_count": 199,
+  "implemented_method_path_count": 214,
+  "matched_design_count": 199,
   "missing_design": [],
   "additional_implemented": [
+    "DELETE /origin/api/session",
     "GET /health/live",
     "GET /health/ready",
+    "GET /internal/v1/attempts/{id}/context",
     "GET /internal/v1/attempts/{id}/inputs/{id}",
+    "GET /origin/api/devices",
+    "GET /origin/api/session",
     "POST /admin/api/v1/channels/{id}/workflow-bindings/approvals",
     "POST /admin/api/v1/public-models/{id}/validation-jobs",
     "POST /internal/v1/attempts/{id}/reconciliation-context",
+    "POST /origin/api/devices/{id}/acquire",
+    "POST /origin/api/devices/{id}/release",
+    "POST /origin/api/session",
+    "PUT /internal/v1/attempts/{id}/context",
     "PUT /internal/v1/uploads/{id}/content"
   ]
 }
