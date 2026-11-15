@@ -37,10 +37,26 @@ python scripts/comfy_origin.py logout
 
 `DEVICE_SLUG` 取目录真实值；不要把 GPU 名或私网 IP 当代号。详细图准备、720×1080 节点参数、多模态文件绑定、恢复、个人 Workflow、取消及原生 HTTP 表见 [Skill 原生参考](../app/skills/media-gen-skill/references/comfy-origin.md)。默认 `.comfy-origin-session.json` 含访问凭据；使用 `--session-file private/session.json` 时所有命令保持同一路径。
 
-用户可用浏览器进入 `/origin/` 登录，在 `/origin/list` 申请设备后打开返回的原始面板；已有[真实截图、录屏与 GIF](media/origin-146/README.md) 记录平台页面。本次仅更新 Skill，未更改页面样式，既有页面证据与本轮客户端证据分开。所有本次浏览器如被使用均须 finally 清理；本轮验证以原生 HTTP 为主。
+用户可用浏览器进入 `/origin/` 登录，在 `/origin/list` 申请设备后打开返回的原始面板；已有[真实截图、录屏与 GIF](media/origin-146/README.md) 记录平台页面。本次仅更新 Skill，未更改页面样式，既有页面证据与本轮客户端证据分开。本轮使用原生 HTTP，未启动浏览器、本地 Docker、WSL 或虚拟机。
 
 ## 验证及发布记录
 
-客户端本地验证、构建摘要、真实诊断及发行结果在完成后追加到本专题。小型 `EmptyImage → SaveImage` CPU 诊断只验证实际协议链路，不证明训练模型质量、其他模态或设备全部验收。已有设备维护、普通业务绑定就绪、历史候选发布、Sub2API 与 10～20 台容量缺口不因 Skill 更新而消除。
+| 编号 | 验证 | 结果与证据 |
+| --- | --- | --- |
+| SK140-V01 | 客户端回归 | [35 项通过](evidence/2026-11-16/skill-native-140-local.json)，含原业务 17 项与原生 18 项；来源在运行前后摘要相同，Ruff、官方 Skill 验证与 Python 3.10 语法检查通过。 |
+| SK140-V02 | 可复现打包 | [两次原生构建完全一致](evidence/2026-11-16/skill-native-140-build.json)，四项资产逐字节比较；独立提取两个客户端并运行帮助命令。提取代码按通用换行比较，发行资产按原始字节比较。 |
+| SK140-V03 | 真实原生调用 | [5070 的 15 项检查通过](evidence/2026-11-16/skill-native-140-live.json)：实际登录、设备/节点/模型目录、占用、上传及已知摘要下载、个人 Workflow 增读删、自定义图提交、历史和队列、下载、恢复、归还及退出。测试占用已 closed、会话文件已删除。 |
+| SK140-V04 | GitHub 不可变发行 | [1.4.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.0) 已发布；[标签流水线与匿名下载](evidence/2026-11-16/skill-native-140-public-release.json) 确认四项资产与本地两次构建完全相同。当地 GitHub API 共享出口限额及资产重定向连接受限时，改从已授权 Linux 主机匿名下载，经固定主机密钥 SSH 回传后逐字节比较，无 GitHub token。 |
+| SK140-V05 | 线上静态更新 | [部署记录](evidence/2026-11-16/skill-native-140-deployment.json)：`current` 从 1.3.0 切至 1.4.0，应用仍为 `linux-20261115.146.6`；5 个服务主进程、主配置、既有静态 include 及历史 1.3.0 字节保持相同。 |
+| SK140-V06 | 外部 HTTP | [23 项检查通过](evidence/2026-11-16/skill-native-140-external.json)：固定/版本四项资产、HEAD、304、任意来源/方法/请求头/私网预检、旧版本、鉴权、健康、Admin、Studio 及原生入口。仅检查 HTTP 39443，不验证 HTTPS 或修改用户反代。 |
+| SK140-V07 | 收尾与隐私 | [最终核对](evidence/2026-11-16/skill-native-140-final-checks.json) 确认来源摘要、目录式本地安装、各阶段报告与文档门禁；[范围化发布扫描](evidence/2026-11-16/skill-native-140-publication-scan.json) 检查本轮来源、文档和全部发行资产，私下匹配 10 项真实凭据，无发现。 |
+
+发行来源固定为 `8d993c84905cbca369674e83164a8a79b5cbaf3d`。单文件 **89,876 字节**，SHA-256 为 `a68d893b4126e5b69e85f68044a020831ac5865024b5012b4da8249c4630c22c`。本地已安装的 `media-gen-skill` 指向仓库来源，随源码同步；单文件安装用户需重新下载并在新会话加载，旧的已提取客户端需明确替换或提取到新目录。
+
+已核对的在线入口：[最新 skill.md](http://43.165.167.179:39443/skill.md) · [固定 1.4.0](http://43.165.167.179:39443/skills/media-gen/1.4.0/skill.md) · [来源清单](http://43.165.167.179:39443/skills/media-gen/1.4.0/release.json)。原有域名路径继续由用户反代提供，本轮不验证其 HTTPS。
+
+静态 include 保留了 145 的受管 CORS 块及更广的暴露响应头，与仓库安装模板的内联写法不同。初次摘要相等保护在暂存或发布前停止；只读复查差异后，发布器显式使用 `--snippet /etc/comfyui-aggregator/public-skills.conf` 保留已运行配置。主配置和 include 的前后摘要均一致。后续维护也应先检查实际文件，不能用安装模板覆盖现有配置。
+
+真实执行为小型 `EmptyImage → SaveImage` 64×64 CPU 诊断，只验证实际协议链路，不证明训练模型质量、其他模态或设备全部验收。3080/4090 没有本轮提交、重启或强制解锁。原生结果下载报告本地哈希，未冒充独立源摘要。已有设备维护、普通业务绑定就绪、历史候选发布、Sub2API 与 10～20 台容量缺口不因 Skill 更新而消除。
 
 源码入口：[Skill](../app/skills/media-gen-skill/SKILL.md)、[客户端](../app/skills/media-gen-skill/scripts/comfy_origin.py)、[构建器](../app/scripts/build-media-gen-skill.py)。发行维护沿用 [131](131-单文件Skill与固定在线地址.md)。后续更新必须递增版本、更新中英说明和更新日志、验证相应能力并同步 GitHub 及线上单文件地址；不能只改本地安装副本。

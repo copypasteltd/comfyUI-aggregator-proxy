@@ -4,6 +4,8 @@
 
 - Explicitly allow Skill users and agents to operate granted ComfyUI devices for their task: discover installed nodes/models, edit API graphs, upload media, submit with durable identity, inspect owned queues/history, download files, manage personal workflows and safely return devices. Add a Python 3.10+ standard-library native client while preserving existing business model calls.
 - Embed both references and clients in the single-file Skill; distinguish native sessions, reservations, actual source integrity checks and device-local retention from business cloud behavior. Preserve unlimited policies, user maintenance holds and the HTTP high port. Validation and GitHub/static rollout results are recorded in document 147.
+- 已发布 GitHub 不可变 1.4.0 及线上 `/skill.md`；两次构建、四项匿名下载和线上资产逐字节一致。35 项客户端回归、5070 的 15 项真实操作、23 项外部 HTTP 检查通过；保留全部服务主进程、应用版本、CORS 配置与历史 Skill。详见 [147](docs/147-Skill原生ComfyUI操作与发布.md)。
+- Publish immutable GitHub 1.4.0 and the current online Skill. Both native builds, all four anonymously downloaded release assets and deployed bytes match. Pass 35 client regressions, 15 actual 5070 checks and 23 external HTTP checks while preserving service PIDs, application/configuration and previous Skill bytes. The live graph is a 64×64 CPU diagnostic; trained-model quality and remaining platform acceptance are separate.
 
 ## 2026-11-15 · Native ComfyUI workspace / 原生 ComfyUI 工作台
 

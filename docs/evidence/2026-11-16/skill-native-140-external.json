@@ -1,0 +1,136 @@
+{
+  "format_version": 1,
+  "at": "2026-11-15T16:39:18.810435+00:00",
+  "passed": true,
+  "scope": "External native Windows HTTP high-port verification of exact latest/version release bytes, HEAD/ETag/304, unrestricted CORS preflights, historical version, authentication, health and existing Admin/Studio/native entry pages. No browser, HTTPS or GPU generation.",
+  "version": "1.4.0",
+  "current_url": "http://43.165.167.179:39443/skill.md",
+  "version_url": "http://43.165.167.179:39443/skills/media-gen/1.4.0/skill.md",
+  "source_revision": "8d993c84905cbca369674e83164a8a79b5cbaf3d",
+  "checks": [
+    {
+      "name": "latest-full-byte-and-header-match",
+      "status": 200,
+      "path": "/skill.md"
+    },
+    {
+      "name": "HEAD-length-ETag",
+      "status": 200,
+      "path": "/skill.md"
+    },
+    {
+      "name": "conditional-GET-304",
+      "status": 304,
+      "path": "/skill.md"
+    },
+    {
+      "name": "arbitrary-origin-method-headers-private-preflight",
+      "status": 204,
+      "path": "/skill.md"
+    },
+    {
+      "name": "arbitrary-origin-method-headers-private-preflight",
+      "status": 204,
+      "path": "/skills/media-gen/1.4.0/skill.md"
+    },
+    {
+      "name": "arbitrary-origin-method-headers-private-preflight",
+      "status": 204,
+      "path": "/v1/jobs"
+    },
+    {
+      "name": "static-write-denied",
+      "status": 403,
+      "path": "/skill.md"
+    },
+    {
+      "name": "immutable-byte-match-media-gen-skill-1.4.0.zip",
+      "status": 200,
+      "path": "/skills/media-gen/1.4.0/media-gen-skill-1.4.0.zip"
+    },
+    {
+      "name": "immutable-byte-match-release.json",
+      "status": 200,
+      "path": "/skills/media-gen/1.4.0/release.json"
+    },
+    {
+      "name": "immutable-byte-match-SHA256SUMS.txt",
+      "status": 200,
+      "path": "/skills/media-gen/1.4.0/SHA256SUMS.txt"
+    },
+    {
+      "name": "immutable-byte-match-skill.md",
+      "status": 200,
+      "path": "/skills/media-gen/1.4.0/skill.md"
+    },
+    {
+      "name": "historical-130-byte-preservation",
+      "status": 200,
+      "path": "/skills/media-gen/1.3.0/skill.md"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 404,
+      "path": "/skills/media-gen/0.0.0/skill.md"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 404,
+      "path": "/skills/media-gen/1.4.0/unknown.txt"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 404,
+      "path": "/skills/media-gen/"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 404,
+      "path": "/internal/health"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 401,
+      "path": "/v1/models"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 401,
+      "path": "/origin/api/session"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 200,
+      "path": "/health/live"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 200,
+      "path": "/health/ready"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 200,
+      "path": "/admin/"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 200,
+      "path": "/studio/"
+    },
+    {
+      "name": "boundary-or-existing-route",
+      "status": 200,
+      "path": "/origin/"
+    }
+  ],
+  "checks_count": 23,
+  "single_file_bytes": 89876,
+  "single_file_sha256": "a68d893b4126e5b69e85f68044a020831ac5865024b5012b4da8249c4630c22c",
+  "all_four_assets_match_public_release": true,
+  "historical_130_unchanged": true,
+  "https_verification_performed": false,
+  "browser_used": false,
+  "virtualization_used": false,
+  "full_acceptance": "pending"
+}

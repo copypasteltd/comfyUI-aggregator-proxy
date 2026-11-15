@@ -1,0 +1,53 @@
+{
+  "native_prompt_id": "c0818091-87ee-4f7f-9968-3cae5a12df7a",
+  "device": "RTX 5070",
+  "model_folder_count": 51,
+  "diagnostic": {
+    "workflow": "EmptyImage -> SaveImage",
+    "width": 64,
+    "height": 64,
+    "uses_trained_model": false,
+    "file_bytes": 407,
+    "local_sha256": "078f676a095db05db5d66ee8a8a7d677ac0cff475dcd08b18626c17c3d739f98",
+    "independent_source_checksum_verified": false
+  },
+  "request_state_kept_private": true,
+  "release_state": "closed",
+  "format_version": 1,
+  "at": "2026-11-15T16:26:38.204484+00:00",
+  "passed": true,
+  "scope": "Real HTTP high-port invocation by the client extracted from committed 1.4.0 single-file Skill; 5070 CPU diagnostic, node/model discovery, native upload/owned download and personal Workflow lifecycle. No trained-model, all-modality, all-device or capacity acceptance.",
+  "version": "1.4.0",
+  "application_release_expected": "linux-20261115.146.6",
+  "source_revision": "8d993c84905cbca369674e83164a8a79b5cbaf3d",
+  "virtualization_used": false,
+  "browser_used": false,
+  "https_verification_performed": false,
+  "full_acceptance": "pending",
+  "checks": [
+    "Standalone extracted client exchanges Key for private native session without printing credentials",
+    "Actual authorized three-device directory is readable",
+    "5070 exclusive reservation is acquired without preempting an existing owner",
+    "Actual node input schema is discovered",
+    "Actual installed model-folder categories are discovered",
+    "Native streamed image upload returns an owned source descriptor",
+    "Owned uploaded source downloads with independently known SHA-256",
+    "Actual personal Workflow save/read/delete remains scoped and does not execute UI JSON",
+    "Standalone client persists intent and submits actual arbitrary API-format graph",
+    "Actual CPU graph completes through owned history and bounded heartbeat polling",
+    "Generated PNG downloads and local hash is correctly distinguished from independent source verification",
+    "Known native prompt recovery only reads existing history",
+    "Owned queue confirms no remaining native task",
+    "Own completed reservation is safely returned as closed",
+    "Only the test native session is logged out and its credential file removed"
+  ],
+  "checks_passed": 15,
+  "failure": null,
+  "3080_or_4090_test_submissions": false,
+  "force_unlock_or_restart_performed": false,
+  "source_sha256": {
+    "app/skills/media-gen-skill/scripts/comfy_origin.py": "6ee77d488aaaeee8aa61ee314808f45c84f4d894701c8d977713b350d94937b4"
+  },
+  "executed_extracted_client_sha256": "bd348d5b3a48dc6eef6fc67197c0595363cf07fb931da1570021f7e90d11b00c",
+  "extracted_code_matches_source_after_newline_normalization": true
+}

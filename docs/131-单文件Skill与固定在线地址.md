@@ -1,6 +1,6 @@
 # 131 · 单文件 Skill 与固定在线地址
 
-**1.4.0 原生 ComfyUI 操作更新**见 [147](147-Skill原生ComfyUI操作与发布.md)。用户/Agent 可使用独立授权设备的原生图、节点及模型；单文件内嵌业务/原生两份参考与两个客户端，已有 1.3.0 及更早版本保持不可变。新增 Cookie 会话文件含凭据，原生源文件不纳入云端八小时删除。实际发行和线上切换结果在 147 分别记录。
+**1.4.0 已发布并上线**，原生 ComfyUI 操作更新见 [147](147-Skill原生ComfyUI操作与发布.md)。用户/Agent 可使用独立授权设备的原生图、节点及模型；单文件内嵌业务/原生两份参考与两个客户端，已有 1.3.0 及更早版本保持不可变。新增 Cookie 会话文件含凭据，原生源文件不纳入云端八小时删除。35 项客户端回归、5070 的 15 项真实操作及 23 项外部 HTTP 检查通过；[本轮已验证的 HTTP 下载地址](http://43.165.167.179:39443/skill.md)。
 
 2026-11-13 [CORS 更新](145-公网入口统一开放CORS.md) 已同步 Skill 静态响应与发布器验证：反映任意 Origin、允许凭证、自定义请求头和私网预检；Skill 1.3.0 内容及不可变资产保持相同。早期报告中的通配来源断言按当时实现保留。
 
@@ -12,7 +12,7 @@
 | --- | --- | --- |
 | SF01 | 最新入口 `https://gen.sub2share.xyz/skill.md` | 公开 UTF-8 Markdown；无需业务 Key 读取说明；生成和内容 API 仍保持原鉴权 |
 | SF02 | 版本入口 `/skills/media-gen/VERSION/skill.md` | 版本目录不可覆盖；latest/current 原子切换；保留历史以便回退 |
-| SF03 | 自包含文件 | 现有 Skill、API 参考、客户端由同一来源编译，不依赖额外下载；内嵌客户端与被测脚本一致；只使用实时模型发现决定能力和参数 |
+| SF03 | 自包含文件 | Skill、业务/原生参考及两个客户端由同一来源编译，不依赖额外下载；内嵌客户端与被测脚本一致；业务按实时模型目录，原生按实际节点及安装模型确定能力和参数 |
 | SF04 | 更新与发布 | 沿用版本标签发布流程；Release 同时包含 ZIP、skill.md、来源清单与摘要；固定地址由原生部署工具更新，验证失败恢复原指针/配置 |
 | SF05 | 服务隔离 | 使用现有 Nginx 静态入口和独立只读发布目录，不改现有生成服务、Worker、数据库或用户反代；无本地 Docker/WSL/浏览器 |
 
@@ -30,9 +30,9 @@
 
 打开 [最新单文件](https://gen.sub2share.xyz/skill.md)，下载后在 Agent 的 skills 目录保存为 `media-gen-skill/SKILL.md`，重新打开会话。Codex 可用 `$CODEX_HOME/skills/media-gen-skill/SKILL.md`；文件名按 Agent 规范使用大写，公开地址保留小写。文件内完整说明业务 Key 设置、模型发现、参数检查、参考图、提交/等待/恢复/下载和八小时期限。使用 CLI 时按新版文内命令在工作目录提取 `media_gen.py` 和 `comfy_origin.py`；该命令不覆盖已有脚本。
 
-Download [the current file](https://gen.sub2share.xyz/skill.md), save it as `media-gen-skill/SKILL.md` in your agent's skills directory, and open a new session. Configure your business API Key yourself. The instructions, native API reference and complete standard-library client are embedded. Native HTTP tools can use the API directly; extract the client only for CLI use. After an update, deliberately replace an old extracted client or extract into a new working directory.
+Download [the current file](https://gen.sub2share.xyz/skill.md), save it as `media-gen-skill/SKILL.md` in your agent's skills directory, and open a new session. Configure your business API Key yourself. The instructions, business/native references and both complete standard-library clients are embedded. Native HTTP tools can use the API directly; extract the clients only for CLI use. After an update, deliberately replace old extracted clients or extract into a new working directory.
 
-固定版本：[1.3.0/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.3.0/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.3.0/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.3.0/media-gen-skill-1.3.0.zip)；用于来源核对、固定版本和回退。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
+固定版本：[1.4.0/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.4.0/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.4.0/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.4.0/media-gen-skill-1.4.0.zip)；用于来源核对、固定版本和回退。[历史 1.3.0](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md) 保留。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
 
 ## 4. 后续发布 / Maintainer workflow
 
@@ -41,6 +41,8 @@ Download [the current file](https://gen.sub2share.xyz/skill.md), save it as `med
 3. 推送源码和 `media-gen-skill-vVERSION` 标签到本仓库；既有 GitHub Actions 构建两次、校验并发行 ZIP、skill.md、SHA256SUMS.txt、release.json。匿名重新下载并核对后，再部署相同资产。**GitHub 标签发行不自动连接生产服务器**。
 4. 用原生 SSH/SFTP 把四项资产放入云端暂存目录，同时上传 `app/deploy/native-linux/publish-public-skill.py` 和同目录的 `public-skills.nginx.conf`。先检查实际配置并取得 `/etc/comfyui-aggregator/nginx.conf` 当前 SHA-256，再运行下方固定部署器。无须重启 API、Runner、GC 或 Worker，无须改用户反代或证书。
 5. 部署器校验完整产物、来源清单与不可变版本，备份 Nginx 配置、检查语法、原子切换 `current` 并平滑加载；回环验证失败恢复原配置和指针。再从外部核对固定/版本入口、完整摘要及健康状态，提交证据并推送。回退可用同一部署器，以已保留的历史版本目录为 `--release-dir`，仍须提供当时配置摘要。
+
+若现有 include 已由其他已授权更新管理，先检查它与安装模板的差异。仅更新 Skill 时可通过 `--snippet /etc/comfyui-aggregator/public-skills.conf` 保留现有已审阅 include；记录其前后摘要并验证任意来源 CORS。本轮即保留 145 的受管块，见 147。
 
 ```sh
 # Run only on the authorized production Linux host; use the inspected config SHA.

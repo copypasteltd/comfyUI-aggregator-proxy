@@ -1,4 +1,18 @@
-# Media Gen Skill 1.2.0
+# Media Gen Skill · 发行说明 / Release guide
+
+## 当前 1.4.0 / Current 1.4.0
+
+[已验证 HTTP 单文件](http://43.165.167.179:39443/skill.md) · [固定 1.4.0](http://43.165.167.179:39443/skills/media-gen/1.4.0/skill.md) · [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.0) · [完整操作及发布证据](147-Skill原生ComfyUI操作与发布.md)
+
+1.4.0 明确允许 Skill 使用者/Agent 直接操作已获独立授权的 ComfyUI：查节点和安装模型、编辑自定义 API 图、上传输入、占用设备、持久化提交、查队列/历史、下载、管理个人工作流并安全归还。无需先将自定义图发布成业务模型；Admin 须先为 Key 启用原生面板和具体设备。新增标准库 `comfy_origin.py`，业务 `media_gen.py` 保留；两份参考与两个客户端均编入单文件。
+
+Version 1.4.0 explicitly allows direct ComfyUI operation on independently granted devices: inspect nodes/models, edit custom graphs, upload inputs, reserve, submit with durable intent, inspect owned queues/history, download, manage personal workflows and return devices. Native graphs do not require a published business alias. Admin must enable the Key's native panel and device grants. Both standard-library clients and references are embedded in the single file.
+
+四项正式资产为 `media-gen-skill-1.4.0.zip`、`skill.md`、`SHA256SUMS.txt`、`release.json`。ZIP 包含 7 个来源文件及清单；单文件 89,876 字节。两次构建、GitHub 匿名下载及线上文件完全一致；35 项客户端回归、5070 的 15 项真实操作和 23 项外部 HTTP 检查通过。实际图为 64×64 CPU 诊断，不代表全部设备或训练模型验收。完整结果见 147，安装/维护见 [126](126-MediaGenSkill安装与调用.md) 和 [131](131-单文件Skill与固定在线地址.md)。
+
+The four immutable assets include the ZIP, single file, checksums and source manifest. The ZIP has seven sources plus the manifest. Both local builds, public GitHub assets and production bytes match. All 35 client regressions, 15 actual 5070 checks and 23 external HTTP checks pass. The live graph is a small CPU diagnostic, not trained-model or fleet acceptance. Private native sessions and graph state remain outside the installation directory. Native outputs stay on devices, outside business cloud storage and eight-hour retention.
+
+## 历史 1.2.0 / Historical 1.2.0
 
 [在线单文件 / Current skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.2.0 / Immutable version](https://gen.sub2share.xyz/skills/media-gen/1.2.0/skill.md) · [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.2.0)
 

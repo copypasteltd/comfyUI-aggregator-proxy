@@ -2,7 +2,7 @@
 
 **1.4.0 增加直接 ComfyUI 模式 / Direct ComfyUI:** 先由 Admin 为 Key 授予设备，再用 `comfy_origin.py login → devices → acquire → submit → wait → release → logout` 操作自定义图；查询节点、模型、上传素材和个人工作流见 [147](147-Skill原生ComfyUI操作与发布.md) 及 [Skill 原生参考](../app/skills/media-gen-skill/references/comfy-origin.md)。Native outputs stay on the device, outside cloud eight-hour retention. Session files contain credentials and must remain private.
 
-默认服务 / Default service: `https://gen.sub2share.xyz`。源码 / Source: [media-gen-skill](../app/skills/media-gen-skill/SKILL.md)。纯 Python 3.10+ 标准库，无需 Docker、ComfyUI 本地安装或额外 Python 依赖。
+默认服务 / Default service: `https://gen.sub2share.xyz`；本轮已验证的 HTTP 入口 / verified HTTP entry: `http://43.165.167.179:39443`（设置 `MEDIA_GEN_BASE_URL`，不验证 HTTPS）。源码 / Source: [media-gen-skill](../app/skills/media-gen-skill/SKILL.md)。纯 Python 3.10+ 标准库，无需 Docker、ComfyUI 本地安装或额外 Python 依赖。
 
 ## 安装 / Install
 
@@ -18,9 +18,9 @@ Download the archive and checksum from this repository's Releases, verify SHA-25
 
 To upgrade, preserve local customizations and private state, verify the new archive in a separate directory, then update the installed Skill's distributed files and open a new session. Keep request-state files, credentials and downloaded outputs outside the installation directory. Updating this package does not upgrade another deployment's server or Worker.
 
-从 Admin 创建业务 API Key。根据实际使用赋予 `models:read`、`capabilities:read`、`jobs:create`、`jobs:read`、`artifacts:read`、`content:read`、`content:download`；生成对应 `images:create`、`videos:create`、`audio:create` 或 `meshes:create`，参考图另需 `assets:upload`。3D 还需显式开启 Tenant/Project/Key 的 `daily_mesh_count`；旧策略默认 0。模型、任务类型、项目、配额限制仍由该 Key 决定。不要使用 Admin 密码、Worker token 或网关凭证代替。
+从 Admin 创建业务 API Key。根据实际使用赋予 `models:read`、`capabilities:read`、`jobs:create`、`jobs:read`、`artifacts:read`、`content:read`、`content:download`；生成对应 `images:create`、`videos:create`、`audio:create` 或 `meshes:create`，参考图另需 `assets:upload`。3D 的 Tenant/Project/Key `daily_mesh_count` 应是有效正额度或明确 unlimited/null；旧策略的 0 会拒绝请求。当前不限额部署不得重新设置日上限。模型、任务类型、项目、配额限制仍由该 Key 决定。不要使用 Admin 密码、Worker token 或网关凭证代替。
 
-Create a business API Key in Admin. Grant the read/job/content scopes above, the appropriate image/video/audio/3D generation scope, and `assets:upload` when references are needed. 3D requires explicit nonzero Tenant/Project/Key daily_mesh_count quotas; existing policies default to zero. **Mesh-only generation does not require images:create**; asset upload permission is separate. Also permit the selected alias/release/channel/task. Model visibility and limits remain scoped to that Key. Never embed real credentials in distributed archives.
+Create a business API Key in Admin. Grant the read/job/content scopes above, the appropriate image/video/audio/3D generation scope, and `assets:upload` when references are needed. For 3D, Tenant/Project/Key daily_mesh_count must allow a positive amount or explicit unlimited/null; zero denies admission. Do not restore daily caps on the current unlimited deployment. **Mesh-only generation does not require images:create**; asset upload permission is separate. Also permit the selected alias/release/channel/task. Model visibility and limits remain scoped to that Key. Never embed real credentials in distributed archives.
 
 PowerShell:
 

@@ -1,0 +1,48 @@
+{
+  "format_version": 1,
+  "at": "2026-11-15T16:26:19.006226+00:00",
+  "passed": true,
+  "scope": "Two native Windows builds from committed Skill/builder sources, exact four-asset comparison, ZIP members, independent single-file extraction/help, official directory/single-file validation and Python 3.10 syntax. No GPU or deployment claim.",
+  "version": "1.4.0",
+  "source_revision": "8d993c84905cbca369674e83164a8a79b5cbaf3d",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "two_native_builds_identical": true,
+  "embedded_clients_identical_to_source": true,
+  "single_file_official_validation": "Skill is valid!",
+  "both_clients_python_310_syntax": true,
+  "external_dependencies": [],
+  "files": [
+    {
+      "name": "media-gen-skill-1.4.0.zip",
+      "bytes": 33324,
+      "sha256": "1984e5ca3c7f669f5ec60efd81d74d018451eb293aa383f246ac5b2fec64038e"
+    },
+    {
+      "name": "release.json",
+      "bytes": 1206,
+      "sha256": "b4c98fa209f9e246e4c5248de8c131a5ae1e701aa60f953eceda8768fed50d22"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 167,
+      "sha256": "63d0cdf2d462e1329e921b157079a661142de7d41201c2b3ad41f868fbe4af45"
+    },
+    {
+      "name": "skill.md",
+      "bytes": 89876,
+      "sha256": "a68d893b4126e5b69e85f68044a020831ac5865024b5012b4da8249c4630c22c"
+    }
+  ],
+  "source_sha256": {
+    "app/skills/media-gen-skill/SKILL.md": "4a9e8b359b00b6f3778e2884ab15ba1a495a1ac3d791770fddcd5eb42175e8d6",
+    "app/skills/media-gen-skill/VERSION": "78b591400c56b7b67b8cb3b2b8a8e65e9093897f02ce0878e6b5405c68620fa7",
+    "app/skills/media-gen-skill/agents/openai.yaml": "2e11309e38725ff0b4eb8d96a0b1506de18ca0421792436f44f045469adda4b8",
+    "app/skills/media-gen-skill/references/api.md": "17be77bd0aef44e0eec0462fa5d57932c02befb3a48d95cbb082c91625cd5683",
+    "app/skills/media-gen-skill/references/comfy-origin.md": "ba3e414acb2cf0d6df7aa1db9e7e47ce993ee24f11a2c179a52b6a77f165d9ac",
+    "app/skills/media-gen-skill/scripts/comfy_origin.py": "6ee77d488aaaeee8aa61ee314808f45c84f4d894701c8d977713b350d94937b4",
+    "app/skills/media-gen-skill/scripts/media_gen.py": "eab79b43e85478b9658442d306fc4d028d4102d7ec5323e8d1364dca9218a132"
+  },
+  "code_comparison": "Embedded/client text matches after universal newline normalization; extraction uses the host newline convention. Archive and four release assets are compared as exact bytes."
+}
