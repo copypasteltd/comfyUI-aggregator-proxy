@@ -5,6 +5,8 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 
 def body_limit(path: str, content_type: str = "") -> int:
+    if path.startswith("/origin/"):
+        return 128 * 1024 * 1024 if content_type.startswith("multipart/form-data") else 8 * 1024 * 1024
     if path.startswith("/internal/v1/commands/") and path.endswith(("/receipts", "/reconciliations")):
         return 8 * 1024 * 1024
     if path.startswith("/internal/v1/uploads/") and path.endswith("/content"):

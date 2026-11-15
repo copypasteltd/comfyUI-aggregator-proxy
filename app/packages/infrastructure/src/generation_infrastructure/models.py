@@ -228,6 +228,70 @@ class MemoryOperation(Entity, Base):
     __table_args__ = (CheckConstraint("stage IN ('preflight','free_intent','free_accepted','barrier1_intent','barrier1_wait','barrier2_intent','barrier2_wait','completed','skipped','unknown','failed')", name="stage"), Index("ix_memory_operations_stage_updated", "stage", "updated_at"))
 
 
+class OriginGrant(Base):
+    __tablename__ = "origin_grants"
+    key_id: Mapped[UUID] = mapped_column(ForeignKey("api_keys.id"), primary_key=True)
+    enabled: Mapped[bool] = mapped_column(default=False)
+    channel_ids: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    revision: Mapped[int] = mapped_column(default=1)
+    __table_args__ = (CheckConstraint("revision >= 1 AND jsonb_typeof(channel_ids)='array'", name="policy"),)
+
+
+class OriginSession(Entity, Base):
+    __tablename__ = "origin_sessions"
+    identifier: Mapped[str] = mapped_column(String(32), unique=True)
+    verifier: Mapped[str] = mapped_column(String(64))
+    credential_id: Mapped[UUID] = mapped_column(ForeignKey("api_credentials.id"), index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    last_activity_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class OriginReservation(Entity, Base):
+    __tablename__ = "origin_reservations"
+    key_id: Mapped[UUID] = mapped_column(ForeignKey("api_keys.id"), index=True)
+    channel_id: Mapped[UUID] = mapped_column(ForeignKey("channels.id"), index=True)
+    state: Mapped[str] = mapped_column(String(16), default="acquiring")
+    config_digest: Mapped[str] = mapped_column(String(64))
+    gpu_ids: Mapped[list[str]] = mapped_column(JSONB)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    error_code: Mapped[str | None] = mapped_column(String(64))
+    __table_args__ = (CheckConstraint("state IN ('acquiring','active','closing','unknown','closed','failed') AND jsonb_typeof(gpu_ids)='array'", name="state"),)
+
+
+class OriginPrompt(Entity, Base):
+    __tablename__ = "origin_prompts"
+    key_id: Mapped[UUID] = mapped_column(ForeignKey("api_keys.id"), index=True)
+    channel_id: Mapped[UUID] = mapped_column(ForeignKey("channels.id"), index=True)
+    reservation_id: Mapped[UUID] = mapped_column(ForeignKey("origin_reservations.id"), index=True)
+    association: Mapped[str] = mapped_column(String(32), unique=True)
+    idempotency_digest: Mapped[str] = mapped_column(String(64))
+    request_digest: Mapped[str] = mapped_column(String(64))
+    prompt_id: Mapped[str | None] = mapped_column(String(128), unique=True)
+    state: Mapped[str] = mapped_column(String(16), default="intent")
+    response: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (UniqueConstraint("key_id", "channel_id", "idempotency_digest"), CheckConstraint("state IN ('intent','submitted','completed','rejected','unknown')", name="state"),)
+
+
+class OriginFile(Entity, Base):
+    __tablename__ = "origin_files"
+    key_id: Mapped[UUID] = mapped_column(ForeignKey("api_keys.id"), index=True)
+    channel_id: Mapped[UUID] = mapped_column(ForeignKey("channels.id"), index=True)
+    file_type: Mapped[str] = mapped_column(String(16))
+    subfolder: Mapped[str] = mapped_column(String(1024))
+    filename: Mapped[str] = mapped_column(String(255))
+    __table_args__ = (UniqueConstraint("key_id", "channel_id", "file_type", "subfolder", "filename"), CheckConstraint("file_type IN ('input','output','temp')", name="file_type"),)
+
+
+class OriginUserData(Base):
+    __tablename__ = "origin_user_data"
+    key_id: Mapped[UUID] = mapped_column(ForeignKey("api_keys.id"), primary_key=True)
+    channel_id: Mapped[UUID] = mapped_column(ForeignKey("channels.id"), primary_key=True)
+    data: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
+
+
 class Workflow(Entity, Scoped, Base):
     __tablename__ = "workflows"
     name: Mapped[str] = mapped_column(String(128))

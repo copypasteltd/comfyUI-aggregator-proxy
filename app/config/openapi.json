@@ -8992,6 +8992,259 @@
         }
       }
     },
+    "/admin/api/v1/api-keys/{identifier}/origin": {
+      "get": {
+        "summary": "Grant",
+        "operationId": "grant_admin_api_v1_api_keys__identifier__origin_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginGrantView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Patch",
+        "operationId": "patch_admin_api_v1_api_keys__identifier__origin_patch",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OriginGrantPatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Patch Admin Api V1 Api Keys  Identifier  Origin Patch"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/origin/api/session": {
+      "get": {
+        "summary": "Session",
+        "operationId": "session_origin_api_session_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Session Origin Api Session Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Login",
+        "operationId": "login_origin_api_session_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OriginLogin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Logout",
+        "operationId": "logout_origin_api_session_delete",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        }
+      }
+    },
+    "/origin/api/devices": {
+      "get": {
+        "summary": "Devices",
+        "operationId": "devices_origin_api_devices_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Devices Origin Api Devices Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/origin/api/devices/{slug}/acquire": {
+      "post": {
+        "summary": "Acquire",
+        "operationId": "acquire_origin_api_devices__slug__acquire_post",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Slug"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Acquire Origin Api Devices  Slug  Acquire Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/origin/api/devices/{slug}/release": {
+      "post": {
+        "summary": "Release",
+        "operationId": "release_origin_api_devices__slug__release_post",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Slug"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Release Origin Api Devices  Slug  Release Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/images/generations": {
       "post": {
         "summary": "Generate",
@@ -20415,6 +20668,118 @@
           "summary"
         ],
         "title": "OperationView"
+      },
+      "OriginChannelOption": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "enabled"
+        ],
+        "title": "OriginChannelOption"
+      },
+      "OriginGrantPatch": {
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "channel_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Channel Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_revision",
+          "enabled",
+          "channel_ids"
+        ],
+        "title": "OriginGrantPatch"
+      },
+      "OriginGrantView": {
+        "properties": {
+          "key_id": {
+            "type": "string",
+            "title": "Key Id"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "channel_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Channel Ids"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/OriginChannelOption"
+            },
+            "type": "array",
+            "title": "Options"
+          },
+          "trust_notice": {
+            "type": "string",
+            "title": "Trust Notice"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key_id",
+          "enabled",
+          "channel_ids",
+          "revision",
+          "options",
+          "trust_notice"
+        ],
+        "title": "OriginGrantView"
+      },
+      "OriginLogin": {
+        "properties": {
+          "api_key": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 40,
+            "title": "Api Key"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "api_key"
+        ],
+        "title": "OriginLogin"
       },
       "OutcomeCounts": {
         "properties": {

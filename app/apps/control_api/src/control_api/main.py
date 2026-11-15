@@ -225,6 +225,7 @@ from generation_infrastructure.monitoring import (
 )
 from generation_infrastructure.monitoring_snapshot import SnapshotUnavailable
 from generation_infrastructure.operational import OperationalQueries
+from generation_infrastructure.origin_access import OriginAccess
 from generation_infrastructure.outputs import OutputRepository
 from generation_infrastructure.recovery import RecoveryRepository
 from generation_infrastructure.security import SecretVault, secret_identifier
@@ -248,6 +249,7 @@ from control_api.compatibility import compatibility_routes
 from control_api.gateway import gateway_routes
 from control_api.limits import BodyLimitMiddleware, body_limit
 from control_api.monitoring import ObservedAPI, RequestLog
+from control_api.origin_routes import origin_routes
 from control_api.static import AdminFiles
 from control_api.uploads import upload_token
 
@@ -1228,6 +1230,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def monitoring_configuration(identity: Annotated[None, Depends(monitoring_identity)]) -> MonitoringConfiguration:
         return configuration(settings)
 
+    app.include_router(origin_routes(OriginAccess(sessions, settings), permission, admin_token, expected_revision))
     app.include_router(compatibility_routes(jobs, content, business, settings.public_origin))
     app.include_router(gateway_routes(GatewayRepository(sessions), GatewayAdministration(sessions, settings), catalog, content, jobs, gateway, permission, admin_token, expected_revision, cursors))
     if (settings.admin_dist / "index.html").is_file():

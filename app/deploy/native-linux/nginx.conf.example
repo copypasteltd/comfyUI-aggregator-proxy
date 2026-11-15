@@ -15,6 +15,10 @@ http {
     client_max_body_size 128m;
     client_body_timeout 60s;
     send_timeout 300s;
+    map $http_upgrade $comfy_origin_connection {
+        default upgrade;
+        '' close;
+    }
     server {
         listen 39443;
         server_name PUBLIC_HOST;
@@ -42,6 +46,20 @@ http {
         location = / { return 302 /admin/; }
         location = /internal { return 404; }
         location ^~ /internal/ { return 404; }
+        location ^~ /origin/ {
+            proxy_pass http://127.0.0.1:32880;
+            proxy_http_version 1.1;
+            proxy_set_header Host PUBLIC_HOST;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $comfy_origin_connection;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Forwarded-Host "";
+            proxy_set_header X-Forwarded-Proto http;
+            proxy_buffering off;
+            proxy_request_buffering off;
+            proxy_read_timeout 300s;
+            proxy_send_timeout 300s;
+        }
         location / {
             proxy_pass http://127.0.0.1:32880;
             proxy_http_version 1.1;

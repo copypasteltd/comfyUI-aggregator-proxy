@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-15 · Native ComfyUI workspace / 原生 ComfyUI 工作台
+
+- Add a Lime-styled `/origin/` login and device directory, `/orgin` and `/list` aliases, and authenticated native editors under `/origin/{device}/`. Add explicit, revisioned, audited per-Key device grants to Admin; existing Keys remain disabled until explicitly granted.
+- Share PostgreSQL dispatch/GPU locks with API scheduling and idle-memory reclamation. Persist reservations and prompt intent before upstream submission, recover positive associations, and retain unknown execution ownership across browser exit and service restart. Never resubmit an uncertain workflow automatically.
+- Proxy registered ComfyUI HTTP/WebSocket resources, scoped history, personal workflow/settings, uploads and authorized Range downloads. Isolate browser storage by Key/device, bound live connections, deny maintenance routes and preserve arbitrary-origin CORS plus the user's HTTP high-port entry.
+- Native mode is for explicitly trusted operators with installed custom nodes. Its device-local outputs are separate from `/v1/jobs`, cloud content, metering and eight-hour retention. See document 146 for actual checks, deployment status and remaining hardware limitations.
+
 ## 2026-11-13 · Unrestricted public CORS / 公网入口统一开放跨域
 
 - Remove the remaining public CORS restrictions: arbitrary preflight methods, request headers and private-network requests now return 204. Reflect the actual origin and allow credentials across API, Admin, Studio, Skill and error responses; hide duplicate upstream CORS headers while preserving authentication, route methods, CSP and private listeners.

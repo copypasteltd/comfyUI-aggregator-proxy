@@ -3707,6 +3707,36 @@
       "response_schemas": [
         "admin-device-pool.schema.json"
       ]
+    },
+    {
+      "operation_id": "get_admin_api_v1_api_keys_id_origin",
+      "method": "GET",
+      "path": "/admin/api/v1/api-keys/{id}/origin",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": false,
+      "idempotency": "none",
+      "if_match_required": false,
+      "work_package": "WP-07"
+    },
+    {
+      "operation_id": "patch_admin_api_v1_api_keys_id_origin",
+      "method": "PATCH",
+      "path": "/admin/api/v1/api-keys/{id}/origin",
+      "identity": "admin",
+      "scopes_all": [],
+      "permissions_all": [
+        "keys:manage"
+      ],
+      "resource_guard": "admin_visibility",
+      "csrf_required": true,
+      "idempotency": "required",
+      "if_match_required": true,
+      "work_package": "WP-07"
     }
   ],
   "inventory_revision": "2026-10-25-increment-81"

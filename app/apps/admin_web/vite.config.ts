@@ -17,5 +17,5 @@ export default defineConfig({
   }],
   base: '/admin/',
   server: { proxy: { '/admin/api': { target: 'https://127.0.0.1:8443', secure: false } } },
-  build: { target: 'es2022' },
+  build: { target: 'es2022', rollupOptions: { input: { main: 'index.html', origin: 'origin.html' } } },
 })
