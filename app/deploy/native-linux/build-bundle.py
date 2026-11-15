@@ -117,7 +117,7 @@ def main() -> None:
             if path.is_absolute() or ".." in path.parts or "\\" in relative:
                 raise SystemExit("Unsafe source path")
             if digest((root / relative).read_bytes()) != expected:
-                portable_change = relative.startswith(("packages/", "apps/control_api/", "apps/control_runner/", "apps/windows_worker/")) or relative in {"config/environment.example", "config/openapi.json", "config/openapi.sha256", "config/contract-hashes.json", "config/implementation-inventory.json", "deploy/native-linux/nginx.conf.example", "deploy/native-linux/comfy-aggregator-api.service", "scripts/sync-contracts.py", "deploy/native-linux/build-bundle.py"}
+                portable_change = relative.startswith(("packages/", "apps/control_api/", "apps/control_runner/", "apps/windows_worker/")) or relative in {"config/environment.example", "config/openapi.json", "config/openapi.sha256", "config/contract-hashes.json", "config/implementation-inventory.json", "deploy/native-linux/nginx.conf.example", "deploy/native-linux/publish-public-skill.py", "deploy/native-linux/comfy-aggregator-api.service", "scripts/sync-contracts.py", "deploy/native-linux/build-bundle.py"}
                 admin_change = args.rebuild_admin and relative.startswith("apps/admin_web/")
                 if not args.rebuild_wheels or not (portable_change or admin_change):
                     raise SystemExit(f"Candidate source changed: {relative}")
