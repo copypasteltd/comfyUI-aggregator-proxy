@@ -9,6 +9,19 @@
     if (url.origin === location.origin && !url.pathname.startsWith(prefix) && nativeRoots.test(url.pathname.slice(1))) url.pathname = prefix + url.pathname.slice(1);
     return url;
   }
+  // Native favicons and previews also assign DOM URL properties directly.
+  // Rebase before the browser starts a root-relative resource request.
+  for (const [type, property] of [[HTMLImageElement, 'src'], [HTMLMediaElement, 'src'], [HTMLSourceElement, 'src'], [HTMLScriptElement, 'src'], [HTMLLinkElement, 'href']]) {
+    const descriptor = Object.getOwnPropertyDescriptor(type.prototype, property);
+    if (descriptor?.set && descriptor.get && descriptor.configurable) Object.defineProperty(type.prototype, property, {
+      ...descriptor, set(value) { return descriptor.set.call(this, scoped(String(value)).href); }
+    });
+  }
+  const setAttribute = Element.prototype.setAttribute;
+  Element.prototype.setAttribute = function (name, value) {
+    if ((name === 'src' && /^(IMG|VIDEO|AUDIO|SOURCE|SCRIPT)$/.test(this.tagName)) || (name === 'href' && this.tagName === 'LINK')) value = scoped(String(value)).href;
+    return setAttribute.call(this, name, value);
+  };
   const originalFetch = window.fetch.bind(window);
   window.fetch = async (input, options = {}) => {
     const supplied = input instanceof Request ? input : null;

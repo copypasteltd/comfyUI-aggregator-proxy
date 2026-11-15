@@ -66,6 +66,7 @@ READS = {
     "experiment",
     "translations",
     "default_workflow",
+    "i18n",
 }
 
 
@@ -540,9 +541,9 @@ def origin_routes(
                     "提交结果未知，系统正在核对原任务，请勿重复运行",
                     409,
                 ) from exc
-        if native.startswith("upload/") and request.method == "POST":
+        if native in {"upload/image", "upload/mask"} and request.method == "POST":
             await asyncio.to_thread(access.active, identity, target["id"])
-            return await upload(identity, target, request, headers)
+            return await upload(identity, target, request, headers, native)
         if native == "view" and not write:
             name, folder, kind = file_parameters(request)
             if not await asyncio.to_thread(
@@ -816,9 +817,37 @@ def origin_routes(
         return result[0]
 
     async def upload(
-        identity: OriginActor, target: dict[str, Any], request: Request, headers: dict[str, str]
+        identity: OriginActor,
+        target: dict[str, Any],
+        request: Request,
+        headers: dict[str, str],
+        native: str,
     ) -> Response:
         async with request.form(max_files=1, max_fields=10) as form:
+            fields = []
+            if native == "upload/mask":
+                try:
+                    reference = json.loads(str(form.get("original_ref", "")))
+                    descriptors = output_files(reference)
+                except (ValueError, TypeError) as exc:
+                    raise DomainError(
+                        "origin_upload_invalid", "遮罩需要有效的原图引用", 422
+                    ) from exc
+                if not isinstance(reference, dict) or len(descriptors) != 1:
+                    raise DomainError("origin_upload_invalid", "遮罩需要有效的原图引用", 422)
+                filename, subfolder, file_type = descriptors[0]
+                if not await asyncio.to_thread(
+                    access.owns_file, identity, target["id"], filename, subfolder, file_type
+                ):
+                    raise DomainError("not_found", "原图不存在或不属于当前 Key", 404)
+                fields.append(
+                    (
+                        "original_ref",
+                        json.dumps(
+                            {"filename": filename, "subfolder": subfolder, "type": file_type}
+                        ),
+                    )
+                )
             file = form.get("image")
             if not isinstance(file, UploadFile):
                 raise DomainError("origin_upload_invalid", "请选择上传文件", 422)
@@ -853,11 +882,12 @@ def origin_routes(
             )
 
             async def content() -> AsyncIterator[bytes]:
-                for key, value in (
+                for key, value in [
                     ("subfolder", folder),
                     ("type", "input"),
                     ("overwrite", "false"),
-                ):
+                    *fields,
+                ]:
                     yield f'--{boundary}\r\nContent-Disposition: form-data; name="{key}"\r\n\r\n{value}\r\n'.encode()
                 yield f'--{boundary}\r\nContent-Disposition: form-data; name="image"; filename="{name}"\r\nContent-Type: application/octet-stream\r\n\r\n'.encode()
                 total = 0
@@ -873,7 +903,7 @@ def origin_routes(
                 timeout=httpx.Timeout(120, connect=4), trust_env=False, follow_redirects=False
             ) as client:
                 upstream = await client.post(
-                    target["base_url"].rstrip("/") + "/upload/image",
+                    target["base_url"].rstrip("/") + "/" + native,
                     headers=headers,
                     content=content(),
                 )
@@ -925,7 +955,9 @@ def origin_routes(
             {"Cache-Control": "private, no-store", "Referrer-Policy": "no-referrer"}
         )
         if path == "":
-            response_headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+            response_headers["Content-Security-Policy"] = (
+                "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+            )
         if "location" in response_headers:
             try:
                 response_headers["location"] = proxied_location(

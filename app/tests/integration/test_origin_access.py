@@ -10,6 +10,8 @@ import threading
 from collections.abc import Iterator
 from concurrent.futures import ThreadPoolExecutor
 from datetime import timedelta
+from email import policy
+from email.parser import BytesParser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 from uuid import UUID, uuid4
@@ -53,6 +55,7 @@ class Source(ThreadingHTTPServer):
     prompts: list[dict[str, Any]]
     history: dict[str, Any]
     queue: dict[str, list[Any]]
+    uploads: list[dict[str, Any]]
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -88,6 +91,8 @@ class Handler(BaseHTTPRequestHandler):
             )
         elif self.path == "/object_info":
             self.reply({"EmptyImage": {"input": {}}})
+        elif self.path == "/api/i18n":
+            self.reply({"en": {"synthetic": "Native translation"}})
         elif self.path == "/extensions":
             self.reply(["/extensions/synthetic/tool.js"])
         elif self.path.startswith("/api/jobs"):
@@ -107,6 +112,29 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         source: Any = self.server
+        if self.path in {"/upload/image", "/upload/mask"}:
+            data = b""
+            if self.headers.get("Transfer-Encoding") == "chunked":
+                while size := int(self.rfile.readline().strip(), 16):
+                    data += self.rfile.read(size)
+                    assert self.rfile.read(2) == b"\r\n"
+                self.rfile.readline()
+            else:
+                data = self.rfile.read(int(self.headers.get("Content-Length", "0")))
+            message = BytesParser(policy=policy.default).parsebytes(
+                ("Content-Type: " + self.headers["Content-Type"] + "\r\n\r\n").encode() + data
+            )
+            fields = {}
+            filename = ""
+            for part in message.iter_parts():
+                name = part.get_param("name", header="content-disposition")
+                if name == "image":
+                    filename = part.get_filename()
+                else:
+                    fields[name] = part.get_content()
+            source.uploads.append({"path": self.path, "filename": filename, "fields": fields})
+            self.reply({"name": filename, "subfolder": fields["subfolder"], "type": fields["type"]})
+            return
         data = json.loads(self.rfile.read(int(self.headers.get("Content-Length", "0"))))
         assert self.path == "/prompt"
         source.prompts.append(data)
@@ -130,7 +158,7 @@ def native(
     pg: sessionmaker[Session], catalog: dict[str, Any], test_settings: Settings
 ) -> Iterator[dict[str, Any]]:
     source = Source(("127.0.0.1", 0), Handler)
-    source.prompts, source.history = [], {}
+    source.prompts, source.history, source.uploads = [], {}, []
     source.queue = {"queue_running": [], "queue_pending": []}
     thread = threading.Thread(target=source.serve_forever, daemon=True)
     thread.start()
@@ -367,6 +395,7 @@ def test_native_prompt_replay_filter_files_range_and_static_paths(
     assert "set-cookie" not in html.headers
     assert c.get(prefix + "extensions").json() == [prefix + "extensions/synthetic/tool.js"]
     assert c.get(prefix + "__origin_bootstrap.js").status_code == 200
+    assert c.get(prefix + "api/i18n").json()["en"]["synthetic"] == "Native translation"
     graph = {"prompt": {"1": {"class_type": "Synthetic", "inputs": {}}}, "extra_data": {}}
     headers = {"Idempotency-Key": "synthetic-http-prompt-01"}
     first = c.post(prefix + "prompt", json=graph, headers=headers)
@@ -386,6 +415,61 @@ def test_native_prompt_replay_filter_files_range_and_static_paths(
     assert c.get(prefix + "internal/logs").status_code == 403
     assert c.post(prefix + "free", json={}).status_code == 403
     assert c.get(prefix + "view?filename=../private.png").status_code == 404
+
+
+def test_native_mask_upload_requires_owned_reference_and_preserves_mask_protocol(
+    native: dict[str, Any],
+) -> None:
+    c, prefix = native["client"], native["prefix"]
+    assert c.post(f"/origin/api/devices/{native['slug']}/acquire").status_code == 200
+    upload = c.post(
+        prefix + "upload/image", files={"image": ("source.png", b"synthetic-png", "image/png")}
+    )
+    assert upload.status_code == 200
+    receipt = upload.json()
+    reference = {
+        "filename": receipt["name"],
+        "subfolder": receipt["subfolder"],
+        "type": receipt["type"],
+    }
+    foreign = {**reference, "filename": "foreign.png"}
+    assert (
+        c.post(
+            prefix + "upload/mask",
+            data={"original_ref": json.dumps(foreign)},
+            files={"image": ("mask.png", b"synthetic-mask", "image/png")},
+        ).status_code
+        == 404
+    )
+    assert len(native["source"].uploads) == 1
+    masked = c.post(
+        prefix + "upload/mask",
+        data={"original_ref": json.dumps(reference)},
+        files={"image": ("mask.png", b"synthetic-mask", "image/png")},
+    )
+    assert masked.status_code == 200
+    actual = native["source"].uploads[-1]
+    assert actual["path"] == "/upload/mask"
+    assert json.loads(actual["fields"]["original_ref"]) == reference
+    assert actual["fields"]["type"] == "input"
+    assert actual["filename"] != receipt["name"]
+    assert (
+        c.get(
+            prefix + "view",
+            params={
+                "filename": masked.json()["name"],
+                "subfolder": masked.json()["subfolder"],
+                "type": "input",
+            },
+        ).status_code
+        == 200
+    )
+    assert (
+        c.post(
+            prefix + "upload/unsupported", files={"image": ("x.png", b"x", "image/png")}
+        ).status_code
+        == 403
+    )
 
 
 def test_native_isolated_userdata_workflow_save_rename_and_listing(native: dict[str, Any]) -> None:
