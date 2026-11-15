@@ -955,8 +955,10 @@ def origin_routes(
             {"Cache-Control": "private, no-store", "Referrer-Policy": "no-referrer"}
         )
         if path == "":
+            # Native frontends boot inline and fetch bundled Rust/WASM through
+            # data/blob URLs. Keep this policy local to the trusted editor.
             response_headers["Content-Security-Policy"] = (
-                "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+                "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
             )
         if "location" in response_headers:
             try:

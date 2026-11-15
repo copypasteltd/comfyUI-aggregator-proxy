@@ -392,6 +392,7 @@ def test_native_prompt_replay_filter_files_range_and_static_paths(
     assert c.post(f"/origin/api/devices/{native['slug']}/acquire").status_code == 200
     html = c.get(prefix)
     assert f'<base href="{prefix}">' in html.text and "__origin_bootstrap.js" in html.text
+    assert "connect-src 'self' data: blob:" in html.headers["content-security-policy"]
     assert "set-cookie" not in html.headers
     assert c.get(prefix + "extensions").json() == [prefix + "extensions/synthetic/tool.js"]
     assert c.get(prefix + "__origin_bootstrap.js").status_code == 200
