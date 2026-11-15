@@ -20,4 +20,18 @@ python scripts/comfy_origin.py --session-file private/domain-session.json device
 
 Key 通过 `MEDIA_GEN_API_KEY` 私下设置。原生设备仍须由 Admin 独立授权。其余能力、归属、未知提交恢复和设备本地素材保留规则沿用 [147](147-Skill原生ComfyUI操作与发布.md)。本轮不新增生成任务，不以域名连通性代替模型质量或全设备验收。
 
-验证与正式发布结果完成后在此追加；历史证据不改写。维护流程见 [131](131-单文件Skill与固定在线地址.md)。
+## 验证与发布结果
+
+| 编号 | 验证 | 实际结果与证据 |
+| --- | --- | --- |
+| DOMAIN-V01 | 客户端回归 | [35 项通过](evidence/2026-11-16/skill-domain-141-local.json)，来源运行前后摘要一致；Ruff、官方目录式 Skill 校验和 Python 3.10 语法通过。 |
+| DOMAIN-V02 | 打包与默认地址 | [两次原生构建一致](evidence/2026-11-16/skill-domain-141-build.json)，独立提取两个客户端运行帮助；AST 核对默认地址和清单均为业务域名，单文件不含旧服务器 IP 或高端口示例。 |
+| DOMAIN-V03 | 域名实际调用 | [6 项通过](evidence/2026-11-16/skill-domain-141-live.json)：两个独立提取客户端不覆盖地址，实际业务鉴权读取模型列表、原生域名登录、会话、获准设备目录与退出。该 Key 可见 45 个业务模型和 3 台设备；目录可见不代表设备空闲或全部可生成。测试会话已注销及删除。 |
+| DOMAIN-V04 | GitHub | [1.4.1 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1) 正式发布；[标签流水线及匿名下载](evidence/2026-11-16/skill-domain-141-public-release.json) 确认四项资产与本地两次构建逐字节相同。 |
+| DOMAIN-V05 | 线上静态部署 | [current 已切至 1.4.1](evidence/2026-11-16/skill-domain-141-deployment.json)；原应用 `linux-20261115.146.6`、五个服务主进程、主配置与既有 CORS include 不变；1.3.0、1.4.0 文件摘要保持相同。 |
+| DOMAIN-V06 | 公网入口 | [48 项检查通过](evidence/2026-11-16/skill-domain-141-external.json)，覆盖业务域名和源站的最新/固定四项资产、HEAD/条件请求、任意来源预检、鉴权、健康、原生入口及旧版本。沿用用户既有反代，不审计或修改 TLS/证书配置。 |
+| DOMAIN-V07 | 最终核对 | [来源、门禁与收尾](evidence/2026-11-16/skill-domain-141-final-checks.json) 核对当前源码摘要、本地安装链接、域名发行资产、各层证据及测试会话删除。 |
+
+发行来源：`c1a8eedbceafea3bf8373c21f009e228e2f22f92`。单文件 **91,131 字节**，SHA-256 为 `4e3251018531af8adf8512e527a01e164dd204d00e15488dc0dab59828bbcc73`。本地安装链接指向当前仓库来源，已同步 1.4.1；其他单文件用户重新下载后在新会话加载，旧提取脚本须在新目录提取或明确替换。
+
+本轮没有设备占用、素材上传或生成提交，不改变 API Key 权限、配额和设备维护状态。[发布隐私扫描](evidence/2026-11-16/skill-domain-141-publication-scan.json) 私下匹配真实凭据，不输出值。历史证据不改写；维护流程见 [131](131-单文件Skill与固定在线地址.md)。

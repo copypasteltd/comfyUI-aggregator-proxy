@@ -1,0 +1,169 @@
+{
+  "format_version": 1,
+  "at": "2026-11-15T17:22:10.969365+00:00",
+  "passed": true,
+  "source_revision": "c1a8eedbceafea3bf8373c21f009e228e2f22f92",
+  "sources_unchanged": true,
+  "scope": "Business client compatibility and direct ComfyUI standard-library session, durable intent, upload/mask, owned download, timeout, personal Workflow and self-contained extraction regressions against owned loopback HTTP. No production or model quality acceptance.",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "python": {
+    "tests": 35,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/scripts/build-media-gen-skill.py": "7fbb434901b50d85f2ec3223cb64439917a757e4e29dcda0f4a77629cc255d46",
+    "app/skills/media-gen-skill/SKILL.md": "bba59ddbeb83df12b79325e335fa7c18bcf23897c6c22b1a48d010224246585e",
+    "app/skills/media-gen-skill/VERSION": "7d072b48526b023950e4c48db01e8c273554a6401119f5691e7589ba9bc65d9d",
+    "app/skills/media-gen-skill/agents/openai.yaml": "2e11309e38725ff0b4eb8d96a0b1506de18ca0421792436f44f045469adda4b8",
+    "app/skills/media-gen-skill/references/api.md": "c230c54843f17e324ca93bad49eaf75c736a75d772de14e005df7d6ced8ef503",
+    "app/skills/media-gen-skill/references/comfy-origin.md": "5be311f9dc7f23870350762cafcdee0dbfaa39ac382f7f7c595b16756736e37c",
+    "app/skills/media-gen-skill/scripts/comfy_origin.py": "37610aed71752f2840066f92a8f67f3e5aeea5d5322a39f8298e03acef599a03",
+    "app/skills/media-gen-skill/scripts/media_gen.py": "b5a33d82b0d05e58913b5cf01171eb7c107bc93bbd0bba8f5105523bfcc8d1bf",
+    "app/tests/unit/test_comfy_origin_skill.py": "81581ce5d39e4ccf01b3a620870442347809882e4e0dcdeea854f4675b921568",
+    "app/tests/unit/test_media_gen_skill.py": "737755b4f5965aa19cf08ad54997108a4ac4daf0d2de406f9ad5fee9e63b5db1"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_compiled_single_file_extracts_both_clients_and_runs_native_without_repository",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_direct_paths_cannot_escape_the_selected_device",
+      "passed_cases": 6
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_download_supplied_hash_is_verified_and_mismatch_removes_only_own_partial",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_native_session_is_private_origin_bound_and_no_bearer_is_forwarded",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_native_wait_tracks_history_heartbeats_and_downloads_owned_descriptors",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_personal_workflow_cli_save_is_scoped_and_does_not_execute",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_redirect_refused_and_native_cli_reuses_private_session_without_key",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_server_unknown_error_never_creates_another_local_intent_or_echoes_data",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_streamed_mask_uses_actual_image_field_and_owned_original_protocol",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_ui_graph_is_not_silently_miscompiled_and_file_descriptors_are_safe",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_unknown_prompt_cannot_move_to_a_different_credential",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_unknown_submission_keeps_exact_intent_then_known_id_only_reads",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_wait_timeout_does_not_cancel_logout_release_or_submit",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_audio_presets_fixed_encoding_does_not_require_unexposed_parameters",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_cli_outputs_utf8_when_windows_redirect_encoding_is_ascii",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_download_verifies_and_never_overwrites_or_leaves_partial",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_invalid_named_input_arguments_are_rejected",
+      "passed_cases": 3
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_lost_submission_reuses_exact_identity_and_body_then_only_polls",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_model3d_client_uses_image_only_and_declared_parameters",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_model3d_download_uses_canonical_extension",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_named_inputs_keep_video_audio_and_transcripts_in_their_semantic_slots",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_redirect_refused_and_origin_locked",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_single_file_runs_independently_and_downloads_a_verified_glb",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_typed_audio_upload_streams_multipart_with_explicit_kind_and_stable_token",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_wait_stops_on_native_unsuccessful_terminal_status",
+      "passed_cases": 3
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "6c652fcd172f9841e96029fa1bc652e10f6a9eaa3585564cc404eaa0e39fa8bb",
+  "python_log_sha256": "f48f753874ed61ac6d2a3e0e39b25e4e78e78592eca5392d112bb426aaaf532e",
+  "additional_checks": {
+    "ruff": "All checks passed!",
+    "directory_skill_validation": "Skill is valid!",
+    "python_310_syntax": true,
+    "actual_runtime": "3.13.1"
+  }
+}

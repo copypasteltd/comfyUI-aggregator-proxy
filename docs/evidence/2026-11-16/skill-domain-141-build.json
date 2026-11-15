@@ -1,0 +1,50 @@
+{
+  "format_version": 1,
+  "at": "2026-11-15T17:22:57.464666+00:00",
+  "passed": true,
+  "scope": "Two native Windows builds from committed Skill/builder sources, exact four-asset comparison, ZIP members, independent single-file extraction/help, official directory/single-file validation and Python 3.10 syntax. Verifies both extracted client defaults and release manifest use the business domain, with no deployed server IP/high-port recommendation in the payload. No GPU or deployment claim.",
+  "version": "1.4.1",
+  "source_revision": "c1a8eedbceafea3bf8373c21f009e228e2f22f92",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "two_native_builds_identical": true,
+  "embedded_clients_identical_to_source": true,
+  "single_file_official_validation": "Skill is valid!",
+  "both_clients_python_310_syntax": true,
+  "both_default_origins": "https://gen.sub2share.xyz",
+  "server_ip_or_high_port_in_payload": false,
+  "code_comparison": "Client text matches after universal-newline normalization. The four release assets are compared as exact bytes.",
+  "external_dependencies": [],
+  "files": [
+    {
+      "name": "media-gen-skill-1.4.1.zip",
+      "bytes": 33699,
+      "sha256": "48fdec063caad02f5caa3fe5b02c28f6fd79e6a9660eddfa43412c34daf0d69e"
+    },
+    {
+      "name": "release.json",
+      "bytes": 1206,
+      "sha256": "6532a9efbb12a96007a24c2d299c5e3bc8546b73b92ff26412239b4d52003730"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 167,
+      "sha256": "5e43745ed72297e0278a879645387da3aafb54fb196c22d7731b9ddb2be011f8"
+    },
+    {
+      "name": "skill.md",
+      "bytes": 91131,
+      "sha256": "4e3251018531af8adf8512e527a01e164dd204d00e15488dc0dab59828bbcc73"
+    }
+  ],
+  "source_sha256": {
+    "app/skills/media-gen-skill/SKILL.md": "bba59ddbeb83df12b79325e335fa7c18bcf23897c6c22b1a48d010224246585e",
+    "app/skills/media-gen-skill/VERSION": "7d072b48526b023950e4c48db01e8c273554a6401119f5691e7589ba9bc65d9d",
+    "app/skills/media-gen-skill/agents/openai.yaml": "2e11309e38725ff0b4eb8d96a0b1506de18ca0421792436f44f045469adda4b8",
+    "app/skills/media-gen-skill/references/api.md": "c230c54843f17e324ca93bad49eaf75c736a75d772de14e005df7d6ced8ef503",
+    "app/skills/media-gen-skill/references/comfy-origin.md": "5be311f9dc7f23870350762cafcdee0dbfaa39ac382f7f7c595b16756736e37c",
+    "app/skills/media-gen-skill/scripts/comfy_origin.py": "37610aed71752f2840066f92a8f67f3e5aeea5d5322a39f8298e03acef599a03",
+    "app/skills/media-gen-skill/scripts/media_gen.py": "b5a33d82b0d05e58913b5cf01171eb7c107bc93bbd0bba8f5105523bfcc8d1bf"
+  }
+}

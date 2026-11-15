@@ -2,7 +2,7 @@
 
 **1.4.1 统一业务域名 / Business domain:** 两个客户端、业务与原生示例均使用 **https://gen.sub2share.xyz**，详情及发布记录见 [148](148-Skill业务域名统一与发布.md)。Default URLs require no override; use a separate private native session when migrating from another origin.
 
-**1.4.1 增加直接 ComfyUI 模式 / Direct ComfyUI:** 先由 Admin 为 Key 授予设备，再用 `comfy_origin.py login → devices → acquire → submit → wait → release → logout` 操作自定义图；查询节点、模型、上传素材和个人工作流见 [147](147-Skill原生ComfyUI操作与发布.md) 及 [Skill 原生参考](../app/skills/media-gen-skill/references/comfy-origin.md)。Native outputs stay on the device, outside cloud eight-hour retention. Session files contain credentials and must remain private.
+**原生 ComfyUI 模式（1.4 起）/ Direct ComfyUI:** 先由 Admin 为 Key 授予设备，再用 `comfy_origin.py login → devices → acquire → submit → wait → release → logout` 操作自定义图；查询节点、模型、上传素材和个人工作流见 [147](147-Skill原生ComfyUI操作与发布.md) 及 [Skill 原生参考](../app/skills/media-gen-skill/references/comfy-origin.md)。Native outputs stay on the device, outside cloud eight-hour retention. Session files contain credentials and must remain private.
 
 默认服务 / Default service: **https://gen.sub2share.xyz**，业务和原生模式保持同域；`MEDIA_GEN_BASE_URL` 可省略。源码 / Source: [media-gen-skill](../app/skills/media-gen-skill/SKILL.md)。纯 Python 3.10+ 标准库，无需 Docker、ComfyUI 本地安装或额外 Python 依赖。
 

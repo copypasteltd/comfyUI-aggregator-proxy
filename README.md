@@ -1,6 +1,6 @@
 # ComfyUI Aggregator Proxy
 
-[Skill 1.4.1 · 统一业务域名](docs/148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和下载均使用 **https://gen.sub2share.xyz**。两个客户端默认同域，无需配置服务器 IP。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) · [原生面板](https://gen.sub2share.xyz/origin/)。验证和上线结果见专题。
+[Skill 1.4.1 · 统一业务域名](docs/148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和下载均使用 **https://gen.sub2share.xyz**。两个客户端默认同域，无需配置服务器 IP。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) · [原生面板](https://gen.sub2share.xyz/origin/)。已同步本地安装、[GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1) 和线上单文件；35 项回归、6 项域名实际调用及 48 项公网检查通过。
 
 [Skill 1.4.0 · 直接操作 ComfyUI](docs/147-Skill原生ComfyUI操作与发布.md)：允许使用者/Agent 在独立设备授权后查询节点和模型、编辑自定义 Workflow、上传素材、提交任务、查看队列与结果、管理个人流程并安全归还。新增标准库 `comfy_origin.py`，单文件内嵌两份参考与两个客户端；业务模型 API 继续支持。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.0](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)。会话文件含派生凭据须私藏，原生结果留在设备，不套用云端八小时删除；已发布到 GitHub 和线上：[HTTP 最新下载](http://43.165.167.179:39443/skill.md) · [1.4.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.0)。35 项客户端回归、5070 的 15 项真实操作与 23 项外部 HTTP 检查通过，完整证据和限制见专题。
 

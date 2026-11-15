@@ -1,0 +1,52 @@
+{
+  "at": "2026-11-15T17:26:28.151823+00:00",
+  "version": "1.4.1",
+  "source_revision": "c1a8eedbceafea3bf8373c21f009e228e2f22f92",
+  "application_release": "/opt/comfyui-aggregator/releases/linux-20261115.146.6",
+  "services_unchanged": true,
+  "service_pids": {
+    "comfy-aggregator-api.service": "4139058",
+    "comfy-aggregator-runner.service": "4139079",
+    "comfy-aggregator-gc.service": "1139",
+    "comfy-aggregator-http-worker.service": "2543",
+    "comfy-aggregator-edge.service": "1132"
+  },
+  "previous_pointer": "1.4.0",
+  "current_pointer": "1.4.1",
+  "config_before_sha256": "fe077ef6850da9da5165cf9173c9eb220f6ab2ae04a30a5153cfe74eac065309",
+  "config_after_sha256": "fe077ef6850da9da5165cf9173c9eb220f6ab2ae04a30a5153cfe74eac065309",
+  "snippet_sha256": "4a0714332791865a6782d822219d1826f7bd2b5d80b2538b1fab103cf5604821",
+  "backup": "/etc/comfyui-aggregator/nginx.conf.before-skill-20261115T172627906595Z",
+  "http": {
+    "get_head": true,
+    "conditional_get": true,
+    "cors_options": true,
+    "immutable_version": true,
+    "missing_paths_404": true,
+    "health_live": true,
+    "business_auth_preserved": true,
+    "private_ingress_preserved": true,
+    "sha256": "4e3251018531af8adf8512e527a01e164dd204d00e15488dc0dab59828bbcc73"
+  },
+  "format_version": 1,
+  "passed": true,
+  "scope": "Static-only publish of the four GitHub 1.4.1 assets, with inspected existing CORS include and config hash guards, loopback checks and unchanged application/five service PIDs; historical 1.3.0 and 1.4.0 bytes preserved.",
+  "public_release_url": "https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1",
+  "configuration_unchanged": true,
+  "installed_snippet_preserved": true,
+  "all_five_service_pids_unchanged": true,
+  "application_release_unchanged": true,
+  "historical_versions_unchanged": true,
+  "historical_skill_sha256": {
+    "1.3.0": "ddce149dfc6ad7f713ad4a49c9ee75a57e251055d8471289d34ad115a4e59ee9",
+    "1.4.0": "a68d893b4126e5b69e85f68044a020831ac5865024b5012b4da8249c4630c22c"
+  },
+  "virtualization_used": false,
+  "browser_used": false,
+  "gpu_generation_during_deployment": false,
+  "tls_or_reverse_proxy_configuration_changed": false,
+  "full_acceptance": "pending",
+  "source_sha256": {
+    "app/deploy/native-linux/publish-public-skill.py": "ded58df6d4bc2a085918fa6ace0e640e0d6bcfa78121f83e2e6fb6c693e226d9"
+  }
+}

@@ -3,7 +3,7 @@
 ## 2026-11-16 · Skill 1.4.1 / 统一业务域名
 
 - 按用户要求，业务 API、原生 ComfyUI、登录、下载和快速示例统一使用 https://gen.sub2share.xyz；两个客户端原默认域名不变，版本同步 1.4.1。补充跨源会话与未决任务迁移说明，保留旧版本。
-- Use the business domain consistently throughout both Skill modes, references, examples and distribution. Retain default client origins and native capabilities; never transfer a session or replay unresolved work across origins. Verification, immutable release and static rollout are recorded in [148](docs/148-Skill业务域名统一与发布.md).
+- Use the business domain consistently throughout both Skill modes, references, examples and distribution. Retain default client origins and native capabilities; never transfer a session or replay unresolved work across origins. Publish immutable GitHub 1.4.1 and the online single file; both builds, four release assets and deployed bytes match. Pass 35 client regressions, 6 real default-domain API checks and 48 external checks. Preserve all five service PIDs, application/configuration and historical Skill bytes; no generation submitted. Evidence is recorded in [148](docs/148-Skill业务域名统一与发布.md).
 
 ## 2026-11-16 · Skill 1.4.0 / 允许直接操作原生 ComfyUI
 

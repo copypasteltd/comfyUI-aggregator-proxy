@@ -2,11 +2,11 @@
   "contract_version": "0.4.0",
   "format_version": 1,
   "increment": 152,
-  "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages. Native workspace146 binds the affected implementation to a separately executed current-source component run; prior report bytes and pending full gates are preserved. Native ComfyUI Skill 1.4.0 source/client regressions are tracked separately from the existing native-panel and full acceptance evidence.",
+  "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages. Native workspace146 binds the affected implementation to a separately executed current-source component run; prior report bytes and pending full gates are preserved. Native ComfyUI Skill 1.4.0 source/client regressions are tracked separately from the existing native-panel and full acceptance evidence. Skill 1.4.1 domain-only update binds current client sources to its own component run without modifying historical evidence.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-16/development-trace-baselines-147-skill.json",
-    "sha256": "907f4ad5ae16911d3244c27327c0bb674b4b322288613cc7c4fbf4b0efe75cec"
+    "path": "docs/evidence/2026-11-16/development-trace-baselines-148-skill-domain.json",
+    "sha256": "0bf017ec864dee0f6df0fed170dbdccc0e89b6388bb5ae749d4c201c816f7e0a"
   },
   "requirements": [
     {
@@ -984,7 +984,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "tests": [
@@ -1106,19 +1106,19 @@
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_model3d_client_uses_image_only_and_declared_parameters",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_model3d_download_uses_canonical_extension",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_single_file_runs_independently_and_downloads_a_verified_glb",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "evidence": [
@@ -1137,7 +1137,8 @@
         "skill138",
         "native139",
         "host152",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "20",
@@ -1203,7 +1204,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "skill140"
+          "baseline": "skill141"
         },
         {
           "path": "app/apps/control_api/src/control_api/origin_routes.py",
@@ -1211,7 +1212,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "tests": [
@@ -1236,7 +1237,7 @@
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
-          "baseline": "skill140",
+          "baseline": "skill141",
           "language": "python"
         },
         {
@@ -1249,13 +1250,13 @@
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_compiled_single_file_extracts_both_clients_and_runs_native_without_repository",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         },
         {
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_personal_workflow_cli_save_is_scoped_and_does_not_execute",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "evidence": [
@@ -1276,7 +1277,8 @@
         "skill138",
         "native139",
         "origin146",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "30",
@@ -1586,7 +1588,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "tests": [
@@ -1606,7 +1608,7 @@
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_direct_paths_cannot_escape_the_selected_device",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "evidence": [
@@ -1619,7 +1621,8 @@
         "contract133",
         "compat135",
         "native139",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "30",
@@ -1700,7 +1703,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "tests": [
@@ -1720,13 +1723,13 @@
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_unknown_submission_keeps_exact_intent_then_known_id_only_reads",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         },
         {
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_wait_timeout_does_not_cancel_logout_release_or_submit",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "evidence": [
@@ -1740,7 +1743,8 @@
         "native139",
         "host152",
         "origin146",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "29",
@@ -2953,7 +2957,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "tests": [
@@ -2973,7 +2977,7 @@
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_download_supplied_hash_is_verified_and_mismatch_removes_only_own_partial",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "evidence": [
@@ -2986,7 +2990,8 @@
         "compat135",
         "native139",
         "host152",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "37",
@@ -4689,7 +4694,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "tests": [
@@ -4709,7 +4714,7 @@
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_native_session_is_private_origin_bound_and_no_bearer_is_forwarded",
           "language": "python",
-          "baseline": "skill140"
+          "baseline": "skill141"
         }
       ],
       "evidence": [
@@ -4725,7 +4730,8 @@
         "browser135",
         "native139",
         "origin146",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "50",
@@ -5378,7 +5384,8 @@
         "mesh129downloads",
         "skill130",
         "single131",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "25",
@@ -5463,7 +5470,8 @@
         "go80",
         "native86",
         "video92",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "29",
@@ -5767,7 +5775,8 @@
         "load58",
         "native86",
         "visual87",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "16",
@@ -5813,7 +5822,8 @@
       "local_evidence": [
         "ci86",
         "native86",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "29",
@@ -5970,7 +5980,8 @@
       "local_evidence": [
         "ci86",
         "native86",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "55",
@@ -6087,7 +6098,8 @@
       ],
       "local_evidence": [
         "ci86",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "14",
@@ -6536,7 +6548,8 @@
         "ci86",
         "installed87",
         "visual87",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "50",
@@ -7102,7 +7115,8 @@
         "mesh129downloads",
         "skill130",
         "single131",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "37",
@@ -7125,7 +7139,8 @@
         "ci86",
         "installed87",
         "visual87",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "50",
@@ -7172,7 +7187,8 @@
         "mesh129downloads",
         "skill130",
         "single131",
-        "skill140"
+        "skill140",
+        "skill141"
       ],
       "remaining_backlog": [
         "17",
