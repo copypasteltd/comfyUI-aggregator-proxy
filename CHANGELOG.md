@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 2026-11-16 · Skill 1.4.0 / 允许直接操作原生 ComfyUI
+
+- Explicitly allow Skill users and agents to operate granted ComfyUI devices for their task: discover installed nodes/models, edit API graphs, upload media, submit with durable identity, inspect owned queues/history, download files, manage personal workflows and safely return devices. Add a Python 3.10+ standard-library native client while preserving existing business model calls.
+- Embed both references and clients in the single-file Skill; distinguish native sessions, reservations, actual source integrity checks and device-local retention from business cloud behavior. Preserve unlimited policies, user maintenance holds and the HTTP high port. Validation and GitHub/static rollout results are recorded in document 147.
+
 ## 2026-11-15 · Native ComfyUI workspace / 原生 ComfyUI 工作台
 
 - Add a Lime-styled `/origin/` login and device directory, `/orgin` and `/list` aliases, and authenticated native editors under `/origin/{device}/`. Add explicit, revisioned, audited per-Key device grants to Admin; existing Keys remain disabled until explicitly granted.

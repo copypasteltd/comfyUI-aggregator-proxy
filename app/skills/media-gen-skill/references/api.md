@@ -21,7 +21,7 @@ For `image_to_3d`, use the dedicated request, quota and download guidance below.
 
 The example deployment's cloud release 129.3 introduced corrected mesh-only admission and canonical GLB attachment filenames, and validates POSITION counts and hierarchies outside the default scene. Skill version 1.3.0 retains those server behaviors and adds declared typed media/text inputs; installing a Skill does not upgrade another deployment's server or Worker. Discover that deployment's approved model first. The source-image-only example below describes the legacy profile; newer multiview, refinement or texturing variants declare their own named inputs in live usage.
 
-For a complete source-image upload, job and result flow, the minimal scope set is `models:read`, `assets:upload`, `jobs:create`, `jobs:read`, `meshes:create`, `artifacts:read`, `content:read` and `content:download`. The `capabilities` command additionally uses `capabilities:read`. Enable the selected alias/release/channel/task in the Key's policy. Set a nonzero `daily_mesh_count` at Tenant, Project and Key levels; old policies default to zero. Do not add `images:create` to work around an outdated server's mesh-scope defect. Visibility alone is not admission or quota approval.
+For a complete source-image upload, job and result flow, the minimal scope set is `models:read`, `assets:upload`, `jobs:create`, `jobs:read`, `meshes:create`, `artifacts:read`, `content:read` and `content:download`. The `capabilities` command additionally uses `capabilities:read`. Enable the selected alias/release/channel/task in the Key's policy. `daily_mesh_count` must allow the call at Tenant, Project and Key levels: a positive allowance or explicit unlimited/null according to the server; older deployments may default to zero. Preserve existing unlimited policies. Do not add `images:create` to work around an outdated server's mesh-scope defect. Visibility alone is not admission or quota approval.
 
 Upload one static image with the same Key, then use its returned asset ID in the model's example. The following illustrates the currently approved TRELLIS2 request; discover the alias and its current preset before use:
 
@@ -40,7 +40,7 @@ The approved profile is static, self-contained triangle GLB 2.0 with MIME `model
 
 The authenticated `/v1/content/{id}/download` endpoint supports full GET, HEAD and a byte Range with the same Key's content authorization; GET/HEAD/Range carry `Content-Disposition: attachment; filename="content_….glb"`. The helper downloads the complete file and derives its automatic `.glb` extension from MIME. For a manual path use `download CONTENT_ID --output ./model.glb`; an explicit `--output` is preserved. Download before `expires_at` (eight hours after success); resuming a completed job does not renew retention or consume another generation.
 
-## Native asynchronous submission
+## Business asynchronous submission
 
 Copy the model's actual `usage.example_request`; this shape illustrates the fields:
 

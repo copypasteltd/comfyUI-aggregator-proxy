@@ -1,5 +1,7 @@
 # 131 · 单文件 Skill 与固定在线地址
 
+**1.4.0 原生 ComfyUI 操作更新**见 [147](147-Skill原生ComfyUI操作与发布.md)。用户/Agent 可使用独立授权设备的原生图、节点及模型；单文件内嵌业务/原生两份参考与两个客户端，已有 1.3.0 及更早版本保持不可变。新增 Cookie 会话文件含凭据，原生源文件不纳入云端八小时删除。实际发行和线上切换结果在 147 分别记录。
+
 2026-11-13 [CORS 更新](145-公网入口统一开放CORS.md) 已同步 Skill 静态响应与发布器验证：反映任意 Origin、允许凭证、自定义请求头和私网预检；Skill 1.3.0 内容及不可变资产保持相同。早期报告中的通配来源断言按当时实现保留。
 
 按用户要求，提供可独立安装和调用的 `skill.md`，并部署到现有服务的固定公开地址。说明、原生 API 用法和 Python 标准库客户端全部嵌入同一文件；不把依赖外部 scripts/references 的入口文件直接冒充单文件。
@@ -9,16 +11,16 @@
 | 编号 | 交付 | 约束 |
 | --- | --- | --- |
 | SF01 | 最新入口 `https://gen.sub2share.xyz/skill.md` | 公开 UTF-8 Markdown；无需业务 Key 读取说明；生成和内容 API 仍保持原鉴权 |
-| SF02 | 版本入口 `/skills/media-gen/1.3.0/skill.md` | 版本目录不可覆盖；latest/current 原子切换；保留历史以便回退 |
+| SF02 | 版本入口 `/skills/media-gen/VERSION/skill.md` | 版本目录不可覆盖；latest/current 原子切换；保留历史以便回退 |
 | SF03 | 自包含文件 | 现有 Skill、API 参考、客户端由同一来源编译，不依赖额外下载；内嵌客户端与被测脚本一致；只使用实时模型发现决定能力和参数 |
 | SF04 | 更新与发布 | 沿用版本标签发布流程；Release 同时包含 ZIP、skill.md、来源清单与摘要；固定地址由原生部署工具更新，验证失败恢复原指针/配置 |
 | SF05 | 服务隔离 | 使用现有 Nginx 静态入口和独立只读发布目录，不改现有生成服务、Worker、数据库或用户反代；无本地 Docker/WSL/浏览器 |
 
-单文件读取不授予服务器管理或业务权限。使用者自行设置业务 Key，按已有模型/任务/内容权限和额度调用；同源下载、摘要验证、提交前保存幂等状态、未知结果恢复以及八小时内容保留规则继续沿用。3D 仍限已发布的静态 GLB 流程。
+单文件读取不授予服务器管理或业务权限。使用者自行设置业务 Key，按已有模型/任务/内容权限和额度调用；同源下载、摘要验证、提交前保存幂等状态、未知结果恢复以及八小时内容保留规则继续沿用。业务 API 的 3D 仍按已发布静态 GLB 契约；独立原生图按 147 的设备节点/文件描述符规则。
 
 ## 2. 验证与维护
 
-实现前核对线上当前生成服务实际为 `linux-20261030.137.1`，本次保留该运行版本及原进程，不拿本地旧部署包覆盖。专用 Nginx 监听 HTTP 39443，后端为回环 32880；只增加公开文档路由。
+2026-11-02 初次实现前核对的历史生成服务为 `linux-20261030.137.1`，本次保留该运行版本及原进程，不拿本地旧部署包覆盖。专用 Nginx 监听 HTTP 39443，后端为回环 32880；只增加公开文档路由。
 
 单文件和 ZIP 的来源、版本、摘要需一致。验证涵盖单文件独立执行、现有客户端回归、同平台及跨平台打包元数据、公开文档的 GET/HEAD、缓存/条件请求、任意来源读取、版本目录和不存在路径、生成服务健康及进程保持。文档与来源证据分别记录，不把本次静态发布当作新 GPU 或完整产品验收。
 
@@ -26,7 +28,7 @@
 
 ## 3. 使用 / Installation
 
-打开 [最新单文件](https://gen.sub2share.xyz/skill.md)，下载后在 Agent 的 skills 目录保存为 `media-gen-skill/SKILL.md`，重新打开会话。Codex 可用 `$CODEX_HOME/skills/media-gen-skill/SKILL.md`；文件名按 Agent 规范使用大写，公开地址保留小写。文件内完整说明业务 Key 设置、模型发现、参数检查、参考图、提交/等待/恢复/下载和八小时期限。只有使用 CLI 时才按文内命令在工作目录提取 `media_gen.py`；该命令不覆盖已有脚本。
+打开 [最新单文件](https://gen.sub2share.xyz/skill.md)，下载后在 Agent 的 skills 目录保存为 `media-gen-skill/SKILL.md`，重新打开会话。Codex 可用 `$CODEX_HOME/skills/media-gen-skill/SKILL.md`；文件名按 Agent 规范使用大写，公开地址保留小写。文件内完整说明业务 Key 设置、模型发现、参数检查、参考图、提交/等待/恢复/下载和八小时期限。使用 CLI 时按新版文内命令在工作目录提取 `media_gen.py` 和 `comfy_origin.py`；该命令不覆盖已有脚本。
 
 Download [the current file](https://gen.sub2share.xyz/skill.md), save it as `media-gen-skill/SKILL.md` in your agent's skills directory, and open a new session. Configure your business API Key yourself. The instructions, native API reference and complete standard-library client are embedded. Native HTTP tools can use the API directly; extract the client only for CLI use. After an update, deliberately replace an old extracted client or extract into a new working directory.
 
@@ -49,7 +51,7 @@ sudo python3 /home/ubuntu/skill-publish/publish-public-skill.py \
 
 The tag workflow publishes GitHub assets; the static publisher updates the production URL separately. It verifies checksums/manifest/ZIP members, refuses to overwrite a different immutable version, guards the inspected configuration hash, backs up configuration, tests Nginx and reloads it gracefully. Local HTTP verification checks GET/HEAD, ETag/304, arbitrary origins/OPTIONS, version/missing paths, live health, business authentication and the private-ingress boundary. It also requires every existing service PID and application release pointer to stay unchanged. Keep the previous version directory for rollback; do not delete history while long-lived caches may still reference it.
 
-## 5. 当前 1.3.0 发行 / Current release
+## 5. 历史 1.3.0 发行 / Historical release
 
 2026-11-04 已同步 GitHub 及原固定地址。来源 `4bc242fcf2dff14c30fa83469cee443937408984`，单文件 **46,550 字节**，SHA-256：
 

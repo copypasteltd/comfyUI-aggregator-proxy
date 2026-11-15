@@ -14,7 +14,7 @@ from pathlib import Path
 APP = Path(__file__).resolve().parents[1]
 ROOT = APP.parent
 SKILL = APP / "skills/media-gen-skill"
-FILES = ("SKILL.md", "VERSION", "agents/openai.yaml", "references/api.md", "scripts/media_gen.py")
+FILES = ("SKILL.md", "VERSION", "agents/openai.yaml", "references/api.md", "references/comfy-origin.md", "scripts/media_gen.py", "scripts/comfy_origin.py")
 SINGLE_FILE_URL = "https://gen.sub2share.xyz/skill.md"
 
 
@@ -22,35 +22,41 @@ def render_single_file(payload: dict[str, bytes], version: str) -> bytes:
     """Compile an installable Skill without external scripts or reference files."""
     entry = payload["SKILL.md"].decode("utf-8").replace("\r\n", "\n")
     reference = payload["references/api.md"].decode("utf-8").replace("\r\n", "\n")
+    native_reference = payload["references/comfy-origin.md"].decode("utf-8").replace("\r\n", "\n")
     client = payload["scripts/media_gen.py"].decode("utf-8").replace("\r\n", "\n")
-    if not entry.startswith("---\n") or entry.count("\n---\n") != 1 or "```python" in entry + reference or "```" in client:
+    native_client = payload["scripts/comfy_origin.py"].decode("utf-8").replace("\r\n", "\n")
+    if not entry.startswith("---\n") or entry.count("\n---\n") != 1 or "```python" in entry + reference + native_reference or "```" in client + native_client:
         raise ValueError("Skill inputs cannot be safely compiled into one Markdown file")
     header, body = entry[4:].split("\n---\n", 1)
     header += f'\nmetadata:\n  version: "{version}"\n  homepage: "{SINGLE_FILE_URL}"'
     body = body.replace("scripts/media_gen.py", "media_gen.py")
-    body = body.replace("The bundled Python 3.10+ client uses the standard library.", "The Python 3.10+ client embedded below uses the standard library. Extract it as media_gen.py before using the CLI examples, or use the native API directly.")
+    body = body.replace("scripts/comfy_origin.py", "comfy_origin.py")
+    body = body.replace("The bundled Python 3.10+ clients use the standard library.", "The two Python 3.10+ clients embedded below use the standard library. Extract them before using CLI examples, or use the HTTP API directly.")
     body = body.replace("(references/api.md#image-to-3d-compatibility)", "(#image-to-3d-compatibility)").replace("(references/api.md)", "(#native-api-reference)")
+    body = body.replace("(references/comfy-origin.md)", "(#direct-comfyui-reference)")
     body = body.replace("Read [references/api.md]", "Read [the embedded API reference]")
-    if re.search(r"\]\((?!https?://|#)[^)]+\)", body + reference):
+    if re.search(r"\]\((?!https?://|#)[^)]+\)", body + reference + native_reference):
         raise ValueError("Single-file Skill still depends on a local reference")
     reference = reference.removeprefix("# API use and recovery\n").lstrip()
+    native_reference = native_reference.removeprefix("# Direct ComfyUI operation\n").lstrip().replace("scripts/comfy_origin.py", "comfy_origin.py")
     introduction = f'''## 单文件安装与更新 / Single-file installation
 
 版本 / Version: **{version}**. 最新固定地址 / Current URL: **{SINGLE_FILE_URL}**.
 
-把本文件保存为 Agent Skill 目录中的 `media-gen-skill/SKILL.md`，重新打开会话。说明、API 参考和完整客户端均在本文中，无需下载其他文件。生成仍需用户配置业务 API Key；文件不包含凭证或模型权重。更新时从同一固定地址获取新版并重新加载；保留自己的凭证、请求状态和下载素材。
+把本文件保存为 Agent Skill 目录中的 `media-gen-skill/SKILL.md`，重新打开会话。说明、业务/原生 ComfyUI 参考和两个完整客户端均在本文中，无需下载其他文件。用户可按任务直接操控获准设备的 ComfyUI；管理员需先独立授权设备。文件不包含凭证或模型权重。更新时从同一固定地址获取新版并重新加载；保留自己的凭证、请求状态和下载素材。
 
-Save this file as `media-gen-skill/SKILL.md` in your agent's skills directory and open a new session. This document contains all instructions, API reference and client source. Keep credentials, recovery state and outputs outside the installation directory. The current URL serves the newest deployed version; historical versions use `/skills/media-gen/VERSION/skill.md`.
+Save this file as `media-gen-skill/SKILL.md` in your agent's skills directory and open a new session. It includes business/native ComfyUI references and both clients. Direct ComfyUI graph operations are permitted for the user's task on explicitly granted devices. Keep credentials, native sessions, recovery state and outputs outside the installation directory. The current URL serves the newest deployed version; historical versions use `/skills/media-gen/VERSION/skill.md`.
 
-If using CLI examples, copy the embedded Python block into your task directory as `media_gen.py`. Alternatively, run the following from the directory containing `SKILL.md`; exclusive creation preserves an existing script. Native HTTP tooling may follow the API reference directly without creating a script.
+For CLI use, extract the embedded blocks as `media_gen.py` (business models) and `comfy_origin.py` (direct ComfyUI). Run the following in a new task directory containing `SKILL.md`; exclusive creation preserves existing scripts. HTTP tools may use the references directly without extraction. After updating the Skill, extract into a new directory or deliberately update old extracted scripts.
 
 ```bash
-python -c "from pathlib import Path; text=Path('SKILL.md').read_text(encoding='utf-8'); code=text.split(chr(96)*3+'python\\n',1)[1].split(chr(96)*3,1)[0]; Path('media_gen.py').open('x',encoding='utf-8').write(code)"
+python -c "from pathlib import Path; text=Path('SKILL.md').read_text(encoding='utf-8'); blocks=text.split(chr(96)*3+'python'+chr(10))[1:]; assert len(blocks)==2; [Path(name).open('x',encoding='utf-8').write(block.split(chr(96)*3,1)[0]) for name,block in zip(('media_gen.py','comfy_origin.py'),blocks)]"
 ```
 
 '''
-    rendered = "---\n" + header + "\n---\n" + introduction + body.lstrip() + "\n\n## Native API reference\n\n" + reference.rstrip() + "\n\n## Embedded Python client\n\n```python\n" + client.rstrip() + "\n```\n"
+    rendered = "---\n" + header + "\n---\n" + introduction + body.lstrip() + "\n\n## Native API reference\n\n" + reference.rstrip() + "\n\n## Direct ComfyUI reference\n\n" + native_reference.rstrip() + "\n\n## Embedded Python client\n\n```python\n" + client.rstrip() + "\n```\n\n## Embedded ComfyUI client\n\n```python\n" + native_client.rstrip() + "\n```\n"
     compile(client, "media_gen.py", "exec")
+    compile(native_client, "comfy_origin.py", "exec")
     return rendered.encode("utf-8")
 
 
@@ -77,8 +83,10 @@ def main() -> None:
     if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", version):
         raise SystemExit("Invalid Skill version")
     compile(payload["scripts/media_gen.py"], "media_gen.py", "exec")
+    compile(payload["scripts/comfy_origin.py"], "comfy_origin.py", "exec")
     standalone = render_single_file(payload, version)
     subprocess.run([sys.executable, str(SKILL / "scripts/media_gen.py"), "--help"], check=True, stdout=subprocess.DEVNULL, timeout=10)  # noqa: S603 -- packaged client help, no credentials or network
+    subprocess.run([sys.executable, str(SKILL / "scripts/comfy_origin.py"), "--help"], check=True, stdout=subprocess.DEVNULL, timeout=10)  # noqa: S603 -- native client help, no credentials or network
     record = {"format_version": 1, "name": "media-gen-skill", "version": version, "source_revision": revision,
               "default_base_url": "https://gen.sub2share.xyz", "python_minimum": "3.10", "external_dependencies": [],
               "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(payload.items())},

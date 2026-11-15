@@ -1,13 +1,55 @@
 ---
 name: media-gen-skill
-description: Discover models and generate images, video, audio or GLB 3D through the ComfyUI Aggregator at gen.sub2share.xyz or another deployment. Use for asynchronous media API calls, named image/video/audio/mesh inputs, workflow text fields, compatible video continuation and verified result downloads.
+description: Generate images, video, audio or 3D through the ComfyUI Aggregator, or directly operate an authorized ComfyUI device through /origin. Use for model API calls, native node/model discovery, custom workflow editing and execution, uploads, queues, progress and result downloads.
 ---
 
 # Media Gen
 
 Use this skill to call the user's media generation platform. The example deployment is **https://gen.sub2share.xyz**. Use the live catalog to choose a model; aliases, supported sizes, durations and reference slots can change.
 
-The bundled Python 3.10+ client uses the standard library. Read the API key from `MEDIA_GEN_API_KEY`; optionally set `MEDIA_GEN_BASE_URL`. No key is included in this package. If the variable is missing, ask the user to configure a business API key for this deployment. Do not search unrelated projects for credentials or print the key.
+The bundled Python 3.10+ clients use the standard library. Read the API key from `MEDIA_GEN_API_KEY`; optionally set `MEDIA_GEN_BASE_URL`. No key is included in this package. If authentication is needed and neither an existing native session nor the variable is available, ask the user to configure a business API key for this deployment. Do not search unrelated projects for credentials or print the key.
+
+## Choose the requested operating mode
+
+| User's task | Mode |
+| --- | --- |
+| Generate through a published model with its advertised inputs/presets | Business API: `scripts/media_gen.py`, `/v1/models` and `/v1/jobs`; follow the sections below. |
+| Directly operate ComfyUI, inspect installed nodes/models, build or modify a custom graph, upload inputs or use its original panel | Native ComfyUI: `scripts/comfy_origin.py`, `/origin/`; read [the native operation guide](references/comfy-origin.md). |
+
+**Native mode explicitly allows the Skill user/Agent to directly operate authorized ComfyUI devices for the user's task.** You may inspect node schemas and installed model choices, edit a local API-format Workflow, set graph inputs, upload image/video/audio/mesh inputs, save personal workflows, submit the graph, inspect owned queue/history, download results and safely return the device. This mode uses installed nodes and models and does not require a published `/v1/models` alias or a business preset. Do not incorrectly reject a custom graph merely because it is absent from the business catalog.
+
+Admin must first enable **API Keys → Native panel** and select devices for this Key. An unlimited business Key does not automatically imply native access. With those grants and the user's task authorization, proceed through the normal operation flow without repeatedly asking permission for each necessary read, upload or submission. Grants do not authorize unrelated content operations, host administration or publishing to others.
+
+### Direct ComfyUI quick start
+
+The deployed HTTP high-port entry is `http://43.165.167.179:39443`; use the origin configured by the user. HTTP is supported and no HTTPS verification is required. The helper's default remains the example domain; set `MEDIA_GEN_BASE_URL` or pass top-level `--base-url` when using the high port.
+
+```powershell
+$env:MEDIA_GEN_BASE_URL = 'http://43.165.167.179:39443'
+python scripts/comfy_origin.py login
+python scripts/comfy_origin.py devices
+```
+
+For a POSIX shell, use `export MEDIA_GEN_BASE_URL='http://43.165.167.179:39443'` instead. Supply `MEDIA_GEN_API_KEY` privately as described above.
+
+Select an actual returned `slug`; replace `DEVICE_SLUG` below. Use the same base URL and private session file for every command (or set `MEDIA_GEN_BASE_URL` once):
+
+```bash
+python scripts/comfy_origin.py acquire DEVICE_SLUG
+python scripts/comfy_origin.py get DEVICE_SLUG object_info/EmptyImage
+python scripts/comfy_origin.py get DEVICE_SLUG models
+python scripts/comfy_origin.py upload DEVICE_SLUG reference.png
+python scripts/comfy_origin.py submit DEVICE_SLUG api-workflow.json --state-file ./private/native-request.json
+python scripts/comfy_origin.py wait ./private/native-request.json --timeout 900 --output-dir ./native-output
+python scripts/comfy_origin.py release DEVICE_SLUG
+python scripts/comfy_origin.py logout
+```
+
+Login exchanges the Key once for a derived Cookie/CSRF session. The default `.comfy-origin-session.json` **contains an access credential**; keep it private, outside Skill installations and Git. Pass top-level `--session-file ./private/session.json` consistently to use another path. Native operations send the session, not a business Bearer header or the API Key upstream. A browser can use `/origin/` → `/origin/list` → `/origin/{slug}/`; `/orgin` and `/list` are aliases. CLI and browser sessions are independent; do not put a Key in a URL. Close owned browser tabs/contexts in `finally` after use.
+
+Native execution reserves the physical device exclusively against ordinary API dispatch and idle cleanup. Never override an existing task, maintenance hold or offline source. Persist the exact graph and submission identity before POST; `resume STATE_FILE` reuses that intent, and a known prompt ID is only queried. An unknown response, wait timeout, closed tab or logout does not prove the task stopped. Keep the state; wait for reconciliation and only treat `release` state `closed` as returned. The helper's bounded HTTP polling refreshes its own reservation heartbeat.
+
+Native history, personal workflows and file downloads are scoped to the logical Key. Output may be image, video, audio, 3D or another installed node's file **when ComfyUI supplies an owned filename/subfolder/type descriptor**. Native results remain on the device, outside `/v1/jobs`, cloud content, business metering and automatic eight-hour deletion. Native downloads report a local SHA-256; an independent source checksum is verified only when supplied. Custom nodes execute with host authority, so this mode is for explicitly trusted operators. Manager, shell, model/node installation, host restart, global history deletion and other users' tasks/files are not delegated.
 
 ## Discover before generating
 
@@ -36,7 +78,7 @@ Legacy reference generation uses `--reference image.png` once for every required
 python scripts/media_gen.py generate --model MODEL_ALIAS --prompt "Preserve the subject" --reference first.png --reference second.png --wait --output-dir ./media-output
 ```
 
-Supply only the number of references required by this model. Do not assume a text model supports references or that every reference slot accepts weight. For a complete native request, copy `usage.example_request`, upload assets first, edit the returned IDs, then run:
+Supply only the number of references required by this model. Do not assume a text model supports references or that every reference slot accepts weight. For a complete business API request, copy `usage.example_request`, upload assets first, edit the returned IDs, then run:
 
 ```bash
 python scripts/media_gen.py submit request.json --wait --output-dir ./media-output
@@ -60,7 +102,7 @@ For a legacy advertised `image_to_3d` model, pass one source image and omit text
 python scripts/media_gen.py generate --model MODEL_ALIAS --source-image robot.png --seed 17 --wait --timeout 1800 --output-dir ./model-output
 ```
 
-For this complete upload/generate/download flow, grant the business Key `models:read`, `jobs:create`, `jobs:read`, `assets:upload`, `artifacts:read`, `content:read`, `content:download` and `meshes:create`; add `capabilities:read` when using that discovery command. Enable nonzero `daily_mesh_count` at Tenant, Project and Key levels and allow the selected alias, release, channel and `image_to_3d` task type. Image, video and audio creation permissions are independent: **3D does not require `images:create`**. If a deployment still demands that scope for a mesh request, report the server compatibility issue rather than broaden the Key's permissions.
+For this complete upload/generate/download flow, grant the business Key `models:read`, `jobs:create`, `jobs:read`, `assets:upload`, `artifacts:read`, `content:read`, `content:download` and `meshes:create`; add `capabilities:read` when using that discovery command. Permit `daily_mesh_count` at Tenant, Project and Key levels (a positive allowance or explicit unlimited/null, according to the server) and allow the selected alias, release, channel and `image_to_3d` task type. Do not restore a daily cap on an unlimited deployment. Image, video and audio creation permissions are independent: **3D does not require `images:create`**. If a deployment still demands that scope for a mesh request, report the server compatibility issue rather than broaden the Key's permissions.
 
 The helper chooses `.glb` from the content MIME `model/gltf-binary`, verifies exact byte count and SHA-256, and keeps existing files. The supported profile is a static, self-contained triangle GLB 2.0, up to 512 MiB, 5 million vertices and 10 million triangles. Inspect content metadata for actual geometry counts and texture presence; a textured or printable model is not guaranteed. OBJ, FBX, multi-file glTF, animation, skinning, compressed geometry and interactive Admin previews are outside this profile. Native 3D does not imply Sub2API 3D billing support. Read [the 3D request and download details](references/api.md#image-to-3d-compatibility) when invoking this mode.
 
@@ -75,6 +117,6 @@ python scripts/media_gen.py download CONTENT_ID --output ./result.mp4
 
 For a manual 3D download, use `download CONTENT_ID --output ./model.glb`. `wait --download` chooses the extension automatically; the explicit `--output` command uses the path you supply. The server's authenticated GLB GET/HEAD/Range responses use an attachment filename ending in `.glb`; the helper's automatic naming uses trusted content metadata instead of a server-supplied path.
 
-The native flow is `POST /v1/jobs` → `GET /v1/jobs/{id}` → `artifacts[].id` → content metadata and authenticated download. It is asynchronous for every media kind. A wait timeout leaves the server task intact. `failed`, `cancelled` and `expired` are terminal; `reconciling` means execution is uncertain and is not permission to resubmit. Download successful artifacts before `expires_at` (normally eight hours after success); resuming a completed job does not extend expiry or create another generation. The client verifies byte count and SHA-256 and never sends the Key to another origin.
+The business flow is `POST /v1/jobs` → `GET /v1/jobs/{id}` → `artifacts[].id` → content metadata and authenticated download. It is asynchronous for every media kind. A wait timeout leaves the server task intact. `failed`, `cancelled` and `expired` are terminal; `reconciling` means execution is uncertain and is not permission to resubmit. Download successful artifacts before `expires_at` (normally eight hours after success); resuming a completed job does not extend expiry or create another generation. The client verifies byte count and SHA-256 and never sends the Key to another origin.
 
-Read [references/api.md](references/api.md) for native JSON, reference roles/weights, scopes, errors and recovery. Run `python scripts/media_gen.py --help` and the subcommand's `--help` for options. Generating or uploading uses the user's authorized service resources; this skill does not authorize publishing content, contacting others, or managing ComfyUI/servers.
+Read [references/api.md](references/api.md) for business JSON, reference roles/weights, scopes, errors and recovery; read [references/comfy-origin.md](references/comfy-origin.md) for direct ComfyUI graph preparation, native upload descriptors, queues, personal workflows, cancellation and recovery. Run either client's `--help` and subcommand help for options. Generating or uploading uses the user's authorized service resources. Native ComfyUI operation is allowed as described above; host administration, unrelated publication and contacting others require their own authorization.

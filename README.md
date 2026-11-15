@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[Skill 1.4.0 · 直接操作 ComfyUI](docs/147-Skill原生ComfyUI操作与发布.md)：允许使用者/Agent 在独立设备授权后查询节点和模型、编辑自定义 Workflow、上传素材、提交任务、查看队列与结果、管理个人流程并安全归还。新增标准库 `comfy_origin.py`，单文件内嵌两份参考与两个客户端；业务模型 API 继续支持。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.0](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)。会话文件含派生凭据须私藏，原生结果留在设备，不套用云端八小时删除；实际验证及发布状态见专题。
+
 [146 · 原生 ComfyUI 工作台](docs/146-原生ComfyUI面板访问与独占操作.md) 已实现并部署到原 HTTP 高位入口：[打开原生工作台](http://43.165.167.179:39443/origin/)。保留任意来源 CORS 和现有 API/Skill/Studio 入口。当前版本、数据库备份、调用及浏览器验证见[部署证明](docs/evidence/2026-11-15/origin-146-production.json)。
 
 | 步骤 | 操作与逻辑 |
@@ -58,9 +60,9 @@ YuE2 自动作谱型号已通过实机试跑和独立业务调用，实际返回
 
 **2026-11-04 工作流盘点**：[3080 / 4090 的 API 封装候选](docs/132-双GPU工作流现状与API封装候选.md)。现场共 397 份工作流文件，包含 UI/API 配对和场景副本；330 份通过本轮静态检查，两台当前已有 8 个发布别名。完整表格区分直接封装候选、需要视频/音频/网格输入扩展的流程，以及缺权重/旧字段阻塞项；文件名中的 2K/4K 按实际产物尺寸说明。本轮仅检查和文档整理，没有新增生成、发布模型或部署。
 
-Skill 1.3.0 已通过 17 项客户端检查及线上视频、音频、GLB 流式上传、业务生图和校验下载。新增命名素材、文本和兼容父任务参数；[真实验证记录](docs/evidence/2026-11-04/media-gen-skill-130-live.json)。1.3.0 已在 GitHub 和固定地址正式发布，四项发行资产与本地两次构建逐字节相同。
+历史 1.3.0 发行已通过 17 项客户端检查及线上视频、音频、GLB 流式上传、业务生图和校验下载。新增命名素材、文本和兼容父任务参数；[真实验证记录](docs/evidence/2026-11-04/media-gen-skill-130-live.json)。1.3.0 已在 GitHub 和固定地址正式发布，四项发行资产与本地两次构建逐字节相同。
 
-**单文件 Skill 1.3.0：[在线 skill.md](https://gen.sub2share.xyz/skill.md)**。将它保存为 Agent 的 `media-gen-skill/SKILL.md`，即可获得完整说明、API 参考及内嵌 Python 客户端，无需另外下载 scripts/references。设置自己的业务 API Key 后先发现模型，再生成图片、视频、音频或已发布的 GLB 3D。固定地址提供最新部署版；[1.3.0 固定版本](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md) 和原 ZIP 均保留。[安装、更新与发布](docs/131-单文件Skill与固定在线地址.md)。
+**单文件 Skill 最新入口：[在线 skill.md](https://gen.sub2share.xyz/skill.md)**。将它保存为 Agent 的 `media-gen-skill/SKILL.md`，即可获得完整说明、API 参考及内嵌 Python 客户端，无需另外下载 scripts/references。设置自己的业务 API Key 后先发现模型，再生成图片、视频、音频或已发布的 GLB 3D。固定地址提供最新部署版；[1.3.0 固定版本](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md) 和原 ZIP 均保留。[安装、更新与发布](docs/131-单文件Skill与固定在线地址.md)。
 
 已完成 17 项客户端检查、线上视频/音频/GLB 上传和普通业务生图下载，以及高位入口和现有域名的外部校验；四项公开资产与原生构建一致，原生成服务版本和五个服务进程未变。后续 Skill 更新继续同步固定入口、版本发行和双语说明。
 
@@ -78,7 +80,7 @@ Skill 1.3.0 已通过 17 项客户端检查及线上视频、音频、GLB 流式
 
 三台设备已启用连续空闲 10 分钟自动释放可回收内存/显存；平台仅调用 ComfyUI API。Admin 的“模型与路由 → 使用说明”可查看能力并编辑说明，“Windows 渠道 → 空闲回收”可配置策略并查看执行证明。新增渠道需单独启用策略。
 
-正式 [Media Gen Skill 1.3.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.3.0) 同时提供单文件、ZIP、来源清单和 SHA-256。客户端使用 Python 3.10+ 标准库，保留云端 129.3 引入的 3D 最小权限、GLB 下载与支持边界；3D 使用 `meshes:create`，不要求 `images:create`。解压 ZIP 后可用下方命令；单文件使用者先按文件内说明提取客户端，并将命令路径改为 `media_gen.py`。模型可见范围和限额由业务 Key 决定。[本次发布](docs/131-单文件Skill与固定在线地址.md) · [历史兼容同步](docs/130-MediaGenSkill兼容同步与发布.md)。
+历史 [Media Gen Skill 1.3.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.3.0) 同时提供单文件、ZIP、来源清单和 SHA-256。客户端使用 Python 3.10+ 标准库，保留云端 129.3 引入的 3D 最小权限、GLB 下载与支持边界；3D 使用 `meshes:create`，不要求 `images:create`。解压 ZIP 后可用下方命令；单文件使用者先按文件内说明提取客户端，并将命令路径改为 `media_gen.py`。模型可见范围和限额由业务 Key 决定。[本次发布](docs/131-单文件Skill与固定在线地址.md) · [历史兼容同步](docs/130-MediaGenSkill兼容同步与发布.md)。
 
 ```powershell
 $env:MEDIA_GEN_API_KEY = 'YOUR_BUSINESS_API_KEY'
