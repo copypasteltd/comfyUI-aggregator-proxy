@@ -2,11 +2,11 @@
   "contract_version": "0.4.0",
   "format_version": 1,
   "increment": 152,
-  "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages. Native workspace146 binds the affected implementation to a separately executed current-source component run; prior report bytes and pending full gates are preserved. Native ComfyUI Skill 1.4.0 source/client regressions are tracked separately from the existing native-panel and full acceptance evidence. Skill 1.4.1 domain-only update binds current client sources to its own component run without modifying historical evidence.",
+  "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages. Native workspace146 binds the affected implementation to a separately executed current-source component run; prior report bytes and pending full gates are preserved. Native ComfyUI Skill 1.4.0 source/client regressions are tracked separately from the existing native-panel and full acceptance evidence. Skill 1.4.1 domain-only update binds current client sources to its own component run without modifying historical evidence. Add explicitly authorized unknown-memory-maintenance reconciliation with a current native PostgreSQL component run; retain historical reports and pending full acceptance.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-16/development-trace-baselines-148-skill-domain.json",
-    "sha256": "0bf017ec864dee0f6df0fed170dbdccc0e89b6388bb5ae749d4c201c816f7e0a"
+    "path": "docs/evidence/2026-11-16/development-trace-baselines-149-memory.json",
+    "sha256": "89ee3dc6cf84635b78767f21d9f1ec789f7be6178c4e6f06647d35b8785ff3a8"
   },
   "requirements": [
     {
@@ -2848,6 +2848,10 @@
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/memory_reclamation.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/memory_reconciliation.py",
+          "baseline": "memory149"
         }
       ],
       "tests": [
@@ -2856,6 +2860,36 @@
           "symbol": "test_channel_runtime_change_clears_approval_but_label_preserves_runtime_revision",
           "language": "python",
           "baseline": "native139"
+        },
+        {
+          "path": "app/tests/integration/test_memory_reconciliation.py",
+          "symbol": "test_unknown_release_reconciles_without_retrying_free_and_resets_idle",
+          "language": "python",
+          "baseline": "memory149"
+        },
+        {
+          "path": "app/tests/integration/test_memory_reconciliation.py",
+          "symbol": "test_observation_and_ownership_blockers_keep_hold",
+          "language": "python",
+          "baseline": "memory149"
+        },
+        {
+          "path": "app/tests/integration/test_memory_reconciliation.py",
+          "symbol": "test_prompt_response_lost_is_found_by_original_intent_after_restart",
+          "language": "python",
+          "baseline": "memory149"
+        },
+        {
+          "path": "app/tests/integration/test_memory_reconciliation.py",
+          "symbol": "test_unobserved_prompt_intent_is_never_resubmitted",
+          "language": "python",
+          "baseline": "memory149"
+        },
+        {
+          "path": "app/tests/integration/test_memory_reconciliation.py",
+          "symbol": "test_midflight_changes_and_bad_proof_never_release",
+          "language": "python",
+          "baseline": "memory149"
         }
       ],
       "evidence": [
@@ -2872,7 +2906,8 @@
         "contract133",
         "compat135",
         "browser135",
-        "native139"
+        "native139",
+        "memory149"
       ],
       "remaining_backlog": [
         "15",

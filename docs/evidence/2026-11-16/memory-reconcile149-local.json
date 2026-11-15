@@ -1,0 +1,137 @@
+{
+  "format_version": 1,
+  "at": "2026-11-15T18:05:44.313053+00:00",
+  "passed": true,
+  "source_revision": "5d6f1bdc73dbc31d3fd0f78e0bc5b3d82249ab4b",
+  "sources_unchanged": true,
+  "scope": "Isolated native PostgreSQL: unknown maintenance recovery, ordered CPU barriers, durable lost-response reconciliation, ownership/activity/native-reservation guards and original reclamation regression. Model quality and full acceptance are excluded.",
+  "real_resource_acceptance": false,
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "python": {
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/packages/infrastructure/src/generation_infrastructure/memory_reconciliation.py": "e6ba6abc400e59376a6aecb3d1a0c2d4adb1354377f452e02163129a5ea501ff",
+    "app/packages/infrastructure/src/generation_infrastructure/memory_reclamation.py": "471d6f529de5ecdf34dfc988679b236b23d639a4b0e05b271b1081b6aaac4208",
+    "app/packages/infrastructure/src/generation_infrastructure/models.py": "bfcebebafc6f87770bf8c9b91519de5fb1754a2db06ae7d548a33aea62554f1d",
+    "app/tests/integration/test_memory_reconciliation.py": "6e31eadab405ac4a57242cd0f84d8d77f102fca6115ea23771cb824bc14df240",
+    "app/tests/integration/test_memory_reclamation.py": "2d5d59bbfbb565ba5e0ee402d53aac9373391a224ed507e639ef642d4e7f00ca"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_600_seconds_two_barriers_holds_all_channels_and_no_repeated_release",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_blockers_never_send_free",
+      "passed_cases": 5
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_changed_origin_requires_explicit_policy_update_without_unique_conflict",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_external_activity_resets_idle_and_group_spans_same_origin_gpu",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_lost_barrier_response_is_found_without_resubmission",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_lost_free_response_survives_restart_and_disable_keeps_hold",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_new_queued_request_before_free_wins_and_releases_only_owned_hold",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_restart_after_free_intent_never_resubmits",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_transient_stale_heartbeat_blocks_release_without_erasing_verified_idle_baseline",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reclamation.py",
+      "symbol": "test_two_runner_claims_have_single_owner",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reconciliation.py",
+      "symbol": "test_inspect_does_not_mutate_or_send_http",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reconciliation.py",
+      "symbol": "test_midflight_changes_and_bad_proof_never_release",
+      "passed_cases": 5
+    },
+    {
+      "path": "app/tests/integration/test_memory_reconciliation.py",
+      "symbol": "test_new_boot_before_reconciliation_is_pinned_but_not_misreported_as_release",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reconciliation.py",
+      "symbol": "test_observation_and_ownership_blockers_keep_hold",
+      "passed_cases": 9
+    },
+    {
+      "path": "app/tests/integration/test_memory_reconciliation.py",
+      "symbol": "test_prompt_response_lost_is_found_by_original_intent_after_restart",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reconciliation.py",
+      "symbol": "test_unknown_release_reconciles_without_retrying_free_and_resets_idle",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_memory_reconciliation.py",
+      "symbol": "test_unobserved_prompt_intent_is_never_resubmitted",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "f61db7aa38cb863c11c77fbf752851318fbdde7d9eeb83ce61ac084f408e393c",
+  "python_log_sha256": "f6f62093fb88ba2f6e3a807bca44933fc3bcbafda21126af39db89e024b4f6d2",
+  "additional_checks": {
+    "ruff": "passed",
+    "mypy": "passed"
+  },
+  "prior_iterations": [
+    {
+      "cases": 31,
+      "failures": 17,
+      "passed": 14,
+      "reason": "Synthetic setup used a timestamp earlier than the policy next-check gate; fixture corrected."
+    },
+    {
+      "cases": 33,
+      "failures": 12,
+      "passed": 21,
+      "reason": "Native PostgreSQL rejected JSONB ?| JSONB; changed to typed JSONB contains predicates."
+    },
+    {
+      "cases": 33,
+      "failures": 0,
+      "passed": 33,
+      "reason": "First successful corrected source run; followed by the captured current-source run for retained log and JUnit provenance."
+    }
+  ]
+}

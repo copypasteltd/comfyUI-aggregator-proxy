@@ -1,5 +1,11 @@
 # 更新日志 / Changelog
 
+## 2026-11-16 · Unknown maintenance reconciliation / 未知维护占用核对
+
+- Add a fixed, read-only-by-default operator command for one named unknown memory-reclamation operation. Persist two ordered CPU barrier intents, reconcile lost responses, validate source/group/boot/lease/activity/native-reservation ownership and atomically return only the original maintenance hold. Preserve the unknown `/free` error, mark the old operation skipped, retain audit and restart idle timing without claiming confirmed unloading.
+- 4090 已按用户授权完成线上核对，原生面板取得与归还通过；33 项原生 PostgreSQL 回归及 14 项业务域名检查通过。五个服务主进程保持原 PID，未重启主机、未变更数据库结构或客户内容。固定运维工具与应用发行版分开保存；完整产品验收仍待完成。详见 [149](docs/149-未知内存回收维护占用核对.md)。
+
+
 ## 2026-11-16 · Skill 1.4.1 / 统一业务域名
 
 - 按用户要求，业务 API、原生 ComfyUI、登录、下载和快速示例统一使用 https://gen.sub2share.xyz；两个客户端原默认域名不变，版本同步 1.4.1。补充跨源会话与未决任务迁移说明，保留旧版本。

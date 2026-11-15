@@ -1,0 +1,67 @@
+{
+  "at": "2026-11-15T18:03:48.766307+00:00",
+  "stage": "skipped",
+  "original_error": "http_write_outcome_unknown",
+  "reconciliation": {
+    "after": {
+      "scope": "whole_host_and_device_not_process_rss",
+      "devices": [
+        {
+          "vram_free": 42003471747,
+          "vram_total": 51526369280,
+          "torch_vram_free": 78572112,
+          "torch_vram_total": 939524096
+        }
+      ],
+      "ram_free": 57805201408,
+      "ram_total": 68612378624
+    },
+    "boots": {
+      "a6307af0-8e12-4a98-8b2f-b06a72d622cf": "8ba851a5-f66a-4835-a020-02954a85d49f"
+    },
+    "proof": "unknown_free_followed_by_two_ordered_cpu_barriers",
+    "protocol": "memory-reconcile-v1",
+    "started_at": 1794765548,
+    "completed_at": "2026-11-15T17:59:25.483244+00:00",
+    "free_retried": false,
+    "previous_error": "http_write_outcome_unknown",
+    "release_verified": false,
+    "barrier1_intent_at": "2026-11-15T17:59:09.840481+00:00",
+    "barrier1_prompt_id": "607ca2ba-3ddf-46c6-9afe-9f6f9a6158d2",
+    "barrier2_intent_at": "2026-11-15T17:59:22.041983+00:00",
+    "barrier2_prompt_id": "280ff17a-bc6b-4a24-a23a-1c8fc71a134c",
+    "barrier1_association": "8ba50d35-0e87-47dc-9406-eb10e3621dfe",
+    "barrier2_association": "7ba326d5-c83f-46b5-a12e-f9cf7b38b1df",
+    "barrier1_completed_at": "2026-11-15T17:59:20.329095+00:00",
+    "barrier2_completed_at": "2026-11-15T17:59:23.794139+00:00"
+  },
+  "active_operation_id": null,
+  "policy_status": "idle_countdown",
+  "policy_enabled": true,
+  "idle_seconds": 600,
+  "released": false,
+  "gpu_management_hold": false,
+  "gpu_occupied": false,
+  "worker_observation_age_seconds": 5.714356,
+  "audit_started_count": 1,
+  "audit_completed_count": 1,
+  "service_pids": {
+    "api": 4139058,
+    "runner": 4139079,
+    "gc": 1139,
+    "edge": 1132,
+    "http-worker": 2543
+  },
+  "format_version": 1,
+  "scope": "Only the explicitly authorized RTX4090 unknown memory-maintenance operation; no customer prompt, workflow, content or process removed.",
+  "runtime": "linux-20261115.146.6",
+  "maintenance_tool_sha256": "e6ba6abc400e59376a6aecb3d1a0c2d4adb1354377f452e02163129a5ea501ff",
+  "maintenance_tool_path": "/opt/comfyui-aggregator/maintenance/memory-reconcile149-e6ba6abc400e/memory_reconciliation.py",
+  "original_operation": "mmo_3e4a46eb52d74d5c9085f944e80f15e5",
+  "application_restart": false,
+  "host_restart": false,
+  "database_schema_change": false,
+  "business_generation_submitted": false,
+  "virtualization_used": false,
+  "full_acceptance": "pending"
+}
