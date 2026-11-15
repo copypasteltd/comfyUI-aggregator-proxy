@@ -306,6 +306,26 @@ def test_native_one_owner_under_concurrent_acquisition(
         assert len(list(db.scalars(select(OriginReservation)))) == 1
 
 
+def test_native_source_observation_does_not_invalidate_same_config_hold(
+    native: dict[str, Any], pg: sessionmaker[Session]
+) -> None:
+    """Worker bootstrap/probe revisions do not change the registered HTTP source."""
+    with pg.begin() as db:
+        channel = db.get(Channel, native["channel"])
+        assert channel
+        channel.verified_revision = None
+    c = native["client"]
+    acquired = c.post(f"/origin/api/devices/{native['slug']}/acquire")
+    assert acquired.status_code == 200
+    with pg.begin() as db:
+        channel = db.get(Channel, native["channel"])
+        assert channel
+        channel.verified_revision = channel.desired_revision
+        channel.revision += 1
+    assert native["access"].active(native["actor"], native["channel"])
+    assert c.get(native["prefix"] + "object_info").status_code == 200
+
+
 def test_native_unknown_submit_never_requeues_or_releases(
     native: dict[str, Any], pg: sessionmaker[Session]
 ) -> None:

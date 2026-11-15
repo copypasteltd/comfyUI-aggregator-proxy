@@ -76,12 +76,10 @@ def configuration(channel: Channel, members: list[Channel]) -> str:
                     "gpu": str(row.gpu_id),
                     "url": row.base_url,
                     "auth": row.encrypted_auth,
-                    "revision": row.revision,
                     "enabled": row.enabled,
                     "draining": row.draining,
                     "desired": row.desired_revision,
                     "applied": row.applied_revision,
-                    "verified": row.verified_revision,
                 }
                 for row in sorted(members, key=lambda row: row.id)
             ],
@@ -298,12 +296,7 @@ class OriginAccess(AdminBase):
             if len(matches) != 1:
                 raise DomainError("not_found", "设备不存在或未获授权", 404)
             row = matches[0]
-            if (
-                not row.enabled
-                or row.draining
-                or row.desired_revision != row.applied_revision
-                or row.desired_revision != row.verified_revision
-            ):
+            if not row.enabled or row.draining or row.desired_revision != row.applied_revision:
                 raise DomainError("origin_device_unavailable", "设备尚未处于可操作状态", 409)
             node = db.get(Node, row.node_id)
             if not node or not node.enabled or node.archived_at:
@@ -380,7 +373,6 @@ class OriginAccess(AdminBase):
                 not row.enabled
                 or row.draining
                 or row.desired_revision != row.applied_revision
-                or row.desired_revision != row.verified_revision
                 or not node
                 or not node.enabled
                 or node.archived_at
