@@ -6,7 +6,7 @@ Use this mode when the user asks you to operate ComfyUI itself or run a custom W
 
 An administrator enables **API Keys → Native panel**, selects devices and saves the independent grant. The Key's existing channel restrictions also apply. Business scopes or unlimited quotas alone do not grant native access. Do not change another Key's grants or use Admin/Worker credentials to bypass a 403.
 
-Set `MEDIA_GEN_API_KEY` to the provided business Key and `MEDIA_GEN_BASE_URL` to the chosen HTTP(S) origin without a path. For the current high-port deployment use `http://43.165.167.179:39443`; HTTPS testing is unnecessary. Examples below assume these variables are configured:
+Set `MEDIA_GEN_API_KEY` to the provided business Key. Both clients default to the business domain **https://gen.sub2share.xyz**; optionally set `MEDIA_GEN_BASE_URL` to that same origin without a path. The native login is `https://gen.sub2share.xyz/origin/`, its device directory is `/origin/list`, and all `/origin/{slug}/` operations remain on this domain. Do not use server IPs or internal ComfyUI addresses in client examples. Examples below assume a private Key is configured:
 
 ```bash
 python scripts/comfy_origin.py login
@@ -16,6 +16,8 @@ python scripts/comfy_origin.py devices
 Login POSTs the Key to `/origin/api/session`, receives an HttpOnly Cookie and CSRF value, and stores only the derived session, origin, credential fingerprint and expiry. The default `.comfy-origin-session.json` is **sensitive**. Top-level `--session-file` selects another path. Never print, commit or distribute it. POSIX files are created with mode 0600; use a private directory with appropriate inherited Windows access permissions. Do not copy it into a browser, another origin, shared example or Skill package. Session expiry, original Key rotation/revocation and grant changes are enforced by the service.
 
 The helper prints no Cookie, CSRF or Key. Other HTTP tools may use their own protected Cookie container. Native calls use derived session/CSRF; a business Bearer header alone is insufficient. Browser login through `/origin/` is separate. Native UI pages use `/origin/{slug}/`; never substitute an internal ComfyUI IP.
+
+Sessions and saved submissions are bound to their original origin. When moving from an old address, choose a new private `--session-file` and log in on the business domain. Keep unresolved requests with the original address and identity until reconciled. Do not rewrite their base URL, transfer Cookies across origins or create a duplicate generation during this address change.
 
 ## Device selection and exclusive operation
 

@@ -1,16 +1,18 @@
 # 126 · MediaGen Skill 安装与调用 / installation and usage
 
-**1.4.0 增加直接 ComfyUI 模式 / Direct ComfyUI:** 先由 Admin 为 Key 授予设备，再用 `comfy_origin.py login → devices → acquire → submit → wait → release → logout` 操作自定义图；查询节点、模型、上传素材和个人工作流见 [147](147-Skill原生ComfyUI操作与发布.md) 及 [Skill 原生参考](../app/skills/media-gen-skill/references/comfy-origin.md)。Native outputs stay on the device, outside cloud eight-hour retention. Session files contain credentials and must remain private.
+**1.4.1 统一业务域名 / Business domain:** 两个客户端、业务与原生示例均使用 **https://gen.sub2share.xyz**，详情及发布记录见 [148](148-Skill业务域名统一与发布.md)。Default URLs require no override; use a separate private native session when migrating from another origin.
 
-默认服务 / Default service: `https://gen.sub2share.xyz`；本轮已验证的 HTTP 入口 / verified HTTP entry: `http://43.165.167.179:39443`（设置 `MEDIA_GEN_BASE_URL`，不验证 HTTPS）。源码 / Source: [media-gen-skill](../app/skills/media-gen-skill/SKILL.md)。纯 Python 3.10+ 标准库，无需 Docker、ComfyUI 本地安装或额外 Python 依赖。
+**1.4.1 增加直接 ComfyUI 模式 / Direct ComfyUI:** 先由 Admin 为 Key 授予设备，再用 `comfy_origin.py login → devices → acquire → submit → wait → release → logout` 操作自定义图；查询节点、模型、上传素材和个人工作流见 [147](147-Skill原生ComfyUI操作与发布.md) 及 [Skill 原生参考](../app/skills/media-gen-skill/references/comfy-origin.md)。Native outputs stay on the device, outside cloud eight-hour retention. Session files contain credentials and must remain private.
+
+默认服务 / Default service: **https://gen.sub2share.xyz**，业务和原生模式保持同域；`MEDIA_GEN_BASE_URL` 可省略。源码 / Source: [media-gen-skill](../app/skills/media-gen-skill/SKILL.md)。纯 Python 3.10+ 标准库，无需 Docker、ComfyUI 本地安装或额外 Python 依赖。
 
 ## 安装 / Install
 
-推荐单文件：[最新 skill.md](https://gen.sub2share.xyz/skill.md)；[固定 1.4.0](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)。下载后命名为 `media-gen-skill/SKILL.md`，放入 Agent 的 Skill 目录并重新打开会话。所有说明、API 参考和客户端均内嵌，无需其他下载。若要执行 CLI，按文件内命令在工作目录提取 `media_gen.py` 和 `comfy_origin.py`，下方示例的 `scripts/media_gen.py` 改为 `media_gen.py`。同一固定地址更新；版本入口保持不变，更新不会自动覆盖已安装文件。
+推荐单文件：[最新 skill.md](https://gen.sub2share.xyz/skill.md)；[固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md)。下载后命名为 `media-gen-skill/SKILL.md`，放入 Agent 的 Skill 目录并重新打开会话。所有说明、API 参考和客户端均内嵌，无需其他下载。若要执行 CLI，按文件内命令在工作目录提取 `media_gen.py` 和 `comfy_origin.py`，下方示例的 `scripts/media_gen.py` 改为 `media_gen.py`。同一固定地址更新；版本入口保持不变，更新不会自动覆盖已安装文件。
 
-For one-file installation, save the [current skill.md](https://gen.sub2share.xyz/skill.md) as `media-gen-skill/SKILL.md` in your agent's skills directory. Open a new session. The API reference and complete client are embedded. To use CLI examples, extract `media_gen.py` and `comfy_origin.py` following the instructions inside the file and omit `scripts/` from the commands below. Re-fetch the current URL to update; retain private state and reload the session. The [versioned URL](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md) remains immutable. [Release and static deployment](131-单文件Skill与固定在线地址.md).
+For one-file installation, save the [current skill.md](https://gen.sub2share.xyz/skill.md) as `media-gen-skill/SKILL.md` in your agent's skills directory. Open a new session. The API reference and complete client are embedded. To use CLI examples, extract `media_gen.py` and `comfy_origin.py` following the instructions inside the file and omit `scripts/` from the commands below. Re-fetch the current URL to update; retain private state and reload the session. The [versioned URL](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) remains immutable. [Release and static deployment](131-单文件Skill与固定在线地址.md).
 
-也可从正式 [Media Gen Skill 1.4.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.0) 获取 `media-gen-skill-1.4.0.zip` 和 `SHA256SUMS.txt`，先校验摘要，再解压为 `media-gen-skill/`。Codex 用户可把该目录放到自己的 `$CODEX_HOME/skills/` 或用户 skills 目录后重新打开会话。其他支持 SKILL.md 的 Agent 使用其对应的 Skill 安装目录；也可直接运行脚本。
+也可从正式 [Media Gen Skill 1.4.1 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1) 获取 `media-gen-skill-1.4.1.zip` 和 `SHA256SUMS.txt`，先校验摘要，再解压为 `media-gen-skill/`。Codex 用户可把该目录放到自己的 `$CODEX_HOME/skills/` 或用户 skills 目录后重新打开会话。其他支持 SKILL.md 的 Agent 使用其对应的 Skill 安装目录；也可直接运行脚本。
 
 Download the archive and checksum from this repository's Releases, verify SHA-256, and extract the single `media-gen-skill` directory. Install that directory in your agent's skills folder, or run the client directly. A `release.json` inside the archive binds every file to its source commit. **A local archive is not proof of a published GitHub Release**; current publication and independent asset verification are recorded in [131](131-单文件Skill与固定在线地址.md); historical 1.1.1 evidence remains in [130](130-MediaGenSkill兼容同步与发布.md).
 
@@ -76,10 +78,10 @@ Business cloud outputs expire eight hours after successful completion. Download 
 ## 维护与发布 / Maintainer release
 
 ```powershell
-python app/scripts/build-media-gen-skill.py --output app/.local/media-gen-skill-1.4.0
+python app/scripts/build-media-gen-skill.py --output app/.local/media-gen-skill-1.4.1
 ```
 
-打包要求 Skill 源码和构建器已提交，ZIP 包含单一根目录、文件清单与来源提交；另生成独立 `skill.md`，SHA256SUMS 同时覆盖 ZIP 和单文件。发布标签约定 `media-gen-skill-v1.4.0`，正式发行四项资产：ZIP、skill.md、SHA256SUMS.txt 和 release.json。构建器固定 ZIP 创建平台并统一单文件换行，便于跨平台复现。版本升级同步 VERSION、文档、兼容行为、验证、GitHub Release 和固定在线入口；静态部署步骤见 [131](131-单文件Skill与固定在线地址.md)。
+打包要求 Skill 源码和构建器已提交，ZIP 包含单一根目录、文件清单与来源提交；另生成独立 `skill.md`，SHA256SUMS 同时覆盖 ZIP 和单文件。发布标签约定 `media-gen-skill-v1.4.1`，正式发行四项资产：ZIP、skill.md、SHA256SUMS.txt 和 release.json。构建器固定 ZIP 创建平台并统一单文件换行，便于跨平台复现。版本升级同步 VERSION、文档、兼容行为、验证、GitHub Release 和固定在线入口；静态部署步骤见 [131](131-单文件Skill与固定在线地址.md)。
 
 Packaging requires committed Skill sources and never includes `.local`、`__pycache__`、真实素材或凭证。仓库应用部署与 Skill 分发版本分别记录；无需给客户分发整个平台。
 
@@ -96,4 +98,4 @@ python scripts/media_gen.py generate --model CONTINUATION_ALIAS --prompt "Contin
 
 Only use the advertised fields. Add `--prompt` when the selected schema requires it. Use `--media SLOT=FILE`, `--text NAME=TEXT` or `--text-file NAME=FILE` for named roles; required values must be explicit. Pair the transcript with the actual reference recording, separately from generated dialogue. The continuation parent belongs to the same Key/project and must still have a compatible unexpired context. Soundtrack strategy is frozen by the model; no generic switch is invented. Video/audio/GLB uploads stream with bounded memory. The server validates the complete media and current ownership/quotas.
 
-1.4.0 发行四项资产和生成服务保持情况见 [147](147-Skill原生ComfyUI操作与发布.md)；历史固定地址维护见 [131](131-单文件Skill与固定在线地址.md)。用户本地需主动重新下载并更新自己的安装；不会自动覆盖已提取客户端或私有请求状态。
+1.4.1 发行四项资产和生成服务保持情况见 [147](147-Skill原生ComfyUI操作与发布.md)；历史固定地址维护见 [131](131-单文件Skill与固定在线地址.md)。用户本地需主动重新下载并更新自己的安装；不会自动覆盖已提取客户端或私有请求状态。

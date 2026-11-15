@@ -1,5 +1,7 @@
 # 147 · Skill 原生 ComfyUI 操作与发布
 
+**后续 1.4.1 域名统一**见 [148](148-Skill业务域名统一与发布.md)；当前安装与调用请使用 **https://gen.sub2share.xyz**。本文保留 1.4.0 的实际高端口验证记录，不改写其来源或资产。
+
 2026-11-16，Asia/Taipei。按用户要求升级 Media Gen Skill 至 **1.4.0**，明确允许 Skill 使用者/Agent 通过已上线的 `/origin/` 直接操控获准 ComfyUI。沿用 [146 的原生会话、独占和数据边界](146-原生ComfyUI面板访问与独占操作.md)，不通过静态 Skill 发布升级应用服务或 Worker。
 
 ## 能力与授权

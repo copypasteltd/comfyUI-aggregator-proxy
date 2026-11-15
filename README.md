@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[Skill 1.4.1 · 统一业务域名](docs/148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和下载均使用 **https://gen.sub2share.xyz**。两个客户端默认同域，无需配置服务器 IP。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) · [原生面板](https://gen.sub2share.xyz/origin/)。验证和上线结果见专题。
+
 [Skill 1.4.0 · 直接操作 ComfyUI](docs/147-Skill原生ComfyUI操作与发布.md)：允许使用者/Agent 在独立设备授权后查询节点和模型、编辑自定义 Workflow、上传素材、提交任务、查看队列与结果、管理个人流程并安全归还。新增标准库 `comfy_origin.py`，单文件内嵌两份参考与两个客户端；业务模型 API 继续支持。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.0](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)。会话文件含派生凭据须私藏，原生结果留在设备，不套用云端八小时删除；已发布到 GitHub 和线上：[HTTP 最新下载](http://43.165.167.179:39443/skill.md) · [1.4.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.0)。35 项客户端回归、5070 的 15 项真实操作与 23 项外部 HTTP 检查通过，完整证据和限制见专题。
 
 [146 · 原生 ComfyUI 工作台](docs/146-原生ComfyUI面板访问与独占操作.md) 已实现并部署到原 HTTP 高位入口：[打开原生工作台](http://43.165.167.179:39443/origin/)。保留任意来源 CORS 和现有 API/Skill/Studio 入口。当前版本、数据库备份、调用及浏览器验证见[部署证明](docs/evidence/2026-11-15/origin-146-production.json)。
@@ -62,7 +64,7 @@ YuE2 自动作谱型号已通过实机试跑和独立业务调用，实际返回
 
 历史 1.3.0 发行已通过 17 项客户端检查及线上视频、音频、GLB 流式上传、业务生图和校验下载。新增命名素材、文本和兼容父任务参数；[真实验证记录](docs/evidence/2026-11-04/media-gen-skill-130-live.json)。1.3.0 已在 GitHub 和固定地址正式发布，四项发行资产与本地两次构建逐字节相同。
 
-**单文件 Skill 最新入口：[在线 skill.md](https://gen.sub2share.xyz/skill.md)**。将它保存为 Agent 的 `media-gen-skill/SKILL.md`，即可获得完整说明、两份 API 参考及两个内嵌 Python 客户端，无需另外下载 scripts/references。设置自己的 API Key 后可使用业务模型，或在独立设备授权后直接操作 ComfyUI。固定地址提供最新部署版；[1.4.0 固定版本](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)、ZIP 及历史版本均保留。[安装、更新与发布](docs/131-单文件Skill与固定在线地址.md)。
+**单文件 Skill 最新入口：[在线 skill.md](https://gen.sub2share.xyz/skill.md)**。将它保存为 Agent 的 `media-gen-skill/SKILL.md`，即可获得完整说明、两份 API 参考及两个内嵌 Python 客户端，无需另外下载 scripts/references。设置自己的 API Key 后可使用业务模型，或在独立设备授权后直接操作 ComfyUI。固定地址提供最新部署版；[1.4.1 固定版本](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md)、ZIP 及历史版本均保留。[安装、更新与发布](docs/131-单文件Skill与固定在线地址.md)。
 
 已完成 17 项客户端检查、线上视频/音频/GLB 上传和普通业务生图下载，以及高位入口和现有域名的外部校验；四项公开资产与原生构建一致，原生成服务版本和五个服务进程未变。后续 Skill 更新继续同步固定入口、版本发行和双语说明。
 

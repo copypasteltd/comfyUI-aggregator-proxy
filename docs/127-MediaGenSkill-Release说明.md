@@ -1,6 +1,12 @@
 # Media Gen Skill · 发行说明 / Release guide
 
-## 当前 1.4.0 / Current 1.4.0
+## 当前 1.4.1 / Current 1.4.1
+
+业务与原生 ComfyUI 全面使用 **https://gen.sub2share.xyz**；两个客户端默认域名，Skill 示例及登录/下载也保持同域。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) · [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1) · [验证及上线记录](148-Skill业务域名统一与发布.md)。
+
+Business APIs, native ComfyUI, login and Skill downloads consistently use **https://gen.sub2share.xyz**. Client defaults and examples share the domain. Keep old-origin unresolved requests and sessions separate during migration. See document 148 for current validation and rollout.
+
+## 历史 1.4.0 / Historical 1.4.0
 
 [已验证 HTTP 单文件](http://43.165.167.179:39443/skill.md) · [固定 1.4.0](http://43.165.167.179:39443/skills/media-gen/1.4.0/skill.md) · [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.0) · [完整操作及发布证据](147-Skill原生ComfyUI操作与发布.md)
 

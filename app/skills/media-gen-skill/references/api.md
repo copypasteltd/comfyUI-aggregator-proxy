@@ -1,6 +1,6 @@
 # API use and recovery
 
-Example origin: `https://gen.sub2share.xyz`. All paths below are relative to the origin. Send `Authorization: Bearer $MEDIA_GEN_API_KEY`; credentials belong to a logical business Key and are separate from Admin/Worker credentials.
+Business origin: `https://gen.sub2share.xyz`, the default for both bundled clients. All paths below are relative to this domain; native ComfyUI also uses it under `/origin/`. Send `Authorization: Bearer $MEDIA_GEN_API_KEY` for business calls; credentials belong to a logical business Key and are separate from Admin/Worker credentials.
 
 ## Discovery
 

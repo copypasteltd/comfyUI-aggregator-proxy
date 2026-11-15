@@ -5,7 +5,7 @@ description: Generate images, video, audio or 3D through the ComfyUI Aggregator,
 
 # Media Gen
 
-Use this skill to call the user's media generation platform. The example deployment is **https://gen.sub2share.xyz**. Use the live catalog to choose a model; aliases, supported sizes, durations and reference slots can change.
+Use this skill to call the user's media generation platform at **https://gen.sub2share.xyz**. This business domain is the default for both published model calls and direct ComfyUI operations. Use the live catalog to choose a model; aliases, supported sizes, durations and reference slots can change.
 
 The bundled Python 3.10+ clients use the standard library. Read the API key from `MEDIA_GEN_API_KEY`; optionally set `MEDIA_GEN_BASE_URL`. No key is included in this package. If authentication is needed and neither an existing native session nor the variable is available, ask the user to configure a business API key for this deployment. Do not search unrelated projects for credentials or print the key.
 
@@ -22,15 +22,15 @@ Admin must first enable **API Keys → Native panel** and select devices for thi
 
 ### Direct ComfyUI quick start
 
-The deployed HTTP high-port entry is `http://43.165.167.179:39443`; use the origin configured by the user. HTTP is supported and no HTTPS verification is required. The helper's default remains the example domain; set `MEDIA_GEN_BASE_URL` or pass top-level `--base-url` when using the high port.
+Use **https://gen.sub2share.xyz** for the business API, native ComfyUI, panel login and Skill downloads. Both clients already default to this origin; `MEDIA_GEN_BASE_URL` is optional. Do not replace it with an internal device address or server IP. An explicit user-selected deployment can still use top-level `--base-url` or the environment variable.
 
 ```powershell
-$env:MEDIA_GEN_BASE_URL = 'http://43.165.167.179:39443'
+$env:MEDIA_GEN_BASE_URL = 'https://gen.sub2share.xyz'
 python scripts/comfy_origin.py login
 python scripts/comfy_origin.py devices
 ```
 
-For a POSIX shell, use `export MEDIA_GEN_BASE_URL='http://43.165.167.179:39443'` instead. Supply `MEDIA_GEN_API_KEY` privately as described above.
+For a POSIX shell, use `export MEDIA_GEN_BASE_URL='https://gen.sub2share.xyz'` instead. Supply `MEDIA_GEN_API_KEY` privately as described above. For browser access use `https://gen.sub2share.xyz/origin/`; the current single-file Skill is `https://gen.sub2share.xyz/skill.md`.
 
 Select an actual returned `slug`; replace `DEVICE_SLUG` below. Use the same base URL and private session file for every command (or set `MEDIA_GEN_BASE_URL` once):
 
@@ -46,6 +46,8 @@ python scripts/comfy_origin.py logout
 ```
 
 Login exchanges the Key once for a derived Cookie/CSRF session. The default `.comfy-origin-session.json` **contains an access credential**; keep it private, outside Skill installations and Git. Pass top-level `--session-file ./private/session.json` consistently to use another path. Native operations send the session, not a business Bearer header or the API Key upstream. A browser can use `/origin/` → `/origin/list` → `/origin/{slug}/`; `/orgin` and `/list` are aliases. CLI and browser sessions are independent; do not put a Key in a URL. Close owned browser tabs/contexts in `finally` after use.
+
+If migrating from another origin, create a separate private session file and log in on the business domain. Do not copy a Cookie or edit the origin in a saved request. Preserve any unresolved old-origin request and reconcile it on its original origin; switching to the domain is not permission to resubmit it.
 
 Native execution reserves the physical device exclusively against ordinary API dispatch and idle cleanup. Never override an existing task, maintenance hold or offline source. Persist the exact graph and submission identity before POST; `resume STATE_FILE` reuses that intent, and a known prompt ID is only queried. An unknown response, wait timeout, closed tab or logout does not prove the task stopped. Keep the state; wait for reconciliation and only treat `release` state `closed` as returned. The helper's bounded HTTP polling refreshes its own reservation heartbeat.
 

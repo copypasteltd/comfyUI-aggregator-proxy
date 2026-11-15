@@ -1,5 +1,7 @@
 # 131 · 单文件 Skill 与固定在线地址
 
+**当前 1.4.1 · 业务域名统一**见 [148](148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和 Skill 使用 **https://gen.sub2share.xyz**。两个客户端默认该域名，单文件中的示例也一致。下文 1.4.0 及更早检查按历史时点保留。
+
 **1.4.0 已发布并上线**，原生 ComfyUI 操作更新见 [147](147-Skill原生ComfyUI操作与发布.md)。用户/Agent 可使用独立授权设备的原生图、节点及模型；单文件内嵌业务/原生两份参考与两个客户端，已有 1.3.0 及更早版本保持不可变。新增 Cookie 会话文件含凭据，原生源文件不纳入云端八小时删除。35 项客户端回归、5070 的 15 项真实操作及 23 项外部 HTTP 检查通过；[本轮已验证的 HTTP 下载地址](http://43.165.167.179:39443/skill.md)。
 
 2026-11-13 [CORS 更新](145-公网入口统一开放CORS.md) 已同步 Skill 静态响应与发布器验证：反映任意 Origin、允许凭证、自定义请求头和私网预检；Skill 1.3.0 内容及不可变资产保持相同。早期报告中的通配来源断言按当时实现保留。
@@ -32,7 +34,7 @@
 
 Download [the current file](https://gen.sub2share.xyz/skill.md), save it as `media-gen-skill/SKILL.md` in your agent's skills directory, and open a new session. Configure your business API Key yourself. The instructions, business/native references and both complete standard-library clients are embedded. Native HTTP tools can use the API directly; extract the clients only for CLI use. After an update, deliberately replace old extracted clients or extract into a new working directory.
 
-固定版本：[1.4.0/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.4.0/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.4.0/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.4.0/media-gen-skill-1.4.0.zip)；用于来源核对、固定版本和回退。[历史 1.3.0](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md) 保留。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
+固定版本：[1.4.1/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.4.1/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.4.1/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.4.1/media-gen-skill-1.4.1.zip)；用于来源核对、固定版本和回退。[历史 1.3.0](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md) 保留。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
 
 ## 4. 后续发布 / Maintainer workflow
 
