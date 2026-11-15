@@ -1,0 +1,261 @@
+{
+  "format_version": 1,
+  "recorded_at": "2026-11-15T15:55:07.617848+00:00",
+  "passed": true,
+  "scope": "Actual native workspace rollout, HTTP/WebSocket and 5070 CPU diagnostic, native frontend and Admin grant persistence. Not full model-catalog, trained-model quality or 10-20-device acceptance.",
+  "full_acceptance": "pending",
+  "virtualization_used": false,
+  "public_workspace": "http://43.165.167.179:39443/origin/",
+  "https_verification_performed": false,
+  "deployment": {
+    "release": "linux-20261115.146.6",
+    "application_source_revision": "8da14ebe89c9069c596ab466c3e4fcded088bb61",
+    "database_head": "04d146a00001",
+    "archive_bytes": 1300935,
+    "archive_sha256": "1b72e22b2cad86531d2f9cd50703f18acbc891655a25063492231bc8f82decd4",
+    "manifest_payload_files": 180,
+    "project_wheels_rebuilt": true,
+    "admin_rebuilt": true,
+    "hash_locked_linux_dependencies": true,
+    "native_uv_pip_check": "passed",
+    "admin_dist_uses_current": true,
+    "services": {
+      "api": {
+        "active": true,
+        "master_pid_preserved_from_pre_rollout_observation": false
+      },
+      "runner": {
+        "active": true,
+        "master_pid_preserved_from_pre_rollout_observation": false
+      },
+      "edge": {
+        "active": true,
+        "master_pid_preserved_from_pre_rollout_observation": true
+      },
+      "gc": {
+        "active": true,
+        "master_pid_preserved_from_pre_rollout_observation": true
+      },
+      "http-worker": {
+        "active": true,
+        "master_pid_preserved_from_pre_rollout_observation": true
+      }
+    },
+    "comfyui_or_windows_restart_performed": false,
+    "backup": {
+      "at": "2026-11-15T14:42:01.593470+00:00",
+      "file": "control-20261115T144147056687Z.dump",
+      "bytes": 119004686,
+      "sha256": "b65cd202412a08406798001206871e14f3f085598f99c3b21b1d9b3e04709951",
+      "archive_list_verified": true,
+      "full_disaster_recovery_verified": false
+    },
+    "destructive_schema_downgrade_performed": false,
+    "edge": {
+      "before_sha256": "d025aed15ff05646613bdf90360e9cd492ca8af5390b94503d57bb38e232a69b",
+      "after_sha256": "fe077ef6850da9da5165cf9173c9eb220f6ab2ae04a30a5153cfe74eac065309",
+      "syntax_check": "passed",
+      "reload": "graceful",
+      "native_websocket_upgrade": true,
+      "arbitrary_origin_method_headers_credentials_private_preflight": true,
+      "existing_skill_studio_and_private_listeners_preserved": true
+    },
+    "api_limits": {
+      "concurrency": 128,
+      "memory_max_mib": 512,
+      "graceful_shutdown_seconds": 20
+    }
+  },
+  "verification": {
+    "component_report": "docs/evidence/2026-11-15/origin-146-local.json",
+    "component_source_revision": "a857056610008d1931375abab886398436a3570a",
+    "component_python": {
+      "passed": 113,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "final_source_difference": "8da14ebe changes only the origin.html Lime data-c attribute after the component snapshot; Python sources are unchanged. The final frontend was rebuilt and actual browser checks ran against release .6.",
+    "python_typecheck_source_files": 193,
+    "python_typecheck": "passed",
+    "relevant_ruff": "passed",
+    "vue_typecheck_and_production_build": "passed",
+    "existing_node_tests_and_two_vitest_cases": "passed",
+    "http_ws": {
+      "passed": 34,
+      "checks": [
+        "Typo alias redirects",
+        "List alias redirects",
+        "Anonymous directory denied",
+        "Key login succeeds",
+        "Derived HttpOnly session excludes Key",
+        "Three authorized devices listed",
+        "Directory hides private topology",
+        "Existing model API remains available",
+        "Unregistered device denied",
+        "Write without valid CSRF denied",
+        "Existing 4090 maintenance preserved",
+        "5070 persistent reservation acquired",
+        "Actual native HTML scoped to device path",
+        "Native adapter excludes API Key",
+        "Installed CPU image nodes discovered",
+        "Public WebSocket Upgrade and status succeed",
+        "Actual native custom Workflow accepted",
+        "Same intent replays original prompt ID",
+        "Actual workflow progress crosses WebSocket",
+        "Real ComfyUI CPU Workflow completes",
+        "Authorized native PNG downloaded",
+        "Actual Range download preserves bytes",
+        "Actual multipart upload succeeds",
+        "Uploaded input uses Key namespace",
+        "Uploaded input download is authorized",
+        "Actual native mask upload preserves original image protocol",
+        "Owned masked result downloads",
+        "Unowned source file denied",
+        "Native maintenance endpoint denied",
+        "Personal workflow save uses native return format",
+        "Personal workflow directory read succeeds",
+        "Owned workflow test file removed",
+        "Native prefix preserves unrestricted public CORS",
+        "Owned reservation release requested"
+      ],
+      "source_release": "linux-20261115.146.5",
+      "scope_note": "Final .6 changes only the HTML Lime attribute. Actual native browser checks below use .6.",
+      "output": {
+        "bytes": 430,
+        "sha256": "d0fc4a43cd15a1e4159b953d269b5f8c249421ea0adcf4d6165dfc689fca545a",
+        "type": "real ComfyUI CPU diagnostic image",
+        "width": 64,
+        "height": 64
+      },
+      "release_state": "closed"
+    },
+    "native_browser": {
+      "passed": 12,
+      "checks": [
+        "Workspace activates the pulled Lime theme tokens",
+        "Mobile landing has no horizontal overflow",
+        "Browser Key login lists three authorized devices",
+        "Browser removes Key field after login",
+        "Mobile directory has no horizontal overflow",
+        "Native panel displays lifecycle notice",
+        "Native graph engine finishes initialization",
+        "Original frontend submits its own Workflow through scoped fetch",
+        "Original frontend Workflow completes on real ComfyUI",
+        "Actual native ComfyUI canvas is visible",
+        "Browser returns its own completed reservation",
+        "Browser logs out its own native session"
+      ],
+      "source_release": "linux-20261115.146.6",
+      "unhandled_page_errors": 0,
+      "all_owned_contexts_closed": true
+    },
+    "admin_browser": {
+      "passed": 4,
+      "checks": [
+        "Admin loads all three explicit owner device grants",
+        "Actual Admin form saves unchanged device selection",
+        "Actual Admin form reload confirms persisted grants",
+        "Admin signs out its own browser session"
+      ],
+      "source_release": "linux-20261115.146.6",
+      "unhandled_page_errors": 0,
+      "all_owned_contexts_closed": true
+    },
+    "automation_note": "A combined capture completed native checks but its later background Admin page paused data fetching and timed out. Admin was then independently verified in a foreground browser. The combined run is not reported as fully passed; original logs remain private.",
+    "compatibility_note": "Core native editor, actual graph execution and preview passed. Some private extension endpoints and external cloud requests remain blocked; expected console errors do not certify universal plugin compatibility.",
+    "actual_diagnostic": "EmptyImage -> SaveImage, 64x64 CPU solid-color image; no trained model quality claim."
+  },
+  "authorization_and_resources": {
+    "explicit_owner_keys_enabled": 3,
+    "other_key_policies_changed": false,
+    "device_status": [
+      {
+        "name": "RTX 5070",
+        "native_source_online": true,
+        "actual_native_execution": "passed"
+      },
+      {
+        "name": "RTX 3080",
+        "native_source_online": false,
+        "test_submission_performed": false,
+        "host_reboot_performed": false
+      },
+      {
+        "name": "RTX 4090",
+        "native_source_online": true,
+        "original_maintenance_hold_preserved": true,
+        "test_submission_performed": false
+      }
+    ],
+    "post_test_native_reservations": [
+      {
+        "state": "closed",
+        "count": 9
+      }
+    ],
+    "post_test_native_prompts": [
+      {
+        "state": "completed",
+        "count": 4
+      },
+      {
+        "state": "rejected",
+        "count": 1
+      }
+    ],
+    "native_output_storage": "Device input/output/temp only; no automatic cloud copy or eight-hour deletion.",
+    "native_access": "Explicitly trusted custom-node operators; separate from business model allowlists, /v1/jobs quotas, metering and cloud content."
+  },
+  "disk_cleanup": {
+    "removed_only_owned_trial_releases": [
+      {
+        "release": "linux-20261115.146.1",
+        "regular_file_bytes": 151609011
+      },
+      {
+        "release": "linux-20261115.146.2",
+        "regular_file_bytes": 149439253
+      },
+      {
+        "release": "linux-20261115.146.3",
+        "regular_file_bytes": 149442989
+      },
+      {
+        "release": "linux-20261115.146.4",
+        "regular_file_bytes": 150337799
+      }
+    ],
+    "retained_current": "linux-20261115.146.6",
+    "retained_rollback": "linux-20261115.146.5",
+    "preexisting_releases_untouched": true,
+    "disk_free_before": 667004928,
+    "disk_free_after": 1343651840,
+    "observed_free_bytes_recovered": 676646912,
+    "final_observed_free_bytes": 1342992384,
+    "scope": "Only this rollout's intermediate releases .1 through .4; current .6 and rollback .5, older releases, backups and user content retained."
+  },
+  "remaining_acceptance": {
+    "ordinary_catalog_models_visible": 45,
+    "existing_binding_observation": [
+      {
+        "applied": true,
+        "verified": null,
+        "count": 49
+      }
+    ],
+    "ordinary_dispatch_note": "49 preexisting applied bindings currently have null cached verified revision. Model discovery is not new dispatch readiness proof; native source probes are separate.",
+    "not_completed_by_this_increment": [
+      "3080 native availability",
+      "4090 generation while existing maintenance hold remains",
+      "Historical pending candidate publication",
+      "Actual Sub2API full-chain acceptance",
+      "10-20-device capacity acceptance",
+      "Design-only source-file handoff cleanup",
+      "Full engineering gates and disaster-recovery restore drill"
+    ]
+  },
+  "media_manifest": "docs/evidence/2026-11-15/origin-146-media.json",
+  "actual_browser_request": "docs/examples/origin-146/workflow-request.json",
+  "actual_browser_receipt": "docs/examples/origin-146/actual-browser-response.json"
+}

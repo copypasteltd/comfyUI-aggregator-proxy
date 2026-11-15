@@ -2,11 +2,11 @@
   "contract_version": "0.4.0",
   "format_version": 1,
   "increment": 152,
-  "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages.",
+  "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages. Native workspace146 binds the affected implementation to a separately executed current-source component run; prior report bytes and pending full gates are preserved.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-04/development-trace-baselines-152.json",
-    "sha256": "52225c4d5e4e5d55b33f80af55f5c52d9f9a83fabfe6f6c302dcbee13f024e4a"
+    "path": "docs/evidence/2026-11-15/development-trace-baselines-146.json",
+    "sha256": "a95ffa5a0589a85d6fd78e17f89c99c311953ca609c2264f461742aea278e3cc"
   },
   "requirements": [
     {
@@ -1186,7 +1186,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "native139"
+          "baseline": "origin146"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/admin_catalog.py",
@@ -1203,6 +1203,10 @@
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/apps/control_api/src/control_api/origin_routes.py",
+          "baseline": "origin146"
         }
       ],
       "tests": [
@@ -1229,6 +1233,12 @@
           "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
           "baseline": "skill138",
           "language": "python"
+        },
+        {
+          "path": "app/tests/integration/test_origin_access.py",
+          "symbol": "test_native_prompt_replay_filter_files_range_and_static_paths",
+          "language": "python",
+          "baseline": "origin146"
         }
       ],
       "evidence": [
@@ -1247,7 +1257,8 @@
         "contract133",
         "compat135",
         "skill138",
-        "native139"
+        "native139",
+        "origin146"
       ],
       "remaining_backlog": [
         "30",
@@ -1324,7 +1335,7 @@
       "implementation": [
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "native139"
+          "baseline": "origin146"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/jobs.py",
@@ -1367,7 +1378,8 @@
         "typed133",
         "contract133",
         "compat135",
-        "native139"
+        "native139",
+        "origin146"
       ],
       "remaining_backlog": [
         "29",
@@ -1647,7 +1659,15 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "host152"
+          "baseline": "origin146"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/origin_access.py",
+          "baseline": "origin146"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/origin_runtime.py",
+          "baseline": "origin146"
         }
       ],
       "tests": [
@@ -1656,6 +1676,12 @@
           "symbol": "test_concurrent_idempotency_accepts_and_reserves_once",
           "language": "python",
           "baseline": "native139"
+        },
+        {
+          "path": "app/tests/integration/test_origin_access.py",
+          "symbol": "test_native_one_owner_under_concurrent_acquisition",
+          "language": "python",
+          "baseline": "origin146"
         }
       ],
       "evidence": [
@@ -1667,7 +1693,8 @@
         "contract133",
         "compat135",
         "native139",
-        "host152"
+        "host152",
+        "origin146"
       ],
       "remaining_backlog": [
         "29",
@@ -3826,11 +3853,19 @@
         },
         {
           "path": "app/apps/control_api/src/control_api/main.py",
-          "baseline": "native139"
+          "baseline": "origin146"
         },
         {
           "path": "app/apps/admin_web/src/pages/Users.vue",
           "baseline": "native139"
+        },
+        {
+          "path": "app/apps/admin_web/src/components/OriginGrantDrawer.vue",
+          "baseline": "origin146"
+        },
+        {
+          "path": "app/apps/admin_web/src/origin/OriginApp.vue",
+          "baseline": "origin146"
         }
       ],
       "tests": [
@@ -3851,6 +3886,12 @@
           "symbol": "test_admin_session_permission_and_missing_job_http",
           "language": "python",
           "baseline": "native139"
+        },
+        {
+          "path": "app/tests/integration/test_origin_access.py",
+          "symbol": "test_native_grant_revision_idempotency_and_existing_key_not_auto_granted",
+          "language": "python",
+          "baseline": "origin146"
         }
       ],
       "evidence": [
@@ -3866,7 +3907,8 @@
         "contract133",
         "compat135",
         "browser135",
-        "native139"
+        "native139",
+        "origin146"
       ],
       "remaining_backlog": [
         "50",
@@ -4582,7 +4624,11 @@
         },
         {
           "path": "app/apps/admin_web/src/pages/Keys.vue",
-          "baseline": "native139"
+          "baseline": "origin146"
+        },
+        {
+          "path": "app/packages/infrastructure/src/generation_infrastructure/origin_access.py",
+          "baseline": "origin146"
         }
       ],
       "tests": [
@@ -4591,6 +4637,12 @@
           "symbol": "test_one_time_secret_replay_rotation_and_revocation",
           "language": "python",
           "baseline": "native139"
+        },
+        {
+          "path": "app/tests/integration/test_origin_access.py",
+          "symbol": "test_native_cookie_auth_grants_csrf_and_revocation",
+          "language": "python",
+          "baseline": "origin146"
         }
       ],
       "evidence": [
@@ -4604,7 +4656,8 @@
         "contract133",
         "compat135",
         "browser135",
-        "native139"
+        "native139",
+        "origin146"
       ],
       "remaining_backlog": [
         "50",
@@ -4888,7 +4941,7 @@
         },
         {
           "path": "app/apps/admin_web/src/pages/Keys.vue",
-          "baseline": "native139"
+          "baseline": "origin146"
         }
       ],
       "tests": [
@@ -4917,7 +4970,8 @@
         "contract133",
         "compat135",
         "browser135",
-        "native139"
+        "native139",
+        "origin146"
       ],
       "remaining_backlog": [
         "50",
@@ -5162,7 +5216,7 @@
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/models.py",
-          "baseline": "host152"
+          "baseline": "origin146"
         }
       ],
       "tests": [
@@ -5189,7 +5243,8 @@
         "compat135",
         "native139",
         "daily150",
-        "host152"
+        "host152",
+        "origin146"
       ],
       "remaining_backlog": [
         "50",
