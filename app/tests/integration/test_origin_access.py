@@ -394,7 +394,7 @@ def test_native_prompt_replay_filter_files_range_and_static_paths(
     assert f'<base href="{prefix}">' in html.text and "__origin_bootstrap.js" in html.text
     assert "connect-src 'self' data: blob:" in html.headers["content-security-policy"]
     assert "set-cookie" not in html.headers
-    assert c.get(prefix + "extensions").json() == [prefix + "extensions/synthetic/tool.js"]
+    assert c.get(prefix + "extensions").json() == ["/extensions/synthetic/tool.js"]
     assert c.get(prefix + "__origin_bootstrap.js").status_code == 200
     assert c.get(prefix + "api/i18n").json()["en"]["synthetic"] == "Native translation"
     graph = {"prompt": {"1": {"class_type": "Synthetic", "inputs": {}}}, "extra_data": {}}

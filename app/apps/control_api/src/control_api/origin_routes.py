@@ -52,7 +52,17 @@ SKIP_HEADERS = {
     "access-control-allow-headers",
     "access-control-expose-headers",
 }
-STATIC = ("assets/", "scripts/", "extensions/", "web/", "templates/", "docs/", "locales/", "i18n/")
+STATIC = (
+    "assets/",
+    "scripts/",
+    "extensions/",
+    "web/",
+    "templates/",
+    "docs/",
+    "locales/",
+    "i18n/",
+    "fonts/",
+)
 READS = {
     "object_info",
     "embeddings",
@@ -63,6 +73,7 @@ READS = {
     "extensions",
     "global_subgraphs",
     "node_replace",
+    "node_replacements",
     "experiment",
     "translations",
     "default_workflow",
@@ -989,9 +1000,19 @@ def origin_routes(
                     )
                     content = content.replace("<head>", "<head>" + bootstrap, 1)
                 elif path.removeprefix("api/") == "extensions":
-                    content = json.dumps(
-                        [prefix + name.lstrip("/") for name in json.loads(content)]
-                    )
+                    names = json.loads(content)
+                    if (
+                        not isinstance(names, list)
+                        or len(names) > 10000
+                        or any(
+                            not isinstance(name, str) or not name.startswith("/extensions/")
+                            for name in names
+                        )
+                    ):
+                        raise DomainError("origin_source_format", "扩展资源格式无效", 502)
+                    # ComfyUI's fileURL already prefixes the native base path.
+                    # Prefixing this list again breaks dynamic module imports.
+                    content = json.dumps(["/" + safe_path(name.lstrip("/")) for name in names])
                 elif path.removeprefix("api/") == "jobs":
                     value = json.loads(content)
                     owned = await asyncio.to_thread(access.prompt_ids, identity, target["id"])
