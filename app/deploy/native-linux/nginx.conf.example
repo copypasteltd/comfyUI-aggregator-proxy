@@ -1,8 +1,9 @@
 # Replace PUBLIC_HOST before installing; do not include this in another nginx master.
 worker_processes 1;
+worker_rlimit_nofile 4096;
 pid /var/lib/comfyui-aggregator/edge/nginx.pid;
 error_log stderr warn;
-events { worker_connections 128; }
+events { worker_connections 2048; }
 http {
     access_log off;
     default_type application/octet-stream;

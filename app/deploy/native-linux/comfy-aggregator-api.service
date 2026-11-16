@@ -11,7 +11,7 @@ Group=comfy-control
 WorkingDirectory=/var/lib/comfyui-aggregator/api
 EnvironmentFile=/etc/comfyui-aggregator/cloud.env
 Environment=PYTHONDONTWRITEBYTECODE=1
-ExecStart=/opt/comfyui-aggregator/current/venv/bin/python -m uvicorn control_api.main:create_app --factory --host 127.0.0.1 --port 32880 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1 --no-access-log --limit-concurrency 128 --timeout-keep-alive 5 --timeout-graceful-shutdown 20
+ExecStart=/opt/comfyui-aggregator/current/venv/bin/python -m uvicorn control_api.main:create_app --factory --host 127.0.0.1 --port 32880 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1 --no-access-log --limit-concurrency 512 --timeout-keep-alive 5 --timeout-graceful-shutdown 20
 Restart=on-failure
 RestartSec=5
 TimeoutStopSec=45
