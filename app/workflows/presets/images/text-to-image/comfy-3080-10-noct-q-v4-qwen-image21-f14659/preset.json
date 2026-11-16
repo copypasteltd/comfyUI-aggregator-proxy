@@ -1,0 +1,33 @@
+{
+  "alias": "comfy-3080-10-noct-q-v4-qwen-image21-f14659",
+  "display_name": "NoctQ v4 · 文生图 · 1024x1536 · RTX 3080 · 27b99e",
+  "task_type": "text_to_image",
+  "device": "rtx3080",
+  "directory": "images/text-to-image/comfy-3080-10-noct-q-v4-qwen-image21-f14659",
+  "native_workflow": "平台预设/2026-11-16/images/text-to-image/comfy-3080-10-noct-q-v4-qwen-image21-f14659.json",
+  "release_id": "wfr_a31b8fad0bca44d48d3f851fe71f85f1",
+  "release_digest": "193b8ef6a4a6a046002e3d33a6e36a2b5f8fddfd107c21faed4e761b17c1b9bc",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPLoader",
+    "EmptyLatentImage",
+    "KSampler",
+    "SaveImage",
+    "TextEncodeQwenImage21",
+    "UNETLoader",
+    "VAEDecode",
+    "VAELoader"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

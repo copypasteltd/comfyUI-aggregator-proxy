@@ -1,0 +1,50 @@
+{
+  "alias": "comfy-3080-anatomy-v2-author-example-01-7f3c47",
+  "display_name": "Qwen Image 2.1 · 图像编辑 · 1024x1024 · RTX 3080 · dc132c",
+  "task_type": "image_to_image",
+  "device": "rtx3080",
+  "directory": "images/image-edit/comfy-3080-anatomy-v2-author-example-01-7f3c47",
+  "native_workflow": "平台预设/2026-11-16/images/image-edit/comfy-3080-anatomy-v2-author-example-01-7f3c47.json",
+  "release_id": "wfr_02df8c635f904aa29d90daba2afc7ac8",
+  "release_digest": "75eb3f4fe9a2b4b8bf86797f6ba50706a63fd20fffcdd9a7db815c630c9ce4dd",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPLoader",
+    "ConditioningZeroOut",
+    "ImageScale",
+    "ImageScaleToTotalPixels",
+    "ImageStitch",
+    "KSampler",
+    "LoadImage",
+    "ModelAttentionBackend",
+    "ModelPatchTorchSettings",
+    "Power Lora Loader (rgthree)",
+    "QwenImage21Cache",
+    "SaveImageAdvanced",
+    "TextEncodeQwenImage21",
+    "UNETLoader",
+    "VAEDecode",
+    "VAELoader"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [
+      {
+        "node_id": "544",
+        "input": "lora_1"
+      },
+      {
+        "node_id": "544",
+        "input": "lora_2"
+      }
+    ],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "1": {
+    "inputs": {
+      "audio": "REPLACE_WITH_UPLOAD_SPEAKER_1.wav"
+    },
+    "class_type": "LoadAudio"
+  },
+  "2": {
+    "inputs": {
+      "audio": "REPLACE_WITH_UPLOAD_SPEAKER_2.wav"
+    },
+    "class_type": "LoadAudio"
+  },
+  "3": {
+    "inputs": {
+      "seed": 42,
+      "model": "FireRedTTS2",
+      "top_k": 20,
+      "top_p": 0.9,
+      "S1_text": "Example text",
+      "S2_text": "Example text",
+      "S1_audio": [
+        "1",
+        0
+      ],
+      "S2_audio": [
+        "2",
+        0
+      ],
+      "temperature": 0.9,
+      "dialogue_text": "Example text",
+      "max_new_tokens": 1800,
+      "repetition_penalty": 1.1
+    },
+    "class_type": "PodcastTrioNative"
+  },
+  "21": {
+    "inputs": {
+      "audio": [
+        "rc_audio_trim",
+        0
+      ],
+      "quality": "320k",
+      "filename_prefix": "platform-presets/comfy-3080-05-firered-film-8635cc/output"
+    },
+    "class_type": "SaveAudioMP3"
+  },
+  "rc_audio_trim": {
+    "inputs": {
+      "audio": [
+        "3",
+        0
+      ],
+      "duration": 30,
+      "start_index": 0
+    },
+    "class_type": "TrimAudioDuration"
+  }
+}

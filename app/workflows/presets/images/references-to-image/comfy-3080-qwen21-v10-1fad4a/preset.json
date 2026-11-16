@@ -1,0 +1,51 @@
+{
+  "alias": "comfy-3080-qwen21-v10-1fad4a",
+  "display_name": "Qwen Image 2.1 · 多参考生图 · 1024x1024 · RTX 3080 · 5d11b8",
+  "task_type": "references_to_image",
+  "device": "rtx3080",
+  "directory": "images/references-to-image/comfy-3080-qwen21-v10-1fad4a",
+  "native_workflow": "平台预设/2026-11-16/images/references-to-image/comfy-3080-qwen21-v10-1fad4a.json",
+  "release_id": "wfr_4c0d86cb92f84e8784076f92863a7dd7",
+  "release_digest": "dfae342ed0fa502bea43c59a38778319e9ea08c539fe0eb6f2cbedba3b0bbcfc",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPLoader",
+    "ImageScale",
+    "LoadImage",
+    "PrimitiveStringMultiline",
+    "QwenImage21Cache",
+    "QwenImage21FastSampler",
+    "QwenRegionComposite",
+    "QwenRegionMaskedLatent",
+    "QwenRegionSelect",
+    "SaveImageAdvanced",
+    "TextEncodeQwenImage21",
+    "UNETLoader",
+    "VAEDecode",
+    "VAELoader",
+    "VisualLoRALoader"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "QwenImage21FastSampler",
+      "QwenRegionComposite",
+      "QwenRegionMaskedLatent",
+      "QwenRegionSelect",
+      "VisualLoRALoader"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [
+      {
+        "node_id": "502",
+        "input": "visual_lora_container"
+      }
+    ],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

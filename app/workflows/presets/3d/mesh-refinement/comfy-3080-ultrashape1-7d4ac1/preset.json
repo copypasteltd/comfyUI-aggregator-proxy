@@ -1,0 +1,49 @@
+{
+  "alias": "comfy-3080-ultrashape1-7d4ac1",
+  "display_name": "UltraShape · 网格精化 · 几何 GLB · RTX 3080 · df7bed",
+  "task_type": "image_to_3d",
+  "device": "rtx3080",
+  "directory": "3d/mesh-refinement/comfy-3080-ultrashape1-7d4ac1",
+  "native_workflow": "平台预设/2026-11-16/3d/mesh-refinement/comfy-3080-ultrashape1-7d4ac1.json",
+  "release_id": "wfr_c220d9e3320043eaaf9788a61ed7f2ae",
+  "release_digest": "4315751653cad47e06cb32badda3fbd0f21079c06b45b8da65433f7750585248",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "InvertMask",
+    "JoinImageWithAlpha",
+    "LoadBackgroundRemovalModel",
+    "LoadImage",
+    "RemoveBackground",
+    "SaveGLB",
+    "UltraShapeConvertToGLB",
+    "UltraShapeLoadCoarseMesh",
+    "UltraShapeLoadModel",
+    "UltraShapeRefine"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "UltraShapeConvertToGLB",
+      "UltraShapeLoadCoarseMesh",
+      "UltraShapeLoadModel",
+      "UltraShapeRefine"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [
+      {
+        "node_id": "21",
+        "input": "num_sharp_points"
+      },
+      {
+        "node_id": "21",
+        "input": "num_uniform_points"
+      }
+    ],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

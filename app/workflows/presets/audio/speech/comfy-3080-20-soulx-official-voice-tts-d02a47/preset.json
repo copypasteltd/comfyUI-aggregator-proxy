@@ -1,0 +1,35 @@
+{
+  "alias": "comfy-3080-20-soulx-official-voice-tts-d02a47",
+  "display_name": "SoulX Podcast · 单人语音 · 30s · RTX 3080 · 5506be",
+  "task_type": "text_to_audio",
+  "device": "rtx3080",
+  "directory": "audio/speech/comfy-3080-20-soulx-official-voice-tts-d02a47",
+  "native_workflow": "平台预设/2026-11-16/audio/speech/comfy-3080-20-soulx-official-voice-tts-d02a47.json",
+  "release_id": "wfr_203135463c8440309514a5f45278bee6",
+  "release_digest": "4720f7758f77f15fae24716e43ecdd302d7519e04da4dc02648e83c0330023f3",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "LoadAudio",
+    "SaveAudio",
+    "SoulXPodcastGenerate",
+    "SoulXPodcastInputParser",
+    "SoulXPodcastLoader",
+    "TrimAudioDuration"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "SoulXPodcastGenerate",
+      "SoulXPodcastInputParser",
+      "SoulXPodcastLoader"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

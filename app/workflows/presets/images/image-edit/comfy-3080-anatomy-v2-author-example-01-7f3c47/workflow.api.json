@@ -1,0 +1,207 @@
+{
+  "470": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_IMAGE_1.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "477": {
+    "inputs": {
+      "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "478": {
+    "inputs": {
+      "type": "qwen_image",
+      "device": "default",
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "479": {
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "482": {
+    "inputs": {
+      "cfg": 1,
+      "seed": 42,
+      "model": [
+        "484",
+        0
+      ],
+      "steps": 8,
+      "denoise": 1,
+      "negative": [
+        "508",
+        0
+      ],
+      "positive": [
+        "485",
+        0
+      ],
+      "scheduler": "beta",
+      "latent_image": [
+        "485",
+        2
+      ],
+      "sampler_name": "res_2s"
+    },
+    "class_type": "KSampler"
+  },
+  "484": {
+    "inputs": {
+      "dtype": "default",
+      "model": [
+        "544",
+        0
+      ],
+      "device": "auto"
+    },
+    "class_type": "QwenImage21Cache"
+  },
+  "485": {
+    "inputs": {
+      "vae": [
+        "479",
+        0
+      ],
+      "clip": [
+        "478",
+        0
+      ],
+      "prompt": "A small blue ceramic teapot on a plain background.",
+      "resolution": 1024,
+      "images.image_1": [
+        "507",
+        0
+      ],
+      "negative_prompt": ""
+    },
+    "class_type": "TextEncodeQwenImage21"
+  },
+  "502": {
+    "inputs": {
+      "model": [
+        "477",
+        0
+      ],
+      "attention": "comfy kitchen attention"
+    },
+    "class_type": "ModelAttentionBackend"
+  },
+  "503": {
+    "inputs": {
+      "model": [
+        "502",
+        0
+      ],
+      "enable_fp16_accumulation": true
+    },
+    "class_type": "ModelPatchTorchSettings"
+  },
+  "507": {
+    "inputs": {
+      "image": [
+        "470",
+        0
+      ],
+      "megapixels": 1,
+      "upscale_method": "lanczos",
+      "resolution_steps": 8
+    },
+    "class_type": "ImageScaleToTotalPixels"
+  },
+  "508": {
+    "inputs": {
+      "conditioning": [
+        "485",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut"
+  },
+  "513": {
+    "inputs": {
+      "vae": [
+        "479",
+        0
+      ],
+      "samples": [
+        "482",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "544": {
+    "inputs": {
+      "model": [
+        "503",
+        0
+      ],
+      "lora_1": {
+        "on": true,
+        "lora": "qwen-image-2.1\\p_qwen_image_2.1_8step_v0.1.safetensors",
+        "strength": 1
+      },
+      "lora_2": {
+        "on": true,
+        "lora": "qwen-image-2.1\\pussyV2.safetensors",
+        "strength": 1
+      },
+      "➕ Add Lora": "",
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      }
+    },
+    "class_type": "Power Lora Loader (rgthree)"
+  },
+  "643": {
+    "inputs": {
+      "image1": [
+        "507",
+        0
+      ],
+      "image2": [
+        "513",
+        0
+      ],
+      "direction": "right",
+      "spacing_color": "white",
+      "spacing_width": 0,
+      "match_image_size": true
+    },
+    "class_type": "ImageStitch"
+  },
+  "644": {
+    "inputs": {
+      "format": "png",
+      "images": [
+        "rc_delivery_size",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-anatomy-v2-author-example-01-7f3c47/output",
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    },
+    "class_type": "SaveImageAdvanced"
+  },
+  "rc_delivery_size": {
+    "inputs": {
+      "crop": "center",
+      "image": [
+        "643",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "upscale_method": "lanczos"
+    },
+    "class_type": "ImageScale"
+  }
+}

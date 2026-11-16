@@ -1,0 +1,124 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "lustifyNSFWCheckpoint_v10Krea2.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "2": {
+    "inputs": {
+      "type": "krea2",
+      "device": "default",
+      "clip_name": "qwen3vl_4b_fp8_scaled.safetensors"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "text": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text."
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "5": {
+    "inputs": {
+      "conditioning": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut"
+  },
+  "6": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "7": {
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "shift": 4,
+      "sampling": "flow"
+    },
+    "class_type": "ModelSamplingAuraFlow"
+  },
+  "8": {
+    "inputs": {
+      "cfg": 1,
+      "seed": 42,
+      "model": [
+        "7",
+        0
+      ],
+      "steps": 8,
+      "denoise": 1,
+      "negative": [
+        "5",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "scheduler": "simple",
+      "latent_image": [
+        "6",
+        0
+      ],
+      "sampler_name": "euler"
+    },
+    "class_type": "KSampler"
+  },
+  "9": {
+    "inputs": {
+      "vae": [
+        "3",
+        0
+      ],
+      "samples": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "10": {
+    "inputs": {
+      "images": [
+        "990",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-image-lustify-krea2/output"
+    },
+    "class_type": "SaveImage"
+  },
+  "990": {
+    "inputs": {
+      "x": 8,
+      "y": 4,
+      "image": [
+        "9",
+        0
+      ],
+      "width": 1024,
+      "height": 1024
+    },
+    "class_type": "ImageCrop"
+  }
+}

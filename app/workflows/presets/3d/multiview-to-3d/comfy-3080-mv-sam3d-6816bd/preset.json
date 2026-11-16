@@ -1,0 +1,42 @@
+{
+  "alias": "comfy-3080-mv-sam3d-6816bd",
+  "display_name": "SAM 3D · 多视图转三维 · RTX 3080 · 56e303",
+  "task_type": "image_to_3d",
+  "device": "rtx3080",
+  "directory": "3d/multiview-to-3d/comfy-3080-mv-sam3d-6816bd",
+  "native_workflow": "平台预设/2026-11-16/3d/multiview-to-3d/comfy-3080-mv-sam3d-6816bd.json",
+  "release_id": "wfr_9840cf1cb16d43f6a289dca36b37c021",
+  "release_digest": "21962d5905e945f2b573bac69599ff99fcff8461cf61726b16f5fbc7101260e7",
+  "device_path_overrides_required": [
+    "51/pipeline_yaml",
+    "51/pixi_python",
+    "51/repo_root"
+  ],
+  "node_classes": [
+    "ImageBatch",
+    "ImageToMask",
+    "LoadBackgroundRemovalModel",
+    "LoadImage",
+    "MVSAM3DExport",
+    "MVSAM3DLoadViews",
+    "MVSAM3DRunMultiView",
+    "MaskToImage",
+    "RemoveBackground"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "MVSAM3DExport",
+      "MVSAM3DLoadViews",
+      "MVSAM3DRunMultiView"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

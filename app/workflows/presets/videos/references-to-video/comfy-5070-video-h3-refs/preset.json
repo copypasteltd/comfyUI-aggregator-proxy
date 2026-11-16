@@ -1,0 +1,40 @@
+{
+  "alias": "comfy-5070-video-h3-refs",
+  "display_name": "H3 · 双参考图生视频 · RTX 5070",
+  "task_type": "references_to_video",
+  "device": "rtx5070",
+  "directory": "videos/references-to-video/comfy-5070-video-h3-refs",
+  "native_workflow": "平台预设/2026-11-16/videos/references-to-video/comfy-5070-video-h3-refs.json",
+  "release_id": "wfr_4f2ee473a30047c29c396034f43c4bf6",
+  "release_digest": "37d2e3147f6f1f26a7555a4a1feb1ba2cb379036b21644f5ee3725eb52479322",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "BasicGuider",
+    "BasicScheduler",
+    "CLIPLoader",
+    "CreateVideo",
+    "LoadImage",
+    "MiniMaxH3ReferenceToVideo",
+    "MiniMaxH3TurboLoRA",
+    "MiniMaxH3TurboSampler",
+    "RandomNoise",
+    "SamplerCustomAdvanced",
+    "SaveVideo",
+    "UNETLoader",
+    "VAEDecode",
+    "VAEDecodeAudio",
+    "VAELoader"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

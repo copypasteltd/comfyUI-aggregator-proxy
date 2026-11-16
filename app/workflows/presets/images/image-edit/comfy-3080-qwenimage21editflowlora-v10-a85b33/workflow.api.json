@@ -1,0 +1,177 @@
+{
+  "13": {
+    "inputs": {
+      "multiple": 32,
+      "megapixels": 1,
+      "aspect_ratio": "9:16 (Portrait Widescreen)"
+    },
+    "class_type": "ResolutionSelector"
+  },
+  "461": {
+    "inputs": {
+      "format": "png",
+      "images": [
+        "rc_delivery_size",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-qwenimage21editflowlora-v10-a85b33/output",
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB"
+    },
+    "class_type": "SaveImageAdvanced"
+  },
+  "475": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_IMAGE_1.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "476": {
+    "inputs": {
+      "unet_name": "image2\\qwen_image_2.1_bf16.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "477": {
+    "inputs": {
+      "type": "qwen_image",
+      "device": "default",
+      "clip_name": "image2\\qwen3vl_8b_bf16.safetensors"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "478": {
+    "inputs": {
+      "vae_name": "image2\\qwen_image_2.1_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "479": {
+    "inputs": {
+      "width": [
+        "13",
+        0
+      ],
+      "height": [
+        "13",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "480": {
+    "inputs": {
+      "vae": [
+        "478",
+        0
+      ],
+      "samples": [
+        "540",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "482": {
+    "inputs": {
+      "switch": false,
+      "on_true": [
+        "479",
+        0
+      ],
+      "on_false": [
+        "484",
+        2
+      ]
+    },
+    "class_type": "ComfySwitchNode"
+  },
+  "483": {
+    "inputs": {
+      "dtype": "default",
+      "model": [
+        "502",
+        0
+      ],
+      "device": "off"
+    },
+    "class_type": "QwenImage21Cache"
+  },
+  "484": {
+    "inputs": {
+      "vae": [
+        "478",
+        0
+      ],
+      "clip": [
+        "477",
+        0
+      ],
+      "prompt": "A small blue ceramic teapot on a plain background.",
+      "resolution": 1024,
+      "images.image_1": [
+        "475",
+        0
+      ],
+      "negative_prompt": ""
+    },
+    "class_type": "TextEncodeQwenImage21"
+  },
+  "502": {
+    "inputs": {
+      "model": [
+        "476",
+        0
+      ],
+      "lora_data": "[{\"strength_model\":1,\"strength_clip\":1,\"enabled\":true,\"name\":\"/qwenimage2.1自练/Qwen-Image-2.1 NSFW Image EditV3.safetensors\"}]",
+      "visual_lora_container": ""
+    },
+    "class_type": "VisualLoRALoader"
+  },
+  "540": {
+    "inputs": {
+      "cfg": 3,
+      "seed": 42,
+      "model": [
+        "483",
+        0
+      ],
+      "steps": 40,
+      "denoise": 1,
+      "negative": [
+        "484",
+        1
+      ],
+      "positive": [
+        "484",
+        0
+      ],
+      "scheduler": "simple",
+      "acceleration": "均衡",
+      "cache_device": "自动",
+      "latent_image": [
+        "482",
+        0
+      ],
+      "sampler_name": "euler",
+      "prefix_cache_mode": "沿用输入模型设置",
+      "guidance_cache_policy": "沿用原档位"
+    },
+    "class_type": "QwenImage21FastSampler"
+  },
+  "rc_delivery_size": {
+    "inputs": {
+      "crop": "center",
+      "image": [
+        "480",
+        0
+      ],
+      "width": 768,
+      "height": 1376,
+      "upscale_method": "lanczos"
+    },
+    "class_type": "ImageScale"
+  }
+}

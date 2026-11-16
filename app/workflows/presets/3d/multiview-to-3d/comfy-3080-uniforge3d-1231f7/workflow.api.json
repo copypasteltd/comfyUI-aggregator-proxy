@@ -1,0 +1,171 @@
+{
+  "1": {
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "class_type": "LoadBackgroundRemovalModel"
+  },
+  "10": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_FRONT.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "11": {
+    "inputs": {
+      "image": [
+        "10",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "12": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_RIGHT.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "13": {
+    "inputs": {
+      "image": [
+        "12",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "14": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_BACK.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "15": {
+    "inputs": {
+      "image": [
+        "14",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "16": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_LEFT.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "17": {
+    "inputs": {
+      "image": [
+        "16",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "20": {
+    "inputs": {
+      "clip_name": "dino_v3_L_naf_fp32.safetensors"
+    },
+    "class_type": "CLIPVisionLoader"
+  },
+  "21": {
+    "inputs": {
+      "model": "UniForge3D",
+      "clip_vision": [
+        "20",
+        0
+      ],
+      "weight_dtype": "bfloat16 (3080)",
+      "keep_models_in_ram": false
+    },
+    "class_type": "UniForge3DLoader"
+  },
+  "22": {
+    "inputs": {
+      "mask_1": [
+        "11",
+        0
+      ],
+      "mask_2": [
+        "13",
+        0
+      ],
+      "mask_3": [
+        "15",
+        0
+      ],
+      "mask_4": [
+        "17",
+        0
+      ],
+      "image_1": [
+        "10",
+        0
+      ],
+      "image_2": [
+        "12",
+        0
+      ],
+      "image_3": [
+        "14",
+        0
+      ],
+      "image_4": [
+        "16",
+        0
+      ],
+      "mask_mode": "foreground"
+    },
+    "class_type": "UniForge3DViews"
+  },
+  "23": {
+    "inputs": {
+      "seed": 42,
+      "views": [
+        "22",
+        0
+      ],
+      "output": "geometry_512",
+      "pipeline": [
+        "21",
+        0
+      ],
+      "shape_steps": 20,
+      "texture_size": 2048,
+      "texture_steps": 20,
+      "structure_steps": 12,
+      "drop_inner_shell": false,
+      "decimation_target": 100000
+    },
+    "class_type": "UniForge3DGenerate"
+  },
+  "90": {
+    "inputs": {
+      "mesh": [
+        "23",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-uniforge3d-1231f7/output"
+    },
+    "class_type": "SaveGLB"
+  }
+}

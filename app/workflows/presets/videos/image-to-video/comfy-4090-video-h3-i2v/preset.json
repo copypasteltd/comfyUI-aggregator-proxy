@@ -1,0 +1,43 @@
+{
+  "alias": "comfy-4090-video-h3-i2v",
+  "display_name": "H3 · 首帧生视频 · RTX 4090",
+  "task_type": "references_to_video",
+  "device": "rtx4090",
+  "directory": "videos/image-to-video/comfy-4090-video-h3-i2v",
+  "native_workflow": "平台预设/2026-11-16/videos/image-to-video/comfy-4090-video-h3-i2v.json",
+  "release_id": "wfr_81503486068145c5addc3b465e3a75e6",
+  "release_digest": "882e9c6a22fa67829817931fcdcbf719665002162fe90fbc4fdb4402a4fbab78",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "BasicGuider",
+    "BasicScheduler",
+    "CLIPLoader",
+    "CreateVideo",
+    "ImageCrop",
+    "KSamplerSelect",
+    "LTXVSeparateAVLatent",
+    "LoadImage",
+    "LoraLoaderModelOnly",
+    "MiniMaxH3ImageToVideo",
+    "MiniMaxH3SigmaShift",
+    "RandomNoise",
+    "SamplerCustomAdvanced",
+    "SaveVideo",
+    "UNETLoader",
+    "VAEDecode",
+    "VAEDecodeAudio",
+    "VAELoader"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

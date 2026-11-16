@@ -1,0 +1,35 @@
+{
+  "alias": "comfy-3080-03-soulx-cafe-4156b3",
+  "display_name": "SoulX Podcast · 双人对话语音 · 30s · RTX 3080 · 52b048",
+  "task_type": "text_to_audio",
+  "device": "rtx3080",
+  "directory": "audio/dialogue/comfy-3080-03-soulx-cafe-4156b3",
+  "native_workflow": "平台预设/2026-11-16/audio/dialogue/comfy-3080-03-soulx-cafe-4156b3.json",
+  "release_id": "wfr_32e97214cc5e459799a686c84e1b5f79",
+  "release_digest": "86acf15273eea088d0e7ca1c974b6c4099ab72158a06e5ec9469b013f556e6ce",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "LoadAudio",
+    "SaveAudioMP3",
+    "SoulXPodcastGenerate",
+    "SoulXPodcastInputParser",
+    "SoulXPodcastLoader",
+    "TrimAudioDuration"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "SoulXPodcastGenerate",
+      "SoulXPodcastInputParser",
+      "SoulXPodcastLoader"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

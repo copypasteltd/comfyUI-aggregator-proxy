@@ -1,0 +1,77 @@
+{
+  "format_version": 1,
+  "at": "2026-11-16T15:58:45.745900+00:00",
+  "passed": true,
+  "scope": "Local preset archive validation, privacy/portability boundaries, release pin preservation, canvas embedded graph fidelity and file-set/digest tamper detection. Native browser conversions and production source discovery are recorded separately.",
+  "full_acceptance": "pending",
+  "real_resource_acceptance": false,
+  "virtualization_used": false,
+  "python": {
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/scripts/workflow_presets.py": "322eab85c6e9b948c89c798114a4765e9171cd99f8ff12d9138f797c161021bb",
+    "app/scripts/workflow_preset_canvas.mjs": "a7c307ac2d9076781fba15ac5d96237a26ca18af2f9ff2f218a51199f50b4a54",
+    "app/tests/unit/test_workflow_presets.py": "54b6903dad5f3d6e9575fcd26e4976973413174f7dae80806cc318765b1e9865",
+    "app/workflows/presets/catalog.json": "187f77e63ad8a2a0eb97ed386e8e366da903320b5fe0a9f0cf9e34d070ce1def",
+    "app/workflows/presets/checksums.json": "85a5d09e5b8219c1b5c7a01a4f6ae10f0cc52c92b605651914afa92e0970db09"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/unit/test_workflow_presets.py",
+      "symbol": "test_archive_cannot_put_private_frozen_source_inside_public_output",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_presets.py",
+      "symbol": "test_archive_rejects_entire_batch_before_writing_bad_release",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_presets.py",
+      "symbol": "test_canvas_keeps_exact_template_and_reports_missing_runtime_nodes",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_presets.py",
+      "symbol": "test_categories_follow_required_inputs",
+      "passed_cases": 6
+    },
+    {
+      "path": "app/tests/unit/test_workflow_presets.py",
+      "symbol": "test_device_paths_are_explicit_private_overrides_not_public_literals",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_presets.py",
+      "symbol": "test_portable_archive_removes_customer_literals_and_preserves_execution_edges",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_workflow_presets.py",
+      "symbol": "test_sealed_archive_detects_tampering_and_keeps_release_pin",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "451666bade28a004173a9c65510061000b476e03eea6824c29467f1f7d46f237",
+  "archive_verification": {
+    "verified_files": 316
+  },
+  "frozen_pins": 45,
+  "presets": 45,
+  "media_categories": {
+    "3d": 14,
+    "audio": 10,
+    "images": 15,
+    "videos": 6
+  },
+  "current_node_declarations_present": 29,
+  "node_declarations_missing": 16,
+  "frontend_difference_presets": 15,
+  "sources_unchanged": true,
+  "python_log_sha256": "7077dd9645bfa5b0c344a60b5fbb3848136f04116473f51d618f402f3ea6ef2e",
+  "actual_runtime": "3.13.1"
+}

@@ -1,0 +1,133 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "NoctQ_V4_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "2": {
+    "inputs": {
+      "type": "qwen_image",
+      "device": "default",
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_IMAGE_1.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "5": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_IMAGE_2.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "6": {
+    "inputs": {
+      "vae": [
+        "3",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": "A small blue ceramic teapot on a plain background.",
+      "resolution": 512,
+      "images.image_1": [
+        "4",
+        0
+      ],
+      "images.image_2": [
+        "5",
+        0
+      ],
+      "negative_prompt": ""
+    },
+    "class_type": "TextEncodeQwenImage21"
+  },
+  "7": {
+    "inputs": {
+      "dtype": "default",
+      "model": [
+        "1",
+        0
+      ],
+      "device": "auto"
+    },
+    "class_type": "QwenImage21Cache"
+  },
+  "8": {
+    "inputs": {
+      "cfg": 3,
+      "seed": 42,
+      "model": [
+        "7",
+        0
+      ],
+      "steps": 25,
+      "denoise": 1,
+      "negative": [
+        "6",
+        1
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "scheduler": "simple",
+      "latent_image": [
+        "6",
+        2
+      ],
+      "sampler_name": "euler"
+    },
+    "class_type": "KSampler"
+  },
+  "9": {
+    "inputs": {
+      "vae": [
+        "3",
+        0
+      ],
+      "samples": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "10": {
+    "inputs": {
+      "images": [
+        "rc_delivery_size",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-31-noctq-b251a0/output"
+    },
+    "class_type": "SaveImage"
+  },
+  "rc_delivery_size": {
+    "inputs": {
+      "crop": "center",
+      "image": [
+        "9",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "upscale_method": "lanczos"
+    },
+    "class_type": "ImageScale"
+  }
+}

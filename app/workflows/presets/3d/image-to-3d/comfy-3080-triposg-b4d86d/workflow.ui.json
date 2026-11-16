@@ -1,0 +1,488 @@
+{
+  "id": "dddab9d4-3699-4d67-8464-960e42db9481",
+  "revision": 0,
+  "last_node_id": 4,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        100,
+        130
+      ],
+      "size": [
+        270,
+        102
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "选择文件上传",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ]
+        },
+        {
+          "localized_name": "遮罩",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 2,
+      "type": "NativeWindows3D",
+      "pos": [
+        470,
+        130
+      ],
+      "size": [
+        358.066015625,
+        246
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "COMBO",
+          "widget": {
+            "name": "model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "steps",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "num_parts",
+          "name": "num_parts",
+          "type": "INT",
+          "widget": {
+            "name": "num_parts"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "tokens",
+          "name": "tokens",
+          "type": "COMBO",
+          "widget": {
+            "name": "tokens"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "mesh_depth",
+          "name": "mesh_depth",
+          "type": "COMBO",
+          "widget": {
+            "name": "mesh_depth"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "remove_background",
+          "name": "remove_background",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "remove_background"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model_3d",
+          "name": "model_3d",
+          "type": "FILE_3D_GLB",
+          "links": [
+            2
+          ]
+        },
+        {
+          "localized_name": "metrics_json",
+          "name": "metrics_json",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "NativeWindows3D"
+      },
+      "widgets_values": [
+        "TripoSG",
+        42,
+        "randomize",
+        30,
+        3,
+        2048,
+        8,
+        true
+      ],
+      "widgets_values_named": {
+        "model": "TripoSG",
+        "seed": 42,
+        "control_after_generate": "randomize",
+        "steps": 30,
+        "num_parts": 3,
+        "tokens": 2048,
+        "mesh_depth": 8,
+        "remove_background": true
+      }
+    },
+    {
+      "id": 3,
+      "type": "Save3DAdvanced",
+      "pos": [
+        928.066015625,
+        130
+      ],
+      "size": [
+        400,
+        550
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model_3d",
+          "name": "model_3d",
+          "type": "FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
+          "link": 2
+        },
+        {
+          "localized_name": "model_3d_info",
+          "name": "model_3d_info",
+          "shape": 7,
+          "type": "LOAD3D_MODEL_INFO",
+          "link": null
+        },
+        {
+          "localized_name": "camera_info",
+          "name": "camera_info",
+          "shape": 7,
+          "type": "LOAD3D_CAMERA",
+          "link": null
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "viewport_state",
+          "name": "viewport_state",
+          "type": "LOAD_3D",
+          "widget": {
+            "name": "viewport_state"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model_3d",
+          "name": "model_3d",
+          "type": "FILE_3D",
+          "links": null
+        },
+        {
+          "localized_name": "model_3d_info",
+          "name": "model_3d_info",
+          "type": "LOAD3D_MODEL_INFO",
+          "links": null
+        },
+        {
+          "localized_name": "camera_info",
+          "name": "camera_info",
+          "type": "LOAD3D_CAMERA",
+          "links": null
+        },
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Camera Config": {
+          "cameraType": "perspective",
+          "fov": 35,
+          "state": {
+            "position": {
+              "x": 10,
+              "y": 10,
+              "z": 10.000000000000002
+            },
+            "target": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "zoom": 1,
+            "cameraType": "perspective",
+            "quaternion": {
+              "x": -0.2798481423331213,
+              "y": 0.3647051996310008,
+              "z": 0.11591689595929511,
+              "w": 0.8804762392171493
+            },
+            "fov": 35,
+            "aspect": 1,
+            "near": 0.01,
+            "far": 10000,
+            "frustum": {
+              "left": -5,
+              "right": 5,
+              "top": 5,
+              "bottom": -5
+            }
+          }
+        }
+      },
+      "widgets_values": [
+        "platform-presets/comfy-3080-triposg-b4d86d/output",
+        "",
+        768,
+        768
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "platform-presets/comfy-3080-triposg-b4d86d/output",
+        "viewport_state": "",
+        "width": 768,
+        "height": 768
+      }
+    },
+    {
+      "id": 4,
+      "type": "Note",
+      "pos": [
+        100,
+        -290
+      ],
+      "size": [
+        650,
+        340
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "comfy-3080-triposg-b4d86d\n\n平台预设 / Platform preset\n先上传并替换媒体输入。Upload and replace media inputs first.\n原 API 别名与冻结版本保留。Original API alias and frozen release are preserved.\n当前缺失节点 / Currently missing nodes: NativeWindows3D\n前端控件差异 / Frontend widget differences: 1\n存在差异时以 workflow.api.json / extra.platform_preset.workflow_api 为准。\nWhen widgets differ, use the complete API template as the reference."
+      ],
+      "title": "平台预设说明 / Preset instructions",
+      "color": "#d2f53c",
+      "bgcolor": "#252827"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "FILE_3D_GLB"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9,
+      "offset": [
+        416,
+        110
+      ]
+    },
+    "platform_preset": {
+      "alias": "comfy-3080-triposg-b4d86d",
+      "release_id": "wfr_22c0aad124294a3c8a309e802fb30ee4",
+      "release_digest": "817464dacbddb9fdba7bf7061f25937034e9642381ecbf553a4c098782f1fd01",
+      "workflow_api": {
+        "1": {
+          "inputs": {
+            "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png"
+          },
+          "class_type": "LoadImage"
+        },
+        "2": {
+          "inputs": {
+            "seed": 42,
+            "image": [
+              "1",
+              0
+            ],
+            "model": "TripoSG",
+            "steps": 30,
+            "tokens": 2048,
+            "num_parts": 3,
+            "mesh_depth": 8,
+            "remove_background": true
+          },
+          "class_type": "NativeWindows3D"
+        },
+        "3": {
+          "inputs": {
+            "width": 768,
+            "height": 768,
+            "model_3d": [
+              "2",
+              0
+            ],
+            "viewport_state": {
+              "mask": "",
+              "image": "",
+              "normal": "",
+              "recording": "",
+              "camera_info": {
+                "far": 10000,
+                "fov": 35,
+                "near": 0.01,
+                "zoom": 1,
+                "aspect": 1,
+                "target": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                },
+                "frustum": {
+                  "top": 5,
+                  "left": -5,
+                  "right": 5,
+                  "bottom": -5
+                },
+                "position": {
+                  "x": 10,
+                  "y": 10,
+                  "z": 10.000000000000002
+                },
+                "cameraType": "perspective",
+                "quaternion": {
+                  "w": 0.8804762392171493,
+                  "x": -0.2798481423331213,
+                  "y": 0.3647051996310008,
+                  "z": 0.11591689595929511
+                }
+              },
+              "model_3d_info": []
+            },
+            "filename_prefix": "platform-presets/comfy-3080-triposg-b4d86d/output"
+          },
+          "class_type": "Save3DAdvanced"
+        }
+      },
+      "frontend_differences": [
+        {
+          "node_id": "3",
+          "input": "viewport_state"
+        }
+      ],
+      "instructions_zh": "先替换上传素材与文本。此画布是编辑副本；API 调用继续使用原模型别名。缺失节点及前端控件差异须处理后才能运行。完整执行模板保存在此文件 extra.platform_preset.workflow_api。",
+      "instructions_en": "Replace uploaded media and text first. This canvas is an editable copy; API calls retain the original alias. Resolve missing nodes and frontend widget differences before running. The complete execution template is embedded in extra.platform_preset.workflow_api."
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,705 @@
+{
+  "schema_version": "1.1",
+  "display_name": "YuE2 · 音乐生成 · 可传 ABC 曲谱 · 30s · RTX 3080 · 9a0005",
+  "description": "音乐生成 · 可传 ABC 曲谱 / Music with an optional supplied ABC score；YuE2，RTX 3080。音乐/语音生成 / Music or speech generation。00_yue2_full_bf16_text2music。按公开 usage 中的槽位、规格与示例调用。Use this model's public usage schema for exact slots, presets and examples.",
+  "notes": [
+    "异步调用：上传素材 → 按槽位提交任务 → 查询状态/排队 → 下载结果。Async: upload assets, submit named slots, poll status/queue, download content.",
+    "仅接受声明的固定规格；n=1，quality=standard。Only advertised frozen presets are accepted; n=1 and quality=standard.",
+    "源工作流 / Source workflow: 00_yue2_full_bf16_text2music",
+    "冻结输出规格 / Frozen output specification: 30s",
+    "文本槽位 / Text slots: abc?, lyrics?, style*; *=required / 必填, ?=optional / 选填.",
+    "seconds 是最大输出时长；自然结束可以更短。seconds caps output duration; natural speech/music may end earlier.",
+    "此版本可通过 abc 传入 ABC 记谱，style 填风格，lyrics 按声明选填；以实际文本槽位的必填标记为准。This version exposes an abc text slot for an optional supplied ABC score, alongside style and optional lyrics. Follow the advertised required fields."
+  ],
+  "tags": [
+    "yue2",
+    "audio",
+    "rtx-3080",
+    "async",
+    "workflow-inputs-v1"
+  ],
+  "task_type": "text_to_audio",
+  "asynchronous": true,
+  "endpoints": {
+    "create": "/v1/jobs",
+    "poll": "/v1/jobs/{job_id}",
+    "upload": "/v1/assets",
+    "content": "/v1/content/{content_id}",
+    "download": "/v1/content/{content_id}/download"
+  },
+  "request_content_type": "application/json",
+  "required_scopes": [
+    "models:read",
+    "capabilities:read",
+    "jobs:create",
+    "audio:create",
+    "jobs:read",
+    "artifacts:read",
+    "content:read",
+    "content:download"
+  ],
+  "defaults": {
+    "n": 1,
+    "quality": "standard",
+    "seconds": 30
+  },
+  "parameter_details": [
+    {
+      "path": "parameters.quality",
+      "required": false,
+      "description": "质量档位；必须与尺寸/时长匹配同一条已发布 preset。",
+      "rules": {
+        "enum": [
+          "standard"
+        ],
+        "default": "standard"
+      }
+    },
+    {
+      "path": "parameters.seed",
+      "required": false,
+      "description": "随机种子；省略由服务固定生成，幂等重放保持同一生成请求。",
+      "rules": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 2147483647
+      }
+    },
+    {
+      "path": "parameters.n",
+      "required": false,
+      "description": "每次任务的主产物数量，目前固定为 1。",
+      "rules": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 1,
+        "default": 1
+      }
+    },
+    {
+      "path": "parameters.seconds",
+      "required": false,
+      "description": "预设的生成时长，单位秒；不能指定 presets 以外的时长。",
+      "rules": {
+        "type": "number",
+        "exclusiveMinimum": 0,
+        "maximum": 600,
+        "multipleOf": 0.001,
+        "default": 30,
+        "enum": [
+          30
+        ]
+      }
+    }
+  ],
+  "references": {
+    "supported": false,
+    "exact_reference_count": 0,
+    "slots": [],
+    "media_types": [],
+    "max_upload_bytes": 20971520,
+    "max_image_pixels": 25000000,
+    "upload_field": "file",
+    "asset_scope": "same_api_key",
+    "note": "上传静态图片获得 asset_id；与生成使用同一个业务 Key。参考数组必须完整且有序，不能传图片 URL、本地路径或视频文件。"
+  },
+  "input_slots": [],
+  "text_slots": [
+    {
+      "name": "abc",
+      "label": "abc",
+      "description": "曲谱采用 ABC 记谱；歌词与风格分别传入。",
+      "required": false,
+      "max_length": 8000
+    },
+    {
+      "name": "lyrics",
+      "label": "lyrics",
+      "description": "传入该工作流的lyrics文本；不作为文件路径或命令执行。",
+      "required": false,
+      "max_length": 8000
+    },
+    {
+      "name": "style",
+      "label": "style",
+      "description": "传入该工作流的style文本；不作为文件路径或命令执行。",
+      "required": true,
+      "max_length": 8000
+    }
+  ],
+  "context": null,
+  "presets": [
+    {
+      "quality": "standard",
+      "seconds": 30,
+      "audio_format": "flac",
+      "sample_rate": 48000,
+      "channels": 2
+    }
+  ],
+  "output": {
+    "media_types": [
+      "audio/flac"
+    ],
+    "expected_count": 1,
+    "max_bytes": 268435456,
+    "audio_policy": null
+  },
+  "request_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "comfy-3080-00-yue2-full-bf16-text2music-77ea35 generation request",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "model",
+      "task_type",
+      "input"
+    ],
+    "properties": {
+      "model": {
+        "const": "comfy-3080-00-yue2-full-bf16-text2music-77ea35"
+      },
+      "task_type": {
+        "const": "text_to_audio"
+      },
+      "input": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "texts"
+        ],
+        "properties": {
+          "texts": {
+            "type": "object",
+            "minProperties": 1,
+            "maxProperties": 16,
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9_]{0,31}$"
+            },
+            "additionalProperties": false,
+            "properties": {
+              "abc": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8000
+              },
+              "lyrics": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8000
+              },
+              "style": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8000
+              }
+            },
+            "required": [
+              "style"
+            ]
+          }
+        }
+      },
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "quality": {
+            "enum": [
+              "standard"
+            ],
+            "default": "standard"
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "n": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1,
+            "default": 1
+          },
+          "seconds": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 600,
+            "multipleOf": 0.001,
+            "default": 30,
+            "enum": [
+              30
+            ]
+          }
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "quality": {
+                "const": "standard"
+              },
+              "seconds": {
+                "const": 30
+              }
+            }
+          }
+        ]
+      },
+      "client_request_id": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "const": "image_to_3d"
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "input": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "prompt"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "negative_prompt"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "mask"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "references"
+                    ]
+                  }
+                ]
+              },
+              "anyOf": [
+                {
+                  "required": [
+                    "source_image"
+                  ]
+                },
+                {
+                  "required": [
+                    "media"
+                  ]
+                }
+              ]
+            },
+            "parameters": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "size"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "seconds"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "fps"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "strength"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "else": {
+          "properties": {
+            "input": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prompt"
+                  ]
+                },
+                {
+                  "required": [
+                    "texts"
+                  ]
+                },
+                {
+                  "required": [
+                    "media"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "enum": [
+                "text_to_image",
+                "text_to_video",
+                "text_to_audio"
+              ]
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "input": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "source_image"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "mask"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "references"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "const": "image_to_image"
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "input": {
+              "not": {
+                "required": [
+                  "references"
+                ]
+              },
+              "anyOf": [
+                {
+                  "required": [
+                    "source_image"
+                  ]
+                },
+                {
+                  "required": [
+                    "media"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "enum": [
+                "references_to_image",
+                "references_to_video"
+              ]
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "input": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "source_image"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "mask"
+                    ]
+                  }
+                ]
+              },
+              "anyOf": [
+                {
+                  "required": [
+                    "references"
+                  ]
+                },
+                {
+                  "required": [
+                    "media"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "enum": [
+                "text_to_image",
+                "image_to_image",
+                "references_to_image"
+              ]
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "parameters": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "seconds"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "fps"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "enum": [
+                "text_to_video",
+                "references_to_video"
+              ]
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "n": {
+                  "const": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "not": {
+                "const": "image_to_image"
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "parameters": {
+              "not": {
+                "required": [
+                  "strength"
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "const": "references_to_image"
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "input": {
+              "properties": {
+                "references": {
+                  "minItems": 2
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "const": "references_to_video"
+            },
+            "input": {
+              "properties": {
+                "references": {
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "references"
+              ]
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "input": {
+              "properties": {
+                "references": {
+                  "items": {
+                    "properties": {
+                      "role": {
+                        "const": "first_frame"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "const": "text_to_audio"
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "parameters": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "size"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "fps"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "else": {
+          "properties": {
+            "parameters": {
+              "properties": {
+                "seconds": {
+                  "maximum": 120
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "task_type": {
+              "not": {
+                "enum": [
+                  "text_to_video",
+                  "references_to_video"
+                ]
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "input": {
+              "not": {
+                "required": [
+                  "context"
+                ]
+              }
+            }
+          }
+        }
+      }
+    ],
+    "$defs": {
+      "assetId": {
+        "type": "string",
+        "pattern": "^asset_[A-Za-z0-9_-]{6,80}$"
+      },
+      "asset": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asset_id"
+        ],
+        "properties": {
+          "asset_id": {
+            "$ref": "#/$defs/assetId"
+          }
+        }
+      }
+    }
+  },
+  "example_request": {
+    "model": "comfy-3080-00-yue2-full-bf16-text2music-77ea35",
+    "task_type": "text_to_audio",
+    "input": {
+      "texts": {
+        "style": "Example text"
+      }
+    },
+    "parameters": {
+      "n": 1,
+      "quality": "standard",
+      "seconds": 30,
+      "seed": 42
+    }
+  },
+  "output_retention_seconds": 28800,
+  "availability_note": "目录表示当前 Key 可发现的已发布能力；设备在线状态、当前容量、额度及提交准入仍需实时检查。"
+}

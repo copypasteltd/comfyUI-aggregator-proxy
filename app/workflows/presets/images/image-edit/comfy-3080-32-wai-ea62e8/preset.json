@@ -1,0 +1,33 @@
+{
+  "alias": "comfy-3080-32-wai-ea62e8",
+  "display_name": "WAI Illustrious SDXL v17 · 图像编辑 · 768x768 · RTX 3080 · 1f3163",
+  "task_type": "image_to_image",
+  "device": "rtx3080",
+  "directory": "images/image-edit/comfy-3080-32-wai-ea62e8",
+  "native_workflow": "平台预设/2026-11-16/images/image-edit/comfy-3080-32-wai-ea62e8.json",
+  "release_id": "wfr_5e146ae70c4e4810920306c6ee65c098",
+  "release_digest": "70f17fa7a89f8f367bfb8151dca0ee22f7696a5a63ed3ed0bf7c793fe7652435",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPTextEncode",
+    "CheckpointLoaderSimple",
+    "ImageScale",
+    "KSampler",
+    "LoadImage",
+    "SaveImage",
+    "VAEDecode",
+    "VAEEncode"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

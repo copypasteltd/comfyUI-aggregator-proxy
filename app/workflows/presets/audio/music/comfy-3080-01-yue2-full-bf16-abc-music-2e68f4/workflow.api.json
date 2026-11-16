@@ -1,0 +1,119 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "yue2_3b_bf16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "2": {
+    "inputs": {
+      "abc": [
+        "8",
+        0
+      ],
+      "clip": [
+        "1",
+        1
+      ],
+      "mode": "full",
+      "seed": 42,
+      "style": "Example text",
+      "top_k": 100,
+      "top_p": 0.95,
+      "lyrics": "",
+      "cfg_scale": 1,
+      "temperature": 1,
+      "max_duration": 30,
+      "repetition_penalty": 1.2
+    },
+    "class_type": "YuE2GenerateMusic"
+  },
+  "3": {
+    "inputs": {
+      "seconds": [
+        "2",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyYuE2LatentAudio"
+  },
+  "4": {
+    "inputs": {
+      "conditioning": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut"
+  },
+  "5": {
+    "inputs": {
+      "cfg": 1,
+      "seed": 42,
+      "model": [
+        "1",
+        0
+      ],
+      "steps": 32,
+      "denoise": 1,
+      "negative": [
+        "4",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "scheduler": "sgm_uniform",
+      "latent_image": [
+        "3",
+        0
+      ],
+      "sampler_name": "dpm_2"
+    },
+    "class_type": "KSampler"
+  },
+  "6": {
+    "inputs": {
+      "vae": [
+        "1",
+        2
+      ],
+      "samples": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeAudio"
+  },
+  "7": {
+    "inputs": {
+      "audio": [
+        "6",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-01-yue2-full-bf16-abc-music-2e68f4/output"
+    },
+    "class_type": "SaveAudio"
+  },
+  "8": {
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "mode": "full",
+      "seed": 42,
+      "style": "Example text",
+      "top_k": 30,
+      "top_p": 0.9,
+      "lyrics": "",
+      "temperature": 0.7,
+      "max_abc_tokens": 4096,
+      "penalty_window": 100,
+      "repetition_penalty": 1.005
+    },
+    "class_type": "YuE2GenerateABC"
+  }
+}

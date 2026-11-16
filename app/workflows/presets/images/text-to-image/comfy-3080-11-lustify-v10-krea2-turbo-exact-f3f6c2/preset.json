@@ -1,0 +1,35 @@
+{
+  "alias": "comfy-3080-11-lustify-v10-krea2-turbo-exact-f3f6c2",
+  "display_name": "Lustify v10 Krea2 · 文生图 · 1024x1024 · RTX 3080 · 636615",
+  "task_type": "text_to_image",
+  "device": "rtx3080",
+  "directory": "images/text-to-image/comfy-3080-11-lustify-v10-krea2-turbo-exact-f3f6c2",
+  "native_workflow": "平台预设/2026-11-16/images/text-to-image/comfy-3080-11-lustify-v10-krea2-turbo-exact-f3f6c2.json",
+  "release_id": "wfr_9779bff346a545fcadeeb8604aeaa905",
+  "release_digest": "7363a58b0f95fb198c62c93a4f06790998b1bbdd28cd05cb810b669b56732811",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPLoader",
+    "CLIPTextEncode",
+    "ConditioningZeroOut",
+    "EmptyLatentImage",
+    "KSampler",
+    "ModelSamplingAuraFlow",
+    "SaveImage",
+    "UNETLoader",
+    "VAEDecode",
+    "VAELoader"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

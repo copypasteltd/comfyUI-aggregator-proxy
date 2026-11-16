@@ -1,0 +1,189 @@
+{
+  "1": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "2": {
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "class_type": "LoadBackgroundRemovalModel"
+  },
+  "3": {
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "bg_removal_model": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "4": {
+    "inputs": {
+      "masks": [
+        "3",
+        0
+      ],
+      "width": 518,
+      "height": 518,
+      "images": [
+        "1",
+        0
+      ],
+      "grow_mask": 0,
+      "background": "#ffffff",
+      "pad_factor": 1.1
+    },
+    "class_type": "ImageCropToMask"
+  },
+  "5": {
+    "inputs": {
+      "clip_name": "hunyuan3d21-dinov2-large-fp16-local.safetensors"
+    },
+    "class_type": "CLIPVisionLoader"
+  },
+  "6": {
+    "inputs": {
+      "crop": "center",
+      "image": [
+        "4",
+        0
+      ],
+      "clip_vision": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "CLIPVisionEncode"
+  },
+  "7": {
+    "inputs": {
+      "clip_vision_output": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "Hunyuan3Dv2Conditioning"
+  },
+  "8": {
+    "inputs": {
+      "unet_name": "hunyuan3d21-dit-fp16-local.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "9": {
+    "inputs": {
+      "model": [
+        "8",
+        0
+      ],
+      "shift": 1
+    },
+    "class_type": "ModelSamplingAuraFlow"
+  },
+  "10": {
+    "inputs": {
+      "batch_size": 1,
+      "resolution": 4096
+    },
+    "class_type": "EmptyLatentHunyuan3Dv2"
+  },
+  "11": {
+    "inputs": {
+      "cfg": 5,
+      "seed": 42,
+      "model": [
+        "9",
+        0
+      ],
+      "steps": 30,
+      "denoise": 1,
+      "negative": [
+        "7",
+        1
+      ],
+      "positive": [
+        "7",
+        0
+      ],
+      "scheduler": "normal",
+      "latent_image": [
+        "10",
+        0
+      ],
+      "sampler_name": "euler"
+    },
+    "class_type": "KSampler"
+  },
+  "12": {
+    "inputs": {
+      "vae_name": "hunyuan3d21-vae-fp16-local.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "13": {
+    "inputs": {
+      "vae": [
+        "12",
+        0
+      ],
+      "samples": [
+        "11",
+        0
+      ],
+      "num_chunks": 4000,
+      "octree_resolution": 256
+    },
+    "class_type": "VAEDecodeHunyuan3D"
+  },
+  "14": {
+    "inputs": {
+      "voxel": [
+        "13",
+        0
+      ],
+      "algorithm": "surface net",
+      "threshold": 0.6
+    },
+    "class_type": "VoxelToMesh"
+  },
+  "15": {
+    "inputs": {
+      "mesh": [
+        "14",
+        0
+      ],
+      "crease_angle": 60
+    },
+    "class_type": "MeshSmoothNormals"
+  },
+  "16": {
+    "inputs": {
+      "mesh": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "MeshToFile3D"
+  },
+  "17": {
+    "inputs": {
+      "width": 768,
+      "height": 768,
+      "model_3d": [
+        "16",
+        0
+      ],
+      "viewport_state": "",
+      "filename_prefix": "platform-presets/comfy-3080-hunyuan3d21-511703/output"
+    },
+    "class_type": "Save3DAdvanced"
+  }
+}

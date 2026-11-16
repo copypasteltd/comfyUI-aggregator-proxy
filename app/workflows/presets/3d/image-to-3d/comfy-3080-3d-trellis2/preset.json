@@ -1,0 +1,51 @@
+{
+  "alias": "comfy-3080-3d-trellis2",
+  "display_name": "TRELLIS2 · 单图生成 3D · RTX 3080",
+  "task_type": "image_to_3d",
+  "device": "rtx3080",
+  "directory": "3d/image-to-3d/comfy-3080-3d-trellis2",
+  "native_workflow": "平台预设/2026-11-16/3d/image-to-3d/comfy-3080-3d-trellis2.json",
+  "release_id": "wfr_3066c5565b224fb4adcf5dd49f51bb1b",
+  "release_digest": "37a107c919b4eb9c68989e4ddbd22693a24775f67a66527181f9064055da9773",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CFGOverride",
+    "CLIPVisionLoader",
+    "EmptyTrellis2LatentStructure",
+    "ImageCropToMask",
+    "KSampler",
+    "LoadBackgroundRemovalModel",
+    "LoadImage",
+    "MeshToFile3D",
+    "ModelSamplingSD3",
+    "PaintMesh",
+    "RemoveBackground",
+    "RescaleCFG",
+    "Save3DAdvanced",
+    "Trellis2Conditioning",
+    "Trellis2ShapeStage",
+    "Trellis2TextureStage",
+    "UNETLoader",
+    "VAELoader",
+    "VaeDecodeShapeTrellis",
+    "VaeDecodeStructureTrellis2",
+    "VaeDecodeTextureTrellis"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [
+      {
+        "node_id": "29",
+        "input": "viewport_state"
+      }
+    ],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

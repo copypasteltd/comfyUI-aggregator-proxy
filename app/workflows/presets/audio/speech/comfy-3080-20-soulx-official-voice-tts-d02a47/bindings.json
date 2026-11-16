@@ -1,0 +1,33 @@
+[
+  {
+    "source": "seed",
+    "node_id": "1",
+    "input_name": "seed"
+  },
+  {
+    "source": "media:speaker_1",
+    "node_id": "2",
+    "input_name": "audio"
+  },
+  {
+    "source": "text:dialogue",
+    "node_id": "3",
+    "input_name": "dialogue_script"
+  },
+  {
+    "source": "text:speaker_1_transcript",
+    "node_id": "3",
+    "pointer": "/speakers/S1/prompt_text",
+    "input_name": "json_config"
+  },
+  {
+    "source": "seed",
+    "node_id": "4",
+    "input_name": "seed"
+  },
+  {
+    "source": "output_prefix",
+    "node_id": "5",
+    "input_name": "filename_prefix"
+  }
+]

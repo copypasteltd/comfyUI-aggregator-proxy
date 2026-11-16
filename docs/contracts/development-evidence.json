@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages. Native workspace146 binds the affected implementation to a separately executed current-source component run; prior report bytes and pending full gates are preserved. Native ComfyUI Skill 1.4.0 source/client regressions are tracked separately from the existing native-panel and full acceptance evidence. Skill 1.4.1 domain-only update binds current client sources to its own component run without modifying historical evidence. Add explicitly authorized unknown-memory-maintenance reconciliation with a current native PostgreSQL component run; retain historical reports and pending full acceptance. Source Workflows 150 binds complete live directory and guarded shared file operations to their own native PostgreSQL component evidence.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-16/development-trace-baselines-150-transport-workflows.json",
-    "sha256": "b60cb8fb4ebe383ae7d951e0c23b69054ba564bae990bd4f70ff34a83d81fa09"
+    "path": "docs/evidence/2026-11-16/development-trace-baselines-151-release-presets.json",
+    "sha256": "89f7d57cac627dbfe83fdf1fd1f7d23dbc56da4445cb3bf2f4d79c593d477189"
   },
   "requirements": [
     {
@@ -48,6 +48,14 @@
         {
           "path": "app/scripts/workflow_catalog_metadata.py",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_presets.py",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/scripts/workflow_preset_canvas.mjs",
+          "baseline": "presets151"
         }
       ],
       "tests": [
@@ -146,6 +154,48 @@
           "symbol": "test_image_usage_does_not_claim_an_unconnected_delivery_resize",
           "language": "python",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_cannot_put_private_frozen_source_inside_public_output",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_rejects_entire_batch_before_writing_bad_release",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_canvas_keeps_exact_template_and_reports_missing_runtime_nodes",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_categories_follow_required_inputs",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_device_paths_are_explicit_private_overrides_not_public_literals",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_portable_archive_removes_customer_literals_and_preserves_execution_edges",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_sealed_archive_detects_tampering_and_keeps_release_pin",
+          "language": "python",
+          "baseline": "presets151"
         }
       ],
       "evidence": [
@@ -164,7 +214,8 @@
         "compat135",
         "native139",
         "canvas140",
-        "host152"
+        "host152",
+        "presets151"
       ],
       "remaining_backlog": [
         "18",
@@ -214,6 +265,14 @@
         {
           "path": "app/scripts/workflow_catalog_metadata.py",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_presets.py",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/scripts/workflow_preset_canvas.mjs",
+          "baseline": "presets151"
         }
       ],
       "tests": [
@@ -312,6 +371,48 @@
           "symbol": "test_image_usage_does_not_claim_an_unconnected_delivery_resize",
           "language": "python",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_cannot_put_private_frozen_source_inside_public_output",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_rejects_entire_batch_before_writing_bad_release",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_canvas_keeps_exact_template_and_reports_missing_runtime_nodes",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_categories_follow_required_inputs",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_device_paths_are_explicit_private_overrides_not_public_literals",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_portable_archive_removes_customer_literals_and_preserves_execution_edges",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_sealed_archive_detects_tampering_and_keeps_release_pin",
+          "language": "python",
+          "baseline": "presets151"
         }
       ],
       "evidence": [
@@ -328,7 +429,8 @@
         "compat135",
         "native139",
         "canvas140",
-        "host152"
+        "host152",
+        "presets151"
       ],
       "remaining_backlog": [
         "19",
@@ -378,6 +480,14 @@
         {
           "path": "app/scripts/workflow_catalog_metadata.py",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/scripts/workflow_presets.py",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/scripts/workflow_preset_canvas.mjs",
+          "baseline": "presets151"
         }
       ],
       "tests": [
@@ -494,6 +604,48 @@
           "symbol": "test_music_usage_describes_the_connected_score_source",
           "language": "python",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_cannot_put_private_frozen_source_inside_public_output",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_rejects_entire_batch_before_writing_bad_release",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_canvas_keeps_exact_template_and_reports_missing_runtime_nodes",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_categories_follow_required_inputs",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_device_paths_are_explicit_private_overrides_not_public_literals",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_portable_archive_removes_customer_literals_and_preserves_execution_edges",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_sealed_archive_detects_tampering_and_keeps_release_pin",
+          "language": "python",
+          "baseline": "presets151"
         }
       ],
       "evidence": [
@@ -510,7 +662,8 @@
         "compat135",
         "native139",
         "canvas140",
-        "host152"
+        "host152",
+        "presets151"
       ],
       "remaining_backlog": [
         "20",
@@ -552,6 +705,14 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/scripts/workflow_presets.py",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/scripts/workflow_preset_canvas.mjs",
+          "baseline": "presets151"
         }
       ],
       "tests": [
@@ -620,6 +781,48 @@
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
           "baseline": "typed133"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_cannot_put_private_frozen_source_inside_public_output",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_rejects_entire_batch_before_writing_bad_release",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_canvas_keeps_exact_template_and_reports_missing_runtime_nodes",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_categories_follow_required_inputs",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_device_paths_are_explicit_private_overrides_not_public_literals",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_portable_archive_removes_customer_literals_and_preserves_execution_edges",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_sealed_archive_detects_tampering_and_keeps_release_pin",
+          "language": "python",
+          "baseline": "presets151"
         }
       ],
       "evidence": [
@@ -638,7 +841,8 @@
         "compat135",
         "native139",
         "canvas140",
-        "host152"
+        "host152",
+        "presets151"
       ],
       "remaining_backlog": [
         "21",
@@ -676,6 +880,14 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/scripts/workflow_presets.py",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/scripts/workflow_preset_canvas.mjs",
+          "baseline": "presets151"
         }
       ],
       "tests": [
@@ -762,6 +974,48 @@
           "symbol": "test_music_usage_describes_the_connected_score_source",
           "language": "python",
           "baseline": "canvas140"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_cannot_put_private_frozen_source_inside_public_output",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_rejects_entire_batch_before_writing_bad_release",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_canvas_keeps_exact_template_and_reports_missing_runtime_nodes",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_categories_follow_required_inputs",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_device_paths_are_explicit_private_overrides_not_public_literals",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_portable_archive_removes_customer_literals_and_preserves_execution_edges",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_sealed_archive_detects_tampering_and_keeps_release_pin",
+          "language": "python",
+          "baseline": "presets151"
         }
       ],
       "evidence": [
@@ -778,7 +1032,8 @@
         "compat135",
         "native139",
         "canvas140",
-        "host152"
+        "host152",
+        "presets151"
       ],
       "remaining_backlog": [
         "22",
@@ -820,6 +1075,14 @@
         {
           "path": "app/apps/windows_worker/src/windows_worker/comfy_json.py",
           "baseline": "native139"
+        },
+        {
+          "path": "app/scripts/workflow_presets.py",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/scripts/workflow_preset_canvas.mjs",
+          "baseline": "presets151"
         }
       ],
       "tests": [
@@ -894,6 +1157,48 @@
           "symbol": "test_bad_history_isolated_while_same_worker_finishes_other_task",
           "language": "python",
           "baseline": "typed133"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_cannot_put_private_frozen_source_inside_public_output",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_archive_rejects_entire_batch_before_writing_bad_release",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_canvas_keeps_exact_template_and_reports_missing_runtime_nodes",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_categories_follow_required_inputs",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_device_paths_are_explicit_private_overrides_not_public_literals",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_portable_archive_removes_customer_literals_and_preserves_execution_edges",
+          "language": "python",
+          "baseline": "presets151"
+        },
+        {
+          "path": "app/tests/unit/test_workflow_presets.py",
+          "symbol": "test_sealed_archive_detects_tampering_and_keeps_release_pin",
+          "language": "python",
+          "baseline": "presets151"
         }
       ],
       "evidence": [
@@ -918,7 +1223,8 @@
         "browser135",
         "native139",
         "canvas140",
-        "host152"
+        "host152",
+        "presets151"
       ],
       "remaining_backlog": [
         "23",

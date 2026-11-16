@@ -1,0 +1,929 @@
+{
+  "id": "0c7b9d6e-9897-4e49-b91a-d1a23d062e61",
+  "revision": 0,
+  "last_node_id": 27,
+  "last_link_id": 11,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadBackgroundRemovalModel",
+      "pos": [
+        100,
+        130
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "背景移除模型名称",
+          "name": "bg_removal_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "bg_removal_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "bg_model",
+          "name": "bg_model",
+          "type": "BACKGROUND_REMOVAL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadBackgroundRemovalModel"
+      },
+      "widgets_values": [
+        "birefnet.safetensors"
+      ],
+      "widgets_values_named": {
+        "bg_removal_name": "birefnet.safetensors"
+      }
+    },
+    {
+      "id": 10,
+      "type": "LoadImage",
+      "pos": [
+        100,
+        318
+      ],
+      "size": [
+        270,
+        102
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "选择文件上传",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            6
+          ]
+        },
+        {
+          "localized_name": "遮罩",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 11,
+      "type": "RemoveBackground",
+      "pos": [
+        470,
+        130
+      ],
+      "size": [
+        147.169921875,
+        46
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "背景移除模型",
+          "name": "bg_removal_model",
+          "type": "BACKGROUND_REMOVAL",
+          "link": 2
+        },
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "mask",
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RemoveBackground"
+      }
+    },
+    {
+      "id": 20,
+      "type": "UltraShapeLoadModel",
+      "pos": [
+        100,
+        550
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "checkpoint",
+          "name": "checkpoint",
+          "type": "COMBO",
+          "widget": {
+            "name": "checkpoint"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "config",
+          "name": "config",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "config"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "dtype",
+          "name": "dtype",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "dtype"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "low_vram",
+          "name": "low_vram",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "low_vram"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "ULTRASHAPE_MODEL",
+          "links": [
+            3,
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltraShapeLoadModel"
+      },
+      "widgets_values": [
+        "ultrashape_v1.pt",
+        "infer_dit_refine.yaml",
+        "bfloat16",
+        true
+      ],
+      "widgets_values_named": {
+        "checkpoint": "ultrashape_v1.pt",
+        "config": "infer_dit_refine.yaml",
+        "dtype": "bfloat16",
+        "low_vram": true
+      }
+    },
+    {
+      "id": 21,
+      "type": "UltraShapeLoadCoarseMesh",
+      "pos": [
+        470,
+        306
+      ],
+      "size": [
+        302.093359375,
+        154
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "ULTRASHAPE_MODEL",
+          "link": 3
+        },
+        {
+          "localized_name": "mesh_path",
+          "name": "mesh_path",
+          "type": "STRING",
+          "widget": {
+            "name": "mesh_path"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "normalize_scale",
+          "name": "normalize_scale",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "normalize_scale"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "num_sharp_points",
+          "name": "num_sharp_points",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "num_sharp_points"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "num_uniform_points",
+          "name": "num_uniform_points",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "num_uniform_points"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "num_latents",
+          "name": "num_latents",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "num_latents"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "coarse_mesh",
+          "name": "coarse_mesh",
+          "type": "ULTRASHAPE_MESH",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltraShapeLoadCoarseMesh"
+      },
+      "widgets_values": [
+        "REPLACE_WITH_UPLOAD_COARSE_MESH.glb",
+        0.99,
+        200000,
+        200000,
+        8192
+      ],
+      "widgets_values_named": {
+        "mesh_path": "REPLACE_WITH_UPLOAD_COARSE_MESH.glb",
+        "normalize_scale": 0.99,
+        "num_sharp_points": 200000,
+        "num_uniform_points": 200000,
+        "num_latents": 8192
+      }
+    },
+    {
+      "id": 22,
+      "type": "InvertMask",
+      "pos": [
+        872.093359375,
+        130
+      ],
+      "size": [
+        140,
+        26
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "遮罩",
+          "name": "mask",
+          "type": "MASK",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "遮罩",
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InvertMask"
+      }
+    },
+    {
+      "id": 23,
+      "type": "JoinImageWithAlpha",
+      "pos": [
+        1112.093359375,
+        130
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 6
+        },
+        {
+          "localized_name": "阿尔法",
+          "name": "alpha",
+          "type": "MASK",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JoinImageWithAlpha"
+      }
+    },
+    {
+      "id": 24,
+      "type": "UltraShapeRefine",
+      "pos": [
+        1352.093359375,
+        130
+      ],
+      "size": [
+        270,
+        290
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "ULTRASHAPE_MODEL",
+          "link": 8
+        },
+        {
+          "localized_name": "coarse_mesh",
+          "name": "coarse_mesh",
+          "type": "ULTRASHAPE_MESH",
+          "link": 9
+        },
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 7
+        },
+        {
+          "localized_name": "steps",
+          "name": "steps",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "guidance_scale",
+          "name": "guidance_scale",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "guidance_scale"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "octree_resolution",
+          "name": "octree_resolution",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "octree_resolution"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "num_chunks",
+          "name": "num_chunks",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "num_chunks"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "mc_level",
+          "name": "mc_level",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "mc_level"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "box_v",
+          "name": "box_v",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "box_v"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "remove_bg",
+          "name": "remove_bg",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "remove_bg"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "refined_mesh",
+          "name": "refined_mesh",
+          "type": "ULTRASHAPE_OUTPUT",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltraShapeRefine"
+      },
+      "widgets_values": [
+        20,
+        5,
+        256,
+        1000,
+        0,
+        1,
+        42,
+        "randomize",
+        false
+      ],
+      "widgets_values_named": {
+        "steps": 20,
+        "guidance_scale": 5,
+        "octree_resolution": 256,
+        "num_chunks": 1000,
+        "mc_level": 0,
+        "box_v": 1,
+        "seed": 42,
+        "control_after_generate": "randomize",
+        "remove_bg": false
+      }
+    },
+    {
+      "id": 25,
+      "type": "UltraShapeConvertToGLB",
+      "pos": [
+        1722.093359375,
+        130
+      ],
+      "size": [
+        314.5689453125,
+        58
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "refined_mesh",
+          "name": "refined_mesh",
+          "type": "ULTRASHAPE_OUTPUT",
+          "link": 10
+        },
+        {
+          "localized_name": "file_format",
+          "name": "file_format",
+          "type": "COMBO",
+          "widget": {
+            "name": "file_format"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "mesh",
+          "name": "mesh",
+          "type": "FILE_3D",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltraShapeConvertToGLB"
+      },
+      "widgets_values": [
+        "glb"
+      ],
+      "widgets_values_named": {
+        "file_format": "glb"
+      }
+    },
+    {
+      "id": 26,
+      "type": "SaveGLB",
+      "pos": [
+        2136.6623046875,
+        130
+      ],
+      "size": [
+        400,
+        550
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH,FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_OBJ,FILE_3D_FBX,FILE_3D_STL,FILE_3D_USDZ,FILE_3D_PLY,FILE_3D_SPLAT,FILE_3D_SPZ,FILE_3D_KSPLAT,FILE_3D_SPLAT_ANY,FILE_3D_POINT_CLOUD_ANY,FILE_3D",
+          "link": 11
+        },
+        {
+          "localized_name": "文件名前缀",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "PREVIEW_3D",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "platform-presets/comfy-3080-ultrashape1-7d4ac1/output",
+        ""
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "platform-presets/comfy-3080-ultrashape1-7d4ac1/output",
+        "image": ""
+      }
+    },
+    {
+      "id": 27,
+      "type": "Note",
+      "pos": [
+        100,
+        -290
+      ],
+      "size": [
+        650,
+        340
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "comfy-3080-ultrashape1-7d4ac1\n\n平台预设 / Platform preset\n先上传并替换媒体输入。Upload and replace media inputs first.\n原 API 别名与冻结版本保留。Original API alias and frozen release are preserved.\n当前缺失节点 / Currently missing nodes: UltraShapeConvertToGLB, UltraShapeLoadCoarseMesh, UltraShapeLoadModel, UltraShapeRefine\n前端控件差异 / Frontend widget differences: 2\n存在差异时以 workflow.api.json / extra.platform_preset.workflow_api 为准。\nWhen widgets differ, use the complete API template as the reference."
+      ],
+      "title": "平台预设说明 / Preset instructions",
+      "color": "#d2f53c",
+      "bgcolor": "#252827"
+    }
+  ],
+  "links": [
+    [
+      1,
+      10,
+      0,
+      11,
+      1,
+      "IMAGE"
+    ],
+    [
+      2,
+      1,
+      0,
+      11,
+      0,
+      "BACKGROUND_REMOVAL"
+    ],
+    [
+      3,
+      20,
+      0,
+      21,
+      0,
+      "ULTRASHAPE_MODEL"
+    ],
+    [
+      4,
+      11,
+      0,
+      22,
+      0,
+      "MASK"
+    ],
+    [
+      5,
+      22,
+      0,
+      23,
+      1,
+      "MASK"
+    ],
+    [
+      6,
+      10,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      7,
+      23,
+      0,
+      24,
+      2,
+      "IMAGE"
+    ],
+    [
+      8,
+      20,
+      0,
+      24,
+      0,
+      "ULTRASHAPE_MODEL"
+    ],
+    [
+      9,
+      21,
+      0,
+      24,
+      1,
+      "ULTRASHAPE_MESH"
+    ],
+    [
+      10,
+      24,
+      0,
+      25,
+      0,
+      "ULTRASHAPE_OUTPUT"
+    ],
+    [
+      11,
+      25,
+      0,
+      26,
+      0,
+      "FILE_3D"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9,
+      "offset": [
+        416,
+        110
+      ]
+    },
+    "platform_preset": {
+      "alias": "comfy-3080-ultrashape1-7d4ac1",
+      "release_id": "wfr_c220d9e3320043eaaf9788a61ed7f2ae",
+      "release_digest": "4315751653cad47e06cb32badda3fbd0f21079c06b45b8da65433f7750585248",
+      "workflow_api": {
+        "1": {
+          "inputs": {
+            "bg_removal_name": "birefnet.safetensors"
+          },
+          "class_type": "LoadBackgroundRemovalModel"
+        },
+        "10": {
+          "inputs": {
+            "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png"
+          },
+          "class_type": "LoadImage"
+        },
+        "11": {
+          "inputs": {
+            "image": [
+              "10",
+              0
+            ],
+            "bg_removal_model": [
+              "1",
+              0
+            ]
+          },
+          "class_type": "RemoveBackground"
+        },
+        "20": {
+          "inputs": {
+            "dtype": "bfloat16",
+            "config": "infer_dit_refine.yaml",
+            "low_vram": true,
+            "checkpoint": "ultrashape_v1.pt"
+          },
+          "class_type": "UltraShapeLoadModel"
+        },
+        "21": {
+          "inputs": {
+            "model": [
+              "20",
+              0
+            ],
+            "mesh_path": "REPLACE_WITH_UPLOAD_COARSE_MESH.glb",
+            "num_latents": 8192,
+            "normalize_scale": 0.99,
+            "num_sharp_points": 204800,
+            "num_uniform_points": 204800
+          },
+          "class_type": "UltraShapeLoadCoarseMesh"
+        },
+        "22": {
+          "inputs": {
+            "mask": [
+              "11",
+              0
+            ]
+          },
+          "class_type": "InvertMask"
+        },
+        "23": {
+          "inputs": {
+            "alpha": [
+              "22",
+              0
+            ],
+            "image": [
+              "10",
+              0
+            ]
+          },
+          "class_type": "JoinImageWithAlpha"
+        },
+        "24": {
+          "inputs": {
+            "seed": 42,
+            "box_v": 1,
+            "image": [
+              "23",
+              0
+            ],
+            "model": [
+              "20",
+              0
+            ],
+            "steps": 20,
+            "mc_level": 0,
+            "remove_bg": false,
+            "num_chunks": 1000,
+            "coarse_mesh": [
+              "21",
+              0
+            ],
+            "guidance_scale": 5,
+            "octree_resolution": 256
+          },
+          "class_type": "UltraShapeRefine"
+        },
+        "25": {
+          "inputs": {
+            "file_format": "glb",
+            "refined_mesh": [
+              "24",
+              0
+            ]
+          },
+          "class_type": "UltraShapeConvertToGLB"
+        },
+        "26": {
+          "inputs": {
+            "mesh": [
+              "25",
+              0
+            ],
+            "filename_prefix": "platform-presets/comfy-3080-ultrashape1-7d4ac1/output"
+          },
+          "class_type": "SaveGLB"
+        }
+      },
+      "frontend_differences": [
+        {
+          "node_id": "21",
+          "input": "num_sharp_points"
+        },
+        {
+          "node_id": "21",
+          "input": "num_uniform_points"
+        }
+      ],
+      "instructions_zh": "先替换上传素材与文本。此画布是编辑副本；API 调用继续使用原模型别名。缺失节点及前端控件差异须处理后才能运行。完整执行模板保存在此文件 extra.platform_preset.workflow_api。",
+      "instructions_en": "Replace uploaded media and text first. This canvas is an editable copy; API calls retain the original alias. Resolve missing nodes and frontend widget differences before running. The complete execution template is embedded in extra.platform_preset.workflow_api."
+    }
+  },
+  "version": 0.4
+}

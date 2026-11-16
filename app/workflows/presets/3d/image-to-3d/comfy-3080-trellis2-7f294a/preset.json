@@ -1,0 +1,51 @@
+{
+  "alias": "comfy-3080-trellis2-7f294a",
+  "display_name": "Trellis2 · 图像转三维 · 顶点色 GLB · RTX 3080 · d22134",
+  "task_type": "image_to_3d",
+  "device": "rtx3080",
+  "directory": "3d/image-to-3d/comfy-3080-trellis2-7f294a",
+  "native_workflow": "平台预设/2026-11-16/3d/image-to-3d/comfy-3080-trellis2-7f294a.json",
+  "release_id": "wfr_4479d95d881b4efbb16f11ea7e3312fa",
+  "release_digest": "0df0f4e4750273e141e8492b1f82af839e7c496c32bd2cee574a9743a223a505",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CFGOverride",
+    "CLIPVisionLoader",
+    "EmptyTrellis2LatentStructure",
+    "ImageCropToMask",
+    "KSampler",
+    "LoadBackgroundRemovalModel",
+    "LoadImage",
+    "MeshToFile3D",
+    "ModelSamplingSD3",
+    "PaintMesh",
+    "RemoveBackground",
+    "RescaleCFG",
+    "Save3DAdvanced",
+    "Trellis2Conditioning",
+    "Trellis2ShapeStage",
+    "Trellis2TextureStage",
+    "UNETLoader",
+    "VAELoader",
+    "VaeDecodeShapeTrellis",
+    "VaeDecodeStructureTrellis2",
+    "VaeDecodeTextureTrellis"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [
+      {
+        "node_id": "29",
+        "input": "viewport_state"
+      }
+    ],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

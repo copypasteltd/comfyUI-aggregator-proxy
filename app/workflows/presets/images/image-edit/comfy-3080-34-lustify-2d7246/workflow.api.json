@@ -1,0 +1,148 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "lustifyNSFWCheckpoint_v10Krea2.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "2": {
+    "inputs": {
+      "type": "krea2",
+      "device": "default",
+      "clip_name": "qwen3vl_4b_fp8_scaled.safetensors"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_IMAGE_1.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "6": {
+    "inputs": {
+      "vae": [
+        "3",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ],
+      "image1": [
+        "4",
+        0
+      ],
+      "prompt": "A small blue ceramic teapot on a plain background."
+    },
+    "class_type": "TextEncodeQwenImageEditPlus"
+  },
+  "7": {
+    "inputs": {
+      "conditioning": [
+        "6",
+        0
+      ],
+      "reference_latents_method": "index_timestep_zero"
+    },
+    "class_type": "FluxKontextMultiReferenceLatentMethod"
+  },
+  "8": {
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut"
+  },
+  "9": {
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "lora_name": "krea2_style_reference.safetensors",
+      "strength_model": 1
+    },
+    "class_type": "LoraLoaderModelOnly"
+  },
+  "10": {
+    "inputs": {
+      "model": [
+        "9",
+        0
+      ],
+      "width": 512,
+      "height": 512,
+      "max_shift": 1.15,
+      "base_shift": 0.5
+    },
+    "class_type": "ModelSamplingFlux"
+  },
+  "11": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "12": {
+    "inputs": {
+      "cfg": 1,
+      "seed": 42,
+      "model": [
+        "10",
+        0
+      ],
+      "steps": 8,
+      "denoise": 1,
+      "negative": [
+        "8",
+        0
+      ],
+      "positive": [
+        "7",
+        0
+      ],
+      "scheduler": "simple",
+      "latent_image": [
+        "11",
+        0
+      ],
+      "sampler_name": "euler"
+    },
+    "class_type": "KSampler"
+  },
+  "13": {
+    "inputs": {
+      "vae": [
+        "3",
+        0
+      ],
+      "samples": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "14": {
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-34-lustify-2d7246/output"
+    },
+    "class_type": "SaveImage"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "format_version": 1,
+  "at": "2026-11-16T15:46:49.247Z",
+  "passed": true,
+  "checks": [
+    "Native reader login succeeds",
+    "comfy-3080-12-wai-illustrious-v17-exact-c249e8 actual new source file opens",
+    "comfy-3080-12-wai-illustrious-v17-exact-c249e8 loads the complete archived graph and note",
+    "comfy-3080-00-yue2-full-bf16-text2music-77ea35 actual new source file opens",
+    "comfy-3080-00-yue2-full-bf16-text2music-77ea35 loads the complete archived graph and note",
+    "comfy-3080-3d-trellis2 actual new source file opens",
+    "comfy-3080-3d-trellis2 loads the complete archived graph and note",
+    "comfy-4090-video-h3 actual new source file opens",
+    "comfy-4090-video-h3 loads the complete archived graph and note"
+  ],
+  "samples": [
+    {
+      "alias": "comfy-3080-12-wai-illustrious-v17-exact-c249e8",
+      "device": "rtx3080",
+      "nodes": 8,
+      "embedded_template": true
+    },
+    {
+      "alias": "comfy-3080-00-yue2-full-bf16-text2music-77ea35",
+      "device": "rtx3080",
+      "nodes": 8,
+      "embedded_template": true
+    },
+    {
+      "alias": "comfy-3080-3d-trellis2",
+      "device": "rtx3080",
+      "nodes": 27,
+      "embedded_template": true
+    },
+    {
+      "alias": "comfy-4090-video-h3",
+      "device": "rtx4090",
+      "nodes": 19,
+      "embedded_template": true
+    }
+  ],
+  "http_5xx": 0,
+  "cleanup": {
+    "all_owned_browser_resources_closed": true
+  },
+  "public_media": {
+    "start_seconds": 41.311,
+    "duration_seconds": 7.580280794143675,
+    "speed": 1,
+    "clip_excludes_login_and_original_source_files": true
+  },
+  "scope": "Actual business-domain native Workflows discovery and four saved presets opened from the real new source paths; no metadata interception, no GPU prompt submission.",
+  "media_sha256": {
+    "3d-preset-desktop.png": "0f3931a86ba4139ad613c911e9086e5381a5840d0059ac453d06f645334f80c2",
+    "audio-preset-desktop.png": "3aed5daa7c99ae007d67737d9757d0964089e487f848befa44c9a714747973db",
+    "image-preset-mobile.png": "ff09c42aeaf92aec4dd2dbc039c7130b0454e5035574baf8a57f743cb741a472",
+    "images-preset-desktop.png": "817351912360890dec762319c136c1d6bd8940e38ce20dbe01dcc133431f1bcc",
+    "preset-browsing.gif": "ada4679efa04a477452b9015205f093e915293c5af90003c821994bb9c4d96fb",
+    "preset-browsing.mp4": "30c43de1ddd7d1c98f7a9f347ec5b1c9141695acafa57ef936152ff3c350c784",
+    "videos-preset-desktop.png": "e2ad83aa3fa5cd46ccc01d0f57c5cd3132302502557cd471156904863dd750e4"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "NoctQ_V4_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "2": {
+    "inputs": {
+      "type": "qwen_image",
+      "device": "default",
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "prompt": "A small blue ceramic teapot on a plain background.",
+      "resolution": 1024,
+      "negative_prompt": ""
+    },
+    "class_type": "TextEncodeQwenImage21"
+  },
+  "5": {
+    "inputs": {
+      "width": 1024,
+      "height": 1536,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "6": {
+    "inputs": {
+      "cfg": 3,
+      "seed": 42,
+      "model": [
+        "1",
+        0
+      ],
+      "steps": 25,
+      "denoise": 1,
+      "negative": [
+        "4",
+        1
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "scheduler": "simple",
+      "latent_image": [
+        "5",
+        0
+      ],
+      "sampler_name": "euler"
+    },
+    "class_type": "KSampler"
+  },
+  "7": {
+    "inputs": {
+      "vae": [
+        "3",
+        0
+      ],
+      "samples": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "8": {
+    "inputs": {
+      "images": [
+        "7",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-10-noct-q-v4-qwen-image21-f14659/output"
+    },
+    "class_type": "SaveImage"
+  }
+}

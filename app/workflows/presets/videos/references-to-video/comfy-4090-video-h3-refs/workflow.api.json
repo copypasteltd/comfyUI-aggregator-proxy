@@ -1,0 +1,234 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "pinkcherry_v1.5_MiniMaxH3_fl2va_int8_pruned.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "2": {
+    "inputs": {
+      "type": "minimax",
+      "device": "default",
+      "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "5": {
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "lora_name": "minimax_h3_ref2v_turbo_4step_v0.1_comfyui_bf16.safetensors",
+      "strength_model": 1
+    },
+    "class_type": "LoraLoaderModelOnly"
+  },
+  "6": {
+    "inputs": {
+      "model": [
+        "5",
+        0
+      ],
+      "shift_audio": 3,
+      "shift_video": 12
+    },
+    "class_type": "MiniMaxH3SigmaShift"
+  },
+  "7": {
+    "inputs": {
+      "vae": [
+        "3",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ],
+      "width": 640,
+      "height": 352,
+      "length": 124,
+      "prompt": "A green lime beside a white ceramic cup on a wooden table, soft daylight, fixed camera, clean background, subtle natural motion, no text.",
+      "audio_vae": [
+        "4",
+        0
+      ],
+      "ref_image_size": "match",
+      "ref_images.ref_image_0": [
+        "30",
+        0
+      ],
+      "ref_images.ref_image_1": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3ReferenceToVideo"
+  },
+  "8": {
+    "inputs": {
+      "model": [
+        "6",
+        0
+      ],
+      "conditioning": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "BasicGuider"
+  },
+  "9": {
+    "inputs": {
+      "noise_seed": 42
+    },
+    "class_type": "RandomNoise"
+  },
+  "10": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect"
+  },
+  "11": {
+    "inputs": {
+      "model": [
+        "6",
+        0
+      ],
+      "steps": 4,
+      "denoise": 1,
+      "scheduler": "beta"
+    },
+    "class_type": "BasicScheduler"
+  },
+  "12": {
+    "inputs": {
+      "noise": [
+        "9",
+        0
+      ],
+      "guider": [
+        "8",
+        0
+      ],
+      "sigmas": [
+        "11",
+        0
+      ],
+      "sampler": [
+        "10",
+        0
+      ],
+      "latent_image": [
+        "7",
+        1
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced"
+  },
+  "13": {
+    "inputs": {
+      "av_latent": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent"
+  },
+  "14": {
+    "inputs": {
+      "vae": [
+        "3",
+        0
+      ],
+      "samples": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "15": {
+    "inputs": {
+      "vae": [
+        "4",
+        0
+      ],
+      "samples": [
+        "13",
+        1
+      ]
+    },
+    "class_type": "VAEDecodeAudio"
+  },
+  "16": {
+    "inputs": {
+      "fps": 24,
+      "audio": [
+        "15",
+        0
+      ],
+      "codec": "none",
+      "images": [
+        "990",
+        0
+      ],
+      "bit_depth": "auto",
+      "color_space": "sRGB"
+    },
+    "class_type": "CreateVideo"
+  },
+  "17": {
+    "inputs": {
+      "codec": "auto",
+      "video": [
+        "16",
+        0
+      ],
+      "format": "mp4",
+      "format.codec": "h264",
+      "filename_prefix": "platform-presets/comfy-4090-video-h3-refs/output",
+      "format.codec.encoding": "auto"
+    },
+    "class_type": "SaveVideo"
+  },
+  "30": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_0.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "31": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_1.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "990": {
+    "inputs": {
+      "x": 8,
+      "y": 4,
+      "image": [
+        "14",
+        0
+      ],
+      "width": 720,
+      "height": 1080
+    },
+    "class_type": "ImageCrop"
+  }
+}

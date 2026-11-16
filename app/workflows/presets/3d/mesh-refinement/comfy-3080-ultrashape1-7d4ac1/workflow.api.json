@@ -1,0 +1,117 @@
+{
+  "1": {
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "class_type": "LoadBackgroundRemovalModel"
+  },
+  "10": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "11": {
+    "inputs": {
+      "image": [
+        "10",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "20": {
+    "inputs": {
+      "dtype": "bfloat16",
+      "config": "infer_dit_refine.yaml",
+      "low_vram": true,
+      "checkpoint": "ultrashape_v1.pt"
+    },
+    "class_type": "UltraShapeLoadModel"
+  },
+  "21": {
+    "inputs": {
+      "model": [
+        "20",
+        0
+      ],
+      "mesh_path": "REPLACE_WITH_UPLOAD_COARSE_MESH.glb",
+      "num_latents": 8192,
+      "normalize_scale": 0.99,
+      "num_sharp_points": 204800,
+      "num_uniform_points": 204800
+    },
+    "class_type": "UltraShapeLoadCoarseMesh"
+  },
+  "22": {
+    "inputs": {
+      "mask": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "InvertMask"
+  },
+  "23": {
+    "inputs": {
+      "alpha": [
+        "22",
+        0
+      ],
+      "image": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "JoinImageWithAlpha"
+  },
+  "24": {
+    "inputs": {
+      "seed": 42,
+      "box_v": 1,
+      "image": [
+        "23",
+        0
+      ],
+      "model": [
+        "20",
+        0
+      ],
+      "steps": 20,
+      "mc_level": 0,
+      "remove_bg": false,
+      "num_chunks": 1000,
+      "coarse_mesh": [
+        "21",
+        0
+      ],
+      "guidance_scale": 5,
+      "octree_resolution": 256
+    },
+    "class_type": "UltraShapeRefine"
+  },
+  "25": {
+    "inputs": {
+      "file_format": "glb",
+      "refined_mesh": [
+        "24",
+        0
+      ]
+    },
+    "class_type": "UltraShapeConvertToGLB"
+  },
+  "26": {
+    "inputs": {
+      "mesh": [
+        "25",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-ultrashape1-7d4ac1/output"
+    },
+    "class_type": "SaveGLB"
+  }
+}

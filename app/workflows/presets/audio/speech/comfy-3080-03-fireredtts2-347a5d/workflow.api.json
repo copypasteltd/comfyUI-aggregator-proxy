@@ -1,0 +1,48 @@
+{
+  "1": {
+    "inputs": {
+      "audio": "REPLACE_WITH_UPLOAD_SPEAKER_1.wav"
+    },
+    "class_type": "LoadAudio"
+  },
+  "2": {
+    "inputs": {
+      "seed": 42,
+      "model": "FireRedTTS2",
+      "top_k": 30,
+      "top_p": 0.9,
+      "S1_text": "Example text",
+      "S1_audio": [
+        "1",
+        0
+      ],
+      "temperature": 0.9,
+      "dialogue_text": "Example text",
+      "max_new_tokens": 1000,
+      "repetition_penalty": 1.1
+    },
+    "class_type": "PodcastTrioNative"
+  },
+  "20": {
+    "inputs": {
+      "audio": [
+        "2",
+        0
+      ],
+      "duration": 30,
+      "start_index": 0
+    },
+    "class_type": "TrimAudioDuration"
+  },
+  "22": {
+    "inputs": {
+      "audio": [
+        "20",
+        0
+      ],
+      "quality": "320k",
+      "filename_prefix": "platform-presets/comfy-3080-03-fireredtts2-347a5d/output"
+    },
+    "class_type": "SaveAudioMP3"
+  }
+}

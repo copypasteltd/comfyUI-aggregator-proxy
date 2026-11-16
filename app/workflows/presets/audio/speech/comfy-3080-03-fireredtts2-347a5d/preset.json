@@ -1,0 +1,31 @@
+{
+  "alias": "comfy-3080-03-fireredtts2-347a5d",
+  "display_name": "FireRedTTS2 · 单人语音 · 30s · RTX 3080 · 7e6d33",
+  "task_type": "text_to_audio",
+  "device": "rtx3080",
+  "directory": "audio/speech/comfy-3080-03-fireredtts2-347a5d",
+  "native_workflow": "平台预设/2026-11-16/audio/speech/comfy-3080-03-fireredtts2-347a5d.json",
+  "release_id": "wfr_e74ae54a71e04e488e1b2f4b8255167b",
+  "release_digest": "c2dcd1cf6c725ad6ffff7cec6fcf8ce9c10be109c96f68365e40d5012ee36116",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "LoadAudio",
+    "PodcastTrioNative",
+    "SaveAudioMP3",
+    "TrimAudioDuration"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "PodcastTrioNative"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "alias": "comfy-3080-image-refs-wai",
+  "display_name": "WAI · 双参考图生图 · RTX 3080",
+  "task_type": "references_to_image",
+  "device": "rtx3080",
+  "directory": "images/references-to-image/comfy-3080-image-refs-wai",
+  "native_workflow": "平台预设/2026-11-16/images/references-to-image/comfy-3080-image-refs-wai.json",
+  "release_id": "wfr_e07baab991d74de99828e4cdba715ac5",
+  "release_digest": "7a45238eeb7c56dd18b91fe7d9803c194a17fcbaa404fb440de60474585bc10e",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPTextEncode",
+    "CLIPVisionLoader",
+    "CheckpointLoaderSimple",
+    "IPAdapterAdvanced",
+    "IPAdapterModelLoader",
+    "ImageBatch",
+    "ImageScale",
+    "KSampler",
+    "LoadImage",
+    "SaveImage",
+    "VAEDecode",
+    "VAEEncode"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "IPAdapterAdvanced",
+      "IPAdapterModelLoader"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

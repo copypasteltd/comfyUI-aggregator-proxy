@@ -1,0 +1,263 @@
+{
+  "1": {
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "class_type": "LoadBackgroundRemovalModel"
+  },
+  "10": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_FRONT.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "11": {
+    "inputs": {
+      "image": [
+        "10",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "12": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_RIGHT.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "13": {
+    "inputs": {
+      "image": [
+        "12",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "14": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_BACK.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "15": {
+    "inputs": {
+      "image": [
+        "14",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "16": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_LEFT.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "17": {
+    "inputs": {
+      "image": [
+        "16",
+        0
+      ],
+      "bg_removal_model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "30": {
+    "inputs": {
+      "image1": [
+        "10",
+        0
+      ],
+      "image2": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "ImageBatch"
+  },
+  "31": {
+    "inputs": {
+      "image1": [
+        "30",
+        0
+      ],
+      "image2": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "ImageBatch"
+  },
+  "32": {
+    "inputs": {
+      "image1": [
+        "31",
+        0
+      ],
+      "image2": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "ImageBatch"
+  },
+  "40": {
+    "inputs": {
+      "mask": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "MaskToImage"
+  },
+  "41": {
+    "inputs": {
+      "mask": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "MaskToImage"
+  },
+  "42": {
+    "inputs": {
+      "mask": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "MaskToImage"
+  },
+  "43": {
+    "inputs": {
+      "mask": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "MaskToImage"
+  },
+  "45": {
+    "inputs": {
+      "image1": [
+        "40",
+        0
+      ],
+      "image2": [
+        "41",
+        0
+      ]
+    },
+    "class_type": "ImageBatch"
+  },
+  "46": {
+    "inputs": {
+      "image1": [
+        "45",
+        0
+      ],
+      "image2": [
+        "42",
+        0
+      ]
+    },
+    "class_type": "ImageBatch"
+  },
+  "47": {
+    "inputs": {
+      "image1": [
+        "46",
+        0
+      ],
+      "image2": [
+        "43",
+        0
+      ]
+    },
+    "class_type": "ImageBatch"
+  },
+  "49": {
+    "inputs": {
+      "image": [
+        "47",
+        0
+      ],
+      "channel": "red"
+    },
+    "class_type": "ImageToMask"
+  },
+  "50": {
+    "inputs": {
+      "masks": [
+        "49",
+        0
+      ],
+      "images": [
+        "32",
+        0
+      ],
+      "scene_name": "3deval-20261029-courier",
+      "object_name": "courier-robot"
+    },
+    "class_type": "MVSAM3DLoadViews"
+  },
+  "51": {
+    "inputs": {
+      "seed": 42,
+      "scene": [
+        "50",
+        0
+      ],
+      "da3_npz": "",
+      "offload": true,
+      "repo_root": "__DEVICE_REPO_ROOT__",
+      "pixi_python": "__DEVICE_PIXI_PYTHON__",
+      "ss_weighting": true,
+      "stage1_steps": 25,
+      "stage2_steps": 25,
+      "pipeline_yaml": "__DEVICE_PIPELINE_YAML__",
+      "decode_formats": "gaussian,mesh",
+      "filename_prefix": "output",
+      "ss_entropy_alpha": 30,
+      "ss_entropy_layer": 9,
+      "stage2_weighting": true,
+      "stage2_min_weight": 0.001,
+      "stage2_entropy_alpha": 30,
+      "stage2_weight_source": "entropy",
+      "stage2_attention_step": 0,
+      "stage2_attention_layer": 6,
+      "stage2_visibility_alpha": 30,
+      "stage2_weight_combine_mode": "average"
+    },
+    "class_type": "MVSAM3DRunMultiView"
+  },
+  "52": {
+    "inputs": {
+      "which": "glb",
+      "result": [
+        "51",
+        0
+      ]
+    },
+    "class_type": "MVSAM3DExport"
+  }
+}

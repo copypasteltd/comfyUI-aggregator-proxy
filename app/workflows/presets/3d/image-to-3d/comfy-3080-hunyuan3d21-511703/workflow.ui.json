@@ -1,0 +1,1513 @@
+{
+  "id": "1000ed2b-ca1e-4c28-9ba9-22bc468ce947",
+  "revision": 0,
+  "last_node_id": 18,
+  "last_link_id": 18,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        100,
+        130
+      ],
+      "size": [
+        270,
+        102
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "选择文件上传",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            4
+          ]
+        },
+        {
+          "localized_name": "遮罩",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 2,
+      "type": "LoadBackgroundRemovalModel",
+      "pos": [
+        100,
+        362
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "背景移除模型名称",
+          "name": "bg_removal_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "bg_removal_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "bg_model",
+          "name": "bg_model",
+          "type": "BACKGROUND_REMOVAL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadBackgroundRemovalModel"
+      },
+      "widgets_values": [
+        "birefnet.safetensors"
+      ],
+      "widgets_values_named": {
+        "bg_removal_name": "birefnet.safetensors"
+      }
+    },
+    {
+      "id": 3,
+      "type": "RemoveBackground",
+      "pos": [
+        470,
+        130
+      ],
+      "size": [
+        147.169921875,
+        46
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "背景移除模型",
+          "name": "bg_removal_model",
+          "type": "BACKGROUND_REMOVAL",
+          "link": 2
+        },
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "mask",
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RemoveBackground"
+      }
+    },
+    {
+      "id": 4,
+      "type": "ImageCropToMask",
+      "pos": [
+        840,
+        130
+      ],
+      "size": [
+        210,
+        174
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "图像",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4
+        },
+        {
+          "localized_name": "遮罩",
+          "name": "masks",
+          "type": "MASK",
+          "link": 3
+        },
+        {
+          "localized_name": "宽度",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "高度",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "pad_factor",
+          "name": "pad_factor",
+          "type": "FLOAT",
+          "widget": {
+            "name": "pad_factor"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "grow_mask",
+          "name": "grow_mask",
+          "type": "INT",
+          "widget": {
+            "name": "grow_mask"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "背景",
+          "name": "background",
+          "type": "COLOR",
+          "widget": {
+            "name": "background"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "图像",
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCropToMask"
+      },
+      "widgets_values": [
+        520,
+        520,
+        1.1,
+        0,
+        "#ffffff"
+      ],
+      "widgets_values_named": {
+        "width": 520,
+        "height": 520,
+        "pad_factor": 1.1,
+        "grow_mask": 0,
+        "background": "#ffffff"
+      }
+    },
+    {
+      "id": 5,
+      "type": "CLIPVisionLoader",
+      "pos": [
+        100,
+        550
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip名称",
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CLIP视觉",
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPVisionLoader"
+      },
+      "widgets_values": [
+        "hunyuan3d21-dinov2-large-fp16-local.safetensors"
+      ],
+      "widgets_values_named": {
+        "clip_name": "hunyuan3d21-dinov2-large-fp16-local.safetensors"
+      }
+    },
+    {
+      "id": 6,
+      "type": "CLIPVisionEncode",
+      "pos": [
+        1150,
+        130
+      ],
+      "size": [
+        270,
+        78
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip视觉",
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": 6
+        },
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 5
+        },
+        {
+          "localized_name": "裁剪",
+          "name": "crop",
+          "type": "COMBO",
+          "widget": {
+            "name": "crop"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CLIP视觉输出",
+          "name": "CLIP_VISION_OUTPUT",
+          "type": "CLIP_VISION_OUTPUT",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPVisionEncode"
+      },
+      "widgets_values": [
+        "center"
+      ],
+      "widgets_values_named": {
+        "crop": "center"
+      }
+    },
+    {
+      "id": 7,
+      "type": "Hunyuan3Dv2Conditioning",
+      "pos": [
+        1520,
+        130
+      ],
+      "size": [
+        162.085546875,
+        46
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip视觉输出",
+          "name": "clip_vision_output",
+          "type": "CLIP_VISION_OUTPUT",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "正向",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            11
+          ]
+        },
+        {
+          "localized_name": "反向",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Hunyuan3Dv2Conditioning"
+      }
+    },
+    {
+      "id": 8,
+      "type": "UNETLoader",
+      "pos": [
+        100,
+        738
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "UNet名称",
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "数据类型",
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "weight_dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "hunyuan3d21-dit-fp16-local.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "hunyuan3d21-dit-fp16-local.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 9,
+      "type": "ModelSamplingAuraFlow",
+      "pos": [
+        470,
+        306
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 8
+        },
+        {
+          "localized_name": "移位",
+          "name": "shift",
+          "type": "FLOAT",
+          "widget": {
+            "name": "shift"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "sampling",
+          "name": "sampling",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "sampling"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingAuraFlow"
+      },
+      "widgets_values": [
+        1,
+        "flow"
+      ],
+      "widgets_values_named": {
+        "shift": 1,
+        "sampling": "flow"
+      }
+    },
+    {
+      "id": 10,
+      "type": "EmptyLatentHunyuan3Dv2",
+      "pos": [
+        100,
+        950
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "分辨率",
+          "name": "resolution",
+          "type": "INT",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "批次大小",
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentHunyuan3Dv2"
+      },
+      "widgets_values": [
+        4096,
+        1
+      ],
+      "widgets_values_named": {
+        "resolution": 4096,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 11,
+      "type": "KSampler",
+      "pos": [
+        1782.085546875,
+        130
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 9
+        },
+        {
+          "localized_name": "正面条件",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 11
+        },
+        {
+          "localized_name": "负面条件",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 10
+        },
+        {
+          "localized_name": "Latent图像",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 12
+        },
+        {
+          "localized_name": "种子",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "步数",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "采样器名称",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "调度器",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "降噪",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "randomize",
+        30,
+        5,
+        "euler",
+        "normal",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 42,
+        "control_after_generate": "randomize",
+        "steps": 30,
+        "cfg": 5,
+        "sampler_name": "euler",
+        "scheduler": "normal",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 12,
+      "type": "VAELoader",
+      "pos": [
+        100,
+        1162
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "vae名称",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "hunyuan3d21-vae-fp16-local.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "hunyuan3d21-vae-fp16-local.safetensors"
+      }
+    },
+    {
+      "id": 13,
+      "type": "VAEDecodeHunyuan3D",
+      "pos": [
+        2152.085546875,
+        130
+      ],
+      "size": [
+        270,
+        102
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "样本",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 14
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 13
+        },
+        {
+          "localized_name": "块数",
+          "name": "num_chunks",
+          "type": "INT",
+          "widget": {
+            "name": "num_chunks"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "八叉树分辨率",
+          "name": "octree_resolution",
+          "type": "INT",
+          "widget": {
+            "name": "octree_resolution"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "体素",
+          "name": "VOXEL",
+          "type": "VOXEL",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecodeHunyuan3D"
+      },
+      "widgets_values": [
+        4000,
+        256
+      ],
+      "widgets_values_named": {
+        "num_chunks": 4000,
+        "octree_resolution": 256
+      }
+    },
+    {
+      "id": 14,
+      "type": "VoxelToMesh",
+      "pos": [
+        2522.085546875,
+        130
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "体素",
+          "name": "voxel",
+          "type": "VOXEL",
+          "link": 15
+        },
+        {
+          "localized_name": "算法",
+          "name": "algorithm",
+          "type": "COMBO",
+          "widget": {
+            "name": "algorithm"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "阈值",
+          "name": "threshold",
+          "type": "FLOAT",
+          "widget": {
+            "name": "threshold"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "网格",
+          "name": "MESH",
+          "type": "MESH",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VoxelToMesh"
+      },
+      "widgets_values": [
+        "surface net",
+        0.6
+      ],
+      "widgets_values_named": {
+        "algorithm": "surface net",
+        "threshold": 0.6
+      }
+    },
+    {
+      "id": 15,
+      "type": "MeshSmoothNormals",
+      "pos": [
+        2892.085546875,
+        130
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "link": 16
+        },
+        {
+          "localized_name": "crease_angle",
+          "name": "crease_angle",
+          "type": "FLOAT",
+          "widget": {
+            "name": "crease_angle"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MeshSmoothNormals"
+      },
+      "widgets_values": [
+        60
+      ],
+      "widgets_values_named": {
+        "crease_angle": 60
+      }
+    },
+    {
+      "id": 16,
+      "type": "MeshToFile3D",
+      "pos": [
+        3262.085546875,
+        130
+      ],
+      "size": [
+        206.5259765625,
+        26
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "3D 模型",
+          "name": "model_3d",
+          "type": "FILE_3D_GLB",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MeshToFile3D"
+      }
+    },
+    {
+      "id": 17,
+      "type": "Save3DAdvanced",
+      "pos": [
+        3568.6115234375,
+        130
+      ],
+      "size": [
+        400,
+        550
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model_3d",
+          "name": "model_3d",
+          "type": "FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
+          "link": 18
+        },
+        {
+          "localized_name": "model_3d_info",
+          "name": "model_3d_info",
+          "shape": 7,
+          "type": "LOAD3D_MODEL_INFO",
+          "link": null
+        },
+        {
+          "localized_name": "camera_info",
+          "name": "camera_info",
+          "shape": 7,
+          "type": "LOAD3D_CAMERA",
+          "link": null
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "viewport_state",
+          "name": "viewport_state",
+          "type": "LOAD_3D",
+          "widget": {
+            "name": "viewport_state"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model_3d",
+          "name": "model_3d",
+          "type": "FILE_3D",
+          "links": null
+        },
+        {
+          "localized_name": "model_3d_info",
+          "name": "model_3d_info",
+          "type": "LOAD3D_MODEL_INFO",
+          "links": null
+        },
+        {
+          "localized_name": "camera_info",
+          "name": "camera_info",
+          "type": "LOAD3D_CAMERA",
+          "links": null
+        },
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Camera Config": {
+          "cameraType": "perspective",
+          "fov": 35,
+          "state": {
+            "position": {
+              "x": 10,
+              "y": 10,
+              "z": 10.000000000000002
+            },
+            "target": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "zoom": 1,
+            "cameraType": "perspective",
+            "quaternion": {
+              "x": -0.2798481423331213,
+              "y": 0.3647051996310008,
+              "z": 0.11591689595929511,
+              "w": 0.8804762392171493
+            },
+            "fov": 35,
+            "aspect": 1,
+            "near": 0.01,
+            "far": 10000,
+            "frustum": {
+              "left": -5,
+              "right": 5,
+              "top": 5,
+              "bottom": -5
+            }
+          }
+        }
+      },
+      "widgets_values": [
+        "platform-presets/comfy-3080-hunyuan3d21-511703/output",
+        "",
+        768,
+        768
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "platform-presets/comfy-3080-hunyuan3d21-511703/output",
+        "viewport_state": "",
+        "width": 768,
+        "height": 768
+      }
+    },
+    {
+      "id": 18,
+      "type": "Note",
+      "pos": [
+        100,
+        -290
+      ],
+      "size": [
+        650,
+        340
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "comfy-3080-hunyuan3d21-511703\n\n平台预设 / Platform preset\n先上传并替换媒体输入。Upload and replace media inputs first.\n原 API 别名与冻结版本保留。Original API alias and frozen release are preserved.\n当前缺失节点 / Currently missing nodes: 无 / none\n前端控件差异 / Frontend widget differences: 3\n存在差异时以 workflow.api.json / extra.platform_preset.workflow_api 为准。\nWhen widgets differ, use the complete API template as the reference."
+      ],
+      "title": "平台预设说明 / Preset instructions",
+      "color": "#d2f53c",
+      "bgcolor": "#252827"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      3,
+      1,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "BACKGROUND_REMOVAL"
+    ],
+    [
+      3,
+      3,
+      0,
+      4,
+      1,
+      "MASK"
+    ],
+    [
+      4,
+      1,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      4,
+      0,
+      6,
+      1,
+      "IMAGE"
+    ],
+    [
+      6,
+      5,
+      0,
+      6,
+      0,
+      "CLIP_VISION"
+    ],
+    [
+      7,
+      6,
+      0,
+      7,
+      0,
+      "CLIP_VISION_OUTPUT"
+    ],
+    [
+      8,
+      8,
+      0,
+      9,
+      0,
+      "MODEL"
+    ],
+    [
+      9,
+      9,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      10,
+      7,
+      1,
+      11,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      11,
+      7,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      10,
+      0,
+      11,
+      3,
+      "LATENT"
+    ],
+    [
+      13,
+      12,
+      0,
+      13,
+      1,
+      "VAE"
+    ],
+    [
+      14,
+      11,
+      0,
+      13,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      13,
+      0,
+      14,
+      0,
+      "VOXEL"
+    ],
+    [
+      16,
+      14,
+      0,
+      15,
+      0,
+      "MESH"
+    ],
+    [
+      17,
+      15,
+      0,
+      16,
+      0,
+      "MESH"
+    ],
+    [
+      18,
+      16,
+      0,
+      17,
+      0,
+      "FILE_3D_GLB"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9,
+      "offset": [
+        416,
+        110
+      ]
+    },
+    "platform_preset": {
+      "alias": "comfy-3080-hunyuan3d21-511703",
+      "release_id": "wfr_d2b0df4630334a709cbfb72f3e5f5cc9",
+      "release_digest": "f9e145c6fcfdb479649dcbd26229ebcec3e9f1212c601ede44ac826535a87cb7",
+      "workflow_api": {
+        "1": {
+          "inputs": {
+            "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png"
+          },
+          "class_type": "LoadImage"
+        },
+        "2": {
+          "inputs": {
+            "bg_removal_name": "birefnet.safetensors"
+          },
+          "class_type": "LoadBackgroundRemovalModel"
+        },
+        "3": {
+          "inputs": {
+            "image": [
+              "1",
+              0
+            ],
+            "bg_removal_model": [
+              "2",
+              0
+            ]
+          },
+          "class_type": "RemoveBackground"
+        },
+        "4": {
+          "inputs": {
+            "masks": [
+              "3",
+              0
+            ],
+            "width": 518,
+            "height": 518,
+            "images": [
+              "1",
+              0
+            ],
+            "grow_mask": 0,
+            "background": "#ffffff",
+            "pad_factor": 1.1
+          },
+          "class_type": "ImageCropToMask"
+        },
+        "5": {
+          "inputs": {
+            "clip_name": "hunyuan3d21-dinov2-large-fp16-local.safetensors"
+          },
+          "class_type": "CLIPVisionLoader"
+        },
+        "6": {
+          "inputs": {
+            "crop": "center",
+            "image": [
+              "4",
+              0
+            ],
+            "clip_vision": [
+              "5",
+              0
+            ]
+          },
+          "class_type": "CLIPVisionEncode"
+        },
+        "7": {
+          "inputs": {
+            "clip_vision_output": [
+              "6",
+              0
+            ]
+          },
+          "class_type": "Hunyuan3Dv2Conditioning"
+        },
+        "8": {
+          "inputs": {
+            "unet_name": "hunyuan3d21-dit-fp16-local.safetensors",
+            "weight_dtype": "default"
+          },
+          "class_type": "UNETLoader"
+        },
+        "9": {
+          "inputs": {
+            "model": [
+              "8",
+              0
+            ],
+            "shift": 1
+          },
+          "class_type": "ModelSamplingAuraFlow"
+        },
+        "10": {
+          "inputs": {
+            "batch_size": 1,
+            "resolution": 4096
+          },
+          "class_type": "EmptyLatentHunyuan3Dv2"
+        },
+        "11": {
+          "inputs": {
+            "cfg": 5,
+            "seed": 42,
+            "model": [
+              "9",
+              0
+            ],
+            "steps": 30,
+            "denoise": 1,
+            "negative": [
+              "7",
+              1
+            ],
+            "positive": [
+              "7",
+              0
+            ],
+            "scheduler": "normal",
+            "latent_image": [
+              "10",
+              0
+            ],
+            "sampler_name": "euler"
+          },
+          "class_type": "KSampler"
+        },
+        "12": {
+          "inputs": {
+            "vae_name": "hunyuan3d21-vae-fp16-local.safetensors"
+          },
+          "class_type": "VAELoader"
+        },
+        "13": {
+          "inputs": {
+            "vae": [
+              "12",
+              0
+            ],
+            "samples": [
+              "11",
+              0
+            ],
+            "num_chunks": 4000,
+            "octree_resolution": 256
+          },
+          "class_type": "VAEDecodeHunyuan3D"
+        },
+        "14": {
+          "inputs": {
+            "voxel": [
+              "13",
+              0
+            ],
+            "algorithm": "surface net",
+            "threshold": 0.6
+          },
+          "class_type": "VoxelToMesh"
+        },
+        "15": {
+          "inputs": {
+            "mesh": [
+              "14",
+              0
+            ],
+            "crease_angle": 60
+          },
+          "class_type": "MeshSmoothNormals"
+        },
+        "16": {
+          "inputs": {
+            "mesh": [
+              "15",
+              0
+            ]
+          },
+          "class_type": "MeshToFile3D"
+        },
+        "17": {
+          "inputs": {
+            "width": 768,
+            "height": 768,
+            "model_3d": [
+              "16",
+              0
+            ],
+            "viewport_state": "",
+            "filename_prefix": "platform-presets/comfy-3080-hunyuan3d21-511703/output"
+          },
+          "class_type": "Save3DAdvanced"
+        }
+      },
+      "frontend_differences": [
+        {
+          "node_id": "4",
+          "input": "width"
+        },
+        {
+          "node_id": "4",
+          "input": "height"
+        },
+        {
+          "node_id": "17",
+          "input": "viewport_state"
+        }
+      ],
+      "instructions_zh": "先替换上传素材与文本。此画布是编辑副本；API 调用继续使用原模型别名。缺失节点及前端控件差异须处理后才能运行。完整执行模板保存在此文件 extra.platform_preset.workflow_api。",
+      "instructions_en": "Replace uploaded media and text first. This canvas is an editable copy; API calls retain the original alias. Resolve missing nodes and frontend widget differences before running. The complete execution template is embedded in extra.platform_preset.workflow_api."
+    }
+  },
+  "version": 0.4
+}

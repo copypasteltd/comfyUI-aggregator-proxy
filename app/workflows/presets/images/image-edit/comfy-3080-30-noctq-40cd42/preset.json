@@ -1,0 +1,35 @@
+{
+  "alias": "comfy-3080-30-noctq-40cd42",
+  "display_name": "NoctQ v4 · 图像编辑 · 1024x1024 · RTX 3080 · a96349",
+  "task_type": "image_to_image",
+  "device": "rtx3080",
+  "directory": "images/image-edit/comfy-3080-30-noctq-40cd42",
+  "native_workflow": "平台预设/2026-11-16/images/image-edit/comfy-3080-30-noctq-40cd42.json",
+  "release_id": "wfr_478944eccc904ef7881d4b1d4a4101e3",
+  "release_digest": "b91d65bbc2b122b82bc4dfb90bcacb10e04fcda98fd5ebb86457540653dea1fa",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPLoader",
+    "ImageScale",
+    "KSampler",
+    "LoadImage",
+    "QwenImage21Cache",
+    "SaveImage",
+    "TextEncodeQwenImage21",
+    "UNETLoader",
+    "VAEDecode",
+    "VAELoader"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

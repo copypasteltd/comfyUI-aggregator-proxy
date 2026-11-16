@@ -1,0 +1,35 @@
+{
+  "alias": "comfy-3080-triposg-b4d86d",
+  "display_name": "TripoSG · 图像转三维 · 几何 GLB · RTX 3080 · 64410a",
+  "task_type": "image_to_3d",
+  "device": "rtx3080",
+  "directory": "3d/image-to-3d/comfy-3080-triposg-b4d86d",
+  "native_workflow": "平台预设/2026-11-16/3d/image-to-3d/comfy-3080-triposg-b4d86d.json",
+  "release_id": "wfr_22c0aad124294a3c8a309e802fb30ee4",
+  "release_digest": "817464dacbddb9fdba7bf7061f25937034e9642381ecbf553a4c098782f1fd01",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "LoadImage",
+    "NativeWindows3D",
+    "Save3DAdvanced"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "NativeWindows3D"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [
+      {
+        "node_id": "3",
+        "input": "viewport_state"
+      }
+    ],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

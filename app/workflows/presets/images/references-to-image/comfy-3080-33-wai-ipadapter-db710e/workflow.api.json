@@ -1,0 +1,168 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "waiIllustriousSDXL_v170.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "2": {
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A small blue ceramic teapot on a plain background."
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "3": {
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": ""
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "4": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_IMAGE_1.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "5": {
+    "inputs": {
+      "crop": "disabled",
+      "image": [
+        "4",
+        0
+      ],
+      "width": 768,
+      "height": 768,
+      "upscale_method": "lanczos"
+    },
+    "class_type": "ImageScale"
+  },
+  "6": {
+    "inputs": {
+      "vae": [
+        "1",
+        2
+      ],
+      "pixels": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "VAEEncode"
+  },
+  "7": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_REFERENCE_IMAGE_2.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "8": {
+    "inputs": {
+      "image1": [
+        "4",
+        0
+      ],
+      "image2": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "ImageBatch"
+  },
+  "10": {
+    "inputs": {
+      "cfg": 7,
+      "seed": 42,
+      "model": [
+        "15",
+        0
+      ],
+      "steps": 25,
+      "denoise": 0.9,
+      "negative": [
+        "3",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "scheduler": "normal",
+      "latent_image": [
+        "6",
+        0
+      ],
+      "sampler_name": "euler_ancestral"
+    },
+    "class_type": "KSampler"
+  },
+  "11": {
+    "inputs": {
+      "vae": [
+        "1",
+        2
+      ],
+      "samples": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "12": {
+    "inputs": {
+      "images": [
+        "11",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-33-wai-ipadapter-db710e/output"
+    },
+    "class_type": "SaveImage"
+  },
+  "13": {
+    "inputs": {
+      "clip_name": "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    },
+    "class_type": "CLIPVisionLoader"
+  },
+  "14": {
+    "inputs": {
+      "ipadapter_file": "ip-adapter-plus_sdxl_vit-h.safetensors"
+    },
+    "class_type": "IPAdapterModelLoader"
+  },
+  "15": {
+    "inputs": {
+      "image": [
+        "8",
+        0
+      ],
+      "model": [
+        "1",
+        0
+      ],
+      "end_at": 0.85,
+      "weight": 0.55,
+      "start_at": 0,
+      "ipadapter": [
+        "14",
+        0
+      ],
+      "clip_vision": [
+        "13",
+        0
+      ],
+      "weight_type": "linear",
+      "combine_embeds": "concat",
+      "embeds_scaling": "V only"
+    },
+    "class_type": "IPAdapterAdvanced"
+  }
+}

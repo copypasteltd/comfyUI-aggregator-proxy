@@ -1,0 +1,35 @@
+{
+  "alias": "comfy-3080-02-soulx-podcast-1-7b-9108b8",
+  "display_name": "SoulX Podcast · 单人语音 · 30s · RTX 3080 · 639eaf",
+  "task_type": "text_to_audio",
+  "device": "rtx3080",
+  "directory": "audio/speech/comfy-3080-02-soulx-podcast-1-7b-9108b8",
+  "native_workflow": "平台预设/2026-11-16/audio/speech/comfy-3080-02-soulx-podcast-1-7b-9108b8.json",
+  "release_id": "wfr_b4898c5b35e44d34bd159779175ef9b2",
+  "release_digest": "a8a8501985e986a906a951f72b5d706b324eb29ef6a507df27f314e003d40bd6",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "LoadAudio",
+    "SaveAudioMP3",
+    "SoulXPodcastGenerate",
+    "SoulXPodcastInputParser",
+    "SoulXPodcastLoader",
+    "TrimAudioDuration"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "SoulXPodcastGenerate",
+      "SoulXPodcastInputParser",
+      "SoulXPodcastLoader"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

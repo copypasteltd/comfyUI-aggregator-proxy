@@ -1,0 +1,32 @@
+{
+  "alias": "comfy-3080-music-yue2",
+  "display_name": "YuE2 · 音乐生成 · RTX 3080",
+  "task_type": "text_to_audio",
+  "device": "rtx3080",
+  "directory": "audio/music/comfy-3080-music-yue2",
+  "native_workflow": "平台预设/2026-11-16/audio/music/comfy-3080-music-yue2.json",
+  "release_id": "wfr_4455b320d0f8402caf282d533e938f55",
+  "release_digest": "c6ef5a078de1fa207441ca4bed549ddfbe89a1bf0f7cb8dd446a140ad52183bc",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CheckpointLoaderSimple",
+    "ConditioningZeroOut",
+    "EmptyYuE2LatentAudio",
+    "KSampler",
+    "SaveAudio",
+    "VAEDecodeAudio",
+    "YuE2GenerateMusic"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

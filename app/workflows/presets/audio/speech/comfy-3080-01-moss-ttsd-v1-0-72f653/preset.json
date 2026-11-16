@@ -1,0 +1,31 @@
+{
+  "alias": "comfy-3080-01-moss-ttsd-v1-0-72f653",
+  "display_name": "MOSS-TTSD v1.0 · 单人语音 · 30s · RTX 3080 · 40c09c",
+  "task_type": "text_to_audio",
+  "device": "rtx3080",
+  "directory": "audio/speech/comfy-3080-01-moss-ttsd-v1-0-72f653",
+  "native_workflow": "平台预设/2026-11-16/audio/speech/comfy-3080-01-moss-ttsd-v1-0-72f653.json",
+  "release_id": "wfr_bd9980f27ca949b8ba0b5434ccb3fa57",
+  "release_digest": "e53956158f3e28cbc3f912005892615c798696d7ba9d2a17d64570f10971451f",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "LoadAudio",
+    "PodcastTrioNative",
+    "SaveAudioMP3",
+    "TrimAudioDuration"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "PodcastTrioNative"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

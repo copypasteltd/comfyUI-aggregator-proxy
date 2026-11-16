@@ -1,0 +1,55 @@
+{
+  "alias": "comfy-3080-hunyuan3d21-511703",
+  "display_name": "Hunyuan3D · 图像转三维 · 几何 GLB · RTX 3080 · ab3b5b",
+  "task_type": "image_to_3d",
+  "device": "rtx3080",
+  "directory": "3d/image-to-3d/comfy-3080-hunyuan3d21-511703",
+  "native_workflow": "平台预设/2026-11-16/3d/image-to-3d/comfy-3080-hunyuan3d21-511703.json",
+  "release_id": "wfr_d2b0df4630334a709cbfb72f3e5f5cc9",
+  "release_digest": "f9e145c6fcfdb479649dcbd26229ebcec3e9f1212c601ede44ac826535a87cb7",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPVisionEncode",
+    "CLIPVisionLoader",
+    "EmptyLatentHunyuan3Dv2",
+    "Hunyuan3Dv2Conditioning",
+    "ImageCropToMask",
+    "KSampler",
+    "LoadBackgroundRemovalModel",
+    "LoadImage",
+    "MeshSmoothNormals",
+    "MeshToFile3D",
+    "ModelSamplingAuraFlow",
+    "RemoveBackground",
+    "Save3DAdvanced",
+    "UNETLoader",
+    "VAEDecodeHunyuan3D",
+    "VAELoader",
+    "VoxelToMesh"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [
+      {
+        "node_id": "4",
+        "input": "width"
+      },
+      {
+        "node_id": "4",
+        "input": "height"
+      },
+      {
+        "node_id": "17",
+        "input": "viewport_state"
+      }
+    ],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "alias": "comfy-3080-uniforge3d-1231f7",
+  "display_name": "UniForge3D · 多视图转三维 · RTX 3080 · aae913",
+  "task_type": "image_to_3d",
+  "device": "rtx3080",
+  "directory": "3d/multiview-to-3d/comfy-3080-uniforge3d-1231f7",
+  "native_workflow": "平台预设/2026-11-16/3d/multiview-to-3d/comfy-3080-uniforge3d-1231f7.json",
+  "release_id": "wfr_672f199f31d1405fadde9ddc2f9bbead",
+  "release_digest": "4b0ea6c09fa84d39fc36276f4b6c6b7afad950bc190313b1d90e08ba955f8249",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPVisionLoader",
+    "LoadBackgroundRemovalModel",
+    "LoadImage",
+    "RemoveBackground",
+    "SaveGLB",
+    "UniForge3DGenerate",
+    "UniForge3DLoader",
+    "UniForge3DViews"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "UniForge3DGenerate",
+      "UniForge3DLoader",
+      "UniForge3DViews"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

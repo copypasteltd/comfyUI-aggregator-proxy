@@ -1,0 +1,57 @@
+{
+  "alias": "comfy-3080-pixal3d-mv-3a489f",
+  "display_name": "Pixal3D · 多视图转三维 · UV/PBR GLB · RTX 3080 · 7d0a4a",
+  "task_type": "image_to_3d",
+  "device": "rtx3080",
+  "directory": "3d/multiview-to-3d/comfy-3080-pixal3d-mv-3a489f",
+  "native_workflow": "平台预设/2026-11-16/3d/multiview-to-3d/comfy-3080-pixal3d-mv-3a489f.json",
+  "release_id": "wfr_e5192f33b136445c93ff7139d9c62abd",
+  "release_digest": "ba93262d15bdfa8022fa23889f6474549a175a3b74193bcb34020562f9acbc70",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "ApplyTextureToMesh",
+    "BakeAmbientOcclusion",
+    "BakeNormalMapFromMesh",
+    "BakeTextureFromVoxel",
+    "CFGOverride",
+    "CLIPVisionLoader",
+    "DecimateMesh",
+    "EmptyTrellis2LatentStructure",
+    "ImageCropToMask",
+    "KSampler",
+    "LoadBackgroundRemovalModel",
+    "LoadImage",
+    "MeshSmoothNormals",
+    "MeshToFile3D",
+    "ModelSamplingSD3",
+    "Pixal3DMultiViewConditioning",
+    "RemoveBackground",
+    "RescaleCFG",
+    "Save3DAdvanced",
+    "Trellis2ShapeStage",
+    "Trellis2TextureStage",
+    "UNETLoader",
+    "UnwrapMesh",
+    "VAELoader",
+    "VaeDecodeShapeTrellis",
+    "VaeDecodeStructureTrellis2",
+    "VaeDecodeTextureTrellis"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [
+      {
+        "node_id": "39",
+        "input": "viewport_state"
+      }
+    ],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

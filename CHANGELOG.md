@@ -1,5 +1,12 @@
 # 更新日志 / Changelog
 
+## 2026-11-16 · Categorized published presets / 已发布预设归档
+
+- Archive all 45 existing aliases: 15 image, six video, ten audio and 14 3D presets. Add classified API templates, native canvases, bindings, usage/request examples, immutable release pins and a complete checksum index under `app/workflows/presets/`.
+- 新增三设备共享原生目录 `平台预设/2026-11-16/`，分别保存 39 / 3 / 3 项。通过已有设备授权与持久幂等协议写入，逐文件回读；保留原文件、45 个发布别名和冻结图，本次临时设备占用已安全归还。
+- Keep private device paths separate, replace test media/text with explicit examples, embed the complete API graph in every canvas and record missing nodes/frontend widget differences. Sixteen presets currently lack node declarations; 15 canvas conversions differ. No weights installed or GPU generation performed.
+- Pass 12 archive cases, all 316 file digests, 45 read-only native conversions, 53 final API/source checks and nine real browser checks across four media types. Record 45 write intents/completions in production, retain the five service processes and database head, and add bilingual usage, actual desktop/mobile screenshots, original-speed MP4 and GIF. Details: [151](docs/151-已发布预设工作流分类归档.md).
+
 ## 2026-11-16 · Complete native Workflows / 原生工作流目录修复
 
 - Replace the empty private-only native catalog with the live source Workflows tree. Preserve original folders/Unicode filenames, v1/v2 listing, metadata and exact file reads, without filtering missing model/node dependencies. Keep existing Key-private files in `@personal` and escape reserved source folder names.

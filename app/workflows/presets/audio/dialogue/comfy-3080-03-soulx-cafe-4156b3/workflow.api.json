@@ -1,0 +1,85 @@
+{
+  "1": {
+    "inputs": {
+      "audio": "REPLACE_WITH_UPLOAD_SPEAKER_1.wav"
+    },
+    "class_type": "LoadAudio"
+  },
+  "2": {
+    "inputs": {
+      "audio": "REPLACE_WITH_UPLOAD_SPEAKER_2.wav"
+    },
+    "class_type": "LoadAudio"
+  },
+  "3": {
+    "inputs": {
+      "seed": 42,
+      "fp16_flow": false,
+      "llm_engine": "hf",
+      "model_name": "SoulX-Podcast-1.7B"
+    },
+    "class_type": "SoulXPodcastLoader"
+  },
+  "4": {
+    "inputs": {
+      "input_mode": "json",
+      "json_config": "{\"speakers\":{\"S1\":{\"prompt_text\":\"Example text\"},\"S2\":{\"prompt_text\":\"Example text\"}}}",
+      "soulx_model": [
+        "3",
+        0
+      ],
+      "S1_prompt_audio": [
+        "1",
+        0
+      ],
+      "S2_prompt_audio": [
+        "2",
+        0
+      ],
+      "dialogue_script": "Example text"
+    },
+    "class_type": "SoulXPodcastInputParser"
+  },
+  "5": {
+    "inputs": {
+      "seed": 42,
+      "top_k": 100,
+      "top_p": 0.9,
+      "max_tokens": 4000,
+      "min_tokens": 8,
+      "soulx_model": [
+        "3",
+        0
+      ],
+      "temperature": 0.6,
+      "podcast_input": [
+        "4",
+        0
+      ],
+      "repetition_penalty": 1.25
+    },
+    "class_type": "SoulXPodcastGenerate"
+  },
+  "21": {
+    "inputs": {
+      "audio": [
+        "rc_audio_trim",
+        0
+      ],
+      "quality": "320k",
+      "filename_prefix": "platform-presets/comfy-3080-03-soulx-cafe-4156b3/output"
+    },
+    "class_type": "SaveAudioMP3"
+  },
+  "rc_audio_trim": {
+    "inputs": {
+      "audio": [
+        "5",
+        0
+      ],
+      "duration": 30,
+      "start_index": 0
+    },
+    "class_type": "TrimAudioDuration"
+  }
+}

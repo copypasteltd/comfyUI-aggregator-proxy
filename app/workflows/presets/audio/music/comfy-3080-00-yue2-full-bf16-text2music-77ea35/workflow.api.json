@@ -1,0 +1,97 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "yue2_3b_bf16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "2": {
+    "inputs": {
+      "abc": "",
+      "clip": [
+        "1",
+        1
+      ],
+      "mode": "full",
+      "seed": 42,
+      "style": "Example text",
+      "top_k": 100,
+      "top_p": 0.95,
+      "lyrics": "",
+      "cfg_scale": 1.01,
+      "temperature": 1,
+      "max_duration": 30,
+      "repetition_penalty": 1.2
+    },
+    "class_type": "YuE2GenerateMusic"
+  },
+  "3": {
+    "inputs": {
+      "seconds": [
+        "2",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyYuE2LatentAudio"
+  },
+  "4": {
+    "inputs": {
+      "conditioning": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut"
+  },
+  "5": {
+    "inputs": {
+      "cfg": 1,
+      "seed": 42,
+      "model": [
+        "1",
+        0
+      ],
+      "steps": 32,
+      "denoise": 1,
+      "negative": [
+        "4",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "scheduler": "sgm_uniform",
+      "latent_image": [
+        "3",
+        0
+      ],
+      "sampler_name": "dpm_2"
+    },
+    "class_type": "KSampler"
+  },
+  "6": {
+    "inputs": {
+      "vae": [
+        "1",
+        2
+      ],
+      "samples": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeAudio"
+  },
+  "7": {
+    "inputs": {
+      "audio": [
+        "6",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-00-yue2-full-bf16-text2music-77ea35/output"
+    },
+    "class_type": "SaveAudio"
+  }
+}

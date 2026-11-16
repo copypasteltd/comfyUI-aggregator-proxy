@@ -1,0 +1,74 @@
+{
+  "1": {
+    "inputs": {
+      "seed": 42,
+      "fp16_flow": false,
+      "llm_engine": "hf",
+      "model_name": "SoulX-Podcast-1.7B"
+    },
+    "class_type": "SoulXPodcastLoader"
+  },
+  "2": {
+    "inputs": {
+      "audio": "REPLACE_WITH_UPLOAD_SPEAKER_1.wav"
+    },
+    "class_type": "LoadAudio"
+  },
+  "3": {
+    "inputs": {
+      "input_mode": "json",
+      "json_config": "{\"speakers\":{\"S1\":{\"prompt_text\":\"Example text\"}}}",
+      "soulx_model": [
+        "1",
+        0
+      ],
+      "S1_prompt_audio": [
+        "2",
+        0
+      ],
+      "dialogue_script": "Example text"
+    },
+    "class_type": "SoulXPodcastInputParser"
+  },
+  "4": {
+    "inputs": {
+      "seed": 42,
+      "top_k": 100,
+      "top_p": 0.9,
+      "max_tokens": 1500,
+      "min_tokens": 8,
+      "soulx_model": [
+        "1",
+        0
+      ],
+      "temperature": 0.6,
+      "podcast_input": [
+        "3",
+        0
+      ],
+      "repetition_penalty": 1.25
+    },
+    "class_type": "SoulXPodcastGenerate"
+  },
+  "5": {
+    "inputs": {
+      "audio": [
+        "rc_audio_trim",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-20-soulx-official-voice-tts-d02a47/output"
+    },
+    "class_type": "SaveAudio"
+  },
+  "rc_audio_trim": {
+    "inputs": {
+      "audio": [
+        "4",
+        0
+      ],
+      "duration": 30,
+      "start_index": 0
+    },
+    "class_type": "TrimAudioDuration"
+  }
+}

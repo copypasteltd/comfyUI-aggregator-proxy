@@ -1,0 +1,377 @@
+{
+  "1": {
+    "inputs": {
+      "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "2": {
+    "inputs": {
+      "bg_removal_name": "birefnet.safetensors"
+    },
+    "class_type": "LoadBackgroundRemovalModel"
+  },
+  "3": {
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "bg_removal_model": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "RemoveBackground"
+  },
+  "4": {
+    "inputs": {
+      "masks": [
+        "3",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "images": [
+        "1",
+        0
+      ],
+      "grow_mask": 0,
+      "background": "#000000",
+      "pad_factor": 1.1
+    },
+    "class_type": "ImageCropToMask"
+  },
+  "5": {
+    "inputs": {
+      "clip_name": "dino_v3_L_naf_fp32.safetensors"
+    },
+    "class_type": "CLIPVisionLoader"
+  },
+  "6": {
+    "inputs": {
+      "image": [
+        "4",
+        0
+      ],
+      "camera_angle_x": [
+        "9",
+        0
+      ],
+      "clip_vision_model": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "Pixal3DConditioning"
+  },
+  "7": {
+    "inputs": {
+      "model_name": "moge_2_vitl_normal_fp16.safetensors"
+    },
+    "class_type": "LoadMoGeModel"
+  },
+  "8": {
+    "inputs": {
+      "image": [
+        "4",
+        0
+      ],
+      "apply_mask": true,
+      "batch_size": 1,
+      "moge_model": [
+        "7",
+        0
+      ],
+      "refine_steps": 3,
+      "fov_x_degrees": 0,
+      "force_projection": true,
+      "resolution_level": 6
+    },
+    "class_type": "MoGeInference"
+  },
+  "9": {
+    "inputs": {
+      "axis": "horizontal",
+      "unit": "degrees",
+      "moge_geometry": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "MoGeGeometryToFOV"
+  },
+  "10": {
+    "inputs": {
+      "unet_name": "pixal3d_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "11": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "end_percent": 1,
+      "start_percent": 0.667
+    },
+    "class_type": "CFGOverride"
+  },
+  "12": {
+    "inputs": {
+      "model": [
+        "11",
+        0
+      ],
+      "multiplier": 0.7
+    },
+    "class_type": "RescaleCFG"
+  },
+  "13": {
+    "inputs": {
+      "model": [
+        "12",
+        0
+      ],
+      "shift": 5
+    },
+    "class_type": "ModelSamplingSD3"
+  },
+  "14": {
+    "inputs": {
+      "batch_size": 1
+    },
+    "class_type": "EmptyTrellis2LatentStructure"
+  },
+  "15": {
+    "inputs": {
+      "cfg": 7.5,
+      "seed": 42,
+      "model": [
+        "13",
+        0
+      ],
+      "steps": 12,
+      "denoise": 1,
+      "negative": [
+        "6",
+        1
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "scheduler": "normal",
+      "latent_image": [
+        "14",
+        0
+      ],
+      "sampler_name": "euler"
+    },
+    "class_type": "KSampler"
+  },
+  "16": {
+    "inputs": {
+      "vae_name": "trellis_2_shape_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "17": {
+    "inputs": {
+      "vae": [
+        "16",
+        0
+      ],
+      "samples": [
+        "15",
+        0
+      ],
+      "resolution": "32"
+    },
+    "class_type": "VaeDecodeStructureTrellis2"
+  },
+  "18": {
+    "inputs": {
+      "voxel": [
+        "17",
+        0
+      ],
+      "negative": [
+        "6",
+        1
+      ],
+      "positive": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "Trellis2ShapeStage"
+  },
+  "19": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "end_percent": 1,
+      "start_percent": 0.769
+    },
+    "class_type": "CFGOverride"
+  },
+  "20": {
+    "inputs": {
+      "model": [
+        "19",
+        0
+      ],
+      "multiplier": 0.5
+    },
+    "class_type": "RescaleCFG"
+  },
+  "21": {
+    "inputs": {
+      "cfg": 7.5,
+      "seed": 42,
+      "model": [
+        "20",
+        0
+      ],
+      "steps": 20,
+      "denoise": 1,
+      "negative": [
+        "18",
+        1
+      ],
+      "positive": [
+        "18",
+        0
+      ],
+      "scheduler": "normal",
+      "latent_image": [
+        "18",
+        2
+      ],
+      "sampler_name": "euler"
+    },
+    "class_type": "KSampler"
+  },
+  "22": {
+    "inputs": {
+      "vae": [
+        "16",
+        0
+      ],
+      "samples": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "VaeDecodeShapeTrellis"
+  },
+  "23": {
+    "inputs": {
+      "negative": [
+        "18",
+        1
+      ],
+      "positive": [
+        "18",
+        0
+      ],
+      "shape_latent": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "Trellis2TextureStage"
+  },
+  "24": {
+    "inputs": {
+      "cfg": 1,
+      "seed": 42,
+      "model": [
+        "10",
+        0
+      ],
+      "steps": 12,
+      "denoise": 1,
+      "negative": [
+        "23",
+        1
+      ],
+      "positive": [
+        "23",
+        0
+      ],
+      "scheduler": "normal",
+      "latent_image": [
+        "23",
+        2
+      ],
+      "sampler_name": "euler"
+    },
+    "class_type": "KSampler"
+  },
+  "25": {
+    "inputs": {
+      "vae_name": "trellis_2_texture_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "26": {
+    "inputs": {
+      "vae": [
+        "25",
+        0
+      ],
+      "samples": [
+        "24",
+        0
+      ],
+      "shape_subdivides": [
+        "22",
+        1
+      ]
+    },
+    "class_type": "VaeDecodeTextureTrellis"
+  },
+  "27": {
+    "inputs": {
+      "mesh": [
+        "22",
+        0
+      ],
+      "voxel_colors": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "PaintMesh"
+  },
+  "28": {
+    "inputs": {
+      "mesh": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "MeshToFile3D"
+  },
+  "29": {
+    "inputs": {
+      "width": 768,
+      "height": 768,
+      "model_3d": [
+        "28",
+        0
+      ],
+      "viewport_state": "",
+      "filename_prefix": "platform-presets/comfy-3080-pixal3d-24a105/output"
+    },
+    "class_type": "Save3DAdvanced"
+  }
+}

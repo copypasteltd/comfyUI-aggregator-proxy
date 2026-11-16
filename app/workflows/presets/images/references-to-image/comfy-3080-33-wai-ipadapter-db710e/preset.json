@@ -1,0 +1,40 @@
+{
+  "alias": "comfy-3080-33-wai-ipadapter-db710e",
+  "display_name": "WAI Illustrious SDXL v17 · 多参考生图 · 768x768 · RTX 3080 · c4dc37",
+  "task_type": "references_to_image",
+  "device": "rtx3080",
+  "directory": "images/references-to-image/comfy-3080-33-wai-ipadapter-db710e",
+  "native_workflow": "平台预设/2026-11-16/images/references-to-image/comfy-3080-33-wai-ipadapter-db710e.json",
+  "release_id": "wfr_cc780964f4944913a06184f08b40f7df",
+  "release_digest": "9ed313e487eb938c6531aff5ebed5cab38bd848b9017be20c4028a0e221b493c",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPTextEncode",
+    "CLIPVisionLoader",
+    "CheckpointLoaderSimple",
+    "IPAdapterAdvanced",
+    "IPAdapterModelLoader",
+    "ImageBatch",
+    "ImageScale",
+    "KSampler",
+    "LoadImage",
+    "SaveImage",
+    "VAEDecode",
+    "VAEEncode"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": false,
+    "missing_node_classes": [
+      "IPAdapterAdvanced",
+      "IPAdapterModelLoader"
+    ],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "waiIllustriousSDXL_v170.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "2": {
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "A small blue ceramic teapot on a plain background."
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "3": {
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": ""
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "4": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "5": {
+    "inputs": {
+      "cfg": 6,
+      "seed": 42,
+      "model": [
+        "1",
+        0
+      ],
+      "steps": 25,
+      "denoise": 1,
+      "negative": [
+        "3",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "scheduler": "normal",
+      "latent_image": [
+        "4",
+        0
+      ],
+      "sampler_name": "euler_ancestral"
+    },
+    "class_type": "KSampler"
+  },
+  "6": {
+    "inputs": {
+      "vae": [
+        "1",
+        2
+      ],
+      "samples": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "7": {
+    "inputs": {
+      "images": [
+        "6",
+        0
+      ],
+      "filename_prefix": "platform-presets/comfy-3080-12-wai-illustrious-v17-exact-c249e8/output"
+    },
+    "class_type": "SaveImage"
+  }
+}

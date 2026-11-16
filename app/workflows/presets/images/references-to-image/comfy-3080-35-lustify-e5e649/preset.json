@@ -1,0 +1,38 @@
+{
+  "alias": "comfy-3080-35-lustify-e5e649",
+  "display_name": "Lustify v10 Krea2 · 多参考生图 · 512x512 · RTX 3080 · 1bde29",
+  "task_type": "references_to_image",
+  "device": "rtx3080",
+  "directory": "images/references-to-image/comfy-3080-35-lustify-e5e649",
+  "native_workflow": "平台预设/2026-11-16/images/references-to-image/comfy-3080-35-lustify-e5e649.json",
+  "release_id": "wfr_4d2dba3bb5764f59a5abb1495a814d53",
+  "release_digest": "1c89e2770ace61e4a37edd2b99c633d53e3ff7834f106731f2bf6ba4074d3628",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CLIPLoader",
+    "ConditioningZeroOut",
+    "EmptyLatentImage",
+    "FluxKontextMultiReferenceLatentMethod",
+    "KSampler",
+    "LoadImage",
+    "LoraLoaderModelOnly",
+    "ModelSamplingFlux",
+    "SaveImage",
+    "TextEncodeQwenImageEditPlus",
+    "UNETLoader",
+    "VAEDecode",
+    "VAELoader"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}

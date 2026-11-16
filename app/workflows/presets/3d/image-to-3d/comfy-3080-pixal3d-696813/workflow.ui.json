@@ -1,0 +1,3470 @@
+{
+  "id": "0e0da8a3-7fd8-4a34-8b43-427b706d2ab9",
+  "revision": 0,
+  "last_node_id": 40,
+  "last_link_id": 58,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        100,
+        130
+      ],
+      "size": [
+        270,
+        102
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "选择文件上传",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            4
+          ]
+        },
+        {
+          "localized_name": "遮罩",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 2,
+      "type": "LoadBackgroundRemovalModel",
+      "pos": [
+        100,
+        362
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "背景移除模型名称",
+          "name": "bg_removal_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "bg_removal_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "bg_model",
+          "name": "bg_model",
+          "type": "BACKGROUND_REMOVAL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadBackgroundRemovalModel"
+      },
+      "widgets_values": [
+        "birefnet.safetensors"
+      ],
+      "widgets_values_named": {
+        "bg_removal_name": "birefnet.safetensors"
+      }
+    },
+    {
+      "id": 3,
+      "type": "RemoveBackground",
+      "pos": [
+        470,
+        130
+      ],
+      "size": [
+        147.169921875,
+        46
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "背景移除模型",
+          "name": "bg_removal_model",
+          "type": "BACKGROUND_REMOVAL",
+          "link": 2
+        },
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "mask",
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RemoveBackground"
+      }
+    },
+    {
+      "id": 4,
+      "type": "ImageCropToMask",
+      "pos": [
+        840,
+        130
+      ],
+      "size": [
+        210,
+        174
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "图像",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4
+        },
+        {
+          "localized_name": "遮罩",
+          "name": "masks",
+          "type": "MASK",
+          "link": 3
+        },
+        {
+          "localized_name": "宽度",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "高度",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "pad_factor",
+          "name": "pad_factor",
+          "type": "FLOAT",
+          "widget": {
+            "name": "pad_factor"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "grow_mask",
+          "name": "grow_mask",
+          "type": "INT",
+          "widget": {
+            "name": "grow_mask"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "背景",
+          "name": "background",
+          "type": "COLOR",
+          "widget": {
+            "name": "background"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "图像",
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            5,
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCropToMask"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1.1,
+        0,
+        "#000000"
+      ],
+      "widgets_values_named": {
+        "width": 1024,
+        "height": 1024,
+        "pad_factor": 1.1,
+        "grow_mask": 0,
+        "background": "#000000"
+      }
+    },
+    {
+      "id": 5,
+      "type": "CLIPVisionLoader",
+      "pos": [
+        100,
+        550
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip名称",
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CLIP视觉",
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPVisionLoader"
+      },
+      "widgets_values": [
+        "dino_v3_L_naf_fp32.safetensors"
+      ],
+      "widgets_values_named": {
+        "clip_name": "dino_v3_L_naf_fp32.safetensors"
+      }
+    },
+    {
+      "id": 6,
+      "type": "Pixal3DConditioning",
+      "pos": [
+        1953.4234375,
+        130
+      ],
+      "size": [
+        270,
+        78
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip 视觉模型",
+          "name": "clip_vision_model",
+          "type": "CLIP_VISION",
+          "link": 7
+        },
+        {
+          "localized_name": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 5
+        },
+        {
+          "localized_name": "相机水平视场角",
+          "name": "camera_angle_x",
+          "type": "FLOAT",
+          "widget": {
+            "name": "camera_angle_x"
+          },
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "正面",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            16,
+            22
+          ]
+        },
+        {
+          "localized_name": "负面",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            15,
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Pixal3DConditioning"
+      },
+      "widgets_values": [
+        49.13
+      ],
+      "widgets_values_named": {
+        "camera_angle_x": 49.13
+      }
+    },
+    {
+      "id": 7,
+      "type": "LoadMoGeModel",
+      "pos": [
+        100,
+        738
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model_name",
+          "name": "model_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MOGE模型",
+          "name": "MOGE_MODEL",
+          "type": "MOGE_MODEL",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadMoGeModel"
+      },
+      "widgets_values": [
+        "moge_2_vitl_normal_fp16.safetensors"
+      ],
+      "widgets_values_named": {
+        "model_name": "moge_2_vitl_normal_fp16.safetensors"
+      }
+    },
+    {
+      "id": 8,
+      "type": "MoGeInference",
+      "pos": [
+        1210,
+        130
+      ],
+      "size": [
+        270,
+        198
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "moge_model",
+          "name": "moge_model",
+          "type": "MOGE_MODEL",
+          "link": 9
+        },
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 8
+        },
+        {
+          "localized_name": "resolution_level",
+          "name": "resolution_level",
+          "type": "INT",
+          "widget": {
+            "name": "resolution_level"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "fov_x_degrees",
+          "name": "fov_x_degrees",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fov_x_degrees"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "batch_size",
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "force_projection",
+          "name": "force_projection",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "force_projection"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "apply_mask",
+          "name": "apply_mask",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "apply_mask"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "refine_steps",
+          "name": "refine_steps",
+          "type": "INT",
+          "widget": {
+            "name": "refine_steps"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "moge_geometry",
+          "name": "moge_geometry",
+          "type": "MOGE_GEOMETRY",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MoGeInference"
+      },
+      "widgets_values": [
+        6,
+        0,
+        1,
+        true,
+        true,
+        3
+      ],
+      "widgets_values_named": {
+        "resolution_level": 6,
+        "fov_x_degrees": 0,
+        "batch_size": 1,
+        "force_projection": true,
+        "apply_mask": true,
+        "refine_steps": 3
+      }
+    },
+    {
+      "id": 9,
+      "type": "MoGeGeometryToFOV",
+      "pos": [
+        1580,
+        130
+      ],
+      "size": [
+        273.4234375,
+        102
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "moge_geometry",
+          "name": "moge_geometry",
+          "type": "MOGE_GEOMETRY",
+          "link": 10
+        },
+        {
+          "localized_name": "轴",
+          "name": "axis",
+          "type": "COMBO",
+          "widget": {
+            "name": "axis"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "单位",
+          "name": "unit",
+          "type": "COMBO",
+          "widget": {
+            "name": "unit"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "视场",
+          "name": "fov",
+          "type": "FLOAT",
+          "links": [
+            6
+          ]
+        },
+        {
+          "localized_name": "焦距（像素）",
+          "name": "focal_pixels",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MoGeGeometryToFOV"
+      },
+      "widgets_values": [
+        "horizontal",
+        "degrees"
+      ],
+      "widgets_values_named": {
+        "axis": "horizontal",
+        "unit": "degrees"
+      }
+    },
+    {
+      "id": 10,
+      "type": "UNETLoader",
+      "pos": [
+        100,
+        926
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "UNet名称",
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "数据类型",
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "weight_dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            11,
+            23,
+            34
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "pixal3d_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "pixal3d_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 11,
+      "type": "CFGOverride",
+      "pos": [
+        470,
+        306
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 11
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "起始百分比",
+          "name": "start_percent",
+          "type": "FLOAT",
+          "widget": {
+            "name": "start_percent"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "结束百分比",
+          "name": "end_percent",
+          "type": "FLOAT",
+          "widget": {
+            "name": "end_percent"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CFGOverride"
+      },
+      "widgets_values": [
+        1,
+        0.667,
+        1
+      ],
+      "widgets_values_named": {
+        "cfg": 1,
+        "start_percent": 0.667,
+        "end_percent": 1
+      }
+    },
+    {
+      "id": 12,
+      "type": "RescaleCFG",
+      "pos": [
+        840,
+        434
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 12
+        },
+        {
+          "localized_name": "乘数",
+          "name": "multiplier",
+          "type": "FLOAT",
+          "widget": {
+            "name": "multiplier"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RescaleCFG"
+      },
+      "widgets_values": [
+        0.7
+      ],
+      "widgets_values_named": {
+        "multiplier": 0.7
+      }
+    },
+    {
+      "id": 13,
+      "type": "ModelSamplingSD3",
+      "pos": [
+        1210,
+        458
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 13
+        },
+        {
+          "localized_name": "移位",
+          "name": "shift",
+          "type": "FLOAT",
+          "widget": {
+            "name": "shift"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingSD3"
+      },
+      "widgets_values": [
+        5
+      ],
+      "widgets_values_named": {
+        "shift": 5
+      }
+    },
+    {
+      "id": 14,
+      "type": "EmptyTrellis2LatentStructure",
+      "pos": [
+        100,
+        1138
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "batch_size",
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyTrellis2LatentStructure"
+      },
+      "widgets_values": [
+        1
+      ],
+      "widgets_values_named": {
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 15,
+      "type": "KSampler",
+      "pos": [
+        2323.4234375,
+        130
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 14
+        },
+        {
+          "localized_name": "正面条件",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 16
+        },
+        {
+          "localized_name": "负面条件",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "localized_name": "Latent图像",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 17
+        },
+        {
+          "localized_name": "种子",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "步数",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "采样器名称",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "调度器",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "降噪",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "randomize",
+        12,
+        7.5,
+        "euler",
+        "normal",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 42,
+        "control_after_generate": "randomize",
+        "steps": 12,
+        "cfg": 7.5,
+        "sampler_name": "euler",
+        "scheduler": "normal",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 16,
+      "type": "VAELoader",
+      "pos": [
+        100,
+        1326
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "vae名称",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            18,
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "trellis_2_shape_vae_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "trellis_2_shape_vae_bf16.safetensors"
+      }
+    },
+    {
+      "id": 17,
+      "type": "VaeDecodeStructureTrellis2",
+      "pos": [
+        2693.4234375,
+        130
+      ],
+      "size": [
+        270,
+        78
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "样本",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 19
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 18
+        },
+        {
+          "localized_name": "分辨率",
+          "name": "resolution",
+          "type": "COMBO",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "体素",
+          "name": "voxel",
+          "type": "VOXEL",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VaeDecodeStructureTrellis2"
+      },
+      "widgets_values": [
+        "32"
+      ],
+      "widgets_values_named": {
+        "resolution": "32"
+      }
+    },
+    {
+      "id": 18,
+      "type": "Trellis2ShapeStage",
+      "pos": [
+        3063.4234375,
+        130
+      ],
+      "size": [
+        147.3814453125,
+        66
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "正面",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 22
+        },
+        {
+          "localized_name": "负面",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 21
+        },
+        {
+          "localized_name": "体素",
+          "name": "voxel",
+          "type": "VOXEL",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "正面",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            27,
+            32
+          ]
+        },
+        {
+          "localized_name": "负面",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            26,
+            31
+          ]
+        },
+        {
+          "localized_name": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Trellis2ShapeStage"
+      }
+    },
+    {
+      "id": 19,
+      "type": "CFGOverride",
+      "pos": [
+        470,
+        542
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 23
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "起始百分比",
+          "name": "start_percent",
+          "type": "FLOAT",
+          "widget": {
+            "name": "start_percent"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "结束百分比",
+          "name": "end_percent",
+          "type": "FLOAT",
+          "widget": {
+            "name": "end_percent"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CFGOverride"
+      },
+      "widgets_values": [
+        1,
+        0.769,
+        1
+      ],
+      "widgets_values_named": {
+        "cfg": 1,
+        "start_percent": 0.769,
+        "end_percent": 1
+      }
+    },
+    {
+      "id": 20,
+      "type": "RescaleCFG",
+      "pos": [
+        840,
+        622
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 24
+        },
+        {
+          "localized_name": "乘数",
+          "name": "multiplier",
+          "type": "FLOAT",
+          "widget": {
+            "name": "multiplier"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RescaleCFG"
+      },
+      "widgets_values": [
+        0.5
+      ],
+      "widgets_values_named": {
+        "multiplier": 0.5
+      }
+    },
+    {
+      "id": 21,
+      "type": "KSampler",
+      "pos": [
+        3310.8048828125,
+        130
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 25
+        },
+        {
+          "localized_name": "正面条件",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 27
+        },
+        {
+          "localized_name": "负面条件",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 26
+        },
+        {
+          "localized_name": "Latent图像",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 28
+        },
+        {
+          "localized_name": "种子",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "步数",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "采样器名称",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "调度器",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "降噪",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            30,
+            33
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "randomize",
+        20,
+        7.5,
+        "euler",
+        "normal",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 42,
+        "control_after_generate": "randomize",
+        "steps": 20,
+        "cfg": 7.5,
+        "sampler_name": "euler",
+        "scheduler": "normal",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 22,
+      "type": "VaeDecodeShapeTrellis",
+      "pos": [
+        3680.8048828125,
+        130
+      ],
+      "size": [
+        178.0953125,
+        46
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "样本",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 30
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "links": [
+            41,
+            46,
+            48,
+            50
+          ]
+        },
+        {
+          "localized_name": "形状细分",
+          "name": "shape_subdivides",
+          "type": "SHAPE_SUBDIVIDES",
+          "links": [
+            40
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VaeDecodeShapeTrellis"
+      }
+    },
+    {
+      "id": 23,
+      "type": "Trellis2TextureStage",
+      "pos": [
+        3680.8048828125,
+        306
+      ],
+      "size": [
+        152.197265625,
+        66
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "正面",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 32
+        },
+        {
+          "localized_name": "负面",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 31
+        },
+        {
+          "localized_name": "shape_latent",
+          "name": "shape_latent",
+          "type": "LATENT",
+          "link": 33
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "正面",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            36
+          ]
+        },
+        {
+          "localized_name": "负面",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            35
+          ]
+        },
+        {
+          "localized_name": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            37
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Trellis2TextureStage"
+      }
+    },
+    {
+      "id": 24,
+      "type": "KSampler",
+      "pos": [
+        3958.9001953125003,
+        342
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 34
+        },
+        {
+          "localized_name": "正面条件",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 36
+        },
+        {
+          "localized_name": "负面条件",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 35
+        },
+        {
+          "localized_name": "Latent图像",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 37
+        },
+        {
+          "localized_name": "种子",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "步数",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "采样器名称",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "调度器",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "降噪",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            39
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        42,
+        "randomize",
+        12,
+        1,
+        "euler",
+        "normal",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 42,
+        "control_after_generate": "randomize",
+        "steps": 12,
+        "cfg": 1,
+        "sampler_name": "euler",
+        "scheduler": "normal",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 25,
+      "type": "VAELoader",
+      "pos": [
+        100,
+        1514
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "vae名称",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "trellis_2_texture_vae_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "trellis_2_texture_vae_bf16.safetensors"
+      }
+    },
+    {
+      "id": 26,
+      "type": "VaeDecodeTextureTrellis",
+      "pos": [
+        4328.900195312501,
+        318
+      ],
+      "size": [
+        178.0953125,
+        66
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "样本",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 39
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 38
+        },
+        {
+          "localized_name": "形状细分",
+          "name": "shape_subdivides",
+          "type": "SHAPE_SUBDIVIDES",
+          "link": 40
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "体素颜色",
+          "name": "voxel_colors",
+          "type": "VOXEL",
+          "links": [
+            45
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VaeDecodeTextureTrellis"
+      }
+    },
+    {
+      "id": 31,
+      "type": "DecimateMesh",
+      "pos": [
+        3958.9001953125003,
+        130
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "mesh",
+          "name": "mesh",
+          "type": "MESH",
+          "link": 41
+        },
+        {
+          "localized_name": "target_face_count",
+          "name": "target_face_count",
+          "type": "INT",
+          "widget": {
+            "name": "target_face_count"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "placement_mode",
+          "name": "placement_mode",
+          "type": "COMFY_DYNAMICCOMBO_V3",
+          "widget": {
+            "name": "placement_mode"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "mesh",
+          "name": "mesh",
+          "type": "MESH",
+          "links": [
+            42
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DecimateMesh"
+      },
+      "widgets_values": [
+        100000,
+        "midpoint"
+      ],
+      "widgets_values_named": {
+        "target_face_count": 100000,
+        "placement_mode": "midpoint"
+      }
+    },
+    {
+      "id": 32,
+      "type": "MeshSmoothNormals",
+      "pos": [
+        4328.900195312501,
+        130
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "link": 42
+        },
+        {
+          "localized_name": "crease_angle",
+          "name": "crease_angle",
+          "type": "FLOAT",
+          "widget": {
+            "name": "crease_angle"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "links": [
+            43
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MeshSmoothNormals"
+      },
+      "widgets_values": [
+        60
+      ],
+      "widgets_values_named": {
+        "crease_angle": 60
+      }
+    },
+    {
+      "id": 33,
+      "type": "UnwrapMesh",
+      "pos": [
+        4698.900195312501,
+        130
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "link": 43
+        },
+        {
+          "localized_name": "分割器",
+          "name": "segmenter",
+          "type": "COMBO",
+          "widget": {
+            "name": "segmenter"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "分辨率",
+          "name": "resolution",
+          "type": "INT",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "边距",
+          "name": "padding",
+          "type": "INT",
+          "widget": {
+            "name": "padding"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "weld_distance",
+          "name": "weld_distance",
+          "type": "FLOAT",
+          "widget": {
+            "name": "weld_distance"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "links": [
+            44,
+            47,
+            49,
+            51
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnwrapMesh"
+      },
+      "widgets_values": [
+        "pec",
+        2048,
+        2,
+        0
+      ],
+      "widgets_values_named": {
+        "segmenter": "pec",
+        "resolution": 2048,
+        "padding": 2,
+        "weld_distance": 0
+      }
+    },
+    {
+      "id": 34,
+      "type": "BakeTextureFromVoxel",
+      "pos": [
+        5068.900195312501,
+        130
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "mesh",
+          "name": "mesh",
+          "type": "MESH",
+          "link": 44
+        },
+        {
+          "localized_name": "voxel_colors",
+          "name": "voxel_colors",
+          "type": "VOXEL",
+          "link": 45
+        },
+        {
+          "localized_name": "reference_mesh",
+          "name": "reference_mesh",
+          "shape": 7,
+          "type": "MESH",
+          "link": 46
+        },
+        {
+          "localized_name": "texture_size",
+          "name": "texture_size",
+          "type": "INT",
+          "widget": {
+            "name": "texture_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "base_color",
+          "name": "base_color",
+          "type": "IMAGE",
+          "links": [
+            55
+          ]
+        },
+        {
+          "localized_name": "metallic",
+          "name": "metallic",
+          "type": "IMAGE",
+          "links": [
+            52
+          ]
+        },
+        {
+          "localized_name": "roughness",
+          "name": "roughness",
+          "type": "IMAGE",
+          "links": [
+            54
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BakeTextureFromVoxel"
+      },
+      "widgets_values": [
+        2048
+      ],
+      "widgets_values_named": {
+        "texture_size": 2048
+      }
+    },
+    {
+      "id": 35,
+      "type": "BakeNormalMapFromMesh",
+      "pos": [
+        5068.900195312501,
+        358
+      ],
+      "size": [
+        270,
+        126
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "low_poly",
+          "name": "low_poly",
+          "type": "MESH",
+          "link": 47
+        },
+        {
+          "localized_name": "high_poly",
+          "name": "high_poly",
+          "type": "MESH",
+          "link": 48
+        },
+        {
+          "localized_name": "resolution",
+          "name": "resolution",
+          "type": "INT",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cage_distance",
+          "name": "cage_distance",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cage_distance"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "ignore_backfaces",
+          "name": "ignore_backfaces",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "ignore_backfaces"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "normal_map",
+          "name": "normal_map",
+          "type": "IMAGE",
+          "links": [
+            56
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BakeNormalMapFromMesh"
+      },
+      "widgets_values": [
+        2048,
+        0.05,
+        true
+      ],
+      "widgets_values_named": {
+        "resolution": 2048,
+        "cage_distance": 0.05,
+        "ignore_backfaces": true
+      }
+    },
+    {
+      "id": 36,
+      "type": "BakeAmbientOcclusion",
+      "pos": [
+        5068.900195312501,
+        614
+      ],
+      "size": [
+        270,
+        174
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "low_poly",
+          "name": "low_poly",
+          "type": "MESH",
+          "link": 49
+        },
+        {
+          "localized_name": "high_poly",
+          "name": "high_poly",
+          "type": "MESH",
+          "link": 50
+        },
+        {
+          "localized_name": "resolution",
+          "name": "resolution",
+          "type": "INT",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "samples",
+          "name": "samples",
+          "type": "INT",
+          "widget": {
+            "name": "samples"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "max_distance",
+          "name": "max_distance",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_distance"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "strength",
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "bias",
+          "name": "bias",
+          "type": "FLOAT",
+          "widget": {
+            "name": "bias"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "occlusion",
+          "name": "occlusion",
+          "type": "IMAGE",
+          "links": [
+            53
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BakeAmbientOcclusion"
+      },
+      "widgets_values": [
+        1024,
+        16,
+        0.5,
+        1,
+        0.01
+      ],
+      "widgets_values_named": {
+        "resolution": 1024,
+        "samples": 16,
+        "max_distance": 0.5,
+        "strength": 1,
+        "bias": 0.01
+      }
+    },
+    {
+      "id": 37,
+      "type": "ApplyTextureToMesh",
+      "pos": [
+        5438.900195312501,
+        130
+      ],
+      "size": [
+        151.9,
+        126
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "mesh",
+          "name": "mesh",
+          "type": "MESH",
+          "link": 51
+        },
+        {
+          "localized_name": "base_color",
+          "name": "base_color",
+          "type": "IMAGE",
+          "link": 55
+        },
+        {
+          "localized_name": "metallic",
+          "name": "metallic",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 52
+        },
+        {
+          "localized_name": "roughness",
+          "name": "roughness",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 54
+        },
+        {
+          "localized_name": "occlusion",
+          "name": "occlusion",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 53
+        },
+        {
+          "localized_name": "normal_map",
+          "name": "normal_map",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 56
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "mesh",
+          "name": "mesh",
+          "type": "MESH",
+          "links": [
+            57
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyTextureToMesh"
+      }
+    },
+    {
+      "id": 38,
+      "type": "MeshToFile3D",
+      "pos": [
+        5690.8001953125,
+        130
+      ],
+      "size": [
+        206.5259765625,
+        26
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "网格",
+          "name": "mesh",
+          "type": "MESH",
+          "link": 57
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "3D 模型",
+          "name": "model_3d",
+          "type": "FILE_3D_GLB",
+          "links": [
+            58
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MeshToFile3D"
+      }
+    },
+    {
+      "id": 39,
+      "type": "Save3DAdvanced",
+      "pos": [
+        5997.326171875,
+        130
+      ],
+      "size": [
+        400,
+        550
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model_3d",
+          "name": "model_3d",
+          "type": "FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
+          "link": 58
+        },
+        {
+          "localized_name": "model_3d_info",
+          "name": "model_3d_info",
+          "shape": 7,
+          "type": "LOAD3D_MODEL_INFO",
+          "link": null
+        },
+        {
+          "localized_name": "camera_info",
+          "name": "camera_info",
+          "shape": 7,
+          "type": "LOAD3D_CAMERA",
+          "link": null
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "viewport_state",
+          "name": "viewport_state",
+          "type": "LOAD_3D",
+          "widget": {
+            "name": "viewport_state"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model_3d",
+          "name": "model_3d",
+          "type": "FILE_3D",
+          "links": null
+        },
+        {
+          "localized_name": "model_3d_info",
+          "name": "model_3d_info",
+          "type": "LOAD3D_MODEL_INFO",
+          "links": null
+        },
+        {
+          "localized_name": "camera_info",
+          "name": "camera_info",
+          "type": "LOAD3D_CAMERA",
+          "links": null
+        },
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Camera Config": {
+          "cameraType": "perspective",
+          "fov": 35,
+          "state": {
+            "position": {
+              "x": 10,
+              "y": 10,
+              "z": 10.000000000000002
+            },
+            "target": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "zoom": 1,
+            "cameraType": "perspective",
+            "quaternion": {
+              "x": -0.2798481423331213,
+              "y": 0.3647051996310008,
+              "z": 0.11591689595929511,
+              "w": 0.8804762392171493
+            },
+            "fov": 35,
+            "aspect": 1,
+            "near": 0.01,
+            "far": 10000,
+            "frustum": {
+              "left": -5,
+              "right": 5,
+              "top": 5,
+              "bottom": -5
+            }
+          }
+        }
+      },
+      "widgets_values": [
+        "platform-presets/comfy-3080-pixal3d-696813/output",
+        "",
+        768,
+        768
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "platform-presets/comfy-3080-pixal3d-696813/output",
+        "viewport_state": "",
+        "width": 768,
+        "height": 768
+      }
+    },
+    {
+      "id": 40,
+      "type": "Note",
+      "pos": [
+        100,
+        -290
+      ],
+      "size": [
+        650,
+        340
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "comfy-3080-pixal3d-696813\n\n平台预设 / Platform preset\n先上传并替换媒体输入。Upload and replace media inputs first.\n原 API 别名与冻结版本保留。Original API alias and frozen release are preserved.\n当前缺失节点 / Currently missing nodes: 无 / none\n前端控件差异 / Frontend widget differences: 1\n存在差异时以 workflow.api.json / extra.platform_preset.workflow_api 为准。\nWhen widgets differ, use the complete API template as the reference."
+      ],
+      "title": "平台预设说明 / Preset instructions",
+      "color": "#d2f53c",
+      "bgcolor": "#252827"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      3,
+      1,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "BACKGROUND_REMOVAL"
+    ],
+    [
+      3,
+      3,
+      0,
+      4,
+      1,
+      "MASK"
+    ],
+    [
+      4,
+      1,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      4,
+      0,
+      6,
+      1,
+      "IMAGE"
+    ],
+    [
+      6,
+      9,
+      0,
+      6,
+      2,
+      "FLOAT"
+    ],
+    [
+      7,
+      5,
+      0,
+      6,
+      0,
+      "CLIP_VISION"
+    ],
+    [
+      8,
+      4,
+      0,
+      8,
+      1,
+      "IMAGE"
+    ],
+    [
+      9,
+      7,
+      0,
+      8,
+      0,
+      "MOGE_MODEL"
+    ],
+    [
+      10,
+      8,
+      0,
+      9,
+      0,
+      "MOGE_GEOMETRY"
+    ],
+    [
+      11,
+      10,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      12,
+      11,
+      0,
+      12,
+      0,
+      "MODEL"
+    ],
+    [
+      13,
+      12,
+      0,
+      13,
+      0,
+      "MODEL"
+    ],
+    [
+      14,
+      13,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      15,
+      6,
+      1,
+      15,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      6,
+      0,
+      15,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      17,
+      14,
+      0,
+      15,
+      3,
+      "LATENT"
+    ],
+    [
+      18,
+      16,
+      0,
+      17,
+      1,
+      "VAE"
+    ],
+    [
+      19,
+      15,
+      0,
+      17,
+      0,
+      "LATENT"
+    ],
+    [
+      20,
+      17,
+      0,
+      18,
+      2,
+      "VOXEL"
+    ],
+    [
+      21,
+      6,
+      1,
+      18,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      22,
+      6,
+      0,
+      18,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      23,
+      10,
+      0,
+      19,
+      0,
+      "MODEL"
+    ],
+    [
+      24,
+      19,
+      0,
+      20,
+      0,
+      "MODEL"
+    ],
+    [
+      25,
+      20,
+      0,
+      21,
+      0,
+      "MODEL"
+    ],
+    [
+      26,
+      18,
+      1,
+      21,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      27,
+      18,
+      0,
+      21,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      28,
+      18,
+      2,
+      21,
+      3,
+      "LATENT"
+    ],
+    [
+      29,
+      16,
+      0,
+      22,
+      1,
+      "VAE"
+    ],
+    [
+      30,
+      21,
+      0,
+      22,
+      0,
+      "LATENT"
+    ],
+    [
+      31,
+      18,
+      1,
+      23,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      32,
+      18,
+      0,
+      23,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      33,
+      21,
+      0,
+      23,
+      2,
+      "LATENT"
+    ],
+    [
+      34,
+      10,
+      0,
+      24,
+      0,
+      "MODEL"
+    ],
+    [
+      35,
+      23,
+      1,
+      24,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      36,
+      23,
+      0,
+      24,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      37,
+      23,
+      2,
+      24,
+      3,
+      "LATENT"
+    ],
+    [
+      38,
+      25,
+      0,
+      26,
+      1,
+      "VAE"
+    ],
+    [
+      39,
+      24,
+      0,
+      26,
+      0,
+      "LATENT"
+    ],
+    [
+      40,
+      22,
+      1,
+      26,
+      2,
+      "SHAPE_SUBDIVIDES"
+    ],
+    [
+      41,
+      22,
+      0,
+      31,
+      0,
+      "MESH"
+    ],
+    [
+      42,
+      31,
+      0,
+      32,
+      0,
+      "MESH"
+    ],
+    [
+      43,
+      32,
+      0,
+      33,
+      0,
+      "MESH"
+    ],
+    [
+      44,
+      33,
+      0,
+      34,
+      0,
+      "MESH"
+    ],
+    [
+      45,
+      26,
+      0,
+      34,
+      1,
+      "VOXEL"
+    ],
+    [
+      46,
+      22,
+      0,
+      34,
+      2,
+      "MESH"
+    ],
+    [
+      47,
+      33,
+      0,
+      35,
+      0,
+      "MESH"
+    ],
+    [
+      48,
+      22,
+      0,
+      35,
+      1,
+      "MESH"
+    ],
+    [
+      49,
+      33,
+      0,
+      36,
+      0,
+      "MESH"
+    ],
+    [
+      50,
+      22,
+      0,
+      36,
+      1,
+      "MESH"
+    ],
+    [
+      51,
+      33,
+      0,
+      37,
+      0,
+      "MESH"
+    ],
+    [
+      52,
+      34,
+      1,
+      37,
+      2,
+      "IMAGE"
+    ],
+    [
+      53,
+      36,
+      0,
+      37,
+      4,
+      "IMAGE"
+    ],
+    [
+      54,
+      34,
+      2,
+      37,
+      3,
+      "IMAGE"
+    ],
+    [
+      55,
+      34,
+      0,
+      37,
+      1,
+      "IMAGE"
+    ],
+    [
+      56,
+      35,
+      0,
+      37,
+      5,
+      "IMAGE"
+    ],
+    [
+      57,
+      37,
+      0,
+      38,
+      0,
+      "MESH"
+    ],
+    [
+      58,
+      38,
+      0,
+      39,
+      0,
+      "FILE_3D_GLB"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9,
+      "offset": [
+        416,
+        110
+      ]
+    },
+    "platform_preset": {
+      "alias": "comfy-3080-pixal3d-696813",
+      "release_id": "wfr_507e46bd1ef0455a87e7ad95edf42370",
+      "release_digest": "eab947d42392f951b32cd03ff6ae1c1409abd4c7ea0bb1b6258959a3f99319de",
+      "workflow_api": {
+        "1": {
+          "inputs": {
+            "image": "REPLACE_WITH_UPLOAD_SOURCE_IMAGE.png"
+          },
+          "class_type": "LoadImage"
+        },
+        "2": {
+          "inputs": {
+            "bg_removal_name": "birefnet.safetensors"
+          },
+          "class_type": "LoadBackgroundRemovalModel"
+        },
+        "3": {
+          "inputs": {
+            "image": [
+              "1",
+              0
+            ],
+            "bg_removal_model": [
+              "2",
+              0
+            ]
+          },
+          "class_type": "RemoveBackground"
+        },
+        "4": {
+          "inputs": {
+            "masks": [
+              "3",
+              0
+            ],
+            "width": 1024,
+            "height": 1024,
+            "images": [
+              "1",
+              0
+            ],
+            "grow_mask": 0,
+            "background": "#000000",
+            "pad_factor": 1.1
+          },
+          "class_type": "ImageCropToMask"
+        },
+        "5": {
+          "inputs": {
+            "clip_name": "dino_v3_L_naf_fp32.safetensors"
+          },
+          "class_type": "CLIPVisionLoader"
+        },
+        "6": {
+          "inputs": {
+            "image": [
+              "4",
+              0
+            ],
+            "camera_angle_x": [
+              "9",
+              0
+            ],
+            "clip_vision_model": [
+              "5",
+              0
+            ]
+          },
+          "class_type": "Pixal3DConditioning"
+        },
+        "7": {
+          "inputs": {
+            "model_name": "moge_2_vitl_normal_fp16.safetensors"
+          },
+          "class_type": "LoadMoGeModel"
+        },
+        "8": {
+          "inputs": {
+            "image": [
+              "4",
+              0
+            ],
+            "apply_mask": true,
+            "batch_size": 1,
+            "moge_model": [
+              "7",
+              0
+            ],
+            "refine_steps": 3,
+            "fov_x_degrees": 0,
+            "force_projection": true,
+            "resolution_level": 6
+          },
+          "class_type": "MoGeInference"
+        },
+        "9": {
+          "inputs": {
+            "axis": "horizontal",
+            "unit": "degrees",
+            "moge_geometry": [
+              "8",
+              0
+            ]
+          },
+          "class_type": "MoGeGeometryToFOV"
+        },
+        "10": {
+          "inputs": {
+            "unet_name": "pixal3d_int8_convrot.safetensors",
+            "weight_dtype": "default"
+          },
+          "class_type": "UNETLoader"
+        },
+        "11": {
+          "inputs": {
+            "cfg": 1,
+            "model": [
+              "10",
+              0
+            ],
+            "end_percent": 1,
+            "start_percent": 0.667
+          },
+          "class_type": "CFGOverride"
+        },
+        "12": {
+          "inputs": {
+            "model": [
+              "11",
+              0
+            ],
+            "multiplier": 0.7
+          },
+          "class_type": "RescaleCFG"
+        },
+        "13": {
+          "inputs": {
+            "model": [
+              "12",
+              0
+            ],
+            "shift": 5
+          },
+          "class_type": "ModelSamplingSD3"
+        },
+        "14": {
+          "inputs": {
+            "batch_size": 1
+          },
+          "class_type": "EmptyTrellis2LatentStructure"
+        },
+        "15": {
+          "inputs": {
+            "cfg": 7.5,
+            "seed": 42,
+            "model": [
+              "13",
+              0
+            ],
+            "steps": 12,
+            "denoise": 1,
+            "negative": [
+              "6",
+              1
+            ],
+            "positive": [
+              "6",
+              0
+            ],
+            "scheduler": "normal",
+            "latent_image": [
+              "14",
+              0
+            ],
+            "sampler_name": "euler"
+          },
+          "class_type": "KSampler"
+        },
+        "16": {
+          "inputs": {
+            "vae_name": "trellis_2_shape_vae_bf16.safetensors"
+          },
+          "class_type": "VAELoader"
+        },
+        "17": {
+          "inputs": {
+            "vae": [
+              "16",
+              0
+            ],
+            "samples": [
+              "15",
+              0
+            ],
+            "resolution": "32"
+          },
+          "class_type": "VaeDecodeStructureTrellis2"
+        },
+        "18": {
+          "inputs": {
+            "voxel": [
+              "17",
+              0
+            ],
+            "negative": [
+              "6",
+              1
+            ],
+            "positive": [
+              "6",
+              0
+            ]
+          },
+          "class_type": "Trellis2ShapeStage"
+        },
+        "19": {
+          "inputs": {
+            "cfg": 1,
+            "model": [
+              "10",
+              0
+            ],
+            "end_percent": 1,
+            "start_percent": 0.769
+          },
+          "class_type": "CFGOverride"
+        },
+        "20": {
+          "inputs": {
+            "model": [
+              "19",
+              0
+            ],
+            "multiplier": 0.5
+          },
+          "class_type": "RescaleCFG"
+        },
+        "21": {
+          "inputs": {
+            "cfg": 7.5,
+            "seed": 42,
+            "model": [
+              "20",
+              0
+            ],
+            "steps": 20,
+            "denoise": 1,
+            "negative": [
+              "18",
+              1
+            ],
+            "positive": [
+              "18",
+              0
+            ],
+            "scheduler": "normal",
+            "latent_image": [
+              "18",
+              2
+            ],
+            "sampler_name": "euler"
+          },
+          "class_type": "KSampler"
+        },
+        "22": {
+          "inputs": {
+            "vae": [
+              "16",
+              0
+            ],
+            "samples": [
+              "21",
+              0
+            ]
+          },
+          "class_type": "VaeDecodeShapeTrellis"
+        },
+        "23": {
+          "inputs": {
+            "negative": [
+              "18",
+              1
+            ],
+            "positive": [
+              "18",
+              0
+            ],
+            "shape_latent": [
+              "21",
+              0
+            ]
+          },
+          "class_type": "Trellis2TextureStage"
+        },
+        "24": {
+          "inputs": {
+            "cfg": 1,
+            "seed": 42,
+            "model": [
+              "10",
+              0
+            ],
+            "steps": 12,
+            "denoise": 1,
+            "negative": [
+              "23",
+              1
+            ],
+            "positive": [
+              "23",
+              0
+            ],
+            "scheduler": "normal",
+            "latent_image": [
+              "23",
+              2
+            ],
+            "sampler_name": "euler"
+          },
+          "class_type": "KSampler"
+        },
+        "25": {
+          "inputs": {
+            "vae_name": "trellis_2_texture_vae_bf16.safetensors"
+          },
+          "class_type": "VAELoader"
+        },
+        "26": {
+          "inputs": {
+            "vae": [
+              "25",
+              0
+            ],
+            "samples": [
+              "24",
+              0
+            ],
+            "shape_subdivides": [
+              "22",
+              1
+            ]
+          },
+          "class_type": "VaeDecodeTextureTrellis"
+        },
+        "31": {
+          "inputs": {
+            "mesh": [
+              "22",
+              0
+            ],
+            "placement_mode": "midpoint",
+            "target_face_count": 100000
+          },
+          "class_type": "DecimateMesh"
+        },
+        "32": {
+          "inputs": {
+            "mesh": [
+              "31",
+              0
+            ],
+            "crease_angle": 60
+          },
+          "class_type": "MeshSmoothNormals"
+        },
+        "33": {
+          "inputs": {
+            "mesh": [
+              "32",
+              0
+            ],
+            "padding": 2,
+            "segmenter": "pec",
+            "resolution": 2048,
+            "weld_distance": 0
+          },
+          "class_type": "UnwrapMesh"
+        },
+        "34": {
+          "inputs": {
+            "mesh": [
+              "33",
+              0
+            ],
+            "texture_size": 2048,
+            "voxel_colors": [
+              "26",
+              0
+            ],
+            "reference_mesh": [
+              "22",
+              0
+            ]
+          },
+          "class_type": "BakeTextureFromVoxel"
+        },
+        "35": {
+          "inputs": {
+            "low_poly": [
+              "33",
+              0
+            ],
+            "high_poly": [
+              "22",
+              0
+            ],
+            "resolution": 2048,
+            "cage_distance": 0.05,
+            "ignore_backfaces": true
+          },
+          "class_type": "BakeNormalMapFromMesh"
+        },
+        "36": {
+          "inputs": {
+            "bias": 0.01,
+            "samples": 16,
+            "low_poly": [
+              "33",
+              0
+            ],
+            "strength": 1,
+            "high_poly": [
+              "22",
+              0
+            ],
+            "resolution": 1024,
+            "max_distance": 0.5
+          },
+          "class_type": "BakeAmbientOcclusion"
+        },
+        "37": {
+          "inputs": {
+            "mesh": [
+              "33",
+              0
+            ],
+            "metallic": [
+              "34",
+              1
+            ],
+            "occlusion": [
+              "36",
+              0
+            ],
+            "roughness": [
+              "34",
+              2
+            ],
+            "base_color": [
+              "34",
+              0
+            ],
+            "normal_map": [
+              "35",
+              0
+            ]
+          },
+          "class_type": "ApplyTextureToMesh"
+        },
+        "38": {
+          "inputs": {
+            "mesh": [
+              "37",
+              0
+            ]
+          },
+          "class_type": "MeshToFile3D"
+        },
+        "39": {
+          "inputs": {
+            "width": 768,
+            "height": 768,
+            "model_3d": [
+              "38",
+              0
+            ],
+            "viewport_state": "",
+            "filename_prefix": "platform-presets/comfy-3080-pixal3d-696813/output"
+          },
+          "class_type": "Save3DAdvanced"
+        }
+      },
+      "frontend_differences": [
+        {
+          "node_id": "39",
+          "input": "viewport_state"
+        }
+      ],
+      "instructions_zh": "先替换上传素材与文本。此画布是编辑副本；API 调用继续使用原模型别名。缺失节点及前端控件差异须处理后才能运行。完整执行模板保存在此文件 extra.platform_preset.workflow_api。",
+      "instructions_en": "Replace uploaded media and text first. This canvas is an editable copy; API calls retain the original alias. Resolve missing nodes and frontend widget differences before running. The complete execution template is embedded in extra.platform_preset.workflow_api."
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,32 @@
+{
+  "alias": "comfy-3080-00-yue2-full-bf16-text2music-77ea35",
+  "display_name": "YuE2 · 音乐生成 · 可传 ABC 曲谱 · 30s · RTX 3080 · 9a0005",
+  "task_type": "text_to_audio",
+  "device": "rtx3080",
+  "directory": "audio/music/comfy-3080-00-yue2-full-bf16-text2music-77ea35",
+  "native_workflow": "平台预设/2026-11-16/audio/music/comfy-3080-00-yue2-full-bf16-text2music-77ea35.json",
+  "release_id": "wfr_2808b0688fbb4011bee984ff047d3b8e",
+  "release_digest": "67371e2c0aa9db161cf1812fdfeb64c3a50b0aa37a38c428e4cd6b30325564df",
+  "device_path_overrides_required": [],
+  "node_classes": [
+    "CheckpointLoaderSimple",
+    "ConditioningZeroOut",
+    "EmptyYuE2LatentAudio",
+    "KSampler",
+    "SaveAudio",
+    "VAEDecodeAudio",
+    "YuE2GenerateMusic"
+  ],
+  "runtime_observation": {
+    "at": "2026-11-16T15:39:41.729997+00:00",
+    "node_classes_present": true,
+    "missing_node_classes": [],
+    "weights_checked": false,
+    "generation_executed": false
+  },
+  "canvas_compatibility": {
+    "frontend_differences": [],
+    "authoritative_execution_template": "workflow.api.json",
+    "embedded_api_graph": "extra.platform_preset.workflow_api"
+  }
+}
