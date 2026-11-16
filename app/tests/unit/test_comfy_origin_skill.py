@@ -73,7 +73,8 @@ def server():
                 state["upload_transfer_encoding"] = self.headers.get("Transfer-Encoding")
                 self.result({"name": "random.png", "subfolder": "origin/key-namespace", "type": "input"})
             elif "/userdata/" in self.path:
-                state["workflow"] = json.loads(raw)
+                if raw:
+                    state["workflow"] = json.loads(raw)
                 self.result("workflows/draft.json")
             elif self.path.endswith("/acquire"):
                 self.result({"state": "active", "url": "/origin/" + SLUG + "/"})
@@ -272,9 +273,45 @@ def test_personal_workflow_cli_save_is_scoped_and_does_not_execute(server, tmp_p
     file = tmp_path / "ui.json"
     file.write_text(json.dumps({"nodes": [], "links": []}))
     assert client.main(["--base-url", api.base, "--session-file", str(api.session_file), "save-workflow", SLUG, "draft.json", str(file)]) == 0
-    assert state["requests"][-1][1] == "/origin/rtx-5070/userdata/workflows/draft.json?overwrite=false"
+    assert state["requests"][-1][1] == "/origin/rtx-5070/userdata/workflows/%40personal/draft.json?overwrite=false"
     assert state["workflow"] == {"nodes": [], "links": []} and not state["submissions"]
     assert client.main(["--base-url", api.base, "--session-file", str(api.session_file), "delete-workflow", SLUG, "draft.json"]) == 0
+
+
+def test_shared_workflow_cli_requires_explicit_intent_and_keeps_original_identity(server, tmp_path):
+    api, state = logged_in(server, tmp_path)
+    file, intent = tmp_path / "ui.json", tmp_path / "source-write.json"
+    file.write_text(json.dumps({"nodes": [], "links": []}))
+    args = ["--base-url", api.base, "--session-file", str(api.session_file), "save-workflow", SLUG, "中文/draft.json", str(file), "--shared"]
+    with pytest.raises(client.OriginError, match="operation-file"):
+        client.main(args)
+    state["error"] = "origin_workflow_write_unknown"
+    with pytest.raises(client.OriginError, match="unknown"):
+        client.main([*args, "--operation-file", str(intent)])
+    saved = client.read_json(intent)
+    assert not saved["completed"] and KEY not in intent.read_text(encoding="utf-8") and TOKEN not in intent.read_text(encoding="utf-8")
+    first = state["requests"][-1]
+    state["error"] = None
+    client.resume_workflow(api, intent)
+    second = state["requests"][-1]
+    assert first[1] == second[1] and "/%40personal/" not in second[1]
+    assert first[2]["Idempotency-Key"] == second[2]["Idempotency-Key"]
+    count = len(state["requests"])
+    client.resume_workflow(api, intent)
+    assert len(state["requests"]) == count and not state["submissions"]
+    with pytest.raises(FileExistsError):
+        client.workflow_write(api, SLUG, "draft.json", "save", intent, {})
+
+
+def test_shared_workflow_move_and_delete_are_explicit_source_operations(server, tmp_path):
+    api, state = logged_in(server, tmp_path)
+    client.workflow_write(api, SLUG, "中文/a.json", "delete", tmp_path / "delete.json")
+    assert state["requests"][-1][0] == "DELETE" and state["requests"][-1][2]["Idempotency-Key"]
+    client.workflow_write(api, SLUG, "中文/a.json", "move", tmp_path / "move.json", destination="中文/b.json")
+    move = state["requests"][-1]
+    assert move[0] == "POST" and "/move/workflows%2F" in move[1] and "%E4%B8%AD" in move[1]
+    with pytest.raises(client.OriginError, match="reserved"):
+        client.workflow_path(SLUG, "@personal/a.json", shared=True)
 
 
 def test_compiled_single_file_extracts_both_clients_and_runs_native_without_repository(server, tmp_path):

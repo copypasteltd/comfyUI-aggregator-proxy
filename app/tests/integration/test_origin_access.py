@@ -475,21 +475,21 @@ def test_native_mask_upload_requires_owned_reference_and_preserves_mask_protocol
 
 def test_native_isolated_userdata_workflow_save_rename_and_listing(native: dict[str, Any]) -> None:
     c, prefix = native["client"], native["prefix"]
-    saved = c.post(prefix + "api/userdata/workflows/a.json?full_info=true", content=b'{"nodes":[]}')
-    assert saved.status_code == 200 and saved.json()["path"] == "workflows/a.json"
-    assert c.get(prefix + "userdata?dir=workflows&recurse=true").json() == ["a.json"]
-    assert c.get(prefix + "v2/userdata?path=workflows").json()[0]["type"] == "file"
+    saved = c.post(prefix + "api/userdata/workflows/@personal/a.json?full_info=true", content=b'{"nodes":[]}')
+    assert saved.status_code == 200 and saved.json()["path"] == "workflows/@personal/a.json"
+    assert c.get(prefix + "userdata?dir=workflows/@personal&recurse=true").json() == ["a.json"]
+    assert c.get(prefix + "v2/userdata?path=workflows/@personal").json()[0]["type"] == "file"
     assert (
-        c.post(prefix + "userdata/workflows/a.json/move/workflows/b.json").json()
-        == "workflows/b.json"
+        c.post(prefix + "userdata/workflows/@personal/a.json/move/workflows/@personal/b.json").json()
+        == "workflows/@personal/b.json"
     )
-    assert c.get(prefix + "userdata/workflows/b.json").json() == {"nodes": []}
+    assert c.get(prefix + "userdata/workflows/@personal/b.json").json() == {"nodes": []}
     assert (
-        c.post(prefix + "userdata/workflows/b.json?overwrite=false", content=b"{}").status_code
+        c.post(prefix + "userdata/workflows/@personal/b.json?overwrite=false", content=b"{}").status_code
         == 409
     )
-    assert c.delete(prefix + "userdata/workflows/b.json").status_code == 204
-    assert c.get(prefix + "userdata?dir=workflows").json() == []
+    assert c.delete(prefix + "userdata/workflows/@personal/b.json").status_code == 204
+    assert c.get(prefix + "userdata?dir=workflows/@personal").json() == []
 
 
 def test_native_same_project_key_cannot_read_other_files_or_userdata(
@@ -497,7 +497,7 @@ def test_native_same_project_key_cannot_read_other_files_or_userdata(
 ) -> None:
     actor, access = native["actor"], native["access"]
     access.remember_file(actor.key_id, native["channel"], "private.png", "", "output")
-    native["client"].post(native["prefix"] + "userdata/workflows/private.json", content=b"{}")
+    native["client"].post(native["prefix"] + "userdata/workflows/@personal/private.json", content=b"{}")
     identifier, secret = issue_secret("sk-gen")
     with pg.begin() as db:
         current = db.get(ApiKey, actor.key_id)

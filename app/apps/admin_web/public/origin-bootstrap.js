@@ -30,7 +30,7 @@
     const headers = new Headers(options.headers || supplied?.headers);
     headers.set('X-Origin-CSRF', csrf);
     const method = (options.method || supplied?.method || 'GET').toUpperCase();
-    if (method === 'POST' && /\/(?:api\/)?prompt$/.test(url.pathname) && !headers.has('Idempotency-Key')) {
+    if (((method === 'POST' && /\/(?:api\/)?prompt$/.test(url.pathname)) || (!['GET', 'HEAD'].includes(method) && /\/(?:api\/)?userdata\//.test(url.pathname))) && !headers.has('Idempotency-Key')) {
       const bytes = crypto.getRandomValues(new Uint8Array(16));
       headers.set('Idempotency-Key', Array.from(bytes, b => b.toString(16).padStart(2, '0')).join(''));
     }
@@ -49,9 +49,20 @@
       super(url, protocols);
     }
   };
-  const xhrOpen = XMLHttpRequest.prototype.open, xhrSend = XMLHttpRequest.prototype.send;
-  XMLHttpRequest.prototype.open = function (method, value, ...rest) { const url = scoped(String(value)); this.__originScoped = url.origin === root.origin && url.pathname.startsWith(prefix); return xhrOpen.call(this, method, url, ...rest); };
-  XMLHttpRequest.prototype.send = function (...args) { if (this.__originScoped) this.setRequestHeader('X-Origin-CSRF', csrf); return xhrSend.apply(this, args); };
+  const xhrOpen = XMLHttpRequest.prototype.open, xhrSend = XMLHttpRequest.prototype.send, xhrHeader = XMLHttpRequest.prototype.setRequestHeader;
+  XMLHttpRequest.prototype.open = function (method, value, ...rest) {
+    const url = scoped(String(value)); this.__originScoped = url.origin === root.origin && url.pathname.startsWith(prefix);
+    this.__originWrite = !['GET', 'HEAD'].includes(String(method).toUpperCase()) && /\/(?:api\/)?userdata\//.test(url.pathname);
+    this.__originIdempotency = false; return xhrOpen.call(this, method, url, ...rest);
+  };
+  XMLHttpRequest.prototype.setRequestHeader = function (name, value) { if (name.toLowerCase() === 'idempotency-key') this.__originIdempotency = true; return xhrHeader.call(this, name, value); };
+  XMLHttpRequest.prototype.send = function (...args) {
+    if (this.__originScoped) {
+      xhrHeader.call(this, 'X-Origin-CSRF', csrf);
+      if (this.__originWrite && !this.__originIdempotency) xhrHeader.call(this, 'Idempotency-Key', Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join(''));
+    }
+    return xhrSend.apply(this, args);
+  };
   for (const name of ['localStorage', 'sessionStorage']) {
     try {
       const storage = window[name], ns = 'comfy-origin:' + namespace + ':';
@@ -69,7 +80,7 @@
     bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', '平台设备操作');
     bar.style.cssText = 'position:fixed;bottom:12px;left:12px;z-index:2147483646;background:#d2f53c;color:#0c0c0c;padding:8px 14px;border-radius:20px;font:12px/1.5 system-ui;box-shadow:0 2px 12px #0003;max-width:calc(100vw - 24px);display:flex;gap:12px;align-items:center';
     const link = document.createElement('a'); link.href = '/origin/list'; link.target = '_blank'; link.rel = 'noopener'; link.textContent = '设备列表 / 归还'; link.style.color = '#0c0c0c';
-    const text = document.createElement('span'); text.textContent = '原生模式 · 文件保存在设备';
+    const text = document.createElement('span'); text.textContent = 'Workflows 与源站共享 · @personal 为个人工作流';
     bar.append(link, text); document.body.append(bar);
     document.addEventListener('origin-session-expired', () => { text.textContent = '会话已过期，请返回设备列表登录'; });
     let timer;

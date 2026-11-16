@@ -1,5 +1,7 @@
 # ComfyUI Aggregator Proxy
 
+[150 · 原生 Workflows 完整目录修复](docs/150-原生工作流完整目录与源站操作修复.md)：修正原代理用 Key 私有目录覆盖源站工作流的问题。`/origin/{设备}/` 实时显示源机全部工作流及原目录，支持打开、保存、另存、文件重命名与删除；缺模型的流程也显示。原私有文件保留在 `@personal`，设置/自动保存继续隔离。源站修改须取得设备操作权，并记录幂等意图和审计；共享修改会反映到源机。Skill 1.5.0 增加显式共享操作及丢响应恢复。部署与实机结果在专题分别记录。
+
 [4090 维护占用已核对归还](docs/149-未知内存回收维护占用核对.md)：2026-11-16 01:59（台北）清理遗留的未知内存回收占用；02:00 业务域名确认在线、空闲，原生面板取得/归还成功。新增默认只读、显式执行的运维核对工具，保留原错误与审计；不重发未知 `/free`。33 项原生 PostgreSQL 回归、14 项实际接口检查通过，现有服务进程保持运行。
 
 [Skill 1.4.1 · 统一业务域名](docs/148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和下载均使用 **https://gen.sub2share.xyz**。两个客户端默认同域，无需配置服务器 IP。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) · [原生面板](https://gen.sub2share.xyz/origin/)。已同步本地安装、[GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1) 和线上单文件；35 项回归、6 项域名实际调用及 48 项公网检查通过。

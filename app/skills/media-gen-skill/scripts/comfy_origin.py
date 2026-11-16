@@ -17,7 +17,7 @@ from http.cookies import SimpleCookie
 from pathlib import Path
 from uuid import uuid4
 
-VERSION = "1.4.1"
+VERSION = "1.5.0"
 DEFAULT_BASE = "https://gen.sub2share.xyz"
 JSON_LIMIT = 16 * 1024**2
 GRAPH_LIMIT = 8 * 1024**2
@@ -350,10 +350,55 @@ def wait(api, path, timeout, output=None):
         time.sleep(min(2, remaining))
 
 
-def workflow_path(slug, name):
+def workflow_path(slug, name, shared=False):
     if not name.endswith(".json"):
-        raise OriginError("Personal workflow name must end in .json")
-    return native_path(slug, "userdata/workflows/" + name)
+        raise OriginError("Workflow name must end in .json")
+    if shared and (name == "@personal" or name.startswith("@personal/")):
+        raise OriginError("Use @source/@personal for an actual source folder with this reserved name")
+    return native_path(slug, "userdata/workflows/" + ("" if shared else "@personal/") + name)
+
+
+def workflow_write(api, slug, name, action, state_file, value=None, overwrite=False, destination=None):
+    workflow_path(slug, name, shared=True)
+    if not api.session:
+        raise OriginError("Login before modifying a shared source Workflow")
+    if len(canonical(value)) > 4 * 1024**2:
+        raise OriginError("Shared Workflow exceeds 4 MiB")
+    operation = {"action": action, "name": name, "destination": destination, "overwrite": overwrite, "value": value}
+    state = {"schema_version": 1, "kind": "workflow_write", "base_url": api.base, "device": slug,
+             "key_fingerprint": api.session["key_fingerprint"], "idempotency_key": uuid4().hex,
+             "operation": operation, "operation_sha256": hashlib.sha256(canonical(operation)).hexdigest(), "completed": False}
+    private_write(state_file, state, exclusive=True)
+    return resume_workflow(api, state_file)
+
+
+def resume_workflow(api, state_file):
+    state = read_json(state_file, 5 * 1024**2)
+    if state.get("schema_version") != 1 or state.get("kind") != "workflow_write" or state.get("base_url") != api.base:
+        raise OriginError("Workflow intent belongs to another origin or version")
+    operation = state.get("operation")
+    if hashlib.sha256(canonical(operation)).hexdigest() != state.get("operation_sha256"):
+        raise OriginError("Saved Workflow operation changed; restore the original state")
+    if state.get("completed"):
+        return state["receipt"]
+    if not api.session or state.get("key_fingerprint") != api.session["key_fingerprint"]:
+        raise OriginError("Unknown Workflow modification requires the original API Key")
+    token = state.get("idempotency_key")
+    if not isinstance(token, str) or not re.fullmatch("[a-zA-Z0-9_-]{16,128}", token):
+        raise OriginError("Invalid saved Workflow modification identity")
+    route = workflow_path(state["device"], operation["name"], shared=True)
+    action = operation["action"]
+    if action == "move":
+        workflow_path(state["device"], operation["destination"], shared=True)
+        route += "/move/" + urllib.parse.quote("workflows/" + operation["destination"], safe="")
+    if action not in {"save", "delete", "move"} or not isinstance(operation["overwrite"], bool):
+        raise OriginError("Invalid saved Workflow operation")
+    if action != "delete":
+        route += "?overwrite=" + str(operation["overwrite"]).lower()
+    receipt = api.request("DELETE" if action == "delete" else "POST", route, operation["value"] if action == "save" else None, {"Idempotency-Key": token})
+    state.update(completed=True, receipt=receipt)
+    private_write(state_file, state)
+    return receipt
 
 
 def parser():
@@ -391,9 +436,18 @@ def parser():
         item = commands.add_parser(command)
         item.add_argument("device")
         item.add_argument("name")
+        item.add_argument("--shared", action="store_true", help="Modify the actual device Workflow; requires acquire and --operation-file")
+        item.add_argument("--operation-file", help="New private intent file for a shared source modification")
         if command == "save-workflow":
             item.add_argument("file")
             item.add_argument("--overwrite", action="store_true")
+    move = commands.add_parser("move-workflow", help="Rename/move an actual source Workflow; requires acquire")
+    move.add_argument("device")
+    move.add_argument("name")
+    move.add_argument("destination")
+    move.add_argument("--operation-file", required=True)
+    move.add_argument("--overwrite", action="store_true")
+    commands.add_parser("resume-workflow").add_argument("operation_file")
     cancel = commands.add_parser("cancel")
     cancel.add_argument("device")
     cancel.add_argument("prompt_id")
@@ -429,10 +483,18 @@ def main(argv=None):
         result = wait(api, args.state_file, args.timeout, args.output_dir)
     elif args.command == "download":
         result = api.download(args.device, read_json(args.descriptor), args.output, args.sha256)
-    elif args.command == "save-workflow":
-        result = api.request("POST", workflow_path(args.device, args.name) + "?overwrite=" + str(args.overwrite).lower(), read_json(args.file, GRAPH_LIMIT))
-    elif args.command == "delete-workflow":
-        result = api.request("DELETE", workflow_path(args.device, args.name))
+    elif args.command in {"save-workflow", "delete-workflow"}:
+        if args.shared and not args.operation_file or args.operation_file and not args.shared:
+            raise OriginError("Shared writes require both --shared and a new --operation-file")
+        value = read_json(args.file, 4 * 1024**2) if args.command == "save-workflow" else None
+        if args.shared:
+            result = workflow_write(api, args.device, args.name, "save" if args.command == "save-workflow" else "delete", args.operation_file, value, getattr(args, "overwrite", False))
+        else:
+            result = api.request("POST" if args.command == "save-workflow" else "DELETE", workflow_path(args.device, args.name) + ("?overwrite=" + str(args.overwrite).lower() if args.command == "save-workflow" else ""), value)
+    elif args.command == "move-workflow":
+        result = workflow_write(api, args.device, args.name, "move", args.operation_file, overwrite=args.overwrite, destination=args.destination)
+    elif args.command == "resume-workflow":
+        result = resume_workflow(api, args.operation_file)
     elif args.command == "cancel":
         component(args.prompt_id, "prompt ID")
         result = api.request("POST", native_path(args.device, "queue"), {"delete": [args.prompt_id]})

@@ -25,6 +25,7 @@ from generation_infrastructure.origin_runtime import (
     output_files,
     queue_entries,
 )
+from generation_infrastructure.origin_workflows import OriginWorkflows
 from starlette.datastructures import UploadFile
 from starlette.responses import (
     FileResponse,
@@ -489,6 +490,23 @@ def origin_routes(
         if native in {"settings", "users"} or native.startswith(
             ("settings/", "userdata", "v2/userdata")
         ):
+            query = dict(request.query_params)
+            workflows = OriginWorkflows(access)
+            if workflows.handles(native, query):
+                try:
+                    reply = await asyncio.to_thread(
+                        workflows.request, identity, target, native, request.method,
+                        query, await request.body() if write else b"",
+                        request.headers.get("idempotency-key", ""),
+                    )
+                except (httpx.HTTPError, OSError) as error:
+                    raise DomainError("origin_workflow_source_unavailable", "源站工作流暂不可访问，请稍后刷新", 502) from error
+                return Response(
+                    b"" if request.method == "HEAD" else reply.body,
+                    status_code=reply.status, media_type=reply.media,
+                    headers={"Cache-Control": "private, no-store", **reply.headers,
+                             **({"Content-Length": str(len(reply.body))} if request.method == "HEAD" else {})},
+                )
             return await user_data(identity, target, native, request)
         if native in {"user.css"}:
             return Response("", media_type="text/css")

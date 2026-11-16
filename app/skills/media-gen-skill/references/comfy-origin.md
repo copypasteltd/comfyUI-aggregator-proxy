@@ -107,16 +107,34 @@ python scripts/comfy_origin.py download DEVICE_SLUG output-descriptor.json --out
 
 Downloads use same-origin authenticated `/view`, refuse redirects/traversal/overwrite, cap each at 2 GiB/30 minutes and remove only their own temporary files on failure. Automatic names use the prompt ID/index and safe extension. Results include local bytes/SHA-256 and whether Content-Length was available. Native history supplies **no authoritative cloud SHA-256**: `source_checksum_verified=false` unless a known independent `--sha256` is provided. A local hash is not independent verification. Direct HTTP tools can also use authenticated HEAD/Range.
 
-## Personal workflows and explicit cancellation
+## Source and personal workflows
 
 ```bash
 python scripts/comfy_origin.py save-workflow DEVICE_SLUG draft.json ui-workflow.json
 python scripts/comfy_origin.py get DEVICE_SLUG "userdata?dir=workflows&recurse=true"
-python scripts/comfy_origin.py get DEVICE_SLUG userdata/workflows/draft.json
+python scripts/comfy_origin.py get DEVICE_SLUG userdata/workflows/@personal/draft.json
 python scripts/comfy_origin.py delete-workflow DEVICE_SLUG draft.json
 ```
 
 Personal saved workflows may be UI JSON; saving does not execute them. Storage is scoped to Key/device. Save refuses overwrite unless `--overwrite` is explicitly supplied. Delete only files whose removal the task authorizes. Combined personal workflow/settings text is limited to 8 MiB. Read settings using `get DEVICE_SLUG settings`; the original panel supports its scoped settings writes.
+
+The original panel's Workflows tree and `userdata?dir=workflows&recurse=true` include **all live source files in their original folders**, plus the separate `@personal` private mount. Source files are shared with the device's direct panel and other trusted operators. A missing model/custom node does not hide a saved Workflow. Check dependencies before execution; do not assume every file is a published API model. v1/v2 directory endpoints support Unicode names, nested folders and metadata; source text is read on demand, without a cloud directory snapshot. Reads are limited to 10,000 files / 4 MiB metadata and 4 MiB per text file. Unreachable sources produce an explicit error.
+
+Read a source graph using `get DEVICE_SLUG userdata/workflows/FOLDER/NAME.json`. The panel also opens Markdown/CSV/text documents. Your browser workspace, autosave and settings remain private. Existing private workflows are retained under `@personal`; this is not a copy of the source catalog. If a real source folder is named `@personal` or `@source`, it is exposed under `@source/@personal/` or `@source/@source/` respectively.
+
+When the task authorizes modifying a shared source file, acquire the device first, then use a **new private operation file for each intended modification**:
+
+```bash
+python scripts/comfy_origin.py save-workflow DEVICE_SLUG FOLDER/draft.json ui-workflow.json --shared --operation-file ./private/save.json
+python scripts/comfy_origin.py move-workflow DEVICE_SLUG FOLDER/draft.json FOLDER/renamed.json --operation-file ./private/move.json
+python scripts/comfy_origin.py delete-workflow DEVICE_SLUG FOLDER/renamed.json --shared --operation-file ./private/delete.json
+```
+
+Source save/move refuses overwrite by default; add `--overwrite` only for an authorized replacement. Saving does not execute a graph. The helper persists the exact operation, hash, original Key fingerprint and Idempotency-Key before sending it; keep these files private because they can contain workflow prompts. If the response is lost, run `resume-workflow ./private/save.json` (or the original move/delete intent). Reuse the original identity and body: the server replays a known receipt or observes the file to reconcile an unknown outcome, and never blindly repeats an uncertain source write. An unresolved 409 is not permission to create a fresh operation file. A completed local intent returns its saved receipt without another write.
+
+The browser automatically supplies CSRF and modification identities. Source saves, save-as, file renames and deletion modify the **actual source device** and require active exclusive ownership, native grant and audit. Cross shared/private moves are refused; read and Save As explicitly instead. Only UTF-8 JSON/Markdown/CSV/text files within the source workflows directory may be modified; OS files, model weights and installation APIs are outside this feature. Workflows in the private mount can still be read/saved if the source is offline.
+
+## Explicit cancellation
 
 When the user requests cancellation, `cancel DEVICE_SLUG PROMPT_ID` removes that owned **pending** prompt; it cannot stop a running one. `interrupt DEVICE_SLUG` requests interruption of this Key's current running work. The gateway refuses interruption while another source/Key owns a running task. Interruption is not stopped proof: inspect history/queue and retain ownership until reconciled. Never clear global history or call Manager, `/free`, shell or host reboot.
 
@@ -149,7 +167,9 @@ Installed custom nodes execute with host authority; native mode is not a malicio
 | `POST /origin/{slug}/prompt` | Active reservation, Cookie/CSRF, 16–128-character Idempotency-Key and API prompt. |
 | `GET /origin/{slug}/queue`, `/history[/prompt_id]` | This logical Key's native task details. Directory source totals are separate. |
 | `GET /origin/{slug}/view?...` | Owned filename/subfolder/type; HEAD/Range use the same auth. |
-| `/origin/{slug}/userdata/...`, `/settings` | Personal data; writes require CSRF and server permission. |
+| `GET /origin/{slug}/userdata?dir=workflows&recurse=true`, `/v2/userdata?path=workflows` | Live source tree plus Key-private `@personal`; no model filtering. |
+| `/origin/{slug}/userdata/workflows/...` | Source file read; POST save/move and DELETE require active reservation, CSRF and Idempotency-Key. |
+| `/origin/{slug}/userdata/workflows/@personal/...`, `/settings` | Key/device-private files/settings; writes require CSRF. |
 | `POST /origin/{slug}/queue`, `/interrupt` | Explicit pending cancellation/current interruption, not force-release. |
 | `WS /origin/{slug}/ws?clientId=...` | Authenticated owned events/previews; client IDs rewritten upstream. |
 
