@@ -142,6 +142,30 @@ class OriginWorkflows:
                 "modified": data.get("file_times", {}).get(name, 0), "created": data.get("file_times", {}).get(name, 0)}
                 for name, value in data.get("files", {}).items() if name.startswith("workflows/")}
 
+    def directories(self, http: Any) -> dict[str, dict[str, Any]]:
+        reply = http.call("GET", "/api/v2/userdata", params={"path": "workflows"})
+        if reply.status == 404:  # Older sources can still expose the v1 file tree.
+            return {}
+        self._ok(reply)
+        try:
+            records = json.loads(reply.body)
+            if not isinstance(records, list) or len(records) > MAX_FILES * 2:
+                raise ValueError
+            result = {}
+            for record in records:
+                if not isinstance(record, dict) or record.get("type") not in {"file", "directory"}:
+                    raise ValueError
+                if record["type"] != "directory":
+                    continue
+                name = path(record["path"], folder=True)
+                if not name.startswith("workflows/"):
+                    raise ValueError
+                name = public_name(name)
+                result[name] = {"path": name, "name": name.rsplit("/", 1)[-1], "type": "directory"}
+            return result
+        except (ValueError, TypeError, KeyError, UnicodeDecodeError, DomainError) as error:
+            raise DomainError("origin_workflow_source_format", "源站工作流文件夹格式无法识别", 502) from error
+
     def listing(self, actor: OriginActor, target: dict[str, Any], native: str, query: dict[str, str]) -> WorkflowReply:
         folder = path(query.get("path" if native == "v2/userdata" else "dir", ""), folder=True)
         data = self.access.userdata(actor, target["id"])
@@ -157,7 +181,9 @@ class OriginWorkflows:
         if len(files) > MAX_FILES:
             raise DomainError("origin_workflow_source_limit", "工作流目录条目超过读取上限", 502)
         if native == "v2/userdata":
-            rows: dict[str, dict[str, Any]] = {}
+            rows: dict[str, dict[str, Any]] = {} if is_personal(folder) else {
+                name: info for name, info in self.directories(self.http_factory(target)).items() if name.startswith(prefix)
+            }
             # Keep an empty private directory discoverable in the native file tree.
             if PERSONAL.startswith(prefix) and folder != PERSONAL:
                 parts = PERSONAL[len(prefix):].split("/")

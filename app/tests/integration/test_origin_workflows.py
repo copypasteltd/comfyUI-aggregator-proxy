@@ -30,6 +30,7 @@ def workflows(native, monkeypatch):  # noqa: F811 -- imported pytest fixture
         "workflows/@source/source-name.json": b'{"source_alias":true}',
     }
     source.file_calls, source.write_calls = [], []
+    source.directories = {"workflows/中文目录/空文件夹"}
     source.drop_response, source.fail_catalog, source.bad_catalog = False, False, None
     source.write_started, source.allow_write = Event(), Event()
     source.allow_write.set()
@@ -44,6 +45,8 @@ def workflows(native, monkeypatch):  # noqa: F811 -- imported pytest fixture
                 return
             rows = [{"path": name[len("workflows/"):], "size": len(raw), "modified": 1700000000123, "created": 1700000000000} for name, raw in sorted(source.files.items())]
             handler.reply(source.bad_catalog if source.bad_catalog is not None else rows)
+        elif parsed.path == "/api/v2/userdata":
+            handler.reply([{"path": name, "type": "directory"} for name in sorted(source.directories)])
         elif parsed.path.startswith("/api/userdata/"):
             name = unquote(parsed.path.removeprefix("/api/userdata/"))
             source.file_calls.append(("GET", name))
@@ -147,6 +150,15 @@ def test_source_changes_are_live_and_root_does_not_expose_source_settings(workfl
     root = c.get(prefix + "v2/userdata?path=").json()
     assert any(row["path"] == "workflows" and row["type"] == "directory" for row in root)
     assert c.get(prefix + "userdata/comfy.settings.json").status_code == 404
+
+
+def test_empty_source_directories_remain_visible_and_refresh_live(workflows):
+    c, prefix, source = workflows["client"], workflows["prefix"], workflows["source"]
+    rows = c.get(prefix + "v2/userdata?path=workflows/中文目录").json()
+    assert any(row["path"] == "workflows/中文目录/空文件夹" and row["type"] == "directory" for row in rows)
+    source.directories.add("workflows/new-empty-folder")
+    rows = c.get(prefix + "v2/userdata?path=workflows").json()
+    assert any(row["path"] == "workflows/new-empty-folder" for row in rows)
 
 
 def test_shared_writes_require_csrf_active_owner_and_idempotency(workflows):

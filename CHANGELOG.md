@@ -3,7 +3,7 @@
 ## 2026-11-16 · Complete native Workflows / 原生工作流目录修复
 
 - Replace the empty private-only native catalog with the live source Workflows tree. Preserve original folders/Unicode filenames, v1/v2 listing, metadata and exact file reads, without filtering missing model/node dependencies. Keep existing Key-private files in `@personal` and escape reserved source folder names.
-- Add guarded source save/save-as/rename/delete with device reservation, CSRF, durable idempotency, audit and lost-response observation. Keep private settings/workspaces and existing task/file authorization. Skill 1.5.0 defaults personal saves to their private mount and adds explicit shared file operations with durable client intents. Verification, deployment and publication details: [150](docs/150-原生工作流完整目录与源站操作修复.md).
+- Add guarded source save/save-as/rename/delete with device reservation, CSRF, durable idempotency, audit and lost-response observation. Keep private settings/workspaces and existing task/file authorization. Skill 1.5.1 defaults personal saves to their private mount and adds explicit shared file operations with durable client intents. Verification, deployment and publication details: [150](docs/150-原生工作流完整目录与源站操作修复.md).
 
 ## 2026-11-16 · Unknown maintenance reconciliation / 未知维护占用核对
 

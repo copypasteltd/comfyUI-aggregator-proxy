@@ -5,8 +5,8 @@
   "scope": "Reviewed implementation and selected named local tests, with immutable historical report references. Full gates remain pending; implementation references are not production Workflow packages. Native workspace146 binds the affected implementation to a separately executed current-source component run; prior report bytes and pending full gates are preserved. Native ComfyUI Skill 1.4.0 source/client regressions are tracked separately from the existing native-panel and full acceptance evidence. Skill 1.4.1 domain-only update binds current client sources to its own component run without modifying historical evidence. Add explicitly authorized unknown-memory-maintenance reconciliation with a current native PostgreSQL component run; retain historical reports and pending full acceptance. Source Workflows 150 binds complete live directory and guarded shared file operations to their own native PostgreSQL component evidence.",
   "full_acceptance": "pending",
   "baseline_index": {
-    "path": "docs/evidence/2026-11-16/development-trace-baselines-150-workflows.json",
-    "sha256": "d9c764d2ce19aa8fc54157c90eb3ad21adc04722270e5bf65e95de19125a8c37"
+    "path": "docs/evidence/2026-11-16/development-trace-baselines-150-release-workflows.json",
+    "sha256": "eeba6d04c1cbb50f75f5b87ee181aa397f7252290b9eca23bf42a6610531a59c"
   },
   "requirements": [
     {
@@ -984,7 +984,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "tests": [
@@ -1106,19 +1106,19 @@
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_model3d_client_uses_image_only_and_declared_parameters",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_model3d_download_uses_canonical_extension",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_single_file_runs_independently_and_downloads_a_verified_glb",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "evidence": [
@@ -1139,7 +1139,9 @@
         "host152",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "20",
@@ -1205,19 +1207,19 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/media_gen.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/apps/control_api/src/control_api/origin_routes.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/packages/infrastructure/src/generation_infrastructure/origin_workflows.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "tests": [
@@ -1242,50 +1244,56 @@
         {
           "path": "app/tests/unit/test_media_gen_skill.py",
           "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
-          "baseline": "origin150",
+          "baseline": "origin150release",
           "language": "python"
         },
         {
           "path": "app/tests/integration/test_origin_access.py",
           "symbol": "test_native_prompt_replay_filter_files_range_and_static_paths",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_compiled_single_file_extracts_both_clients_and_runs_native_without_repository",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_personal_workflow_cli_save_is_scoped_and_does_not_execute",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/integration/test_origin_workflows.py",
           "symbol": "test_live_complete_catalog_keeps_source_names_and_mounts_legacy_private_files",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/integration/test_origin_workflows.py",
           "symbol": "test_shared_writes_require_csrf_active_owner_and_idempotency",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/integration/test_origin_workflows.py",
           "symbol": "test_lost_source_write_response_is_observed_without_repeating_mutation",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/integration/test_origin_workflows.py",
           "symbol": "test_concurrent_duplicate_does_not_send_a_second_source_write",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
+        },
+        {
+          "path": "app/tests/integration/test_origin_workflows.py",
+          "symbol": "test_empty_source_directories_remain_visible_and_refresh_live",
+          "language": "python",
+          "baseline": "origin150release"
         }
       ],
       "evidence": [
@@ -1308,7 +1316,9 @@
         "origin146",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "30",
@@ -1618,7 +1628,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "tests": [
@@ -1638,7 +1648,7 @@
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_direct_paths_cannot_escape_the_selected_device",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "evidence": [
@@ -1653,7 +1663,9 @@
         "native139",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "30",
@@ -1734,7 +1746,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "tests": [
@@ -1748,19 +1760,19 @@
           "path": "app/tests/integration/test_origin_access.py",
           "symbol": "test_native_one_owner_under_concurrent_acquisition",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_unknown_submission_keeps_exact_intent_then_known_id_only_reads",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_wait_timeout_does_not_cancel_logout_release_or_submit",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "evidence": [
@@ -1776,7 +1788,9 @@
         "origin146",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "29",
@@ -3024,7 +3038,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "tests": [
@@ -3044,7 +3058,7 @@
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_download_supplied_hash_is_verified_and_mismatch_removes_only_own_partial",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "evidence": [
@@ -3059,7 +3073,9 @@
         "host152",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "37",
@@ -4021,7 +4037,7 @@
           "path": "app/tests/integration/test_origin_access.py",
           "symbol": "test_native_grant_revision_idempotency_and_existing_key_not_auto_granted",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "evidence": [
@@ -4039,7 +4055,9 @@
         "browser135",
         "native139",
         "origin146",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "50",
@@ -4763,7 +4781,7 @@
         },
         {
           "path": "app/skills/media-gen-skill/scripts/comfy_origin.py",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "tests": [
@@ -4777,13 +4795,13 @@
           "path": "app/tests/integration/test_origin_access.py",
           "symbol": "test_native_cookie_auth_grants_csrf_and_revocation",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         },
         {
           "path": "app/tests/unit/test_comfy_origin_skill.py",
           "symbol": "test_native_session_is_private_origin_bound_and_no_bearer_is_forwarded",
           "language": "python",
-          "baseline": "origin150"
+          "baseline": "origin150release"
         }
       ],
       "evidence": [
@@ -4801,7 +4819,9 @@
         "origin146",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "50",
@@ -5456,7 +5476,9 @@
         "single131",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "25",
@@ -5543,7 +5565,9 @@
         "video92",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "29",
@@ -5849,7 +5873,9 @@
         "visual87",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "16",
@@ -5897,7 +5923,9 @@
         "native86",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "29",
@@ -6056,7 +6084,9 @@
         "native86",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "55",
@@ -6175,7 +6205,9 @@
         "ci86",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "14",
@@ -6626,7 +6658,9 @@
         "visual87",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "50",
@@ -7194,7 +7228,9 @@
         "single131",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "37",
@@ -7219,7 +7255,9 @@
         "visual87",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "50",
@@ -7268,7 +7306,9 @@
         "single131",
         "skill140",
         "skill141",
-        "origin150"
+        "origin150",
+        "origin150final",
+        "origin150release"
       ],
       "remaining_backlog": [
         "17",

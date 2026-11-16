@@ -17,7 +17,7 @@ from http.cookies import SimpleCookie
 from pathlib import Path
 from uuid import uuid4
 
-VERSION = "1.5.0"
+VERSION = "1.5.1"
 DEFAULT_BASE = "https://gen.sub2share.xyz"
 JSON_LIMIT = 16 * 1024**2
 GRAPH_LIMIT = 8 * 1024**2
