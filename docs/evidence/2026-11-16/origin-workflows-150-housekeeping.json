@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "application_release": "linux-20261116.150.2",
+  "removed_owned_intermediate_release": "linux-20261116.150.1",
+  "retained_rollback_release": "linux-20261115.146.6",
+  "removed_release_was_not_used_by_service_pids": true,
+  "free_bytes_before": 421076992,
+  "free_bytes_after": 592003072,
+  "bytes_recovered": 170926080,
+  "post_capacity_observation": {
+    "api_statuses": {
+      "200": 2522,
+      "401": 3,
+      "404": 8,
+      "403": 43,
+      "204": 5
+    },
+    "api_5xx": 0,
+    "edge_connection_slot_exhaustion": 0
+  },
+  "observed_edge_worker_fd_soft_limits": [
+    4096
+  ],
+  "all_five_services_active": true,
+  "source_files_or_customer_content_deleted": false,
+  "database_backups_preserved": true,
+  "service_restart_for_cleanup": false,
+  "at": "2026-11-16T09:43:49.223263+00:00",
+  "scope": "Final post-capacity service logs/worker descriptor limit and removal of this task-owned intermediate application release, after verifying no service process references it. Current application and original rollback, all database backups and customer content remain.",
+  "virtualization_used": false,
+  "full_acceptance": "pending"
+}

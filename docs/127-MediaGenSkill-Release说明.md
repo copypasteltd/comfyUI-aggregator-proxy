@@ -1,6 +1,14 @@
 # Media Gen Skill · 发行说明 / Release guide
 
-## 当前 1.4.1 / Current 1.4.1
+## 当前 1.5.1 / Current 1.5.1
+
+[在线单文件 / current Skill](https://gen.sub2share.xyz/skill.md) · [固定版本 / immutable version](https://gen.sub2share.xyz/skills/media-gen/1.5.1/skill.md) · [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.5.1)
+
+使用 https://gen.sub2share.xyz，完整保留业务图片、视频、音频、GLB 与原生 ComfyUI 两种模式。新增实际源站 Workflow 目录及显式共享保存/改名/删除；默认个人文件位于 `@personal`。共享修改须取得设备占用，使用 `--shared --operation-file` 保存意图，未知响应用 `resume-workflow` 核对，不能新建身份盲重试。[完整行为与实机证据](150-原生工作流完整目录与源站操作修复.md)。
+
+Use the business domain for both clients. Source workflows retain their original tree; personal saves default to `@personal`. Explicit shared writes require device ownership and a durable operation file. Recover uncertain replies with `resume-workflow`. Both native builds, all four anonymous GitHub assets and deployed bytes match; 48 public HTTP checks pass. [Installation](126-MediaGenSkill安装与调用.md).
+
+## 历史 1.4.1 / Historical 1.4.1
 
 业务与原生 ComfyUI 全面使用 **https://gen.sub2share.xyz**；两个客户端默认域名，Skill 示例及登录/下载也保持同域。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) · [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1) · [验证及上线记录](148-Skill业务域名统一与发布.md)。
 

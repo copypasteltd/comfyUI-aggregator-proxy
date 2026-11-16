@@ -1,6 +1,15 @@
 # 131 · 单文件 Skill 与固定在线地址
 
-**当前 1.4.1 · 业务域名统一**见 [148](148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和 Skill 使用 **https://gen.sub2share.xyz**。两个客户端默认该域名，单文件中的示例也一致。已同步 GitHub 和线上，35 项回归、6 项实际域名调用和 48 项公网检查通过。下文 1.4.0 及更早检查按历史时点保留。
+## 当前 1.5.1 / Current 1.5.1
+
+[在线单文件 / current Skill](https://gen.sub2share.xyz/skill.md) · [固定版本 / immutable version](https://gen.sub2share.xyz/skills/media-gen/1.5.1/skill.md) · [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.5.1)
+
+使用 https://gen.sub2share.xyz，完整保留业务图片、视频、音频、GLB 与原生 ComfyUI 两种模式。新增实际源站 Workflow 目录及显式共享保存/改名/删除；默认个人文件位于 `@personal`。共享修改须取得设备占用，使用 `--shared --operation-file` 保存意图，未知响应用 `resume-workflow` 核对，不能新建身份盲重试。[完整行为与实机证据](150-原生工作流完整目录与源站操作修复.md)。
+
+Use the business domain for both clients. Source workflows retain their original tree; personal saves default to `@personal`. Explicit shared writes require device ownership and a durable operation file. Recover uncertain replies with `resume-workflow`. Both native builds, all four anonymous GitHub assets and deployed bytes match; 48 public HTTP checks pass. [Installation](126-MediaGenSkill安装与调用.md).
+
+
+**历史 1.4.1 · 业务域名统一**见 [148](148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和 Skill 使用 **https://gen.sub2share.xyz**。两个客户端默认该域名，单文件中的示例也一致。已同步 GitHub 和线上，35 项回归、6 项实际域名调用和 48 项公网检查通过。下文 1.4.0 及更早检查按历史时点保留。
 
 **1.4.0 已发布并上线**，原生 ComfyUI 操作更新见 [147](147-Skill原生ComfyUI操作与发布.md)。用户/Agent 可使用独立授权设备的原生图、节点及模型；单文件内嵌业务/原生两份参考与两个客户端，已有 1.3.0 及更早版本保持不可变。新增 Cookie 会话文件含凭据，原生源文件不纳入云端八小时删除。35 项客户端回归、5070 的 15 项真实操作及 23 项外部 HTTP 检查通过；[本轮已验证的 HTTP 下载地址](http://43.165.167.179:39443/skill.md)。
 
@@ -34,7 +43,7 @@
 
 Download [the current file](https://gen.sub2share.xyz/skill.md), save it as `media-gen-skill/SKILL.md` in your agent's skills directory, and open a new session. Configure your business API Key yourself. The instructions, business/native references and both complete standard-library clients are embedded. Native HTTP tools can use the API directly; extract the clients only for CLI use. After an update, deliberately replace old extracted clients or extract into a new working directory.
 
-固定版本：[1.4.1/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.4.1/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.4.1/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.4.1/media-gen-skill-1.4.1.zip)；用于来源核对、固定版本和回退。[历史 1.3.0](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md) 保留。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
+固定版本：[1.5.1/skill.md](https://gen.sub2share.xyz/skills/media-gen/1.5.1/skill.md)。同目录提供 [release.json](https://gen.sub2share.xyz/skills/media-gen/1.5.1/release.json)、[SHA256SUMS.txt](https://gen.sub2share.xyz/skills/media-gen/1.5.1/SHA256SUMS.txt) 和 [ZIP](https://gen.sub2share.xyz/skills/media-gen/1.5.1/media-gen-skill-1.5.1.zip)；用于来源核对、固定版本和回退。[历史 1.3.0](https://gen.sub2share.xyz/skills/media-gen/1.3.0/skill.md) 保留。源站固定 `/skill.md` 使用 no-cache，版本入口使用一年 immutable；用户现有域名代理可覆盖缓存行为，实际观察见下文。任意来源可读取公开文档，生成/内容接口继续使用业务 Key。
 
 ## 4. 后续发布 / Maintainer workflow
 

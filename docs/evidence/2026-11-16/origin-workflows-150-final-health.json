@@ -1,0 +1,89 @@
+{
+  "format_version": 1,
+  "at": "2026-11-16T09:06:21.990273+00:00",
+  "passed": true,
+  "scope": "Fresh final production read-only service/domain/native-device/Skill checks. No graph execution, resource release or TLS/reverse-proxy audit.",
+  "release": "linux-20261116.150.1",
+  "source_revision": "f22e526f41c2df0ac973db152c1880ec9f95b6e0",
+  "all_five_services_active": true,
+  "configuration_unchanged": true,
+  "skill_version": "1.5.1",
+  "skill_sha256": "4849ccb9c27ce7790e459e6905f4dc2248034e4ababeaa8816557c471a202e7c",
+  "http_checks": [
+    {
+      "path": "/health/live",
+      "status": 200,
+      "arbitrary_origin_allowed": true
+    },
+    {
+      "path": "/health/ready",
+      "status": 200,
+      "arbitrary_origin_allowed": true
+    },
+    {
+      "path": "/origin/",
+      "status": 200,
+      "arbitrary_origin_allowed": true
+    },
+    {
+      "path": "/origin/list",
+      "status": 200,
+      "arbitrary_origin_allowed": true
+    },
+    {
+      "path": "/admin/",
+      "status": 200,
+      "arbitrary_origin_allowed": true
+    },
+    {
+      "path": "/studio/",
+      "status": 200,
+      "arbitrary_origin_allowed": true
+    },
+    {
+      "path": "/v1/models",
+      "status": 401,
+      "arbitrary_origin_allowed": true
+    },
+    {
+      "path": "/origin/api/devices",
+      "status": 401,
+      "arbitrary_origin_allowed": true
+    },
+    {
+      "path": "/skill.md",
+      "status": 200,
+      "release_bytes_match": true
+    }
+  ],
+  "devices": [
+    {
+      "slug": "rtx3080",
+      "online": true,
+      "busy": true,
+      "queue_running": 0,
+      "queue_pending": 0,
+      "reservation_state": "active"
+    },
+    {
+      "slug": "rtx4090",
+      "online": true,
+      "busy": true,
+      "queue_running": 0,
+      "queue_pending": 0,
+      "reservation_state": "active"
+    },
+    {
+      "slug": "rtx5070",
+      "online": true,
+      "busy": true,
+      "queue_running": 0,
+      "queue_pending": 0,
+      "reservation_state": "active"
+    }
+  ],
+  "visible_published_models": 45,
+  "test_session_logged_out": true,
+  "virtualization_used": false,
+  "full_acceptance": "pending"
+}

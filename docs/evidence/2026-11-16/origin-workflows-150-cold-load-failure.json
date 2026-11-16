@@ -1,0 +1,25 @@
+{
+  "format_version": 1,
+  "scope": "Preserved failed cold browser observation before the fixed HTTP capacity adjustment. No source graphs or raw resource paths are published.",
+  "started_at": "2026-11-16T09:25:34.556Z",
+  "observed_failure": true,
+  "completed_ui_checks": 13,
+  "resource_http_status_counts": {
+    "200": 399,
+    "502": 218,
+    "404": 6,
+    "403": 24
+  },
+  "child_blueprint_status_counts": {
+    "200": 64,
+    "502": 59
+  },
+  "source_file_cleanup": {
+    "source_file_removed": true,
+    "pre_existing_user_reservation_preserved": true,
+    "logged_out": true,
+    "all_owned_browser_resources_closed": true
+  },
+  "protected_raw_report_sha256": "9c59084f1bd26c5a4dcdb17304877ed7f30ad10316236063f0b60525f0dc613b",
+  "remediation": "Dedicated edge connection slots 128 -> 2048, worker FD limit 4096, API admission concurrency 128 -> 512. Application source connections are pooled with eight active resource bodies per device. Final browser evidence follows separately."
+}

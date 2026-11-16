@@ -2,11 +2,17 @@
 
 [150 · 原生 Workflows 完整目录修复](docs/150-原生工作流完整目录与源站操作修复.md)：修正原代理用 Key 私有目录覆盖源站工作流的问题。`/origin/{设备}/` 实时显示源机全部工作流及原目录，支持打开、保存、另存、文件重命名与删除；缺模型的流程也显示。原私有文件保留在 `@personal`，设置/自动保存继续隔离。源站修改须取得设备操作权，并记录幂等意图和审计；共享修改会反映到源机。Skill 1.5.1 增加显式共享操作及丢响应恢复。部署与实机结果在专题分别记录。
 
+**已上线 `linux-20261116.150.2`。** 三台设备在线，真实源目录与代理分别核对为 **3080：7、4090：386、5070：79 个文件**，含原文件夹和空目录；这些不是业务发布模型数。84 项组件回归、5 项入口容量回归和 15 项真实浏览器检查通过。首次加载的连接槽不足已修复；670 个实际响应无 5xx、123 个子工作流蓝图全部加载。未知扩展接口等兼容边界见专题。
+
+[原生入口](https://gen.sub2share.xyz/origin/) · [使用命令](docs/examples/origin-workflows-150/README.md) · [截图、原速录屏和 GIF](docs/media/origin-workflows-150/README.md) · [Skill 1.5.1 固定地址](https://gen.sub2share.xyz/skills/media-gen/1.5.1/skill.md) · [GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.5.1)
+
+![真实源目录与中文流程打开](docs/media/origin-workflows-150/native-workflows.gif)
+
 [4090 维护占用已核对归还](docs/149-未知内存回收维护占用核对.md)：2026-11-16 01:59（台北）清理遗留的未知内存回收占用；02:00 业务域名确认在线、空闲，原生面板取得/归还成功。新增默认只读、显式执行的运维核对工具，保留原错误与审计；不重发未知 `/free`。33 项原生 PostgreSQL 回归、14 项实际接口检查通过，现有服务进程保持运行。
 
-[Skill 1.4.1 · 统一业务域名](docs/148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和下载均使用 **https://gen.sub2share.xyz**。两个客户端默认同域，无需配置服务器 IP。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) · [原生面板](https://gen.sub2share.xyz/origin/)。已同步本地安装、[GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1) 和线上单文件；35 项回归、6 项域名实际调用及 48 项公网检查通过。
+[历史 Skill 1.4.1 · 统一业务域名](docs/148-Skill业务域名统一与发布.md)：业务 API、原生 ComfyUI、登录和下载均使用 **https://gen.sub2share.xyz**。两个客户端默认同域，无需配置服务器 IP。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.1](https://gen.sub2share.xyz/skills/media-gen/1.4.1/skill.md) · [原生面板](https://gen.sub2share.xyz/origin/)。已同步本地安装、[GitHub Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.1) 和线上单文件；35 项回归、6 项域名实际调用及 48 项公网检查通过。
 
-[Skill 1.4.0 · 直接操作 ComfyUI](docs/147-Skill原生ComfyUI操作与发布.md)：允许使用者/Agent 在独立设备授权后查询节点和模型、编辑自定义 Workflow、上传素材、提交任务、查看队列与结果、管理个人流程并安全归还。新增标准库 `comfy_origin.py`，单文件内嵌两份参考与两个客户端；业务模型 API 继续支持。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.0](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)。会话文件含派生凭据须私藏，原生结果留在设备，不套用云端八小时删除；已发布到 GitHub 和线上：[HTTP 最新下载](http://43.165.167.179:39443/skill.md) · [1.4.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.0)。35 项客户端回归、5070 的 15 项真实操作与 23 项外部 HTTP 检查通过，完整证据和限制见专题。
+[历史 Skill 1.4.0 · 直接操作 ComfyUI](docs/147-Skill原生ComfyUI操作与发布.md)：允许使用者/Agent 在独立设备授权后查询节点和模型、编辑自定义 Workflow、上传素材、提交任务、查看队列与结果、管理个人流程并安全归还。新增标准库 `comfy_origin.py`，单文件内嵌两份参考与两个客户端；业务模型 API 继续支持。[最新 skill.md](https://gen.sub2share.xyz/skill.md) · [固定 1.4.0](https://gen.sub2share.xyz/skills/media-gen/1.4.0/skill.md)。会话文件含派生凭据须私藏，原生结果留在设备，不套用云端八小时删除；已发布到 GitHub 和线上：[HTTP 最新下载](http://43.165.167.179:39443/skill.md) · [1.4.0 Release](https://github.com/copypasteltd/comfyUI-aggregator-proxy/releases/tag/media-gen-skill-v1.4.0)。35 项客户端回归、5070 的 15 项真实操作与 23 项外部 HTTP 检查通过，完整证据和限制见专题。
 
 [146 · 原生 ComfyUI 工作台](docs/146-原生ComfyUI面板访问与独占操作.md) 已实现并部署到原 HTTP 高位入口：[打开原生工作台](http://43.165.167.179:39443/origin/)。保留任意来源 CORS 和现有 API/Skill/Studio 入口。当前版本、数据库备份、调用及浏览器验证见[部署证明](docs/evidence/2026-11-15/origin-146-production.json)。
 
@@ -20,7 +26,7 @@
 
 原生授权面向可信操作者，可运行已安装自定义节点；不使用公开模型白名单、业务 `/v1/jobs` 的额度/结算和云端内容生命周期。原生结果留在设备，**不自动进入云端或应用八小时删除**。API Key 的渠道范围继续有效，不会自动安装模型或开放 Manager/主机管理。单次上传最多 127 MiB、单图最多 3,000 节点，个人工作流/设置文本最多 8 MiB。原生扩展的私有接口及外部云服务不保证全部兼容。
 
-5070 已用于实际原生调用；3080 当前 ComfyUI 不可达，4090 原维护占用保留。三台已授权不等同于三台当前均可运行。本轮 CPU 小图验证协议及交付，不代表模型画质或全部设备验收。[详细方案及开发约束](docs/146-原生ComfyUI面板访问与独占操作.md) · [真实截图、录屏和 GIF](docs/media/origin-146/README.md)。
+146 发布时的历史设备状态：5070 已用于实际原生调用；当时 3080 ComfyUI 不可达，4090 原维护占用保留。当前设备状态以文首 150 的复核和实时设备列表为准。本轮 CPU 小图验证协议及交付，不代表模型画质或全部设备验收。[详细方案及开发约束](docs/146-原生ComfyUI面板访问与独占操作.md) · [真实截图、录屏和 GIF](docs/media/origin-146/README.md)。
 
 本轮已部署 `linux-20261115.146.6`：113 项相关回归、34 项线上 HTTP/WS、12 项最终原生浏览器及 4 项独立 Admin 浏览器检查通过。[真实请求与回执](docs/examples/origin-146/README.md) 提供诊断来源；普通业务绑定就绪和全项目验收仍需分别完成。
 
