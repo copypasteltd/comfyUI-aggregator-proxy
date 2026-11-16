@@ -1,0 +1,366 @@
+{
+  "format_version": 1,
+  "at": "2026-11-16T09:19:41.342240+00:00",
+  "passed": true,
+  "source_revision": "f22e526f41c2df0ac973db152c1880ec9f95b6e0",
+  "sources_unchanged": true,
+  "scope": "Native PostgreSQL source Workflow directory/CRUD, isolation, reservation, idempotency and lost-reply/concurrent fault regressions, existing native panel/edge behavior and both Skill clients against owned loopback fixtures. Includes fetch/XHR source-write adaptation, mypy, Ruff and Skill validation. No production or trained-model quality claim.",
+  "full_acceptance": "pending",
+  "real_resource_acceptance": false,
+  "virtualization_used": false,
+  "python": {
+    "tests": 84,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "app/apps/admin_web/public/origin-bootstrap.js": "6bc9d808de211e0698506251c5d64e9fcd498b78f9e909c982a81fc6de63868c",
+    "app/apps/admin_web/tests/originBootstrap.test.ts": "6c32240bc6a68c3c0bc72d6051ee55a1f3b422077ab2146a992677d5d14330fb",
+    "app/apps/control_api/src/control_api/origin_routes.py": "e8b6a8de6b0675ebe2995add74f8d51a05fb3fffb7c76380779b75c3ed772f78",
+    "app/apps/control_api/src/control_api/origin_transport.py": "b8cbc04768e4fe9fbe43de5be09904fdc218e100bbc444934be67b8d58704d89",
+    "app/deploy/native-linux/build-bundle.py": "07cc1b1173ea6cbe13a964a2a6a6095404d625953477239ee24be6a9f990e941",
+    "app/packages/infrastructure/src/generation_infrastructure/origin_workflows.py": "bb93923e31808e5f6e934762f56bba8c9efabfcd23dbacfff5f2bb2c505c789d",
+    "app/scripts/build-media-gen-skill.py": "7fbb434901b50d85f2ec3223cb64439917a757e4e29dcda0f4a77629cc255d46",
+    "app/skills/media-gen-skill/SKILL.md": "0192f217225d831dd5047426d62709830c8b930d0e1692d51bf9a0399fffac49",
+    "app/skills/media-gen-skill/VERSION": "dfe7d71b3f428eb73ed853f8fded65e2986896e21d69f45ebf06bb623b450e14",
+    "app/skills/media-gen-skill/agents/openai.yaml": "2e11309e38725ff0b4eb8d96a0b1506de18ca0421792436f44f045469adda4b8",
+    "app/skills/media-gen-skill/references/api.md": "c230c54843f17e324ca93bad49eaf75c736a75d772de14e005df7d6ced8ef503",
+    "app/skills/media-gen-skill/references/comfy-origin.md": "df9e02b55cdd8490d2ca8a927dcfd8eb7651033f3cce0aa3af5d054ab053507c",
+    "app/skills/media-gen-skill/scripts/comfy_origin.py": "e221bb5e2c429339955d567d34b572ad1a1fa33d016317f37d65f0b93c752bc6",
+    "app/skills/media-gen-skill/scripts/media_gen.py": "8d9c1861bff56982d9f18041ba5ed547373bb206b20256af962afccc3840a756",
+    "app/tests/integration/test_origin_access.py": "35c041fa1393c330b10fa94cd764144376bbfdf8983feac2fe55b70f1d89f09a",
+    "app/tests/integration/test_origin_workflows.py": "eff34ff937ce2969edbb7981e8d4a65b3a71f8ad8be5cc5bfeaa52671f0e1ecf",
+    "app/tests/unit/test_comfy_origin_skill.py": "301492988140d09b909d0dc97745898f246e97db3a6626b85743041fb428bcea",
+    "app/tests/unit/test_media_gen_skill.py": "737755b4f5965aa19cf08ad54997108a4ac4daf0d2de406f9ad5fee9e63b5db1",
+    "app/tests/unit/test_origin_edge.py": "652322dc1cb3df97b73596f0692eea6e6bf7ef50a19f5828d8be95059e8ab1f0",
+    "app/tests/unit/test_origin_resource_transport.py": "7b1e94e035a2436c4dc858ac0e36a358e2838933641bb4eef0dad6af15762e13"
+  },
+  "python_tests": [
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_cookie_auth_grants_csrf_and_revocation",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_grant_revision_idempotency_and_existing_key_not_auto_granted",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_isolated_userdata_workflow_save_rename_and_listing",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_live_policy_checks",
+      "passed_cases": 4
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_mask_upload_requires_owned_reference_and_preserves_mask_protocol",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_one_owner_under_concurrent_acquisition",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_persistent_hold_excludes_api_and_sibling_channels",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_prompt_replay_filter_files_range_and_static_paths",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_same_project_key_cannot_read_other_files_or_userdata",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_source_observation_does_not_invalidate_same_config_hold",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_unknown_submit_never_requeues_or_releases",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_native_websocket_json_binary_filter_and_invalid_csrf",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_origin_output_descriptor_and_redirect_boundaries",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_access.py",
+      "symbol": "test_origin_path_rejects_escape",
+      "passed_cases": 7
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_concurrent_duplicate_does_not_send_a_second_source_write",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_cross_mount_move_and_oversize_or_executable_writes_are_rejected",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_directory_traversal_never_reaches_source",
+      "passed_cases": 4
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_empty_source_directories_remain_visible_and_refresh_live",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_known_overwrite_rejection_is_replayed_as_rejection",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_live_complete_catalog_keeps_source_names_and_mounts_legacy_private_files",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_lost_source_write_response_is_observed_without_repeating_mutation",
+      "passed_cases": 3
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_nested_split_metadata_utf8_and_head_match_source_bytes",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_private_storage_keeps_working_during_source_outage",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_shared_save_move_delete_replay_updates_actual_source_and_audits",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_shared_writes_require_csrf_active_owner_and_idempotency",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_source_changes_are_live_and_root_does_not_expose_source_settings",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/integration/test_origin_workflows.py",
+      "symbol": "test_unreachable_or_malformed_source_is_not_an_empty_catalog",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_compiled_single_file_extracts_both_clients_and_runs_native_without_repository",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_direct_paths_cannot_escape_the_selected_device",
+      "passed_cases": 6
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_download_supplied_hash_is_verified_and_mismatch_removes_only_own_partial",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_native_session_is_private_origin_bound_and_no_bearer_is_forwarded",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_native_wait_tracks_history_heartbeats_and_downloads_owned_descriptors",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_personal_workflow_cli_save_is_scoped_and_does_not_execute",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_redirect_refused_and_native_cli_reuses_private_session_without_key",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_server_unknown_error_never_creates_another_local_intent_or_echoes_data",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_shared_workflow_cli_requires_explicit_intent_and_keeps_original_identity",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_shared_workflow_move_and_delete_are_explicit_source_operations",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_streamed_mask_uses_actual_image_field_and_owned_original_protocol",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_ui_graph_is_not_silently_miscompiled_and_file_descriptors_are_safe",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_unknown_prompt_cannot_move_to_a_different_credential",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_unknown_submission_keeps_exact_intent_then_known_id_only_reads",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_comfy_origin_skill.py",
+      "symbol": "test_wait_timeout_does_not_cancel_logout_release_or_submit",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_audio_presets_fixed_encoding_does_not_require_unexposed_parameters",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_cli_outputs_utf8_when_windows_redirect_encoding_is_ascii",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_download_verifies_and_never_overwrites_or_leaves_partial",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_invalid_named_input_arguments_are_rejected",
+      "passed_cases": 3
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_lost_submission_reuses_exact_identity_and_body_then_only_polls",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_model3d_client_uses_image_only_and_declared_parameters",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_model3d_download_uses_canonical_extension",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_named_inputs_keep_video_audio_and_transcripts_in_their_semantic_slots",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_redirect_refused_and_origin_locked",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_single_file_runs_independently_and_downloads_a_verified_glb",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_typed_audio_upload_streams_multipart_with_explicit_kind_and_stable_token",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_wait_stops_on_native_unsuccessful_terminal_status",
+      "passed_cases": 3
+    },
+    {
+      "path": "app/tests/unit/test_media_gen_skill.py",
+      "symbol": "test_wait_uses_native_job_status_and_downloads_completed_artifacts",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_origin_edge.py",
+      "symbol": "test_native_origin_edge_preserves_cors_and_private_servers",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_origin_edge.py",
+      "symbol": "test_native_origin_edge_refuses_ambiguous_config",
+      "passed_cases": 2
+    },
+    {
+      "path": "app/tests/unit/test_origin_resource_transport.py",
+      "symbol": "test_native_relative_modules_resolve_at_source_root_before_mounting",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_origin_resource_transport.py",
+      "symbol": "test_native_resource_burst_holds_device_slot_until_body_closed",
+      "passed_cases": 1
+    },
+    {
+      "path": "app/tests/unit/test_origin_resource_transport.py",
+      "symbol": "test_native_resource_failure_and_cancellation_release_slots",
+      "passed_cases": 1
+    }
+  ],
+  "junit_sha256": "db8563e684552ab4841839dadab8f9f69c56f244bcfd352a17037cfc50007ec3",
+  "python_log_sha256": "49d6a15e95f4d32d55f99b338b4305b1d467dc8e691190073b4f62e33f3646b0",
+  "additional_checks": [
+    {
+      "tool": "python.exe",
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    {
+      "tool": "python.exe",
+      "exit_code": 0,
+      "output": "Success: no issues found in 3 source files\n"
+    },
+    {
+      "tool": "python.exe",
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "tool": "node.exe",
+      "exit_code": 0,
+      "output": "✔ native fetch preserves source filenames and supplies guarded write identity (19.7147ms)\n✔ native XHR source save and move have CSRF and one modification identity (1.2107ms)\nℹ tests 2\nℹ suites 0\nℹ pass 2\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 152.5569\n"
+    }
+  ],
+  "actual_runtime": "3.13.1"
+}

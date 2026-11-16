@@ -7,9 +7,10 @@ import json
 import re
 import time
 from collections.abc import AsyncIterator, Callable
+from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import PurePosixPath
 from typing import Annotated, Any
-from urllib.parse import quote, unquote, urlencode, urlsplit
+from urllib.parse import quote, unquote, urlencode, urljoin, urlsplit
 from uuid import UUID, uuid4
 
 import httpx
@@ -36,6 +37,8 @@ from starlette.responses import (
 )
 from websockets.asyncio.client import connect
 from websockets.exceptions import ConnectionClosed
+
+from control_api.origin_transport import NativeResourcePool
 
 COOKIE = "comfy_origin_session"
 SKIP_HEADERS = {
@@ -138,13 +141,45 @@ async def json_call(target: dict[str, Any], path: str) -> Any:
     return await asyncio.to_thread(bounded_json, target["base_url"], path, target["authorization"])
 
 
+def resource_paths(content: str, path: str, prefix: str) -> str:
+    content = re.sub(
+        r"""(["'(])/(assets|scripts|extensions)/""",
+        lambda match: match[1] + prefix + match[2] + "/",
+        content,
+    )
+    if path.endswith((".js", ".mjs")):
+        # An upstream relative import may climb above /extensions/. Resolve it
+        # at the upstream root before mounting it below this device's prefix.
+        def relative(match: re.Match[str]) -> str:
+            resolved = urljoin("/" + path, match["path"])
+            if not resolved.lstrip("/").startswith(STATIC):
+                return match[0]
+            return match["lead"] + match["quote"] + prefix + resolved.lstrip("/") + match["quote"]
+
+        content = re.sub(
+            r"""(?P<lead>\bfrom\s*|\bimport\s*(?:\(\s*)?)(?P<quote>["'])(?P<path>\.{1,2}/[^"'\r\n]*)(?P=quote)""",
+            relative,
+            content,
+        )
+    return content
+
+
 def origin_routes(
     access: OriginAccess,
     permission: Callable[..., Any],
     admin_token: Callable[..., str],
     expected_revision: Callable[..., None],
 ) -> APIRouter:
-    router = APIRouter()
+    resources = NativeResourcePool()
+
+    @asynccontextmanager
+    async def lifespan(_app: Any) -> AsyncIterator[None]:
+        try:
+            yield
+        finally:
+            await resources.close()
+
+    router = APIRouter(lifespan=lifespan)
     socket_counts: dict[UUID, int] = {}
     reconciler = OriginReconciler(access.sessions, access.settings)
 
@@ -959,21 +994,19 @@ def origin_routes(
         prefix: str,
         identity: OriginActor,
     ) -> Response:
-        client = httpx.AsyncClient(
-            timeout=httpx.Timeout(120, connect=4), trust_env=False, follow_redirects=False
-        )
+        connections = AsyncExitStack()
         try:
-            upstream = await client.send(
-                client.build_request(
+            upstream = await connections.enter_async_context(
+                resources.open(
+                    target["id"],
                     request.method,
                     target["base_url"].rstrip("/") + "/" + quote(path, safe="/-_.~"),
                     params=str(request.query_params),
                     headers=headers,
-                ),
-                stream=True,
+                )
             )
         except httpx.HTTPError as exc:
-            await client.aclose()
+            await connections.aclose()
             raise DomainError("origin_source_unavailable", "设备暂不可访问", 502) from exc
         response_headers = {
             name: value
@@ -995,13 +1028,12 @@ def origin_routes(
                     response_headers["location"], target["base_url"], prefix
                 )
             except DomainError:
-                await upstream.aclose()
-                await client.aclose()
+                await connections.aclose()
                 raise
         rewrite = (
             path == ""
             or path.removeprefix("api/") in {"extensions", "workflow_templates", "jobs"}
-            or path.endswith((".js", ".css"))
+            or path.endswith((".js", ".mjs", ".css"))
         )
         if rewrite:
             try:
@@ -1051,25 +1083,19 @@ def origin_routes(
                                     or []
                                 )
                     content = json.dumps(value)
-                elif path.endswith((".js", ".css")):
-                    content = re.sub(
-                        r"""(["'(])/(assets|scripts|extensions)/""",
-                        lambda match: match[1] + prefix + match[2] + "/",
-                        content,
-                    )
+                elif path.endswith((".js", ".mjs", ".css")):
+                    content = resource_paths(content, path, prefix)
                 response_headers.pop("etag", None)
                 return Response(content, status_code=upstream.status_code, headers=response_headers)
             finally:
-                await upstream.aclose()
-                await client.aclose()
+                await connections.aclose()
 
         async def body() -> AsyncIterator[bytes]:
             try:
                 async for chunk in upstream.aiter_bytes(65536):
                     yield chunk
             finally:
-                await upstream.aclose()
-                await client.aclose()
+                await connections.aclose()
 
         if "content-length" in upstream.headers:
             response_headers["content-length"] = upstream.headers["content-length"]
